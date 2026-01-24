@@ -1,8 +1,5 @@
-# LOCATION: zenpkgs/flake.nix
-# DESCRIPTION: Imports ./lib/utils.nix and exports it.
-
 {
-  description = "ZenPKGS - Custom Package Set";
+  description = "ZenPkgs - A collection of packages and modules for ZenOS";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
@@ -22,7 +19,6 @@
         let
           lib = prev.lib;
 
-          # PHASE 1: Pure Discovery
           generatePackageTree =
             path:
             let
@@ -39,7 +35,6 @@
               in
               if validChildren == { } then null else validChildren;
 
-          # PHASE 2: Inflation
           inflateTree =
             tree: f: p:
             if builtins.isPath tree then
