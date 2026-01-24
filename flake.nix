@@ -6,39 +6,44 @@
   outputs =
     { nixpkgs, ... }:
     let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-      lib = pkgs.lib // {
-        licenses = pkgs.lib.licenses // {
-          napl = {
-            shortName = "napl";
-            fullName = "The Non-Aggression License 1.0";
-            url = "https://github.com/negative-zero-inft/nap-license";
-            free = true;
-            redistributable = true;
-            copyleft = true;
-          };
-        };
-      };
-      zenPkgsMaintainers = import ./maintainers.nix { inherit pkgs lib; };
+      systems = [ "x86_64-linux" ];
 
-      zenModulesRaw = builtins.readDir ./modules;
-      moduleDirs = lib.filterAttrs (n: t: t == "directory") zenModulesRaw;
-      zenModules = lib.mapAttrs (n: v: pkgs.callPackage ./modules/${n}/module.nix { }) moduleDirs;
-
-      zenPkgsRaw = builtins.readDir ./pkgs;
-      packageDirs = lib.filterAttrs (n: t: t == "directory") zenPkgsRaw;
-      zenPkgs = lib.mapAttrs (
-        n: v:
-        pkgs.callPackage ./pkgs/${n}/package.nix {
-          inherit lib;
-          maintainers = zenPkgsMaintainers;
-        }
-      ) packageDirs;
+      forAllSystems = nixpkgs.lib.genAttrs systems;
     in
     {
-      packages.${system} = zenPkgs;
+      packages = forAllSystems (
+        system:
+        let
+          pkgsRaw = import nixpkgs { inherit system; };
 
-      nixosModules.${system} = zenModules;
+          lib = pkgsRaw.lib // {
+            licenses = pkgsRaw.lib.licenses // {
+              napl = {
+                shortName = "napl";
+                fullName = "The Non-Aggression License 1.0";
+                url = "https://github.com/negative-zero-inft/nap-license";
+                free = true;
+                redistributable = true;
+                copyleft = true;
+              };
+            };
+          };
+
+          zenPkgNames = builtins.attrNames (
+            lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./pkgs)
+          );
+
+          zenOverlay =
+            final: prev:
+            lib.genAttrs zenPkgNames (name: final.callPackage ./pkgs/${name}/package.nix { inherit lib; });
+
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ zenOverlay ];
+          };
+
+        in
+        lib.genAttrs zenPkgNames (name: pkgs.${name})
+      );
     };
 }

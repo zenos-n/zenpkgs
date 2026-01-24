@@ -8,25 +8,32 @@ stdenv.mkDerivation {
   pname = "zero-gnome-clock";
   version = "1.0";
 
-  src = ./src;
-
   nativeBuildInputs = with pkgs; [
     zero-font
     gnomeExtensions.user-themes
   ];
 
+  dontUnpack = true;
+
   buildPhase = "
     echo 'Building Zero GNOME Clock...'
-    cat > $out/share/themes/zero-gnome-clock/gnome-clock.css << EOF
-    @import url(\"resource:///org/gnome/shell/theme/default.css\");
+    mkdir -p $out/share/themes/zero-gnome-clock
 
-    .clock-display {
-      font-family: 'Zero', sans-serif !important;
-      font-weight: normal !important;
-      font-style: normal !important;
-      font-size: 12px;
-    }
-    EOF
+    FONT_PATH=$(find ${pkgs.zero-font} -name \"*.ttf\" -o -name \"*.otf\" | head -n 1)
+
+    cat > $out/share/themes/zero-gnome-clock/gnome-clock.css << EOF
+@import url(\"resource:///org/gnome/shell/theme/default.css\");
+@font-face {
+  font-family: 'Zero';
+  src: url(\"file://$FONT_PATH\");
+}
+
+.clock-display {
+  font-family: 'Zero', sans-serif !important;
+  font-weight: normal !important;
+  font-style: normal !important;
+  font-size: 12px;
+}
   ";
 
   installPhase = "
