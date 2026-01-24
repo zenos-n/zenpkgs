@@ -27,6 +27,11 @@ in
       default = "purple";
       description = "Accent color for GNOME desktop. Can be overridden by users.";
     };
+    defaultDarkMode.enable = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Whether to enable dark mode for all users by default";
+    };
     fileIndexing.enable = mkOption {
       type = types.bool;
       default = true;
@@ -42,22 +47,79 @@ in
       ];
       description = "List of applications to add to the GNOME dock for all users by default.";
     };
+    extraPackages.enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to include additional non-critical curated gnome apps";
+    };
+    excludeGnomeConsole = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to disable the gnome console. Useful when you want to use your own custom console.";
+    };
   };
 
   config = mkIf cfg.enable {
-    # 1. Disable conflicting loaders
-    boot.loader.grub.enable = mkDefault false;
-    boot.loader.systemd-boot.enable = mkDefault false;
+    environment.systemPackages =
+      with pkgs;
+      [
+        pipewire
+        gst_all_1.gstreamer
+        gst_all_1.gst-plugins-base
+        gst_all_1.gst-plugins-good
+        gst_all_1.gst-plugins-bad
+        gst_all_1.gst-plugins-ugly
+        gst_all_1.gst-libav # Essential for common formats like .mp4/.mkv
 
-    environment.systemPackages = with pkgs; [
+        gnome-tweaks
+        gnome-extension-manager
+        wl-clipboard
+        dconf-editor
+        resources
 
-    ];
+        pika-backup
+      ]
+      ++ mkIf services.flatpak.enable [
+        warehouse
+      ]
+      ++ mkIf cfg.extraPackages.enable [
+        icon-library
+        letterpress
+        biblioteca
+        dialect
+        raider
+        wike
+        curtail
+        czkawka
+        hieroglyphic
+        switcheroo
+        rnote
+        helvum
+      ];
 
-    # 4. Activation Script
-    # This executes the python setup logic on every 'nixos-rebuild switch'
-    system.activationScripts.zenboot = ''
-      echo " [ZenBoot] Updating bootloader configuration..."
-      ${zenbootPkg}/bin/zenboot-setup
-    '';
+    gnome.excludePackages = (
+      with pkgs;
+      [
+        gnome-software
+        gnome-photos
+        gnome-tour
+        gedit
+        cheese
+        gnome-music
+        gnome-maps
+        epiphany
+        gnome-contacts
+        gnome-weather
+      ]
+      ++ mkIf cfg.disableGnomeConsole [
+        gnome-console
+      ]
+    );
+    programs.dconf.settings = {
+      "org/gnome/desktop/interface" = {
+        accent-color = cfg.defaultAccentColor;
+        color-scheme = (if cfg.defaultDarkMode then "prefer-dark" else "prefer-light");
+      };
+    };
   };
 }
