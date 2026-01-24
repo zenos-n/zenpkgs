@@ -42,54 +42,6 @@ in
       ];
       description = "List of applications to add to the GNOME dock for all users by default.";
     };
-    tweaks = mkOption {
-      type = types.attrsOf (
-        types.submodule {
-          options = {
-            firefoxTheming = mkOption {
-              type = types.bool;
-              default = true;
-              description = "Enable Gnome Firefox theming (Global).";
-            };
-            zero-clock = mkOption {
-              type = types.bool;
-              default = true;
-              description = "Enable the Zero GNOME clock font.";
-            };
-            zenos-fonts = mkOption {
-              type = types.bool;
-              default = true;
-              description = "Install ZenOS fonts.";
-            };
-            zenos-extensions = mkOption {
-              type = types.submodule {
-                options = {
-                  enable = mkOption {
-                    type = types.bool;
-                    default = true;
-                    description = "Enable installation of curated ZenOS GNOME extensions.";
-                  };
-                  excludedExtensions = mkOption {
-                    type = types.listOf types.str;
-                    default = [ ];
-                    description = "List of curated ZenOS GNOME extensions to exclude from installation.";
-                  };
-                  extensionConfig.enable = mkOption {
-                    type = types.bool;
-                    default = true;
-                    description = "Default ZenOS extension settings.";
-                  };
-                };
-              };
-              default = true;
-              description = "Install the curated ZenOS GNOME extension set.";
-            };
-          };
-        }
-      );
-      default = { };
-      description = "ZenOS tweaks for GNOME desktop.";
-    };
   };
 
   config = mkIf cfg.enable {
