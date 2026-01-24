@@ -15,9 +15,9 @@ stdenv.mkDerivation {
 
   src = ./src;
 
-  nativeBuildInputs = [
-    pkgs.imagemagick
-    pkgs.coreutils-full
+  nativeBuildInputs = with pkgs; [
+    imagemagick
+    coreutils-full
   ];
 
   env_distroName = distroName;
