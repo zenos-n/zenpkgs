@@ -14,6 +14,32 @@
       ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
+      generateModuleTree =
+        path:
+        let
+          entries = builtins.readDir path;
+        in
+        nixpkgs.lib.filterAttrs (n: v: v != null) (
+          nixpkgs.lib.mapAttrs (
+            name: type:
+            if type == "directory" then
+              # Priority 1: Directory with default.nix is a module
+              if builtins.pathExists (path + "/${name}/default.nix") then
+                path + "/${name}/default.nix"
+              else
+                # Priority 2: Recurse into directory
+                let
+                  subtree = generateModuleTree (path + "/${name}");
+                in
+                if subtree == { } then null else subtree
+            # Priority 3: Standalone .nix file is a module
+            else if type == "regular" && nixpkgs.lib.hasSuffix ".nix" name && name != "default.nix" then
+              path + "/${name}"
+            else
+              null
+          ) entries
+        );
+
       zenOverlay =
         final: prev:
         let
@@ -63,6 +89,8 @@
     {
       overlays.default = zenOverlay;
 
+      nixosModules = if builtins.pathExists ./modules then generateModuleTree ./modules else { };
+
       packages = forAllSystems (
         system:
         let
@@ -78,7 +106,6 @@
         nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.${name})
       );
 
-      # EXPORT: Import the implementation from the file
       lib.mkUtils = import ./lib/utils.nix;
     };
 }
