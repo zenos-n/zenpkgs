@@ -29,43 +29,53 @@
             };
           };
 
-          # Recursive discovery function
-          # Walks the directory tree. If it finds 'package.nix', it treats it as a package.
-          # Otherwise, it treats it as a category and recurses deeper.
-          discoverPackages =
+          # PHASE 1: Pure Discovery
+          # Scans the disk and builds a tree of paths.
+          # Returns: path (if package) OR attrset (if category) OR null (if empty)
+          # Does NOT involve 'final', 'prev', or 'callPackage'.
+          generatePackageTree =
             path:
             let
               entries = builtins.readDir path;
               isPackage = builtins.pathExists (path + "/package.nix");
             in
             if isPackage then
-              (final: prev: final.callPackage (path + "/package.nix") { inherit lib; })
+              path + "/package.nix"
             else
-              (
-                final: prev:
-                let
-                  subDirs = lib.filterAttrs (n: v: v == "directory") entries;
+              let
+                subDirs = lib.filterAttrs (n: v: v == "directory") entries;
 
-                  # Generate children by calling the recursive function
-                  children = lib.mapAttrs (name: _: (discoverPackages (path + "/${name}")) final prev) subDirs;
+                # Recursively map children
+                children = lib.mapAttrs (name: _: generatePackageTree (path + "/${name}")) subDirs;
 
-                  # Filter out empty sets or sets that only contain the recursion flag
-                  # This prevents empty directories from appearing as attributes
-                  validChildren = lib.filterAttrs (
-                    n: v:
-                    v != { }
-                    && (if (v ? recurseForDerivations) then (builtins.length (builtins.attrNames v) > 1) else true)
-                  ) children;
-                in
-                lib.recurseIntoAttrs validChildren
-              );
+                # Filter out nulls (empty directories)
+                validChildren = lib.filterAttrs (n: v: v != null) children;
+              in
+              if validChildren == { } then null else validChildren;
+
+          # PHASE 2: Inflation
+          # Takes the pure tree and applies the overlay logic (callPackage).
+          inflateTree =
+            tree: final: prev:
+            if builtins.isPath tree then
+              # It's a path, so it's a package
+              final.callPackage tree { inherit lib; }
+            else
+              # It's a set, so it's a category
+              lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflateTree value final prev) tree);
 
           zenPkgNames = builtins.attrNames (
             lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./pkgs)
           );
 
-          # Modified overlay to use the recursive discovery
-          zenOverlay = final: prev: (discoverPackages ./pkgs) final prev;
+          # The Overlay
+          # We generate the tree structure once (purely), then inflate it with Nix logic.
+          zenOverlay =
+            final: prev:
+            let
+              tree = generatePackageTree ./pkgs;
+            in
+            if tree == null then { } else inflateTree tree final prev;
 
           pkgs = import nixpkgs {
             inherit system;
