@@ -15,10 +15,8 @@ stdenv.mkDerivation {
     python3
   ];
 
-  # Pass paths to the script via environment variables as it expects
-  # We use '.' because we 'cd' into the source directory or reference relative to build root
   rawPath = "./resources/zero-src";
-  # condensedPath = "./resources/zero-condensed-src"; # Uncomment if you have this
+  # condensedPath = "./resources/zero-condensed-src";
 
   buildPhase = ''
     runHook preBuild
@@ -48,7 +46,7 @@ stdenv.mkDerivation {
   meta = with lib; {
     description = "Zero Font";
     homepage = "https://zenos.neg-zero.com";
-    license = licenses.napl; # Updated to reflect your custom NAPL if defined elsewhere
+    license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
     platforms = platforms.linux;
   };
