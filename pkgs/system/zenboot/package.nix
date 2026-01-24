@@ -35,7 +35,7 @@ stdenv.mkDerivation {
   ];
 
   buildInputs = with pkgs; [
-    zenos-refind-theme
+    theming.system.zenos-refind-theme
   ];
 
   buildPhase = ''

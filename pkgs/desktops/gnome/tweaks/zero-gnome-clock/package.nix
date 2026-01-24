@@ -9,7 +9,7 @@ stdenv.mkDerivation {
   version = "1.0";
 
   nativeBuildInputs = with pkgs; [
-    zero-font
+    theming.fonts.zero-font
     gnomeExtensions.user-themes
   ];
 
