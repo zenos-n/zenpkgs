@@ -4,7 +4,11 @@
   pkgs,
   python3,
   resolution ? "max",
-  scannedDevices ? "external, optical, manual",
+  scannedDevices ? [
+    "external"
+    "optical"
+    "manual"
+  ],
   extraIncludedFiles ? null,
   extraConfig ? null,
   timeout ? 5,
@@ -21,7 +25,6 @@ stdenv.mkDerivation {
   pname = "zenboot";
   version = "1.0";
 
-  # Assuming ./src contains scripts/zenboot-setup.py
   src = ./src;
 
   dontUnpack = true;
@@ -31,13 +34,10 @@ stdenv.mkDerivation {
     python3
   ];
 
-  # We strictly assume these packages exist in your flake/nixpath
   buildInputs = with pkgs; [
     zenos-refind-theme
   ];
 
-  # 1. Generate the refind.conf
-  # 2. Prepare the python script
   buildPhase = ''
     mkdir -p build/config
     mkdir -p build/bin
@@ -49,12 +49,12 @@ stdenv.mkDerivation {
     use_nvram ${if use_nvram then "true" else "false"}
     ${lib.optionalString enable_mouse "enable_mouse"}
     resolution ${resolution}
-    scanfor ${scannedDevices}
+    scanfor ${lib.concatStringsSep ", " scannedDevices}
 
     # Include the dynamically generated entries file
     include zenboot-entries.conf
 
-    # Include the theme (path relative to EFI/refind/)
+    # Include the theme 
     include theme/theme.conf
 
     ${lib.concatStringsSep "\n" (
@@ -70,18 +70,13 @@ stdenv.mkDerivation {
     mkdir -p $out/bin
     mkdir -p $out/share/zenboot
 
-    # Copy Config
     cp build/config/refind.conf $out/share/zenboot/
 
-    # Copy Python Script
     cp $src/scripts/zenboot-setup.py $out/share/zenboot/zenboot-setup.py
 
-    # Copy Theme
-    # We copy the theme contents into a generic 'theme' folder in share
     mkdir -p $out/share/zenboot/theme
-    cp -r ${pkgs.zenos-refind-theme}/* $out/share/zenboot/theme/
+    cp -r ${pkgs.zenos-refind-theme}/boot/EFI/refind/themes/zenos-refind-theme/* $out/share/zenboot/theme/
 
-    # Create the executable wrapper
     cat > $out/bin/zenboot-setup << EOF
     #!${pkgs.bash}/bin/bash
     export PATH=${

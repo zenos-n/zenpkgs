@@ -1,128 +1,109 @@
 import os
 import glob
-import shutil
-import subprocess
 import sys
 import re
 
-# Envs passed from the bash wrapper
+# Environment Variables
 ESP_MOUNT = os.environ.get("ESP_MOUNT", "/boot")
 PROFILE_DIR = os.environ.get("PROFILE_DIR", "/nix/var/nix/profiles/system")
 OS_ICON = os.environ.get("OS_ICON", "zenos")
 GEN_COUNT = int(os.environ.get("GEN_COUNT", "10"))
-SHARE_DIR = os.environ.get("ZENBOOT_SHARE", "/run/current-system/sw/share/zenboot")
 
+# Paths
 REFIND_DIR = os.path.join(ESP_MOUNT, "EFI", "refind")
-ENTRIES_FILE = os.path.join(REFIND_DIR, "zenboot-entries.conf")
+OUTPUT_FILE = os.path.join(REFIND_DIR, "zenboot-entries.conf")
+ICON_PATH = f"{REFIND_DIR}/themes/zenos-refind-theme/icons/{OS_ICON}.png"
+
+# Default kernel options usually required for NixOS/ZenOS
+# We use systemd.unit=multi-user.target for the main boot, 
+# but you can adjust this if you want graphical by default.
 
 def log(msg):
     print(f"[zenboot] {msg}")
 
-def ensure_refind_installed():
-    """Checks if refind is installed in EFI, installs if missing."""
-    efi_boot = os.path.join(REFIND_DIR, "refind_x64.efi")
-    
-    if not os.path.exists(efi_boot):
-        log("rEFInd binary not found. Installing...")
-        # Assuming 'refind-install' is in PATH via the derivation's nativeBuildInputs
-        try:
-            subprocess.check_call(["refind-install", "--yes"])
-        except subprocess.CalledProcessError:
-            log("CRITICAL: Failed to install rEFInd. Check EFIVARS access.")
-            sys.exit(1)
-    else:
-        log("rEFInd is already installed.")
-
-def update_config_files():
-    """Copies refind.conf and themes from the package store to ESP."""
-    log("Updating configuration and themes...")
-    
-    # 1. Install main config
-    pkg_config = os.path.join(SHARE_DIR, "refind.conf")
-    target_config = os.path.join(REFIND_DIR, "refind.conf")
-    
-    if os.path.exists(pkg_config):
-        shutil.copy2(pkg_config, target_config)
-    else:
-        log(f"WARNING: Source config {pkg_config} not found.")
-
-    # 2. Install Theme
-    # We copy from store to ESP/EFI/refind/theme
-    pkg_theme = os.path.join(SHARE_DIR, "theme")
-    target_theme = os.path.join(REFIND_DIR, "theme")
-    
-    if os.path.exists(target_theme):
-        shutil.rmtree(target_theme)
-    
-    if os.path.exists(pkg_theme):
-        shutil.copytree(pkg_theme, target_theme)
-    else:
-        log("WARNING: Theme directory not found in package.")
-
-def get_kernel_params(generation_path):
+def get_gens():
     """
-    Attempts to retrieve kernel params. 
-    On standard NixOS, this is hard to get for old generations without metadata.
-    We fall back to a safe default if specific params file isn't found.
+    Finds generation links, sorts them by version number (descending).
+    Returns a list of full paths.
     """
-    params_path = os.path.join(generation_path, "kernel-params")
-    if os.path.exists(params_path):
-        with open(params_path, 'r') as f:
-            return f.read().strip()
+    # Glob patterns: /nix/var/nix/profiles/system-*-link
+    pattern = f"{PROFILE_DIR}-*-link"
+    gens = glob.glob(pattern)
     
-    # Fallback: Look at init script to find init path, generic params
-    # This is a simplification. For robust usage, your OS module should 
-    # generate a 'kernel-params' file in the generation output.
-    return "init=/nix/var/nix/profiles/system/init loglevel=4"
+    def extract_gen_num(path):
+        match = re.search(r'system-(\d+)-link', path)
+        return int(match.group(1)) if match else 0
 
-def generate_entries():
-    """Scans profiles and generates the refind sub-config."""
-    log(f"Scanning up to {GEN_COUNT} generations...")
-    
-    profiles = sorted(glob.glob(f"{PROFILE_DIR}-*-link"), key=lambda p: int(p.split('-')[-2]), reverse=True)
-    profiles = profiles[:GEN_COUNT]
-    
-    entries = []
-    
-    for profile in profiles:
-        try:
-            gen_num = profile.split('-')[-2]
-            kernel_path = os.path.realpath(os.path.join(profile, "kernel"))
-            initrd_path = os.path.realpath(os.path.join(profile, "initrd"))
-            
-            # Map /nix/store paths to EFI paths if they aren't on the ESP.
-            # rEFInd driver for ext4/btrfs can read /nix/store if partition is accessible.
-            # We assume rEFInd has filesystem drivers loaded.
-            
-            params = get_kernel_params(profile)
-            
-            entry = f"""
-menuentry "ZenOS Generation {gen_num}" {{
-    icon {REFIND_DIR}/theme/icons/{OS_ICON}.png
-    loader {kernel_path}
-    initrd {initrd_path}
-    options "{params}"
-    submenuentry "Boot to Terminal" {{
-        add_options "systemd.unit=multi-user.target"
-    }}
-}}
-"""
-            entries.append(entry)
-        except Exception as e:
-            log(f"Skipping generation {gen_num}: {e}")
+    return sorted(gens, key=extract_gen_num, reverse=True)[:GEN_COUNT]
 
-    with open(ENTRIES_FILE, "w") as f:
-        f.write("\n".join(entries))
-    
-    log(f"Generated {len(entries)} boot entries in {ENTRIES_FILE}")
+def resolve_esp_path(path, type_label):
+    """
+    Resolves the path for the loader. 
+    Since rEFInd with the btrfs/ext4 drivers can read /nix/store directly,
+    we return the absolute path.
+    """
+    if not os.path.exists(path):
+        log(f"WARNING: {type_label} path does not exist: {path}")
+    return path
 
-def main():
-    if not os.path.exists(REFIND_DIR):
-        os.makedirs(REFIND_DIR, exist_ok=True)
+def generate_config():
+    gens = get_gens()
+    if not gens:
+        log("No generations found in profile dir.")
+        return
+
+    log(f"Generating {OUTPUT_FILE} for {len(gens)} generations...")
+
+    with open(OUTPUT_FILE, "w") as f:
+        # Start the main entry block
+        f.write(f'menuentry "ZenOS" {{\n')
+        f.write(f'    icon {ICON_PATH}\n')
         
-    ensure_refind_installed()
-    update_config_files()
-    generate_entries()
+        for i, gen in enumerate(gens):
+            # Extract generation number from filename
+            match = re.search(r'system-(\d+)-link', gen)
+            gen_num = match.group(1) if match else "0"
+            
+            # Resolve the symlink to the actual store path
+            target = os.readlink(gen)
+            
+            # Construct paths to kernel/initrd/init inside the store path
+            kernel_link = os.path.join(target, "kernel")
+            initrd_link = os.path.join(target, "initrd")
+            init_path = os.path.join(target, "init")
+            
+            # Resolve physical files (keep as absolute paths for rEFInd drivers)
+            loader_final = resolve_esp_path(kernel_link, "kernel")
+            initrd_final = resolve_esp_path(initrd_link, "initrd")
+            
+            # Read built-in params from the generation's kernel-params file
+            params_file = os.path.join(target, "kernel-params")
+            params = ""
+            if os.path.exists(params_file):
+                with open(params_file, "r") as p:
+                    params = p.read().strip()
+
+            # Combine init path, built-in params, and forced flags
+            full_options = f"init={init_path} {params}"
+
+            # Main Entry Logic (Latest Generation)
+            # This sets the default action when hitting Enter on the icon
+            if i == 0:
+                f.write(f'    loader {loader_final}\n')
+                f.write(f'    initrd {initrd_final}\n')
+                f.write(f'    options "{full_options}"\n')
+            
+            # Submenus for specific generations (including the current one)
+            # This allows rolling back via the F2/Submenu key
+            f.write(f'    submenuentry "Generation {gen_num}" {{\n')
+            f.write(f'        loader {loader_final}\n')
+            f.write(f'        initrd {initrd_final}\n')
+            f.write(f'        options "{full_options}"\n')
+            f.write(f'    }}\n')
+            
+        f.write(f'}}\n')
+    
+    log("Done.")
 
 if __name__ == "__main__":
-    main()
+    generate_config()

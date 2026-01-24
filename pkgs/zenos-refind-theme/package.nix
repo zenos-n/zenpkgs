@@ -1,7 +1,6 @@
 {
   lib,
   stdenv,
-  pkgs,
   ...
 }:
 stdenv.mkDerivation {
@@ -12,10 +11,6 @@ stdenv.mkDerivation {
 
   dontUnpack = true;
 
-  nativeBuildInputs = with pkgs; [
-    # guess leave it as empty
-  ];
-
   buildPhase = " 
   cat > theme.conf << EOF
   #
@@ -23,17 +18,17 @@ stdenv.mkDerivation {
   #
 
   # Load banner and fit to screen
-  banner themes/zenos-refind-theme/background.png
+  banner themes/zenos-refind-theme/resources/background.png
   banner_scale fillscreen
 
   # Load icons
   big_icon_size 256
   small_icon_size 64
-  icons_dir themes/zenos-refind-theme/icons
+  icons_dir themes/zenos-refind-theme/resources/icons
 
   # Load selection background
-  selection_big themes/zenos-refind-theme/selection/big.png
-  selection_small themes/zenos-refind-theme/selection/small.png
+  selection_big themes/zenos-refind-theme/resources/selection/big.png
+  selection_small themes/zenos-refind-theme/resources/selection/small.png
 
   # Hide everything
   hideui singleuser,arrows
