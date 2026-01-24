@@ -7,6 +7,11 @@
 with lib;
 
 let
+  allPackages = config.environment.systemPackages;
+
+  installedExtensions = builtins.filter (pkg: pkg ? extensionUuid) allPackages;
+
+  allExts = builtins.map (pkg: pkg.extensionUuid) installedExtensions;
 in
 {
   options.zenos.desktops.gnome = {
@@ -97,6 +102,10 @@ in
         helvum
       ];
 
+    services.flatpak.packages = mkIf services.flatpak.enable [
+      "com.github.tchx84.Flatseal"
+    ];
+
     gnome.excludePackages = (
       with pkgs;
       [
@@ -115,11 +124,37 @@ in
         gnome-console
       ]
     );
-    programs.dconf.settings = {
+    programs.dconf.enable = true;
+    programs.dconf.settings.profiles.user.databases = {
       "org/gnome/desktop/interface" = {
         accent-color = cfg.defaultAccentColor;
         color-scheme = (if cfg.defaultDarkMode then "prefer-dark" else "prefer-light");
+        enable-hot-corners = mkDefault false;
+        gtk-enable-primary-paste = mkForce false; # when you middle click, you're pasting FASCISM
       };
+
+      "org/gnome/shell" = {
+        disable-user-extensions = false;
+        enabled-extensions = allExts;
+
+        favorite-apps = mkDefault cfg.dockItems;
+      };
+
+      "org/gnome/desktop/wm/preferences" = {
+        edge-tiling = mkDefault false;
+        action-double-click-titlebar = "toggle-maximize";
+      };
+
+      "org/gnome/mutter" = {
+        edge-tiling = mkDefault false;
+        center-new-windows = mkDefault false;
+        auto-maximize = false;
+        experimental-features = [
+          "scale-monitor-framebuffer"
+          "xwayland-native-scaling"
+        ];
+      };
+
     };
   };
 }
