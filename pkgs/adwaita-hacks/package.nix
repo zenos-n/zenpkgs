@@ -7,6 +7,7 @@ stdenv.mkDerivation {
   pname = "adwaita-hacks";
   version = "1.0";
 
+  # prob should be packaged separately but eh
   src = ./src;
 
   dontUnpack = true;
