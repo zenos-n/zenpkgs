@@ -1,38 +1,28 @@
+# LOCATION: zenpkgs/flake.nix
+# DESCRIPTION: Imports ./lib/utils.nix and exports it.
+
 {
+  description = "ZenPKGS - Custom Package Set";
+
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   };
 
   outputs =
-    { nixpkgs, ... }:
+    { self, nixpkgs, ... }:
     let
-      systems = [ "x86_64-linux" ];
-
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux"
+      ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
-    in
-    {
-      packages = forAllSystems (
-        system:
-        let
-          pkgsRaw = import nixpkgs { inherit system; };
 
-          lib = pkgsRaw.lib // {
-            licenses = pkgsRaw.lib.licenses // {
-              napl = {
-                shortName = "napl";
-                fullName = "The Non-Aggression License 1.0";
-                url = "https://github.com/negative-zero-inft/nap-license";
-                free = true;
-                redistributable = true;
-                copyleft = true;
-              };
-            };
-          };
+      zenOverlay =
+        final: prev:
+        let
+          lib = prev.lib;
 
           # PHASE 1: Pure Discovery
-          # Scans the disk and builds a tree of paths.
-          # Returns: path (if package) OR attrset (if category) OR null (if empty)
-          # Does NOT involve 'final', 'prev', or 'callPackage'.
           generatePackageTree =
             path:
             let
@@ -44,46 +34,56 @@
             else
               let
                 subDirs = lib.filterAttrs (n: v: v == "directory") entries;
-
-                # Recursively map children
                 children = lib.mapAttrs (name: _: generatePackageTree (path + "/${name}")) subDirs;
-
-                # Filter out nulls (empty directories)
                 validChildren = lib.filterAttrs (n: v: v != null) children;
               in
               if validChildren == { } then null else validChildren;
 
           # PHASE 2: Inflation
-          # Takes the pure tree and applies the overlay logic (callPackage).
           inflateTree =
-            tree: final: prev:
+            tree: f: p:
             if builtins.isPath tree then
-              # It's a path, so it's a package
-              final.callPackage tree { inherit lib; }
+              f.callPackage tree {
+                lib = f.lib // {
+                  licenses = f.lib.licenses // {
+                    napl = {
+                      shortName = "napl";
+                      fullName = "The Non-Aggression License 1.0";
+                      url = "https://github.com/negative-zero-inft/nap-license";
+                      free = true;
+                      redistributable = true;
+                      copyleft = true;
+                    };
+                  };
+                };
+              }
             else
-              # It's a set, so it's a category
-              lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflateTree value final prev) tree);
+              lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflateTree value f p) tree);
 
-          zenPkgNames = builtins.attrNames (
-            lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./pkgs)
-          );
+          tree = generatePackageTree ./pkgs;
+        in
+        if tree == null then { } else inflateTree tree final prev;
 
-          # The Overlay
-          # We generate the tree structure once (purely), then inflate it with Nix logic.
-          zenOverlay =
-            final: prev:
-            let
-              tree = generatePackageTree ./pkgs;
-            in
-            if tree == null then { } else inflateTree tree final prev;
+    in
+    {
+      overlays.default = zenOverlay;
 
+      packages = forAllSystems (
+        system:
+        let
           pkgs = import nixpkgs {
             inherit system;
-            overlays = [ zenOverlay ];
+            overlays = [ self.overlays.default ];
+            config.allowUnfree = true;
           };
-
+          zenPkgNames = builtins.attrNames (
+            nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./pkgs)
+          );
         in
-        lib.genAttrs zenPkgNames (name: pkgs.${name})
+        nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.${name})
       );
+
+      # EXPORT: Import the implementation from the file
+      lib.mkUtils = import ./lib/utils.nix;
     };
 }
