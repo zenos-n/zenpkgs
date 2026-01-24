@@ -10,7 +10,7 @@ stdenv.mkDerivation {
 
   src = ./src;
 
-  unpackPhase = "null";
+  dontUnpack = true;
 
   nativeBuildInputs = with pkgs; [
     # guess leave it as empty
@@ -45,7 +45,8 @@ EOF
 
   installPhase = "
   mkdir $out/boot/EFI/refind/themes/zenos-refind-theme -p
-  cp -r * $out/boot/EFI/refind/themes/zenos-refind-theme/
+  cp -r $src/resources $out/boot/EFI/refind/themes/zenos-refind-theme/
+  cp -r theme.conf $out/boot/EFI/refind/themes/zenos-refind-theme/
   
   ";
 
