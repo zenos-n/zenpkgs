@@ -68,7 +68,7 @@ stdenv.mkDerivation {
   meta = with lib; {
     description = "ZenOS Plymouth Boot Theme";
     homepage = "https://zenos.neg-zero.com"; # i know this doesn't exist yet but uhhhh
-    license = licenses.mit;
+    license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
     platforms = platforms.linux;
   };
