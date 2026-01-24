@@ -27,7 +27,7 @@ stdenv.mkDerivation {
   '';
 
   meta = with lib; {
-    description = "Customized version of the forge gnome extension with tweaks to work with gnome 49. The license applies to my patches, not the original code.";
+    description = "Customized version of the forge gnome extension with tweaks to work with gnome 49. The license applies to my patches and install script, not the original code.";
     homepage = "https://zenos.neg-zero.com";
     license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
