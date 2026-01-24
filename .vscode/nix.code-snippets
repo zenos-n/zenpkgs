@@ -1,0 +1,38 @@
+{
+  "Nix Derivation Template": {
+    "prefix": "mkderiv",
+    "body": [
+      "{",
+      "  lib,",
+      "  stdenv,",
+      "  pkgs,",
+      "  ...",
+      "}:",
+      "stdenv.mkDerivation {",
+      "  pname = \"${1:name}\";",
+      "  version = \"${2:1.0}\";",
+      "",
+      "  src = ./${3:src};",
+      "",
+      "  unpackPhase = \"${4| ,null|}\";",
+      "",
+      "  nativeBuildInputs = with pkgs; [",
+      "    ${5}",
+      "  ];",
+      "",
+      "  buildPhase = \"${6| ,null|}\";",
+      "",
+      "  installPhase = \"${7| ,null|}\";",
+      "",
+      "  meta = with lib; {",
+      "    description = \"${8}\";",
+      "    homepage = \"https://zenos.neg-zero.com\";",
+      "    license = licenses.napl;",
+      "    maintainers = with maintainers; [ doromiert ];",
+      "    platforms = platforms.linux;",
+      "  };",
+      "}"
+    ],
+    "description": "Basic Nix stdenv.mkDerivation template for zenpkgs"
+  }
+}
