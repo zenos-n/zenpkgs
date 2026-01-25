@@ -102,9 +102,13 @@ in
         helvum
       ];
 
-    services.flatpak.packages = mkIf services.flatpak.enable [
-      "com.github.tchx84.Flatseal"
-    ];
+    services.flatpak.packages =
+      mkIf services.flatpak.enable [
+        "com.github.tchx84.Flatseal"
+      ]
+      ++ mkIf cfg.extraPackages.enable [
+        "studio.planetpeanut.Bobby"
+      ];
 
     gnome.excludePackages = (
       with pkgs;
