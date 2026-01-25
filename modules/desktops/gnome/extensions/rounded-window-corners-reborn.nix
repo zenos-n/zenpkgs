@@ -10,6 +10,67 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.rounded-window-corners-reborn;
 
+  # --- Hex Color Parsing Helpers ---
+
+  # Mapping hex chars to integers
+  hexToDecMap = {
+    "0" = 0;
+    "1" = 1;
+    "2" = 2;
+    "3" = 3;
+    "4" = 4;
+    "5" = 5;
+    "6" = 6;
+    "7" = 7;
+    "8" = 8;
+    "9" = 9;
+    "a" = 10;
+    "b" = 11;
+    "c" = 12;
+    "d" = 13;
+    "e" = 14;
+    "f" = 15;
+    "A" = 10;
+    "B" = 11;
+    "C" = 12;
+    "D" = 13;
+    "E" = 14;
+    "F" = 15;
+  };
+
+  # Parse a single hex character
+  hexCharToInt =
+    c: if builtins.hasAttr c hexToDecMap then hexToDecMap.${c} else throw "Invalid hex character: ${c}";
+
+  # Parse a 2-character hex byte (e.g., "FF" -> 255)
+  parseHexByte =
+    s: (hexCharToInt (builtins.substring 0 1 s) * 16) + (hexCharToInt (builtins.substring 1 1 s));
+
+  # Main converter: Hex String -> [ R G B A ] (Floats 0.0 - 1.0)
+  parseHexColor =
+    s:
+    let
+      hex = lib.removePrefix "#" s;
+      len = builtins.stringLength hex;
+      norm = v: v / 255.0; # Normalize 0-255 to 0.0-1.0
+    in
+    if len == 6 then
+      [
+        (norm (parseHexByte (builtins.substring 0 2 hex)))
+        (norm (parseHexByte (builtins.substring 2 2 hex)))
+        (norm (parseHexByte (builtins.substring 4 2 hex)))
+        1.0
+      ]
+    else if len == 8 then
+      [
+        (norm (parseHexByte (builtins.substring 0 2 hex)))
+        (norm (parseHexByte (builtins.substring 2 2 hex)))
+        (norm (parseHexByte (builtins.substring 4 2 hex)))
+        (norm (parseHexByte (builtins.substring 6 2 hex)))
+      ]
+    else
+      throw "Invalid hex color: '${s}'. Must be 6 (RRGGBB) or 8 (RRGGBBAA) characters.";
+
   # --- Helpers ---
   mkBool =
     default: description:
@@ -86,16 +147,21 @@ let
       };
       borderRadius = mkUint 12 "Border radius.";
       smoothing = mkUint 0 "Smoothing.";
+
+      # MODIFIED: Accepts List<Float> OR String (Hex)
       borderColor = mkOption {
-        type = types.listOf types.float;
+        type = types.either (types.listOf types.float) types.str;
         default = [
           0.5
           0.5
           0.5
           1.0
         ];
-        description = "Border color (RGBA tuple).";
+        description = "Border color. Accepts either an RGBA tuple of floats (0.0-1.0) or a Hex string ('#FF0000' / '#FF000088').";
+        # The apply function automatically converts hex strings to the required float list
+        apply = v: if builtins.isString v then parseHexColor v else v;
       };
+
       enabled = mkBool true "Enable rounded corners.";
     };
   };
@@ -138,6 +204,7 @@ let
         mkVariant "{${concatStringsSep ", " pairs}}";
 
       # BorderColor: <[0.5, 0.5, 0.5, 1.0]>
+      # Note: settings.borderColor is guaranteed to be a list of floats here due to the 'apply' in mkOption
       colorStr = mkVariant "[${concatMapStringsSep ", " serializeFloat settings.borderColor}]";
 
       # Construct the main dictionary

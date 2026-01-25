@@ -1,13 +1,87 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.coverflow-alt-tab;
+  cfg = config.zenos.desktops.gnome.extensions.coverflow-alt-tab;
+
+  # --- Hex Color Parsing Helpers ---
+
+  # Mapping hex chars to integers
+  hexToDecMap = {
+    "0" = 0;
+    "1" = 1;
+    "2" = 2;
+    "3" = 3;
+    "4" = 4;
+    "5" = 5;
+    "6" = 6;
+    "7" = 7;
+    "8" = 8;
+    "9" = 9;
+    "a" = 10;
+    "b" = 11;
+    "c" = 12;
+    "d" = 13;
+    "e" = 14;
+    "f" = 15;
+    "A" = 10;
+    "B" = 11;
+    "C" = 12;
+    "D" = 13;
+    "E" = 14;
+    "F" = 15;
+  };
+
+  # Parse a single hex character
+  hexCharToInt =
+    c: if builtins.hasAttr c hexToDecMap then hexToDecMap.${c} else throw "Invalid hex character: ${c}";
+
+  # Parse a 2-character hex byte (e.g., "FF" -> 255)
+  parseHexByte =
+    s: (hexCharToInt (builtins.substring 0 1 s) * 16) + (hexCharToInt (builtins.substring 1 1 s));
+
+  # Main converter: Hex String -> [ R G B A ] (Floats 0.0 - 1.0)
+  parseHexColor =
+    s:
+    let
+      hex = lib.removePrefix "#" s;
+      len = builtins.stringLength hex;
+      norm = v: v / 255.0; # Normalize 0-255 to 0.0-1.0
+    in
+    if len == 6 then
+      [
+        (norm (parseHexByte (builtins.substring 0 2 hex)))
+        (norm (parseHexByte (builtins.substring 2 2 hex)))
+        (norm (parseHexByte (builtins.substring 4 2 hex)))
+        1.0
+      ]
+    else if len == 8 then
+      [
+        (norm (parseHexByte (builtins.substring 0 2 hex)))
+        (norm (parseHexByte (builtins.substring 2 2 hex)))
+        (norm (parseHexByte (builtins.substring 4 2 hex)))
+        (norm (parseHexByte (builtins.substring 6 2 hex)))
+      ]
+    else
+      throw "Invalid hex color: '${s}'. Must be 6 (RRGGBB) or 8 (RRGGBBAA) characters.";
+
+  # Force floats to have decimal points (required for GVariant doubles)
+  serializeFloat =
+    v:
+    let
+      s = toString v;
+    in
+    if builtins.match ".*\\..*" s == null then "${s}.0" else s;
+
+  # Convert a list of 3+ floats to a GVariant tuple string "(r, g, b)"
+  listToTupleStr =
+    l: "(${serializeFloat (elemAt l 0)},${serializeFloat (elemAt l 1)},${serializeFloat (elemAt l 2)})";
 
   # --- Helpers for Types ---
   mkBool =
@@ -50,13 +124,23 @@ let
       description = description;
     };
 
-  # Helper for (ddd) tuples - exposed as a string for simplicity, user enters "(0.0, 0.0, 0.0)"
-  mkColorTuple =
+  # Helper for (ddd) tuples - Supports Hex String, List of Floats, or raw tuple String
+  mkColorOption =
     default: description:
     mkOption {
-      type = types.str;
+      type = types.either types.str (types.listOf types.float);
       default = default;
-      description = description;
+      description =
+        description
+        + " Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)').";
+      apply =
+        v:
+        if builtins.isList v then
+          listToTupleStr v
+        else if (builtins.isString v && lib.hasPrefix "#" v) then
+          listToTupleStr (parseHexColor v)
+        else
+          v;
     };
 
 in
@@ -126,9 +210,9 @@ in
 
     use-tint = mkBool true "Whether to Use a Tint Color on the Background Application Switcher.";
 
-    tint-color = mkColorTuple "(0.0,0.0,0.0)" "Tint Color (GVariant tuple string, e.g. '(0.0,0.0,0.0)').";
+    tint-color = mkColorOption "(0.0,0.0,0.0)" "Tint Color.";
 
-    switcher-background-color = mkColorTuple "(0.0,0.0,0.0)" "Switcher Background Color (GVariant tuple string).";
+    switcher-background-color = mkColorOption "(0.0,0.0,0.0)" "Switcher Background Color.";
 
     tint-blend = mkDouble 0.0 "Amount to Blend Tint Color.";
 
@@ -138,7 +222,7 @@ in
 
     invert-swipes = mkBool false "Invert System Scroll Direction Setting.";
 
-    highlight-color = mkColorTuple "(1.0,1.0,1.0)" "Highlight Color (GVariant tuple string).";
+    highlight-color = mkColorOption "(1.0,1.0,1.0)" "Highlight Color.";
 
     coverflow-switch-windows = mkStrList [ "" ] "Switch Windows Keyboard Shortcut.";
 
