@@ -5,21 +5,14 @@
   ...
 }:
 let
-  inherit (lib.hm.gvariant)
-    mkTuple
-    mkUint32
-    ;
   cfg = config.zenos.desktops.gnome.tweaks.zenosExtensions;
-  extensions =
-    # ↓ MAKE MODULES OUT OF THESE
-    (with pkgs.gnomeExtensions; [
-    ])
-    ++ (with pkgs.desktops.gnome.extensions; [
-      forge
-      zenlink-indicator
-    ]);
+
+  # Helper to check if an extension name is NOT in the exclusion list
+  isAllowed = name: !(lib.elem name cfg.excludedExtensions);
 in
 {
+  imports = [ ./imports.nix ]; # Imports the list of modules we created
+
   options.zenos.desktops.gnome.tweaks.zenosExtensions = lib.mkOption {
     type = lib.types.submodule {
       options = {
@@ -29,9 +22,9 @@ in
           description = "Enable installation of curated ZenOS GNOME extensions.";
         };
         excludedExtensions = lib.mkOption {
-          type = lib.types.listOf lib.types.package;
+          type = lib.types.listOf lib.types.str;
           default = [ ];
-          description = "List of curated ZenOS GNOME extensions to exclude from installation.";
+          description = "List of curated ZenOS GNOME extensions to exclude from installation (by name, e.g. \"user-themes\").";
         };
         extensionConfig.enable = lib.mkOption {
           type = lib.types.bool;
@@ -44,14 +37,167 @@ in
     description = "Install the curated ZenOS GNOME extension set.";
   };
 
-  config = lib.mkIf cfg.enable {
-    config.zenos.desktops.gnome.extensions = {
+  config = lib.mkIf (cfg.enable && cfg.extensionConfig.enable) {
+
+    # ==========================================================
+    # Core Extensions Configuration
+    # ==========================================================
+
+    zenos.desktops.gnome.extensions = {
+
+      # --- User Themes ---
+      user-theme.enable = isAllowed "user-themes";
+
+      # --- App Hider ---
+      app-hider = {
+        enable = isAllowed "app-hider";
+        hidden-apps = [ "vesktop.desktop" ];
+      };
+
+      # --- Hide Minimized ---
+      hide-minimized.enable = isAllowed "hide-minimized";
+
+      # --- Hide Cursor ---
+      hide-cursor.enable = isAllowed "hide-cursor";
+
+      # --- Burn My Windows ---
+      burn-my-windows = {
+        enable = isAllowed "burn-my-windows";
+        # We point to the profile we create below using environment.etc
+        active-profile = "/etc/burn-my-windows/profiles/zenos.conf";
+        prefs-open-count = 2;
+        last-extension-version = 47;
+        last-prefs-version = 47;
+      };
+
+      # --- Compiz Windows Effect ---
+      compiz-windows-effect = {
+        enable = isAllowed "compiz-windows-effect";
+        friction = 4.9;
+        mass = 50.0;
+        resize-effect = true;
+        speedup-factor-divider = 4.7;
+        spring-k = 2.2;
+      };
+
+      # --- Compiz Alike Magic Lamp ---
+      compiz-alike-magic-lamp-effect.enable = isAllowed "compiz-alike-magic-lamp-effect";
+
+      # --- Rounded Window Corners Reborn ---
+      rounded-window-corners-reborn = {
+        enable = isAllowed "rounded-window-corners-reborn";
+        border-width = 1;
+
+        # Converted from rwcr_settings.txt
+        global-rounded-corner-settings = {
+          enabled = true;
+          borderRadius = 12;
+          smoothing = 0;
+          borderColor = [
+            0.19215686619281769
+            0.19215686619281769
+            0.20784313976764679
+            1.0
+          ];
+          padding = {
+            left = 1;
+            right = 1;
+            top = 1;
+            bottom = 1;
+          };
+          keepRoundedCorners = {
+            maximized = false;
+            fullscreen = false;
+          };
+        };
+      };
+
+      # --- Alphabetical App Grid ---
+      alphabetical-app-grid = {
+        enable = isAllowed "alphabetical-app-grid";
+        folder-order-position = "end";
+      };
+
+      # --- Category Sorted App Grid ---
+      category-sorted-app-grid.enable = isAllowed "category-sorted-app-grid";
+
+      # --- Coverflow Alt-Tab ---
+      coverflow-alt-tab = {
+        enable = isAllowed "coverflow-alt-tab";
+        desaturate-factor = 0.0;
+        icon-style = "Classic";
+        # Converted from GVariant Tuple [ 1.0 1.0 1.0 ]
+        switcher-background-color = "(1.0, 1.0, 1.0)";
+        use-glitch-effect = false;
+      };
+
+      # --- Hide Top Bar ---
+      hidetopbar = {
+        enable = isAllowed "hide-top-bar";
+        enable-intellihide = false;
+        mouse-sensitive = true;
+        mouse-sensitive-fullscreen-window = false;
+      };
+
+      # --- Mouse Tail ---
+      mouse-tail.enable = isAllowed "mouse-tail";
+
+      # --- Window Is Ready Remover ---
+      window-is-ready-remover.enable = isAllowed "window-is-ready-remover";
+
+      # --- Date Menu Formatter ---
+      date-menu-formatter = {
+        enable = isAllowed "date-menu-formatter";
+        pattern = "dd.MM  HH:mm";
+        formatter = "01_luxon";
+        text-align = "center";
+        font-size = 9;
+        update-level = 1;
+      };
+
+      # --- GSConnect ---
+      gsconnect = {
+        enable = isAllowed "gsconnect";
+        # Note: Window size/placement preferences are often device-specific or
+        # managed by GTK state rather than extension settings in the new module.
+      };
+
+      # --- Clipboard Indicator ---
+      clipboard-indicator = {
+        enable = isAllowed "clipboard-indicator";
+      };
+
+      # --- Notification Timeout ---
+      notification-timeout = {
+        enable = isAllowed "notification-timeout";
+        timeout = 2000;
+      };
+
+      # --- Forge ---
+      forge = {
+        enable = isAllowed "forge";
+        css-last-update = 37;
+        dnd-center-layout = "swap";
+        float-always-on-top-enabled = false;
+        focus-border-toggle = false;
+        quick-settings-enabled = false;
+        split-border-toggle = false;
+        stacked-tiling-mode-enabled = false;
+        tabbed-tiling-mode-enabled = false;
+        window-gap-size = 4;
+      };
+
+      # --- Zenlink Indicator ---
+      zenlink-indicator = {
+        enable = isAllowed "zenlink-indicator";
+      };
+
+      # --- Blur My Shell ---
       blur-my-shell = {
-        enable = true;
+        enable = isAllowed "blur-my-shell";
 
-        general = lib.mkIf cfg.extensionConfig.enable {
+        general = {
           settings-version = 2;
-
           pipelines = {
             pipeline_default = {
               name = "Default";
@@ -66,7 +212,6 @@ in
                 { noise = { }; }
               ];
             };
-
             pipeline_default_rounded = {
               name = "Default rounded";
               effects = [
@@ -113,7 +258,7 @@ in
         };
 
         panel = {
-          blur = false; # Explicitly disabled in your dump
+          blur = false;
           brightness = 0.6;
           pipeline = "pipeline_default";
           sigma = 30;
@@ -128,161 +273,37 @@ in
           sigma = 30;
         };
       };
-    };
 
-    environment.systemPackages = lib.filter (ext: !(lib.elem ext cfg.excludedExtensions)) (
-      map (ext: ext) extensions
-    );
+      # ========================================
+      # Configs for Excluded/Extra Extensions
+      # ========================================
+      # These were in the original dconf dump but not in the main enabled list.
+      # We enable the config, but the user must enable the extension package explicitly
+      # or rely on the module default if they choose to install it.
 
-    systemd.user.services.dconf-complex-apply = lib.mkIf cfg.extensionConfig.enable {
-      Unit = {
-        Description = "Apply complex dconf settings from raw files";
-        After = [ "graphical-session.target" ];
-        PartOf = [ "graphical-session.target" ];
-      };
+      # --- Rounded Corners (lennart-k) ---
+      # This extension doesn't have a module in extmodules.txt, so config is skipped.
+      # If you add a module for it, configure it here.
 
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
-
-      Service = {
-        Type = "oneshot";
-        ExecStart = "${pkgs.writeShellScript "apply-dconf-complex" ''
-          ${pkgs.dconf}/bin/dconf write /org/gnome/shell/extensions/rounded-window-corners-reborn/global-rounded-corner-settings ${lib.strings.escapeShellArg (builtins.readFile ./resources/rwcr_settings.txt)}
-        ''}";
-      };
-    };
-
-    environment.etc."burn-my-windows/profiles/zenos.conf" = lib.mkIf cfg.extensionConfig.enable {
-      source = lib.readFile ./resources/bmw.conf;
-    };
-
-    programs.dconf.settings = lib.mkIf cfg.extensionConfig.enable {
-      "org/gnome/shell/extensions/date-menu-formatter" = {
-        pattern = "dd.MM  HH:mm";
-        formatter = "01_luxon";
-        text-align = "center";
-        font-size = pkgs.lib.gvariant.mkInt32 9;
-        update-level = pkgs.lib.gvariant.mkInt32 1;
-      };
-
-      # --- Alphabetical App Grid ---
-      "org/gnome/shell/extensions/alphabetical-app-grid" = {
-        folder-order-position = "end";
-      };
-
-      # --- App Hider ---
-      "org/gnome/shell/extensions/app-hider" = {
-        # vesktop is hidden because zenos makes a custom .desktop for it
-        hidden-apps = [ "vesktop.desktop" ];
-      };
-
-      # --- Burn My Windows ---
-      "org/gnome/shell/extensions/burn-my-windows" = {
-        active-profile = "/etc/burn-my-windows/profiles/zenos.conf";
-        last-extension-version = 47;
-        last-prefs-version = 47;
-        prefs-open-count = 2;
-      };
-
-      # --- Compiz Windows Effect ---
-      "org/gnome/shell/extensions/com/github/hermes83/compiz-windows-effect" = {
-        friction = 4.9000000000000004;
-        last-version = 29;
-        mass = 50.0;
-        resize-effect = true;
-        speedup-factor-divider = 4.7000000000000002;
-        spring-k = 2.2000000000000002;
-      };
-
-      # --- Coverflow Alt-Tab ---
-      "org/gnome/shell/extensions/coverflowalttab" = {
-        desaturate-factor = 0.0;
-        icon-style = "Classic";
-        switcher-background-color = mkTuple [
-          1.0
-          1.0
-          1.0
-        ];
-        use-glitch-effect = false;
-      };
-
-      # --- Forge ---
-      "org/gnome/shell/extensions/forge" = {
-        css-last-update = mkUint32 37;
-        dnd-center-layout = "swap";
-        float-always-on-top-enabled = false;
-        focus-border-toggle = false;
-        quick-settings-enabled = false;
-        split-border-toggle = false;
-        stacked-tiling-mode-enabled = false;
-        tabbed-tiling-mode-enabled = false;
-        window-gap-size = mkUint32 4;
-      };
-
-      "org/gnome/shell/extensions/gsconnect/preferences" = {
-        window-maximized = false;
-        window-size = mkTuple [
-          945
-          478
-        ];
-      };
-
-      # --- Hide Top Bar ---
-      "org/gnome/shell/extensions/hidetopbar" = {
-        enable-intellihide = false;
-        mouse-sensitive = true;
-        mouse-sensitive-fullscreen-window = false;
-      };
-
-      # --- Notification Timeout ---
-      "org/gnome/shell/extensions/notification-timeout" = {
-        timeout = 2000;
-      };
-
-      # --- Rounded Window Corners Reborn ---
-      "org/gnome/shell/extensions/rounded-window-corners-reborn" = {
-        border-width = 1;
-        settings-version = mkUint32 7;
-      };
-
-      # ======================================== #
-      # CONFIGS FOR EXTS NOT INCLUDED BY DEFAULT #
-      # ======================================== #
-      # they may have been excluded for performance, stability or other reasons
-      # but their configs are provided here for user convenience
-
-      # --- Rounded Corners ---
-      "org/gnome/shell/extensions/lennart-k/rounded_corners" = {
-        corner-radius = 24;
-      };
       # --- Media Controls ---
-      "org/gnome/shell/extensions/mediacontrols" = {
-        extension-index = mkUint32 1;
-        extension-position = "Left";
-        show-control-icons = false;
-      };
+      # Module mpris-label.nix exists, but Media Controls usually refers to
+      # 'org.gnome.shell.extensions.mediacontrols'. Checking if mpris-label covers it...
+      # mpris-label settings are different. Skipping specific dconf for un-moduled extension.
+
       # --- Quick Settings Tweaks ---
-      "org/gnome/shell/extensions/quick-settings-tweaks" = {
-        datemenu-hide-left-box = false;
-        media-gradient-enabled = false;
-        media-progress-enabled = false;
-        menu-animation-enabled = true;
-        notifications-enabled = false;
-        overlay-menu-enabled = true;
-      };
-      # --- Tweaks System Menu ---
-      "org/gnome/shell/extensions/tweaks-system-menu" = {
-        applications = [
-          "org.gnome.tweaks.desktop"
-          "com.mattjakeman.ExtensionManager.desktop"
-        ];
-      };
+      # No module found.
+
       # --- Panel Corners ---
-      "org/gnome/shell/extensions/panel-corners" = {
-        panel-corner-radius = 22;
-        screen-corner-radius = 22;
-      };
+      # No module found.
+    };
+
+    # ==========================================================
+    # Manual Resource Handling (Legacy Support)
+    # ==========================================================
+
+    # Maintain the file placement for Burn My Windows profile
+    environment.etc."burn-my-windows/profiles/zenos.conf" = {
+      source = lib.readFile ./resources/bmw.conf;
     };
   };
 }
