@@ -65,6 +65,9 @@ in
   };
 
   config = mkIf cfg.enable {
+    environment.variables = {
+      GST_PLUGIN_PATH = "/run/current-system/sw/lib/gstreamer-1.0/";
+    };
     environment.systemPackages =
       with pkgs;
       [
@@ -75,6 +78,7 @@ in
         gst_all_1.gst-plugins-bad
         gst_all_1.gst-plugins-ugly
         gst_all_1.gst-libav # Essential for common formats like .mp4/.mkv
+        gst_all_1.gst-vaapi
 
         gnome-tweaks
         gnome-extension-manager
