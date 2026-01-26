@@ -134,6 +134,10 @@ in
     );
     programs.dconf.enable = true;
     programs.dconf.settings.profiles.user.databases = {
+      "org/gnome/desktop/notifications" = {
+        show-in-lock-screen = false;
+      };
+
       "org/gnome/desktop/interface" = {
         accent-color = cfg.defaultAccentColor;
         color-scheme = (if cfg.defaultDarkMode then "prefer-dark" else "prefer-light");
