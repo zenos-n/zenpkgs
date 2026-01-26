@@ -10,7 +10,7 @@ with lib;
 let
   cfg = config.boot.loader.zenboot;
 
-  zenbootPkg = pkgs.system.zenboot.override {
+  zenbootPkg = pkgs.zenos.zenboot.override {
     inherit (cfg)
       resolution
       scannedDevices
