@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -7,7 +8,7 @@
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.dash-in-panel;
+  cfg = config.zenos.desktops.gnome.extensions.dash-in-panel;
 
   # --- Helpers for Types ---
   mkBool =

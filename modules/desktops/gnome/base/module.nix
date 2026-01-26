@@ -1,12 +1,14 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 
 with lib;
 
 let
+  cfg = config.zenos.desktops.gnome;
   allPackages = config.environment.systemPackages;
 
   installedExtensions = builtins.filter (pkg: pkg ? extensionUuid) allPackages;
@@ -32,7 +34,7 @@ in
       default = "purple";
       description = "Accent color for GNOME desktop. Can be overridden by users.";
     };
-    defaultDarkMode.enable = mkOption {
+    defaultDarkMode = mkOption {
       type = types.bool;
       default = true;
       description = "Whether to enable dark mode for all users by default";
@@ -114,59 +116,57 @@ in
         "studio.planetpeanut.Bobby"
       ];
 
-    gnome.excludePackages = (
-      with pkgs;
-      [
-        gnome-software
-        gnome-photos
-        gnome-tour
-        gedit
-        cheese
-        gnome-music
-        gnome-maps
-        epiphany
-        gnome-contacts
-        gnome-weather
-      ]
-      ++ mkIf cfg.disableGnomeConsole [
-        gnome-console
-      ]
-    );
+    environment.gnome.excludePackages = with pkgs; [
+      gnome-software
+      gnome-photos
+      gnome-tour
+      gedit
+      cheese
+      gnome-music
+      gnome-maps
+      epiphany
+      gnome-contacts
+      gnome-weather
+      (mkIf cfg.excludeGnomeConsole pkgs.gnome-console)
+    ];
+
     programs.dconf.enable = true;
-    programs.dconf.settings.profiles.user.databases = {
-      "org/gnome/desktop/notifications" = {
-        show-in-lock-screen = false;
-      };
+    programs.dconf.profiles.user.databases = [
+      {
+        "org/gnome/desktop/notifications" = {
+          show-in-lock-screen = false;
+        };
 
-      "org/gnome/desktop/interface" = {
-        accent-color = cfg.defaultAccentColor;
-        color-scheme = (if cfg.defaultDarkMode then "prefer-dark" else "prefer-light");
-        enable-hot-corners = mkDefault false;
-        gtk-enable-primary-paste = mkForce false; # when you middle click, you're pasting FASCISM
-      };
+        "org/gnome/desktop/interface" = {
+          accent-color = cfg.defaultAccentColor;
+          color-scheme = (if cfg.defaultDarkMode then "prefer-dark" else "prefer-light");
+          enable-hot-corners = mkDefault false;
+          gtk-enable-primary-paste = mkForce false; # when you middle click, you're pasting FASCISM
+        };
 
-      "org/gnome/shell" = {
-        disable-user-extensions = false;
-        enabled-extensions = allExts;
+        "org/gnome/shell" = {
+          disable-user-extensions = false;
+          enabled-extensions = allExts;
 
-        favorite-apps = mkDefault cfg.dockItems;
-      };
+          favorite-apps = mkDefault cfg.dockItems;
+        };
 
-      "org/gnome/desktop/wm/preferences" = {
-        edge-tiling = mkDefault false;
-        action-double-click-titlebar = "toggle-maximize";
-      };
+        "org/gnome/desktop/wm/preferences" = {
+          edge-tiling = mkDefault false;
+          action-double-click-titlebar = "toggle-maximize";
+        };
 
-      "org/gnome/mutter" = {
-        edge-tiling = mkDefault false;
-        center-new-windows = mkDefault false;
-        auto-maximize = false;
-        experimental-features = [
-          "scale-monitor-framebuffer"
-          "xwayland-native-scaling"
-        ];
-      };
+        "org/gnome/mutter" = {
+          edge-tiling = mkDefault false;
+          center-new-windows = mkDefault false;
+          auto-maximize = false;
+          experimental-features = [
+            "scale-monitor-framebuffer"
+            "xwayland-native-scaling"
+          ];
+        };
 
-    };
+      }
+    ];
   };
 }

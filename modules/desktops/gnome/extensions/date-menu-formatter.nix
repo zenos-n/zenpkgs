@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -7,7 +8,7 @@
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.date-menu-formatter;
+  cfg = config.zenos.desktops.gnome.extensions.date-menu-formatter;
 
   # --- Helpers for Types ---
   mkBool =
@@ -66,6 +67,7 @@ in
     update-level = mkInt 1 "Update Clock Every (0=minute, 1=second, 2=2x/sec, etc).";
 
     text-align = mkStr "center" "Align the label (left, center, right).";
+
   };
 
   config = mkIf cfg.enable {

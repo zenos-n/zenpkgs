@@ -1,13 +1,14 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.vitals;
+  cfg = config.zenos.desktops.gnome.extensions.vitals;
 
   # --- Helpers for Types ---
   mkBool =

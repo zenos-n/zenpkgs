@@ -1,13 +1,14 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.space-bar;
+  cfg = config.zenos.desktops.gnome.extensions.space-bar;
 
   # --- Helpers for Types ---
   mkBool =

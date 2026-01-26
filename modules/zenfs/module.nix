@@ -1,4 +1,4 @@
-{ lib, config, ... }:
+{ pkgs, options,  lib, config, ... }:
 
 with lib;
 
@@ -7,7 +7,13 @@ let
 
   # --- [ Submodule for Per-User Settings ] ---
   userJanitorOpts =
-    { ... }:
+    {
+  config,
+  lib,
+  pkgs,
+  options,
+  ...
+}:
     {
       options = {
         dumb = {

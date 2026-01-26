@@ -1,13 +1,14 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.tiling-assistant;
+  cfg = config.zenos.desktops.gnome.extensions.tiling-assistant;
 
   # --- Helpers for Types ---
   mkBool =

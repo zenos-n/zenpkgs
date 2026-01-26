@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -7,7 +8,7 @@
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.clipboard-indicator;
+  cfg = config.zenos.desktops.gnome.extensions.clipboard-indicator;
 
   # --- Helpers for Types ---
   mkBool =

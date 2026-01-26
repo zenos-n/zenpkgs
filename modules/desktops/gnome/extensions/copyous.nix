@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -7,7 +8,7 @@
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.copyous;
+  cfg = config.zenos.desktops.gnome.extensions.copyous;
 
   # --- Helpers for Types ---
   mkBool =

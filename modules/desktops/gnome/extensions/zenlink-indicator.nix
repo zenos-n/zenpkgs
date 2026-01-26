@@ -1,13 +1,14 @@
 {
   pkgs,
   lib,
+  options,
   ...
 }:
 
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.zenlink-indicator;
+  cfg = config.zenos.desktops.gnome.extensions.zenlink-indicator;
 in
 {
   options.zenos.desktops.gnome.extensions.zenlink-indicator = {

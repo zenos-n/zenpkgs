@@ -10,30 +10,26 @@ let
   isAllowed = name: !(lib.elem name cfg.excludedExtensions);
 in
 {
-  imports = [ ./imports.nix ]; # Imports the list of modules we created
-
-  options.zenos.desktops.gnome.tweaks.zenosExtensions = lib.mkOption {
-    type = lib.types.submodule {
-      options = {
-        enable = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-          description = "Enable installation of curated ZenOS GNOME extensions.";
-        };
-        excludedExtensions = lib.mkOption {
-          type = lib.types.listOf lib.types.str;
-          default = [ ];
-          description = "List of curated ZenOS GNOME extensions to exclude from installation (by name, e.g. \"user-themes\").";
-        };
-        extensionConfig.enable = lib.mkOption {
-          type = lib.types.bool;
-          default = true;
-          description = "Default ZenOS extension settings.";
-        };
+  options.zenos.desktops.gnome.tweaks.zenosExtensions = {
+    enable = lib.mkEnableOption "Enable the curated ZenOS GNOME extension set.";
+    options = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable installation of curated ZenOS GNOME extensions.";
+      };
+      excludedExtensions = lib.mkOption {
+        type = lib.types.listOf lib.types.str;
+        default = [ ];
+        description = "List of curated ZenOS GNOME extensions to exclude from installation (by name, e.g. \"user-themes\").";
+      };
+      extensionConfig.enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Default ZenOS extension settings.";
       };
     };
-    default = true;
-    description = "Install the curated ZenOS GNOME extension set.";
+
   };
 
   config = lib.mkIf cfg.enable {

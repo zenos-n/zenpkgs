@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   lib,
   ...
@@ -7,7 +8,7 @@
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.mouse-tail;
+  cfg = config.zenos.desktops.gnome.extensions.mouse-tail;
 
   # --- Helpers for Types ---
   mkInt =

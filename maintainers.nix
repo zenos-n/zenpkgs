@@ -1,4 +1,10 @@
-{ ... }:
+{
+  config,
+  lib,
+  pkgs,
+  options,
+  ...
+}:
 {
   doromiert = {
     email = "doromiert@gmail.com";

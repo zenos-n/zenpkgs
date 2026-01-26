@@ -5,13 +5,14 @@
 {
   pkgs,
   lib,
+  config,
   ...
 }:
 
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.blur-my-shell;
+  cfg = config.zenos.desktops.gnome.extensions.blur-my-shell;
 
   # --- Helpers for Types ---
   mkBool =
@@ -176,7 +177,7 @@ let
 
 in
 {
-  options.programs.blur-my-shell = {
+  options.zenos.desktops.gnome.extensions.blur-my-shell = {
     enable = mkEnableOption "Blur My Shell GNOME extension configuration";
 
     # --- General Settings ---

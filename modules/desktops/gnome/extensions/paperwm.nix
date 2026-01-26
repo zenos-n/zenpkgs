@@ -1,5 +1,6 @@
 {
   pkgs,
+  config,
   lib,
   ...
 }:
@@ -7,7 +8,7 @@
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.paperwm;
+  cfg = config.zenos.desktops.gnome.extensions.paperwm;
 
   # --- Helpers for Types ---
   mkBool =

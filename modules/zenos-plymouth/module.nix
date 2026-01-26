@@ -1,6 +1,9 @@
-{ lib, pkgs, ... }:
-
-{ config, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 let
   cfg = config.zenos.plymouth;
 

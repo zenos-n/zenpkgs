@@ -7,7 +7,7 @@
 with lib;
 
 let
-  cfg = options.zenos.desktops.gnome.extensions.places-status-indicator;
+  cfg = config.zenos.desktops.gnome.extensions.places-status-indicator;
 in
 {
   options.zenos.desktops.gnome.extensions.places-status-indicator = {
