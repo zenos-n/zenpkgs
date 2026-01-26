@@ -1,6 +1,7 @@
 {
   options,
   lib,
+  pkgs,
   ...
 }:
 
@@ -14,10 +15,16 @@ in
 
 {
   cfg = {
-    enable = lib.mkEnableOption "BlackBox theming for GNOME.";
+    enable = lib.mkEnableOption "BlackBox theming for ZenOS.";
   };
 
   config = lib.mkIf cfg.enable {
+
+    environment.systemPackages = with pkgs; [
+      blackbox-terminal
+      nerd-fonts.atkynson-mono
+    ];
+
     programs.dconf.settings = {
 
       # --- BlackBox Terminal ---
