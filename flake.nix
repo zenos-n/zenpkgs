@@ -108,7 +108,27 @@
             nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./pkgs)
           );
         in
-        nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.${name})
+        nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.zenos.${name})
+      );
+
+      # --- Documentation Data Output ---
+      # Run with: nix eval .#docData --json > src/lib/data.json
+      docData = forAllSystems (
+        system:
+        import ./lib/doc-gen.nix {
+          pkgs = import nixpkgs { inherit system; };
+          inherit system;
+          flake = self;
+        }
+      );
+
+      audit = forAllSystems (
+        system:
+        import ./lib/audit.nix {
+          pkgs = import nixpkgs { inherit system; };
+          inherit system;
+          flake = self;
+        }
       );
 
       lib.mkUtils = import ./lib/utils.nix;

@@ -41,6 +41,8 @@ rec {
     in
     lib.flatten entries;
 
+  platforms.zenos = platforms.linux ++ [ "x86_64-linux" ];
+
   # Helper to check if a module is enabled via the new config syntax
   isModuleEnabled =
     config: category: name:
