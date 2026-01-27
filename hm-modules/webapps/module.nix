@@ -112,9 +112,14 @@ in
     enable = mkEnableOption "Zenos WebApps Declarative Module";
 
     base = mkOption {
-      type = types.enum [ "firefox" ];
+      type = types.enum [
+        "firefox"
+        "brave"
+        "chrome"
+        "helium"
+      ];
       default = "firefox";
-      description = "The backend browser engine to use for PWAs.";
+      description = "The backend browser engine to use for PWAs. Firefox is the only one that's officially supported. If you want the base for your browser to be supported, you need to maintain it yourself. PRs welcome is what i'm saying.";
     };
 
     profileDir = mkOption {
@@ -130,6 +135,13 @@ in
         type = types.functionTo types.str;
         default = _: "echo 'No backend configured'";
         description = "Function that takes an App ID and returns the shell command to launch it.";
+      };
+
+      # Internal interface for WM Class (used for window matching in desktop entries)
+      getWmClass = mkOption {
+        internal = true;
+        type = types.functionTo types.str;
+        default = id: "PWA-${id}";
       };
     };
 
@@ -179,26 +191,41 @@ in
       '')
     ];
 
-    # 2. Register Dispatcher as a Desktop Entry
-    xdg.desktopEntries = mkIf cfg.dispatcher.enable {
-      pwa-dispatcher = {
-        name = "PWA Dispatcher";
-        genericName = "Web Browser Dispatcher";
-        exec = "pwa-dispatcher %U";
-        icon = "web-browser";
-        categories = [
-          "Network"
-          "WebBrowser"
-        ];
-        mimeType = [
-          "text/html"
-          "text/xml"
-          "application/xhtml+xml"
-          "x-scheme-handler/http"
-          "x-scheme-handler/https"
-        ];
-      };
-    };
+    # 2. Register Desktop Entries (Merged: Dispatcher + Apps)
+    xdg.desktopEntries = (
+      # Dispatcher Entry (Conditional)
+      (optionalAttrs cfg.dispatcher.enable {
+        pwa-dispatcher = {
+          name = "PWA Dispatcher";
+          genericName = "Web Browser Dispatcher";
+          exec = "pwa-dispatcher %U";
+          icon = "web-browser";
+          categories = [
+            "Network"
+            "WebBrowser"
+          ];
+          mimeType = [
+            "text/html"
+            "text/xml"
+            "application/xhtml+xml"
+            "x-scheme-handler/http"
+            "x-scheme-handler/https"
+          ];
+        };
+      })
+      # PWA App Entries
+      // (mapAttrs (key: app: {
+        name = app.name;
+        genericName = "Web Application";
+        exec = "${cfg.backend.getRunCommand app.id} %U";
+        icon = app.icon;
+        categories = app.categories;
+        settings = {
+          Keywords = concatStringsSep ";" app.keywords;
+          StartupWMClass = cfg.backend.getWmClass app.id;
+        };
+      }) cfg.apps)
+    );
 
     # 3. Set Dispatcher as Default Application
     xdg.mimeApps = mkIf cfg.dispatcher.enable {

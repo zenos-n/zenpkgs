@@ -9,9 +9,6 @@ with lib;
 
 let
   cfg = config.zenos.webApps;
-
-  # Only evaluate this let-block if we are actually using firefox
-  # to avoid evaluation errors if pkgs.firefox changes or is missing.
   enabled = cfg.enable && cfg.base == "firefox";
 
   # --- Constants & Paths ---
@@ -331,6 +328,7 @@ let
       align-items: center;
     }
 
+    /* Strict 46px height to match GNOME headers */
     #TabsToolbar, #navigator-toolbox {
        height: 46px !important;
        overflow: visible !important; 
@@ -372,15 +370,17 @@ let
     .urlbarView { margin-top: 0 !important; }
     #taskbar-tabs-button { display: none !important; }
 
+    /* Safety Net: Force extensions to stay off the toolbar */
     #nav-bar-customization-target > .unified-extensions-item,
     #TabsToolbar-customization-target > .unified-extensions-item,
     #nav-bar > .unified-extensions-item {
       display: none !important;
     }
 
+    /* Floating Infobars (Banners) */
     .notificationbox-stack {
       position: fixed !important;
-      top: 46px !important;
+      top: 46px !important; 
       left: 0 !important;
       right: 0 !important;
       z-index: 2147483647 !important;
@@ -412,29 +412,18 @@ in
   };
 
   config = mkIf enabled {
-    # 1. Register Logic for Global Dispatcher
+    # 1. Register Logic for Global Dispatcher & Desktop Entries
     zenos.webApps.backend.getRunCommand =
       id:
       "${pwaFirefox}/bin/firefox --no-remote --profile \"${cfg.profileDir}/${id}\" --name \"FFPWA-${id}\"";
 
-    # 2. Register Desktop Entries for Apps (Backend Specific)
-    xdg.desktopEntries = mapAttrs (key: app: {
-      name = app.name;
-      genericName = "Web Application";
-      exec = "${pwaFirefox}/bin/firefox --no-remote --profile \"${cfg.profileDir}/${app.id}\" --name \"FFPWA-${app.id}\" %U";
-      icon = app.icon;
-      categories = app.categories;
-      settings = {
-        Keywords = concatStringsSep ";" app.keywords;
-        StartupWMClass = "FFPWA-${app.id}";
-      };
-    }) cfg.apps;
+    zenos.webApps.backend.getWmClass = id: "FFPWA-${id}";
 
-    # 3. Activation Script (Profile Generation)
+    # 2. Activation Script (Profile Generation)
     home.activation.pwaMakerApply = lib.hm.dag.entryAfter [ "writeBoundary" ] (
       let
         curl = getExe pkgs.curl;
-        profileBaseDir = cfg.profileDir; # Local alias for the script
+        profileBaseDir = cfg.profileDir;
 
         cleanupScript = ''
           echo "Cleaning up stale PWA profiles..."
