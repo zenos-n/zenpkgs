@@ -7,7 +7,8 @@ let
   cfg = config.zenos.desktops.gnome.tweaks.zenosExtensions;
 
   # Helper to check if an extension name is NOT in the exclusion list
-  isAllowed = name: !(lib.elem name cfg.excludedExtensions);
+  isAllowed =
+    name: !(lib.elem name config.zenos.desktops.gnome.tweaks.zenosExtensions.excludedExtensions);
 in
 {
   options.zenos.desktops.gnome.tweaks.zenosExtensions = {

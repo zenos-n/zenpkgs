@@ -1,7 +1,6 @@
 {
   config,
   lib,
-  pkgs,
   ...
 }:
 let
@@ -36,18 +35,18 @@ in
           };
         };
       };
-    };
-    user-theme = {
-      enable = true;
-      theme.cssOverride = ''
-        /* The Top Bar Clock */
-        .clock-display {
-            font-family: 'ZeroClock', sans-serif !important;
-            font-weight: normal !important;
-            font-style: normal !important;
-            font-size: 12px;
-        }
-      '';
+      user-theme = {
+        enable = true;
+        theme.cssOverride = ''
+          /* The Top Bar Clock */
+          .clock-display {
+              font-family: 'ZeroClock', sans-serif !important;
+              font-weight: normal !important;
+              font-style: normal !important;
+              font-size: 12px;
+          }
+        '';
+      };
     };
   };
 }
