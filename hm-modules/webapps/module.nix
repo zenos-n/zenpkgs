@@ -108,6 +108,11 @@ let
 
 in
 {
+  meta = {
+    maintainers = with maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+  };
+
   options.zenos.webApps = {
     enable = mkEnableOption "Zenos WebApps Declarative Module";
 

@@ -12,6 +12,10 @@ let
   enabled = cfg.enable && cfg.base == "chrome";
 in
 {
+  meta = {
+    maintainers = with maintainers; [ ];
+    license = lib.licenses.napl;
+  };
   options.zenos.webApps.chromePackage = mkOption {
     type = types.package;
     default = pkgs.google-chrome;
@@ -19,6 +23,9 @@ in
   };
 
   config = mkIf enabled {
+    warnings = [
+      "zenos.webApps: The 'chrome' backend is experimental. Only 'firefox' is officially supported and tested."
+    ];
     # 1. Register Logic
     zenos.webApps.backend.getRunCommand =
       id:

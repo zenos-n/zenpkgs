@@ -12,6 +12,10 @@ let
   enabled = cfg.enable && cfg.base == "helium";
 in
 {
+  meta = {
+    maintainers = with maintainers; [ ];
+    license = lib.licenses.napl;
+  };
   options.zenos.webApps.heliumPackage = mkOption {
     type = types.package;
     default = pkgs.helium;
@@ -19,6 +23,9 @@ in
   };
 
   config = mkIf enabled {
+    warnings = [
+      "zenos.webApps: The 'helium' backend is experimental. Only 'firefox' is officially supported and tested."
+    ];
     # 1. Register Logic
     # Helium is simple: helium <url>
     zenos.webApps.backend.getRunCommand = id: "${getExe cfg.heliumPackage} \"${cfg.apps.${id}.url}\"";

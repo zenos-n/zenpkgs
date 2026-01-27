@@ -12,6 +12,10 @@ let
   enabled = cfg.enable && cfg.base == "brave";
 in
 {
+  meta = {
+    maintainers = with maintainers; [ ];
+    license = lib.licenses.napl;
+  };
   options.zenos.webApps.bravePackage = mkOption {
     type = types.package;
     default = pkgs.brave;
@@ -19,6 +23,9 @@ in
   };
 
   config = mkIf enabled {
+    warnings = [
+      "zenos.webApps: The 'brave' backend is experimental. Only 'firefox' is officially supported and tested."
+    ];
     # 1. Register Logic
     zenos.webApps.backend.getRunCommand =
       id:

@@ -398,6 +398,10 @@ let
 
 in
 {
+  meta = {
+    maintainers = with maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+  };
   options.zenos.webApps = {
     nativeMessagingHosts = mkOption {
       type = types.listOf types.package;
