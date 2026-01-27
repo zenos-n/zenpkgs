@@ -8,9 +8,7 @@
   outputs =
     { self, nixpkgs, ... }:
     let
-      systems = [
-        "x86_64-linux"
-      ];
+      systems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
 
       # Recursively generate a tree of modules from a directory
@@ -83,16 +81,17 @@
 
           tree = generatePackageTree ./pkgs;
         in
-        if tree == null then { } else inflateTree tree final prev;
+        if tree == null then { } else { zenos = inflateTree tree final prev; };
 
     in
     {
       overlays.default = zenOverlay;
 
       # NixOS Modules (System Level)
+      # Scans the ./modules directory
       nixosModules = if builtins.pathExists ./modules then generateModuleTree ./modules else { };
 
-      # [NEW] Home Manager Modules (User Level)
+      # Home Manager Modules (User Level)
       # Scans the ./hm-modules directory
       homeManagerModules =
         if builtins.pathExists ./hm-modules then generateModuleTree ./hm-modules else { };
