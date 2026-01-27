@@ -117,14 +117,17 @@ let
       isHM = type == "home-manager";
       # Check 1: Top-level meta block
       modFn = import path;
+      # FIX: Added options = {} to prevent crashes on strict module args
       modResult =
         if lib.isFunction modFn then
           modFn {
             inherit pkgs lib;
             config = { };
+            options = { };
           }
         else
           modFn;
+
       metaMissing =
         if !(modResult ? meta) then
           [ "meta_block_missing" ]

@@ -85,7 +85,7 @@
             "}:",
             "",
             "let",
-            "  cfg = config.zenos.user.${1:category}.${2:name};",
+            "  cfg = config.zenos.${1:category}.${2:name};",
             "in",
             "{",
             "  meta = {",

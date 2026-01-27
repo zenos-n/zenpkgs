@@ -2,6 +2,6 @@
   config,
   lib,
   pkgs,
-  options,
   ...
-}:{ }
+}:
+{ }

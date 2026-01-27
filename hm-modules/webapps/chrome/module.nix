@@ -4,18 +4,27 @@
   pkgs,
   ...
 }:
-
 with lib;
-
 let
   cfg = config.zenos.webApps;
   enabled = cfg.enable && cfg.base == "chrome";
 in
 {
   meta = {
+    description = "Chrome submodule for ZenOS webapps";
+    longDescription = ''
+      Configures Chrome Browser as the execution backend for the ZenOS WebApps system.
+
+      This module handles the generation of isolated profiles and PWA wrappers using Chrome's `--app` flags. 
+      1It is intended for users who prefer Chrome-based rendering for their web applications.
+
+      > **Maintenance Warning:** This backend is **experimental** and community-maintained. The core ZenOS maintainer (doromiert) does not officially test or support Brave. Issues specific to this backend will be closed unless accompanied by a PR. For a supported experience, use the `firefox` backend.
+    '';
     maintainers = with maintainers; [ ];
-    license = lib.licenses.napl;
+    license = licenses.napl;
+    platforms = platforms.zenos;
   };
+
   options.zenos.webApps.chromePackage = mkOption {
     type = types.package;
     default = pkgs.google-chrome;
@@ -34,7 +43,7 @@ in
     zenos.webApps.backend.getWmClass = id: "chrome-${id}";
 
     # 2. Activation Script (Simple Directory Creation)
-    home.activation.pwaMakerChromeApply = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    home.activation.pwaMakerChromeApply = hm.dag.entryAfter [ "writeBoundary" ] (
       let
         profileBaseDir = cfg.profileDir;
       in

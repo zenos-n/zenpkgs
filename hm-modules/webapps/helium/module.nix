@@ -6,16 +6,26 @@
 }:
 
 with lib;
-
 let
   cfg = config.zenos.webApps;
   enabled = cfg.enable && cfg.base == "helium";
 in
 {
   meta = {
-    maintainers = with maintainers; [ ];
+    description = "Helium backend for ZenOS webapps";
+    longDescription = ''
+      Configures Helium Browser as the execution backend for the ZenOS WebApps system.
+
+      This module handles the generation of isolated profiles and PWA wrappers using Helium's `--app` flags. 
+      1It is intended for users who prefer Helium-based rendering for their web applications.
+
+      > **Maintenance Warning:** This backend is **experimental** and community-maintained. The core ZenOS maintainer (doromiert) does not officially test or support Helium. Issues specific to this backend will be closed unless accompanied by a PR. For a supported experience, use the `firefox` backend.
+    '';
+    maintainers = with lib.maintainers; [ ];
     license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
   };
+
   options.zenos.webApps.heliumPackage = mkOption {
     type = types.package;
     default = pkgs.helium;

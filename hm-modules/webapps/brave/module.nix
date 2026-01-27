@@ -12,10 +12,22 @@ let
   enabled = cfg.enable && cfg.base == "brave";
 in
 {
+  # Merged Metadata
   meta = {
+    description = "Brave submodule for ZenOS webapps";
+    longDescription = ''
+      Configures Brave Browser as the execution backend for the ZenOS WebApps system.
+
+      This module handles the generation of isolated profiles and PWA wrappers using Brave's `--app` flags. 
+      1It is intended for users who prefer Brave-based rendering for their web applications.
+
+      > **Maintenance Warning:** This backend is **experimental** and community-maintained. The core ZenOS maintainer (doromiert) does not officially test or support Brave. Issues specific to this backend will be closed unless accompanied by a PR. For a supported experience, use the `firefox` backend.
+    '';
     maintainers = with maintainers; [ ];
-    license = lib.licenses.napl;
+    license = licenses.napl;
+    platforms = platforms.zenos;
   };
+
   options.zenos.webApps.bravePackage = mkOption {
     type = types.package;
     default = pkgs.brave;
@@ -26,6 +38,7 @@ in
     warnings = [
       "zenos.webApps: The 'brave' backend is experimental. Only 'firefox' is officially supported and tested."
     ];
+
     # 1. Register Logic
     zenos.webApps.backend.getRunCommand =
       id:
@@ -34,7 +47,7 @@ in
     zenos.webApps.backend.getWmClass = id: "brave-${id}";
 
     # 2. Activation Script (Profile Generation)
-    home.activation.pwaMakerBraveApply = lib.hm.dag.entryAfter [ "writeBoundary" ] (
+    home.activation.pwaMakerBraveApply = hm.dag.entryAfter [ "writeBoundary" ] (
       let
         profileBaseDir = cfg.profileDir;
       in
