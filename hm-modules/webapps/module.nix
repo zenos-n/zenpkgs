@@ -14,8 +14,14 @@ let
 
   extensionSubmodule = types.submodule {
     options = {
-      id = mkOption { type = types.str; };
-      url = mkOption { type = types.str; };
+      id = mkOption {
+        type = types.str;
+        description = "The ID of the extension you want to install (usually something@something.xyz or {2a3ef5...})";
+      };
+      url = mkOption {
+        type = types.str;
+        description = "The URL of the extension to install";
+      };
     };
   };
 
@@ -24,14 +30,18 @@ let
       name = mkOption {
         type = types.nullOr types.str;
         default = null;
+        description = "The name of the custom search engine";
       };
       url = mkOption {
         type = types.nullOr types.str;
         default = null;
+        description = "The URL of the custom search engine";
+        example = "https://www.youtube.com/results?search_query={searchTerms}";
       };
       icon = mkOption {
         type = types.nullOr types.str;
         default = null;
+        description = "The icon of the custom search engine";
       };
     };
   };
@@ -109,8 +119,13 @@ let
 in
 {
   meta = {
-    maintainers = with maintainers; [ doromiert ];
+    description = "The webapp maker tool for ZenOS";
+    longDescription = ''
+      Detailed module documentation.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
   };
 
   options.zenos.webApps = {
@@ -124,13 +139,19 @@ in
         "helium"
       ];
       default = "firefox";
-      description = "The backend browser engine to use for PWAs. Firefox is the only one that's officially supported. If you want the base for your browser to be supported, you need to maintain it yourself. PRs welcome is what i'm saying.";
+      description = "The backend browser engine to use for PWAs ";
+      longDescription = ''
+        Firefox is the only one that's officially supported. 
+        If you want the base for your browser to be supported, you need to maintain it yourself. 
+
+        PRs welcome is what i'm saying.
+      '';
     };
 
     profileDir = mkOption {
       type = types.path;
       default = "${config.home.homeDirectory}/.local/share/pwamaker-profiles";
-      description = "Directory where PWA profiles are stored.";
+      description = "Directory where PWA profiles are stored";
     };
 
     backend = {
@@ -139,7 +160,7 @@ in
         internal = true;
         type = types.functionTo types.str;
         default = _: "echo 'No backend configured'";
-        description = "Function that takes an App ID and returns the shell command to launch it.";
+        description = "Function that takes an App ID and returns the shell command to launch it";
       };
 
       # Internal interface for WM Class (used for window matching in desktop entries)
@@ -147,11 +168,22 @@ in
         internal = true;
         type = types.functionTo types.str;
         default = id: "PWA-${id}";
+        description = "Internal interface for WM class";
+        longDescription = ''
+          It's basically used to get the WM class for the webapps so that window managers know that window x is actually an instance of x.desktop.
+          This makes it so that if you let's say pin a webapp to your taskbar, it won't make a separate icon on it when you launch it but just use the icon you already pinned.
+
+          Without this, webapps would look glitchy
+        '';
       };
     };
 
     dispatcher = {
       enable = mkEnableOption "Enable internal URL dispatcher";
+      longDescription = ''
+        A small script that opens all web links and decides what app to open them in.
+        Useful if you want to open all related links in the appropriate webapp.  
+      '';
       fallbackBrowser = mkOption {
         type = types.str;
         default = "firefox";
@@ -162,6 +194,7 @@ in
     apps = mkOption {
       default = { };
       type = types.attrsOf appSubmodule;
+      description = "The webapps you want to use";
     };
   };
 
