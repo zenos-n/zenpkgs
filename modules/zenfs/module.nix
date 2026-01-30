@@ -7,11 +7,19 @@
 
 let
   cfg = config.zenos.zenfs;
-  # Points to pkgs/system/zenfs based on flake structure
-  zenfsPkg = pkgs.system.zenfs;
+  zenfsPkg = pkgs.zenos.system.zenfs;
 
   configMapFile = pkgs.writeText "config_categories.json" (builtins.toJSON cfg.fhs.configMap);
   ignoreFile = pkgs.writeText "ignore_list.json" (builtins.toJSON cfg.database.ignoredFiles);
+
+  # Offload Config
+  offloadJson = pkgs.writeText "offload_config.json" (
+    builtins.toJSON {
+      offloadThreshold = cfg.roaming.offloadThreshold;
+      roamingSafeLimit = cfg.roaming.roamingSafeLimit;
+      mainDrive = cfg.drives.mainDrive;
+    }
+  );
 
   toUnitName = path: lib.strings.removePrefix "-" (lib.strings.replaceStrings [ "/" ] [ "-" ] path);
 
@@ -60,14 +68,19 @@ let
 
 in
 {
-  meta = {
-    description = "ZenFS Custom FHS and Roaming Drive Management";
-    maintainers = with lib.maintainers; [ doromiert ];
-    platforms = lib.platforms.zenos;
-  };
-
   options.zenos.zenfs = {
     enable = lib.mkEnableOption "ZenFS";
+
+    drives = {
+      mainDrive = lib.mkOption {
+        type = lib.types.str;
+        description = "UUID of the Main Drive (hosting /home)";
+      };
+      bootDrive = lib.mkOption {
+        type = lib.types.str;
+        description = "UUID of the Boot Drive";
+      };
+    };
 
     implementation = lib.mkOption {
       type = lib.types.enum [
@@ -75,7 +88,6 @@ in
         "fuse"
       ];
       default = "symlink";
-      description = "Method for presenting the FHS. 'fuse' uses custom python FUSE. 'symlink' uses standard symlinks.";
     };
 
     fhs = {
@@ -109,7 +121,6 @@ in
           }
         );
         default = {
-          # --- SYSTEM ---
           "/System" = {
             type = "directory";
           };
@@ -151,7 +162,6 @@ in
             type = "symlink";
             target = "/boot";
           };
-          # --- CONFIG ---
           "/Config" = {
             type = "directory";
           };
@@ -159,7 +169,6 @@ in
             type = "symlink";
             target = "/etc";
           };
-          # --- APPS ---
           "/Apps" = {
             type = "directory";
           };
@@ -178,7 +187,6 @@ in
           "/Apps/Portable" = {
             type = "directory";
           };
-          # --- LIVE ---
           "/Live" = {
             type = "directory";
           };
@@ -206,7 +214,6 @@ in
             type = "symlink";
             target = "/dev";
           };
-          # --- MOUNT ---
           "/Mount" = {
             type = "directory";
           };
@@ -216,7 +223,6 @@ in
           "/Mount/Drives" = {
             type = "directory";
           };
-          # --- USERS ---
           "/Users" = {
             type = "symlink";
             target = "/home";
@@ -292,7 +298,21 @@ in
       ];
     };
 
-    roaming.enable = lib.mkEnableOption "Roaming Drive support";
+    roaming = {
+      enable = lib.mkEnableOption "Roaming Drive support";
+
+      offloadThreshold = lib.mkOption {
+        type = lib.types.int;
+        default = 80;
+        description = "Percentage of Main Drive usage to trigger offloading.";
+      };
+
+      roamingSafeLimit = lib.mkOption {
+        type = lib.types.int;
+        default = 90;
+        description = "Percentage of Roaming Drive usage to stop prioritizing it.";
+      };
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -349,6 +369,15 @@ in
         };
       };
 
+      # New Offload Service (Periodic)
+      zenfs-offload = lib.mkIf cfg.roaming.enable {
+        description = "ZenFS Disk Usage Offloader";
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${zenfsPkg}/bin/zenfs offload -c ${offloadJson}";
+        };
+      };
+
       zenfs-roaming-checker = {
         description = "ZenFS Boot Checker";
         wantedBy = [ "multi-user.target" ];
@@ -366,6 +395,16 @@ in
           Type = "oneshot";
           ExecStart = "${zenfsPkg}/bin/zenfs attach %i";
         };
+      };
+    };
+
+    # Timer for Offloader
+    systemd.timers.zenfs-offload = lib.mkIf cfg.roaming.enable {
+      description = "Run ZenFS Offloader hourly";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnCalendar = "hourly";
+        Persistent = true;
       };
     };
 

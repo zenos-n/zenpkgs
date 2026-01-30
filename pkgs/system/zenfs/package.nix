@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
       ps.psutil
       ps.watchdog
       ps.fusepy
-      ps.mutagen # For Music Janitor
+      ps.mutagen
     ]))
     libnotify
     util-linux
@@ -32,15 +32,12 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/bin $out/libexec/scripts/core $out/libexec/scripts/janitor
 
-    # Core
+    # Install Scripts
     install -Dm755 scripts/core/*.py -t $out/libexec/scripts/core/
-
-    # Janitor
     install -Dm755 scripts/janitor/*.py -t $out/libexec/scripts/janitor/
 
     # --- WRAPPERS ---
 
-    # 1. Main ZenFS CLI
     makeWrapper ${python3}/bin/python3 $out/bin/zenfs \
       --add-flags "$out/libexec/scripts/core/dispatcher.py" \
       --prefix PATH : ${
@@ -51,7 +48,6 @@ stdenv.mkDerivation rec {
       } \
       --set PYTHONPATH "$out/libexec/scripts/core"
 
-    # 2. ZenFS FUSE (Core)
     makeWrapper ${python3}/bin/python3 $out/bin/zenfs-fuse \
       --add-flags "$out/libexec/scripts/core/fuse_fs.py" \
       --prefix PATH : ${
@@ -63,7 +59,6 @@ stdenv.mkDerivation rec {
       } \
       --set PYTHONPATH "$out/libexec/scripts/core"
 
-    # 3. ZenFS Janitor CLI
     makeWrapper ${python3}/bin/python3 $out/bin/zenfs-janitor \
       --add-flags "$out/libexec/scripts/janitor/dispatcher.py" \
       --prefix PATH : ${
@@ -78,15 +73,6 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "ZenFS Filesystem Manager & Janitor";
-    longDescription = ''
-      ZenFS Core Utilities.
-      Includes:
-      - mint/attach/detach: Drive Management
-      - core: Config categorization
-      - roaming: Database Sync
-      - fuse: Custom User Union Filesystem
-      - janitor: Automated organization daemon (Dumb/Music/ML)
-    '';
     license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
     platforms = platforms.zenos;

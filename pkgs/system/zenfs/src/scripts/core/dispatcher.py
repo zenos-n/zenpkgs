@@ -7,6 +7,7 @@ import mint
 import attach
 import detach
 import watcher
+import offload
 
 def main():
     if len(sys.argv) < 2:
@@ -23,6 +24,14 @@ def main():
         checker.main()
     elif cmd == "watcher":
         watcher.main()
+    elif cmd == "offload":
+        # Usage: zenfs offload -c config.json
+        if len(sys.argv) > 3 and sys.argv[2] == "-c":
+            with open(sys.argv[3]) as f:
+                cfg_str = f.read()
+            offload.main(cfg_str)
+        else:
+            print("Usage: zenfs offload -c <config_path>")
     elif cmd == "mint":
         if len(sys.argv) < 4:
             print("Usage: zenfs mint <dev> <label> [type]")
