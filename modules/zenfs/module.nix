@@ -1,210 +1,376 @@
-{ pkgs, options,  lib, config, ... }:
-
-with lib;
-
-let
-  cfg = config.zenos.zenfs.janitor;
-
-  # --- [ Submodule for Per-User Settings ] ---
-  userJanitorOpts =
-    {
+{
   config,
   lib,
   pkgs,
-  options,
   ...
 }:
-    {
-      options = {
-        dumb = {
-          enable = mkOption {
-            type = types.bool;
-            default = cfg.dumb.global.enable;
-            description = "Enable Dumb Janitor for this user.";
-          };
-          interval = mkOption {
-            type = types.str;
-            default = cfg.dumb.global.interval;
-            description = "Override global interval.";
-          };
-          gracePeriod = mkOption {
-            type = types.int;
-            default = cfg.dumb.global.gracePeriod;
-            description = "Override global grace period.";
-          };
-          watchedDirs = mkOption {
-            type = types.listOf types.str;
-            default =
-              if cfg.dumb.global.watchedDirs == [ ] then
-                [ "/home/${name}/Downloads" ]
-              else
-                cfg.dumb.global.watchedDirs;
-            description = "Directories to watch. Defaults to global list.";
-          };
-          rules = mkOption {
-            type = types.attrsOf (types.listOf types.str);
-            default = cfg.dumb.global.rules;
-            description = "Sorting rules. Defaults to global rules.";
-          };
-        };
 
-        music = {
-          enable = mkOption {
-            type = types.bool;
-            default = cfg.music.global.enable;
-            description = "Enable Music Janitor for this user.";
-          };
-          interval = mkOption {
-            type = types.str;
-            default = cfg.music.global.interval;
-          };
-          musicDir = mkOption {
-            type = types.str;
-            # Fallback to global, or smart default if global is unset?
-            # Using global as requested.
-            default =
-              if cfg.music.global.musicDir != "/var/lib/music" then
-                cfg.music.global.musicDir
-              else
-                "/home/${name}/Music";
-            description = "Target music directory.";
-          };
-          unsortedDir = mkOption {
-            type = types.str;
-            default = cfg.music.global.unsortedDir;
-            description = "Staging directory for unsorted music.";
-          };
-          artistSplitSymbols = mkOption {
-            type = types.listOf types.str;
-            default = cfg.music.global.artistSplitSymbols;
-            description = "Symbols to split artists by. For example, if a song has \"Mr. J. Medeiros; 20syl\" in the artist field, it'll interpret it as 2 artists instead of one.";
-          };
-        };
+let
+  cfg = config.zenos.zenfs;
+  # Points to pkgs/system/zenfs based on flake structure
+  zenfsPkg = pkgs.system.zenfs;
 
-        ml = {
-          enable = mkOption {
-            type = types.bool;
-            default = cfg.ml.global.enable;
-            description = "Enable ML Janitor for this user.";
+  configMapFile = pkgs.writeText "config_categories.json" (builtins.toJSON cfg.fhs.configMap);
+  ignoreFile = pkgs.writeText "ignore_list.json" (builtins.toJSON cfg.database.ignoredFiles);
+
+  toUnitName = path: lib.strings.removePrefix "-" (lib.strings.replaceStrings [ "/" ] [ "-" ] path);
+
+  generateTmpfiles =
+    structure:
+    lib.mapAttrsToList (
+      path: rules:
+      let
+        useFuse = cfg.implementation == "fuse" && rules.target != null;
+        type =
+          if useFuse then
+            "d"
+          else if rules.type == "symlink" then
+            "L+"
+          else
+            "d";
+        mode = rules.mode or (if type == "L+" then "-" else "0755");
+        user = rules.user or "root";
+        group = rules.group or "root";
+        target = if useFuse then "-" else (rules.target or "-");
+      in
+      "${type} ${path} ${mode} ${user} ${group} - ${target}"
+    ) structure;
+
+  generateFuseServices =
+    structure:
+    lib.concatMapAttrs (
+      path: rules:
+      if (cfg.implementation == "fuse" && rules.target != null && path != "/Users") then
+        {
+          "zenfs-fhs-${toUnitName path}" = {
+            description = "ZenFS FUSE Mirror: ${path}";
+            wantedBy = [ "multi-user.target" ];
+            after = [ "local-fs.target" ];
+            requires = [ "local-fs.target" ];
+            serviceConfig = {
+              ExecStart = "${zenfsPkg}/bin/zenfs-fuse ${rules.target} ${path}";
+              ExecStop = "fusermount -u ${path}";
+              Restart = "always";
+            };
           };
-          interval = mkOption {
-            type = types.str;
-            default = cfg.ml.global.interval;
-          };
-          scanDirs = mkOption {
-            type = types.listOf types.str;
-            default = cfg.ml.global.scanDirs;
-            description = "Directories for the ML janitor to scan.";
-          };
-        };
-      };
-    };
+        }
+      else
+        { }
+    ) structure;
 
 in
 {
-  options.zenos.zenfs.janitor = {
+  meta = {
+    description = "ZenFS Custom FHS and Roaming Drive Management";
+    maintainers = with lib.maintainers; [ doromiert ];
+    platforms = lib.platforms.zenos;
+  };
 
-    # --- [ Per-User Configuration Container ] ---
-    users = mkOption {
-      type = types.attrsOf (types.submodule userJanitorOpts);
-      default = { };
-      description = "Per-user Janitor configuration overrides.";
-      example = literalExpression ''
-        {
-          doromiert.dumb.enable = true;
-          doromiert.music.musicDir = "/home/doromiert/Music";
-        }
-      '';
+  options.zenos.zenfs = {
+    enable = lib.mkEnableOption "ZenFS";
+
+    implementation = lib.mkOption {
+      type = lib.types.enum [
+        "symlink"
+        "fuse"
+      ];
+      default = "symlink";
+      description = "Method for presenting the FHS. 'fuse' uses custom python FUSE. 'symlink' uses standard symlinks.";
     };
 
-    dumb.global = {
-      enable = mkEnableOption "Enable the dumb (rule based) janitor.";
-      interval = mkOption {
-        type = types.str;
-        default = "60m";
-        description = "When to manually check whether a watched directory has been updated in case the watchdog didn't catch it.";
-      };
-      gracePeriod = mkOption {
-        type = types.int;
-        default = "20m";
-        description = "How long to wait before moving the files.";
-      };
-      watchedDirs = mkOption {
-        type = types.listOf types.str;
-        default = [ ]; # Set empty by default, let users override or set global
-        description = "Directories the janitor will watch";
-      };
-      rules = mkOption {
-        type = types.attrsOf (types.listOf types.str);
-        default = { };
-      };
-      groupWaitingFiles = {
-        enable = mkOption {
-          type = types.bool;
-          default = true;
-          description = "Whether to group files waiting to be moved. If enabled, for example, if you download 5 files in quick succession, the janitor will put them in the same waiting folder. Useful for downloading for example whole albums.";
+    fhs = {
+      structure = lib.mkOption {
+        type = lib.types.attrsOf (
+          lib.types.submodule {
+            options = {
+              type = lib.mkOption {
+                type = lib.types.enum [
+                  "directory"
+                  "symlink"
+                ];
+              };
+              target = lib.mkOption {
+                type = lib.types.nullOr lib.types.str;
+                default = null;
+              };
+              mode = lib.mkOption {
+                type = lib.types.str;
+                default = "0755";
+              };
+              user = lib.mkOption {
+                type = lib.types.str;
+                default = "root";
+              };
+              group = lib.mkOption {
+                type = lib.types.str;
+                default = "root";
+              };
+            };
+          }
+        );
+        default = {
+          # --- SYSTEM ---
+          "/System" = {
+            type = "directory";
+          };
+          "/System/ZenFS" = {
+            type = "directory";
+          };
+          "/System/ZenFS/Database" = {
+            type = "directory";
+          };
+          "/System/State" = {
+            type = "symlink";
+            target = "/var/lib";
+          };
+          "/System/Cache" = {
+            type = "symlink";
+            target = "/var/cache";
+          };
+          "/System/Spool" = {
+            type = "symlink";
+            target = "/var/spool";
+          };
+          "/System/Legacy" = {
+            type = "symlink";
+            target = "/usr";
+          };
+          "/System/Packages" = {
+            type = "symlink";
+            target = "/nix/store";
+          };
+          "/System/Profiles" = {
+            type = "symlink";
+            target = "/nix/var/nix/profiles";
+          };
+          "/System/Logs" = {
+            type = "symlink";
+            target = "/var/log";
+          };
+          "/System/Boot" = {
+            type = "symlink";
+            target = "/boot";
+          };
+          # --- CONFIG ---
+          "/Config" = {
+            type = "directory";
+          };
+          "/Config/Other" = {
+            type = "symlink";
+            target = "/etc";
+          };
+          # --- APPS ---
+          "/Apps" = {
+            type = "directory";
+          };
+          "/Apps/Binaries" = {
+            type = "symlink";
+            target = "/run/current-system/sw/bin";
+          };
+          "/Apps/Flatpak" = {
+            type = "symlink";
+            target = "/var/lib/flatpak";
+          };
+          "/Apps/Containers" = {
+            type = "symlink";
+            target = "/var/lib/containers";
+          };
+          "/Apps/Portable" = {
+            type = "directory";
+          };
+          # --- LIVE ---
+          "/Live" = {
+            type = "directory";
+          };
+          "/Live/Processes" = {
+            type = "symlink";
+            target = "/proc";
+          };
+          "/Live/Kernel" = {
+            type = "symlink";
+            target = "/sys";
+          };
+          "/Live/Runtime" = {
+            type = "symlink";
+            target = "/run";
+          };
+          "/Live/Memory" = {
+            type = "symlink";
+            target = "/dev/shm";
+          };
+          "/Live/Temp" = {
+            type = "symlink";
+            target = "/tmp";
+          };
+          "/Live/Devices" = {
+            type = "symlink";
+            target = "/dev";
+          };
+          # --- MOUNT ---
+          "/Mount" = {
+            type = "directory";
+          };
+          "/Mount/Roaming" = {
+            type = "directory";
+          };
+          "/Mount/Drives" = {
+            type = "directory";
+          };
+          # --- USERS ---
+          "/Users" = {
+            type = "symlink";
+            target = "/home";
+          };
+          "/Users/Admin" = {
+            type = "symlink";
+            target = "/root";
+          };
         };
-        interval = mkOption {
-          type = types.str;
-          default = "10m";
-          description = "How long to wait before making a new group.";
+      };
+
+      configMap = lib.mkOption {
+        type = lib.types.attrsOf (lib.types.listOf lib.types.str);
+        default = {
+          Audio = [
+            "/etc/wireplumber"
+            "/etc/pipewire"
+            "/etc/pulse"
+            "/etc/alsa"
+          ];
+          Bluetooth = [ "/etc/bluetooth" ];
+          Desktop = [
+            "/etc/dconf"
+            "/etc/xdg"
+          ];
+          Display = [
+            "/etc/X11"
+            "/etc/wayland"
+          ];
+          Fonts = [ "/etc/fonts" ];
+          Hardware = [
+            "/etc/udev"
+            "/etc/libinput"
+          ];
+          Network = [
+            "/etc/hosts"
+            "/etc/NetworkManager"
+            "/etc/wpa_supplicant"
+            "/etc/ssh"
+          ];
+          Nix = [ "/etc/nix" ];
+          Security = [
+            "/etc/sudoers"
+            "/etc/pam.d"
+            "/etc/firejail"
+          ];
+          Services = [ "/etc/systemd" ];
+          System = [
+            "/etc/fstab"
+            "/etc/hostname"
+            "/etc/locale.conf"
+            "/etc/localtime"
+          ];
+          User = [
+            "/etc/passwd"
+            "/etc/group"
+            "/etc/shadow"
+          ];
+          ZenOS = [ ];
         };
       };
     };
 
-    music.global = {
-      enable = mkEnableOption "Music Janitor (Global Default)";
-      interval = mkOption {
-        type = types.str;
-        default = "60min";
-        description = "When to check whether a the watched directory has been updated in case the watchdog didn't catch it.";
+    database.ignoredFiles = lib.mkOption {
+      type = lib.types.listOf lib.types.str;
+      default = [
+        ".config"
+        ".local"
+        ".mozilla"
+        ".cache"
+        ".bash_history"
+        "Downloads/Temp"
+      ];
+    };
+
+    roaming.enable = lib.mkEnableOption "Roaming Drive support";
+  };
+
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = [
+      zenfsPkg
+    ]
+    ++ lib.optionals (cfg.implementation == "fuse") [ pkgs.fuse ];
+
+    systemd.tmpfiles.rules = (generateTmpfiles cfg.fhs.structure) ++ [
+      "L+ /System/ZenFS/config_categories.json - - - - ${configMapFile}"
+      "L+ /System/ZenFS/ignore_list.json - - - - ${ignoreFile}"
+      "d /Config/ZenOS 0755 root root -"
+      "d /Config/System 0755 root root -"
+    ];
+
+    systemd.services = generateFuseServices cfg.fhs.structure // {
+      zenfs-core = {
+        description = "ZenFS Core Service";
+        wantedBy = [ "multi-user.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${zenfsPkg}/bin/zenfs core";
+        };
       };
-      musicDir = mkOption {
-        type = types.str;
-        default = "/var/lib/music"; # Generic default
+
+      zenfs-roaming = {
+        description = "ZenFS Roaming Sync";
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${zenfsPkg}/bin/zenfs roaming";
+        };
       };
-      unsortedDir = mkOption {
-        type = types.str;
-        default = "/var/lib/music/.database";
+
+      zenfs-fuse = lib.mkIf (cfg.implementation == "fuse") {
+        description = "ZenFS FUSE Daemon (Users Union)";
+        wantedBy = [ "multi-user.target" ];
+        after = [ "local-fs.target" ];
+        serviceConfig = {
+          ExecStart = "${zenfsPkg}/bin/zenfs-fuse /home /Users";
+          ExecStop = "fusermount -u /Users";
+          Restart = "always";
+        };
       };
-      artistSplitSymbols = mkOption {
-        type = types.listOf types.str;
-        default = [
-          ";"
-        ];
+
+      zenfs-watcher = lib.mkIf cfg.roaming.enable {
+        description = "ZenFS Filesystem Watcher";
+        wantedBy = [ "multi-user.target" ];
+        after =
+          if cfg.implementation == "fuse" then [ "zenfs-fuse.service" ] else [ "zenfs-roaming.service" ];
+        serviceConfig = {
+          Type = "simple";
+          ExecStart = "${zenfsPkg}/bin/zenfs watcher";
+          Restart = "always";
+        };
+      };
+
+      zenfs-roaming-checker = {
+        description = "ZenFS Boot Checker";
+        wantedBy = [ "multi-user.target" ];
+        after = [ "local-fs.target" ];
+        requires = [ "local-fs.target" ];
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${zenfsPkg}/bin/zenfs checker";
+        };
+      };
+
+      "zenfs-mount@" = lib.mkIf cfg.roaming.enable {
+        description = "ZenFS Mount %i";
+        serviceConfig = {
+          Type = "oneshot";
+          ExecStart = "${zenfsPkg}/bin/zenfs attach %i";
+        };
       };
     };
 
-    ml.global = {
-      enable = mkEnableOption "ML Janitor (Global Default)";
-      interval = mkOption {
-        type = types.str;
-        default = "1h";
-      };
-      scanDirs = mkOption {
-        type = types.listOf types.str;
-        default = [ ];
-      };
-      renameFiles = mkOption {
-        type = types.bool;
-        default = true;
-        description = "Whether to use the heavy ML model to rename files.";
-      };
-      model = {
-        local = mkOption {
-          type = types.bool;
-          default = true;
-          description = "Whether to use a local ML model instead of an online one.";
-        };
-        heavy = mkOption {
-          type = types.str;
-          description = "Heavy ML model used for sorting and renaming files.";
-        };
-        light = mkOption {
-          type = types.str;
-          description = "Lightweight ML model used for sorting files only.";
-        };
-      };
-    };
+    services.udev.extraRules = lib.mkIf cfg.roaming.enable ''
+      ACTION=="add", SUBSYSTEM=="block", ENV{ID_FS_USAGE}=="filesystem", TAG+="systemd", ENV{SYSTEMD_WANTS}+="zenfs-mount@%k.service"
+    '';
   };
 }
