@@ -74,6 +74,9 @@
                       copyleft = true;
                     };
                   };
+                  platforms = f.lib.platforms // {
+                    zenos = f.lib.platforms.linux ++ [ "x86_64-linux" ];
+                  };
                 };
               }
             else
