@@ -10,6 +10,11 @@ stdenv.mkDerivation {
 
   src = ./src;
 
+  propagatedBuildInputs = with pkgs; [
+    libnotify
+    tmux
+  ];
+
   nativeInputs = with pkgs; [
     bash
   ];
