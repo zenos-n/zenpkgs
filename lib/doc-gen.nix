@@ -46,6 +46,10 @@ let
   # --- Helper: Get Derivation Name Safe ---
   getName = drv: if lib.isDerivation drv then drv.name else (toString drv);
 
+  # --- Helper: Detect ZenOS Platform ---
+  # Matches the strictly defined list in utils.nix
+  zenosPlatforms = [ "x86_64-linux" ];
+
   # --- Helper: Extract Package Metadata ---
   getPkgMeta =
     name: pkg:
@@ -53,6 +57,10 @@ let
       # Enforce validation
       rawMeta = pkg.meta or { };
       validMeta = validateMeta name rawMeta "Package";
+
+      # Check if the platforms list matches our custom 'zenos' definition (deep equality check)
+      resolvedPlatforms =
+        if validMeta.platforms == zenosPlatforms then [ "zenos" ] else validMeta.platforms;
     in
     {
       name = name;
@@ -63,7 +71,7 @@ let
       maintainers = map (m: m.name) (
         if builtins.isList validMeta.maintainers then validMeta.maintainers else [ validMeta.maintainers ]
       );
-      platforms = validMeta.platforms;
+      platforms = resolvedPlatforms;
 
       # Build Details
       nativeBuildInputs = map getName (pkg.nativeBuildInputs or [ ]);
@@ -80,8 +88,6 @@ let
     tree:
     if lib.isDerivation tree then
       # If it's a package, extract meta.
-      # We use pname or name as the key if we are at a leaf without context,
-      # but usually mapAttrs passes the key.
       getPkgMeta (tree.pname or tree.name) tree
     else if lib.isAttrs tree then
       # If it's a directory/category, recurse

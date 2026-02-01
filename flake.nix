@@ -1,12 +1,33 @@
 {
-  description = "ZenPkgs - A collection of packages and modules for ZenOS";
+  description = "ZenPkgs - The Core Dependency Hub for ZenOS";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # --- Core Repositories ---
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    # --- System Components ---
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    nixos-hardware.url = "github:nixos/nixos-hardware";
+    nix-flatpak.url = "github:gmodena/nix-flatpak";
+    jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
+
+    # --- Software Collections ---
+    nix-gaming.url = "github:fufexan/nix-gaming";
+    vsc-extensions.url = "github:nix-community/nix-vscode-extensions";
+    nixcord.url = "github:kaylorben/nixcord";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    nur = {
+      url = "github:nix-community/NUR";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
-    { self, nixpkgs, ... }:
+    { self, nixpkgs, ... }@inputs:
     let
       systems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
@@ -42,7 +63,6 @@
         final: prev:
         let
           lib = prev.lib;
-
           generatePackageTree =
             path:
             let
@@ -74,6 +94,7 @@
                       copyleft = true;
                     };
                   };
+                  maintainers = f.lib.maintainers // (import ./lib/maintainers.nix { inherit (f) lib; });
                   platforms = f.lib.platforms // {
                     zenos = f.lib.platforms.linux ++ [ "x86_64-linux" ];
                   };
@@ -82,20 +103,89 @@
             else
               lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflateTree value f p) tree);
 
-          tree = generatePackageTree ./pkgs;
+          # 1. Generate the Local Tree (from ./pkgs)
+          # This mimics the structure of your folders
+          localTree = generatePackageTree ./pkgs;
+          localPkgs = if localTree == null then { } else inflateTree localTree final prev;
+
+          # 2. Define the Standard Map (The "Zen" Structure)
+          # This maps upstream packages to your preferred hierarchy
+          standardMap = {
+            # --- Desktops & Environments ---
+            desktops = {
+              gnome = {
+                core = prev.gnome-shell;
+                apps = prev.gnome-apps // {
+                  nautilus = prev.nautilus;
+                  terminal = prev.gnome-console;
+                };
+                # AUTO-MAPPING: Aliasing the entire gnomeExtensions set
+                extensions = prev.gnomeExtensions;
+              };
+              hyprland = {
+                core = prev.hyprland;
+                portal = prev.xdg-desktop-portal-hyprland;
+              };
+            };
+
+            # --- Development ---
+            dev = {
+              langs = {
+                python = prev.python3;
+                rust = prev.cargo;
+                go = prev.go;
+                nix = prev.nix;
+              };
+              editors = {
+                vscode = prev.vscode;
+                vim = prev.vim;
+              };
+            };
+
+            # --- System ---
+            sys = {
+              kernel = prev.linuxPackages_latest.kernel;
+              boot = {
+                systemd = prev.systemd;
+                grub = prev.grub2;
+              };
+            };
+
+            # --- Explicit Legacy Access ---
+            # You can access raw nixpkgs here if things get confusing
+            legacy = prev;
+          };
+
+          # 3. MERGE: Local Pkgs + Standard Map
+          # lib.recursiveUpdate ensures that if you have ./pkgs/desktops/gnome/extensions/my-cool-extension
+          # it is ADDED to the mapped prev.gnomeExtensions, not overwriting it.
+          structuredPkgs = lib.recursiveUpdate standardMap localPkgs;
         in
-        if tree == null then { } else { zenos = inflateTree tree final prev; };
+        # EXPORT: We merge 'structuredPkgs' directly into 'final' (the top level pkgs)
+        structuredPkgs
+        // {
+          # We also keep 'zenos' as a namespace just in case you want to be explicit
+          zenos = structuredPkgs;
+        };
 
     in
     {
+      # [CRITICAL] Re-export inputs so downstream flakes can use them
+      inherit inputs;
+
       overlays.default = zenOverlay;
 
-      # NixOS Modules (System Level)
-      # Scans the ./modules directory
-      nixosModules = if builtins.pathExists ./modules then generateModuleTree ./modules else { };
+      # Helper Functions
+      lib = {
+        mkUtils = import ./lib/utils.nix;
 
-      # Home Manager Modules (User Level)
-      # Scans the ./hm-modules directory
+        # [NEW] The Bundle Builder
+        # Takes a structured attribute set of packages and flattens it into a list
+        # Example: bundle { tools = { a = pkgs.hello; }; } -> [ pkgs.hello ]
+        bundle = rootSet: nixpkgs.lib.collect nixpkgs.lib.isDerivation rootSet;
+      };
+
+      nixosModules = if builtins.pathExists ./modules then generateModuleTree ./modules else { };
       homeManagerModules =
         if builtins.pathExists ./hm-modules then generateModuleTree ./hm-modules else { };
 
@@ -111,11 +201,11 @@
             nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./pkgs)
           );
         in
-        nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.zenos.${name})
+        {
+          zenos = pkgs.zenos;
+        }
       );
 
-      # --- Documentation Data Output ---
-      # Run with: nix eval .#docData --json > src/lib/data.json
       docData = forAllSystems (
         system:
         import ./lib/doc-gen.nix {
@@ -133,7 +223,5 @@
           flake = self;
         }
       );
-
-      lib.mkUtils = import ./lib/utils.nix;
     };
 }

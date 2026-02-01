@@ -37,7 +37,7 @@ stdenv.mkDerivation {
   buildInputs = with pkgs; [
     # Assumes this package exists in the overlay/scope as requested in the input
     # If not, it might need to be passed or referenced differently.
-    zenos-refind-theme
+    zenos.theming.system.zenos-refind-theme
   ];
 
   buildPhase = ''
@@ -78,7 +78,7 @@ stdenv.mkDerivation {
 
     mkdir -p $out/share/zenboot/theme
     # Adjust path if needed based on actual package structure
-    cp -r ${pkgs.zenos-refind-theme}/boot/EFI/refind/themes/zenos-refind-theme/* $out/share/zenboot/theme/
+    cp -r ${pkgs.zenos.theming.system.zenos-refind-theme}/boot/EFI/refind/themes/zenos-refind-theme/* $out/share/zenboot/theme/
 
     cat > $out/bin/zenboot-setup << EOF
     #!${pkgs.bash}/bin/bash

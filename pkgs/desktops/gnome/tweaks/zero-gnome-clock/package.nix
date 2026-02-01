@@ -10,7 +10,7 @@ stdenv.mkDerivation {
   version = "1.0";
 
   nativeBuildInputs = with pkgs; [
-    theming.fonts.zero-font
+    zenos.theming.fonts.zero-font
     gnomeExtensions.user-themes
   ];
 
@@ -21,7 +21,7 @@ stdenv.mkDerivation {
     mkdir -p $out/share/themes/zero-gnome-clock
 
     # Find the font file dynamically
-    FONT_PATH=$(find ${pkgs.zero-font} -name "*.ttf" -o -name "*.otf" | head -n 1)
+    FONT_PATH=$(find ${pkgs.zenos.theming.fonts.zero-font} -name "*.ttf" -o -name "*.otf" | head -n 1)
 
     # Generate the theme CSS
     cat > $out/share/themes/zero-gnome-clock/gnome-clock.css << EOF
