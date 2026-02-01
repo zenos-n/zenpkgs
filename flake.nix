@@ -3,14 +3,13 @@
 
   inputs = {
     # --- Core Repositories ---
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    # --- System Components ---
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
@@ -31,6 +30,8 @@
     let
       systems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
+
+      # --- Logic adapted from Flake 1 (Robust recursive scanning) ---
 
       # Recursively generate a tree of modules from a directory
       generateModuleTree =
@@ -63,6 +64,7 @@
         final: prev:
         let
           lib = prev.lib;
+
           generatePackageTree =
             path:
             let
@@ -94,6 +96,7 @@
                       copyleft = true;
                     };
                   };
+                  # FIX: Inject custom maintainers into the lib scope
                   maintainers = f.lib.maintainers // (import ./lib/maintainers.nix { inherit (f) lib; });
                   platforms = f.lib.platforms // {
                     zenos = f.lib.platforms.linux ++ [ "x86_64-linux" ];
@@ -103,89 +106,35 @@
             else
               lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflateTree value f p) tree);
 
-          # 1. Generate the Local Tree (from ./pkgs)
-          # This mimics the structure of your folders
-          localTree = generatePackageTree ./pkgs;
-          localPkgs = if localTree == null then { } else inflateTree localTree final prev;
-
-          # 2. Define the Standard Map (The "Zen" Structure)
-          # This maps upstream packages to your preferred hierarchy
-          standardMap = {
-            # --- Desktops & Environments ---
-            desktops = {
-              gnome = {
-                core = prev.gnome-shell;
-                apps = prev.gnome-apps // {
-                  nautilus = prev.nautilus;
-                  terminal = prev.gnome-console;
-                };
-                # AUTO-MAPPING: Aliasing the entire gnomeExtensions set
-                extensions = prev.gnomeExtensions;
-              };
-              hyprland = {
-                core = prev.hyprland;
-                portal = prev.xdg-desktop-portal-hyprland;
-              };
-            };
-
-            # --- Development ---
-            dev = {
-              langs = {
-                python = prev.python3;
-                rust = prev.cargo;
-                go = prev.go;
-                nix = prev.nix;
-              };
-              editors = {
-                vscode = prev.vscode;
-                vim = prev.vim;
-              };
-            };
-
-            # --- System ---
-            sys = {
-              kernel = prev.linuxPackages_latest.kernel;
-              boot = {
-                systemd = prev.systemd;
-                grub = prev.grub2;
-              };
-            };
-
-            # --- Explicit Legacy Access ---
-            # You can access raw nixpkgs here if things get confusing
-            legacy = prev;
-          };
-
-          # 3. MERGE: Local Pkgs + Standard Map
-          # lib.recursiveUpdate ensures that if you have ./pkgs/desktops/gnome/extensions/my-cool-extension
-          # it is ADDED to the mapped prev.gnomeExtensions, not overwriting it.
-          structuredPkgs = lib.recursiveUpdate standardMap localPkgs;
+          # Scans ./pkgs (Standard behavior from Flake 1)
+          tree = if builtins.pathExists ./pkgs then generatePackageTree ./pkgs else null;
         in
-        # EXPORT: We merge 'structuredPkgs' directly into 'final' (the top level pkgs)
-        structuredPkgs
-        // {
-          # We also keep 'zenos' as a namespace just in case you want to be explicit
-          zenos = structuredPkgs;
-        };
+        if tree == null then { } else { zenos = inflateTree tree final prev; };
 
     in
     {
-      # [CRITICAL] Re-export inputs so downstream flakes can use them
       inherit inputs;
-
       overlays.default = zenOverlay;
 
-      # Helper Functions
       lib = {
         mkUtils = import ./lib/utils.nix;
-
-        # [NEW] The Bundle Builder
-        # Takes a structured attribute set of packages and flattens it into a list
-        # Example: bundle { tools = { a = pkgs.hello; }; } -> [ pkgs.hello ]
+        # bundle: converts config trees to flat lists (from Flake 2)
         bundle = rootSet: nixpkgs.lib.collect nixpkgs.lib.isDerivation rootSet;
       };
 
-      nixosModules = if builtins.pathExists ./modules then generateModuleTree ./modules else { };
+      # NixOS Modules (System Level)
+      nixosModules =
+        let
+          scannedModules = if builtins.pathExists ./modules then generateModuleTree ./modules else { };
+          interface =
+            if builtins.pathExists ./modules/zen-interface.nix then
+              { interface = import ./modules/zen-interface.nix; }
+            else
+              { };
+        in
+        scannedModules // interface;
+
+      # Home Manager Modules (User Level)
       homeManagerModules =
         if builtins.pathExists ./hm-modules then generateModuleTree ./hm-modules else { };
 
@@ -197,15 +146,27 @@
             overlays = [ self.overlays.default ];
             config.allowUnfree = true;
           };
-          zenPkgNames = builtins.attrNames (
-            nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./pkgs)
-          );
+          # Dynamically expose top-level packages from the generated zenos tree
+          zenPkgNames =
+            if builtins.pathExists ./pkgs then
+              builtins.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./pkgs))
+            else
+              [ ];
+
+          dynamicPkgs =
+            if zenPkgNames == [ ] then { } else nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.zenos.${name});
         in
-        {
-          zenos = pkgs.zenos;
+        dynamicPkgs
+        // {
+          # Default package to satisfy 'nix build .' and 'nix run .'
+          default = pkgs.writeShellScriptBin "zenpkgs-info" ''
+            echo "ZenPkgs - The Core Dependency Hub for ZenOS"
+            echo "Available packages: ${builtins.concatStringsSep ", " zenPkgNames}"
+          '';
         }
       );
 
+      # --- Documentation & Audit (From Flake 1) ---
       docData = forAllSystems (
         system:
         import ./lib/doc-gen.nix {
