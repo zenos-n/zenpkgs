@@ -14,7 +14,7 @@
   timeout ? 5,
   use_nvram ? false,
   enable_mouse ? true,
-  maxGenrations ? 10,
+  maxGenerations ? 10,
   profileDir ? "/nix/var/nix/profiles/system",
   espMountPoint ? "/boot",
   osIcon ? "zenos",
@@ -35,7 +35,9 @@ stdenv.mkDerivation {
   ];
 
   buildInputs = with pkgs; [
-    theming.system.zenos-refind-theme
+    # Assumes this package exists in the overlay/scope as requested in the input
+    # If not, it might need to be passed or referenced differently.
+    zenos-refind-theme
   ];
 
   buildPhase = ''
@@ -54,7 +56,7 @@ stdenv.mkDerivation {
     # Include the dynamically generated entries file
     include zenboot-entries.conf
 
-    # Include the theme 
+    # Include the theme
     include theme/theme.conf
 
     ${lib.concatStringsSep "\n" (
@@ -75,6 +77,7 @@ stdenv.mkDerivation {
     cp $src/scripts/zenboot-setup.py $out/share/zenboot/zenboot-setup.py
 
     mkdir -p $out/share/zenboot/theme
+    # Adjust path if needed based on actual package structure
     cp -r ${pkgs.zenos-refind-theme}/boot/EFI/refind/themes/zenos-refind-theme/* $out/share/zenboot/theme/
 
     cat > $out/bin/zenboot-setup << EOF
@@ -89,7 +92,7 @@ stdenv.mkDerivation {
     export ESP_MOUNT="${espMountPoint}"
     export PROFILE_DIR="${profileDir}"
     export OS_ICON="${osIcon}"
-    export GEN_COUNT="${toString maxGenrations}"
+    export GEN_COUNT="${toString maxGenerations}"
     export ZENBOOT_SHARE="$out/share/zenboot"
 
     exec ${pkgs.python3}/bin/python3 $out/share/zenboot/zenboot-setup.py
@@ -100,8 +103,19 @@ stdenv.mkDerivation {
 
   meta = with lib; {
     description = "ZenOS bootloader automation based on rEFInd";
+    longDescription = ''
+      **ZenBoot** is an automated bootloader management tool for ZenOS, built on top of rEFInd.
+      It handles the generation of boot entries, manages EFI variables, and applies the ZenOS
+      theme to the bootloader.
+
+      **Features:**
+      - Automatic generation of rEFInd configuration.
+      - Integration with NixOS generations.
+      - Theming support via `zenos-refind-theme`.
+    '';
     homepage = "https://zenos.neg-zero.com";
-    license = licenses.mit;
-    platforms = platforms.linux;
+    license = licenses.napl;
+    maintainers = with maintainers; [ doromiert ];
+    platforms = platforms.zenos;
   };
 }

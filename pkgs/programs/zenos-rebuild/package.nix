@@ -4,6 +4,7 @@
   pkgs,
   ...
 }:
+
 stdenv.mkDerivation {
   pname = "zenos-rebuild";
   version = "1.0";
@@ -15,21 +16,32 @@ stdenv.mkDerivation {
     tmux
   ];
 
-  nativeInputs = with pkgs; [
+  # Corrected from 'nativeInputs'
+  nativeBuildInputs = with pkgs; [
     bash
   ];
 
   dontUnpack = true;
-  installPhase = "
+
+  installPhase = ''
     mkdir -p $out/bin
     install -Dm755 $src/scripts/zenos-rebuild.sh $out/bin/zenos-rebuild
-  ";
+  '';
 
   meta = with lib; {
-    description = "nixos-rebuild switch wrapper with some niceties";
+    description = "Wrapper for nixos-rebuild switch with additional features";
+    longDescription = ''
+      **zenos-rebuild** is a wrapper script around `nixos-rebuild switch` designed for ZenOS.
+      It provides additional convenience features such as desktop notifications and
+      integration with the ZenOS system environment.
+
+      **Features:**
+      - Automates the rebuild process.
+      - Provides user feedback via libnotify.
+    '';
     homepage = "https://zenos.neg-zero.com";
     license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
-    platforms = platforms.linux;
+    platforms = platforms.zenos;
   };
 }

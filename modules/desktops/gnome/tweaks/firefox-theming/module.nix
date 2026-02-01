@@ -98,7 +98,7 @@ in
     # 3. Home Manager Configuration
     home-manager.sharedModules = [
       (
-        { pkgs, ... }:
+        { ... }:
         {
           programs.firefox = {
             enable = true;

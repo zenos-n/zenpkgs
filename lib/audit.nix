@@ -18,6 +18,7 @@ let
   mkPermissive =
     default:
     lib.mkOption {
+      description = "Mocked option"; # <--- FIX: Added description to prevent audit false positives
       type = lib.types.submodule { freeformType = lib.types.attrs; };
       default = default;
     };
@@ -26,6 +27,7 @@ let
     { lib, ... }:
     {
       options.meta = lib.mkOption {
+        description = "Mocked meta"; # <--- FIX: Added description
         type = lib.types.attrs;
         default = { };
       };
@@ -49,10 +51,12 @@ let
       imports = [ mockMeta ];
       options = {
         assertions = lib.mkOption {
+          description = "Mocked assertions"; # <--- FIX: Added description
           type = lib.types.listOf lib.types.attrs;
           default = [ ];
         };
         warnings = lib.mkOption {
+          description = "Mocked warnings"; # <--- FIX: Added description
           type = lib.types.listOf lib.types.str;
           default = [ ];
         };
@@ -72,7 +76,7 @@ let
     };
 
   mockHomeManager =
-    { lib, ... }:
+    { ... }:
     {
       imports = [ mockMeta ];
       options = {

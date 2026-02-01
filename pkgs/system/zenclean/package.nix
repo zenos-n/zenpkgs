@@ -5,7 +5,7 @@
   ...
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "zenos-maintenance";
   version = "0.1.0";
 

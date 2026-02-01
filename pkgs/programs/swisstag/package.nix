@@ -111,10 +111,21 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Automatic music tagger and renamer";
+    longDescription = ''
+      **Swisstag** is a powerful CLI tool for automatically tagging and organizing music collections.
+      It uses MusicBrainz and other sources to fetch metadata, lyrics, and cover art, ensuring
+      a clean and consistent music library.
+
+      **Features:**
+      - Automatic tagging via MusicBrainz.
+      - Lyrics fetching (synced and unsynced).
+      - Cover art downloading.
+      - Intelligent file renaming.
+    '';
     homepage = "https://zenos.neg-zero.com";
     license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
     mainProgram = "swisstag";
-    platforms = platforms.linux;
+    platforms = platforms.zenos;
   };
 }

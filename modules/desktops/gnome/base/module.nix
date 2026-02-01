@@ -37,6 +37,7 @@ in
 
       Integrates with `services.flatpak` and standard NixOS desktop managers.
     '';
+    license = lib.licenses.napl;
     maintainers = with lib.maintainers; [ doromiert ];
     platforms = lib.platforms.zenos;
   };

@@ -167,7 +167,7 @@ let
 
   # 4. Mock Home Manager Options
   mockHomeManager =
-    { lib, ... }:
+    { ... }:
     {
       imports = [ mockMeta ];
       options = {

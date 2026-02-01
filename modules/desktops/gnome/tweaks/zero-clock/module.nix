@@ -3,10 +3,28 @@
   lib,
   ...
 }:
+
 let
   cfg = config.zenos.desktops.gnome.tweaks.zeroClock;
+
 in
 {
+  meta = {
+    description = "Configures the Zero Clock font tweak for GNOME";
+    longDescription = ''
+      This module applies the "Zero" font style to the GNOME lock screen clock and
+      the top bar clock. It utilizes `customize-clock-on-lockscreen` for the
+      lock screen and a CSS override via `user-theme` for the top bar.
+
+      **Features:**
+      - Sets "ZeroMono" font for the lock screen time.
+      - Sets "ZeroClock" font for the lock screen date and top bar clock.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.tweaks.zeroClock = {
     enable = lib.mkEnableOption "Zero GNOME clock font";
   };

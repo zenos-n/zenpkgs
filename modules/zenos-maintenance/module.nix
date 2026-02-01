@@ -25,7 +25,7 @@ in
     longDescription = ''
       This module installs and configures the ZenOS maintenance daemon. It schedules
       periodic checks to perform garbage collection, store optimization, and system
-      updates when the user is away. It also supports hooks for cleaning up the 
+      updates when the user is away. It also supports hooks for cleaning up the
       system on shutdown or reboot.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
@@ -39,32 +39,32 @@ in
     garbageCollectionAge = lib.mkOption {
       type = lib.types.str;
       default = "14d";
-      description = "Time interval for retaining garbage (e.g., 14d, 30d).";
+      description = "Time interval for retaining garbage (e.g., 14d, 30d)";
     };
 
     notificationFrequencyDays = lib.mkOption {
       type = lib.types.int;
       default = 7;
-      description = "Interval between maintenance reminders in days.";
+      description = "Interval between maintenance reminders in days";
     };
 
     updateCommand = lib.mkOption {
       type = lib.types.str;
       default = "nixos-rebuild switch --upgrade";
-      description = "Command executed to update the system.";
+      description = "Command executed to update the system";
       example = "nix flake update --flake /etc/nixos && nixos-rebuild switch";
     };
 
     cleanOnShutdown = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Triggers garbage collection during system shutdown.";
+      description = "Triggers garbage collection during system shutdown";
     };
 
     cleanOnReboot = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Triggers garbage collection during system reboot.";
+      description = "Triggers garbage collection during system reboot";
     };
   };
 

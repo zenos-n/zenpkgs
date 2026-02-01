@@ -5,17 +5,20 @@
   ...
 }:
 
-with lib;
-
 let
   cfg = config.boot.loader.zenboot;
 
   # Resolve branding variables from zenos.branding if available, otherwise fallback
-  brandingCfg = config.zenos.branding;
+  brandingCfg =
+    config.zenos.branding or {
+      prettyName = null;
+      icon = null;
+    };
   finalDeviceName =
     if brandingCfg.prettyName != null then brandingCfg.prettyName else config.networking.hostName;
   finalIcon = if brandingCfg.icon != null then brandingCfg.icon else "negzero";
 
+  # Assuming the package is available as pkgs.zenos.zenboot
   zenbootPkg = pkgs.zenos.zenboot.override {
     inherit (cfg)
       resolution
@@ -25,7 +28,7 @@ let
       timeout
       use_nvram
       enable_mouse
-      maxGenrations
+      maxGenerations
       osIcon
       ;
 
@@ -33,6 +36,7 @@ let
     profileDir = "/nix/var/nix/profiles/system";
   };
 
+  # Assuming the theme package is available
   zenosPlymouthPkg = pkgs.zenos.theming.system.zenos-plymouth.override {
     distroName = cfg.distroName;
     releaseVersion = config.system.nixos.label;
@@ -45,7 +49,7 @@ in
   meta = {
     description = "Configures the ZenOS Bootloader (ZenBoot) and Boot Animation";
     longDescription = ''
-      ZenBoot is a wrapper around rEFInd, customized for ZenOS. 
+      ZenBoot is a wrapper around rEFInd, customized for ZenOS.
       This module also handles the Plymouth boot animation integration.
 
       > **Warning:** Modifies bootloader configurations. Ensure `boot.loader.efi.canTouchEfiVariables` matches the `use_nvram` setting.
@@ -56,19 +60,19 @@ in
   };
 
   options.boot.loader.zenboot = {
-    enable = mkEnableOption "ZenBoot (ZenOS Bootloader)";
+    enable = lib.mkEnableOption "ZenBoot (ZenOS Bootloader)";
 
     plymouth = {
-      enable = mkEnableOption "ZenOS Plymouth theme";
-      color = mkOption {
-        type = types.strMatching "[0-9a-fA-F]{6}";
+      enable = lib.mkEnableOption "ZenOS Plymouth theme";
+      color = lib.mkOption {
+        type = lib.types.strMatching "[0-9a-fA-F]{6}";
         default = "C532FF";
-        description = "Hex color code for the boot animation glow (without #).";
+        description = "Hex color code for the boot animation glow (without #)";
       };
     };
 
-    osIcon = mkOption {
-      type = types.enum [
+    osIcon = lib.mkOption {
+      type = lib.types.enum [
         "zenos"
         "freebsd"
         "usb"
@@ -79,82 +83,84 @@ in
         "mac"
       ];
       default = "zenos";
-      description = "Icon name for the OS in the boot menu.";
+      description = "Icon name for the OS in the boot menu";
     };
 
-    distroName = mkOption {
-      type = types.str;
+    distroName = lib.mkOption {
+      type = lib.types.str;
       default = "ZenOS";
       description = "The name of the distribution";
     };
 
-    resolution = mkOption {
-      type = types.str;
+    resolution = lib.mkOption {
+      type = lib.types.str;
       default = "max";
-      description = "Screen resolution for rEFInd (e.g., '1920 1080' or 'max').";
+      description = "Screen resolution for rEFInd (e.g., '1920 1080' or 'max')";
     };
 
-    timeout = mkOption {
-      type = types.int;
+    timeout = lib.mkOption {
+      type = lib.types.int;
       default = 5;
-      description = "Boot menu timeout in seconds.";
+      description = "Boot menu timeout in seconds";
     };
 
-    maxGenrations = mkOption {
-      type = types.int;
+    maxGenerations = lib.mkOption {
+      type = lib.types.int;
       default = 10;
-      description = "Number of generations to include in the boot menu.";
+      description = "Number of generations to include in the boot menu";
     };
 
-    use_nvram = mkOption {
-      type = types.bool;
+    use_nvram = lib.mkOption {
+      type = lib.types.bool;
       default = false;
-      description = "Whether to write variables to NVRAM (efibootmgr).";
+      description = "Whether to write variables to NVRAM (efibootmgr)";
     };
 
-    enable_mouse = mkOption {
-      type = types.bool;
+    enable_mouse = lib.mkOption {
+      type = lib.types.bool;
       default = true;
-      description = "Enable mouse support in the boot menu.";
+      description = "Enable mouse support in the boot menu";
     };
 
-    scannedDevices = mkOption {
-      type = types.listOf types.enum [
-        "internal"
-        "external"
-        "optical"
-        "netboot"
-        "hdbios"
-        "biosexternal"
-        "cd"
-        "manual"
-        "firmware"
-      ];
+    scannedDevices = lib.mkOption {
+      type = lib.types.listOf (
+        lib.types.enum [
+          "internal"
+          "external"
+          "optical"
+          "netboot"
+          "hdbios"
+          "biosexternal"
+          "cd"
+          "manual"
+          "firmware"
+        ]
+      );
       default = [
         "external"
         "optical"
         "manual"
       ];
-      description = "Comma-separated list of device types to scan (passed to 'scanfor').";
+      description = "Comma-separated list of device types to scan (passed to 'scanfor')";
     };
 
-    extraConfig = mkOption {
-      type = types.lines;
+    extraConfig = lib.mkOption {
+      type = lib.types.lines;
       default = "";
-      description = "Extra configuration lines appended to refind.conf.";
+      description = "Extra configuration lines appended to refind.conf";
     };
 
-    extraIncludedFiles = mkOption {
-      type = types.nullOr (types.attrsOf types.path);
+    extraIncludedFiles = lib.mkOption {
+      type = lib.types.nullOr (lib.types.attrsOf lib.types.path);
       default = null;
-      description = "Attribute set of extra config files to include.";
+      description = "Attribute set of extra config files to include";
     };
   };
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     # 1. Disable conflicting loaders
-    boot.loader.grub.enable = mkDefault false;
-    boot.loader.systemd-boot.enable = mkDefault false;
+    boot.loader.grub.enable = lib.mkDefault false;
+    boot.loader.systemd-boot.enable = lib.mkDefault false;
 
     # 2. Safety Checks
     assertions = [
@@ -176,7 +182,7 @@ in
     '';
 
     # 5. Plymouth Integration
-    boot.plymouth = mkIf cfg.plymouth.enable {
+    boot.plymouth = lib.mkIf cfg.plymouth.enable {
       enable = true;
       theme = "zenos";
       themePackages = [ zenosPlymouthPkg ];

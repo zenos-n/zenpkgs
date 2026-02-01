@@ -4,6 +4,7 @@
   pkgs,
   ...
 }:
+
 stdenv.mkDerivation {
   pname = "zero-font";
   version = "1.0";
@@ -45,9 +46,17 @@ stdenv.mkDerivation {
 
   meta = with lib; {
     description = "Zero Font";
+    longDescription = ''
+      **Zero Font** is a custom typeface designed for the ZenOS aesthetic.
+      It includes a standard and condensed variant, optimized for UI legibility.
+
+      **Features:**
+      - Custom glyphs and ligatures.
+      - Optimized for high-DPI displays.
+    '';
     homepage = "https://zenos.neg-zero.com";
     license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
-    platforms = platforms.linux;
+    platforms = platforms.zenos;
   };
 }

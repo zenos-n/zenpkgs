@@ -4,6 +4,7 @@
   pkgs,
   ...
 }:
+
 stdenv.mkDerivation {
   pname = "forge";
   version = "custom";
@@ -27,10 +28,19 @@ stdenv.mkDerivation {
   '';
 
   meta = with lib; {
-    description = "Customized version of the forge gnome extension with tweaks to work with gnome 49. The license applies to my patches and install script, not the original code.";
+    description = "Customized version of the Forge GNOME extension";
+    longDescription = ''
+      **Forge (Custom)** is a modified build of the Forge GNOME extension, tailored for ZenOS.
+      It includes specific tweaks and patches to ensure compatibility with GNOME 49 and integrates
+      seamlessly with the ZenOS tiling workflow.
+
+      **Features:**
+      - Tiling window management for GNOME.
+      - Custom compatibility patches for newer GNOME versions.
+    '';
     homepage = "https://zenos.neg-zero.com";
     license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
-    platforms = platforms.linux;
+    platforms = platforms.zenos;
   };
 }

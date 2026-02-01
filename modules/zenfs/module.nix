@@ -68,6 +68,24 @@ let
 
 in
 {
+  meta = {
+    description = "Configures ZenFS, the declarative file system manager for ZenOS";
+    longDescription = ''
+      This module configures **ZenFS**, a subsystem responsible for managing the
+      filesystem hierarchy in ZenOS. It handles the creation of the FHS structure,
+      manages symlinks for configuration mapping, and supports roaming drive offloading.
+
+      **Features:**
+      - Declarative definition of the filesystem structure (FHS).
+      - Support for both symlink-based and FUSE-based implementations.
+      - Roaming drive support for offloading data from the main drive.
+      - Automatic configuration mapping via `configMap`.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.zenfs = {
     enable = lib.mkEnableOption "ZenFS";
 
@@ -88,6 +106,7 @@ in
         "fuse"
       ];
       default = "symlink";
+      description = "Implementation method for the filesystem structure";
     };
 
     fhs = {
@@ -100,22 +119,27 @@ in
                   "directory"
                   "symlink"
                 ];
+                description = "Type of the filesystem entry";
               };
               target = lib.mkOption {
                 type = lib.types.nullOr lib.types.str;
                 default = null;
+                description = "Target path for symlinks (optional)";
               };
               mode = lib.mkOption {
                 type = lib.types.str;
                 default = "0755";
+                description = "File permission mode";
               };
               user = lib.mkOption {
                 type = lib.types.str;
                 default = "root";
+                description = "Owner user";
               };
               group = lib.mkOption {
                 type = lib.types.str;
                 default = "root";
+                description = "Owner group";
               };
             };
           }
@@ -232,6 +256,7 @@ in
             target = "/root";
           };
         };
+        description = "Filesystem hierarchy structure definition";
       };
 
       configMap = lib.mkOption {
@@ -283,6 +308,7 @@ in
           ];
           ZenOS = [ ];
         };
+        description = "Mapping of configuration categories to file paths";
       };
     };
 
@@ -296,6 +322,7 @@ in
         ".bash_history"
         "Downloads/Temp"
       ];
+      description = "List of files to be ignored by the ZenFS database";
     };
 
     roaming = {
@@ -304,13 +331,13 @@ in
       offloadThreshold = lib.mkOption {
         type = lib.types.int;
         default = 80;
-        description = "Percentage of Main Drive usage to trigger offloading.";
+        description = "Percentage of Main Drive usage to trigger offloading";
       };
 
       roamingSafeLimit = lib.mkOption {
         type = lib.types.int;
         default = 90;
-        description = "Percentage of Roaming Drive usage to stop prioritizing it.";
+        description = "Percentage of Roaming Drive usage to stop prioritizing it";
       };
     };
   };

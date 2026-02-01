@@ -9,6 +9,7 @@
   color ? "C532FF",
   ...
 }:
+
 stdenv.mkDerivation {
   pname = "zenos-plymouth";
   version = "1.0";
@@ -54,7 +55,7 @@ stdenv.mkDerivation {
     ${pkgs.imagemagick}/bin/magick -background none -density 8000 icons/zenos.svg -resize 1640x1640 -channel A -evaluate multiply 0.10 watermark_bg.png
     ${pkgs.imagemagick}/bin/magick -size 600x600 xc:transparent -fill "#${color}" -draw "rectangle 250,250 350,350" -blur 0x100 -resize 6000x6000 glow.png
 
-    ${pkgs.coreutils-full}/bin/rm -rf icons/ 
+    ${pkgs.coreutils-full}/bin/rm -rf icons/
     ${pkgs.coreutils-full}/bin/mkdir graphics
     ${pkgs.coreutils-full}/bin/mv ./*.png graphics
   '';
@@ -62,15 +63,23 @@ stdenv.mkDerivation {
   installPhase = ''
     ${pkgs.coreutils-full}/bin/mkdir -p $out/share/plymouth/themes/zenos
     ${pkgs.coreutils-full}/bin/cp -r * $out/share/plymouth/themes/zenos/
-
   '';
 
   meta = with lib; {
     description = "ZenOS Plymouth Boot Theme";
-    homepage = "https://zenos.neg-zero.com"; # i know this doesn't exist yet but uhhhh
+    longDescription = ''
+      **ZenOS Plymouth Theme** provides a branded boot animation for ZenOS.
+      It features a customizable device name, distro logo, and glowing effects,
+      dynamically generated at build time using ImageMagick.
+
+      **Features:**
+      - Dynamic asset generation.
+      - Customizable device name and icon.
+      - Clean, modern aesthetic matching ZenOS design language.
+    '';
+    homepage = "https://zenos.neg-zero.com";
     license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
-    platforms = platforms.linux;
+    platforms = platforms.zenos;
   };
-
 }
