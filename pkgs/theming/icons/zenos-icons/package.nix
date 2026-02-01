@@ -1,11 +1,14 @@
 {
   lib,
   stdenv,
+  hicolor-icon-theme,
   ...
 }:
 stdenv.mkDerivation {
   pname = "zenos-icons";
   version = "1.0";
+
+  propagatedBuildInputs = [ hicolor-icon-theme ];
 
   src = ./src;
 
