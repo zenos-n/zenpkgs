@@ -1,5 +1,5 @@
-# LOCATION: zenpkgs/lib/utils.nix
-# DESCRIPTION: Utility functions for ZenOS, including microarchitecture detection and optimization targeting.
+# LOCATION: lib/utils.nix
+# DESCRIPTION: Core utilities, licenses, and platform definitions.
 
 {
   lib,
@@ -8,8 +8,6 @@
 }:
 
 let
-  # [ DATABASE ] x86-64 Microarchitecture Levels
-  # Maps GCC -march names to x86-64 feature levels.
   cpuDb = {
     # --- INTEL ---
     "nehalem" = "v2";
@@ -65,14 +63,13 @@ let
     # Defaults ZenOS logic to 'v3' as a statistical guess for modern hardware.
     "native" = "v3";
   };
-
 in
 rec {
   osVersionString =
     let
-      major = inputs.self.version.majorVer;
-      variant = inputs.self.version.variant;
-      type = inputs.self.version.type;
+      major = inputs.self.version.majorVer or "0";
+      variant = inputs.self.version.variant or "N";
+      type = inputs.self.version.type or "beta";
     in
     "${major}${variant}${type}${
       if type != "stable" then
@@ -80,6 +77,19 @@ rec {
       else
         ""
     }";
+
+  # [ STANDARD ] ZenOS Platform Definition
+  platforms.zenos = [ "x86_64-linux" ];
+
+  # [ STANDARD ] NAPL License Definition
+  licenses.napl = {
+    shortName = "napl";
+    fullName = "The Non-Aggression License 1.1";
+    url = "https://github.com/negative-zero-inft/nap-license";
+    free = true;
+    redistributable = true;
+    copyleft = true;
+  };
 
   recursiveImports =
     path:
@@ -96,45 +106,28 @@ rec {
           [ fullPath ]
         else
           [ ];
-      entries = lib.mapAttrsToList processEntry contents;
     in
-    lib.flatten entries;
+    lib.flatten (lib.mapAttrsToList processEntry contents);
 
-  platforms.zenos = [ "x86_64-linux" ];
+  getZenLevel = cpu: cpuDb.${cpu} or "v2";
 
-  # [ LOGIC ] Microarchitecture Resolver
-  getZenLevel =
-    cpu:
-    let
-      knownLevel = cpuDb.${cpu} or null;
-    in
-    if knownLevel != null then
-      knownLevel
-    else
-      builtins.trace "## [ ! ] ZenOS Warning: CPU '${cpu}' unknown. Defaulting to v2." "v2";
-
-  # [ HELPER ] Host Platform Generator
-  makeHostPlatform =
-    system: cpu:
-    let
-      level = getZenLevel cpu;
-      archFlag =
-        if cpu == "native" then
-          "native"
-        else
+  makeHostPlatform = system: cpu: {
+    inherit system;
+    gcc.arch =
+      if cpu == "native" then
+        "native"
+      else
+        (
           {
             "v1" = "x86-64";
             "v2" = "x86-64-v2";
             "v3" = "x86-64-v3";
             "v4" = "x86-64-v4";
           }
-          .${level};
-    in
-    {
-      inherit system;
-      gcc.arch = archFlag;
-      gcc.tune = if (cpuDb ? ${cpu} && cpu != "native") then cpu else "generic";
-    };
+          .${getZenLevel cpu}
+        );
+    gcc.tune = if (cpuDb ? ${cpu} && cpu != "native") then cpu else "generic";
+  };
 
   isModuleEnabled =
     config: category: name:
@@ -143,28 +136,11 @@ rec {
     in
     (categoryConfig == "*") || (lib.elem name categoryConfig);
 
-  # [ TOOL ] Architecture Detection Script
-  # Usage: Expose this in flake.nix as an app to run on the target machine.
-  # $ nix run .#detect-arch
   detectArchScript = ''
     #!/bin/sh
     echo "## [ ZenOS Hardware Detector ]"
-
-    if ! command -v gcc >/dev/null 2>&1; then
-        echo "Error: GCC is required for detection."
-        exit 1
-    fi
-
-    # Ask GCC what it thinks this CPU is
+    if ! command -v gcc >/dev/null 2>&1; then echo "Error: GCC required."; exit 1; fi
     DETECTED_ARCH=$(gcc -march=native -Q --help=target | grep --text -m1 -- "-march=" | cut -d= -f2 | xargs)
-
-    echo "Detected CPU Architecture: \033[1;32m$DETECTED_ARCH\033[0m"
-    echo ""
-    echo "Recommended Configuration:"
-    echo "--------------------------"
-    echo "zenos.hardware.cpu = \"$DETECTED_ARCH\";"
-    echo "--------------------------"
-    echo ""
-    echo "Copy the line above into your hosts/<hostname>/default.nix"
+    echo "Detected: $DETECTED_ARCH"
   '';
 }

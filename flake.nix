@@ -1,20 +1,18 @@
+# LOCATION: flake.nix
+# DESCRIPTION: The Entry Point. Wires the overlay, loader, and structure.
+
 {
   description = "ZenPkgs - The Core Dependency Hub for ZenOS";
 
   inputs = {
-    # --- Core Repositories ---
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
-
-    # --- Software Collections ---
     nix-gaming.url = "github:fufexan/nix-gaming";
     vsc-extensions.url = "github:nix-community/nix-vscode-extensions";
     nixcord.url = "github:kaylorben/nixcord";
@@ -30,86 +28,52 @@
     let
       systems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
+      loader = import ./lib/loader.nix { inherit (nixpkgs) lib; };
 
-      # --- Logic adapted from Flake 1 (Robust recursive scanning) ---
+      # Import Utils with Inputs Context
+      utils = import ./lib/utils.nix {
+        inherit (nixpkgs) lib;
+        inherit inputs self;
+      };
 
-      # Recursively generate a tree of modules from a directory
-      generateModuleTree =
-        path:
-        let
-          entries = builtins.readDir path;
-        in
-        nixpkgs.lib.filterAttrs (n: v: v != null) (
-          nixpkgs.lib.mapAttrs (
-            name: type:
-            if type == "directory" then
-              # Priority 1: Directory with default.nix is a module
-              if builtins.pathExists (path + "/${name}/default.nix") then
-                path + "/${name}/default.nix"
-              else
-                # Priority 2: Recurse into directory
-                let
-                  subtree = generateModuleTree (path + "/${name}");
-                in
-                if subtree == { } then null else subtree
-            # Priority 3: Standalone .nix file is a module
-            else if type == "regular" && nixpkgs.lib.hasSuffix ".nix" name && name != "default.nix" then
-              path + "/${name}"
-            else
-              null
-          ) entries
-        );
-
+      # --- Package Overlay ---
       zenOverlay =
         final: prev:
         let
           lib = prev.lib;
-
-          generatePackageTree =
-            path:
-            let
-              entries = builtins.readDir path;
-              isPackage = builtins.pathExists (path + "/package.nix");
-            in
-            if isPackage then
-              path + "/package.nix"
-            else
-              let
-                subDirs = lib.filterAttrs (n: v: v == "directory") entries;
-                children = lib.mapAttrs (name: _: generatePackageTree (path + "/${name}")) subDirs;
-                validChildren = lib.filterAttrs (n: v: v != null) children;
-              in
-              if validChildren == { } then null else validChildren;
-
-          inflateTree =
-            tree: f: p:
+          inflate =
+            tree: f:
             if builtins.isPath tree then
               f.callPackage tree {
                 lib = f.lib // {
-                  licenses = f.lib.licenses // {
-                    napl = {
-                      shortName = "napl";
-                      fullName = "The Non-Aggression License 1.0";
-                      url = "https://github.com/negative-zero-inft/nap-license";
-                      free = true;
-                      redistributable = true;
-                      copyleft = true;
-                    };
-                  };
-                  # FIX: Inject custom maintainers into the lib scope
-                  maintainers = f.lib.maintainers // (import ./lib/maintainers.nix { inherit (f) lib; });
-                  platforms = f.lib.platforms // {
-                    zenos = f.lib.platforms.linux ++ [ "x86_64-linux" ];
-                  };
+                  # INJECT: Custom definitions
+                  licenses = f.lib.licenses // utils.licenses;
+                  platforms = f.lib.platforms // utils.platforms;
+                  maintainers =
+                    f.lib.maintainers
+                    // (
+                      if builtins.pathExists ./lib/maintainers.nix then
+                        import ./lib/maintainers.nix { inherit (f) lib; }
+                      else
+                        { }
+                    );
+                  zenUtils = utils;
                 };
               }
             else
-              lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflateTree value f p) tree);
+              lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflate value f) tree);
 
-          # Scans ./pkgs (Standard behavior from Flake 1)
-          tree = if builtins.pathExists ./pkgs then generatePackageTree ./pkgs else null;
+          zenTree = loader.generateTree ./pkgs;
+          legacyTree = loader.generateTree ./legacy/packages;
         in
-        if tree == null then { } else { zenos = inflateTree tree final prev; };
+        # 1. Base Legacy (Safeguard)
+        {
+          legacy = prev;
+        }
+        # 2. Legacy Mappers (Custom maps like 'win-browser')
+        // (if legacyTree == { } then { } else inflate legacyTree final)
+        # 3. ZenPkgs Priority (Overwrites upstream)
+        // (if zenTree == { } then { } else inflate zenTree final);
 
     in
     {
@@ -117,27 +81,74 @@
       overlays.default = zenOverlay;
 
       lib = {
-        mkUtils = import ./lib/utils.nix;
-        # bundle: converts config trees to flat lists (from Flake 2)
-        bundle = rootSet: nixpkgs.lib.collect nixpkgs.lib.isDerivation rootSet;
+        loader = loader;
+        utils = utils;
       };
 
-      # NixOS Modules (System Level)
+      # --- NixOS Modules ---
       nixosModules =
         let
-          scannedModules = if builtins.pathExists ./modules then generateModuleTree ./modules else { };
-          interface =
-            if builtins.pathExists ./modules/zen-interface.nix then
-              { interface = import ./modules/zen-interface.nix; }
-            else
-              { };
+          zenosTree = loader.generateTree ./modules;
+          legacyTree = loader.generateTree ./legacy/modules;
+          programsTree = loader.generateTree ./programModules;
+
+          zenosList = nixpkgs.lib.collect builtins.isPath zenosTree;
+          legacyList = nixpkgs.lib.collect builtins.isPath legacyTree;
+          programsList = nixpkgs.lib.collect builtins.isPath programsTree;
+
+          # Dynamic Injection for Program Modules
+          programInjection =
+            { config, lib, ... }:
+            {
+              system.programs = {
+                imports = programsList;
+              };
+              users.users = lib.mkOption {
+                type = lib.types.attrsOf (
+                  lib.types.submodule {
+                    options.programs = {
+                      imports = programsList;
+                    };
+                  }
+                );
+              };
+            };
         in
-        scannedModules // interface;
+        {
+          zenos = zenosTree;
+          legacy = legacyTree;
+          programs = programsTree;
 
-      # Home Manager Modules (User Level)
+          default = {
+            imports = [
+              ./structure.nix
+              programInjection
+            ]
+            ++ zenosList
+            ++ legacyList;
+          };
+        }
+        // zenosTree;
+
+      # --- Home Manager Modules ---
       homeManagerModules =
-        if builtins.pathExists ./hm-modules then generateModuleTree ./hm-modules else { };
+        let
+          zenosTree = loader.generateTree ./hmModules;
+          legacyTree = loader.generateTree ./legacy/home;
 
+          zenosList = nixpkgs.lib.collect builtins.isPath zenosTree;
+          legacyList = nixpkgs.lib.collect builtins.isPath legacyTree;
+        in
+        {
+          zenos = zenosTree;
+          legacy = legacyTree;
+          default = {
+            imports = zenosList ++ legacyList;
+          };
+        }
+        // zenosTree;
+
+      # --- Packages ---
       packages = forAllSystems (
         system:
         let
@@ -146,43 +157,13 @@
             overlays = [ self.overlays.default ];
             config.allowUnfree = true;
           };
-          # Dynamically expose top-level packages from the generated zenos tree
           zenPkgNames =
             if builtins.pathExists ./pkgs then
               builtins.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./pkgs))
             else
               [ ];
-
-          dynamicPkgs =
-            if zenPkgNames == [ ] then { } else nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.zenos.${name});
         in
-        dynamicPkgs
-        // {
-          # Default package to satisfy 'nix build .' and 'nix run .'
-          default = pkgs.writeShellScriptBin "zenpkgs-info" ''
-            echo "ZenPkgs - The Core Dependency Hub for ZenOS"
-            echo "Available packages: ${builtins.concatStringsSep ", " zenPkgNames}"
-          '';
-        }
-      );
-
-      # --- Documentation & Audit (From Flake 1) ---
-      docData = forAllSystems (
-        system:
-        import ./lib/doc-gen.nix {
-          pkgs = import nixpkgs { inherit system; };
-          inherit system;
-          flake = self;
-        }
-      );
-
-      audit = forAllSystems (
-        system:
-        import ./lib/audit.nix {
-          pkgs = import nixpkgs { inherit system; };
-          inherit system;
-          flake = self;
-        }
+        if zenPkgNames == [ ] then { } else nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.${name})
       );
     };
 }

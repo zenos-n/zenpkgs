@@ -1,25 +1,49 @@
 # LOCATION: lib/loader.nix
+# DESCRIPTION: Recursive directory scanner for modules and packages.
+
 { lib }:
 rec {
-  # [ FUNCTION ] scanDir
-  # Returns a list of .nix file paths in a directory.
-  # Usage: imports = scanDir ./path;
-  scanDir =
+  # [ FUNCTION ] generateTree
+  # Scans directories to build attribute trees (pkgs.a.b)
+  generateTree =
+    path:
+    if !builtins.pathExists path then
+      { }
+    else
+      let
+        entries = builtins.readDir path;
+      in
+      lib.filterAttrs (n: v: v != null) (
+        lib.mapAttrs (
+          name: type:
+          if type == "directory" then
+            # Priority 1: Leaf Module
+            if builtins.pathExists (path + "/${name}/default.nix") then
+              path + "/${name}/default.nix"
+            else if builtins.pathExists (path + "/${name}/package.nix") then
+              path + "/${name}/package.nix"
+            # Priority 2: Branch (Recurse)
+            else
+              let
+                subtree = generateTree (path + "/${name}");
+              in
+              if subtree == { } then null else subtree
+          # Priority 3: Leaf File
+          else if
+            type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix" && name != "package.nix"
+          then
+            path + "/${name}"
+          else
+            null
+        ) entries
+      );
+
+  # [ FUNCTION ] scanPaths
+  # Returns a flat list of all paths found in the tree (for imports).
+  scanPaths =
     path:
     let
-      entries = builtins.readDir path;
-      filter = name: type: type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix";
+      tree = generateTree path;
     in
-    lib.mapAttrsToList (name: _: path + "/${name}") (lib.filterAttrs filter entries);
-
-  # [ FUNCTION ] mergeDir
-  # Imports every file in a directory and merges the resulting attribute sets.
-  # Usage: map = mergeDir ./packages { pkgs = ... };
-  mergeDir =
-    path: args:
-    let
-      paths = scanDir path;
-      imported = map (p: import p args) paths;
-    in
-    lib.foldl lib.recursiveUpdate { } imported;
+    if tree == { } then [ ] else lib.collect builtins.isPath tree;
 }
