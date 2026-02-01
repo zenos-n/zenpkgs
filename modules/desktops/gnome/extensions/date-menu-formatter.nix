@@ -10,64 +10,110 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.date-menu-formatter;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
 in
 {
+  meta = {
+    description = "Configures the Date Menu Formatter GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Date Menu Formatter** extension for GNOME.
+      It allows customization of the date format in the top bar using Luxon formatting patterns.
+
+      **Features:**
+      - Custom date/time patterns.
+      - Localization and time zone overrides.
+      - Option to remove the messages indicator.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.date-menu-formatter = {
     enable = mkEnableOption "Date Menu Formatter GNOME extension configuration";
 
     # --- Schema Options ---
 
-    formatter = mkStr "01_luxon" "Date formatter.";
+    formatter = mkOption {
+      type = types.str;
+      default = "01_luxon";
+      description = "Date formatter";
+    };
 
-    pattern = mkStr "EEE, MMM d  H : mm" "Date format pattern.";
+    pattern = mkOption {
+      type = types.str;
+      default = "EEE, MMM d  H : mm";
+      description = "Date format pattern";
+    };
 
-    custom-locale = mkStr "" "Custom locale.";
+    custom-locale = mkOption {
+      type = types.str;
+      default = "";
+      description = "Custom locale";
+    };
 
-    use-default-locale = mkBool true "Should default system locale be used.";
+    use-default-locale = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Should default system locale be used";
+    };
 
-    custom-calendar = mkStr "" "Custom Calendar.";
+    custom-calendar = mkOption {
+      type = types.str;
+      default = "";
+      description = "Custom Calendar";
+    };
 
-    use-default-calendar = mkBool true "Should default calendar be used.";
+    use-default-calendar = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Should default calendar be used";
+    };
 
-    custom-timezone = mkStr "" "Custom timezone.";
+    custom-timezone = mkOption {
+      type = types.str;
+      default = "";
+      description = "Custom timezone";
+    };
 
-    use-default-timezone = mkBool true "Should default system timezone be used.";
+    use-default-timezone = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Should default system timezone be used";
+    };
 
-    remove-messages-indicator = mkBool false "Should unread messages indicator be removed.";
+    remove-messages-indicator = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Should unread messages indicator be removed";
+    };
 
-    apply-all-panels = mkBool false "Should extension modify all Dash To Panel panels.";
+    apply-all-panels = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Should extension modify all Dash To Panel panels";
+    };
 
-    font-size = mkInt 10 "Font size.";
+    font-size = mkOption {
+      type = types.int;
+      default = 10;
+      description = "Font size";
+    };
 
-    update-level = mkInt 1 "Update Clock Every (0=minute, 1=second, 2=2x/sec, etc).";
+    update-level = mkOption {
+      type = types.int;
+      default = 1;
+      description = "Update Clock Every (0=minute, 1=second, 2=2x/sec, etc)";
+    };
 
-    text-align = mkStr "center" "Align the label (left, center, right).";
-
+    text-align = mkOption {
+      type = types.enum [
+        "left"
+        "center"
+        "right"
+      ];
+      default = "center";
+      description = "Align the label";
+    };
   };
 
   config = mkIf cfg.enable {

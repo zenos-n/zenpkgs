@@ -10,66 +10,102 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.lockscreen-extension;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkDouble =
-    default: description:
-    mkOption {
-      type = types.float;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  # Helper to generate options for the numbered profiles (1-4) to reduce repetition in this file
-  # while keeping the resulting options flat and explicit.
+  # Helper to generate options for the numbered profiles (1-4)
   mkProfileOptions = i: {
-    "primary-color-${toString i}" = mkStr "red" "Primary color for profile ${toString i}.";
-    "secondary-color-${toString i}" = mkStr "orange" "Secondary color for profile ${toString i}.";
-    "gradient-direction-${toString i}" = mkStr "none" "Gradient direction for profile ${toString i}.";
-    "background-image-path-${toString i}" =
-      mkStr "none" "Background image path for profile ${toString i}.";
-    "background-size-${toString i}" =
-      mkStr "cover" "Background size (e.g., cover, contain) for profile ${toString i}.";
-    "blur-radius-${toString i}" = mkInt 0 "Blur radius (0-100) for profile ${toString i}.";
-    "blur-brightness-${toString i}" =
-      mkDouble 0.65 "Blur brightness (0.0-1.0) for profile ${toString i}.";
-    "user-background-${toString i}" = mkBool true "Use user background for profile ${toString i}.";
+    "primary-color-${toString i}" = mkOption {
+      type = types.str;
+      default = "red";
+      description = "Primary color for profile ${toString i}";
+    };
+    "secondary-color-${toString i}" = mkOption {
+      type = types.str;
+      default = "orange";
+      description = "Secondary color for profile ${toString i}";
+    };
+    "gradient-direction-${toString i}" = mkOption {
+      type = types.str;
+      default = "none";
+      description = "Gradient direction for profile ${toString i}";
+    };
+    "background-image-path-${toString i}" = mkOption {
+      type = types.str;
+      default = "none";
+      description = "Background image path for profile ${toString i}";
+    };
+    "background-size-${toString i}" = mkOption {
+      type = types.str;
+      default = "cover";
+      description = "Background size (e.g., cover, contain) for profile ${toString i}";
+    };
+    "blur-radius-${toString i}" = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Blur radius (0-100) for profile ${toString i}";
+    };
+    "blur-brightness-${toString i}" = mkOption {
+      type = types.float;
+      default = 0.65;
+      description = "Blur brightness (0.0-1.0) for profile ${toString i}";
+    };
+    "user-background-${toString i}" = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Use user background for profile ${toString i}";
+    };
   };
 
 in
 {
+  meta = {
+    description = "Configures the Lockscreen Extension for GNOME";
+    longDescription = ''
+      This module installs and configures the **Lockscreen Extension** for GNOME.
+      It allows customization of the lock screen background, including blurring,
+      brightness, and color gradients for multiple profiles.
+
+      **Features:**
+      - Configure up to 4 distinct visual profiles.
+      - Customize background images, blur, and brightness.
+      - Set gradient colors and directions.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.lockscreen-extension = {
     enable = mkEnableOption "Lockscreen Extension configuration";
 
     # --- Global Settings ---
-    hide-lockscreen-extension-button = mkBool false "Hide the extension button on the lockscreen.";
-    backgrounds-folder-path = mkStr "" "Custom path for backgrounds folder.";
-    local-share-backgrounds-folder-path = mkBool true "Search in ~/.local/share/backgrounds.";
-    usr-local-share-backgrounds-folder-path = mkBool true "Search in /usr/local/share/backgrounds.";
-    usr-share-backgrounds-folder-path = mkBool true "Search in /usr/share/backgrounds.";
+    hide-lockscreen-extension-button = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Hide the extension button on the lockscreen";
+    };
+
+    backgrounds-folder-path = mkOption {
+      type = types.str;
+      default = "";
+      description = "Custom path for backgrounds folder";
+    };
+
+    local-share-backgrounds-folder-path = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Search in ~/.local/share/backgrounds";
+    };
+
+    usr-local-share-backgrounds-folder-path = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Search in /usr/local/share/backgrounds";
+    };
+
+    usr-share-backgrounds-folder-path = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Search in /usr/share/backgrounds";
+    };
 
     # --- Profile 1 ---
     inherit (mkProfileOptions 1)

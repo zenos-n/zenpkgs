@@ -10,45 +10,73 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.compiz-windows-effect;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkDouble =
-    default: description:
-    mkOption {
-      type = types.float;
-      default = default;
-      description = description;
-    };
-
 in
 {
+  meta = {
+    description = "Configures the Compiz Windows Effect GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Compiz Windows Effect** extension for GNOME.
+      It adds wobbly windows and other Compiz-like animations to window interactions.
+
+      **Features:**
+      - Wobbly windows effect on movement and resize.
+      - Configurable physics (friction, mass, spring).
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.compiz-windows-effect = {
     enable = mkEnableOption "Compiz Windows Effect GNOME extension configuration";
 
-    # --- Schema Options ---
+    friction = mkOption {
+      type = types.float;
+      default = 3.5;
+      description = "Friction";
+    };
 
-    friction = mkDouble 3.5 "Friction";
+    spring-k = mkOption {
+      type = types.float;
+      default = 3.8;
+      description = "Spring k";
+    };
 
-    spring-k = mkDouble 3.8 "Spring k";
+    speedup-factor-divider = mkOption {
+      type = types.float;
+      default = 12.0;
+      description = "Speedup Factor";
+    };
 
-    speedup-factor-divider = mkDouble 12.0 "Speedup Factor";
+    mass = mkOption {
+      type = types.float;
+      default = 70.0;
+      description = "Mass";
+    };
 
-    mass = mkDouble 70.0 "Mass";
+    x-tiles = mkOption {
+      type = types.float;
+      default = 6.0;
+      description = "X Tiles";
+    };
 
-    x-tiles = mkDouble 6.0 "X Tiles";
+    y-tiles = mkOption {
+      type = types.float;
+      default = 6.0;
+      description = "Y Tiles";
+    };
 
-    y-tiles = mkDouble 6.0 "Y Tiles";
+    maximize-effect = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Maximize effect";
+    };
 
-    maximize-effect = mkBool true "Maximize effect";
-
-    resize-effect = mkBool false "Resize effect";
+    resize-effect = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Resize effect";
+    };
   };
 
   config = mkIf cfg.enable {

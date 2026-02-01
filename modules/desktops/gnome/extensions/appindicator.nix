@@ -70,26 +70,42 @@ let
 
 in
 {
+  meta = {
+    description = "Configures the AppIndicator GNOME extension";
+    longDescription = ''
+      This module installs and configures the **AppIndicator and KStatusNotifierItem Support** extension for GNOME.
+      It re-enables the system tray, allowing applications to display icons and menus in the top bar.
+
+      **Features:**
+      - Restores legacy tray icon support.
+      - Customizable icon appearance (saturation, brightness, opacity).
+      - Configurable tray positioning.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.appindicator = {
     enable = mkEnableOption "AppIndicator GNOME extension configuration";
 
-    legacy-tray-enabled = mkBool true "Enable legacy tray icons support.";
+    legacy-tray-enabled = mkBool true "Enable legacy tray icons support";
 
-    icon-saturation = mkDouble 0.0 "Icon saturation.";
-    icon-brightness = mkDouble 0.0 "Icon brightness.";
-    icon-contrast = mkDouble 0.0 "Icon contrast.";
+    icon-saturation = mkDouble 0.0 "Icon saturation";
+    icon-brightness = mkDouble 0.0 "Icon brightness";
+    icon-contrast = mkDouble 0.0 "Icon contrast";
 
-    icon-opacity = mkInt 240 "Icon opacity.";
-    icon-size = mkInt 0 "Icon size in pixels (0 = auto).";
-    icon-spacing = mkInt 12 "Icon spacing within the tray.";
+    icon-opacity = mkInt 240 "Icon opacity";
+    icon-size = mkInt 0 "Icon size in pixels (0 = auto)";
+    icon-spacing = mkInt 12 "Icon spacing within the tray";
 
-    tray-pos = mkStr "right" "Position in tray (left/right).";
-    tray-order = mkInt 1 "Order in tray.";
+    tray-pos = mkStr "right" "Position in tray (left/right)";
+    tray-order = mkInt 1 "Order in tray";
 
     custom-icons = mkOption {
       type = types.listOf (types.listOf types.str);
       default = [ ];
-      description = "Custom icons as list of [id, icon, path] tuples.";
+      description = "Custom icons as list of [id, icon, path] tuples";
       example = [
         [
           "skype"

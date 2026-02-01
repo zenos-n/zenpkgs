@@ -10,52 +10,114 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.mouse-tail;
 
-  # --- Helpers for Types ---
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
+  # --- Color Normalization Helpers ---
+  hexToDecMap = {
+    "0" = 0;
+    "1" = 1;
+    "2" = 2;
+    "3" = 3;
+    "4" = 4;
+    "5" = 5;
+    "6" = 6;
+    "7" = 7;
+    "8" = 8;
+    "9" = 9;
+    "a" = 10;
+    "b" = 11;
+    "c" = 12;
+    "d" = 13;
+    "e" = 14;
+    "f" = 15;
+    "A" = 10;
+    "B" = 11;
+    "C" = 12;
+    "D" = 13;
+    "E" = 14;
+    "F" = 15;
+  };
 
-  mkDouble =
-    default: description:
-    mkOption {
-      type = types.float;
-      default = default;
-      description = description;
-    };
+  hexCharToInt = c: if builtins.hasAttr c hexToDecMap then hexToDecMap.${c} else 0;
 
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
+  parseHexByte =
+    s: (hexCharToInt (builtins.substring 0 1 s) * 16) + (hexCharToInt (builtins.substring 1 1 s));
+
+  # Converts hex string to list of floats [R, G, B]
+  hexToRgbList =
+    val:
+    if builtins.isString val && (builtins.substring 0 1 val == "#") then
+      let
+        hex = lib.removePrefix "#" val;
+        r = (parseHexByte (substring 0 2 hex)) / 255.0;
+        g = (parseHexByte (substring 2 2 hex)) / 255.0;
+        b = (parseHexByte (substring 4 2 hex)) / 255.0;
+      in
+      [
+        r
+        g
+        b
+      ]
+    else
+      val;
 
 in
 {
+  meta = {
+    description = "Configures the Mouse Tail GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Mouse Tail** extension for GNOME.
+      It adds a customizable trail effect to the mouse cursor, which can be useful for
+      presentations or accessibility to locate the cursor easily.
+
+      **Features:**
+      - Customizable fade duration and line width.
+      - RGB color and transparency support.
+      - Performance tuning via rendering modes.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.mouse-tail = {
     enable = mkEnableOption "Mouse Tail GNOME extension configuration";
 
-    fade-duration = mkInt 200 "How long the trail takes to fade out in milliseconds.";
-    line-width = mkInt 8 "Thickness of the mouse trail line.";
+    fade-duration = mkOption {
+      type = types.int;
+      default = 200;
+      description = "How long the trail takes to fade out in milliseconds";
+    };
+
+    line-width = mkOption {
+      type = types.int;
+      default = 8;
+      description = "Thickness of the mouse trail line";
+    };
 
     color = mkOption {
-      type = types.listOf types.float;
+      type = types.either (types.listOf types.float) types.str;
       default = [
         1.0
         1.0
         1.0
       ];
-      description = "Color of the mouse trail as RGB values (list of doubles).";
+      description = "Color of the mouse trail. Accepts list of RGB floats ([1.0 0.0 0.0]) or Hex string ('#FF0000')";
     };
 
-    alpha = mkDouble 0.5 "Transparency level of the mouse trail (0.0 = transparent, 1.0 = opaque).";
+    alpha = mkOption {
+      type = types.float;
+      default = 0.5;
+      description = "Transparency level of the mouse trail (0.0 = transparent, 1.0 = opaque)";
+    };
 
-    render-mode = mkStr "precise" "Rendering mode: 'precise', 'balance', or 'fast'.";
+    render-mode = mkOption {
+      type = types.enum [
+        "precise"
+        "balance"
+        "fast"
+      ];
+      default = "precise";
+      description = "Rendering mode optimization";
+    };
   };
 
   # --- Implementation ---
@@ -68,7 +130,7 @@ in
           "org/gnome/shell/extensions/mouse-tail" = {
             fade-duration = cfg.fade-duration;
             line-width = cfg.line-width;
-            color = cfg.color;
+            color = hexToRgbList cfg.color;
             alpha = cfg.alpha;
             render-mode = cfg.render-mode;
           };

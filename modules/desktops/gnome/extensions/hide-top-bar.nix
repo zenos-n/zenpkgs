@@ -10,60 +10,117 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.hidetopbar;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkDouble =
-    default: description:
-    mkOption {
-      type = types.float;
-      default = default;
-      description = description;
-    };
-
 in
 {
+  meta = {
+    description = "Configures the Hide Top Bar GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Hide Top Bar** extension for GNOME.
+      It automatically hides the top bar to maximize screen space, showing it only
+      when the mouse approaches the edge or via keyboard shortcuts.
+
+      **Features:**
+      - Intelligent hiding (intellihide) when windows overlap the panel.
+      - Configurable mouse sensitivity and pressure barriers.
+      - Keyboard shortcuts to toggle visibility.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.hidetopbar = {
     enable = mkEnableOption "Hide Top Bar GNOME extension configuration";
 
-    hot-corner = mkBool false "Keep hot corner sensitive even when panel is hidden.";
-    mouse-sensitive = mkBool false "Show panel when mouse approaches edge of the screen.";
-    mouse-sensitive-fullscreen-window = mkBool true "Show panel when mouse approaches edge in fullscreen.";
-    mouse-triggers-overview = mkBool false "Show overview when mouse approaches edge (requires mouse-sensitive).";
-    keep-round-corners = mkBool false "Keep round corners on the top when panel is hidden.";
+    hot-corner = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Keep hot corner sensitive even when panel is hidden";
+    };
 
-    animation-time-overview = mkDouble 0.4 "Slide in/out animation time for overview.";
-    animation-time-autohide = mkDouble 0.2 "Slide in/out animation time for autohide.";
+    mouse-sensitive = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Show panel when mouse approaches edge of the screen";
+    };
 
-    pressure-threshold = mkInt 100 "Pressure barrier threshold (pixels).";
-    pressure-timeout = mkInt 1000 "Pressure barrier timeout (ms).";
+    mouse-sensitive-fullscreen-window = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Show panel when mouse approaches edge in fullscreen";
+    };
+
+    mouse-triggers-overview = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Show overview when mouse approaches edge (requires mouse-sensitive)";
+    };
+
+    keep-round-corners = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Keep round corners on the top when panel is hidden";
+    };
+
+    animation-time-overview = mkOption {
+      type = types.float;
+      default = 0.4;
+      description = "Slide in/out animation time for overview";
+    };
+
+    animation-time-autohide = mkOption {
+      type = types.float;
+      default = 0.2;
+      description = "Slide in/out animation time for autohide";
+    };
+
+    pressure-threshold = mkOption {
+      type = types.int;
+      default = 100;
+      description = "Pressure barrier threshold (pixels)";
+    };
+
+    pressure-timeout = mkOption {
+      type = types.int;
+      default = 1000;
+      description = "Pressure barrier timeout (ms)";
+    };
 
     shortcut-keybind = mkOption {
       type = types.listOf types.str;
       default = [ ];
-      description = "Keyboard shortcut that triggers the bar to be shown.";
+      description = "Keyboard shortcut that triggers the bar to be shown";
     };
 
-    shortcut-delay = mkDouble 1.0 "Delay before bar rehides automatically after key press (0.0 = unlimited).";
-    shortcut-toggles = mkBool true "Pressing the shortcut again rehides the panel.";
+    shortcut-delay = mkOption {
+      type = types.float;
+      default = 1.0;
+      description = "Delay before bar rehides automatically after key press (0.0 = unlimited)";
+    };
 
-    enable-intellihide = mkBool true "Panel only hides if a window takes the space.";
-    enable-active-window = mkBool true "Intellihide only triggers for active window.";
-    show-in-overview = mkBool true "Panel is visible in overview.";
+    shortcut-toggles = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Pressing the shortcut again rehides the panel";
+    };
+
+    enable-intellihide = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Panel only hides if a window takes the space";
+    };
+
+    enable-active-window = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Intellihide only triggers for active window";
+    };
+
+    show-in-overview = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Panel is visible in overview";
+    };
   };
 
   # --- Implementation ---

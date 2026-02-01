@@ -10,106 +10,416 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.just-perfection;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
 in
 {
+  meta = {
+    description = "Configures the Just Perfection GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Just Perfection** extension for GNOME.
+      It is a comprehensive "all-in-one" utility to customize GNOME Shell, allowing you to
+      tweak visibility of UI elements, adjust panel sizes, change behavior, and more.
+
+      **Features:**
+      - Extensive visibility controls for almost every shell element.
+      - Behavior tweaks (window focus, workspace wrapping).
+      - Positioning and sizing customizations.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.just-perfection = {
     enable = mkEnableOption "Just Perfection GNOME extension configuration";
 
     # --- Visibility ---
-    panel = mkBool true "Panel Visibility Status.";
-    panel-in-overview = mkBool false "Panel in Overview Visibility Status.";
-    background-menu = mkBool true "Background Menu Status.";
-    search = mkBool true "Search Box Visibility Status.";
-    workspace = mkBool true "Workspace Switcher Visibility Status.";
-    dash = mkBool true "Dash Visibility Status.";
-    osd = mkBool true "OSD Visibility Status.";
-    workspace-popup = mkBool true "Workspace Popup Visibility Status.";
-    theme = mkBool false "Theme Status.";
-    activities-button = mkBool true "Activities Button Visibility Status.";
-    clock-menu = mkBool true "Clock Menu Visibility Status.";
-    panel-notification-icon = mkBool true "Panel Notification Icon Visibility Status.";
-    keyboard-layout = mkBool true "Keyboard Layout Visibility Status.";
-    accessibility-menu = mkBool true "Accessibility Menu Visibility Status.";
-    quick-settings = mkBool true "Quick Settings Visibility Status.";
-    power-icon = mkBool true "Power Icon Visibility Status.";
-    window-picker-icon = mkBool true "Window Picker Icon Visiblity.";
-    show-apps-button = mkBool true "Show Apps Button Visiblity Status.";
-    workspaces-in-app-grid = mkBool true "Workspaces Visiblity in App Grid Status.";
-    workspace-switcher-should-show = mkBool false "Always Show Workspace Switcher Status.";
-    window-preview-caption = mkBool true "Window Preview Caption Status.";
-    window-preview-close-button = mkBool true "Window Preview Close Button Status.";
-    ripple-box = mkBool true "Ripple Box Status.";
-    world-clock = mkBool true "World Clock Visibility Status.";
-    weather = mkBool true "Weather Visibility Status.";
-    events-button = mkBool true "Events Button Visibility Status.";
-    calendar = mkBool true "Calendar Visibility Status.";
-    dash-separator = mkBool true "Dash Separator Visibility Status.";
-    window-menu = mkBool true "Window Menu Status.";
-    window-menu-take-screenshot-button = mkBool true "Window Menu Take Screenshot Button Visibility Status.";
-    screen-sharing-indicator = mkBool true "Screen Sharing Indicator Visibility Status.";
-    screen-recording-indicator = mkBool true "Screen Recording Indicator Visibility Status.";
-    dash-app-running = mkBool true "Dash app running dot visibility status.";
-    quick-settings-dark-mode = mkBool true "Dark Mode Toggle Button Visibility Status.";
-    quick-settings-night-light = mkBool true "Night Light Toggle Button Visibility Status.";
-    quick-settings-do-not-disturb = mkBool true "Do Not Disturb Toggle Button Visibility Status.";
-    quick-settings-backlight = mkBool true "Backlight Toggle Button Visibility Status.";
-    quick-settings-airplane-mode = mkBool true "Airplane Mode Toggle Button Visibility Status.";
+    visibility = {
+      panel = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Panel Visibility";
+      };
+      panel-in-overview = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Panel in Overview Visibility";
+      };
+      dash = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Dash Visibility";
+      };
+      dash-separator = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Dash Separator Visibility";
+      };
+      dash-app-running = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Dash app running dot visibility";
+      };
+      search = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Search Box Visibility";
+      };
+      workspace = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Workspace Switcher Visibility";
+      };
+      workspace-popup = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Workspace Popup Visibility";
+      };
+      workspaces-in-app-grid = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Workspaces Visibility in App Grid";
+      };
+      background-menu = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Background Menu Visibility";
+      };
+      osd = mkOption {
+        type = types.bool;
+        default = true;
+        description = "OSD Visibility";
+      };
+      activities-button = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Activities Button Visibility";
+      };
+      clock-menu = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Clock Menu Visibility";
+      };
+      keyboard-layout = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Keyboard Layout Visibility";
+      };
+      accessibility-menu = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Accessibility Menu Visibility";
+      };
+      power-icon = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Power Icon Visibility";
+      };
+      panel-notification-icon = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Panel Notification Icon Visibility";
+      };
+      window-picker-icon = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Window Picker Icon Visibility";
+      };
+      show-apps-button = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Show Apps Button Visibility";
+      };
+      theme = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Theme Visibility (Internal/Advanced)";
+      };
+      quick-settings = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Quick Settings Menu Visibility";
+      };
+      world-clock = mkOption {
+        type = types.bool;
+        default = true;
+        description = "World Clock Visibility";
+      };
+      weather = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Weather Visibility";
+      };
+      calendar = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Calendar Visibility";
+      };
+      events-button = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Events Button Visibility";
+      };
+      ripple-box = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Ripple Box Visibility (Hot Corner Effect)";
+      };
+      window-menu = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Window Menu Visibility";
+      };
+      window-menu-take-screenshot-button = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Window Menu Take Screenshot Button Visibility";
+      };
+      window-preview-caption = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Window Preview Caption Visibility";
+      };
+      window-preview-close-button = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Window Preview Close Button Visibility";
+      };
+      screen-sharing-indicator = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Screen Sharing Indicator Visibility";
+      };
+      screen-recording-indicator = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Screen Recording Indicator Visibility";
+      };
+    };
+
+    # --- Quick Settings Toggles ---
+    quick-settings = {
+      dark-mode = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Dark Mode Toggle Visibility";
+      };
+      night-light = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Night Light Toggle Visibility";
+      };
+      do-not-disturb = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Do Not Disturb Toggle Visibility";
+      };
+      backlight = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Backlight Slider Visibility";
+      };
+      airplane-mode = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Airplane Mode Toggle Visibility";
+      };
+    };
 
     # --- Behavior ---
-    type-to-search = mkBool true "Type to Search Behavior.";
-    window-demands-attention-focus = mkBool false "Window Demands Attention Focus Status.";
-    window-maximized-on-create = mkBool false "Window Maximized on Create Status.";
-    workspace-wrap-around = mkBool false "Workspace Wrap Around Status.";
-    double-super-to-appgrid = mkBool true "Double Supper To App Grid Status.";
-    overlay-key = mkBool true "Overlay Key to Overview Status.";
-    switcher-popup-delay = mkBool true "Removes the delay for all switcher popups.";
-    workspace-peek = mkBool true "Workspace Peek Status.";
-    accent-color-icon = mkBool false "Use Accent for Icons.";
-    workspace-thumbnail-to-main-view = mkBool false "Workspace Thumbnail Click to Main View.";
-    invert-calendar-column-items = mkBool false "Invert Calendar Column Items.";
+    behavior = {
+      workspace-switcher-always-show = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Always Show Workspace Switcher";
+      };
+      workspace-wrap-around = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Workspace Wrap Around";
+      };
+      workspace-peek = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Workspace Peek";
+      };
+      workspace-thumbnail-to-main-view = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Clicking Workspace Thumbnail switches to Main View";
+      };
+      window-demands-attention-focus = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Focus windows that demand attention immediately";
+      };
+      window-maximized-on-create = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Maximize new windows automatically";
+      };
+      type-to-search = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Type to Search in Overview";
+      };
+      double-super-to-appgrid = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Double press Super key to open App Grid";
+      };
+      overlay-key = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Use Overlay Key (Super) to open Overview";
+      };
+      switcher-popup-delay = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Disable delay for switcher popups (Alt-Tab)";
+      };
+      invert-calendar-column-items = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Invert Calendar Column Items order";
+      };
+    };
 
-    # --- Dimensions & Positioning ---
-    panel-corner-size = mkInt 0 "Panel Corner Size (0=theme, 1=no border, 2-61=size).";
-    workspace-switcher-size = mkInt 0 "Workspace Switcher Size in percent (0=default).";
-    top-panel-position = mkInt 0 "Top Panel Position Status (0-1).";
-    clock-menu-position = mkInt 0 "Clock Menu Position (0=center, 1=right, 2=left).";
-    clock-menu-position-offset = mkInt 0 "Clock Menu Position Offset (0-20).";
-    animation = mkInt 1 "Animation Speed (0=disabled, 1=default, 2-6=speed).";
-    dash-icon-size = mkInt 0 "Dash Icon Size (0=default).";
-    startup-status = mkInt 1 "Startup Status (0=desktop, 1=overview).";
-    notification-banner-position = mkInt 1 "Notification Banner Position (0-5).";
-    panel-size = mkInt 0 "Panel Size (0=theme, 1-64=pixels).";
-    panel-button-padding-size = mkInt 0 "Panel Button Padding Size (0=theme, 1=none, 2-61=size).";
-    panel-indicator-padding-size = mkInt 0 "Panel Indicator Padding Size (0=theme, 1=none, 2-61=size).";
-    workspace-background-corner-size = mkInt 0 "Workspace Background Corner Size (0=default, 1=none, 2-61=radius).";
-    panel-icon-size = mkInt 0 "Panel Icon Size (0=theme, 1-60=size).";
-    looking-glass-width = mkInt 0 "Looking Glass Width % (0=default).";
-    looking-glass-height = mkInt 0 "Looking Glass Height % (0=default).";
-    osd-position = mkInt 0 "OSD Position Status (0-9).";
-    alt-tab-window-preview-size = mkInt 0 "Alt Tab Window Preview Size (0=default).";
-    alt-tab-small-icon-size = mkInt 0 "Alt Tab Small Icon Size (0=default).";
-    alt-tab-icon-size = mkInt 0 "Alt Tab Icon Size (0=default).";
-    controls-manager-spacing-size = mkInt 0 "Controls manager spacing Size (0=default).";
-    max-displayed-search-results = mkInt 0 "Max Displayed Search Results (0=default).";
-    support-notifier-type = mkInt 1 "Support Notifier Type (0=Never, 1=New Releases).";
-    support-notifier-showed-version = mkInt 0 "The Last Version The Support Notifier Showed Up.";
+    # --- Appearance (Sizes & Icons) ---
+    appearance = {
+      accent-color-icon = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Use Accent Color for Icons";
+      };
+      panel-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Panel Size (0=theme default, 1-64=pixels)";
+      };
+      panel-icon-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Panel Icon Size (0=theme default, 1-60=pixels)";
+      };
+      panel-button-padding-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Panel Button Padding Size (0=theme, 1=none, 2-61=pixels)";
+      };
+      panel-indicator-padding-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Panel Indicator Padding Size (0=theme, 1=none, 2-61=pixels)";
+      };
+      panel-corner-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Panel Corner Size (0=theme, 1=no border, 2-61=radius)";
+      };
+      dash-icon-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Dash Icon Size (0=default)";
+      };
+      workspace-switcher-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Workspace Switcher Width % (0=default)";
+      };
+      workspace-background-corner-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Workspace Background Corner Size (0=default, 1=none, 2-61=radius)";
+      };
+      looking-glass-width = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Looking Glass Width % (0=default)";
+      };
+      looking-glass-height = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Looking Glass Height % (0=default)";
+      };
+      alt-tab-window-preview-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Alt Tab Window Preview Size (0=default)";
+      };
+      alt-tab-icon-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Alt Tab Icon Size (0=default)";
+      };
+      alt-tab-small-icon-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Alt Tab Small Icon Size (0=default)";
+      };
+      controls-manager-spacing-size = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Controls Manager Spacing Size (0=default)";
+      };
+      max-displayed-search-results = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Max Displayed Search Results (0=default)";
+      };
+    };
+
+    # --- Positioning ---
+    positioning = {
+      top-panel-position = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Top Panel Position (0=Top, 1=Bottom)";
+      };
+      clock-menu-position = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Clock Menu Position (0=Center, 1=Right, 2=Left)";
+      };
+      clock-menu-position-offset = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Clock Menu Position Offset (0-20)";
+      };
+      notification-banner-position = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Notification Banner Position (0-5, 1=Top Center)";
+      };
+      osd-position = mkOption {
+        type = types.int;
+        default = 0;
+        description = "OSD Position (0-9)";
+      };
+    };
+
+    # --- General ---
+    general = {
+      startup-status = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Startup State (0=Desktop, 1=Overview)";
+      };
+      animation = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Animation Speed (0=Disabled, 1=Default, 2=Fast, 3=Faster, 4=Fastest, 5=Slow, 6=Slower)";
+      };
+      support-notifier-type = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Support Notifier Type (0=Never, 1=New Releases)";
+      };
+      support-notifier-showed-version = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Last Version Support Notifier Showed";
+      };
+    };
   };
 
   # --- Implementation ---
@@ -121,83 +431,85 @@ in
         settings = {
           "org/gnome/shell/extensions/just-perfection" = {
             # Visibility
-            panel = cfg.panel;
-            panel-in-overview = cfg.panel-in-overview;
-            background-menu = cfg.background-menu;
-            search = cfg.search;
-            workspace = cfg.workspace;
-            dash = cfg.dash;
-            osd = cfg.osd;
-            workspace-popup = cfg.workspace-popup;
-            theme = cfg.theme;
-            activities-button = cfg.activities-button;
-            clock-menu = cfg.clock-menu;
-            panel-notification-icon = cfg.panel-notification-icon;
-            keyboard-layout = cfg.keyboard-layout;
-            accessibility-menu = cfg.accessibility-menu;
-            quick-settings = cfg.quick-settings;
-            power-icon = cfg.power-icon;
-            window-picker-icon = cfg.window-picker-icon;
-            show-apps-button = cfg.show-apps-button;
-            workspaces-in-app-grid = cfg.workspaces-in-app-grid;
-            workspace-switcher-should-show = cfg.workspace-switcher-should-show;
-            window-preview-caption = cfg.window-preview-caption;
-            window-preview-close-button = cfg.window-preview-close-button;
-            ripple-box = cfg.ripple-box;
-            world-clock = cfg.world-clock;
-            weather = cfg.weather;
-            events-button = cfg.events-button;
-            calendar = cfg.calendar;
-            dash-separator = cfg.dash-separator;
-            window-menu = cfg.window-menu;
-            window-menu-take-screenshot-button = cfg.window-menu-take-screenshot-button;
-            screen-sharing-indicator = cfg.screen-sharing-indicator;
-            screen-recording-indicator = cfg.screen-recording-indicator;
-            dash-app-running = cfg.dash-app-running;
-            quick-settings-dark-mode = cfg.quick-settings-dark-mode;
-            quick-settings-night-light = cfg.quick-settings-night-light;
-            quick-settings-do-not-disturb = cfg.quick-settings-do-not-disturb;
-            quick-settings-backlight = cfg.quick-settings-backlight;
-            quick-settings-airplane-mode = cfg.quick-settings-airplane-mode;
+            panel = cfg.visibility.panel;
+            panel-in-overview = cfg.visibility.panel-in-overview;
+            background-menu = cfg.visibility.background-menu;
+            search = cfg.visibility.search;
+            workspace = cfg.visibility.workspace;
+            dash = cfg.visibility.dash;
+            osd = cfg.visibility.osd;
+            workspace-popup = cfg.visibility.workspace-popup;
+            theme = cfg.visibility.theme;
+            activities-button = cfg.visibility.activities-button;
+            clock-menu = cfg.visibility.clock-menu;
+            panel-notification-icon = cfg.visibility.panel-notification-icon;
+            keyboard-layout = cfg.visibility.keyboard-layout;
+            accessibility-menu = cfg.visibility.accessibility-menu;
+            quick-settings = cfg.visibility.quick-settings;
+            power-icon = cfg.visibility.power-icon;
+            window-picker-icon = cfg.visibility.window-picker-icon;
+            show-apps-button = cfg.visibility.show-apps-button;
+            workspaces-in-app-grid = cfg.visibility.workspaces-in-app-grid;
+            workspace-switcher-should-show = cfg.behavior.workspace-switcher-always-show;
+            window-preview-caption = cfg.visibility.window-preview-caption;
+            window-preview-close-button = cfg.visibility.window-preview-close-button;
+            ripple-box = cfg.visibility.ripple-box;
+            world-clock = cfg.visibility.world-clock;
+            weather = cfg.visibility.weather;
+            events-button = cfg.visibility.events-button;
+            calendar = cfg.visibility.calendar;
+            dash-separator = cfg.visibility.dash-separator;
+            window-menu = cfg.visibility.window-menu;
+            window-menu-take-screenshot-button = cfg.visibility.window-menu-take-screenshot-button;
+            screen-sharing-indicator = cfg.visibility.screen-sharing-indicator;
+            screen-recording-indicator = cfg.visibility.screen-recording-indicator;
+            dash-app-running = cfg.visibility.dash-app-running;
+
+            # Quick Settings
+            quick-settings-dark-mode = cfg.quick-settings.dark-mode;
+            quick-settings-night-light = cfg.quick-settings.night-light;
+            quick-settings-do-not-disturb = cfg.quick-settings.do-not-disturb;
+            quick-settings-backlight = cfg.quick-settings.backlight;
+            quick-settings-airplane-mode = cfg.quick-settings.airplane-mode;
 
             # Behavior
-            type-to-search = cfg.type-to-search;
-            window-demands-attention-focus = cfg.window-demands-attention-focus;
-            window-maximized-on-create = cfg.window-maximized-on-create;
-            workspace-wrap-around = cfg.workspace-wrap-around;
-            double-super-to-appgrid = cfg.double-super-to-appgrid;
-            overlay-key = cfg.overlay-key;
-            switcher-popup-delay = cfg.switcher-popup-delay;
-            workspace-peek = cfg.workspace-peek;
-            accent-color-icon = cfg.accent-color-icon;
-            workspace-thumbnail-to-main-view = cfg.workspace-thumbnail-to-main-view;
-            invert-calendar-column-items = cfg.invert-calendar-column-items;
+            type-to-search = cfg.behavior.type-to-search;
+            window-demands-attention-focus = cfg.behavior.window-demands-attention-focus;
+            window-maximized-on-create = cfg.behavior.window-maximized-on-create;
+            workspace-wrap-around = cfg.behavior.workspace-wrap-around;
+            double-super-to-appgrid = cfg.behavior.double-super-to-appgrid;
+            overlay-key = cfg.behavior.overlay-key;
+            switcher-popup-delay = cfg.behavior.switcher-popup-delay;
+            workspace-peek = cfg.behavior.workspace-peek;
+            accent-color-icon = cfg.appearance.accent-color-icon;
+            workspace-thumbnail-to-main-view = cfg.behavior.workspace-thumbnail-to-main-view;
+            invert-calendar-column-items = cfg.behavior.invert-calendar-column-items;
 
             # Dimensions & Positioning
-            panel-corner-size = cfg.panel-corner-size;
-            workspace-switcher-size = cfg.workspace-switcher-size;
-            top-panel-position = cfg.top-panel-position;
-            clock-menu-position = cfg.clock-menu-position;
-            clock-menu-position-offset = cfg.clock-menu-position-offset;
-            animation = cfg.animation;
-            dash-icon-size = cfg.dash-icon-size;
-            startup-status = cfg.startup-status;
-            notification-banner-position = cfg.notification-banner-position;
-            panel-size = cfg.panel-size;
-            panel-button-padding-size = cfg.panel-button-padding-size;
-            panel-indicator-padding-size = cfg.panel-indicator-padding-size;
-            workspace-background-corner-size = cfg.workspace-background-corner-size;
-            panel-icon-size = cfg.panel-icon-size;
-            looking-glass-width = cfg.looking-glass-width;
-            looking-glass-height = cfg.looking-glass-height;
-            osd-position = cfg.osd-position;
-            alt-tab-window-preview-size = cfg.alt-tab-window-preview-size;
-            alt-tab-small-icon-size = cfg.alt-tab-small-icon-size;
-            alt-tab-icon-size = cfg.alt-tab-icon-size;
-            controls-manager-spacing-size = cfg.controls-manager-spacing-size;
-            max-displayed-search-results = cfg.max-displayed-search-results;
-            support-notifier-type = cfg.support-notifier-type;
-            support-notifier-showed-version = cfg.support-notifier-showed-version;
+            panel-corner-size = cfg.appearance.panel-corner-size;
+            workspace-switcher-size = cfg.appearance.workspace-switcher-size;
+            top-panel-position = cfg.positioning.top-panel-position;
+            clock-menu-position = cfg.positioning.clock-menu-position;
+            clock-menu-position-offset = cfg.positioning.clock-menu-position-offset;
+            animation = cfg.general.animation;
+            dash-icon-size = cfg.appearance.dash-icon-size;
+            startup-status = cfg.general.startup-status;
+            notification-banner-position = cfg.positioning.notification-banner-position;
+            panel-size = cfg.appearance.panel-size;
+            panel-button-padding-size = cfg.appearance.panel-button-padding-size;
+            panel-indicator-padding-size = cfg.appearance.panel-indicator-padding-size;
+            workspace-background-corner-size = cfg.appearance.workspace-background-corner-size;
+            panel-icon-size = cfg.appearance.panel-icon-size;
+            looking-glass-width = cfg.appearance.looking-glass-width;
+            looking-glass-height = cfg.appearance.looking-glass-height;
+            osd-position = cfg.positioning.osd-position;
+            alt-tab-window-preview-size = cfg.appearance.alt-tab-window-preview-size;
+            alt-tab-small-icon-size = cfg.appearance.alt-tab-small-icon-size;
+            alt-tab-icon-size = cfg.appearance.alt-tab-icon-size;
+            controls-manager-spacing-size = cfg.appearance.controls-manager-spacing-size;
+            max-displayed-search-results = cfg.appearance.max-displayed-search-results;
+            support-notifier-type = cfg.general.support-notifier-type;
+            support-notifier-showed-version = cfg.general.support-notifier-showed-version;
           };
         };
       }

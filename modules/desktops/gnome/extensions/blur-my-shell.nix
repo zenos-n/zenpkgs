@@ -1,11 +1,7 @@
-# the comments may look AI-generated
-# this is because i used an ai to convert my original home manager module into a nixos module
-# i didn't export the thinking to AI
-# just the boring parts
 {
+  config,
   pkgs,
   lib,
-  config,
   ...
 }:
 
@@ -14,73 +10,7 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.blur-my-shell;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkDouble =
-    default: description:
-    mkOption {
-      type = types.float;
-      default = default;
-      description = description;
-    };
-
-  mkColor =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  # --- Pipeline & Effect Submodules ---
-  pipelineSubmodule = types.submodule {
-    options = {
-      name = mkOption {
-        type = types.str;
-        description = "Human readable name of the pipeline.";
-      };
-      effects = mkOption {
-        type = types.listOf types.attrs;
-        default = [ ];
-        description = "List of effects. Supports simplified syntax (e.g. { blur.gaussian = { ... }; }).";
-      };
-    };
-  };
-
-  # --- Shared Options ---
-  commonBlurOptions = {
-    blur = mkBool true "Whether to activate blur for this component.";
-    customize = mkBool false "Whether to customize sigma/brightness or use global values.";
-    sigma = mkInt 30 "Gaussian sigma (blur strength).";
-    brightness = mkDouble 0.6 "Brightness of the blur effect.";
-    color = mkColor "(0.0,0.0,0.0,0.0)" "Color to mix with the blur (GVariant tuple string).";
-    noise-amount = mkDouble 0.0 "Amount of noise to add.";
-    noise-lightness = mkDouble 0.0 "Lightness of the noise.";
-  };
-
-  mkComponent =
-    extraOptions:
-    types.submodule {
-      options = commonBlurOptions // extraOptions;
-    };
-
   # --- GVariant Serialization Logic ---
-
   mkVariant = v: "<${v}>";
   mkString = v: "'${v}'";
 
@@ -175,25 +105,139 @@ let
     )
   }}";
 
+  # --- Shared Options Helpers ---
+  # These are used to construct the submodules consistently
+  commonBlurOptions = {
+    blur = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Whether to activate blur for this component";
+    };
+    customize = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to customize sigma/brightness or use global values";
+    };
+    sigma = mkOption {
+      type = types.int;
+      default = 30;
+      description = "Gaussian sigma (blur strength)";
+    };
+    brightness = mkOption {
+      type = types.float;
+      default = 0.6;
+      description = "Brightness of the blur effect";
+    };
+    color = mkOption {
+      type = types.str;
+      default = "(0.0,0.0,0.0,0.0)";
+      description = "Color to mix with the blur (GVariant tuple string)";
+    };
+    noise-amount = mkOption {
+      type = types.float;
+      default = 0.0;
+      description = "Amount of noise to add";
+    };
+    noise-lightness = mkOption {
+      type = types.float;
+      default = 0.0;
+      description = "Lightness of the noise";
+    };
+  };
+
+  mkComponent =
+    extraOptions:
+    types.submodule {
+      options = commonBlurOptions // extraOptions;
+    };
+
+  pipelineSubmodule = types.submodule {
+    options = {
+      name = mkOption {
+        type = types.str;
+        description = "Human readable name of the pipeline";
+      };
+      effects = mkOption {
+        type = types.listOf types.attrs;
+        default = [ ];
+        description = "List of effects. Supports simplified syntax (e.g. { blur.gaussian = { ... }; })";
+      };
+    };
+  };
+
 in
 {
+  meta = {
+    description = "Configures the Blur My Shell GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Blur My Shell** extension for GNOME.
+      It adds a blur look to different parts of the GNOME Shell, including the top panel,
+      dash, overview, and applications.
+
+      **Features:**
+      - Global blur settings (sigma, brightness, noise).
+      - Per-component configuration (Panel, Dock, Overview, Lockscreen).
+      - Advanced pipeline support for custom effects.
+      - Application whitelist/blacklist.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.blur-my-shell = {
     enable = mkEnableOption "Blur My Shell GNOME extension configuration";
 
     # --- General Settings ---
     general = {
-      settings-version = mkInt 1 "Settings version.";
-      sigma = mkInt 30 "Global gaussian sigma.";
-      brightness = mkDouble 0.6 "Global brightness.";
-      color = mkColor "(0.0,0.0,0.0,0.0)" "Global color mix.";
-      noise-amount = mkDouble 0.0 "Global noise amount.";
-      noise-lightness = mkDouble 0.0 "Global noise lightness.";
-      color-and-noise = mkBool true "Whether color and noise effects are used globally.";
-      hacks-level = mkInt 1 "Level of hacks to use (0-2).";
-      debug = mkBool false "Enable verbose logging.";
+      settings-version = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Settings version";
+      };
+      sigma = mkOption {
+        type = types.int;
+        default = 30;
+        description = "Global gaussian sigma";
+      };
+      brightness = mkOption {
+        type = types.float;
+        default = 0.6;
+        description = "Global brightness";
+      };
+      color = mkOption {
+        type = types.str;
+        default = "(0.0,0.0,0.0,0.0)";
+        description = "Global color mix";
+      };
+      noise-amount = mkOption {
+        type = types.float;
+        default = 0.0;
+        description = "Global noise amount";
+      };
+      noise-lightness = mkOption {
+        type = types.float;
+        default = 0.0;
+        description = "Global noise lightness";
+      };
+      color-and-noise = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Whether color and noise effects are used globally";
+      };
+      hacks-level = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Level of hacks to use (0-2)";
+      };
+      debug = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Enable verbose logging";
+      };
 
       pipelines = mkOption {
-        description = "Pipeline definitions.";
+        description = "Pipeline definitions";
         type = types.attrsOf pipelineSubmodule;
         default = { };
       };
@@ -202,69 +246,140 @@ in
     # --- Components ---
 
     overview = mkOption {
-      description = "Overview configuration.";
+      description = "Overview configuration";
       type = mkComponent {
         pipeline = mkOption {
           type = types.str;
           default = "pipeline_default";
+          description = "Pipeline to use for overview";
         };
-        style-components = mkInt 1 "Style of components (0: none, 1: light, 2: dark, 3: transparent).";
+        style-components = mkOption {
+          type = types.int;
+          default = 1;
+          description = "Style of components (0: none, 1: light, 2: dark, 3: transparent)";
+        };
       };
       default = { };
     };
 
     appfolder = mkOption {
-      description = "Appfolder configuration.";
+      description = "Appfolder configuration";
       type = mkComponent {
-        style-dialogs = mkInt 1 "Style of dialogs (0: none, 1: transparent, 2: light, 3: dark).";
+        style-dialogs = mkOption {
+          type = types.int;
+          default = 1;
+          description = "Style of dialogs (0: none, 1: transparent, 2: light, 3: dark)";
+        };
       };
       default = { };
     };
 
     panel = mkOption {
-      description = "Top Panel configuration.";
+      description = "Top Panel configuration";
       type = mkComponent {
         pipeline = mkOption {
           type = types.str;
           default = "pipeline_default";
+          description = "Pipeline to use for panel";
         };
-        static-blur = mkBool true "Use static blur.";
-        unblur-in-overview = mkBool true "Disable blur in overview.";
-        force-light-text = mkBool false "Force light text on panel.";
-        override-background = mkBool true "Override panel background.";
-        style-panel = mkInt 0 "Panel style (0: transparent, 1: light, 2: dark, 3: contrasted).";
-        override-background-dynamically = mkBool false "Dynamically unblur when windows approach.";
+        static-blur = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Use static blur";
+        };
+        unblur-in-overview = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Disable blur in overview";
+        };
+        force-light-text = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Force light text on panel";
+        };
+        override-background = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Override panel background";
+        };
+        style-panel = mkOption {
+          type = types.int;
+          default = 0;
+          description = "Panel style (0: transparent, 1: light, 2: dark, 3: contrasted)";
+        };
+        override-background-dynamically = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Dynamically unblur when windows approach";
+        };
       };
       default = { };
     };
 
     dash-to-dock = mkOption {
-      description = "Dash to Dock integration.";
+      description = "Dash to Dock integration";
       type = mkComponent {
         pipeline = mkOption {
           type = types.str;
           default = "pipeline_default_rounded";
+          description = "Pipeline to use for Dash to Dock";
         };
-        static-blur = mkBool true "Use static blur.";
-        override-background = mkBool true "Override background.";
-        style-dash-to-dock = mkInt 0 "Style (0: transparent, 1: light, 2: dark).";
-        unblur-in-overview = mkBool false "Unblur in overview.";
-        corner-radius = mkInt 12 "Corner radius for rounding effect.";
+        static-blur = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Use static blur";
+        };
+        override-background = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Override background";
+        };
+        style-dash-to-dock = mkOption {
+          type = types.int;
+          default = 0;
+          description = "Style (0: transparent, 1: light, 2: dark)";
+        };
+        unblur-in-overview = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Unblur in overview";
+        };
+        corner-radius = mkOption {
+          type = types.int;
+          default = 12;
+          description = "Corner radius for rounding effect";
+        };
       };
       default = { };
     };
 
     applications = mkOption {
-      description = "Per-application blur configuration.";
+      description = "Per-application blur configuration";
       type = mkComponent {
-        opacity = mkInt 215 "Opacity of window actor.";
-        dynamic-opacity = mkBool true "Make focused window opaque.";
-        blur-on-overview = mkBool false "Blur applications in overview.";
-        enable-all = mkBool false "Blur all applications by default.";
+        opacity = mkOption {
+          type = types.int;
+          default = 215;
+          description = "Opacity of window actor";
+        };
+        dynamic-opacity = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Make focused window opaque";
+        };
+        blur-on-overview = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Blur applications in overview";
+        };
+        enable-all = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Blur all applications by default";
+        };
         whitelist = mkOption {
           type = types.listOf types.str;
           default = [ ];
-          description = "Apps to always blur.";
+          description = "Apps to always blur";
         };
         blacklist = mkOption {
           type = types.listOf types.str;
@@ -273,7 +388,7 @@ in
             "com.desktop.ding"
             "Conky"
           ];
-          description = "Apps to never blur.";
+          description = "Apps to never blur";
         };
       };
       default = {
@@ -284,46 +399,54 @@ in
     };
 
     screenshot = mkOption {
-      description = "Screenshot UI configuration.";
+      description = "Screenshot UI configuration";
       type = mkComponent {
         pipeline = mkOption {
           type = types.str;
           default = "pipeline_default";
+          description = "Pipeline to use for screenshot UI";
         };
       };
       default = { };
     };
 
     lockscreen = mkOption {
-      description = "Lockscreen configuration.";
+      description = "Lockscreen configuration";
       type = mkComponent {
         pipeline = mkOption {
           type = types.str;
           default = "pipeline_default";
+          description = "Pipeline to use for lockscreen";
         };
       };
       default = { };
     };
 
     window-list = mkOption {
-      description = "Window List extension integration.";
+      description = "Window List extension integration";
       type = mkComponent {
         pipeline = mkOption {
           type = types.str;
           default = "pipeline_default";
+          description = "Pipeline to use for window list";
         };
       };
       default = { };
     };
 
     coverflow-alt-tab = mkOption {
-      description = "Coverflow Alt-Tab integration.";
+      description = "Coverflow Alt-Tab integration";
       type = types.submodule {
         options = {
-          blur = mkBool true "Enable blur.";
+          blur = mkOption {
+            type = types.bool;
+            default = true;
+            description = "Enable blur";
+          };
           pipeline = mkOption {
             type = types.str;
             default = "pipeline_default";
+            description = "Pipeline to use for coverflow";
           };
         };
       };
@@ -331,20 +454,28 @@ in
     };
 
     hidetopbar = mkOption {
-      description = "Hide Top Bar integration.";
+      description = "Hide Top Bar integration";
       type = types.submodule {
         options = {
-          compatibility = mkBool false "Try compatibility with hidetopbar extension.";
+          compatibility = mkOption {
+            type = types.bool;
+            default = false;
+            description = "Try compatibility with hidetopbar extension";
+          };
         };
       };
       default = { };
     };
 
     dash-to-panel = mkOption {
-      description = "Dash to Panel integration.";
+      description = "Dash to Panel integration";
       type = types.submodule {
         options = {
-          blur-original-panel = mkBool true "Blur original panel with Dash to Panel.";
+          blur-original-panel = mkOption {
+            type = types.bool;
+            default = true;
+            description = "Blur original panel with Dash to Panel";
+          };
         };
       };
       default = { };
@@ -355,6 +486,7 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.blur-my-shell ];
+
     # Using NixOS standard programs.dconf to set user defaults for simple types
     programs.dconf.profiles.user.databases = [
       {

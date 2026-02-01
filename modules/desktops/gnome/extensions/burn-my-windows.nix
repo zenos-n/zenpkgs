@@ -10,31 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.burn-my-windows;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
   # --- INI/Conf Serialization Logic ---
 
   # Ensure floats always have a decimal point (0 -> "0.0")
@@ -68,29 +43,72 @@ let
 
 in
 {
+  meta = {
+    description = "Configures the Burn My Windows GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Burn My Windows** extension for GNOME.
+      It adds retro-style window opening and closing effects, such as fire, tv-glitch, and hexagon.
+
+      **Features:**
+      - Configure active effects and profiles.
+      - Generate custom Nix-managed effect profiles.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.burn-my-windows = {
     enable = mkEnableOption "Burn My Windows GNOME extension configuration";
 
     # --- Schema Options ---
 
-    active-profile = mkStr "" "The currently active effect profile. (Overridden if 'settings' is used).";
+    active-profile = mkOption {
+      type = types.str;
+      default = "";
+      description = "The currently active effect profile (Overridden if 'settings' is used)";
+    };
 
-    preview-effect = mkStr "" "The effect with this nick will be used for the next window animation.";
+    preview-effect = mkOption {
+      type = types.str;
+      default = "";
+      description = "The effect with this nick will be used for the next window animation";
+    };
 
-    test-mode = mkBool false "If set to true, all animations will show only one still frame.";
+    test-mode = mkOption {
+      type = types.bool;
+      default = false;
+      description = "If set to true, all animations will show only one still frame";
+    };
 
-    show-support-dialog = mkBool true "If set to false, the ask-for-support dialog will never be shown.";
+    show-support-dialog = mkOption {
+      type = types.bool;
+      default = true;
+      description = "If set to false, the ask-for-support dialog will never be shown";
+    };
 
-    last-prefs-version = mkInt 0 "Used to check whether the extension got updated from the preferences dialog.";
+    last-prefs-version = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Used to check whether the extension got updated from the preferences dialog";
+    };
 
-    last-extension-version = mkInt 0 "Used to check whether the extension got updated from the extension side.";
+    last-extension-version = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Used to check whether the extension got updated from the extension side";
+    };
 
-    prefs-open-count = mkInt 0 "The number of times the settings dialog was opened.";
+    prefs-open-count = mkOption {
+      type = types.int;
+      default = 0;
+      description = "The number of times the settings dialog was opened";
+    };
 
     # --- Profile Generation Options ---
 
     settings = mkOption {
-      description = "Effect settings for the managed profile. Generates ~/.config/burn-my-windows/profiles/nix-managed.conf.";
+      description = "Effect settings for the managed profile. Generates ~/.config/burn-my-windows/profiles/nix-managed.conf";
       type = types.attrsOf (
         types.either types.bool (types.either types.int (types.either types.float types.str))
       );

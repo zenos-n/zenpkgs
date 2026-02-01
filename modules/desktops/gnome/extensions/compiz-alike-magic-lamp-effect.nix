@@ -10,37 +10,49 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.compiz-alike-magic-lamp-effect;
 
-  # --- Helpers for Types ---
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  mkDouble =
-    default: description:
-    mkOption {
-      type = types.float;
-      default = default;
-      description = description;
-    };
-
 in
 {
+  meta = {
+    description = "Configures the Compiz Alike Magic Lamp Effect GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Compiz Alike Magic Lamp Effect** extension for GNOME.
+      It recreates the classic "Magic Lamp" window minimization effect found in Compiz and macOS.
+
+      **Features:**
+      - Configurable animation duration.
+      - Adjustable grid density (tiles) for smoother or faster animations.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.compiz-alike-magic-lamp-effect = {
     enable = mkEnableOption "Compiz Alike Magic Lamp Effect GNOME extension configuration";
 
-    # --- Schema Options ---
+    effect = mkOption {
+      type = types.str;
+      default = "default";
+      description = "Effect type to apply";
+    };
 
-    effect = mkStr "default" "Effect";
+    duration = mkOption {
+      type = types.float;
+      default = 400.0;
+      description = "Animation duration in milliseconds";
+    };
 
-    duration = mkDouble 400.0 "Duration";
+    x-tiles = mkOption {
+      type = types.float;
+      default = 10.0;
+      description = "Number of horizontal tiles for the mesh";
+    };
 
-    x-tiles = mkDouble 10.0 "X Tiles";
-
-    y-tiles = mkDouble 10.0 "Y Tiles";
+    y-tiles = mkOption {
+      type = types.float;
+      default = 10.0;
+      description = "Number of vertical tiles for the mesh";
+    };
   };
 
   config = mkIf cfg.enable {

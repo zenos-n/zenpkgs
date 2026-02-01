@@ -3,34 +3,55 @@
   config,
   ...
 }:
+
 let
   cfg = config.zenos.desktops.gnome.tweaks.zenosExtensions;
 
   # Helper to check if an extension name is NOT in the exclusion list
-  isAllowed =
-    name: !(lib.elem name config.zenos.desktops.gnome.tweaks.zenosExtensions.excludedExtensions);
+  isAllowed = name: !(lib.elem name cfg.options.excludedExtensions);
 in
 {
+  meta = {
+    description = "Configures the curated ZenOS GNOME extension set";
+    longDescription = ''
+      This module manages the installation and configuration of the curated set of
+      GNOME extensions for ZenOS. It provides a single toggle to enable a cohesive
+      desktop experience and allows excluding specific extensions if needed.
+
+      **Includes configuration for:**
+      - Visual effects (Burn My Windows, Compiz effects)
+      - Shell enhancements (Blur My Shell, App Hider)
+      - Utilities (Clipboard Indicator, Forge)
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.tweaks.zenosExtensions = {
-    enable = lib.mkEnableOption "Enable the curated ZenOS GNOME extension set.";
+    enable = lib.mkEnableOption "Enable the curated ZenOS GNOME extension set";
+
     options = {
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
-        description = "Enable installation of curated ZenOS GNOME extensions.";
+        description = "Enable installation of curated ZenOS GNOME extensions";
       };
+
       excludedExtensions = lib.mkOption {
         type = lib.types.listOf lib.types.str;
         default = [ ];
-        description = "List of curated ZenOS GNOME extensions to exclude from installation (by name, e.g. \"user-themes\").";
+        description = "List of curated ZenOS GNOME extensions to exclude from installation (by name, e.g. \"user-themes\")";
       };
-      extensionConfig.enable = lib.mkOption {
-        type = lib.types.bool;
-        default = true;
-        description = "Default ZenOS extension settings.";
+
+      extensionConfig = {
+        enable = lib.mkOption {
+          type = lib.types.bool;
+          default = true;
+          description = "Default ZenOS extension settings";
+        };
       };
     };
-
   };
 
   config = lib.mkIf cfg.enable {
@@ -60,7 +81,7 @@ in
         blur-my-shell.enable = isAllowed "blur-my-shell";
       }
 
-      (lib.mkIf cfg.extensionConfig.enable {
+      (lib.mkIf cfg.options.extensionConfig.enable {
 
         app-hider.hidden-apps = [ "vesktop.desktop" ];
 

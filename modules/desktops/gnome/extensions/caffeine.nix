@@ -10,77 +10,169 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.caffeine;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  mkOptionStrList =
-    default: description:
-    mkOption {
-      type = types.listOf types.str;
-      default = default;
-      description = description;
-    };
-
-  mkOptionIntList =
-    default: description:
-    mkOption {
-      type = types.listOf types.int;
-      default = default;
-      description = description;
-    };
-
 in
 {
+  meta = {
+    description = "Configures the Caffeine GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Caffeine** extension for GNOME.
+      It allows users to temporarily disable the screensaver and auto-suspend modes.
+
+      **Features:**
+      - Quick settings toggle.
+      - Automatic activation for fullscreen apps or specific running applications.
+      - Configurable timer and duration settings.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.caffeine = {
     enable = mkEnableOption "Caffeine GNOME extension configuration";
 
-    inhibit-apps = mkOptionStrList [ ] "List of applications to inhibit (desktop file names).";
-    user-enabled = mkBool false "Store caffeine user state.";
-    duration-timer-list = mkOptionIntList [ 900 1800 3600 ] "List of duration timer values (seconds).";
-    use-custom-duration = mkBool false "Use custom duration values for the timer.";
-    countdown-timer = mkInt 0 "Time (seconds) for the timer countdown.";
-    duration-timer = mkInt 2 "Index of duration range for the timer.";
-    restore-state = mkBool false "Restore caffeine state.";
-    show-indicator = mkStr "only-active" "Show indicator: 'only-active', 'always', or 'never'.";
-    show-notifications = mkBool true "Show notifications when enabled/disabled.";
-    show-timer = mkBool true "Show timer when enabled/disabled.";
-    show-toggle = mkBool true "Show the quick settings toggle.";
-    enable-fullscreen = mkBool true "Enable when a fullscreen application is running.";
-    enable-mpris = mkBool false "Enable when an application is playing media.";
-    nightlight-control = mkStr "never" "Night Light control mode: 'never', 'always', 'for-apps'.";
-    screen-blank = mkStr "never" "Allow screen blank: 'never', 'always', 'for-apps'.";
-    trigger-apps-mode = mkStr "on-running" "Trigger App control mode: 'on-running', 'on-focus', 'on-active-workspace'.";
-    toggle-shortcut = mkOptionStrList [ ] "Shortcut to toggle Caffeine.";
+    inhibit-apps = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "List of applications to inhibit (desktop file names)";
+    };
+
+    user-enabled = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Store caffeine user state";
+    };
+
+    duration-timer-list = mkOption {
+      type = types.listOf types.int;
+      default = [
+        900
+        1800
+        3600
+      ];
+      description = "List of duration timer values (seconds)";
+    };
+
+    use-custom-duration = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Use custom duration values for the timer";
+    };
+
+    countdown-timer = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Time (seconds) for the timer countdown";
+    };
+
+    duration-timer = mkOption {
+      type = types.int;
+      default = 2;
+      description = "Index of duration range for the timer";
+    };
+
+    restore-state = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Restore caffeine state";
+    };
+
+    show-indicator = mkOption {
+      type = types.str;
+      default = "only-active";
+      description = "Show indicator: 'only-active', 'always', or 'never'";
+    };
+
+    show-notifications = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Show notifications when enabled/disabled";
+    };
+
+    show-timer = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Show timer when enabled/disabled";
+    };
+
+    show-toggle = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Show the quick settings toggle";
+    };
+
+    enable-fullscreen = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable when a fullscreen application is running";
+    };
+
+    enable-mpris = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable when an application is playing media";
+    };
+
+    nightlight-control = mkOption {
+      type = types.str;
+      default = "never";
+      description = "Night Light control mode: 'never', 'always', 'for-apps'";
+    };
+
+    screen-blank = mkOption {
+      type = types.str;
+      default = "never";
+      description = "Allow screen blank: 'never', 'always', 'for-apps'";
+    };
+
+    trigger-apps-mode = mkOption {
+      type = types.str;
+      default = "on-running";
+      description = "Trigger App control mode: 'on-running', 'on-focus', 'on-active-workspace'";
+    };
+
+    toggle-shortcut = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Shortcut to toggle Caffeine";
+    };
 
     # UI Preferences (Hidden/Advanced)
-    prefs-default-width = mkInt 570 "Default width for the preferences window.";
-    prefs-default-height = mkInt 590 "Default height for the preferences window.";
-    indicator-position = mkInt 0 "Visible position offset of status icon in indicator menu.";
-    indicator-position-index = mkInt 0 "Real position offset of status icon in indicator menu.";
-    indicator-position-max = mkInt 1 "Last item index in indicator menu.";
-    cli-toggle = mkBool false "Command line key to toggle state.";
+    prefs-default-width = mkOption {
+      type = types.int;
+      default = 570;
+      description = "Default width for the preferences window";
+    };
+
+    prefs-default-height = mkOption {
+      type = types.int;
+      default = 590;
+      description = "Default height for the preferences window";
+    };
+
+    indicator-position = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Visible position offset of status icon in indicator menu";
+    };
+
+    indicator-position-index = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Real position offset of status icon in indicator menu";
+    };
+
+    indicator-position-max = mkOption {
+      type = types.int;
+      default = 1;
+      description = "Last item index in indicator menu";
+    };
+
+    cli-toggle = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Command line key to toggle state";
+    };
   };
 
   # --- Implementation ---

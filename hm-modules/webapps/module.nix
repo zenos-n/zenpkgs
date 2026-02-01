@@ -5,9 +5,21 @@
   ...
 }:
 
-with lib;
-
 let
+  inherit (lib)
+    mkIf
+    mkOption
+    mkEnableOption
+    types
+    mapAttrs
+    mapAttrsToList
+    optionalString
+    optionalAttrs
+    concatStrings
+    concatMapStrings
+    concatStringsSep
+    ;
+
   cfg = config.zenos.webApps;
 
   # --- Submodules Definition ---
@@ -16,11 +28,12 @@ let
     options = {
       id = mkOption {
         type = types.str;
-        description = "The ID of the extension you want to install (usually something@something.xyz or {2a3ef5...})";
+        description = "The ID of the extension to install";
+        example = "ublock-origin@raymondhill.net";
       };
       url = mkOption {
         type = types.str;
-        description = "The URL of the extension to install";
+        description = "The URL where the extension XPI can be downloaded";
       };
     };
   };
@@ -35,7 +48,7 @@ let
       url = mkOption {
         type = types.nullOr types.str;
         default = null;
-        description = "The URL of the custom search engine";
+        description = "The URL of the custom search engine with placeholder";
         example = "https://www.youtube.com/results?search_query={searchTerms}";
       };
       icon = mkOption {
@@ -53,25 +66,36 @@ let
         id = mkOption {
           type = types.str;
           default = name;
+          description = "Unique identifier for the web application";
         };
-        name = mkOption { type = types.str; };
-        url = mkOption { type = types.str; };
+        name = mkOption {
+          type = types.str;
+          description = "Display name of the application";
+        };
+        url = mkOption {
+          type = types.str;
+          description = "The home URL of the web application";
+        };
         icon = mkOption {
           type = types.str;
           default = "web-browser";
+          description = "The icon name or path for the desktop entry";
         };
         extensions = mkOption {
           type = types.listOf extensionSubmodule;
           default = [ ];
+          description = "List of browser extensions to pre-install in the PWA profile";
         };
         search = mkOption {
           type = searchSubmodule;
           default = { };
+          description = "Custom search engine configuration for the PWA";
         };
         enablePasswordManager = mkOption {
           type = types.bool;
           default = false;
-          description = "Enable the built-in password manager (Backend dependent).";
+          description = "Enable the built-in password manager";
+          longDescription = "Whether to allow the backend browser to store and autofill credentials. Availability depends on the chosen backend.";
         };
         layoutStart = mkOption {
           type = types.listOf types.str;
@@ -79,22 +103,27 @@ let
             "home"
             "reload"
           ];
+          description = "Toolbar elements to display at the start of the navigation bar";
         };
         layoutEnd = mkOption {
           type = types.listOf types.str;
           default = [ "addons" ];
+          description = "Toolbar elements to display at the end of the navigation bar";
         };
         userChrome = mkOption {
           type = types.lines;
           default = "";
+          description = "Custom CSS for the browser UI (userChrome.css)";
         };
         userContent = mkOption {
           type = types.lines;
           default = "";
+          description = "Custom CSS for web pages (userContent.css)";
         };
         extraPrefs = mkOption {
           type = types.lines;
           default = "";
+          description = "Additional browser preferences (prefs.js)";
         };
         categories = mkOption {
           type = types.listOf types.str;
@@ -102,15 +131,18 @@ let
             "Network"
             "WebBrowser"
           ];
+          description = "Desktop categories for the application";
         };
         keywords = mkOption {
           type = types.listOf types.str;
           default = [ ];
+          description = "Keywords for desktop search providers";
         };
         openUrls = mkOption {
           type = types.listOf types.str;
           default = [ ];
-          description = "List of substrings to match in the URL to route to this PWA.";
+          description = "URL substrings that should trigger this PWA via the dispatcher";
+          example = [ "discord.com" ];
         };
       };
     }
@@ -119,9 +151,20 @@ let
 in
 {
   meta = {
-    description = "The webapp maker tool for ZenOS";
+    description = "Declarative web application (PWA) manager for ZenOS";
     longDescription = ''
-      Detailed module documentation.
+      This module provides a framework for creating isolated, declarative web applications 
+      (Progressive Web Apps) using various browser backends.
+
+      ### Why use this?
+      - **Isolation**: Each app runs in its own profile, keeping cookies and history separate from your main browser.
+      - **Integration**: Generates standard `.desktop` entries that integrate with your app launcher and taskbar.
+      - **Routing**: Includes an optional dispatcher that intercepts links and opens them in the correct PWA (e.g., clicking a Discord link in your browser opens the Discord PWA).
+
+      ### Key Features
+      - Custom CSS injection via `userChrome` and `userContent`.
+      - Declarative extension management.
+      - Deep integration with `xdg.desktopEntries` for correct window grouping (WM_CLASS).
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -129,7 +172,7 @@ in
   };
 
   options.zenos.webApps = {
-    enable = mkEnableOption "Zenos WebApps Declarative Module";
+    enable = mkEnableOption "ZenOS WebApps declarative module";
 
     base = mkOption {
       type = types.enum [
@@ -139,62 +182,53 @@ in
         "helium"
       ];
       default = "firefox";
-      description = "The backend browser engine to use for PWAs ";
+      description = "The backend browser engine to use for PWAs";
       longDescription = ''
-        Firefox is the only one that's officially supported. 
-        If you want the base for your browser to be supported, you need to maintain it yourself. 
-
-        PRs welcome is what i'm saying.
+        Firefox is the primary supported backend. Other backends are available but may 
+        require manual maintenance or have limited feature support regarding CSS injection 
+        and extension management.
       '';
     };
 
     profileDir = mkOption {
       type = types.path;
       default = "${config.home.homeDirectory}/.local/share/pwamaker-profiles";
-      description = "Directory where PWA profiles are stored";
+      description = "Directory where PWA browser profiles are stored";
     };
 
     backend = {
-      # Internal interface for the backend module to provide the execution command
       getRunCommand = mkOption {
         internal = true;
         type = types.functionTo types.str;
         default = _: "echo 'No backend configured'";
-        description = "Function that takes an App ID and returns the shell command to launch it";
+        description = "Internal function to generate the launch command for a specific PWA ID";
       };
 
-      # Internal interface for WM Class (used for window matching in desktop entries)
       getWmClass = mkOption {
         internal = true;
         type = types.functionTo types.str;
         default = id: "PWA-${id}";
-        description = "Internal interface for WM class";
+        description = "Internal function to generate the WM_CLASS for window matching";
         longDescription = ''
-          It's basically used to get the WM class for the webapps so that window managers know that window x is actually an instance of x.desktop.
-          This makes it so that if you let's say pin a webapp to your taskbar, it won't make a separate icon on it when you launch it but just use the icon you already pinned.
-
-          Without this, webapps would look glitchy
+          Used to link windows to their desktop entries. This ensures that pinned 
+          applications don't create duplicate icons in the taskbar when launched.
         '';
       };
     };
 
     dispatcher = {
-      enable = mkEnableOption "Enable internal URL dispatcher";
-      longDescription = ''
-        A small script that opens all web links and decides what app to open them in.
-        Useful if you want to open all related links in the appropriate webapp.  
-      '';
+      enable = mkEnableOption "internal URL dispatcher";
       fallbackBrowser = mkOption {
         type = types.str;
         default = "firefox";
-        description = "Command to run for links that don't match any PWA.";
+        description = "Command to run for links that don't match any registered PWA";
       };
     };
 
     apps = mkOption {
       default = { };
       type = types.attrsOf appSubmodule;
-      description = "The webapps you want to use";
+      description = "Attribute set of web applications to configure";
     };
   };
 
@@ -230,8 +264,7 @@ in
     ];
 
     # 2. Register Desktop Entries (Merged: Dispatcher + Apps)
-    xdg.desktopEntries = (
-      # Dispatcher Entry (Conditional)
+    xdg.desktopEntries =
       (optionalAttrs cfg.dispatcher.enable {
         pwa-dispatcher = {
           name = "PWA Dispatcher";
@@ -251,7 +284,6 @@ in
           ];
         };
       })
-      # PWA App Entries
       // (mapAttrs (key: app: {
         name = app.name;
         genericName = "Web Application";
@@ -262,8 +294,7 @@ in
           Keywords = concatStringsSep ";" app.keywords;
           StartupWMClass = cfg.backend.getWmClass app.id;
         };
-      }) cfg.apps)
-    );
+      }) cfg.apps);
 
     # 3. Set Dispatcher as Default Application
     xdg.mimeApps = mkIf cfg.dispatcher.enable {

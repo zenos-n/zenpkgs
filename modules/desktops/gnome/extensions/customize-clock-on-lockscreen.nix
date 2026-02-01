@@ -10,33 +10,9 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.customize-clock-on-lockscreen;
 
-  # --- GVariant & Type Helpers ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
+  # --- Color Normalization Helpers ---
+  # The extension requires 'rgba(r, g, b, a)' strings, but users often prefer Hex.
 
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  # --- Color Normalization ---
-  # The schema expects a string like 'rgba(255, 255, 255, 1.0)'
   hexToDecMap = {
     "0" = 0;
     "1" = 1;
@@ -63,6 +39,7 @@ let
   };
 
   hexCharToInt = c: if builtins.hasAttr c hexToDecMap then hexToDecMap.${c} else 0;
+
   parseHexByte =
     s: (hexCharToInt (builtins.substring 0 1 s) * 16) + (hexCharToInt (builtins.substring 1 1 s));
 
@@ -91,8 +68,8 @@ let
     else
       val;
 
-  # --- Submodule for Font Groups ---
-  mkFontOpts =
+  # --- Shared Options ---
+  mkFontOptions =
     { defaultSize, defaultColor }:
     {
       color = mkOption {
@@ -100,29 +77,78 @@ let
         default = defaultColor;
         description = "Text color (Hex string like #ffffff or rgba string)";
       };
-      size = mkInt defaultSize "Font size (20-96)";
-      family = mkStr "Default" "Font family";
-      weight = mkStr "Default" "Font weight";
-      style = mkStr "Default" "Font style";
+      size = mkOption {
+        type = types.int;
+        default = defaultSize;
+        description = "Font size (20-96)";
+      };
+      family = mkOption {
+        type = types.str;
+        default = "Default";
+        description = "Font family";
+      };
+      weight = mkOption {
+        type = types.str;
+        default = "Default";
+        description = "Font weight";
+      };
+      style = mkOption {
+        type = types.str;
+        default = "Default";
+        description = "Font style";
+      };
     };
 
 in
 {
+  meta = {
+    description = "Configures the Customize Clock on Lockscreen GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Customize Clock on Lockscreen** extension for GNOME.
+      It allows extensive customization of the clock, date, and hint text on the lock screen,
+      including fonts, colors, and content.
+
+      **Features:**
+      - Run custom commands to display text (e.g., `whoami`).
+      - Customize clock style (Digital, Analog, LED).
+      - Adjust fonts and colors for all elements.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.customize-clock-on-lockscreen = {
     enable = mkEnableOption "Customize Clock on Lockscreen GNOME extension configuration";
 
     command = {
-      enable = mkBool true "Enable custom command output.";
-      text = mkStr "whoami" "Command to execute.";
-      font = mkFontOpts {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable custom command output";
+      };
+      text = mkOption {
+        type = types.str;
+        default = "whoami";
+        description = "Command to execute";
+      };
+      font = mkFontOptions {
         defaultSize = 48;
         defaultColor = "rgba(255, 244, 177, 1.0)";
       };
     };
 
     time = {
-      enable = mkBool true "Enable time display.";
-      text = mkStr "" "Custom clock format (leave empty for default).";
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable time display";
+      };
+      text = mkOption {
+        type = types.str;
+        default = "";
+        description = "Custom clock format (leave empty for default)";
+      };
       style = mkOption {
         type = types.enum [
           "digital"
@@ -130,26 +156,38 @@ in
           "led"
         ];
         default = "digital";
-        description = "Clock face style.";
+        description = "Clock face style";
       };
-      font = mkFontOpts {
+      font = mkFontOptions {
         defaultSize = 96;
         defaultColor = "rgba(160, 230, 163, 1.0)";
       };
     };
 
     date = {
-      enable = mkBool true "Enable date display.";
-      text = mkStr "" "Custom date format.";
-      font = mkFontOpts {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable date display";
+      };
+      text = mkOption {
+        type = types.str;
+        default = "";
+        description = "Custom date format";
+      };
+      font = mkFontOptions {
         defaultSize = 28;
         defaultColor = "rgba(242, 92, 84, 1.0)";
       };
     };
 
     hint = {
-      enable = mkBool true "Enable hint text.";
-      font = mkFontOpts {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable hint text";
+      };
+      font = mkFontOptions {
         defaultSize = 20;
         defaultColor = "rgba(212, 237, 138, 1.0)";
       };
@@ -164,10 +202,10 @@ in
         settings = {
           "org/gnome/shell/extensions/customize-clock-on-lockscreen" = {
             # Visibility Toggles (Inverted from 'enable' keys)
-            remove-command-output = cfg.command.enable == false;
-            remove-time = cfg.time.enable == false;
-            remove-date = cfg.date.enable == false;
-            remove-hint = cfg.hint.enable == false;
+            remove-command-output = !cfg.command.enable;
+            remove-time = !cfg.time.enable;
+            remove-date = !cfg.date.enable;
+            remove-hint = !cfg.hint.enable;
 
             # Content
             command = cfg.command.text;

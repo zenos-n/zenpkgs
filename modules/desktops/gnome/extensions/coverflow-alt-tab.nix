@@ -1,7 +1,7 @@
 {
+  config,
   pkgs,
   lib,
-  config,
   ...
 }:
 
@@ -83,47 +83,6 @@ let
   listToTupleStr =
     l: "(${serializeFloat (elemAt l 0)},${serializeFloat (elemAt l 1)},${serializeFloat (elemAt l 2)})";
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkDouble =
-    default: description:
-    mkOption {
-      type = types.float;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  mkStrList =
-    default: description:
-    mkOption {
-      type = types.listOf types.str;
-      default = default;
-      description = description;
-    };
-
   # Helper for (ddd) tuples - Supports Hex String, List of Floats, or raw tuple String
   mkColorOption =
     default: description:
@@ -132,7 +91,7 @@ let
       default = default;
       description =
         description
-        + " Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)').";
+        + " Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)')";
       apply =
         v:
         if builtins.isList v then
@@ -145,102 +104,301 @@ let
 
 in
 {
+  meta = {
+    description = "Configures the Coverflow Alt-Tab GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Coverflow Alt-Tab** extension for GNOME.
+      It replaces the standard Alt-Tab switcher with a visually rich Coverflow or Timeline 3D effect.
+
+      **Features:**
+      - 3D Coverflow or Timeline switcher styles.
+      - Highly configurable animations, dimming, and scaling.
+      - Support for custom tint and background colors.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.coverflow-alt-tab = {
     enable = mkEnableOption "Coverflow Alt-Tab GNOME extension configuration";
 
     # --- Schema Options ---
 
-    hide-panel = mkBool true "Hide the panel when showing coverflow.";
+    hide-panel = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Hide the panel when showing coverflow";
+    };
 
-    enforce-primary-monitor = mkBool false "Always show the switcher on the primary monitor.";
+    enforce-primary-monitor = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Always show the switcher on the primary monitor";
+    };
 
-    animation-time = mkDouble 0.2 "The duration of coverflow animations in ms.";
+    animation-time = mkOption {
+      type = types.float;
+      default = 0.2;
+      description = "The duration of coverflow animations in ms";
+    };
 
-    dim-factor = mkDouble 1.0 "Dim factor for background.";
+    dim-factor = mkOption {
+      type = types.float;
+      default = 1.0;
+      description = "Dim factor for background";
+    };
 
-    position = mkStr "Bottom" "Position of icon and window title (Top, Bottom).";
+    position = mkOption {
+      type = types.enum [
+        "Top"
+        "Bottom"
+      ];
+      default = "Bottom";
+      description = "Position of icon and window title";
+    };
 
-    offset = mkInt 0 "Set a vertical offset.";
+    offset = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Set a vertical offset";
+    };
 
-    icon-style = mkStr "Classic" "Icon style (Classic, Overlay, Attached).";
+    icon-style = mkOption {
+      type = types.enum [
+        "Classic"
+        "Overlay"
+        "Attached"
+      ];
+      default = "Classic";
+      description = "Icon style";
+    };
 
-    overlay-icon-opacity = mkDouble 1.0 "The opacity of the overlay icon.";
+    overlay-icon-opacity = mkOption {
+      type = types.float;
+      default = 1.0;
+      description = "The opacity of the overlay icon";
+    };
 
-    overlay-icon-size = mkDouble 128.0 "The icon size in pixels.";
+    overlay-icon-size = mkOption {
+      type = types.float;
+      default = 128.0;
+      description = "The icon size in pixels";
+    };
 
-    switcher-style = mkStr "Coverflow" "Switcher style (Coverflow, Timeline).";
+    switcher-style = mkOption {
+      type = types.enum [
+        "Coverflow"
+        "Timeline"
+      ];
+      default = "Coverflow";
+      description = "Switcher style";
+    };
 
-    easing-function = mkStr "ease-out-cubic" "Easing function used in animations.";
+    easing-function = mkOption {
+      type = types.str;
+      default = "ease-out-cubic";
+      description = "Easing function used in animations";
+    };
 
-    current-workspace-only = mkStr "current" "Show windows from current workspace only (current, all, all-currentfirst).";
+    current-workspace-only = mkOption {
+      type = types.enum [
+        "current"
+        "all"
+        "all-currentfirst"
+      ];
+      default = "current";
+      description = "Show windows from current workspace only";
+    };
 
-    switch-per-monitor = mkBool false "Per monitor window switch.";
+    switch-per-monitor = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Per monitor window switch";
+    };
 
-    icon-has-shadow = mkBool false "Icon has shadow switch.";
+    icon-has-shadow = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Icon has shadow switch";
+    };
 
-    randomize-animation-times = mkBool false "Randomize animation times switch.";
+    randomize-animation-times = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Randomize animation times switch";
+    };
 
-    preview-to-monitor-ratio = mkDouble 0.5 "The maximum ratio of the preview dimensions with the monitor dimensions.";
+    preview-to-monitor-ratio = mkOption {
+      type = types.float;
+      default = 0.5;
+      description = "The maximum ratio of the preview dimensions with the monitor dimensions";
+    };
 
-    preview-scaling-factor = mkDouble 0.8 "Scales the previews as they spread out to the sides.";
+    preview-scaling-factor = mkOption {
+      type = types.float;
+      default = 0.8;
+      description = "Scales the previews as they spread out to the sides";
+    };
 
-    coverflow-window-angle = mkDouble 90.0 "In Coverflow switcher, angle of off-center windows.";
+    coverflow-window-angle = mkOption {
+      type = types.float;
+      default = 90.0;
+      description = "In Coverflow switcher, angle of off-center windows";
+    };
 
-    coverflow-window-offset-width = mkDouble 50.0 "In Coverflow switcher, distance from center of off-center windows.";
+    coverflow-window-offset-width = mkOption {
+      type = types.float;
+      default = 50.0;
+      description = "In Coverflow switcher, distance from center of off-center windows";
+    };
 
-    bind-to-switch-applications = mkBool true "Bind to 'switch-applications' keybinding.";
+    bind-to-switch-applications = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Bind to 'switch-applications' keybinding";
+    };
 
-    bind-to-switch-windows = mkBool true "Bind to 'switch-windows' keybinding.";
+    bind-to-switch-windows = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Bind to 'switch-windows' keybinding";
+    };
 
-    highlight-mouse-over = mkBool false "Highlight window under mouse.";
+    highlight-mouse-over = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Highlight window under mouse";
+    };
 
-    highlight-use-theme-color = mkBool true "Use theme color for highlight.";
+    highlight-use-theme-color = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Use theme color for highlight";
+    };
 
-    raise-mouse-over = mkBool true "Raise window under mouse.";
+    raise-mouse-over = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Raise window under mouse";
+    };
 
-    perspective-correction-method = mkStr "Move Camera" "Method to correct off-center monitor perspective.";
+    perspective-correction-method = mkOption {
+      type = types.str;
+      default = "Move Camera";
+      description = "Method to correct off-center monitor perspective";
+    };
 
-    desaturate-factor = mkDouble 0.0 "Amount to Desaturate the Background Application Switcher.";
+    desaturate-factor = mkOption {
+      type = types.float;
+      default = 0.0;
+      description = "Amount to Desaturate the Background Application Switcher";
+    };
 
-    blur-radius = mkDouble 0.0 "Radius of Blur Applied to the Background Application Switcher.";
+    blur-radius = mkOption {
+      type = types.float;
+      default = 0.0;
+      description = "Radius of Blur Applied to the Background Application Switcher";
+    };
 
-    switcher-looping-method = mkStr "Flip Stack" "How the windows cycle through the coverflow (Flip Stack, Carousel).";
+    switcher-looping-method = mkOption {
+      type = types.enum [
+        "Flip Stack"
+        "Carousel"
+      ];
+      default = "Flip Stack";
+      description = "How the windows cycle through the coverflow";
+    };
 
-    switch-application-behaves-like-switch-windows = mkBool false "The application-switcher keybinding action behaves the same as the window-switcher.";
+    switch-application-behaves-like-switch-windows = mkOption {
+      type = types.bool;
+      default = false;
+      description = "The application-switcher keybinding action behaves the same as the window-switcher";
+    };
 
-    use-tint = mkBool true "Whether to Use a Tint Color on the Background Application Switcher.";
+    use-tint = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Whether to Use a Tint Color on the Background Application Switcher";
+    };
 
-    tint-color = mkColorOption "(0.0,0.0,0.0)" "Tint Color.";
+    tint-color = mkColorOption "(0.0,0.0,0.0)" "Tint Color";
 
-    switcher-background-color = mkColorOption "(0.0,0.0,0.0)" "Switcher Background Color.";
+    switcher-background-color = mkColorOption "(0.0,0.0,0.0)" "Switcher Background Color";
 
-    tint-blend = mkDouble 0.0 "Amount to Blend Tint Color.";
+    tint-blend = mkOption {
+      type = types.float;
+      default = 0.0;
+      description = "Amount to Blend Tint Color";
+    };
 
-    tint-use-theme-color = mkBool true "Use theme color for tint.";
+    tint-use-theme-color = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Use theme color for tint";
+    };
 
-    use-glitch-effect = mkBool false "Use a 'glitch effect' on the background application switcher.";
+    use-glitch-effect = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Use a 'glitch effect' on the background application switcher";
+    };
 
-    invert-swipes = mkBool false "Invert System Scroll Direction Setting.";
+    invert-swipes = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Invert System Scroll Direction Setting";
+    };
 
-    highlight-color = mkColorOption "(1.0,1.0,1.0)" "Highlight Color.";
+    highlight-color = mkColorOption "(1.0,1.0,1.0)" "Highlight Color";
 
-    coverflow-switch-windows = mkStrList [ "" ] "Switch Windows Keyboard Shortcut.";
+    coverflow-switch-windows = mkOption {
+      type = types.listOf types.str;
+      default = [ "" ];
+      description = "Switch Windows Keyboard Shortcut";
+    };
 
-    coverflow-switch-windows-backward = mkStrList [ "" ] "Switch Windows Backward Keyboard Shortcut.";
+    coverflow-switch-windows-backward = mkOption {
+      type = types.listOf types.str;
+      default = [ "" ];
+      description = "Switch Windows Backward Keyboard Shortcut";
+    };
 
-    coverflow-switch-applications = mkStrList [ "" ] "Switch Applications Keyboard Shortcut.";
+    coverflow-switch-applications = mkOption {
+      type = types.listOf types.str;
+      default = [ "" ];
+      description = "Switch Applications Keyboard Shortcut";
+    };
 
-    coverflow-switch-applications-backward = mkStrList [
-      ""
-    ] "Switch Applications Backward Keyboard Shortcut.";
+    coverflow-switch-applications-backward = mkOption {
+      type = types.listOf types.str;
+      default = [ "" ];
+      description = "Switch Applications Backward Keyboard Shortcut";
+    };
 
-    prefs-default-width = mkDouble 700.0 "Default width for the preferences window.";
+    prefs-default-width = mkOption {
+      type = types.float;
+      default = 700.0;
+      description = "Default width for the preferences window";
+    };
 
-    prefs-default-height = mkDouble 600.0 "Default height for the preferences window.";
+    prefs-default-height = mkOption {
+      type = types.float;
+      default = 600.0;
+      description = "Default height for the preferences window";
+    };
 
-    verbose-logging = mkBool false "Whether to log lots of messages or not.";
+    verbose-logging = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Whether to log lots of messages or not";
+    };
 
-    icon-add-remove-effects = mkStr "Fade Only" "Whether to fade, scale, or both fade and scale icons in and out.";
+    icon-add-remove-effects = mkOption {
+      type = types.str;
+      default = "Fade Only";
+      description = "Whether to fade, scale, or both fade and scale icons in and out";
+    };
   };
 
   config = mkIf cfg.enable {
