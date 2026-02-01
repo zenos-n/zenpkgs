@@ -1,41 +1,17 @@
 {
+  config,
   pkgs,
   lib,
-  config,
   ...
 }:
 
 with lib;
 
 let
-  cfg = config.zenos.desktops.gnome.extensions.tiling-assistant;
+  cfg = config.zenos.desktops.gnome.extensions.tactile;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  mkOptionStrList =
+  # Helper for keybinding options
+  mkKeybindOption =
     default: description:
     mkOption {
       type = types.listOf types.str;
@@ -43,173 +19,397 @@ let
       description = description;
     };
 
-  # --- GVariant Serializer for a{sv} (overridden-settings) ---
-  mkVariant = v: "<${v}>";
-  mkString = v: "'${v}'";
-  mkUint32 = v: "uint32 ${toString v}";
+  # --- Color Normalization Helpers ---
+  hexToDecMap = {
+    "0" = 0;
+    "1" = 1;
+    "2" = 2;
+    "3" = 3;
+    "4" = 4;
+    "5" = 5;
+    "6" = 6;
+    "7" = 7;
+    "8" = 8;
+    "9" = 9;
+    "a" = 10;
+    "b" = 11;
+    "c" = 12;
+    "d" = 13;
+    "e" = 14;
+    "f" = 15;
+    "A" = 10;
+    "B" = 11;
+    "C" = 12;
+    "D" = 13;
+    "E" = 14;
+    "F" = 15;
+  };
+
+  hexCharToInt = c: if builtins.hasAttr c hexToDecMap then hexToDecMap.${c} else 0;
+
+  parseHexByte =
+    s: (hexCharToInt (builtins.substring 0 1 s) * 16) + (hexCharToInt (builtins.substring 1 1 s));
 
   serializeFloat =
-    v:
+    f:
     let
-      s = toString v;
+      s = toString f;
     in
-    if builtins.match ".*\\..*" s == null then "${s}.0" else s;
+    if builtins.match ".*\\..*" s != null then s else "${s}.0";
 
-  serializeSettings =
-    settings:
-    if settings == { } then
-      "@a{sv} {}"
-    else
+  toRgbaString =
+    val:
+    if builtins.isString val && (builtins.substring 0 1 val == "#") then
       let
-        pairs = mapAttrsToList (
-          k: v:
-          "${mkString k}: ${
-            mkVariant (
-              if builtins.isBool v then
-                (if v then "true" else "false")
-              else if builtins.isInt v then
-                toString v # Schema uses 'i' mostly, check if 'u' needed
-              else if builtins.isString v then
-                mkString v
-              else
-                throw "Unknown type for Tiling Assistant overridden setting: ${k}"
-            )
-          }"
-        ) settings;
+        hex = lib.removePrefix "#" val;
+        r = toString (parseHexByte (substring 0 2 hex));
+        g = toString (parseHexByte (substring 2 2 hex));
+        b = toString (parseHexByte (substring 4 2 hex));
+        a =
+          if (builtins.stringLength hex) == 8 then
+            serializeFloat ((parseHexByte (substring 6 2 hex)) / 255.0)
+          else
+            "1.0";
       in
-      "{${concatStringsSep ", " pairs}}";
+      "rgba(${r}, ${g}, ${b}, ${a})"
+    else
+      val;
 
 in
 {
-  options.zenos.desktops.gnome.extensions.tiling-assistant = {
-    enable = mkEnableOption "Tiling Assistant GNOME extension configuration";
+  meta = {
+    description = "Configures the Tactile GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Tactile** extension for GNOME.
+      Tactile is a tiling window manager extension that allows you to organize windows
+      using a custom grid layout and keyboard shortcuts.
 
-    # --- General ---
-    enable-tiling-popup = mkBool true "Enable tiling popup.";
-    tiling-popup-all-workspace = mkBool false "Popup on all workspaces.";
-    enable-raise-tile-group = mkBool true "Raise tile group.";
-    tilegroups-in-app-switcher = mkBool false "Show tilegroups in app switcher.";
-    dynamic-keybinding-behavior = mkInt 0 "Dynamic keybinding behavior.";
-    focus-hint = mkInt 0 "Focus hint type.";
-    focus-hint-color = mkStr "" "Focus hint color.";
-    focus-hint-outline-border-radius = mkInt 8 "Outline border radius.";
-    focus-hint-outline-size = mkInt 8 "Outline size.";
-    focus-hint-outline-style = mkInt 0 "Outline style (0: solid, 1: border).";
+      **Features:**
+      - Custom grid layouts.
+      - Keyboard-driven window placement.
+      - Multi-monitor support.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
 
-    # --- Gaps ---
-    window-gap = mkInt 0 "Window gap.";
-    single-screen-gap = mkInt 0 "Single screen gap.";
-    screen-top-gap = mkInt 0 "Screen top gap.";
-    screen-left-gap = mkInt 0 "Screen left gap.";
-    screen-right-gap = mkInt 0 "Screen right gap.";
-    screen-bottom-gap = mkInt 0 "Screen bottom gap.";
-    maximize-with-gap = mkBool false "Maximize with gap.";
-    monitor-switch-grace-period = mkBool true "Monitor switch grace period.";
+  options.zenos.desktops.gnome.extensions.tactile = {
+    enable = mkEnableOption "Tactile GNOME extension configuration";
 
     # --- Keybindings ---
-    toggle-tiling-popup = mkOptionStrList [ ] "Toggle tiling popup.";
-    tile-edit-mode = mkOptionStrList [ ] "Tile edit mode.";
-    auto-tile = mkOptionStrList [ ] "Auto tile.";
-    toggle-always-on-top = mkOptionStrList [ ] "Toggle always on top.";
-    tile-maximize = mkOptionStrList [ "<Super>Up" "<Super>KP_5" ] "Tile maximize.";
-    restore-window = mkOptionStrList [ "<Super>Down" ] "Restore window.";
-    tile-top-half = mkOptionStrList [ "<Super>KP_8" ] "Tile top half.";
-    tile-bottom-half = mkOptionStrList [ "<Super>KP_2" ] "Tile bottom half.";
-    tile-left-half = mkOptionStrList [ "<Super>Left" "<Super>KP_4" ] "Tile left half.";
-    tile-right-half = mkOptionStrList [ "<Super>Right" "<Super>KP_6" ] "Tile right half.";
-    tile-topleft-quarter = mkOptionStrList [ "<Super>KP_7" ] "Tile top-left.";
-    tile-topright-quarter = mkOptionStrList [ "<Super>KP_9" ] "Tile top-right.";
-    tile-bottomleft-quarter = mkOptionStrList [ "<Super>KP_1" ] "Tile bottom-left.";
-    tile-bottomright-quarter = mkOptionStrList [ "<Super>KP_3" ] "Tile bottom-right.";
+    keybindings = {
+      global = {
+        show-tiles = mkKeybindOption [ "<Super>t" ] "Show tiles overlay";
+        hide-tiles = mkKeybindOption [ "Escape" ] "Hide tiles overlay";
+        show-settings = mkKeybindOption [ "<Super><Shift>t" ] "Show settings panel";
+      };
 
-    # --- Advanced / Hidden ---
-    enable-advanced-experimental-features = mkBool false "Enable experimental features.";
-    enable-tile-animations = mkBool true "Enable tile animations.";
-    enable-untile-animations = mkBool true "Enable untile animations.";
-    disable-tile-groups = mkBool false "Disable tile groups.";
-    default-move-mode = mkInt 0 "Default move mode.";
-    low-performance-move-mode = mkBool false "Low performance move mode.";
-    adapt-edge-tiling-to-favorite-layout = mkBool false "Adapt edge tiling to favorite layout.";
+      monitors = {
+        next = mkKeybindOption [ "space" ] "Move tiles to next monitor";
+        previous = mkKeybindOption [ "<Shift>space" ] "Move tiles to previous monitor";
+      };
 
-    # --- Overridden Settings (Complex a{sv}) ---
-    overridden-settings = mkOption {
-      type = types.attrsOf (
-        types.oneOf [
-          types.bool
-          types.int
-          types.str
-        ]
-      );
-      default = { };
-      description = "Map of overridden settings (private key).";
+      layouts = {
+        select-1 = mkKeybindOption [ "1" ] "Switch to Layout 1";
+        select-2 = mkKeybindOption [ "2" ] "Switch to Layout 2";
+        select-3 = mkKeybindOption [ "3" ] "Switch to Layout 3";
+        select-4 = mkKeybindOption [ "4" ] "Switch to Layout 4";
+      };
+
+      # Tile Activation Keys
+      tiles = {
+        # Row 0
+        "0-0" = mkKeybindOption [ "q" ] "Tile 0:0";
+        "1-0" = mkKeybindOption [ "w" ] "Tile 1:0";
+        "2-0" = mkKeybindOption [ "e" ] "Tile 2:0";
+        "3-0" = mkKeybindOption [ "r" ] "Tile 3:0";
+        # Row 1
+        "0-1" = mkKeybindOption [ "a" ] "Tile 0:1";
+        "1-1" = mkKeybindOption [ "s" ] "Tile 1:1";
+        "2-1" = mkKeybindOption [ "d" ] "Tile 2:1";
+        "3-1" = mkKeybindOption [ "f" ] "Tile 3:1";
+        # Row 2
+        "0-2" = mkKeybindOption [ "z" ] "Tile 0:2";
+        "1-2" = mkKeybindOption [ "x" ] "Tile 1:2";
+        "2-2" = mkKeybindOption [ "c" ] "Tile 2:2";
+        "3-2" = mkKeybindOption [ "v" ] "Tile 3:2";
+      };
+    };
+
+    # --- Layout Definitions ---
+    layouts = {
+      one = {
+        cols = {
+          "0" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Column 0 weight";
+          };
+          "1" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Column 1 weight";
+          };
+          "2" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Column 2 weight";
+          };
+          "3" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Column 3 weight";
+          };
+          "4" = mkOption {
+            type = types.int;
+            default = 0;
+            description = "Column 4 weight";
+          };
+        };
+        rows = {
+          "0" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Row 0 weight";
+          };
+          "1" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Row 1 weight";
+          };
+          "2" = mkOption {
+            type = types.int;
+            default = 0;
+            description = "Row 2 weight";
+          };
+        };
+      };
+
+      two = {
+        cols = {
+          "0" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Column 0 weight";
+          };
+          "1" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Column 1 weight";
+          };
+          "2" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Column 2 weight";
+          };
+        };
+        rows = {
+          "0" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Row 0 weight";
+          };
+          "1" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Row 1 weight";
+          };
+        };
+      };
+
+      three = {
+        cols = {
+          "0" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Column 0 weight";
+          };
+          "1" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Column 1 weight";
+          };
+        };
+        rows = {
+          "0" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Row 0 weight";
+          };
+          "1" = mkOption {
+            type = types.int;
+            default = 1;
+            description = "Row 1 weight";
+          };
+        };
+      };
+    };
+
+    # --- Monitor Configuration ---
+    monitors = {
+      "0" = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Layout index for Monitor 0";
+      };
+      "1" = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Layout index for Monitor 1";
+      };
+      "2" = mkOption {
+        type = types.int;
+        default = 1;
+        description = "Layout index for Monitor 2";
+      };
+    };
+
+    # --- Appearance ---
+    appearance = {
+      colors = {
+        text = mkOption {
+          type = types.str;
+          default = "rgba(128,128,255,1.0)";
+          description = "Text color (CSS string or Hex)";
+        };
+        border = mkOption {
+          type = types.str;
+          default = "rgba(128,128,255,0.5)";
+          description = "Border color (CSS string or Hex)";
+        };
+        background = mkOption {
+          type = types.str;
+          default = "rgba(128,128,255,0.1)";
+          description = "Background color (CSS string or Hex)";
+        };
+      };
+
+      sizes = {
+        text = mkOption {
+          type = types.int;
+          default = 48;
+          description = "Text size";
+        };
+        border = mkOption {
+          type = types.int;
+          default = 1;
+          description = "Border size";
+        };
+        gap = mkOption {
+          type = types.int;
+          default = 0;
+          description = "Gap size";
+        };
+      };
+
+      grid = {
+        cols = mkOption {
+          type = types.int;
+          default = 4;
+          description = "Number of grid columns";
+        };
+        rows = mkOption {
+          type = types.int;
+          default = 3;
+          description = "Number of grid rows";
+        };
+      };
+    };
+
+    # --- Behavior ---
+    behavior = {
+      maximize = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Maximize window when possible";
+      };
+      debug = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Log debug information";
+      };
     };
   };
 
   # --- Implementation ---
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.gnomeExtensions.tiling-assistant ];
+    environment.systemPackages = [ pkgs.gnomeExtensions.tactile ];
 
-    # Standard Types
     programs.dconf.profiles.user.databases = [
       {
         settings = {
-          "org/gnome/shell/extensions/tiling-assistant" = {
-            enable-tiling-popup = cfg.enable-tiling-popup;
-            tiling-popup-all-workspace = cfg.tiling-popup-all-workspace;
-            enable-raise-tile-group = cfg.enable-raise-tile-group;
-            tilegroups-in-app-switcher = cfg.tilegroups-in-app-switcher;
-            dynamic-keybinding-behavior = cfg.dynamic-keybinding-behavior;
-            focus-hint = cfg.focus-hint;
-            focus-hint-color = cfg.focus-hint-color;
-            focus-hint-outline-border-radius = cfg.focus-hint-outline-border-radius;
-            focus-hint-outline-size = cfg.focus-hint-outline-size;
-            focus-hint-outline-style = cfg.focus-hint-outline-style;
-            window-gap = cfg.window-gap;
-            single-screen-gap = cfg.single-screen-gap;
-            screen-top-gap = cfg.screen-top-gap;
-            screen-left-gap = cfg.screen-left-gap;
-            screen-right-gap = cfg.screen-right-gap;
-            screen-bottom-gap = cfg.screen-bottom-gap;
-            maximize-with-gap = cfg.maximize-with-gap;
-            monitor-switch-grace-period = cfg.monitor-switch-grace-period;
-            toggle-tiling-popup = cfg.toggle-tiling-popup;
-            tile-edit-mode = cfg.tile-edit-mode;
-            auto-tile = cfg.auto-tile;
-            toggle-always-on-top = cfg.toggle-always-on-top;
-            tile-maximize = cfg.tile-maximize;
-            restore-window = cfg.restore-window;
-            tile-top-half = cfg.tile-top-half;
-            tile-bottom-half = cfg.tile-bottom-half;
-            tile-left-half = cfg.tile-left-half;
-            tile-right-half = cfg.tile-right-half;
-            tile-topleft-quarter = cfg.tile-topleft-quarter;
-            tile-topright-quarter = cfg.tile-topright-quarter;
-            tile-bottomleft-quarter = cfg.tile-bottomleft-quarter;
-            tile-bottomright-quarter = cfg.tile-bottomright-quarter;
-            enable-advanced-experimental-features = cfg.enable-advanced-experimental-features;
-            enable-tile-animations = cfg.enable-tile-animations;
-            enable-untile-animations = cfg.enable-untile-animations;
-            disable-tile-groups = cfg.disable-tile-groups;
-            default-move-mode = cfg.default-move-mode;
-            low-performance-move-mode = cfg.low-performance-move-mode;
-            adapt-edge-tiling-to-favorite-layout = cfg.adapt-edge-tiling-to-favorite-layout;
+          "org/gnome/shell/extensions/tactile" = {
+            # Shortcuts
+            show-tiles = cfg.keybindings.global.show-tiles;
+            hide-tiles = cfg.keybindings.global.hide-tiles;
+            next-monitor = cfg.keybindings.monitors.next;
+            prev-monitor = cfg.keybindings.monitors.previous;
+            show-settings = cfg.keybindings.global.show-settings;
+
+            layout-1 = cfg.keybindings.layouts.select-1;
+            layout-2 = cfg.keybindings.layouts.select-2;
+            layout-3 = cfg.keybindings.layouts.select-3;
+            layout-4 = cfg.keybindings.layouts.select-4;
+
+            # Tile Keys
+            tile-0-0 = cfg.keybindings.tiles."0-0";
+            tile-1-0 = cfg.keybindings.tiles."1-0";
+            tile-2-0 = cfg.keybindings.tiles."2-0";
+            tile-3-0 = cfg.keybindings.tiles."3-0";
+            tile-0-1 = cfg.keybindings.tiles."0-1";
+            tile-1-1 = cfg.keybindings.tiles."1-1";
+            tile-2-1 = cfg.keybindings.tiles."2-1";
+            tile-3-1 = cfg.keybindings.tiles."3-1";
+            tile-0-2 = cfg.keybindings.tiles."0-2";
+            tile-1-2 = cfg.keybindings.tiles."1-2";
+            tile-2-2 = cfg.keybindings.tiles."2-2";
+            tile-3-2 = cfg.keybindings.tiles."3-2";
+
+            # Layout 1
+            col-0 = cfg.layouts.one.cols."0";
+            col-1 = cfg.layouts.one.cols."1";
+            col-2 = cfg.layouts.one.cols."2";
+            col-3 = cfg.layouts.one.cols."3";
+            col-4 = cfg.layouts.one.cols."4";
+            row-0 = cfg.layouts.one.rows."0";
+            row-1 = cfg.layouts.one.rows."1";
+            row-2 = cfg.layouts.one.rows."2";
+
+            # Layout 2
+            layout-2-col-0 = cfg.layouts.two.cols."0";
+            layout-2-col-1 = cfg.layouts.two.cols."1";
+            layout-2-col-2 = cfg.layouts.two.cols."2";
+            layout-2-row-0 = cfg.layouts.two.rows."0";
+            layout-2-row-1 = cfg.layouts.two.rows."1";
+
+            # Layout 3
+            layout-3-col-0 = cfg.layouts.three.cols."0";
+            layout-3-col-1 = cfg.layouts.three.cols."1";
+            layout-3-row-0 = cfg.layouts.three.rows."0";
+            layout-3-row-1 = cfg.layouts.three.rows."1";
+
+            # Monitors
+            monitor-0-layout = cfg.monitors."0";
+            monitor-1-layout = cfg.monitors."1";
+            monitor-2-layout = cfg.monitors."2";
+
+            # Appearance
+            text-color = toRgbaString cfg.appearance.colors.text;
+            border-color = toRgbaString cfg.appearance.colors.border;
+            background-color = toRgbaString cfg.appearance.colors.background;
+            text-size = cfg.appearance.sizes.text;
+            border-size = cfg.appearance.sizes.border;
+            gap-size = cfg.appearance.sizes.gap;
+            grid-cols = cfg.appearance.grid.cols;
+            grid-rows = cfg.appearance.grid.rows;
+
+            # Behavior
+            maximize = cfg.behavior.maximize;
+            debug = cfg.behavior.debug;
           };
         };
       }
     ];
-
-    # Complex Type (overridden-settings) via systemd
-    systemd.user.services.tiling-assistant-overrides = {
-      description = "Apply Tiling Assistant overridden settings";
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        RemainAfterExit = true;
-      };
-      script = ''
-        ${pkgs.dconf}/bin/dconf write /org/gnome/shell/extensions/tiling-assistant/overridden-settings ${escapeShellArg (serializeSettings cfg.overridden-settings)}
-      '';
-    };
   };
 }

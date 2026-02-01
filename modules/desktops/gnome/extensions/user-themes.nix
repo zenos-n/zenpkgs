@@ -39,30 +39,47 @@ let
 
 in
 {
+  meta = {
+    description = "Configures the User Theme GNOME extension";
+    longDescription = ''
+      This module installs and configures the **User Themes** extension for GNOME.
+      It allows loading shell themes from the user directory and provides a mechanism
+      to generate custom themes on-the-fly using CSS overrides.
+
+      **Features:**
+      - Install User Themes extension.
+      - Apply existing themes by name.
+      - Generate custom themes extending base themes with CSS overrides.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.user-theme = {
     enable = mkEnableOption "User Theme GNOME extension configuration";
 
     name = mkOption {
       type = types.str;
       default = "";
-      description = "The name of the theme to apply. If using cssOverride, this becomes the name of the generated theme.";
+      description = "The name of the theme to apply. If using cssOverride, this becomes the name of the generated theme";
     };
 
     theme = mkOption {
-      description = "Theme generation settings.";
+      description = "Theme generation settings";
       default = { };
       type = types.submodule {
         options = {
           activeTheme = mkOption {
             type = types.str;
             default = "";
-            description = "The name of the base theme to inherit from (e.g., 'Orchis-Dark'). Must be installed in systemPackages.";
+            description = "The name of the base theme to inherit from (e.g., 'Orchis-Dark'). Must be installed in systemPackages";
           };
 
           cssOverride = mkOption {
             type = types.lines;
             default = "";
-            description = "CSS to append to the generated theme. If empty, no theme is generated.";
+            description = "CSS to append to the generated theme. If empty, no theme is generated";
           };
         };
       };

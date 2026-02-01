@@ -10,31 +10,45 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.notification-timeout;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
 in
 {
+  meta = {
+    description = "Configures the Notification Timeout GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Notification Timeout** extension for GNOME.
+      It allows setting a custom timeout for notifications, ensuring they disappear
+      automatically after a specified duration.
+
+      **Features:**
+      - Configurable timeout duration in milliseconds.
+      - Option to ignore user idle state.
+      - Force all notifications to be treated as normal priority.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.notification-timeout = {
     enable = mkEnableOption "Notification Timeout GNOME extension configuration";
 
-    ignore-idle = mkBool true "Ignores idle user - always timeout.";
-    always-normal = mkBool true "Always treat notifications as normal priority.";
-    timeout = mkInt 3000 "Notification timeout in milliseconds.";
+    ignore-idle = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Ignores idle user - always timeout";
+    };
+
+    always-normal = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Always treat notifications as normal priority";
+    };
+
+    timeout = mkOption {
+      type = types.int;
+      default = 3000;
+      description = "Notification timeout in milliseconds";
+    };
   };
 
   # --- Implementation ---

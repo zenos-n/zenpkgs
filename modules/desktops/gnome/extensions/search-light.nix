@@ -10,88 +10,196 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.search-light;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkDouble =
-    default: description:
-    mkOption {
-      type = types.float;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  mkColor =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  mkOptionStrList =
-    default: description:
-    mkOption {
-      type = types.listOf types.str;
-      default = default;
-      description = description;
-    };
-
 in
 {
+  meta = {
+    description = "Configures the Search Light GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Search Light** extension for GNOME.
+      It replaces the default search with a macOS Spotlight-like search overlay,
+      centered on the screen with customizable styling and shortcuts.
+
+      **Features:**
+      - Spotlight-like search interface.
+      - Customizable appearance (colors, borders, transparency, blur).
+      - Configurable keyboard shortcuts.
+      - Unit and currency converters.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.search-light = {
     enable = mkEnableOption "Search Light GNOME extension configuration";
 
-    border-radius = mkDouble 0.0 "Border radius.";
-    border-color = mkColor "(1.0,1.0,1.0,1.0)" "Border color (GVariant tuple).";
-    border-thickness = mkInt 0 "Border thickness.";
-    background-color = mkColor "(0.0,0.0,0.0,0.25)" "Background color (GVariant tuple).";
-    scale-width = mkDouble 0.1 "Scale width.";
-    scale-height = mkDouble 0.1 "Scale height.";
-    preferred-monitor = mkInt 0 "Preferred monitor index.";
-    monitor-count = mkInt 1 "Monitors count.";
-    shortcut-search = mkOptionStrList [ ] "Shortcut for search.";
-    secondary-shortcut-search = mkOptionStrList [ ] "Secondary shortcut for search.";
-    popup-at-cursor-monitor = mkBool false "Popup at cursor monitor.";
-    msg-to-pref = mkStr "" "MsgBus to pref.";
-    msg-to-ext = mkStr "" "MsgBus to ext.";
-    blur-background = mkBool false "Enable background blur.";
-    blur-sigma = mkDouble 30.0 "Blur sigma.";
-    blur-brightness = mkDouble 0.6 "Blur brightness.";
-    font-size = mkInt 0 "Text size.";
-    entry-font-size = mkInt 1 "Entry text size.";
-    text-color = mkColor "(1.0,1.0,1.0,0.0)" "Text color (GVariant tuple).";
-    panel-icon-color = mkColor "(1.0,1.0,1.0,1.0)" "Panel icon color (GVariant tuple).";
-    entry-text-color = mkColor "(1.0,1.0,1.0,0.0)" "Entry text color (GVariant tuple).";
-    show-panel-icon = mkBool false "Show panel icon.";
-    unit-converter = mkBool false "Show unit converter.";
-    currency-converter = mkBool false "Show currency converter.";
-    window-effect = mkInt 0 "Window effect.";
-    window-effect-color = mkColor "(1.0,1.0,1.0,1.0)" "Window effect color (GVariant tuple).";
-    use-animations = mkBool true "Use window animations.";
-    animation-speed = mkDouble 100.0 "Animation speed.";
+    border-radius = mkOption {
+      type = types.float;
+      default = 0.0;
+      description = "Border radius";
+    };
+
+    border-color = mkOption {
+      type = types.str;
+      default = "(1.0,1.0,1.0,1.0)";
+      description = "Border color (GVariant tuple)";
+    };
+
+    border-thickness = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Border thickness";
+    };
+
+    background-color = mkOption {
+      type = types.str;
+      default = "(0.0,0.0,0.0,0.25)";
+      description = "Background color (GVariant tuple)";
+    };
+
+    scale-width = mkOption {
+      type = types.float;
+      default = 0.1;
+      description = "Scale width";
+    };
+
+    scale-height = mkOption {
+      type = types.float;
+      default = 0.1;
+      description = "Scale height";
+    };
+
+    preferred-monitor = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Preferred monitor index";
+    };
+
+    monitor-count = mkOption {
+      type = types.int;
+      default = 1;
+      description = "Monitors count";
+    };
+
+    shortcut-search = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Shortcut for search";
+    };
+
+    secondary-shortcut-search = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Secondary shortcut for search";
+    };
+
+    popup-at-cursor-monitor = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Popup at cursor monitor";
+    };
+
+    msg-to-pref = mkOption {
+      type = types.str;
+      default = "";
+      description = "MsgBus to pref";
+    };
+
+    msg-to-ext = mkOption {
+      type = types.str;
+      default = "";
+      description = "MsgBus to ext";
+    };
+
+    blur-background = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable background blur";
+    };
+
+    blur-sigma = mkOption {
+      type = types.float;
+      default = 30.0;
+      description = "Blur sigma";
+    };
+
+    blur-brightness = mkOption {
+      type = types.float;
+      default = 0.6;
+      description = "Blur brightness";
+    };
+
+    font-size = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Text size";
+    };
+
+    entry-font-size = mkOption {
+      type = types.int;
+      default = 1;
+      description = "Entry text size";
+    };
+
+    text-color = mkOption {
+      type = types.str;
+      default = "(1.0,1.0,1.0,0.0)";
+      description = "Text color (GVariant tuple)";
+    };
+
+    panel-icon-color = mkOption {
+      type = types.str;
+      default = "(1.0,1.0,1.0,1.0)";
+      description = "Panel icon color (GVariant tuple)";
+    };
+
+    entry-text-color = mkOption {
+      type = types.str;
+      default = "(1.0,1.0,1.0,0.0)";
+      description = "Entry text color (GVariant tuple)";
+    };
+
+    show-panel-icon = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Show panel icon";
+    };
+
+    unit-converter = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Show unit converter";
+    };
+
+    currency-converter = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Show currency converter";
+    };
+
+    window-effect = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Window effect";
+    };
+
+    window-effect-color = mkOption {
+      type = types.str;
+      default = "(1.0,1.0,1.0,1.0)";
+      description = "Window effect color (GVariant tuple)";
+    };
+
+    use-animations = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Use window animations";
+    };
+
+    animation-speed = mkOption {
+      type = types.float;
+      default = 100.0;
+      description = "Animation speed";
+    };
   };
 
   # --- Implementation ---

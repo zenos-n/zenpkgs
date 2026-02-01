@@ -1,6 +1,6 @@
 {
-  pkgs,
   config,
+  pkgs,
   lib,
   ...
 }:
@@ -10,40 +10,8 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.paperwm;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkDouble =
-    default: description:
-    mkOption {
-      type = types.float;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  mkOptionStrList =
+  # Helper for keybinding options
+  mkKeybindOption =
     default: description:
     mkOption {
       type = types.listOf types.str;
@@ -51,96 +19,346 @@ let
       description = description;
     };
 
-  mkOptionFloatList =
-    default: description:
-    mkOption {
-      type = types.listOf types.float;
-      default = default;
-      description = description;
-    };
-
 in
 {
+  meta = {
+    description = "Configures the PaperWM GNOME extension";
+    longDescription = ''
+      This module installs and configures the **PaperWM** extension for GNOME.
+      PaperWM implements a scrollable tiling window manager, inspired by 10/GUI concepts.
+      It arranges windows in a horizontal ribbon, allowing for efficient navigation and management.
+
+      **Features:**
+      - Scrollable tiling layout.
+      - Extensive keyboard navigation.
+      - Touchpad gesture support.
+      - Customizable appearance (margins, borders, minimap).
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.paperwm = {
     enable = mkEnableOption "PaperWM GNOME extension configuration";
 
-    # --- Main Settings ---
-    horizontal-margin = mkInt 20 "Minimum margin from windows left and right edge.";
-    vertical-margin = mkInt 20 "Minimum margin from windows top edge.";
-    vertical-margin-bottom = mkInt 20 "Minimum margin from windows bottom edge.";
-    window-gap = mkInt 20 "Minimum gap between windows.";
-    selection-border-size = mkInt 10 "Selected window border size (px).";
-    selection-border-radius-top = mkInt 12 "Selected window border top radius (px).";
-    selection-border-radius-bottom = mkInt 0 "Selected window border bottom radius (px).";
-    minimap-scale = mkDouble 0.15 "Scale of minimap tiles.";
-    minimap-shade-opacity = mkInt 160 "Opacity of non-selected windows in minimap.";
+    # --- Layout ---
+    layout = {
+      margins = {
+        horizontal = mkOption {
+          type = types.int;
+          default = 20;
+          description = "Minimum margin from windows left and right edge";
+        };
+        vertical = mkOption {
+          type = types.int;
+          default = 20;
+          description = "Minimum margin from windows top edge";
+        };
+        bottom = mkOption {
+          type = types.int;
+          default = 20;
+          description = "Minimum margin from windows bottom edge";
+        };
+      };
 
-    edge-preview-enable = mkBool true "Enable tiling edge window previews.";
-    edge-preview-scale = mkDouble 0.15 "Scale of edge previews.";
-    edge-preview-click-enable = mkBool true "Activate edge preview with click.";
-    edge-preview-timeout-enable = mkBool false "Activate edge preview with timeout.";
-    edge-preview-timeout = mkInt 800 "Timeout (ms) for edge preview.";
-    edge-preview-timeout-continual = mkBool false "Continual activation at edge.";
-    window-switcher-preview-scale = mkDouble 0.15 "Scale of window switch previews.";
+      gap = mkOption {
+        type = types.int;
+        default = 20;
+        description = "Minimum gap between windows";
+      };
 
-    only-scratch-in-overview = mkBool false "Limit overview to scratch windows.";
-    disable-scratch-in-overview = mkBool false "Don't show scratch windows in overview.";
+      maximize = {
+        width-percent = mkOption {
+          type = types.float;
+          default = 1.00;
+          description = "Percent width for horizontal maximize";
+        };
+        within-tiling = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Maximize within tiling margins";
+        };
+      };
 
-    swipe-sensitivity = mkOptionFloatList [ 2.0 2.0 ] "Swipe sensitivity [x, y].";
-    swipe-friction = mkOptionFloatList [ 0.3 0.1 ] "Swipe friction [x, y].";
-    cycle-width-steps = mkOptionFloatList [ 0.38195 0.5 0.61804 ] "Cycle width steps.";
-    cycle-height-steps = mkOptionFloatList [ 0.38195 0.5 0.61804 ] "Cycle height steps.";
+      cycle-steps = {
+        width = mkOption {
+          type = types.listOf types.float;
+          default = [
+            0.38195
+            0.5
+            0.61804
+          ];
+          description = "Cycle width steps";
+        };
+        height = mkOption {
+          type = types.listOf types.float;
+          default = [
+            0.38195
+            0.5
+            0.61804
+          ];
+          description = "Cycle height steps";
+        };
+      };
+    };
 
-    maximize-width-percent = mkDouble 1.00 "Percent width for horizontal maximize.";
-    maximize-within-tiling = mkBool true "Maximize within tiling margins.";
+    # --- Appearance ---
+    appearance = {
+      borders = {
+        size = mkOption {
+          type = types.int;
+          default = 10;
+          description = "Selected window border size (px)";
+        };
+        radius-top = mkOption {
+          type = types.int;
+          default = 12;
+          description = "Selected window border top radius (px)";
+        };
+        radius-bottom = mkOption {
+          type = types.int;
+          default = 0;
+          description = "Selected window border bottom radius (px)";
+        };
+      };
 
-    workspace-colors = mkOptionStrList [ "#314E6C" "#565248" "#445632" ] "Workspace colors.";
-    use-default-background = mkBool true "Use default GNOME background.";
-    default-show-top-bar = mkBool true "Show top bar on workspaces by default.";
+      minimap = {
+        scale = mkOption {
+          type = types.float;
+          default = 0.15;
+          description = "Scale of minimap tiles";
+        };
+        shade-opacity = mkOption {
+          type = types.int;
+          default = 160;
+          description = "Opacity of non-selected windows in minimap";
+        };
+      };
 
-    open-window-position = mkInt 0 "New window position (0:Right, 1:Left, 2:Start, 3:End).";
-    disable-topbar-styling = mkBool false "Disable PaperWM topbar styling.";
-    show-workspace-indicator = mkBool true "Show workspace indicator in topbar.";
-    show-window-position-bar = mkBool true "Show window position bar in topbar.";
-    show-focus-mode-icon = mkBool true "Show focus mode icon in topbar.";
-    show-open-position-icon = mkBool true "Show open position icon in topbar.";
-    topbar-mouse-scroll-enable = mkBool true "Enable scroll on topbar to switch windows.";
+      workspace-colors = mkOption {
+        type = types.listOf types.str;
+        default = [
+          "#314E6C"
+          "#565248"
+          "#445632"
+        ];
+        description = "Workspace colors";
+      };
 
-    animation-time = mkDouble 0.25 "Animation duration (s).";
-    drift-speed = mkInt 2 "Drift speed (px/ms).";
+      use-default-background = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Use default GNOME background";
+      };
+    };
 
-    gesture-enabled = mkBool true "Enable touchpad gestures.";
-    gesture-horizontal-fingers = mkInt 3 "Fingers for horizontal swipe.";
-    gesture-workspace-fingers = mkInt 3 "Fingers for workspace switching.";
+    # --- Behavior ---
+    behavior = {
+      open-window-position = mkOption {
+        type = types.enum [
+          "Right"
+          "Left"
+          "Start"
+          "End"
+        ];
+        default = "Right";
+        description = "New window position";
+      };
 
-    winprops = mkOptionStrList [ ] "Array of winprops JSON objects.";
+      animation-time = mkOption {
+        type = types.float;
+        default = 0.25;
+        description = "Animation duration (s)";
+      };
 
-    # --- Keybindings Submodule ---
+      drift-speed = mkOption {
+        type = types.int;
+        default = 2;
+        description = "Drift speed (px/ms)";
+      };
+
+      winprops = mkOption {
+        type = types.listOf types.str;
+        default = [ ];
+        description = "Array of winprops JSON objects";
+      };
+    };
+
+    # --- Top Bar ---
+    topbar = {
+      show-on-workspaces = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Show top bar on workspaces by default";
+      };
+
+      disable-styling = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Disable PaperWM topbar styling";
+      };
+
+      mouse-scroll-enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable scroll on topbar to switch windows";
+      };
+
+      indicators = {
+        workspace = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Show workspace indicator in topbar";
+        };
+        position = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Show window position bar in topbar";
+        };
+        focus-mode = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Show focus mode icon in topbar";
+        };
+        open-position = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Show open position icon in topbar";
+        };
+      };
+    };
+
+    # --- Previews ---
+    previews = {
+      edge = {
+        enable = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Enable tiling edge window previews";
+        };
+        scale = mkOption {
+          type = types.float;
+          default = 0.15;
+          description = "Scale of edge previews";
+        };
+        click-enable = mkOption {
+          type = types.bool;
+          default = true;
+          description = "Activate edge preview with click";
+        };
+        timeout = {
+          enable = mkOption {
+            type = types.bool;
+            default = false;
+            description = "Activate edge preview with timeout";
+          };
+          delay = mkOption {
+            type = types.int;
+            default = 800;
+            description = "Timeout (ms) for edge preview";
+          };
+          continual = mkOption {
+            type = types.bool;
+            default = false;
+            description = "Continual activation at edge";
+          };
+        };
+      };
+
+      switcher-scale = mkOption {
+        type = types.float;
+        default = 0.15;
+        description = "Scale of window switch previews";
+      };
+
+      overview = {
+        only-scratch = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Limit overview to scratch windows";
+        };
+        disable-scratch = mkOption {
+          type = types.bool;
+          default = false;
+          description = "Don't show scratch windows in overview";
+        };
+      };
+    };
+
+    # --- Gestures ---
+    gestures = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Enable touchpad gestures";
+      };
+
+      fingers = {
+        horizontal = mkOption {
+          type = types.int;
+          default = 3;
+          description = "Fingers for horizontal swipe";
+        };
+        workspace = mkOption {
+          type = types.int;
+          default = 3;
+          description = "Fingers for workspace switching";
+        };
+      };
+
+      swipe = {
+        sensitivity = mkOption {
+          type = types.listOf types.float;
+          default = [
+            2.0
+            2.0
+          ];
+          description = "Swipe sensitivity [x, y]";
+        };
+        friction = mkOption {
+          type = types.listOf types.float;
+          default = [
+            0.3
+            0.1
+          ];
+          description = "Swipe friction [x, y]";
+        };
+      };
+    };
+
+    # --- Keybindings ---
     keybindings = {
-      new-window = mkOptionStrList [ "<Super>Return" "<Super>n" ] "Open new window.";
-      live-alt-tab = mkOptionStrList [ "<Super>Tab" "<Alt>Tab" ] "Switch to prev active window.";
-      live-alt-tab-backward = mkOptionStrList [
+      new-window = mkKeybindOption [
+        "<Super>Return"
+        "<Super>n"
+      ] "Open new window";
+      live-alt-tab = mkKeybindOption [
+        "<Super>Tab"
+        "<Alt>Tab"
+      ] "Switch to prev active window";
+      live-alt-tab-backward = mkKeybindOption [
         "<Super><Shift>Tab"
         "<Alt><Shift>Tab"
-      ] "Switch to prev active window (backward).";
-      previous-workspace = mkOptionStrList [ "<Super>Above_Tab" ] "Switch to prev workspace.";
-      switch-monitor-right = mkOptionStrList [ "<Super><Shift>Right" ] "Switch to right monitor.";
-      switch-monitor-left = mkOptionStrList [ "<Super><Shift>Left" ] "Switch to left monitor.";
-      move-right = mkOptionStrList [
+      ] "Switch to prev active window (backward)";
+      previous-workspace = mkKeybindOption [ "<Super>Above_Tab" ] "Switch to prev workspace";
+      switch-monitor-right = mkKeybindOption [ "<Super><Shift>Right" ] "Switch to right monitor";
+      switch-monitor-left = mkKeybindOption [ "<Super><Shift>Left" ] "Switch to left monitor";
+      move-right = mkKeybindOption [
         "<Super><Ctrl>period"
         "<Super><Shift>period"
         "<Super><Ctrl>Right"
-      ] "Move window right.";
-      move-left = mkOptionStrList [
+      ] "Move window right";
+      move-left = mkKeybindOption [
         "<Super><Ctrl>comma"
         "<Super><Shift>comma"
         "<Super><Ctrl>Left"
-      ] "Move window left.";
-      move-up = mkOptionStrList [ "<Super><Ctrl>Up" ] "Move window up.";
-      move-down = mkOptionStrList [ "<Super><Ctrl>Down" ] "Move window down.";
-      close-window = mkOptionStrList [ "<Super>BackSpace" ] "Close active window.";
-      toggle-maximize-width = mkOptionStrList [ "<Super>f" ] "Maximize width.";
-      paper-toggle-fullscreen = mkOptionStrList [ "<Super><shift>f" ] "Toggle fullscreen.";
+      ] "Move window left";
+      move-up = mkKeybindOption [ "<Super><Ctrl>Up" ] "Move window up";
+      move-down = mkKeybindOption [ "<Super><Ctrl>Down" ] "Move window down";
+      close-window = mkKeybindOption [ "<Super>BackSpace" ] "Close active window";
+      toggle-maximize-width = mkKeybindOption [ "<Super>f" ] "Maximize width";
+      paper-toggle-fullscreen = mkKeybindOption [ "<Super><shift>f" ] "Toggle fullscreen";
     };
   };
 
@@ -152,46 +370,66 @@ in
       {
         settings = {
           "org/gnome/shell/extensions/paperwm" = {
-            horizontal-margin = cfg.horizontal-margin;
-            vertical-margin = cfg.vertical-margin;
-            vertical-margin-bottom = cfg.vertical-margin-bottom;
-            window-gap = cfg.window-gap;
-            selection-border-size = cfg.selection-border-size;
-            selection-border-radius-top = cfg.selection-border-radius-top;
-            selection-border-radius-bottom = cfg.selection-border-radius-bottom;
-            minimap-scale = cfg.minimap-scale;
-            minimap-shade-opacity = cfg.minimap-shade-opacity;
-            edge-preview-enable = cfg.edge-preview-enable;
-            edge-preview-scale = cfg.edge-preview-scale;
-            edge-preview-click-enable = cfg.edge-preview-click-enable;
-            edge-preview-timeout-enable = cfg.edge-preview-timeout-enable;
-            edge-preview-timeout = cfg.edge-preview-timeout;
-            edge-preview-timeout-continual = cfg.edge-preview-timeout-continual;
-            window-switcher-preview-scale = cfg.window-switcher-preview-scale;
-            only-scratch-in-overview = cfg.only-scratch-in-overview;
-            disable-scratch-in-overview = cfg.disable-scratch-in-overview;
-            swipe-sensitivity = cfg.swipe-sensitivity;
-            swipe-friction = cfg.swipe-friction;
-            cycle-width-steps = cfg.cycle-width-steps;
-            cycle-height-steps = cfg.cycle-height-steps;
-            maximize-width-percent = cfg.maximize-width-percent;
-            maximize-within-tiling = cfg.maximize-within-tiling;
-            workspace-colors = cfg.workspace-colors;
-            use-default-background = cfg.use-default-background;
-            default-show-top-bar = cfg.default-show-top-bar;
-            open-window-position = cfg.open-window-position;
-            disable-topbar-styling = cfg.disable-topbar-styling;
-            show-workspace-indicator = cfg.show-workspace-indicator;
-            show-window-position-bar = cfg.show-window-position-bar;
-            show-focus-mode-icon = cfg.show-focus-mode-icon;
-            show-open-position-icon = cfg.show-open-position-icon;
-            topbar-mouse-scroll-enable = cfg.topbar-mouse-scroll-enable;
-            animation-time = cfg.animation-time;
-            drift-speed = cfg.drift-speed;
-            gesture-enabled = cfg.gesture-enabled;
-            gesture-horizontal-fingers = cfg.gesture-horizontal-fingers;
-            gesture-workspace-fingers = cfg.gesture-workspace-fingers;
-            winprops = cfg.winprops;
+            # Layout
+            horizontal-margin = cfg.layout.margins.horizontal;
+            vertical-margin = cfg.layout.margins.vertical;
+            vertical-margin-bottom = cfg.layout.margins.bottom;
+            window-gap = cfg.layout.gap;
+            maximize-width-percent = cfg.layout.maximize.width-percent;
+            maximize-within-tiling = cfg.layout.maximize.within-tiling;
+            cycle-width-steps = cfg.layout.cycle-steps.width;
+            cycle-height-steps = cfg.layout.cycle-steps.height;
+
+            # Appearance
+            selection-border-size = cfg.appearance.borders.size;
+            selection-border-radius-top = cfg.appearance.borders.radius-top;
+            selection-border-radius-bottom = cfg.appearance.borders.radius-bottom;
+            minimap-scale = cfg.appearance.minimap.scale;
+            minimap-shade-opacity = cfg.appearance.minimap.shade-opacity;
+            workspace-colors = cfg.appearance.workspace-colors;
+            use-default-background = cfg.appearance.use-default-background;
+
+            # Behavior
+            open-window-position =
+              let
+                map = {
+                  "Right" = 0;
+                  "Left" = 1;
+                  "Start" = 2;
+                  "End" = 3;
+                };
+              in
+              map.${cfg.behavior.open-window-position};
+            animation-time = cfg.behavior.animation-time;
+            drift-speed = cfg.behavior.drift-speed;
+            winprops = cfg.behavior.winprops;
+
+            # Top Bar
+            default-show-top-bar = cfg.topbar.show-on-workspaces;
+            disable-topbar-styling = cfg.topbar.disable-styling;
+            topbar-mouse-scroll-enable = cfg.topbar.mouse-scroll-enable;
+            show-workspace-indicator = cfg.topbar.indicators.workspace;
+            show-window-position-bar = cfg.topbar.indicators.position;
+            show-focus-mode-icon = cfg.topbar.indicators.focus-mode;
+            show-open-position-icon = cfg.topbar.indicators.open-position;
+
+            # Previews
+            edge-preview-enable = cfg.previews.edge.enable;
+            edge-preview-scale = cfg.previews.edge.scale;
+            edge-preview-click-enable = cfg.previews.edge.click-enable;
+            edge-preview-timeout-enable = cfg.previews.edge.timeout.enable;
+            edge-preview-timeout = cfg.previews.edge.timeout.delay;
+            edge-preview-timeout-continual = cfg.previews.edge.timeout.continual;
+            window-switcher-preview-scale = cfg.previews.switcher-scale;
+            only-scratch-in-overview = cfg.previews.overview.only-scratch;
+            disable-scratch-in-overview = cfg.previews.overview.disable-scratch;
+
+            # Gestures
+            gesture-enabled = cfg.gestures.enable;
+            gesture-horizontal-fingers = cfg.gestures.fingers.horizontal;
+            gesture-workspace-fingers = cfg.gestures.fingers.workspace;
+            swipe-sensitivity = cfg.gestures.swipe.sensitivity;
+            swipe-friction = cfg.gestures.swipe.friction;
           };
 
           "org/gnome/shell/extensions/paperwm/keybindings" = {

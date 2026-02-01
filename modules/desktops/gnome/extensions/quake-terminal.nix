@@ -10,39 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.quake-terminal;
 
-  # --- Helpers for Types ---
-  mkBool =
-    default: description:
-    mkOption {
-      type = types.bool;
-      default = default;
-      description = description;
-    };
-
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
-  mkOptionStrList =
-    default: description:
-    mkOption {
-      type = types.listOf types.str;
-      default = default;
-      description = description;
-    };
-
   # --- Serializer Logic for a{ss} ---
   # Helper to quote strings for GVariant
   mkGVariantString = v: "'${v}'";
@@ -60,31 +27,115 @@ let
 
 in
 {
+  meta = {
+    description = "Configures the Quake Terminal GNOME extension";
+    longDescription = ''
+      This module installs and configures the **Quake Terminal** extension for GNOME.
+      It provides a dropdown terminal (Quake-style) that can be toggled with a keyboard shortcut.
+
+      **Features:**
+      - Dropdown terminal functionality for any app (defaults to gnome-terminal).
+      - Configurable size, position, and animation.
+      - Multi-monitor support.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.quake-terminal = {
     enable = mkEnableOption "Quake Terminal GNOME extension configuration";
 
-    terminal-id = mkStr "org.gnome.Terminal.desktop" "The application path used as a reference.";
-    terminal-shortcut = mkOptionStrList [
-      "<Super>Return"
-    ] "Shortcut to activate the terminal application.";
+    # --- Application Settings ---
+    app = {
+      id = mkOption {
+        type = types.str;
+        default = "org.gnome.Terminal.desktop";
+        description = "The application path used as a reference";
+      };
 
-    vertical-size = mkInt 50 "Terminal Vertical Size (percentage).";
-    horizontal-size = mkInt 100 "Terminal Horizontal Size (percentage).";
-    horizontal-alignment = mkInt 2 "Terminal Horizontal Alignment (0-2).";
+      shortcut = mkOption {
+        type = types.listOf types.str;
+        default = [ "<Super>Return" ];
+        description = "Shortcut to activate the terminal application";
+      };
 
-    render-on-current-monitor = mkBool false "Show on the current Display.";
-    render-on-primary-monitor = mkBool false "Show on the primary Display.";
-    monitor-screen = mkInt 0 "Specify the display where the terminal should be rendered.";
+      launch-args = mkOption {
+        type = types.attrsOf types.str;
+        default = { };
+        description = "Dictionary mapping application IDs to their terminal launch arguments";
+      };
+    };
 
-    auto-hide-window = mkBool true "Hide Terminal window when it loses focus.";
-    always-on-top = mkBool false "Terminal window will appear on top of all other windows.";
-    animation-time = mkInt 250 "Duration of the dropdown animation in milliseconds.";
-    skip-taskbar = mkBool true "Hide terminal window in overview mode or Alt+Tab.";
+    # --- Layout ---
+    layout = {
+      size = {
+        vertical = mkOption {
+          type = types.int;
+          default = 50;
+          description = "Terminal Vertical Size (percentage)";
+        };
 
-    launch-args-map = mkOption {
-      type = types.attrsOf types.str;
-      default = { };
-      description = "Dictionary mapping application IDs to their terminal launch arguments (a{ss}).";
+        horizontal = mkOption {
+          type = types.int;
+          default = 100;
+          description = "Terminal Horizontal Size (percentage)";
+        };
+      };
+
+      alignment = mkOption {
+        type = types.int;
+        default = 2;
+        description = "Terminal Horizontal Alignment (0-2)";
+      };
+    };
+
+    # --- Monitors ---
+    monitors = {
+      render-on-current = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Show on the current Display";
+      };
+
+      render-on-primary = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Show on the primary Display";
+      };
+
+      monitor-index = mkOption {
+        type = types.int;
+        default = 0;
+        description = "Specify the display where the terminal should be rendered";
+      };
+    };
+
+    # --- Behavior ---
+    behavior = {
+      auto-hide = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Hide Terminal window when it loses focus";
+      };
+
+      always-on-top = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Terminal window will appear on top of all other windows";
+      };
+
+      animation-time = mkOption {
+        type = types.int;
+        default = 250;
+        description = "Duration of the dropdown animation in milliseconds";
+      };
+
+      skip-taskbar = mkOption {
+        type = types.bool;
+        default = true;
+        description = "Hide terminal window in overview mode or Alt+Tab";
+      };
     };
   };
 
@@ -97,18 +148,18 @@ in
       {
         settings = {
           "org/gnome/shell/extensions/quake-terminal" = {
-            terminal-id = cfg.terminal-id;
-            terminal-shortcut = cfg.terminal-shortcut;
-            vertical-size = cfg.vertical-size;
-            horizontal-size = cfg.horizontal-size;
-            horizontal-alignment = cfg.horizontal-alignment;
-            render-on-current-monitor = cfg.render-on-current-monitor;
-            render-on-primary-monitor = cfg.render-on-primary-monitor;
-            monitor-screen = cfg.monitor-screen;
-            auto-hide-window = cfg.auto-hide-window;
-            always-on-top = cfg.always-on-top;
-            animation-time = cfg.animation-time;
-            skip-taskbar = cfg.skip-taskbar;
+            terminal-id = cfg.app.id;
+            terminal-shortcut = cfg.app.shortcut;
+            vertical-size = cfg.layout.size.vertical;
+            horizontal-size = cfg.layout.size.horizontal;
+            horizontal-alignment = cfg.layout.alignment;
+            render-on-current-monitor = cfg.monitors.render-on-current;
+            render-on-primary-monitor = cfg.monitors.render-on-primary;
+            monitor-screen = cfg.monitors.monitor-index;
+            auto-hide-window = cfg.behavior.auto-hide;
+            always-on-top = cfg.behavior.always-on-top;
+            animation-time = cfg.behavior.animation-time;
+            skip-taskbar = cfg.behavior.skip-taskbar;
           };
         };
       }
@@ -124,7 +175,7 @@ in
         RemainAfterExit = true;
       };
       script = ''
-        ${pkgs.dconf}/bin/dconf write /org/gnome/shell/extensions/quake-terminal/launch-args-map ${escapeShellArg (serializeLaunchArgs cfg.launch-args-map)}
+        ${pkgs.dconf}/bin/dconf write /org/gnome/shell/extensions/quake-terminal/launch-args-map ${escapeShellArg (serializeLaunchArgs cfg.app.launch-args)}
       '';
     };
   };

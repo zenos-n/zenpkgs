@@ -10,60 +10,192 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.mpris-label;
 
-  # --- Helpers for Types ---
-  mkInt =
-    default: description:
-    mkOption {
-      type = types.int;
-      default = default;
-      description = description;
-    };
-
-  mkStr =
-    default: description:
-    mkOption {
-      type = types.str;
-      default = default;
-      description = description;
-    };
-
 in
 {
+  meta = {
+    description = "Configures the MPRIS Label GNOME extension";
+    longDescription = ''
+      This module installs and configures the **MPRIS Label** extension for GNOME.
+      It displays the currently playing media metadata (artist, title, etc.) in the top bar,
+      with customizable fields, layout, and mouse actions.
+
+      **Features:**
+      - Customizable metadata fields (Artist, Title, etc.).
+      - configurable mouse click and scroll actions.
+      - Extensive layout and formatting options.
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options.zenos.desktops.gnome.extensions.mpris-label = {
     enable = mkEnableOption "MPRIS Label GNOME extension configuration";
 
     # --- Layout & Formatting ---
-    left-padding = mkInt 30 "Left padding.";
-    right-padding = mkInt 30 "Right padding.";
-    max-string-length = mkInt 30 "Maximum string length.";
-    extension-index = mkInt 3 "Extension index.";
-    extension-place = mkStr "right" "Extension place (left, center, right).";
-    refresh-rate = mkInt 300 "Refresh rate (ms).";
-    button-placeholder = mkStr "＿" "Button placeholder text.";
-    font-color = mkStr "" "Font color (css).";
-    label-filtered-list = mkStr "remaster,remix,featuring,live" "Comma-separated list of strings to filter out.";
-    divider-string = mkStr " | " "String separator between fields.";
+    layout = {
+      padding-left = mkOption {
+        type = types.int;
+        default = 30;
+        description = "Left padding";
+      };
+
+      padding-right = mkOption {
+        type = types.int;
+        default = 30;
+        description = "Right padding";
+      };
+
+      max-string-length = mkOption {
+        type = types.int;
+        default = 30;
+        description = "Maximum string length";
+      };
+
+      extension-index = mkOption {
+        type = types.int;
+        default = 3;
+        description = "Extension index position";
+      };
+
+      extension-place = mkOption {
+        type = types.enum [
+          "left"
+          "center"
+          "right"
+        ];
+        default = "right";
+        description = "Extension placement in the top bar";
+      };
+
+      refresh-rate = mkOption {
+        type = types.int;
+        default = 300;
+        description = "Refresh rate in milliseconds";
+      };
+
+      button-placeholder = mkOption {
+        type = types.str;
+        default = "＿";
+        description = "Button placeholder text";
+      };
+
+      divider-string = mkOption {
+        type = types.str;
+        default = " | ";
+        description = "String separator between fields";
+      };
+
+      font-color = mkOption {
+        type = types.str;
+        default = "";
+        description = "Font color (CSS value)";
+      };
+
+      filtered-list = mkOption {
+        type = types.str;
+        default = "remaster,remix,featuring,live";
+        description = "Comma-separated list of strings to filter out from metadata";
+      };
+    };
 
     # --- Fields ---
-    first-field = mkStr "xesam:artist" "First metadata field.";
-    second-field = mkStr "xesam:title" "Second metadata field.";
-    last-field = mkStr "" "Last metadata field.";
+    fields = {
+      first = mkOption {
+        type = types.str;
+        default = "xesam:artist";
+        description = "First metadata field to display";
+      };
+
+      second = mkOption {
+        type = types.str;
+        default = "xesam:title";
+        description = "Second metadata field to display";
+      };
+
+      last = mkOption {
+        type = types.str;
+        default = "";
+        description = "Last metadata field to display";
+      };
+    };
 
     # --- Actions ---
-    left-click-action = mkStr "play-pause" "Left click action.";
-    left-double-click-action = mkStr "next-track" "Left double-click action.";
-    right-click-action = mkStr "activate-player" "Right click action.";
-    right-double-click-action = mkStr "prev-track" "Right double-click action.";
-    middle-click-action = mkStr "play-pause" "Middle click action.";
-    middle-double-click-action = mkStr "none" "Middle double-click action.";
+    actions = {
+      left = {
+        click = mkOption {
+          type = types.str;
+          default = "play-pause";
+          description = "Left click action";
+        };
+        double-click = mkOption {
+          type = types.str;
+          default = "next-track";
+          description = "Left double-click action";
+        };
+      };
 
-    thumb-forward-action = mkStr "next-track" "Mouse thumb forward action.";
-    thumb-double-forward-action = mkStr "none" "Mouse thumb double forward action.";
-    thumb-backward-action = mkStr "prev-track" "Mouse thumb backward action.";
-    thumb-double-backward-action = mkStr "none" "Mouse thumb double backward action.";
+      right = {
+        click = mkOption {
+          type = types.str;
+          default = "activate-player";
+          description = "Right click action";
+        };
+        double-click = mkOption {
+          type = types.str;
+          default = "prev-track";
+          description = "Right double-click action";
+        };
+      };
 
-    scroll-action = mkStr "volume-controls" "Scroll action.";
-    volume-control-scheme = mkStr "application" "Volume control scheme.";
+      middle = {
+        click = mkOption {
+          type = types.str;
+          default = "play-pause";
+          description = "Middle click action";
+        };
+        double-click = mkOption {
+          type = types.str;
+          default = "none";
+          description = "Middle double-click action";
+        };
+      };
+
+      thumb = {
+        forward = mkOption {
+          type = types.str;
+          default = "next-track";
+          description = "Mouse thumb forward action";
+        };
+        double-forward = mkOption {
+          type = types.str;
+          default = "none";
+          description = "Mouse thumb double forward action";
+        };
+        backward = mkOption {
+          type = types.str;
+          default = "prev-track";
+          description = "Mouse thumb backward action";
+        };
+        double-backward = mkOption {
+          type = types.str;
+          default = "none";
+          description = "Mouse thumb double backward action";
+        };
+      };
+
+      scroll = mkOption {
+        type = types.str;
+        default = "volume-controls";
+        description = "Scroll action";
+      };
+
+      volume-control-scheme = mkOption {
+        type = types.str;
+        default = "application";
+        description = "Volume control scheme";
+      };
+    };
   };
 
   # --- Implementation ---
@@ -74,34 +206,38 @@ in
       {
         settings = {
           "org/gnome/shell/extensions/mpris-label" = {
-            left-padding = cfg.left-padding;
-            right-padding = cfg.right-padding;
-            max-string-length = cfg.max-string-length;
-            extension-index = cfg.extension-index;
-            extension-place = cfg.extension-place;
-            refresh-rate = cfg.refresh-rate;
-            button-placeholder = cfg.button-placeholder;
-            font-color = cfg.font-color;
-            label-filtered-list = cfg.label-filtered-list;
-            divider-string = cfg.divider-string;
-            first-field = cfg.first-field;
-            second-field = cfg.second-field;
-            last-field = cfg.last-field;
+            # Layout
+            left-padding = cfg.layout.padding-left;
+            right-padding = cfg.layout.padding-right;
+            max-string-length = cfg.layout.max-string-length;
+            extension-index = cfg.layout.extension-index;
+            extension-place = cfg.layout.extension-place;
+            refresh-rate = cfg.layout.refresh-rate;
+            button-placeholder = cfg.layout.button-placeholder;
+            font-color = cfg.layout.font-color;
+            label-filtered-list = cfg.layout.filtered-list;
+            divider-string = cfg.layout.divider-string;
 
-            left-click-action = cfg.left-click-action;
-            left-double-click-action = cfg.left-double-click-action;
-            right-click-action = cfg.right-click-action;
-            right-double-click-action = cfg.right-double-click-action;
-            middle-click-action = cfg.middle-click-action;
-            middle-double-click-action = cfg.middle-double-click-action;
+            # Fields
+            first-field = cfg.fields.first;
+            second-field = cfg.fields.second;
+            last-field = cfg.fields.last;
 
-            thumb-forward-action = cfg.thumb-forward-action;
-            thumb-double-forward-action = cfg.thumb-double-forward-action;
-            thumb-backward-action = cfg.thumb-backward-action;
-            thumb-double-backward-action = cfg.thumb-double-backward-action;
+            # Actions
+            left-click-action = cfg.actions.left.click;
+            left-double-click-action = cfg.actions.left.double-click;
+            right-click-action = cfg.actions.right.click;
+            right-double-click-action = cfg.actions.right.double-click;
+            middle-click-action = cfg.actions.middle.click;
+            middle-double-click-action = cfg.actions.middle.double-click;
 
-            scroll-action = cfg.scroll-action;
-            volume-control-scheme = cfg.volume-control-scheme;
+            thumb-forward-action = cfg.actions.thumb.forward;
+            thumb-double-forward-action = cfg.actions.thumb.double-forward;
+            thumb-backward-action = cfg.actions.thumb.backward;
+            thumb-double-backward-action = cfg.actions.thumb.double-backward;
+
+            scroll-action = cfg.actions.scroll;
+            volume-control-scheme = cfg.actions.volume-control-scheme;
           };
         };
       }
