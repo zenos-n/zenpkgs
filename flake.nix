@@ -72,12 +72,14 @@
         }
         # 2. Legacy Mappers (Custom maps like 'win-browser')
         // (if legacyTree == { } then { } else inflate legacyTree final)
-        # 3. ZenPkgs Priority (Overwrites upstream)
-        // (if zenTree == { } then { } else inflate zenTree final);
+        # 3. ZenPkgs Priority (Namespace to 'zenos')
+        // {
+          zenos = if zenTree == { } then { } else inflate zenTree final;
+        };
 
     in
     {
-      inherit inputs;
+      # Removed 'inherit inputs;' to silence "unknown flake output" warning
       overlays.default = zenOverlay;
 
       lib = {
@@ -90,7 +92,7 @@
         let
           zenosTree = loader.generateTree ./modules;
           legacyTree = loader.generateTree ./legacy/modules;
-          programsTree = loader.generateTree ./programModules;
+          programsTree = loader.generateTree ./program-modules;
 
           zenosList = nixpkgs.lib.collect builtins.isPath zenosTree;
           legacyList = nixpkgs.lib.collect builtins.isPath legacyTree;
@@ -98,19 +100,31 @@
 
           # Dynamic Injection for Program Modules
           programInjection =
-            { config, lib, ... }:
+            { lib, ... }:
             {
-              system.programs = {
-                imports = programsList;
+              # 1. Define the Options (Type/Structure)
+              options = {
+                users.users = lib.mkOption {
+                  type = lib.types.attrsOf (
+                    lib.types.submodule {
+                      # Extend the user submodule to include 'programs'
+                      imports = [
+                        {
+                          options.programs = {
+                            imports = programsList;
+                          };
+                        }
+                      ];
+                    }
+                  );
+                };
               };
-              users.users = lib.mkOption {
-                type = lib.types.attrsOf (
-                  lib.types.submodule {
-                    options.programs = {
-                      imports = programsList;
-                    };
-                  }
-                );
+
+              # 2. Define the Configuration (Values)
+              config = {
+                system.programs = {
+                  imports = programsList;
+                };
               };
             };
         in
@@ -133,7 +147,7 @@
       # --- Home Manager Modules ---
       homeManagerModules =
         let
-          zenosTree = loader.generateTree ./hmModules;
+          zenosTree = loader.generateTree ./hm-modules;
           legacyTree = loader.generateTree ./legacy/home;
 
           zenosList = nixpkgs.lib.collect builtins.isPath zenosTree;
@@ -157,13 +171,13 @@
             overlays = [ self.overlays.default ];
             config.allowUnfree = true;
           };
+
+          # Since packages are now namespaced under pkgs.zenos,
+          # we grab the top-level categories from that namespace.
           zenPkgNames =
-            if builtins.pathExists ./pkgs then
-              builtins.attrNames (nixpkgs.lib.filterAttrs (n: v: v == "directory") (builtins.readDir ./pkgs))
-            else
-              [ ];
+            if builtins.pathExists ./pkgs then builtins.attrNames (builtins.readDir ./pkgs) else [ ];
         in
-        if zenPkgNames == [ ] then { } else nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.${name})
+        if zenPkgNames == [ ] then { } else nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.zenos.${name})
       );
     };
 }

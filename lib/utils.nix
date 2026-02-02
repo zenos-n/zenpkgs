@@ -143,4 +143,49 @@ rec {
     DETECTED_ARCH=$(gcc -march=native -Q --help=target | grep --text -m1 -- "-march=" | cut -d= -f2 | xargs)
     echo "Detected: $DETECTED_ARCH"
   '';
+
+  # [ HELPER ] mkBinding
+  # Automates the ZenOS > Legacy > Upstream priority logic.
+  mkBinding =
+    {
+      name, # Human readable name
+      sys, # The ZenOS 'sys' config set
+      legacy, # The Legacy config set
+      target, # The upstream option path (list of strings)
+    }:
+    let
+      setPath = val: lib.setAttrByPath target val;
+    in
+    lib.mkMerge [
+      # 1. Zen/Sys Priority (Force Overrides)
+      (lib.mkIf sys.enable (setPath (lib.mkForce sys)))
+
+      # 2. Legacy Fallback (Normal Priority)
+      (setPath legacy)
+
+      # 3. Conflict Warning
+      {
+        warnings =
+          lib.optional (sys.enable && legacy != { })
+            "ZenOS Conflict: '${name}' is configured via both 'sys' and 'legacy'. 'sys' settings have been forced.";
+      }
+    ];
+
+  # [ HELPER ] mkUserPkgs
+  # MAGICAL SHADOWING: Creates a 'pkgs' wrapper for the User Config.
+  # This allows the user to type 'pkgs.system.zenfs' while preserving
+  # 'pkgs.system' as a string for internal Nix usage (like string interpolation).
+  #
+  # USAGE: In ZenOS flake, pass 'pkgs = utils.mkUserPkgs pkgs' in specialArgs.
+  #
+  # WARNING: 'pkgs.system == "x86_64-linux"' will return FALSE because it is now a Set.
+  # However, '"${pkgs.system}"' will still correctly return "x86_64-linux".
+  mkUserPkgs =
+    pkgs:
+    pkgs
+    // {
+      system = (pkgs.sys or { }) // {
+        __toString = _: pkgs.stdenv.hostPlatform.system;
+      };
+    };
 }
