@@ -42,7 +42,7 @@ in
     platforms = lib.platforms.zenos;
   };
 
-  options.zenos.desktops.gnome = {
+  options.desktops.gnome = {
     enable = mkEnableOption "Gnome Desktop Base Module";
 
     defaultAccentColor = mkOption {

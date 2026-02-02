@@ -39,7 +39,7 @@ in
     platforms = lib.platforms.zenos;
   };
 
-  options.zenos.plymouth = {
+  options.system.boot.plymouth.theme.zenos = {
     enable = lib.mkEnableOption "ZenOS Plymouth boot animation";
 
     kernelParams = {
