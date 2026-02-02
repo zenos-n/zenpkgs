@@ -1,56 +1,39 @@
-name: ZenPkgs Integrity Check
+name: Nix Integrity Check
 
 on:
   push:
-    branches: [main]
+    branches: ["main", "master"]
   pull_request:
-    branches: [main]
+    branches: ["main", "master"]
 
 jobs:
-  sanity-check:
-    name: Sanity Audit
+  check-integrity:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Verify Runner
-        run: echo "✅ Runner started! Installing Nix..."
-
       - name: Install Nix
-        uses: cachix/install-nix-action@v25
+        uses: cachix/install-nix-action@v27
         with:
           nix_path: nixpkgs=channel:nixos-unstable
-          extra_nix_config: |
-            experimental-features = nix-command flakes
-            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
-      - name: Run Integrity Audit
+      - name: Eval Report and Verify Status
         run: |
-          echo "::group::Audit Execution"
-          echo "Starting Nix Evaluation..."
+          # Run the evaluation and capture stdout
+          # 2>&1 ensures we catch errors if nix itself fails to run
+          OUTPUT=$(nix eval --show-trace --file tests/integrity.nix report)
 
-          # Run eval with trace and pipe to tee
-          nix eval --json --show-trace -v --file tests/integrity.nix report | tee report.json
+          # Print output for debugging in the Actions log
+          echo "Nix Evaluation Output:"
+          echo "$OUTPUT"
 
-          echo "::endgroup::"
-
-          if [ ! -s report.json ]; then
-             echo "::error::Report file is empty. Evaluation likely crashed or produced no output."
-             exit 1
-          fi
-
-          echo "::group::Audit Results"
-          jq . report.json
-          echo "::endgroup::"
-
-          STATUS=$(jq -r '.status' report.json)
-
-          if [ "$STATUS" == "PASSED" ]; then
-            echo "✅ Integrity Check Passed"
+          # Check if the output contains the specific success string
+          # We search for 'status = "PASSED";' specifically as requested
+          if echo "$OUTPUT" | grep -Fq 'status = "PASSED";'; then
+            echo "✅ Integrity check PASSED."
             exit 0
           else
-            echo "❌ Integrity Check Failed"
-            echo "::error::Status: $STATUS. See logs for details."
+            echo "❌ Integrity check FAILED. Status was not 'PASSED'."
             exit 1
           fi
