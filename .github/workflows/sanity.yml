@@ -14,43 +14,43 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v4
 
+      - name: Verify Runner
+        run: echo "✅ Runner started! Installing Nix..."
+
       - name: Install Nix
         uses: cachix/install-nix-action@v25
         with:
           nix_path: nixpkgs=channel:nixos-unstable
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            access-tokens = github.com=${{ secrets.GITHUB_TOKEN }}
 
       - name: Run Integrity Audit
         run: |
           echo "::group::Audit Execution"
-          echo "Starting Integrity Audit..."
+          echo "Starting Nix Evaluation..."
 
-          # 1. Run eval with -v (verbose) to see download progress
-          # Pipe to 'tee' so we see output in logs AND save to file
-          # 2>&1 redirects stderr (traces) to stdout so they are captured/printed together
+          # Run eval with trace and pipe to tee
           nix eval --json --show-trace -v --file tests/integrity.nix report | tee report.json
 
           echo "::endgroup::"
 
-          # 2. Check if report was generated
           if [ ! -s report.json ]; then
-             echo "::error::Report file is empty. Evaluation likely crashed."
+             echo "::error::Report file is empty. Evaluation likely crashed or produced no output."
              exit 1
           fi
 
-          # 3. Pretty print for logs
           echo "::group::Audit Results"
           jq . report.json
           echo "::endgroup::"
 
-          # 4. Parse Status
           STATUS=$(jq -r '.status' report.json)
 
-          # 5. Fail or Pass
           if [ "$STATUS" == "PASSED" ]; then
             echo "✅ Integrity Check Passed"
             exit 0
           else
             echo "❌ Integrity Check Failed"
-            echo "::error::Integrity check returned status: $STATUS. Check logs for specific errors."
+            echo "::error::Status: $STATUS. See logs for details."
             exit 1
           fi
