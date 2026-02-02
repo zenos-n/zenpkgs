@@ -2,15 +2,17 @@ name: ZenPkgs Integrity Check
 
 on:
   push:
-    branches: [main, master]
+    branches: [main]
   pull_request:
-    branches: [main, master]
+    branches: [main]
 
 jobs:
   sanity-check:
+    name: Sanity Audit
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
       - name: Install Nix
         uses: cachix/install-nix-action@v25
@@ -19,17 +21,23 @@ jobs:
 
       - name: Run Integrity Audit
         run: |
-          # Evaluate the report and capture the output
-          nix eval --json --file tests/integrity.nix report > report.json
+          # 1. Run the evaluation and save JSON output
+          # We use --show-trace to help debug if Nix itself crashes
+          nix eval --json --show-trace --file tests/integrity.nix report > report.json
 
-          # Print the report for debugging
+          # 2. Print the full report to the build log for inspection
+          echo "--- Audit Report ---"
           cat report.json | jq .
 
-          # Check status and fail if not PASSED
+          # 3. Parse Status
           STATUS=$(jq -r '.status' report.json)
-          if [ "$STATUS" != "PASSED" ]; then
-            echo "::error::Integrity Check Failed!"
-            exit 1
+
+          # 4. Fail or Pass based on Status
+          if [ "$STATUS" == "PASSED" ]; then
+            echo "✅ Integrity Check Passed"
+            exit 0
           else
-            echo "::notice::Integrity Check Passed"
+            echo "❌ Integrity Check Failed"
+            echo "::error::Integrity check returned status: $STATUS. Check logs for specific module/package errors."
+            exit 1
           fi
