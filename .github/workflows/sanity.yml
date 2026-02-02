@@ -21,23 +21,36 @@ jobs:
 
       - name: Run Integrity Audit
         run: |
-          # 1. Run the evaluation and save JSON output
-          # We use --show-trace to help debug if Nix itself crashes
-          nix eval --json --show-trace --file tests/integrity.nix report > report.json
+          echo "::group::Audit Execution"
+          echo "Starting Integrity Audit..."
 
-          # 2. Print the full report to the build log for inspection
-          echo "--- Audit Report ---"
-          cat report.json | jq .
+          # 1. Run eval with -v (verbose) to see download progress
+          # Pipe to 'tee' so we see output in logs AND save to file
+          # 2>&1 redirects stderr (traces) to stdout so they are captured/printed together
+          nix eval --json --show-trace -v --file tests/integrity.nix report | tee report.json
 
-          # 3. Parse Status
+          echo "::endgroup::"
+
+          # 2. Check if report was generated
+          if [ ! -s report.json ]; then
+             echo "::error::Report file is empty. Evaluation likely crashed."
+             exit 1
+          fi
+
+          # 3. Pretty print for logs
+          echo "::group::Audit Results"
+          jq . report.json
+          echo "::endgroup::"
+
+          # 4. Parse Status
           STATUS=$(jq -r '.status' report.json)
 
-          # 4. Fail or Pass based on Status
+          # 5. Fail or Pass
           if [ "$STATUS" == "PASSED" ]; then
             echo "✅ Integrity Check Passed"
             exit 0
           else
             echo "❌ Integrity Check Failed"
-            echo "::error::Integrity check returned status: $STATUS. Check logs for specific module/package errors."
+            echo "::error::Integrity check returned status: $STATUS. Check logs for specific errors."
             exit 1
           fi
