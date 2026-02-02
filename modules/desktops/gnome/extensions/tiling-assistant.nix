@@ -5,411 +5,393 @@
   ...
 }:
 
-with lib;
-
 let
-  cfg = config.zenos.desktops.gnome.extensions.tactile;
+  cfg = config.zenos.desktops.gnome.extensions.tiling-assistant;
+  inherit (lib)
+    mkIf
+    mkOption
+    types
+    mapAttrsToList
+    concatStringsSep
+    mkEnableOption
+    escapeShellArg
+    ;
 
-  # Helper for keybinding options
-  mkKeybindOption =
-    default: description:
-    mkOption {
-      type = types.listOf types.str;
-      default = default;
-      description = description;
-    };
+  # --- GVariant Serializer for a{sv} (overridden-settings) ---
+  mkVariant = v: "<${v}>";
+  mkString = v: "'${v}'";
 
-  # --- Color Normalization Helpers ---
-  hexToDecMap = {
-    "0" = 0;
-    "1" = 1;
-    "2" = 2;
-    "3" = 3;
-    "4" = 4;
-    "5" = 5;
-    "6" = 6;
-    "7" = 7;
-    "8" = 8;
-    "9" = 9;
-    "a" = 10;
-    "b" = 11;
-    "c" = 12;
-    "d" = 13;
-    "e" = 14;
-    "f" = 15;
-    "A" = 10;
-    "B" = 11;
-    "C" = 12;
-    "D" = 13;
-    "E" = 14;
-    "F" = 15;
-  };
-
-  hexCharToInt = c: if builtins.hasAttr c hexToDecMap then hexToDecMap.${c} else 0;
-
-  parseHexByte =
-    s: (hexCharToInt (builtins.substring 0 1 s) * 16) + (hexCharToInt (builtins.substring 1 1 s));
-
-  serializeFloat =
-    f:
-    let
-      s = toString f;
-    in
-    if builtins.match ".*\\..*" s != null then s else "${s}.0";
-
-  toRgbaString =
-    val:
-    if builtins.isString val && (builtins.substring 0 1 val == "#") then
-      let
-        hex = lib.removePrefix "#" val;
-        r = toString (parseHexByte (substring 0 2 hex));
-        g = toString (parseHexByte (substring 2 2 hex));
-        b = toString (parseHexByte (substring 4 2 hex));
-        a =
-          if (builtins.stringLength hex) == 8 then
-            serializeFloat ((parseHexByte (substring 6 2 hex)) / 255.0)
-          else
-            "1.0";
-      in
-      "rgba(${r}, ${g}, ${b}, ${a})"
+  serializeSettings =
+    settings:
+    if settings == { } then
+      "@a{sv} {}"
     else
-      val;
+      let
+        pairs = mapAttrsToList (
+          k: v:
+          "${mkString k}: ${
+            mkVariant (
+              if builtins.isBool v then
+                (if v then "true" else "false")
+              else if builtins.isInt v then
+                toString v
+              else if builtins.isString v then
+                mkString v
+              else
+                throw "Unknown type for Tiling Assistant overridden setting: ${k}"
+            )
+          }"
+        ) settings;
+      in
+      "{${concatStringsSep ", " pairs}}";
 
 in
 {
   meta = {
-    description = "Configures the Tactile GNOME extension";
+    description = "Configures the Tiling Assistant GNOME extension for advanced window snapping";
     longDescription = ''
-      This module installs and configures the **Tactile** extension for GNOME.
-      Tactile is a tiling window manager extension that allows you to organize windows
-      using a custom grid layout and keyboard shortcuts.
+      This module installs and configures **Tiling Assistant**, which brings advanced 
+      window management features to GNOME Shell, similar to Windows' "Snap Assist".
 
-      **Features:**
-      - Custom grid layouts.
-      - Keyboard-driven window placement.
-      - Multi-monitor support.
+      ### Features
+      - **Snap Layouts:** Easily tile windows into halves, quarters, or custom layouts.
+      - **Tiling Popup:** Automatically suggest windows to tile alongside the current one.
+      - **Window Gaps:** Add customizable spacing between windows and screen edges.
+      - **Tile Groups:** Manage groups of tiled windows as a single unit.
+      - **Keybindings:** Extensive shortcuts for tiling and resizing windows.
+
+      Integrates with `zenos.desktops.gnome` and respects system-wide theming.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
 
-  options.zenos.desktops.gnome.extensions.tactile = {
-    enable = mkEnableOption "Tactile GNOME extension configuration";
+  options.zenos.desktops.gnome.extensions.tiling-assistant = {
+    enable = mkEnableOption "Tiling Assistant GNOME extension configuration";
+
+    # --- General ---
+    enable-tiling-popup = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable the popup that suggests windows to tile alongside the current one";
+    };
+
+    tiling-popup-all-workspace = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Show the tiling popup on all workspaces instead of just the active one";
+    };
+
+    enable-raise-tile-group = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Automatically raise all windows in a tile group when one is focused";
+    };
+
+    tilegroups-in-app-switcher = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Show tile groups as single entries in the Alt-Tab application switcher";
+    };
+
+    dynamic-keybinding-behavior = mkOption {
+      type = types.int;
+      default = 0;
+      description = "Dynamic keybinding behavior mode (0-3)";
+    };
+
+    focus-hint = mkOption {
+      type = types.int;
+      default = 0;
+      description = "The type of focus hint to display (0: disabled, 1: outline, 2: background)";
+    };
+
+    focus-hint-color = mkOption {
+      type = types.str;
+      default = "";
+      description = "The CSS color string for the focus hint";
+    };
+
+    focus-hint-outline-border-radius = mkOption {
+      type = types.int;
+      default = 8;
+      description = "The border radius of the focus hint outline in pixels";
+    };
+
+    focus-hint-outline-size = mkOption {
+      type = types.int;
+      default = 8;
+      description = "The size/thickness of the focus hint outline in pixels";
+    };
+
+    focus-hint-outline-style = mkOption {
+      type = types.int;
+      default = 0;
+      description = "The style of the outline (0: solid, 1: border)";
+    };
+
+    # --- Gaps ---
+    window-gap = mkOption {
+      type = types.int;
+      default = 0;
+      description = "The gap between tiled windows in pixels";
+    };
+
+    single-screen-gap = mkOption {
+      type = types.int;
+      default = 0;
+      description = "The gap applied when only a single window is tiled";
+    };
+
+    screen-top-gap = mkOption {
+      type = types.int;
+      default = 0;
+      description = "The gap between windows and the top of the screen";
+    };
+
+    screen-left-gap = mkOption {
+      type = types.int;
+      default = 0;
+      description = "The gap between windows and the left side of the screen";
+    };
+
+    screen-right-gap = mkOption {
+      type = types.int;
+      default = 0;
+      description = "The gap between windows and the right side of the screen";
+    };
+
+    screen-bottom-gap = mkOption {
+      type = types.int;
+      default = 0;
+      description = "The gap between windows and the bottom of the screen";
+    };
+
+    maximize-with-gap = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Apply window gaps even when a window is maximized";
+    };
+
+    monitor-switch-grace-period = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable a grace period when moving windows between monitors to prevent accidental tiling";
+    };
 
     # --- Keybindings ---
-    keybindings = {
-      global = {
-        show-tiles = mkKeybindOption [ "<Super>t" ] "Show tiles overlay";
-        hide-tiles = mkKeybindOption [ "Escape" ] "Hide tiles overlay";
-        show-settings = mkKeybindOption [ "<Super><Shift>t" ] "Show settings panel";
-      };
-
-      monitors = {
-        next = mkKeybindOption [ "space" ] "Move tiles to next monitor";
-        previous = mkKeybindOption [ "<Shift>space" ] "Move tiles to previous monitor";
-      };
-
-      layouts = {
-        select-1 = mkKeybindOption [ "1" ] "Switch to Layout 1";
-        select-2 = mkKeybindOption [ "2" ] "Switch to Layout 2";
-        select-3 = mkKeybindOption [ "3" ] "Switch to Layout 3";
-        select-4 = mkKeybindOption [ "4" ] "Switch to Layout 4";
-      };
-
-      # Tile Activation Keys
-      tiles = {
-        # Row 0
-        "0-0" = mkKeybindOption [ "q" ] "Tile 0:0";
-        "1-0" = mkKeybindOption [ "w" ] "Tile 1:0";
-        "2-0" = mkKeybindOption [ "e" ] "Tile 2:0";
-        "3-0" = mkKeybindOption [ "r" ] "Tile 3:0";
-        # Row 1
-        "0-1" = mkKeybindOption [ "a" ] "Tile 0:1";
-        "1-1" = mkKeybindOption [ "s" ] "Tile 1:1";
-        "2-1" = mkKeybindOption [ "d" ] "Tile 2:1";
-        "3-1" = mkKeybindOption [ "f" ] "Tile 3:1";
-        # Row 2
-        "0-2" = mkKeybindOption [ "z" ] "Tile 0:2";
-        "1-2" = mkKeybindOption [ "x" ] "Tile 1:2";
-        "2-2" = mkKeybindOption [ "c" ] "Tile 2:2";
-        "3-2" = mkKeybindOption [ "v" ] "Tile 3:2";
-      };
+    toggle-tiling-popup = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Keybindings to manually toggle the tiling popup";
     };
 
-    # --- Layout Definitions ---
-    layouts = {
-      one = {
-        cols = {
-          "0" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Column 0 weight";
-          };
-          "1" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Column 1 weight";
-          };
-          "2" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Column 2 weight";
-          };
-          "3" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Column 3 weight";
-          };
-          "4" = mkOption {
-            type = types.int;
-            default = 0;
-            description = "Column 4 weight";
-          };
-        };
-        rows = {
-          "0" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Row 0 weight";
-          };
-          "1" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Row 1 weight";
-          };
-          "2" = mkOption {
-            type = types.int;
-            default = 0;
-            description = "Row 2 weight";
-          };
-        };
-      };
-
-      two = {
-        cols = {
-          "0" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Column 0 weight";
-          };
-          "1" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Column 1 weight";
-          };
-          "2" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Column 2 weight";
-          };
-        };
-        rows = {
-          "0" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Row 0 weight";
-          };
-          "1" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Row 1 weight";
-          };
-        };
-      };
-
-      three = {
-        cols = {
-          "0" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Column 0 weight";
-          };
-          "1" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Column 1 weight";
-          };
-        };
-        rows = {
-          "0" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Row 0 weight";
-          };
-          "1" = mkOption {
-            type = types.int;
-            default = 1;
-            description = "Row 1 weight";
-          };
-        };
-      };
+    tile-edit-mode = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Keybindings to enter tile edit mode";
     };
 
-    # --- Monitor Configuration ---
-    monitors = {
-      "0" = mkOption {
-        type = types.int;
-        default = 1;
-        description = "Layout index for Monitor 0";
-      };
-      "1" = mkOption {
-        type = types.int;
-        default = 1;
-        description = "Layout index for Monitor 1";
-      };
-      "2" = mkOption {
-        type = types.int;
-        default = 1;
-        description = "Layout index for Monitor 2";
-      };
+    auto-tile = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Keybindings to automatically tile the active window";
     };
 
-    # --- Appearance ---
-    appearance = {
-      colors = {
-        text = mkOption {
-          type = types.str;
-          default = "rgba(128,128,255,1.0)";
-          description = "Text color (CSS string or Hex)";
-        };
-        border = mkOption {
-          type = types.str;
-          default = "rgba(128,128,255,0.5)";
-          description = "Border color (CSS string or Hex)";
-        };
-        background = mkOption {
-          type = types.str;
-          default = "rgba(128,128,255,0.1)";
-          description = "Background color (CSS string or Hex)";
-        };
-      };
-
-      sizes = {
-        text = mkOption {
-          type = types.int;
-          default = 48;
-          description = "Text size";
-        };
-        border = mkOption {
-          type = types.int;
-          default = 1;
-          description = "Border size";
-        };
-        gap = mkOption {
-          type = types.int;
-          default = 0;
-          description = "Gap size";
-        };
-      };
-
-      grid = {
-        cols = mkOption {
-          type = types.int;
-          default = 4;
-          description = "Number of grid columns";
-        };
-        rows = mkOption {
-          type = types.int;
-          default = 3;
-          description = "Number of grid rows";
-        };
-      };
+    toggle-always-on-top = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Keybindings to toggle the 'always on top' state for the active window";
     };
 
-    # --- Behavior ---
-    behavior = {
-      maximize = mkOption {
-        type = types.bool;
-        default = true;
-        description = "Maximize window when possible";
-      };
-      debug = mkOption {
-        type = types.bool;
-        default = false;
-        description = "Log debug information";
-      };
+    tile-maximize = mkOption {
+      type = types.listOf types.str;
+      default = [
+        "<Super>Up"
+        "<Super>KP_5"
+      ];
+      description = "Keybindings to maximize the window within the tiling grid";
+    };
+
+    restore-window = mkOption {
+      type = types.listOf types.str;
+      default = [ "<Super>Down" ];
+      description = "Keybindings to restore a tiled window to its original size";
+    };
+
+    tile-top-half = mkOption {
+      type = types.listOf types.str;
+      default = [ "<Super>KP_8" ];
+      description = "Keybindings to tile window to the top half";
+    };
+
+    tile-bottom-half = mkOption {
+      type = types.listOf types.str;
+      default = [ "<Super>KP_2" ];
+      description = "Keybindings to tile window to the bottom half";
+    };
+
+    tile-left-half = mkOption {
+      type = types.listOf types.str;
+      default = [
+        "<Super>Left"
+        "<Super>KP_4"
+      ];
+      description = "Keybindings to tile window to the left half";
+    };
+
+    tile-right-half = mkOption {
+      type = types.listOf types.str;
+      default = [
+        "<Super>Right"
+        "<Super>KP_6"
+      ];
+      description = "Keybindings to tile window to the right half";
+    };
+
+    tile-topleft-quarter = mkOption {
+      type = types.listOf types.str;
+      default = [ "<Super>KP_7" ];
+      description = "Keybindings to tile window to the top-left quarter";
+    };
+
+    tile-topright-quarter = mkOption {
+      type = types.listOf types.str;
+      default = [ "<Super>KP_9" ];
+      description = "Keybindings to tile window to the top-right quarter";
+    };
+
+    tile-bottomleft-quarter = mkOption {
+      type = types.listOf types.str;
+      default = [ "<Super>KP_1" ];
+      description = "Keybindings to tile window to the bottom-left quarter";
+    };
+
+    tile-bottomright-quarter = mkOption {
+      type = types.listOf types.str;
+      default = [ "<Super>KP_3" ];
+      description = "Keybindings to tile window to the bottom-right quarter";
+    };
+
+    # --- Advanced / Experimental ---
+    enable-advanced-experimental-features = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable experimental features that may be unstable";
+    };
+
+    enable-tile-animations = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable animations when tiling windows";
+    };
+
+    enable-untile-animations = mkOption {
+      type = types.bool;
+      default = true;
+      description = "Enable animations when restoring tiled windows";
+    };
+
+    disable-tile-groups = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Completely disable tile group functionality";
+    };
+
+    default-move-mode = mkOption {
+      type = types.int;
+      default = 0;
+      description = "The default behavior when moving windows (0: standard, 1: tiling)";
+    };
+
+    low-performance-move-mode = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Use a simplified move mode for better performance on low-end hardware";
+    };
+
+    adapt-edge-tiling-to-favorite-layout = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Adapt the edge tiling behavior based on the configured favorite layout";
+    };
+
+    overridden-settings = mkOption {
+      type = types.attrsOf (
+        types.oneOf [
+          types.bool
+          types.int
+          types.str
+        ]
+      );
+      default = { };
+      description = "Manual overrides for extension settings stored in the GVariant dictionary";
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.gnomeExtensions.tactile ];
+    environment.systemPackages = [ pkgs.gnomeExtensions.tiling-assistant ];
 
     programs.dconf.profiles.user.databases = [
       {
         settings = {
-          "org/gnome/shell/extensions/tactile" = {
-            # Shortcuts
-            show-tiles = cfg.keybindings.global.show-tiles;
-            hide-tiles = cfg.keybindings.global.hide-tiles;
-            next-monitor = cfg.keybindings.monitors.next;
-            prev-monitor = cfg.keybindings.monitors.previous;
-            show-settings = cfg.keybindings.global.show-settings;
-
-            layout-1 = cfg.keybindings.layouts.select-1;
-            layout-2 = cfg.keybindings.layouts.select-2;
-            layout-3 = cfg.keybindings.layouts.select-3;
-            layout-4 = cfg.keybindings.layouts.select-4;
-
-            # Tile Keys
-            tile-0-0 = cfg.keybindings.tiles."0-0";
-            tile-1-0 = cfg.keybindings.tiles."1-0";
-            tile-2-0 = cfg.keybindings.tiles."2-0";
-            tile-3-0 = cfg.keybindings.tiles."3-0";
-            tile-0-1 = cfg.keybindings.tiles."0-1";
-            tile-1-1 = cfg.keybindings.tiles."1-1";
-            tile-2-1 = cfg.keybindings.tiles."2-1";
-            tile-3-1 = cfg.keybindings.tiles."3-1";
-            tile-0-2 = cfg.keybindings.tiles."0-2";
-            tile-1-2 = cfg.keybindings.tiles."1-2";
-            tile-2-2 = cfg.keybindings.tiles."2-2";
-            tile-3-2 = cfg.keybindings.tiles."3-2";
-
-            # Layout 1
-            col-0 = cfg.layouts.one.cols."0";
-            col-1 = cfg.layouts.one.cols."1";
-            col-2 = cfg.layouts.one.cols."2";
-            col-3 = cfg.layouts.one.cols."3";
-            col-4 = cfg.layouts.one.cols."4";
-            row-0 = cfg.layouts.one.rows."0";
-            row-1 = cfg.layouts.one.rows."1";
-            row-2 = cfg.layouts.one.rows."2";
-
-            # Layout 2
-            layout-2-col-0 = cfg.layouts.two.cols."0";
-            layout-2-col-1 = cfg.layouts.two.cols."1";
-            layout-2-col-2 = cfg.layouts.two.cols."2";
-            layout-2-row-0 = cfg.layouts.two.rows."0";
-            layout-2-row-1 = cfg.layouts.two.rows."1";
-
-            # Layout 3
-            layout-3-col-0 = cfg.layouts.three.cols."0";
-            layout-3-col-1 = cfg.layouts.three.cols."1";
-            layout-3-row-0 = cfg.layouts.three.rows."0";
-            layout-3-row-1 = cfg.layouts.three.rows."1";
-
-            # Monitors
-            monitor-0-layout = cfg.monitors."0";
-            monitor-1-layout = cfg.monitors."1";
-            monitor-2-layout = cfg.monitors."2";
-
-            # Appearance
-            text-color = toRgbaString cfg.appearance.colors.text;
-            border-color = toRgbaString cfg.appearance.colors.border;
-            background-color = toRgbaString cfg.appearance.colors.background;
-            text-size = cfg.appearance.sizes.text;
-            border-size = cfg.appearance.sizes.border;
-            gap-size = cfg.appearance.sizes.gap;
-            grid-cols = cfg.appearance.grid.cols;
-            grid-rows = cfg.appearance.grid.rows;
-
-            # Behavior
-            maximize = cfg.behavior.maximize;
-            debug = cfg.behavior.debug;
+          "org/gnome/shell/extensions/tiling-assistant" = {
+            enable-tiling-popup = cfg.enable-tiling-popup;
+            tiling-popup-all-workspace = cfg.tiling-popup-all-workspace;
+            enable-raise-tile-group = cfg.enable-raise-tile-group;
+            tilegroups-in-app-switcher = cfg.tilegroups-in-app-switcher;
+            dynamic-keybinding-behavior = cfg.dynamic-keybinding-behavior;
+            focus-hint = cfg.focus-hint;
+            focus-hint-color = cfg.focus-hint-color;
+            focus-hint-outline-border-radius = cfg.focus-hint-outline-border-radius;
+            focus-hint-outline-size = cfg.focus-hint-outline-size;
+            focus-hint-outline-style = cfg.focus-hint-outline-style;
+            window-gap = cfg.window-gap;
+            single-screen-gap = cfg.single-screen-gap;
+            screen-top-gap = cfg.screen-top-gap;
+            screen-left-gap = cfg.screen-left-gap;
+            screen-right-gap = cfg.screen-right-gap;
+            screen-bottom-gap = cfg.screen-bottom-gap;
+            maximize-with-gap = cfg.maximize-with-gap;
+            monitor-switch-grace-period = cfg.monitor-switch-grace-period;
+            toggle-tiling-popup = cfg.toggle-tiling-popup;
+            tile-edit-mode = cfg.tile-edit-mode;
+            auto-tile = cfg.auto-tile;
+            toggle-always-on-top = cfg.toggle-always-on-top;
+            tile-maximize = cfg.tile-maximize;
+            restore-window = cfg.restore-window;
+            tile-top-half = cfg.tile-top-half;
+            tile-bottom-half = cfg.tile-bottom-half;
+            tile-left-half = cfg.tile-left-half;
+            tile-right-half = cfg.tile-right-half;
+            tile-topleft-quarter = cfg.tile-topleft-quarter;
+            tile-topright-quarter = cfg.tile-topright-quarter;
+            tile-bottomleft-quarter = cfg.tile-bottomleft-quarter;
+            tile-bottomright-quarter = cfg.tile-bottomright-quarter;
+            enable-advanced-experimental-features = cfg.enable-advanced-experimental-features;
+            enable-tile-animations = cfg.enable-tile-animations;
+            enable-untile-animations = cfg.enable-untile-animations;
+            disable-tile-groups = cfg.disable-tile-groups;
+            default-move-mode = cfg.default-move-mode;
+            low-performance-move-mode = cfg.low-performance-move-mode;
+            adapt-edge-tiling-to-favorite-layout = cfg.adapt-edge-tiling-to-favorite-layout;
           };
         };
       }
     ];
+
+    systemd.user.services.tiling-assistant-overrides = {
+      description = "Apply Tiling Assistant overridden settings";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      script = ''
+        ${pkgs.dconf}/bin/dconf write /org/gnome/shell/extensions/tiling-assistant/overridden-settings ${escapeShellArg (serializeSettings cfg.overridden-settings)}
+      '';
+    };
   };
 }

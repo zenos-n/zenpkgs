@@ -1,6 +1,3 @@
-# LOCATION: modules/zen-packages.nix
-# DESCRIPTION: Allows installing packages using a structured syntax mapping to pkgs.zenos
-
 {
   config,
   lib,
@@ -10,8 +7,17 @@
 
 let
   cfg = config.zenos.packages;
+  inherit (lib)
+    mkOption
+    types
+    flatten
+    mapAttrsToList
+    attrByPath
+    isDerivation
+    concatStringsSep
+    ;
 
-  # [FIX] Handle the case where pkgs.zenos is missing due to missing overlay in specialArgs
+  # Reference the zenos package set, throwing an error if the overlay is missing
   zenPkgs =
     pkgs.zenos
       or (throw "ZenPkgs Error: 'pkgs.zenos' is missing. Ensure your 'pkgs' argument includes the ZenPkgs overlay.");
@@ -19,23 +25,22 @@ let
   # Recursive function to map the boolean/empty-set tree to actual packages
   findPackages =
     path: attrs:
-    lib.flatten (
-      lib.mapAttrsToList (
+    flatten (
+      mapAttrsToList (
         name: value:
         let
           currentPath = path ++ [ name ];
-          # Try to locate the package in pkgs.zenos
-          pkg = lib.attrByPath currentPath null zenPkgs;
+          pkg = attrByPath currentPath null zenPkgs;
         in
         if value == true || value == { } then
-          if pkg != null && lib.isDerivation pkg then
+          if pkg != null && isDerivation pkg then
             [ pkg ]
           else if pkg == null then
             builtins.trace
-              "ZenPkgs Warning: Package 'pkgs.zenos.${lib.concatStringsSep "." currentPath}' not found."
+              "ZenPkgs Warning: Package 'pkgs.zenos.${concatStringsSep "." currentPath}' not found."
               [ ]
           else
-            # It's a category (e.g. desktops.gnome), don't auto-install children to avoid bloat.
+            # Avoid auto-installing children of categories to prevent system bloat
             [ ]
         else if builtins.isAttrs value then
           findPackages currentPath value
@@ -46,65 +51,79 @@ let
 
 in
 {
+  meta = {
+    description = "Provides a structured tree-based package selection system for ZenOS";
+    longDescription = ''
+      This module allows users to install packages from the `pkgs.zenos` collection 
+      using a structured attribute set (tree) rather than a traditional flat list.
+
+      ### Benefits
+      - **Categorization:** Group packages logically by their function (e.g., `desktops.gnome`).
+      - **User-Specific Toggling:** Easily enable/disable groups of software per-user.
+      - **Sandbox Support:** Integrates with `zenos.config` for declarative user environment management.
+
+      ### Example Usage
+      ```nix
+      zenos.packages.desktops.gnome.extensions = {
+        forge = true;
+        gsconnect = true;
+      };
+      ```
+    '';
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
+  };
+
   options = {
-    # 1. The main option
-    zenos.packages = lib.mkOption {
-      description = "Select packages to install from pkgs.zenos using a tree structure.";
+    zenos.packages = mkOption {
+      description = "Structured tree of packages to install globally from the ZenOS package set";
       default = { };
-      type = lib.types.submodule {
-        freeformType = lib.types.attrs;
+      type = types.submodule {
+        freeformType = types.attrs;
       };
     };
 
-    # 2. System Root Alias
-    # Allows 'packages = { ... }' in configuration.nix and zenos.config
-    packages = lib.mkOption {
-      description = "Alias for zenos.packages";
+    packages = mkOption {
+      description = "System-level alias for `zenos.packages`";
       default = { };
-      type = lib.types.submodule {
-        freeformType = lib.types.attrs;
+      type = types.submodule {
+        freeformType = types.attrs;
       };
     };
 
-    # 3. Sandbox Loader Support
-    # Defines the schema for 'zenos.config' so your 'main.nix' import works.
-    zenos.config = lib.mkOption {
-      description = "Sandboxed user configuration container.";
+    zenos.config = mkOption {
+      description = "Sandboxed user configuration container supporting structured package definitions";
       default = { };
-      type = lib.types.submodule {
-        freeformType = lib.types.attrs;
+      type = types.submodule {
+        freeformType = types.attrs;
         options = {
-          # Allow 'packages' inside the sandbox
-          packages = lib.mkOption {
-            type = lib.types.submodule { freeformType = lib.types.attrs; };
+          packages = mkOption {
+            type = types.submodule { freeformType = types.attrs; };
             default = { };
+            description = "Structured packages defined within the sandboxed configuration";
           };
-          # Allow 'zenos.packages' inside the sandbox
-          zenos.packages = lib.mkOption {
-            type = lib.types.submodule { freeformType = lib.types.attrs; };
+          zenos.packages = mkOption {
+            type = types.submodule { freeformType = types.attrs; };
             default = { };
+            description = "Namespaced structured packages within the sandboxed configuration";
           };
         };
       };
     };
 
-    # 4. User Module Injection
-    # Extends users.users.<name> to support the structured package picker.
-    users.users = lib.mkOption {
-      type = lib.types.attrsOf (
-        lib.types.submodule (
+    users.users = mkOption {
+      type = types.attrsOf (
+        types.submodule (
           { config, ... }:
           {
-            options = {
-              # We use 'zenos.packages' here because 'packages' is already defined by NixOS as a list.
-              zenos.packages = lib.mkOption {
-                description = "User-specific structured package installation.";
-                default = { };
-                type = lib.types.submodule { freeformType = lib.types.attrs; };
-              };
+            options.zenos.packages = mkOption {
+              description = "User-specific structured package installation tree";
+              default = { };
+              type = types.submodule { freeformType = types.attrs; };
             };
             config = {
-              # Convert our tree structure into the flat list NixOS expects
+              # NixOS expects a flat list in 'packages'; we generate it from the tree
               packages = findPackages [ ] config.zenos.packages;
             };
           }
@@ -114,14 +133,13 @@ in
   };
 
   config = {
-    # 1. Sync aliases (Root <-> zenos.packages)
+    # Synchronize the global alias with the primary option
     zenos.packages = config.packages;
 
-    # 2. Merge Sandbox Config (zenos.config.packages -> zenos.packages)
-    # This ensures packages defined in main.nix are actually installed.
+    # Merge sandboxed package definitions into the global system set
     packages = config.zenos.config.packages or { };
 
-    # 3. Install found packages to system
+    # Map the entire tree structure to the system environment
     environment.systemPackages = findPackages [ ] cfg;
   };
 }
