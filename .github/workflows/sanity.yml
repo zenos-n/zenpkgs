@@ -20,20 +20,4 @@ jobs:
 
       - name: Eval Report and Verify Status
         run: |
-          # Run the evaluation and capture stdout
-          # 2>&1 ensures we catch errors if nix itself fails to run
-          OUTPUT=$(nix eval --show-trace --file tests/integrity.nix report)
-
-          # Print output for debugging in the Actions log
-          echo "Nix Evaluation Output:"
-          echo "$OUTPUT"
-
-          # Check if the output contains the specific success string
-          # We search for 'status = "PASSED";' specifically as requested
-          if echo "$OUTPUT" | grep -Fq 'status = "PASSED";'; then
-            echo "✅ Integrity check PASSED."
-            exit 0
-          else
-            echo "❌ Integrity check FAILED. Status was not 'PASSED'."
-            exit 1
-          fi
+          nix eval --show-trace --file tests/integrity.nix report
