@@ -6,7 +6,7 @@
 }:
 
 let
-  cfg = config.system.maintenance;
+  cfg = config.zenos.system.maintenance;
 
   # Referenced from global pkgs scope as requested
   zenos-maintenance = pkgs.zenos.system.zenclean;
@@ -33,7 +33,7 @@ in
     platforms = lib.platforms.zenos;
   };
 
-  options.system.maintenance = {
+  options.zenos.system.maintenance = {
     enable = lib.mkEnableOption "ZenOS Maintenance System";
 
     garbageCollectionAge = lib.mkOption {

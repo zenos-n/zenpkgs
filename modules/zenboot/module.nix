@@ -6,7 +6,7 @@
 }:
 
 let
-  cfg = config.boot.loader.zenboot;
+  cfg = config.zenos.system.boot.loader.zenboot;
 
   # Resolve branding variables from zenos.branding if available, otherwise fallback
   brandingCfg =
@@ -32,7 +32,7 @@ let
       osIcon
       ;
 
-    espMountPoint = config.boot.loader.efi.efiSysMountPoint;
+    espMountPoint = config.zenos.system.boot.loader.efi.efiSysMountPoint;
     profileDir = "/nix/var/nix/profiles/system";
   };
 
@@ -59,7 +59,7 @@ in
     platforms = lib.platforms.zenos;
   };
 
-  options.boot.loader.zenboot = {
+  options.zenos.system.boot.loader.zenboot = {
     enable = lib.mkEnableOption "ZenBoot (ZenOS Bootloader)";
 
     plymouth = {
@@ -165,7 +165,7 @@ in
     # 2. Safety Checks
     assertions = [
       {
-        assertion = config.boot.loader.efi.canTouchEfiVariables || !cfg.use_nvram;
+        assertion = config.zenos.system.boot.loader.efi.canTouchEfiVariables || !cfg.use_nvram;
         message = "ZenBoot: 'use_nvram' requires 'boot.loader.efi.canTouchEfiVariables' to be true.";
       }
     ];

@@ -6,7 +6,7 @@
 }:
 
 let
-  cfg = config.zenos.plymouth;
+  cfg = config.zenos.system.boot.plymouth.theme.zenos;
 
   # Reference the Plymouth theme package from the ZenOS package set
   plymouthTheme = pkgs.zenos.plymouth.override {
@@ -39,7 +39,7 @@ in
     platforms = lib.platforms.zenos;
   };
 
-  options.system.boot.plymouth.theme.zenos = {
+  options.zenos.system.boot.plymouth.theme.zenos = {
     enable = lib.mkEnableOption "ZenOS Plymouth boot animation";
 
     kernelParams = {
