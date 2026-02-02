@@ -141,7 +141,7 @@ let
       imports = [ mockMeta ];
       options = {
         home = mkPermissive {
-          stateVersion = "24.05";
+          stateVersion = "25.11";
           username = "mock";
           homeDirectory = "/tmp";
         };
@@ -313,10 +313,23 @@ let
           opt: builtins.any (decl: lib.hasPrefix (toString ../.) (toString decl)) (opt.declarations or [ ]);
         localOpts = lib.filterAttrs (n: v: isLocal v) eval.options;
 
-        # Check descriptions AND types
+        # [FIX] Allow standard extensions and explicit aliases
+        allowedPrefixes = [
+          "zenos"
+          "users"
+          "home"
+        ];
+        allowedExact = [ "packages" ];
+
+        checkNamespace =
+          n: (lib.any (p: lib.hasPrefix p n) allowedPrefixes) || (builtins.elem n allowedExact);
+
+        # Check descriptions AND types AND namespace
         badOptions = lib.mapAttrsToList (
           n: v:
-          if !(v ? description) || v.description == "No description" then
+          if !(checkNamespace n) then
+            "${n} (Namespace Error: Option must start with 'zenos' or be a whitelisted alias.)"
+          else if !(v ? description) || v.description == "No description" then
             "${n} (Missing Description)"
           else if !(v ? type) then
             "${n} (Missing Type)"
