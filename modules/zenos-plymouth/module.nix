@@ -6,137 +6,98 @@
 }:
 
 let
-  cfg = config.zenos.maintenance;
+  cfg = config.zenos.plymouth;
 
-  # Referenced from global pkgs scope as requested
-  zenos-maintenance = pkgs.zenos.system.zenclean;
-
-  configFile = pkgs.writeText "zenos-maintenance-config.json" (
-    builtins.toJSON {
-      garbage_age = cfg.garbageCollectionAge;
-      notification_freq_days = cfg.notificationFrequencyDays;
-      update_command = cfg.updateCommand;
-    }
-  );
+  # Reference the Plymouth theme package from the ZenOS package set
+  plymouthTheme = pkgs.zenos.plymouth.override {
+    distroName = cfg.distroName;
+    releaseVersion = cfg.releaseVersion;
+    deviceName = cfg.deviceName;
+    icon = cfg.icon;
+    color = cfg.color;
+  };
 in
 {
   meta = {
-    description = "Configures the ZenOS maintenance and optimization system";
+    description = "Configures the ZenOS Plymouth boot animation and splash screen";
     longDescription = ''
-      This module installs and configures the ZenOS maintenance daemon. It schedules
-      periodic checks to perform garbage collection, store optimization, and system
-      updates when the user is away. It also supports hooks for cleaning up the
-      system on shutdown or reboot.
+      This module manages the **Plymouth** boot splash screen for ZenOS. 
+      It allows for deep customization of the boot experience, including the 
+      displayed distribution name, version strings, device-specific icons, 
+      and the glow effect color.
+
+      ### Features
+      - **Custom Branding:** Set your own OS name and version string.
+      - **Device Identity:** Choose from various hardware icons (laptop, desktop, smartphone, etc.).
+      - **Theming:** Customize the glow effect hex color.
+      - **Kernel Integration:** Optionally adds `quiet` and `splash` to boot parameters.
+
+      Integrates with the `boot.plymouth` NixOS subsystem.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
 
-  options.zenos.maintenance = {
-    enable = lib.mkEnableOption "ZenOS Maintenance System";
+  options.zenos.plymouth = {
+    enable = lib.mkEnableOption "ZenOS Plymouth boot animation";
 
-    garbageCollectionAge = lib.mkOption {
+    kernelParams = {
+      enable = lib.mkEnableOption "automatic addition of 'quiet' and 'splash' to kernel parameters";
+    };
+
+    distroName = lib.mkOption {
       type = lib.types.str;
-      default = "14d";
-      description = "Time interval for retaining garbage (e.g., 14d, 30d)";
+      default = "ZenOS";
+      description = "The operating system name displayed prominently on the splash screen";
     };
 
-    notificationFrequencyDays = lib.mkOption {
-      type = lib.types.int;
-      default = 7;
-      description = "Interval between maintenance reminders in days";
-    };
-
-    updateCommand = lib.mkOption {
+    releaseVersion = lib.mkOption {
       type = lib.types.str;
-      default = "nixos-rebuild switch --upgrade";
-      description = "Command executed to update the system";
-      example = "nix flake update --flake /etc/nixos && nixos-rebuild switch";
+      default = "1.0N";
+      description = "The version or release string displayed below the OS name";
     };
 
-    cleanOnShutdown = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Triggers garbage collection during system shutdown";
+    deviceName = lib.mkOption {
+      type = lib.types.str;
+      default = config.networking.hostName;
+      description = "The device identifier or hostname shown on the boot screen";
     };
 
-    cleanOnReboot = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Triggers garbage collection during system reboot";
+    icon = lib.mkOption {
+      type = lib.types.enum [
+        "negzero"
+        "zenos"
+        "tablet"
+        "laptop"
+        "desktop"
+        "server"
+        "smartphone"
+        "zerobox"
+        "tv"
+      ];
+      default = "negzero";
+      description = "The hardware or brand icon displayed in the center of the splash screen";
+    };
+
+    color = lib.mkOption {
+      type = lib.types.str;
+      default = "C532FF";
+      description = "The hex color code (without #) used for the animated glow effect";
+      example = "FF5555";
     };
   };
 
   config = lib.mkIf cfg.enable {
+    boot.plymouth = {
+      enable = true;
+      theme = "zenos";
+      themePackages = [ plymouthTheme ];
+    };
 
-    # Make manually runnable by user
-    environment.systemPackages = [ zenos-maintenance ];
-
-    # Create config structure
-    systemd.tmpfiles.rules = [
-      "d /System/ZenClean 0755 root root -"
-      "d /System/Logs 0755 root root -"
-      "L+ /System/ZenClean/config.json - - - - ${configFile}"
+    boot.kernelParams = lib.mkIf cfg.kernelParams.enable [
+      "quiet"
+      "splash"
     ];
-
-    # --- Main Service ---
-    systemd.services.zenos-maintenance = {
-      description = "ZenOS System Maintenance and Optimization";
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${zenos-maintenance}/bin/zenos-maintenance";
-        User = "root";
-        DeviceAllow = [ "/dev/input/event* r" ];
-        CapabilityBoundingSet = "CAP_SYS_ADMIN";
-      };
-      path = with pkgs; [
-        nix
-        nixos-rebuild
-        libnotify
-        systemd
-        coreutils
-        bash
-        procps
-        util-linux
-        gnugrep
-      ];
-    };
-
-    # Timer
-    systemd.timers.zenos-maintenance = {
-      description = "Timer for ZenOS Maintenance";
-      wantedBy = [ "timers.target" ];
-      timerConfig = {
-        OnBootSec = "10m";
-        OnUnitActiveSec = "1d";
-        Persistent = true;
-      };
-    };
-
-    # --- Hooks ---
-    systemd.services.zenos-maintenance-shutdown = lib.mkIf cfg.cleanOnShutdown {
-      description = "ZenOS Garbage Collection (Shutdown)";
-      wantedBy = [ "shutdown.target" ];
-      before = [ "shutdown.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${zenos-maintenance}/bin/zenos-maintenance --shutdown";
-        TimeoutStartSec = "5m";
-      };
-      path = with pkgs; [ nix ];
-    };
-
-    systemd.services.zenos-maintenance-reboot = lib.mkIf cfg.cleanOnReboot {
-      description = "ZenOS Garbage Collection (Reboot)";
-      wantedBy = [ "reboot.target" ];
-      before = [ "reboot.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${zenos-maintenance}/bin/zenos-maintenance --reboot";
-        TimeoutStartSec = "5m";
-      };
-      path = with pkgs; [ nix ];
-    };
   };
 }

@@ -45,13 +45,6 @@ in
   options.zenos.desktops.gnome = {
     enable = mkEnableOption "Gnome Desktop Base Module";
 
-    extensions = mkOption {
-      type = types.listOf types.package;
-      default = [ ];
-      description = "List of GNOME extensions to install and enable automatically.";
-      example = literalExpression "[ pkgs.gnomeExtensions.appindicator ]";
-    };
-
     defaultAccentColor = mkOption {
       type = types.enum [
         "blue"

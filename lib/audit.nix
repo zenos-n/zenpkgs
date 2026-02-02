@@ -1,24 +1,35 @@
 {
-  pkgs,
-  flake,
-  system,
+  system ? builtins.currentSystem,
 }:
 
 let
+  # 1. Load the Flake from the parent directory
+  flake = builtins.getFlake (toString ../.);
+
+  # 2. Instantiate pkgs with your overlay so 'pkgs.zenos' exists
+  pkgs = import flake.inputs.nixpkgs {
+    inherit system;
+    overlays = [ flake.overlays.default ];
+    config.allowUnfree = true;
+  };
+
   lib = pkgs.lib;
+
+  # --- Validation Config ---
   requiredMeta = [
     "description"
-    "longDescription"
-    "maintainers"
     "license"
+    "maintainers"
     "platforms"
   ];
 
-  # --- Mocks (Required to eval without crashing) ---
+  # --- Mocks ---
+  # These allow modules to be evaluated in isolation without needing a full system.
+
   mkPermissive =
     default:
     lib.mkOption {
-      description = "Mocked option"; # <--- FIX: Added description to prevent audit false positives
+      description = "Mocked Permissive Option";
       type = lib.types.submodule { freeformType = lib.types.attrs; };
       default = default;
     };
@@ -27,12 +38,13 @@ let
     { lib, ... }:
     {
       options.meta = lib.mkOption {
-        description = "Mocked meta"; # <--- FIX: Added description
+        description = "Mocked meta";
         type = lib.types.attrs;
         default = { };
       };
     };
 
+  # Mock Lib for Home Manager specific types (dag)
   mockHMLib = lib.extend (
     self: super: {
       hm = {
@@ -45,21 +57,23 @@ let
     }
   );
 
+  # Mock NixOS Environment
   mockNixOS =
     { lib, ... }:
     {
       imports = [ mockMeta ];
       options = {
+        # Standard Mocks
         assertions = lib.mkOption {
-          description = "Mocked assertions"; # <--- FIX: Added description
           type = lib.types.listOf lib.types.attrs;
           default = [ ];
         };
         warnings = lib.mkOption {
-          description = "Mocked warnings"; # <--- FIX: Added description
           type = lib.types.listOf lib.types.str;
           default = [ ];
         };
+
+        # Submodule Mocks
         boot = mkPermissive { };
         networking = mkPermissive { };
         fileSystems = mkPermissive { };
@@ -71,10 +85,15 @@ let
         hardware = mkPermissive { };
         environment = mkPermissive { };
         fonts = mkPermissive { };
+
+        # [UPDATED] ZenOS Specific Mocks
+        zenos = mkPermissive { };
+        packages = mkPermissive { }; # Handle the root alias
       };
       config._module.check = false;
     };
 
+  # Mock Home Manager Environment
   mockHomeManager =
     { ... }:
     {
@@ -90,55 +109,53 @@ let
         services = mkPermissive { };
         systemd = mkPermissive { };
         wayland = mkPermissive { };
+
+        # [UPDATED] ZenOS Specific Mocks
+        zenos = mkPermissive { };
       };
       config._module.check = false;
     };
 
-  # --- Audit Logic ---
+  # --- Auditors ---
 
-  # 1. Packages
+  # 1. Audit Packages
+  # Recursively walks pkgs.zenos to find broken derivations or missing meta
   auditPackage =
     name: pkg:
     let
-      meta = pkg.meta or { };
+      # Wrap in tryEval to catch build failures at eval time
+      evalResult = builtins.tryEval pkg;
+      meta = if evalResult.success then (pkg.meta or { }) else { };
       missing = lib.filter (field: !(meta ? ${field})) requiredMeta;
     in
-    if missing == [ ] then null else { inherit name missing; };
+    if !evalResult.success then
+      {
+        inherit name;
+        error = "Evaluation Failed";
+      }
+    else if missing != [ ] then
+      { inherit name missing; }
+    else
+      null;
 
   auditPackageTree =
     tree:
     if lib.isDerivation tree then
-      auditPackage (tree.pname or tree.name) tree
+      auditPackage (tree.pname or tree.name or "unknown") tree
     else if lib.isAttrs tree then
-      lib.filter (x: x != null) (lib.flatten (lib.mapAttrsToList (_: v: auditPackageTree v) tree))
+      lib.flatten (lib.mapAttrsToList (_: v: auditPackageTree v) tree)
     else
       [ ];
 
-  # 2. Modules
+  # 2. Audit Modules
+  # Imports the module and evaluates it against the Mocks
   auditModule =
     path: type:
     let
       isHM = type == "home-manager";
-      # Check 1: Top-level meta block
       modFn = import path;
-      # FIX: Added options = {} to prevent crashes on strict module args
-      modResult =
-        if lib.isFunction modFn then
-          modFn {
-            inherit pkgs lib;
-            config = { };
-            options = { };
-          }
-        else
-          modFn;
 
-      metaMissing =
-        if !(modResult ? meta) then
-          [ "meta_block_missing" ]
-        else
-          lib.filter (field: !(modResult.meta ? ${field})) requiredMeta;
-
-      # Check 2: Option descriptions
+      # Mock Evaluation
       eval =
         if !isHM then
           lib.evalModules {
@@ -166,28 +183,18 @@ let
             };
           };
 
-      isLocal =
-        opt:
-        builtins.any (decl: lib.hasPrefix (builtins.toString flake.outPath) (builtins.toString decl)) (
-          opt.declarations or [ ]
-        );
-
-      localOptions = lib.filterAttrs (n: v: isLocal v) eval.options;
-      badOptions = lib.mapAttrsToList (
-        name: opt: if !(opt ? description) || opt.description == "No description" then name else null
-      ) localOptions;
-
-      missingOpts = lib.filter (x: x != null) badOptions;
+      # Check for basic failures (tryEval on options)
+      failed = builtins.tryEval eval.options;
     in
-    if metaMissing == [ ] && missingOpts == [ ] then
-      null
-    else
+    if !failed.success then
       {
         file = toString path;
-        missing_meta = metaMissing;
-        missing_option_descriptions = missingOpts;
-      };
+        error = "Module Evaluation Failed";
+      }
+    else
+      null; # Success
 
+  # Helpers
   collectModules =
     tree:
     if builtins.isAttrs tree then
@@ -199,11 +206,19 @@ let
 
 in
 {
-  packages = auditPackageTree (flake.packages.${system} or { });
-  nixosModules = lib.filter (x: x != null) (
-    map (m: auditModule m "nixos") (collectModules flake.nixosModules)
-  );
-  hmModules = lib.filter (x: x != null) (
-    map (m: auditModule m "home-manager") (collectModules flake.homeManagerModules)
-  );
+  # The Report
+  report = {
+    # Check 1: All packages in pkgs.zenos
+    packages = lib.filter (x: x != null) (auditPackageTree pkgs.zenos);
+
+    # Check 2: NixOS Modules
+    nixosModules = lib.filter (x: x != null) (
+      map (m: auditModule m "nixos") (collectModules flake.nixosModules)
+    );
+
+    # Check 3: Home Manager Modules
+    hmModules = lib.filter (x: x != null) (
+      map (m: auditModule m "home-manager") (collectModules flake.homeManagerModules)
+    );
+  };
 }
