@@ -1,67 +1,67 @@
 {
-    "ZenOS Legacy Module Map": {
-        "prefix": "zenmodmap",
-        "body": [
-            "{ config, lib, ... }:",
-            "with lib;",
-            "let",
-            "  # [1] Grab legacy config (safe access)",
-            "  legacyCfg = config.legacy.${1:category}.${2:programName} or {};",
-            "in",
-            "{",
-            "  # [2] Map to ZenOS System Target",
-            "  config.system.${3:programs}.${2:programName} = mkIf (legacyCfg.enable or false) (",
-            "    {",
-            "      enable = true;",
-            "      # [3] ZenOS Defaults (Overridable by legacy config)",
-            "      ${4:overrides = { };}",
-            "    } // legacyCfg",
-            "  );",
-            "}"
-        ],
-        "description": "Create a Legacy -> ZenOS System Module Mapper"
-    },
-    "ZenOS Legacy Home Manager Map": {
-        "prefix": "zenhmmap",
-        "body": [
-            "{ config, lib, pkgs, ... }:",
-            "with lib;",
-            "let",
-            "  legacyCfg = config.legacy.${1:home}.${2:programName} or {};",
-            "in",
-            "{",
-            "  # [1] Map to Home Manager Standard Option",
-            "  config.programs.${2:programName} = mkIf (legacyCfg.enable or false) (",
-            "    {",
-            "      enable = true;",
-            "      # [2] Custom ZenOS settings",
-            "      ${3:package = pkgs.${2:programName};}",
-            "    } // legacyCfg",
-            "  );",
-            "}"
-        ],
-        "description": "Create a Legacy -> Home Manager Module Mapper"
-    },
-    "ZenOS Legacy Package Alias": {
-        "prefix": "zenpkgmap",
-        "body": [
-            "{ lib, pkgs, ... }:",
-            "",
-            "# Legacy Alias: ${1:legacy-name} -> ${2:real-package}",
-            "pkgs.buildEnv {",
-            "  name = \"${1:legacy-name}-alias\";",
-            "  paths = [ pkgs.${2:real-package} ];",
-            "",
-            "  meta = {",
-            "    description = \"Legacy alias mapping '${1:legacy-name}' to '${2:real-package}'\";",
-            "    license = lib.licenses.napl;",
-            "    platforms = lib.platforms.zenos;",
-            "    maintainers = with lib.maintainers; [ ${3:doromiert} ];",
-            "  };",
-            "}"
-        ],
-        "description": "Create a Legacy Package Alias using ZenOS metadata"
-    },
+	"ZenOS Legacy Module Map (Reverse)": {
+		"prefix": "zenmodmap",
+		"body": [
+			"{ config, lib, ... }:",
+			"with lib;",
+			"let",
+			"  # [1] Source: The New Option User Sets (e.g. system.boot)",
+			"  cfg = config.${1:newScope}.${2:name} or {};",
+			"in",
+			"{",
+			"  # [2] Target: The Legacy Backend (e.g. legacy.system.boot)",
+			"  # Logic: Pass configuration through to legacy (Direct Mirror)",
+			"  config.legacy.${3:oldScope}.${2:name} = {",
+			"    # [3] Custom Mapping / Defaults (Optional)",
+			"    ${4:legacySetting = cfg.newSetting or true;}",
+			"  } // cfg;",
+			"}"
+		],
+		"description": "Map a ZenOS Config Option TO a Legacy Option"
+	},
+	"ZenOS Legacy Home Manager Map (Reverse)": {
+		"prefix": "zenhmmap",
+		"body": [
+			"{ config, lib, pkgs, ... }:",
+			"with lib;",
+			"let",
+			"  # [1] Source: Home Manager Standard Option",
+			"  cfg = config.${1:programs}.${2:programName} or {};",
+			"in",
+			"{",
+			"  # [2] Target: Legacy Home Backend",
+			"  config.legacy.${3:home}.${2:programName} = {",
+			"    # [3] Inject Dependencies if needed",
+			"    ${4:package = pkgs.${2:programName};}",
+			"  } // cfg;",
+			"}"
+		],
+		"description": "Map a standard Home Manager Option TO a Legacy Option"
+	},
+	"ZenOS Legacy Package Alias": {
+		"prefix": "zenpkgmap",
+		"body": [
+			"{ lib, pkgs, ... }:",
+			"",
+			"# Legacy Alias: ${1:legacy-name} -> ${2:real-package}",
+			"pkgs.buildEnv {",
+			"  name = \"${1:legacy-name}-alias\";",
+			"  paths = [ pkgs.${2:real-package} ];",
+			"",
+			"  meta = {",
+			"    description = \"Legacy alias mapping '${1:legacy-name}' to '${2:real-package}'\";",
+			"    longDescription = ''",
+			"      Redirects the legacy package '${1:legacy-name}' to the modern ZenOS equivalent '${2:real-package}'.",
+			"      Ensures backward compatibility for existing configurations.",
+			"    '';",
+			"    license = lib.licenses.napl;",
+			"    platforms = lib.platforms.zenos;",
+			"    maintainers = with lib.maintainers; [ ${3:doromiert} ];",
+			"  };",
+			"}"
+		],
+		"description": "Create a Legacy Package Alias using ZenOS metadata"
+	},
     "Zen Package": {
         "prefix": "zenpkg",
         "body": [
