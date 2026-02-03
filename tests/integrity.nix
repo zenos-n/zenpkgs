@@ -9,6 +9,30 @@ let
   cleanPkgs = import lockFlake.inputs.nixpkgs { inherit system; };
   lib = cleanPkgs.lib;
 
+  # [TRAP] Custom Lib to detect forbidden attributes without crashing evaluation
+  auditorLib = lib.extend (
+    self: super: {
+      mkOption =
+        args:
+        let
+          hasLong = args ? longDescription;
+          # 1. Sanitize arguments to prevent "unexpected argument" crash in Nixpkgs
+          cleanArgs = removeAttrs args [ "longDescription" ];
+
+          # 2. Inject detection marker if violation occurred
+          # We prepend to description so it survives merging and visibility checks
+          desc =
+            if hasLong then
+              "[VIOLATION-LONGDESC] " + (args.description or "No description")
+            else
+              (args.description or null);
+
+          newArgs = cleanArgs // (if desc != null then { description = desc; } else { });
+        in
+        super.mkOption newArgs;
+    }
+  );
+
   # Mock Self to prevent recursion during flake output eval
   mockSelf = {
     outPath = ../.;
@@ -43,7 +67,7 @@ let
   # --- Guidelines ---
   requiredMeta = [
     "description"
-    "longDescription"
+    # "longDescription" -> Removed (Merged into description via First Line Rule)
     "license"
     "maintainers"
     "platforms"
@@ -51,8 +75,12 @@ let
 
   # Style Validators
   validateDescription =
-    desc:
+    fullDesc:
     let
+      # [FIRST LINE RULE] Extract only the first line for validation
+      lines = lib.splitString "\n" fullDesc;
+      desc = builtins.head lines;
+
       len = builtins.stringLength desc;
       first = if len > 0 then builtins.substring 0 1 desc else "";
       last = if len > 0 then builtins.substring (len - 1) 1 desc else "";
@@ -61,19 +89,21 @@ let
     in
     if len == 0 then
       "Description is empty."
+    else if lib.hasPrefix "[VIOLATION-LONGDESC]" fullDesc then
+      "Forbidden 'longDescription' detected in Options."
     else if !isCapitalized then
-      "Description must start with a capital letter."
+      "Description (First Line) must start with a capital letter."
     else if hasTrailingPeriod then
-      "Description must not end with a period."
+      "Description (First Line) must not end with a period."
     else
       null;
 
   # --- Mocks ---
   mkPermissive =
     default:
-    lib.mkOption {
+    auditorLib.mkOption {
       description = "Mocked Permissive Option";
-      type = lib.types.submodule { freeformType = lib.types.attrs; };
+      type = auditorLib.types.submodule { freeformType = auditorLib.types.attrs; };
       default = default;
     };
 
@@ -87,7 +117,8 @@ let
       };
     };
 
-  mockHMLib = lib.extend (
+  # Use auditorLib for HM as well
+  mockHMLib = auditorLib.extend (
     self: super: {
       hm = {
         dag = {
@@ -125,10 +156,8 @@ let
         hardware = mkPermissive { };
         environment = mkPermissive { };
         fonts = mkPermissive { };
-        zenos = mkPermissive { };
-        # [FIX] Removed 'packages' from mock because it's defined by the ZenOS modules themselves.
-        # Defining it here causes a "already declared" collision during global integration tests.
-        # packages = mkPermissive {};
+        # [FIX] Removed 'zenos' from mock to allow full tree expansion
+        # zenos = mkPermissive { };
         legacy = mkPermissive { };
         system = mkPermissive { };
       };
@@ -150,7 +179,8 @@ let
         services = mkPermissive { };
         systemd = mkPermissive { };
         wayland = mkPermissive { };
-        zenos = mkPermissive { };
+        # [FIX] Removed 'zenos' from mock
+        # zenos = mkPermissive { };
         legacy = mkPermissive { };
       };
       config._module.check = false;
@@ -179,8 +209,7 @@ let
         else
           null;
 
-      # CHECK 3: Build Plan Evaluation (The "Strictest" Check)
-      # This tries to evaluate the derivation path. If dependencies are missing or syntax is wrong inside the package, this fails.
+      # CHECK 3: Build Plan Evaluation
       drvEval = builtins.tryEval (pkg.drvPath or (throw "Not a derivation"));
       buildError =
         if !drvEval.success then
@@ -260,7 +289,8 @@ let
           modResult =
             if lib.isFunction modFn then
               modFn {
-                inherit pkgs lib;
+                inherit pkgs;
+                lib = auditorLib; # Use trapped lib
                 config = { };
                 options = { };
               }
@@ -295,7 +325,10 @@ let
                   }
                 )
               ];
-              specialArgs = { inherit pkgs; };
+              specialArgs = {
+                inherit pkgs;
+                lib = auditorLib;
+              };
             }
           else
             lib.evalModules {
@@ -311,9 +344,29 @@ let
 
         isLocal =
           opt: builtins.any (decl: lib.hasPrefix (toString ../.) (toString decl)) (opt.declarations or [ ]);
-        localOpts = lib.filterAttrs (n: v: isLocal v) eval.options;
 
-        # [FIX] Allow standard extensions and explicit aliases
+        # [RECURSIVE WALKER]
+        # Traverse the entire option tree to find deeply nested violations
+        walkOptions =
+          p: tree:
+          if tree ? _type && tree._type == "option" then
+            if isLocal tree then
+              [
+                {
+                  path = p;
+                  option = tree;
+                }
+              ]
+            else
+              [ ]
+          else if lib.isAttrs tree then
+            lib.flatten (lib.mapAttrsToList (n: v: walkOptions (p ++ [ n ]) v) tree)
+          else
+            [ ];
+
+        # Collect all local options with their full paths
+        allLocalOptions = walkOptions [ ] eval.options;
+
         allowedPrefixes = [
           "zenos"
           "users"
@@ -324,18 +377,23 @@ let
         checkNamespace =
           n: (lib.any (p: lib.hasPrefix p n) allowedPrefixes) || (builtins.elem n allowedExact);
 
-        # Check descriptions AND types AND namespace
-        badOptions = lib.mapAttrsToList (
-          n: v:
-          if !(checkNamespace n) then
-            "${n} (Namespace Error: Option must start with 'zenos' or be a whitelisted alias.)"
+        badOptions = map (
+          entry:
+          let
+            name = lib.concatStringsSep "." entry.path;
+            v = entry.option;
+          in
+          if !(checkNamespace (builtins.head entry.path)) then
+            "${name} (Namespace Error: Root option must start with 'zenos' or be a whitelisted alias.)"
+          else if lib.hasPrefix "[VIOLATION-LONGDESC]" (v.description or "") then
+            "${name} (Forbidden argument 'longDescription' used. Remove it and merge into 'description' via the First Line Rule.)"
           else if !(v ? description) || v.description == "No description" then
-            "${n} (Missing Description)"
+            "${name} (Missing Description)"
           else if !(v ? type) then
-            "${n} (Missing Type)"
+            "${name} (Missing Type)"
           else
             null
-        ) localOpts;
+        ) allLocalOptions;
 
         optionErrors = lib.filter (x: x != null) badOptions;
         metaError = checkMetaBlock;
@@ -350,7 +408,7 @@ let
         {
           file = pathStr;
           status = "FAILED";
-          error = "Module Evaluation Crashed";
+          error = "Module Evaluation Crashed (Syntax or Import Error)";
         }
       else if errors != [ ] then
         {
@@ -413,13 +471,15 @@ let
   );
 
   # 3. Global Collision Check
-  # This merges ALL ZenOS modules into one evaluation to detect option conflicts.
   globalEval = lib.evalModules {
     modules =
       (collectModules flake.nixosModules.zenos "global-check")
       ++ (collectModules flake.nixosModules.programs "global-check")
       ++ [ mockNixOS ];
-    specialArgs = { inherit pkgs; };
+    specialArgs = {
+      inherit pkgs;
+      lib = auditorLib;
+    };
   };
 
   globalCheck =

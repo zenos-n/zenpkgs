@@ -96,12 +96,6 @@ in
   };
 
   options.zenos = {
-    system.packages = lib.mkOption {
-      type = lib.types.attrs;
-      default = { };
-      description = "Attribute set of system packages to be automatically resolved and installed";
-    };
-
     users = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule userSubmodule);
       default = { };
@@ -110,9 +104,6 @@ in
   };
 
   config = {
-    # System-wide package resolution
-    environment.systemPackages = resolvePackages [ ] cfg.system.packages;
-
     # Map ZenOS users to standard NixOS user configuration
     users.users = lib.mapAttrs (
       name: userCfg:

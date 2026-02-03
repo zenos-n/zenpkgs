@@ -6,32 +6,49 @@ To ensure the documentation site renders correctly and builds pass CI, all Packa
 
 Every `package.nix` (in `meta` set) and `module.nix` (top-level `meta` set) **MUST** contain:
 
-| Field             | Type              | Description                                                   |
-| :---------------- | :---------------- | :------------------------------------------------------------ |
-| `description`     | `str`             | A concise, one-line summary.                                  |
-| `longDescription` | `str` (multiline) | Detailed documentation supporting Markdown.                   |
-| `maintainers`     | `list`            | List of maintainers (e.g., `with lib.maintainers; [ user ]`). |
-| `license`         | `set`             | The licensing attribute (default: `lib.licenses.napl`).       |
-| `platforms`       | `list`            | Supported platforms (default: `lib.platforms.zenos`).         |
+| Field         | Type              | Description                                                   |
+| :------------ | :---------------- | :------------------------------------------------------------ |
+| `description` | `str` (multiline) | See "The First Line Rule" below.                              |
+| `maintainers` | `list`            | List of maintainers (e.g., `with lib.maintainers; [ user ]`). |
+| `license`     | `set`             | The licensing attribute (default: `lib.licenses.napl`).       |
+| `platforms`   | `list`            | Supported platforms (default: `lib.platforms.zenos`).         |
 
 ## 2. Style Guidelines
 
-### `description`
+### The First Line Rule
 
-- **Do** keep it under 80 characters if possible.
-- **Do** start with a capital letter.
-- **Do not** end with a period.
-- **Example:** `"Configures the ZenOS bootloader theme"`
+To unify documentation across packages and options (which do not support `longDescription`), we use the First Line Rule for the `description` field.
 
-### `longDescription`
+**Structure:**
 
-- **Format:** Use standard Markdown.
-- **Content:**
+```nix
+description = ''
+  Short summary line here (max 80 chars).
+
+  Detailed explanation paragraphs go here.
+  You can use standard **Markdown**.
+
+  - List items
+  - Code blocks
+'';
+```
+
+#### Line 1: The Summary
+
+- **Purpose:** Displayed in search results and lists.
+- **Constraints:**
+  - **Do** start with a capital letter.
+  - **Do not** end with a period.
+  - **Do** keep it under 80 characters.
+
+#### Line 2+: The Details
+
+- **Purpose:** Displayed on the detailed documentation page.
+- **Constraints:**
   - Explain _what_ the module/package does.
-  - Explain _why_ a user would want to enable/install it.
-  - List key integration points (e.g., "Integrates with `zenos.theming`").
-  - **Warnings:** If experimental, use a blockquote: `> **Warning:** ...`
-- **Code Blocks:** Use syntax highlighting (e.g., ```nix).
+  - Explain _why_ a user would want it.
+  - List integration points.
+  - Separate from the summary with a blank line.
 
 ### `maintainers`
 
@@ -45,10 +62,10 @@ Every `package.nix` (in `meta` set) and `module.nix` (top-level `meta` set) **MU
 
 ## 3. Options Metadata
 
-Options declared via `mkOption` **MUST** have a `description`.
+Options declared via `mkOption` **MUST** follow the **First Line Rule**.
 
-- **`description`**: Mandatory. Plain text summary.
-- **`longDescription`**: Optional. Use this for complex options that require examples or detailed behavior explanation.
+- **`description`**: Mandatory. Use the multiline string format.
+- **`longDescription`**: **FORBIDDEN**. Do not use this attribute in `mkOption` calls; it will cause evaluation errors.
 - **`example`**: Recommended for non-boolean types.
 
 ## 4. Enforcement
@@ -56,5 +73,5 @@ Options declared via `mkOption` **MUST** have a `description`.
 Run the audit tool to verify compliance:
 
 ```bash
-nix eval .#audit.x86_64-linux --json | jq
+nix eval --file tests/integrity.nix --json | jq
 ```

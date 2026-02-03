@@ -90,10 +90,30 @@ let
     else
       { };
 
+  # Helper to collect unique maintainers from the package tree
+  collectMaintainers =
+    tree:
+    if lib.isDerivation tree then
+      tree.meta.maintainers or [ ]
+    else if lib.isAttrs tree && !(tree ? _type && tree._type == "option") then
+      let
+        # Clean up internal attributes before recursing
+        cleanTree = removeAttrs tree [
+          "recurseForDerivations"
+          "override"
+          "overrideDerivation"
+          "newScope"
+          "callPackage"
+        ];
+        lists = lib.mapAttrsToList (n: v: collectMaintainers v) cleanTree;
+      in
+      lib.flatten lists
+    else
+      [ ];
+
   # --- Evaluator ---
 
-  # We evaluate modules to get the fully merged option tree
-  # Use 'lib.collect builtins.isPath' to extract all module file paths.
+  # 1. NixOS Modules Evaluation
   modulePaths = lib.collect builtins.isPath flake.nixosModules;
 
   eval = lib.evalModules {
@@ -103,7 +123,6 @@ let
         { lib, ... }:
         {
           options = {
-            # Define minimal system options to satisfy module requirements
             networking.hostName = lib.mkOption { default = "docs"; };
             boot = lib.mkOption {
               type = lib.types.submodule { freeformType = lib.types.attrs; };
@@ -121,8 +140,38 @@ let
     specialArgs = { inherit pkgs; };
   };
 
+  # 2. Home Manager Modules Evaluation
+  # We collect paths from flake.homeModules just like we did for nixosModules
+  hmModulePaths = lib.collect builtins.isPath (flake.homeModules or { });
+
+  hmEval = lib.evalModules {
+    modules = hmModulePaths ++ [
+      # Mocks to prevent evaluation errors on Home Manager options
+      (
+        { lib, ... }:
+        {
+          options = {
+            home = {
+              username = lib.mkOption { default = "docs"; };
+              homeDirectory = lib.mkOption { default = "/home/docs"; };
+              stateVersion = lib.mkOption { default = "24.05"; };
+            };
+            xdg = {
+              enable = lib.mkOption { default = true; };
+              mime.enable = lib.mkOption { default = true; };
+              userDirs.enable = lib.mkOption { default = true; };
+            };
+          };
+          config._module.check = false;
+        }
+      )
+    ];
+    specialArgs = { inherit pkgs; };
+  };
+
   # Filter for Local Options Only
-  # We check against flake.outPath (store path)
+  # We check against flake.outPath (store path) to ensure we don't document
+  # generic NixOS/HM options, only the ones defined in this flake.
   isLocal =
     opt:
     builtins.any (decl: lib.hasPrefix (toString flake.outPath) (toString decl)) (
@@ -143,19 +192,41 @@ let
     else
       null;
 
-  # 1. Prune the full NixOS option tree down to just your options
-  localTree = pruneTree eval.options;
+  # --- Processing ---
 
-  # 2. Format Options
+  # 1. NixOS Options
+  localTree = pruneTree eval.options;
   optionsJson = if localTree != null then formatOptions localTree else { };
 
-  # 3. Format Packages
-  # Use flake.packages.${system} which exposes the top-level zenos attributes
+  # 2. Home Manager Options
+  hmLocalTree = pruneTree hmEval.options;
+  hmOptionsJson = if hmLocalTree != null then formatOptions hmLocalTree else { };
+
+  # 3. Packages
   packagesTree = flake.packages.${system} or { };
   packagesJson = formatPackages packagesTree;
+
+  # 4. Maintainers
+  # Extract all maintainers used in the local packages
+  usedMaintainersList = collectMaintainers packagesTree;
+
+  # Convert to attribute set { "handle" = { ... }; }
+  # We use the github handle as the key if available, otherwise the name.
+  usedMaintainers = lib.listToAttrs (
+    map (m: {
+      name = m.github or m.name;
+      value = m;
+    }) usedMaintainersList
+  );
 
 in
 {
   options = optionsJson.sub or { };
   pkgs = packagesJson.sub or { };
+
+  # Added: Only maintainers used in zenpkgs
+  maintainers = usedMaintainers;
+
+  # Added: Home Manager options defined in flake.homeModules
+  home-options = hmOptionsJson.sub or { };
 }
