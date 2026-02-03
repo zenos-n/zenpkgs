@@ -5,6 +5,7 @@
   lib,
   inputs,
   self,
+  ...
 }:
 
 let
@@ -65,12 +66,14 @@ let
   };
 in
 rec {
-  osVersionString =
-    let
-      major = inputs.self.version.majorVer or "0";
-      variant = inputs.self.version.variant or "N";
-      type = inputs.self.version.type or "beta";
-    in
+  # [ CHANGED ] mkVersionString
+  # Removed dependency on 'inputs.self.version'. Now accepts arguments.
+  mkVersionString =
+    {
+      major ? "1.0",
+      variant ? "N",
+      type ? "beta",
+    }:
     "${major}${variant}${type}${
       if type != "stable" then
         "b (${if (self ? shortRev) then self.shortRev else "${self.dirtyShortRev or "unknown"}"})"

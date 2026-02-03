@@ -49,13 +49,13 @@ in
     distroName = lib.mkOption {
       type = lib.types.str;
       default = "ZenOS";
-      description = "The operating system name displayed prominently on the splash screen";
+      description = "The operating system name displayed below the hostname on the boot screen";
     };
 
     releaseVersion = lib.mkOption {
       type = lib.types.str;
       default = "1.0N";
-      description = "The version or release string displayed below the OS name";
+      description = "The version or release string displayed alongside the OS name";
     };
 
     deviceName = lib.mkOption {
