@@ -13,10 +13,11 @@ let
 in
 {
   meta = {
-    description = "Configures the Compiz Windows Effect GNOME extension";
-    longDescription = ''
-      This module installs and configures the **Compiz Windows Effect** extension for GNOME.
-      It adds wobbly windows and other Compiz-like animations to window interactions.
+    description = ''
+      Wobbly window physics and animations for GNOME
+
+      This module installs and configures the **Compiz Windows Effect** extension for GNOME. It adds wobbly windows and other Compiz-like 
+      animations to window interactions.
 
       **Features:**
       - Wobbly windows effect on movement and resize.
@@ -33,49 +34,86 @@ in
     friction = mkOption {
       type = types.float;
       default = 3.5;
-      description = "Friction";
+      description = ''
+        Window movement friction
+
+        Determines how quickly window wobble energy dissipates. Lower values 
+        result in longer-lasting oscillations.
+      '';
     };
 
     spring-k = mkOption {
       type = types.float;
       default = 3.8;
-      description = "Spring k";
+      description = ''
+        Spring stiffness constant
+
+        Determines the 'tightness' of the wobble effect. Higher values 
+        make windows snap back faster.
+      '';
     };
 
     speedup-factor-divider = mkOption {
       type = types.float;
       default = 12.0;
-      description = "Speedup Factor";
+      description = ''
+        Animation speed divisor
+
+        Scaling factor for the overall speed of the physics simulation.
+      '';
     };
 
     mass = mkOption {
       type = types.float;
       default = 70.0;
-      description = "Mass";
+      description = ''
+        Simulated window mass
+
+        Determines the inertia of the wobble. Heavier windows feel 'sluggish' 
+        and wobble with greater amplitude.
+      '';
     };
 
     x-tiles = mkOption {
       type = types.float;
       default = 6.0;
-      description = "X Tiles";
+      description = ''
+        Horizontal mesh density
+
+        Determines the number of points on the X-axis used to calculate 
+        window deformation.
+      '';
     };
 
     y-tiles = mkOption {
       type = types.float;
       default = 6.0;
-      description = "Y Tiles";
+      description = ''
+        Vertical mesh density
+
+        Determines the number of points on the Y-axis used to calculate 
+        window deformation.
+      '';
     };
 
     maximize-effect = mkOption {
       type = types.bool;
       default = true;
-      description = "Maximize effect";
+      description = ''
+        Enable wobble on maximization
+
+        Whether windows should wobble when transitioning to a maximized state.
+      '';
     };
 
     resize-effect = mkOption {
       type = types.bool;
       default = false;
-      description = "Resize effect";
+      description = ''
+        Enable wobble on manual resize
+
+        Whether windows should wobble while being resized by the user.
+      '';
     };
   };
 

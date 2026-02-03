@@ -13,10 +13,12 @@ let
 in
 {
   meta = {
-    description = "Configures the Clipboard Indicator GNOME extension";
-    longDescription = ''
+    description = ''
+      Clipboard history management for the GNOME top bar
+
       This module installs and configures the **Clipboard Indicator** extension for GNOME.
-      It adds a clipboard history menu to the top bar, allowing users to access and paste previously copied items.
+      It adds a clipboard history menu to the top bar, allowing users to access and 
+      paste previously copied items.
 
       **Features:**
       - Clipboard history with configurable size.
@@ -32,27 +34,38 @@ in
   options.zenos.desktops.gnome.extensions.clipboard-indicator = {
     enable = mkEnableOption "Clipboard Indicator GNOME extension configuration";
 
-    # --- UI / Layout Options ---
-
     paste-button = mkOption {
       type = types.bool;
       default = true;
-      description = "If true, adds another button to each menu entry that lets you immediately paste it";
+      description = ''
+        Enable immediate paste buttons
+
+        If true, adds a dedicated button to each menu entry that triggers 
+        an immediate paste action upon selection.
+      '';
     };
 
     pinned-on-bottom = mkOption {
       type = types.bool;
       default = false;
-      description = "If true, places the 'pinned' section on the bottom";
+      description = ''
+        Position pinned items at the bottom
+
+        If true, reorders the clipboard menu to place the 'pinned' section 
+        at the bottom of the list.
+      '';
     };
 
     enable-deletion = mkOption {
       type = types.bool;
       default = true;
-      description = "If true, displays 'delete' buttons on each item, and a 'Clear History' option";
-    };
+      description = ''
+        Enable history deletion controls
 
-    # --- Grouped Options ---
+        If true, displays 'delete' buttons on each item and provides a 
+        'Clear History' option in the menu.
+      '';
+    };
 
     topbar = {
       display-mode = mkOption {
@@ -63,13 +76,23 @@ in
           "neither"
         ];
         default = "icon";
-        description = "What to display in the top bar";
+        description = ''
+          Panel display mode
+
+          Configures what information is displayed directly in the GNOME 
+          top bar (icon, text content, or both).
+        '';
       };
 
       enable-down-arrow = mkOption {
         type = types.bool;
         default = false;
-        description = "Show down arrow in top bar";
+        description = ''
+          Show panel dropdown arrow
+
+          Whether to display a visual down-arrow indicator next to the 
+          clipboard icon in the top bar.
+        '';
       };
     };
 
@@ -77,13 +100,23 @@ in
       menu-length = mkOption {
         type = types.int;
         default = 30;
-        description = "Amount of visible characters for clipboard items in the menu";
+        description = ''
+          Menu character preview limit
+
+          The maximum number of characters displayed for clipboard items 
+          inside the extension menu.
+        '';
       };
 
       topbar-length = mkOption {
         type = types.int;
         default = 10;
-        description = "Amount of visible characters for current clipboard item in the topbar";
+        description = ''
+          Topbar character preview limit
+
+          The maximum number of characters displayed for the current 
+          clipboard item in the GNOME top bar.
+        '';
       };
     };
 
@@ -91,50 +124,85 @@ in
       size = mkOption {
         type = types.int;
         default = 15;
-        description = "The number of items to save in history";
+        description = ''
+          History buffer size
+
+          The maximum number of copied items to persist in the 
+          clipboard history.
+        '';
       };
 
       clear-on-boot = mkOption {
         type = types.bool;
         default = false;
-        description = "Clear clipboard history on every system reboot";
+        description = ''
+          Clear history on system startup
+
+          When enabled, the clipboard history buffer is purged every 
+          time the system reboots.
+        '';
       };
 
       confirm-clear = mkOption {
         type = types.bool;
         default = true;
-        description = "Show confirmation dialog on Clear History";
+        description = ''
+          Confirm history purge
+
+          Whether to show a confirmation dialog before performing a 
+          'Clear History' action.
+        '';
       };
 
       keep-selected-on-clear = mkOption {
         type = types.bool;
         default = false;
-        description = "Whether to keep the currently selected entry in the clipboard after clearing history";
+        description = ''
+          Preserve active selection during clear
+
+          Whether to retain the currently selected clipboard entry 
+          when performing a bulk history deletion.
+        '';
       };
 
       excluded-apps = mkOption {
         type = types.listOf types.str;
         default = [ ];
-        description = "List of applications that are excluded from clipboard history";
+        description = ''
+          Applications ignored by the extension
+
+          List of application identifiers whose clipboard activity 
+          should not be recorded in the history.
+        '';
       };
 
       autoclear = {
         enable = mkOption {
           type = types.bool;
           default = false;
-          description = "Enable clearing history on interval";
+          description = ''
+            Enable periodic history clearing
+
+            Activates the timer-based automatic purging of the 
+            clipboard history buffer.
+          '';
         };
 
         interval = mkOption {
           type = types.int;
           default = 60;
-          description = "Interval for clearing history in minutes";
+          description = ''
+            Autoclear interval duration
+
+            Specifies the time in minutes between scheduled 
+            history purges.
+          '';
         };
 
         next-run = mkOption {
           type = types.int;
           default = -1;
-          description = "The timestamp for the next scheduled history clear (Internal state)";
+          description = "Internal state tracker for the next scheduled clear";
         };
       };
     };
@@ -143,19 +211,34 @@ in
       paste-on-select = mkOption {
         type = types.bool;
         default = false;
-        description = "Paste on select";
+        description = ''
+          Automatic paste upon selection
+
+          When enabled, clicking a history item immediately pastes 
+          it into the active window.
+        '';
       };
 
       move-item-first = mkOption {
         type = types.bool;
         default = false;
-        description = "Move items to the top of the list when selected";
+        description = ''
+          Reorder history on use
+
+          Whether to move items to the top of the history list 
+          when they are selected.
+        '';
       };
 
       strip-text = mkOption {
         type = types.bool;
         default = false;
-        description = "Remove whitespace around text";
+        description = ''
+          Trim whitespace from text
+
+          When enabled, leading and trailing whitespace is automatically 
+          removed from copied text strings.
+        '';
       };
     };
 
@@ -163,13 +246,22 @@ in
       case-sensitive = mkOption {
         type = types.bool;
         default = false;
-        description = "Make search case sensitive";
+        description = ''
+          Case-sensitive history search
+
+          Whether the search filter should respect character casing.
+        '';
       };
 
       regex = mkOption {
         type = types.bool;
         default = false;
-        description = "Allow regex in search";
+        description = ''
+          Enable regular expressions in search
+
+          Allows using advanced regex patterns when filtering the 
+          clipboard history.
+        '';
       };
     };
 
@@ -177,13 +269,23 @@ in
       on-copy = mkOption {
         type = types.bool;
         default = false;
-        description = "Show notification on copy to clipboard";
+        description = ''
+          Show notification on new copy
+
+          Displays a desktop notification every time a new item 
+          is added to the clipboard.
+        '';
       };
 
       on-cycle = mkOption {
         type = types.bool;
         default = true;
-        description = "Show notification when cycling through the clipboard entries using hotkeys";
+        description = ''
+          Show notification during history cycling
+
+          Displays a notification when cycling through clipboard 
+          entries using keyboard shortcuts.
+        '';
       };
     };
 
@@ -191,19 +293,34 @@ in
       size = mkOption {
         type = types.int;
         default = 5;
-        description = "The allowed size for the registry cache file in MB";
+        description = ''
+          Maximum registry cache size
+
+          The allowed size for the disk-based registry cache file 
+          in megabytes.
+        '';
       };
 
       only-favorites = mkOption {
         type = types.bool;
         default = false;
-        description = "Disable the registry cache file for favorites and use memory only (avoids writing secrets to disk)";
+        description = ''
+          Restrict disk cache to favorites
+
+          Disables the registry cache file for standard items, using 
+          volatile memory only to avoid writing secrets to disk.
+        '';
       };
 
       images = mkOption {
         type = types.bool;
         default = true;
-        description = "Allow caching images to disk";
+        description = ''
+          Enable image caching to disk
+
+          Whether the extension is permitted to persist copied image 
+          data in its disk cache.
+        '';
       };
     };
 
@@ -211,37 +328,37 @@ in
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Enable the keyboard shortcuts";
+        description = "Enable extension keyboard shortcuts";
       };
 
       clear-history = mkOption {
         type = types.listOf types.str;
         default = [ "<Control>F10" ];
-        description = "Key to clear the history";
+        description = "Shortcut to purge clipboard history";
       };
 
       prev-entry = mkOption {
         type = types.listOf types.str;
         default = [ "<Control>F11" ];
-        description = "Key to cycle to the previous entry in the clipboard";
+        description = "Shortcut to cycle to the previous history entry";
       };
 
       next-entry = mkOption {
         type = types.listOf types.str;
         default = [ "<Control>F12" ];
-        description = "Key to cycle to the next entry in the clipboard";
+        description = "Shortcut to cycle to the next history entry";
       };
 
       toggle-menu = mkOption {
         type = types.listOf types.str;
         default = [ "<Control>F9" ];
-        description = "Key to toggle the clipboard menu";
+        description = "Shortcut to display the clipboard menu";
       };
 
       private-mode = mkOption {
         type = types.listOf types.str;
         default = [ "<Control>F8" ];
-        description = "Key to toggle Private Mode";
+        description = "Shortcut to toggle Private Mode";
       };
     };
   };
@@ -253,12 +370,9 @@ in
       {
         settings = {
           "org/gnome/shell/extensions/clipboard-indicator" = {
-            # UI
             paste-button = cfg.paste-button;
             pinned-on-bottom = cfg.pinned-on-bottom;
             enable-deletion = cfg.enable-deletion;
-
-            # Topbar
             display-mode =
               let
                 modes = {
@@ -270,42 +384,26 @@ in
               in
               modes.${cfg.topbar.display-mode};
             disable-down-arrow = !cfg.topbar.enable-down-arrow;
-
-            # Preview
             preview-size = cfg.preview.menu-length;
             topbar-preview-size = cfg.preview.topbar-length;
-
-            # History
             history-size = cfg.history.size;
             clear-on-boot = cfg.history.clear-on-boot;
             confirm-clear = cfg.history.confirm-clear;
             keep-selected-on-clear = cfg.history.keep-selected-on-clear;
             excluded-apps = cfg.history.excluded-apps;
-
-            # History Autoclear
             clear-history-on-interval = cfg.history.autoclear.enable;
             clear-history-interval = cfg.history.autoclear.interval;
             next-history-clear = cfg.history.autoclear.next-run;
-
-            # Behavior
             paste-on-select = cfg.behavior.paste-on-select;
             move-item-first = cfg.behavior.move-item-first;
             strip-text = cfg.behavior.strip-text;
-
-            # Search
             case-sensitive-search = cfg.search.case-sensitive;
             regex-search = cfg.search.regex;
-
-            # Notify
             notify-on-copy = cfg.notify.on-copy;
             notify-on-cycle = cfg.notify.on-cycle;
-
-            # Cache
             cache-size = cfg.cache.size;
             cache-only-favorites = cfg.cache.only-favorites;
             cache-images = cfg.cache.images;
-
-            # Keybindings
             enable-keybindings = cfg.keybindings.enable;
             clear-history = cfg.keybindings.clear-history;
             prev-entry = cfg.keybindings.prev-entry;

@@ -13,11 +13,12 @@ let
 in
 {
   meta = {
-    description = "Configures the Dash In Panel GNOME extension";
-    longDescription = ''
+    description = ''
+      Merges the GNOME Dash into the top panel
+
       This module installs and configures the **Dash In Panel** extension for GNOME.
-      It merges the Dash into the Top Bar, saving vertical screen space and providing
-      quick access to applications and indicators.
+      It merges the Dash into the Top Bar, saving vertical screen space and 
+      providing quick access to applications and indicators.
 
       **Features:**
       - Integrate Dash into the top panel.
@@ -36,31 +37,31 @@ in
       panel-height = mkOption {
         type = types.int;
         default = 32;
-        description = "Top panel height in pixels";
+        description = "Vertical pixel height for the consolidated top panel";
       };
 
       icon-size = mkOption {
         type = types.int;
         default = 20;
-        description = "Application icon size in pixels";
+        description = "Pixel dimensions for application icons in the panel";
       };
 
       button-margin = mkOption {
         type = types.int;
         default = 2;
-        description = "Margin around app buttons";
+        description = "Pixel spacing around application launch buttons";
       };
 
       move-clock-right = mkOption {
         type = types.bool;
         default = true;
-        description = "Move the clock/date menu to the right side of the panel";
+        description = "Shift the clock and date menu to the right side of the panel";
       };
 
       center-dash = mkOption {
         type = types.bool;
         default = false;
-        description = "Center the dash elements in the panel";
+        description = "Center the taskbar/dash elements within the top panel";
       };
     };
 
@@ -68,31 +69,31 @@ in
       show-overview-on-startup = mkOption {
         type = types.bool;
         default = false;
-        description = "Show overview immediately at start-up";
+        description = "Automatically enter activity overview when logging in";
       };
 
       show-dash-in-overview = mkOption {
         type = types.bool;
         default = false;
-        description = "Keep dash visible inside the overview";
+        description = "Maintain panel-dash visibility when in overview mode";
       };
 
       scroll-on-panel = mkOption {
         type = types.bool;
         default = true;
-        description = "Change workspace by scrolling on the panel";
+        description = "Switch virtual workspaces by scrolling on the top panel";
       };
 
       minimize-on-click = mkOption {
         type = types.bool;
         default = true;
-        description = "Minimize the focused application when clicking its icon";
+        description = "Hide the focused window when its icon is clicked";
       };
 
       cycle-windows = mkOption {
         type = types.bool;
         default = true;
-        description = "Cycle through open windows when clicking the app icon";
+        description = "Switch between open windows of the same app on icon click";
       };
     };
 
@@ -100,25 +101,25 @@ in
       activities-button = mkOption {
         type = types.bool;
         default = false;
-        description = "Show the Activities button";
+        description = "Display the 'Activities' label in the top bar";
       };
 
       app-grid-button = mkOption {
         type = types.bool;
         default = true;
-        description = "Show the 'Show Applications' grid button";
+        description = "Display the 'Show Applications' grid button in the panel";
       };
 
       app-label-on-hover = mkOption {
         type = types.bool;
         default = true;
-        description = "Show application name label when hovering icons";
+        description = "Show application name tooltips when hovering over icons";
       };
 
       only-running-apps = mkOption {
         type = types.bool;
         default = false;
-        description = "Show only running applications (hide favorites)";
+        description = "Hide pinned favorites and only show active windows";
       };
     };
 
@@ -126,18 +127,17 @@ in
       use-dominant-color = mkOption {
         type = types.bool;
         default = true;
-        description = "Use the application's dominant color for the running indicator dot";
+        description = "Color running dots based on the application's primary icon color";
       };
 
       dim-on-inactive-workspace = mkOption {
         type = types.bool;
         default = false;
-        description = "Dim the running indicator if the app is not on the active workspace";
+        description = "Fade the running indicator for apps not on the current desktop";
       };
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.dash-in-panel ];
 
@@ -145,27 +145,20 @@ in
       {
         settings = {
           "org/gnome/shell/extensions/dash-in-panel" = {
-            # Layout
             panel-height = cfg.layout.panel-height;
             icon-size = cfg.layout.icon-size;
             button-margin = cfg.layout.button-margin;
             move-date = cfg.layout.move-clock-right;
             center-dash = cfg.layout.center-dash;
-
-            # Behavior
             show-overview = cfg.behavior.show-overview-on-startup;
             show-dash = cfg.behavior.show-dash-in-overview;
             scroll-panel = cfg.behavior.scroll-on-panel;
             click-changed = cfg.behavior.minimize-on-click;
             cycle-windows = cfg.behavior.cycle-windows;
-
-            # Visibility
             show-activities = cfg.visibility.activities-button;
             show-apps = cfg.visibility.app-grid-button;
             show-label = cfg.visibility.app-label-on-hover;
             show-running = cfg.visibility.only-running-apps;
-
-            # Indicators
             colored-dot = cfg.indicators.use-dominant-color;
             dim-dot = cfg.indicators.dim-on-inactive-workspace;
           };

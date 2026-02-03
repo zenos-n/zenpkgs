@@ -13,11 +13,12 @@ let
 in
 {
   meta = {
-    description = "Configures the Places Status Indicator GNOME extension";
-    longDescription = ''
-      This module installs and configures the **Places Status Indicator** extension for GNOME.
-      It adds a menu to the top bar for quick navigation to bookmarked places, mounted volumes,
-      and network locations.
+    description = ''
+      Filesystem navigation menu for the GNOME top bar
+
+      This module installs and configures the **Places Status Indicator** extension 
+      for GNOME. It adds a menu to the top bar for quick navigation to bookmarked 
+      places, mounted volumes, and network locations.
 
       **Features:**
       - Quick access to home folder, documents, downloads, etc.

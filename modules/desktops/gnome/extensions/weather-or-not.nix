@@ -13,15 +13,16 @@ let
 in
 {
   meta = {
-    description = "Configures the Weather Or Not GNOME extension";
-    longDescription = ''
+    description = ''
+      Flexible weather indicator positioning for the panel
+
       This module installs and configures the **Weather Or Not** extension for GNOME.
-      It allows you to place the weather indicator in various positions on the panel,
-      such as next to the clock or on the left/right sides.
+      It allows you to decouple the weather indicator from the date menu and place 
+      it in various positions across the top bar.
 
       **Features:**
-      - Flexible positioning of the weather indicator.
-      - Integration with the clock menu.
+      - Move weather to the left, center, or right of the clock.
+      - Integrated panel alignment options.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -41,7 +42,12 @@ in
         "right"
       ];
       default = "clock-right";
-      description = "Indicator position";
+      description = ''
+        Panel anchor position for the weather icon
+
+        Determines where the weather information is rendered relative to the 
+        system clock or panel edges.
+      '';
     };
   };
 

@@ -13,8 +13,9 @@ let
 in
 {
   meta = {
-    description = "Configures the Caffeine GNOME extension";
-    longDescription = ''
+    description = ''
+      Manual and automatic screensaver inhibition for GNOME
+
       This module installs and configures the **Caffeine** extension for GNOME.
       It allows users to temporarily disable the screensaver and auto-suspend modes.
 
@@ -34,13 +35,21 @@ in
     inhibit-apps = mkOption {
       type = types.listOf types.str;
       default = [ ];
-      description = "List of applications to inhibit (desktop file names)";
+      description = ''
+        Auto-inhibit application list
+
+        List of applications (desktop file IDs) that trigger caffeine when running.
+      '';
     };
 
     user-enabled = mkOption {
       type = types.bool;
       default = false;
-      description = "Store caffeine user state";
+      description = ''
+        Manual toggle state persistence
+
+        Whether caffeine should remember its enabled state across sessions.
+      '';
     };
 
     duration-timer-list = mkOption {
@@ -50,132 +59,190 @@ in
         1800
         3600
       ];
-      description = "List of duration timer values (seconds)";
+      description = ''
+        Available timer duration intervals
+
+        List of possible timer values in seconds for the dropdown menu.
+      '';
     };
 
     use-custom-duration = mkOption {
       type = types.bool;
       default = false;
-      description = "Use custom duration values for the timer";
+      description = ''
+        Enable custom duration timer
+
+        Whether to use custom user-defined values for the inhibition timer.
+      '';
     };
 
     countdown-timer = mkOption {
       type = types.int;
       default = 0;
-      description = "Time (seconds) for the timer countdown";
+      description = ''
+        Active countdown remaining time
+
+        Internal timer state representing seconds remaining until inhibition ends.
+      '';
     };
 
     duration-timer = mkOption {
       type = types.int;
       default = 2;
-      description = "Index of duration range for the timer";
+      description = ''
+        Default timer duration index
+
+        The default index from the duration list used when starting a timer.
+      '';
     };
 
     restore-state = mkOption {
       type = types.bool;
       default = false;
-      description = "Restore caffeine state";
+      description = ''
+        Restore inhibition state on startup
+
+        Whether to automatically re-enable caffeine if it was active on shutdown.
+      '';
     };
 
     show-indicator = mkOption {
       type = types.str;
       default = "only-active";
-      description = "Show indicator: 'only-active', 'always', or 'never'";
+      description = ''
+        Indicator visibility mode
+
+        Controls the top bar icon visibility: 'only-active', 'always', or 'never'.
+      '';
     };
 
     show-notifications = mkOption {
       type = types.bool;
       default = true;
-      description = "Show notifications when enabled/disabled";
+      description = ''
+        Display status notifications
+
+        Whether to show desktop notifications when caffeine is toggled.
+      '';
     };
 
     show-timer = mkOption {
       type = types.bool;
       default = true;
-      description = "Show timer when enabled/disabled";
+      description = ''
+        Display countdown in top bar
+
+        Whether to show the remaining inhibition time next to the icon.
+      '';
     };
 
     show-toggle = mkOption {
       type = types.bool;
       default = true;
-      description = "Show the quick settings toggle";
+      description = ''
+        Enable quick settings toggle
+
+        Whether the toggle switch appears in the GNOME Quick Settings menu.
+      '';
     };
 
     enable-fullscreen = mkOption {
       type = types.bool;
       default = true;
-      description = "Enable when a fullscreen application is running";
+      description = ''
+        Auto-inhibit on fullscreen apps
+
+        Enable caffeine automatically when any application enters fullscreen mode.
+      '';
     };
 
     enable-mpris = mkOption {
       type = types.bool;
       default = false;
-      description = "Enable when an application is playing media";
+      description = ''
+        Auto-inhibit on media playback
+
+        Enable caffeine automatically when an MPRIS-compatible media player is active.
+      '';
     };
 
     nightlight-control = mkOption {
       type = types.str;
       default = "never";
-      description = "Night Light control mode: 'never', 'always', 'for-apps'";
+      description = ''
+        Inhibit GNOME Night Light
+
+        Mode for suppressing Night Light: 'never', 'always', or 'for-apps'.
+      '';
     };
 
     screen-blank = mkOption {
       type = types.str;
       default = "never";
-      description = "Allow screen blank: 'never', 'always', 'for-apps'";
+      description = ''
+        Allow screen blanking while active
+
+        Mode for allowing the screen to turn off: 'never', 'always', or 'for-apps'.
+      '';
     };
 
     trigger-apps-mode = mkOption {
       type = types.str;
       default = "on-running";
-      description = "Trigger App control mode: 'on-running', 'on-focus', 'on-active-workspace'";
+      description = ''
+        Application trigger logic
+
+        Criteria for app-based inhibition: 'on-running', 'on-focus', 'on-active-workspace'.
+      '';
     };
 
     toggle-shortcut = mkOption {
       type = types.listOf types.str;
       default = [ ];
-      description = "Shortcut to toggle Caffeine";
+      description = ''
+        Keyboard shortcut to toggle state
+
+        List of key combination strings used to manually enable/disable caffeine.
+      '';
     };
 
-    # UI Preferences (Hidden/Advanced)
     prefs-default-width = mkOption {
       type = types.int;
       default = 570;
-      description = "Default width for the preferences window";
+      description = "Default width for the preferences window interface";
     };
 
     prefs-default-height = mkOption {
       type = types.int;
       default = 590;
-      description = "Default height for the preferences window";
+      description = "Default height for the preferences window interface";
     };
 
     indicator-position = mkOption {
       type = types.int;
       default = 0;
-      description = "Visible position offset of status icon in indicator menu";
+      description = "Visual offset for the status icon in the panel";
     };
 
     indicator-position-index = mkOption {
       type = types.int;
       default = 0;
-      description = "Real position offset of status icon in indicator menu";
+      description = "Logical sorting index for the status icon";
     };
 
     indicator-position-max = mkOption {
       type = types.int;
       default = 1;
-      description = "Last item index in indicator menu";
+      description = "Maximum index for icon positioning in the indicator menu";
     };
 
     cli-toggle = mkOption {
       type = types.bool;
       default = false;
-      description = "Command line key to toggle state";
+      description = "Allow toggling caffeine via command line signals";
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.caffeine ];
 
@@ -200,7 +267,6 @@ in
             screen-blank = cfg.screen-blank;
             trigger-apps-mode = cfg.trigger-apps-mode;
             toggle-shortcut = cfg.toggle-shortcut;
-
             prefs-default-width = cfg.prefs-default-width;
             prefs-default-height = cfg.prefs-default-height;
             indicator-position = cfg.indicator-position;

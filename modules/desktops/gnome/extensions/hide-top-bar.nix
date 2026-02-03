@@ -13,8 +13,9 @@ let
 in
 {
   meta = {
-    description = "Configures the Hide Top Bar GNOME extension";
-    longDescription = ''
+    description = ''
+      Intelligent panel visibility management for GNOME Shell
+
       This module installs and configures the **Hide Top Bar** extension for GNOME.
       It automatically hides the top bar to maximize screen space, showing it only
       when the mouse approaches the edge or via keyboard shortcuts.
@@ -35,118 +36,189 @@ in
     hot-corner = mkOption {
       type = types.bool;
       default = false;
-      description = "Keep hot corner sensitive even when panel is hidden";
+      description = ''
+        Maintain hot corner sensitivity
+
+        Whether to keep the activities hot corner active even when the 
+        panel is hidden.
+      '';
     };
 
     mouse-sensitive = mkOption {
       type = types.bool;
       default = false;
-      description = "Show panel when mouse approaches edge of the screen";
+      description = ''
+        Reveal panel on mouse proximity
+
+        Whether to show the panel when the mouse cursor approaches the 
+        edge of the screen.
+      '';
     };
 
     mouse-sensitive-fullscreen-window = mkOption {
       type = types.bool;
       default = true;
-      description = "Show panel when mouse approaches edge in fullscreen";
+      description = ''
+        Enable mouse reveal in fullscreen
+
+        Allows revealing the panel via mouse proximity even when a 
+        fullscreen application is active.
+      '';
     };
 
     mouse-triggers-overview = mkOption {
       type = types.bool;
       default = false;
-      description = "Show overview when mouse approaches edge (requires mouse-sensitive)";
+      description = ''
+        Trigger overview on edge proximity
+
+        Whether to open the activity overview when the mouse hits 
+        the panel edge.
+      '';
     };
 
     keep-round-corners = mkOption {
       type = types.bool;
       default = false;
-      description = "Keep round corners on the top when panel is hidden";
+      description = ''
+        Maintain rounded panel corners
+
+        Preserves the aesthetic rounded corners of the top panel 
+        even in its hidden state.
+      '';
     };
 
     animation-time-overview = mkOption {
       type = types.float;
       default = 0.4;
-      description = "Slide in/out animation time for overview";
+      description = ''
+        Overview transition speed
+
+        Duration in seconds for the panel slide animation when 
+        entering the overview.
+      '';
     };
 
     animation-time-autohide = mkOption {
       type = types.float;
       default = 0.2;
-      description = "Slide in/out animation time for autohide";
+      description = ''
+        Autohide transition speed
+
+        Duration in seconds for the panel slide animation during 
+        standard reveal/hide events.
+      '';
     };
 
     pressure-threshold = mkOption {
       type = types.int;
       default = 100;
-      description = "Pressure barrier threshold (pixels)";
+      description = ''
+        Edge pressure barrier limit
+
+        The amount of cursor 'pressure' (pixels) required to break 
+        the reveal barrier.
+      '';
     };
 
     pressure-timeout = mkOption {
       type = types.int;
       default = 1000;
-      description = "Pressure barrier timeout (ms)";
+      description = ''
+        Pressure barrier reset time
+
+        Time in milliseconds before the pressure barrier resets 
+        after a failed break attempt.
+      '';
     };
 
     shortcut-keybind = mkOption {
       type = types.listOf types.str;
       default = [ ];
-      description = "Keyboard shortcut that triggers the bar to be shown";
+      description = ''
+        Panel visibility keyboard shortcut
+
+        List of key combinations used to manually reveal the top bar.
+      '';
     };
 
     shortcut-delay = mkOption {
       type = types.float;
       default = 1.0;
-      description = "Delay before bar rehides automatically after key press (0.0 = unlimited)";
+      description = ''
+        Manual reveal persistence
+
+        Number of seconds the bar remains visible after being 
+        triggered by a keyboard shortcut.
+      '';
     };
 
     shortcut-toggles = mkOption {
       type = types.bool;
       default = true;
-      description = "Pressing the shortcut again rehides the panel";
+      description = ''
+        Enable shortcut toggle mode
+
+        If enabled, pressing the reveal shortcut while the bar is 
+        visible will manually hide it.
+      '';
     };
 
     enable-intellihide = mkOption {
       type = types.bool;
       default = true;
-      description = "Panel only hides if a window takes the space";
+      description = ''
+        Enable smart hiding logic
+
+        Only hides the panel when a window occupies the panel area.
+      '';
     };
 
     enable-active-window = mkOption {
       type = types.bool;
       default = true;
-      description = "Intellihide only triggers for active window";
+      description = ''
+        Restrict intellihide to active window
+
+        When enabled, only the focused window triggers the panel 
+        hiding logic.
+      '';
     };
 
     show-in-overview = mkOption {
       type = types.bool;
       default = true;
-      description = "Panel is visible in overview";
+      description = ''
+        Show panel in activities overview
+
+        Whether the panel should always be rendered when the 
+        overview is active.
+      '';
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.hidetopbar ];
-
     programs.dconf.profiles.user.databases = [
       {
-        settings = {
-          "org/gnome/shell/extensions/hidetopbar" = {
-            hot-corner = cfg.hot-corner;
-            mouse-sensitive = cfg.mouse-sensitive;
-            mouse-sensitive-fullscreen-window = cfg.mouse-sensitive-fullscreen-window;
-            mouse-triggers-overview = cfg.mouse-triggers-overview;
-            keep-round-corners = cfg.keep-round-corners;
-            animation-time-overview = cfg.animation-time-overview;
-            animation-time-autohide = cfg.animation-time-autohide;
-            pressure-threshold = cfg.pressure-threshold;
-            pressure-timeout = cfg.pressure-timeout;
-            shortcut-keybind = cfg.shortcut-keybind;
-            shortcut-delay = cfg.shortcut-delay;
-            shortcut-toggles = cfg.shortcut-toggles;
-            enable-intellihide = cfg.enable-intellihide;
-            enable-active-window = cfg.enable-active-window;
-            show-in-overview = cfg.show-in-overview;
-          };
+        settings."org/gnome/shell/extensions/hidetopbar" = {
+          inherit (cfg)
+            hot-corner
+            mouse-sensitive
+            mouse-sensitive-fullscreen-window
+            mouse-triggers-overview
+            keep-round-corners
+            animation-time-overview
+            animation-time-autohide
+            pressure-threshold
+            pressure-timeout
+            shortcut-keybind
+            shortcut-delay
+            shortcut-toggles
+            enable-intellihide
+            enable-active-window
+            show-in-overview
+            ;
         };
       }
     ];

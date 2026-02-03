@@ -11,8 +11,6 @@ let
   cfg = config.zenos.desktops.gnome.extensions.user-theme;
 
   # Determine the name used in dconf.
-  # If overriding, use the generated name (defaulting to "zenos-override" if name is unset).
-  # If not overriding, use the provided name directly.
   effectiveName =
     if cfg.theme.cssOverride != "" then
       (if cfg.name != "" then cfg.name else "zenos-override")
@@ -40,16 +38,17 @@ let
 in
 {
   meta = {
-    description = "Configures the User Theme GNOME extension";
-    longDescription = ''
+    description = ''
+      Shell theme customization and dynamic theme generation
+
       This module installs and configures the **User Themes** extension for GNOME.
-      It allows loading shell themes from the user directory and provides a mechanism
-      to generate custom themes on-the-fly using CSS overrides.
+      It allows loading custom shell themes from the user's home directory and provides
+      logic to generate dynamic CSS overrides on top of existing themes.
 
       **Features:**
-      - Install User Themes extension.
-      - Apply existing themes by name.
-      - Generate custom themes extending base themes with CSS overrides.
+      - Enable custom GNOME Shell themes via dconf.
+      - Declaratively append CSS to themes using `cssOverride`.
+      - Inherit from installed system themes like Orchis or WhiteSur.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -62,39 +61,45 @@ in
     name = mkOption {
       type = types.str;
       default = "";
-      description = "The name of the theme to apply. If using cssOverride, this becomes the name of the generated theme";
+      description = ''
+        Identifier for the shell theme to apply
+
+        The name of the theme directory found in /share/themes. If using 
+        `cssOverride`, this becomes the directory name of the generated theme.
+      '';
     };
 
-    theme = mkOption {
-      description = "Theme generation settings";
-      default = { };
-      type = types.submodule {
-        options = {
-          activeTheme = mkOption {
-            type = types.str;
-            default = "";
-            description = "The name of the base theme to inherit from (e.g., 'Orchis-Dark'). Must be installed in systemPackages";
-          };
+    theme = {
+      activeTheme = mkOption {
+        type = types.str;
+        default = "";
+        description = ''
+          Base theme for CSS inheritance
 
-          cssOverride = mkOption {
-            type = types.lines;
-            default = "";
-            description = "CSS to append to the generated theme. If empty, no theme is generated";
-          };
-        };
+          The name of an installed theme (e.g., 'Orchis-Dark') to use as a 
+          parent. This theme must be present in the system packages.
+        '';
+      };
+
+      cssOverride = mkOption {
+        type = types.lines;
+        default = "";
+        description = ''
+          Custom CSS rules for GNOME Shell
+
+          Raw CSS content to be appended to the shell's stylesheet. If 
+          provided, a synthetic theme package is automatically generated.
+        '';
       };
     };
   };
 
   config = mkIf cfg.enable {
-    # Ensure the extension is installed
     environment.systemPackages = [
       pkgs.gnomeExtensions.user-themes
     ]
-    # Add the generated theme to packages if we are overriding
     ++ (optional (cfg.theme.cssOverride != "") generatedTheme);
 
-    # Apply dconf settings
     programs.dconf.profiles.user.databases = [
       {
         settings = {

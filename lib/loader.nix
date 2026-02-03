@@ -17,11 +17,16 @@ rec {
         lib.mapAttrs (
           name: type:
           if type == "directory" then
-            # Priority 1: Leaf Module
+            # Priority 1: Leaf Module (Standard)
             if builtins.pathExists (path + "/${name}/default.nix") then
               path + "/${name}/default.nix"
+            # Priority 1.5: Leaf Module (Alternative)
             else if builtins.pathExists (path + "/${name}/package.nix") then
               path + "/${name}/package.nix"
+            # Priority 1.6: Leaf Module (Name Match)
+            # Detects /foo/foo.nix patterns
+            else if builtins.pathExists (path + "/${name}/${name}.nix") then
+              path + "/${name}/${name}.nix"
             # Priority 2: Branch (Recurse)
             else
               let

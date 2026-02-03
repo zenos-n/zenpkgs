@@ -17,8 +17,6 @@ let
     escapeShellArg
     ;
 
-  # --- Serializers ---
-  # Basic GSConnect types are simple, but runcommand list is a{sv}
   mkVariant = v: "<${v}>";
   mkString = v: "'${v}'";
 
@@ -28,7 +26,6 @@ let
       "@a{sv} {}"
     else
       let
-        # Expect input: { "name" = { name = "Name"; command = "cmd"; }; }
         serializeCmd =
           cmdAttrs:
           let
@@ -36,39 +33,36 @@ let
             c = cmdAttrs.command or "";
           in
           " {'name': ${mkVariant (mkString n)}, 'command': ${mkVariant (mkString c)}}";
-
         pairs = mapAttrsToList (k: v: "${mkString k}: ${mkVariant (serializeCmd v)}") commands;
       in
       "{${concatStringsSep ", " pairs}}";
-
-  # --- Submodules ---
 
   pluginBatterySubmodule = types.submodule {
     options = {
       send-statistics = mkOption {
         type = types.bool;
         default = false;
-        description = "Send battery statistics to the connected device";
+        description = "Transmit battery health data to connected device";
       };
       low-battery-notification = mkOption {
         type = types.bool;
         default = true;
-        description = "Show notification when battery is low";
+        description = "Alert when the remote battery level is critically low";
       };
       custom-battery-notification = mkOption {
         type = types.bool;
         default = false;
-        description = "Enable custom battery threshold notification";
+        description = "Enable alerts for specific battery percentage thresholds";
       };
       custom-battery-notification-value = mkOption {
         type = types.int;
         default = 80;
-        description = "Percentage threshold for custom battery notification";
+        description = "Trigger threshold for custom battery alerts";
       };
       full-battery-notification = mkOption {
         type = types.bool;
         default = false;
-        description = "Show notification when battery is fully charged";
+        description = "Alert when remote battery reaches full charge";
       };
     };
   };
@@ -78,12 +72,12 @@ let
       receive-content = mkOption {
         type = types.bool;
         default = false;
-        description = "Receive clipboard content from connected devices";
+        description = "Accept incoming clipboard data from external devices";
       };
       send-content = mkOption {
         type = types.bool;
         default = false;
-        description = "Send local clipboard content to connected devices";
+        description = "Broadcast local clipboard data to external devices";
       };
     };
   };
@@ -93,7 +87,7 @@ let
       contacts-source = mkOption {
         type = types.bool;
         default = true;
-        description = "Share local contacts with the connected device";
+        description = "Permit contact list synchronization with remote devices";
       };
     };
   };
@@ -103,7 +97,7 @@ let
       share-control = mkOption {
         type = types.bool;
         default = true;
-        description = "Allow the connected device to control the mouse pointer";
+        description = "Allow remote cursor and input manipulation";
       };
     };
   };
@@ -113,7 +107,7 @@ let
       share-players = mkOption {
         type = types.bool;
         default = true;
-        description = "Share MPRIS media player controls with the connected device";
+        description = "Export media player controls to connected devices";
       };
     };
   };
@@ -123,17 +117,17 @@ let
       send-notifications = mkOption {
         type = types.bool;
         default = true;
-        description = "Send system notifications to the connected device";
+        description = "Forward desktop notifications to connected devices";
       };
       send-active = mkOption {
         type = types.bool;
         default = true;
-        description = "Only send notifications when the system is active";
+        description = "Restrict notification forwarding to active session state";
       };
       applications = mkOption {
         type = types.str;
         default = "{}";
-        description = "JSON string defining per-application notification policies";
+        description = "JSON configuration for per-application notification rules";
       };
     };
   };
@@ -146,11 +140,11 @@ let
             options = {
               name = mkOption {
                 type = types.str;
-                description = "Display name of the command";
+                description = "Display label for the remote command";
               };
               command = mkOption {
                 type = types.str;
-                description = "Shell command to execute";
+                description = "System command string to be executed";
               };
             };
           }
@@ -177,7 +171,12 @@ let
             command = "systemctl suspend";
           };
         };
-        description = "Attributes of commands shared with connected devices";
+        description = ''
+          Managed set of executable remote commands
+
+          Dictionary of commands that can be triggered from a connected 
+          Android or iOS device.
+        '';
       };
     };
   };
@@ -187,7 +186,7 @@ let
       automount = mkOption {
         type = types.bool;
         default = true;
-        description = "Automatically mount the device filesystem via SFTP";
+        description = "Mount remote filesystem automatically upon connection";
       };
     };
   };
@@ -197,17 +196,17 @@ let
       receive-files = mkOption {
         type = types.bool;
         default = true;
-        description = "Allow receiving files from the connected device";
+        description = "Allow remote devices to push files to the desktop";
       };
       receive-directory = mkOption {
         type = types.str;
         default = "";
-        description = "Directory for received files (defaults to ~/Downloads)";
+        description = "Destination path for incoming wireless transfers";
       };
       launch-urls = mkOption {
         type = types.bool;
         default = false;
-        description = "Automatically open received URLs in the default browser";
+        description = "Automatically open received links in the default browser";
       };
     };
   };
@@ -217,7 +216,7 @@ let
       legacy-sms = mkOption {
         type = types.bool;
         default = false;
-        description = "Enable legacy SMS support for older Android versions";
+        description = "Enable compatibility mode for older Android SMS stacks";
       };
     };
   };
@@ -227,7 +226,7 @@ let
       share-sinks = mkOption {
         type = types.bool;
         default = true;
-        description = "Allow connected devices to control system volume";
+        description = "Permit remote control of desktop audio outputs";
       };
     };
   };
@@ -237,27 +236,27 @@ let
       ringing-volume = mkOption {
         type = types.str;
         default = "lower";
-        description = "System volume behavior during incoming calls (lower, mute, or none)";
+        description = "Audio behavior during incoming call events";
       };
       ringing-pause = mkOption {
         type = types.bool;
         default = false;
-        description = "Pause media playback during incoming calls";
+        description = "Suspend media playback when phone is ringing";
       };
       talking-volume = mkOption {
         type = types.str;
         default = "mute";
-        description = "System volume behavior during active calls";
+        description = "Audio behavior during active call events";
       };
       talking-microphone = mkOption {
         type = types.bool;
         default = true;
-        description = "Mute local microphone during active calls";
+        description = "Automatically mute local mic during voice calls";
       };
       talking-pause = mkOption {
         type = types.bool;
         default = true;
-        description = "Pause media playback during active calls";
+        description = "Suspend media playback during active calls";
       };
     };
   };
@@ -267,62 +266,62 @@ let
       battery = mkOption {
         type = pluginBatterySubmodule;
         default = { };
-        description = "Battery plugin settings";
+        description = "Battery plugin default configuration";
       };
       clipboard = mkOption {
         type = pluginClipboardSubmodule;
         default = { };
-        description = "Clipboard plugin settings";
+        description = "Clipboard plugin default configuration";
       };
       contacts = mkOption {
         type = pluginContactsSubmodule;
         default = { };
-        description = "Contacts plugin settings";
+        description = "Contacts plugin default configuration";
       };
       mousepad = mkOption {
         type = pluginMousepadSubmodule;
         default = { };
-        description = "Remote mousepad plugin settings";
+        description = "Mousepad plugin default configuration";
       };
       mpris = mkOption {
         type = pluginMprisSubmodule;
         default = { };
-        description = "Media player integration settings";
+        description = "Media player plugin default configuration";
       };
       notification = mkOption {
         type = pluginNotificationSubmodule;
         default = { };
-        description = "Notification synchronization settings";
+        description = "Notification plugin default configuration";
       };
       runcommand = mkOption {
         type = pluginRunCommandSubmodule;
         default = { };
-        description = "Remote command execution settings";
+        description = "Remote command plugin default configuration";
       };
       sftp = mkOption {
         type = pluginSftpSubmodule;
         default = { };
-        description = "Filesystem integration settings";
+        description = "SFTP plugin default configuration";
       };
       share = mkOption {
         type = pluginShareSubmodule;
         default = { };
-        description = "File sharing plugin settings";
+        description = "File sharing plugin default configuration";
       };
       sms = mkOption {
         type = pluginSmsSubmodule;
         default = { };
-        description = "SMS integration settings";
+        description = "SMS plugin default configuration";
       };
       systemvolume = mkOption {
         type = pluginSystemVolumeSubmodule;
         default = { };
-        description = "System volume control settings";
+        description = "Volume control plugin default configuration";
       };
       telephony = mkOption {
         type = pluginTelephonySubmodule;
         default = { };
-        description = "Telephony integration settings";
+        description = "Telephony plugin default configuration";
       };
     };
   };
@@ -330,8 +329,9 @@ let
 in
 {
   meta = {
-    description = "Configures the GSConnect GNOME extension for Android integration";
-    longDescription = ''
+    description = ''
+      Mobile device integration via GSConnect and KDE Connect
+
       This module provides deep integration for **GSConnect**, a complete implementation 
       of the KDE Connect protocol for GNOME Shell.
 
@@ -341,8 +341,6 @@ in
       - **Media Control:** Remotely control your desktop's media players or vice versa.
       - **Telephony:** See incoming calls and SMS messages on your computer.
       - **Remote Input:** Use your mobile device as a touchpad or keyboard for your PC.
-
-      Integrates with the `zenos.desktops.gnome` ecosystem.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -355,81 +353,120 @@ in
     enabled = mkOption {
       type = types.bool;
       default = true;
-      description = "Enable the GSConnect extension functionality";
+      description = ''
+        Master switch for extension functionality
+
+        Enables or disables the GSConnect background service and shell integration.
+      '';
     };
 
     show-indicators = mkOption {
       type = types.bool;
       default = false;
-      description = "Show connection status indicators in the top bar";
+      description = ''
+        Display connection status in top bar
+
+        Whether to show the persistent connection status and device 
+        indicators in the GNOME panel.
+      '';
     };
 
     keep-alive-when-locked = mkOption {
       type = types.bool;
       default = true;
-      description = "Maintain device connections while the screen is locked";
+      description = ''
+        Maintain background connections during lock
+
+        Ensures that devices remain paired and reachable even when the 
+        desktop session is locked.
+      '';
     };
 
     create-native-messaging-hosts = mkOption {
       type = types.bool;
       default = true;
-      description = "Enable browser integration for sharing links directly to devices";
+      description = ''
+        Enable browser integration features
+
+        Configures native messaging manifests to allow sharing links 
+        directly from web browsers to remote devices.
+      '';
     };
 
     id = mkOption {
       type = types.str;
       default = "";
-      description = "The unique identifier for this machine's GSConnect service";
+      description = ''
+        Unique machine identifier
+
+        The UUID or identifier used to register this machine within 
+        the KDE Connect network.
+      '';
     };
 
     name = mkOption {
       type = types.str;
       default = "";
-      description = "The display name for this machine (shown on mobile devices)";
+      description = ''
+        Network broadcast name
+
+        The human-readable label shown to other devices when 
+        discovering this machine on the local network.
+      '';
     };
 
     debug = mkOption {
       type = types.bool;
       default = false;
-      description = "Enable verbose debug logging for troubleshooting";
+      description = ''
+        Enable verbose troubleshooting logs
+
+        Activates detailed logging for diagnostic purposes.
+      '';
     };
 
     discoverable = mkOption {
       type = types.bool;
       default = true;
-      description = "Make this machine visible to other devices on the network";
+      description = ''
+        Make machine visible on local network
+
+        Whether this system should announce itself via MDNS for 
+        remote device discovery.
+      '';
     };
 
     device-defaults = mkOption {
       type = deviceDefaultsSubmodule;
       default = { };
-      description = "Default plugin settings applied to all paired devices via dconf";
+      description = ''
+        Default plugin policies for paired devices
+
+        A set of default plugin settings that are automatically 
+        pushed to dconf for every newly paired device.
+      '';
     };
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.gsconnect ];
-
-    # 1. Global Dconf Settings
     programs.dconf.profiles.user.databases = [
       {
-        settings = {
-          "org/gnome/shell/extensions/gsconnect" = {
-            enabled = cfg.enabled;
-            show-indicators = cfg.show-indicators;
-            keep-alive-when-locked = cfg.keep-alive-when-locked;
-            create-native-messaging-hosts = cfg.create-native-messaging-hosts;
-            id = cfg.id;
-            name = cfg.name;
-            debug = cfg.debug;
-            discoverable = cfg.discoverable;
-          };
+        settings."org/gnome/shell/extensions/gsconnect" = {
+          inherit (cfg)
+            enabled
+            show-indicators
+            keep-alive-when-locked
+            create-native-messaging-hosts
+            id
+            name
+            debug
+            discoverable
+            ;
         };
       }
     ];
 
-    # 2. Dynamic Device Configuration Service
-    # Iterates over all paired devices found in dconf and applies 'device-defaults'
     systemd.user.services.gsconnect-device-config = {
       description = "Apply GSConnect device defaults";
       wantedBy = [ "graphical-session.target" ];
@@ -439,25 +476,13 @@ in
         RemainAfterExit = true;
       };
       script = ''
-        # Helper to write if changed
-        set_val() {
-          ${pkgs.dconf}/bin/dconf write "$1" "$2"
-        }
-
-        # Get list of devices
+        set_val() { ${pkgs.dconf}/bin/dconf write "$1" "$2"; }
         DEVICES_RAW=$(${pkgs.dconf}/bin/dconf read /org/gnome/shell/extensions/gsconnect/devices)
-
-        if [ -z "$DEVICES_RAW" ] || [ "$DEVICES_RAW" = "@as []" ]; then
-          exit 0
-        fi
-
-        # Clean string to space-separated list
+        if [ -z "$DEVICES_RAW" ] || [ "$DEVICES_RAW" = "@as []" ]; then exit 0; fi
         DEVICES=$(echo "$DEVICES_RAW" | sed "s/[[']//g;s/,/ /g;s/]//g")
 
         for ID in $DEVICES; do
           BASE="/org/gnome/shell/extensions/gsconnect/device/$ID"
-
-          # Battery
           set_val "$BASE/plugin/battery/send-statistics" "${
             if cfg.device-defaults.battery.send-statistics then "true" else "false"
           }"
@@ -471,31 +496,21 @@ in
           set_val "$BASE/plugin/battery/full-battery-notification" "${
             if cfg.device-defaults.battery.full-battery-notification then "true" else "false"
           }"
-
-          # Clipboard
           set_val "$BASE/plugin/clipboard/receive-content" "${
             if cfg.device-defaults.clipboard.receive-content then "true" else "false"
           }"
           set_val "$BASE/plugin/clipboard/send-content" "${
             if cfg.device-defaults.clipboard.send-content then "true" else "false"
           }"
-
-          # Contacts
           set_val "$BASE/plugin/contacts/contacts-source" "${
             if cfg.device-defaults.contacts.contacts-source then "true" else "false"
           }"
-
-          # Mousepad
           set_val "$BASE/plugin/mousepad/share-control" "${
             if cfg.device-defaults.mousepad.share-control then "true" else "false"
           }"
-
-          # MPRIS
           set_val "$BASE/plugin/mpris/share-players" "${
             if cfg.device-defaults.mpris.share-players then "true" else "false"
           }"
-
-          # Notification
           set_val "$BASE/plugin/notification/send-notifications" "${
             if cfg.device-defaults.notification.send-notifications then "true" else "false"
           }"
@@ -503,16 +518,10 @@ in
             if cfg.device-defaults.notification.send-active then "true" else "false"
           }"
           set_val "$BASE/plugin/notification/applications" "${escapeShellArg cfg.device-defaults.notification.applications}"
-
-          # RunCommand
           set_val "$BASE/plugin/runcommand/command-list" "${escapeShellArg (serializeCommandList cfg.device-defaults.runcommand.command-list)}"
-
-          # SFTP
           set_val "$BASE/plugin/sftp/automount" "${
             if cfg.device-defaults.sftp.automount then "true" else "false"
           }"
-
-          # Share
           set_val "$BASE/plugin/share/receive-files" "${
             if cfg.device-defaults.share.receive-files then "true" else "false"
           }"
@@ -520,18 +529,12 @@ in
           set_val "$BASE/plugin/share/launch-urls" "${
             if cfg.device-defaults.share.launch-urls then "true" else "false"
           }"
-
-          # SMS
           set_val "$BASE/plugin/sms/legacy-sms" "${
             if cfg.device-defaults.sms.legacy-sms then "true" else "false"
           }"
-
-          # SystemVolume
           set_val "$BASE/plugin/systemvolume/share-sinks" "${
             if cfg.device-defaults.systemvolume.share-sinks then "true" else "false"
           }"
-
-          # Telephony
           set_val "$BASE/plugin/telephony/ringing-volume" "'${cfg.device-defaults.telephony.ringing-volume}'"
           set_val "$BASE/plugin/telephony/ringing-pause" "${
             if cfg.device-defaults.telephony.ringing-pause then "true" else "false"

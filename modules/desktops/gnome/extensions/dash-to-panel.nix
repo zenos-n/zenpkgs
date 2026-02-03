@@ -10,9 +10,7 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.dash-to-panel;
 
-  # --- Serializer Logic for a{s*} ---
   mkGVariantString = v: "'${v}'";
-  mkGVariantInt = v: toString v;
   mkGVariantDouble =
     v:
     let
@@ -20,29 +18,29 @@ let
     in
     if builtins.match ".*\\..*" s == null then "${s}.0" else s;
 
-  # Generic Map Serializer
   serializeMap =
     valFormatter: mapAttrs:
     if mapAttrs == { } then
-      "@a{s*} {}" # Generic placeholder, specific type set by usage context
+      "@a{s*} {}"
     else
       let
         pairs = mapAttrsToList (k: v: "${mkGVariantString k}: ${valFormatter v}") mapAttrs;
       in
       "{${concatStringsSep ", " pairs}}";
 
-  # Specific Serializers
   serializeMapStrDouble = serializeMap mkGVariantDouble;
-  serializeMapStrInt = serializeMap mkGVariantInt;
   serializeMapStrUint = serializeMap (v: "uint32 ${toString v}");
+  serializeMapStrInt = serializeMap toString;
 
 in
 {
   meta = {
-    description = "Configures the Dash to Panel GNOME extension";
-    longDescription = ''
+    description = ''
+      Combined taskbar and panel interface for GNOME Shell
+
       This module installs and configures the **Dash to Panel** extension for GNOME.
-      It combines the Dash and the Top Bar into a single panel, similar to Windows 10/11 or KDE Plasma.
+      It combines the Dash and the Top Bar into a single panel, similar to 
+      Windows or KDE Plasma.
 
       **Features:**
       - Integrated taskbar and system tray.
@@ -58,7 +56,6 @@ in
   options.zenos.desktops.gnome.extensions.dash-to-panel = {
     enable = mkEnableOption "Dash to Panel GNOME extension configuration";
 
-    # --- Positioning ---
     positioning = {
       panel-position = mkOption {
         type = types.enum [
@@ -68,51 +65,44 @@ in
           "RIGHT"
         ];
         default = "BOTTOM";
-        description = "Panel position on the screen";
+        description = "Anchor edge for the consolidated panel";
       };
-
       panel-size = mkOption {
         type = types.int;
         default = 48;
-        description = "Panel thickness in pixels";
+        description = "Consolidated panel thickness in pixels";
       };
-
       panel-lengths = mkOption {
         type = types.str;
         default = "{}";
-        description = "Panel lengths (JSON string)";
+        description = "Per-monitor panel lengths (JSON)";
       };
-
       panel-sizes = mkOption {
         type = types.str;
         default = "{}";
-        description = "Panel sizes (JSON string)";
+        description = "Per-monitor panel thicknesses (JSON)";
       };
     };
 
-    # --- Style & Appearance ---
     style = {
       appicon-margin = mkOption {
         type = types.int;
         default = 8;
-        description = "App icon margin";
+        description = "Pixel margin around application icons";
       };
-
       appicon-padding = mkOption {
         type = types.int;
         default = 4;
-        description = "App icon padding";
+        description = "Internal padding for application icons";
       };
-
       dot-position = mkOption {
         type = types.enum [
           "BOTTOM"
           "TOP"
         ];
         default = "BOTTOM";
-        description = "Running indicator dot position";
+        description = "Placement of the active window marker";
       };
-
       dot-style-focused = mkOption {
         type = types.enum [
           "METRO"
@@ -124,9 +114,8 @@ in
           "CILIORA"
         ];
         default = "METRO";
-        description = "Focused running indicator style";
+        description = "Visual style of the focused app marker";
       };
-
       dot-style-unfocused = mkOption {
         type = types.enum [
           "METRO"
@@ -138,80 +127,71 @@ in
           "CILIORA"
         ];
         default = "METRO";
-        description = "Unfocused running indicator style";
+        description = "Visual style of unfocused app markers";
       };
-
       transparency = {
         enable = mkOption {
           type = types.bool;
           default = false;
-          description = "Enable custom transparency settings";
+          description = "Enable shell theme transparency overrides";
         };
         opacity = mkOption {
           type = types.float;
           default = 0.4;
-          description = "Panel opacity (0.0 - 1.0)";
+          description = "Fixed panel alpha transparency (0.0-1.0)";
         };
         color = mkOption {
           type = types.str;
           default = "#000000";
-          description = "Panel background color";
+          description = "Custom panel background color (Hex)";
         };
         dynamic = mkOption {
           type = types.bool;
           default = false;
-          description = "Enable dynamic opacity";
+          description = "Adjust opacity based on window proximity";
         };
       };
     };
 
-    # --- Behavior ---
     behavior = {
       isolate-workspaces = mkOption {
         type = types.bool;
         default = false;
-        description = "Show only apps from the current workspace";
+        description = "Filter items by current desktop";
       };
-
       isolate-monitors = mkOption {
         type = types.bool;
         default = false;
-        description = "Show only apps from the current monitor";
+        description = "Filter items by hardware monitor";
       };
-
       group-apps = mkOption {
         type = types.bool;
         default = true;
-        description = "Group applications";
+        description = "Unify multiple windows under one icon";
       };
-
       click-action = mkOption {
         type = types.str;
         default = "CYCLE-MIN";
-        description = "Action when clicking a running app";
+        description = "Primary interaction button behavior";
       };
-
       scroll-panel-action = mkOption {
         type = types.str;
         default = "SWITCH_WORKSPACE";
-        description = "Action when scrolling on the panel";
+        description = "Mouse scroll wheel behavior on the panel";
       };
-
       show-window-previews = mkOption {
         type = types.bool;
         default = true;
-        description = "Show window previews on hover";
+        description = "Show live thumbnails on icon hover";
       };
     };
 
-    # --- Intellihide ---
     intellihide = {
       enable = mkOption {
         type = types.bool;
         default = false;
-        description = "Enable Intellihide";
+        description = "Hide panel when obstructed by windows";
       };
-
       behavior = mkOption {
         type = types.enum [
           "ALL_WINDOWS"
@@ -219,23 +199,21 @@ in
           "MAXIMIZED_WINDOWS"
         ];
         default = "FOCUSED_WINDOWS";
-        description = "Intellihide behavior mode";
+        description = "Hiding trigger policy";
       };
-
       animation-time = mkOption {
         type = types.int;
         default = 200;
-        description = "Animation duration in ms";
+        description = "Visual transition time in milliseconds";
       };
     };
 
-    # --- Animations (Advanced) ---
     animations = {
       appicon-hover = {
         enable = mkOption {
           type = types.bool;
           default = false;
-          description = "Animate app icon hover";
+          description = "Enable mouse hover animations for icons";
         };
         convexity = mkOption {
           type = types.attrsOf types.float;
@@ -243,7 +221,7 @@ in
             "RIPPLE" = 2.0;
             "PLANK" = 1.0;
           };
-          description = "Animation convexity map";
+          description = "Deformation curvature map";
         };
         duration = mkOption {
           type = types.attrsOf types.int;
@@ -252,7 +230,7 @@ in
             "RIPPLE" = 130;
             "PLANK" = 100;
           };
-          description = "Animation duration map";
+          description = "Animation speed map";
         };
         extent = mkOption {
           type = types.attrsOf types.int;
@@ -260,7 +238,7 @@ in
             "RIPPLE" = 4;
             "PLANK" = 4;
           };
-          description = "Animation extent map";
+          description = "Animation spread map";
         };
         rotation = mkOption {
           type = types.attrsOf types.int;
@@ -269,7 +247,7 @@ in
             "RIPPLE" = 10;
             "PLANK" = 0;
           };
-          description = "Animation rotation map";
+          description = "Icon rotation map";
         };
         travel = mkOption {
           type = types.attrsOf types.float;
@@ -278,7 +256,7 @@ in
             "RIPPLE" = 0.40;
             "PLANK" = 0.0;
           };
-          description = "Animation travel map";
+          description = "Translation distance map";
         };
         zoom = mkOption {
           type = types.attrsOf types.float;
@@ -287,76 +265,53 @@ in
             "RIPPLE" = 1.25;
             "PLANK" = 2.0;
           };
-          description = "Animation zoom map";
+          description = "Scale factor map";
         };
       };
     };
 
-    # --- Unexposed / Detailed Options (Mapped Flatly) ---
-    # These options are kept flat to match the provided structure but can be accessed directly.
-    # Users can set these if specific fine-tuning is needed.
     extraSettings = mkOption {
       type = types.attrs;
       default = { };
-      description = "Extra settings to pass directly to dconf (keys must match schema)";
+      description = "Direct schema-key overrides for dconf";
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.dash-to-panel ];
-
     programs.dconf.profiles.user.databases = [
       {
-        settings = {
-          "org/gnome/shell/extensions/dash-to-panel" = {
-            # Positioning
-            panel-position = cfg.positioning.panel-position;
-            panel-size = cfg.positioning.panel-size;
-            panel-lengths = cfg.positioning.panel-lengths;
-            panel-sizes = cfg.positioning.panel-sizes;
-
-            # Style
-            appicon-margin = cfg.style.appicon-margin;
-            appicon-padding = cfg.style.appicon-padding;
-            dot-position = cfg.style.dot-position;
-            dot-style-focused = cfg.style.dot-style-focused;
-            dot-style-unfocused = cfg.style.dot-style-unfocused;
-            trans-use-custom-opacity = cfg.style.transparency.enable;
-            trans-panel-opacity = cfg.style.transparency.opacity;
-            trans-bg-color = cfg.style.transparency.color;
-            trans-use-dynamic-opacity = cfg.style.transparency.dynamic;
-
-            # Behavior
-            isolate-workspaces = cfg.behavior.isolate-workspaces;
-            isolate-monitors = cfg.behavior.isolate-monitors;
-            group-apps = cfg.behavior.group-apps;
-            click-action = cfg.behavior.click-action;
-            scroll-panel-action = cfg.behavior.scroll-panel-action;
-            show-window-previews = cfg.behavior.show-window-previews;
-
-            # Intellihide
-            intellihide = cfg.intellihide.enable;
-            intellihide-behaviour = cfg.intellihide.behavior;
-            intellihide-animation-time = cfg.intellihide.animation-time;
-
-            # Animations
-            animate-appicon-hover = cfg.animations.appicon-hover.enable;
-
-            # Defaults for other common keys
-            desktop-line-use-custom-color = false;
-            focus-highlight = true;
-            stockgs-keep-dash = false;
-            show-apps-icon-file = "";
-            animate-app-switch = true;
-            animate-window-launch = true;
-          }
-          // cfg.extraSettings;
-        };
+        settings."org/gnome/shell/extensions/dash-to-panel" = {
+          panel-position = cfg.positioning.panel-position;
+          panel-size = cfg.positioning.panel-size;
+          panel-lengths = cfg.positioning.panel-lengths;
+          panel-sizes = cfg.positioning.panel-sizes;
+          appicon-margin = cfg.style.appicon-margin;
+          appicon-padding = cfg.style.appicon-padding;
+          dot-position = cfg.style.dot-position;
+          dot-style-focused = cfg.style.dot-style-focused;
+          dot-style-unfocused = cfg.style.dot-style-unfocused;
+          trans-use-custom-opacity = cfg.style.transparency.enable;
+          trans-panel-opacity = cfg.style.transparency.opacity;
+          trans-bg-color = cfg.style.transparency.color;
+          trans-use-dynamic-opacity = cfg.style.transparency.dynamic;
+          isolate-workspaces = cfg.behavior.isolate-workspaces;
+          isolate-monitors = cfg.behavior.isolate-monitors;
+          group-apps = cfg.behavior.group-apps;
+          click-action = cfg.behavior.click-action;
+          scroll-panel-action = cfg.behavior.scroll-panel-action;
+          show-window-previews = cfg.behavior.show-window-previews;
+          intellihide = cfg.intellihide.enable;
+          intellihide-behaviour = cfg.intellihide.behavior;
+          intellihide-animation-time = cfg.intellihide.animation-time;
+          animate-appicon-hover = cfg.animations.appicon-hover.enable;
+          desktop-line-use-custom-color = false;
+          animate-app-switch = true;
+        }
+        // cfg.extraSettings;
       }
     ];
 
-    # Complex Types requiring GVariant serialization via systemd oneshot
     systemd.user.services.dash-to-panel-complex-config = {
       description = "Apply Dash to Panel complex configuration";
       wantedBy = [ "graphical-session.target" ];

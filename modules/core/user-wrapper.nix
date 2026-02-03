@@ -30,60 +30,96 @@ let
     );
 
   userSubmodule =
-    { name, config, ... }:
+    { name, ... }:
     {
       options = {
         packages = lib.mkOption {
           type = lib.types.attrs;
           default = { };
-          description = "User-specific packages with structural auto-resolution";
+          description = ''
+            User-specific packages with structural auto-resolution
+
+            Allows defining software for a specific user using the same 
+            recursive resolution logic as system packages.
+          '';
         };
 
         programs = lib.mkOption {
           type = lib.types.attrs;
           default = { };
-          description = "User-specific program configurations to be mapped to NixOS programs";
+          description = ''
+            User-specific program configurations
+
+            Attribute set of program-specific settings to be mapped 
+            directly to NixOS program options.
+          '';
         };
 
         groups = lib.mkOption {
           type = lib.types.listOf lib.types.str;
           default = [ ];
-          description = "Additional groups for the user";
+          description = ''
+            Additional user group memberships
+
+            A list of secondary groups the user should be added to 
+            (e.g., 'wheel', 'docker', 'video').
+          '';
         };
 
         keys = lib.mkOption {
           type = lib.types.listOf lib.types.str;
           default = [ ];
-          description = "SSH public keys to add to authorized_keys";
+          description = ''
+            Authorized SSH public keys
+
+            List of strings representing public keys to be added to the 
+            user's authorized_keys file.
+          '';
         };
 
         shell = lib.mkOption {
           type = lib.types.nullOr lib.types.package;
           default = null;
-          description = "The default login shell for the user";
+          description = ''
+            Default login shell for the user
+
+            The package representing the user's preferred interactive 
+            shell (e.g., pkgs.zsh).
+          '';
         };
 
         home = lib.mkOption {
           type = lib.types.attrs;
           default = { };
-          description = "Direct Home Manager configuration attributes";
+          description = ''
+            Direct Home Manager configuration
+
+            Raw attribute set passed directly to the Home Manager 
+            user configuration block.
+          '';
         };
 
         legacy = lib.mkOption {
           type = lib.types.attrs;
           default = { };
-          description = "Standard NixOS users.users options to pass through";
+          description = ''
+            Standard NixOS user options passthrough
+
+            Allows defining standard NixOS 'users.users.<name>' attributes 
+            that are not explicitly covered by ZenOS options.
+          '';
         };
       };
     };
 in
 {
   meta = {
-    description = "Enhanced user and system package management for ZenOS";
-    longDescription = ''
-      This module provides a unified interface for managing system-wide and user-specific 
-      configurations. It includes a recursive package resolver that allows defining 
-      software sets logically.
+    description = ''
+      Enhanced user and system package management for ZenOS
+
+      This module provides a unified interface for managing system-wide 
+      and user-specific configurations. It includes a recursive package 
+      resolver that allows defining software sets logically.
 
       It handles:
       - System packages via `zenos.system.packages`
@@ -96,15 +132,35 @@ in
   };
 
   options.zenos = {
+    system.packages = lib.mkOption {
+      type = lib.types.attrs;
+      default = { };
+      description = ''
+        Declarative attribute set of system packages to install
+
+        Attribute set of system packages to be automatically resolved 
+        and installed. Leaf nodes can be empty sets to trigger 
+        automatic lookup in nixpkgs.
+      '';
+    };
+
     users = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule userSubmodule);
       default = { };
-      description = "Declarative user configurations with automatic NixOS and Home Manager integration";
+      description = ''
+        Declarative user configurations with automatic integration
+
+        Defines ZenOS-specific user settings that are automatically 
+        mapped to both standard NixOS user options and Home Manager.
+      '';
     };
   };
 
   config = {
-    # Map ZenOS users to standard NixOS user configuration
+    # 1. Resolve Global System Packages
+    environment.systemPackages = resolvePackages [ ] cfg.system.packages;
+
+    # 2. Map ZenOS users to standard NixOS user configuration
     users.users = lib.mapAttrs (
       name: userCfg:
       (userCfg.legacy or { })
@@ -116,7 +172,7 @@ in
       // (lib.optionalAttrs (userCfg.shell != null) { inherit (userCfg) shell; })
     ) cfg.users;
 
-    # Map ZenOS users to Home Manager
+    # 3. Map ZenOS users to Home Manager
     home-manager.users = lib.mapAttrs (name: userCfg: userCfg.home) cfg.users;
   };
 }

@@ -13,11 +13,12 @@ let
 in
 {
   meta = {
-    description = "Configures the Just Perfection GNOME extension";
-    longDescription = ''
+    description = ''
+      Universal GNOME Shell customization utility
+
       This module installs and configures the **Just Perfection** extension for GNOME.
       It is a comprehensive "all-in-one" utility to customize GNOME Shell, allowing you to
-      tweak visibility of UI elements, adjust panel sizes, change behavior, and more.
+      tweak visibility of UI elements, adjust panel sizes, and change core behaviors.
 
       **Features:**
       - Extensive visibility controls for almost every shell element.
@@ -32,485 +33,478 @@ in
   options.zenos.desktops.gnome.extensions.just-perfection = {
     enable = mkEnableOption "Just Perfection GNOME extension configuration";
 
-    # --- Visibility ---
     visibility = {
       panel = mkOption {
         type = types.bool;
         default = true;
-        description = "Panel Visibility";
+        description = "Master visibility switch for the top panel";
       };
       panel-in-overview = mkOption {
         type = types.bool;
         default = false;
-        description = "Panel in Overview Visibility";
+        description = "Toggle panel visibility while in the activities overview";
       };
       dash = mkOption {
         type = types.bool;
         default = true;
-        description = "Dash Visibility";
+        description = "Master visibility switch for the GNOME dash";
       };
       dash-separator = mkOption {
         type = types.bool;
         default = true;
-        description = "Dash Separator Visibility";
+        description = "Show or hide the separator between favorites and running apps";
       };
       dash-app-running = mkOption {
         type = types.bool;
         default = true;
-        description = "Dash app running dot visibility";
+        description = "Toggle visibility of the dots under running applications";
       };
       search = mkOption {
         type = types.bool;
         default = true;
-        description = "Search Box Visibility";
+        description = "Toggle visibility of the search box in overview";
       };
       workspace = mkOption {
         type = types.bool;
         default = true;
-        description = "Workspace Switcher Visibility";
+        description = "Master visibility for the workspace switcher";
       };
       workspace-popup = mkOption {
         type = types.bool;
         default = true;
-        description = "Workspace Popup Visibility";
+        description = "Toggle the workspace indicator popup on desktop switch";
       };
       workspaces-in-app-grid = mkOption {
         type = types.bool;
         default = true;
-        description = "Workspaces Visibility in App Grid";
+        description = "Show or hide workspace thumbnails in the application grid";
       };
       background-menu = mkOption {
         type = types.bool;
         default = true;
-        description = "Background Menu Visibility";
+        description = "Toggle the desktop right-click background menu";
       };
       osd = mkOption {
         type = types.bool;
         default = true;
-        description = "OSD Visibility";
+        description = "Toggle On-Screen Display (Volume, Brightness popups)";
       };
       activities-button = mkOption {
         type = types.bool;
         default = true;
-        description = "Activities Button Visibility";
+        description = "Show or hide the 'Activities' label button";
       };
       clock-menu = mkOption {
         type = types.bool;
         default = true;
-        description = "Clock Menu Visibility";
+        description = "Toggle the central clock and date menu";
       };
       keyboard-layout = mkOption {
         type = types.bool;
         default = true;
-        description = "Keyboard Layout Visibility";
+        description = "Toggle the input source/keyboard layout panel menu";
       };
       accessibility-menu = mkOption {
         type = types.bool;
         default = true;
-        description = "Accessibility Menu Visibility";
+        description = "Toggle the accessibility features panel menu";
       };
       power-icon = mkOption {
         type = types.bool;
         default = true;
-        description = "Power Icon Visibility";
+        description = "Toggle the system status and power icon";
       };
       panel-notification-icon = mkOption {
         type = types.bool;
         default = true;
-        description = "Panel Notification Icon Visibility";
+        description = "Toggle the notifications indicator in the panel";
       };
       window-picker-icon = mkOption {
         type = types.bool;
         default = true;
-        description = "Window Picker Icon Visibility";
+        description = "Toggle icons on window previews in overview";
       };
       show-apps-button = mkOption {
         type = types.bool;
         default = true;
-        description = "Show Apps Button Visibility";
+        description = "Toggle the 'Show Applications' grid button";
       };
       theme = mkOption {
         type = types.bool;
         default = false;
-        description = "Theme Visibility (Internal/Advanced)";
+        description = "Enable advanced theme override visibility";
       };
       quick-settings = mkOption {
         type = types.bool;
         default = true;
-        description = "Quick Settings Menu Visibility";
+        description = "Toggle the entire GNOME Quick Settings menu";
       };
       world-clock = mkOption {
         type = types.bool;
         default = true;
-        description = "World Clock Visibility";
+        description = "Toggle world clock visibility in the date menu";
       };
       weather = mkOption {
         type = types.bool;
         default = true;
-        description = "Weather Visibility";
+        description = "Toggle weather info visibility in the date menu";
       };
       calendar = mkOption {
         type = types.bool;
         default = true;
-        description = "Calendar Visibility";
+        description = "Toggle the calendar view in the date menu";
       };
       events-button = mkOption {
         type = types.bool;
         default = true;
-        description = "Events Button Visibility";
+        description = "Toggle the events section in the date menu";
       };
       ripple-box = mkOption {
         type = types.bool;
         default = true;
-        description = "Ripple Box Visibility (Hot Corner Effect)";
+        description = "Toggle the visual ripple effect when hitting hot corners";
       };
       window-menu = mkOption {
         type = types.bool;
         default = true;
-        description = "Window Menu Visibility";
+        description = "Toggle the right-click menu on window titlebars";
       };
       window-menu-take-screenshot-button = mkOption {
         type = types.bool;
         default = true;
-        description = "Window Menu Take Screenshot Button Visibility";
+        description = "Toggle the screenshot button within the window menu";
       };
       window-preview-caption = mkOption {
         type = types.bool;
         default = true;
-        description = "Window Preview Caption Visibility";
+        description = "Toggle application names on window previews";
       };
       window-preview-close-button = mkOption {
         type = types.bool;
         default = true;
-        description = "Window Preview Close Button Visibility";
+        description = "Toggle close buttons on window previews";
       };
       screen-sharing-indicator = mkOption {
         type = types.bool;
         default = true;
-        description = "Screen Sharing Indicator Visibility";
+        description = "Toggle visibility of the screen sharing status icon";
       };
       screen-recording-indicator = mkOption {
         type = types.bool;
         default = true;
-        description = "Screen Recording Indicator Visibility";
+        description = "Toggle visibility of the screen recording status icon";
       };
     };
 
-    # --- Quick Settings Toggles ---
     quick-settings = {
       dark-mode = mkOption {
         type = types.bool;
         default = true;
-        description = "Dark Mode Toggle Visibility";
+        description = "Toggle Dark Mode switch visibility";
       };
       night-light = mkOption {
         type = types.bool;
         default = true;
-        description = "Night Light Toggle Visibility";
+        description = "Toggle Night Light switch visibility";
       };
       do-not-disturb = mkOption {
         type = types.bool;
         default = true;
-        description = "Do Not Disturb Toggle Visibility";
+        description = "Toggle Do Not Disturb switch visibility";
       };
       backlight = mkOption {
         type = types.bool;
         default = true;
-        description = "Backlight Slider Visibility";
+        description = "Toggle display brightness slider visibility";
       };
       airplane-mode = mkOption {
         type = types.bool;
         default = true;
-        description = "Airplane Mode Toggle Visibility";
+        description = "Toggle Airplane Mode switch visibility";
       };
     };
 
-    # --- Behavior ---
     behavior = {
       workspace-switcher-always-show = mkOption {
         type = types.bool;
         default = false;
-        description = "Always Show Workspace Switcher";
+        description = "Force persistent visibility of the workspace list";
       };
       workspace-wrap-around = mkOption {
         type = types.bool;
         default = false;
-        description = "Workspace Wrap Around";
+        description = "Allow workspace switching to loop from last to first";
       };
       workspace-peek = mkOption {
         type = types.bool;
         default = true;
-        description = "Workspace Peek";
+        description = "Enable horizontal workspace peeking in overview";
       };
       workspace-thumbnail-to-main-view = mkOption {
         type = types.bool;
         default = false;
-        description = "Clicking Workspace Thumbnail switches to Main View";
+        description = "Switch to main view immediately on thumbnail click";
       };
       window-demands-attention-focus = mkOption {
         type = types.bool;
         default = false;
-        description = "Focus windows that demand attention immediately";
+        description = "Automatically focus windows requesting user attention";
       };
       window-maximized-on-create = mkOption {
         type = types.bool;
         default = false;
-        description = "Maximize new windows automatically";
+        description = "Automatically maximize newly opened application windows";
       };
       type-to-search = mkOption {
         type = types.bool;
         default = true;
-        description = "Type to Search in Overview";
+        description = "Enable immediate search indexing on overview keystrokes";
       };
       double-super-to-appgrid = mkOption {
         type = types.bool;
         default = true;
-        description = "Double press Super key to open App Grid";
+        description = "Toggle app grid on double Super key press";
       };
       overlay-key = mkOption {
         type = types.bool;
         default = true;
-        description = "Use Overlay Key (Super) to open Overview";
+        description = "Use the Super key as the primary overview shortcut";
       };
       switcher-popup-delay = mkOption {
         type = types.bool;
         default = true;
-        description = "Disable delay for switcher popups (Alt-Tab)";
+        description = "Enable or disable delays for Alt-Tab popups";
       };
       invert-calendar-column-items = mkOption {
         type = types.bool;
         default = false;
-        description = "Invert Calendar Column Items order";
+        description = "Invert the sorting order of calendar columns";
       };
     };
 
-    # --- Appearance (Sizes & Icons) ---
     appearance = {
       accent-color-icon = mkOption {
         type = types.bool;
         default = false;
-        description = "Use Accent Color for Icons";
+        description = "Apply system accent color to shell icons";
       };
       panel-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Panel Size (0=theme default, 1-64=pixels)";
+        description = "Custom vertical height for the top bar (0 for default)";
       };
       panel-icon-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Panel Icon Size (0=theme default, 1-60=pixels)";
+        description = "Custom pixel size for panel icons (0 for default)";
       };
       panel-button-padding-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Panel Button Padding Size (0=theme, 1=none, 2-61=pixels)";
+        description = "Custom horizontal padding for panel buttons";
       };
       panel-indicator-padding-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Panel Indicator Padding Size (0=theme, 1=none, 2-61=pixels)";
+        description = "Custom horizontal padding for panel indicators";
       };
       panel-corner-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Panel Corner Size (0=theme, 1=no border, 2-61=radius)";
+        description = "Custom corner radius for the top bar";
       };
       dash-icon-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Dash Icon Size (0=default)";
+        description = "Custom pixel size for dash icons (0 for default)";
       };
       workspace-switcher-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Workspace Switcher Width % (0=default)";
+        description = "Width percentage for the workspace switcher (0 for default)";
       };
       workspace-background-corner-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Workspace Background Corner Size (0=default, 1=none, 2-61=radius)";
+        description = "Corner radius for workspace background containers";
       };
       looking-glass-width = mkOption {
         type = types.int;
         default = 0;
-        description = "Looking Glass Width % (0=default)";
+        description = "Width percentage for the Looking Glass debug tool";
       };
       looking-glass-height = mkOption {
         type = types.int;
         default = 0;
-        description = "Looking Glass Height % (0=default)";
+        description = "Height percentage for the Looking Glass debug tool";
       };
       alt-tab-window-preview-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Alt Tab Window Preview Size (0=default)";
+        description = "Custom size for Alt-Tab window previews";
       };
       alt-tab-icon-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Alt Tab Icon Size (0=default)";
+        description = "Custom size for Alt-Tab application icons";
       };
       alt-tab-small-icon-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Alt Tab Small Icon Size (0=default)";
+        description = "Custom size for Alt-Tab secondary icons";
       };
       controls-manager-spacing-size = mkOption {
         type = types.int;
         default = 0;
-        description = "Controls Manager Spacing Size (0=default)";
+        description = "Custom spacing for internal controls containers";
       };
       max-displayed-search-results = mkOption {
         type = types.int;
         default = 0;
-        description = "Max Displayed Search Results (0=default)";
+        description = "Cap the number of search results shown in overview";
       };
     };
 
-    # --- Positioning ---
     positioning = {
       top-panel-position = mkOption {
         type = types.int;
         default = 0;
-        description = "Top Panel Position (0=Top, 1=Bottom)";
+        description = "Anchor position for the main panel (0: Top, 1: Bottom)";
       };
       clock-menu-position = mkOption {
         type = types.int;
         default = 0;
-        description = "Clock Menu Position (0=Center, 1=Right, 2=Left)";
+        description = "Panel alignment for the clock (0: Center, 1: Right, 2: Left)";
       };
       clock-menu-position-offset = mkOption {
         type = types.int;
         default = 0;
-        description = "Clock Menu Position Offset (0-20)";
+        description = "Numerical offset for clock positioning";
       };
       notification-banner-position = mkOption {
         type = types.int;
         default = 1;
-        description = "Notification Banner Position (0-5, 1=Top Center)";
+        description = "Display corner for notification banners (0-5)";
       };
       osd-position = mkOption {
         type = types.int;
         default = 0;
-        description = "OSD Position (0-9)";
+        description = "Anchor location for system popups (0-9)";
       };
     };
 
-    # --- General ---
     general = {
       startup-status = mkOption {
         type = types.int;
         default = 1;
-        description = "Startup State (0=Desktop, 1=Overview)";
+        description = "Initial state after login (0: Desktop, 1: Overview)";
       };
       animation = mkOption {
         type = types.int;
         default = 1;
-        description = "Animation Speed (0=Disabled, 1=Default, 2=Fast, 3=Faster, 4=Fastest, 5=Slow, 6=Slower)";
+        description = "Global animation speed scaling (0: Disabled, 1: Default)";
       };
       support-notifier-type = mkOption {
         type = types.int;
         default = 1;
-        description = "Support Notifier Type (0=Never, 1=New Releases)";
+        description = "Frequency of extension update notifications";
       };
       support-notifier-showed-version = mkOption {
         type = types.int;
         default = 0;
-        description = "Last Version Support Notifier Showed";
+        description = "Internal tracker for last notified version";
       };
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.just-perfection ];
-
     programs.dconf.profiles.user.databases = [
       {
-        settings = {
-          "org/gnome/shell/extensions/just-perfection" = {
-            # Visibility
-            panel = cfg.visibility.panel;
-            panel-in-overview = cfg.visibility.panel-in-overview;
-            background-menu = cfg.visibility.background-menu;
-            search = cfg.visibility.search;
-            workspace = cfg.visibility.workspace;
-            dash = cfg.visibility.dash;
-            osd = cfg.visibility.osd;
-            workspace-popup = cfg.visibility.workspace-popup;
-            theme = cfg.visibility.theme;
-            activities-button = cfg.visibility.activities-button;
-            clock-menu = cfg.visibility.clock-menu;
-            panel-notification-icon = cfg.visibility.panel-notification-icon;
-            keyboard-layout = cfg.visibility.keyboard-layout;
-            accessibility-menu = cfg.visibility.accessibility-menu;
-            quick-settings = cfg.visibility.quick-settings;
-            power-icon = cfg.visibility.power-icon;
-            window-picker-icon = cfg.visibility.window-picker-icon;
-            show-apps-button = cfg.visibility.show-apps-button;
-            workspaces-in-app-grid = cfg.visibility.workspaces-in-app-grid;
-            workspace-switcher-should-show = cfg.behavior.workspace-switcher-always-show;
-            window-preview-caption = cfg.visibility.window-preview-caption;
-            window-preview-close-button = cfg.visibility.window-preview-close-button;
-            ripple-box = cfg.visibility.ripple-box;
-            world-clock = cfg.visibility.world-clock;
-            weather = cfg.visibility.weather;
-            events-button = cfg.visibility.events-button;
-            calendar = cfg.visibility.calendar;
-            dash-separator = cfg.visibility.dash-separator;
-            window-menu = cfg.visibility.window-menu;
-            window-menu-take-screenshot-button = cfg.visibility.window-menu-take-screenshot-button;
-            screen-sharing-indicator = cfg.visibility.screen-sharing-indicator;
-            screen-recording-indicator = cfg.visibility.screen-recording-indicator;
-            dash-app-running = cfg.visibility.dash-app-running;
-
-            # Quick Settings
-            quick-settings-dark-mode = cfg.quick-settings.dark-mode;
-            quick-settings-night-light = cfg.quick-settings.night-light;
-            quick-settings-do-not-disturb = cfg.quick-settings.do-not-disturb;
-            quick-settings-backlight = cfg.quick-settings.backlight;
-            quick-settings-airplane-mode = cfg.quick-settings.airplane-mode;
-
-            # Behavior
-            type-to-search = cfg.behavior.type-to-search;
-            window-demands-attention-focus = cfg.behavior.window-demands-attention-focus;
-            window-maximized-on-create = cfg.behavior.window-maximized-on-create;
-            workspace-wrap-around = cfg.behavior.workspace-wrap-around;
-            double-super-to-appgrid = cfg.behavior.double-super-to-appgrid;
-            overlay-key = cfg.behavior.overlay-key;
-            switcher-popup-delay = cfg.behavior.switcher-popup-delay;
-            workspace-peek = cfg.behavior.workspace-peek;
-            accent-color-icon = cfg.appearance.accent-color-icon;
-            workspace-thumbnail-to-main-view = cfg.behavior.workspace-thumbnail-to-main-view;
-            invert-calendar-column-items = cfg.behavior.invert-calendar-column-items;
-
-            # Dimensions & Positioning
-            panel-corner-size = cfg.appearance.panel-corner-size;
-            workspace-switcher-size = cfg.appearance.workspace-switcher-size;
-            top-panel-position = cfg.positioning.top-panel-position;
-            clock-menu-position = cfg.positioning.clock-menu-position;
-            clock-menu-position-offset = cfg.positioning.clock-menu-position-offset;
-            animation = cfg.general.animation;
-            dash-icon-size = cfg.appearance.dash-icon-size;
-            startup-status = cfg.general.startup-status;
-            notification-banner-position = cfg.positioning.notification-banner-position;
-            panel-size = cfg.appearance.panel-size;
-            panel-button-padding-size = cfg.appearance.panel-button-padding-size;
-            panel-indicator-padding-size = cfg.appearance.panel-indicator-padding-size;
-            workspace-background-corner-size = cfg.appearance.workspace-background-corner-size;
-            panel-icon-size = cfg.appearance.panel-icon-size;
-            looking-glass-width = cfg.appearance.looking-glass-width;
-            looking-glass-height = cfg.appearance.looking-glass-height;
-            osd-position = cfg.positioning.osd-position;
-            alt-tab-window-preview-size = cfg.appearance.alt-tab-window-preview-size;
-            alt-tab-small-icon-size = cfg.appearance.alt-tab-small-icon-size;
-            alt-tab-icon-size = cfg.appearance.alt-tab-icon-size;
-            controls-manager-spacing-size = cfg.appearance.controls-manager-spacing-size;
-            max-displayed-search-results = cfg.appearance.max-displayed-search-results;
-            support-notifier-type = cfg.general.support-notifier-type;
-            support-notifier-showed-version = cfg.general.support-notifier-showed-version;
-          };
+        settings."org/gnome/shell/extensions/just-perfection" = {
+          inherit (cfg.visibility)
+            panel
+            background-menu
+            search
+            workspace
+            dash
+            osd
+            theme
+            calendar
+            events-button
+            screen-sharing-indicator
+            screen-recording-indicator
+            world-clock
+            weather
+            ;
+          panel-in-overview = cfg.visibility.panel-in-overview;
+          workspace-popup = cfg.visibility.workspace-popup;
+          activities-button = cfg.visibility.activities-button;
+          clock-menu = cfg.visibility.clock-menu;
+          panel-notification-icon = cfg.visibility.panel-notification-icon;
+          keyboard-layout = cfg.visibility.keyboard-layout;
+          accessibility-menu = cfg.visibility.accessibility-menu;
+          quick-settings = cfg.visibility.quick-settings;
+          power-icon = cfg.visibility.power-icon;
+          window-picker-icon = cfg.visibility.window-picker-icon;
+          show-apps-button = cfg.visibility.show-apps-button;
+          workspaces-in-app-grid = cfg.visibility.workspaces-in-app-grid;
+          workspace-switcher-should-show = cfg.behavior.workspace-switcher-always-show;
+          window-preview-caption = cfg.visibility.window-preview-caption;
+          window-preview-close-button = cfg.visibility.window-preview-close-button;
+          ripple-box = cfg.visibility.ripple-box;
+          dash-separator = cfg.visibility.dash-separator;
+          window-menu = cfg.visibility.window-menu;
+          window-menu-take-screenshot-button = cfg.visibility.window-menu-take-screenshot-button;
+          dash-app-running = cfg.visibility.dash-app-running;
+          quick-settings-dark-mode = cfg.quick-settings.dark-mode;
+          quick-settings-night-light = cfg.quick-settings.night-light;
+          quick-settings-do-not-disturb = cfg.quick-settings.do-not-disturb;
+          quick-settings-backlight = cfg.quick-settings.backlight;
+          quick-settings-airplane-mode = cfg.quick-settings.airplane-mode;
+          inherit (cfg.behavior)
+            type-to-search
+            window-demands-attention-focus
+            window-maximized-on-create
+            workspace-wrap-around
+            double-super-to-appgrid
+            overlay-key
+            switcher-popup-delay
+            workspace-peek
+            accent-color-icon
+            workspace-thumbnail-to-main-view
+            invert-calendar-column-items
+            ;
+          inherit (cfg.appearance)
+            panel-corner-size
+            workspace-switcher-size
+            dash-icon-size
+            panel-size
+            panel-button-padding-size
+            panel-indicator-padding-size
+            workspace-background-corner-size
+            panel-icon-size
+            looking-glass-width
+            looking-glass-height
+            alt-tab-window-preview-size
+            alt-tab-small-icon-size
+            alt-tab-icon-size
+            controls-manager-spacing-size
+            max-displayed-search-results
+            ;
+          inherit (cfg.positioning)
+            top-panel-position
+            clock-menu-position
+            clock-menu-position-offset
+            notification-banner-position
+            osd-position
+            ;
+          inherit (cfg.general)
+            animation
+            startup-status
+            support-notifier-type
+            support-notifier-showed-version
+            ;
         };
       }
     ];

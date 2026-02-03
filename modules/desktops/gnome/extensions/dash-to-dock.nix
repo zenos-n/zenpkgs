@@ -13,11 +13,12 @@ let
 in
 {
   meta = {
-    description = "Configures the Dash to Dock GNOME extension";
-    longDescription = ''
+    description = ''
+      Highly configurable dock interface for GNOME Shell
+
       This module installs and configures the **Dash to Dock** extension for GNOME.
-      It transforms the dash into a highly configurable dock that can be placed on
-      any edge of the screen, with intelligent hiding and extensive appearance options.
+      It transforms the dash into a highly configurable dock that can be placed 
+      on any edge of the screen.
 
       **Features:**
       - Configurable position, size, and visibility behavior.
@@ -33,7 +34,6 @@ in
   options.zenos.desktops.gnome.extensions.dash-to-dock = {
     enable = mkEnableOption "Dash to Dock GNOME extension configuration";
 
-    # --- Layout & Position ---
     layout = {
       position = mkOption {
         type = types.enum [
@@ -43,24 +43,24 @@ in
           "RIGHT"
         ];
         default = "BOTTOM";
-        description = "Dock position on the screen";
+        description = "Screen edge where the dock is anchored";
       };
 
       monitor = {
         preferred = mkOption {
           type = types.int;
           default = -2;
-          description = "Preferred monitor index (-2 for primary)";
+          description = "Monitor index (-2 for primary)";
         };
         connector = mkOption {
           type = types.str;
           default = "primary";
-          description = "Preferred monitor connector";
+          description = "Monitor hardware connector ID";
         };
         multi-monitor = mkOption {
           type = types.bool;
           default = false;
-          description = "Show dock on all monitors";
+          description = "Show dock on all available screens";
         };
       };
 
@@ -68,12 +68,12 @@ in
         fraction = mkOption {
           type = types.float;
           default = 0.90;
-          description = "Dock max height/width fraction (0.0 - 1.0)";
+          description = "Maximum dock size relative to screen edge";
         };
         extend = mkOption {
           type = types.bool;
           default = false;
-          description = "Extend dock container to screen edges (panel mode)";
+          description = "Expand the dock to fill the entire screen edge";
         };
       };
 
@@ -81,43 +81,42 @@ in
         size = mkOption {
           type = types.int;
           default = 48;
-          description = "Maximum dash icon size in pixels";
+          description = "Target pixel size for application icons";
         };
         fixed = mkOption {
           type = types.bool;
           default = false;
-          description = "Fixed icon size (do not shrink)";
+          description = "Prevent the dock from shrinking icons";
         };
         center = mkOption {
           type = types.bool;
           default = false;
-          description = "Always center icons when extended";
+          description = "Keep icons centered when in panel mode";
         };
       };
     };
 
-    # --- Appearance ---
     appearance = {
       theme = {
         apply-custom = mkOption {
           type = types.bool;
           default = false;
-          description = "Apply custom theme customizations";
+          description = "Enable shell theme overrides";
         };
         shrink = mkOption {
           type = types.bool;
           default = false;
-          description = "Shrink the dock to minimum width";
+          description = "Remove extra padding around the dock";
         };
         glossy = mkOption {
           type = types.bool;
           default = true;
-          description = "Apply glossy effect";
+          description = "Apply a visual glossy effect to icons";
         };
         straight-corner = mkOption {
           type = types.bool;
           default = false;
-          description = "Force straight corners";
+          description = "Disable corner rounding for the dock background";
         };
       };
 
@@ -125,17 +124,17 @@ in
         color = mkOption {
           type = types.str;
           default = "#ffffff";
-          description = "Custom dock background color (Hex)";
+          description = "Hex color for the dock background";
         };
         custom-color = mkOption {
           type = types.bool;
           default = false;
-          description = "Enable custom background color";
+          description = "Force use of the custom background color";
         };
         opacity = mkOption {
           type = types.float;
           default = 0.8;
-          description = "Background opacity";
+          description = "Fixed background alpha transparency";
         };
         transparency-mode = mkOption {
           type = types.enum [
@@ -145,22 +144,22 @@ in
             "ADAPTIVE"
           ];
           default = "DEFAULT";
-          description = "Transparency mode";
+          description = "Alpha blending logic for the dock background";
         };
         customize-alphas = mkOption {
           type = types.bool;
           default = false;
-          description = "Manually set min/max opacity values";
+          description = "Manually override min/max opacity levels";
         };
         min-alpha = mkOption {
           type = types.float;
           default = 0.2;
-          description = "Minimum opacity";
+          description = "Minimum opacity when windows are not near";
         };
         max-alpha = mkOption {
           type = types.float;
           default = 0.8;
-          description = "Maximum opacity";
+          description = "Maximum opacity when windows overlap";
         };
       };
 
@@ -175,33 +174,33 @@ in
             "METRO"
           ];
           default = "DEFAULT";
-          description = "Style of the running application indicator";
+          description = "Visual style of the active application marker";
         };
         dominant-color = mkOption {
           type = types.bool;
           default = false;
-          description = "Use dominant color from app icon for indicator";
+          description = "Inherit indicator color from the app icon";
         };
         custom-dots = {
           enable = mkOption {
             type = types.bool;
             default = false;
-            description = "Customize running dots appearance";
+            description = "Manual marker color configuration";
           };
           color = mkOption {
             type = types.str;
             default = "#ffffff";
-            description = "Running dots color";
+            description = "Marker fill color";
           };
           border-color = mkOption {
             type = types.str;
             default = "#ffffff";
-            description = "Running dots border color";
+            description = "Marker outline color";
           };
           border-width = mkOption {
             type = types.int;
             default = 0;
-            description = "Running dots border width";
+            description = "Marker outline pixel thickness";
           };
         };
       };
@@ -209,33 +208,32 @@ in
       unity-backlit = mkOption {
         type = types.bool;
         default = false;
-        description = "Enable Unity-like backlit items";
+        description = "Glow effects behind active icons";
       };
     };
 
-    # --- Behavior & Visibility ---
     behavior = {
       visibility = {
         autohide = mkOption {
           type = types.bool;
           default = true;
-          description = "Hide dock when not in use (shown on mouse over)";
+          description = "Hide when the cursor is not near the edge";
         };
         manualhide = mkOption {
           type = types.bool;
           default = false;
-          description = "Dock is explicitly hidden via shortcut";
+          description = "Require explicit toggle for visibility";
         };
         fixed = mkOption {
           type = types.bool;
           default = false;
-          description = "Dock is always visible";
+          description = "Always keep the dock visible";
         };
         intellihide = {
           enable = mkOption {
             type = types.bool;
             default = true;
-            description = "Dock intelligently dodges overlapping windows";
+            description = "Avoid overlapping application windows";
           };
           mode = mkOption {
             type = types.enum [
@@ -244,18 +242,18 @@ in
               "MAXIMIZED_WINDOWS"
             ];
             default = "FOCUS_APPLICATION_WINDOWS";
-            description = "Intellihide behavior mode";
+            description = "Intellihide behavior policy";
           };
         };
         fullscreen-autohide = mkOption {
           type = types.bool;
           default = false;
-          description = "Enable autohide even in fullscreen";
+          description = "Hide the dock for fullscreen media/games";
         };
         urgent-notify = mkOption {
           type = types.bool;
           default = true;
-          description = "Show dock when an application has an urgent notification";
+          description = "Show dock when apps request attention";
         };
       };
 
@@ -263,17 +261,17 @@ in
         animation-time = mkOption {
           type = types.float;
           default = 0.2;
-          description = "Animation duration";
+          description = "Visual transition duration";
         };
         show-delay = mkOption {
           type = types.float;
           default = 0.25;
-          description = "Delay before showing the dock";
+          description = "Pause before revealing the hidden dock";
         };
         hide-delay = mkOption {
           type = types.float;
           default = 0.20;
-          description = "Delay before hiding the dock";
+          description = "Pause before concealing the visible dock";
         };
       };
 
@@ -281,12 +279,12 @@ in
         enable = mkOption {
           type = types.bool;
           default = true;
-          description = "Require pressure at edge to show dash";
+          description = "Require cursor pressure to trigger revealing";
         };
         threshold = mkOption {
           type = types.float;
           default = 100.0;
-          description = "Pressure threshold value";
+          description = "Trigger threshold for edge pressure";
         };
       };
 
@@ -294,27 +292,27 @@ in
         click = mkOption {
           type = types.str;
           default = "cycle-windows";
-          description = "Action when clicking a running app";
+          description = "Standard click action";
         };
         shift-click = mkOption {
           type = types.str;
           default = "minimize";
-          description = "Action when Shift+clicking an app";
+          description = "Action for Shift+Click";
         };
         middle-click = mkOption {
           type = types.str;
           default = "launch";
-          description = "Action when Middle-clicking an app";
+          description = "Action for Middle Click";
         };
         shift-middle-click = mkOption {
           type = types.str;
           default = "launch";
-          description = "Action when Shift+Middle-clicking an app";
+          description = "Action for Shift+Middle Click";
         };
         scroll = mkOption {
           type = types.str;
           default = "do-nothing";
-          description = "Action when scrolling on an app icon";
+          description = "Action for mouse scroll on icon";
         };
       };
 
@@ -322,241 +320,203 @@ in
         switch-workspace = mkOption {
           type = types.bool;
           default = true;
-          description = "Switch workspace by scrolling on the dock";
+          description = "Change desktop by scrolling on the dock";
         };
       };
 
       minimize-shift = mkOption {
         type = types.bool;
         default = true;
-        description = "Minimize on Shift+Click";
+        description = "Hide windows when clicking with Shift";
       };
 
       isolate = {
         workspaces = mkOption {
           type = types.bool;
           default = false;
-          description = "Show only apps from the current workspace";
+          description = "Filter apps by current desktop";
         };
         monitors = mkOption {
           type = types.bool;
           default = false;
-          description = "Show only apps from the current monitor";
+          description = "Filter apps by hardware display";
         };
         locations = mkOption {
           type = types.bool;
           default = true;
-          description = "Isolate volumes/trash windows";
+          description = "Separate trash and mount indicators";
         };
       };
     };
 
-    # --- Content ---
     content = {
       show-favorites = mkOption {
         type = types.bool;
         default = true;
-        description = "Show favorite applications";
+        description = "Display pinned applications";
       };
       show-running = mkOption {
         type = types.bool;
         default = true;
-        description = "Show running applications";
+        description = "Display active windows";
       };
       show-trash = mkOption {
         type = types.bool;
         default = true;
-        description = "Show trash can";
+        description = "Display the trash can icon";
       };
       show-mounts = mkOption {
         type = types.bool;
         default = true;
-        description = "Show mounted volumes";
+        description = "Display external storage icons";
       };
       show-mounts-network = mkOption {
         type = types.bool;
         default = false;
-        description = "Show network mounts";
+        description = "Display remote network shares";
       };
       show-mounts-only-mounted = mkOption {
         type = types.bool;
         default = true;
-        description = "Only show volumes that are currently mounted";
+        description = "Hide unmounted device placeholders";
       };
       show-windows-preview = mkOption {
         type = types.bool;
         default = true;
-        description = "Show preview of open windows on hover/click";
+        description = "Render live thumbnails on interaction";
       };
       apps-button = {
         show = mkOption {
           type = types.bool;
           default = true;
-          description = "Show the 'Show Applications' button";
+          description = "Display the application grid button";
         };
         at-top = mkOption {
           type = types.bool;
           default = false;
-          description = "Position the apps button at the beginning of the dock";
+          description = "Anchor apps button to the start of the dock";
         };
         always-in-edge = mkOption {
           type = types.bool;
           default = true;
-          description = "Keep apps button at the screen edge";
+          description = "Keep apps button fixed to screen corner";
         };
       };
     };
 
-    # --- Shortcuts ---
     shortcuts = {
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Enable Super+Number hotkeys";
+        description = "Enable Super+Num launch keys";
       };
       show-dock = mkOption {
         type = types.bool;
         default = true;
-        description = "Show dock when hotkeys are pressed";
+        description = "Show dock when hotkey is triggered";
       };
       overlay = mkOption {
         type = types.bool;
         default = true;
-        description = "Show hotkeys overlay on numbers";
+        description = "Display key numbers over icons";
       };
       timeout = mkOption {
         type = types.float;
         default = 2.0;
-        description = "Shortcut overlay timeout";
+        description = "Duration of the numbers overlay";
       };
       toggle-shortcut = mkOption {
         type = types.listOf types.str;
         default = [ "<Super>q" ];
-        description = "Shortcut to toggle the dock visibility";
+        description = "Shortcut to show/hide dock";
       };
     };
 
-    # --- Misc ---
     disable-overview-on-startup = mkOption {
       type = types.bool;
       default = false;
-      description = "Do not show overview on startup";
+      description = "Skip overview after login";
     };
-
     bolt-support = mkOption {
       type = types.bool;
       default = true;
-      description = "Enable Bolt extensions compatibility";
+      description = "Compatibility for bolt extensions";
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.dash-to-dock ];
-
     programs.dconf.profiles.user.databases = [
       {
-        settings = {
-          "org/gnome/shell/extensions/dash-to-dock" = {
-            # Layout
-            dock-position = cfg.layout.position;
-            preferred-monitor = cfg.layout.monitor.preferred;
-            preferred-monitor-by-connector = cfg.layout.monitor.connector;
-            multi-monitor = cfg.layout.monitor.multi-monitor;
-            height-fraction = cfg.layout.height.fraction;
-            extend-height = cfg.layout.height.extend;
-            dash-max-icon-size = cfg.layout.icons.size;
-            icon-size-fixed = cfg.layout.icons.fixed;
-            always-center-icons = cfg.layout.icons.center;
-
-            # Appearance
-            apply-custom-theme = cfg.appearance.theme.apply-custom;
-            custom-theme-shrink = cfg.appearance.theme.shrink;
-            apply-glossy-effect = cfg.appearance.theme.glossy;
-            force-straight-corner = cfg.appearance.theme.straight-corner;
-            unity-backlit-items = cfg.appearance.unity-backlit;
-
-            background-color = cfg.appearance.background.color;
-            custom-background-color = cfg.appearance.background.custom-color;
-            background-opacity = cfg.appearance.background.opacity;
-            transparency-mode = cfg.appearance.background.transparency-mode;
-            customize-alphas = cfg.appearance.background.customize-alphas;
-            min-alpha = cfg.appearance.background.min-alpha;
-            max-alpha = cfg.appearance.background.max-alpha;
-
-            running-indicator-style = cfg.appearance.running-indicator.style;
-            running-indicator-dominant-color = cfg.appearance.running-indicator.dominant-color;
-            custom-theme-customize-running-dots = cfg.appearance.running-indicator.custom-dots.enable;
-            custom-theme-running-dots-color = cfg.appearance.running-indicator.custom-dots.color;
-            custom-theme-running-dots-border-color = cfg.appearance.running-indicator.custom-dots.border-color;
-            custom-theme-running-dots-border-width = cfg.appearance.running-indicator.custom-dots.border-width;
-
-            # Behavior & Visibility
-            autohide = cfg.behavior.visibility.autohide;
-            manualhide = cfg.behavior.visibility.manualhide;
-            dock-fixed = cfg.behavior.visibility.fixed;
-            intellihide = cfg.behavior.visibility.intellihide.enable;
-            intellihide-mode = cfg.behavior.visibility.intellihide.mode;
-            autohide-in-fullscreen = cfg.behavior.visibility.fullscreen-autohide;
-            show-dock-urgent-notify = cfg.behavior.visibility.urgent-notify;
-
-            animation-time = cfg.behavior.timing.animation-time;
-            show-delay = cfg.behavior.timing.show-delay;
-            hide-delay = cfg.behavior.timing.hide-delay;
-
-            require-pressure-to-show = cfg.behavior.pressure.enable;
-            pressure-threshold = cfg.behavior.pressure.threshold;
-
-            click-action = cfg.behavior.actions.click;
-            shift-click-action = cfg.behavior.actions.shift-click;
-            middle-click-action = cfg.behavior.actions.middle-click;
-            shift-middle-click-action = cfg.behavior.actions.shift-middle-click;
-            scroll-action = cfg.behavior.actions.scroll;
-
-            scroll-switch-workspace = cfg.behavior.scrolling.switch-workspace;
-            minimize-shift = cfg.behavior.minimize-shift;
-
-            isolate-workspaces = cfg.behavior.isolate.workspaces;
-            isolate-monitors = cfg.behavior.isolate.monitors;
-            isolate-locations = cfg.behavior.isolate.locations;
-
-            # Content
-            show-favorites = cfg.content.show-favorites;
-            show-running = cfg.content.show-running;
-            show-trash = cfg.content.show-trash;
-            show-mounts = cfg.content.show-mounts;
-            show-mounts-network = cfg.content.show-mounts-network;
-            show-mounts-only-mounted = cfg.content.show-mounts-only-mounted;
-            show-windows-preview = cfg.content.show-windows-preview;
-            show-show-apps-button = cfg.content.apps-button.show;
-            show-apps-at-top = cfg.content.apps-button.at-top;
-            show-apps-always-in-the-edge = cfg.content.apps-button.always-in-edge;
-
-            # Shortcuts
-            hot-keys = cfg.shortcuts.enable;
-            hotkeys-show-dock = cfg.shortcuts.show-dock;
-            hotkeys-overlay = cfg.shortcuts.overlay;
-            shortcut-timeout = cfg.shortcuts.timeout;
-            shortcut = cfg.shortcuts.toggle-shortcut;
-            shortcut-text =
-              if (length cfg.shortcuts.toggle-shortcut) > 0 then (head cfg.shortcuts.toggle-shortcut) else "";
-
-            # Misc
-            disable-overview-on-startup = cfg.disable-overview-on-startup;
-            bolt-support = cfg.bolt-support;
-
-            # Defaults for unexposed options (from original file)
-            preview-size-scale = 0.0;
-            workspace-agnostic-urgent-windows = true;
-            dance-urgent-applications = true;
-            scroll-to-focused-application = true;
-            default-windows-preview-to-open = false;
-            activate-single-window = true;
-            hide-tooltip = false;
-            show-icons-emblems = true;
-            show-icons-notifications-counter = true;
-            application-counter-overrides-notifications = true;
-          };
+        settings."org/gnome/shell/extensions/dash-to-dock" = {
+          dock-position = cfg.layout.position;
+          preferred-monitor = cfg.layout.monitor.preferred;
+          preferred-monitor-by-connector = cfg.layout.monitor.connector;
+          multi-monitor = cfg.layout.monitor.multi-monitor;
+          height-fraction = cfg.layout.height.fraction;
+          extend-height = cfg.layout.height.extend;
+          dash-max-icon-size = cfg.layout.icons.size;
+          icon-size-fixed = cfg.layout.icons.fixed;
+          always-center-icons = cfg.layout.icons.center;
+          apply-custom-theme = cfg.appearance.theme.apply-custom;
+          custom-theme-shrink = cfg.appearance.theme.shrink;
+          apply-glossy-effect = cfg.appearance.theme.glossy;
+          force-straight-corner = cfg.appearance.theme.straight-corner;
+          unity-backlit-items = cfg.appearance.unity-backlit;
+          background-color = cfg.appearance.background.color;
+          custom-background-color = cfg.appearance.background.custom-color;
+          background-opacity = cfg.appearance.background.opacity;
+          transparency-mode = cfg.appearance.background.transparency-mode;
+          customize-alphas = cfg.appearance.background.customize-alphas;
+          min-alpha = cfg.appearance.background.min-alpha;
+          max-alpha = cfg.appearance.background.max-alpha;
+          running-indicator-style = cfg.appearance.running-indicator.style;
+          running-indicator-dominant-color = cfg.appearance.running-indicator.dominant-color;
+          custom-theme-customize-running-dots = cfg.appearance.running-indicator.custom-dots.enable;
+          custom-theme-running-dots-color = cfg.appearance.running-indicator.custom-dots.color;
+          custom-theme-running-dots-border-color = cfg.appearance.running-indicator.custom-dots.border-color;
+          custom-theme-running-dots-border-width = cfg.appearance.running-indicator.custom-dots.border-width;
+          autohide = cfg.behavior.visibility.autohide;
+          manualhide = cfg.behavior.visibility.manualhide;
+          dock-fixed = cfg.behavior.visibility.fixed;
+          intellihide = cfg.behavior.visibility.intellihide.enable;
+          intellihide-mode = cfg.behavior.visibility.intellihide.mode;
+          autohide-in-fullscreen = cfg.behavior.visibility.fullscreen-autohide;
+          show-dock-urgent-notify = cfg.behavior.visibility.urgent-notify;
+          animation-time = cfg.behavior.timing.animation-time;
+          show-delay = cfg.behavior.timing.show-delay;
+          hide-delay = cfg.behavior.timing.hide-delay;
+          require-pressure-to-show = cfg.behavior.pressure.enable;
+          pressure-threshold = cfg.behavior.pressure.threshold;
+          click-action = cfg.behavior.actions.click;
+          shift-click-action = cfg.behavior.actions.shift-click;
+          middle-click-action = cfg.behavior.actions.middle-click;
+          shift-middle-click-action = cfg.behavior.actions.shift-middle-click;
+          scroll-action = cfg.behavior.actions.scroll;
+          scroll-switch-workspace = cfg.behavior.scrolling.switch-workspace;
+          minimize-shift = cfg.behavior.minimize-shift;
+          isolate-workspaces = cfg.behavior.isolate.workspaces;
+          isolate-monitors = cfg.behavior.isolate.monitors;
+          isolate-locations = cfg.behavior.isolate.locations;
+          show-favorites = cfg.content.show-favorites;
+          show-running = cfg.content.show-running;
+          show-trash = cfg.content.show-trash;
+          show-mounts = cfg.content.show-mounts;
+          show-mounts-network = cfg.content.show-mounts-network;
+          show-mounts-only-mounted = cfg.content.show-mounts-only-mounted;
+          show-windows-preview = cfg.content.show-windows-preview;
+          show-show-apps-button = cfg.content.apps-button.show;
+          show-apps-at-top = cfg.content.apps-button.at-top;
+          show-apps-always-in-the-edge = cfg.content.apps-button.always-in-edge;
+          hot-keys = cfg.shortcuts.enable;
+          hotkeys-show-dock = cfg.shortcuts.show-dock;
+          hotkeys-overlay = cfg.shortcuts.overlay;
+          shortcut-timeout = cfg.shortcuts.timeout;
+          shortcut = cfg.shortcuts.toggle-shortcut;
+          shortcut-text =
+            if (length cfg.shortcuts.toggle-shortcut) > 0 then (head cfg.shortcuts.toggle-shortcut) else "";
+          disable-overview-on-startup = cfg.disable-overview-on-startup;
+          bolt-support = cfg.bolt-support;
         };
       }
     ];

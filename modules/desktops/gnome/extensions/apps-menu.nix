@@ -13,14 +13,15 @@ let
 in
 {
   meta = {
-    description = "Configures the Apps Menu GNOME extension";
-    longDescription = ''
+    description = ''
+      Traditional category-based application menu for GNOME
+
       This module installs and configures the **Apps Menu** extension for GNOME.
       It adds a traditional application menu to the top bar, organized by category.
 
       **Features:**
       - Provides a category-based application menu.
-      - configurable keyboard shortcut to toggle the menu.
+      - Configurable keyboard shortcut to toggle the menu.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -33,11 +34,14 @@ in
     apps-menu-toggle-menu = mkOption {
       type = types.listOf types.str;
       default = [ "<Alt>F1" ];
-      description = "Keybinding to open the applications menu";
+      description = ''
+        Menu toggle keyboard shortcut
+
+        Keybinding to open the applications menu.
+      '';
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.apps-menu ];
 

@@ -13,14 +13,17 @@ let
 in
 {
   meta = {
-    description = "Configures the Window Is Ready Remover GNOME extension";
-    longDescription = ''
-      This module installs and configures the **Window Is Ready Remover** extension for GNOME.
-      It prevents the "Window is Ready" notification from appearing, which often occurs
-      when a window tries to grab focus but is denied by the window manager.
+    description = ''
+      Suppress focus-stealing prevention notifications
+
+      This module installs and configures the **Window Is Ready Remover** extension.
+      It prevents the "Window is Ready" notification from appearing, which occurs 
+      when a background window attempts to grab focus but is denied by the 
+      window manager.
 
       **Features:**
-      - Suppresses "Window is ready" notifications.
+      - Silences annoying "Window is ready" notification banners.
+      - Improves workflow by removing redundant focus alerts.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;

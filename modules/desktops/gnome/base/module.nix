@@ -11,8 +11,6 @@ let
   cfg = config.zenos.desktops.gnome;
 
   # Safely extract UUIDs. Assumes your extension packages have the 'extensionUuid' attribute.
-  # If using standard nixpkgs extensions, you might need a helper to lookup UUIDs or manually specify them.
-  # This logic preserves your current reliance on the attribute being present.
   getUuid =
     pkg:
     if (builtins.hasAttr "extensionUuid" pkg) then
@@ -23,8 +21,9 @@ let
 in
 {
   meta = {
-    description = "Configures the GNOME desktop environment for ZenOS";
-    longDescription = ''
+    description = ''
+      Configures the GNOME desktop environment for ZenOS
+
       This module provides a comprehensive GNOME configuration tailored for ZenOS.
       It handles the installation of core GNOME packages, audio/video plugins (GStreamer),
       and manages default settings via dconf.
@@ -42,8 +41,19 @@ in
     platforms = lib.platforms.zenos;
   };
 
-  options.desktops.gnome = {
+  options.zenos.desktops.gnome = {
     enable = mkEnableOption "Gnome Desktop Base Module";
+
+    extensions = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = ''
+        List of GNOME extensions to install
+
+        Specifies the extension packages to be included in the system environment
+        and automatically enabled in the user profile.
+      '';
+    };
 
     defaultAccentColor = mkOption {
       type = types.enum [
@@ -58,19 +68,36 @@ in
         "grey"
       ];
       default = "purple";
-      description = "Accent color for GNOME desktop.";
+      description = ''
+        Primary accent color for the interface
+
+        Sets the system-wide accent color for GNOME components and supported
+        GTK4 applications.
+      '';
     };
 
     defaultDarkMode = mkOption {
       type = types.bool;
       default = true;
-      description = "Whether to enable dark mode by default.";
+      description = ''
+        Enable system-wide dark mode
+
+        Whether to prefer the dark color scheme by default across the desktop
+        environment and applications.
+      '';
     };
 
-    fileIndexing.enable = mkOption {
-      type = types.bool;
-      default = true;
-      description = "Enable Tracker file indexing.";
+    fileIndexing = {
+      enable = mkOption {
+        type = types.bool;
+        default = true;
+        description = ''
+          Enable Tracker file indexing
+
+          Controls the background indexing services for file search and 
+          metadata extraction.
+        '';
+      };
     };
 
     dockItems = mkOption {
@@ -81,22 +108,38 @@ in
         "org.gnome.Terminal.desktop"
         "kitty.desktop"
       ];
-      description = "Default dock favorites.";
+      description = ''
+        Default favorite applications in the dock
+
+        List of .desktop file identifiers to be pinned to the GNOME Dash
+        by default.
+      '';
     };
 
-    extraPackages.enable = mkEnableOption "installation of extra curated GNOME apps";
+    extraPackages = {
+      enable = mkEnableOption "installation of extra curated GNOME apps";
+    };
 
     excludeGnomeConsole = mkOption {
       type = types.bool;
       default = false;
-      description = "Disable gnome-console.";
+      description = ''
+        Remove the default GNOME Console
+
+        When enabled, the modern GNOME Console (kgx) is added to the 
+        exclusion list for the environment.
+      '';
     };
 
-    # New option for gaming/high-refresh monitors
     variableRefreshRate = mkOption {
       type = types.bool;
       default = true;
-      description = "Enable VRR (Variable Refresh Rate) in Mutter.";
+      description = ''
+        Enable Variable Refresh Rate support
+
+        Activates experimental VRR support in Mutter for compatible high-refresh
+        rate gaming monitors.
+      '';
     };
   };
 
@@ -114,7 +157,6 @@ in
         pika-backup
 
         # Multimedia (GStreamer)
-        # Note: Explicit path setting removed; relying on system path is cleaner in modern NixOS
         gst_all_1.gstreamer
         gst_all_1.gst-plugins-base
         gst_all_1.gst-plugins-good
@@ -123,25 +165,28 @@ in
         gst_all_1.gst-libav
         gst_all_1.gst-vaapi
       ]
-      ++ cfg.extensions # Install the extensions defined in options
-      ++ mkIf services.flatpak.enable [ warehouse ]
-      ++ mkIf cfg.extraPackages.enable [
-        icon-library
-        letterpress
-        biblioteca
-        dialect
-        raider
-        wike
-        curtail
-        czkawka
-        hieroglyphic
-        switcheroo
-        rnote
-        helvum
-      ];
+      ++ cfg.extensions
+      ++ mkIf (config.services.flatpak.enable or false) [ pkgs.warehouse ]
+      ++ mkIf cfg.extraPackages.enable (
+        with pkgs;
+        [
+          icon-library
+          letterpress
+          biblioteca
+          dialect
+          raider
+          wike
+          curtail
+          czkawka
+          hieroglyphic
+          switcheroo
+          rnote
+          helvum
+        ]
+      );
 
     # 2. Flatpak Configuration
-    services.flatpak.packages = mkIf services.flatpak.enable (
+    services.flatpak.packages = mkIf (config.services.flatpak.enable or false) (
       [ "com.github.tchx84.Flatseal" ]
       ++ (optionals cfg.extraPackages.enable [ "studio.planetpeanut.Bobby" ])
     );
@@ -160,7 +205,7 @@ in
         epiphany
         gnome-contacts
         gnome-weather
-        yelp # Help viewer, rarely used
+        yelp
         gnome-clocks
       ]
       ++ (optional cfg.excludeGnomeConsole pkgs.gnome-console);
@@ -183,12 +228,12 @@ in
             color-scheme = if cfg.defaultDarkMode then "prefer-dark" else "prefer-light";
             enable-hot-corners = false;
             gtk-enable-primary-paste = false;
-            clock-show-weekday = true; # Useful default
+            clock-show-weekday = true;
             show-battery-percentage = true;
           };
 
           "org/gnome/desktop/peripherals/mouse" = {
-            accel-profile = "flat"; # Better for gaming consistency
+            accel-profile = "flat";
           };
 
           "org/gnome/shell" = {
@@ -198,14 +243,14 @@ in
           };
 
           "org/gnome/desktop/wm/preferences" = {
-            edge-tiling = false; # Tiling usually handled by extensions (Pop Shell/Forge)
+            edge-tiling = false;
             action-double-click-titlebar = "toggle-maximize";
-            button-layout = "appmenu:minimize,maximize,close"; # Ensure buttons exist
+            button-layout = "appmenu:minimize,maximize,close";
           };
 
           "org/gnome/mutter" = {
             edge-tiling = false;
-            center-new-windows = true; # Prefer centering
+            center-new-windows = true;
             dynamic-workspaces = true;
             experimental-features = [
               "scale-monitor-framebuffer"
@@ -217,7 +262,6 @@ in
       }
     ];
 
-    # 6. Optional: Udev rules for controllers if this is a gaming rig
     services.udev.packages = [ pkgs.gnome-settings-daemon ];
   };
 }

@@ -1,6 +1,3 @@
-# @file: coremodules/desktop/gnome/tweaks/firefox-theming.nix
-# @brief: Advanced Firefox theming (GNOME theme integration).
-# @context: desktop tweaks
 {
   config,
   lib,
@@ -19,25 +16,22 @@ let
     sha256 = "sha256-0E3TqvXAy81qeM/jZXWWOTZ14Hs1RT7o78UyZM+Jbr4=";
   };
 
-  # [FIX] Import from the subdirectory so relative paths in the theme work
   customChromeCss = pkgs.writeText "userChrome.css" ''
     @import "gnome-theme/userChrome.css";
   '';
 
-  # [FIX] Wrapper for userContent.css to maintain relative path integrity
   customContentCss = pkgs.writeText "userContent.css" ''
     @import "gnome-theme/userContent.css";
   '';
 in
 {
   meta = {
-    description = "Applies native GNOME theming to Firefox";
-    longDescription = ''
-      Installs the `firefox-gnome-theme` and configures Firefox to look like a
-      native GTK4 application.
+    description = ''
+      Native GNOME theming for Firefox
 
-      Includes activation scripts to rescue profiles with missing `profiles.ini`
-      to ensure the theme applies correctly on fresh installs.
+      Installs the `firefox-gnome-theme` and configures Firefox to look like a
+      native GTK4 application. Includes activation scripts to rescue profiles 
+      with missing `profiles.ini` to ensure the theme is applied reliably.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -45,57 +39,63 @@ in
   };
 
   options.zenos.desktops.gnome.tweaks.firefoxTheming = {
-    enable = lib.mkEnableOption "Firefox Theming for GNOME Tweaks" // {
-      description = "Enables the Firefox GNOME theme configuration.";
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = ''
+        Enable Firefox GNOME integration
+
+        Applies GTK4 styling to Firefox via the rafaelmardojai theme and 
+        configures necessary CSS overrides.
+      '';
     };
 
     theme = {
       hideSingleTab = lib.mkOption {
         type = lib.types.bool;
         default = true;
-        description = "Hides the tab bar when only one tab is open (GNOME Web style).";
+        description = "Hide the tab bar when only one tab is open";
       };
-
       normalWidthTabs = lib.mkOption {
         type = lib.types.bool;
         default = false;
-        description = "Uses standard Firefox tab widths instead of expanding to fill the bar.";
+        description = "Use standard width tabs instead of expanding them";
       };
-
       bookmarksToolbarUnderTabs = lib.mkOption {
         type = lib.types.bool;
         default = true;
-        description = "Moves the bookmarks toolbar below the tabs for better aesthetic integration.";
+        description = "Position the bookmarks toolbar beneath the tab bar";
       };
-
       roundedBottomCorners = lib.mkOption {
         type = lib.types.bool;
-        default = false;
-        description = "Enables rounded bottom corners. Disabled by default to prevent double-rounding on GNOME.";
+        default = true;
+        description = "Enable rounded bottom corners for the browser window";
       };
     };
   };
 
   config = lib.mkIf cfg.enable {
-    # 1. System Level Assets
-    environment.etc = {
-      "firefox/gnome-theme".source = gnomeThemeRepo;
-      "firefox/custom/userChrome.css".source = customChromeCss;
-    };
+    home.activation.firefoxRescue = lib.hm.dag.entryBefore [ "linkGeneration" ] ''
+      for p_ini in $HOME/.mozilla/firefox/profiles.ini; do
+        if [ ! -f "$p_ini" ] && [ ! -L "$p_ini" ]; then
+          mkdir -p $(dirname "$p_ini")
+          cat > "$p_ini" <<EOF
+      [Profile0]
+      Name=default
+      IsRelative=1
+      Path=default
+      Default=1
 
-    # 2. Activation Scripts (Rescue only)
-    system.activationScripts.firefoxProfileRescue = {
-      text = ''
-        for user_home in /home/*; do
-          p_ini="$user_home/.mozilla/firefox/profiles.ini"
-          if [ -f "$p_ini" ] && [ ! -L "$p_ini" ]; then
-            mv "$p_ini" "$p_ini.bak.$(date +%s)"
-          fi
-        done
-      '';
-    };
+      [General]
+      StartWithLastProfile=1
+      Version=2
+      EOF
+        elif [ -f "$p_ini" ] && [ ! -s "$p_ini" ] && [ ! -L "$p_ini" ]; then
+          mv "$p_ini" "$p_ini.bak.$(date +%s)"
+        fi
+      done
+    '';
 
-    # 3. Home Manager Configuration
     home-manager.sharedModules = [
       (
         { ... }:
@@ -107,13 +107,10 @@ in
               name = "default";
               isDefault = true;
               settings = {
-                # --- Core Theme Settings ---
                 "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
                 "svg.context-properties.content.enabled" = true;
                 "browser.tabs.drawInTitlebar" = true;
-                "browser.uidensity" = 1; # Compact mode matches GNOME better
-
-                # --- Configurable Options ---
+                "browser.uidensity" = 1;
                 "gnomeTheme.hideSingleTab" = themeCfg.hideSingleTab;
                 "gnomeTheme.normalWidthTabs" = themeCfg.normalWidthTabs;
                 "gnomeTheme.bookmarksToolbarUnderTabs" = themeCfg.bookmarksToolbarUnderTabs;

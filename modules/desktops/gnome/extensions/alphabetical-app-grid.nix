@@ -30,10 +30,12 @@ let
 in
 {
   meta = {
-    description = "Configures the Alphabetical App Grid GNOME extension";
-    longDescription = ''
+    description = ''
+      Alphabetical sorting for the GNOME application grid
+
       This module installs and configures the **Alphabetical App Grid** extension for GNOME.
-      It enforces alphabetical sorting on the application grid and folders, ensuring a consistent layout.
+      It enforces alphabetical sorting on the application grid and folders, ensuring a 
+      consistent layout.
 
       **Features:**
       - Automatically sorts folder contents.
@@ -48,19 +50,34 @@ in
   options.zenos.desktops.gnome.extensions.alphabetical-app-grid = {
     enable = mkEnableOption "Alphabetical App Grid GNOME extension configuration";
 
-    sort-folder-contents = mkBool true "Whether the contents of folders should be sorted alphabetically";
+    sort-folder-contents = mkBool true ''
+      Sort folder contents alphabetically
 
-    folder-order-position = mkStr "alphabetical" "Where to place folders when ordering the application grid";
+      Whether the contents of folders should be sorted alphabetically.
+    '';
 
-    show-favourite-apps = mkBool false "Allows displaying the favourite apps on the app grid (GNOME 40+)";
+    folder-order-position = mkStr "alphabetical" ''
+      Position of folders in the grid
 
-    logging-enabled = mkBool false "Allow the extension to send messages to the system logs";
+      Where to place folders when ordering the application grid (e.g., 'alphabetical').
+    '';
+
+    show-favourite-apps = mkBool false ''
+      Display favorite apps in the grid
+
+      Allows displaying the favourite apps on the app grid (GNOME 40+).
+    '';
+
+    logging-enabled = mkBool false ''
+      Enable system logging for the extension
+
+      Allow the extension to send messages to the system logs for debugging.
+    '';
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.alphabetical-app-grid ];
 
-    # Standard types (b, i, s, as) are handled directly by dconf module
     programs.dconf.profiles.user.databases = [
       {
         settings = {

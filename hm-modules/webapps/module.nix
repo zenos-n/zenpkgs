@@ -28,12 +28,20 @@ let
     options = {
       id = mkOption {
         type = types.str;
-        description = "The ID of the extension to install";
+        description = ''
+          Extension ID to install
+
+          Unique identifier for the extension, e.g., `ublock-origin@raymondhill.net`.
+        '';
         example = "ublock-origin@raymondhill.net";
       };
       url = mkOption {
         type = types.str;
-        description = "The URL where the extension XPI can be downloaded";
+        description = ''
+          Direct XPI download URL
+
+          Specifies where the extension package can be retrieved for installation.
+        '';
       };
     };
   };
@@ -43,18 +51,30 @@ let
       name = mkOption {
         type = types.nullOr types.str;
         default = null;
-        description = "The name of the custom search engine";
+        description = ''
+          Custom search engine name
+
+          Display label for the search engine in the browser UI.
+        '';
       };
       url = mkOption {
         type = types.nullOr types.str;
         default = null;
-        description = "The URL of the custom search engine with placeholder";
+        description = ''
+          Search engine template URL
+
+          URL containing a `{searchTerms}` placeholder for query substitution.
+        '';
         example = "https://www.youtube.com/results?search_query={searchTerms}";
       };
       icon = mkOption {
         type = types.nullOr types.str;
         default = null;
-        description = "The icon of the custom search engine";
+        description = ''
+          Search engine icon identifier
+
+          Specifies the icon used for the search engine in selection menus.
+        '';
       };
     };
   };
@@ -66,36 +86,64 @@ let
         id = mkOption {
           type = types.str;
           default = name;
-          description = "Unique identifier for the web application";
+          description = ''
+            Unique web application identifier
+
+            Used for profile directory naming and internal routing.
+          '';
         };
         name = mkOption {
           type = types.str;
-          description = "Display name of the application";
+          description = ''
+            Application display name
+
+            Name used for desktop entries and browser window titles.
+          '';
         };
         url = mkOption {
           type = types.str;
-          description = "The home URL of the web application";
+          description = ''
+            Application home URL
+
+            The primary address loaded when the application is launched.
+          '';
         };
         icon = mkOption {
           type = types.str;
           default = "web-browser";
-          description = "The icon name or path for the desktop entry";
+          description = ''
+            Desktop entry icon
+
+            Theme icon name or absolute path for the application launcher.
+          '';
         };
         extensions = mkOption {
           type = types.listOf extensionSubmodule;
           default = [ ];
-          description = "List of browser extensions to pre-install in the PWA profile";
+          description = ''
+            List of pre-installed extensions
+
+            Browser extensions to be automatically provisioned within the app profile.
+          '';
         };
         search = mkOption {
           type = searchSubmodule;
           default = { };
-          description = "Custom search engine configuration for the PWA";
+          description = ''
+            Search engine configuration
+
+            Defines a custom search engine for the application's search bar.
+          '';
         };
         enablePasswordManager = mkOption {
           type = types.bool;
           default = false;
-          description = "Enable the built-in password manager";
-          longDescription = "Whether to allow the backend browser to store and autofill credentials. Availability depends on the chosen backend.";
+          description = ''
+            Enable built-in password manager
+
+            Whether to allow the backend browser to store and autofill credentials. 
+            Availability depends on the chosen backend.
+          '';
         };
         layoutStart = mkOption {
           type = types.listOf types.str;
@@ -103,27 +151,47 @@ let
             "home"
             "reload"
           ];
-          description = "Toolbar elements to display at the start of the navigation bar";
+          description = ''
+            Leading toolbar elements
+
+            Widget IDs to display at the beginning of the navigation bar.
+          '';
         };
         layoutEnd = mkOption {
           type = types.listOf types.str;
           default = [ "addons" ];
-          description = "Toolbar elements to display at the end of the navigation bar";
+          description = ''
+            Trailing toolbar elements
+
+            Widget IDs to display at the end of the navigation bar.
+          '';
         };
         userChrome = mkOption {
           type = types.lines;
           default = "";
-          description = "Custom CSS for the browser UI (userChrome.css)";
+          description = ''
+            Custom browser UI CSS
+
+            Raw CSS injected into `userChrome.css` for interface customization.
+          '';
         };
         userContent = mkOption {
           type = types.lines;
           default = "";
-          description = "Custom CSS for web pages (userContent.css)";
+          description = ''
+            Custom web content CSS
+
+            Raw CSS injected into `userContent.css` to modify web page appearance.
+          '';
         };
         extraPrefs = mkOption {
           type = types.lines;
           default = "";
-          description = "Additional browser preferences (prefs.js)";
+          description = ''
+            Additional browser preferences
+
+            Low-level preference strings to be written directly to `prefs.js`.
+          '';
         };
         categories = mkOption {
           type = types.listOf types.str;
@@ -131,17 +199,29 @@ let
             "Network"
             "WebBrowser"
           ];
-          description = "Desktop categories for the application";
+          description = ''
+            Desktop entry categories
+
+            Categories assigned to the generated `.desktop` file for launcher organization.
+          '';
         };
         keywords = mkOption {
           type = types.listOf types.str;
           default = [ ];
-          description = "Keywords for desktop search providers";
+          description = ''
+            Search provider keywords
+
+            List of terms to index the application in desktop search results.
+          '';
         };
         openUrls = mkOption {
           type = types.listOf types.str;
           default = [ ];
-          description = "URL substrings that should trigger this PWA via the dispatcher";
+          description = ''
+            URL interception patterns
+
+            Substrings that, when encountered by the dispatcher, trigger this PWA.
+          '';
           example = [ "discord.com" ];
         };
       };
@@ -151,20 +231,21 @@ let
 in
 {
   meta = {
-    description = "Declarative web application (PWA) manager for ZenOS";
-    longDescription = ''
+    description = ''
+      Declarative web application (PWA) manager for ZenOS
+
       This module provides a framework for creating isolated, declarative web applications 
       (Progressive Web Apps) using various browser backends.
 
       ### Why use this?
-      - **Isolation**: Each app runs in its own profile, keeping cookies and history separate from your main browser.
-      - **Integration**: Generates standard `.desktop` entries that integrate with your app launcher and taskbar.
-      - **Routing**: Includes an optional dispatcher that intercepts links and opens them in the correct PWA (e.g., clicking a Discord link in your browser opens the Discord PWA).
+      - **Isolation**: Each app runs in its own profile, keeping cookies separate from your main browser.
+      - **Integration**: Generates standard `.desktop` entries that integrate with your app launcher.
+      - **Routing**: Includes an optional dispatcher that intercepts links and opens them in the correct PWA.
 
       ### Key Features
       - Custom CSS injection via `userChrome` and `userContent`.
       - Declarative extension management.
-      - Deep integration with `xdg.desktopEntries` for correct window grouping (WM_CLASS).
+      - Deep integration with `xdg.desktopEntries` for correct window grouping.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -182,18 +263,22 @@ in
         "helium"
       ];
       default = "firefox";
-      description = "The backend browser engine to use for PWAs";
-      longDescription = ''
-        Firefox is the primary supported backend. Other backends are available but may 
-        require manual maintenance or have limited feature support regarding CSS injection 
-        and extension management.
+      description = ''
+        Backend browser engine
+
+        Specifies the underlying engine for PWAs. Firefox is the primary 
+        supported backend; others may have limited feature parity.
       '';
     };
 
     profileDir = mkOption {
       type = types.path;
       default = "${config.home.homeDirectory}/.local/share/pwamaker-profiles";
-      description = "Directory where PWA browser profiles are stored";
+      description = ''
+        Profile storage directory
+
+        Root path where all PWA browser profiles and configuration will be stored.
+      '';
     };
 
     backend = {
@@ -201,17 +286,21 @@ in
         internal = true;
         type = types.functionTo types.str;
         default = _: "echo 'No backend configured'";
-        description = "Internal function to generate the launch command for a specific PWA ID";
+        description = ''
+          Internal launch command generator
+
+          Function used to generate the execution string for a given application.
+        '';
       };
 
       getWmClass = mkOption {
         internal = true;
         type = types.functionTo types.str;
         default = id: "PWA-${id}";
-        description = "Internal function to generate the WM_CLASS for window matching";
-        longDescription = ''
-          Used to link windows to their desktop entries. This ensures that pinned 
-          applications don't create duplicate icons in the taskbar when launched.
+        description = ''
+          Internal WM_CLASS generator
+
+          Used to link windows to desktop entries for correct taskbar grouping.
         '';
       };
     };
@@ -221,14 +310,22 @@ in
       fallbackBrowser = mkOption {
         type = types.str;
         default = "firefox";
-        description = "Command to run for links that don't match any registered PWA";
+        description = ''
+          Fallback browser command
+
+          Command to execute for links that do not match any registered PWA pattern.
+        '';
       };
     };
 
     apps = mkOption {
       default = { };
       type = types.attrsOf appSubmodule;
-      description = "Attribute set of web applications to configure";
+      description = ''
+        PWA application definitions
+
+        Attribute set mapping application names to their specific configurations.
+      '';
     };
   };
 

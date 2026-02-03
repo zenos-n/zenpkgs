@@ -9,11 +9,12 @@ let
 in
 {
   meta = {
-    description = "ZenOS version";
-    longDescription = ''
-      **ZenOS Version Module**
+    description = ''
+      ZenOS version information
 
-      Contains the version information for ZenOS. Designed to not be interacted with by the user directly.
+      Provides the foundational versioning metadata for the operating system.
+      This module is designed for internal system use and should not be interacted 
+      with by the user directly.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -21,25 +22,34 @@ in
   };
 
   options.zenos.system.version = {
-
     type = lib.mkOption {
       type = lib.types.str;
       default = "beta";
-      description = "Release type";
+      description = ''
+        Release lifecycle type
+
+        Defines the stability track of the current release (e.g., 'beta', 'stable').
+      '';
     };
 
     majorVer = lib.mkOption {
       type = lib.types.str;
       default = "1.0";
-      description = "Major version number";
+      description = ''
+        Major version identifier
+
+        The primary version number assigned to the current ZenOS release cycle.
+      '';
     };
 
     variant = lib.mkOption {
       type = lib.types.str;
       default = "N";
-      description = "Version variant";
-      longDescription = ''
-        The variant indicates the edition or flavor of the release, such as "N" for the nixos-based edition.
+      description = ''
+        Version variant code
+
+        Indicates the edition or flavor of the release, such as 'N' for the 
+        NixOS-based edition.
       '';
     };
 
@@ -50,9 +60,11 @@ in
         variant = cfg.variant;
         type = cfg.type;
       };
-      description = "Full version string";
-      longDescription = ''
-        The complete version string constructed from the major version, variant, and type. If beta, it includes the git short revision.
+      description = ''
+        Complete version string
+
+        The final constructed version identifier combining major version, variant, 
+        and release type. If the type is 'beta', it may include specific revision data.
       '';
     };
   };

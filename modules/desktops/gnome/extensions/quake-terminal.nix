@@ -10,11 +10,8 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.quake-terminal;
 
-  # --- Serializer Logic for a{ss} ---
-  # Helper to quote strings for GVariant
   mkGVariantString = v: "'${v}'";
 
-  # Serializer for a{ss} (Map<String, String>)
   serializeLaunchArgs =
     args:
     if args == { } then
@@ -28,10 +25,12 @@ let
 in
 {
   meta = {
-    description = "Configures the Quake Terminal GNOME extension";
-    longDescription = ''
+    description = ''
+      Dropdown application integration for GNOME Shell
+
       This module installs and configures the **Quake Terminal** extension for GNOME.
-      It provides a dropdown terminal (Quake-style) that can be toggled with a keyboard shortcut.
+      It provides a dropdown terminal (Quake-style) that can be toggled with a 
+      keyboard shortcut.
 
       **Features:**
       - Dropdown terminal functionality for any app (defaults to gnome-terminal).
@@ -46,104 +45,106 @@ in
   options.zenos.desktops.gnome.extensions.quake-terminal = {
     enable = mkEnableOption "Quake Terminal GNOME extension configuration";
 
-    # --- Application Settings ---
     app = {
       id = mkOption {
         type = types.str;
         default = "org.gnome.Terminal.desktop";
-        description = "The application path used as a reference";
+        description = ''
+          Target application for dropdown
+
+          The desktop entry ID of the application that should behave as the 
+          Quake-style terminal.
+        '';
       };
 
       shortcut = mkOption {
-        type = types.listOf types.str;
-        default = [ "<Super>Return" ];
-        description = "Shortcut to activate the terminal application";
+        type = types.str;
+        default = "<Alt>Tab";
+        description = ''
+          Toggle keyboard shortcut
+
+          Key combination used to reveal and conceal the dropdown window.
+        '';
       };
 
       launch-args = mkOption {
         type = types.attrsOf types.str;
         default = { };
-        description = "Dictionary mapping application IDs to their terminal launch arguments";
+        description = ''
+          Application command arguments
+
+          Custom key-value pairs passed to the application upon launch 
+          (e.g., terminal profile or shell flags).
+        '';
       };
     };
 
-    # --- Layout ---
     layout = {
       size = {
         vertical = mkOption {
           type = types.int;
           default = 50;
-          description = "Terminal Vertical Size (percentage)";
+          description = "Window height as a percentage of monitor height";
         };
-
         horizontal = mkOption {
           type = types.int;
           default = 100;
-          description = "Terminal Horizontal Size (percentage)";
+          description = "Window width as a percentage of monitor width";
         };
       };
 
       alignment = mkOption {
         type = types.int;
-        default = 2;
-        description = "Terminal Horizontal Alignment (0-2)";
+        default = 1;
+        description = "Horizontal alignment of the dropdown window (0: left, 1: center, 2: right)";
       };
     };
 
-    # --- Monitors ---
     monitors = {
       render-on-current = mkOption {
         type = types.bool;
-        default = false;
-        description = "Show on the current Display";
+        default = true;
+        description = "Display the dropdown on the monitor containing the mouse cursor";
       };
-
       render-on-primary = mkOption {
         type = types.bool;
         default = false;
-        description = "Show on the primary Display";
+        description = "Always display the dropdown on the primary monitor";
       };
-
       monitor-index = mkOption {
         type = types.int;
         default = 0;
-        description = "Specify the display where the terminal should be rendered";
+        description = "Specific hardware monitor index to use if primary/current is disabled";
       };
     };
 
-    # --- Behavior ---
     behavior = {
       auto-hide = mkOption {
         type = types.bool;
         default = true;
-        description = "Hide Terminal window when it loses focus";
+        description = "Hide the window automatically when it loses input focus";
       };
-
       always-on-top = mkOption {
         type = types.bool;
-        default = false;
-        description = "Terminal window will appear on top of all other windows";
+        default = true;
+        description = "Force the window to remain above all other window actors";
       };
-
       animation-time = mkOption {
-        type = types.int;
-        default = 250;
-        description = "Duration of the dropdown animation in milliseconds";
+        type = types.float;
+        default = 0.2;
+        description = "Visual transition duration in seconds for slide events";
       };
-
       skip-taskbar = mkOption {
         type = types.bool;
         default = true;
-        description = "Hide terminal window in overview mode or Alt+Tab";
+        description = "Prevent the dropdown window from appearing in the taskbar or Alt-Tab switcher";
       };
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.quake-terminal ];
 
-    # Standard types mapped directly
     programs.dconf.profiles.user.databases = [
       {
         settings = {
@@ -165,7 +166,6 @@ in
       }
     ];
 
-    # Complex type (a{ss}) handled by systemd service
     systemd.user.services.quake-terminal-setup = {
       description = "Apply Quake Terminal specific configuration";
       wantedBy = [ "graphical-session.target" ];
@@ -175,7 +175,7 @@ in
         RemainAfterExit = true;
       };
       script = ''
-        ${pkgs.dconf}/bin/dconf write /org/gnome/shell/extensions/quake-terminal/launch-args-map ${escapeShellArg (serializeLaunchArgs cfg.app.launch-args)}
+        ${pkgs.dconf}/bin/dconf write /org/gnome/shell/extensions/quake-terminal/terminal-args "${escapeShellArg (serializeLaunchArgs cfg.app.launch-args)}"
       '';
     };
   };

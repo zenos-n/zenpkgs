@@ -31,14 +31,16 @@ let
 in
 {
   meta = {
-    description = "Provides automated package resolution for ZenOS system sets";
-    longDescription = ''
-      This module allows users to define packages as an attribute set under `zenos.system.packages`.
-      It recursively scans the set and resolves them to actual derivations, either from the provided 
-      values or by looking up the path in the global `pkgs` set.
+    description = ''
+      Automated package resolution for ZenOS system sets
 
-      This is particularly useful for organizing system software into logical categories 
-      within your configuration.
+      This module allows users to define packages as an attribute set under 
+      `zenos.system.packages`. It recursively scans the set and resolves 
+      them to actual derivations, either from the provided values or by 
+      looking up the path in the global `pkgs` set.
+
+      This is particularly useful for organizing system software into logical 
+      categories within your configuration.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -49,7 +51,13 @@ in
     packages = lib.mkOption {
       type = lib.types.attrs;
       default = { };
-      description = "Attribute set of system packages to be automatically resolved and installed";
+      description = ''
+        Declarative attribute set of system packages to install
+
+        Attribute set of system packages to be automatically resolved and 
+        installed. Leaf nodes can be empty sets to trigger automatic lookup 
+        in nixpkgs.
+      '';
       example = lib.literalExpression ''
         {
           editors.vim = pkgs.vim;

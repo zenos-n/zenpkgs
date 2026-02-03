@@ -13,8 +13,9 @@ let
 in
 {
   meta = {
-    description = "Configures the Splash Indicator GNOME extension";
-    longDescription = ''
+    description = ''
+      Visual login feedback screen for GNOME Shell
+
       This module installs and configures the **Splash Indicator** extension for GNOME.
       It displays a splash screen during system startup or login, providing visual
       feedback while the desktop environment is loading.

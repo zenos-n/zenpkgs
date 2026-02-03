@@ -157,9 +157,9 @@ let
       }
       
       const getSSM = () => {
-         if (Services.scriptSecurityManager) return Services.scriptSecurityManager;
-         try { return getService("@mozilla.org/scriptsecuritymanager;1", "nsIScriptSecurityManager"); } 
-         catch(e) { return null; }
+          if (Services.scriptSecurityManager) return Services.scriptSecurityManager;
+          try { return getService("@mozilla.org/scriptsecuritymanager;1", "nsIScriptSecurityManager"); } 
+          catch(e) { return null; }
       };
 
       // READ PROFILE CONFIG
@@ -217,12 +217,12 @@ let
       };
       
       const getTopWindow = () => {
-         try {
-            const { BrowserWindowTracker } = ChromeUtils.importESModule("resource:///modules/BrowserWindowTracker.sys.mjs");
-            return BrowserWindowTracker.getTopWindow();
-         } catch(e) {
-            return Services.wm.getMostRecentWindow("navigator:browser");
-         }
+          try {
+             const { BrowserWindowTracker } = ChromeUtils.importESModule("resource:///modules/BrowserWindowTracker.sys.mjs");
+             return BrowserWindowTracker.getTopWindow();
+          } catch(e) {
+             return Services.wm.getMostRecentWindow("navigator:browser");
+          }
       };
 
       const NewTabObserver = {
@@ -398,18 +398,19 @@ let
 in
 {
   meta = {
-    description = "Firefox backend for ZenOS webapps";
-    longDescription = ''
+    description = ''
+      Firefox backend for ZenOS webapps
+
       Configures **Firefox** as the execution backend for the ZenOS WebApps system.
 
       ### Role & Status
       This is the **official, supported backend** for ZenOS web applications. It leverages a custom-patched Firefox wrapper ("PWA Edition") to provide a native-like application experience.
 
       ### Key Features
-      * **Isolation:** Generates unique profiles (`pwa.json`, `user.js`) for each webapp.
-      * **Styling:** Injects `userChrome.css` to hide browser chrome (tabs, URL bar) for an app-like feel.
-      * **Optimization:** Aggressively strips telemetry, "pocket", and unnecessary network requests via `autoconfig.js`.
-      * **Native Messaging:** Supports connecting specific native hosts per-app.
+      - **Isolation:** Generates unique profiles (`pwa.json`, `user.js`) for each webapp.
+      - **Styling:** Injects `userChrome.css` to hide browser chrome (tabs, URL bar) for an app-like feel.
+      - **Optimization:** Aggressively strips telemetry, "pocket", and unnecessary network requests via `autoconfig.js`.
+      - **Native Messaging:** Supports connecting specific native hosts per-app.
 
       ### GNOME Integration
       Supports the `firefox-gnome-theme` via the `firefoxGnomeTheme` option, allowing PWAs to blend seamlessly with the Adwaita aesthetic.
@@ -417,24 +418,32 @@ in
       ### Implementation Details
       This module compiles a python script (`json2mozlz4.py`) to handle the proprietary `mozLz4` compression required for search engine configuration, ensuring custom search engines work inside the PWAs.
     '';
-    maintainers = with maintainers; [ doromiert ];
-    license = licenses.napl;
-    platforms = platforms.zenos;
+    maintainers = with lib.maintainers; [ doromiert ];
+    license = lib.licenses.napl;
+    platforms = lib.platforms.zenos;
   };
 
   options.zenos.webApps = {
     nativeMessagingHosts = mkOption {
       type = types.listOf types.package;
       default = [ ];
-      description = "List of packages containing native messaging hosts (Firefox specific)";
+      description = ''
+        List of packages containing native messaging hosts
+
+        Specifies packages that provide Firefox native messaging host manifests.
+        These will be linked and made available to the Firefox PWA edition.
+      '';
     };
 
     firefoxGnomeTheme = mkOption {
       type = types.nullOr types.path;
       default = null;
-      description = "Firefox gnome theme path";
-      longDescription = ''
-        Since the lead dev uses GNOME, he wanted to add gnome theme support but he didn't want to force it so he made this option.
+      description = ''
+        Path to the Firefox GNOME theme directory
+
+        Enables seamless integration with the GNOME desktop by importing the
+        `firefox-gnome-theme` into generated PWA profiles. This ensures that
+        web applications match the system's Adwaita aesthetic.
       '';
     };
   };

@@ -10,9 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.burn-my-windows;
 
-  # --- INI/Conf Serialization Logic ---
-
-  # Ensure floats always have a decimal point (0 -> "0.0")
   serializeFloat =
     v:
     let
@@ -20,7 +17,6 @@ let
     in
     if builtins.match ".*\\..*" s == null then "${s}.0" else s;
 
-  # Serialize primitives to INI format
   serializeIniValue =
     v:
     if builtins.isBool v then
@@ -30,7 +26,6 @@ let
     else
       toString v;
 
-  # Generate the [section] and key=value pairs
   generateProfileContent =
     settings:
     let
@@ -44,10 +39,12 @@ let
 in
 {
   meta = {
-    description = "Configures the Burn My Windows GNOME extension";
-    longDescription = ''
+    description = ''
+      Retro window opening and closing animations for GNOME
+
       This module installs and configures the **Burn My Windows** extension for GNOME.
-      It adds retro-style window opening and closing effects, such as fire, tv-glitch, and hexagon.
+      It adds retro-style window opening and closing effects, such as fire, 
+      tv-glitch, and hexagon.
 
       **Features:**
       - Configure active effects and profiles.
@@ -61,54 +58,83 @@ in
   options.zenos.desktops.gnome.extensions.burn-my-windows = {
     enable = mkEnableOption "Burn My Windows GNOME extension configuration";
 
-    # --- Schema Options ---
-
     active-profile = mkOption {
       type = types.str;
       default = "";
-      description = "The currently active effect profile (Overridden if 'settings' is used)";
+      description = ''
+        Currently selected animation profile
+
+        The filename of the active effect profile (e.g., 'fire.conf'). 
+        Overridden if 'settings' attribute is defined.
+      '';
     };
 
     preview-effect = mkOption {
       type = types.str;
       default = "";
-      description = "The effect with this nick will be used for the next window animation";
+      description = ''
+        Nickname of the effect for preview
+
+        The effect with this nick will be used for the next window animation.
+      '';
     };
 
     test-mode = mkOption {
       type = types.bool;
       default = false;
-      description = "If set to true, all animations will show only one still frame";
+      description = ''
+        Enable single-frame animation testing
+
+        If set to true, all animations will show only one still frame.
+      '';
     };
 
     show-support-dialog = mkOption {
       type = types.bool;
       default = true;
-      description = "If set to false, the ask-for-support dialog will never be shown";
+      description = ''
+        Display the ask-for-support dialog
+
+        Whether to allow the extension to show its periodic donation dialog.
+      '';
     };
 
     last-prefs-version = mkOption {
       type = types.int;
       default = 0;
-      description = "Used to check whether the extension got updated from the preferences dialog";
+      description = ''
+        Internal version of last used preferences
+
+        Tracks updates between the preferences dialog and the extension core.
+      '';
     };
 
     last-extension-version = mkOption {
       type = types.int;
       default = 0;
-      description = "Used to check whether the extension got updated from the extension side";
+      description = ''
+        Internal version of the extension core
+
+        Tracks the version of the extension code for compatibility checks.
+      '';
     };
 
     prefs-open-count = mkOption {
       type = types.int;
       default = 0;
-      description = "The number of times the settings dialog was opened";
+      description = ''
+        Preferences dialog interaction counter
+
+        Tracks how many times the settings interface has been opened.
+      '';
     };
 
-    # --- Profile Generation Options ---
-
     settings = mkOption {
-      description = "Effect settings for the managed profile. Generates ~/.config/burn-my-windows/profiles/nix-managed.conf";
+      description = ''
+        Declarative effect parameters for the managed profile
+
+        Generates a custom INI profile at `~/.config/burn-my-windows/profiles/nix-managed.conf`.
+      '';
       type = types.attrsOf (
         types.either types.bool (types.either types.int (types.either types.float types.str))
       );
@@ -117,7 +143,6 @@ in
         fire-enable-effect = true;
         doom-enable-effect = true;
         glide-animation-time = 150;
-        apparition-twirl-intensity = 0.0;
       };
     };
   };
@@ -125,12 +150,10 @@ in
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.burn-my-windows ];
 
-    # 1. Standard Dconf Settings
     programs.dconf.profiles.user.databases = [
       {
         settings = {
           "org/gnome/shell/extensions/burn-my-windows" = {
-            # Automatically point to our managed profile if settings are defined
             active-profile = if cfg.settings != { } then "nix-managed.conf" else cfg.active-profile;
             preview-effect = cfg.preview-effect;
             test-mode = cfg.test-mode;
@@ -143,10 +166,6 @@ in
       }
     ];
 
-    # 2. Profile File Generation
-    # We use a systemd user service to write the configuration file because
-    # creating files in ~/.config typically requires home-manager's xdg module,
-    # but this approach works in pure NixOS modules too.
     systemd.user.services.burn-my-windows-profile = mkIf (cfg.settings != { }) {
       description = "Generate Burn My Windows Nix-managed profile";
       wantedBy = [ "graphical-session.target" ];

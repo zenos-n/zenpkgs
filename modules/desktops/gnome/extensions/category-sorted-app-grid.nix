@@ -13,10 +13,12 @@ let
 in
 {
   meta = {
-    description = "Configures the Category Sorted App Grid GNOME extension";
-    longDescription = ''
-      This module installs and configures the **Category Sorted App Grid** extension for GNOME.
-      It automatically organizes the application grid by category, ensuring a tidy and accessible layout.
+    description = ''
+      Automatic category-based sorting for the GNOME application grid
+
+      This module installs and configures the **Category Sorted App Grid** extension 
+      for GNOME. It automatically organizes the application grid by category, 
+      ensuring a tidy and accessible layout.
 
       **Features:**
       - Automatically sorts apps into category folders.

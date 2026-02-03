@@ -13,8 +13,9 @@ let
 in
 {
   meta = {
-    description = "Configures the Auto Theme Switcher GNOME extension";
-    longDescription = ''
+    description = ''
+      Automatic light and dark theme switching for GNOME
+
       This module installs and configures the **Auto Theme Switcher** extension for GNOME.
       It automatically toggles the system theme between light and dark modes based on
       custom coordinates or system location services.
@@ -36,26 +37,37 @@ in
         type = types.str;
         default = "";
         example = "San Francisco";
-        description = "Human-readable location name used for display";
+        description = ''
+          Human-readable location label
+
+          Custom name used to identify the location in the user interface.
+        '';
       };
 
       latitude = mkOption {
         type = types.str;
         default = "";
         example = "37.7749";
-        description = "Latitude for sunset/sunrise calculation";
+        description = ''
+          Geographic latitude
+
+          Latitude coordinate used for sunset and sunrise calculations.
+        '';
       };
 
       longitude = mkOption {
         type = types.str;
         default = "";
         example = "-122.4194";
-        description = "Longitude for sunset/sunrise calculation";
+        description = ''
+          Geographic longitude
+
+          Longitude coordinate used for sunset and sunrise calculations.
+        '';
       };
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.auto-theme-switcher ];
 

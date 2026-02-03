@@ -10,7 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.forge;
 
-  # --- Keybinding Serialization Logic ---
   formatPart =
     part:
     let
@@ -34,10 +33,14 @@ let
     mkOption {
       type = types.listOf types.str;
       default = default;
-      description = "${description} (Define as list of keys, e.g. [ \"super\" \"q\" ])";
+      description = ''
+        ${description}
+
+        Define as a list of keys, e.g., [ "super" "q" ]. 
+        Supported modifiers: super, ctrl, alt, shift.
+      '';
     };
 
-  # --- Color Normalization Helpers ---
   hexToDecMap = {
     "0" = 0;
     "1" = 1;
@@ -64,10 +67,8 @@ let
   };
 
   hexCharToInt = c: if builtins.hasAttr c hexToDecMap then hexToDecMap.${c} else 0;
-
   parseHexByte =
     s: (hexCharToInt (builtins.substring 0 1 s) * 16) + (hexCharToInt (builtins.substring 1 1 s));
-
   serializeFloat =
     f:
     let
@@ -96,11 +97,12 @@ let
 in
 {
   meta = {
-    description = "Configures the Forge GNOME extension";
-    longDescription = ''
+    description = ''
+      Tiling window management for GNOME Shell
+
       This module installs and configures the **Forge** extension for GNOME.
       Forge transforms the GNOME Shell into a tiling window manager, offering automatic
-      tiling, window gaps, and extensive keyboard shortcuts for window management.
+      tiling, window gaps, and extensive keyboard shortcuts.
 
       **Features:**
       - Automatic tiling and stacking.
@@ -115,340 +117,251 @@ in
   options.zenos.desktops.gnome.extensions.forge = {
     enable = mkEnableOption "Forge GNOME extension configuration";
 
-    # --- Appearance ---
     appearance = {
       borders = {
         focus = {
           toggle = mkOption {
             type = types.bool;
             default = true;
-            description = "Show window border on focused window";
+            description = "Display border on focused window";
           };
           size = mkOption {
             type = types.int;
             default = 3;
-            description = "The focused border's current thickness";
+            description = "Focused window border pixel thickness";
           };
           color = mkOption {
             type = types.str;
             default = "rgba(236, 94, 94, 1)";
-            description = "The focused border's current color (accepts Hex or rgba string)";
+            description = "CSS color for focused border";
           };
         };
         split = {
           toggle = mkOption {
             type = types.bool;
             default = true;
-            description = "Show split direction border on focused window";
+            description = "Display split direction indicator";
           };
           color = mkOption {
             type = types.str;
             default = "rgba(255, 246, 108, 1)";
-            description = "The focused border's current color (accepts Hex or rgba string)";
+            description = "CSS color for split indicator";
           };
         };
       };
-
       gaps = {
         size = mkOption {
           type = types.int;
           default = 4;
-          description = "The size of the gap between windows in the workarea";
+          description = "Base gap size between tiled windows";
         };
         increment = mkOption {
           type = types.int;
           default = 1;
-          description = "The size increment of the gaps (size-increment * gap-size)";
+          description = "Multiplier for gap size adjustments";
         };
         hide-on-single = mkOption {
           type = types.bool;
           default = false;
-          description = "Hide gap when single window toggle";
+          description = "Suppress gaps for single windows";
         };
       };
-
       decorations = {
         tabs = mkOption {
           type = types.bool;
           default = true;
-          description = "Whether to show the tab decoration or not";
+          description = "Display tab decorations for stacked windows";
         };
         preview-hint = mkOption {
           type = types.bool;
           default = true;
-          description = "Whether to show preview hint during Drag and Drop";
+          description = "Display preview area during drag-and-drop";
         };
       };
     };
 
-    # --- Tiling Behavior ---
     tiling = {
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Tiling mode enabled";
+        description = "Global tiling mode master switch";
       };
-
       primary-mode = mkOption {
         type = types.enum [
           "tiling"
           "stacking"
         ];
         default = "tiling";
-        description = "Primary layout mode";
+        description = "Default layout strategy for new windows";
       };
-
       stacked = mkOption {
         type = types.bool;
         default = true;
-        description = "Stacked tiling mode enabled";
+        description = "Enable stacked layout capabilities";
       };
-
       tabbed = {
         enable = mkOption {
           type = types.bool;
           default = true;
-          description = "Tabbed tiling mode enabled";
+          description = "Enable tabbed layout capabilities";
         };
         auto-exit = mkOption {
           type = types.bool;
           default = true;
-          description = "Exit tabbed tiling mode when only a single tab remains";
+          description = "Automatically exit tabbed mode for single windows";
         };
       };
-
       auto-split = mkOption {
         type = types.bool;
         default = true;
-        description = "Enable auto split or quarter-tiling based on smaller side";
+        description = "Automatically select split axis based on window dimensions";
       };
-
       workspace-skip = mkOption {
         type = types.str;
         default = "";
-        description = "Skips tiling on the provided workspace indices";
+        description = "Indices of workspaces to exclude from tiling";
       };
     };
 
-    # --- Interaction & Windows ---
     interaction = {
       mouse = {
         move-pointer-focus = mkOption {
           type = types.bool;
           default = false;
-          description = "Move the pointer when focusing or swapping via keyboard";
+          description = "Sync pointer location with keyboard focus changes";
         };
         focus-on-hover = mkOption {
           type = types.bool;
           default = false;
-          description = "Focus switches to the window under the pointer";
+          description = "Follow-mouse focus policy";
         };
       };
-
       dnd-center-layout = mkOption {
         type = types.enum [
           "tabbed"
           "stacked"
         ];
         default = "tabbed";
-        description = "Default center layout when dragging/dropping";
+        description = "Layout used for drops into window center";
       };
-
       float-always-on-top = mkOption {
         type = types.bool;
         default = true;
-        description = "Floating windows toggle always-on-top";
+        description = "Keep floating windows above tiled ones";
       };
-
       resize-amount = mkOption {
         type = types.int;
         default = 15;
-        description = "The window resize increment/decrement in pixels";
+        description = "Pixel increment for window resizing operations";
       };
     };
 
-    # --- General / System ---
     general = {
       quick-settings = mkOption {
         type = types.bool;
         default = true;
-        description = "Enable Forge quick settings toggle in system menu";
+        description = "Add Forge toggle to system quick settings";
       };
-
       logging = {
         enable = mkOption {
           type = types.bool;
           default = false;
-          description = "Enable logging";
+          description = "Enable extension event logging";
         };
         level = mkOption {
           type = types.int;
           default = 0;
-          description = "Log level (0=OFF, 1=FATAL... 7=ALL)";
+          description = "Verbosity level for extension logs";
         };
       };
-
       css = {
         updated = mkOption {
           type = types.str;
           default = "";
-          description = "Timestamp when css is last updated";
+          description = "Timestamp of the last CSS injection";
         };
         last-update = mkOption {
           type = types.int;
           default = 1;
-          description = "CSS Last Update version";
+          description = "Internal CSS schema version";
         };
       };
     };
 
-    # --- Keybindings ---
     keybindings = {
-      focus-border-toggle = mkKeybindOption [
-        "super"
-        "x"
-      ] "Toggle the focused window's border";
-
+      focus-border-toggle = mkKeybindOption [ "super" "x" ] "Shortcut to toggle focused window border";
       window-gap-size-increase = mkKeybindOption [
         "ctrl"
         "super"
         "plus"
-      ] "Increase gap size";
-
+      ] "Shortcut to increase window gaps";
       window-gap-size-decrease = mkKeybindOption [
         "ctrl"
         "super"
         "minus"
-      ] "Decrease gap size";
-
-      con-split-layout-toggle = mkKeybindOption [
-        "super"
-        "g"
-      ] "Toggle split layout";
-
-      con-split-horizontal = mkKeybindOption [
-        "super"
-        "z"
-      ] "Split container horizontally";
-
-      con-split-vertical = mkKeybindOption [
-        "super"
-        "v"
-      ] "Split container vertically";
-
+      ] "Shortcut to decrease window gaps";
+      con-split-layout-toggle = mkKeybindOption [ "super" "g" ] "Shortcut to toggle split orientation";
+      con-split-horizontal = mkKeybindOption [ "super" "z" ] "Shortcut to force horizontal split";
+      con-split-vertical = mkKeybindOption [ "super" "v" ] "Shortcut to force vertical split";
       con-stacked-layout-toggle = mkKeybindOption [
         "shift"
         "super"
         "s"
-      ] "Toggle stacked layout";
-
+      ] "Shortcut to toggle stacked layout";
       con-tabbed-layout-toggle = mkKeybindOption [
         "shift"
         "super"
         "t"
-      ] "Toggle tabbed layout";
-
+      ] "Shortcut to toggle tabbed layout";
       con-tabbed-showtab-decoration-toggle = mkKeybindOption [
         "ctrl"
         "alt"
         "y"
-      ] "Toggle tab decoration";
-
+      ] "Shortcut to toggle tab decorations";
       window-swap-left = mkKeybindOption [
         "ctrl"
         "super"
         "h"
-      ] "Swap window left";
-
+      ] "Shortcut to swap window with left neighbor";
       window-swap-down = mkKeybindOption [
         "ctrl"
         "super"
         "j"
-      ] "Swap window down";
-
+      ] "Shortcut to swap window with lower neighbor";
       window-swap-up = mkKeybindOption [
         "ctrl"
         "super"
         "k"
-      ] "Swap window up";
-
+      ] "Shortcut to swap window with upper neighbor";
       window-swap-right = mkKeybindOption [
         "ctrl"
         "super"
         "l"
-      ] "Swap window right";
-
-      window-move-left = mkKeybindOption [
-        "shift"
-        "super"
-        "h"
-      ] "Move window left";
-
-      window-move-down = mkKeybindOption [
-        "shift"
-        "super"
-        "j"
-      ] "Move window down";
-
-      window-move-up = mkKeybindOption [
-        "shift"
-        "super"
-        "k"
-      ] "Move window up";
-
-      window-move-right = mkKeybindOption [
-        "shift"
-        "super"
-        "l"
-      ] "Move window right";
-
-      window-focus-left = mkKeybindOption [
-        "super"
-        "h"
-      ] "Focus window left";
-
-      window-focus-down = mkKeybindOption [
-        "super"
-        "j"
-      ] "Focus window down";
-
-      window-focus-up = mkKeybindOption [
-        "super"
-        "k"
-      ] "Focus window up";
-
-      window-focus-right = mkKeybindOption [
-        "super"
-        "l"
-      ] "Focus window right";
-
+      ] "Shortcut to swap window with right neighbor";
+      window-move-left = mkKeybindOption [ "shift" "super" "h" ] "Shortcut to move window left";
+      window-move-down = mkKeybindOption [ "shift" "super" "j" ] "Shortcut to move window down";
+      window-move-up = mkKeybindOption [ "shift" "super" "k" ] "Shortcut to move window up";
+      window-move-right = mkKeybindOption [ "shift" "super" "l" ] "Shortcut to move window right";
+      window-focus-left = mkKeybindOption [ "super" "h" ] "Shortcut to focus left neighbor";
+      window-focus-down = mkKeybindOption [ "super" "j" ] "Shortcut to focus lower neighbor";
+      window-focus-up = mkKeybindOption [ "super" "k" ] "Shortcut to focus upper neighbor";
+      window-focus-right = mkKeybindOption [ "super" "l" ] "Shortcut to focus right neighbor";
       window-toggle-float = mkKeybindOption [
         "super"
         "c"
-      ] "Toggle window float";
-
+      ] "Shortcut to toggle floating for active window";
       window-toggle-always-float = mkKeybindOption [
         "shift"
         "super"
         "c"
-      ] "Toggle always float";
-
+      ] "Shortcut to force permanent float for app";
       workspace-active-tile-toggle = mkKeybindOption [
         "shift"
         "super"
         "w"
-      ] "Toggle active workspace tiling";
-
-      prefs-open = mkKeybindOption [
-        "super"
-        "period"
-      ] "Open preferences";
-
-      prefs-tiling-toggle = mkKeybindOption [
-        "super"
-        "w"
-      ] "Toggle tiling mode";
-
+      ] "Shortcut to toggle tiling for current desktop";
+      prefs-open = mkKeybindOption [ "super" "period" ] "Shortcut to open Forge preferences";
+      prefs-tiling-toggle = mkKeybindOption [ "super" "w" ] "Shortcut to toggle tiling mode";
       mod-mask-mouse-tile = mkOption {
         type = types.enum [
           "Super"
@@ -458,107 +371,62 @@ in
           "None"
         ];
         default = "None";
-        description = "Mod mask for mouse tiling";
+        description = "Modifier key for mouse-based tiling operations";
       };
-
       window-swap-last-active = mkKeybindOption [
         "super"
         "return"
-      ] "Swap last active window";
-
+      ] "Shortcut to swap with previously active window";
       window-snap-one-third-right = mkKeybindOption [
         "ctrl"
         "alt"
         "g"
-      ] "Snap 1/3 right";
-
+      ] "Snap active window to 1/3 right";
       window-snap-two-third-right = mkKeybindOption [
         "ctrl"
         "alt"
         "t"
-      ] "Snap 2/3 right";
-
-      window-snap-one-third-left = mkKeybindOption [
-        "ctrl"
-        "alt"
-        "d"
-      ] "Snap 1/3 left";
-
-      window-snap-two-third-left = mkKeybindOption [
-        "ctrl"
-        "alt"
-        "e"
-      ] "Snap 2/3 left";
-
-      window-snap-center = mkKeybindOption [
-        "ctrl"
-        "alt"
-        "c"
-      ] "Snap center";
-
-      window-resize-left-increase = mkKeybindOption [
-        "ctrl"
-        "super"
-        "y"
-      ] "Resize left increase";
-
+      ] "Snap active window to 2/3 right";
+      window-snap-one-third-left = mkKeybindOption [ "ctrl" "alt" "d" ] "Snap active window to 1/3 left";
+      window-snap-two-third-left = mkKeybindOption [ "ctrl" "alt" "e" ] "Snap active window to 2/3 left";
+      window-snap-center = mkKeybindOption [ "ctrl" "alt" "c" ] "Snap active window to center";
+      window-resize-left-increase = mkKeybindOption [ "ctrl" "super" "y" ] "Resize window leftwards";
       window-resize-left-decrease = mkKeybindOption [
         "ctrl"
         "shift"
         "super"
         "o"
-      ] "Resize left decrease";
-
-      window-resize-bottom-increase = mkKeybindOption [
-        "ctrl"
-        "super"
-        "u"
-      ] "Resize bottom increase";
-
+      ] "Shrink window from left";
+      window-resize-bottom-increase = mkKeybindOption [ "ctrl" "super" "u" ] "Resize window downwards";
       window-resize-bottom-decrease = mkKeybindOption [
         "ctrl"
         "shift"
         "super"
         "i"
-      ] "Resize bottom decrease";
-
-      window-resize-top-increase = mkKeybindOption [
-        "ctrl"
-        "super"
-        "i"
-      ] "Resize top increase";
-
+      ] "Shrink window from bottom";
+      window-resize-top-increase = mkKeybindOption [ "ctrl" "super" "i" ] "Resize window upwards";
       window-resize-top-decrease = mkKeybindOption [
         "ctrl"
         "shift"
         "super"
         "u"
-      ] "Resize top decrease";
-
-      window-resize-right-increase = mkKeybindOption [
-        "ctrl"
-        "super"
-        "o"
-      ] "Resize right increase";
-
+      ] "Shrink window from top";
+      window-resize-right-increase = mkKeybindOption [ "ctrl" "super" "o" ] "Resize window rightwards";
       window-resize-right-decrease = mkKeybindOption [
         "ctrl"
         "shift"
         "super"
         "y"
-      ] "Resize right decrease";
+      ] "Shrink window from right";
     };
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.forge ];
-
     programs.dconf.profiles.user.databases = [
       {
         settings = {
-          # Main Settings
           "org/gnome/shell/extensions/forge" = {
-            # Appearance
             focus-border-toggle = cfg.appearance.borders.focus.toggle;
             focus-border-size = mkUint32 cfg.appearance.borders.focus.size;
             focus-border-color = toRgbaString cfg.appearance.borders.focus.color;
@@ -569,8 +437,6 @@ in
             window-gap-hidden-on-single = cfg.appearance.gaps.hide-on-single;
             showtab-decoration-enabled = cfg.appearance.decorations.tabs;
             preview-hint-enabled = cfg.appearance.decorations.preview-hint;
-
-            # Tiling
             tiling-mode-enabled = cfg.tiling.enable;
             primary-layout-mode = cfg.tiling.primary-mode;
             stacked-tiling-mode-enabled = cfg.tiling.stacked;
@@ -578,23 +444,17 @@ in
             auto-exit-tabbed = cfg.tiling.tabbed.auto-exit;
             auto-split-enabled = cfg.tiling.auto-split;
             workspace-skip-tile = cfg.tiling.workspace-skip;
-
-            # Interaction
             move-pointer-focus-enabled = cfg.interaction.mouse.move-pointer-focus;
             focus-on-hover-enabled = cfg.interaction.mouse.focus-on-hover;
             dnd-center-layout = cfg.interaction.dnd-center-layout;
             float-always-on-top-enabled = cfg.interaction.float-always-on-top;
             resize-amount = mkUint32 cfg.interaction.resize-amount;
-
-            # General
             quick-settings-enabled = cfg.general.quick-settings;
             logging-enabled = cfg.general.logging.enable;
             log-level = mkUint32 cfg.general.logging.level;
             css-updated = cfg.general.css.updated;
             css-last-update = mkUint32 cfg.general.css.last-update;
           };
-
-          # Keybindings
           "org/gnome/shell/extensions/forge/keybindings" = {
             focus-border-toggle = serializeKeybind cfg.keybindings.focus-border-toggle;
             window-gap-size-increase = serializeKeybind cfg.keybindings.window-gap-size-increase;
@@ -622,10 +482,7 @@ in
             workspace-active-tile-toggle = serializeKeybind cfg.keybindings.workspace-active-tile-toggle;
             prefs-open = serializeKeybind cfg.keybindings.prefs-open;
             prefs-tiling-toggle = serializeKeybind cfg.keybindings.prefs-tiling-toggle;
-
-            # String setting, not keybind
             mod-mask-mouse-tile = cfg.keybindings.mod-mask-mouse-tile;
-
             window-swap-last-active = serializeKeybind cfg.keybindings.window-swap-last-active;
             window-snap-one-third-right = serializeKeybind cfg.keybindings.window-snap-one-third-right;
             window-snap-two-third-right = serializeKeybind cfg.keybindings.window-snap-two-third-right;

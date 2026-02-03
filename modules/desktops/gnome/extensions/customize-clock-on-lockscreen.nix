@@ -10,9 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.customize-clock-on-lockscreen;
 
-  # --- Color Normalization Helpers ---
-  # The extension requires 'rgba(r, g, b, a)' strings, but users often prefer Hex.
-
   hexToDecMap = {
     "0" = 0;
     "1" = 1;
@@ -37,12 +34,10 @@ let
     "E" = 14;
     "F" = 15;
   };
-
-  hexCharToInt = c: if builtins.hasAttr c hexToDecMap then hexToDecMap.${c} else 0;
-
   parseHexByte =
-    s: (hexCharToInt (builtins.substring 0 1 s) * 16) + (hexCharToInt (builtins.substring 1 1 s));
-
+    s:
+    (if builtins.hasAttr (substring 0 1 s) hexToDecMap then hexToDecMap.${substring 0 1 s} else 0) * 16
+    + (if builtins.hasAttr (substring 1 1 s) hexToDecMap then hexToDecMap.${substring 1 1 s} else 0);
   serializeFloat =
     f:
     let
@@ -52,7 +47,7 @@ let
 
   toRgbaString =
     val:
-    if builtins.isString val && (builtins.substring 0 1 val == "#") then
+    if builtins.isString val && (substring 0 1 val == "#") then
       let
         hex = lib.removePrefix "#" val;
         r = toString (parseHexByte (substring 0 2 hex));
@@ -68,45 +63,44 @@ let
     else
       val;
 
-  # --- Shared Options ---
   mkFontOptions =
     { defaultSize, defaultColor }:
     {
       color = mkOption {
         type = types.str;
         default = defaultColor;
-        description = "Text color (Hex string like #ffffff or rgba string)";
+        description = "CSS color (Hex or RGBA)";
       };
       size = mkOption {
         type = types.int;
         default = defaultSize;
-        description = "Font size (20-96)";
+        description = "Font size in points (20-96)";
       };
       family = mkOption {
         type = types.str;
         default = "Default";
-        description = "Font family";
+        description = "Font family name";
       };
       weight = mkOption {
         type = types.str;
         default = "Default";
-        description = "Font weight";
+        description = "Typography weight";
       };
       style = mkOption {
         type = types.str;
         default = "Default";
-        description = "Font style";
+        description = "Typography style";
       };
     };
 
 in
 {
   meta = {
-    description = "Configures the Customize Clock on Lockscreen GNOME extension";
-    longDescription = ''
-      This module installs and configures the **Customize Clock on Lockscreen** extension for GNOME.
-      It allows extensive customization of the clock, date, and hint text on the lock screen,
-      including fonts, colors, and content.
+    description = ''
+      Fine-grained typography control for the GNOME lock screen
+
+      This module installs and configures the **Customize Clock on Lockscreen** extension for GNOME. It allows extensive customization of the clock, 
+      date, and hint text on the lock screen.
 
       **Features:**
       - Run custom commands to display text (e.g., `whoami`).
@@ -125,12 +119,12 @@ in
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Enable custom command output";
+        description = "Display output from a custom shell command";
       };
       text = mkOption {
         type = types.str;
         default = "whoami";
-        description = "Command to execute";
+        description = "Shell command to execute for output display";
       };
       font = mkFontOptions {
         defaultSize = 48;
@@ -142,12 +136,12 @@ in
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Enable time display";
+        description = "Show the lock screen clock";
       };
       text = mkOption {
         type = types.str;
         default = "";
-        description = "Custom clock format (leave empty for default)";
+        description = "Custom strftime format pattern";
       };
       style = mkOption {
         type = types.enum [
@@ -156,7 +150,7 @@ in
           "led"
         ];
         default = "digital";
-        description = "Clock face style";
+        description = "Clock face rendering style";
       };
       font = mkFontOptions {
         defaultSize = 96;
@@ -168,12 +162,12 @@ in
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Enable date display";
+        description = "Show the lock screen date";
       };
       text = mkOption {
         type = types.str;
         default = "";
-        description = "Custom date format";
+        description = "Custom date format pattern";
       };
       font = mkFontOptions {
         defaultSize = 28;
@@ -185,7 +179,7 @@ in
       enable = mkOption {
         type = types.bool;
         default = true;
-        description = "Enable hint text";
+        description = "Show the 'swipe up to unlock' hint";
       };
       font = mkFontOptions {
         defaultSize = 20;
@@ -196,51 +190,37 @@ in
 
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.customize-clock-on-lock-screen ];
-
     programs.dconf.profiles.user.databases = [
       {
-        settings = {
-          "org/gnome/shell/extensions/customize-clock-on-lockscreen" = {
-            # Visibility Toggles (Inverted from 'enable' keys)
-            remove-command-output = !cfg.command.enable;
-            remove-time = !cfg.time.enable;
-            remove-date = !cfg.date.enable;
-            remove-hint = !cfg.hint.enable;
-
-            # Content
-            command = cfg.command.text;
-            custom-time-text = cfg.time.text;
-            custom-date-text = cfg.date.text;
-            clock-style = cfg.time.style;
-
-            # Command Font
-            command-output-font-color = toRgbaString cfg.command.font.color;
-            command-output-font-size = lib.gvariant.mkInt32 cfg.command.font.size;
-            command-output-font-family = cfg.command.font.family;
-            command-output-font-weight = cfg.command.font.weight;
-            command-output-font-style = cfg.command.font.style;
-
-            # Time Font
-            time-font-color = toRgbaString cfg.time.font.color;
-            time-font-size = lib.gvariant.mkInt32 cfg.time.font.size;
-            time-font-family = cfg.time.font.family;
-            time-font-weight = cfg.time.font.weight;
-            time-font-style = cfg.time.font.style;
-
-            # Date Font
-            date-font-color = toRgbaString cfg.date.font.color;
-            date-font-size = lib.gvariant.mkInt32 cfg.date.font.size;
-            date-font-family = cfg.date.font.family;
-            date-font-weight = cfg.date.font.weight;
-            date-font-style = cfg.date.font.style;
-
-            # Hint Font
-            hint-font-color = toRgbaString cfg.hint.font.color;
-            hint-font-size = lib.gvariant.mkInt32 cfg.hint.font.size;
-            hint-font-family = cfg.hint.font.family;
-            hint-font-weight = cfg.hint.font.weight;
-            hint-font-style = cfg.hint.font.style;
-          };
+        settings."org/gnome/shell/extensions/customize-clock-on-lockscreen" = {
+          remove-command-output = !cfg.command.enable;
+          remove-time = !cfg.time.enable;
+          remove-date = !cfg.date.enable;
+          remove-hint = !cfg.hint.enable;
+          command = cfg.command.text;
+          custom-time-text = cfg.time.text;
+          custom-date-text = cfg.date.text;
+          clock-style = cfg.time.style;
+          command-output-font-color = toRgbaString cfg.command.font.color;
+          command-output-font-size = lib.gvariant.mkInt32 cfg.command.font.size;
+          command-output-font-family = cfg.command.font.family;
+          command-output-font-weight = cfg.command.font.weight;
+          command-output-font-style = cfg.command.font.style;
+          time-font-color = toRgbaString cfg.time.font.color;
+          time-font-size = lib.gvariant.mkInt32 cfg.time.font.size;
+          time-font-family = cfg.time.font.family;
+          time-font-weight = cfg.time.font.weight;
+          time-font-style = cfg.time.font.style;
+          date-font-color = toRgbaString cfg.date.font.color;
+          date-font-size = lib.gvariant.mkInt32 cfg.date.font.size;
+          date-font-family = cfg.date.font.family;
+          date-font-weight = cfg.date.font.weight;
+          date-font-style = cfg.date.font.style;
+          hint-font-color = toRgbaString cfg.hint.font.color;
+          hint-font-size = lib.gvariant.mkInt32 cfg.hint.font.size;
+          hint-font-family = cfg.hint.font.family;
+          hint-font-weight = cfg.hint.font.weight;
+          hint-font-style = cfg.hint.font.style;
         };
       }
     ];

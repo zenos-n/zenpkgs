@@ -11,13 +11,13 @@ let
     mkTuple
     mkUint32
     ;
-  cfg = config.zenos.desktop.gnome.tweaks.blackBoxSettings;
+  cfg = config.zenos.desktops.gnome.tweaks.blackBoxSettings;
 in
-
 {
   meta = {
-    description = "Configures BlackBox terminal theming for ZenOS";
-    longDescription = ''
+    description = ''
+      Native BlackBox terminal theming for ZenOS
+
       This module applies the ZenOS theme configuration to the BlackBox terminal.
       It sets the font to "Atkynson Mono", configures window dimensions, padding,
       and floating controls for a consistent look and feel.
@@ -32,12 +32,20 @@ in
     platforms = lib.platforms.zenos;
   };
 
-  options.zenos.desktop.gnome.tweaks.blackBoxSettings = {
-    enable = lib.mkEnableOption "BlackBox theming for ZenOS";
+  options.zenos.desktops.gnome.tweaks.blackBoxSettings = {
+    enable = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+      description = ''
+        Enable BlackBox terminal theming
+
+        Applies system-wide theming, font overrides, and layout configurations 
+        specifically for the BlackBox terminal emulator.
+      '';
+    };
   };
 
   config = lib.mkIf cfg.enable {
-
     environment.systemPackages = with pkgs; [
       blackbox-terminal
       nerd-fonts.atkynson-mono
@@ -46,7 +54,6 @@ in
     programs.dconf.profiles.user.databases = [
       {
         settings = {
-          # --- BlackBox Terminal ---
           "com/raggesilver/BlackBox" = {
             floating-controls = true;
             font = "Atkynson Mono NF 11";
@@ -57,8 +64,8 @@ in
               (mkUint32 5)
               (mkUint32 5)
             ];
-            window-height = mkUint32 744;
-            window-width = mkUint32 828;
+            window-height = mkUint32 550;
+            window-width = mkUint32 900;
           };
         };
       }

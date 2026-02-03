@@ -13,8 +13,9 @@ let
 in
 {
   meta = {
-    description = "Configures the Search Light GNOME extension";
-    longDescription = ''
+    description = ''
+      Spotlight-style search overlay for GNOME Shell
+
       This module installs and configures the **Search Light** extension for GNOME.
       It replaces the default search with a macOS Spotlight-like search overlay,
       centered on the screen with customizable styling and shortcuts.
@@ -36,173 +37,162 @@ in
     border-radius = mkOption {
       type = types.float;
       default = 0.0;
-      description = "Border radius";
+      description = ''
+        Visual corner rounding radius
+
+        Pixel radius for the search overlay corners. Defaults to 0 for 
+        sharp square corners.
+      '';
     };
 
     border-color = mkOption {
       type = types.str;
       default = "(1.0,1.0,1.0,1.0)";
-      description = "Border color (GVariant tuple)";
+      description = ''
+        Search overlay border color
+
+        GVariant tuple defining the RGBA components of the overlay border.
+      '';
     };
 
     border-thickness = mkOption {
       type = types.int;
       default = 0;
-      description = "Border thickness";
+      description = ''
+        Search overlay border width
+
+        Pixel thickness of the border drawn around the search interface.
+      '';
     };
 
     background-color = mkOption {
       type = types.str;
-      default = "(0.0,0.0,0.0,0.25)";
-      description = "Background color (GVariant tuple)";
+      default = "(0.0,0.0,0.0,0.9)";
+      description = ''
+        Search overlay background color
+
+        GVariant tuple defining the RGBA components of the primary 
+        search window background.
+      '';
     };
 
     scale-width = mkOption {
       type = types.float;
-      default = 0.1;
-      description = "Scale width";
+      default = 0.5;
+      description = "Window width relative to the monitor width (0.0 - 1.0)";
     };
 
     scale-height = mkOption {
       type = types.float;
-      default = 0.1;
-      description = "Scale height";
+      default = 0.4;
+      description = "Window height relative to the monitor height (0.0 - 1.0)";
     };
 
     preferred-monitor = mkOption {
       type = types.int;
-      default = 0;
-      description = "Preferred monitor index";
+      default = -1;
+      description = ''
+        Target display index
+
+        The monitor index where the search box should appear (-1 for 
+        primary monitor).
+      '';
     };
 
     monitor-count = mkOption {
       type = types.int;
       default = 1;
-      description = "Monitors count";
+      description = "Internal state tracker for available system monitors";
     };
 
     shortcut-search = mkOption {
       type = types.listOf types.str;
-      default = [ ];
-      description = "Shortcut for search";
+      default = [ "<Super>space" ];
+      description = "Primary keyboard shortcut to trigger the search overlay";
     };
 
     secondary-shortcut-search = mkOption {
       type = types.listOf types.str;
       default = [ ];
-      description = "Secondary shortcut for search";
+      description = "Alternative shortcut to trigger the search overlay";
     };
 
     popup-at-cursor-monitor = mkOption {
       type = types.bool;
-      default = false;
-      description = "Popup at cursor monitor";
-    };
+      default = true;
+      description = ''
+        Reveal overlay at mouse location
 
-    msg-to-pref = mkOption {
-      type = types.str;
-      default = "";
-      description = "MsgBus to pref";
-    };
-
-    msg-to-ext = mkOption {
-      type = types.str;
-      default = "";
-      description = "MsgBus to ext";
+        Whether to display the search box on the monitor currently 
+        containing the mouse pointer.
+      '';
     };
 
     blur-background = mkOption {
       type = types.bool;
-      default = false;
-      description = "Enable background blur";
+      default = true;
+      description = ''
+        Enable background blur
+
+        Applies a gaussian blur effect to the desktop area behind the 
+        search overlay.
+      '';
     };
 
     blur-sigma = mkOption {
-      type = types.float;
-      default = 30.0;
-      description = "Blur sigma";
+      type = types.int;
+      default = 30;
+      description = "Gaussian sigma value determining the strength of the blur";
     };
 
     blur-brightness = mkOption {
       type = types.float;
       default = 0.6;
-      description = "Blur brightness";
+      description = "Luminance multiplier for the blurred background area";
     };
 
     font-size = mkOption {
       type = types.int;
-      default = 0;
-      description = "Text size";
+      default = 12;
+      description = "Base pixel font size for search results and metadata";
     };
 
     entry-font-size = mkOption {
       type = types.int;
-      default = 1;
-      description = "Entry text size";
+      default = 24;
+      description = "Large pixel font size for the active search input field";
     };
 
     text-color = mkOption {
       type = types.str;
-      default = "(1.0,1.0,1.0,0.0)";
-      description = "Text color (GVariant tuple)";
-    };
-
-    panel-icon-color = mkOption {
-      type = types.str;
       default = "(1.0,1.0,1.0,1.0)";
-      description = "Panel icon color (GVariant tuple)";
-    };
-
-    entry-text-color = mkOption {
-      type = types.str;
-      default = "(1.0,1.0,1.0,0.0)";
-      description = "Entry text color (GVariant tuple)";
+      description = "GVariant tuple defining the RGBA color of the result text";
     };
 
     show-panel-icon = mkOption {
       type = types.bool;
-      default = false;
-      description = "Show panel icon";
+      default = true;
+      description = ''
+        Display top bar status icon
+
+        Whether to show the Search Light icon in the GNOME panel for 
+        mouse interaction.
+      '';
     };
 
     unit-converter = mkOption {
       type = types.bool;
-      default = false;
-      description = "Show unit converter";
+      default = true;
+      description = "Enable real-time unit conversion inside the search results";
     };
 
     currency-converter = mkOption {
       type = types.bool;
-      default = false;
-      description = "Show currency converter";
-    };
-
-    window-effect = mkOption {
-      type = types.int;
-      default = 0;
-      description = "Window effect";
-    };
-
-    window-effect-color = mkOption {
-      type = types.str;
-      default = "(1.0,1.0,1.0,1.0)";
-      description = "Window effect color (GVariant tuple)";
-    };
-
-    use-animations = mkOption {
-      type = types.bool;
       default = true;
-      description = "Use window animations";
-    };
-
-    animation-speed = mkOption {
-      type = types.float;
-      default = 100.0;
-      description = "Animation speed";
+      description = "Enable real-time currency conversion inside the search results";
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.search-light ];
 
@@ -221,23 +211,15 @@ in
             shortcut-search = cfg.shortcut-search;
             secondary-shortcut-search = cfg.secondary-shortcut-search;
             popup-at-cursor-monitor = cfg.popup-at-cursor-monitor;
-            msg-to-pref = cfg.msg-to-pref;
-            msg-to-ext = cfg.msg-to-ext;
             blur-background = cfg.blur-background;
             blur-sigma = cfg.blur-sigma;
             blur-brightness = cfg.blur-brightness;
             font-size = cfg.font-size;
             entry-font-size = cfg.entry-font-size;
             text-color = cfg.text-color;
-            panel-icon-color = cfg.panel-icon-color;
-            entry-text-color = cfg.entry-text-color;
             show-panel-icon = cfg.show-panel-icon;
             unit-converter = cfg.unit-converter;
             currency-converter = cfg.currency-converter;
-            window-effect = cfg.window-effect;
-            window-effect-color = cfg.window-effect-color;
-            use-animations = cfg.use-animations;
-            animation-speed = cfg.animation-speed;
           };
         };
       }

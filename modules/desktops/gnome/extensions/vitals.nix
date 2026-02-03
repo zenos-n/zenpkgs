@@ -13,16 +13,17 @@ let
 in
 {
   meta = {
-    description = "Configures the Vitals GNOME extension";
-    longDescription = ''
+    description = ''
+      Real-time system resource monitoring for the top bar
+
       This module installs and configures the **Vitals** extension for GNOME.
-      Vitals provides a glimpse into your computer's temperature, voltage, fan speed, memory usage,
-      processor load, system resources, network speed and storage stats.
+      Vitals provides a glimpse into your computer's temperature, voltage, fan speed, 
+      memory usage, processor load, network speed and storage stats.
 
       **Features:**
-      - Customizable sensors in the top bar.
-      - Detailed system monitoring dropdown.
-      - Support for CPU, Memory, Storage, Network, and more.
+      - Highly customizable sensor list in the top bar.
+      - Detailed system monitoring dropdown menu.
+      - Support for CPU, GPU, Memory, Storage, and Network monitoring.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -32,7 +33,6 @@ in
   options.zenos.desktops.gnome.extensions.vitals = {
     enable = mkEnableOption "Vitals GNOME extension configuration";
 
-    # --- Sensors & Data ---
     sensors = {
       hot-list = mkOption {
         type = types.listOf types.str;
@@ -41,144 +41,152 @@ in
           "_system_load_1m_"
           "__network-rx_max__"
         ];
-        description = "List of sensors to be shown directly in the panel";
+        description = ''
+          Primary sensors for the panel display
+
+          List of internal sensor identifiers to be rendered directly 
+          on the GNOME top bar.
+        '';
       };
 
       update-time = mkOption {
         type = types.int;
         default = 5;
-        description = "Seconds between updates";
+        description = "Interval in seconds between sensor data refreshes";
       };
 
       hide-zeros = mkOption {
         type = types.bool;
         default = false;
-        description = "Hide data from sensors that are invalid or zero";
+        description = "Hide sensors returning a zero value from the display";
+      };
+
+      hide-labels = mkOption {
+        type = types.bool;
+        default = false;
+        description = "Remove text labels from the panel sensors to save space";
       };
 
       include-static-info = mkOption {
         type = types.bool;
-        default = false;
-        description = "Include processor static information";
+        default = true;
+        description = "Display non-volatile hardware metadata in the dropdown";
       };
     };
 
-    # --- Display / Appearance ---
     display = {
       position-in-panel = mkOption {
         type = types.int;
-        default = 2;
-        description = "Position in panel (0: left, 1: center, 2: right)";
+        default = 0;
+        description = "Relative sorting index for the Vitals icon in the panel";
       };
 
       icon-style = mkOption {
         type = types.int;
         default = 0;
-        description = "Icon style (0: original, 1: updated)";
+        description = "Visual style for sensor icons (0: Default, 1: Solid)";
       };
 
       fixed-widths = mkOption {
         type = types.bool;
         default = true;
-        description = "Use fixed widths in top bar to prevent jitter";
+        description = "Enforce constant pixel width for panel labels to prevent jitter";
       };
 
       hide-icons = mkOption {
         type = types.bool;
         default = false;
-        description = "Hide icons in top bar";
+        description = "Display only text values without icons in the top bar";
       };
 
       menu-centered = mkOption {
         type = types.bool;
         default = false;
-        description = "Make the dropdown menu centered";
+        description = "Center the dropdown menu relative to the sensor icon";
       };
 
       alphabetize = mkOption {
         type = types.bool;
-        default = true;
-        description = "Display sensors in alphabetical order in the menu";
+        default = false;
+        description = "Sort sensors alphabetically in the dropdown menu";
       };
 
       use-higher-precision = mkOption {
         type = types.bool;
         default = false;
-        description = "Show one extra digit after decimal";
+        description = "Show additional decimal places for sensor readings";
       };
 
       unit = mkOption {
         type = types.int;
-        default = 0;
-        description = "Temperature unit (0: centigrade, 1: fahrenheit)";
+        default = 1;
+        description = "Measurement unit system (1: Metric, 2: Imperial)";
       };
     };
 
-    # --- Categories ---
     show = {
       temperature = mkOption {
         type = types.bool;
         default = true;
-        description = "Display temperature of various components";
+        description = "Toggle temperature monitoring visibility";
       };
       voltage = mkOption {
         type = types.bool;
         default = true;
-        description = "Display voltage of various components";
+        description = "Toggle voltage monitoring visibility";
       };
       fan = mkOption {
         type = types.bool;
         default = true;
-        description = "Display fan rotation per minute";
+        description = "Toggle fan speed monitoring visibility";
       };
       memory = mkOption {
         type = types.bool;
         default = true;
-        description = "Display memory information";
+        description = "Toggle memory usage monitoring visibility";
       };
       processor = mkOption {
         type = types.bool;
         default = true;
-        description = "Display processor information";
+        description = "Toggle CPU load monitoring visibility";
       };
       system = mkOption {
         type = types.bool;
         default = true;
-        description = "Display system information";
+        description = "Toggle system health monitoring visibility";
       };
       storage = mkOption {
         type = types.bool;
         default = true;
-        description = "Display storage information";
+        description = "Toggle disk space monitoring visibility";
       };
       network = mkOption {
         type = types.bool;
         default = true;
-        description = "Display network information";
+        description = "Toggle bandwidth monitoring visibility";
       };
       battery = mkOption {
         type = types.bool;
-        default = false;
-        description = "Monitor battery health";
+        default = true;
+        description = "Toggle battery health monitoring visibility";
       };
       gpu = mkOption {
         type = types.bool;
-        default = false;
-        description = "Monitor GPU (requires nvidia-smi)";
+        default = true;
+        description = "Toggle GPU resource monitoring visibility";
       };
     };
 
-    # --- Specific Settings ---
     network = {
       speed-format = mkOption {
         type = types.int;
         default = 0;
-        description = "Network speed format (0: bits, 1: bytes)";
+        description = "Bandwidth unit (0: bits/s, 1: bytes/s)";
       };
       include-public-ip = mkOption {
         type = types.bool;
-        default = true;
-        description = "Display public IP address of internet connection";
+        default = false;
+        description = "Fetch and display the external public IP address";
       };
     };
 
@@ -186,20 +194,20 @@ in
       path = mkOption {
         type = types.str;
         default = "/";
-        description = "Storage path for monitoring";
+        description = "Filesystem mount point to monitor for space";
       };
       measurement = mkOption {
         type = types.int;
-        default = 1;
-        description = "Storage measurement unit (0: gigabyte, 1: gibibyte)";
+        default = 0;
+        description = "Capacity unit (0: Percent, 1: GB Used, 2: GB Free)";
       };
     };
 
     memory = {
       measurement = mkOption {
         type = types.int;
-        default = 1;
-        description = "Memory measurement unit (0: gigabyte, 1: gibibyte)";
+        default = 0;
+        description = "Usage unit (0: Percent, 1: GB Used, 2: GB Free)";
       };
     };
 
@@ -207,29 +215,27 @@ in
       slot = mkOption {
         type = types.int;
         default = 0;
-        description = "Which numerical battery slot should vitals monitor";
+        description = "Hardware battery index to monitor";
       };
     };
 
     gpu = {
       include-static-info = mkOption {
         type = types.bool;
-        default = false;
-        description = "Include GPU static information";
+        default = true;
+        description = "Display GPU hardware metadata in the dropdown";
       };
     };
 
-    # --- System Integration ---
     system = {
       monitor-cmd = mkOption {
         type = types.str;
-        default = "gnome-system-monitor";
-        description = "Command to launch System Monitor";
+        default = "resources";
+        description = "Command to execute when clicking the 'System Monitor' item";
       };
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.vitals ];
 
@@ -237,13 +243,11 @@ in
       {
         settings = {
           "org/gnome/shell/extensions/vitals" = {
-            # Sensors & Data
-            hot-sensors = cfg.sensors.hot-list;
+            hot-list = cfg.sensors.hot-list;
             update-time = cfg.sensors.update-time;
             hide-zeros = cfg.sensors.hide-zeros;
+            hide-labels = cfg.sensors.hide-labels;
             include-static-info = cfg.sensors.include-static-info;
-
-            # Display
             position-in-panel = cfg.display.position-in-panel;
             icon-style = cfg.display.icon-style;
             fixed-widths = cfg.display.fixed-widths;
@@ -252,8 +256,6 @@ in
             alphabetize = cfg.display.alphabetize;
             use-higher-precision = cfg.display.use-higher-precision;
             unit = cfg.display.unit;
-
-            # Categories
             show-temperature = cfg.show.temperature;
             show-voltage = cfg.show.voltage;
             show-fan = cfg.show.fan;
@@ -264,8 +266,6 @@ in
             show-network = cfg.show.network;
             show-battery = cfg.show.battery;
             show-gpu = cfg.show.gpu;
-
-            # Specifics
             network-speed-format = cfg.network.speed-format;
             include-public-ip = cfg.network.include-public-ip;
             storage-path = cfg.storage.path;
@@ -273,8 +273,6 @@ in
             memory-measurement = cfg.memory.measurement;
             battery-slot = cfg.battery.slot;
             include-static-gpu-info = cfg.gpu.include-static-info;
-
-            # System
             monitor-cmd = cfg.system.monitor-cmd;
           };
         };

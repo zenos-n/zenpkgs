@@ -10,20 +10,12 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.app-hider;
 
-  # --- Helpers for Types ---
-  mkStrList =
-    default: description:
-    mkOption {
-      type = types.listOf types.str;
-      default = default;
-      description = description;
-    };
-
 in
 {
   meta = {
-    description = "Configures the App Hider GNOME extension";
-    longDescription = ''
+    description = ''
+      Hide specific applications from the GNOME app grid and search
+
       This module installs and configures the **App Hider** extension for GNOME.
       It allows hiding specific applications from the application grid and search results.
 
@@ -39,15 +31,30 @@ in
   options.zenos.desktops.gnome.extensions.app-hider = {
     enable = mkEnableOption "App Hider GNOME extension configuration";
 
-    hidden-apps = mkStrList [ ] "Apps that are hidden";
+    hidden-apps = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = ''
+        List of hidden application IDs
 
-    hidden-search-apps = mkStrList [ ] "Apps that are hidden from search";
+        Applications that are hidden from the standard app grid.
+      '';
+    };
+
+    hidden-search-apps = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = ''
+        List of applications hidden from search
+
+        Applications that are hidden specifically from GNOME Shell search results.
+      '';
+    };
   };
 
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.app-hider ];
 
-    # Standard types (b, i, s, as) are handled directly by dconf module
     programs.dconf.profiles.user.databases = [
       {
         settings = {

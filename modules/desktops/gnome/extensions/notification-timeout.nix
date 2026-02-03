@@ -13,8 +13,9 @@ let
 in
 {
   meta = {
-    description = "Configures the Notification Timeout GNOME extension";
-    longDescription = ''
+    description = ''
+      Custom notification duration management for GNOME
+
       This module installs and configures the **Notification Timeout** extension for GNOME.
       It allows setting a custom timeout for notifications, ensuring they disappear
       automatically after a specified duration.
@@ -35,23 +36,37 @@ in
     ignore-idle = mkOption {
       type = types.bool;
       default = true;
-      description = "Ignores idle user - always timeout";
+      description = ''
+        Ignore user idle state for timeouts
+
+        When enabled, notifications will always timeout regardless of whether the 
+        user is currently active or idle.
+      '';
     };
 
     always-normal = mkOption {
       type = types.bool;
       default = true;
-      description = "Always treat notifications as normal priority";
+      description = ''
+        Force normal priority for all notifications
+
+        Treats all incoming notifications as normal priority, preventing them 
+        from persisting indefinitely even if sent with high priority.
+      '';
     };
 
     timeout = mkOption {
       type = types.int;
       default = 3000;
-      description = "Notification timeout in milliseconds";
+      description = ''
+        Global notification display duration
+
+        Duration in milliseconds after which notifications will automatically 
+        be dismissed from the screen.
+      '';
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.notification-timeout ];
 

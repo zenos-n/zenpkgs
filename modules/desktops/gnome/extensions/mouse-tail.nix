@@ -10,7 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.mouse-tail;
 
-  # --- Color Normalization Helpers ---
   hexToDecMap = {
     "0" = 0;
     "1" = 1;
@@ -37,11 +36,9 @@ let
   };
 
   hexCharToInt = c: if builtins.hasAttr c hexToDecMap then hexToDecMap.${c} else 0;
-
   parseHexByte =
     s: (hexCharToInt (builtins.substring 0 1 s) * 16) + (hexCharToInt (builtins.substring 1 1 s));
 
-  # Converts hex string to list of floats [R, G, B]
   hexToRgbList =
     val:
     if builtins.isString val && (builtins.substring 0 1 val == "#") then
@@ -62,8 +59,9 @@ let
 in
 {
   meta = {
-    description = "Configures the Mouse Tail GNOME extension";
-    longDescription = ''
+    description = ''
+      Visual trail effect for the GNOME mouse cursor
+
       This module installs and configures the **Mouse Tail** extension for GNOME.
       It adds a customizable trail effect to the mouse cursor, which can be useful for
       presentations or accessibility to locate the cursor easily.
@@ -84,13 +82,21 @@ in
     fade-duration = mkOption {
       type = types.int;
       default = 200;
-      description = "How long the trail takes to fade out in milliseconds";
+      description = ''
+        Trail persistence duration
+
+        Specifies how long the trail segments take to fade out in milliseconds.
+      '';
     };
 
     line-width = mkOption {
       type = types.int;
       default = 8;
-      description = "Thickness of the mouse trail line";
+      description = ''
+        Trail line thickness
+
+        Pixel width for the rendered mouse trail segments.
+      '';
     };
 
     color = mkOption {
@@ -100,13 +106,22 @@ in
         1.0
         1.0
       ];
-      description = "Color of the mouse trail. Accepts list of RGB floats ([1.0 0.0 0.0]) or Hex string ('#FF0000')";
+      description = ''
+        Visual color of the trail
+
+        Accepts a list of RGB floats ([1.0 0.0 0.0]) or a Hex string ('#FF0000').
+      '';
     };
 
     alpha = mkOption {
       type = types.float;
       default = 0.5;
-      description = "Transparency level of the mouse trail (0.0 = transparent, 1.0 = opaque)";
+      description = ''
+        Trail alpha transparency
+
+        Transparency level of the mouse trail, where 0.0 is invisible 
+        and 1.0 is fully opaque.
+      '';
     };
 
     render-mode = mkOption {
@@ -116,24 +131,25 @@ in
         "fast"
       ];
       default = "precise";
-      description = "Rendering mode optimization";
+      description = ''
+        Graphic rendering strategy
+
+        Optimizes the trail rendering for either visual precision 
+        or performance.
+      '';
     };
   };
 
-  # --- Implementation ---
   config = mkIf cfg.enable {
     environment.systemPackages = [ pkgs.gnomeExtensions.mouse-tail ];
-
     programs.dconf.profiles.user.databases = [
       {
-        settings = {
-          "org/gnome/shell/extensions/mouse-tail" = {
-            fade-duration = cfg.fade-duration;
-            line-width = cfg.line-width;
-            color = hexToRgbList cfg.color;
-            alpha = cfg.alpha;
-            render-mode = cfg.render-mode;
-          };
+        settings."org/gnome/shell/extensions/mouse-tail" = {
+          fade-duration = cfg.fade-duration;
+          line-width = cfg.line-width;
+          color = hexToRgbList cfg.color;
+          alpha = cfg.alpha;
+          render-mode = cfg.render-mode;
         };
       }
     ];
