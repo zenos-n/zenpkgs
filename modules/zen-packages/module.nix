@@ -17,12 +17,10 @@ let
     concatStringsSep
     ;
 
-  # Reference the zenos package set, throwing an error if the overlay is missing
   zenPkgs =
     pkgs.zenos
       or (throw "ZenPkgs Error: 'pkgs.zenos' is missing. Ensure your 'pkgs' argument includes the ZenPkgs overlay.");
 
-  # Recursive function to map the boolean/empty-set tree to actual packages
   findPackages =
     path: attrs:
     flatten (
@@ -40,7 +38,6 @@ let
               "ZenPkgs Warning: Package 'pkgs.zenos.${concatStringsSep "." currentPath}' not found."
               [ ]
           else
-            # Avoid auto-installing children of categories to prevent system bloat
             [ ]
         else if builtins.isAttrs value then
           findPackages currentPath value
@@ -52,21 +49,18 @@ let
 in
 {
   meta = {
-    description = "Provides a structured tree-based package selection system for ZenOS";
-    longDescription = ''
-      This module allows users to install packages from the `pkgs.zenos` collection 
-      using a structured attribute set (tree) rather than a traditional flat list.
+    description = ''
+      Structured tree-based package selection system for ZenOS
 
-      ### Benefits
-      - **Categorization:** Group packages logically by their function (e.g., `desktops.gnome`).
-      - **User-Specific Toggling:** Easily enable/disable groups of software per-user.
-      - **Sandbox Support:** Integrates with `zenos.config` for declarative user environment management.
+      This module allows users to install packages from the ZenPkgs set 
+      using a declarative attribute tree. It maps keys in your config 
+      directly to derivations in `pkgs.zenos`.
 
-      ### Example Usage
+      ### Usage Example
       ```nix
-      zenos.packages.desktops.gnome.extensions = {
-        forge = true;
-        gsconnect = true;
+      zenos.packages = {
+        editors.vscode = true;
+        browsers.firefox = { };
       };
       ```
     '';
@@ -76,70 +70,25 @@ in
   };
 
   options = {
-    zenos.packages = mkOption {
-      description = "Structured tree of packages to install globally from the ZenOS package set";
-      default = { };
-      type = types.submodule {
-        freeformType = types.attrs;
-      };
-    };
-
     packages = mkOption {
-      description = "System-level alias for `zenos.packages`";
+      type = types.submodule { freeformType = types.attrs; };
       default = { };
-      type = types.submodule {
-        freeformType = types.attrs;
-      };
+      description = ''
+        Global package selection tree
+
+        The primary interface for installing ZenOS software categories. 
+        Setting a leaf node to `true` or `{}` triggers installation.
+      '';
     };
 
-    zenos.config = mkOption {
-      description = "Sandboxed user configuration container supporting structured package definitions";
+    zenos.packages = mkOption {
+      type = types.submodule { freeformType = types.attrs; };
       default = { };
-      type = types.submodule {
-        freeformType = types.attrs;
-        options = {
-          packages = mkOption {
-            type = types.submodule { freeformType = types.attrs; };
-            default = { };
-            description = "Structured packages defined within the sandboxed configuration";
-          };
-          zenos.packages = mkOption {
-            type = types.submodule { freeformType = types.attrs; };
-            default = { };
-            description = "Namespaced structured packages within the sandboxed configuration";
-          };
-        };
-      };
-    };
-
-    users.users = mkOption {
-      type = types.attrsOf (
-        types.submodule (
-          { config, ... }:
-          {
-            options.zenos.packages = mkOption {
-              description = "User-specific structured package installation tree";
-              default = { };
-              type = types.submodule { freeformType = types.attrs; };
-            };
-            config = {
-              # NixOS expects a flat list in 'packages'; we generate it from the tree
-              packages = findPackages [ ] config.zenos.packages;
-            };
-          }
-        )
-      );
+      description = "Alias for the global package selection tree";
     };
   };
 
   config = {
-    # Synchronize the global alias with the primary option
-    zenos.packages = config.packages;
-
-    # Merge sandboxed package definitions into the global system set
-    packages = config.zenos.config.packages or { };
-
-    # Map the entire tree structure to the system environment
     environment.systemPackages = findPackages [ ] cfg;
   };
 }

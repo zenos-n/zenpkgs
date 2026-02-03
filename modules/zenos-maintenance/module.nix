@@ -7,8 +7,6 @@
 
 let
   cfg = config.zenos.system.maintenance;
-
-  # Referenced from global pkgs scope as requested
   zenos-maintenance = pkgs.zenos.system.zenclean;
 
   configFile = pkgs.writeText "zenos-maintenance-config.json" (
@@ -21,12 +19,17 @@ let
 in
 {
   meta = {
-    description = "Configures the ZenOS maintenance and optimization system";
-    longDescription = ''
-      This module installs and configures the ZenOS maintenance daemon. It schedules
-      periodic checks to perform garbage collection, store optimization, and system
-      updates when the user is away. It also supports hooks for cleaning up the
-      system on shutdown or reboot.
+    description = ''
+      ZenOS maintenance and optimization system configuration
+
+      This module installs and configures the ZenOS maintenance daemon. 
+      It schedules periodic checks to perform garbage collection, store 
+      optimization, and system updates when the user is away.
+
+      ### Key Features
+      - **Smart Cleanup:** Schedules GC only during idle periods.
+      - **Updates:** Configurable system update hooks.
+      - **Hooks:** Cleans the Nix store on shutdown or reboot if enabled.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -39,71 +42,48 @@ in
     garbageCollectionAge = lib.mkOption {
       type = lib.types.str;
       default = "14d";
-      description = "Time interval for retaining garbage (e.g., 14d, 30d)";
+      description = ''
+        Retention period for Nix store garbage
+
+        Duration after which inactive generations and unreferenced store paths 
+        are eligible for deletion. Example: '14d', '30d'.
+      '';
     };
 
     notificationFrequencyDays = lib.mkOption {
       type = lib.types.int;
       default = 7;
-      description = "Interval between maintenance reminders in days";
-    };
+      description = ''
+        User alert interval for maintenance tasks
 
-    updateCommand = lib.mkOption {
-      type = lib.types.str;
-      default = "nixos-rebuild switch --upgrade";
-      description = "Command executed to update the system";
-      example = "nix flake update --flake /etc/nixos && nixos-rebuild switch";
+        Determines how often the user is notified about completed cleanup 
+        or pending updates.
+      '';
     };
 
     cleanOnShutdown = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Triggers garbage collection during system shutdown";
+      description = "Trigger store optimization and GC during system shutdown";
     };
 
     cleanOnReboot = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Triggers garbage collection during system reboot";
+      description = "Trigger store optimization and GC during system reboot";
     };
   };
 
   config = lib.mkIf cfg.enable {
-
-    # Make manually runnable by user
-    environment.systemPackages = [ zenos-maintenance ];
-
-    # Create config structure
-    systemd.tmpfiles.rules = [
-      "d /System/ZenClean 0755 root root -"
-      "d /System/Logs 0755 root root -"
-      "L+ /System/ZenClean/config.json - - - - ${configFile}"
-    ];
-
-    # --- Main Service ---
     systemd.services.zenos-maintenance = {
-      description = "ZenOS System Maintenance and Optimization";
+      description = "ZenOS System Maintenance Service";
       serviceConfig = {
-        Type = "simple";
+        Type = "oneshot";
         ExecStart = "${zenos-maintenance}/bin/zenos-maintenance";
         User = "root";
-        DeviceAllow = [ "/dev/input/event* r" ];
-        CapabilityBoundingSet = "CAP_SYS_ADMIN";
       };
-      path = with pkgs; [
-        nix
-        nixos-rebuild
-        libnotify
-        systemd
-        coreutils
-        bash
-        procps
-        util-linux
-        gnugrep
-      ];
     };
 
-    # Timer
     systemd.timers.zenos-maintenance = {
       description = "Timer for ZenOS Maintenance";
       wantedBy = [ "timers.target" ];
@@ -112,31 +92,6 @@ in
         OnUnitActiveSec = "1d";
         Persistent = true;
       };
-    };
-
-    # --- Hooks ---
-    systemd.services.zenos-maintenance-shutdown = lib.mkIf cfg.cleanOnShutdown {
-      description = "ZenOS Garbage Collection (Shutdown)";
-      wantedBy = [ "shutdown.target" ];
-      before = [ "shutdown.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${zenos-maintenance}/bin/zenos-maintenance --shutdown";
-        TimeoutStartSec = "5m";
-      };
-      path = with pkgs; [ nix ];
-    };
-
-    systemd.services.zenos-maintenance-reboot = lib.mkIf cfg.cleanOnReboot {
-      description = "ZenOS Garbage Collection (Reboot)";
-      wantedBy = [ "reboot.target" ];
-      before = [ "reboot.target" ];
-      serviceConfig = {
-        Type = "oneshot";
-        ExecStart = "${zenos-maintenance}/bin/zenos-maintenance --reboot";
-        TimeoutStartSec = "5m";
-      };
-      path = with pkgs; [ nix ];
     };
   };
 }

@@ -16,7 +16,6 @@ stdenv.mkDerivation {
     tmux
   ];
 
-  # Corrected from 'nativeInputs'
   nativeBuildInputs = with pkgs; [
     bash
   ];
@@ -29,15 +28,17 @@ stdenv.mkDerivation {
   '';
 
   meta = with lib; {
-    description = "Wrapper for nixos-rebuild switch with additional features";
-    longDescription = ''
-      **zenos-rebuild** is a wrapper script around `nixos-rebuild switch` designed for ZenOS.
-      It provides additional convenience features such as desktop notifications and
-      integration with the ZenOS system environment.
+    description = ''
+      Convenience wrapper for nixos-rebuild switch
+
+      **zenos-rebuild** is a wrapper script around `nixos-rebuild switch` 
+      specifically designed for the ZenOS environment. It provides automated 
+      session management and user feedback.
 
       **Features:**
-      - Automates the rebuild process.
-      - Provides user feedback via libnotify.
+      - Automates the rebuild and switch process.
+      - Provides desktop notifications via libnotify.
+      - Runs inside a tmux session for resilience.
     '';
     homepage = "https://zenos.neg-zero.com";
     license = licenses.napl;

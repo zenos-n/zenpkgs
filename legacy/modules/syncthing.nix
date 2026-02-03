@@ -20,12 +20,15 @@ let
 in
 {
   meta = {
-    description = "Configures Syncthing file synchronization service";
-    longDescription = ''
-      Syncthing is a continuous file synchronization program. It synchronizes files between two or more computers in real time, safely protected from prying eyes.
+    description = ''
+      Continuous file synchronization service configuration
 
-      This module provides a high-level abstraction over the standard NixOS Syncthing service, 
-      integrating it into the ZenOS configuration hierarchy.
+      Syncthing is a continuous file synchronization program that synchronizes 
+      files between two or more computers in real time, safely protected 
+      from prying eyes.
+
+      This module provides a high-level abstraction over the standard NixOS 
+      Syncthing service, integrating it into the ZenOS configuration hierarchy.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -36,10 +39,14 @@ in
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;
-      description = "Enable the Syncthing service.";
-    };
+      description = ''
+        Enable the Syncthing service
 
-    # Note: Additional passthrough options would be defined here using 'zenopt'
+        Whether to activate the Syncthing file synchronization daemon. This 
+        implementation uses the ZenOS abstraction layer to map settings to 
+        the underlying legacy service.
+      '';
+    };
   };
 
   config = lib.mkMerge [

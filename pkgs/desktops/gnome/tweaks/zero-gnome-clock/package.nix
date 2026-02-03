@@ -20,10 +20,10 @@ stdenv.mkDerivation {
     echo 'Building Zero GNOME Clock...'
     mkdir -p $out/share/themes/zero-gnome-clock
 
-    # Find the font file dynamically
+    # Find the font file dynamically from the Zero Font package
     FONT_PATH=$(find ${pkgs.zenos.theming.fonts.zero-font} -name "*.ttf" -o -name "*.otf" | head -n 1)
 
-    # Generate the theme CSS
+    # Generate the theme CSS with font injection
     cat > $out/share/themes/zero-gnome-clock/gnome-clock.css << EOF
     @import url("resource:///org/gnome/shell/theme/default.css");
     @font-face {
@@ -42,9 +42,11 @@ stdenv.mkDerivation {
 
   installPhase = ''
     echo 'Installing Zero GNOME Clock...'
+    # Create dconf profile for automatic integration
     mkdir -p $out/share/dconf/profile
     echo "system-db:local" > $out/share/dconf/profile/user
 
+    # Provide the GSchema for the user-theme extension to handle overrides
     mkdir -p $out/share/glib-2.0/schemas
     cat > $out/share/glib-2.0/schemas/org.gnome.shell.extensions.user-theme.gschema.xml << EOF
     <?xml version="1.0" encoding="UTF-8"?>
@@ -57,14 +59,16 @@ stdenv.mkDerivation {
     </schemalist>
     EOF
 
+    # Compile the schemas for the store path
     glib-compile-schemas $out/share/glib-2.0/schemas
   '';
 
   meta = with lib; {
-    description = "Zero GNOME Clock Theme";
-    longDescription = ''
-      **Zero GNOME Clock** is a custom GNOME Shell theme component that overrides the
-      default top bar clock font. It uses the custom "Zero" font to provide a minimal
+    description = ''
+      GNOME Shell top bar clock typography override
+
+      **Zero GNOME Clock** is a custom GNOME Shell theme component that overrides the 
+      default top bar clock font. It uses the custom "Zero" font to provide a minimal 
       and stylized clock appearance.
 
       **Features:**

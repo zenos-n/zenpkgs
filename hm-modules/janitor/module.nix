@@ -14,10 +14,11 @@ let
 in
 {
   meta = {
-    description = "Automated organization daemon for ZenOS user directories";
-    longDescription = ''
-      The Janitor is a background service for ZenOS designed to keep user directories clean 
-      and organized using various sorting strategies.
+    description = ''
+      Automated organization daemon for ZenOS user directories
+
+      The Janitor is a background service for ZenOS designed to keep user directories 
+      clean and organized using various sorting strategies.
 
       ### Why use ZenFS Janitor?
       - **Automation**: Automatically moves files from "dumping grounds" like Downloads to structured folders.
@@ -45,14 +46,22 @@ in
       batchInterval = lib.mkOption {
         type = lib.types.str;
         default = "5m";
-        description = "Idle time to wait after a file is added before creating a processing batch";
+        description = ''
+          Batch processing idle interval
+
+          Idle time to wait after a file is added before creating a processing batch.
+        '';
         example = "5m";
       };
 
       gracePeriod = lib.mkOption {
         type = lib.types.str;
         default = "15m";
-        description = "Minimum age of a batch folder before the Janitor processes it";
+        description = ''
+          Minimum batch age for processing
+
+          Minimum age of a batch folder before the Janitor processes it.
+        '';
         example = "15m";
       };
 
@@ -61,7 +70,12 @@ in
           lib.types.submodule {
             options.rules = lib.mkOption {
               type = lib.types.attrsOf (lib.types.listOf lib.types.str);
-              description = "Mapping of target subdirectories to file extensions";
+              description = ''
+                Extension to subdirectory mapping
+
+                Mapping of target subdirectories to file extensions for this 
+                specific watched directory.
+              '';
               example = {
                 "Pictures/Downloads" = [
                   "jpg"
@@ -72,7 +86,12 @@ in
           }
         );
         default = { };
-        description = "Set of directories to monitor for automated sorting";
+        description = ''
+          Directories monitored for automated sorting
+
+          Set of directories to monitor for automated sorting. Each entry 
+          represents a source path containing rules for moving files.
+        '';
       };
     };
 
@@ -81,12 +100,21 @@ in
 
       sourceDir = lib.mkOption {
         type = lib.types.str;
-        description = "Path to the source directory containing raw music files";
+        description = ''
+          Source directory for raw music files
+
+          Path to the source directory containing raw music files to be 
+          indexed by the FUSE provider.
+        '';
       };
 
       mountPoint = lib.mkOption {
         type = lib.types.str;
-        description = "The target directory where the virtual FUSE view will be mounted";
+        description = ''
+          FUSE mount point for virtual music library
+
+          The target directory where the virtual FUSE view will be mounted.
+        '';
       };
 
       artistSplitSymbols = lib.mkOption {
@@ -97,7 +125,12 @@ in
           " feat. "
           "zenfs-reg:\\s*(?:ft\\.|feat)\\s*"
         ];
-        description = "List of delimiters or regex patterns used to split multi-artist tags";
+        description = ''
+          Delimiters for multi-artist metadata tags
+
+          List of delimiters or regex patterns used to split multi-artist 
+          tags into discrete entries.
+        '';
       };
     };
 

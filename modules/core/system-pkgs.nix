@@ -60,8 +60,8 @@ in
       '';
       example = lib.literalExpression ''
         {
-          editors.vim = pkgs.vim;
-          tools.git = { }; # Resolves to pkgs.git automatically
+            editors.vim = pkgs.vim;
+            tools.git = { }; # Resolves to pkgs.git automatically
         }
       '';
     };

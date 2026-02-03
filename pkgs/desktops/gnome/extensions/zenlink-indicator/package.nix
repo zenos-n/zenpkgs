@@ -13,20 +13,20 @@ stdenv.mkDerivation {
 
   unpackPhase = " ";
 
-  nativeBuildInputs = with pkgs; [
-
-  ];
+  nativeBuildInputs = with pkgs; [ ];
 
   buildPhase = " ";
 
   installPhase = " ";
 
   meta = with lib; {
-    description = "Indicator for ZenLink that resides in the control center";
-    longDescription = ''
-      **ZenLink Indicator** provides a status icon and control interface for the ZenLink service.
-      It integrates directly into the GNOME control center or top bar, offering quick access
-      to device pairing, file transfers, and notification settings.
+    description = ''
+      ZenLink status indicator and control interface for GNOME
+
+      **ZenLink Indicator** provides a status icon and control interface for the 
+      ZenLink service. It integrates directly into the GNOME control center or 
+      top bar, offering quick access to device pairing, file transfers, and 
+      notification settings.
 
       **Features:**
       - Visual status indicator for connectivity.

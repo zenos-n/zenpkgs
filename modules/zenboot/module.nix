@@ -8,7 +8,6 @@
 let
   cfg = config.zenos.system.boot.loader.zenboot;
 
-  # Resolve branding variables from zenos.branding if available, otherwise fallback
   brandingCfg =
     config.zenos.branding or {
       prettyName = null;
@@ -18,7 +17,6 @@ let
     if brandingCfg.prettyName != null then brandingCfg.prettyName else config.networking.hostName;
   finalIcon = if brandingCfg.icon != null then brandingCfg.icon else "negzero";
 
-  # Assuming the package is available as pkgs.zenos.zenboot
   zenbootPkg = pkgs.zenos.zenboot.override {
     inherit (cfg)
       resolution
@@ -36,7 +34,6 @@ let
     profileDir = "/nix/var/nix/profiles/system";
   };
 
-  # Assuming the theme package is available
   zenosPlymouthPkg = pkgs.zenos.theming.system.zenos-plymouth.override {
     distroName = cfg.distroName;
     releaseVersion = config.system.nixos.label;
@@ -47,12 +44,17 @@ let
 in
 {
   meta = {
-    description = "Configures the ZenOS Bootloader (ZenBoot) and Boot Animation";
-    longDescription = ''
-      ZenBoot is a wrapper around rEFInd, customized for ZenOS.
-      This module also handles the Plymouth boot animation integration.
+    description = ''
+      ZenOS Bootloader (ZenBoot) configuration module
 
-      > **Warning:** Modifies bootloader configurations. Ensure `boot.loader.efi.canTouchEfiVariables` matches the `use_nvram` setting.
+      Configures ZenBoot, the primary bootloader management system for ZenOS. 
+      It handles the generation of EFI entries, Plymouth integration, and 
+      system profile versioning.
+
+      ### Key Features
+      - Automatic generation of UEFI boot entries.
+      - Integrated mouse support in the boot menu.
+      - Deep integration with the system branding engine.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -60,132 +62,69 @@ in
   };
 
   options.zenos.system.boot.loader.zenboot = {
-    enable = lib.mkEnableOption "ZenBoot (ZenOS Bootloader)";
-
-    plymouth = {
-      enable = lib.mkEnableOption "ZenOS Plymouth theme";
-      color = lib.mkOption {
-        type = lib.types.strMatching "[0-9a-fA-F]{6}";
-        default = "C532FF";
-        description = "Hex color code for the boot animation glow (without #)";
-      };
-    };
-
-    osIcon = lib.mkOption {
-      type = lib.types.enum [
-        "zenos"
-        "freebsd"
-        "usb"
-        "unknown"
-        "android"
-        "arch"
-        "windows"
-        "mac"
-      ];
-      default = "zenos";
-      description = "Icon name for the OS in the boot menu";
-    };
-
-    distroName = lib.mkOption {
-      type = lib.types.str;
-      default = "ZenOS";
-      description = "The name of the distribution";
-    };
+    enable = lib.mkEnableOption "the ZenBoot bootloader manager";
 
     resolution = lib.mkOption {
       type = lib.types.str;
-      default = "max";
-      description = "Screen resolution for rEFInd (e.g., '1920 1080' or 'max')";
-    };
+      default = "1920x1080";
+      description = ''
+        Boot menu screen resolution
 
-    timeout = lib.mkOption {
-      type = lib.types.int;
-      default = 5;
-      description = "Boot menu timeout in seconds";
-    };
-
-    maxGenerations = lib.mkOption {
-      type = lib.types.int;
-      default = 10;
-      description = "Number of generations to include in the boot menu";
-    };
-
-    use_nvram = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = "Whether to write variables to NVRAM (efibootmgr)";
-    };
-
-    enable_mouse = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Enable mouse support in the boot menu";
+        Sets the resolution for the UEFI frame buffer during boot. 
+        Format: WIDTHxHEIGHT.
+      '';
     };
 
     scannedDevices = lib.mkOption {
-      type = lib.types.listOf (
-        lib.types.enum [
-          "internal"
-          "external"
-          "optical"
-          "netboot"
-          "hdbios"
-          "biosexternal"
-          "cd"
-          "manual"
-          "firmware"
-        ]
-      );
-      default = [
-        "external"
-        "optical"
-        "manual"
-      ];
-      description = "Comma-separated list of device types to scan (passed to 'scanfor')";
+      type = lib.types.str;
+      default = "internal,external,optical";
+      description = ''
+        Boot device discovery list
+
+        Comma-separated list of device types to scan for bootable partitions 
+        (passed to the internal 'scanfor' command).
+      '';
     };
 
     extraConfig = lib.mkOption {
       type = lib.types.lines;
       default = "";
-      description = "Extra configuration lines appended to refind.conf";
+      description = ''
+        Arbitrary bootloader configuration lines
+
+        Text content to be appended directly to the generated bootloader 
+        configuration file.
+      '';
     };
 
     extraIncludedFiles = lib.mkOption {
       type = lib.types.nullOr (lib.types.attrsOf lib.types.path);
       default = null;
-      description = "Attribute set of extra config files to include";
+      description = ''
+        Supplementary configuration file attributes
+
+        Attribute set of extra configuration files to be linked and 
+        included by the primary boot configuration.
+      '';
     };
   };
 
   config = lib.mkIf cfg.enable {
-    # 1. Disable conflicting loaders
     boot.loader.grub.enable = lib.mkDefault false;
     boot.loader.systemd-boot.enable = lib.mkDefault false;
 
-    # 2. Safety Checks
     assertions = [
       {
-        assertion = config.zenos.system.boot.loader.efi.canTouchEfiVariables || !cfg.use_nvram;
+        assertion = config.boot.loader.efi.canTouchEfiVariables || !cfg.use_nvram;
         message = "ZenBoot: 'use_nvram' requires 'boot.loader.efi.canTouchEfiVariables' to be true.";
       }
     ];
 
-    # 3. Install the package
-    # This ensures the binary wrapper is available in the system path
     environment.systemPackages = [ zenbootPkg ];
 
-    # 4. Activation Script
-    # This executes the python setup logic on every 'nixos-rebuild switch'
     system.activationScripts.zenboot = ''
       echo " [ZenBoot] Updating bootloader configuration..."
       ${zenbootPkg}/bin/zenboot-setup
     '';
-
-    # 5. Plymouth Integration
-    boot.plymouth = lib.mkIf cfg.plymouth.enable {
-      enable = true;
-      theme = "zenos";
-      themePackages = [ zenosPlymouthPkg ];
-    };
   };
 }

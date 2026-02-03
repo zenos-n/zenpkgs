@@ -31,20 +31,20 @@ stdenv.mkDerivation {
   '';
 
   meta = with lib; {
-    description = "ZenOS fastfetch theming (Global)";
-    longDescription = ''
-      **ZenOS Fastfetch** provides a custom configuration for `fastfetch` that aligns with the ZenOS brand.
-      It wraps the standard `fastfetch` binary to load the ZenOS preset and ASCII art by default.
+    description = ''
+      ZenOS fastfetch theming and ASCII art
+
+      **ZenOS Fastfetch** provides a custom configuration for `fastfetch` that aligns 
+      with the ZenOS brand. It wraps the standard `fastfetch` binary to load the 
+      ZenOS preset and ASCII art by default.
 
       **Features:**
       - Custom ZenOS ASCII art.
       - Pre-configured JSONC preset.
       - Global availability without user-level configuration.
     '';
-    homepage = "https://zenos.neg-zero.com";
     license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
-    platforms = platforms.zenos;
-    mainProgram = "fastfetch";
+    platforms = platforms.linux;
   };
 }

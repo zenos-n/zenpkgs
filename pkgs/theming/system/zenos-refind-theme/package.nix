@@ -46,18 +46,18 @@ stdenv.mkDerivation {
   '';
 
   meta = with lib; {
-    description = "The rEFInd theme for ZenOS";
-    longDescription = ''
-      **ZenOS rEFInd Theme** provides a clean, modern look for the rEFInd bootloader,
-      aligning with the ZenOS visual identity. It includes custom icons, backgrounds,
-      and configuration settings optimized for a streamlined boot experience.
+    description = ''
+      Custom rEFInd bootloader theme for ZenOS
+
+      **ZenOS rEFInd Theme** provides a clean, modern look for the rEFInd 
+      bootloader. It includes custom icons, high-resolution backgrounds, 
+      and configuration settings optimized for the ZenOS minimal aesthetic.
 
       **Features:**
-      - Fullscreen banner support.
-      - Custom large and small icons.
-      - Simplified UI by hiding unnecessary elements.
+      - Fullscreen high-detail banner support.
+      - Branded icon sets for various operating systems.
+      - Streamlined UI hiding unnecessary boot elements.
     '';
-    homepage = "https://zenos.neg-zero.com";
     license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];
     platforms = platforms.zenos;

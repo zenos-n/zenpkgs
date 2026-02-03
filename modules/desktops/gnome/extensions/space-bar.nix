@@ -22,7 +22,7 @@ in
 {
   meta = {
     description = ''
-      i3-style workspace bar for GNOME Shell
+      An i3-style workspace bar for GNOME Shell
 
       This module installs and configures the **Space Bar** extension for GNOME.
       It replaces the Activities button with a highly configurable workspace 

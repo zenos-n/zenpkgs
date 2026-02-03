@@ -10,11 +10,9 @@ stdenv.mkDerivation {
   version = "0.1.0";
 
   src = ./src;
-
   nativeBuildInputs = [ python3.pkgs.wrapPython ];
   buildInputs = [ python3 ];
   propagatedBuildInputs = [ python3.pkgs.dbus-python ];
-
   dontUnpack = true;
 
   installPhase = ''
@@ -24,17 +22,16 @@ stdenv.mkDerivation {
   '';
 
   meta = with lib; {
-    description = "Automated system maintenance and optimization utility";
-    longDescription = ''
+    description = ''
+      Automated system maintenance and optimization utility
+
       The ZenOS Maintenance package provides an intelligent background service that
       optimizes the system during idle periods. 
 
-      Features:
-      - **Smart Idle Detection:** Monitors CPU load and input devices to run only when truly idle.
-      - **Sleep Inhibition:** Prevents the system from suspending during maintenance.
-      - **Auto-Updates:** Runs configured system update commands.
+      **Features:**
+      - **Smart Idle Detection:** Monitors CPU load to run tasks when user is away.
       - **Garbage Collection:** Automatically clears old Nix store paths.
-      - **Notifications:** Alerts the user when maintenance is required or completed.
+      - **Notifications:** Alerts the user when maintenance is completed.
     '';
     license = licenses.napl;
     maintainers = with maintainers; [ doromiert ];

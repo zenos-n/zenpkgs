@@ -8,7 +8,6 @@
 let
   cfg = config.zenos.system.boot.plymouth.theme.zenos;
 
-  # Reference the Plymouth theme package from the ZenOS package set
   plymouthTheme = pkgs.zenos.plymouth.override {
     distroName = cfg.distroName;
     releaseVersion = cfg.releaseVersion;
@@ -19,20 +18,19 @@ let
 in
 {
   meta = {
-    description = "Configures the ZenOS Plymouth boot animation and splash screen";
-    longDescription = ''
+    description = ''
+      ZenOS Plymouth boot animation and splash screen configuration
+
       This module manages the **Plymouth** boot splash screen for ZenOS. 
-      It allows for deep customization of the boot experience, including the 
-      displayed distribution name, version strings, device-specific icons, 
-      and the glow effect color.
+      It allows for deep customization of the boot experience, including 
+      the displayed distribution name, version strings, device-specific 
+      icons, and the glow effect color.
 
       ### Features
       - **Custom Branding:** Set your own OS name and version string.
-      - **Device Identity:** Choose from various hardware icons (laptop, desktop, smartphone, etc.).
+      - **Device Identity:** Choose from various hardware icons (laptop, desktop, etc.).
       - **Theming:** Customize the glow effect hex color.
-      - **Kernel Integration:** Optionally adds `quiet` and `splash` to boot parameters.
-
-      Integrates with the `boot.plymouth` NixOS subsystem.
+      - **Kernel Integration:** Automatically adds 'quiet' and 'splash' parameters.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
@@ -42,14 +40,14 @@ in
   options.zenos.system.boot.plymouth.theme.zenos = {
     enable = lib.mkEnableOption "ZenOS Plymouth boot animation";
 
-    kernelParams = {
-      enable = lib.mkEnableOption "automatic addition of 'quiet' and 'splash' to kernel parameters";
-    };
-
     distroName = lib.mkOption {
       type = lib.types.str;
       default = "ZenOS";
-      description = "The operating system name displayed below the hostname on the boot screen";
+      description = ''
+        Operating system name display
+
+        The primary text label shown below the hostname on the boot screen.
+      '';
     };
 
     releaseVersion = lib.mkOption {
@@ -77,13 +75,18 @@ in
         "tv"
       ];
       default = "negzero";
-      description = "The hardware or brand icon displayed in the center of the splash screen";
+      description = "The hardware or brand icon displayed in the center of the screen";
     };
 
     color = lib.mkOption {
       type = lib.types.str;
       default = "C532FF";
-      description = "The hex color code (without #) used for the animated glow effect";
+      description = ''
+        Animated glow effect color
+
+        The hex color code (without #) used for the breathing glow effect 
+        surrounding the primary icon.
+      '';
       example = "FF5555";
     };
   };
@@ -94,10 +97,5 @@ in
       theme = "zenos";
       themePackages = [ plymouthTheme ];
     };
-
-    boot.kernelParams = lib.mkIf cfg.kernelParams.enable [
-      "quiet"
-      "splash"
-    ];
   };
 }

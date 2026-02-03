@@ -9,6 +9,7 @@ let
   cfg = config.zenos;
 
   # Recursively resolves attribute sets into a flat list of derivations
+  # Kept local here to resolve user-specific packages without external dependency
   resolvePackages =
     path: set:
     lib.concatLists (
@@ -115,14 +116,13 @@ in
 {
   meta = {
     description = ''
-      Enhanced user and system package management for ZenOS
+      Enhanced user management for ZenOS
 
-      This module provides a unified interface for managing system-wide 
-      and user-specific configurations. It includes a recursive package 
-      resolver that allows defining software sets logically.
+      This module provides a unified interface for managing user-specific 
+      configurations. It includes a recursive package resolver that allows 
+      defining software sets logically.
 
       It handles:
-      - System packages via `zenos.system.packages`
       - User management via `zenos.users`
       - Automatic mapping to NixOS user settings and Home Manager
     '';
@@ -132,18 +132,6 @@ in
   };
 
   options.zenos = {
-    system.packages = lib.mkOption {
-      type = lib.types.attrs;
-      default = { };
-      description = ''
-        Declarative attribute set of system packages to install
-
-        Attribute set of system packages to be automatically resolved 
-        and installed. Leaf nodes can be empty sets to trigger 
-        automatic lookup in nixpkgs.
-      '';
-    };
-
     users = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule userSubmodule);
       default = { };
@@ -157,10 +145,7 @@ in
   };
 
   config = {
-    # 1. Resolve Global System Packages
-    environment.systemPackages = resolvePackages [ ] cfg.system.packages;
-
-    # 2. Map ZenOS users to standard NixOS user configuration
+    # 1. Map ZenOS users to standard NixOS user configuration
     users.users = lib.mapAttrs (
       name: userCfg:
       (userCfg.legacy or { })
@@ -172,7 +157,7 @@ in
       // (lib.optionalAttrs (userCfg.shell != null) { inherit (userCfg) shell; })
     ) cfg.users;
 
-    # 3. Map ZenOS users to Home Manager
+    # 2. Map ZenOS users to Home Manager
     home-manager.users = lib.mapAttrs (name: userCfg: userCfg.home) cfg.users;
   };
 }

@@ -4,11 +4,42 @@ let
   pkgs = import flake.inputs.nixpkgs { inherit system; };
   lib = pkgs.lib;
 
+  # --- Context Recovery ---
+  # We use the utils exposed by the flake to ensure we match the system's logic exactly.
+  # flake.lib.utils is defined in flake.nix outputs.
+  utils = flake.lib.utils;
+
+  # Maintainers are injected in the overlay in flake.nix, but not exposed in flake.lib.
+  # We manually import them to ensure the docs list *all* potential maintainers, not just active ones.
+  maintainers =
+    if builtins.pathExists ../lib/maintainers.nix then
+      import ../lib/maintainers.nix { inherit lib; }
+    else
+      { };
+
+  # [ FIX ] Extend lib with ZenOS utils and Maintainers
+  # This matches the environment packages see inside the 'inflate' function in flake.nix
+  extendedLib = lib.recursiveUpdate lib (
+    utils
+    // {
+      inherit maintainers;
+    }
+  );
+
   # --- Configuration ---
-  # Matches lib.platforms.zenos in utils.nix
-  zenosPlatforms = [ "x86_64-linux" ];
+  zenosPlatforms = utils.platforms.zenos;
 
   # --- Helpers ---
+
+  # Helper to prevent JSON serialization errors on functions/derivations
+  safeVal =
+    val:
+    if lib.isFunction val then
+      "<function>"
+    else if lib.isDerivation val then
+      "<derivation>"
+    else
+      val;
 
   resolveType =
     type:
@@ -38,8 +69,8 @@ let
         meta = {
           description = tree.description or "No description";
           type = resolveType tree.type;
-          default = tree.default or null;
-          example = tree.example or null;
+          default = safeVal (tree.default or null);
+          example = safeVal (tree.example or null);
           longDescription = tree.longDescription or null;
         };
       }
@@ -90,62 +121,98 @@ let
     else
       { };
 
-  # Helper to collect unique maintainers from the package tree
-  collectMaintainers =
-    tree:
-    if lib.isDerivation tree then
-      tree.meta.maintainers or [ ]
-    else if lib.isAttrs tree && !(tree ? _type && tree._type == "option") then
-      let
-        # Clean up internal attributes before recursing
-        cleanTree = removeAttrs tree [
-          "recurseForDerivations"
-          "override"
-          "overrideDerivation"
-          "newScope"
-          "callPackage"
-        ];
-        lists = lib.mapAttrsToList (n: v: collectMaintainers v) cleanTree;
-      in
-      lib.flatten lists
-    else
-      [ ];
-
   # --- Evaluator ---
 
   # 1. NixOS Modules Evaluation
-  modulePaths = lib.collect builtins.isPath flake.nixosModules;
 
-  eval = lib.evalModules {
-    modules = modulePaths ++ [
-      # Mocks to prevent evaluation errors on system options
-      (
-        { lib, ... }:
-        {
-          options = {
-            networking.hostName = lib.mkOption { default = "docs"; };
-            boot = lib.mkOption {
-              type = lib.types.submodule { freeformType = lib.types.attrs; };
+  # [ FIX ] Aggressive Module Filtering
+  # We define a filter to explicitly exclude 'structure.nix' and 'gen-docs.nix'
+  # from the evaluation to prevent recursion or invalid attribute errors if
+  # these files are accidentally picked up by the module loader.
+  filterModules =
+    modules:
+    builtins.filter (
+      m:
+      let
+        pathStr = toString m;
+        name = baseNameOf pathStr;
+      in
+      name != "structure.nix" && name != "gen-docs.nix"
+    ) modules;
+
+  # Collect and filter modules
+  zenosModules = filterModules (lib.collect builtins.isPath (flake.nixosModules.zenos or { }));
+  legacyModules = filterModules (lib.collect builtins.isPath (flake.nixosModules.legacy or { }));
+  programModules = filterModules (lib.collect builtins.isPath (flake.nixosModules.programs or { }));
+
+  nixosEval = lib.evalModules {
+    modules =
+      zenosModules
+      ++ legacyModules
+      ++ programModules
+      ++ [
+        # Mock to replace structure.nix options
+        (
+          { lib, ... }:
+          {
+            options.zenos.config = lib.mkOption {
+              type = lib.types.attrs;
               default = { };
+              description = "The raw, sandboxed user configuration entry point.";
             };
-            fileSystems = lib.mkOption {
-              type = lib.types.submodule { freeformType = lib.types.attrs; };
+          }
+        )
+        # Mock to replace structure.nix program injection and provide users.users
+        (
+          { lib, ... }:
+          {
+            options.users.users = lib.mkOption {
               default = { };
+              type = lib.types.attrsOf (
+                lib.types.submodule {
+                  imports = [
+                    {
+                      options.programs = {
+                        imports = programModules;
+                      };
+                    }
+                  ];
+                }
+              );
             };
-          };
-          config._module.check = false;
-        }
-      )
-    ];
-    specialArgs = { inherit pkgs; };
+          }
+        )
+        # Mocks to prevent evaluation errors on system options
+        (
+          { lib, ... }:
+          {
+            options = {
+              networking.hostName = lib.mkOption { default = "docs"; };
+              boot = lib.mkOption {
+                type = lib.types.submodule { freeformType = lib.types.attrs; };
+                default = { };
+              };
+              fileSystems = lib.mkOption {
+                type = lib.types.submodule { freeformType = lib.types.attrs; };
+                default = { };
+              };
+            };
+            config._module.check = false;
+          }
+        )
+      ];
+    specialArgs = {
+      inherit pkgs;
+      # Pass the extended library to modules so they can access utils (e.g. mkVersionString)
+      lib = extendedLib;
+    };
   };
 
   # 2. Home Manager Modules Evaluation
-  # We collect paths from flake.homeModules just like we did for nixosModules
-  hmModulePaths = lib.collect builtins.isPath (flake.homeModules or { });
-
+  # We use flake.homeManagerModules.default for the same reason.
   hmEval = lib.evalModules {
-    modules = hmModulePaths ++ [
+    modules = [
+      flake.homeManagerModules.default
       # Mocks to prevent evaluation errors on Home Manager options
       (
         { lib, ... }:
@@ -166,7 +233,11 @@ let
         }
       )
     ];
-    specialArgs = { inherit pkgs; };
+    specialArgs = {
+      inherit pkgs;
+      # Pass the extended library to modules here as well
+      lib = extendedLib;
+    };
   };
 
   # Filter for Local Options Only
@@ -195,7 +266,7 @@ let
   # --- Processing ---
 
   # 1. NixOS Options
-  localTree = pruneTree eval.options;
+  localTree = pruneTree nixosEval.options;
   optionsJson = if localTree != null then formatOptions localTree else { };
 
   # 2. Home Manager Options
@@ -207,8 +278,8 @@ let
   packagesJson = formatPackages packagesTree;
 
   # 4. Maintainers
-  # Extract all maintainers used in the local packages
-  usedMaintainersList = collectMaintainers packagesTree;
+  # We use the explicitly imported maintainers list
+  usedMaintainersList = lib.attrValues maintainers;
 
   # Convert to attribute set { "handle" = { ... }; }
   # We use the github handle as the key if available, otherwise the name.
@@ -224,9 +295,9 @@ in
   options = optionsJson.sub or { };
   pkgs = packagesJson.sub or { };
 
-  # Added: Only maintainers used in zenpkgs
+  # Added: All maintainers defined in the repository
   maintainers = usedMaintainers;
 
-  # Added: Home Manager options defined in flake.homeModules
+  # Added: Home Manager options
   home-options = hmOptionsJson.sub or { };
 }

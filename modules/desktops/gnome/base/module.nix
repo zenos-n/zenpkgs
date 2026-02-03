@@ -11,13 +11,13 @@ let
   cfg = config.zenos.desktops.gnome;
 
   # Safely extract UUIDs. Assumes your extension packages have the 'extensionUuid' attribute.
-  getUuid =
-    pkg:
-    if (builtins.hasAttr "extensionUuid" pkg) then
-      pkg.extensionUuid
-    else
-      (builtins.trace "Warning: Extension ${pkg.name} missing extensionUuid" null);
-  extensionUuids = builtins.filter (x: x != null) (map getUuid cfg.extensions);
+  # getUuid =
+  #   pkg:
+  #   if (builtins.hasAttr "extensionUuid" pkg) then
+  #     pkg.extensionUuid
+  #   else
+  #     (builtins.trace "Warning: Extension ${pkg.name} missing extensionUuid" null);
+  # extensionUuids = builtins.filter (x: x != null) (map getUuid cfg.extensions);
 in
 {
   meta = {
@@ -43,17 +43,6 @@ in
 
   options.zenos.desktops.gnome = {
     enable = mkEnableOption "Gnome Desktop Base Module";
-
-    extensions = mkOption {
-      type = types.listOf types.package;
-      default = [ ];
-      description = ''
-        List of GNOME extensions to install
-
-        Specifies the extension packages to be included in the system environment
-        and automatically enabled in the user profile.
-      '';
-    };
 
     defaultAccentColor = mkOption {
       type = types.enum [
