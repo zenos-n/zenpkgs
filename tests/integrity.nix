@@ -190,7 +190,8 @@ let
         missingMeta = lib.filter (field: !(meta ? ${field})) requiredMeta;
 
         # CHECK 1.1: Forbidden Attributes (Top-Level)
-        hasLongDesc = meta ? longDescription;
+        # [FIX] Check if value is not null, rather than just existence
+        hasLongDesc = (meta.longDescription or null) != null;
         longDescError = if hasLongDesc then "Forbidden meta field 'longDescription' detected." else null;
 
         # CHECK 2: Style & Types
