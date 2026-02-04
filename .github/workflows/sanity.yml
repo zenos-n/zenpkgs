@@ -3,6 +3,7 @@ name: Nix Integrity Check & Archive
 on:
   push:
     branches: ["main"]
+    tags: ["*"] # Run on version tags (e.g., 1.0, v2.3)
   pull_request:
     branches: ["main"]
 
@@ -26,7 +27,6 @@ jobs:
         id: eval
         run: |
           echo "Running Integrity Check..."
-          # Capture output including stderr
           OUTPUT=$(nix eval --show-trace --file tests/integrity.nix report 2>&1)
 
           echo "Nix Evaluation Output:"
@@ -52,31 +52,45 @@ jobs:
           git config --global user.name "ZenOS Bot"
           git config --global user.email "bot@zenos.dev"
 
-          # Save the artifact to a safe place
-          mv docs.json /tmp/latestCommit.json
+          # Determine filenames based on ref type
+          # Always update latestCommit.json for main branch pushes
+          # For tags, create <tag>.json
 
-          # Switch to 'json' branch, creating it if necessary
-          # We check if the remote branch exists first
+          FILES_TO_ADD=""
+
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            TAG_NAME=${GITHUB_REF#refs/tags/}
+            echo "Detected release tag: $TAG_NAME"
+            cp docs.json /tmp/$TAG_NAME.json
+            FILES_TO_ADD="$TAG_NAME.json"
+          elif [[ "$GITHUB_REF_NAME" == "main" ]]; then
+            echo "Detected push to main."
+            cp docs.json /tmp/latestCommit.json
+            FILES_TO_ADD="latestCommit.json"
+          fi
+
+          # Switch to 'json' branch
           if git ls-remote --exit-code --heads origin json; then
-            echo "Branch 'json' exists. Checking out..."
             git fetch origin json
             git checkout json
           else
-            echo "Branch 'json' does not exist. Creating orphan..."
             git checkout --orphan json
-            # Clear the working directory of files from 'main'
             git rm -rf .
           fi
 
-          # Move the artifact back
-          mv /tmp/latestCommit.json latestCommit.json
+          # Move files into place
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+            TAG_NAME=${GITHUB_REF#refs/tags/}
+            mv /tmp/$TAG_NAME.json .
+          elif [[ "$GITHUB_REF_NAME" == "main" ]]; then
+            mv /tmp/latestCommit.json .
+          fi
 
-          # Commit and Push
-          git add latestCommit.json
+          # Add and Commit
+          git add $FILES_TO_ADD
 
-          # Only commit if there are changes
           if ! git diff --cached --quiet; then
-            git commit -m "Archive: ${GITHUB_SHA::7} - $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git commit -m "Archive: ${GITHUB_REF_NAME} - $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
             git push origin json
           else
             echo "No changes to commit."
