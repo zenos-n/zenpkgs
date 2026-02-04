@@ -38,7 +38,7 @@ stdenv.mkDerivation rec {
   pname = "zenlink";
   version = "1.0.0";
 
-  src = ../src/scripts;
+  src = ./src/scripts;
 
   nativeBuildInputs = [ makeWrapper ];
 
