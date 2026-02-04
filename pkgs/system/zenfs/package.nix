@@ -9,7 +9,7 @@
   ...
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "zenfs";
   version = "2.0";
 
