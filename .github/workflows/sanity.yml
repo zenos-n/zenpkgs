@@ -9,9 +9,13 @@ on:
 jobs:
   check-integrity:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to push to the json branch
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # Fetch all history so we can switch branches easily
 
       - name: Install Nix
         uses: cachix/install-nix-action@v27
@@ -21,11 +25,8 @@ jobs:
       - name: Eval Report and Verify Status
         id: eval
         run: |
-          # Run the evaluation and capture stdout
-          # We use --json to ensure the output is strictly formatted for the file
-          # But for the status check, we grep the raw eval
-
           echo "Running Integrity Check..."
+          # Capture output including stderr
           OUTPUT=$(nix eval --show-trace --file tests/integrity.nix report 2>&1)
 
           echo "Nix Evaluation Output:"
@@ -42,37 +43,41 @@ jobs:
 
       - name: Generate Documentation JSON
         if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
-        id: docgen
         run: |
-          # Generate the documentation JSON using the updated generator
-          # We redirect to a temporary file first
           nix eval --json --file scripts/gen-docs.nix > docs.json
 
       - name: Archive JSON to 'json' branch
         if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
         run: |
-          # Configure Git Identity
           git config --global user.name "ZenOS Bot"
           git config --global user.email "bot@zenos.dev"
 
-          # Stash the generated JSON so it survives the checkout
+          # Save the artifact to a safe place
           mv docs.json /tmp/latestCommit.json
 
-          # Fetch or Create 'json' branch
-          git fetch origin json || true
-
-          if git rev-parse --verify origin/json >/dev/null 2>&1; then
+          # Switch to 'json' branch, creating it if necessary
+          # We check if the remote branch exists first
+          if git ls-remote --exit-code --heads origin json; then
+            echo "Branch 'json' exists. Checking out..."
+            git fetch origin json
             git checkout json
           else
-            # Create orphan branch if it doesn't exist
+            echo "Branch 'json' does not exist. Creating orphan..."
             git checkout --orphan json
+            # Clear the working directory of files from 'main'
             git rm -rf .
           fi
 
-          # Restore the JSON
+          # Move the artifact back
           mv /tmp/latestCommit.json latestCommit.json
 
-          # Add, Commit, Push
+          # Commit and Push
           git add latestCommit.json
-          git commit -m "Archive: ${GITHUB_SHA::7} - $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          git push origin json
+
+          # Only commit if there are changes
+          if ! git diff --cached --quiet; then
+            git commit -m "Archive: ${GITHUB_SHA::7} - $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git push origin json
+          else
+            echo "No changes to commit."
+          fi
