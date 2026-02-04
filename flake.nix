@@ -1,6 +1,3 @@
-# LOCATION: flake.nix
-# DESCRIPTION: The Entry Point. Wires the overlay, loader, and structure.
-
 {
   description = "ZenPkgs - The Core Dependency Hub for ZenOS";
 
@@ -94,6 +91,12 @@
           legacyTree = loader.generateTree ./legacy/modules;
           programsTree = loader.generateTree ./program-modules;
 
+          # [ HM INJECTION ]
+          # Load HM modules for injection into users.
+          # We collect these as a list of paths to pass to user-wrapper.nix via _module.args.
+          zenHmTree = loader.generateTree ./hm-modules;
+          zenHmList = nixpkgs.lib.collect builtins.isPath zenHmTree;
+
           zenosList = nixpkgs.lib.collect builtins.isPath zenosTree;
           legacyList = nixpkgs.lib.collect builtins.isPath legacyTree;
           programsList = nixpkgs.lib.collect builtins.isPath programsTree;
@@ -134,6 +137,10 @@
           programs = programsTree;
 
           default = {
+            # Pass the collected HM modules to the system arguments.
+            # This allows user-wrapper.nix to access them via { zenUserModules, ... }
+            _module.args.zenUserModules = zenHmList;
+
             imports = [
               ./structure.nix
               programInjection
