@@ -64,6 +64,9 @@ let
             "boolean"
           else if lib.hasPrefix "string" t then
             "string"
+          # [ FIX ] Function Simplification: "function that evaluates..." -> "function"
+          else if lib.hasPrefix "function" t then
+            "function"
           else if lib.hasPrefix "list of" t then
             "array"
           else if lib.hasPrefix "attribute set" t then
@@ -86,7 +89,7 @@ let
           else if t == "null" then
             "null"
           else if lib.hasPrefix "package" t then
-            "set" # Mapped to set as per user preference/standard
+            "set"
           else if t == "path" || t == "absolute path" then
             "string"
           else
@@ -245,7 +248,7 @@ let
         (toString ../.)
       ];
     in
-    # Allow empty decls (for inline mocks/modules) or paths matching project
+    # Allow empty decls or paths matching project
     declStrs == [ ] || builtins.any (decl: builtins.any (root: lib.hasPrefix root decl) roots) declStrs;
 
   pruneTree =
