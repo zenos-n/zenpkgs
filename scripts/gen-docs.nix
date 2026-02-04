@@ -79,8 +79,6 @@ let
           then
             "number"
           else if lib.hasPrefix "null or" t then
-            # Recurse for "null or string" -> "string"
-            # If purely null, returns "null"
             let
               inner = lib.removePrefix "null or " t;
             in
@@ -88,7 +86,7 @@ let
           else if t == "null" then
             "null"
           else if lib.hasPrefix "package" t then
-            "package" # Keep package as distinct from string/set? User didn't specify, but it's useful. I'll map to 'set' if strictness required, but 'string' (path) is also common. Let's stick to user list: 'set' is safest for derivations.
+            "set" # Mapped to set as per user preference/standard
           else if t == "path" || t == "absolute path" then
             "string"
           else
@@ -96,15 +94,7 @@ let
 
         simple = simplify raw;
       in
-      # Map 'package' to 'set' if strict compliance to user list is needed,
-      # but 'package' is semantically useful.
-      # User list: boolean, string, array, set, number, enum, null.
-      if simple == "package" then
-        "set"
-      else if simple == "unknown" then
-        raw # Keep raw if no match
-      else
-        simple;
+      if simple == "unknown" then raw else simple;
 
   processDesc =
     desc: long:

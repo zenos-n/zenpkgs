@@ -1,4 +1,4 @@
-name: Nix Integrity Check
+name: Nix Integrity Check & Archive
 
 on:
   push:
@@ -19,21 +19,60 @@ jobs:
           nix_path: nixpkgs=channel:nixos-unstable
 
       - name: Eval Report and Verify Status
+        id: eval
         run: |
           # Run the evaluation and capture stdout
-          # 2>&1 ensures we catch errors if nix itself fails to run
-          OUTPUT=$(nix eval --show-trace --file tests/integrity.nix report)
+          # We use --json to ensure the output is strictly formatted for the file
+          # But for the status check, we grep the raw eval
 
-          # Print output for debugging in the Actions log
+          echo "Running Integrity Check..."
+          OUTPUT=$(nix eval --show-trace --file tests/integrity.nix report 2>&1)
+
           echo "Nix Evaluation Output:"
           echo "$OUTPUT"
 
-          # Check if the output contains the specific success string
-          # We search for 'status = "PASSED";' specifically as requested
           if echo "$OUTPUT" | grep -Fq 'status = "PASSED";'; then
             echo "✅ Integrity check PASSED."
-            exit 0
+            echo "status=success" >> $GITHUB_OUTPUT
           else
-            echo "❌ Integrity check FAILED. Status was not 'PASSED'."
+            echo "❌ Integrity check FAILED."
+            echo "status=failure" >> $GITHUB_OUTPUT
             exit 1
           fi
+
+      - name: Generate Documentation JSON
+        if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
+        id: docgen
+        run: |
+          # Generate the documentation JSON using the updated generator
+          # We redirect to a temporary file first
+          nix eval --json --file scripts/gen-docs.nix > docs.json
+
+      - name: Archive JSON to 'json' branch
+        if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
+        run: |
+          # Configure Git Identity
+          git config --global user.name "ZenOS Bot"
+          git config --global user.email "bot@zenos.dev"
+
+          # Stash the generated JSON so it survives the checkout
+          mv docs.json /tmp/latestCommit.json
+
+          # Fetch or Create 'json' branch
+          git fetch origin json || true
+
+          if git rev-parse --verify origin/json >/dev/null 2>&1; then
+            git checkout json
+          else
+            # Create orphan branch if it doesn't exist
+            git checkout --orphan json
+            git rm -rf .
+          fi
+
+          # Restore the JSON
+          mv /tmp/latestCommit.json latestCommit.json
+
+          # Add, Commit, Push
+          git add latestCommit.json
+          git commit -m "Archive: ${GITHUB_SHA::7} - $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+          git push origin json
