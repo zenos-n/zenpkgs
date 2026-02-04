@@ -39,8 +39,8 @@ scrcpy_last_crash = 0
 current_mic_gain = "1.0"
 current_audio_gain = "1.0"
 
-# Track loopback processes to prevent infinite spawning
-virtual_sinks = {} 
+# Socket for sending (Shared)
+send_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Args
 args = None
@@ -110,23 +110,17 @@ def run_command(cmd_list, bg=False):
         return None
 
 def set_pactl_volume(node_name, gain_str):
-    """
-    Safely sets volume using pactl if available.
-    Expects gain_str like "1.5" (150%).
-    """
     try:
         gain_float = float(gain_str)
         pct = int(gain_float * 100)
-        # Use set-sink-volume because zlin_void is a Null Sink
         subprocess.run(["pactl", "set-sink-volume", node_name, f"{pct}%"], 
                        stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     except Exception as e:
-        # If pactl is missing or fails, we fail silently to preserve robustness
         pass
 
 def send_notification(title, message):
     try:
-        subprocess.Popen(["notify-send", "-a", "zerobridge", "-u", "critical", "-i", "phone", title, message])
+        subprocess.Popen(["notify-send", "-a", "ZenLink", "-u", "critical", "-i", "phone", title, message])
     except Exception as e:
         error(f"Failed to send notification: {e}")
 
@@ -165,111 +159,62 @@ def ensure_adb_connection(target_ip):
         error(f":: [Daemon] ADB Error: {e}")
         return False
 
-def spawn_loopback_sink(node_name, description, target_node):
-    global virtual_sinks
-
-    client_name = f"zenlink_loopback_{node_name}"
-
-    if node_name in virtual_sinks:
-        proc = virtual_sinks[node_name]
-        if proc.poll() is None:
-            return 
-        else:
-            log(f":: [Daemon] Virtual Sink {node_name} died unexpectedly. Respawning...")
-            del virtual_sinks[node_name]
-
-    if subprocess.run(["pgrep", "-f", f"pw-loopback.*--name {client_name}"], stdout=subprocess.DEVNULL).returncode == 0:
-        subprocess.run(["pkill", "-f", f"pw-loopback.*--name {client_name}"])
-        time.sleep(0.2)
-
-    log(f":: [Daemon] Spawning Virtual Sink: {node_name} -> {target_node}")
-    
-    capture_props = {
-        "media.class": "Audio/Sink",
-        "node.name": node_name,
-        "node.description": description,
-        "audio.position": ["FL", "FR"]
-    }
-    
-    playback_props = {
-        "node.target": target_node,
-        "audio.position": ["FL", "FR"],
-        "node.dont-reconnect": True
-    }
-    
-    cmd = [
-        "pw-loopback",
-        "--name", client_name, 
-        "--capture-props", json.dumps(capture_props),
-        "--playback-props", json.dumps(playback_props)
-    ]
-    
-    virtual_sinks[node_name] = subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-
 def setup_audio_graph():
-    # 1. Create Internal VOID nodes
-    void_nodes = ["zlout_void", "zbin_void", "zmic"]
-    void_descs = ["zenlink_Out_Internal", "zenlink_In_Internal", "ZeroBridge_Microphone"]
-    void_types = ["Audio/Sink", "Audio/Sink", "Audio/Source/Virtual"]
+    # 1. ZenLink Output (Null Sink) -> Apps dump audio here, GStreamer reads from Monitor.
+    # 2. ZenLink Mic (Virtual Source) -> Scrcpy dumps audio here, Apps read from Source.
     
-    for i, node in enumerate(void_nodes):
-        if not get_node_id(node):
+    nodes = [
+        {"name": "zenlink_out", "desc": "ZenLink Output", "type": "Audio/Sink"},
+        {"name": "zenlink_mic", "desc": "ZenLink Mic", "type": "Audio/Source/Virtual"}
+    ]
+
+    for node in nodes:
+        if not get_node_id(node["name"]):
             cmd = [
                 "pw-cli", "create-node", "adapter",
                 "factory.name=support.null-audio-sink",
-                f"node.name={node}",
-                f"media.class={void_types[i]}",
-                f"node.description={void_descs[i]}",
-                "object.linger=true"
+                f"node.name={node['name']}",
+                f"media.class={node['type']}",
+                f"node.description={node['desc']}",
+                "media.icon-name=smartphone-symbolic", # Icon
+                "media.role=Communication",       # Identifies as Phone/VOIP
+                "node.latency=512/48000",         # Low latency hint (~10ms)
+                "audio.rate=48000",               # Lock rate to 48k (Matches Opus)
+                "node.pause-on-idle=false",       # Prevent sleep/pops on silence
+                "object.linger=true",
+                "audio.position=[FL,FR]"
             ]
             run_command(cmd)
     
     time.sleep(0.5)
 
-    # 2. Spawn Loopback Sinks
-    spawn_loopback_sink("zlout", "ZeroBridge_To_Phone", "zbout_void")
-    spawn_loopback_sink("zlin", "ZeroBridge_Phone_Mic", "zbin_void")
-
-    # 3. Enforce Routing (Reverted to Safe pw-link Logic)
+    # 3. Enforce Routing (Direct Linking)
     try:
-        # A. Link zlin_void -> zmic (Restored)
-        run_command(["pw-link", "zlin_void:monitor_FL", "zmic:input_FL"])
-        run_command(["pw-link", "zlin_void:monitor_FR", "zmic:input_FR"])
-
-        # B. Route Scrcpy/SDL to zlin
+        # Route Scrcpy (Phone Audio) -> ZenLink Mic
         sources = ["SDL Application", "scrcpy"]
         for src in sources:
-            run_command(["pw-link", f"{src}:output_FL", "zlin:playback_FL"])
-            run_command(["pw-link", f"{src}:output_FR", "zlin:playback_FR"])
+            run_command(["pw-link", f"{src}:output_FL", "zenlink_mic:input_FL"])
+            run_command(["pw-link", f"{src}:output_FR", "zenlink_mic:input_FR"])
             
-            # Anti-Feedback
-            run_command(["pw-link", "-d", f"{src}:output_FL", "zlout:playback_FL"])
-            run_command(["pw-link", "-d", f"{src}:output_FR", "zlout:playback_FR"])
-
-        # C. Loopback Cleanups
-        run_command(["pw-link", "-d", "output.zenlink_Monitor:output_FL", "zlout:playback_FL"])
-        run_command(["pw-link", "-d", "output.zenlink_Monitor:output_FR", "zlout:playback_FR"])
-        
-        # Anti-Feedback for Desktop Capture
-        run_command(["pw-link", "-d", "zmic:capture_FL", "input.zenlink_Desktop:input_FL"])
-        run_command(["pw-link", "-d", "zmic:capture_FR", "input.zenlink_Desktop:input_FR"])
+            # Anti-Feedback: Ensure Scrcpy doesn't loop back into ZenLink Output
+            run_command(["pw-link", "-d", f"{src}:output_FL", "zenlink_out:playback_FL"])
+            run_command(["pw-link", "-d", f"{src}:output_FR", "zenlink_out:playback_FR"])
     except:
         pass
 
-def manage_loopback(name, active, source=None, sink=None):
-    is_running = subprocess.run(["pgrep", "-f", f"pw-loopback.*--name {name}"], stdout=subprocess.DEVNULL).returncode == 0
-    if active == "on" and not is_running:
-        log(f"Enabling Loopback: {name}")
-        cmd = ["pw-loopback", "--name", name]
-        if source and source != "0": cmd.append(f"--capture-props={{ \"node.target\": \"{source}\" }}")
-        if sink and sink != "0": cmd.append(f"--playback-props={{ \"node.target\": \"{sink}\" }}")
-        subprocess.Popen(cmd, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    elif active != "on" and is_running:
-        log(f"Disabling Loopback: {name}")
-        run_command(["pkill", "-f", f"pw-loopback.*--name {name}"])
+def send_to_phone(msg_bytes):
+    global phone_ip
+    if not phone_ip: return
+    try:
+        target = phone_ip.split(':')[0]
+        send_sock.sendto(msg_bytes, (target, UDP_PORT_SEND))
+    except Exception as e:
+        error(f"Send Error: {e}")
 
 def handle_reload(signum, frame):
     log(":: [Daemon] Reload signal (SIGUSR1). Parsing config... ::")
+    send_to_phone(b"BYE")
+    
     if os.path.exists(CONFIG_PID_FILE):
         try:
             with open(CONFIG_PID_FILE, 'r') as f:
@@ -296,7 +241,8 @@ def network_listener():
         try:
             data, addr = sock.recvfrom(1024)
             msg = data.decode('utf-8').strip()
-            if "READY" in msg:
+            
+            if "READY" in msg or "PING" in msg:
                 with lock:
                     last_heartbeat = time.time()
                     if current_state != "CONNECTED":
@@ -304,9 +250,9 @@ def network_listener():
                         current_state = "CONNECTED"
                         with open(READY_FLAG, 'w') as f: f.write("1")
                     
-                    ack_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-                    ack_msg = f"ACK:{session_id}"
-                    ack_sock.sendto(ack_msg.encode('utf-8'), (addr[0], UDP_PORT_SEND))
+                    ack_msg = f"PONG:{session_id}"
+                    send_sock.sendto(ack_msg.encode('utf-8'), (addr[0], UDP_PORT_SEND))
+
         except socket.timeout: pass
         except Exception as e:
             error(f"Listener Error: {e}")
@@ -319,6 +265,16 @@ def connection_manager():
     
     start_time = time.time()
     startup_notified = False
+    
+    cfg = read_config()
+    initial_ip = cfg.get("PHONE_IP", "")
+    if initial_ip:
+        log(f"Broadcasting SYNC to {initial_ip}...")
+        my_ip = get_local_ip_for_target(initial_ip.split(':')[0])
+        if my_ip:
+            try:
+                send_sock.sendto(f"SYNC:{my_ip}".encode('utf-8'), (initial_ip.split(':')[0], UDP_PORT_SEND))
+            except: pass
 
     while running:
         setup_audio_graph()
@@ -332,19 +288,15 @@ def connection_manager():
         def_front = cfg.get("DEF_ORIENT_FRONT", "flip90")
         def_back = cfg.get("DEF_ORIENT_BACK", "flip270")
         
-        # Gain Updates
         new_mic_gain = cfg.get("MIC_GAIN", "1.0")
         new_audio_gain = cfg.get("AUDIO_GAIN", "1.0")
         
-        # Apply Mic Gain via Pactl (Does not require graph restart)
         if new_mic_gain != current_mic_gain:
-            log(f":: [Daemon] Mic Gain changing: {current_mic_gain} -> {new_mic_gain}")
             current_mic_gain = new_mic_gain
-            set_pactl_volume("zlin_void", current_mic_gain)
+            # Set volume on our persistent node
+            set_pactl_volume("zenlink_mic", current_mic_gain)
 
-        # Apply Audio Gain (Requires Stream Restart)
         if new_audio_gain != current_audio_gain:
-            log(f":: [Daemon] Audio Out Gain changing: {current_audio_gain} -> {new_audio_gain}")
             current_audio_gain = new_audio_gain
             if gst_process: 
                 gst_process.terminate()
@@ -354,39 +306,39 @@ def connection_manager():
             log(f"Target IP Changed: {new_ip}")
             phone_ip = new_ip
             current_state = "DISCONNECTED"
+            send_to_phone(b"BYE") 
+            
             if gst_process: gst_process.terminate(); gst_process = None
             if scrcpy_process: scrcpy_process.terminate(); scrcpy_process = None
             if placeholder_process: placeholder_process.terminate(); placeholder_process = None
             if os.path.exists(READY_FLAG): os.remove(READY_FLAG)
-
-        manage_loopback("zenlink_Monitor", monitor, "zmic", "0")
-        manage_loopback("zenlink_Desktop", desktop, "0", "zlout")
 
         target_ip_clean = phone_ip.split(':')[0]
         if not target_ip_clean or target_ip_clean == "127.0.0.1":
             time.sleep(1)
             continue
 
-        # if current_state == "CONNECTED" and (time.time() - last_heartbeat > 10):
-        #     log("Heartbeat timed out.")
-        #     current_state = "DISCONNECTED"
-        #     if os.path.exists(READY_FLAG): os.remove(READY_FLAG)
-        #     if gst_process: gst_process.terminate(); gst_process = None
-        #     if scrcpy_process: scrcpy_process.terminate(); scrcpy_process = None
-        #     if placeholder_process: placeholder_process.terminate(); placeholder_process = None
+        if current_state == "CONNECTED" and (time.time() - last_heartbeat > 4.0):
+            log(":: [Daemon] Heartbeat timeout (4s). Disconnecting...")
+            current_state = "DISCONNECTED"
+            if os.path.exists(READY_FLAG): os.remove(READY_FLAG)
+            if gst_process: gst_process.terminate(); gst_process = None
+            if scrcpy_process: scrcpy_process.terminate(); scrcpy_process = None
+            if placeholder_process: placeholder_process.terminate(); placeholder_process = None
+            send_to_phone(b"BYE")
 
         if current_state == "DISCONNECTED":
             if args.debug_notify and not startup_notified and (time.time() - start_time > 5.0):
-                send_notification("ZeroBridge", "No response from phone. Run sv restart zreceiver in termux.")
+                send_notification("ZenLink", "No response from phone. Run sv restart zreceiver in termux.")
                 startup_notified = True
             
             my_ip = get_local_ip_for_target(target_ip_clean)
             if my_ip:
                 try:
-                    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-                    sock.sendto(f"SYNC:{my_ip}".encode('utf-8'), (target_ip_clean, UDP_PORT_SEND))
+                    if time.time() % 1.0 < 0.2:
+                        send_sock.sendto(f"SYNC:{my_ip}".encode('utf-8'), (target_ip_clean, UDP_PORT_SEND))
                 except: pass
-            time.sleep(1)
+            time.sleep(0.5)
 
         elif current_state == "CONNECTED":
             startup_notified = True 
@@ -394,12 +346,13 @@ def connection_manager():
             # --- AUDIO STREAM (PC -> Phone) ---
             if desktop == "on":
                 if gst_process is None or gst_process.poll() is not None:
-                    zlout_void_id = get_node_id("zbout_void")
-                    if zlout_void_id:
+                    # Capture directly from the Output Node
+                    zlout_id = get_node_id("zenlink_out")
+                    if zlout_id:
                         log(f"Starting Stream -> {target_ip_clean}:5000 (Gain: {current_audio_gain})")
                         cmd = [
                             "gst-launch-1.0", "-q", 
-                            "pipewiresrc", f"path={zlout_void_id}", "do-timestamp=true", "!",
+                            "pipewiresrc", f"path={zlout_id}", "do-timestamp=true", "!",
                             "audioconvert", "!",
                             "volume", f"volume={current_audio_gain}", "!",
                             "opusenc", "bitrate=96000", "audio-type=voice", "frame-size=10",
@@ -476,28 +429,29 @@ def connection_manager():
                         scrcpy_process = subprocess.Popen(target_cmd, env=env, stdout=subprocess.DEVNULL, stderr=subprocess.PIPE, text=True)
                         current_scrcpy_cmd = target_cmd
             
-            # Initial Gain Set for fresh loops
             if current_state == "CONNECTED" and time.time() % 5 < 0.6:
-                set_pactl_volume("zlin_void", current_mic_gain)
+                set_pactl_volume("zenlink_mic", current_mic_gain)
 
         time.sleep(0.5)
 
 def cleanup_handler(signum, frame):
     global running
     log("Shutting down...")
+    send_to_phone(b"BYE")
     running = False
     if gst_process: gst_process.terminate()
     if scrcpy_process: scrcpy_process.terminate()
     if placeholder_process: placeholder_process.terminate()
     if os.path.exists(READY_FLAG): os.remove(READY_FLAG)
-    subprocess.run(["pkill", "-f", "pw-loopback.*--name zenlink_"])
-    for name, proc in virtual_sinks.items():
-        if proc.poll() is None: proc.terminate()
-    subprocess.run(["pkill", "-f", "pw-loopback.*zenlink_loopback_"])
+    # Remove nodes on exit (optional, but cleaner)
+    try:
+        if get_node_id("zenlink_out"): subprocess.run(["pw-cli", "destroy", get_node_id("zenlink_out")])
+        if get_node_id("zenlink_mic"): subprocess.run(["pw-cli", "destroy", get_node_id("zenlink_mic")])
+    except: pass
     sys.exit(0)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="ZeroBridge Daemon")
+    parser = argparse.ArgumentParser(description="ZenLink Daemon")
     parser.add_argument("-d", "--debug-notify", action="store_true", help="Send desktop notification if no handshake in 5s")
     args = parser.parse_args()
 

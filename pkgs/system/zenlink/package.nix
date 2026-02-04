@@ -20,12 +20,11 @@
   uutils-findutils,
   libnotify,
   python3,
-  gst_all_1, # [ FIX ] Injected correct GStreamer set
+  gst_all_1,
   enableNotify ? true,
 }:
 
 let
-  # [ FIX ] Extracted plugins to local scope
   inherit (gst_all_1)
     gstreamer
     gst-plugins-base
@@ -34,7 +33,7 @@ let
     gst-plugins-ugly
     ;
 in
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "zenlink";
   version = "1.0.0";
 

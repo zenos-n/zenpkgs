@@ -1,8 +1,4 @@
 #!/usr/bin/env bash
-# ==============================================================================
-# ZBridge Controller (zb-config.sh)
-# Role: Client / State Writer / List Manager
-# ==============================================================================
 
 CONFIG_DIR="$HOME/.config/zenlink"
 CONFIG_FILE="$CONFIG_DIR/state.conf"
@@ -110,14 +106,18 @@ toggle_setting() {
 # --- List Management ---
 
 list_saved() {
-    [[ -f "$IPS_FILE" ]] && cat "$IPS_FILE"
+    echo ":: Saved IPs ::"
+    [[ -f "$IPS_FILE" ]] && cat "$IPS_FILE" || echo "(None)"
+    echo
+    echo ":: Saved Ports ::"
+    [[ -f "$PORTS_FILE" ]] && cat "$PORTS_FILE" || echo "(None)"
 }
 
 add_saved_ip() {
     local ip="$1"
     if ! is_valid_ip "$ip"; then
         echo "ERROR: Invalid IP format"
-        exit 1
+        return 1
     fi
     if ! grep -Fxq "$ip" "$IPS_FILE"; then
         echo "$ip" >> "$IPS_FILE"
@@ -131,7 +131,7 @@ add_saved_port() {
     local port="$1"
     if ! is_valid_port "$port"; then
         echo "ERROR: Invalid Port"
-        exit 1
+        return 1
     fi
     if ! grep -Fxq "$port" "$PORTS_FILE"; then
         echo "$port" >> "$PORTS_FILE"
@@ -157,8 +157,63 @@ remove_saved_port() {
     fi
 }
 
+manage_lists_interactive() {
+    while true; do
+        clear
+        echo "========================================"
+        echo "       ZenLink List Manager"
+        echo "========================================"
+        echo
+        echo "--- Saved IPs ---"
+        if [[ -s "$IPS_FILE" ]]; then
+            cat -n "$IPS_FILE"
+        else
+            echo "   (None)"
+        fi
+        echo
+        echo "--- Saved Ports ---"
+        if [[ -s "$PORTS_FILE" ]]; then
+            cat -n "$PORTS_FILE"
+        else
+            echo "   (None)"
+        fi
+        echo
+        echo "----------------------------------------"
+        echo " 1) Add IP           3) Add Port"
+        echo " 2) Remove IP        4) Remove Port"
+        echo " 0) Exit"
+        echo "----------------------------------------"
+        read -p "Select > " opt
+        
+        case $opt in
+            1) 
+                read -p "Enter IP to add: " val
+                add_saved_ip "$val"
+                read -p "Press Enter..." dummy
+                ;;
+            2) 
+                read -p "Enter IP to remove: " val
+                remove_saved_ip "$val"
+                read -p "Press Enter..." dummy
+                ;;
+            3) 
+                read -p "Enter Port to add: " val
+                add_saved_port "$val"
+                read -p "Press Enter..." dummy
+                ;;
+            4) 
+                read -p "Enter Port to remove: " val
+                remove_saved_port "$val"
+                read -p "Press Enter..." dummy
+                ;;
+            0|q) break ;;
+            *) ;;
+        esac
+    done
+}
+
 show_status() {
-    echo ":: ZeroBridge State ::"
+    echo ":: ZenLink State ::"
     echo "   IP: $(get_config PHONE_IP)"
     echo "   Port: $(get_config PHONE_PORT)"
     
@@ -178,13 +233,13 @@ show_status() {
     fi
     
     local mon_conf=$(get_config MONITOR)
-    local mon_act=$(pw-dump Node | jq -r '.[] | select(.info.props["node.name"] | strings | contains("ZBridge_Monitor")) | .id' | head -n 1)
-    echo -n "   Monitor: [${mon_conf:-off}] "
+    local mon_act=$(pw-dump Node | jq -r '.[] | select(.info.props["node.name"] | strings | contains("zenlink_mic")) | .id' | head -n 1)
+    echo -n "   Monitor (Mic): [${mon_conf:-off}] "
     [[ -n "$mon_act" && "$mon_act" != "null" ]] && echo -e "\033[32m[ACTIVE]\033[0m" || echo -e "\033[31m[INACTIVE]\033[0m"
 
     local dsk_conf=$(get_config DESKTOP)
-    local dsk_act=$(pw-dump Node | jq -r '.[] | select(.info.props["node.name"] | strings | contains("ZBridge_Desktop")) | .id' | head -n 1)
-    echo -n "   Desktop: [${dsk_conf:-off}] "
+    local dsk_act=$(pw-dump Node | jq -r '.[] | select(.info.props["node.name"] | strings | contains("zenlink_out")) | .id' | head -n 1)
+    echo -n "   Desktop (Audio): [${dsk_conf:-off}] "
     [[ -n "$dsk_act" && "$dsk_act" != "null" ]] && echo -e "\033[32m[ACTIVE]\033[0m" || echo -e "\033[31m[INACTIVE]\033[0m"
 
     local mic_gain=$(get_config MIC_GAIN)
@@ -200,7 +255,7 @@ show_status() {
 
 if [[ $# -eq 0 ]]; then show_status; exit 0; fi
 
-while getopts "i:p:c:m:d:o:g:G:F:B:I:r:P:R:Ltk" opt; do
+while getopts "i:p:c:m:d:o:g:G:F:B:I:r:P:R:LtkM" opt; do
     case $opt in
         i) 
             if is_valid_ip "$OPTARG"; then
@@ -235,6 +290,7 @@ while getopts "i:p:c:m:d:o:g:G:F:B:I:r:P:R:Ltk" opt; do
         P) add_saved_port "$OPTARG" ;; 
         R) remove_saved_port "$OPTARG" ;;
         L) list_saved ;;
+        M) manage_lists_interactive ;;
         c) 
             set_config "CAM_FACING" "$OPTARG"
             set_config "CAM_ORIENT" ""
@@ -273,10 +329,11 @@ while getopts "i:p:c:m:d:o:g:G:F:B:I:r:P:R:Ltk" opt; do
             fi
             ;;
         k)
+            # Full kill switch
             systemctl --user stop "$SERVICE_NAME"
             pkill -f "scrcpy"
-            pkill -f "pw-loopback.*ZBridge"
+            pkill -f "pw-loopback.*zenlink"
             ;;
         \?) echo "Invalid option"; exit 1 ;;
     esac
-done
+doneoneone

@@ -2,7 +2,7 @@
 # ==============================================================================
 # ZBridge Installer (zb-installer.sh)
 # Role: Deploys Python Receiver to Phone (Reliability Optimized)
-# Updated: Session ID Syncing + Removed Hardcoded Volume
+# Protocol: Heartbeats + Soft Restart + Passive Mode
 # ==============================================================================
 
 PHONE_IP=$1
@@ -12,7 +12,7 @@ echo ":: Connecting to $PHONE_IP..."
 adb connect "$PHONE_IP"
 adb -s "$PHONE_IP" wait-for-device
 
-# --- 1. Generate Python Payload (Updated with Session ID Logic) ---
+# --- 1. Generate Python Payload (Updated Logic) ---
 cat << 'EOF' > zb_receiver.py
 import socket
 import time
@@ -26,11 +26,21 @@ UDP_LISTEN = 5002
 UDP_SEND = 5001
 GST_PORT = 5000
 
+# Constants: Timeouts
+PING_INTERVAL = 1.0
+TIMEOUT_SEC = 4.0
+MAX_RETRIES = 5
+
 # State
 pc_ip = None
 running = True
 gst_process = None
 current_session_id = None
+
+# Connection State
+last_ack_time = 0
+retry_count = 0
+is_passive_mode = False
 
 def load_cached_ip():
     if os.path.exists(CACHE_FILE):
@@ -52,10 +62,6 @@ def start_gst():
         return # Already running
     
     print(":: [Recv] Starting GStreamer (Reliable Mode)...")
-    # OPTIMIZATION:
-    # 1. do-lost=true: Dropping late packets immediately
-    # 2. mode=slave: Slave jitterbuffer to sender clock (Fixes drift/robotic audio)
-    # 3. No Volume Plugin: Gain is controlled purely by PC Sender volume (zbout)
     cmd = [
         "gst-launch-1.0", "-q", "udpsrc", f"port={GST_PORT}", "!",
         "application/x-rtp,media=audio,clock-rate=48000,encoding-name=OPUS,payload=96", "!",
@@ -69,7 +75,7 @@ def start_gst():
 def stop_gst():
     global gst_process
     if gst_process:
-        print(":: [Recv] Stopping GStreamer for Sync...")
+        print(":: [Recv] Stopping GStreamer...")
         gst_process.terminate()
         try:
             gst_process.wait(timeout=1)
@@ -78,71 +84,96 @@ def stop_gst():
         gst_process = None
 
 # --- Main Loop ---
-print(":: [Recv] ZBridge Receiver Started (Python/Reliable)")
+print(":: [Recv] ZBridge Receiver Started (Protocol V2)")
 
-# 1. Load Cache
 pc_ip = load_cached_ip()
 if pc_ip:
-    print(f":: [Recv] Loaded cached PC IP: {pc_ip}. Advertising immediately.")
+    print(f":: [Recv] Loaded cached PC IP: {pc_ip}")
 
 sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-# Socket Buffer Optimization
 try:
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_RCVBUF, 131072)
-except: pass # Might fail on some Android kernels
+except: pass 
 
 sock.bind(('0.0.0.0', UDP_LISTEN))
-sock.settimeout(1.0) # Non-blocking listen
+sock.settimeout(1.0) 
 
-last_advert = 0
+last_ping_sent = 0
 
 while running:
     current_time = time.time()
     
-    # A. ADVERTISE / HEARTBEAT
-    if pc_ip:
-        if current_time - last_advert > 1.0: # Send every 1s
+    # --- 1. SEND PING (If Active) ---
+    if pc_ip and not is_passive_mode:
+        if current_time - last_ping_sent > PING_INTERVAL:
             try:
-                sock.sendto(b"READY", (pc_ip, UDP_SEND))
-                last_advert = current_time
+                sock.sendto(b"PING", (pc_ip, UDP_SEND))
+                last_ping_sent = current_time
             except Exception as e:
-                print(f":: [Error] Send failed: {e}")
+                print(f":: [Error] Ping failed: {e}")
 
-    # B. LISTEN
+    # --- 2. LISTEN ---
     try:
         data, addr = sock.recvfrom(1024)
         msg = data.decode('utf-8').strip()
         sender_ip = addr[0]
 
         if "SYNC" in msg:
+            # Wake Up Call from PC
             new_ip = msg.split(':')[1] if ':' in msg else sender_ip
-            if new_ip != pc_ip:
-                print(f":: [Recv] SYNC received. PC found at {new_ip}")
-                pc_ip = new_ip
-                save_ip(pc_ip)
-            sock.sendto(b"READY", (pc_ip, UDP_SEND))
+            print(f":: [Recv] SYNC (Wake Up) from {new_ip}")
+            pc_ip = new_ip
+            save_ip(pc_ip)
             
-        elif "ACK" in msg:
-            # Parse ACK:SessionID
+            # Reset State
+            is_passive_mode = False
+            retry_count = 0
+            last_ack_time = current_time # Treat sync as ack
+            
+            # Immediate Response
+            sock.sendto(b"PING", (pc_ip, UDP_SEND))
+            
+        elif "PONG" in msg or "ACK" in msg:
+            # Heartbeat Response
+            last_ack_time = current_time
+            retry_count = 0
+            
+            # Session Check
             parts = msg.split(':')
             received_sid = parts[1] if len(parts) > 1 else "legacy"
             
-            # If Session ID changed, RESTART GStreamer to resync clocks
             if received_sid != "legacy" and received_sid != current_session_id:
-                print(f":: [Recv] New Session detected ({received_sid}). Resyncing...")
+                print(f":: [Recv] New Session ({received_sid}). Resyncing...")
                 stop_gst()
                 current_session_id = received_sid
             
             start_gst()
             
+        elif "BYE" in msg:
+            print(":: [Recv] Server Shutdown (BYE). Going Passive.")
+            stop_gst()
+            is_passive_mode = True
+
     except socket.timeout:
         pass
     except Exception as e:
         print(f":: [Error] Loop error: {e}")
 
-    # C. HEALTH CHECK / WATCHDOG
-    if pc_ip and (not gst_process or gst_process.poll() is not None):
-        pass 
+    # --- 3. WATCHDOG ---
+    if pc_ip and not is_passive_mode:
+        if current_time - last_ack_time > TIMEOUT_SEC:
+            # Timeout detected
+            if gst_process:
+                print(":: [Recv] Connection Lost (Timeout). Stopping Audio.")
+                stop_gst()
+            
+            if retry_count < MAX_RETRIES:
+                retry_count += 1
+                print(f":: [Recv] Retry attempt {retry_count}/{MAX_RETRIES}...")
+                # We will send PING on next loop iteration
+            else:
+                print(":: [Recv] Max retries reached. Entering PASSIVE mode.")
+                is_passive_mode = True
 EOF
 
 # --- 2. Generate Wrapper Script ---
@@ -193,9 +224,7 @@ echo ":: Restarting Termux..."
 adb -s "$PHONE_IP" shell am force-stop com.termux
 adb -s "$PHONE_IP" shell am start -n com.termux/.app.TermuxActivity
 
-echo ":: DONE. Re-run zb-config to connect."
+echo ":: DONE. Re-run zl-config to connect."
 rm zb_receiver.py zreceiver_setup.sh
 
-
-echo ":: IMPORTANT! if you see a \"java.lang.SecurityException: Injecting input events requires the caller \(or the source of the instrumentation, if any\) to have the INJECT_EVENTS permission.\" it means that it hasn't installed itself. You have to go to Settings > Additional Settings > Developer Options and enable \"USB Debugging (Security Settings)\" (it might be named something else on your device so look for something akin to that) and toggle it on."
-echo ":: IMPORTANT! if the installer didn't recognize the phone, you probably need to enable wireless debugging."
+echo ":: IMPORTANT! if you see a \"java.lang.SecurityException\" enable \"USB Debugging (Security Settings)\"."
