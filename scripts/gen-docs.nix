@@ -1,7 +1,14 @@
 let
   system = builtins.currentSystem;
   flake = builtins.getFlake (toString ../.);
-  pkgs = import flake.inputs.nixpkgs { inherit system; };
+
+  # [ FIX ] Apply the overlay and config so modules can find pkgs.zenos
+  pkgs = import flake.inputs.nixpkgs {
+    inherit system;
+    overlays = [ flake.overlays.default ];
+    config.allowUnfree = true;
+  };
+
   lib = pkgs.lib;
 
   # --- Context Recovery ---
@@ -153,13 +160,18 @@ let
       ++ [
         # Mock to replace structure.nix options
         (
-          { lib, ... }:
+          { config, lib, ... }:
           {
             options.zenos.config = lib.mkOption {
               type = lib.types.attrs;
               default = { };
               description = "The raw, sandboxed user configuration entry point.";
             };
+
+            # [ ADDED ] Mock User Instance
+            # This ensures that any module iterating over config.zenos.users
+            # (like the User Manager) has data to process.
+            config.zenos.users.docs-user = { };
           }
         )
         # Mock to replace structure.nix program injection and provide users.users
@@ -266,7 +278,11 @@ let
   # --- Processing ---
 
   # 1. NixOS Options
-  localTree = pruneTree nixosEval.options;
+  # [ FIX ] Remove global 'packages' alias from documentation
+  # The user confirmed that 'packages' appearing at the top level is duplicate behavior.
+  # We enforce that only 'zenos.system.packages' and 'zenos.users' are documented.
+  rawTree = pruneTree nixosEval.options;
+  localTree = if rawTree != null then removeAttrs rawTree [ "packages" ] else null;
   optionsJson = if localTree != null then formatOptions localTree else { };
 
   # 2. Home Manager Options

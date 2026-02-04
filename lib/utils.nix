@@ -74,7 +74,7 @@ rec {
       variant ? "N",
       type ? "beta",
     }:
-    "${major}${variant}${type}${
+    "${major}${variant}${
       if type != "stable" then
         "b (${if (self ? shortRev) then self.shortRev else "${self.dirtyShortRev or "unknown"}"})"
       else
