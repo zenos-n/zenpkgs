@@ -5,11 +5,6 @@
   android-tools,
   scrcpy,
   pipewire,
-  gstreamer,
-  gst-plugins-base,
-  gst-plugins-good,
-  gst-plugins-bad,
-  gst-plugins-ugly,
   pulseaudio,
   procps,
   systemd,
@@ -25,9 +20,20 @@
   uutils-findutils,
   libnotify,
   python3,
+  gst_all_1, # [ FIX ] Injected correct GStreamer set
   enableNotify ? true,
 }:
 
+let
+  # [ FIX ] Extracted plugins to local scope
+  inherit (gst_all_1)
+    gstreamer
+    gst-plugins-base
+    gst-plugins-good
+    gst-plugins-bad
+    gst-plugins-ugly
+    ;
+in
 stdenv.mkDerivation rec {
   pname = "zenlink";
   version = "1.0.0";
@@ -37,58 +43,55 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ makeWrapper ];
 
   installPhase = ''
-    mkdir -p $out/bin
-
-    cp zl-config.sh $out/bin/zl-config
-    cp zl-daemon.py $out/bin/zl-daemon
-    cp zl-installer.sh $out/bin/zl-installer
-    cp zl-debug-phone.sh $out/bin/zl-debug-phone
-
-    chmod +x $out/bin/*
+    install -Dm755 zl-config.sh $out/bin/zl-config
+    install -Dm755 zl-daemon.py $out/bin/zl-daemon
+    install -Dm755 zl-installer.sh $out/bin/zl-installer
+    install -Dm755 zl-debug-phone.sh $out/bin/zl-debug-phone
   '';
 
   fixupPhase = ''
-    for script in zl-config zl-daemon zl-installer zl-debug-phone; do
-      
-      EXTRA_FLAGS=""
-      if [ "$script" == "zl-daemon" ]; then
-        ${lib.optionalString enableNotify ''EXTRA_FLAGS="--add-flags -d"''}
-      fi
+    for script in zl-config zl-daemon zl-installer zl-debug-phone;
+    do
+        EXTRA_FLAGS=""
+        if [ "$script" == "zl-daemon" ];
+        then
+            ${lib.optionalString enableNotify ''EXTRA_FLAGS="--add-flags -d"''}
+        fi
 
-      wrapProgram $out/bin/$script \
-        $EXTRA_FLAGS \
-        --prefix PATH : ${
-          lib.makeBinPath [
-            python3
-            bash
-            coreutils
-            gnugrep
-            iproute2
-            uutils-findutils
-            gawk
-            jq
-            libnotify
-            which
-            android-tools
-            scrcpy
-            pipewire
-            gstreamer
-            pulseaudio
-            procps
-            systemd
-            toybox
-            util-linux
-          ]
-        } \
-        --prefix GST_PLUGIN_SYSTEM_PATH_1_0 : "${
-          lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
-            gstreamer
-            gst-plugins-base
-            gst-plugins-good
-            gst-plugins-bad
-            gst-plugins-ugly
-          ]
-        }"
+        wrapProgram $out/bin/$script \
+            $EXTRA_FLAGS \
+            --prefix PATH : ${
+              lib.makeBinPath [
+                python3
+                bash
+                coreutils
+                gnugrep
+                iproute2
+                uutils-findutils
+                gawk
+                jq
+                libnotify
+                which
+                android-tools
+                scrcpy
+                pipewire
+                gstreamer
+                pulseaudio
+                procps
+                systemd
+                toybox
+                util-linux
+              ]
+            } \
+            --prefix GST_PLUGIN_SYSTEM_PATH_1_0 : "${
+              lib.makeSearchPathOutput "lib" "lib/gstreamer-1.0" [
+                gstreamer
+                gst-plugins-base
+                gst-plugins-good
+                gst-plugins-bad
+                gst-plugins-ugly
+              ]
+            }"
     done
   '';
 
@@ -100,7 +103,6 @@ stdenv.mkDerivation rec {
 
       ZenLink uses termux to stream PC audio to your phone and ADB to stream phone's mic and camera to your PC.
       It provides a seamless integration between mobile hardware and the ZenOS desktop environment.
-
       Configure using `zl-config` or the gnome extension (`pkgs.desktops.gnome.extensions.zenlink-indicator`).
     '';
     license = licenses.napl;
