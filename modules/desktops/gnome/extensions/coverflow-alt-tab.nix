@@ -69,7 +69,7 @@ let
         (norm (parseHexByte (builtins.substring 6 2 hex)))
       ]
     else
-      throw "Invalid hex color: '${s}'. Must be 6 (RRGGBB) or 8 (RRGGBBAA) characters.";
+      throw "Invalid hex color: '${s}'. Must be 6 (RRGGBB) or 8 (RRGGBBAA) characters";
 
   # Force floats to have decimal points (required for GVariant doubles)
   serializeFloat =
@@ -105,8 +105,7 @@ let
   # [ ENFORCEMENT ] ZenPkgs Metadata Guidelines
   meta = {
     description = ''
-      Configures the Coverflow Alt-Tab GNOME extension.
-
+      Configures the Coverflow Alt-Tab GNOME extension
       **Context**
       This module installs and configures the **Coverflow Alt-Tab** extension for GNOME.
       It replaces the standard Alt-Tab switcher with a visually rich Coverflow or Timeline 3D effect.

@@ -270,7 +270,7 @@ let
       # Prepare Native Messaging Hosts
       nativeMessagingHostsJoined = pkgs.symlinkJoin {
         name = "pwa-native-messaging-hosts";
-        paths = cfg.nativeMessagingHosts;
+        paths = cfg.firefox.nativeMessagingHosts;
       };
 
       patchedUnwrapped = pkgs.symlinkJoin {
@@ -423,7 +423,13 @@ let
 in
 {
 
-  options.zenos.webApps = {
+  options.zenos.webApps.firefox = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     nativeMessagingHosts = mkOption {
       type = types.listOf types.package;
       default = [ ];
@@ -501,10 +507,10 @@ in
               ${optionalString (!hasForward) "#forward-button { display: none !important; }"}
             '';
             baseChrome = optionalString (
-              cfg.firefoxGnomeTheme != null
+              cfg.firefox.firefoxGnomeTheme != null
             ) ''@import "firefox-gnome-theme/userChrome.css";'';
             baseContent = optionalString (
-              cfg.firefoxGnomeTheme != null
+              cfg.firefox.firefoxGnomeTheme != null
             ) ''@import "firefox-gnome-theme/userContent.css";'';
             fullChromeCss =
               baseChrome + "\n" + globalUserChrome + "\n" + hideButtonsCss + "\n" + app.userChrome;
@@ -722,15 +728,15 @@ in
               user_pref("keyword.enabled", true);
             ''}
 
-            ${optionalString (cfg.firefoxGnomeTheme != null) ''
+            ${optionalString (cfg.firefox.firefoxGnomeTheme != null) ''
               user_pref("svg.context-properties.content.enabled", true);
               user_pref("gnomeTheme.hideSingleTab", true);
               user_pref("gnomeTheme.tabsAsHeaderbar", true);
             ''}
             ${app.extraPrefs}
             EOF
-            ${optionalString (cfg.firefoxGnomeTheme != null) ''
-              ln -sfn "${cfg.firefoxGnomeTheme}" "$PWA_DIR/chrome/firefox-gnome-theme"
+            ${optionalString (cfg.firefox.firefoxGnomeTheme != null) ''
+              ln -sfn "${cfg.firefox.firefoxGnomeTheme}" "$PWA_DIR/chrome/firefox-gnome-theme"
             ''}
             cat > "$PWA_DIR/chrome/userChrome.css" <<EOF
             ${fullChromeCss}
