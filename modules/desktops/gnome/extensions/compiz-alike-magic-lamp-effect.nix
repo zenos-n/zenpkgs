@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.compiz-alike-magic-lamp-effect;
 
-in
-{
   meta = {
     description = ''
       Retro 'Magic Lamp' window animation for GNOME
@@ -27,8 +25,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.compiz-alike-magic-lamp-effect = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Compiz Alike Magic Lamp Effect GNOME extension configuration";
 
     effect = mkOption {

@@ -28,8 +28,6 @@ let
           [ ]
       ) set
     );
-in
-{
   meta = {
     description = ''
       Automated package resolution for ZenOS system sets
@@ -46,8 +44,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.system = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     packages = lib.mkOption {
       type = lib.types.attrs;
       default = { };

@@ -93,8 +93,6 @@ let
       };
     };
 
-in
-{
   meta = {
     description = ''
       Fine-grained typography control for the GNOME lock screen
@@ -111,8 +109,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.customize-clock-on-lockscreen = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Customize Clock on Lockscreen GNOME extension configuration";
 
     command = {

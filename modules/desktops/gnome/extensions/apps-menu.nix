@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.apps-menu;
 
-in
-{
   meta = {
     description = ''
       Traditional category-based application menu for GNOME
@@ -27,8 +25,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.apps-menu = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Apps Menu GNOME extension configuration";
 
     apps-menu-toggle-menu = mkOption {

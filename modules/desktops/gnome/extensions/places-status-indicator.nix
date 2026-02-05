@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.places-status-indicator;
 
-in
-{
   meta = {
     description = ''
       Filesystem navigation menu for the GNOME top bar
@@ -28,8 +26,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.places-status-indicator = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Places Status Indicator GNOME extension configuration";
   };
 

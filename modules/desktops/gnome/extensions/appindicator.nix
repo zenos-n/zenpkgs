@@ -29,8 +29,6 @@ let
       in
       "[${concatStringsSep ", " serializedList}]";
 
-in
-{
   meta = {
     description = ''
       System tray icon support for the GNOME top bar
@@ -47,8 +45,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.appindicator = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "AppIndicator GNOME extension configuration";
 
     legacy-tray-enabled = mkOption {

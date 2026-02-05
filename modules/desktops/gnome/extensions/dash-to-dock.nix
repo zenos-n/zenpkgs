@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.dash-to-dock;
 
-in
-{
   meta = {
     description = ''
       Highly configurable dock interface for GNOME Shell
@@ -30,8 +28,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.dash-to-dock = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Dash to Dock GNOME extension configuration";
 
     layout = {

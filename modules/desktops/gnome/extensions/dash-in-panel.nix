@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.dash-in-panel;
 
-in
-{
   meta = {
     description = ''
       Merges the GNOME Dash into the top panel
@@ -29,8 +27,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.dash-in-panel = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Dash In Panel GNOME extension configuration";
 
     layout = {

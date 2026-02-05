@@ -9,8 +9,6 @@ with lib;
 let
   cfg = config.zenos.webApps;
   enabled = cfg.enable && cfg.base == "helium";
-in
-{
   meta = {
     description = ''
       Helium browser backend for ZenOS webapps
@@ -29,6 +27,8 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   # options.zenos.webApps.heliumPackage = mkOption {
   #   type = types.package;

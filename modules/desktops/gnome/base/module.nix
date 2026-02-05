@@ -10,16 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome;
 
-  # Safely extract UUIDs. Assumes your extension packages have the 'extensionUuid' attribute.
-  # getUuid =
-  #   pkg:
-  #   if (builtins.hasAttr "extensionUuid" pkg) then
-  #     pkg.extensionUuid
-  #   else
-  #     (builtins.trace "Warning: Extension ${pkg.name} missing extensionUuid" null);
-  # extensionUuids = builtins.filter (x: x != null) (map getUuid cfg.extensions);
-in
-{
   meta = {
     description = ''
       Configures the GNOME desktop environment for ZenOS
@@ -40,8 +30,14 @@ in
     maintainers = with lib.maintainers; [ doromiert ];
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome = {
+    _meta = mkOption {
+      internal = true;
+      default = meta;
+    };
     enable = mkEnableOption "Gnome Desktop Base Module";
 
     defaultAccentColor = mkOption {

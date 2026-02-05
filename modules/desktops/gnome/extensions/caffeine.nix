@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.caffeine;
 
-in
-{
   meta = {
     description = ''
       Manual and automatic screensaver inhibition for GNOME
@@ -28,8 +26,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.caffeine = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Caffeine GNOME extension configuration";
 
     inhibit-apps = mkOption {

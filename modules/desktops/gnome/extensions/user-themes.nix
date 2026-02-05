@@ -35,8 +35,6 @@ let
     '';
   };
 
-in
-{
   meta = {
     description = ''
       Shell theme customization and dynamic theme generation
@@ -54,8 +52,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.user-theme = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "User Theme GNOME extension configuration";
 
     name = mkOption {

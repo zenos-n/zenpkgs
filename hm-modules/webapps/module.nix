@@ -228,8 +228,6 @@ let
     }
   );
 
-in
-{
   meta = {
     description = ''
       Declarative web application (PWA) manager for ZenOS
@@ -251,8 +249,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.webApps = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "ZenOS WebApps declarative module";
 
     base = mkOption {

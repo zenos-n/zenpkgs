@@ -315,7 +315,34 @@ let
               }
             else
               modFn;
-          meta = modResult.meta or { };
+
+          # [ FIX ] Support Hidden Meta Pattern (_meta)
+          # Recursively search for _meta option in the options tree
+          findHiddenMeta =
+            tree:
+            if tree ? _type && tree._type == "option" then
+              null # Stop at option leaf
+            else if tree ? _meta && tree._meta ? _type && tree._meta._type == "option" then
+              tree._meta.default or { } # Found it!
+            else if lib.isAttrs tree then
+              # Recurse until found
+              lib.foldl (acc: v: if acc != null then acc else findHiddenMeta v) null (lib.attrValues tree)
+            else
+              null;
+
+          # Strategy: Use top-level meta if exists, otherwise hunt for hidden _meta
+          topLevelMeta = modResult.meta or null;
+          hiddenMeta =
+            if topLevelMeta == null && modResult ? options then findHiddenMeta modResult.options else null;
+
+          meta =
+            if topLevelMeta != null then
+              topLevelMeta
+            else if hiddenMeta != null then
+              hiddenMeta
+            else
+              { }; # Empty fail state
+
           missing = lib.filter (field: !(meta ? ${field})) requiredMeta;
 
           # NEW: Check for forbidden attributes in top-level meta
@@ -324,7 +351,7 @@ let
           descError = if (meta ? description) then validateDescription meta.description else null;
         in
         if missing != [ ] then
-          "Missing top-level meta: ${toString missing}"
+          "Missing meta (Top-level or _meta): ${toString missing}"
         else if hasLongDesc then
           "Forbidden top-level meta: 'longDescription' is not allowed. Merge into 'description' using the First Line Rule."
         else if descError != null then
@@ -394,9 +421,12 @@ let
             entry:
             let
               name = lib.concatStringsSep "." entry.path;
+              baseName = lib.last entry.path; # [ NEW ] Get last key
               v = entry.option;
             in
-            if !(checkNamespace (builtins.head entry.path)) then
+            if baseName == "_meta" then
+              null # [ FIX ] Ignore Hidden Meta options for description checks
+            else if !(checkNamespace (builtins.head entry.path)) then
               "${name} (Namespace Error: Root option must start with 'zenos' or be a whitelisted alias.)"
             else if lib.hasPrefix "[VIOLATION-LONGDESC]" (v.description or "") then
               "${name} (Forbidden argument 'longDescription' used. Remove it and merge into 'description' via the First Line Rule.)"

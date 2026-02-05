@@ -22,8 +22,6 @@ let
       in
       "{${concatStringsSep ", " pairs}}";
 
-in
-{
   meta = {
     description = ''
       Dropdown application integration for GNOME Shell
@@ -41,8 +39,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.quake-terminal = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Quake Terminal GNOME extension configuration";
 
     app = {

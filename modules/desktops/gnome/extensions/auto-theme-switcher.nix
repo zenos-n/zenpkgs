@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.auto-theme-switcher;
 
-in
-{
   meta = {
     description = ''
       Automatic light and dark theme switching for GNOME
@@ -28,8 +26,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.auto-theme-switcher = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Auto Theme Switcher GNOME extension configuration";
 
     location = {

@@ -7,8 +7,6 @@
 let
   cfg = config.zenos.desktops.gnome.tweaks.zenosExtensions;
   isAllowed = name: !(lib.elem name cfg.excludedExtensions);
-in
-{
   meta = {
     description = ''
       Curated ZenOS GNOME extension suite
@@ -27,8 +25,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.tweaks.zenosExtensions = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = lib.mkOption {
       type = lib.types.bool;
       default = true;

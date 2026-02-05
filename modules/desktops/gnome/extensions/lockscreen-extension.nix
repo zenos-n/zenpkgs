@@ -53,8 +53,6 @@ let
     };
   };
 
-in
-{
   meta = {
     description = ''
       Advanced lock screen background customization for GNOME
@@ -72,8 +70,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.lockscreen-extension = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Lockscreen Extension configuration";
 
     hide-lockscreen-extension-button = mkOption {

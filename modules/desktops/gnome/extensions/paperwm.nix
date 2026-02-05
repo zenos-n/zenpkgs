@@ -18,8 +18,6 @@ let
       description = description;
     };
 
-in
-{
   meta = {
     description = ''
       Scrollable tiling window manager for GNOME Shell
@@ -39,8 +37,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.paperwm = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "PaperWM GNOME extension configuration";
 
     layout = {

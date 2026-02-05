@@ -18,8 +18,6 @@ let
       description = description;
     };
 
-in
-{
   meta = {
     description = ''
       Grid-based window organization and layout manager
@@ -37,8 +35,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.tactile = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Tactile GNOME extension configuration";
 
     keybindings = {

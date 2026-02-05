@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.clipboard-indicator;
 
-in
-{
   meta = {
     description = ''
       Clipboard history management for the GNOME top bar
@@ -30,8 +28,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.clipboard-indicator = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Clipboard Indicator GNOME extension configuration";
 
     paste-button = mkOption {

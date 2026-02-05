@@ -23,8 +23,6 @@ let
   customContentCss = pkgs.writeText "userContent.css" ''
     @import "gnome-theme/userContent.css";
   '';
-in
-{
   meta = {
     description = ''
       Native GNOME theming for Firefox
@@ -37,8 +35,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.tweaks.firefoxTheming = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;

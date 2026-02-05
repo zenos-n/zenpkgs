@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.astra-monitor;
 
-in
-{
   meta = {
     description = ''
       Customizable system resource monitor for the GNOME panel
@@ -29,8 +27,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.astra-monitor = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Astra Monitor GNOME extension configuration";
 
     position-in-panel = mkOption {

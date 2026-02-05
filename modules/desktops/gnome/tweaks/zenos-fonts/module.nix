@@ -7,8 +7,6 @@
 
 let
   cfg = config.zenos.desktops.gnome.tweaks.zenosFonts;
-in
-{
   meta = {
     description = ''
       System typography and ZenOS font overrides
@@ -21,8 +19,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.tweaks.zenosFonts = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;

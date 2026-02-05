@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.mpris-label;
 
-in
-{
   meta = {
     description = ''
       Media metadata display for the GNOME top bar
@@ -29,8 +27,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.mpris-label = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "MPRIS Label GNOME extension configuration";
 
     layout = {

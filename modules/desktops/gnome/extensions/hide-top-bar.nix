@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.hidetopbar;
 
-in
-{
   meta = {
     description = ''
       Intelligent panel visibility management for GNOME Shell
@@ -29,8 +27,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.hidetopbar = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Hide Top Bar GNOME extension configuration";
 
     hot-corner = mkOption {

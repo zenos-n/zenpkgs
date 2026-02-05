@@ -9,8 +9,6 @@ with lib;
 
 let
   cfg = config.zenos.zenlink;
-in
-{
   meta = {
     description = ''
       Android to ZenOS communication bridge service
@@ -24,8 +22,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.zenlink = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkOption {
       type = types.bool;
       default = false;

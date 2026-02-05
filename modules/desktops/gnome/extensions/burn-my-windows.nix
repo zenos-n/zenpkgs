@@ -36,8 +36,6 @@ let
       ${concatStringsSep "\n" lines}
     '';
 
-in
-{
   meta = {
     description = ''
       Retro window opening and closing animations for GNOME
@@ -54,8 +52,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.burn-my-windows = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Burn My Windows GNOME extension configuration";
 
     active-profile = mkOption {

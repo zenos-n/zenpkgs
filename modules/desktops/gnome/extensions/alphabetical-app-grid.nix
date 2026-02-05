@@ -27,8 +27,6 @@ let
       description = description;
     };
 
-in
-{
   meta = {
     description = ''
       Alphabetical sorting for the GNOME application grid
@@ -46,8 +44,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.alphabetical-app-grid = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Alphabetical App Grid GNOME extension configuration";
 
     sort-folder-contents = mkBool true ''

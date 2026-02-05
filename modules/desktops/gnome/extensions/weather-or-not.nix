@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.weatherornot;
 
-in
-{
   meta = {
     description = ''
       Flexible weather indicator positioning for the panel
@@ -28,8 +26,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.weatherornot = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Weather Or Not GNOME extension configuration";
 
     position = mkOption {

@@ -160,8 +160,6 @@ let
     };
   };
 
-in
-{
   meta = {
     description = ''
       Aesthetic blur effects for GNOME Shell components
@@ -180,8 +178,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.blur-my-shell = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Blur My Shell GNOME extension configuration";
 
     general = {

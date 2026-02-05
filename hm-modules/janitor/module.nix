@@ -11,8 +11,6 @@ let
   zenfsPkg = pkgs.zenos.system.zenfs;
 
   jsonConfig = pkgs.writeText "janitor_config.json" (builtins.toJSON cfg);
-in
-{
   meta = {
     description = ''
       Automated organization daemon for ZenOS user directories
@@ -36,8 +34,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.janitor = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = lib.mkEnableOption "the ZenFS Janitor automated organization service";
 
     dumb = {

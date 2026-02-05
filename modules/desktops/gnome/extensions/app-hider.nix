@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.app-hider;
 
-in
-{
   meta = {
     description = ''
       Hide specific applications from the GNOME app grid and search
@@ -27,8 +25,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.app-hider = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "App Hider GNOME extension configuration";
 
     hidden-apps = mkOption {

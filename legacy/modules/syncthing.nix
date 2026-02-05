@@ -1,73 +1,50 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
+{ config, lib, ... }:
+with lib;
 let
-  cfg = config.zenos.services.syncthing;
+  # [1] Source: ZenOS Abstraction (e.g. zenos.system.syncthing)
+  cfg = config.zenos.system.syncthing or { };
 
-  # Target inspection for legacy/upstream paths
-  legacyTarget = config.legacy.services.syncthing or { };
+  # [2] Target Inspection
+  # Check if the legacy backend (Root Namespace) is active via other means
+  legacyTarget = config.services.syncthing or { };
   targetEnabled = legacyTarget.enable or false;
 
-  # Construct mapping for the legacy backend
-  mappedCfg = {
-    # We strip ZenOS-specific meta before passing to legacy
-  }
-  // (builtins.removeAttrs cfg [ "enable" ]);
+  # [3] Construct Mapping
+  mappedCfg = cfg;
 in
 {
   meta = {
     description = ''
-      Continuous file synchronization service configuration
+      Legacy mapping for syncthing
 
-      Syncthing is a continuous file synchronization program that synchronizes 
-      files between two or more computers in real time, safely protected 
-      from prying eyes.
+      **Legacy Map: syncthing**
 
-      This module provides a high-level abstraction over the standard NixOS 
-      Syncthing service, integrating it into the ZenOS configuration hierarchy.
+      Maps the ZenOS option `zenos.system.syncthing` to the root backend `services.syncthing`.
+      Includes conflict detection and priority warnings.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
 
-  options.zenos.services.syncthing = {
-    enable = lib.mkOption {
-      type = lib.types.bool;
-      default = false;
-      description = ''
-        Enable the Syncthing service
+  config = mkMerge [
+    # A. Forward Configuration (Unconditional)
+    {
+      services.syncthing = mappedCfg;
+    }
 
-        Whether to activate the Syncthing file synchronization daemon. This 
-        implementation uses the ZenOS abstraction layer to map settings to 
-        the underlying legacy service.
-      '';
-    };
-  };
-
-  config = lib.mkMerge [
-    # Apply Mapping to Legacy Backend
-    (lib.mkIf cfg.enable {
-      legacy.services.syncthing = mappedCfg;
-
-      # Ensure the package is sourced from zenos overlay if available
-      services.syncthing.package = lib.mkDefault pkgs.zenos.syncthing;
-    })
-
-    # ZenOS Priority & Conflict Warnings
+    # B. Priority Warnings
     {
       warnings =
         [ ]
+        # Case 1: Bypass Detected (Target active via Root, but ZenOS abstraction empty)
         ++
-          lib.optional (!cfg.enable && targetEnabled)
-            "ZenOS Priority: 'syncthing' is active via a broad path (legacy.services). Please use the fine-grained 'zenos.services.syncthing' instead."
+          optional (cfg == { } && targetEnabled)
+            "ZenOS Priority: 'syncthing' is active via the root path 'services.syncthing'. Please use the abstraction 'zenos.system.syncthing' instead."
+        # Case 2: Conflict Detected (Abstraction used, but result differs)
         ++
-          lib.optional (cfg.enable && legacyTarget != mappedCfg)
-            "ZenOS Conflict: You are using 'zenos.services.syncthing' but also modifying 'legacy.services.syncthing' elsewhere. Please stick to the abstraction.";
+          optional (cfg != { } && legacyTarget != mappedCfg)
+            "ZenOS Conflict: You are using 'zenos.system.syncthing' but the final config for 'services.syncthing' differs. Please stick to the abstraction.";
     }
   ];
 }

@@ -395,8 +395,6 @@ let
     }
   '';
 
-in
-{
   meta = {
     description = ''
       Firefox backend for ZenOS webapps
@@ -422,6 +420,8 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.webApps = {
     nativeMessagingHosts = mkOption {

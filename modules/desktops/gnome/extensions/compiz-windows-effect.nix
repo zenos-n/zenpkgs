@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.compiz-windows-effect;
 
-in
-{
   meta = {
     description = ''
       Wobbly window physics and animations for GNOME
@@ -27,8 +25,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.compiz-windows-effect = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Compiz Windows Effect GNOME extension configuration";
 
     friction = mkOption {

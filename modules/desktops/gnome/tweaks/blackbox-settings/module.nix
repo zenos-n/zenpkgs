@@ -1,5 +1,4 @@
 {
-  options,
   lib,
   config,
   pkgs,
@@ -12,8 +11,6 @@ let
     mkUint32
     ;
   cfg = config.zenos.desktops.gnome.tweaks.blackBoxSettings;
-in
-{
   meta = {
     description = ''
       Native BlackBox terminal theming for ZenOS
@@ -31,8 +28,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.tweaks.blackBoxSettings = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = lib.mkOption {
       type = lib.types.bool;
       default = false;

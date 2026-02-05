@@ -44,8 +44,6 @@ let
       in
       "{${concatStringsSep ", " pairs}}";
 
-in
-{
   meta = {
     description = ''
       Advanced window snapping and tiling features for GNOME
@@ -63,8 +61,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.tiling-assistant = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Tiling Assistant GNOME extension configuration";
 
     enable-tiling-popup = mkOption {

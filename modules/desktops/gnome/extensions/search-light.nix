@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.search-light;
 
-in
-{
   meta = {
     description = ''
       Spotlight-style search overlay for GNOME Shell
@@ -30,8 +28,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.search-light = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Search Light GNOME extension configuration";
 
     border-radius = mkOption {

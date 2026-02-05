@@ -18,8 +18,6 @@ let
       description = description;
     };
 
-in
-{
   meta = {
     description = ''
       An i3-style workspace bar for GNOME Shell
@@ -37,8 +35,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.space-bar = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Space Bar GNOME extension configuration";
 
     state = {

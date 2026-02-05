@@ -56,8 +56,6 @@ let
     else
       val;
 
-in
-{
   meta = {
     description = ''
       Visual trail effect for the GNOME mouse cursor
@@ -75,8 +73,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.mouse-tail = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Mouse Tail GNOME extension configuration";
 
     fade-duration = mkOption {

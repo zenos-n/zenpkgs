@@ -32,8 +32,6 @@ let
   serializeMapStrUint = serializeMap (v: "uint32 ${toString v}");
   serializeMapStrInt = serializeMap toString;
 
-in
-{
   meta = {
     description = ''
       Combined taskbar and panel interface for GNOME Shell
@@ -52,8 +50,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.dash-to-panel = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Dash to Panel GNOME extension configuration";
 
     positioning = {

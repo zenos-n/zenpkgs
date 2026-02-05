@@ -326,8 +326,6 @@ let
     };
   };
 
-in
-{
   meta = {
     description = ''
       Mobile device integration via GSConnect and KDE Connect
@@ -346,8 +344,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.gsconnect = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "GSConnect GNOME extension configuration";
 
     enabled = mkOption {

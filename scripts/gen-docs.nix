@@ -30,6 +30,15 @@ let
 
   zenosPlatforms = utils.platforms.zenos;
 
+  # --- External Metadata Overlay ---
+  # Load meta.json if it exists, otherwise empty
+  metaJsonPath = ./meta.json;
+  metaOverlay =
+    if builtins.pathExists metaJsonPath then
+      builtins.fromJSON (builtins.readFile metaJsonPath)
+    else
+      { };
+
   # --- Helpers ---
 
   safeVal =
@@ -57,14 +66,12 @@ let
     else
       let
         raw = type.description or "unknown";
-        # [ UPDATED ] Simplified Type Mapping
         simplify =
           t:
           if t == "boolean" then
             "boolean"
           else if lib.hasPrefix "string" t then
             "string"
-          # [ FIX ] Function Simplification: "function that evaluates..." -> "function"
           else if lib.hasPrefix "function" t then
             "function"
           else if lib.hasPrefix "list of" t then
@@ -123,8 +130,6 @@ let
     tree:
     if lib.isAttrs tree then
       let
-        # We don't filter "meta" here because formatOptions generates valid meta docs.
-        # We only remove internal module system artifacts.
         bannedKeys = [
           "_module"
           "check"
@@ -133,17 +138,15 @@ let
           "warnings"
           "assertions"
         ];
-
         filterFunc = n: v: !(builtins.elem n bannedKeys) && (n == "_type" || !lib.hasPrefix "_" n);
-
         cleanedSub = lib.mapAttrs (n: v: cleanModuleArtifacts v) tree;
       in
       lib.filterAttrs filterFunc cleanedSub
     else
       tree;
-
+  # formatOptions now takes a parallel 'jsonNode' to merge metadata
   formatOptions =
-    tree:
+    tree: jsonNode:
     if tree ? "_type" && tree._type == "option" then
       let
         # Unwrap attrsOf/listOf
@@ -162,9 +165,32 @@ let
           else
             subOpts;
 
-        subFormatted = lib.mapAttrs (n: v: formatOptions v) finalSubOpts;
-        cleanSub = lib.filterAttrs (n: v: v != { }) subFormatted;
-        processed = processDesc (tree.description or null) (tree.longDescription or null);
+        # Recurse with corresponding JSON sub-nodes
+        subFormatted = lib.mapAttrs (n: v: formatOptions v (jsonNode.sub.${n} or { })) finalSubOpts;
+
+        # Extract config metadata (from _meta or raw attrs)
+        rawEmbedded = subFormatted._meta or null;
+        configMeta =
+          if rawEmbedded == null then
+            { }
+          else if rawEmbedded ? meta && rawEmbedded.meta ? default then
+            rawEmbedded.meta.default
+          else
+            rawEmbedded;
+
+        # Extract JSON metadata
+        jsonMeta = jsonNode.meta or { };
+
+        # Merge: Config wins
+        mergedMeta = jsonMeta // configMeta;
+
+        finalSubCleaned = removeAttrs subFormatted [ "_meta" ];
+        cleanSub = lib.filterAttrs (n: v: v != { }) finalSubCleaned;
+
+        # Determine final description
+        rawDesc = tree.description or mergedMeta.description or null;
+        rawLong = tree.longDescription or mergedMeta.longDescription or null;
+        processed = processDesc rawDesc rawLong;
       in
       {
         meta = {
@@ -173,34 +199,98 @@ let
           default = safeVal (tree.default or null);
           example = safeVal (tree.example or null);
           longDescription = processed.longDescription;
+
+          # Priority: Tree > Embedded _meta > JSON Overlay
+          license =
+            tree.license or configMeta.license.shortName or configMeta.license.fullName or configMeta.license
+              or jsonMeta.license or null;
+          maintainers = map (m: m.name or m) (
+            tree.maintainers or configMeta.maintainers or jsonMeta.maintainers or [ ]
+          );
+          platforms = tree.platforms or configMeta.platforms or jsonMeta.platforms or [ ];
         };
       }
+      # Merge children if they exist (for submodules)
       // (if cleanSub != { } then { sub = cleanSub; } else { })
+
     else if lib.isAttrs tree then
       let
-        sub = lib.mapAttrs (n: v: formatOptions v) tree;
+        # Check for _meta in module
+        rawMeta = tree._meta or null;
+        isOption = rawMeta ? _type && rawMeta._type == "option";
+        configMeta =
+          if isOption then
+            rawMeta.default or { }
+          else if rawMeta != null then
+            rawMeta
+          else
+            { };
+
+        # Check for meta in JSON
+        jsonMeta = jsonNode.meta or { };
+
+        # Merge: Config wins
+        mergedMeta = jsonMeta // configMeta;
+        hasMeta = mergedMeta != { };
+
+        # Clean tree for recursion
+        cleanTree = if rawMeta != null then removeAttrs tree [ "_meta" ] else tree;
+
+        # Recurse: Note that JSON structure uses 'sub' to nest children
+        sub = lib.mapAttrs (n: v: formatOptions v (jsonNode.sub.${n} or { })) cleanTree;
         cleanSub = lib.filterAttrs (n: v: v != { }) sub;
+
+        processedMeta =
+          if hasMeta then
+            processDesc (mergedMeta.description or null) (mergedMeta.longDescription or null)
+          else
+            {
+              description = null;
+              longDescription = null;
+            };
+
+        dirMeta =
+          if hasMeta then
+            {
+              description = processedMeta.description;
+              longDescription = processedMeta.longDescription;
+              license = mergedMeta.license.shortName or mergedMeta.license.fullName or mergedMeta.license or null;
+              maintainers = map (m: m.name or m) (mergedMeta.maintainers or [ ]);
+              platforms = mergedMeta.platforms or [ ];
+            }
+          else
+            null;
       in
-      if cleanSub == { } then { } else { inherit sub; }
+      if cleanSub == { } then
+        { }
+      else
+        ({ inherit sub; } // (if dirMeta != null then { meta = dirMeta; } else { }))
     else
       { };
 
+  # Packages also support overlay
   formatPackages =
-    tree:
+    tree: jsonNode:
     if lib.isDerivation tree then
       let
         rawPlatforms = tree.meta.platforms or [ ];
         finalPlatforms = if rawPlatforms == zenosPlatforms then [ "zenos" ] else rawPlatforms;
-        processed = processDesc (tree.meta.description or null) (tree.meta.longDescription or null);
+
+        jsonMeta = jsonNode.meta or { };
+
+        # Merge descriptions
+        rawDesc = tree.meta.description or jsonMeta.description or null;
+        rawLong = tree.meta.longDescription or jsonMeta.longDescription or null;
+        processed = processDesc rawDesc rawLong;
       in
       {
         meta = {
           description = processed.description;
           longDescription = processed.longDescription;
-          homepage = tree.meta.homepage or null;
-          license = tree.meta.license.shortName or tree.meta.license.fullName or null;
-          platforms = finalPlatforms;
-          maintainers = map (m: m.name) (tree.meta.maintainers or [ ]);
+          homepage = tree.meta.homepage or jsonMeta.homepage or null;
+          license = tree.meta.license.shortName or tree.meta.license.fullName or jsonMeta.license or null;
+          platforms = finalPlatforms; # Pkgs usually have platforms defined, so we prefer tree
+          maintainers = map (m: m.name) (tree.meta.maintainers or jsonMeta.maintainers or [ ]);
           version = tree.version or null;
         };
       }
@@ -213,10 +303,26 @@ let
           "newScope"
           "callPackage"
         ];
-        sub = lib.mapAttrs (n: v: formatPackages v) cleanTree;
+        # Recurse
+        sub = lib.mapAttrs (n: v: formatPackages v (jsonNode.sub.${n} or { })) cleanTree;
         cleanSub = lib.filterAttrs (n: v: v != { }) sub;
+
+        # Allow directory-level meta for package sets (e.g. pkgs.gnomeExtensions)
+        jsonMeta = jsonNode.meta or { };
+        hasMeta = jsonMeta != { };
+        dirMeta =
+          if hasMeta then
+            {
+              description = jsonMeta.description or null;
+              longDescription = jsonMeta.longDescription or null;
+            }
+          else
+            null;
       in
-      if cleanSub == { } then { } else { inherit sub; }
+      if cleanSub == { } then
+        { }
+      else
+        ({ inherit sub; } // (if dirMeta != null then { meta = dirMeta; } else { }))
     else
       { };
 
@@ -230,7 +336,6 @@ let
         pathStr = toString m;
         name = baseNameOf pathStr;
       in
-      # [ REVERTED ] Include user-wrapper.nix again
       name != "structure.nix" && name != "gen-docs.nix"
     ) modules;
 
@@ -238,7 +343,6 @@ let
   legacyModules = filterModules (lib.collect builtins.isPath (flake.nixosModules.legacy or { }));
   programModules = filterModules (lib.collect builtins.isPath (flake.nixosModules.programs or { }));
 
-  # Filter for Local Options Only
   isLocal =
     opt:
     let
@@ -248,7 +352,6 @@ let
         (toString ../.)
       ];
     in
-    # Allow empty decls or paths matching project
     declStrs == [ ] || builtins.any (decl: builtins.any (root: lib.hasPrefix root decl) roots) declStrs;
 
   pruneTree =
@@ -272,7 +375,6 @@ let
       ++ legacyModules
       ++ programModules
       ++ [
-        # 1. Mock structure.nix
         (
           { config, lib, ... }:
           {
@@ -281,11 +383,9 @@ let
               default = { };
               description = "The raw, sandboxed user configuration entry point.";
             };
-            # Dummy user to trigger submodule evaluation
             config.zenos.users.docs-user = { };
           }
         )
-        # 2. Mock program injection + users
         (
           { lib, ... }:
           {
@@ -305,7 +405,6 @@ let
             };
           }
         )
-        # 3. System Mocks
         (
           { lib, ... }:
           {
@@ -323,9 +422,6 @@ let
             config._module.check = false;
           }
         )
-        # 4. CRITICAL: Override zenUserModules to be EMPTY
-        # We purposely prevent the user-wrapper from loading HM modules here
-        # to avoid context/eval errors. We will graft them in later.
         (
           { config, ... }:
           {
@@ -353,7 +449,6 @@ let
         xdg.enable = true;
         _module.args.pkgs = pkgs;
       }
-      # HM Option Stubs + Mock Meta
       (
         { lib, ... }:
         {
@@ -416,16 +511,25 @@ let
     };
   };
 
-  # --- PROCESSING & GRAFTING ---
+  # --- PROCESSING ---
 
-  # 1. Process NixOS Options (Now Clean!)
   rawTree = pruneTree nixosEval.options;
   localTree = if rawTree != null then removeAttrs rawTree [ "packages" ] else null;
-  baseOptions = if localTree != null then formatOptions localTree else { };
+
+  # [ UPDATE ] Shim: Map 'zenos' attribute in Nix tree to 'metaOverlay.options' root (skipping 'zenos' key in JSON)
+  baseOptions =
+    if localTree != null then
+      formatOptions localTree {
+        sub = {
+          zenos = {
+            sub = metaOverlay.options.sub or metaOverlay.options;
+          };
+        };
+      }
+    else
+      { };
   baseOptionsClean = cleanModuleArtifacts baseOptions;
 
-  # [ FIX ] Remove User Wrapper Shim Options (Manual Strip)
-  # We clean the user submodule to hide the HM passthrough options
   baseOptionsRefined =
     if
       (
@@ -439,7 +543,7 @@ let
         users = zenos.sub.users;
         namedUser = users.sub."<name>";
 
-        # Shim keys to strip (defined in user-wrapper.nix)
+        # 1. Strip Shim Keys
         shimKeys = [
           "home"
           "xdg"
@@ -451,12 +555,21 @@ let
           "qt"
           "dconf"
         ];
+        cleanedShims = removeAttrs namedUser.sub shimKeys;
 
-        # Remove them from the submodule
-        cleanedSub = removeAttrs namedUser.sub shimKeys;
+        # 2. Flattening users.<user>.zenos -> users.<user>
+        flattenedUserSub =
+          if cleanedShims ? zenos && cleanedShims.zenos ? sub then
+            let
+              innerZenos = cleanedShims.zenos.sub;
+              withoutZenos = removeAttrs cleanedShims [ "zenos" ];
+            in
+            lib.recursiveUpdate withoutZenos innerZenos
+          else
+            cleanedShims;
 
         newNamedUser = namedUser // {
-          sub = cleanedSub;
+          sub = flattenedUserSub;
         };
         newUsers = users // {
           sub = users.sub // {
@@ -473,7 +586,6 @@ let
     else
       baseOptionsClean;
 
-  # 2. Process Home Manager Options
   hmRawTree = pruneTree hmEval.options;
   hmStubKeys = [
     "meta"
@@ -490,10 +602,21 @@ let
     "assertions"
   ];
   hmRawTreeClean = if hmRawTree != null then removeAttrs hmRawTree hmStubKeys else null;
-  hmOptions = if hmRawTreeClean != null then formatOptions hmRawTreeClean else { };
+
+  # [ UPDATE ] Shim: Map 'zenos' in HM tree to 'metaOverlay.options' root
+  hmOptions =
+    if hmRawTreeClean != null then
+      formatOptions hmRawTreeClean {
+        sub = {
+          zenos = {
+            sub = metaOverlay.options.sub or metaOverlay.options;
+          };
+        };
+      }
+    else
+      { };
   hmOptionsClean = cleanModuleArtifacts hmOptions;
 
-  # 3. Graft HM Options into zenos.users.<name>
   treeWithHm =
     let
       base = baseOptionsRefined.sub or { };
@@ -507,14 +630,12 @@ let
         && hmZenosChildren != null
       )
     then
-      # Merge HM 'zenos' children directly into user submodule root
       lib.recursiveUpdate base {
         zenos.sub.users.sub."<name>".sub = hmZenosChildren;
       }
     else
       base;
 
-  # 4. Strip 'zenos' prefix (Promote zenos.* to *)
   finalOptions =
     if treeWithHm ? zenos && treeWithHm.zenos ? sub then
       let
@@ -525,9 +646,16 @@ let
     else
       treeWithHm;
 
-  # 5. Packages & Maintainers
   packagesTree = flake.packages.${system} or { };
-  packagesJson = formatPackages packagesTree;
+
+  # [ UPDATE ] Shim: Map 'zenos' pkg scope to 'metaOverlay.pkgs' root (skipping 'zenos' key in JSON)
+  packagesJson = formatPackages packagesTree {
+    sub = {
+      zenos = {
+        sub = metaOverlay.pkgs.sub or metaOverlay.pkgs;
+      };
+    };
+  };
 
   usedMaintainersList = lib.attrValues maintainers;
   usedMaintainers = lib.listToAttrs (

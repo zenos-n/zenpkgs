@@ -10,8 +10,6 @@ with lib;
 let
   cfg = config.zenos.desktops.gnome.extensions.category-sorted-app-grid;
 
-in
-{
   meta = {
     description = ''
       Automatic category-based sorting for the GNOME application grid
@@ -28,8 +26,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.desktops.gnome.extensions.category-sorted-app-grid = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     enable = mkEnableOption "Category Sorted App Grid GNOME extension configuration";
   };
 

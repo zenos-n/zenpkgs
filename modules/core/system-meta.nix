@@ -6,8 +6,6 @@
 
 let
   cfg = config.zenos.system.version;
-in
-{
   meta = {
     description = ''
       ZenOS version information
@@ -20,8 +18,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos.system.version = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     type = lib.mkOption {
       type = lib.types.str;
       default = "beta";

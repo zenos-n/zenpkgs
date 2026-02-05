@@ -163,8 +163,6 @@ let
         };
       };
     };
-in
-{
   meta = {
     description = ''
       Enhanced user management for ZenOS
@@ -177,8 +175,16 @@ in
     license = lib.licenses.napl;
     platforms = lib.platforms.zenos;
   };
+in
+{
 
   options.zenos = {
+    _meta = lib.mkOption {
+      internal = true;
+      readOnly = true;
+      default = meta;
+      description = "Internal documentation metadata";
+    };
     users = lib.mkOption {
       type = lib.types.attrsOf (lib.types.submodule userSubmodule);
       default = { };
