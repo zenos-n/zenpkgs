@@ -393,13 +393,8 @@ let
               default = { };
               type = lib.types.attrsOf (
                 lib.types.submodule {
-                  imports = [
-                    {
-                      options.programs = {
-                        imports = programModules;
-                      };
-                    }
-                  ];
+                  # [ FIX ] Import modules directly instead of nesting in options
+                  imports = programModules;
                 }
               );
             };
@@ -514,7 +509,14 @@ let
   # --- PROCESSING ---
 
   rawTree = pruneTree nixosEval.options;
-  localTree = if rawTree != null then removeAttrs rawTree [ "packages" ] else null;
+  # [ FIX ] Expose full NixOS options as 'legacy'
+  systemLegacy = removeAttrs nixosEval.options [
+    "zenos"
+    "_module"
+  ];
+  localTree = (if rawTree != null then removeAttrs rawTree [ "packages" ] else { }) // {
+    legacy = systemLegacy;
+  };
 
   # [ UPDATE ] Shim: Map 'zenos' attribute in Nix tree to 'metaOverlay.options' root (skipping 'zenos' key in JSON)
   baseOptions =
@@ -601,7 +603,15 @@ let
     "warnings"
     "assertions"
   ];
-  hmRawTreeClean = if hmRawTree != null then removeAttrs hmRawTree hmStubKeys else null;
+
+  # [ FIX ] Expose full HM options as 'legacy' inside the user module
+  hmLegacy = removeAttrs hmEval.options [
+    "zenos"
+    "_module"
+  ];
+  hmRawTreeClean = (if hmRawTree != null then removeAttrs hmRawTree hmStubKeys else { }) // {
+    legacy = hmLegacy;
+  };
 
   # [ UPDATE ] Shim: Map 'zenos' in HM tree to 'metaOverlay.options' root
   hmOptions =
@@ -620,18 +630,15 @@ let
   treeWithHm =
     let
       base = baseOptionsRefined.sub or { };
-      hmZenosChildren = hmOptionsClean.sub.zenos.sub or null;
+      hmZenosChildren = hmOptionsClean.sub.zenos.sub or { };
+      hmLegacyChildren = hmOptionsClean.sub.legacy or { };
+      hmUserContent = hmZenosChildren // {
+        legacy = hmLegacyChildren;
+      };
     in
-    if
-      (
-        base ? zenos
-        && base.zenos.sub ? users
-        && base.zenos.sub.users.sub ? "<name>"
-        && hmZenosChildren != null
-      )
-    then
+    if (base ? zenos && base.zenos.sub ? users && base.zenos.sub.users.sub ? "<name>") then
       lib.recursiveUpdate base {
-        zenos.sub.users.sub."<name>".sub = hmZenosChildren;
+        zenos.sub.users.sub."<name>".sub = hmUserContent;
       }
     else
       base;
