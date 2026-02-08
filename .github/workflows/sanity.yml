@@ -37,7 +37,7 @@ jobs:
               # This runs the unflattening 'fake it' engine in tools/doc-gen.nix
               nix run .#docs
               # The generator outputs to zenos-options.json by default
-              cp zenos-options.json docs.json
+              cp options.json docs.json
 
         - name: Archive JSON to 'json' branch
           if: success() && github.event_name == 'push'
