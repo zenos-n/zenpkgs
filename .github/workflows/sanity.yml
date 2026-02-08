@@ -19,67 +19,68 @@ jobs:
           fetch-depth: 0 # Fetch all history so we can switch branches easily
 
       - name: Install Nix
-          uses: cachix/install-nix-action@v27
-          with:
-              nix_path: nixpkgs=channel:nixos-unstable
+        uses: cachix/install-nix-action@v27
+        with:
+          nix_path: nixpkgs=channel:nixos-unstable
 
-        - name: Run ZenOS Integrity Check
-          id: eval
-          run: |
-              echo "Running Integrity Check via Flake App..."
-              # This runs the python-based checker defined in tools/integrity.nix
-              nix run .#check
+      - name: Run ZenOS Integrity Check
+        id: eval
+        run: |
+          echo "Running Integrity Check via Flake App..."
+          # This runs the python-based checker defined in tools/integrity.nix
+          nix run .#check
 
-        - name: Generate Documentation JSON
-          if: success() && github.event_name == 'push'
-          run: |
-              echo "Generating Documentation via Flake App..."
-              # This runs the unflattening 'fake it' engine in tools/doc-gen.nix
-              nix run .#docs
-              # The generator outputs to zenos-options.json by default
-              cp options.json docs.json
+      - name: Generate Documentation JSON
+        if: success() && github.event_name == 'push'
+        run: |
+          echo "Generating Documentation via Flake App..."
+          # This runs the unflattening 'fake it' engine in tools/doc-gen.nix
+          nix run .#docs
+          # The generator outputs to zenos-options.json by default
+          # Using cp to ensure docs.json exists for the archive step
+          cp options.json docs.json
 
-        - name: Archive JSON to 'json' branch
-          if: success() && github.event_name == 'push'
-          run: |
-              git config --global user.name "ZenOS Bot"
-              git config --global user.email "bot@zenos.dev"
+      - name: Archive JSON to 'json' branch
+        if: success() && github.event_name == 'push'
+        run: |
+          git config --global user.name "ZenOS Bot"
+          git config --global user.email "bot@zenos.dev"
 
-              FILES_TO_ADD=""
+          FILES_TO_ADD=""
 
-              if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
-                  TAG_NAME=${GITHUB_REF#refs/tags/}
-                  echo "Detected release tag: $TAG_NAME"
-                  cp docs.json /tmp/$TAG_NAME.json
-                  FILES_TO_ADD="$TAG_NAME.json"
-              elif [[ "$GITHUB_REF_NAME" == "main" ]]; then
-                  echo "Detected push to main."
-                  cp docs.json /tmp/latestCommit.json
-                  FILES_TO_ADD="latestCommit.json"
-              fi
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+              TAG_NAME=${GITHUB_REF#refs/tags/}
+              echo "Detected release tag: $TAG_NAME"
+              cp docs.json /tmp/$TAG_NAME.json
+              FILES_TO_ADD="$TAG_NAME.json"
+          elif [[ "$GITHUB_REF_NAME" == "main" ]]; then
+              echo "Detected push to main."
+              cp docs.json /tmp/latestCommit.json
+              FILES_TO_ADD="latestCommit.json"
+          fi
 
-              # Switch to 'json' branch
-              if git ls-remote --exit-code --heads origin json; then
-                  git fetch origin json
-                  git checkout json
-              else
-                  git checkout --orphan json
-                  git rm -rf .
-              fi
+          # Switch to 'json' branch or create it if it doesn't exist
+          if git ls-remote --exit-code --heads origin json; then
+              git fetch origin json
+              git checkout json
+          else
+              git checkout --orphan json
+              git rm -rf .
+          fi
 
-              # Move files into place
-              if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
-                  TAG_NAME=${GITHUB_REF#refs/tags/}
-                  mv /tmp/$TAG_NAME.json .
-              elif [[ "$GITHUB_REF_NAME" == "main" ]]; then
-                  mv /tmp/latestCommit.json .
-              fi
+          # Move files from temporary storage into the branch root
+          if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
+              TAG_NAME=${GITHUB_REF#refs/tags/}
+              mv /tmp/$TAG_NAME.json .
+          elif [[ "$GITHUB_REF_NAME" == "main" ]]; then
+              mv /tmp/latestCommit.json .
+          fi
 
-              git add $FILES_TO_ADD
+          git add $FILES_TO_ADD
 
-              if ! git diff --cached --quiet; then
-                  git commit -m "Archive: ${GITHUB_REF_NAME} - $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-                  git push origin json
-              else
-                  echo "No changes to commit."
-              fi
+          if ! git diff --cached --quiet; then
+              git commit -m "Archive: ${GITHUB_REF_NAME} - $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+              git push origin json
+          else
+              echo "No changes to commit."
+          fi
