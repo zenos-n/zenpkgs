@@ -138,12 +138,18 @@
 
       docGen = import ./tools/doc-gen.nix {
         inherit pkgs lib;
-        modules = [ self.nixosModules.default ];
+        modules = [
+          self.nixosModules.default
+          home-manager.nixosModules.home-manager
+        ];
       };
 
       integrityCheck = import ./tools/integrity.nix {
         inherit pkgs lib;
-        modules = [ self.nixosModules.default ];
+        modules = [
+          self.nixosModules.default
+          home-manager.nixosModules.home-manager
+        ];
       };
 
     in

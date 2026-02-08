@@ -2,56 +2,89 @@
 
 let
   # --- MOCK TYPES ---
-  # We return a simple representation of types for the docs.
-  # Crucially, we handle submodules by recursively evaluating them.
   mockTypes = rec {
     str = "string";
     int = "int";
     bool = "bool";
     path = "path";
     package = "package";
-    listOf = t: "list of ${t}";
-    attrsOf = t: "map of ${if builtins.isString t then t else "submodule"}";
+    attrs = "attrs";
+    anything = "any";
+    raw = "raw";
 
-    # THE MAGIC: Recursively evaluate submodules to get their options
+    listOf = t: "list of ${if builtins.isString t then t else "complex"}";
+
+    attrsOf =
+      t:
+      if builtins.isAttrs t && t ? _type && t._type == "submodule_schema" then
+        t
+      else
+        "map of ${if builtins.isString t then t else "complex"}";
+
+    # FIXED: Handle submodules that are Sets or Paths, not just Functions
     submodule =
-      module:
+      rawMod:
       let
-        # Evaluate the submodule with our mock infrastructure
-        eval = module {
-          lib = mockLib;
-          pkgs = pkgs; # Mock pkgs passed down
-          config = { };
-          name = "<name>";
-        };
+        modContent = if builtins.isPath rawMod then import rawMod else rawMod;
+        modSet =
+          if builtins.isFunction modContent then
+            modContent {
+              lib = mockLib;
+              pkgs = pkgs;
+              config = { };
+              name = "<name>";
+            }
+          else
+            modContent;
       in
       {
         _type = "submodule_schema";
-        options = eval.options;
+        options = modSet.options or { };
       };
 
-    # Fallback for complex types
+    nullOr = t: "null or ${if builtins.isString t then t else "complex"}";
     oneOf = _: "choice";
-    nullOr = t: "null or ${if builtins.isString t then t else "submodule"}";
+    enum = _: "enum";
+    mkOptionType = _: "custom_type";
   };
 
   # --- MOCK LIB ---
   mockLib = lib // {
-    # Override mkOption to return raw data instead of processing it
     mkOption =
       attrs:
-      attrs
-      // {
+      let
+        resolvedType = if attrs ? type then attrs.type else "unknown";
+
+        resolvedDefault =
+          if attrs ? default then
+            (
+              if builtins.isFunction attrs.default then
+                "<function>"
+              else if builtins.isAttrs attrs.default then
+                "<set>"
+              else
+                attrs.default
+            )
+          else
+            null;
+      in
+      {
         _type = "zen_option";
-        # Ensure description is present
         description = attrs.description or "No description provided.";
+        type = resolvedType;
+        default = resolvedDefault;
+        internal = attrs.internal or false;
+        visible = attrs.visible or true;
+        # PASS THROUGH EXTRA METADATA for doc-gen structure
+        maintainers = attrs.maintainers or null;
+        platforms = attrs.platforms or null;
       };
 
-    # Override mkIf/mkMerge to just return the content (simplification)
     mkIf = _cond: content: content;
-    mkMerge = contents: builtins.head contents; # Just take the first one for doc purposes
+    mkMerge = contents: builtins.head contents;
+    mkDefault = val: val;
+    mkForce = val: val;
 
-    # Inject our mock types
     types = lib.types // mockTypes;
   };
 in

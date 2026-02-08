@@ -6,100 +6,189 @@ def load_json(path):
     with open(path, 'r') as f:
         return json.load(f)
 
-def create_legacy_stub():
+# --- STANDARD FORMATTERS ---
+
+def create_meta(node_type="container", brief="", description="", default="none", maintainers=None, platforms=None):
+    """Helper to generate the standard meta block."""
     return {
-        "description": "Standard NixOS/Home-Manager legacy options.",
-        "type": "attrs",
-        "_is_legacy_stub": True
+        "type": node_type,
+        "brief": brief,
+        "description": description,
+        "default": default,
+        "maintainers": maintainers,
+        "platforms": platforms
     }
 
-def process_node(node):
-    if isinstance(node, dict):
-        # Leaf node (Option)
-        if node.get("_type") == "zen_option":
-            # Skip internal options if you want to hide them
-            if node.get("internal") == True:
-                return None 
-            
-            return {
-                "description": node.get("description", ""),
-                "type": str(node.get("type", "unknown")),
-                "default": str(node.get("default", "none"))
-            }
-        
-        # Submodule Schema
-        if node.get("_type") == "submodule_schema":
-            return process_tree(node.get("options", {}))
+# --- TREE RECONSTRUCTION ---
 
-        # Recursive step
-        cleaned = {}
-        for k, v in node.items():
-            res = process_node(v)
-            if res is not None:
-                cleaned[k] = res
-        return cleaned
-    return node
+def unflatten_options(flat_options):
+    """
+    Converts {'a.b.c': data} -> {'a': {'b': {'c': data}}}
+    """
+    root = {}
+    
+    for dot_path, data in flat_options.items():
+        parts = dot_path.split('.')
+        current = root
+        
+        for i, part in enumerate(parts[:-1]):
+            if part not in current:
+                current[part] = {}
+            
+            if not isinstance(current[part], dict):
+                current[part] = {} 
+                
+            current = current[part]
+            
+        leaf_key = parts[-1]
+        data["_type"] = "zen_option"
+        current[leaf_key] = data
+        
+    return root
+
+# --- PROCESSORS ---
+
+def process_option_node(node):
+    """Converts a raw option dict to the Meta/Sub format."""
+    # Defensive check for description type
+    raw_desc = node.get("description", "")
+    if isinstance(raw_desc, dict):
+        # Handle cases where description might be a complex object (e.g. literal MD)
+        full_desc = str(raw_desc.get("text", "")) if "text" in raw_desc else str(raw_desc)
+    else:
+        full_desc = str(raw_desc)
+
+    lines = full_desc.split("\n")
+    brief = lines[0].strip() if lines else "No description."
+    description_rest = "\n".join(lines[1:]).strip() if len(lines) > 1 else ""
+
+    type_str = str(node.get("type", "unknown"))
+    
+    result = {
+        "meta": create_meta(
+            node_type=type_str,
+            brief=brief,
+            description=description_rest,
+            default=str(node.get("default", "none")),
+            maintainers=node.get("maintainers"),
+            platforms=node.get("platforms")
+        )
+    }
+    return result
 
 def process_tree(raw_root):
+    """Recursively applies Meta/Sub formatting to the tree."""
     processed = {}
+    
     for key, value in raw_root.items():
-        res = process_node(value)
-        if res is not None:
-            processed[key] = res
+        # A. Leaf Option
+        if isinstance(value, dict) and value.get("_type") == "zen_option":
+            processed[key] = process_option_node(value)
+        
+        # B. Container
+        elif isinstance(value, dict):
+            children = process_tree(value)
+            if children:
+                processed[key] = {
+                    "meta": create_meta(node_type="container", brief=f"Category: {key}"),
+                    "sub": children
+                }
+                
     return processed
 
-def transform_structure(root_options):
-    zenos_root = root_options.get("zenos", {})
-    
-    # 1. Output Base
-    output = {
-        "legacy": create_legacy_stub()
+# --- THE "FAKE IT" LOGIC ---
+
+def transform_structure(root_tree):
+    # 1. CUT OFF ZENOS
+    zenos_tree = root_tree.pop("zenos", {})
+
+    # 2. CUT USER LEGACY (users.users.<name>)
+    user_legacy_tree = {}
+    if "users" in root_tree and "users" in root_tree["users"]:
+        users_map = root_tree["users"]["users"]
+        placeholder_key = None
+        
+        # Identify the placeholder (standard NixOS options use "<name>")
+        for k in users_map.keys():
+            if k in ["<name>", "*", "name"]:
+                placeholder_key = k
+                break
+        
+        if placeholder_key:
+            user_legacy_tree = users_map.pop(placeholder_key)
+            # Remove empty users.users container if needed
+            if not users_map:
+                root_tree["users"].pop("users")
+
+    # 3. ATTACH USER LEGACY -> zenos.users.<name>.legacy
+    if "users" in zenos_tree:
+        z_users = zenos_tree["users"]
+        z_placeholder = None
+        for k in z_users.keys():
+            if k in ["<name>", "*", "name"]:
+                z_placeholder = k
+                break
+        
+        if z_placeholder:
+            # Ensure the user node is a dict we can attach to
+            if not isinstance(z_users[z_placeholder], dict):
+                z_users[z_placeholder] = {}
+            z_users[z_placeholder]["legacy"] = user_legacy_tree
+
+    # 4. ATTACH THE REST -> zenos.legacy
+    # Exclude ZenOS from the root before attaching (it's already popped)
+    zenos_tree["legacy"] = root_tree
+
+    # 5. META-IFY THE WHOLE ZENOS TREE
+    processed_zenos = process_tree(zenos_tree)
+
+    # 6. TOP-LEVEL KEYS SHUFFLE
+    final_output = {
+        "maintainers": {},
+        "pkgs": {},
+        "options": {}
     }
 
-    # 2. Flatten Zenos Namespaces
-    for category in ["system", "desktops", "environment"]:
-        if category in zenos_root:
-            output[category] = process_node(zenos_root[category])
-
-    # 3. Handle Users (Check root options.users.users OR zenos.users)
-    users_raw = None
+    # Extract Maintainers if they exist as a raw sub-tree
+    if "maintainers" in processed_zenos:
+        final_output["maintainers"] = processed_zenos.pop("maintainers").get("sub", {})
     
-    # Path A: options.users.users (Standard NixOS structure used in your framework)
-    if "users" in root_options and "users" in root_options["users"]:
-        users_raw = root_options["users"]["users"]
-    # Path B: options.zenos.users
-    elif "users" in zenos_root:
-        users_raw = zenos_root["users"]
+    # Extract Packages/Programs for the 'pkgs' view
+    if "system" in processed_zenos and "sub" in processed_zenos["system"]:
+        sys_sub = processed_zenos["system"]["sub"]
+        if "packages" in sys_sub:
+            final_output["pkgs"]["system-packages"] = sys_sub.pop("packages")
+        if "programs" in sys_sub:
+             final_output["pkgs"]["programs"] = sys_sub.pop("programs")
 
-    if users_raw:
-        # Extract submodule schema
-        user_type_info = users_raw.get("type", {})
-        if isinstance(user_type_info, dict) and user_type_info.get("_type") == "submodule_schema":
-            user_schema = process_tree(user_type_info.get("options", {}))
-            
-            # Ensure legacy stub exists in user scope
-            if "legacy" in user_schema:
-                 user_schema["legacy"] = create_legacy_stub()
-                 
-            output["users"] = { "<name>": user_schema }
-        else:
-             output["users"] = { "error": "User submodule schema not found." }
-    else:
-        output["users"] = { "status": "No user options defined." }
+    # The rest remains in options
+    final_output["options"] = processed_zenos
 
-    return output
+    return final_output
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: python doc_gen.py <json_path>")
         sys.exit(1)
 
-    raw_data = load_json(sys.argv[1])
-    final_struct = transform_structure(raw_data)
+    try:
+        raw_data = load_json(sys.argv[1])
+        
+        # Check if flat (dots in keys)
+        is_flat = any("." in k for k in list(raw_data.keys())[:100])
+        
+        if is_flat:
+            root_tree = unflatten_options(raw_data)
+        else:
+            root_tree = raw_data
 
-    output_path = "zenos-options.json"
-    with open(output_path, 'w') as f:
-        json.dump(final_struct, f, indent=2)
+        final_struct = transform_structure(root_tree)
+
+        with open("options.json", 'w') as f:
+            json.dump(final_struct, f, indent=2)
+            
+    except Exception as e:
+        sys.stderr.write(f"Error during transform: {str(e)}\n")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

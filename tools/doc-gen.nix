@@ -5,45 +5,87 @@
 }:
 
 let
-  mockLib = import ./lib_mock.nix { inherit lib pkgs; };
+  # Fix Recursion 1: Instantiate loaders locally so they are available as specialArgs
+  loaders = import ../lib/loaders.nix { inherit lib; };
 
-  # CRITICAL: This set MUST match the arguments expected by framework.nix
-  mockArgs = {
-    lib = mockLib;
-    pkgs = pkgs;
-    config = {
-      zenos = { };
-      users = { };
-    }; # Dummy config
-    options = { };
-
-    # 1. Satisfy 'zenpkgsInputs' argument
-    zenpkgsInputs = {
-      self = { };
-      nixpkgs = { };
-      home-manager = { };
+  # Fix Recursion 2: Mock inputs required by framework.nix
+  zenpkgsInputs = {
+    self = {
+      outPath = ./..;
     };
-
-    # 2. Satisfy 'loaders' argument (and its usage of loadModules)
-    loaders = {
-      loadLib = _: { };
-      # Return empty list to bypass module imports during doc gen
-      loadModules = _: [ ];
+    nixpkgs = {
+      outPath = pkgs.path;
+    };
+    home-manager = {
+      outPath = ./..;
     };
   };
 
-  # Evaluate the framework to get the option tree
-  frameworkEval =
-    if builtins.isPath (builtins.head modules) then
-      import (builtins.head modules) mockArgs
-    else
-      (builtins.head modules) mockArgs;
+  # 1. Full System Evaluation
+  eval = lib.nixosSystem {
+    system = "x86_64-linux";
 
-  optionsJson = pkgs.writeText "zenos-raw-options.json" (builtins.toJSON frameworkEval.options);
+    # CRITICAL: Pass specialArgs to prevent infinite recursion in framework.nix
+    specialArgs = {
+      inherit loaders zenpkgsInputs;
+    };
+
+    modules = modules ++ [
+      # Dummy config to satisfy assertions
+      (
+        { pkgs, ... }:
+        {
+          system.stateVersion = lib.versions.majorMinor lib.version;
+          boot.loader.grub.enable = false;
+          fileSystems."/".device = "/dev/null";
+
+          # FIXED: Correct option path for NixOS modules
+          nixpkgs.config.allowUnfree = true;
+        }
+      )
+
+      # FIX: Resolve collision between framework.nix and NixOS users-groups.nix
+      # Your framework defines 'users.users.<name>.home' as an internal option.
+      # NixOS defines 'users.users.<name>.home' as the home directory path.
+      # We shadow the NixOS one or disable the conflict check for docs.
+      (
+        { lib, ... }:
+        {
+          options.users.users = lib.mkOption {
+            type = lib.types.attrsOf (
+              lib.types.submodule {
+                options.home = lib.mkOption {
+                  visible = false; # Try to suppress visibility to avoid collision
+                  # We use mkForce/mkOverride to ensure the evaluator doesn't crash on the double declaration
+                  # though usually, the module system requires unique declarations.
+                };
+              }
+            );
+          };
+        }
+      )
+    ];
+  };
+
+  # 2. Extract Options
+  optionsDoc = pkgs.nixosOptionsDoc {
+    options = eval.options;
+    transformOptions =
+      opt:
+      opt
+      // {
+        # Strip declarations to reduce file size (optional)
+        declarations = [ ];
+      };
+  };
 
 in
 pkgs.writeShellScriptBin "zen-doc-gen" ''
-  echo "[ZenDoc] Generating documentation schema..."
-  ${pkgs.python3}/bin/python3 ${./doc_gen.py} "${optionsJson}"
-  echo "[ZenDoc] Done. Output written to zenos-options.json"
+  echo "[ZenDoc] Extracting FULL NixOS Option Tree..."
+  OPTIONS_JSON="${optionsDoc.optionsJSON}/share/doc/nixos/options.json"
+
+  echo "[ZenDoc] Processing options..."
+  ${pkgs.python3}/bin/python3 ${./doc_gen.py} "$OPTIONS_JSON"
+
+  echo "[ZenDoc] Done. Generated zenos-options.json"
 ''
