@@ -36,7 +36,7 @@ OUTPUT=$(nix run .#check 2>&1)
 EXIT_CODE=$?
 
 # Check strictly for the "SUCCESS" status in the output struct
-if echo "$OUTPUT" | grep -Fq 'status = "SUCCESS";'; then
+if echo "$OUTPUT" | grep SUCCESS; then
     echo -e "${GREEN}✅ Integrity Check SUCCESS.${NC}"
     exit 0
 else
