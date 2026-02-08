@@ -1,190 +1,181 @@
 {
-  description = "ZenPkgs - The Core Dependency Hub for ZenOS";
+  description = "ZenPkgs - The ZenOS Ecosystem";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager = {
-      url = "github:nix-community/home-manager";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-    jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
-    nix-gaming.url = "github:fufexan/nix-gaming";
-    vsc-extensions.url = "github:nix-community/nix-vscode-extensions";
-    nixcord.url = "github:kaylorben/nixcord";
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
-    nur = {
-      url = "github:nix-community/NUR";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
     let
-      systems = [ "x86_64-linux" ];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-      loader = import ./lib/loader.nix { inherit (nixpkgs) lib; };
+      baseSystem = "x86_64-linux";
 
-      # Import Utils with Inputs Context
-      utils = import ./lib/utils.nix {
-        inherit (nixpkgs) lib;
-        inherit inputs self;
+      loaders = import ./lib/loaders.nix { inherit (nixpkgs) lib; };
+      userLib = loaders.loadLib ./lib;
+
+      rebuildScript = pkgs.writeShellScriptBin "zenos-rebuild" ''
+        if [ "$1" == "-h" ]; then
+          if [ -z "$2" ]; then
+            echo "Error: Hostname required."
+            exit 1
+          fi
+          echo "Rebuilding ZenOS for host: $2..."
+          sudo nixos-rebuild switch --flake .#$2
+        else
+          echo "Usage: zenos-rebuild -h <hostname>"
+          exit 1
+        fi
+      '';
+
+      lib = nixpkgs.lib.extend (
+        final: prev:
+        userLib
+        // {
+          loaders = loaders;
+          licenses = prev.licenses // {
+            napalm = {
+              fullName = "Non Aggression Principle Anti-License Mandate";
+              url = "https://github.com/negative-zero-inft/nap-license";
+              free = true;
+            };
+          };
+          platforms = prev.platforms // {
+            zenos = [ "x86_64-linux" ];
+          };
+
+          # --- MK SYSTEM WITH AUTO-WRAPPING ---
+          mkSystem =
+            {
+              modules,
+              specialArgs ? { },
+              system,
+            }:
+            let
+              isZenos = prev.hasPrefix "zenos-x64-" system;
+              cpuVer = if isZenos then prev.removePrefix "zenos-x64-" system else null;
+              microArch = if cpuVer != null then "x86-64-${cpuVer}" else null;
+              realSystem = if isZenos then "x86_64-linux" else system;
+
+              # The Wrapper: Takes a user module and injects it into 'zenos'
+              wrapModule =
+                m:
+                if builtins.isPath m || builtins.isString m then
+                  { ... }:
+                  {
+                    zenos = import m;
+                  }
+                else if builtins.isFunction m then
+                  args: { zenos = m args; }
+                else
+                  { zenos = m; };
+
+            in
+            nixpkgs.lib.nixosSystem {
+              system = realSystem;
+              specialArgs = specialArgs // {
+                zenpkgsInputs = inputs;
+                inherit loaders;
+              };
+
+              # We map over the user-provided modules and wrap them.
+              # Then we append the Core Framework (which defines the zenos option).
+              modules = (map wrapModule modules) ++ [
+                self.nixosModules.default
+
+                (
+                  { pkgs, lib, ... }:
+                  {
+                    nixpkgs.overlays = [ self.overlays.default ];
+
+                    nixpkgs.hostPlatform = lib.mkIf (microArch != null) {
+                      system = realSystem;
+                      gcc.arch = microArch;
+                      gcc.tune = microArch;
+                    };
+
+                    environment.systemPackages = [ rebuildScript ];
+                  }
+                )
+              ];
+            };
+        }
+      );
+
+      pkgsOverlay = final: prev: {
+        zenos =
+          let
+            nativePkgs = import ./core/builder.nix {
+              inherit lib;
+              pkgs = final;
+              path = ./pkgs;
+            };
+
+            legacyMaps = import ./core/builder.nix {
+              inherit lib;
+              pkgs = final;
+              path = ./legacyMaps/pkgs;
+            };
+          in
+          legacyMaps
+          // nativePkgs
+          // {
+            legacy = prev;
+          };
       };
 
-      # --- Package Overlay ---
-      zenOverlay =
-        final: prev:
-        let
-          lib = prev.lib;
-          inflate =
-            tree: f:
-            if builtins.isPath tree then
-              f.callPackage tree {
-                lib = f.lib // {
-                  # INJECT: Custom definitions
-                  licenses = f.lib.licenses // utils.licenses;
-                  platforms = f.lib.platforms // utils.platforms;
-                  maintainers =
-                    f.lib.maintainers
-                    // (
-                      if builtins.pathExists ./lib/maintainers.nix then
-                        import ./lib/maintainers.nix { inherit (f) lib; }
-                      else
-                        { }
-                    );
-                  zenUtils = utils;
-                };
-              }
-            else
-              lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflate value f) tree);
+      pkgs = import nixpkgs {
+        system = baseSystem;
+        overlays = [ pkgsOverlay ];
+        config.allowUnfree = true;
+      };
 
-          zenTree = loader.generateTree ./pkgs;
-          legacyTree = loader.generateTree ./legacy/packages;
-        in
-        # 1. Base Legacy (Safeguard)
-        {
-          legacy = prev;
-        }
-        # 2. Legacy Mappers (Custom maps like 'win-browser')
-        // (if legacyTree == { } then { } else inflate legacyTree final)
-        # 3. ZenPkgs Priority (Namespace to 'zenos')
-        // {
-          zenos = if zenTree == { } then { } else inflate zenTree final;
-        };
+      docGen = import ./tools/doc-gen.nix {
+        inherit pkgs lib;
+        modules = [ self.nixosModules.default ];
+      };
+
+      integrityCheck = import ./tools/integrity.nix {
+        inherit pkgs lib;
+        modules = [ self.nixosModules.default ];
+      };
 
     in
     {
-      # Removed 'inherit inputs;' to silence "unknown flake output" warning
-      overlays.default = zenOverlay;
+      overlays.default = pkgsOverlay;
+      inherit lib;
 
-      lib = {
-        loader = loader;
-        utils = utils;
+      nixosModules.default = ./core/framework.nix;
+
+      apps.${baseSystem} = {
+        docs = {
+          type = "app";
+          program = "${docGen}/bin/zen-doc-gen";
+        };
+        check = {
+          type = "app";
+          program = "${integrityCheck}/bin/zen-integrity";
+        };
       };
 
-      # --- NixOS Modules ---
-      nixosModules =
-        let
-          zenosTree = loader.generateTree ./modules;
-          legacyTree = loader.generateTree ./legacy/modules;
-          programsTree = loader.generateTree ./program-modules;
+      packages.${baseSystem} = pkgs.zenos // {
+        doc-generator = docGen;
+        zenos-rebuild = rebuildScript;
+        integrity-check = integrityCheck;
+      };
 
-          # [ HM INJECTION ]
-          # Load HM modules for injection into users.
-          # We collect these as a list of paths to pass to user-wrapper.nix via _module.args.
-          zenHmTree = loader.generateTree ./hm-modules;
-          zenHmList = nixpkgs.lib.collect builtins.isPath zenHmTree;
-
-          zenosList = nixpkgs.lib.collect builtins.isPath zenosTree;
-          legacyList = nixpkgs.lib.collect builtins.isPath legacyTree;
-          programsList = nixpkgs.lib.collect builtins.isPath programsTree;
-
-          # Dynamic Injection for Program Modules
-          programInjection =
-            { lib, ... }:
-            {
-              # 1. Define the Options (Type/Structure)
-              options = {
-                users.users = lib.mkOption {
-                  type = lib.types.attrsOf (
-                    lib.types.submodule {
-                      # Extend the user submodule to include 'programs'
-                      imports = [
-                        {
-                          options.programs = {
-                            imports = programsList;
-                          };
-                        }
-                      ];
-                    }
-                  );
-                };
-              };
-
-              # 2. Define the Configuration (Values)
-              config = {
-                system.programs = {
-                  imports = programsList;
-                };
-              };
-            };
-        in
-        {
-          zenos = zenosTree;
-          legacy = legacyTree;
-          programs = programsTree;
-
-          default = {
-            # Pass the collected HM modules to the system arguments.
-            # This allows user-wrapper.nix to access them via { zenUserModules, ... }
-            _module.args.zenUserModules = zenHmList;
-
-            imports = [
-              ./structure.nix
-              programInjection
-            ]
-            ++ zenosList
-            ++ legacyList;
-          };
-        }
-        // zenosTree;
-
-      # --- Home Manager Modules ---
-      homeManagerModules =
-        let
-          zenosTree = loader.generateTree ./hm-modules;
-          legacyTree = loader.generateTree ./legacy/home;
-
-          zenosList = nixpkgs.lib.collect builtins.isPath zenosTree;
-          legacyList = nixpkgs.lib.collect builtins.isPath legacyTree;
-        in
-        {
-          zenos = zenosTree;
-          legacy = legacyTree;
-          default = {
-            imports = zenosList ++ legacyList;
-          };
-        }
-        // zenosTree;
-
-      # --- Packages ---
-      packages = forAllSystems (
-        system:
-        let
-          pkgs = import nixpkgs {
-            inherit system;
-            overlays = [ self.overlays.default ];
-            config.allowUnfree = true;
-          };
-
-          # Since packages are now namespaced under pkgs.zenos,
-          # we grab the top-level categories from that namespace.
-          zenPkgNames =
-            if builtins.pathExists ./pkgs then builtins.attrNames (builtins.readDir ./pkgs) else [ ];
-        in
-        if zenPkgNames == [ ] then { } else nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.zenos.${name})
-      );
+      devShells.${baseSystem}.default = pkgs.mkShell {
+        packages = with pkgs; [
+          nixpkgs-fmt
+          jq
+          python3
+        ];
+      };
     };
 }
