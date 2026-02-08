@@ -2,6 +2,6 @@
   "id": "debug-2026-02-09-001",
   "title": "ZenPkgs Browser v2.0 Update",
   "date": "2026-02-09",
-  "authors": ["doromiert", "zenos"],
+  "authors": ["doromiert"],
   "content": "## System Status\n\nWe have successfully integrated the **News System** and resolved the API connectivity issues.\n\n### Key Changes\n\n* **CORS Fix:** Switched from Atom feeds to the GitHub API.\n* **News Modal:** Added a dedicated view for developer updates.\n* **Start Screen:** New dashboard layout with quick previews.\n\n"
 }
