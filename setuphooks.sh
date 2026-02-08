@@ -32,12 +32,12 @@ NC='\033[0m' # No Color
 echo "Running Nix Integrity Check before push..."
 
 # Run the evaluation
-OUTPUT=$(nix eval --show-trace --file tests/integrity.nix report 2>&1)
+OUTPUT=$(nix run .#check 2>&1)
 EXIT_CODE=$?
 
-# Check strictly for the "PASSED" status in the output struct
-if echo "$OUTPUT" | grep -Fq 'status = "PASSED";'; then
-    echo -e "${GREEN}✅ Integrity Check PASSED.${NC}"
+# Check strictly for the "SUCCESS" status in the output struct
+if echo "$OUTPUT" | grep -Fq 'status = "SUCCESS";'; then
+    echo -e "${GREEN}✅ Integrity Check SUCCESS.${NC}"
     exit 0
 else
     echo -e "${RED}❌ Integrity Check FAILED. Push aborted.${NC}"
