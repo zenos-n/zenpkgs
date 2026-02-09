@@ -1,0 +1,7 @@
+{
+  "id": "09.02.2026-2",
+  "title": "ZenPkgs Browser v1.0.1 Release",
+  "date": "09.02.2026",
+  "authors": ["doromiert"],
+  "content": "## wow, a patch already? \n okay, so, on release, there was this bug on linux chromium that caused tree elements to not render when expanded for god knows what reason \n\n welp guess what, that's been fixed by throwing stuff at the wall and seeing what sticks lol \n\n oh also, if you noticed that badge popups are misaligned when they're low on the screen, that's fixed too now ig"
+}
