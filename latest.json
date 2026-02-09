@@ -1,7 +1,7 @@
 {
-  "id": "09.02.2026",
-  "title": "ZenPkgs Browser v1.0 Release",
+  "id": "09.02.2026-2",
+  "title": "ZenPkgs Browser v1.0.1 Release",
   "date": "09.02.2026",
   "authors": ["doromiert"],
-  "content": "## Welp, it's finally officially out\n Yeah, the versions you saw until now were just betas, I didn't want to call it a 1.0 until we had mobile UI.\n Either way, it's feature-packed with stuff like\n - a tree-based option and package browsing UI\n - lazy loading and virtual options (performance stuff)\n - a mobile view\n - a scratchpad with some niceties\n - accent colors\n - clanker features\n - reduced motion\n - keyboard navigation\n - custom CSS\n - local JSON support\n - diffs against other versions of zenpkgs\n - news\n - favorites\n - search\n - recents\n - command palette\n - random package or option picker.\n\n yeah, that's a LOT.\n\n i hope you have as much fun using it as i had making it.\n\n oh and btw, surprisingly enough, even though it's clanker-made (i know, cringe, i will rewrite it in svelte without using AI later but for now it'll suffice), it's actually quite good. i guess the only issue is that it's impossible to maintain.\n\n like actually impossible to maintain lmfao.\n\nanyways, enough yapping, i hope you enjoy ZenOS and ZenPkgs search."
+  "content": "## wow, a patch already? \n okay, so, on release, there was this bug on linux chromium that caused tree elements to not render when expanded for god knows what reason \n\n welp guess what, that's been fixed by throwing stuff at the wall and seeing what sticks lol \n\n oh also, if you noticed that badge popups are misaligned when they're low on the screen, that's fixed too now ig"
 }
