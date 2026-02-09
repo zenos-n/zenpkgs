@@ -1,7 +1,0 @@
-{
-  "id": "2026-02-15-001",
-  "title": "another news test",
-  "date": "2026-02-15",
-  "authors": ["doromiert"],
-  "content": "## Better Sound on ZenOS\n\nWe've completely rewritten the audio module (`zenos.audio`) to leverage the latest PipeWire features. This update brings low-latency monitoring by default and a new system-wide equalizer interface.\n\n### New Features\n\n* **Auto-Routing:** Headphones are now prioritized automatically when plugged in.\n* **Equalizer:** Added `zenos.audio.equalizer.presets` for bass boost and vocal clarity.\n* **Bluetooth:** LDAC codec support is now enabled out-of-the-box.\n\n### Migration\n\nIf you were using PulseAudio manually, please remove `services.pulseaudio.enable` from your config.\n\n```nix\nzenos.audio = {\n  enable = true;\n  lowLatency = true;\n  equalizer.preset = \"bass-boost\";\n};\n```"
-}
