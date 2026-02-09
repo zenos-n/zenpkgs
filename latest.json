@@ -1,7 +1,7 @@
 {
-  "id": "debug-2026-02-09-001",
-  "title": "ZenPkgs Browser v2.0 Update",
-  "date": "2026-02-09",
+  "id": "09.02.2026",
+  "title": "ZenPkgs Browser v1.0 Release",
+  "date": "09.02.2026",
   "authors": ["doromiert"],
-  "content": "## System Status\n\nWe have successfully integrated the **News System** and resolved the API connectivity issues.\n\n### Key Changes\n\n* **CORS Fix:** Switched from Atom feeds to the GitHub API.\n* **News Modal:** Added a dedicated view for developer updates.\n* **Start Screen:** New dashboard layout with quick previews.\n\n"
+  "content": "## Welp, it's finally officially out\nYeah, the versions you saw until now were just betas, I didn't want to call it a 1.0 until we had mobile UI.\nEither way, it's feature-packed with stuff like\n- a tree-based option and package browsing UI\n- lazy loading and virtual options (performance stuff)\n- a mobile view\n- a scratchpad with some niceties\n- accent colors\n- clanker features\n- reduced motion\n- keyboard navigation\n- custom CSS\n- local JSON support\n- diffs against other versions of zenpkgs\n- news\n- favorites\n- search\n- recents\n- command palette\n- random package or option picker.\n\nyeah, that's a LOT.\n i hope you have as much fun using it as i had making it.\n oh and btw, surprisingly enough, even though it's clanker-made (i know, cringe, i will rewrite it in svelte without using AI later but for now it'll suffice), it's actually quite good. i guess the only issue is that it's impossible to maintain.\n like actually impossible to maintain lmfao.\n\nanyways, enough yapping, i hope you enjoy ZenOS and ZenPkgs search."
 }
