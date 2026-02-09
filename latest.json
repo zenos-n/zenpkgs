@@ -1,7 +1,7 @@
 {
-  "id": "09.02.2026-3",
-  "title": "ZenPkgs Browser v1.0.2 Release",
+  "id": "09.02.2026-4",
+  "title": "ZenPkgs Browser v1.0.3 Release",
   "date": "09.02.2026",
   "authors": ["doromiert"],
-  "content": "## ANOTHER PATCH?????? \n short answer: yes. long answer: web dev is stupid \n\n basically, what happened was i set extreme values for the glide in animation because i thought they were too low... \n\n nope, they weren't... \n\n the changes made in v1.0.1 showed that it was just some rendering issue. \n\n anyways, enjoy your new cool animations that are more akin to the default window animations in ZenOS 1.0N's gnome desktop, yay!"
+  "content": "## news animations or something ig \n i basically applied the same logic from the about modal to the news modal to make it a bit nicer or something idk"
 }
