@@ -44,7 +44,7 @@ jobs:
         if: success() && github.event_name == 'push'
         run: |
           git config --global user.name "ZenOS Bot"
-          git config --global user.email "bot@zenos.dev"
+          git config --global user.email "bot@zenos.neg-zero.com"
 
           FILES_TO_ADD=""
 

@@ -80,7 +80,30 @@ def process_tree(raw_root):
     """Recursively applies Meta/Sub formatting to the tree."""
     processed = {}
     
+    # [NEW] 1. Check for Meta-Injection
+    # We look for a child key named "_meta". If it exists, we extract its 
+    # description to use as the container's brief.
+    container_brief = ""
+    container_desc = ""
+    
+    if "_meta" in raw_root:
+        meta_node = raw_root["_meta"]
+        # In the unflattened tree, this node is a dict with _type="zen_option"
+        # We assume the description field holds the text we want.
+        raw_desc = meta_node.get("description", "")
+        
+        # Handle dict descriptions (common in NixOS JSON)
+        if isinstance(raw_desc, dict):
+            raw_desc = raw_desc.get("text", "")
+            
+        container_brief = str(raw_desc).split("\n")[0]
+        container_desc = str(raw_desc)
+    
     for key, value in raw_root.items():
+        # [NEW] 2. Skip processing _meta as a regular child
+        if key == "_meta":
+            continue
+
         # A. Leaf Option
         if isinstance(value, dict) and value.get("_type") == "zen_option":
             processed[key] = process_option_node(value)
@@ -89,8 +112,16 @@ def process_tree(raw_root):
         elif isinstance(value, dict):
             children = process_tree(value)
             if children:
+                # [NEW] 3. Apply the injected meta if available, else fallback to key
+                brief_text = container_brief if container_brief else f"Category: {key}"
+                full_desc = container_desc if container_desc else ""
+                
                 processed[key] = {
-                    "meta": create_meta(node_type="container", brief=f"Category: {key}"),
+                    "meta": create_meta(
+                        node_type="container", 
+                        brief=brief_text,
+                        description=full_desc
+                    ),
                     "sub": children
                 }
                 
