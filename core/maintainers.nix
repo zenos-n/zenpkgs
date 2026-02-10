@@ -1,7 +1,4 @@
 {
-  ...
-}:
-{
   doromiert = {
     email = "doromiert@gmail.com";
     github = "doromiert";

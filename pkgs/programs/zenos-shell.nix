@@ -2,6 +2,7 @@
   lib,
   writeShellScriptBin,
   pname,
+  pkgs,
 }:
 
 writeShellScriptBin "zenos-shell" ''
@@ -13,6 +14,7 @@ writeShellScriptBin "zenos-shell" ''
   exec nix-shell -E "with import <nixpkgs> { overlays = [ (builtins.getFlake \"flake:zenpkgs\").overlays.default ]; }; runCommand \"shell\" { buildInputs = [ $* ]; } \"\""
 ''
 // {
+  buildInputs = [ pkgs.nix ];
   meta = with lib; {
     version = "1.0";
     description = ''

@@ -47,6 +47,10 @@
               url = "https://github.com/negative-zero-inft/nap-license";
             };
           };
+          platforms = prev.platforms // {
+            zenos = [ "x86_64-linux" ];
+          };
+
         }
       );
 
@@ -67,9 +71,9 @@
             path = ./legacyMaps/pkgs;
           };
         in
-        legacyMaps
-        // nativePkgs
-        // {
+        {
+          # FIX: Namespace everything under 'zenos' to break infinite recursion
+          zenos = legacyMaps // nativePkgs;
           legacy = prev;
         };
 
