@@ -2,12 +2,12 @@
 
 {
   imports = [
-    # 1. The Functional Link (Functionality)
-    (lib.mkAliasOptionModule [ "zenos" "system" "syncthing" ] [ "services" "syncthing" ])
+    # Map 'zenos.system.syncthing' -> 'services.syncthing'
+    (lib.mkAliasOptionModule (lib.splitString "." "zenos.system.syncthing") (
+      lib.splitString "." "services.syncthing"
+    ))
   ];
 
-  # 2. The Meta Injection (Documentation Data)
-  # Use "_zenpkgs-meta" to target the specific custom logic in doc_gen.py
   options.zenos.system.syncthing."_zenpkgs-meta" = lib.mkOption {
     type = lib.types.str;
     description = ''

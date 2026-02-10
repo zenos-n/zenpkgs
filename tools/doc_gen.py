@@ -91,14 +91,15 @@ def clean_default(val):
 
 # --- STANDARD FORMATTERS ---
 
-def create_meta(node_type="container", brief="", description="", default="none", maintainers=None, platforms=None):
+def create_meta(node_type="container", brief="", description="", default="none", maintainers=None, platforms=None, dependencies=None):
     return {
         "type": node_type,
         "brief": brief,
         "description": description,
         "default": default,
         "maintainers": maintainers,
-        "platforms": platforms
+        "platforms": platforms,
+        "dependencies": dependencies or [] # [NEW]
     }
 
 # --- TREE RECONSTRUCTION ---
@@ -124,7 +125,7 @@ def unflatten_options(flat_options):
         leaf_key = parts[-1]
         data["_type"] = "zen_option"
         
-        # [FIX] Merge if exists, otherwise assign
+        # Merge if exists, otherwise assign
         if leaf_key in current and isinstance(current[leaf_key], dict):
             current[leaf_key].update(data)
         else:
@@ -137,10 +138,8 @@ def unflatten_options(flat_options):
 def process_option_node(node, in_legacy=False, current_path="", override_desc=None):
     """Converts a raw option dict to the Meta/Sub format."""
     
-    # [LOGIC] If override provided, use it. Otherwise use node description.
     if override_desc:
         full_desc = override_desc
-        # If we have an override, we treat it as a native ZenOS description (clean formatted)
         using_override = True
     else:
         raw_desc = node.get("description", "")
@@ -150,13 +149,11 @@ def process_option_node(node, in_legacy=False, current_path="", override_desc=No
             full_desc = str(raw_desc)
         using_override = False
 
-    # Check for Auto-Generated Alias (only if NOT overridden)
     is_auto_alias = bool(re.search(r"Alias of.*`", full_desc)) if not using_override else False
 
-    # Formatting Logic
     if in_legacy or is_auto_alias:
-        brief = full_desc
-        description_rest = ""
+        brief = "Legacy maps don't support briefs, read the documentation below" 
+        description_rest = full_desc
     else:
         lines = full_desc.split("\n")
         brief = lines[0].strip() if lines else "No description."
@@ -167,10 +164,6 @@ def process_option_node(node, in_legacy=False, current_path="", override_desc=No
     raw_default = node.get("default", "none")
     clean_def = clean_default(raw_default)
     
-    # Validation
-    # We validate if:
-    # 1. It is NOT legacy
-    # 2. AND (It is NOT an auto-alias OR We are using a manual override)
     should_validate = not in_legacy and (not is_auto_alias or using_override)
     
     if should_validate:
@@ -189,6 +182,56 @@ def process_option_node(node, in_legacy=False, current_path="", override_desc=No
     }
     return result
 
+# [NEW] Package Catalog Processor
+def process_package_catalog(raw_tree, path_prefix="pkgs"):
+    """
+    Recursively transforms the raw zen-packages.json tree into the standard Doc format.
+    """
+    processed = {}
+    
+    for key, value in raw_tree.items():
+        current_path = f"{path_prefix}.{key}"
+        
+        # Check if it's a leaf package
+        if isinstance(value, dict) and value.get("_type") == "zen_package":
+            # Extract fields
+            raw_desc = value.get("meta", {}).get("description", "")
+            lines = str(raw_desc).split("\n")
+            brief = lines[0].strip() if lines else "No description."
+            description_rest = "\n".join(lines[1:]).strip() if len(lines) > 1 else ""
+            
+            # Metadata from Nix JSON
+            maintainers = value.get("meta", {}).get("maintainers", [])
+            platforms = value.get("meta", {}).get("platforms", [])
+            deps = value.get("dependencies", [])
+            
+            # Validation
+            validate_node(value.get("meta", {}), brief, current_path, is_package=True)
+            
+            processed[key] = {
+                "meta": create_meta(
+                    node_type="package",
+                    brief=brief,
+                    description=description_rest,
+                    maintainers=maintainers,
+                    platforms=platforms,
+                    dependencies=deps # Pass dependencies
+                )
+            }
+            STATS["packages"] += 1
+            
+        # It's a category/directory
+        elif isinstance(value, dict):
+            children = process_package_catalog(value, current_path)
+            if children:
+                processed[key] = {
+                    "meta": create_meta(node_type="container", brief=f"Category: {key}"),
+                    "sub": children
+                }
+                
+    return processed
+
+
 def find_node(root, dot_path):
     parts = dot_path.split('.')
     current = root
@@ -206,8 +249,6 @@ def process_tree(raw_root, full_root=None, in_legacy=False, count_stats=True, pa
 
     processed = {}
     
-    # [NEW] Look for _zenpkgs-meta in children
-    # This allows aliases (or any option) to have a sibling defining custom metadata.
     meta_override = None
     if "_zenpkgs-meta" in raw_root:
         meta_node = raw_root["_zenpkgs-meta"]
@@ -215,36 +256,26 @@ def process_tree(raw_root, full_root=None, in_legacy=False, count_stats=True, pa
         if isinstance(raw_desc, dict): raw_desc = raw_desc.get("text", "")
         meta_override = str(raw_desc)
         
-    # Also handle standard _meta for containers (backwards compat)
     if "_meta" in raw_root:
         meta_node = raw_root["_meta"]
         raw_desc = meta_node.get("description", "")
         if isinstance(raw_desc, dict): raw_desc = raw_desc.get("text", "")
-        if not meta_override: # _zenpkgs-meta takes precedence
+        if not meta_override: 
             meta_override = str(raw_desc)
 
-    # 1. HYBRID PROCESSING (Node is both Option and Container)
+    # 1. HYBRID PROCESSING
     if raw_root.get("_type") == "zen_option":
-        
-        # Process the node itself using the override if present
         processed_node = process_option_node(raw_root, in_legacy=in_legacy, current_path=path_prefix, override_desc=meta_override)
         
-        # LINKING LOGIC:
-        # We need the ORIGINAL description to find the alias target, 
-        # because we might have just overwritten 'brief' with custom text.
         original_desc = raw_root.get("description", "")
         if isinstance(original_desc, dict): original_desc = original_desc.get("text", "")
         
-        # Check for alias link in original text
         match = re.search(r"Alias of.*`([a-zA-Z0-9\._-]+)`", str(original_desc))
         
         if match:
-            # It IS an alias map
             if count_stats and not in_legacy: STATS["maps"] += 1 
-
             target_path = match.group(1)
             target_node = find_node(full_root, target_path)
-            
             if target_node:
                 if isinstance(target_node, dict) and "sub" in target_node:
                     processed_node["sub"] = target_node["sub"]
@@ -253,22 +284,12 @@ def process_tree(raw_root, full_root=None, in_legacy=False, count_stats=True, pa
                         if processed_target:
                             processed_node["sub"] = processed_target
         else:
-            # It is a standard option
             if count_stats and not in_legacy: STATS["options"] += 1
 
-        # Merge other children (if any)
-        # Note: We skip _meta/_zenpkgs-meta here as they are helpers
-        children_processed = {}
         for k, v in raw_root.items():
             if k in ["_meta", "_zenpkgs-meta"] or not isinstance(v, dict): continue
-            # Recursive call
-            child_prefix = f"{path_prefix}.{k}" if path_prefix else k
-            # Pass legacy=True if we are inside a legacy map alias? No, we are in a hybrid.
-            child_res = process_tree(v, full_root, in_legacy, count_stats, child_prefix)
-            if child_res:
-                pass
-        
-
+            # Recursion needed for hybrid children if strict structure required
+            pass 
         
         return processed_node
 
@@ -277,27 +298,17 @@ def process_tree(raw_root, full_root=None, in_legacy=False, count_stats=True, pa
         if key in ["_meta", "_zenpkgs-meta"]: continue
         
         current_path = f"{path_prefix}.{key}" if path_prefix else key
-
-        # Recurse
         is_legacy = in_legacy or (key == "legacy")
         
-        # Check if child is Option or Container
         if isinstance(value, dict):
             child_result = process_tree(value, full_root, in_legacy=is_legacy, count_stats=count_stats, path_prefix=current_path)
             
-            # Now we determine if child_result is a "Container Dict" or a "Node Object"
-            # Node Object has "meta" key. Container Dict has keys that are option names.
-            
             if "meta" in child_result:
-                # It's an Option Node (Leaf or Hybrid)
                 processed[key] = child_result
             else:
-                # It's a Container. We need to wrap it.
-                # Use inherited meta if available
                 desc = meta_override if meta_override else ""
                 brief = desc.split("\n")[0]
                 
-                # Only wrap if it has content
                 if child_result:
                     processed[key] = {
                         "meta": create_meta(node_type="container", brief=brief, description=desc),
@@ -308,7 +319,7 @@ def process_tree(raw_root, full_root=None, in_legacy=False, count_stats=True, pa
 
 # --- THE TRANSFORM LOGIC ---
 
-def transform_structure(root_tree):
+def transform_structure(root_tree, package_catalog_raw=None):
     # 1. CUT OFF ZENOS
     zenos_tree = root_tree.pop("zenos", {})
 
@@ -344,15 +355,16 @@ def transform_structure(root_tree):
     # 4. ATTACH LEGACY
     zenos_tree["legacy"] = root_tree
 
-    # 5. PROCESS
+    # 5. PROCESS OPTIONS
     processed_zenos = process_tree(zenos_tree, root_tree, path_prefix="zenos")
     
-    # 6. OUTPUT (Handle case where processed_zenos is a Node vs Dict)
-    # Since zenos_tree is a container, process_tree returns a dict of children, wrapped?
-    # No, process_tree on a container returns a dict of processed children (wrapped or nodes).
-    # Wait, my logic in Loop B returns: `processed[key] = { meta:..., sub: ...}`
-    # So `processed_zenos` is { "system": { meta:..., sub:...}, "desktops": ... }
-    
+    # 6. PROCESS PACKAGES
+    # [NEW] Process the package catalog from the second JSON file
+    processed_packages = {}
+    if package_catalog_raw:
+        processed_packages = process_package_catalog(package_catalog_raw)
+
+    # 7. OUTPUT
     final_output = {
         "maintainers": {},
         "pkgs": {},
@@ -360,18 +372,17 @@ def transform_structure(root_tree):
     }
 
     if "maintainers" in processed_zenos:
-        # maintainers is a Node { meta:..., sub:... }
         final_output["maintainers"] = processed_zenos.pop("maintainers").get("sub", {})
     
+    # [UPDATED] Populate 'catalog' with the scanned packages
+    final_output["pkgs"]["catalog"] = processed_packages
+
+    # Keep 'system-packages' option if it exists (for reference of what is INSTALLED)
     if "system" in processed_zenos and "sub" in processed_zenos["system"]:
         sys_sub = processed_zenos["system"]["sub"]
         if "packages" in sys_sub:
-            pkgs_node = sys_sub["packages"]
-            # pkgs_node is a Node { meta:..., sub:... } OR a Dict?
-            # It's a Node.
-            pkg_count = len(pkgs_node.get("sub", {}))
-            STATS["packages"] += pkg_count
-            final_output["pkgs"]["system-packages"] = sys_sub.pop("packages")
+             # Just move it, don't count it as 'packages' since we have a catalog now
+             final_output["pkgs"]["system-packages"] = sys_sub.pop("packages")
         if "programs" in sys_sub:
              final_output["pkgs"]["programs"] = sys_sub.pop("programs")
 
@@ -385,14 +396,19 @@ def main():
 
     try:
         raw_data = load_json(sys.argv[1])
-        is_flat = any("." in k for k in list(raw_data.keys())[:100])
         
+        # [NEW] Load Packages JSON if provided
+        package_catalog_raw = None
+        if len(sys.argv) > 2:
+            package_catalog_raw = load_json(sys.argv[2])
+
+        is_flat = any("." in k for k in list(raw_data.keys())[:100])
         if is_flat:
             root_tree = unflatten_options(raw_data)
         else:
             root_tree = raw_data
 
-        final_struct = transform_structure(root_tree)
+        final_struct = transform_structure(root_tree, package_catalog_raw)
         
         print(":: ZenPkgs Doc Generation Stats ::")
         print(f"   - Native Options: {STATS['options']}")

@@ -35,7 +35,13 @@ let
           if type == "directory" then
             # Support legacy folder-based packages (containing default.nix)
             if pathExists (nodePath + "/default.nix") then
-              nameValuePair name (pkgs.callPackage nodePath { })
+              # Pass custom lib and inferred pname
+              nameValuePair name (
+                pkgs.callPackage nodePath {
+                  inherit lib;
+                  pname = name;
+                }
+              )
             # Otherwise treat as category/namespace
             else
               nameValuePair name (buildTree nodePath)
@@ -43,7 +49,13 @@ let
           # Case 2: Nix File (The new flat package standard)
           # e.g. "zenos-shell.nix" -> "zenos-shell"
           else if type == "regular" && isNix && name != "default.nix" then
-            nameValuePair baseName (pkgs.callPackage nodePath { })
+            # Pass custom lib and inferred pname
+            nameValuePair baseName (
+              pkgs.callPackage nodePath {
+                inherit lib;
+                pname = baseName;
+              }
+            )
 
           # Case 3: Ignored files (README, etc)
           else
@@ -51,7 +63,7 @@ let
         ) entries;
 
       in
-      # Filter out nulls
+      # Filter out nulls (ignored files)
       filterAttrs (n: v: v != null) tree;
 in
 buildTree path

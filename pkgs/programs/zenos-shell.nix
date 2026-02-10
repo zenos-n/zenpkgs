@@ -1,4 +1,8 @@
-{ lib, writeShellScriptBin }:
+{
+  lib,
+  writeShellScriptBin,
+  pname,
+}:
 
 writeShellScriptBin "zenos-shell" ''
   # Wrapper for nix-shell that injects the ZenPkgs overlay
@@ -10,14 +14,13 @@ writeShellScriptBin "zenos-shell" ''
 ''
 // {
   meta = with lib; {
+    version = "1.0";
     description = ''
       Wrapper for nix-shell with ZenPkgs overlay
 
-      Allows you to run `zenos-shell zenos.themes.adwaita` to get a shell 
-      with ZenPkgs available, mimicking the legacy `nix-shell -p` behavior
-      but with full access to the ZenOS ecosystem.
+      Allows you to run commands like `zenos-shell zenos.themes.adwaita` to get a shell with ZenPkgs available, mimicking the legacy `nix-shell -p` behavior but with full access to the ZenOS ecosystem.
     '';
-    maintainers = [ maintainers.zenos-n ];
+    maintainers = [ maintainers.doromiert ];
     license = licenses.napalm;
     platforms = platforms.zenos;
   };
