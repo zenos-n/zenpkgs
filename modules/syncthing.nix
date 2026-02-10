@@ -2,20 +2,21 @@
 
 {
   imports = [
-    # 1. The Magic Link: Aliases the entire directory tree
+    # 1. The Functional Link (Functionality)
     (lib.mkAliasOptionModule [ "zenos" "system" "syncthing" ] [ "services" "syncthing" ])
   ];
 
-  # 2. The Meta Injection
-  # Since we aliased the namespace, adding options here adds them to 'services.syncthing' too.
-  # We add a hidden '_meta' option that our Python script will scrape.
-  options.zenos.system.syncthing._meta = lib.mkOption {
+  # 2. The Meta Injection (Documentation Data)
+  # Use "_zenpkgs-meta" to target the specific custom logic in doc_gen.py
+  options.zenos.system.syncthing."_zenpkgs-meta" = lib.mkOption {
     type = lib.types.str;
-    description = "High-performance, continuous file synchronization service
-    
-    stuff";
+    description = ''
+      High-performance, continuous file synchronization service
+
+      Syncthing replaces proprietary sync and cloud services with something open, trustworthy and decentralized.
+    '';
     default = "meta-marker";
-    internal = true; # Hide from standard NixOS docs, but visible to our JSON generator
-    visible = true; # Ensure it ends up in options.json
+    visible = true;
+    internal = false;
   };
 }

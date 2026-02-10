@@ -141,7 +141,11 @@
         modules = [
           self.nixosModules.default
           home-manager.nixosModules.home-manager
-        ];
+
+          # [FIX] Inject your custom modules here!
+          # This tells the doc generator to scan your 'modules' folder.
+        ]
+        ++ (loaders.loadModules ./modules);
       };
 
       integrityCheck = import ./tools/integrity.nix {

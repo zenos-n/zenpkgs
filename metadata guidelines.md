@@ -65,7 +65,6 @@ description = ''
 Options declared via `mkOption` **MUST** follow the **First Line Rule**.
 
 - **`description`**: Mandatory. Use the multiline string format.
-- **`longDescription`**: **FORBIDDEN**. Do not use this attribute in `mkOption` calls; it will cause evaluation errors.
 - **`example`**: Recommended for non-boolean types.
 
 ## 4. Enforcement

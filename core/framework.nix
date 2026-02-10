@@ -26,12 +26,6 @@ let
           type = types.attrsOf types.package;
           default = { };
         };
-
-        theme = mkOption {
-          description = "User theme preferences";
-          type = types.str;
-          default = "dark";
-        };
       };
     };
 
@@ -42,17 +36,6 @@ in
 
     # --- SYSTEM ---
     system = {
-      hostName = mkOption {
-        type = types.str;
-        description = "The hostname of the machine";
-      };
-
-      boot = mkOption {
-        type = types.str;
-        description = "Bootloader configuration mode (efi/bios)";
-        default = "efi";
-      };
-
       packages = mkOption {
         type = types.attrsOf types.package;
         description = "System-wide packages (Set-based)";
@@ -61,16 +44,6 @@ in
 
     # --- DESKTOPS ---
     desktops = {
-      gnome = mkOption {
-        type = types.bool;
-        description = "Enable GNOME Desktop Environment";
-        default = false;
-      };
-      hyprland = mkOption {
-        type = types.bool;
-        description = "Enable Hyprland Window Manager";
-        default = false;
-      };
     };
 
     # --- ENVIRONMENT ---

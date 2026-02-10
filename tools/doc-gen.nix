@@ -87,5 +87,5 @@ pkgs.writeShellScriptBin "zen-doc-gen" ''
   echo "[ZenDoc] Processing options..."
   ${pkgs.python3}/bin/python3 ${./doc_gen.py} "$OPTIONS_JSON"
 
-  echo "[ZenDoc] Done. Generated zenos-options.json"
+  echo "[ZenDoc] Done."
 ''
