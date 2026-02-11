@@ -157,5 +157,42 @@
 			"}"
 		],
 		"description": "Scaffold for a legacy package map file (legacyMaps/pkgs)."
+	},
+	"ZenPkgs User Option Extension": {
+		"prefix": "zen-user-option",
+		"body": [
+			"{ lib, ... }:",
+			"",
+			"{",
+			"  options.${1:category}.${2:name} = lib.mkOption {",
+			"    type = lib.types.${3:bool};",
+			"    default = ${4:false};",
+			"    description = ''",
+			"      ${5:Summary line < 80 chars, Uppercase start, NO period}",
+			"",
+			"      ${6:Detailed description of this per-user option.}",
+			"    '';",
+			"  };",
+			"}"
+		],
+		"description": "Module for ./userModules. Extends zenos.users.<name>.* directly."
+	},
+	"ZenPkgs Program Module": {
+		"prefix": "zen-program",
+		"body": [
+			"{ lib, config, ... }:",
+			"",
+			"{",
+			"  # Maps to: zenos.system.programs.${1:name} AND zenos.users.<name>.programs.${1:name}",
+			"  options.${1:name}.enable = lib.mkEnableOption \"${1:name}\";",
+			"",
+			"  config = lib.mkIf config.${1:name}.enable {",
+			"    # Logic here applies to whichever scope enabled it.",
+			"    # Note: 'packages' option exists in both scopes.",
+			"    packages.${1:name} = pkgs.${1:name};",
+			"  };",
+			"}"
+		],
+		"description": "Module for ./programModules. Automatically mapped to system and user scopes."
 	}
 }

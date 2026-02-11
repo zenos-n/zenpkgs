@@ -39,7 +39,6 @@
         userLib
         // {
           loaders = loaders;
-          # [NEW] Import core maintainers
           maintainers = prev.maintainers // (import ./core/maintainers.nix);
           licenses = prev.licenses // {
             napalm = {
@@ -50,21 +49,18 @@
           platforms = prev.platforms // {
             zenos = [ "x86_64-linux" ];
           };
-
         }
       );
 
       pkgsOverlay =
         final: prev:
         let
-          # Load native ZenPkgs
           nativePkgs = import ./core/builder.nix {
             inherit lib;
             pkgs = final;
             path = ./pkgs;
           };
 
-          # Load legacy package maps
           legacyMaps = import ./core/builder.nix {
             inherit lib;
             pkgs = final;
@@ -72,7 +68,6 @@
           };
         in
         {
-          # FIX: Namespace everything under 'zenos' to break infinite recursion
           zenos = legacyMaps // nativePkgs;
           legacy = prev;
         };
@@ -83,15 +78,20 @@
         config.allowUnfree = true;
       };
 
+      # [HELPER] Safely load directory for tools
+      safeLoad = path: if builtins.pathExists path then loaders.loadModules path else [ ];
+
       docGen = import ./tools/doc-gen.nix {
         inherit pkgs lib;
         modules = [
           self.nixosModules.default
           home-manager.nixosModules.home-manager
         ]
-        # [RESTORED] Ensure modules are loaded for docs
         ++ (loaders.loadModules ./modules)
-        ++ (loaders.loadModules ./legacyMaps/modules);
+        ++ (loaders.loadModules ./legacyMaps/modules)
+        # [NEW] Include dynamic modules in docs
+        ++ (safeLoad ./userModules)
+        ++ (safeLoad ./programModules);
       };
 
       integrityCheck = import ./tools/integrity.nix {
@@ -100,8 +100,10 @@
           self.nixosModules.default
           home-manager.nixosModules.home-manager
         ]
-        # [RESTORED] Ensure modules are loaded for checks
-        ++ (loaders.loadModules ./modules);
+        ++ (loaders.loadModules ./modules)
+        # [NEW] Include dynamic modules in checks
+        ++ (safeLoad ./userModules)
+        ++ (safeLoad ./programModules);
       };
 
     in
