@@ -1,3 +1,5 @@
+# LOCATION: core/builder.nix
+
 {
   lib,
   pkgs,
@@ -35,7 +37,6 @@ let
           if type == "directory" then
             # Support legacy folder-based packages (containing default.nix)
             if pathExists (nodePath + "/default.nix") then
-              # Pass custom lib and inferred pname
               nameValuePair name (
                 pkgs.callPackage nodePath {
                   inherit lib;
@@ -47,9 +48,7 @@ let
               nameValuePair name (buildTree nodePath)
 
           # Case 2: Nix File (The new flat package standard)
-          # e.g. "zenos-shell.nix" -> "zenos-shell"
           else if type == "regular" && isNix && name != "default.nix" then
-            # Pass custom lib and inferred pname
             nameValuePair baseName (
               pkgs.callPackage nodePath {
                 inherit lib;

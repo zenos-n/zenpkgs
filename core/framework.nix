@@ -1,3 +1,5 @@
+# LOCATION: core/framework.nix
+
 {
   lib,
   pkgs,
@@ -59,12 +61,10 @@ let
       [ ];
 
   # 3. Robust Package Lookup & Collection
-  # Applies Flattening -> Lookup -> Collection
   getFromSource =
     source: cfg:
     let
       enabledPaths = flattenConfig cfg;
-
       resolvePackage =
         pathStr:
         let
@@ -73,7 +73,6 @@ let
         lib.attrByPath pathList
           (throw "ZenPkgs Error: Could not find package '${pathStr}' in the registry.")
           source;
-
       resolvedItems = map resolvePackage enabledPaths;
     in
     concatMap collectPackages resolvedItems;
@@ -84,7 +83,8 @@ let
   programScope = types.submodule {
     imports = programModules;
     options = {
-      packages = mkOption {
+      # Internal option for modules to export packages to
+      exportedPackages = mkOption {
         type = types.attrsOf types.package;
         default = { };
         internal = true;
@@ -98,7 +98,7 @@ let
     options = {
       legacy = mkOption {
         description = "Legacy packages from NixPkgs (Supports Deep Nesting & Set Installation)";
-        type = types.attrs;
+        type = types.attrs; # Allows recursion
         default = { };
         example = {
           vim = true;
@@ -108,7 +108,7 @@ let
 
       programs = mkOption {
         description = "ZenOS Native Programs (Supports Deep Nesting & Set Installation)";
-        type = types.attrs;
+        type = types.attrs; # Allows recursion
         default = { };
       };
     };
@@ -134,7 +134,7 @@ let
 
         packages = mkOption {
           description = "Declarative package installation";
-          type = packageRegistry; # Shared Logic
+          type = packageRegistry;
           default = { };
         };
 
@@ -163,7 +163,7 @@ in
       };
 
       packages = mkOption {
-        type = packageRegistry; # Shared Logic
+        type = packageRegistry;
         description = "System-wide package registry";
         default = { };
       };
@@ -212,19 +212,19 @@ in
 
     environment.systemPackages =
       (getFromSource pkgs.legacy config.zenos.system.packages.legacy)
+      # Note: pkgs.zenos.programs must exist in the overlay for this to work
       ++ (getFromSource pkgs.zenos.programs config.zenos.system.packages.programs)
-      ++ (attrValues config.zenos.system.programs.packages);
+      ++ (attrValues config.zenos.system.programs.exportedPackages);
 
     environment.variables = config.zenos.environment.variables;
 
     # 2. User Configuration
     users.users = mapAttrs (name: userCfg: {
       isNormalUser = true;
-      # Logic matches systemPackages exactly
       packages =
         (getFromSource pkgs.legacy userCfg.packages.legacy)
         ++ (getFromSource pkgs.zenos.programs userCfg.packages.programs)
-        ++ (attrValues userCfg.programs.packages);
+        ++ (attrValues userCfg.programs.exportedPackages);
     }) config.zenos.users;
 
     # 3. Home Manager Bridge

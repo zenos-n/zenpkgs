@@ -1,3 +1,5 @@
+# LOCATION: flake.nix
+
 {
   description = "ZenPkgs - The ZenOS Ecosystem";
 
@@ -68,6 +70,7 @@
           };
         in
         {
+          # NAMESPACING: Prevents infinite recursion
           zenos = legacyMaps // nativePkgs;
           legacy = prev;
         };
@@ -78,9 +81,6 @@
         config.allowUnfree = true;
       };
 
-      # [HELPER] Safely load directory for tools
-      safeLoad = path: if builtins.pathExists path then loaders.loadModules path else [ ];
-
       docGen = import ./tools/doc-gen.nix {
         inherit pkgs lib;
         modules = [
@@ -88,10 +88,8 @@
           home-manager.nixosModules.home-manager
         ]
         ++ (loaders.loadModules ./modules)
-        ++ (loaders.loadModules ./legacyMaps/modules)
-        # [NEW] Include dynamic modules in docs
-        ++ (safeLoad ./userModules)
-        ++ (safeLoad ./programModules);
+        ++ (loaders.loadModules ./legacyMaps/modules);
+        # NOTE: Program/User modules are loaded by framework.nix, not here
       };
 
       integrityCheck = import ./tools/integrity.nix {
@@ -100,10 +98,7 @@
           self.nixosModules.default
           home-manager.nixosModules.home-manager
         ]
-        ++ (loaders.loadModules ./modules)
-        # [NEW] Include dynamic modules in checks
-        ++ (safeLoad ./userModules)
-        ++ (safeLoad ./programModules);
+        ++ (loaders.loadModules ./modules);
       };
 
     in
