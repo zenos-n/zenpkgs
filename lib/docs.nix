@@ -33,6 +33,27 @@ let
 
   lib = pkgs.lib;
 
+  # --- HELPER: Metadata Validator & Tracer ---
+  # This warns the user during nix eval if essential fields are missing.
+  warnMissing =
+    path: meta:
+    let
+      # Only warn for options in 'zenos' (not legacy) or packages in 'pkgs.zenos'
+      isZenosOption = (builtins.head path == "zenos") && !(lib.any (s: s == "legacy") path);
+      isZenosPkg = (builtins.head path == "pkgs") && (builtins.elemAt path 1 == "zenos");
+
+      shouldWarn = isZenosOption || isZenosPkg;
+
+      missing =
+        (if (meta.brief or null) == null then [ "brief" ] else [ ])
+        ++ (if (meta.description or null) == null then [ "description" ] else [ ]);
+      pathStr = lib.concatStringsSep "." path;
+    in
+    if !shouldWarn || missing == [ ] then
+      meta
+    else
+      builtins.trace "WARNING: ${pathStr} is missing metadata: ${lib.concatStringsSep ", " missing}" meta;
+
   # --- HELPER: Type Normalizer ---
   normalizeType =
     t:
@@ -124,338 +145,276 @@ let
   # 3. Recursive Package Walker
   showPackages =
     strict: maxDepth: path: v:
-    # TRACE: Re-enabled
-    builtins.trace "PKG: ${lib.concatStringsSep "." path}" (
-      let
-        pathStr = lib.concatStringsSep "." path;
-        name = lib.last path;
+    let
+      pathStr = lib.concatStringsSep "." path;
+      name = lib.last path;
 
-        isZenPkg = builtins.isAttrs v && (v ? package) && (v ? brief);
-        triedDrv = builtins.tryEval (lib.isDerivation v);
-        isDrv = triedDrv.success && triedDrv.value;
-        isLegacy = path == [ "legacy" ];
+      isZenPkg = builtins.isAttrs v && (v ? package) && (v ? brief);
+      triedDrv = builtins.tryEval (lib.isDerivation v);
+      isDrv = triedDrv.success && triedDrv.value;
+      isLegacy = lib.any (segment: segment == "legacy") path;
 
-        # Assigned Logic
-        brief =
-          if isLegacy then
-            "legacy options/packages don't support briefs, read docs below"
-          else if isZenPkg then
-            v.brief
-          else if isDrv then
-            (v.meta.description or "")
-          else
-            "";
+      # Raw Metadata Extraction
+      rawBrief =
+        if isZenPkg then
+          v.brief
+        else if isDrv then
+          (v.meta.description or null)
+        else if isLegacy then
+          "legacy package/set"
+        else
+          null;
 
-        description =
-          if isZenPkg then
-            v.description or ""
-          else if isDrv then
-            v.meta.longDescription or v.meta.description or ""
-          else
-            "";
+      rawDescription =
+        if isZenPkg then
+          v.description or null
+        else if isDrv then
+          (v.meta.longDescription or v.meta.description or null)
+        else
+          null;
 
+      # Standardized Metadata Object
+      metaObj = warnMissing path {
+        brief = rawBrief;
+        description = rawDescription;
         maintainers = if isZenPkg then v.maintainers or [ ] else (v.meta.maintainers or [ ]);
         license = if isZenPkg then v.license or "napalm" else (v.meta.license.shortName or "unknown");
         dependencies = if isZenPkg then v.dependencies or [ ] else [ ];
+        type = {
+          name = "set";
+        };
+      };
 
-        checkRecurse =
-          if strict then
+      checkRecurse =
+        if strict then
+          let
+            res = builtins.tryEval (v.recurseForDerivations or false);
+          in
+          res.success && res.value
+        else
+          true;
+
+      isNested = builtins.isAttrs v && !isDrv && !isZenPkg && checkRecurse;
+      depth = builtins.length path;
+      isRepeating = name != "<name>" && lib.count (x: x == name) path > 1;
+    in
+    if isRepeating || depth > maxDepth then
+      {
+        meta = metaObj // {
+          debug = "recursion blocked";
+        };
+        sub = { };
+      }
+    else
+      {
+        meta = metaObj;
+        sub =
+          if isNested then
             let
-              res = builtins.tryEval (v.recurseForDerivations or false);
+              keys = builtins.attrNames v;
+              safeKeys = builtins.filter (
+                n:
+                !lib.hasPrefix "_" n
+                && !(builtins.elem n [
+                  "pkgs"
+                  "lib"
+                  "out"
+                  "dev"
+                  "bin"
+                  "man"
+                  "stdenv"
+                  "override"
+                  "overrideDerivation"
+                  "recurseForDerivations"
+                  "nixosTests"
+                  "tests"
+                  "debugPackages"
+                ])
+              ) keys;
+
+              process =
+                n:
+                let
+                  attempt = builtins.tryEval v.${n};
+                in
+                if attempt.success then
+                  {
+                    name = n;
+                    value = showPackages strict maxDepth (path ++ [ n ]) attempt.value;
+                  }
+                else
+                  null;
+
+              results = map process safeKeys;
             in
-            res.success && res.value
+            builtins.listToAttrs (builtins.filter (x: x != null) results)
           else
-            true;
-
-        isNested = builtins.isAttrs v && !isDrv && !isZenPkg && checkRecurse;
-        depth = builtins.length path;
-        isRepeating = name != "<name>" && lib.count (x: x == name) path > 1;
-      in
-      if isRepeating || depth > maxDepth then
-        {
-          meta = {
-            type = {
-              name = "set";
-            };
-            inherit brief;
-            debug = {
-              status = "recursion blocked";
-            };
-          };
-          sub = { };
-        }
-      else
-        {
-          meta = {
-            type = {
-              name = "set";
-            };
-            inherit
-              brief
-              description
-              maintainers
-              license
-              dependencies
-              ;
-            # DEBUG INFO
-            debug = {
-              found = {
-                isZenPkg = isZenPkg;
-                isDrv = isDrv;
-                rawBrief = if isZenPkg then v.brief else null;
-                rawDesc = if isZenPkg then v.description else (if isDrv then v.meta.description or null else null);
-              };
-              assigned = {
-                inherit
-                  brief
-                  description
-                  maintainers
-                  license
-                  dependencies
-                  ;
-              };
-            };
-          };
-          sub =
-            if isNested then
-              let
-                keys = builtins.attrNames v;
-                safeKeys = builtins.filter (
-                  n:
-                  !lib.hasPrefix "_" n
-                  && !(builtins.elem n [
-                    "pkgs"
-                    "lib"
-                    "out"
-                    "dev"
-                    "bin"
-                    "man"
-                    "stdenv"
-                    "override"
-                    "overrideDerivation"
-                    "recurseForDerivations"
-                    "nixosTests"
-                    "tests"
-                    "debugPackages"
-                  ])
-                ) keys;
-
-                process =
-                  n:
-                  let
-                    attempt = builtins.tryEval v.${n};
-                  in
-                  if attempt.success then
-                    {
-                      name = n;
-                      value = showPackages strict maxDepth (path ++ [ n ]) attempt.value;
-                    }
-                  else
-                    null;
-
-                results = map process safeKeys;
-              in
-              builtins.listToAttrs (builtins.filter (x: x != null) results)
-            else
-              { };
-        }
-    );
+            { };
+      };
 
   # 4. Robust Option Walker
   showOptions =
     path: v:
-    # TRACE: Re-enabled
-    builtins.trace "OPT: ${lib.concatStringsSep "." path}" (
-      let
-        name = lib.last path;
-        isRepeating = name != "<name>" && lib.count (x: x == name) path > 1;
+    let
+      name = lib.last path;
+      isRepeating = name != "<name>" && lib.count (x: x == name) path > 1;
 
-        metaLookup = moduleMetadata.${name} or null;
-        hasMeta = metaLookup != null;
-      in
-      if isRepeating then
-        {
-          meta = {
-            type = {
-              name = "unknown";
-            };
-            brief = "Infinite loop detected";
+      metaLookup = moduleMetadata.${name} or null;
+      hasMeta = metaLookup != null;
+      isLegacyPath = lib.any (segment: segment == "legacy") path;
+    in
+    if isRepeating then
+      {
+        meta = {
+          type = {
+            name = "unknown";
           };
-        }
-      else
-        let
-          isOption = v: builtins.isAttrs v && (v._type or "") == "option";
-          isContainer = v: builtins.isAttrs v && (v._type or "") == "_container";
+          brief = "Infinite loop detected";
+        };
+      }
+    else
+      let
+        isOption = v: builtins.isAttrs v && (v._type or "") == "option";
+        isContainer = v: builtins.isAttrs v && (v._type or "") == "_container";
 
-          # SAFE DEFAULT EXTRACTION
-          safeDefault =
-            if isOption v && (v ? default) then
-              if (builtins.elem "legacy" path) then
-                null
-              else
-                let
-                  val = v.default;
-                  typeName = v.type.name or "unknown";
-                  isSafeType = builtins.elem typeName [
-                    "boolean"
-                    "integer"
-                    "str"
-                    "string"
-                    "enum"
-                    "port"
-                    "path"
-                  ];
-                  res = if isSafeType then builtins.tryEval (builtins.deepSeq val val) else builtins.tryEval val;
-                in
-                if res.success then (if isSafeType then res.value else "<complex>") else "<dynamic>"
+        # SAFE DEFAULT EXTRACTION
+        safeDefault =
+          if isOption v && (v ? default) then
+            if isLegacyPath then
+              null
+            else
+              let
+                val = v.default;
+                typeName = v.type.name or "unknown";
+                isSafeType = builtins.elem typeName [
+                  "boolean"
+                  "integer"
+                  "str"
+                  "string"
+                  "enum"
+                  "port"
+                  "path"
+                ];
+                res = if isSafeType then builtins.tryEval (builtins.deepSeq val val) else builtins.tryEval val;
+              in
+              if res.success then (if isSafeType then res.value else "<complex>") else "<dynamic>"
+          else
+            null;
+
+        normTypeName = if isOption v then normalizeType v.type else "set";
+        typeBase = {
+          name = normTypeName;
+        };
+        typeWithEnum =
+          if normTypeName == "enum" && (v.type.functor.payload or [ ]) != [ ] then
+            typeBase // { enum = v.type.functor.payload; }
+          else
+            typeBase;
+        typeFinal =
+          if safeDefault != null then typeWithEnum // { default = safeDefault; } else typeWithEnum;
+
+        # Standardized Metadata Object
+        metaObj = warnMissing path {
+          brief =
+            if hasMeta && metaLookup.brief != null then
+              metaLookup.brief
+            else if (v ? description) then
+              v.description
+            else if isLegacyPath then
+              "upstream NixOS option"
             else
               null;
-
-          # NORMALIZE TYPE
-          normTypeName = if isOption v then normalizeType v.type else "set";
-
-          # Construct Type Object
-          typeBase = {
-            name = normTypeName;
-          };
-
-          typeWithEnum =
-            if normTypeName == "enum" && (v.type.functor.payload or [ ]) != [ ] then
-              typeBase // { enum = v.type.functor.payload; }
-            else
-              typeBase;
-
-          typeFinal =
-            if safeDefault != null then typeWithEnum // { default = safeDefault; } else typeWithEnum;
-
-          # ASSIGNED VALUES
-          brief =
-            if name == "legacy" then
-              "legacy options/packages don't support briefs, read docs below"
-            else if hasMeta && metaLookup.brief != null then
-              metaLookup.brief
-            else
-              v.description or "Missing brief";
-
-          description = if hasMeta then metaLookup.description else v.description or "";
-
+          description = if hasMeta then metaLookup.description else (v.description or null);
           maintainers = if hasMeta then metaLookup.maintainers else [ ];
           license = if hasMeta then metaLookup.license else "napalm";
           dependencies = if hasMeta then metaLookup.dependencies else [ ];
+          type = typeFinal;
+        };
 
-          getRawChildren =
-            v:
-            if
-              path == [
-                "zenos"
-                "legacy"
-              ]
-            then
-              builtins.removeAttrs eval.options [
-                "zenos"
-                "users"
-                "nixpkgs"
-                "systemd"
-                "networking"
-                "environment"
-                "hardware"
-                "documentation"
+        getRawChildren =
+          v:
+          if
+            path == [
+              "zenos"
+              "legacy"
+            ]
+          then
+            builtins.removeAttrs eval.options [
+              "zenos"
+              "users"
+              "nixpkgs"
+              "systemd"
+              "networking"
+              "environment"
+              "hardware"
+              "documentation"
+              "_module"
+              "_args"
+              "specialArgs"
+            ]
+          else if
+            (builtins.length path == 4) && (name == "legacy") && (builtins.elemAt path 1 == "users")
+          then
+            eval.options.users.users.type.nestedTypes.elemType.getSubOptions [ ]
+          else if isOption v then
+            let
+              t = v.type;
+              elem = t.nestedTypes.elemType or null;
+              elemSub = if elem != null then (elem.getSubOptions or null) else null;
+              directSub = t.getSubOptions or null;
+            in
+            if elemSub != null then
+              {
+                "<name>" = {
+                  _type = "_container";
+                  content = elemSub [ ];
+                };
+              }
+            else if directSub != null then
+              let
+                children = directSub [ ];
+              in
+              if children ? _freeformOptions then
+                builtins.removeAttrs children [ "_freeformOptions" ] // { "<name>" = children._freeformOptions; }
+              else
+                children
+            else
+              null
+          else if isContainer v then
+            v.content
+          else if builtins.isAttrs v then
+            v
+          else
+            null;
+
+        rawChildren = getRawChildren v;
+        validChildren =
+          if rawChildren != null then
+            builtins.removeAttrs rawChildren (
+              [
                 "_module"
                 "_args"
-                "specialArgs"
+                "freeformType"
+                "specialisation"
+                "containers"
+                "vmVariant"
               ]
-            else if
-              (builtins.length path == 4) && (name == "legacy") && (builtins.elemAt path 1 == "users")
-            then
-              eval.options.users.users.type.nestedTypes.elemType.getSubOptions [ ]
-            else if isOption v then
-              let
-                t = v.type;
-                elem = t.nestedTypes.elemType or null;
-                elemSub = if elem != null then (elem.getSubOptions or null) else null;
-                directSub = t.getSubOptions or null;
-              in
-              if elemSub != null then
-                {
-                  "<name>" = {
-                    _type = "_container";
-                    content = elemSub [ ];
-                  };
-                }
-              else if directSub != null then
-                # FIX: Intercept and Rename _freeformOptions
-                let
-                  children = directSub [ ];
-                in
-                if children ? _freeformOptions then
-                  builtins.removeAttrs children [ "_freeformOptions" ] // { "<name>" = children._freeformOptions; }
-                else
-                  children
-              else
-                null
-            else if isContainer v then
-              v.content
-            else if builtins.isAttrs v then
-              v
-            else
-              null;
-
-          rawChildren = getRawChildren v;
-          validChildren =
-            if rawChildren != null then
-              builtins.removeAttrs rawChildren (
-                [
-                  "_module"
-                  "_args"
-                  "freeformType"
-                  "specialisation"
-                  "containers"
-                  "vmVariant"
-                ]
-                ++ (if path == [ "zenos" ] then [ "sandbox" ] else [ ])
-              )
-            else
-              { };
-
-          hasChildren = validChildren != { };
-        in
-        {
-          meta = {
-            inherit
-              brief
-              description
-              maintainers
-              license
-              dependencies
-              ;
-            type = typeFinal;
-
-            # DEBUG INFO
-            debug = {
-              found = if hasMeta then metaLookup else { status = "none found in source modules"; };
-              assigned = {
-                inherit
-                  brief
-                  description
-                  maintainers
-                  license
-                  dependencies
-                  ;
-              };
-            };
-          };
-        }
-        // (
-          if hasChildren then
-            {
-              sub = lib.mapAttrs (n: child: showOptions (path ++ [ n ]) child) validChildren;
-            }
+              ++ (if path == [ "zenos" ] then [ "sandbox" ] else [ ])
+            )
           else
-            { }
-        )
-    );
+            { };
+        hasChildren = validChildren != { };
+      in
+      {
+        meta = metaObj;
+      }
+      // (
+        if hasChildren then
+          { sub = lib.mapAttrs (n: child: showOptions (path ++ [ n ]) child) validChildren; }
+        else
+          { }
+      );
 
-  # 6. Generate Trees
   optionRoot = showOptions [ "zenos" ] eval.options.zenos;
 in
 {
@@ -465,7 +424,8 @@ in
     pkgs =
       let
         zenoPkgs = if pkgs ? zenos then pkgs.zenos else { };
-        customPkgs = lib.mapAttrs (n: v: showPackages false 10 [ n ] v) zenoPkgs;
+        # Path for warnMissing should start with 'pkgs.zenos'
+        customPkgs = lib.mapAttrs (n: v: showPackages false 10 [ "pkgs" "zenos" n ] v) zenoPkgs;
 
         legacySet = {
           legacy = {
@@ -519,7 +479,7 @@ in
                   if res.success && res.value != null then
                     {
                       name = name;
-                      value = showPackages true 3 [ name ] res.value;
+                      value = showPackages true 3 [ "pkgs" "legacy" name ] res.value;
                     }
                   else
                     null;
@@ -533,19 +493,5 @@ in
 
     options = (optionRoot).sub or optionRoot;
     maintainers = if builtins.pathExists ./maintainers.nix then import ./maintainers.nix else { };
-
-    validation =
-      let
-        items = lib.mapAttrsToList (name: meta: {
-          inherit name;
-          missing =
-            (if meta.brief == null then [ "brief" ] else [ ])
-            ++ (if meta.description == null then [ "description" ] else [ ])
-            ++ (if meta.maintainers == null then [ "maintainers" ] else [ ])
-            ++ (if meta.license == null then [ "license" ] else [ ]);
-          file = meta._file;
-        }) moduleMetadata;
-      in
-      builtins.filter (x: x.missing != [ ]) items;
   };
 }
