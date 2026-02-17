@@ -18,6 +18,18 @@ let
     else
       pkgs.bash;
 
+  # INHERITANCE HELPER
+  # Filters out keys that are strictly ZenOS options, passing the rest to Legacy
+  passPrograms =
+    zenosPrograms: zenosOptions:
+    let
+      # Get list of options defined in schema
+      defined = builtins.attrNames (zenosOptions);
+      # Remove them from the config, leaving only freeform/legacy attrs
+      legacyOnly = lib.removeAttrs zenosPrograms defined;
+    in
+    legacyOnly;
+
   # --- CONFIGURATION BRIDGE ---
 in
 {
@@ -62,31 +74,42 @@ in
       ) cfg.environment;
     })
 
-    # 2. Root Legacy Plumbing
-    # We use .definitions to bypass evaluation of the config itself.
-    # This prevents infinite recursion cycles (config -> zenos.legacy -> config).
-    # (lib.mkIf (options.zenos ? legacy) (lib.mkMerge options.zenos.legacy.definitions))
+    # 2. AUTOMATIC PROGRAM INHERITANCE (System)
+    (lib.mkIf (options.zenos ? system && config.zenos.system.programs != { }) {
+      # Map freeform programs to legacy.programs
+      legacy.programs =
+        passPrograms config.zenos.system.programs options.zenos.system.programs.type.getSubOptions
+          [ ];
+    })
 
-    # # 3. Sandbox Legacy Plumbing
-    # # Same strategy: Merge definitions directly to root.
-    # (lib.mkIf (options.zenos.sandbox ? legacy) (lib.mkMerge options.zenos.sandbox.legacy.definitions))
-
-    # 4. User Plumbing
+    # 3. User Plumbing & Inheritance
     {
       users.users = lib.mapAttrs (
         name: userCfg:
         let
-          # Standard generated config
           baseConfig = {
             isNormalUser = true;
             shell = resolveShell (userCfg.shell or "bash");
             packages = userCfg.packages or [ ];
           };
+
+          # Calculate User Legacy Programs
+          legacyPrograms =
+            if userCfg.programs != { } then
+              passPrograms userCfg.programs options.zenos.users.type.nestedTypes.elemType.getSubOptions
+                [ ].programs.type.getSubOptions
+                [ ]
+            else
+              { };
+
         in
-        # MERGE: Base config + Legacy overrides
-        # This allows 'legacy' to define things like 'uid', 'extraGroups', 'openssh', etc.
-        baseConfig // (userCfg.legacy or { })
-      ) config.zenos.users;
+        # MERGE: Base + Legacy + Program Inheritance
+        baseConfig
+        // (userCfg.legacy or { })
+        // {
+          programs = (userCfg.legacy.programs or { }) // legacyPrograms;
+        }
+      ) (config.zenos.users or { });
     }
   ];
 }

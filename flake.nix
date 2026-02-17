@@ -29,9 +29,12 @@
 
               };
 
+              # 3. Programs Submodule (With Inheritance Support)
               programsSubmodule = lib.types.submodule {
                 imports = moduleTree.programModules or [ ];
-                options = commonOptions; # No legacy here
+                options = commonOptions;
+                # ALLOW ARBITRARY ATTRIBUTES
+                freeformType = lib.types.attrs;
               };
             in
             {
@@ -129,7 +132,12 @@
           gen =
             system:
             import ./lib/docs.nix {
-              inherit inputs self system;
+              inherit
+                inputs
+                self
+                system
+                moduleTree
+                ;
             };
         in
         {
