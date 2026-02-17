@@ -1,0 +1,7 @@
+{
+  "id": "17.02.2026-2",
+  "title": "ZenPkgs Browser v1.1.1 Release",
+  "date": "17.02.2026",
+  "authors": ["doromiert"],
+  "content": "## more robust maintainers and type handling \n\n since we're moving to a new format, i had to prepare the zenpkgs browser for it. so, what's new? \n - when the maintainer is an object instead of a string, it'll be properly interpreted \n - when the zenpkgs browser detects the new metadata format, it'll actually know how to use it \n - packages now use the toggle instead of a naive true by default \n\n not a lot but it's a minor release, eh"
+}
