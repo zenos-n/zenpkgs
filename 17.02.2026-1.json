@@ -1,0 +1,7 @@
+{
+  "id": "17.02.2026-1",
+  "title": "ZenPkgs Browser v1.1.0 Release",
+  "date": "17.02.2026",
+  "authors": ["doromiert"],
+  "content": "## better search performance\n\n since ZenPkgs will soon include all legacy options and packages, making search more performant was necessary.\n\n so, what did i do? i made it use the virtual scroller class used in the unfiltered tree.\n\n what this does is make it so that only the elements that are visible are rendered.\n\n before, with a 10mb test file (around 7k entries!), just typing anything into the search bar would make my browser freeze.\n\n now, it's buttery smooth as god intended.\n\n enjoy"
+}
