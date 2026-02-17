@@ -31,24 +31,48 @@ let
   mkPackageTree =
     pkgs: root:
     let
+      # Load local metadata to inject into lib
+      localLib = mkLib (dirOf root + "/lib");
+
+      # Create an extended lib that includes our custom maintainers and licenses
+      extendedLib = pkgs.lib.extend (self: super: {
+        maintainers = super.maintainers // (localLib.maintainers or { });
+        licenses = super.licenses // (localLib.licenses or { });
+      });
+
       isPkg = n: t: t == "regular" && lib.hasSuffix ".nix" n && n != "default.nix";
       files = walkDir root isPkg;
+
       toAttr =
         entry:
         let
-          imported = import entry.absPath;
-          # FIX: Only use callPackage if the file returns a function.
-          # This allows 'utils.nix' or library files to be plain sets.
-          value = if builtins.isFunction imported then pkgs.callPackage imported { } else imported;
+          # Use tryEval to prevent crash on broken imports
+          importedTry = builtins.tryEval (import entry.absPath);
+          imported = if importedTry.success then importedTry.value else { };
+
+          # Pass the extended lib so lib.licenses.napalm works
+          value = if builtins.isFunction imported
+                  then pkgs.callPackage imported { lib = extendedLib; }
+                  else imported;
         in
         {
           attrPath = entry.relPath ++ [ (lib.removeSuffix ".nix" entry.name) ];
           inherit value;
         };
-    in
-    lib.foldl' (acc: el: lib.setAttrByPath el.attrPath el.value acc) { } (map toAttr files);
 
-  # --- LOGIC 2: Module Tree Scanner (Magic Discovery) ---
+      allAttrs = map toAttr files;
+    in
+    lib.foldl' (acc: el:
+      let
+        existing = lib.attrByPath el.attrPath null acc;
+      in
+      # Avoid overwriting or merging into derivations (leaf nodes)
+      if existing != null && (lib.isDerivation existing || !builtins.isAttrs el.value)
+      then acc
+      else lib.recursiveUpdate acc (lib.setAttrByPath el.attrPath el.value)
+    ) { } allAttrs;
+
+  # --- LOGIC 2: Module Tree Scanner ---
   mkModuleTree =
     root:
     let
