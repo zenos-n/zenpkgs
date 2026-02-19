@@ -9,28 +9,25 @@
 let
   cfg = config.zenos.sandbox;
 
-  resolveShell =
-    name:
-    if name == "bash" then
-      pkgs.bash
-    else if name == "fish" then
-      pkgs.fish
-    else
-      pkgs.bash;
-
   # INHERITANCE HELPER
-  # Filters out keys that are strictly ZenOS options, passing the rest to Legacy
   passPrograms =
     zenosPrograms: zenosOptions:
     let
-      # Get list of options defined in schema
+      # Get list of options defined in schema (including our new .legacy)
       defined = builtins.attrNames (zenosOptions);
       # Remove them from the config, leaving only freeform/legacy attrs
       legacyOnly = lib.removeAttrs zenosPrograms defined;
     in
     legacyOnly;
 
-  # --- CONFIGURATION BRIDGE ---
+  # Combined legacy programs for a specific context
+  getLegacyPrograms =
+    zenosPrograms: zenosOptions:
+    let
+      explicitLegacy = zenosPrograms.legacy or { };
+      inheritedLegacy = passPrograms zenosPrograms zenosOptions;
+    in
+    lib.recursiveUpdate explicitLegacy inheritedLegacy;
 in
 {
   # Define the sandbox options (user-facing)
@@ -62,9 +59,8 @@ in
     };
   };
 
-  # Apply Logic
   config = lib.mkMerge [
-    # 1. Map Sandbox to Internal Modules
+    # 1. Map Sandbox
     (lib.mkIf (cfg != { }) {
       zenos.system = lib.mkIf (options.zenos ? system && cfg.system != { }) cfg.system;
       zenos.users = lib.mkIf (options.zenos ? users && cfg.users != { }) cfg.users;
@@ -74,36 +70,31 @@ in
       ) cfg.environment;
     })
 
-    # 2. AUTOMATIC PROGRAM INHERITANCE (System)
+    # 2. System Program Inheritance
     (lib.mkIf (options.zenos ? system && config.zenos.system.programs != { }) {
-      # Map freeform programs to legacy.programs
       legacy.programs =
-        passPrograms config.zenos.system.programs options.zenos.system.programs.type.getSubOptions
+        getLegacyPrograms config.zenos.system.programs options.zenos.system.programs.type.getSubOptions
           [ ];
     })
 
-    # 3. User Plumbing & Inheritance
+    # 3. User Plumbing
     {
       users.users = lib.mapAttrs (
         name: userCfg:
         let
           baseConfig = {
-            isNormalUser = true;
-            shell = resolveShell (userCfg.shell or "bash");
-            packages = userCfg.packages or [ ];
           };
 
-          # Calculate User Legacy Programs
+          # User specific legacy programs
           legacyPrograms =
             if userCfg.programs != { } then
-              passPrograms userCfg.programs options.zenos.users.type.nestedTypes.elemType.getSubOptions
+              getLegacyPrograms userCfg.programs options.zenos.users.type.nestedTypes.elemType.getSubOptions
                 [ ].programs.type.getSubOptions
                 [ ]
             else
               { };
 
         in
-        # MERGE: Base + Legacy + Program Inheritance
         baseConfig
         // (userCfg.legacy or { })
         // {

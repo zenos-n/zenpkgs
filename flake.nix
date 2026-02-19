@@ -25,16 +25,16 @@
               };
 
               # 2. Common Options
-              commonOptions = {
+              commonOptions = { };
 
-              };
-
-              # 3. Programs Submodule (With Inheritance Support)
+              # 3. Programs Submodule (With Internal Legacy Support)
               programsSubmodule = lib.types.submodule {
                 imports = moduleTree.programModules or [ ];
-                options = commonOptions;
-                # ALLOW ARBITRARY ATTRIBUTES
-                freeformType = lib.types.attrs;
+                options = commonOptions // {
+                  # Allows users to specify legacy programs inside the programs block
+                  legacy = legacyOption;
+                };
+                # ALLOW ARBITRARY ATTRIBUTES (for automatic inheritance)
               };
             in
             {
@@ -104,10 +104,6 @@
         zenos = (prev.zenos or { }) // (zenCore.mkPackageTree final ./pkgs);
       };
 
-      # --- MODULE DEFINITIONS ---
-
-      # 1. Structural Module (Safe for Docs)
-      # Contains only options and logic. No overlay injection.
       nixosModules.structure =
         { ... }:
         {
@@ -117,8 +113,6 @@
           ];
         };
 
-      # 2. Default Module (For Users)
-      # Imports structure AND injects the overlay.
       nixosModules.default =
         { ... }:
         {
@@ -126,7 +120,6 @@
           nixpkgs.overlays = [ self.overlays.default ];
         };
 
-      # --- DOCS GENERATOR ---
       docs =
         let
           gen =

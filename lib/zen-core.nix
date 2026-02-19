@@ -35,10 +35,12 @@ let
       localLib = mkLib (dirOf root + "/lib");
 
       # Create an extended lib that includes our custom maintainers and licenses
-      extendedLib = pkgs.lib.extend (self: super: {
-        maintainers = super.maintainers // (localLib.maintainers or { });
-        licenses = super.licenses // (localLib.licenses or { });
-      });
+      extendedLib = pkgs.lib.extend (
+        self: super: {
+          maintainers = super.maintainers // (localLib.maintainers or { });
+          licenses = super.licenses // (localLib.licenses or { });
+        }
+      );
 
       isPkg = n: t: t == "regular" && lib.hasSuffix ".nix" n && n != "default.nix";
       files = walkDir root isPkg;
@@ -51,9 +53,8 @@ let
           imported = if importedTry.success then importedTry.value else { };
 
           # Pass the extended lib so lib.licenses.napalm works
-          value = if builtins.isFunction imported
-                  then pkgs.callPackage imported { lib = extendedLib; }
-                  else imported;
+          value =
+            if builtins.isFunction imported then pkgs.callPackage imported { lib = extendedLib; } else imported;
         in
         {
           attrPath = entry.relPath ++ [ (lib.removeSuffix ".nix" entry.name) ];
@@ -62,14 +63,16 @@ let
 
       allAttrs = map toAttr files;
     in
-    lib.foldl' (acc: el:
+    lib.foldl' (
+      acc: el:
       let
         existing = lib.attrByPath el.attrPath null acc;
       in
       # Avoid overwriting or merging into derivations (leaf nodes)
-      if existing != null && (lib.isDerivation existing || !builtins.isAttrs el.value)
-      then acc
-      else lib.recursiveUpdate acc (lib.setAttrByPath el.attrPath el.value)
+      if existing != null && (lib.isDerivation existing || !builtins.isAttrs el.value) then
+        acc
+      else
+        lib.recursiveUpdate acc (lib.setAttrByPath el.attrPath el.value)
     ) { } allAttrs;
 
   # --- LOGIC 2: Module Tree Scanner ---
@@ -102,7 +105,7 @@ let
     path:
     let
       raw = builtins.readFile path;
-      wrapped = "{ hostDir, ... }:\n{\n" + raw + "\n}";
+      wrapped = "{ pkgs, lib, config, options, hostDir, ... }:\n{\n" + raw + "\n}";
       storeFile = builtins.toFile "zen-config.nix" wrapped;
     in
     import storeFile;
@@ -131,14 +134,29 @@ let
           value = inputs.nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
             specialArgs = { inherit inputs; };
-            modules = modules ++ [
-              (
-                { ... }:
-                {
-                  zenos = if lib.isFunction configLoader then configLoader { inherit hostDir; } else configLoader;
-                }
-              )
-            ];
+            modules =
+              modules
+              ++ [
+                (
+                  args@{
+                    pkgs,
+                    lib,
+                    config,
+                    options,
+                    ...
+                  }:
+                  {
+                    zenos =
+                      if lib.isFunction configLoader then configLoader (args // { inherit hostDir; }) else configLoader;
+                  }
+                )
+              ]
+              ++ (
+                if builtins.pathExists (hostDir + "/hardware-configuration.nix") then
+                  [ (hostDir + "/hardware-configuration.nix") ]
+                else
+                  [ ]
+              );
           };
         };
     in
