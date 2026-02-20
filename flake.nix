@@ -1,205 +1,90 @@
 {
-  description = "ZenPKGS - Negative Zero Overlay & Configs";
+  description = "ZenOS - System Architecture Framework";
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    home-manager.url = "github:nix-community/home-manager";
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      ...
-    }@inputs:
+    { self, nixpkgs, ... }@inputs:
     let
-      # --- 1. Create the Super Lib correctly ---
-      # We use the 'self' reference to pull the local files
-      superLib = nixpkgs.lib.extend (
-        lself: lsuper: {
-          maintainers = lsuper.maintainers // (import ./lib/maintainers.nix);
-          licenses = lsuper.licenses // (import ./lib/licenses.nix);
-        }
-      );
+      lib = nixpkgs.lib;
+      system = "x86_64-linux";
 
-      # Pass this superLib to zenCore
-      zenCore = import ./lib/zen-core.nix {
-        lib = superLib;
-        inherit inputs;
-      };
-      moduleTree = zenCore.mkModuleTree ./modules;
+      zenBuilder = import ./lib/module-builder.nix { inherit lib; };
+      zenCore = import ./lib/zen-core.nix { inherit lib inputs; };
 
-      # --- 2. Fix the autoMounter closure ---
-      autoMounter =
-        { lib, pkgs, ... }:
+      zenOSModules = zenBuilder.mapZenModules ./modules [ ];
+
+      # The coreModule now ONLY provides options.
+      # Logic is handled by the builder and the host generator to prevent recursion.
+      coreModule =
+        { ... }:
         {
-          options.zenos =
-            let
-              # 1. Define the Legacy Passthrough Option
-              legacyOption = lib.mkOption {
-                type = lib.types.attrs;
-                default = { };
-                description = "Passthrough attributes to the underlying NixOS configuration";
-              };
+          options.zenos = {
+            legacy = lib.mkOption {
+              type = lib.types.attrsOf lib.types.anything;
+              default = { };
+              description = "Raw NixOS options merged at the root level.";
+            };
 
-              # 2. Common Options
-              pkgSetType = lib.types.attrsOf (lib.types.either lib.types.bool lib.types.attrs);
-              commonOptions = {
-                meta = lib.mkOption {
-                  type = lib.types.attrs;
-                  default = { };
-                  description = "ZenOS internal module metadata";
-                };
-
-                # NEW: The aggregation buffer for programs
-                __installPackages = lib.mkOption {
-                  type = lib.types.listOf lib.types.package;
-                  default = [ ];
-                  description = "Internal buffer of packages requested by enabled programs";
-                };
-
-                __configFiles = lib.mkOption {
-                  type = lib.types.attrs;
-                  default = { };
-                  description = "Internal buffer of configuration files (mapped to /etc or ~/.config)";
-                };
-
-                # _devlegacy = legacyOption;
-              };
-
-              # 3. Programs Submodule (With Internal Legacy Support)
-              programsSubmodule = lib.types.submoduleWith {
-                modules = (moduleTree.programs or [ ]) ++ [
+            users = lib.mkOption {
+              type = lib.types.attrsOf (
+                lib.types.submodule (
+                  { name, ... }:
                   {
-                    options = commonOptions // {
-                      # Allows users to specify legacy programs inside the programs block
-                      legacy = legacyOption;
-                    };
-                  }
-                ];
-                specialArgs = {
-                  inherit pkgs;
-                  hm = home-manager.lib.hm;
-                };
-              };
-            in
-            {
-              # --- ROOT LEVEL LEGACY ---
-              legacy = legacyOption;
-
-              users = lib.mkOption {
-                type = lib.types.attrsOf (
-                  lib.types.submodule {
                     options = {
-                      legacy = legacyOption;
-                      packages = lib.mkOption {
-                        type = pkgSetType;
+                      legacy = lib.mkOption {
+                        type = lib.types.attrsOf lib.types.anything;
                         default = { };
+                        description = "Raw NixOS user settings for ${name}.";
                       };
                       programs = lib.mkOption {
-                        type = programsSubmodule;
+                        type = lib.types.attrsOf lib.types.anything;
                         default = { };
                       };
-                    }
-                    // commonOptions;
+                    };
                   }
-                );
-                default = { };
-              };
-
-              system = lib.mkOption {
-                type = lib.types.submodule {
-                  imports = moduleTree.system or [ ];
-                  options = commonOptions // {
-                    packages = lib.mkOption {
-                      type = pkgSetType;
-                      default = { };
-                    };
-                    programs = lib.mkOption {
-                      type = programsSubmodule;
-                      default = { };
-                    };
-                  };
-                };
-                default = { };
-              };
-            }
-            // (
-              let
-                special = [
-                  "system"
-                  "userModules"
-                  "programModules"
-                  "programs" # Add this to prevent root mounting
-                ];
-                generic = lib.removeAttrs moduleTree special;
-              in
-              lib.mapAttrs (
-                name: paths:
-                lib.mkOption {
-                  type = lib.types.submoduleWith {
-                    modules = paths ++ [ { options = commonOptions; } ];
-                    specialArgs = {
-                      hm = home-manager.lib.hm;
-                      inherit pkgs;
-                    };
-                  };
-                  default = { };
-                }
-              ) generic
-            );
+                )
+              );
+              default = { };
+              description = "ZenOS user configurations.";
+            };
+          };
         };
+
+      allZenModules = zenOSModules ++ [ coreModule ];
+
     in
     {
-      inputs = inputs;
-      lib = superLib // {
-        core = zenCore;
-      };
-
+      lib.core = zenCore;
       overlays.default = final: prev: {
-        zenos = (prev.zenos or { }) // (zenCore.mkPackageTree final ./pkgs);
+        zenos = (zenCore.mkPackageTree prev ./pkgs) // {
+          legacy = prev;
+        };
+      };
+      nixosModules.default = {
+        imports = allZenModules;
+      };
+      nixosModules.structure = {
+        imports = allZenModules;
       };
 
-      nixosModules.structure =
-        { ... }:
-        {
-          _module.args = {
-            # Pass the raw moduleTree so bridge.nix can see the structure
-            inherit moduleTree;
+      docs = import ./lib/docs.nix {
+        inherit inputs self system;
+        zenOSModules = allZenModules;
+        moduleTree =
+          let
+            getFiles =
+              dir:
+              if builtins.pathExists dir then
+                zenCore.walkDir dir (n: t: t == "regular" && (lib.hasSuffix ".nix" n || lib.hasSuffix ".zmdl" n))
+              else
+                [ ];
+          in
+          {
+            modules = map (e: e.absPath) (getFiles ./modules);
           };
-          imports = [
-            home-manager.nixosModules.home-manager
-            ./modules/bridge.nix
-            autoMounter
-          ];
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
-        };
-
-      nixosModules.default =
-        { ... }:
-        {
-          imports = [ self.nixosModules.structure ];
-          nixpkgs.overlays = [ self.overlays.default ];
-        };
-
-      docs =
-        let
-          gen =
-            system:
-            import ./lib/docs.nix {
-              inherit
-                inputs
-                self
-                system
-                moduleTree
-                ;
-            };
-        in
-        {
-          x86_64-linux = gen "x86_64-linux";
-          aarch64-linux = gen "aarch64-linux";
-        };
+      };
     };
 }

@@ -1,7 +1,6 @@
-# FILE: zenpkgs/lib/zen-core.nix
 { lib, inputs }:
 let
-  # --- HELPER: Recursive Directory Walker ---
+  # Recursive Directory Walker
   walkDir =
     dir: criteriaFn:
     let
@@ -27,133 +26,89 @@ let
     in
     lib.flatten (map processEntry entries);
 
-  # --- LOGIC 1: Package Importer (Resilient) ---
+  # Package Tree Generator
+  # Maps a directory (e.g., ./pkgs) to an attribute set of callPackage calls
   mkPackageTree =
     pkgs: root:
     let
-      # Load local metadata to inject into lib
-      localLib = mkLib (dirOf root + "/lib");
-
-      # Create an extended lib that includes our custom maintainers and licenses
-      extendedLib = pkgs.lib.extend (
-        self: super: {
-          maintainers = super.maintainers // (localLib.maintainers or { });
-          licenses = super.licenses // (localLib.licenses or { });
-        }
-      );
-
-      isPkg = n: t: t == "regular" && lib.hasSuffix ".nix" n && n != "default.nix";
+      isPkg = n: t: n == "default.nix";
       files = walkDir root isPkg;
-
-      toAttr =
-        entry:
-        let
-          # Use tryEval to prevent crash on broken imports
-          importedTry = builtins.tryEval (import entry.absPath);
-          imported = if importedTry.success then importedTry.value else { };
-
-          # Pass the extended lib so lib.licenses.napalm works
-          value =
-            if builtins.isFunction imported then pkgs.callPackage imported { lib = extendedLib; } else imported;
-        in
-        {
-          attrPath = entry.relPath ++ [ (lib.removeSuffix ".nix" entry.name) ];
-          inherit value;
-        };
-
-      allAttrs = map toAttr files;
+      toAttr = entry: {
+        # Use the parent directory name as the attribute name
+        name = lib.last entry.relPath;
+        value = pkgs.callPackage entry.absPath { };
+      };
     in
-    lib.foldl' (
-      acc: el:
-      let
-        existing = lib.attrByPath el.attrPath null acc;
-      in
-      # Avoid overwriting or merging into derivations (leaf nodes)
-      if existing != null && (lib.isDerivation existing || !builtins.isAttrs el.value) then
-        acc
-      else
-        lib.recursiveUpdate acc (lib.setAttrByPath el.attrPath el.value)
-    ) { } allAttrs;
+    builtins.listToAttrs (map toAttr files);
 
-  # --- LOGIC 2: Module Tree Scanner ---
-  mkModuleTree =
-    root:
-    let
-      dirs =
-        if builtins.pathExists root then
-          lib.attrNames (lib.filterAttrs (n: v: v == "directory") (builtins.readDir root))
-        else
-          [ ];
-      getModules =
-        subdir:
-        let
-          isMod = n: t: t == "regular" && lib.hasSuffix ".nix" n;
-          files = walkDir (root + "/${subdir}") isMod;
-        in
-        map (e: e.absPath) files;
-    in
-    lib.genAttrs dirs (d: getModules d);
-
-  mkLib = root: {
-    maintainers =
-      if builtins.pathExists (root + "/maintainers.nix") then import (root + "/maintainers.nix") else { };
-    licenses =
-      if builtins.pathExists (root + "/licenses.nix") then import (root + "/licenses.nix") else { };
-  };
-
-  importZen =
+  # ZCFG / Flat File Importer (for host configs)
+  importZcfg =
     path:
+    {
+      pkgs,
+      lib,
+      config,
+      ...
+    }@args:
     let
-      raw = builtins.readFile path;
-      wrapped = "{ pkgs, lib, config, options, hostDir, ... }:\n{\n" + raw + "\n}";
-      storeFile = builtins.toFile "zen-config.nix" wrapped;
-    in
-    import storeFile;
+      hostDir = dirOf path;
+      content = builtins.readFile path;
+      wrapped = "{ " + content + " }";
+      tempFile = builtins.toFile "zen-config-wrapped.nix" wrapped;
 
+      scope = args // {
+        inherit hostDir;
+        importZen = p: importZcfg p args;
+        conf = f: importZcfg (hostDir + "/config/${f}") args;
+      };
+
+      raw = builtins.scopedImport scope tempFile;
+    in
+    if builtins.isFunction raw then raw args else raw;
+
+  # Host Generator
   mkHosts =
     {
       root,
       modules ? [ ],
+      specialArgs ? { },
     }:
     let
       isHost = n: t: n == "host.nix" || n == "host.zcfg" || n == "host.nzo";
       files = walkDir root isHost;
-      # Inside mkHosts in zen-core.nix
+
       mkSystem =
         entry:
         let
           name = builtins.concatStringsSep "." entry.relPath;
-          hostDir = dirOf entry.absPath;
 
-          # 1. Create the "Super Lib" early
+          hostModule =
+            args:
+            let
+              raw =
+                if (lib.hasSuffix ".zcfg" entry.name || lib.hasSuffix ".nzo" entry.name) then
+                  importZcfg entry.absPath args
+                else
+                  import entry.absPath args;
 
-          configLoader =
-            if (lib.hasSuffix ".zcfg" entry.name || lib.hasSuffix ".nzo" entry.name) then
-              (importZen entry.absPath)
-            else
-              (import entry.absPath);
+              legacyConfig = raw.legacy or { };
+              zenosConfig = builtins.removeAttrs raw [ "legacy" ];
+            in
+            {
+              config = lib.mkMerge [
+                legacyConfig
+                { zenos = zenosConfig; }
+              ];
+            };
         in
         {
-          name = name;
-          # 2. IMPORTANT: Use superLib's nixosSystem, not inputs.nixpkgs.lib
+          inherit name;
           value = lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = {
+            specialArgs = specialArgs // {
               inherit inputs;
-              lib = lib;
             };
-            modules = modules ++ [
-              # 3. Force the module system's internal lib reference
-              { _module.args.lib = lib; }
-
-              (
-                args@{ pkgs, lib, ... }:
-                {
-                  zenos =
-                    if lib.isFunction configLoader then configLoader (args // { inherit hostDir; }) else configLoader;
-                }
-              )
-            ];
+            modules = modules ++ [ hostModule ];
           };
         };
     in
@@ -161,10 +116,5 @@ let
 
 in
 {
-  inherit
-    mkPackageTree
-    mkHosts
-    mkLib
-    mkModuleTree
-    ;
+  inherit mkHosts walkDir mkPackageTree;
 }
