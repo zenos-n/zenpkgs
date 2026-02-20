@@ -3,10 +3,16 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
     let
       lib = nixpkgs.lib;
       zenCore = import ./lib/zen-core.nix { inherit lib inputs; };
@@ -31,11 +37,26 @@
                   default = { };
                   description = "ZenOS internal module metadata";
                 };
+
+                # NEW: The aggregation buffer for programs
+                __installPackages = lib.mkOption {
+                  type = lib.types.listOf lib.types.package;
+                  default = [ ];
+                  description = "Internal buffer of packages requested by enabled programs";
+                };
+
+                __configFiles = lib.mkOption {
+                  type = lib.types.attrs;
+                  default = { };
+                  description = "Internal buffer of configuration files (mapped to /etc or ~/.config)";
+                };
+
+                _devlegacy = legacyOption;
               };
 
               # 3. Programs Submodule (With Internal Legacy Support)
               programsSubmodule = lib.types.submoduleWith {
-                modules = (moduleTree.programModules or [ ]) ++ [
+                modules = (moduleTree.programs or [ ]) ++ [
                   {
                     options = commonOptions // {
                       # Allows users to specify legacy programs inside the programs block
@@ -43,7 +64,10 @@
                     };
                   }
                 ];
-                specialArgs = { inherit pkgs; };
+                specialArgs = {
+                  inherit pkgs;
+                  hm = home-manager.lib.hm;
+                };
               };
             in
             {
@@ -87,6 +111,7 @@
                   "system"
                   "userModules"
                   "programModules"
+                  "programs" # Add this to prevent root mounting
                 ];
                 generic = lib.removeAttrs moduleTree special;
               in
@@ -95,7 +120,10 @@
                 lib.mkOption {
                   type = lib.types.submoduleWith {
                     modules = paths ++ [ { options = commonOptions; } ];
-                    specialArgs = { inherit pkgs; };
+                    specialArgs = {
+                      hm = home-manager.lib.hm;
+                      inherit pkgs;
+                    };
                   };
                   default = { };
                 }
@@ -117,9 +145,12 @@
         { ... }:
         {
           imports = [
+            home-manager.nixosModules.home-manager
             ./modules/bridge.nix
             autoMounter
           ];
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
         };
 
       nixosModules.default =

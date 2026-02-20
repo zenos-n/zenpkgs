@@ -35,8 +35,9 @@ let
         boot.loader.systemd-boot.enable = true;
         system.stateVersion = "2.5.11";
         _module.check = false;
-        # Inject the extended lib so modules can access custom properties
         _module.args.lib = lib;
+        # --- ADD THIS LINE ---
+        _module.args.isDocs = true;
       }
     ];
   };
@@ -433,7 +434,11 @@ let
             let
               clean =
                 attrs:
-                builtins.removeAttrs attrs [
+                let
+                  # Drop any internal options starting with __
+                  noHidden = lib.filterAttrs (k: v: !(lib.hasPrefix "__" k) && k != "_devlegacy") attrs;
+                in
+                builtins.removeAttrs noHidden [
                   "_module"
                   "_args"
                   "freeformType"
