@@ -14,10 +14,23 @@
       ...
     }@inputs:
     let
-      lib = nixpkgs.lib;
-      zenCore = import ./lib/zen-core.nix { inherit lib inputs; };
+      # --- 1. Create the Super Lib correctly ---
+      # We use the 'self' reference to pull the local files
+      superLib = nixpkgs.lib.extend (
+        lself: lsuper: {
+          maintainers = lsuper.maintainers // (import ./lib/maintainers.nix);
+          licenses = lsuper.licenses // (import ./lib/licenses.nix);
+        }
+      );
+
+      # Pass this superLib to zenCore
+      zenCore = import ./lib/zen-core.nix {
+        lib = superLib;
+        inherit inputs;
+      };
       moduleTree = zenCore.mkModuleTree ./modules;
 
+      # --- 2. Fix the autoMounter closure ---
       autoMounter =
         { lib, pkgs, ... }:
         {
@@ -52,7 +65,7 @@
                   description = "Internal buffer of configuration files (mapped to /etc or ~/.config)";
                 };
 
-                _devlegacy = legacyOption;
+                # _devlegacy = legacyOption;
               };
 
               # 3. Programs Submodule (With Internal Legacy Support)
@@ -140,8 +153,8 @@
     in
     {
       inputs = inputs;
-      lib = (zenCore.mkLib ./lib) // {
-        core = import ./lib/zen-core.nix;
+      lib = superLib // {
+        core = zenCore;
       };
 
       overlays.default = final: prev: {

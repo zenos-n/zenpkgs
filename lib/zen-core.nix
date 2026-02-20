@@ -118,11 +118,15 @@ let
     let
       isHost = n: t: n == "host.nix" || n == "host.zcfg" || n == "host.nzo";
       files = walkDir root isHost;
+      # Inside mkHosts in zen-core.nix
       mkSystem =
         entry:
         let
           name = builtins.concatStringsSep "." entry.relPath;
           hostDir = dirOf entry.absPath;
+
+          # 1. Create the "Super Lib" early
+
           configLoader =
             if (lib.hasSuffix ".zcfg" entry.name || lib.hasSuffix ".nzo" entry.name) then
               (importZen entry.absPath)
@@ -131,41 +135,25 @@ let
         in
         {
           name = name;
-          value = inputs.nixpkgs.lib.nixosSystem {
+          # 2. IMPORTANT: Use superLib's nixosSystem, not inputs.nixpkgs.lib
+          value = lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = { inherit inputs; };
-            modules =
-              modules
-              ++ [
+            specialArgs = {
+              inherit inputs;
+              lib = lib;
+            };
+            modules = modules ++ [
+              # 3. Force the module system's internal lib reference
+              { _module.args.lib = lib; }
+
+              (
+                args@{ pkgs, lib, ... }:
                 {
-                  # Inject custom lib so host modules have access to napalm
-                  _module.args.lib = inputs.nixpkgs.lib.extend (
-                    lself: lsuper: {
-                      maintainers = lsuper.maintainers // (inputs.self.lib.maintainers or { });
-                      licenses = lsuper.licenses // (inputs.self.lib.licenses or { });
-                    }
-                  );
+                  zenos =
+                    if lib.isFunction configLoader then configLoader (args // { inherit hostDir; }) else configLoader;
                 }
-                (
-                  args@{
-                    pkgs,
-                    lib,
-                    config,
-                    options,
-                    ...
-                  }:
-                  {
-                    zenos =
-                      if lib.isFunction configLoader then configLoader (args // { inherit hostDir; }) else configLoader;
-                  }
-                )
-              ]
-              ++ (
-                if builtins.pathExists (hostDir + "/hardware-configuration.nix") then
-                  [ (hostDir + "/hardware-configuration.nix") ]
-                else
-                  [ ]
-              );
+              )
+            ];
           };
         };
     in

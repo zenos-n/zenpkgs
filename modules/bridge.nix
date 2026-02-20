@@ -98,7 +98,35 @@ in
 {
   # Define the sandbox options (user-facing)
   options = {
-    legacy = { };
+    zenos = {
+
+      desktops._devlegacy = lib.mkOption {
+        type = lib.types.attrs;
+        default = { };
+      };
+      environment._devlegacy = lib.mkOption {
+        type = lib.types.attrs;
+        default = { };
+      };
+      system._devlegacy = lib.mkOption {
+        type = lib.types.attrs;
+        default = { };
+      };
+      system.programs._devlegacy = lib.mkOption {
+        type = lib.types.attrs;
+        default = { };
+      };
+    };
+    _devlegacy = lib.mkOption {
+      type = lib.types.attrsOf lib.types.anything;
+      default = { };
+      description = "Root passthrough for native NixOS configuration from modules";
+    };
+    legacy = lib.mkOption {
+      type = lib.types.attrsOf lib.types.anything;
+      default = { };
+      description = "Global Legacy Passthrough";
+    };
     zenos.sandbox = {
       system = lib.mkOption {
         description = "System-level configuration sandbox";
@@ -129,6 +157,15 @@ in
   };
 
   config = lib.mkMerge [
+    (lib.mkIf (cfg != { }) {
+      zenos.system = lib.mkIf (options.zenos ? system && cfg.system != { }) cfg.system;
+      zenos.users = lib.mkIf (options.zenos ? users && cfg.users != { }) cfg.users;
+      zenos.desktops = lib.mkIf (options.zenos ? desktops && cfg.desktops != { }) cfg.desktops;
+      zenos.environment = lib.mkIf (
+        options.zenos ? environment && cfg.environment != { }
+      ) cfg.environment;
+    })
+
     # 1. Map Sandbox
     (lib.mkIf (cfg != { }) {
       zenos.system = lib.mkIf (options.zenos ? system && cfg.system != { }) cfg.system;
@@ -173,5 +210,6 @@ in
         home.stateVersion = config.system.stateVersion;
       }) config.zenos.users;
     }
+
   ];
 }
