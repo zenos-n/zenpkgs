@@ -13,7 +13,7 @@
       moduleTree = zenCore.mkModuleTree ./modules;
 
       autoMounter =
-        { lib, ... }:
+        { lib, pkgs, ... }:
         {
           options.zenos =
             let
@@ -25,16 +25,25 @@
               };
 
               # 2. Common Options
-              commonOptions = { };
+              commonOptions = {
+                meta = lib.mkOption {
+                  type = lib.types.attrs;
+                  default = { };
+                  description = "ZenOS internal module metadata";
+                };
+              };
 
               # 3. Programs Submodule (With Internal Legacy Support)
-              programsSubmodule = lib.types.submodule {
-                imports = moduleTree.programModules or [ ];
-                options = commonOptions // {
-                  # Allows users to specify legacy programs inside the programs block
-                  legacy = legacyOption;
-                };
-                # ALLOW ARBITRARY ATTRIBUTES (for automatic inheritance)
+              programsSubmodule = lib.types.submoduleWith {
+                modules = (moduleTree.programModules or [ ]) ++ [
+                  {
+                    options = commonOptions // {
+                      # Allows users to specify legacy programs inside the programs block
+                      legacy = legacyOption;
+                    };
+                  }
+                ];
+                specialArgs = { inherit pkgs; };
               };
             in
             {
@@ -84,9 +93,9 @@
               lib.mapAttrs (
                 name: paths:
                 lib.mkOption {
-                  type = lib.types.submodule {
-                    imports = paths;
-                    options = commonOptions;
+                  type = lib.types.submoduleWith {
+                    modules = paths ++ [ { options = commonOptions; } ];
+                    specialArgs = { inherit pkgs; };
                   };
                   default = { };
                 }

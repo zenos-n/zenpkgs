@@ -137,6 +137,15 @@ let
             modules =
               modules
               ++ [
+                {
+                  # Inject custom lib so host modules have access to napalm
+                  _module.args.lib = inputs.nixpkgs.lib.extend (
+                    lself: lsuper: {
+                      maintainers = lsuper.maintainers // (inputs.self.lib.maintainers or { });
+                      licenses = lsuper.licenses // (inputs.self.lib.licenses or { });
+                    }
+                  );
+                }
                 (
                   args@{
                     pkgs,
