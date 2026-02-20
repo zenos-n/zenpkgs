@@ -31,6 +31,7 @@
               };
 
               # 2. Common Options
+              pkgSetType = lib.types.attrsOf (lib.types.either lib.types.bool lib.types.attrs);
               commonOptions = {
                 meta = lib.mkOption {
                   type = lib.types.attrs;
@@ -77,16 +78,18 @@
               users = lib.mkOption {
                 type = lib.types.attrsOf (
                   lib.types.submodule {
-                    imports = moduleTree.userModules or [ ];
-                    options = commonOptions // {
-                      # --- USER LEVEL LEGACY ---
+                    options = {
                       legacy = legacyOption;
-
+                      packages = lib.mkOption {
+                        type = pkgSetType;
+                        default = { };
+                      };
                       programs = lib.mkOption {
                         type = programsSubmodule;
                         default = { };
                       };
-                    };
+                    }
+                    // commonOptions;
                   }
                 );
                 default = { };
@@ -96,6 +99,10 @@
                 type = lib.types.submodule {
                   imports = moduleTree.system or [ ];
                   options = commonOptions // {
+                    packages = lib.mkOption {
+                      type = pkgSetType;
+                      default = { };
+                    };
                     programs = lib.mkOption {
                       type = programsSubmodule;
                       default = { };
@@ -144,6 +151,10 @@
       nixosModules.structure =
         { ... }:
         {
+          _module.args = {
+            # Pass the raw moduleTree so bridge.nix can see the structure
+            inherit moduleTree;
+          };
           imports = [
             home-manager.nixosModules.home-manager
             ./modules/bridge.nix
