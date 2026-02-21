@@ -31,7 +31,20 @@ let
       ...
     }@args:
     let
-      attrPath = lib.concatStringsSep "." ([ "zenos" ] ++ pathList);
+      # Check if this module is in the programs namespace
+      isProgram = builtins.length pathList > 0 && builtins.head pathList == "programs";
+
+      # Adjust path pointers for $path / $cfg replacements
+      attrPath = lib.concatStringsSep "." (
+        if isProgram then
+          [
+            "zenos"
+            "system"
+          ]
+          ++ pathList
+        else
+          [ "zenos" ] ++ pathList
+      );
       cfgPath = "config.${attrPath}";
       name = lib.last pathList;
 
@@ -55,12 +68,12 @@ let
             rawContent = builtins.readFile file;
             trimmed = lib.trim rawContent;
             templated = lib.replaceStrings [ "$path" "$cfg" "$name" ] [ attrPath cfgPath name ] rawContent;
-
             wrapped =
               if lib.hasPrefix "{" trimmed then
                 ''
                   { pkgs, lib, config, enableOption, maintainers, ... }@args:
-                  let f = ${templated}; in if builtins.isFunction f then f args else f
+                  let f = ${templated};
+                  in if builtins.isFunction f then f args else f
                 ''
               else
                 ''
@@ -91,41 +104,90 @@ let
               n: v:
               lib.mkOption {
                 type = mapType (v.type or "freeform") (v.enum or [ ]);
-                default = v.default or (if v.type or "" == "bool" then false else null);
+                default = v.default or (if (v.type or "") == "bool" then false else null);
                 description = v._meta.brief or v.meta.brief or "";
               }
             ) leaves)
             // (lib.mapAttrs (n: v: v.option) processedNodes);
 
+          # NEW: action now accepts a relative namespace configuration
+          # In lib/module-builder.nix
           action =
-            config:
+            localConfig: isUser: # <-- ADD isUser parameter here
             let
-              nodeCfg = lib.attrByPath ([ "zenos" ] ++ path) { } config;
+              nodeCfg = lib.attrByPath path { } localConfig;
             in
             lib.mkMerge (
               (lib.mapAttrsToList (
                 n: v:
                 if (v.type or "") == "bool" then
-                  lib.mkIf (nodeCfg.${n} or false) (v.action or { })
+                  let
+                    # If action is a function, pass the dynamic context
+                    evaluatedAction =
+                      if builtins.isFunction (v.action or { }) then
+                        (v.action or { }) {
+                          cfg = nodeCfg;
+                          inherit isUser;
+                        }
+                      else
+                        (v.action or { });
+                  in
+                  lib.mkIf (nodeCfg.${n} or false) evaluatedAction
                 else if v ? action then
-                  (v.action nodeCfg.${n})
+                  if builtins.isFunction v.action then
+                    v.action nodeCfg.${n} # Keep existing behavior for non-bools
+                  else
+                    v.action
                 else
                   { }
               ) leaves)
-              ++ (lib.mapAttrsToList (n: v: v.action config) processedNodes)
+              ++ (lib.mapAttrsToList (
+                n: v: v.action localConfig isUser # <-- Pass isUser down the tree
+              ) processedNodes)
             );
         };
 
       tree = processZmdlOptions pathList (imported.options or { });
     in
-    {
-      options.zenos = lib.setAttrByPath pathList tree.option;
-      config = lib.mkMerge [
-        (imported.action or { })
-        (imported.legacy or { }) # Non-recursive promotion
-        (tree.action config)
-      ];
-    };
+    if isProgram then
+      {
+        # 1. Map options to system.programs
+        options.zenos.system = lib.setAttrByPath pathList tree.option;
+
+        # 2. Map options inside the users.<name> submodule
+        options.zenos.users = lib.mkOption {
+          type = lib.types.attrsOf (
+            lib.types.submodule (
+              { config, ... }:
+              {
+                options = lib.setAttrByPath pathList tree.option;
+                config = lib.mkMerge [
+                  (imported.action or { })
+                  (imported.legacy or { })
+                  (tree.action config true) # <-- Pass true for isUser
+                ];
+              }
+            )
+          );
+        };
+
+        # 3. Apply the system action logic to the top-level
+        config = lib.mkMerge [
+          (imported.action or { })
+          (imported.legacy or { })
+          (tree.action config.zenos.system false)
+        ];
+      }
+    else
+      {
+        # Default behavior for non-programs (e.g. system core options)
+        options.zenos = lib.setAttrByPath pathList tree.option;
+        config = lib.mkMerge [
+          (imported.action or { })
+          (imported.legacy or { })
+          (tree.action config.zenos false)
+        ];
+      };
 
   mapZenModules =
     dir: currentPath:

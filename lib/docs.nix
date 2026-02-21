@@ -442,6 +442,32 @@ let
                 "users"
                 "nixpkgs"
               ]
+            else if
+              path == [
+                "zenos"
+                "users"
+                "<name>"
+                "legacy"
+              ]
+            then
+              legacyEval.options.users.users.type.getSubOptions [ ]
+            else if
+              path == [
+                "zenos"
+                "system"
+                "programs"
+                "legacy"
+              ]
+              ||
+                path == [
+                  "zenos"
+                  "users"
+                  "<name>"
+                  "programs"
+                  "legacy"
+                ]
+            then
+              legacyEval.options.programs
             else if isOption v then
               let
                 t = v.type;
@@ -521,7 +547,7 @@ let
 in
 {
   # Structural metadata
-  maintainers = if builtins.pathExists ../maintainers.nix then import ../maintainers.nix else { };
+  maintainers = if builtins.pathExists ./maintainers.nix then import ./maintainers.nix else { };
 
   # Option documentation tree
   options = (showOptions [ "zenos" ] eval.options.zenos).sub;

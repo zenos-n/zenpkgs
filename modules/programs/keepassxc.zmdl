@@ -1,3 +1,4 @@
+# keepassxc.zmdl
 meta = {
     brief = "KeePassXC Manager";
 };
@@ -5,36 +6,32 @@ meta = {
 options = {
     enable = enableOption {
         meta.brief = "Install $name";
-        action = {
-            # 1. System-wide Installation
-            # Triggered if used in zenos.system.programs.keepassxc
-            environment.systemPackages = lib.mkIf (lib.hasPrefix "system" "$path") [ pkgs.keepassxc ];
+        action = { cfg, isUser }: 
+            if isUser then {
+                # 1. User-specific Configuration strictly within `legacy.home-manager`
+                legacy.home-manager = {
+                    home.packages = [ pkgs.keepassxc ];
+                    home.file.".config/keepassxc/keepassxc.ini".text = ''
+                        [General]
+                        ConfigVersion=2
+                        UpdateCheckMessageShown=true
 
-            # 2. User-specific Configuration
-            # Triggered if used in zenos.users.<name>.programs.keepassxc
-            # We assume 'home' is mapped to home-manager attributes in your user modules
-            home = lib.mkIf (lib.hasPrefix "users" "$path") {
-                packages = [ pkgs.keepassxc ];
-                file.".config/keepassxc/keepassxc.ini".text = ''
-                    [General]
-                    ConfigVersion=2
-                    UpdateCheckMessageShown=true
-
-                    [GUI]
-                    ApplicationTheme=${$cfg.theme}
-                '';
+                        [GUI]
+                        ApplicationTheme=${cfg.theme}
+                    '';
+                };
+            } else {
+                # 2. System-wide Configuration (Top-level NixOS)
+                environment.systemPackages = [ pkgs.keepassxc ];
+                services.xserver.displayManager.sessionCommands = 
+                    if cfg.autostart then "${pkgs.keepassxc}/bin/keepassxc &" else "";
             };
-
-            # 3. Shared Logic (System or User)
-            services.xserver.displayManager.sessionCommands = 
-                if $cfg.autostart then "${pkgs.keepassxc}/bin/keepassxc &" else "";
-        };
     };
 
     autostart = {
         type = "bool";
         default = false;
-        _meta.brief = "Start $name automatically on login";
+        _meta.brief = "Start $name automatically on login (System only)";
     };
 
     theme = {
@@ -42,11 +39,5 @@ options = {
         enum = [ "dark" "light" "classic" ];
         default = "dark";
         _meta.brief = "UI Theme for $name";
-    };
-
-    customConfig = {
-        type = "string";
-        default = "";
-        _meta.brief = "Additional raw config";
     };
 };
