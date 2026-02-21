@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    home-manager.url = "github:nix-community/home-manager";
   };
 
   outputs =
@@ -85,20 +86,15 @@
           # -- PASSTHROUGH CONFIGURATION --
           # Automatically map the evaluated legacy configs back to the actual NixOS attributes.
           config = {
-            config = {
-              # Pass system.programs.legacy -> programs
-              programs = config.zenos.system.programs.legacy;
+            programs = config.zenos.system.programs.legacy;
 
-              # Map all legacy settings (EXCEPT home-manager) to standard NixOS users
-              users.users = lib.mapAttrs (
-                name: userCfg: builtins.removeAttrs userCfg.legacy [ "home-manager" ]
-              ) config.zenos.users;
+            users.users = lib.mapAttrs (
+              name: userCfg: builtins.removeAttrs userCfg.legacy [ "home-manager" ]
+            ) config.zenos.users;
 
-              # Intercept legacy.home-manager and map it to Home Manager
-              home-manager.users = lib.mapAttrs (
-                name: userCfg: userCfg.legacy.home-manager or { }
-              ) config.zenos.users;
-            };
+            home-manager.users = lib.mapAttrs (
+              name: userCfg: userCfg.legacy.home-manager or { }
+            ) config.zenos.users;
           };
         };
       allZenModules = zenOSModules ++ [ coreModule ];
