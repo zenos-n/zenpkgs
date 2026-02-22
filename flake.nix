@@ -7,7 +7,12 @@
   };
 
   outputs =
-    { self, nixpkgs, ... }@inputs:
+    {
+      self,
+      nixpkgs,
+      home-manager,
+      ...
+    }@inputs:
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
@@ -17,12 +22,59 @@
 
       zenOSModules = zenBuilder.mapZenModules ./modules [ ];
 
-      # The coreModule now ONLY provides options.
-      # Logic is handled by the builder and the host generator to prevent recursion.
-      # The coreModule now ONLY provides options.
-      # Logic is handled by the builder and the host generator to prevent recursion.
       coreModule =
-        { config, lib, ... }:
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
+        let
+          resolvePackages =
+            pTree: cTree:
+            let
+              traverse =
+                pNode: cNode:
+                let
+                  # Node is enabled if explicitly true, or set via the zcfg hack
+                  enabled = cNode == true || (builtins.isAttrs cNode && cNode._enable or false);
+                in
+                if enabled then
+                  if lib.isDerivation pNode then
+                    [ pNode ]
+                  else if builtins.isAttrs pNode then
+                    # Guard against OOM evaluation of legacy nixpkgs
+                    if pNode ? system || pNode ? stdenv then
+                      throw "ZenOS: Cannot evaluate entire legacy packages tree."
+                    else
+                      lib.flatten (
+                        lib.mapAttrsToList (
+                          name: pVal:
+                          let
+                            cVal = if builtins.isAttrs cNode then cNode.${name} or { } else { };
+                            childDisabled = cVal == false || (builtins.isAttrs cVal && cVal ? _enable && !cVal._enable);
+                          in
+                          if childDisabled then
+                            [ ]
+                          else if cVal != { } then
+                            traverse pVal cVal
+                          else
+                            traverse pVal true
+                        ) pNode
+                      )
+                  else
+                    [ ]
+                else if builtins.isAttrs cNode then
+                  lib.flatten (
+                    lib.mapAttrsToList (
+                      name: cVal: if name != "_enable" && pNode ? ${name} then traverse pNode.${name} cVal else [ ]
+                    ) cNode
+                  )
+                else
+                  [ ];
+            in
+            traverse pTree cTree;
+        in
         {
           options.zenos = {
             legacy = lib.mkOption {
@@ -34,13 +86,17 @@
             system = lib.mkOption {
               type = lib.types.submodule {
                 options = {
+                  packages = lib.mkOption {
+                    type = lib.types.attrsOf lib.types.anything;
+                    default = { };
+                    description = "System packages mapped to pkgs.zenos tree.";
+                  };
                   programs = lib.mkOption {
                     type = lib.types.submodule {
                       options = {
                         legacy = lib.mkOption {
                           type = lib.types.attrsOf lib.types.anything;
                           default = { };
-                          description = "Raw NixOS system-level program settings.";
                         };
                       };
                     };
@@ -57,10 +113,14 @@
                   { name, ... }:
                   {
                     options = {
+                      packages = lib.mkOption {
+                        type = lib.types.attrsOf lib.types.anything;
+                        default = { };
+                        description = "User packages mapped to pkgs.zenos tree.";
+                      };
                       legacy = lib.mkOption {
                         type = lib.types.attrsOf lib.types.anything;
                         default = { };
-                        description = "Raw NixOS user settings mapped to users.users.${name}.";
                       };
                       programs = lib.mkOption {
                         type = lib.types.submodule {
@@ -68,7 +128,6 @@
                             legacy = lib.mkOption {
                               type = lib.types.attrsOf lib.types.anything;
                               default = { };
-                              description = "Raw program settings for ${name} (e.g., mapped via Home Manager).";
                             };
                           };
                         };
@@ -79,25 +138,34 @@
                 )
               );
               default = { };
-              description = "ZenOS user configurations.";
             };
           };
 
-          # -- PASSTHROUGH CONFIGURATION --
-          # Automatically map the evaluated legacy configs back to the actual NixOS attributes.
           config = {
             programs = config.zenos.system.programs.legacy;
+            environment.systemPackages = resolvePackages pkgs.zenos config.zenos.system.packages;
 
             users.users = lib.mapAttrs (
               name: userCfg: builtins.removeAttrs userCfg.legacy [ "home-manager" ]
             ) config.zenos.users;
 
-            home-manager.users = lib.mapAttrs (
-              name: userCfg: userCfg.legacy.home-manager or { }
-            ) config.zenos.users;
+            home-manager = {
+              useGlobalPkgs = true;
+              useUserPackages = true;
+              users = lib.mapAttrs (
+                name: userCfg:
+                lib.recursiveUpdate {
+                  home.stateVersion = config.system.stateVersion or "25.11";
+                  home.packages = resolvePackages pkgs.zenos userCfg.packages;
+                } (lib.recursiveUpdate (userCfg.legacy.home-manager or { }) { programs = userCfg.programs.legacy; })
+              ) config.zenos.users;
+            };
           };
         };
-      allZenModules = zenOSModules ++ [ coreModule ];
+      allZenModules = zenOSModules ++ [
+        coreModule
+        home-manager.nixosModules.home-manager
+      ];
 
     in
     {

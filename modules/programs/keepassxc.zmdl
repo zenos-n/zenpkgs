@@ -1,4 +1,3 @@
-# keepassxc.zmdl
 meta = {
     brief = "KeePassXC Manager";
 };
@@ -21,7 +20,6 @@ options = {
                     '';
                 };
             } else {
-                # 2. System-wide Configuration (Top-level NixOS)
                 environment.systemPackages = [ pkgs.keepassxc ];
                 services.xserver.displayManager.sessionCommands = 
                     if cfg.autostart then "${pkgs.keepassxc}/bin/keepassxc &" else "";
