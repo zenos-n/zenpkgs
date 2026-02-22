@@ -1,65 +1,84 @@
 legacy = {
-    type = (alias nixpkgs);
-    brief = "Raw NixOS options merged at the root level";
-    description = ''
-        Since ZenOS has way less maintainers than NixOS, we provide you a way to directly work with the NixOS backend.
+    _meta = {
+        type = (alias nixpkgs);
+        brief = "Raw NixOS options merged at the root level";
+        description = ''
+            Since ZenOS has way less maintainers than NixOS, we provide you a way to directly work with the NixOS backend.
 
-        It is generally best you avoid it when possible but if ZenOS doesn't provide some option, you have this as an option.
-    '';
-    maintainers = [ "doromiert" ];
+            It is generally best you avoid it when possible but if ZenOS doesn't provide some option, you have this as an option.
+        '';
+        maintainers = [ "doromiert" ];
+    };
 };
 
 system = {
-    brief = "Global system configuration for ZenOS";
-    description = "Core system configurations that apply globally to your ZenOS deployment.";
-    maintainers = [ "doromiert" ];
-    type = (zmdl system);
-    children = {
-        packages = {
+    _meta = {
+        brief = "Global system configuration for ZenOS";
+        description = "Core system configurations that apply globally to your ZenOS deployment.";
+        maintainers = [ "doromiert" ];
+        type = (zmdl system);
+    };
+    packages = {
+        _meta = {
             type = (packages system);
             brief = "System packages mapped to pkgs.zenos tree";
             description = "System packages mapped to pkgs.zenos tree.";
             maintainers = [ "doromiert" ];
         };
-        programs = {
-            brief = "Global program configurations";
-            description = "System-wide program configurations and defaults.";
-            maintainers = [ "doromiert" ];
-            type = (programs system);
+    };
+    programs = {
+         _meta = {
+
+        brief = "Global program configurations";
+        description = "System-wide program configurations and defaults.";
+        maintainers = [ "doromiert" ];
+        type = (programs system);
         };
     };
 };
 
 desktops = {
-    brief = "Desktop environments";
-    description = "Desktop environment configurations and defaults.";
-    maintainers = [ "doromiert" ];
-    type = (zmdl desktops);
+     _meta = {
+        brief = "Desktop environments";
+        description = "Desktop environment configurations and defaults.";
+        maintainers = [ "doromiert" ];
+        type = (zmdl desktops);
+    };
 };
 
 users = {
-    brief = "Per-user configuration settings for ZenOS";
-    description = "Configurations, packages, and options scoped specifically to individual user accounts.";
-    maintainers = [ "doromiert" ];
-    type = (zdml users)
-    children.(freeform $user) = {
+     _meta = {
+
+        brief = "Per-user configuration settings for ZenOS";
+        description = "Configurations, packages, and options scoped specifically to individual user accounts.";
+        maintainers = [ "doromiert" ];
+        type = (zdml users)
+    };
+    (freeform $user) = {
         packages = {
-            type = (packages user);
-            brief = "User packages mapped to pkgs.zenos tree";
-            description = "User packages mapped to pkgs.zenos tree.";
-            maintainers = [ "doromiert" ];
+            _meta = {
+
+                type = (packages user);
+                brief = "User packages mapped to pkgs.zenos tree";
+                description = "User packages mapped to pkgs.zenos tree.";
+                maintainers = [ "doromiert" ];
+            };
         };
         legacy = {
-            type = (alias nixpkgs.users.users.$user);
-            brief = "Raw NixOS user options";
-            description = "Direct access to raw NixOS backend configurations for this specific user.";
-            maintainers = [ "doromiert" ];
+            _meta = {
+                type = (alias nixpkgs.users.users.$user);
+                brief = "Raw NixOS user options";
+                description = "Direct access to raw NixOS backend configurations for this specific user.";
+                maintainers = [ "doromiert" ];
+            };
         };
         programs = {
-            brief = "User-specific program configurations";
-            description = "Configurations and overrides for programs specific to this user account.";
-            maintainers = [ "doromiert" ];
-            type = (programs user)
+            _meta = {
+                brief = "User-specific program configurations";
+                description = "Configurations and overrides for programs specific to this user account.";
+                maintainers = [ "doromiert" ];
+                type = (programs user)
+            };
         };
     };
 };

@@ -3,40 +3,57 @@ let
   # 1. Parse structure.zstr purely for metadata
   rawZstr = builtins.readFile ../structure.zstr;
 
+  # Textual Transpilation: Prepare the custom DSL for Nix evaluation
   cleanZstr =
-    builtins.replaceStrings
-      [
-        "type = (zdml users)\n"
-        "type = (zdml users)\r\n"
-        "children.(freeform $user) ="
-        "nixpkgs.users.users.$user"
-        "type = (programs user)\n"
-        "type = (programs user)\r\n"
-      ]
-      [
-        "type = (zdml users);\n"
-        "type = (zdml users);\r\n"
-        "children.\"<name>\".children ="
-        "nixpkgs_users_user"
-        "type = (programs user);\n"
-        "type = (programs user);\r\n"
-      ]
-      rawZstr;
+    let
+      # Phase 1: Basic string replacements for known bash-style patterns
+      manual =
+        builtins.replaceStrings
+          [
+            "children.(freeform $user) ="
+            "(freeform $user) ="
+            "$user"
+          ]
+          [
+            "\"<name>\" ="
+            "\"<name>\" ="
+            "<user>"
+          ]
+          rawZstr;
+
+      # Phase 2: Quote type targets to prevent "expected a set but found a string" errors.
+      # This converts (alias nixpkgs.foo) -> (alias "nixpkgs.foo")
+      # Regex: matches (type_name path_with_dots)
+      quoted =
+        let
+          parts = builtins.split "\\((alias|zmdl|zdml|packages|programs)[[:space:]]+([^)\"]+)\\)" manual;
+          process = p: if builtins.isList p then "(${builtins.elemAt p 0} \"${builtins.elemAt p 1}\")" else p;
+        in
+        lib.concatStrings (map process parts);
+
+      # Phase 3: Ensure semicolons after type assignments if missing
+      semicolons =
+        let
+          parts = builtins.split "(type[[:space:]]*=[[:space:]]*\\([^)]+\\))([^;])" quoted;
+          process = p: if builtins.isList p then "${builtins.elemAt p 0};${builtins.elemAt p 1}" else p;
+        in
+        lib.concatStrings (map process parts);
+    in
+    semicolons;
 
   zstrEnv = ''
     let
-      alias = target: { _isZenType = true; name = "alias"; };
-      zmdl = target: { _isZenType = true; name = "zmdl"; };
-      zdml = target: { _isZenType = true; name = "zmdl"; };
-      packages = target: { _isZenType = true; name = "packages"; };
-      programs = target: { _isZenType = true; name = "programs"; };
+      alias = target: { _isZenType = true; name = "alias"; inherit target; };
+      zmdl = target: { _isZenType = true; name = "zmdl"; inherit target; };
+      zdml = target: { _isZenType = true; name = "zmdl"; inherit target; };
+      packages = target: { _isZenType = true; name = "packages"; inherit target; };
+      programs = target: { _isZenType = true; name = "programs"; inherit target; };
       
       nixpkgs = "nixpkgs";
       system = "system";
       desktops = "desktops";
       users = "users";
       user = "user";
-      nixpkgs_users_user = "nixpkgs";
     in {
   ''
   + cleanZstr
@@ -46,16 +63,51 @@ let
 
   parsedZstr = import (builtins.toFile "parsed-structure.nix" zstrEnv);
 
-  # Extract metadata recursively from parsed ZSTR
+  # Extract metadata recursively from parsed ZSTR AST
   extractZstrMeta =
     node:
     let
+      # Logic: All metadata MUST be inside _meta.
+      # Everything else is a child node.
+      metaData = node._meta or { };
+
       meta = {
-        brief = node.brief or null;
-        description = node.description or null;
-        maintainers = node.maintainers or [ ];
+        brief = metaData.brief or node.brief or null;
+        description = metaData.description or node.description or null;
+        maintainers = metaData.maintainers or node.maintainers or [ ];
+        type = metaData.type or node.type or null;
       };
-      children = if node ? children then lib.mapAttrs (k: v: extractZstrMeta v) node.children else { };
+
+      # Children are all keys except reserved keywords and the _meta block
+      reserved = [
+        "_meta"
+        "brief"
+        "description"
+        "maintainers"
+        "type"
+        "default"
+        "children"
+      ];
+      rawChildren = builtins.removeAttrs node reserved;
+
+      baseChildren = lib.mapAttrs (k: v: extractZstrMeta v) rawChildren;
+
+      # Automatically inject 'legacy' child for program containers
+      children =
+        if (meta.type.name or "") == "programs" then
+          baseChildren
+          // {
+            legacy = {
+              meta = {
+                brief = "Raw upstream options for this category";
+                description = "Directly map native NixOS or Home-Manager options here to bypass ZenOS abstractions.";
+                maintainers = meta.maintainers;
+              };
+              children = { };
+            };
+          }
+        else
+          baseChildren;
     in
     {
       inherit meta children;
@@ -68,7 +120,7 @@ let
     };
   };
 
-  # 2. Parse all .zmdl files
+  # 2. Parse all .zmdl files for leaf metadata
   enableOption = args: args // { _isEnableOption = true; };
 
   zmdlFiles = builtins.filter (p: lib.hasSuffix ".zmdl" p) moduleTree.modules;
@@ -79,7 +131,6 @@ let
     let
       raw = builtins.readFile absPath;
 
-      # Parse path to get logical module placement
       relStr = lib.removePrefix "${modRoot}/" (builtins.toString absPath);
       relPathRaw = lib.splitString "/" relStr;
       modNameWithExt = lib.last relPathRaw;
@@ -101,10 +152,8 @@ let
       );
       cfgPath = "config.${attrPath}";
 
-      # Template replacements
       templated = builtins.replaceStrings [ "$path" "$cfg" "$name" ] [ attrPath cfgPath modName ] raw;
 
-      # Wrap to catch the module exports natively without evaluating Nixpkgs or Options
       wrapped = "{ enableOption, pkgs, lib, config, maintainers }: { ${templated} }";
 
       expr = import (builtins.toFile "static-zmdl-${modName}.nix" wrapped) {
@@ -142,7 +191,7 @@ let
 
   zmdlParsed = map processZmdl zmdlFiles;
 
-  # Merge logic for assembling the tree
+  # Recursive merge for assembling the final static tree
   mergeNode =
     tree: path: node:
     if path == [ ] then

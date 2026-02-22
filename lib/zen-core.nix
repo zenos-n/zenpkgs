@@ -153,43 +153,45 @@ let
     builtins.listToAttrs (map mkSystem files);
 
   parseZstr =
-    lib: path:
+    lib: options: path:
     let
       rawZstr = builtins.readFile path;
-      cleanSyntax =
+
+      manual =
         builtins.replaceStrings
           [
-            "type = (zdml users)\n"
-            "type = (zdml users)\r\n"
             "children.(freeform $user) ="
-            "nixpkgs.users.users.$user"
-            "type = (programs user)\n"
-            "type = (programs user)\r\n"
+            "(freeform $user) ="
+            "$user"
           ]
           [
-            "type = (zdml users);\n"
-            "type = (zdml users);\r\n"
-            "children.\"<user>\" ="
-            "nixpkgs_users_user"
-            "type = (programs user);\n"
-            "type = (programs user);\r\n"
+            "\"<name>\" ="
+            "\"<name>\" ="
+            "<user>"
           ]
           rawZstr;
 
+      quoted =
+        let
+          parts = builtins.split "\\((alias|zmdl|zdml|packages|programs)[[:space:]]+([^)\"]+)\\)" manual;
+          process = p: if builtins.isList p then "(${builtins.elemAt p 0} \"${builtins.elemAt p 1}\")" else p;
+        in
+        lib.concatStrings (map process parts);
+
+      cleanSyntax =
+        let
+          parts = builtins.split "(type[[:space:]]*=[[:space:]]*\\([^)]+\\))([^;])" quoted;
+          process = p: if builtins.isList p then "${builtins.elemAt p 0};${builtins.elemAt p 1}" else p;
+        in
+        lib.concatStrings (map process parts);
+
       dslEnv = ''
         let
-          alias = target: { _isZenType = true; name = "alias"; inherit target; };
-          zmdl = target: { _isZenType = true; name = "zmdl"; inherit target; };
-          zdml = target: { _isZenType = true; name = "zmdl"; inherit target; }; # Typo handler
-          packages = target: { _isZenType = true; name = "packages"; inherit target; };
-          programs = target: { _isZenType = true; name = "programs"; inherit target; };
-
-          nixpkgs = "nixpkgs";
-          system = "system";
-          desktops = "desktops";
-          users = "users";
-          user = "user";
-          nixpkgs_users_user = "nixpkgs.users.users.<user>";
+            alias = target: { _isZenType = true; name = "alias"; inherit target; };
+            zmdl = target: { _isZenType = true; name = "zmdl"; inherit target; };
+            zdml = target: { _isZenType = true; name = "zmdl"; inherit target; };
+            packages = target: { _isZenType = true; name = "packages"; inherit target; };
+            programs = target: { _isZenType = true; name = "programs"; inherit target; };
         in {
       ''
       + cleanSyntax
@@ -205,7 +207,34 @@ let
         zType:
         if builtins.isAttrs zType && zType ? _isZenType then
           if zType.name == "alias" then
-            lib.types.attrsOf lib.types.anything
+            let
+              parts = lib.splitString "." zType.target;
+              isRoot = parts == [ "nixpkgs" ];
+              targetPath = if isRoot then [ ] else lib.tail parts;
+
+              isUserPath = lib.last parts == "<user>";
+              actualPath = if isUserPath then lib.init targetPath else targetPath;
+
+              targetOpts = lib.attrByPath actualPath { } options;
+
+              isLeaf = targetOpts ? _type && targetOpts._type == "option";
+
+              finalOpts =
+                if isUserPath && isLeaf && targetOpts.type ? getSubOptions then
+                  targetOpts.type.getSubOptions [ ]
+                else if isUserPath then
+                  { }
+                else
+                  targetOpts;
+            in
+            if isRoot then
+              lib.types.attrsOf lib.types.anything
+            else if !isUserPath && isLeaf then
+              targetOpts.type
+            else
+              lib.types.submodule {
+                options = finalOpts;
+              }
           else if zType.name == "packages" then
             lib.types.attrsOf lib.types.anything
           else
@@ -216,13 +245,37 @@ let
       mkNode =
         node:
         let
+          # Metadata logic: all metadata MUST be inside _meta
+          metaData = node._meta or { };
           meta = {
-            brief = node.brief or "";
-            description = node.description or "";
-            maintainers = node.maintainers or [ ];
+            brief = metaData.brief or "";
+            description = metaData.description or "";
+            maintainers = metaData.maintainers or [ ];
           };
-          hasChildren = node ? children;
-          hasFreeformUser = hasChildren && node.children ? "<user>";
+          nodeType = metaData.type or null;
+
+          # Branching logic: Everything except _meta is a child node
+          rawChildren = builtins.removeAttrs node [ "_meta" ];
+
+          # Process children
+          baseChildren = lib.mapAttrs (k: v: mkNode v) rawChildren;
+
+          # Inject 'legacy' option for program containers
+          processedChildren =
+            if (nodeType.name or "") == "programs" then
+              baseChildren
+              // {
+                legacy = lib.mkOption {
+                  type = lib.types.attrsOf lib.types.anything;
+                  default = { };
+                  description = "Raw upstream options for this category.";
+                };
+              }
+            else
+              baseChildren;
+
+          # Check for user freeform mapping
+          hasFreeformUser = rawChildren ? "<name>";
         in
         if hasFreeformUser then
           lib.mkOption {
@@ -231,28 +284,28 @@ let
                 lib.types.submodule (
                   { name, ... }:
                   {
-                    options = lib.mapAttrs (k: v: mkNode v) node.children."<user>";
+                    options = lib.mapAttrs (k: v: mkNode v) rawChildren."<name>";
                   }
                 )
               )
             );
-            default = node.default or { };
+            default = { };
             description = meta.description;
           }
-        else if hasChildren then
+        else if processedChildren != { } then
           lib.mkOption {
             type = mkZenType meta (
               lib.types.submodule {
-                options = lib.mapAttrs (k: v: mkNode v) node.children;
+                options = processedChildren;
               }
             );
-            default = node.default or { };
+            default = { };
             description = meta.description;
           }
         else
           lib.mkOption {
-            type = mkZenType meta (resolveType (node.type or null));
-            default = node.default or { };
+            type = mkZenType meta (resolveType nodeType);
+            default = node.default or (if (nodeType.name or "") == "alias" then { } else null);
             description = meta.description;
           };
     in

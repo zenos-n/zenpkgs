@@ -27,6 +27,7 @@
           config,
           lib,
           pkgs,
+          options,
           ...
         }:
         let
@@ -77,7 +78,7 @@
         in
         {
           # Evaluate the custom DSL structure file into standard mkOption mappings here
-          options.zenos = zenCore.parseZstr lib ./structure.zstr;
+          options.zenos = zenCore.parseZstr lib options ./structure.zstr;
 
           config = {
             programs = config.zenos.system.programs.legacy;
