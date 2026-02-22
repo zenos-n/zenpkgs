@@ -56,23 +56,66 @@ let
     ];
   };
 
+  # 4. STATIC METADATA PARSER INJECTION
+  staticMetaTree = import ./doc-parser.nix { inherit lib moduleTree; };
+
   # --- HELPER: Metadata Validator & Tracer ---
   warnMissing =
-    path: meta:
+    path: _evalMeta:
     let
       pathStr = lib.concatStringsSep "." path;
+      isLegacy = lib.any (s: s == "legacy") path;
       isZenosPkg = lib.hasPrefix "pkgs.zenos" pathStr;
-      isZenosOption = lib.hasPrefix "zenos" pathStr && !(lib.any (s: s == "legacy") path);
-      shouldWarn = isZenosPkg || isZenosOption;
+      isZenosOption = lib.hasPrefix "zenos" pathStr;
 
-      missing =
-        (if (meta.brief or null) == null then [ "brief" ] else [ ])
-        ++ (if (meta.description or null) == null then [ "description" ] else [ ]);
+      # Avoid warning on structural <name> placeholders and package leaf nodes
+      isNameNode = lib.last path == "<name>";
+      isPackageItem =
+        builtins.length path > 1 && (lib.elemAt path (builtins.length path - 2)) == "packages";
+
+      shouldWarn = !isLegacy && !isNameNode && !isPackageItem && (isZenosPkg || isZenosOption);
+
+      # Traverse the purely static meta tree for docs
+      lookupMeta =
+        tree: p:
+        if p == [ ] then
+          tree.meta or { }
+        else if tree ? children && tree.children ? ${builtins.head p} then
+          lookupMeta tree.children.${builtins.head p} (builtins.tail p)
+        else
+          { };
+
+      staticMeta = if isZenosOption then lookupMeta staticMetaTree path else { };
+
+      # Safely merge static metadata over dynamic eval metadata
+      meta =
+        _evalMeta
+        // staticMeta
+        // {
+          brief = staticMeta.brief or _evalMeta.brief or null;
+          description = staticMeta.description or _evalMeta.description or null;
+          maintainers =
+            if (staticMeta.maintainers or [ ]) != [ ] then
+              staticMeta.maintainers
+            else
+              (_evalMeta.maintainers or [ ]);
+        };
+
+      brief = meta.brief or null;
+      desc = meta.description or null;
+      maintainers = meta.maintainers or [ ];
+
+      issues =
+        (if brief == null then [ "missing brief" ] else [ ])
+        ++ (if desc == null then [ "missing description" ] else [ ])
+        ++ (if maintainers == [ ] then [ "missing maintainers" ] else [ ])
+        ++ (if brief != null && builtins.stringLength brief > 80 then [ "brief > 80 chars" ] else [ ])
+        ++ (if brief != null && lib.hasSuffix "." brief then [ "brief has trailing dot" ] else [ ]);
     in
-    if !shouldWarn || missing == [ ] then
-      meta
+    if !shouldWarn || issues == [ ] then
+      meta // { _warnings = [ ]; }
     else
-      builtins.trace "WARNING: ${pathStr} is missing metadata: ${lib.concatStringsSep ", " missing}" meta;
+      meta // { _warnings = issues; };
 
   # --- HELPER: Type Normalizer ---
   normalizeType =
@@ -504,6 +547,8 @@ let
               extractedMeta.brief or (
                 if hasMeta && metaLookup.brief != null then
                   metaLookup.brief
+                else if v ? brief then
+                  v.brief
                 else
                   (v.description or (if isLegacyPath then "upstream NixOS option" else null))
               );
@@ -545,23 +590,54 @@ let
     );
 
 in
-{
-  # Structural metadata
-  maintainers = if builtins.pathExists ./maintainers.nix then import ./maintainers.nix else { };
+let
+  optionsTree = (showOptions [ "zenos" ] eval.options.zenos).sub;
 
-  # Option documentation tree
-  options = (showOptions [ "zenos" ] eval.options.zenos).sub;
-
-  # Package documentation (filtered to requested namespaces)
-  pkgs =
+  pkgsTree =
     let
       zenosSet = showPackages 3 [ "pkgs" "zenos" ] (pkgs.zenos or { });
     in
     (builtins.removeAttrs (zenosSet.sub or { }) [ "legacy" ])
     // {
-      # Extract the custom ZenOS packages, removing the legacy pointer to avoid circular metadata
-
-      # Extract the legacy nixpkgs tree from the nested pointer
       legacy.sub = zenosSet.sub.legacy.sub or { };
     };
-}
+
+  # --- REPORT GENERATOR ---
+  collectWarnings =
+    pathStr: node:
+    let
+      warnings =
+        if (node ? meta && node.meta ? _warnings && node.meta._warnings != [ ]) then
+          [ "- ${pathStr}: ${lib.concatStringsSep ", " node.meta._warnings}" ]
+        else
+          [ ];
+      children = node.sub or { };
+      childWarnings = lib.flatten (
+        lib.mapAttrsToList (k: v: collectWarnings "${pathStr}.${k}" v) children
+      );
+    in
+    warnings ++ childWarnings;
+
+  allWarnings =
+    (lib.flatten (lib.mapAttrsToList (k: v: collectWarnings "zenos.${k}" v) optionsTree))
+    ++ (lib.flatten (lib.mapAttrsToList (k: v: collectWarnings "pkgs.zenos.${k}" v) pkgsTree));
+
+  report =
+    "\n=======================================================\n"
+    + "               ZENOS METADATA REPORT\n"
+    + "=======================================================\n"
+    + (
+      if allWarnings == [ ] then
+        "All zenos options and packages have valid metadata!\n"
+      else
+        "The following items have metadata issues:\n\n" + (lib.concatStringsSep "\n" allWarnings) + "\n"
+    )
+    + "=======================================================\n";
+
+  finalResult = {
+    maintainers = if builtins.pathExists ./maintainers.nix then import ./maintainers.nix else { };
+    options = optionsTree;
+    pkgs = pkgsTree;
+  };
+in
+builtins.trace report finalResult

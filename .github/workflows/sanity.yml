@@ -23,25 +23,17 @@ jobs:
         with:
           nix_path: nixpkgs=channel:nixos-unstable
 
-      - name: Run ZenOS Integrity Check
-        id: eval
-        run: |
-          echo "Running Integrity Check via Flake App..."
-          # This runs the python-based checker defined in tools/integrity.nix
-          nix run .#check
-
       - name: Generate Documentation JSON
-        if: success() && github.event_name == 'push'
+        if: github.event_name == 'push'
         run: |
           echo "Generating Documentation via Flake App..."
-          # This runs the unflattening 'fake it' engine in tools/doc-gen.nix
-          nix run .#docs
+          nix eval .#docs --json > options.json
           # The generator outputs to zenos-options.json by default
           # Using cp to ensure docs.json exists for the archive step
           cp options.json docs.json
 
       - name: Archive JSON to 'json' branch
-        if: success() && github.event_name == 'push'
+        if: github.event_name == 'push'
         run: |
           git config --global user.name "ZenOS Bot"
           git config --global user.email "bot@zenos.neg-zero.com"

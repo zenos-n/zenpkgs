@@ -103,17 +103,18 @@ let
             (lib.mapAttrs (
               n: v:
               lib.mkOption {
-                type = mapType (v.type or "freeform") (v.enum or [ ]);
+                # INJECT METADATA: Attach _zenosMeta to dynamically generated types so docs.nix picks it up.
+                type = (mapType (v.type or "freeform") (v.enum or [ ])) // {
+                  _zenosMeta = v.meta or { };
+                };
                 default = v.default or (if (v.type or "") == "bool" then false else null);
                 description = v._meta.brief or v.meta.brief or "";
               }
             ) leaves)
             // (lib.mapAttrs (n: v: v.option) processedNodes);
 
-          # NEW: action now accepts a relative namespace configuration
-          # In lib/module-builder.nix
           action =
-            localConfig: isUser: # <-- ADD isUser parameter here
+            localConfig: isUser:
             let
               nodeCfg = lib.attrByPath path { } localConfig;
             in
@@ -122,7 +123,6 @@ let
                 n: v:
                 if (v.type or "") == "bool" then
                   let
-                    # If action is a function, pass the dynamic context
                     evaluatedAction =
                       if builtins.isFunction (v.action or { }) then
                         (v.action or { }) {
@@ -134,16 +134,11 @@ let
                   in
                   lib.mkIf (nodeCfg.${n} or false) evaluatedAction
                 else if v ? action then
-                  if builtins.isFunction v.action then
-                    v.action nodeCfg.${n} # Keep existing behavior for non-bools
-                  else
-                    v.action
+                  if builtins.isFunction v.action then v.action nodeCfg.${n} else v.action
                 else
                   { }
               ) leaves)
-              ++ (lib.mapAttrsToList (
-                n: v: v.action localConfig isUser # <-- Pass isUser down the tree
-              ) processedNodes)
+              ++ (lib.mapAttrsToList (n: v: v.action localConfig isUser) processedNodes)
             );
         };
 
@@ -151,10 +146,8 @@ let
     in
     if isProgram then
       {
-        # 1. Map options to system.programs
         options.zenos.system = lib.setAttrByPath pathList tree.option;
 
-        # 2. Map options inside the users.<name> submodule
         options.zenos.users = lib.mkOption {
           type = lib.types.attrsOf (
             lib.types.submodule (
@@ -164,14 +157,13 @@ let
                 config = lib.mkMerge [
                   (imported.action or { })
                   (imported.legacy or { })
-                  (tree.action config true) # <-- Pass true for isUser
+                  (tree.action config true)
                 ];
               }
             )
           );
         };
 
-        # 3. Apply the system action logic to the top-level
         config = lib.mkMerge [
           (imported.action or { })
           (imported.legacy or { })
@@ -180,7 +172,6 @@ let
       }
     else
       {
-        # Default behavior for non-programs (e.g. system core options)
         options.zenos = lib.setAttrByPath pathList tree.option;
         config = lib.mkMerge [
           (imported.action or { })

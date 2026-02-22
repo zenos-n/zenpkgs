@@ -1,11 +1,14 @@
 meta = {
     brief = "The GNOME desktop environment";
-    description = "Standard ZenOS configuration for the GNOME shell and session management.";
+    description = "Standard ZenOS configuration for the GNOME shell and session management";
+    maintainers = [ "doromiert" ];
 };
 
 options = {
     enable = enableOption {
         meta.brief = "Enable the core $name desktop environment";
+        meta.description = "Enables GDM and the GNOME desktop manager.";
+        meta.maintainers = [ "doromiert" ];
         action = {
             services.displayManager.gdm.enable = true;
             services.desktopManager.gnome.enable = true;
@@ -26,6 +29,8 @@ options = {
 
     extraTools = enableOption {
         meta.brief = "Install additional $name utilities (Tweaks, etc.)";
+        meta.description = "Installs tools like GNOME Tweaks to customize the desktop.";
+        meta.maintainers = [ "doromiert" ];
         action = {
             environment.systemPackages = [ pkgs.gnome-tweaks ];
         };

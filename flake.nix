@@ -76,70 +76,8 @@
             traverse pTree cTree;
         in
         {
-          options.zenos = {
-            legacy = lib.mkOption {
-              type = lib.types.attrsOf lib.types.anything;
-              default = { };
-              description = "Raw NixOS options merged at the root level.";
-            };
-
-            system = lib.mkOption {
-              type = lib.types.submodule {
-                options = {
-                  packages = lib.mkOption {
-                    type = lib.types.attrsOf lib.types.anything;
-                    default = { };
-                    description = "System packages mapped to pkgs.zenos tree.";
-                  };
-                  programs = lib.mkOption {
-                    type = lib.types.submodule {
-                      options = {
-                        legacy = lib.mkOption {
-                          type = lib.types.attrsOf lib.types.anything;
-                          default = { };
-                        };
-                      };
-                    };
-                    default = { };
-                  };
-                };
-              };
-              default = { };
-            };
-
-            users = lib.mkOption {
-              type = lib.types.attrsOf (
-                lib.types.submodule (
-                  { name, ... }:
-                  {
-                    options = {
-                      packages = lib.mkOption {
-                        type = lib.types.attrsOf lib.types.anything;
-                        default = { };
-                        description = "User packages mapped to pkgs.zenos tree.";
-                      };
-                      legacy = lib.mkOption {
-                        type = lib.types.attrsOf lib.types.anything;
-                        default = { };
-                      };
-                      programs = lib.mkOption {
-                        type = lib.types.submodule {
-                          options = {
-                            legacy = lib.mkOption {
-                              type = lib.types.attrsOf lib.types.anything;
-                              default = { };
-                            };
-                          };
-                        };
-                        default = { };
-                      };
-                    };
-                  }
-                )
-              );
-              default = { };
-            };
-          };
+          # Evaluate the custom DSL structure file into standard mkOption mappings here
+          options.zenos = zenCore.parseZstr lib ./structure.zstr;
 
           config = {
             programs = config.zenos.system.programs.legacy;
@@ -162,6 +100,7 @@
             };
           };
         };
+
       allZenModules = zenOSModules ++ [
         coreModule
         home-manager.nixosModules.home-manager

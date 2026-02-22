@@ -16,7 +16,7 @@ let
       [
         "type = (zdml users);\n"
         "type = (zdml users);\r\n"
-        "children.\"<name>\" ="
+        "children.\"<name>\".children ="
         "nixpkgs_users_user"
         "type = (programs user);\n"
         "type = (programs user);\r\n"

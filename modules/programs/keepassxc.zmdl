@@ -1,10 +1,16 @@
+
+
 meta = {
     brief = "KeePassXC Manager";
+    description = "Password manager integration for ZenOS";
+    maintainers = [ "doromiert" ];
 };
 
 options = {
     enable = enableOption {
         meta.brief = "Install $name";
+        meta.description = "Installs KeePassXC and configures the default UI theme.";
+        meta.maintainers = [ "doromiert" ];
         action = { cfg, isUser }: 
             if isUser then {
                 # 1. User-specific Configuration strictly within `legacy.home-manager`
@@ -30,6 +36,8 @@ options = {
         type = "bool";
         default = false;
         _meta.brief = "Start $name automatically on login (System only)";
+        _meta.description = "Adds KeePassXC to the display manager session commands for autostart.";
+        _meta.maintainers = [ "doromiert" ];
     };
 
     theme = {
@@ -37,5 +45,7 @@ options = {
         enum = [ "dark" "light" "classic" ];
         default = "dark";
         _meta.brief = "UI Theme for $name";
+        _meta.description = "Sets the ApplicationTheme in the KeePassXC configuration.";
+        _meta.maintainers = [ "doromiert" ];
     };
 };

@@ -152,7 +152,118 @@ let
     in
     builtins.listToAttrs (map mkSystem files);
 
+  parseZstr =
+    lib: path:
+    let
+      rawZstr = builtins.readFile path;
+      cleanSyntax =
+        builtins.replaceStrings
+          [
+            "type = (zdml users)\n"
+            "type = (zdml users)\r\n"
+            "children.(freeform $user) ="
+            "nixpkgs.users.users.$user"
+            "type = (programs user)\n"
+            "type = (programs user)\r\n"
+          ]
+          [
+            "type = (zdml users);\n"
+            "type = (zdml users);\r\n"
+            "children.\"<user>\" ="
+            "nixpkgs_users_user"
+            "type = (programs user);\n"
+            "type = (programs user);\r\n"
+          ]
+          rawZstr;
+
+      dslEnv = ''
+        let
+          alias = target: { _isZenType = true; name = "alias"; inherit target; };
+          zmdl = target: { _isZenType = true; name = "zmdl"; inherit target; };
+          zdml = target: { _isZenType = true; name = "zmdl"; inherit target; }; # Typo handler
+          packages = target: { _isZenType = true; name = "packages"; inherit target; };
+          programs = target: { _isZenType = true; name = "programs"; inherit target; };
+
+          nixpkgs = "nixpkgs";
+          system = "system";
+          desktops = "desktops";
+          users = "users";
+          user = "user";
+          nixpkgs_users_user = "nixpkgs.users.users.<user>";
+        in {
+      ''
+      + cleanSyntax
+      + ''
+        }
+      '';
+
+      parsedStructure = import (builtins.toFile "parsed-structure.nix" dslEnv);
+
+      mkZenType = meta: type: type // { _zenosMeta = meta; };
+
+      resolveType =
+        zType:
+        if builtins.isAttrs zType && zType ? _isZenType then
+          if zType.name == "alias" then
+            lib.types.attrsOf lib.types.anything
+          else if zType.name == "packages" then
+            lib.types.attrsOf lib.types.anything
+          else
+            lib.types.submodule { options = { }; }
+        else
+          lib.types.submodule { options = { }; };
+
+      mkNode =
+        node:
+        let
+          meta = {
+            brief = node.brief or "";
+            description = node.description or "";
+            maintainers = node.maintainers or [ ];
+          };
+          hasChildren = node ? children;
+          hasFreeformUser = hasChildren && node.children ? "<user>";
+        in
+        if hasFreeformUser then
+          lib.mkOption {
+            type = mkZenType meta (
+              lib.types.attrsOf (
+                lib.types.submodule (
+                  { name, ... }:
+                  {
+                    options = lib.mapAttrs (k: v: mkNode v) node.children."<user>";
+                  }
+                )
+              )
+            );
+            default = node.default or { };
+            description = meta.description;
+          }
+        else if hasChildren then
+          lib.mkOption {
+            type = mkZenType meta (
+              lib.types.submodule {
+                options = lib.mapAttrs (k: v: mkNode v) node.children;
+              }
+            );
+            default = node.default or { };
+            description = meta.description;
+          }
+        else
+          lib.mkOption {
+            type = mkZenType meta (resolveType (node.type or null));
+            default = node.default or { };
+            description = meta.description;
+          };
+    in
+    lib.mapAttrs (k: v: mkNode v) parsedStructure;
+
 in
 {
-  inherit mkHosts walkDir mkPackageTree;
+  inherit
+    mkHosts
+    walkDir
+    mkPackageTree
+    parseZstr
+    ;
 }
