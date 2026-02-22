@@ -27,7 +27,7 @@ system = {
         };
     };
     programs = {
-         _meta = {
+        _meta = {
 
         brief = "Global program configurations";
         description = "System-wide program configurations and defaults.";
@@ -38,7 +38,7 @@ system = {
 };
 
 desktops = {
-     _meta = {
+    _meta = {
         brief = "Desktop environments";
         description = "Desktop environment configurations and defaults.";
         maintainers = [ "doromiert" ];
@@ -47,7 +47,7 @@ desktops = {
 };
 
 users = {
-     _meta = {
+    _meta = {
 
         brief = "Per-user configuration settings for ZenOS";
         description = "Configurations, packages, and options scoped specifically to individual user accounts.";
