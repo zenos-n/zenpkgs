@@ -49,15 +49,11 @@ let
       name = lib.last pathList;
 
       enableOption =
-        {
-          meta ? { },
-          action ? { },
-        }:
-        {
-          _isZenLeaf = true;
+        node:
+        node
+        // {
           type = "bool";
-          default = false;
-          inherit meta action;
+          _isZenLeaf = true;
         };
 
       maintainers = if builtins.pathExists ../maintainers.nix then import ../maintainers.nix else { };
@@ -67,7 +63,11 @@ let
           let
             rawContent = builtins.readFile file;
             trimmed = lib.trim rawContent;
-            templated = lib.replaceStrings [ "$path" "$cfg" "$name" ] [ attrPath cfgPath name ] rawContent;
+            templated =
+              lib.replaceStrings
+                [ "$path" "$cfg" "$name" "$m" "$l" ]
+                [ attrPath cfgPath name "lib.maintainers" "lib.licenses" ]
+                rawContent;
             wrapped =
               if lib.hasPrefix "{" trimmed then
                 ''
@@ -89,60 +89,94 @@ let
           if builtins.isFunction raw then raw (args // { inherit enableOption maintainers; }) else raw;
 
       processZmdlOptions =
-        path: opts:
+        path: opts: parentMeta:
         let
-          isLeaf = o: builtins.isAttrs o && (o._isZenLeaf or false || o ? type);
-          leaves = lib.filterAttrs (n: v: isLeaf v) opts;
-          nodes = lib.filterAttrs (
-            n: v: !isLeaf v && n != "_meta" && n != "_action" && n != "meta" && n != "action" && n != "legacy"
-          ) opts;
-          processedNodes = lib.mapAttrs (n: v: processZmdlOptions (path ++ [ n ]) v) nodes;
+          # 1. Resolve Metadata & Inheritance within the file scope
+          metaRaw = opts._meta or (opts.meta or { });
+          currentMeta = metaRaw // {
+            license = metaRaw.license or parentMeta.license or null;
+            maintainers = metaRaw.maintainers or parentMeta.maintainers or [ ];
+            brief = metaRaw.brief or parentMeta.brief or "";
+            description = metaRaw.description or parentMeta.description or "";
+          };
+
+          # 2. Identify Children (Everything not a reserved keyword)
+          reserved = [
+            "_meta"
+            "_saction"
+            "_uaction"
+            "meta"
+            "action"
+            "legacy"
+            "type"
+            "default"
+            "_isZenLeaf"
+          ];
+          childKeys = builtins.filter (n: !(builtins.elem n reserved)) (builtins.attrNames opts);
+
+          # If a node has no children, it evaluates as a leaf option
+          isLeaf = childKeys == [ ];
+
+          # 3. Process Children Recursively
+          childrenNodes = lib.getAttrs childKeys opts;
+          processedChildren = lib.mapAttrs (
+            n: v: processZmdlOptions (path ++ [ n ]) v currentMeta
+          ) childrenNodes;
         in
         {
           option =
-            (lib.mapAttrs (
-              n: v:
+            if isLeaf then
               lib.mkOption {
-                # INJECT METADATA: Attach _zenosMeta to dynamically generated types so docs.nix picks it up.
-                type = (mapType (v.type or "freeform") (v.enum or [ ])) // {
-                  _zenosMeta = v.meta or { };
+                type = (mapType (opts.type or "bool") (opts.enum or [ ])) // {
+                  _zenosMeta = currentMeta; # Inject metadata for docs.nix
                 };
-                default = v.default or (if (v.type or "") == "bool" then false else null);
-                description = v._meta.brief or v.meta.brief or "";
+                default = opts.default or (if (opts.type or "bool") == "bool" then false else null);
+                description = currentMeta.brief;
               }
-            ) leaves)
-            // (lib.mapAttrs (n: v: v.option) processedNodes);
+            else
+              lib.mapAttrs (n: v: v.option) processedChildren;
 
           action =
             localConfig: isUser:
             let
+              # Retrieve the configuration value for the current path
               nodeCfg = lib.attrByPath path { } localConfig;
+
+              # Action for this specific node
+              thisAction =
+                if isUser && opts ? _uaction then
+                  if builtins.isFunction opts._uaction then
+                    opts._uaction {
+                      cfg = nodeCfg;
+                      inherit isUser;
+                    }
+                  else
+                    opts._uaction
+                else if !isUser && opts ? _saction then
+                  if builtins.isFunction opts._saction then
+                    opts._saction {
+                      cfg = nodeCfg;
+                      inherit isUser;
+                    }
+                  else
+                    opts._saction
+                else
+                  { };
+
+              # If this is a leaf node and a boolean, only apply the action if `cfg == true`
+              nodeActionWrapped =
+                if isLeaf && (opts.type or "bool") == "bool" then
+                  lib.mkIf (nodeCfg == true) thisAction
+                else
+                  thisAction;
             in
             lib.mkMerge (
-              (lib.mapAttrsToList (
-                n: v:
-                if (v.type or "") == "bool" then
-                  let
-                    evaluatedAction =
-                      if builtins.isFunction (v.action or { }) then
-                        (v.action or { }) {
-                          cfg = nodeCfg;
-                          inherit isUser;
-                        }
-                      else
-                        (v.action or { });
-                  in
-                  lib.mkIf (nodeCfg.${n} or false) evaluatedAction
-                else if v ? action then
-                  if builtins.isFunction v.action then v.action nodeCfg.${n} else v.action
-                else
-                  { }
-              ) leaves)
-              ++ (lib.mapAttrsToList (n: v: v.action localConfig isUser) processedNodes)
+              [ nodeActionWrapped ] ++ (lib.mapAttrsToList (n: v: v.action localConfig isUser) processedChildren)
             );
         };
 
-      tree = processZmdlOptions pathList (imported.options or { });
+      # Start the processing chain (pass empty parent meta initially)
+      tree = processZmdlOptions pathList (imported.options or imported) { };
     in
     if isProgram then
       {

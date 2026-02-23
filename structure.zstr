@@ -7,7 +7,7 @@ legacy = {
 
             It is generally best you avoid it when possible but if ZenOS doesn't provide some option, you have this as an option.
         '';
-        maintainers = [ "doromiert" ];
+        maintainers = []; # maintained externally by nix
     };
 };
 
@@ -15,24 +15,23 @@ system = {
     _meta = {
         brief = "Global system configuration for ZenOS";
         description = "Core system configurations that apply globally to your ZenOS deployment.";
-        maintainers = [ "doromiert" ];
+        maintainers = [ $m.doromiert ];
         type = (zmdl system);
     };
     packages = {
         _meta = {
-            type = (packages system);
+            type = (packages);
             brief = "System packages mapped to pkgs.zenos tree";
             description = "System packages mapped to pkgs.zenos tree.";
-            maintainers = [ "doromiert" ];
+            maintainers = [ $m.doromiert ];
         };
     };
     programs = {
         _meta = {
-
-        brief = "Global program configurations";
-        description = "System-wide program configurations and defaults.";
-        maintainers = [ "doromiert" ];
-        type = (programs system);
+            brief = "Global program configurations";
+            description = "System-wide program configurations and defaults.";
+            maintainers = [ $m.doromiert ];
+            type = (programs);
         };
     };
 };
@@ -41,43 +40,41 @@ desktops = {
     _meta = {
         brief = "Desktop environments";
         description = "Desktop environment configurations and defaults.";
-        maintainers = [ "doromiert" ];
+        maintainers = [ $m.doromiert ];
         type = (zmdl desktops);
     };
 };
 
 users = {
     _meta = {
-
         brief = "Per-user configuration settings for ZenOS";
         description = "Configurations, packages, and options scoped specifically to individual user accounts.";
-        maintainers = [ "doromiert" ];
-        type = (zdml users)
+        maintainers = [ $m.doromiert ];
+        type = (zmdl users);
     };
-    (freeform $user) = {
+    (freeform user) = {
         packages = {
             _meta = {
-
-                type = (packages user);
+                type = (packages);
                 brief = "User packages mapped to pkgs.zenos tree";
                 description = "User packages mapped to pkgs.zenos tree.";
-                maintainers = [ "doromiert" ];
+                maintainers = [ $m.doromiert ];
             };
         };
         legacy = {
             _meta = {
-                type = (alias nixpkgs.users.users.$user);
+                type = (alias nixpkgs.users.users.$f.user);
                 brief = "Raw NixOS user options";
                 description = "Direct access to raw NixOS backend configurations for this specific user.";
-                maintainers = [ "doromiert" ];
+                maintainers = [ $m.doromiert ];
             };
         };
         programs = {
             _meta = {
                 brief = "User-specific program configurations";
                 description = "Configurations and overrides for programs specific to this user account.";
-                maintainers = [ "doromiert" ];
-                type = (programs user)
+                maintainers = [ $m.doromiert ];
+                type = (programs);
             };
         };
     };

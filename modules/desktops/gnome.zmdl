@@ -1,38 +1,35 @@
-meta = {
+_meta = {
     brief = "The GNOME desktop environment";
     description = "Standard ZenOS configuration for the GNOME shell and session management";
-    maintainers = [ "doromiert" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napalm;
 };
 
-options = {
-    enable = enableOption {
-        meta.brief = "Enable the core $name desktop environment";
-        meta.description = "Enables GDM and the GNOME desktop manager.";
-        meta.maintainers = [ "doromiert" ];
-        action = {
-            services.displayManager.gdm.enable = true;
-            services.desktopManager.gnome.enable = true;
+enable = enableOption {
+    _meta.brief = "Enable the core $name desktop environment";
+    _meta.description = "Enables GDM and the GNOME desktop manager.";
+    _action = {
+        services.displayManager.gdm.enable = true;
+        services.desktopManager.gnome.enable = true;
 
-            # Minimalist ZenOS Defaults: Disable the heavy suite
-            services.gnome = {
-                core-apps.enable = false;
-                core-developer-tools.enable = false;
-                games.enable = false;
-            };
-
-            environment.gnome.excludePackages = [
-                pkgs.gnome-tour
-                pkgs.gnome-user-docs
-            ];
+        # Minimalist ZenOS Defaults: Disable the heavy suite
+        services.gnome = {
+            core-apps.enable = false;
+            core-developer-tools.enable = false;
+            games.enable = false;
         };
+
+        environment.gnome.excludePackages = [
+            pkgs.gnome-tour
+            pkgs.gnome-user-docs
+        ];
     };
+};
 
-    extraTools = enableOption {
-        meta.brief = "Install additional $name utilities (Tweaks, etc.)";
-        meta.description = "Installs tools like GNOME Tweaks to customize the desktop.";
-        meta.maintainers = [ "doromiert" ];
-        action = {
-            environment.systemPackages = [ pkgs.gnome-tweaks ];
-        };
+extraTools = enableOption {
+    _meta.brief = "Install additional $name utilities (Tweaks, etc.)";
+    _meta.description = "Installs tools like GNOME Tweaks to customize the desktop.";
+    _action = {
+        environment.systemPackages = [ pkgs.gnome-tweaks ];
     };
 };

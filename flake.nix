@@ -17,17 +17,16 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
 
-      zenBuilder = import ./lib/module-builder.nix { inherit lib; };
+      zenBuilder = import ./lib/z-module-bridge.nix { inherit lib inputs; };
       zenCore = import ./lib/zen-core.nix { inherit lib inputs; };
 
-      zenOSModules = zenBuilder.mapZenModules ./modules [ ];
+      zenOSModules = zenBuilder.mapZenModules ./modules [ "zenos" ];
 
       coreModule =
         {
           config,
           lib,
           pkgs,
-          options,
           ...
         }:
         let
@@ -48,46 +47,27 @@
                     if pNode ? system || pNode ? stdenv then
                       throw "ZenOS: Cannot evaluate entire legacy packages tree."
                     else
-                      lib.flatten (
-                        lib.mapAttrsToList (
-                          name: pVal:
-                          let
-                            cVal = if builtins.isAttrs cNode then cNode.${name} or { } else { };
-                            childDisabled = cVal == false || (builtins.isAttrs cVal && cVal ? _enable && !cVal._enable);
-                          in
-                          if childDisabled then
-                            [ ]
-                          else if cVal != { } then
-                            traverse pVal cVal
-                          else
-                            traverse pVal true
-                        ) pNode
-                      )
+                      lib.flatten (lib.mapAttrsToList (n: v: if cNode ? ${n} then traverse v cNode.${n} else [ ]) pNode)
                   else
                     [ ]
-                else if builtins.isAttrs cNode then
-                  lib.flatten (
-                    lib.mapAttrsToList (
-                      name: cVal: if name != "_enable" && pNode ? ${name} then traverse pNode.${name} cVal else [ ]
-                    ) cNode
-                  )
                 else
                   [ ];
             in
             traverse pTree cTree;
         in
         {
-          # Evaluate the custom DSL structure file into standard mkOption mappings here
-          options.zenos = zenCore.parseZstr lib options ./structure.zstr;
+          options = {
+            # Options are fully populated by structure.zstr in allZenModules
+          };
 
           config = {
-            programs = config.zenos.system.programs.legacy;
-            environment.systemPackages = resolvePackages pkgs.zenos config.zenos.system.packages;
+            # Legacy Fallback Injector
+            zenos.legacy = config;
 
-            users.users = lib.mapAttrs (
-              name: userCfg: builtins.removeAttrs userCfg.legacy [ "home-manager" ]
-            ) config.zenos.users;
+            # Build global packages
+            environment.systemPackages = resolvePackages pkgs.zenos config.zenos.packages;
 
+            # Configure root level home-manager legacy injection point
             home-manager = {
               useGlobalPkgs = true;
               useUserPackages = true;
@@ -105,6 +85,7 @@
       allZenModules = zenOSModules ++ [
         coreModule
         home-manager.nixosModules.home-manager
+        (zenBuilder.zstrToModule { file = ./structure.zstr; })
       ];
 
     in
@@ -135,8 +116,33 @@
                 [ ];
           in
           {
-            modules = map (e: e.absPath) (getFiles ./modules);
+            modules = map (
+              e:
+              if lib.hasSuffix ".zmdl" e.name then
+                let
+                  raw = builtins.readFile e.absPath;
+                  # Sanitize custom Z-Dialect variables into valid Nix syntax
+                  safe =
+                    builtins.replaceStrings
+                      [ "$m." "$l." "$type." "$name" "$path." ]
+                      [ "lib.maintainers." "lib.licenses." "lib.types." "name" "config." ]
+                      raw;
+                  # Create the file and completely strip the string context so docs.nix
+                  # doesn't crash when passing its filename into another toFile call.
+                  # Converting via `/. +` guarantees it acts as a standard filesystem path.
+                  safeFile = builtins.unsafeDiscardStringContext (builtins.toFile "${e.name}-doc.nix" safe);
+                in
+                /. + safeFile
+              else
+                e.absPath
+            ) (getFiles ./modules);
+            packages = map (e: e.absPath) (getFiles ./pkgs);
           };
+      };
+
+      hosts = zenCore.mkHosts {
+        root = ./systems;
+        modules = allZenModules;
       };
     };
 }

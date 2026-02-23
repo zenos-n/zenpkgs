@@ -1,0 +1,11 @@
+_meta = {
+    brief = "test";
+    description = "test";
+};
+
+enable = enableOption {
+    _meta.description = "test";
+    _action = {
+        
+    };
+}
