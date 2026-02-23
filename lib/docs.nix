@@ -120,7 +120,6 @@ let
       enableOption =
         {
           meta ? { },
-          action ? { },
         }:
         {
           _isZenLeaf = true;

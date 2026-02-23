@@ -1,6 +1,5 @@
 {
   lib,
-  inputs ? { },
 }:
 let
   zDialect = import ./z-dialect.nix { inherit lib; };
@@ -146,7 +145,6 @@ rec {
   zstrToModule =
     { file }:
     {
-      config,
       lib,
       pkgs,
       ...
