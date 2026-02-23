@@ -13,11 +13,11 @@ let
     str:
     let
       # 1. Functional RHS Constructs -> map to Typed Nodes
-      # Using POSIX [[:space:]] instead of PCRE \s
-      s1 = replaceRegex "\\([[:space:]]*alias[[:space:]]+([a-zA-Z0-9_\\.\\$]+)[[:space:]]*\\)" (
+      # Added \\(\\) to the target character class so nested variables like ($f.user) are valid!
+      s1 = replaceRegex "\\([[:space:]]*alias[[:space:]]+([a-zA-Z0-9_\\.\\$\\(\\)]+)[[:space:]]*\\)" (
         g: "{ _type = \"alias\"; target = \"${builtins.elemAt g 0}\"; }"
       ) str;
-      s2 = replaceRegex "\\([[:space:]]*zmdl[[:space:]]+([a-zA-Z0-9_\\.\\$]+)[[:space:]]*\\)" (
+      s2 = replaceRegex "\\([[:space:]]*zmdl[[:space:]]+([a-zA-Z0-9_\\.\\$\\(\\)]+)[[:space:]]*\\)" (
         g: "{ _type = \"zmdl\"; target = \"${builtins.elemAt g 0}\"; }"
       ) s1;
       s3 = replaceRegex "\\([[:space:]]*programs[[:space:]]*\\)" (g: "{ _type = \"programs\"; }") s2;
@@ -39,7 +39,7 @@ let
       walk =
         val:
         if builtins.isString val then
-          builtins.replaceStrings [ "$name" ] [ args.name ] val
+          builtins.replaceStrings [ "__zargs.name" ] [ args.name ] val
         else if builtins.isAttrs val then
           lib.mapAttrs (n: v: walk v) val
         else if builtins.isList val then
@@ -148,9 +148,7 @@ let
     in
     finalConfig;
 
-  evalZFile = { file, ... }@args: evalZString (args // { content = builtins.readFile file; });
-
 in
 {
-  inherit transpileZString evalZString evalZFile;
+  inherit transpileZString evalZString;
 }

@@ -20,7 +20,37 @@
       zenBuilder = import ./lib/z-module-bridge.nix { inherit lib inputs; };
       zenCore = import ./lib/zen-core.nix { inherit lib inputs; };
 
-      zenOSModules = zenBuilder.mapZenModules ./modules [ "zenos" ];
+      # Manually map the directories to match the (zmdl ...) definitions in structure.zstr
+      zenOSModules = lib.flatten [
+        (
+          if builtins.pathExists ./modules/system then
+            zenBuilder.mapZenModules ./modules/system [
+              "zenos"
+              "system"
+            ]
+          else
+            [ ]
+        )
+        (
+          if builtins.pathExists ./modules/desktops then
+            zenBuilder.mapZenModules ./modules/desktops [
+              "zenos"
+              "desktops"
+            ]
+          else
+            [ ]
+        )
+        (
+          if builtins.pathExists ./modules/programs then
+            zenBuilder.mapZenModules ./modules/programs [
+              "zenos"
+              "system"
+              "programs"
+            ]
+          else
+            [ ]
+        )
+      ];
 
       coreModule =
         {
@@ -58,6 +88,27 @@
         {
           options = {
             # Options are fully populated by structure.zstr in allZenModules
+            # We explicitly inject user modules and program modules into the freeform user submodule
+            zenos.users = lib.mkOption {
+              type = lib.types.attrsOf (
+                lib.types.submodule {
+                  imports = lib.flatten [
+                    (
+                      if builtins.pathExists ./modules/userModules then
+                        zenBuilder.mapZenModules ./modules/userModules [ ]
+                      else
+                        [ ]
+                    )
+                    (
+                      if builtins.pathExists ./modules/programs then
+                        zenBuilder.mapZenModules ./modules/programs [ "programs" ]
+                      else
+                        [ ]
+                    )
+                  ];
+                }
+              );
+            };
           };
 
           config = {
@@ -114,19 +165,39 @@
                 zenCore.walkDir dir (n: t: t == "regular" && (lib.hasSuffix ".nix" n || lib.hasSuffix ".zmdl" n))
               else
                 [ ];
+
+            # Explicitly append structure.zstr to the list of parsed documents
+            allFiles = (getFiles ./modules) ++ [
+              {
+                name = "structure.zstr";
+                type = "regular";
+                relPath = [ ];
+                absPath = ./structure.zstr;
+              }
+            ];
+
+            # Pull the dialect parser to safely convert Z-Syntax constructs for the documentation
+            zDialect = import ./lib/z-dialect.nix { inherit lib; };
           in
           {
             modules = map (
               e:
-              if lib.hasSuffix ".zmdl" e.name then
+              if lib.hasSuffix ".zmdl" e.name || lib.hasSuffix ".zstr" e.name then
                 let
                   raw = builtins.readFile e.absPath;
-                  # Sanitize custom Z-Dialect variables into valid Nix syntax
+                  baseName = lib.removeSuffix ".zmdl" (lib.removeSuffix ".zstr" e.name);
+
+                  # 1. Transpile z-syntax (like (zmdl foo)) into valid nix AST strings
+                  # so docs.nix can evaluate the attribute sets without crashing on syntax
+                  transpiled = zDialect.transpileZString raw;
+
+                  # 2. Map transpiled variables to standard Nix types so docs.nix evaluates the meta blocks
                   safe =
                     builtins.replaceStrings
-                      [ "$m." "$l." "$type." "$name" "$path." ]
-                      [ "lib.maintainers." "lib.licenses." "lib.types." "name" "config." ]
-                      raw;
+                      [ "__zargs.m." "__zargs.l." "__zargs.type." "__zargs.name" "__zargs.path." ]
+                      [ "lib.maintainers." "lib.licenses." "lib.types." ''"${baseName}"'' "config." ]
+                      transpiled;
+
                   # Create the file and completely strip the string context so docs.nix
                   # doesn't crash when passing its filename into another toFile call.
                   # Converting via `/. +` guarantees it acts as a standard filesystem path.
@@ -135,7 +206,7 @@
                 /. + safeFile
               else
                 e.absPath
-            ) (getFiles ./modules);
+            ) allFiles;
             packages = map (e: e.absPath) (getFiles ./pkgs);
           };
       };
