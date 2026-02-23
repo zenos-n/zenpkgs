@@ -21,32 +21,23 @@
       zenCore = import ./lib/zen-core.nix { inherit lib inputs; };
 
       # Manually map the directories to match the (zmdl ...) definitions in structure.zstr
+      # Passed 'false' for isUserScope on global mounts
       zenOSModules = lib.flatten [
         (
           if builtins.pathExists ./modules/system then
-            zenBuilder.mapZenModules ./modules/system [
-              "zenos"
-              "system"
-            ]
+            zenBuilder.mapZenModules ./modules/system [ "zenos" "system" ] false
           else
             [ ]
         )
         (
           if builtins.pathExists ./modules/desktops then
-            zenBuilder.mapZenModules ./modules/desktops [
-              "zenos"
-              "desktops"
-            ]
+            zenBuilder.mapZenModules ./modules/desktops [ "zenos" "desktops" ] false
           else
             [ ]
         )
         (
           if builtins.pathExists ./modules/programs then
-            zenBuilder.mapZenModules ./modules/programs [
-              "zenos"
-              "system"
-              "programs"
-            ]
+            zenBuilder.mapZenModules ./modules/programs [ "zenos" "system" "programs" ] false
           else
             [ ]
         )
@@ -66,14 +57,12 @@
               traverse =
                 pNode: cNode:
                 let
-                  # Node is enabled if explicitly true, or set via the zcfg hack
                   enabled = cNode == true || (builtins.isAttrs cNode && cNode._enable or false);
                 in
                 if enabled then
                   if lib.isDerivation pNode then
                     [ pNode ]
                   else if builtins.isAttrs pNode then
-                    # Guard against OOM evaluation of legacy nixpkgs
                     if pNode ? system || pNode ? stdenv then
                       throw "ZenOS: Cannot evaluate entire legacy packages tree."
                     else
@@ -92,16 +81,20 @@
             zenos.users = lib.mkOption {
               type = lib.types.attrsOf (
                 lib.types.submodule {
+                  # INJECT pkgs into submodule scope so home-manager and ZMDL files can access it
+                  _module.args.pkgs = pkgs;
+
+                  # Pass 'true' for isUserScope so the module bridge knows to isolate _saction
                   imports = lib.flatten [
                     (
                       if builtins.pathExists ./modules/userModules then
-                        zenBuilder.mapZenModules ./modules/userModules [ ]
+                        zenBuilder.mapZenModules ./modules/userModules [ ] true
                       else
                         [ ]
                     )
                     (
                       if builtins.pathExists ./modules/programs then
-                        zenBuilder.mapZenModules ./modules/programs [ "programs" ]
+                        zenBuilder.mapZenModules ./modules/programs [ "programs" ] true
                       else
                         [ ]
                     )
@@ -116,7 +109,12 @@
             zenos.legacy = config;
 
             # Build global packages
-            environment.systemPackages = resolvePackages pkgs.zenos config.zenos.packages;
+            environment.systemPackages = resolvePackages pkgs.zenos config.zenos.system.packages;
+
+            # Inject raw NixOS user legacy configurations so 'users.debug-user.legacy.isNormalUser' works
+            users.users = lib.mapAttrs (
+              name: userCfg: builtins.removeAttrs (userCfg.legacy or { }) [ "home-manager" ]
+            ) config.zenos.users;
 
             # Configure root level home-manager legacy injection point
             home-manager = {
@@ -124,10 +122,16 @@
               useUserPackages = true;
               users = lib.mapAttrs (
                 name: userCfg:
-                lib.recursiveUpdate {
-                  home.stateVersion = config.system.stateVersion or "25.11";
-                  home.packages = resolvePackages pkgs.zenos userCfg.packages;
-                } (lib.recursiveUpdate (userCfg.legacy.home-manager or { }) { programs = userCfg.programs.legacy; })
+                lib.recursiveUpdate
+                  {
+                    home.stateVersion = config.system.stateVersion or "25.11";
+                    home.packages = resolvePackages pkgs.zenos (userCfg.packages or { });
+                  }
+                  (
+                    lib.recursiveUpdate (userCfg.legacy.home-manager or { }) {
+                      programs = userCfg.programs.legacy or { };
+                    }
+                  )
               ) config.zenos.users;
             };
           };
@@ -166,7 +170,6 @@
               else
                 [ ];
 
-            # Explicitly append structure.zstr to the list of parsed documents
             allFiles = (getFiles ./modules) ++ [
               {
                 name = "structure.zstr";
@@ -175,8 +178,6 @@
                 absPath = ./structure.zstr;
               }
             ];
-
-            # Pull the dialect parser to safely convert Z-Syntax constructs for the documentation
             zDialect = import ./lib/z-dialect.nix { inherit lib; };
           in
           {
@@ -186,21 +187,13 @@
                 let
                   raw = builtins.readFile e.absPath;
                   baseName = lib.removeSuffix ".zmdl" (lib.removeSuffix ".zstr" e.name);
-
-                  # 1. Transpile z-syntax (like (zmdl foo)) into valid nix AST strings
-                  # so docs.nix can evaluate the attribute sets without crashing on syntax
                   transpiled = zDialect.transpileZString raw;
-
-                  # 2. Map transpiled variables to standard Nix types so docs.nix evaluates the meta blocks
                   safe =
                     builtins.replaceStrings
                       [ "__zargs.m." "__zargs.l." "__zargs.type." "__zargs.name" "__zargs.path." ]
                       [ "lib.maintainers." "lib.licenses." "lib.types." ''"${baseName}"'' "config." ]
                       transpiled;
 
-                  # Create the file and completely strip the string context so docs.nix
-                  # doesn't crash when passing its filename into another toFile call.
-                  # Converting via `/. +` guarantees it acts as a standard filesystem path.
                   safeFile = builtins.unsafeDiscardStringContext (builtins.toFile "${e.name}-doc.nix" safe);
                 in
                 /. + safeFile

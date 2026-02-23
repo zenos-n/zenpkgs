@@ -13,20 +13,22 @@ let
     str:
     let
       # 1. Functional RHS Constructs -> map to Typed Nodes
-      # Added \\(\\) to the target character class so nested variables like ($f.user) are valid!
-      s1 = replaceRegex "\\([[:space:]]*alias[[:space:]]+([a-zA-Z0-9_\\.\\$\\(\\)]+)[[:space:]]*\\)" (
+      # Added the hyphen `-` at the start of the character class and literal `()`
+      # This allows target paths like `nixpkgs.home-manager.users.($f.user)`
+      s1 = replaceRegex "\\([[:space:]]*alias[[:space:]]+([-a-zA-Z0-9_.$()]+)[[:space:]]*\\)" (
         g: "{ _type = \"alias\"; target = \"${builtins.elemAt g 0}\"; }"
       ) str;
-      s2 = replaceRegex "\\([[:space:]]*zmdl[[:space:]]+([a-zA-Z0-9_\\.\\$\\(\\)]+)[[:space:]]*\\)" (
+      s2 = replaceRegex "\\([[:space:]]*zmdl[[:space:]]+([-a-zA-Z0-9_.$()]+)[[:space:]]*\\)" (
         g: "{ _type = \"zmdl\"; target = \"${builtins.elemAt g 0}\"; }"
       ) s1;
       s3 = replaceRegex "\\([[:space:]]*programs[[:space:]]*\\)" (g: "{ _type = \"programs\"; }") s2;
       s4 = replaceRegex "\\([[:space:]]*packages[[:space:]]*\\)" (g: "{ _type = \"packages\"; }") s3;
 
       # 2. LHS Freeform Definitions: `(freeform name) =` -> `__z_freeform_name =`
-      s5 = replaceRegex "\\([[:space:]]*freeform[[:space:]]+([a-zA-Z0-9_]+)[[:space:]]*\\)[[:space:]]*=" (
-        g: "__z_freeform_${builtins.elemAt g 0} ="
-      ) s4;
+      s5 =
+        replaceRegex "\\([[:space:]]*freeform[[:space:]]+([-a-zA-Z0-9_]+)[[:space:]]*\\)[[:space:]]*="
+          (g: "__z_freeform_${builtins.elemAt g 0} =")
+          s4;
 
       # 3. Keyword Variables: $name, $path, $m, $l, $type
       s6 = replaceRegex "\\$(name|path|m|l|type)" (g: "__zargs.${builtins.elemAt g 0}") s5;

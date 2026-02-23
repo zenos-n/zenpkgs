@@ -79,6 +79,13 @@ users = {
                 description = "Direct access to raw NixOS backend configurations for this specific user.";
                 maintainers = [ $m.doromiert ];
             };
+            home-manager._meta = {
+                brief = "Home-manager configuration";
+                description = ''
+                    Lets you interact with home-manager directly.
+                '';
+                type = (alias nixpkgs.home-manager.users.($f.user));
+            };
         };
         programs = {
             _meta = {
@@ -91,6 +98,7 @@ users = {
                 brief = "Legacy program modules";
                 description = "Lets you configure programs from nixos directly.";
                 type = (alias nixpkgs.users.users.($f.user).programs);
+                default = {};
             };
         };
     };

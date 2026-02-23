@@ -49,19 +49,25 @@ let
     walk ast;
 
   mkConfig =
-    cfgPath: ast:
+    cfgPath: ast: isUserScope: globalConfig:
     let
       walk =
         cfgNode: astNode:
         let
           isEnabled = if astNode ? _type && astNode._type == "enableOption" then cfgNode else true;
 
-          action = astNode._action or { };
-          saction = astNode._saction or { };
+          # SCOPE AWARENESS: Filter actions based on where this module is currently mounted
+          action = if isUserScope then { } else astNode._action or { };
+          saction = if isUserScope then { } else astNode._saction or { };
+
           uaction =
-            if astNode ? _uaction then
+            if isUserScope then
+              # If in user scope, _uaction applies directly to this specific user
+              astNode._uaction or { }
+            else if astNode ? _uaction then
               {
-                zenos.users = lib.mapAttrs (u: v: astNode._uaction) cfgPath.users or { };
+                # If enabled globally, _uaction cascades down to all registered users
+                zenos.users = lib.mapAttrs (u: v: astNode._uaction) (globalConfig.zenos.users or { });
               }
             else
               { };
@@ -89,7 +95,11 @@ let
 in
 rec {
   zmdlToModule =
-    { file, namespacePath }:
+    {
+      file,
+      namespacePath,
+      isUserScope ? false,
+    }:
     {
       config,
       lib,
@@ -113,8 +123,24 @@ rec {
 
     in
     {
-      options = lib.setAttrByPath (namespacePath ++ [ name ]) (mkOptions ast);
-      config = mkConfig scopeConfig ast;
+      # Add a default legacy mapping for every program module
+      options = lib.recursiveUpdate (lib.setAttrByPath (namespacePath ++ [ name ]) (mkOptions ast)) (
+        lib.setAttrByPath
+          (
+            namespacePath
+            ++ [
+              name
+              "legacy"
+            ]
+          )
+          (
+            lib.mkOption {
+              type = lib.types.attrsOf lib.types.anything;
+              default = { };
+            }
+          )
+      );
+      config = mkConfig scopeConfig ast isUserScope config;
     };
 
   zstrToModule =
@@ -134,14 +160,36 @@ rec {
 
       processStructure =
         node:
-        if node ? _meta && node._meta ? type && node._meta.type._type == "alias" then
+        let
+          isAlias = node ? _meta && node._meta ? type && node._meta.type._type == "alias";
+          isPackages = node ? _meta && node._meta ? type && node._meta.type._type == "packages";
+          isPrograms = node ? _meta && node._meta ? type && node._meta.type._type == "programs";
+          isZmdl = node ? _meta && node._meta ? type && node._meta.type._type == "zmdl";
+
+          children = builtins.removeAttrs node [ "_meta" ];
+          mappedChildren = lib.mapAttrs (n: v: processStructure v) children;
+        in
+        if isAlias then
+          if children == { } then
+            lib.mkOption {
+              type = lib.types.attrsOf lib.types.anything;
+              description = node._meta.brief or "Alias to ${node._meta.type.target}";
+              default = { }; # Ensure structural aliases have a default empty set
+            }
+          else
+            lib.mkOption {
+              # Dynamically promote alias to a submodule if it has children!
+              # attrsOf anything allows it to properly merge loose arbitrary variables natively
+              type = lib.types.submodule {
+                freeformType = lib.types.attrsOf lib.types.anything;
+                options = mappedChildren;
+              };
+              description = node._meta.brief or "Alias to ${node._meta.type.target}";
+              default = { };
+            }
+        else if isPackages then
           lib.mkOption {
-            type = lib.types.attrs;
-            description = node._meta.brief or "Alias to ${node._meta.type.target}";
-          }
-        else if node ? _meta && node._meta ? type && node._meta.type._type == "packages" then
-          lib.mkOption {
-            type = lib.types.attrsOf lib.types.package;
+            type = lib.types.attrsOf lib.types.anything;
             default = { };
             description = node._meta.brief or "Packages scope";
           }
@@ -154,8 +202,18 @@ rec {
             );
             default = { };
           }
+        else if isPrograms || isZmdl then
+          mappedChildren
+          // (lib.optionalAttrs (!(mappedChildren ? legacy)) {
+            # Automatically establish legacy fallback inside structural domains
+            legacy = lib.mkOption {
+              type = lib.types.attrsOf lib.types.anything;
+              default = { };
+              description = "Raw configuration bypass";
+            };
+          })
         else if builtins.isAttrs node then
-          lib.mapAttrs (n: v: processStructure v) (builtins.removeAttrs node [ "_meta" ])
+          mappedChildren
         else
           { };
 
@@ -165,7 +223,7 @@ rec {
     };
 
   mapZenModules =
-    dir: namespacePath:
+    dir: namespacePath: isUserScope:
     if !builtins.pathExists dir then
       [ ]
     else
@@ -177,13 +235,13 @@ rec {
             path = dir + "/${name}";
           in
           if type == "directory" then
-            mapZenModules path (namespacePath ++ [ name ])
+            mapZenModules path (namespacePath ++ [ name ]) isUserScope
           else if type == "regular" then
             if lib.hasSuffix ".zmdl" name then
               [
                 (zmdlToModule {
                   file = path;
-                  inherit namespacePath;
+                  inherit namespacePath isUserScope;
                 })
               ]
             else if lib.hasSuffix ".zstr" name then
