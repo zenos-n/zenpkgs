@@ -396,15 +396,6 @@ let
       metaLookup = moduleMetadata.${name} or null;
       hasMeta = metaLookup != null;
       isLegacyPath = lib.any (segment: segment == "legacy") path;
-
-      attachedMeta = if builtins.isAttrs v && v ? meta then v.meta else null;
-
-      # 2. Fallback to your existing global lookup
-      globalMeta = moduleMetadata.${name} or null;
-
-      # 3. Final meta object used for the report
-      metaObj = if attachedMeta != null then attachedMeta else globalMeta;
-
     in
     maybeTrace (
       if isRepeating then
