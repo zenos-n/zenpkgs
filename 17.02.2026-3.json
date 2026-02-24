@@ -1,0 +1,7 @@
+{
+  "id": "17.02.2026-3",
+  "title": "ZenPkgs Browser v1.1.2 Release",
+  "date": "17.02.2026",
+  "authors": ["doromiert"],
+  "content": "## keyboard UX improvements \n\n yeah... so, in 1.1.1 (or 1.1.0? i forgot), something i did broke keyboard nav in 2 ways: \n - when an input was focused, it didn't filter out keybinds (especially annoying for vim-like keybinds) \n - arrow navigation in search results was broken \n\n so what i did was, of course, fix those two issues but i also improved how keyboard navigation feels in general. \n\n now, if a node that you're moving to is below 50% of your screen's height, it will animate it so that it's on top of the screen. \n\n not a giant update but i hope it still makes your life easier"
+}
