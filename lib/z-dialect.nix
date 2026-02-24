@@ -34,14 +34,14 @@ let
       ) s6;
 
       # 2. _let hook translations
-      # Maps `_let name: $type.int = value;` to a local `_vars."name" = value;` assignment
-      s8 = replaceRegex "_let[[:space:]]+([a-zA-Z0-9_-]+)[[:space:]]*:[[:space:]]*[^=]+=" (
-        g: "_vars.\"${builtins.elemAt g 0}\" ="
+      s8 = replaceRegex "\\([[:space:]]*freeform[[:space:]]+([-a-zA-Z0-9_.$]+)[[:space:]]*\\)" (
+        g: "\"__freeform_${builtins.elemAt g 0}\""
       ) s7;
 
-      # 3. Shorthand ! -> _action =
-      # Using [{] instead of \\{ to prevent POSIX ERE engine errors
-      s9 = replaceRegex "![[:space:]]*[{]" (g: "_action = {") s8;
+      # 2. _let hook translations (Update this to take s8 as input!)
+      s9 = replaceRegex "_let[[:space:]]+([a-zA-Z0-9_-]+)[[:space:]]*:[[:space:]]*[^=]+=" (
+        g: "_vars.\"${builtins.elemAt g 0}\" ="
+      ) s8;
 
       # 4. Zen Namespaces ($ variables mapping)
       s10 =

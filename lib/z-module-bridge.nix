@@ -34,20 +34,44 @@ let
             description = node._meta.description or node._meta.brief or "";
           }
         else if builtins.isAttrs node then
-          lib.mapAttrs (n: v: walk v) (
-            builtins.removeAttrs node [
-              "_meta"
-              "_action"
-              "_saction"
-              "_uaction"
-              "_type"
-              "_deps"
-              "_vars"
-            ]
-          )
+          # Use mapAttrs' to allow us to intercept and rename keys
+          lib.mapAttrs'
+            (
+              n: v:
+              if lib.hasPrefix "__freeform_" n then
+                let
+                  freeformName = lib.removePrefix "__freeform_" n;
+                in
+                lib.nameValuePair freeformName (
+                  lib.mkOption {
+                    # Wrap the inner structure in a submodule
+                    type = lib.types.attrsOf (
+                      lib.types.submodule {
+                        options = walk v;
+                      }
+                    );
+                    default = { };
+                    description = v._meta.description or "Freeform configuration for ${freeformName}";
+                  }
+                )
+              else
+                lib.nameValuePair n (walk v)
+            )
+            (
+              builtins.removeAttrs node [
+                "_meta"
+                "_action"
+                "_saction"
+                "_uaction"
+                "_type"
+                "_deps"
+                "_vars"
+              ]
+            )
         else
           { };
     in
+    # ...
     walk ast;
 
   mkConfig =
@@ -164,6 +188,7 @@ let
       namespacePath,
       isUserScope ? false,
     }:
+    { config, ... }: # <--- Module lambda is now wrapped around the AST evaluation
     let
       name = lib.removeSuffix ".zmdl" (builtins.baseNameOf file);
       cfgPath = namespacePath ++ [ name ];
@@ -178,11 +203,10 @@ let
           __zargs.lib = lib;
           __zargs.maintainers = maintainers;
           __zargs.licenses = licenses;
+          contextArgs = lib.attrByPath cfgPath { } config; # <--- Feeds the user's config to $f
         };
       };
-
     in
-    { config, ... }:
     {
       options = lib.setAttrByPath cfgPath (mkOptions ast);
       config = mkConfig cfgPath ast isUserScope config;
@@ -199,10 +223,36 @@ let
       processStructure =
         node:
         let
-          mappedChildren = lib.mapAttrs (n: v: processStructure v) node;
-          isZmdl = builtins.any (x: x ? _type && x._type == "zmdl") (builtins.attrValues node);
+          # 1. Detect if this level defines a freeform child
+          freeformKeys = builtins.filter (k: lib.hasPrefix "__freeform_" k) (builtins.attrNames node);
+          hasFreeform = builtins.length freeformKeys > 0;
+          freeformKey = if hasFreeform then builtins.head freeformKeys else null;
+          freeformName = if hasFreeform then lib.removePrefix "__freeform_" freeformKey else "";
+
+          # 2. Strip metadata and the freeform key itself so they don't leak as nested options
+          cleanNode = builtins.removeAttrs node (
+            [ "_meta" ] ++ (if hasFreeform then [ freeformKey ] else [ ])
+          );
+
+          mappedChildren = lib.mapAttrs (n: v: processStructure v) cleanNode;
+
+          # Use cleanNode so we don't accidentally match _meta properties
+          isZmdl = builtins.any (x: builtins.isAttrs x && x ? _type && x._type == "zmdl") (
+            builtins.attrValues node
+          );
         in
-        if isZmdl then
+        if hasFreeform then
+          lib.mkOption {
+            # Wrap the node in attrsOf submodule, processing the freeform's inner contents
+            type = lib.types.attrsOf (
+              lib.types.submodule {
+                options = processStructure (builtins.removeAttrs node.${freeformKey} [ "_meta" ]);
+              }
+            );
+            default = { };
+            description = node._meta.description or "Freeform configuration for ${freeformName}";
+          }
+        else if isZmdl then
           mappedChildren
           // (lib.optionalAttrs (!(mappedChildren ? legacy)) {
             legacy = lib.mkOption {

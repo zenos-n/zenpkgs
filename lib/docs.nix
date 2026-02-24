@@ -72,7 +72,8 @@ let
     if !shouldWarn || missing == [ ] then
       meta
     else
-      builtins.trace "WARNING: ${pathStr} is missing metadata: ${lib.concatStringsSep ", " missing}" meta;
+      # Embed the warning into the meta object instead of tracing immediately
+      meta // { _warning = "${pathStr} is missing metadata: ${lib.concatStringsSep ", " missing}"; };
 
   # --- HELPER: Type Normalizer ---
   normalizeType =
@@ -522,7 +523,13 @@ let
                   "_args"
                   "freeformType"
                   "sandbox"
-                  "meta"
+                  "_meta"
+                  "_action"
+                  "_saction"
+                  "_uaction"
+                  "_vars"
+                  "_type"
+                  "_deps"
                   "specialisation"
                   "containers"
                   "vmVariant"
@@ -542,25 +549,44 @@ let
         in
         { meta = metaObj; } // (if finalSub != { } then { sub = finalSub; } else { })
     );
+  # Generate the raw trees natively
+  rawOptions = (showOptions [ "zenos" ] eval.options.zenos).sub;
+
+  rawPkgsSet = showPackages 3 [ "pkgs" "zenos" ] (pkgs.zenos or { });
+  rawPkgs = (builtins.removeAttrs (rawPkgsSet.sub or { }) [ "legacy" ]) // {
+    legacy.sub = rawPkgsSet.sub.legacy.sub or { };
+  };
+
+  # Helper to pull all warnings out of the generated AST
+  collectWarnings =
+    node:
+    (if node ? meta && node.meta ? _warning then [ node.meta._warning ] else [ ])
+    ++ (
+      if node ? sub then lib.flatten (lib.mapAttrsToList (k: v: collectWarnings v) node.sub) else [ ]
+    );
+
+  # Gather them all
+  warnings = (collectWarnings { sub = rawOptions; }) ++ (collectWarnings { sub = rawPkgs; });
+  warningReport = lib.concatStringsSep "\n" warnings;
 
 in
-{
-  # Structural metadata
-  maintainers = if builtins.pathExists ./maintainers.nix then import ./maintainers.nix else { };
+# If there are warnings, trace them out in one block before returning the final set.
+if warnings != [ ] then
+  builtins.trace
+    ''
 
-  # Option documentation tree
-  options = (showOptions [ "zenos" ] eval.options.zenos).sub;
-
-  # Package documentation (filtered to requested namespaces)
-  pkgs =
-    let
-      zenosSet = showPackages 3 [ "pkgs" "zenos" ] (pkgs.zenos or { });
-    in
-    (builtins.removeAttrs (zenosSet.sub or { }) [ "legacy" ])
-    // {
-      # Extract the custom ZenOS packages, removing the legacy pointer to avoid circular metadata
-
-      # Extract the legacy nixpkgs tree from the nested pointer
-      legacy.sub = zenosSet.sub.legacy.sub or { };
-    };
-}
+      === MISSING METADATA REPORT ===
+      ${warningReport}
+      ===============================
+    ''
+    {
+      maintainers = if builtins.pathExists ./maintainers.nix then import ./maintainers.nix else { };
+      options = rawOptions;
+      pkgs = rawPkgs;
+    }
+else
+  {
+    maintainers = if builtins.pathExists ./maintainers.nix then import ./maintainers.nix else { };
+    options = rawOptions;
+    pkgs = rawPkgs;
+  }
