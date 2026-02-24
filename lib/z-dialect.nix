@@ -53,9 +53,9 @@ let
             "$c"
             "$v"
             "$m"
+            "$lib"
             "$l"
             "$type"
-            "$lib"
             "$f"
           ]
           [
@@ -65,9 +65,9 @@ let
             "__zargs.colors"
             "_vars"
             "__zargs.maintainers"
+            "lib"
             "__zargs.licenses"
             "__zargs.type"
-            "lib"
             "__zargs.context"
           ]
           s9;

@@ -41,7 +41,6 @@ let
         _module.args.lib = lib;
         _module.args.isDocs = true;
 
-        # --- FIX 1: Provide __zargs natively to prevent evaluation crashes ---
         _module.args.__zargs = {
           maintainers = lib.maintainers;
           licenses = lib.licenses;
@@ -58,7 +57,7 @@ let
       {
         fileSystems."/".device = "/dev/null";
         boot.loader.systemd-boot.enable = true;
-        system.stateVersion = "2.5.11";
+        system.stateVersion = "25.11";
       }
     ];
   };
