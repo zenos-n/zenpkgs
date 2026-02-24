@@ -34,7 +34,6 @@ let
             description = node._meta.description or node._meta.brief or "";
           }
         else if builtins.isAttrs node then
-          # Use mapAttrs' to allow us to intercept and rename keys
           lib.mapAttrs'
             (
               n: v:
@@ -44,7 +43,6 @@ let
                 in
                 lib.nameValuePair freeformName (
                   lib.mkOption {
-                    # Wrap the inner structure in a submodule
                     type = lib.types.attrsOf (
                       lib.types.submodule {
                         options = walk v;
@@ -71,7 +69,6 @@ let
         else
           { };
     in
-    # ...
     walk ast;
 
   mkConfig =
@@ -166,8 +163,9 @@ let
             ]
           )
         else if builtins.isAttrs node then
-          lib.mapAttrs (n: v: walk (path ++ [ n ]) v) (
-            builtins.removeAttrs node [
+          # Extract all freeform keys at this level
+          let
+            cleanNode = builtins.removeAttrs node [
               "_meta"
               "_action"
               "_saction"
@@ -175,7 +173,33 @@ let
               "_type"
               "_deps"
               "_vars"
-            ]
+            ];
+          in
+          lib.mkMerge (
+            lib.mapAttrsToList (
+              n: v:
+              if lib.hasPrefix "__freeform_" n then
+                let
+                  freeformName = lib.removePrefix "__freeform_" n;
+                  # Get the actual keys the user configured (e.g., "alice", "bob")
+                  userConfiguredDict = lib.attrByPath (cfgPath ++ path ++ [ freeformName ]) { } globalConfig;
+                in
+                # Map over the user's actual keys and walk the inner AST for each one
+                lib.mkMerge (
+                  lib.mapAttrsToList (
+                    actualKey: actualVal:
+                    walk (
+                      path
+                      ++ [
+                        freeformName
+                        actualKey
+                      ]
+                    ) v
+                  ) userConfiguredDict
+                )
+              else
+                walk (path ++ [ n ]) v
+            ) cleanNode
           )
         else
           { };
