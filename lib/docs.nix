@@ -61,7 +61,7 @@ let
     path: meta:
     let
       pathStr = lib.concatStringsSep "." path;
-      isZenosPkg = lib.hasPrefix "pkgs.zenos" pathStr;
+      isZenosPkg = lib.hasPrefix "pkgs.zenos" pathStr && !(lib.any (s: s == "legacy") path);
       isZenosOption = lib.hasPrefix "zenos" pathStr && !(lib.any (s: s == "legacy") path);
       shouldWarn = isZenosPkg || isZenosOption;
 
