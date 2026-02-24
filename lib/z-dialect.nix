@@ -13,8 +13,6 @@ let
     str:
     let
       # 1. Functional RHS Constructs -> map to Typed Nodes
-      # Added the hyphen `-` at the start of the character class and literal `()`
-      # This allows target paths like `nixpkgs.home-manager.users.($f.user)`
       s1 = replaceRegex "\\([[:space:]]*alias[[:space:]]+([-a-zA-Z0-9_.$()]+)[[:space:]]*\\)" (
         g: "{ _type = \"alias\"; target = \"${builtins.elemAt g 0}\"; }"
       ) str;
@@ -23,90 +21,144 @@ let
       ) s1;
       s3 = replaceRegex "\\([[:space:]]*programs[[:space:]]*\\)" (g: "{ _type = \"programs\"; }") s2;
       s4 = replaceRegex "\\([[:space:]]*packages[[:space:]]*\\)" (g: "{ _type = \"packages\"; }") s3;
+      s5 = replaceRegex "\\([[:space:]]*group[[:space:]]+([-a-zA-Z0-9_.$]+)[[:space:]]*\\)" (
+        g: "{ _type = \"group\"; name = \"${builtins.elemAt g 0}\"; }"
+      ) s4;
+      s6 =
+        replaceRegex
+          "\\([[:space:]]*import[[:space:]]+([^[:space:]]+)[[:space:]]*[{]([^}]+)[}][[:space:]]*\\)"
+          (g: "{ _type = \"import\"; path = \"${builtins.elemAt g 0}\"; args = {${builtins.elemAt g 1}}; }")
+          s5;
+      s7 = replaceRegex "\\([[:space:]]*needs[[:space:]]+([-a-zA-Z0-9_.$]+)[[:space:]]*\\)" (
+        g: "{ _type = \"needs\"; dep = \"${builtins.elemAt g 0}\"; }"
+      ) s6;
 
-      # 2. LHS Freeform Definitions: `(freeform name) =` -> `__z_freeform_name =`
-      s5 =
-        replaceRegex "\\([[:space:]]*freeform[[:space:]]+([-a-zA-Z0-9_]+)[[:space:]]*\\)[[:space:]]*="
-          (g: "__z_freeform_${builtins.elemAt g 0} =")
-          s4;
+      # 2. _let hook translations
+      # Maps `_let name: $type.int = value;` to a local `_vars."name" = value;` assignment
+      s8 = replaceRegex "_let[[:space:]]+([a-zA-Z0-9_-]+)[[:space:]]*:[[:space:]]*[^=]+=" (
+        g: "_vars.\"${builtins.elemAt g 0}\" ="
+      ) s7;
 
-      # 3. Keyword Variables: $name, $path, $m, $l, $type
-      s6 = replaceRegex "\\$(name|path|m|l|type)" (g: "__zargs.${builtins.elemAt g 0}") s5;
+      # 3. Shorthand ! -> _action =
+      # Using [{] instead of \\{ to prevent POSIX ERE engine errors
+      s9 = replaceRegex "![[:space:]]*[{]" (g: "_action = {") s8;
+
+      # 4. Zen Namespaces ($ variables mapping)
+      s10 =
+        builtins.replaceStrings
+          [
+            "$name"
+            "$path"
+            "$pkgs"
+            "$c"
+            "$v"
+            "$m"
+            "$l"
+            "$type"
+            "$lib"
+            "$f"
+          ]
+          [
+            "__zargs.name"
+            "__zargs.path"
+            "__zargs.pkgs.zenos"
+            "__zargs.colors"
+            "_vars"
+            "__zargs.maintainers"
+            "__zargs.licenses"
+            "__zargs.type"
+            "lib"
+            "__zargs.context"
+          ]
+          s9;
+
     in
-    s6;
-
-  interpolateStrings =
-    args: config:
-    let
-      walk =
-        val:
-        if builtins.isString val then
-          builtins.replaceStrings [ "__zargs.name" ] [ args.name ] val
-        else if builtins.isAttrs val then
-          lib.mapAttrs (n: v: walk v) val
-        else if builtins.isList val then
-          map walk val
-        else
-          val;
-    in
-    walk config;
+    s10;
 
   evalZString =
     {
-      name ? "unknown",
-      path ? { },
-      content,
-      maintainers ? { },
-      licenses ? { },
-      pkgs ? null,
+      name,
+      path ? [ ],
+      isUserScope ? false,
+      file,
       extraArgs ? { },
     }:
     let
-      transpiled = transpileZString content;
+      raw = builtins.readFile file;
+      transpiled = transpileZString raw;
 
-      nixExprString = ''
-        __zargs: with __zargs; {
-          ${transpiled}
-        }
-      '';
+      # We wrap in `with __zargs; rec { ... }` so `_vars` and variables are safely localized
+      tmpFile = builtins.unsafeDiscardStringContext (
+        builtins.toFile "${name}-transpiled.nix" ''
+          __zargs: with __zargs; rec {
+            ${transpiled}
+          }
+        ''
+      );
 
-      tmpFile = builtins.toFile "zenos-transpiled-${name}.nix" nixExprString;
       rawModule = import tmpFile;
 
+      # Overloaded enableOption implementation
+      enableOptionImpl =
+        arg1:
+        if
+          builtins.isAttrs arg1
+          && (arg1 ? _action || arg1 ? _meta || arg1 ? _saction || arg1 ? _uaction || arg1 ? _vars)
+        then
+          arg1
+          // {
+            _type = "enableOption";
+            _deps = { };
+          }
+        else
+          (
+            body:
+            body
+            // {
+              _type = "enableOption";
+              _deps = arg1;
+            }
+          );
+
       __zargs = {
-        inherit
-          name
-          path
-          pkgs
-          lib
-          ;
-        m = maintainers;
-        l = licenses;
+        inherit name path isUserScope;
+        enableOption = enableOptionImpl;
+
+        # Zen Type System Registry
         type = {
-          boolean = {
-            _type = "ztype";
-            name = "boolean";
-          };
-          string = {
-            _type = "ztype";
-            name = "string";
-          };
-          int = {
-            _type = "ztype";
-            name = "int";
-          };
+          string = "string";
+          int = "int";
+          float = "float";
+          boolean = "boolean";
+          array = "array";
+          set = "set";
           enum = vals: {
-            _type = "ztype";
             name = "enum";
             values = vals;
           };
         };
-        enableOption = attrs: attrs // { _type = "enableOption"; };
+
+        # Global Colors Theme Tokens ($c)
+        colors = {
+          primary = "#0055ff";
+          secondary = "#00aaff";
+          accent = "#ff0055";
+          bg = "#111111";
+          fg = "#eeeeee";
+          white = "#ffffff";
+          black = "#000000";
+          error = "#ff0000";
+          warning = "#ffaa00";
+        };
+
+        # Execution Context Variables ($f)
+        context = {
+          user = "doromiert"; # Configurable/dynamic target username
+        };
       }
       // extraArgs;
 
       evaluated = rawModule __zargs;
-      interpolated = interpolateStrings { inherit name; } evaluated;
 
       propagateMetaRecursive =
         parentLicense: parentMaintainers: node:
@@ -135,7 +187,7 @@ let
 
             processChild =
               k: v:
-              if k == "_meta" || k == "_action" || k == "_saction" || k == "_uaction" then
+              if k == "_meta" || k == "_action" || k == "_saction" || k == "_uaction" || k == "_vars" then
                 v
               else
                 propagateMetaRecursive nodeLicense nodeMaintainers v;
@@ -144,8 +196,9 @@ let
         else
           node;
 
-      finalConfig = propagateMetaRecursive (interpolated._meta.license or null
-      ) (interpolated._meta.maintainers or [ ]) interpolated;
+      finalConfig = propagateMetaRecursive (evaluated._meta.license or null) (evaluated._meta.maintainers
+        or [ ]
+      ) evaluated;
 
     in
     finalConfig;

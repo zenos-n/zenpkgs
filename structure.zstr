@@ -74,7 +74,7 @@ users = {
     };
     legacy = {
       _meta = {
-        type = (alias nixpkgs.users.users.(__ZEN_VAR_6__.user));
+        type = (alias nixpkgs.users.users.($f.user));
         brief = "Raw NixOS user options";
         description = "Direct access to raw NixOS backend configurations for this specific user.";
         maintainers = [ $m.doromiert ];
@@ -84,7 +84,7 @@ users = {
         description = ''
           Lets you interact with home-manager directly.
         '';
-        type = (alias nixpkgs.home-manager.users.(__ZEN_VAR_8__.user));
+        type = (alias nixpkgs.home-manager.users.($f.user));
       };
     };
     programs = {
@@ -97,7 +97,7 @@ users = {
       legacy._meta = {
         brief = "Legacy program modules";
         description = "Lets you configure programs from nixos directly.";
-        type = (alias nixpkgs.users.users.(__ZEN_VAR_10__.user).programs);
+        type = (alias nixpkgs.users.users.($f.user).programs);
         default = { };
       };
     };

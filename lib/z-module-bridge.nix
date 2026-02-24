@@ -1,5 +1,6 @@
 {
   lib,
+  inputs,
 }:
 let
   zDialect = import ./z-dialect.nix { inherit lib; };
@@ -8,13 +9,13 @@ let
 
   mapZType =
     ztype:
-    if ztype.name == "boolean" then
+    if ztype == "boolean" || ztype.name == "boolean" then
       lib.types.bool
-    else if ztype.name == "string" then
+    else if ztype == "string" || ztype.name == "string" then
       lib.types.str
-    else if ztype.name == "int" then
+    else if ztype == "int" || ztype.name == "int" then
       lib.types.int
-    else if ztype.name == "enum" then
+    else if builtins.isAttrs ztype && ztype.name == "enum" then
       lib.types.enum ztype.values
     else
       lib.types.unspecified;
@@ -40,6 +41,8 @@ let
               "_saction"
               "_uaction"
               "_type"
+              "_deps"
+              "_vars"
             ]
           )
         else
@@ -51,159 +54,157 @@ let
     cfgPath: ast: isUserScope: globalConfig:
     let
       walk =
-        cfgNode: astNode:
-        let
-          isEnabled = if astNode ? _type && astNode._type == "enableOption" then cfgNode else true;
+        path: node:
+        if node ? _type && node._type == "enableOption" then
+          let
+            # 1. Base Options Enablement
+            enabled = lib.attrByPath (cfgPath ++ path) false globalConfig;
 
-          # SCOPE AWARENESS: Filter actions based on where this module is currently mounted
-          action = if isUserScope then { } else astNode._action or { };
-          saction = if isUserScope then { } else astNode._saction or { };
-
-          uaction =
-            if isUserScope then
-              # If in user scope, _uaction applies directly to this specific user
-              astNode._uaction or { }
-            else if astNode ? _uaction then
+            # 2. Dependency Awareness & Assertions Processing
+            deps = node._deps or { };
+            depList =
+              if builtins.isList deps then
+                deps
+              else if builtins.isAttrs deps then
+                builtins.attrNames deps
+              else
+                [ ];
+            assertions = map (
+              dep:
+              let
+                depName = if builtins.isAttrs dep && dep._type == "needs" then dep.dep else dep;
+              in
               {
-                # If enabled globally, _uaction cascades down to all registered users
-                zenos.users = lib.mapAttrs (u: v: astNode._uaction) (globalConfig.zenos.users or { });
+                assertion = lib.attrByPath (builtins.split "\\." depName) false globalConfig;
+                message = "ZenOS Module dependency missing: ${depName} is required by ${
+                  lib.concatStringsSep "." (cfgPath ++ path)
+                }.";
               }
-            else
-              { };
+            ) depList;
 
-          mergedAction = lib.mkMerge [
-            action
-            saction
-            uaction
-          ];
-          currentConfig = lib.mkIf (isEnabled && mergedAction != { }) mergedAction;
+            # 3. Scope Promotion Logic
+            currentUser = globalConfig.zenos.user or "doromiert";
 
-          children = builtins.removeAttrs astNode [
-            "_meta"
-            "_action"
-            "_saction"
-            "_uaction"
-            "_type"
-          ];
-          childConfigs = lib.mapAttrsToList (n: v: walk (cfgNode.${n} or { }) v) children;
-        in
-        lib.mkMerge ([ currentConfig ] ++ childConfigs);
+            extractGroups =
+              action:
+              let
+                groupsAttr = action.groups or [ ];
+                groupNames = map (g: if builtins.isAttrs g && g._type == "group" then g.name else g) groupsAttr;
+              in
+              groupNames;
+
+            mergedAction =
+              if isUserScope then
+                lib.mkMerge [
+                  (node._action or { })
+                  (node._uaction or { })
+                ]
+              else
+                let
+                  sAction = node._saction or { };
+                  uAction = node._uaction or { };
+
+                  # Broadcast System-level User Action logic to Home Manager
+                  allUsers = builtins.attrNames (globalConfig.users.users or { });
+                  broadcastAction =
+                    if (node ? _uaction) then
+                      {
+                        home-manager.users = lib.genAttrs allUsers (user: {
+                          zenos = uAction;
+                        });
+                      }
+                    else
+                      { };
+
+                  # Handle immediate (group name) injections
+                  extractedGroups = extractGroups uAction;
+                  groupAction =
+                    if (builtins.length extractedGroups > 0) then
+                      {
+                        users.users."${currentUser}".extraGroups = extractedGroups;
+                      }
+                    else
+                      { };
+
+                in
+                lib.mkMerge [
+                  (node._action or { })
+                  sAction
+                  broadcastAction
+                  groupAction
+                ];
+
+          in
+          lib.mkIf enabled (
+            lib.mkMerge [
+              mergedAction
+              { inherit assertions; }
+            ]
+          )
+        else if builtins.isAttrs node then
+          lib.mapAttrs (n: v: walk (path ++ [ n ]) v) (
+            builtins.removeAttrs node [
+              "_meta"
+              "_action"
+              "_saction"
+              "_uaction"
+              "_type"
+              "_deps"
+              "_vars"
+            ]
+          )
+        else
+          { };
     in
-    walk cfgPath ast;
+    walk [ ] ast;
 
-in
-rec {
   zmdlToModule =
     {
       file,
       namespacePath,
       isUserScope ? false,
     }:
-    {
-      config,
-      lib,
-      pkgs,
-      ...
-    }:
     let
       name = lib.removeSuffix ".zmdl" (builtins.baseNameOf file);
-      scopeConfig = lib.attrByPath (namespacePath ++ [ name ]) { } config;
+      cfgPath = namespacePath ++ [ name ];
 
       ast = zDialect.evalZString {
-        inherit
-          name
-          pkgs
-          maintainers
-          licenses
-          ;
-        content = builtins.readFile file;
-        path = scopeConfig;
+        inherit name file isUserScope;
+        path = cfgPath;
+        extraArgs = {
+          __zargs.pkgs = {
+            zenos = inputs.self.packages;
+          };
+          __zargs.lib = lib;
+          __zargs.maintainers = maintainers;
+          __zargs.licenses = licenses;
+        };
       };
 
     in
+    { config, ... }:
     {
-      # Add a default legacy mapping for every program module
-      options = lib.recursiveUpdate (lib.setAttrByPath (namespacePath ++ [ name ]) (mkOptions ast)) (
-        lib.setAttrByPath
-          (
-            namespacePath
-            ++ [
-              name
-              "legacy"
-            ]
-          )
-          (
-            lib.mkOption {
-              type = lib.types.attrsOf lib.types.anything;
-              default = { };
-            }
-          )
-      );
-      config = mkConfig scopeConfig ast isUserScope config;
+      options = lib.setAttrByPath cfgPath (mkOptions ast);
+      config = mkConfig cfgPath ast isUserScope config;
     };
 
   zstrToModule =
     { file }:
-    {
-      lib,
-      pkgs,
-      ...
-    }:
     let
       ast = zDialect.evalZString {
-        inherit pkgs maintainers licenses;
-        content = builtins.readFile file;
-        name = "structure";
+        name = lib.removeSuffix ".zstr" (builtins.baseNameOf file);
+        inherit file;
       };
 
       processStructure =
         node:
         let
-          isAlias = node ? _meta && node._meta ? type && node._meta.type._type == "alias";
-          isPackages = node ? _meta && node._meta ? type && node._meta.type._type == "packages";
-          isPrograms = node ? _meta && node._meta ? type && node._meta.type._type == "programs";
-          isZmdl = node ? _meta && node._meta ? type && node._meta.type._type == "zmdl";
-
-          children = builtins.removeAttrs node [ "_meta" ];
-          mappedChildren = lib.mapAttrs (n: v: processStructure v) children;
+          mappedChildren = lib.mapAttrs (n: v: processStructure v) node;
+          isZmdl = builtins.any (x: x ? _type && x._type == "zmdl") (builtins.attrValues node);
         in
-        if isAlias then
-          if children == { } then
-            lib.mkOption {
-              type = lib.types.attrsOf lib.types.anything;
-              description = node._meta.brief or "Alias to ${node._meta.type.target}";
-              default = { }; # Ensure structural aliases have a default empty set
-            }
-          else
-            lib.mkOption {
-              # Dynamically promote alias to a submodule if it has children!
-              # attrsOf anything allows it to properly merge loose arbitrary variables natively
-              type = lib.types.submodule {
-                freeformType = lib.types.attrsOf lib.types.anything;
-                options = mappedChildren;
-              };
-              description = node._meta.brief or "Alias to ${node._meta.type.target}";
-              default = { };
-            }
-        else if isPackages then
-          lib.mkOption {
-            type = lib.types.attrsOf lib.types.anything;
-            default = { };
-            description = node._meta.brief or "Packages scope";
-          }
-        else if node ? __z_freeform_user then
-          lib.mkOption {
-            type = lib.types.attrsOf (
-              lib.types.submodule {
-                options = processStructure node.__z_freeform_user;
-              }
-            );
-            default = { };
-          }
-        else if isPrograms || isZmdl then
+        if isZmdl then
           mappedChildren
           // (lib.optionalAttrs (!(mappedChildren ? legacy)) {
-            # Automatically establish legacy fallback inside structural domains
             legacy = lib.mkOption {
               type = lib.types.attrsOf lib.types.anything;
               default = { };
@@ -214,7 +215,6 @@ rec {
           mappedChildren
         else
           { };
-
     in
     {
       options.zenos = processStructure ast;
@@ -252,4 +252,13 @@ rec {
             [ ];
       in
       lib.flatten (lib.mapAttrsToList processEntry entries);
+in
+{
+  inherit
+    mapZenModules
+    mkOptions
+    mkConfig
+    zmdlToModule
+    zstrToModule
+    ;
 }
