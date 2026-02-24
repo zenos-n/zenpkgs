@@ -36,10 +36,17 @@ let
         nixpkgs.pkgs = pkgs;
         fileSystems."/".device = "/dev/null";
         boot.loader.systemd-boot.enable = true;
-        system.stateVersion = "2.5.11";
+        system.stateVersion = "25.11";
         _module.check = false;
         _module.args.lib = lib;
         _module.args.isDocs = true;
+
+        # --- FIX 1: Provide __zargs natively to prevent evaluation crashes ---
+        _module.args.__zargs = {
+          maintainers = lib.maintainers;
+          licenses = lib.licenses;
+          type = lib.types;
+        };
       }
     ];
   };
@@ -61,8 +68,12 @@ let
     path: meta:
     let
       pathStr = lib.concatStringsSep "." path;
-      isZenosPkg = lib.hasPrefix "pkgs.zenos" pathStr && !(lib.any (s: s == "legacy") path);
-      isZenosOption = lib.hasPrefix "zenos" pathStr && !(lib.any (s: s == "legacy") path);
+      isZenosPkg =
+        (lib.hasPrefix "pkgs.zenos" pathStr || lib.hasPrefix "pkgs.zenpkgs" pathStr)
+        && !(lib.any (s: s == "legacy") path);
+      isZenosOption =
+        (lib.hasPrefix "zenos" pathStr || lib.hasPrefix "zenpkgs" pathStr)
+        && !(lib.any (s: s == "legacy") path);
       shouldWarn = isZenosPkg || isZenosOption;
 
       missing =
@@ -73,7 +84,10 @@ let
       meta
     else
       # Embed the warning into the meta object instead of tracing immediately
-      meta // { _warning = "${pathStr} is missing metadata: ${lib.concatStringsSep ", " missing}"; };
+      meta
+      // {
+        _warning = "${pathStr} is missing metadata: ${lib.concatStringsSep ", " missing}";
+      };
 
   # --- HELPER: Type Normalizer ---
   normalizeType =
@@ -189,12 +203,16 @@ let
         path:
         let
           mod = importZenMetadata path;
+
+          # --- FIX 2: Target the top-level _meta block used in .zmdl files ---
+          rawMeta = mod._meta or mod.meta or mod;
+
           meta = {
-            brief = mod.meta.brief or mod.brief or null;
-            description = mod.meta.description or mod.description or null;
-            maintainers = mod.meta.maintainers or mod.maintainers or [ ];
-            license = mod.meta.license or mod.license or "napalm";
-            dependencies = mod.meta.dependencies or mod.dependencies or [ ];
+            brief = rawMeta.brief or null;
+            description = rawMeta.description or null;
+            maintainers = rawMeta.maintainers or [ ];
+            license = rawMeta.license or "napalm";
+            dependencies = rawMeta.dependencies or [ ];
             _file = toString path;
           };
           name = lib.removeSuffix ".zmdl" (lib.removeSuffix ".nix" (baseNameOf path));
@@ -218,41 +236,43 @@ let
       isSet = builtins.isAttrs v;
       isFunc = builtins.isFunction v;
 
-      isZenPkg = isSet && (v ? package) && (v ? brief);
+      isZenPkg =
+        isSet && ((v ? package && v ? brief) || (v ? _meta && (v._meta ? brief || v._meta ? description)));
       triedDrv = builtins.tryEval (if isSet then lib.isDerivation v else false);
       isDrv = triedDrv.success && triedDrv.value;
       isLegacy = lib.any (segment: segment == "legacy") path;
 
-      rawBrief =
-        if isZenPkg then
-          v.brief
-        else if isDrv && isSet then
-          (v.meta.description or null)
-        else if isFunc then
-          "Builder function"
-        else if isLegacy then
-          "legacy package/set"
-        else
-          null;
+      isOpt = v ? _type && v._type == "option";
+
+      rawBrief = if isOpt then (v.meta.brief or null) else (v._meta.value.brief or null);
 
       rawDescription =
-        if isZenPkg then
-          v.description or null
-        else if isDrv && isSet then
-          (v.meta.longDescription or v.meta.description or null)
+        if isOpt then
+          (v.description.value or v.description or null)
         else
-          null;
+          (v._meta.value.description or null);
+
+      maintainers =
+        if isZenPkg then
+          (v._meta.maintainers or v.maintainers or [ ])
+        else
+          (if isSet then v.meta.maintainers or [ ] else [ ]);
+
+      license =
+        if isZenPkg then
+          (v._meta.license or v.license or "napalm")
+        else
+          (if isDrv && isSet && v ? meta.license.shortName then v.meta.license.shortName else "unknown");
 
       metaObj = warnMissing path {
         brief = rawBrief;
         description = rawDescription;
-        maintainers =
-          if isZenPkg then v.maintainers or [ ] else (if isSet then v.meta.maintainers or [ ] else [ ]);
+        maintainers = if isZenPkg then maintainers else (if isSet then v.meta.maintainers or [ ] else [ ]);
         license =
           if isZenPkg then
             v.license or "napalm"
           else
-            (if isDrv && isSet && v ? meta.license.shortName then v.meta.license.shortName else "unknown");
+            (if isDrv && isSet && v ? meta.license then license else "unknown");
         dependencies = if isZenPkg then v.dependencies or [ ] else [ ];
         type =
           if isFunc then
@@ -376,6 +396,15 @@ let
       metaLookup = moduleMetadata.${name} or null;
       hasMeta = metaLookup != null;
       isLegacyPath = lib.any (segment: segment == "legacy") path;
+
+      attachedMeta = if builtins.isAttrs v && v ? meta then v.meta else null;
+
+      # 2. Fallback to your existing global lookup
+      globalMeta = moduleMetadata.${name} or null;
+
+      # 3. Final meta object used for the report
+      metaObj = if attachedMeta != null then attachedMeta else globalMeta;
+
     in
     maybeTrace (
       if isRepeating then
@@ -499,21 +528,58 @@ let
             else
               { };
 
-          metaObj = warnMissing path {
+          isOpt = v ? _type && v._type == "option";
+          hasNamespaceMeta = builtins.isAttrs v && v ? _meta;
+          isStructural = builtins.length path > 0 && (lib.last path) == "options";
+          nsMeta = if hasNamespaceMeta then (v._meta.value or v._meta.default or { }) else { };
+
+          # Safely extract description ONLY if the node is an actual option
+          optDesc = if isOpt then (v.description.text or v.description or null) else null;
+
+          rawMetaObj = {
             brief =
               extractedMeta.brief or (
-                if hasMeta && metaLookup.brief != null then
+                if hasNamespaceMeta && nsMeta ? brief then
+                  nsMeta.brief
+                else if hasMeta && metaLookup.brief != null then
                   metaLookup.brief
+                else if isOpt then
+                  (optDesc)
                 else
-                  (v.description or (if isLegacyPath then "upstream NixOS option" else null))
+                  null
               );
             description =
-              extractedMeta.description or (if hasMeta then metaLookup.description else (v.description or null));
-            maintainers = extractedMeta.maintainers or (if hasMeta then metaLookup.maintainers else [ ]);
-            license = extractedMeta.license or (if hasMeta then metaLookup.license else "napalm");
+              extractedMeta.description or (
+                if hasNamespaceMeta && nsMeta ? description then
+                  nsMeta.description
+                else if hasMeta then
+                  metaLookup.description
+                else
+                  optDesc
+              );
+            maintainers =
+              extractedMeta.maintainers or (
+                if hasNamespaceMeta && nsMeta ? maintainers then
+                  nsMeta.maintainers
+                else if hasMeta then
+                  metaLookup.maintainers
+                else
+                  [ ]
+              );
+            license =
+              extractedMeta.license or (
+                if hasNamespaceMeta && nsMeta ? license then
+                  nsMeta.license
+                else if hasMeta then
+                  metaLookup.license
+                else
+                  "napalm"
+              );
             dependencies = extractedMeta.dependencies or (if hasMeta then metaLookup.dependencies else [ ]);
             type = typeFinal;
           };
+
+          metaObj = if isStructural then rawMetaObj else warnMissing path rawMetaObj;
 
           validChildren =
             if rawChildren != null then
@@ -552,7 +618,9 @@ let
   # Generate the raw trees natively
   rawOptions = (showOptions [ "zenos" ] eval.options.zenos).sub;
 
-  rawPkgsSet = showPackages 3 [ "pkgs" "zenos" ] (pkgs.zenos or { });
+  # Change the base namespace array and evaluation target
+  rawPkgsSet = showPackages 3 [ "pkgs" "zenpkgs" ] (pkgs.zenpkgs or pkgs.zenos or { });
+
   rawPkgs = (builtins.removeAttrs (rawPkgsSet.sub or { }) [ "legacy" ]) // {
     legacy.sub = rawPkgsSet.sub.legacy.sub or { };
   };

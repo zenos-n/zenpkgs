@@ -20,56 +20,72 @@ let
     else
       lib.types.unspecified;
 
-  mkOptions =
-    ast:
-    let
-      walk =
-        node:
-        if node ? _type && node._type == "enableOption" then
-          lib.mkEnableOption (node._meta.brief or "Enable module")
-        else if node ? _meta && node._meta ? type then
-          lib.mkOption {
-            type = mapZType node._meta.type;
-            default = node._meta.default or null;
-            description = node._meta.description or node._meta.brief or "";
-          }
-        else if builtins.isAttrs node then
-          lib.mapAttrs'
-            (
-              n: v:
-              if lib.hasPrefix "__freeform_" n then
-                let
-                  freeformName = lib.removePrefix "__freeform_" n;
-                in
-                lib.nameValuePair freeformName (
-                  lib.mkOption {
-                    type = lib.types.attrsOf (
-                      lib.types.submodule {
-                        options = walk v;
-                      }
-                    );
-                    default = { };
-                    description = v._meta.description or "Freeform configuration for ${freeformName}";
-                  }
-                )
-              else
-                lib.nameValuePair n (walk v)
+  processNode =
+    node:
+    if node ? _type && node._type == "enableOption" then
+      lib.mkOption {
+        default = false;
+        example = true;
+        type = lib.types.bool;
+        description = node._meta.description or node._meta.brief or "Enable module";
+      }
+      // {
+        meta = {
+          brief = node._meta.brief or null;
+        };
+      }
+    else if node ? _meta && node._meta ? type then
+      lib.mkOption {
+        type = mapZType node._meta.type;
+        default = node._meta.default or null;
+        description = node._meta.description or node._meta.brief or "";
+      }
+      // {
+        meta = {
+          brief = node._meta.brief or null;
+        };
+      }
+    else if builtins.isAttrs node then
+      let
+        cleaned = builtins.removeAttrs node [
+          "_meta"
+          "_action"
+          "_saction"
+          "_uaction"
+          "legacy"
+        ];
+        mappedChildren = lib.mapAttrs' (
+          n: v:
+          if lib.hasPrefix "__freeform_" n then
+            let
+              freeformName = lib.removePrefix "__freeform_" n;
+            in
+            lib.nameValuePair freeformName (
+              lib.mkOption {
+                type = lib.types.attrsOf (lib.types.submodule { options = processNode v; });
+                description = v._meta.description or v._meta.brief or "";
+                meta = {
+                  brief = v._meta.brief or null;
+                };
+              }
             )
-            (
-              builtins.removeAttrs node [
-                "_meta"
-                "_action"
-                "_saction"
-                "_uaction"
-                "_type"
-                "_deps"
-                "_vars"
-              ]
-            )
-        else
-          { };
-    in
-    walk ast;
+          else
+            lib.nameValuePair n (processNode v)
+        ) cleaned;
+        namespaceMeta = lib.optionalAttrs (node ? _meta) {
+          _meta = lib.mkOption {
+            type = lib.types.attrsOf lib.types.anything;
+            default = node._meta;
+            internal = true;
+            description = "Internal ZenOS metadata for namespace";
+          };
+        };
+      in
+      mappedChildren // namespaceMeta
+    else
+      { };
+
+  mkOptions = ast: processNode ast;
 
   mkConfig =
     cfgPath: ast: isUserScope: globalConfig:
@@ -78,10 +94,7 @@ let
         path: node:
         if node ? _type && node._type == "enableOption" then
           let
-            # 1. Base Options Enablement
             enabled = lib.attrByPath (cfgPath ++ path) false globalConfig;
-
-            # 2. Dependency Awareness & Assertions Processing
             deps = node._deps or { };
             depList =
               if builtins.isList deps then
@@ -103,9 +116,7 @@ let
               }
             ) depList;
 
-            # 3. Scope Promotion Logic
             currentUser = globalConfig.zenos.user or "doromiert";
-
             extractGroups =
               action:
               let
@@ -124,8 +135,6 @@ let
                 let
                   sAction = node._saction or { };
                   uAction = node._uaction or { };
-
-                  # Broadcast System-level User Action logic to Home Manager
                   allUsers = builtins.attrNames (globalConfig.users.users or { });
                   broadcastAction =
                     if (node ? _uaction) then
@@ -136,8 +145,6 @@ let
                       }
                     else
                       { };
-
-                  # Handle immediate (group name) injections
                   extractedGroups = extractGroups uAction;
                   groupAction =
                     if (builtins.length extractedGroups > 0) then
@@ -146,7 +153,6 @@ let
                       }
                     else
                       { };
-
                 in
                 lib.mkMerge [
                   (node._action or { })
@@ -154,7 +160,6 @@ let
                   broadcastAction
                   groupAction
                 ];
-
           in
           lib.mkIf enabled (
             lib.mkMerge [
@@ -163,7 +168,6 @@ let
             ]
           )
         else if builtins.isAttrs node then
-          # Extract all freeform keys at this level
           let
             cleanNode = builtins.removeAttrs node [
               "_meta"
@@ -181,10 +185,8 @@ let
               if lib.hasPrefix "__freeform_" n then
                 let
                   freeformName = lib.removePrefix "__freeform_" n;
-                  # Get the actual keys the user configured (e.g., "alice", "bob")
                   userConfiguredDict = lib.attrByPath (cfgPath ++ path ++ [ freeformName ]) { } globalConfig;
                 in
-                # Map over the user's actual keys and walk the inner AST for each one
                 lib.mkMerge (
                   lib.mapAttrsToList (
                     actualKey: actualVal:
@@ -212,7 +214,7 @@ let
       namespacePath,
       isUserScope ? false,
     }:
-    { config, ... }: # <--- Module lambda is now wrapped around the AST evaluation
+    { config, ... }:
     let
       name = lib.removeSuffix ".zmdl" (builtins.baseNameOf file);
       cfgPath = namespacePath ++ [ name ];
@@ -221,13 +223,11 @@ let
         inherit name file isUserScope;
         path = cfgPath;
         extraArgs = {
-          __zargs.pkgs = {
+          pkgs = {
             zenos = inputs.self.packages;
           };
-          __zargs.lib = lib;
-          __zargs.maintainers = maintainers;
-          __zargs.licenses = licenses;
-          contextArgs = lib.attrByPath cfgPath { } config; # <--- Feeds the user's config to $f
+          inherit lib maintainers licenses;
+          contextArgs = lib.attrByPath cfgPath { } config;
         };
       };
     in
@@ -242,38 +242,58 @@ let
       ast = zDialect.evalZString {
         name = lib.removeSuffix ".zstr" (builtins.baseNameOf file);
         inherit file;
+        extraArgs = {
+          pkgs = {
+            zenos = inputs.self.packages;
+          };
+          inherit lib maintainers licenses;
+        };
       };
 
       processStructure =
         node:
         let
-          # 1. Detect if this level defines a freeform child
           freeformKeys = builtins.filter (k: lib.hasPrefix "__freeform_" k) (builtins.attrNames node);
           hasFreeform = builtins.length freeformKeys > 0;
           freeformKey = if hasFreeform then builtins.head freeformKeys else null;
           freeformName = if hasFreeform then lib.removePrefix "__freeform_" freeformKey else "";
 
-          # 2. Strip metadata and the freeform key itself so they don't leak as nested options
           cleanNode = builtins.removeAttrs node (
             [ "_meta" ] ++ (if hasFreeform then [ freeformKey ] else [ ])
           );
-
           mappedChildren = lib.mapAttrs (n: v: processStructure v) cleanNode;
 
-          # Use cleanNode so we don't accidentally match _meta properties
           isZmdl = builtins.any (x: builtins.isAttrs x && x ? _type && x._type == "zmdl") (
             builtins.attrValues node
           );
+
+          namespaceMeta = lib.optionalAttrs (node ? _meta) {
+            _meta = lib.mkOption {
+              type = lib.types.attrsOf lib.types.anything;
+              default = node._meta;
+              internal = true;
+              description = "Internal ZenOS metadata for namespace";
+            };
+          };
         in
         if hasFreeform then
           lib.mkOption {
-            # Wrap the node in attrsOf submodule, processing the freeform's inner contents
             type = lib.types.attrsOf (
               lib.types.submodule {
-                options = processStructure (builtins.removeAttrs node.${freeformKey} [ "_meta" ]);
+                # This makes the metadata a formal part of the NixOS option tree
+                options = (processStructure node.${freeformKey}) // {
+                  _meta = lib.mkOption {
+                    default = {
+                      brief = node._meta.brief or null;
+                      description = node._meta.description or null;
+                      maintainers = node._meta.maintainers or null;
+                      license = node._meta.license or null;
+                    };
+                  };
+                };
               }
             );
-            default = { };
+            # Keep the top-level description for basic Nix tools
             description = node._meta.description or "Freeform configuration for ${freeformName}";
           }
         else if isZmdl then
@@ -285,8 +305,9 @@ let
               description = "Raw configuration bypass";
             };
           })
+          // namespaceMeta
         else if builtins.isAttrs node then
-          mappedChildren
+          mappedChildren // namespaceMeta
         else
           { };
     in

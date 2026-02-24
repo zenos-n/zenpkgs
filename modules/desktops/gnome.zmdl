@@ -76,7 +76,7 @@ enable = enableOption {
   };
 };
 
-fileIndexing.enable = enableOption {
+fileIndexing = enableOption {
   _meta.brief = "Enable file indexing and search with Tracker";
   _meta.description = ''
     This option enables the Tracker file indexing and search service, which provides powerful search capabilities for the GNOME desktop environment. When enabled, Tracker will index your files, documents, and media, allowing you to quickly find and access them using the GNOME search functionality.
