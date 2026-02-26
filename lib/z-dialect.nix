@@ -13,8 +13,6 @@ let
     str:
     let
       # 1. Functional RHS Constructs -> map to Typed Nodes
-      # Added the hyphen `-` at the start of the character class and literal `()`
-      # This allows target paths like `nixpkgs.home-manager.users.($f.user)`
       s1 = replaceRegex "\\([[:space:]]*alias[[:space:]]+([-a-zA-Z0-9_.$()]+)[[:space:]]*\\)" (
         g: "{ _type = \"alias\"; target = \"${builtins.elemAt g 0}\"; }"
       ) str;
@@ -30,10 +28,30 @@ let
           (g: "__z_freeform_${builtins.elemAt g 0} =")
           s4;
 
-      # 3. Keyword Variables: $name, $path, $m, $l, $type
-      s6 = replaceRegex "\\$(name|path|m|l|type)" (g: "__zargs.${builtins.elemAt g 0}") s5;
+      # 3. Action Shorthands: `s! {`, `u! {`, `! {`
+      s6 = replaceRegex "(^|[[:space:]]+)s![[:space:]]*\\{" (g: "${builtins.elemAt g 0}_saction = {") s5;
+      s7 = replaceRegex "(^|[[:space:]]+)u![[:space:]]*\\{" (g: "${builtins.elemAt g 0}_uaction = {") s6;
+      s8 = replaceRegex "(^|[[:space:]]+)![[:space:]]*\\{" (g: "${builtins.elemAt g 0}_action = {") s7;
+
+      # 4. Typed _let Variable Bindings -> Maps to `_v` dict payload
+      # e.g., `_let default_port: $type.int = 8080;` -> `_v.default_port = 8080;`
+      s9 =
+        replaceRegex "_let[[:space:]]+([a-zA-Z0-9_]+)[[:space:]]*:[[:space:]]*[^=]+=[[:space:]]*([^;]+);"
+          (g: "_v.${builtins.elemAt g 0} = ${builtins.elemAt g 1};")
+          s8;
+
+      # 5. Freeform & Variable Keyword Mappings
+      # Path-embedded `$f` evaluates to a system string placeholder for dynamic replacement during `mkConfig`
+      s10 = replaceRegex "\\(\\$f\\.([a-zA-Z0-9_]+)\\)" (g: "\"__Z_FREEFORM_ID__\"") s9;
+      s11 = replaceRegex "\\$f\\.([a-zA-Z0-9_]+)" (g: "\"__Z_FREEFORM_ID__\"") s10;
+      s12 = replaceRegex "\\$v\\.([a-zA-Z0-9_]+)" (g: "_v.${builtins.elemAt g 0}") s11;
+
+      # 6. Global Variables: $cfg, $pkgs, $path, $name, $c, $lib, $l, $m, $type
+      s13 = replaceRegex "\\$(cfg|pkgs|path|name|c|lib|l|m|type)" (
+        g: "__zargs.${builtins.elemAt g 0}"
+      ) s12;
     in
-    s6;
+    s13;
 
   interpolateStrings =
     args: config:
@@ -65,7 +83,7 @@ let
       transpiled = transpileZString content;
 
       nixExprString = ''
-        __zargs: with __zargs; {
+        __zargs: with __zargs; rec {
           ${transpiled}
         }
       '';
@@ -80,9 +98,15 @@ let
           pkgs
           lib
           ;
+        cfg = extraArgs.config or { };
+        c = extraArgs.c or { };
         m = maintainers;
         l = licenses;
         type = {
+          bool = {
+            _type = "ztype";
+            name = "bool";
+          };
           boolean = {
             _type = "ztype";
             name = "boolean";
@@ -95,10 +119,52 @@ let
             _type = "ztype";
             name = "int";
           };
+          float = {
+            _type = "ztype";
+            name = "float";
+          };
+          null = {
+            _type = "ztype";
+            name = "null";
+          };
+          set = {
+            _type = "ztype";
+            name = "set";
+          };
+          list = {
+            _type = "ztype";
+            name = "list";
+          };
+          path = {
+            _type = "ztype";
+            name = "path";
+          };
+          package = {
+            _type = "ztype";
+            name = "package";
+          };
+          packages = {
+            _type = "ztype";
+            name = "packages";
+          };
+          color = {
+            _type = "ztype";
+            name = "color";
+          };
+          function = args: {
+            _type = "ztype";
+            name = "function";
+            inherit args;
+          };
           enum = vals: {
             _type = "ztype";
             name = "enum";
             values = vals;
+          };
+          either = types: {
+            _type = "ztype";
+            name = "either";
+            values = types;
           };
         };
         enableOption = attrs: attrs // { _type = "enableOption"; };
@@ -135,7 +201,7 @@ let
 
             processChild =
               k: v:
-              if k == "_meta" || k == "_action" || k == "_saction" || k == "_uaction" then
+              if k == "_meta" || k == "_action" || k == "_saction" || k == "_uaction" || k == "_v" then
                 v
               else
                 propagateMetaRecursive nodeLicense nodeMaintainers v;

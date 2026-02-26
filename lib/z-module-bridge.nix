@@ -9,14 +9,42 @@ let
 
   mapZType =
     ztype:
-    if ztype.name == "boolean" then
+    if !builtins.isAttrs ztype then
+      lib.types.unspecified
+    else if ztype.name == "boolean" || ztype.name == "bool" then
       lib.types.bool
     else if ztype.name == "string" then
       lib.types.str
     else if ztype.name == "int" then
       lib.types.int
+    else if ztype.name == "float" then
+      lib.types.float
+    else if ztype.name == "null" then
+      lib.types.nullOr lib.types.anything
+    else if ztype.name == "set" then
+      lib.types.attrs
+    else if ztype.name == "list" then
+      lib.types.listOf lib.types.anything
+    else if ztype.name == "path" then
+      lib.types.path
+    else if ztype.name == "package" then
+      lib.types.package
+    else if ztype.name == "packages" then
+      lib.types.attrsOf lib.types.anything
+    else if ztype.name == "color" then
+      lib.types.str
+      // {
+        # Transforms standard Hex/RGB strings by stripping the hashtag at compile time
+        apply = v: if builtins.isString v then builtins.replaceStrings [ "#" ] [ "" ] v else v;
+      }
     else if ztype.name == "enum" then
       lib.types.enum ztype.values
+    else if ztype.name == "either" then
+      lib.types.either (mapZType (builtins.elemAt ztype.values 0)) (
+        mapZType (builtins.elemAt ztype.values 1)
+      )
+    else if ztype.name == "function" then
+      lib.types.unspecified
     else
       lib.types.unspecified;
 
@@ -41,6 +69,7 @@ let
               "_saction"
               "_uaction"
               "_type"
+              "_v"
             ]
           )
         else
@@ -51,6 +80,28 @@ let
   mkConfig =
     cfgPath: ast: isUserScope: globalConfig:
     let
+      # Deep replaces dynamic Freeform Identifiers mapped from the transpiler's __Z_FREEFORM_ID__
+      replaceFreeform =
+        freeformValue: attrset:
+        let
+          walk =
+            val:
+            if builtins.isString val then
+              builtins.replaceStrings [ "__Z_FREEFORM_ID__" ] [ freeformValue ] val
+            else if builtins.isAttrs val then
+              lib.listToAttrs (
+                map (name: {
+                  name = builtins.replaceStrings [ "__Z_FREEFORM_ID__" ] [ freeformValue ] name;
+                  value = walk val.${name};
+                }) (builtins.attrNames val)
+              )
+            else if builtins.isList val then
+              map walk val
+            else
+              val;
+        in
+        walk attrset;
+
       walk =
         cfgNode: astNode:
         let
@@ -67,7 +118,10 @@ let
             else if astNode ? _uaction then
               {
                 # If enabled globally, _uaction cascades down to all registered users
-                zenos.users = lib.mapAttrs (u: v: astNode._uaction) (globalConfig.zenos.users or { });
+                # We iteratively map the action, injecting the username directly to freeform references
+                zenos.users = lib.mapAttrs (u: v: replaceFreeform u astNode._uaction) (
+                  globalConfig.zenos.users or { }
+                );
               }
             else
               { };
@@ -85,6 +139,7 @@ let
             "_saction"
             "_uaction"
             "_type"
+            "_v"
           ];
           childConfigs = lib.mapAttrsToList (n: v: walk (cfgNode.${n} or { }) v) children;
         in
@@ -119,6 +174,7 @@ rec {
           ;
         content = builtins.readFile file;
         path = scopeConfig;
+        extraArgs = { inherit config; };
       };
 
     in
@@ -156,6 +212,7 @@ rec {
         inherit pkgs maintainers licenses;
         content = builtins.readFile file;
         name = "structure";
+        extraArgs = { inherit config; };
       };
 
       processStructure =
@@ -254,4 +311,47 @@ rec {
             [ ];
       in
       lib.flatten (lib.mapAttrsToList processEntry entries);
+
+  # Auto-Documentation Generator Export
+  generateDocs =
+    {
+      optionsTree,
+      pkgsTree ? { },
+      maintainersData ? maintainers,
+    }:
+    let
+      processNode =
+        path: node:
+        if lib.isOption node then
+          let
+            hasMeta = node ? meta && node.meta != { };
+            isLegacy = builtins.elem "legacy" path;
+
+            # Trace missing metadata at evaluation time
+            traceWarning =
+              if (!hasMeta && !isLegacy) then
+                builtins.trace "ZONE DOC WARNING: Missing metadata for option ${lib.concatStringsSep "." path}"
+              else
+                (x: x);
+
+          in
+          traceWarning {
+            _meta = if hasMeta then node.meta else { brief = node.description or null; };
+          }
+        else if builtins.isAttrs node then
+          lib.mapAttrs (k: v: processNode (path ++ [ k ]) v) (
+            lib.filterAttrs (k: v: k != "_module" && k != "_type") node
+          )
+        else
+          { };
+
+      optDocs = processNode [ "zenos" ] (optionsTree.zenos or { });
+      pkgDocs = processNode [ "pkgs" ] (pkgsTree.zenos or { });
+
+    in
+    builtins.toJSON {
+      maintainers = maintainersData;
+      options = optDocs;
+      pkgs = pkgDocs;
+    };
 }
