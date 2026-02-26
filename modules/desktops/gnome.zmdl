@@ -1,156 +1,35 @@
 _meta = {
-  brief = "The GNOME desktop environment";
-  description = "Standard ZenOS configuration for the GNOME shell and session management";
-  maintainers = [ $m.doromiert ];
-  license = $l.napalm;
+    brief = "The GNOME desktop environment";
+    description = "Standard ZenOS configuration for the GNOME shell and session management";
+    maintainers = [ $m.doromiert ];
+    license = $l.napalm;
 };
 
 enable = enableOption {
-  _meta.brief = "Enable the core $name desktop environment";
-  _meta.description = ''
-    This module provides a comprehensive GNOME configuration tailored for ZenOS.
-      It handles the installation of core GNOME packages, audio/video plugins (GStreamer),
-      and manages default settings via dconf.
+    _meta.brief = "Enable the core $name desktop environment";
+    _meta.description = "Enables GDM and the GNOME desktop manager.";
+    _action = {
+        services.displayManager.gdm.enable = true;
+        services.desktopManager.gnome.enable = true;
 
-      **Key Features:**
-      - Automatic extension management via UUID injection
-      - Integrated variable refresh rate (VRR) support for gaming
-      - Optional curated app suite and bloat removal
-      - System-wide dark mode and accent color enforcement
+        # Minimalist ZenOS Defaults: Disable the heavy suite
+        services.gnome = {
+            core-apps.enable = false;
+            core-developer-tools.enable = false;
+            games.enable = false;
+        };
 
-      Integrates with `services.flatpak` and standard NixOS desktop managers.
-  '';
-  _action = {
-    services.displayManager.gdm.enable = true;
-    services.desktopManager.gnome.enable = true;
-
-    environment.systemPackages =
-      with pkgs;
-      [
-        # Core Utils
-        wl-clipboard
-        dconf-editor
-        gnome-tweaks
-        gnome-extension-manager
-        resources
-        pika-backup
-
-        # Multimedia (GStreamer)
-        gst_all_1.gstreamer
-        gst_all_1.gst-plugins-base
-        gst_all_1.gst-plugins-good
-        gst_all_1.gst-plugins-bad
-        gst_all_1.gst-plugins-ugly
-        gst_all_1.gst-libav
-        gst_all_1.gst-vaapi
-      ]
-      ++ $lib.mkIf (config.services.flatpak.enable or false) [ pkgs.warehouse ];
-
-    # 2. Flatpak Configuration
-    services.flatpak.packages = $lib.mkIf (config.services.flatpak.enable or false) (
-      [ "com.github.tchx84.Flatseal" ]
-      ++ (optionals cfg.extraPackages.enable [ "studio.planetpeanut.Bobby" ])
-    );
-
-    # 3. Bloat Removal
-    environment.gnome.excludePackages =
-      with pkgs;
-      [
-        gnome-software
-        gnome-photos
-        gnome-tour
-        gedit
-        cheese
-        gnome-music
-        gnome-maps
-        epiphany
-        gnome-contacts
-        gnome-weather
-        yelp
-        gnome-clocks
-      ]
-      ++ (optional cfg.excludeGnomeConsole pkgs.gnome-console);
-
-    services.gnome.tracker-miners.enable = $lib.mkDefault false;
-    services.gnome.tracker.enable = $lib.mkDefault false;
-  };
-};
-
-fileIndexing = enableOption {
-  _meta.brief = "Enable file indexing and search with Tracker";
-  _meta.description = ''
-    This option enables the Tracker file indexing and search service, which provides powerful search capabilities for the GNOME desktop environment. When enabled, Tracker will index your files, documents, and media, allowing you to quickly find and access them using the GNOME search functionality.
-
-    **Key Features:**
-    - Fast and efficient file indexing for improved search performance
-    - Integration with the GNOME desktop environment for seamless search experience
-    - Configurable indexing options to control which files and directories are indexed
-    - Support for various file types, including documents, images, videos, and more
-
-    Enabling this option will enhance your productivity by making it easier to locate and manage your files directly from the GNOME interface.
-  '';
-  _meta.default = true;
-  _action = {
-    services.gnome.tracker-miners.enable = true;
-    services.gnome.tracker.enable = true;
-  };
-};
-
-minimal = enableOption {
-  _meta.brief = "Remove the default GNOME app suite and install only the gnome shell and core session management";
-  _meta.description = ''
-    This option provides a minimalist GNOME experience by stripping down the default app suite to only include the essential components for the shell and session management. It is ideal for users who prefer a lean desktop environment or want to customize their app selection without the overhead of unnecessary applications.
-
-    **Key Changes:**
-    - Disables the installation of the full GNOME app suite, including core apps, developer tools, and games.
-    - Retains only the necessary packages for the GNOME shell and session management, ensuring a lightweight setup.
-    - Allows users to install their preferred applications separately, giving them full control over their desktop environment.
-
-    This option is perfect for users who want a clean slate to build their own customized GNOME experience while still benefiting from the core features and stability of the GNOME desktop environment.
-  '';
-  _action = {
-    services.gnome = {
-      core-apps.enable = false;
-      core-developer-tools.enable = false;
-      games.enable = false;
+        environment.gnome.excludePackages = [
+            pkgs.gnome-tour
+            pkgs.gnome-user-docs
+        ];
     };
-
-    environment.gnome.excludePackages = [
-      pkgs.gnome-tour
-      pkgs.gnome-user-docs
-    ];
-  };
 };
 
-extraPackages = enableOption {
-  _meta = {
-    brief = "Enable extra GNOME packages curated by the ZenOS team";
-    description = ''
-      This option allows users to easily install a curated selection of additional GNOME applications that have been handpicked by the ZenOS team for their utility, performance, and integration with the GNOME desktop environment. These packages include a variety of tools and utilities that enhance the overall user experience, providing additional functionality and customization options for GNOME users.
-
-      **Key Features:**
-      - A diverse selection of applications covering various use cases, from productivity to media management.
-      - Seamless integration with the GNOME desktop environment for a consistent user experience.
-      - Regular updates and maintenance by the ZenOS team to ensure compatibility and performance.
-
-      Enabling this option will allow users to easily access and install these additional applications, enhancing their GNOME experience with a wider range of tools and utilities that complement the core desktop environment.
-    '';
-    default = false;
-  };
-  _action = {
-    environment.systemPackages = with pkgs; [
-      icon-library
-      letterpress
-      biblioteca
-      dialect
-      raider
-      wike
-      curtail
-      czkawka
-      hieroglyphic
-      switcheroo
-      rnote
-      helvum
-    ];
-  };
+extraTools = enableOption {
+    _meta.brief = "Install additional $name utilities (Tweaks, etc.)";
+    _meta.description = "Installs tools like GNOME Tweaks to customize the desktop.";
+    _action = {
+        environment.systemPackages = [ pkgs.gnome-tweaks ];
+    };
 };

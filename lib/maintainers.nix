@@ -1,3 +1,5 @@
+# LOCATION: ./zenpkgs/lib/maintainers.nix
+# REVISION: 1
 {
   doromiert = {
     email = "doromiert@gmail.com";

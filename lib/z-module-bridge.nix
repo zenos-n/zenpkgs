@@ -1,6 +1,6 @@
 {
   lib,
-  inputs,
+  inputs ? { },
 }:
 let
   zDialect = import ./z-dialect.nix { inherit lib; };
@@ -9,307 +9,214 @@ let
 
   mapZType =
     ztype:
-    if ztype == "boolean" || ztype.name == "boolean" then
+    if ztype.name == "boolean" then
       lib.types.bool
-    else if ztype == "string" || ztype.name == "string" then
+    else if ztype.name == "string" then
       lib.types.str
-    else if ztype == "int" || ztype.name == "int" then
+    else if ztype.name == "int" then
       lib.types.int
-    else if builtins.isAttrs ztype && ztype.name == "enum" then
+    else if ztype.name == "enum" then
       lib.types.enum ztype.values
     else
       lib.types.unspecified;
 
-  processNode =
-    node:
-    if node ? _type && node._type == "enableOption" then
-      lib.mkOption {
-        default = false;
-        example = true;
-        type = lib.types.bool;
-        description = node._meta.description or node._meta.brief or "Enable module";
-      }
-      // {
-        meta = {
-          brief = node._meta.brief or null;
-        };
-      }
-    else if node ? _meta && node._meta ? type then
-      lib.mkOption {
-        type = mapZType node._meta.type;
-        default = node._meta.default or null;
-        description = node._meta.description or node._meta.brief or "";
-      }
-      // {
-        meta = {
-          brief = node._meta.brief or null;
-        };
-      }
-    else if builtins.isAttrs node then
-      let
-        cleaned = builtins.removeAttrs node [
-          "_meta"
-          "_action"
-          "_saction"
-          "_uaction"
-          "legacy"
-        ];
-        mappedChildren = lib.mapAttrs' (
-          n: v:
-          if lib.hasPrefix "__freeform_" n then
-            let
-              freeformName = lib.removePrefix "__freeform_" n;
-            in
-            lib.nameValuePair freeformName (
-              lib.mkOption {
-                type = lib.types.attrsOf (lib.types.submodule { options = processNode v; });
-                description = v._meta.description or v._meta.brief or "";
-                meta = {
-                  brief = v._meta.brief or null;
-                };
-              }
-            )
-          else
-            lib.nameValuePair n (processNode v)
-        ) cleaned;
-        namespaceMeta = lib.optionalAttrs (node ? _meta) {
-          _meta = lib.mkOption {
-            type = lib.types.attrsOf lib.types.anything;
-            default = node._meta;
-            internal = true;
-            description = "Internal ZenOS metadata for namespace";
-          };
-        };
-      in
-      mappedChildren // namespaceMeta
-    else
-      { };
-
-  mkOptions = ast: processNode ast;
-
-  mkConfig =
-    cfgPath: ast: isUserScope: globalConfig:
+  mkOptions =
+    ast:
     let
       walk =
-        path: node:
+        node:
         if node ? _type && node._type == "enableOption" then
-          let
-            enabled = lib.attrByPath (cfgPath ++ path) false globalConfig;
-            deps = node._deps or { };
-            depList =
-              if builtins.isList deps then
-                deps
-              else if builtins.isAttrs deps then
-                builtins.attrNames deps
-              else
-                [ ];
-            assertions = map (
-              dep:
-              let
-                depName = if builtins.isAttrs dep && dep._type == "needs" then dep.dep else dep;
-              in
-              {
-                assertion = lib.attrByPath (builtins.split "\\." depName) false globalConfig;
-                message = "ZenOS Module dependency missing: ${depName} is required by ${
-                  lib.concatStringsSep "." (cfgPath ++ path)
-                }.";
-              }
-            ) depList;
-
-            currentUser = globalConfig.zenos.user or "doromiert";
-            extractGroups =
-              action:
-              let
-                groupsAttr = action.groups or [ ];
-                groupNames = map (g: if builtins.isAttrs g && g._type == "group" then g.name else g) groupsAttr;
-              in
-              groupNames;
-
-            mergedAction =
-              if isUserScope then
-                lib.mkMerge [
-                  (node._action or { })
-                  (node._uaction or { })
-                ]
-              else
-                let
-                  sAction = node._saction or { };
-                  uAction = node._uaction or { };
-                  allUsers = builtins.attrNames (globalConfig.users.users or { });
-                  broadcastAction =
-                    if (node ? _uaction) then
-                      {
-                        home-manager.users = lib.genAttrs allUsers (user: {
-                          zenos = uAction;
-                        });
-                      }
-                    else
-                      { };
-                  extractedGroups = extractGroups uAction;
-                  groupAction =
-                    if (builtins.length extractedGroups > 0) then
-                      {
-                        users.users."${currentUser}".extraGroups = extractedGroups;
-                      }
-                    else
-                      { };
-                in
-                lib.mkMerge [
-                  (node._action or { })
-                  sAction
-                  broadcastAction
-                  groupAction
-                ];
-          in
-          lib.mkIf enabled (
-            lib.mkMerge [
-              mergedAction
-              { inherit assertions; }
-            ]
-          )
+          lib.mkEnableOption (node._meta.brief or "Enable module")
+        else if node ? _meta && node._meta ? type then
+          lib.mkOption {
+            type = mapZType node._meta.type;
+            default = node._meta.default or null;
+            description = node._meta.description or node._meta.brief or "";
+          }
         else if builtins.isAttrs node then
-          let
-            cleanNode = builtins.removeAttrs node [
+          lib.mapAttrs (n: v: walk v) (
+            builtins.removeAttrs node [
               "_meta"
               "_action"
               "_saction"
               "_uaction"
               "_type"
-              "_deps"
-              "_vars"
-            ];
-          in
-          lib.mkMerge (
-            lib.mapAttrsToList (
-              n: v:
-              if lib.hasPrefix "__freeform_" n then
-                let
-                  freeformName = lib.removePrefix "__freeform_" n;
-                  userConfiguredDict = lib.attrByPath (cfgPath ++ path ++ [ freeformName ]) { } globalConfig;
-                in
-                lib.mkMerge (
-                  lib.mapAttrsToList (
-                    actualKey: actualVal:
-                    walk (
-                      path
-                      ++ [
-                        freeformName
-                        actualKey
-                      ]
-                    ) v
-                  ) userConfiguredDict
-                )
-              else
-                walk (path ++ [ n ]) v
-            ) cleanNode
+            ]
           )
         else
           { };
     in
-    walk [ ] ast;
+    walk ast;
 
+  mkConfig =
+    cfgPath: ast: isUserScope: globalConfig:
+    let
+      walk =
+        cfgNode: astNode:
+        let
+          isEnabled = if astNode ? _type && astNode._type == "enableOption" then cfgNode else true;
+
+          # SCOPE AWARENESS: Filter actions based on where this module is currently mounted
+          action = if isUserScope then { } else astNode._action or { };
+          saction = if isUserScope then { } else astNode._saction or { };
+
+          uaction =
+            if isUserScope then
+              # If in user scope, _uaction applies directly to this specific user
+              astNode._uaction or { }
+            else if astNode ? _uaction then
+              {
+                # If enabled globally, _uaction cascades down to all registered users
+                zenos.users = lib.mapAttrs (u: v: astNode._uaction) (globalConfig.zenos.users or { });
+              }
+            else
+              { };
+
+          mergedAction = lib.mkMerge [
+            action
+            saction
+            uaction
+          ];
+          currentConfig = lib.mkIf (isEnabled && mergedAction != { }) mergedAction;
+
+          children = builtins.removeAttrs astNode [
+            "_meta"
+            "_action"
+            "_saction"
+            "_uaction"
+            "_type"
+          ];
+          childConfigs = lib.mapAttrsToList (n: v: walk (cfgNode.${n} or { }) v) children;
+        in
+        lib.mkMerge ([ currentConfig ] ++ childConfigs);
+    in
+    walk cfgPath ast;
+
+in
+rec {
   zmdlToModule =
     {
       file,
       namespacePath,
       isUserScope ? false,
     }:
-    { config, ... }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       name = lib.removeSuffix ".zmdl" (builtins.baseNameOf file);
-      cfgPath = namespacePath ++ [ name ];
+      scopeConfig = lib.attrByPath (namespacePath ++ [ name ]) { } config;
 
       ast = zDialect.evalZString {
-        inherit name file isUserScope;
-        path = cfgPath;
-        extraArgs = {
-          pkgs = {
-            zenos = inputs.self.packages;
-          };
-          inherit lib maintainers licenses;
-          contextArgs = lib.attrByPath cfgPath { } config;
-        };
+        inherit
+          name
+          pkgs
+          maintainers
+          licenses
+          ;
+        content = builtins.readFile file;
+        path = scopeConfig;
       };
+
     in
     {
-      options = lib.setAttrByPath cfgPath (mkOptions ast);
-      config = mkConfig cfgPath ast isUserScope config;
+      # Add a default legacy mapping for every program module
+      options = lib.recursiveUpdate (lib.setAttrByPath (namespacePath ++ [ name ]) (mkOptions ast)) (
+        lib.setAttrByPath
+          (
+            namespacePath
+            ++ [
+              name
+              "legacy"
+            ]
+          )
+          (
+            lib.mkOption {
+              type = lib.types.attrsOf lib.types.anything;
+              default = { };
+            }
+          )
+      );
+      config = mkConfig scopeConfig ast isUserScope config;
     };
 
   zstrToModule =
     { file }:
+    {
+      config,
+      lib,
+      pkgs,
+      ...
+    }:
     let
       ast = zDialect.evalZString {
-        name = lib.removeSuffix ".zstr" (builtins.baseNameOf file);
-        inherit file;
-        extraArgs = {
-          pkgs = {
-            zenos = inputs.self.packages;
-          };
-          inherit lib maintainers licenses;
-        };
+        inherit pkgs maintainers licenses;
+        content = builtins.readFile file;
+        name = "structure";
       };
 
       processStructure =
         node:
         let
-          freeformKeys = builtins.filter (k: lib.hasPrefix "__freeform_" k) (builtins.attrNames node);
-          hasFreeform = builtins.length freeformKeys > 0;
-          freeformKey = if hasFreeform then builtins.head freeformKeys else null;
-          freeformName = if hasFreeform then lib.removePrefix "__freeform_" freeformKey else "";
+          isAlias = node ? _meta && node._meta ? type && node._meta.type._type == "alias";
+          isPackages = node ? _meta && node._meta ? type && node._meta.type._type == "packages";
+          isPrograms = node ? _meta && node._meta ? type && node._meta.type._type == "programs";
+          isZmdl = node ? _meta && node._meta ? type && node._meta.type._type == "zmdl";
 
-          cleanNode = builtins.removeAttrs node (
-            [ "_meta" ] ++ (if hasFreeform then [ freeformKey ] else [ ])
-          );
-          mappedChildren = lib.mapAttrs (n: v: processStructure v) cleanNode;
-
-          isZmdl = builtins.any (x: builtins.isAttrs x && x ? _type && x._type == "zmdl") (
-            builtins.attrValues node
-          );
-
-          namespaceMeta = lib.optionalAttrs (node ? _meta) {
-            _meta = lib.mkOption {
-              type = lib.types.attrsOf lib.types.anything;
-              default = node._meta;
-              internal = true;
-              description = "Internal ZenOS metadata for namespace";
-            };
-          };
+          children = builtins.removeAttrs node [ "_meta" ];
+          mappedChildren = lib.mapAttrs (n: v: processStructure v) children;
         in
-        if hasFreeform then
+        if isAlias then
+          if children == { } then
+            lib.mkOption {
+              type = lib.types.attrsOf lib.types.anything;
+              description = node._meta.brief or "Alias to ${node._meta.type.target}";
+              default = { }; # Ensure structural aliases have a default empty set
+            }
+          else
+            lib.mkOption {
+              # Dynamically promote alias to a submodule if it has children!
+              # attrsOf anything allows it to properly merge loose arbitrary variables natively
+              type = lib.types.submodule {
+                freeformType = lib.types.attrsOf lib.types.anything;
+                options = mappedChildren;
+              };
+              description = node._meta.brief or "Alias to ${node._meta.type.target}";
+              default = { };
+            }
+        else if isPackages then
+          lib.mkOption {
+            type = lib.types.attrsOf lib.types.anything;
+            default = { };
+            description = node._meta.brief or "Packages scope";
+          }
+        else if node ? __z_freeform_user then
           lib.mkOption {
             type = lib.types.attrsOf (
               lib.types.submodule {
-                # This makes the metadata a formal part of the NixOS option tree
-                options = (processStructure node.${freeformKey}) // {
-                  _meta = lib.mkOption {
-                    default = {
-                      brief = node._meta.brief or null;
-                      description = node._meta.description or null;
-                      maintainers = node._meta.maintainers or null;
-                      license = node._meta.license or null;
-                    };
-                  };
-                };
+                options = processStructure node.__z_freeform_user;
               }
             );
-            # Keep the top-level description for basic Nix tools
-            description = node._meta.description or "Freeform configuration for ${freeformName}";
+            default = { };
           }
-        else if isZmdl then
+        else if isPrograms || isZmdl then
           mappedChildren
           // (lib.optionalAttrs (!(mappedChildren ? legacy)) {
+            # Automatically establish legacy fallback inside structural domains
             legacy = lib.mkOption {
               type = lib.types.attrsOf lib.types.anything;
               default = { };
               description = "Raw configuration bypass";
             };
           })
-          // namespaceMeta
         else if builtins.isAttrs node then
-          mappedChildren // namespaceMeta
+          mappedChildren
         else
           { };
+
     in
     {
       options.zenos = processStructure ast;
@@ -347,13 +254,4 @@ let
             [ ];
       in
       lib.flatten (lib.mapAttrsToList processEntry entries);
-in
-{
-  inherit
-    mapZenModules
-    mkOptions
-    mkConfig
-    zmdlToModule
-    zstrToModule
-    ;
 }

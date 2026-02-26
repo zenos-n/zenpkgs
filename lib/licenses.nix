@@ -1,3 +1,5 @@
+# LOCATION: ./zenpkgs/lib/licenses.nix
+# REVISION: 1
 {
   napalm = {
     spdxId = "NAPALM-2.0";

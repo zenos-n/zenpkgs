@@ -26,20 +26,32 @@ let
     in
     lib.flatten (map processEntry entries);
 
-  # Package Tree Generator
-  # Maps a directory (e.g., ./pkgs) to an attribute set of callPackage calls
+  # Updated Package Tree Generator
   mkPackageTree =
     pkgs: root:
     let
-      isPkg = n: t: n == "default.nix";
+      # Look for all .nix files [cite: 52]
+      isPkg = n: t: t == "regular" && lib.hasSuffix ".nix" n;
       files = walkDir root isPkg;
-      toAttr = entry: {
-        # Use the parent directory name as the attribute name
-        name = lib.last entry.relPath;
-        value = pkgs.callPackage entry.absPath { };
-      };
+
+      toPackageAttr =
+        entry:
+        let
+          # Filename without .nix becomes the attribute key
+          pname = lib.removeSuffix ".nix" entry.name;
+
+          # Create the nested path: e.g., pkgs/utils/test.nix -> [ "utils" "test" ]
+          attrPath = entry.relPath ++ [ pname ];
+
+          # IMPORTANT: Use pkgs.callPackage so it can inject stdenv/lib
+          pkg = pkgs.callPackage entry.absPath { };
+        in
+        lib.setAttrByPath attrPath pkg;
+
+      attrList = map toPackageAttr files;
     in
-    builtins.listToAttrs (map toAttr files);
+    # Merge all individual attribute paths into one nested tree
+    lib.foldl' lib.recursiveUpdate { } attrList;
 
   importZcfg =
     path: args:
