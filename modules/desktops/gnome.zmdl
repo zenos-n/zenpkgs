@@ -1,35 +1,35 @@
 _meta = {
-    brief = "The GNOME desktop environment";
-    description = "Standard ZenOS configuration for the GNOME shell and session management";
-    maintainers = [ $m.doromiert ];
-    license = $l.napalm;
+  brief = "The GNOME desktop environment";
+  description = "Standard ZenOS configuration for the GNOME shell and session management";
+  maintainers = [ $m.doromiert ];
+  license = $l.napalm;
 };
 
 enable = enableOption {
-    _meta.brief = "Enable the core $name desktop environment";
-    _meta.description = "Enables GDM and the GNOME desktop manager.";
-    _action = {
-        services.displayManager.gdm.enable = true;
-        services.desktopManager.gnome.enable = true;
+  _meta.brief = "Enable the core $name desktop environment";
+  _meta.description = "Enables GDM and the GNOME desktop manager.";
+  _action = {
+    services.displayManager.gdm.enable = true;
+    services.desktopManager.gnome.enable = true;
 
-        # Minimalist ZenOS Defaults: Disable the heavy suite
-        services.gnome = {
-            core-apps.enable = false;
-            core-developer-tools.enable = false;
-            games.enable = false;
-        };
-
-        environment.gnome.excludePackages = [
-            pkgs.gnome-tour
-            pkgs.gnome-user-docs
-        ];
+    # Minimalist ZenOS Defaults: Disable the heavy suite
+    services.gnome = {
+      core-apps.enable = false;
+      core-developer-tools.enable = false;
+      games.enable = false;
     };
+
+    environment.gnome.excludePackages = [
+      pkgs.gnome-tour
+      pkgs.gnome-user-docs
+    ];
+  };
 };
 
 extraTools = enableOption {
-    _meta.brief = "Install additional $name utilities (Tweaks, etc.)";
-    _meta.description = "Installs tools like GNOME Tweaks to customize the desktop.";
-    _action = {
-        environment.systemPackages = [ pkgs.gnome-tweaks ];
-    };
+  _meta.brief = "Install additional $name utilities (Tweaks, etc.)";
+  _meta.description = "Installs tools like GNOME Tweaks to customize the desktop.";
+  _action = {
+    environment.systemPackages = [ pkgs.gnome-tweaks ];
+  };
 };
