@@ -58,14 +58,13 @@ let
         if node ? _type && node._type == "enableOption" then
           lib.mkEnableOption (node._meta.brief or "Enable module")
         else if node ? _meta && node._meta ? type then
-          (lib.mkOption {
-            type = mapZType node._meta.type;
+          lib.mkOption {
+            type = (mapZType node._meta.type) // {
+              _zmeta = node._meta;
+            }; # <-- TUNNEL META HERE
             default = node._meta.default or null;
             description = node._meta.description or node._meta.brief or "";
-          })
-          // {
-            meta = node._meta;
-          } # <-- merged onto the result
+          }
         else if builtins.isAttrs node then
           let
             # Detect if any key is a freeform identifier (e.g., __z_freeform_service)
@@ -248,22 +247,20 @@ rec {
           mappedChildren = lib.mapAttrs (n: v: processStructure v) children;
         in
         if isAlias && children == { } then
-          (lib.mkOption {
-            type = lib.types.attrsOf lib.types.anything;
+          lib.mkOption {
+            type = (lib.types.attrsOf lib.types.anything) // {
+              _zmeta = node._meta;
+            };
             description = node._meta.brief or "Alias to ${node._meta.type.target}";
             default = { };
-          })
-          // {
-            meta = node._meta;
           }
         else if isPackages then
-          (lib.mkOption {
-            type = lib.types.attrsOf lib.types.anything;
+          lib.mkOption {
+            type = (lib.types.attrsOf lib.types.anything) // {
+              _zmeta = node._meta;
+            };
             default = { };
             description = node._meta.brief or "Packages scope";
-          })
-          // {
-            meta = node._meta;
           }
         else if node ? __z_freeform_user then
           lib.mkOption {
@@ -275,20 +272,31 @@ rec {
             default = { };
           }
         else if isAlias then
-          (lib.mkOption {
-            type = lib.types.submoduleWith {
-              modules = [
-                {
-                  freeformType = lib.types.attrsOf lib.types.anything;
-                  options = mappedChildren; # still clean of passthroughs
-                }
-              ];
-            };
+          # Alias with children: expose as a freeform submodule so that:
+          # - undeclared keys (e.g. isNormalUser, shell) are accepted and preserved
+          #   for the alias mapping in coreModule (users.users.<name> / hm passthrough)
+          # - declared children (e.g. home-manager) get their own typed sub-options
+          lib.mkOption {
+            type =
+              (lib.types.submoduleWith {
+                modules = [
+                  {
+                    freeformType = lib.types.attrsOf lib.types.anything;
+                    options = mappedChildren // {
+                      # NEW: Inject metadata safely inside the submodule
+                      _zmeta_passthrough = lib.mkOption {
+                        internal = true;
+                        default = node._meta;
+                      };
+                    };
+                  }
+                ];
+              })
+              // {
+                _zmeta = node._meta;
+              }; # Keep this for standard fallback
             description = node._meta.brief or "Alias to ${node._meta.type.target}";
             default = { };
-          })
-          // {
-            meta = node._meta;
           }
         else if isPrograms || isZmdl then
           mappedChildren

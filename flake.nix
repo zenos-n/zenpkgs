@@ -195,7 +195,11 @@
             environment.systemPackages = resolvePackages pkgs.zenos config.zenos.system.packages;
 
             users.users = lib.mapAttrs (
-              name: userCfg: builtins.removeAttrs (userCfg.legacy or { }) [ "home-manager" ]
+              name: userCfg:
+              builtins.removeAttrs (userCfg.legacy or { }) [
+                "_zmeta_passthrough"
+                "home-manager"
+              ]
             ) config.zenos.users;
 
             home-manager = {
