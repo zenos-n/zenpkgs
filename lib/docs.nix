@@ -50,18 +50,18 @@ let
     inherit system;
     modules = [
       # 1. Include the HM NixOS module so the 'home-manager' attr exists
-      inputs.home-manager.nixosModules.home-manager 
-      
+      inputs.home-manager.nixosModules.home-manager
+
       {
         fileSystems."/".device = "/dev/null";
         boot.loader.systemd-boot.enable = true;
         system.stateVersion = "2.5.11";
-        
+
         # 2. Provide a dummy user to ensure the submodule types are processed
         # This helps the evaluator realize home-manager.users.<name> is a valid path
         home-manager.useGlobalPkgs = true;
         home-manager.useUserPackages = true;
-      } 
+      }
     ];
   };
 
@@ -364,7 +364,7 @@ let
         }
     );
 
-# --- OPTION WALKER ---
+  # --- OPTION WALKER ---
   showOptions =
     path: v:
     let
@@ -376,36 +376,61 @@ let
         (name != "<name>")
         && (
           (lib.count (x: x == name) path > 1)
-          || (lib.length path > 15) 
+          || (lib.length path > 15)
           || (lib.count (x: x == "specialisation") path > 1)
           || (lib.count (x: x == "configuration") path > 2)
           || (lib.count (x: x == "programs") path > 1 && name != "programs")
         );
 
-      getZstrMeta = p: tree:
+      getZstrMeta =
+        p: tree:
         let
           cleanPath = if builtins.length p > 0 && builtins.head p == "zenos" then builtins.tail p else p;
-          step = attr: current:
-            if current == null then null
+          step =
+            attr: current:
+            if current == null then
+              null
             else if attr == "<name>" then
-              let freeformKeys = builtins.filter (k: lib.hasPrefix "__z_freeform_" k) (builtins.attrNames current);
-              in if builtins.length freeformKeys > 0 then current.${builtins.head freeformKeys} else null
-            else if builtins.isAttrs current && current ? ${attr} then current.${attr}
-            else null;
+              let
+                freeformKeys = builtins.filter (k: lib.hasPrefix "__z_freeform_" k) (builtins.attrNames current);
+              in
+              if builtins.length freeformKeys > 0 then current.${builtins.head freeformKeys} else null
+            else if builtins.isAttrs current && current ? ${attr} then
+              current.${attr}
+            else
+              null;
           node = builtins.foldl' (current: attr: step attr current) tree cleanPath;
         in
-          if builtins.isAttrs node && node ? _meta then node._meta else null;
+        if builtins.isAttrs node && node ? _meta then node._meta else null;
 
-      zmeta = 
-        if lib.isOption v && v.type ? _zmeta then v.type._zmeta 
-        else getZstrMeta path moduleTree;
-        
+      zmeta =
+        if lib.isOption v && v.type ? _zmeta then
+          v.type._zmeta
+        else if lib.isOption v && v.type ? getSubOptions then
+          # NEW: Recover stripped metadata from the submodule's internal passthrough
+          let
+            sub = v.type.getSubOptions [ ];
+          in
+          if builtins.isAttrs sub && sub ? _zmeta_passthrough then
+            sub._zmeta_passthrough.default
+          else
+            getZstrMeta path moduleTree
+        else
+          getZstrMeta path moduleTree;
+
       hasMeta = zmeta != null;
 
     in
     maybeTrace (
       if isRepeating then
-        { meta = { type = { name = "unknown"; }; brief = "Recursion Limit Reached"; }; }
+        {
+          meta = {
+            type = {
+              name = "unknown";
+            };
+            brief = "Recursion Limit Reached";
+          };
+        }
       else
         let
           isOption = v: builtins.isAttrs v && (v._type or "") == "option";
@@ -414,72 +439,137 @@ let
           safeDefault =
             if isOption v then
               if v ? defaultText then
-                let dt = v.defaultText;
-                in if builtins.isString dt then dt else if builtins.isAttrs dt && dt ? text then dt.text else "<complex>"
+                let
+                  dt = v.defaultText;
+                in
+                if builtins.isString dt then
+                  dt
+                else if builtins.isAttrs dt && dt ? text then
+                  dt.text
+                else
+                  "<complex>"
               else if v ? default then
                 let
                   val = v.default;
                   typeName = v.type.name or "unknown";
-                  isSafeType = builtins.elem typeName [ "boolean" "bool" "integer" "int" "str" "string" "enum" "port" ];
+                  isSafeType = builtins.elem typeName [
+                    "boolean"
+                    "bool"
+                    "integer"
+                    "int"
+                    "str"
+                    "string"
+                    "enum"
+                    "port"
+                  ];
                 in
-                if isSafeType then 
-                  let res = builtins.tryEval (builtins.deepSeq val val);
-                  in if res.success then res.value else "<dynamic>"
-                else "<complex>"
-              else null
-            else null;
+                if isSafeType then
+                  let
+                    res = builtins.tryEval (builtins.deepSeq val val);
+                  in
+                  if res.success then res.value else "<dynamic>"
+                else
+                  "<complex>"
+              else
+                null
+            else
+              null;
 
           normTypeName = if isOption v then normalizeType v.type else "set";
 
           typeFinal =
             let
-              base = { name = normTypeName; };
-              enum = if normTypeName == "enum" && (v.type.functor.payload or [ ]) != [ ] then base // { enum = v.type.functor.payload; } else base;
+              base = {
+                name = normTypeName;
+              };
+              enum =
+                if normTypeName == "enum" && (v.type.functor.payload or [ ]) != [ ] then
+                  base // { enum = v.type.functor.payload; }
+                else
+                  base;
             in
             if safeDefault != null then enum // { default = safeDefault; } else enum;
 
-            getRawChildren = v: meta:
+          getRawChildren =
+            v: meta:
             let
               metaObj = if meta != null then meta else { };
               metaType = metaObj.type or { };
-              
+
               # CHECK: Is this node an alias?
               # We check the _zmeta directly attached to the option type
               isAlias = (metaType._type or "") == "alias" || (metaType.name or "") == "alias";
               aliasTarget = if isAlias then (metaType.target or null) else null;
 
-              getSubs = opt:
-                if opt.type ? getSubOptions then opt.type.getSubOptions [ ]
-                else if opt.type ? nestedTypes.elemType && opt.type.nestedTypes.elemType ? getSubOptions then opt.type.nestedTypes.elemType.getSubOptions [ ]
-                else { };
+              getSubs =
+                opt:
+                if opt.type ? getSubOptions then
+                  opt.type.getSubOptions [ ]
+                else if opt.type ? nestedTypes.elemType && opt.type.nestedTypes.elemType ? getSubOptions then
+                  opt.type.nestedTypes.elemType.getSubOptions [ ]
+                else
+                  { };
 
-              resolveAliasTarget = targetStr:
+              resolveAliasTarget =
+                targetStr:
                 let
                   rawParts = lib.splitString "." targetStr;
-                  
-                  fixParts = p:
+
+                  fixParts =
+                    p:
                     let
-                      res = builtins.foldl' (acc: el:
-                        if acc.open then
-                          if lib.hasSuffix ")" el then
-                            { open = false; list = acc.list ++ [ "${acc.buf}.${el}" ]; buf = ""; }
-                          else
-                            { open = true; list = acc.list; buf = "${acc.buf}.${el}"; }
-                        else
-                          if lib.hasPrefix "(" el && !lib.hasSuffix ")" el then
-                            { open = true; list = acc.list; buf = el; }
-                          else
-                            { open = false; list = acc.list ++ [ el ]; buf = ""; }
-                      ) { open = false; list = []; buf = ""; } p;
-                    in res.list;
+                      res =
+                        builtins.foldl'
+                          (
+                            acc: el:
+                            if acc.open then
+                              if lib.hasSuffix ")" el then
+                                {
+                                  open = false;
+                                  list = acc.list ++ [ "${acc.buf}.${el}" ];
+                                  buf = "";
+                                }
+                              else
+                                {
+                                  open = true;
+                                  list = acc.list;
+                                  buf = "${acc.buf}.${el}";
+                                }
+                            else if lib.hasPrefix "(" el && !lib.hasSuffix ")" el then
+                              {
+                                open = true;
+                                list = acc.list;
+                                buf = el;
+                              }
+                            else
+                              {
+                                open = false;
+                                list = acc.list ++ [ el ];
+                                buf = "";
+                              }
+                          )
+                          {
+                            open = false;
+                            list = [ ];
+                            buf = "";
+                          }
+                          p;
+                    in
+                    res.list;
 
                   parts = fixParts rawParts;
-                  cleanParts = if builtins.length parts > 0 && builtins.head parts == "nixpkgs" then lib.tail parts else parts;
+                  cleanParts =
+                    if builtins.length parts > 0 && builtins.head parts == "nixpkgs" then lib.tail parts else parts;
 
-                  walk = currentTree: pathParts:
+                  walk =
+                    currentTree: pathParts:
                     if pathParts == [ ] then
                       if currentTree == legacyEval.options then
-                        builtins.removeAttrs currentTree [ "zenos" "users" "nixpkgs" ]
+                        builtins.removeAttrs currentTree [
+                          "zenos"
+                          "users"
+                          "nixpkgs"
+                        ]
                       else
                         currentTree
                     else
@@ -491,94 +581,149 @@ let
                         # THE FIX: Distinguish between attrsOf lists and standard submodules
                         if currentTree.type ? nestedTypes.elemType then
                           # It's an attrsOf mapping (like users.users). Drop the key/index (head) and extract.
-                          let sub = currentTree.type.nestedTypes.elemType.getSubOptions [ ];
-                          in walk sub tail
+                          let
+                            sub = currentTree.type.nestedTypes.elemType.getSubOptions [ ];
+                          in
+                          walk sub tail
                         else if currentTree.type ? getSubOptions then
                           # It's a standard submodule (like home-manager). Extract, but KEEP the head and search for it.
-                          let sub = currentTree.type.getSubOptions [ ];
+                          let
+                            sub = currentTree.type.getSubOptions [ ];
                           in
-                            if builtins.isAttrs sub && sub ? ${head} then
-                              walk sub.${head} tail
-                            else
-                              { }
+                          if builtins.isAttrs sub && sub ? ${head} then walk sub.${head} tail else { }
                         else
                           { }
                       else if builtins.isAttrs currentTree && currentTree ? ${head} then
                         walk currentTree.${head} tail
                       else
-                        { }; 
+                        { };
                 in
                 walk legacyEval.options cleanParts;
 
-            rawAlias = if isAlias && aliasTarget != null then resolveAliasTarget aliasTarget else { };
+              rawAlias = if isAlias && aliasTarget != null then resolveAliasTarget aliasTarget else { };
               aliasChildren = if lib.isOption rawAlias then getSubs rawAlias else rawAlias;
 
               nativeChildren =
                 if lib.isOption v then
                   let
                     t = v.type;
-                    elemSub = if (!isAlias && t ? nestedTypes.elemType) then (t.nestedTypes.elemType.getSubOptions or null) else null;
+                    elemSub =
+                      if (!isAlias && t ? nestedTypes.elemType) then
+                        (t.nestedTypes.elemType.getSubOptions or null)
+                      else
+                        null;
                     directSub = t.getSubOptions or null;
                   in
-                  if elemSub != null then { "<name>" = { _type = "_container"; content = elemSub [ ]; }; }
-                  else if directSub != null then directSub [ ]
-  else { }
-                else if isContainer v then v.content
-                else if builtins.isAttrs v then v
-                else { };
+                  if elemSub != null then
+                    {
+                      "<name>" = {
+                        _type = "_container";
+                        content = elemSub [ ];
+                      };
+                    }
+                  else if directSub != null then
+                    directSub [ ]
+                  else
+                    { }
+                else if isContainer v then
+                  v.content
+                else if builtins.isAttrs v then
+                  v
+                else
+                  { };
             in
             if isAlias then
               # MERGE logic:
               # 1. aliasChildren (from target)
               # 2. nativeChildren (defined in zstr)
-              (if builtins.isAttrs aliasChildren && builtins.isAttrs nativeChildren then
-                aliasChildren // nativeChildren
-              else if builtins.isAttrs aliasChildren then
-                aliasChildren
-              else
-                nativeChildren)
+              (
+                if builtins.isAttrs aliasChildren && builtins.isAttrs nativeChildren then
+                  aliasChildren // nativeChildren
+                else if builtins.isAttrs aliasChildren then
+                  aliasChildren
+                else
+                  nativeChildren
+              )
             else
               nativeChildren;
 
           rawChildren = getRawChildren v zmeta;
-          extractedMeta = if rawChildren != null && rawChildren ? meta && rawChildren.meta ? default then rawChildren.meta.default else { };
+          extractedMeta =
+            if rawChildren != null && rawChildren ? meta && rawChildren.meta ? default then
+              rawChildren.meta.default
+            else
+              { };
 
           baseMeta = {
-            brief = 
-              if extractedMeta ? brief then extractedMeta.brief
-              else if hasMeta && zmeta ? brief && zmeta.brief != null then zmeta.brief
-              else if v ? description then v.description
-              else null;
-            description = 
-              if extractedMeta ? description then extractedMeta.description
-              else if hasMeta && zmeta ? description && zmeta.description != null then zmeta.description
-              else if v ? description then v.description
-              else null;
-            maintainers = 
-              if extractedMeta ? maintainers then extractedMeta.maintainers
-              else if hasMeta && zmeta ? maintainers then zmeta.maintainers
-              else [ ];
-            license = 
-              if extractedMeta ? license then extractedMeta.license
-              else if hasMeta && zmeta ? license then zmeta.license
-              else "napalm";
-            dependencies = 
-              if extractedMeta ? dependencies then extractedMeta.dependencies
-              else if hasMeta && zmeta ? dependencies then zmeta.dependencies
-              else [ ];
+            brief =
+              if extractedMeta ? brief then
+                extractedMeta.brief
+              else if hasMeta && zmeta ? brief && zmeta.brief != null then
+                zmeta.brief
+              else if v ? description then
+                v.description
+              else
+                null;
+            description =
+              if extractedMeta ? description then
+                extractedMeta.description
+              else if hasMeta && zmeta ? description && zmeta.description != null then
+                zmeta.description
+              else if v ? description then
+                v.description
+              else
+                null;
+            maintainers =
+              if extractedMeta ? maintainers then
+                extractedMeta.maintainers
+              else if hasMeta && zmeta ? maintainers then
+                zmeta.maintainers
+              else
+                [ ];
+            license =
+              if extractedMeta ? license then
+                extractedMeta.license
+              else if hasMeta && zmeta ? license then
+                zmeta.license
+              else
+                "napalm";
+            dependencies =
+              if extractedMeta ? dependencies then
+                extractedMeta.dependencies
+              else if hasMeta && zmeta ? dependencies then
+                zmeta.dependencies
+              else
+                [ ];
             type = typeFinal;
           };
 
-          metaObj = if builtins.isFunction (builtins.tryEval warnMissing).value then warnMissing path baseMeta else baseMeta;
+          metaObj =
+            if builtins.isFunction (builtins.tryEval warnMissing).value then
+              warnMissing path baseMeta
+            else
+              baseMeta;
 
           validChildren =
             if rawChildren != null && builtins.isAttrs rawChildren then
               builtins.removeAttrs rawChildren [
-                "_module" "_args" "freeformType" "sandbox" "meta" "specialisation" "containers" "vmVariant"
-                "commonConfigurationFile" "commonConfiguration" "settings" "declarativeConfig" "package"
+                "_module"
+                "_args"
+                "freeformType"
+                "sandbox"
+                "meta"
+                "specialisation"
+                "containers"
+                "vmVariant"
+                "commonConfigurationFile"
+                "commonConfiguration"
+                "settings"
+                "declarativeConfig"
+                "package"
                 "_freeformOptions"
+                "_zmeta_passthrough" # <-- Added here
               ]
-            else { };
+            else
+              { };
 
           subOptions = lib.mapAttrs (n: child: showOptions (path ++ [ n ]) child) validChildren;
 

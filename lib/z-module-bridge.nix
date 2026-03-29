@@ -232,7 +232,7 @@ in
               );
               default = { };
             }
-          else if isAlias then
+         else if isAlias then
             # Alias with children: expose as a freeform submodule so that:
             # - undeclared keys (e.g. isNormalUser, shell) are accepted and preserved
             #   for the alias mapping in coreModule (users.users.<name> / hm passthrough)
@@ -242,10 +242,16 @@ in
                 modules = [
                   {
                     freeformType = lib.types.attrsOf lib.types.anything;
-                    options = mappedChildren;
+                    options = mappedChildren // {
+                      # NEW: Inject metadata safely inside the submodule
+                      _zmeta_passthrough = lib.mkOption {
+                        internal = true;
+                        default = node._meta;
+                      };
+                    };
                   }
                 ];
-              }) // { _zmeta = node._meta; };
+              }) // { _zmeta = node._meta; }; # Keep this for standard fallback
               description = node._meta.brief or "Alias to ${node._meta.type.target}";
               default = { };
             }
