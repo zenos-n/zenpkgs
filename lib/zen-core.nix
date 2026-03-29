@@ -155,14 +155,13 @@ let
           name = builtins.concatStringsSep "." entry.relPath;
 
           hostModule =
-            args:
+            args@{ pkgs, ... }: # Capture pkgs from the module args
             let
-              raw = cleanLegacyBlocks (
+              raw =
                 if (lib.hasSuffix ".zcfg" entry.name || lib.hasSuffix ".nzo" entry.name) then
-                  importZcfg entry.absPath args
+                  importZcfg entry.absPath (args // { inherit pkgs; }) # Pass it here
                 else
-                  import entry.absPath args
-              );
+                  import entry.absPath args;
 
               legacyConfig = raw.legacy or { };
               zenosConfig = builtins.removeAttrs raw [ "legacy" ];

@@ -34,14 +34,14 @@ enable = {
     programs.dconf.profiles.user.databases = [{
       settings = {
         "org/gnome/desktop/interface" = {
-          accent-color = $cfg.defaultAccentColor;
-          color-scheme = if $cfg.defaultDarkMode then "prefer-dark" else "prefer-light";
+          accent-color = $path.defaultAccentColor;
+          color-scheme = if $path.defaultDarkMode then "prefer-dark" else "prefer-light";
           show-battery-percentage = true;
         };
         "org/gnome/shell" = {
           disable-user-extensions = false;
           enabled-extensions = $v.extensionUuids;
-          favorite-apps = $cfg.dockItems;
+          favorite-apps = $path.dockItems;
         };
       };
     }];

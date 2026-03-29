@@ -125,9 +125,11 @@ let
         inherit
           name
           path
-          pkgs
           lib
           ;
+        pkgs = (extraArgs.pkgs.zenos or { }) // {
+          legacy = extraArgs.pkgs or pkgs; # Fallback to the top-level pkgs if extraArgs is empty
+        };
         cfg = extraArgs.config or { };
         c = extraArgs.c or { };
         m = maintainers;

@@ -170,8 +170,7 @@
             zenos.users = lib.mkOption {
               type = lib.types.attrsOf (
                 lib.types.submodule {
-                  _module.args.pkgs = pkgs;
-
+                  _module.args.pkgs = pkgs.zenos;
                   imports = lib.flatten [
                     (
                       if builtins.pathExists ./modules/userModules then
