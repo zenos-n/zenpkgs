@@ -1,8 +1,10 @@
 {
   lib,
   inputs ? { },
+  ...
 }:
 let
+
   zDialect = import ./z-dialect.nix { inherit lib; };
   maintainers = import ./maintainers.nix;
   licenses = import ./licenses.nix;

@@ -80,12 +80,8 @@ let
           (g: "_v.${builtins.elemAt g 0} = import \"${builtins.elemAt g 1}\" __zargs; ")
           s15;
 
-      # 10. Boolean Enable Logic: `key = true;` -> `key = { _enable = true; };`
-      s17 = replaceRegex "([a-zA-Z0-9_.-]+)[[:space:]]*=[[:space:]]*(true|false)[[:space:]]*;" (
-        g: "${builtins.elemAt g 0} = { _enable = ${builtins.elemAt g 1}; }; "
-      ) s16;
     in
-    s17;
+    s16;
 
   interpolateStrings =
     args: config:
@@ -137,6 +133,7 @@ let
         m = maintainers;
         l = licenses;
         type = {
+
           bool = {
             _type = "ztype";
             name = "bool";

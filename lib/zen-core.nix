@@ -1,5 +1,29 @@
 { lib, inputs }:
 let
+  scrubMeta =
+    node:
+    if builtins.isAttrs node then
+      let
+        cleanAttrs = builtins.removeAttrs node [
+          "_meta"
+          "_zmeta_passthrough"
+        ];
+      in
+      lib.mapAttrs (k: v: scrubMeta v) cleanAttrs
+    else if builtins.isList node then
+      map scrubMeta node
+    else
+      node;
+
+  # targets specifically "legacy" keys and scrubs their contents
+  cleanLegacyBlocks =
+    node:
+    if builtins.isAttrs node then
+      lib.mapAttrs (k: v: if k == "legacy" then scrubMeta v else cleanLegacyBlocks v) node
+    else if builtins.isList node then
+      map cleanLegacyBlocks node
+    else
+      node;
   # Recursive Directory Walker
   walkDir =
     dir: criteriaFn:
@@ -133,11 +157,12 @@ let
           hostModule =
             args:
             let
-              raw =
+              raw = cleanLegacyBlocks (
                 if (lib.hasSuffix ".zcfg" entry.name || lib.hasSuffix ".nzo" entry.name) then
                   importZcfg entry.absPath args
                 else
-                  import entry.absPath args;
+                  import entry.absPath args
+              );
 
               legacyConfig = raw.legacy or { };
               zenosConfig = builtins.removeAttrs raw [ "legacy" ];

@@ -1,0 +1,95 @@
+_meta = {
+  brief = "Tailored GNOME desktop environment";
+  description = "Comprehensive GNOME configuration with extensions, VRR, and dark mode.";
+  license = $l.napalm;
+  maintainers = [ $m.doromiert ];
+};
+
+# Internal constants
+_let extensionUuids: $type.list = [
+  "appindicatorsupport@rgcjonas.gmail.com"
+  "dash-to-dock@micxgx.gmail.com"
+  "just-perfection-desktop@just-perfection"
+  "blur-my-shell@aunetx"
+];
+
+enable = {
+  _meta = { 
+    type = $type.boolean; 
+    brief = "Enable the Gnome Desktop Base Module";
+    default = false;
+  };
+  
+  # Logic tied to this specific boolean being true
+  ! {
+    services.xserver.displayManager.gdm.enable = true;
+    services.xserver.desktopManager.gnome.enable = true;
+
+    environment.systemPackages = [
+      $pkgs.legacy.gnome-tweaks
+      $pkgs.legacy.gnome-extension-manager
+      $pkgs.legacy.adw-gtk3
+    ];
+
+    programs.dconf.profiles.user.databases = [{
+      settings = {
+        "org/gnome/desktop/interface" = {
+          accent-color = $cfg.defaultAccentColor;
+          color-scheme = if $cfg.defaultDarkMode then "prefer-dark" else "prefer-light";
+          show-battery-percentage = true;
+        };
+        "org/gnome/shell" = {
+          disable-user-extensions = false;
+          enabled-extensions = $v.extensionUuids;
+          favorite-apps = $cfg.dockItems;
+        };
+      };
+    }];
+  };
+};
+
+variableRefreshRate = {
+  _meta = { 
+    type = $type.boolean; 
+    brief = "Enable Experimental Variable Refresh Rate (VRR) support"; 
+    default = false;
+  };
+  
+  ! {
+    programs.dconf.profiles.user.databases = [{
+      settings."org/gnome/mutter".experimental-features = [
+        "scale-monitor-framebuffer"
+        "xwayland-native-scaling"
+        "variable-refresh-rate"
+      ];
+    }];
+  };
+};
+
+defaultAccentColor = {
+  _meta = {
+    type = $type.enum [ "blue" "teal" "purple" "red" "orange" "yellow" "green" "pink" "grey" ];
+    brief = "Primary accent color for the interface";
+    default = "purple";
+  };
+};
+
+defaultDarkMode = {
+  _meta = { 
+    type = $type.boolean; 
+    brief = "Default to dark mode"; 
+    default = true;
+  };
+};
+
+dockItems = {
+  _meta = { 
+    type = $type.list ; 
+    brief = "Default applications in the Dash";
+    default = [
+      "org.gnome.Settings.desktop"
+      "org.gnome.Nautilus.desktop"
+      "firefox.desktop"
+    ];
+  };
+};
