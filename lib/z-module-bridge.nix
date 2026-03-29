@@ -64,16 +64,34 @@ let
             description = node._meta.description or node._meta.brief or "";
           }
         else if builtins.isAttrs node then
-          lib.mapAttrs (n: v: walk v) (
-            builtins.removeAttrs node [
-              "_meta"
-              "_action"
-              "_saction"
-              "_uaction"
-              "_type"
-              "_v"
-            ]
-          )
+          let
+            # Detect if any key is a freeform identifier (e.g., __z_freeform_service)
+            freeformKey = lib.findFirst (n: lib.hasPrefix "__z_freeform_" n) null (builtins.attrNames node);
+          in
+          if freeformKey != null then
+            let
+              actualName = lib.removePrefix "__z_freeform_" freeformKey;
+            in
+            lib.mkOption {
+              # Creates an attrsOf where each key resolves the $f variable
+              type = lib.types.attrsOf (
+                lib.types.submodule {
+                  options = walk node.${freeformKey};
+                }
+              );
+              description = "Freeform configuration for ${actualName}";
+            }
+          else
+            lib.mapAttrs (n: v: walk v) (
+              builtins.removeAttrs node [
+                "_meta"
+                "_action"
+                "_saction"
+                "_uaction"
+                "_type"
+                "_v"
+              ]
+            )
         else
           { };
     in
@@ -128,12 +146,25 @@ let
             else
               { };
 
+          # Merge unconditional actions (these ignore the 'isEnabled' check)
+          unconditionalAction = lib.mkMerge [
+            (astNode._action_unconditional or { })
+            (if isUserScope then { } else astNode._saction_unconditional or { })
+            (if isUserScope then astNode._uaction_unconditional or { } else { })
+          ];
+
+          # Existing logic for standard actions
           mergedAction = lib.mkMerge [
             action
             saction
             uaction
           ];
-          currentConfig = lib.mkIf (isEnabled && mergedAction != { }) mergedAction;
+
+          # Update currentConfig to merge both
+          currentConfig = lib.mkMerge [
+            unconditionalAction
+            (lib.mkIf (isEnabled && mergedAction != { }) mergedAction)
+          ];
 
           children = builtins.removeAttrs astNode [
             "_meta"

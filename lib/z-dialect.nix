@@ -21,24 +21,35 @@ let
       ) s1;
       s3 = replaceRegex "\\([[:space:]]*programs[[:space:]]*\\)" (g: "{ _type = \"programs\"; }") s2;
       s4 = replaceRegex "\\([[:space:]]*packages[[:space:]]*\\)" (g: "{ _type = \"packages\"; }") s3;
+      s4_1 = replaceRegex "\\+\\+\\[" (g: "{ _op = \"++\"; val = [") s4;
+      s4_2 = replaceRegex "--\\[" (g: "{ _op = \"--\"; val = [") s4_1;
 
       # 2. LHS Freeform Definitions: `(freeform name) =` -> `__z_freeform_name =`
       s5 =
         replaceRegex "\\([[:space:]]*freeform[[:space:]]+([-a-zA-Z0-9_]+)[[:space:]]*\\)[[:space:]]*="
           (g: "__z_freeform_${builtins.elemAt g 0} =")
-          s4;
+          s4_2;
 
       # 3. Action Shorthands: `s! {`, `u! {`, `! {`
       s6 = replaceRegex "(^|[[:space:]]+)s![[:space:]]*\\{" (g: "${builtins.elemAt g 0}_saction = {") s5;
       s7 = replaceRegex "(^|[[:space:]]+)u![[:space:]]*\\{" (g: "${builtins.elemAt g 0}_uaction = {") s6;
       s8 = replaceRegex "(^|[[:space:]]+)![[:space:]]*\\{" (g: "${builtins.elemAt g 0}_action = {") s7;
+      s8_1 = replaceRegex "(^|[[:space:]]+)s!![[:space:]]*\\{" (
+        g: "${builtins.elemAt g 0}_saction_unconditional = {"
+      ) s8;
+      s8_2 = replaceRegex "(^|[[:space:]]+)u!![[:space:]]*\\{" (
+        g: "${builtins.elemAt g 0}_uaction_unconditional = {"
+      ) s8_1;
+      s8_3 = replaceRegex "(^|[[:space:]]+)!![[:space:]]*\\{" (
+        g: "${builtins.elemAt g 0}_action_unconditional = {"
+      ) s8_2;
 
       # 4. Typed _let Variable Bindings -> Maps to `_v` dict payload
       # e.g., `_let default_port: $type.int = 8080;` -> `_v.default_port = 8080;`
       s9 =
         replaceRegex "_let[[:space:]]+([a-zA-Z0-9_]+)[[:space:]]*:[[:space:]]*[^=]+=[[:space:]]*([^;]+);"
           (g: "_v.${builtins.elemAt g 0} = ${builtins.elemAt g 1};")
-          s8;
+          s8_3;
 
       # 5. Freeform & Variable Keyword Mappings
       # Path-embedded `$f` evaluates to a system string placeholder for dynamic replacement during `mkConfig`
@@ -47,7 +58,7 @@ let
       s12 = replaceRegex "\\$v\\.([a-zA-Z0-9_]+)" (g: "_v.${builtins.elemAt g 0}") s11;
 
       # 6. Global Variables: $cfg, $pkgs, $path, $name, $c, $lib, $l, $m, $type
-      s13 = replaceRegex "\\$(cfg|pkgs|path|name|c|lib|l|m|type)" (
+      s13 = replaceRegex "\\$(cfg|pkgs|path|name|c|lib|l|m|type|deps)" (
         g: "__zargs.${builtins.elemAt g 0}"
       ) s12;
 
@@ -70,7 +81,7 @@ let
           s15;
 
       # 10. Boolean Enable Logic: `key = true;` -> `key = { _enable = true; };`
-      s17 = replaceRegex "([a-zA-Z0-9_]+)[[:space:]]*=[[:space:]]*(true|false)[[:space:]]*;" (
+      s17 = replaceRegex "([a-zA-Z0-9_.-]+)[[:space:]]*=[[:space:]]*(true|false)[[:space:]]*;" (
         g: "${builtins.elemAt g 0} = { _enable = ${builtins.elemAt g 1}; }; "
       ) s16;
     in
