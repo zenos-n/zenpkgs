@@ -50,8 +50,31 @@ let
       s13 = replaceRegex "\\$(cfg|pkgs|path|name|c|lib|l|m|type)" (
         g: "__zargs.${builtins.elemAt g 0}"
       ) s12;
+
+      # 7. Bare Import: _import "path"; -> import "path" __zargs;
+      s14 = replaceRegex "_import[[:space:]]+\"([^\"]+)\"[[:space:]]*;" (
+        g: "import \"${builtins.elemAt g 0}\" __zargs; "
+      ) s13;
+
+      # 8. Bound Import: _import name: type = "path"; -> _v.name = import "path" __zargs;
+      s15 =
+        replaceRegex
+          "_import[[:space:]]+([a-zA-Z0-9_]+)[[:space:]]*:[[:space:]]*[^=]+=[[:space:]]*\"([^\"]+)\"[[:space:]]*;"
+          (g: "_v.${builtins.elemAt g 0} = import \"${builtins.elemAt g 1}\" __zargs; ")
+          s14;
+
+      # 9. Untyped Bound Import: _import name = "path"; -> _v.name = import "path" __zargs;
+      s16 =
+        replaceRegex "_import[[:space:]]+([a-zA-Z0-9_]+)[[:space:]]*=[[:space:]]*\"([^\"]+)\"[[:space:]]*;"
+          (g: "_v.${builtins.elemAt g 0} = import \"${builtins.elemAt g 1}\" __zargs; ")
+          s15;
+
+      # 10. Boolean Enable Logic: `key = true;` -> `key = { _enable = true; };`
+      s17 = replaceRegex "([a-zA-Z0-9_]+)[[:space:]]*=[[:space:]]*(true|false)[[:space:]]*;" (
+        g: "${builtins.elemAt g 0} = { _enable = ${builtins.elemAt g 1}; }; "
+      ) s16;
     in
-    s13;
+    s17;
 
   interpolateStrings =
     args: config:
