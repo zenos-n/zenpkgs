@@ -1,4 +1,5 @@
 # ZenOS DSL Specification
+
 **Revision: 0.1.0 — Draft**
 **Maintainer: doromiert**
 
@@ -8,11 +9,12 @@
 
 ZenOS uses three domain-specific file formats that transpile to Nix expressions:
 
-| Extension | Role | Scope |
-|-----------|------|-------|
-| `.zcfg` | Host/user configuration | Declares system state |
-| `.zmdl` | Module definition | Defines options + implementation |
-| `.zpkg` | Package definition | Defines a derivation |
+| Extension | Role                    | Scope                                         |
+| --------- | ----------------------- | --------------------------------------------- |
+| `.zcfg`   | Host/user configuration | Declares system state                         |
+| `.zmdl`   | Module definition       | Defines options + implementation              |
+| `.zpkg`   | Package definition      | Defines a derivation                          |
+| `.zstr`   | Structure definition    | Defines how options and packages are laid out |
 
 All three share a common syntax foundation and the same `$variable` system. They differ in what top-level keys mean and what context is injected at evaluation time.
 
@@ -35,20 +37,20 @@ All three share a common syntax foundation and the same `$variable` system. They
 
 Available in all three file types unless noted:
 
-| Variable | Resolves To | Available In |
-|----------|-------------|--------------|
-| `$pkgs` | ZenPkgs package set | all |
-| `$lib` | nixpkgs lib | all |
-| `$cfg` | Evaluated global config | `.zmdl`, `.zcfg` |
-| `$path` | Config values at current module's scope | `.zmdl` |
-| `$name` | Current module/package name string | all |
-| `$type` | ZenOS type primitives | `.zmdl`, `.zpkg` |
-| `$m` | Maintainers registry | all |
-| `$l` | Licenses registry | all |
-| `$c` | Color primitives | `.zmdl` |
-| `$v` | `_let` variable access | `.zmdl` |
-| `$f` | Freeform identifier (current key name) | `.zmdl`, `.zstr` |
-| `$deps` | Runtime deps (resolved store paths) | `.zpkg` |
+| Variable | Resolves To                             | Available In     |
+| -------- | --------------------------------------- | ---------------- |
+| `$pkgs`  | ZenPkgs package set                     | all              |
+| `$lib`   | nixpkgs lib                             | all              |
+| `$cfg`   | Evaluated global config                 | `.zmdl`, `.zcfg` |
+| `$path`  | Config values at current module's scope | `.zmdl`          |
+| `$name`  | Current module/package name string      | all              |
+| `$type`  | ZenOS type primitives                   | `.zmdl`, `.zpkg` |
+| `$m`     | Maintainers registry                    | all              |
+| `$l`     | Licenses registry                       | all              |
+| `$c`     | Color primitives                        | `.zmdl`          |
+| `$v`     | `_let` variable access                  | `.zmdl`          |
+| `$f`     | Freeform identifier (current key name)  | `.zmdl`, `.zstr` |
+| `$deps`  | Runtime deps (resolved store paths)     | `.zpkg`          |
 
 ### 1.3 `_let` — Typed Variables
 
@@ -247,13 +249,13 @@ Actions are the implementation layer of a module. There are two classes:
 - **Conditional (`!`)** — fires only when the option's value is truthy (i.e. the user has enabled it)
 - **Unconditional (`!!`)** — fires always when the module is loaded, regardless of any option value. Use for base setup: registering service skeletons, creating required directories, writing base configs that conditional actions then extend.
 
-| Shorthand | Class | Scope |
-|-----------|-------|-------|
-| `! { }` | Conditional | Generic |
-| `!! { }` | Unconditional | Generic |
-| `s! { }` | Conditional | NixOS system config |
-| `s!! { }` | Unconditional | NixOS system config |
-| `u! { }` | Conditional | Home Manager / user config |
+| Shorthand | Class         | Scope                      |
+| --------- | ------------- | -------------------------- |
+| `! { }`   | Conditional   | Generic                    |
+| `!! { }`  | Unconditional | Generic                    |
+| `s! { }`  | Conditional   | NixOS system config        |
+| `s!! { }` | Unconditional | NixOS system config        |
+| `u! { }`  | Conditional   | Home Manager / user config |
 | `u!! { }` | Unconditional | Home Manager / user config |
 
 Multiple action blocks can co-exist on the same option. All six can be defined simultaneously.
@@ -261,6 +263,7 @@ Multiple action blocks can co-exist on the same option. All six can be defined s
 #### Action Block Bodies
 
 Action block bodies are **vanilla Nix expressions** with `$`-variable substitution applied. This means:
+
 - `let ... in { ... }` works inside action blocks
 - Standard Nix library functions are available via `$lib`
 - Package overrides work: `$pkgs.foo.override { opt = $path.val; }`
@@ -343,69 +346,79 @@ port = {
 
 #### Primitives
 
-| Type | Nix Equivalent | Description |
-|------|---------------|-------------|
-| `$type.bool` / `$type.boolean` | `types.bool` | Boolean |
-| `$type.string` | `types.str` | UTF-8 string |
-| `$type.int` | `types.int` | Integer |
-| `$type.float` | `types.float` | Float |
-| `$type.null` | `types.nullOr types.anything` | Null / unset |
-| `$type.path` | `types.path` | Nix-aware filesystem path |
-| `$type.package` | `types.package` | Single derivation |
-| `$type.packages` | `types.attrsOf types.anything` | Package tree scope |
-| `$type.color` | `types.str` (with `#` stripped) | Color string |
-| `$type.function (args)` | `types.unspecified` | Callable block |
+| Type                           | Nix Equivalent                  | Description               |
+| ------------------------------ | ------------------------------- | ------------------------- |
+| `$type.bool` / `$type.boolean` | `types.bool`                    | Boolean                   |
+| `$type.string`                 | `types.str`                     | UTF-8 string              |
+| `$type.int`                    | `types.int`                     | Integer                   |
+| `$type.float`                  | `types.float`                   | Float                     |
+| `$type.null`                   | `types.nullOr types.anything`   | Null / unset              |
+| `$type.path`                   | `types.path`                    | Nix-aware filesystem path |
+| `$type.package`                | `types.package`                 | Single derivation         |
+| `$type.packages`               | `types.attrsOf types.anything`  | Package tree scope        |
+| `$type.color`                  | `types.str` (with `#` stripped) | Color string              |
+| `$type.function (args)`        | `types.unspecified`             | Callable block            |
 
 #### Typed Collections
 
 Collections take a type parameter in brackets. The type parameter can itself be a typed collection (nested).
 
 **List:**
+
 ```nix
 $type.list [ $type.string ]           # listOf str
 $type.list [ $type.int ]              # listOf int
 $type.list [ $type.package ]          # listOf package
 $type.list [ $type.list [ $type.string ] ]  # listOf (listOf str)
 ```
+
 → `lib.types.listOf <inner>`
 
 **Set (attrsOf):**
 
 Keys in a Nix attrset are always strings, so only the value type is specified.
+
 ```nix
 $type.set [ $type.string ]            # attrsOf str
 $type.set [ $type.int ]               # attrsOf int
 $type.set [ $type.package ]           # attrsOf package
 $type.set [ $type.list [ $type.int ] ] # attrsOf (listOf int)
 ```
+
 → `lib.types.attrsOf <value type>`
 
 Bare `$type.set` (no brackets) remains `types.attrs` — untyped attrset.
 
 **Function return type** (for options whose value is a callable):
+
 ```nix
 $type.functionTo [ $type.string ]   # types.functionTo types.str
 $type.functionTo [ $type.int ]      # types.functionTo types.int
 $type.functionTo [ $type.package ]  # types.functionTo types.package
 ```
+
 → `lib.types.functionTo <return type>`
 
-Note: `$type.function (args)` (no `To`) is for *callable logic blocks*. `$type.functionTo [ t ]` is for options that *store* a function.
+Note: `$type.function (args)` (no `To`) is for _callable logic blocks_. `$type.functionTo [ t ]` is for options that _store_ a function.
 
 **Either (union):**
 
 Accepts two or more types. All are valid for the option.
+
 ```nix
 $type.either [ $type.string $type.int ]              # either str int
 $type.either [ $type.string $type.int $type.bool ]   # one of string, int, bool
 $type.either [ $type.string $type.list [ $type.int ] ] # string or list of int
 ```
+
 → `lib.types.either t1 (lib.types.either t2 t3 ...)` (left-folded)
 
 **Enum:**
+
 ```nix
 $type.enum [ "dark" "light" "classic" ]   # one of these string literals
 ```
+
 → `lib.types.enum [ "dark" "light" "classic" ]`
 
 ### 3.8 Full Example
@@ -475,11 +488,11 @@ theme = {
 
 ### 4.2 Top-Level Keys
 
-| Key | Required | Description |
-|-----|----------|-------------|
-| `_meta` | Yes | Package metadata + deps |
-| `_src` | Yes | Source fetcher |
-| `_build` | Yes | Build configuration |
+| Key      | Required | Description             |
+| -------- | -------- | ----------------------- |
+| `_meta`  | Yes      | Package metadata + deps |
+| `_src`   | Yes      | Source fetcher          |
+| `_build` | Yes      | Build configuration     |
 
 ### 4.3 `_meta` Block
 
@@ -504,13 +517,13 @@ _meta = {
 
 Each scope starts from `global` and applies modifiers:
 
-| Syntax | Behavior |
-|--------|----------|
-| `= [ a b ]` | Ignore global, use exactly this list |
-| `= ++[ a b ]` | `global ++ [ a b ]` |
-| `= --[ a b ]` | `global` with `a`, `b` removed |
-| `= --[ a ] ++[ b ]` | Chain: remove `a`, then append `b` |
-| *(omitted)* | Inherit `global` unchanged |
+| Syntax              | Behavior                             |
+| ------------------- | ------------------------------------ |
+| `= [ a b ]`         | Ignore global, use exactly this list |
+| `= ++[ a b ]`       | `global ++ [ a b ]`                  |
+| `= --[ a b ]`       | `global` with `a`, `b` removed       |
+| `= --[ a ] ++[ b ]` | Chain: remove `a`, then append `b`   |
+| _(omitted)_         | Inherit `global` unchanged           |
 
 Operators are resolved left-to-right. Multiple `++` and `--` can be chained on the same line.
 
@@ -518,10 +531,10 @@ If `deps` is a flat list (not an attrset), it is treated as `deps.global` with a
 
 #### Nix Mapping
 
-| ZenOS scope | Nix parameter |
-|-------------|---------------|
-| `deps.build` | `nativeBuildInputs` |
-| `deps.run` | `buildInputs` |
+| ZenOS scope   | Nix parameter           |
+| ------------- | ----------------------- |
+| `deps.build`  | `nativeBuildInputs`     |
+| `deps.run`    | `buildInputs`           |
 | `deps.export` | `propagatedBuildInputs` |
 
 ### 4.4 `_src` Block
@@ -691,17 +704,20 @@ _import hw = "./hardware.zcfg";
 ### 5.3 Rules
 
 **Path resolution:**
+
 - Strings starting with `./` or `../` are relative to the current file
 - Strings without a prefix are relative to the current file (same as `./`)
 - Nix paths (no quotes, starting with `/`) are absolute
 
 **Bare import behavior:**
+
 - The imported file is evaluated in the same `$`-variable context as the current file
 - Result is deep-recursively merged into the current scope (`lib.recursiveUpdate`)
 - Conflicts: imported file wins (last-write semantics within the merge)
 - Multiple bare imports are merged in declaration order, top to bottom
 
 **Bound import behavior:**
+
 - Result is bound as a `_let` variable accessible via `$v.name`
 - Type annotation is optional — if provided, the transpiler emits a runtime type check
 - The bound value does not merge into scope automatically
@@ -822,16 +838,16 @@ The ZenOS transpiler (`z-dialect.nix`) handles these transforms in order:
 
 ## Appendix A — License Registry (`$l.*`)
 
-| Key | SPDX | Notes |
-|-----|------|-------|
-| `$l.napalm` | `NAPALM-2.0` | ZenOS custom license |
-| `$l.mit` | `MIT` | Standard MIT |
-| `$l.gpl2` | `GPL-2.0` | GNU GPL v2 |
-| `$l.gpl3` | `GPL-3.0` | GNU GPL v3 |
-| `$l.lgpl` | `LGPL-2.1` | GNU LGPL |
-| `$l.apache` | `Apache-2.0` | Apache 2.0 |
-| `$l.mpl` | `MPL-2.0` | Mozilla Public License |
-| `$l.unfree` | *(none)* | Proprietary / unfree |
+| Key         | SPDX         | Notes                  |
+| ----------- | ------------ | ---------------------- |
+| `$l.napalm` | `NAPALM-2.0` | ZenOS custom license   |
+| `$l.mit`    | `MIT`        | Standard MIT           |
+| `$l.gpl2`   | `GPL-2.0`    | GNU GPL v2             |
+| `$l.gpl3`   | `GPL-3.0`    | GNU GPL v3             |
+| `$l.lgpl`   | `LGPL-2.1`   | GNU LGPL               |
+| `$l.apache` | `Apache-2.0` | Apache 2.0             |
+| `$l.mpl`    | `MPL-2.0`    | Mozilla Public License |
+| `$l.unfree` | _(none)_     | Proprietary / unfree   |
 
 ---
 
@@ -843,4 +859,4 @@ Current maintainers: `$m.doromiert`, `$m.catnowblue`
 
 ---
 
-*End of ZenOS DSL Specification v0.1.0*
+_End of ZenOS DSL Specification v0.1.0_
