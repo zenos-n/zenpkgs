@@ -1,5 +1,7 @@
 # ZenPkgs
 
+![CERTAIN cert](https://cert.neg-zero.com/zenpkgs)
+
 The nix packages repo for ZenOS
 
 for now this is just a placeholder readme, will be updated later

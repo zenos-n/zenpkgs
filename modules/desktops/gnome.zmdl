@@ -1,6 +1,17 @@
 _meta = {
-  brief = "Tailored GNOME desktop environment";
-  description = "Comprehensive GNOME configuration with extensions, VRR, and dark mode.";
+  brief = "GNOME desktop environment";
+  description = ''This module provides a comprehensive GNOME configuration tailored for ZenOS.
+    It handles the installation of core GNOME packages, audio/video plugins (GStreamer),
+    and manages default settings via dconf.
+
+    **Key Features:**
+    - Automatic extension management via UUID injection
+    - Integrated variable refresh rate (VRR) support for gaming
+    - Optional curated app suite and bloat removal
+    - System-wide dark mode and accent color enforcement
+
+    Integrates with `services.flatpak` and standard NixOS desktop managers.
+  '';
   license = $l.napalm;
   maintainers = [ $m.doromiert ];
 };
@@ -17,19 +28,13 @@ enable = {
   _meta = { 
     type = $type.boolean; 
     brief = "Enable the Gnome Desktop Base Module";
+
     default = false;
   };
   
-  # Logic tied to this specific boolean being true
   ! {
-    services.xserver.displayManager.gdm.enable = true;
-    services.xserver.desktopManager.gnome.enable = true;
-
-    environment.systemPackages = [
-      $pkgs.legacy.gnome-tweaks
-      $pkgs.legacy.gnome-extension-manager
-      $pkgs.legacy.adw-gtk3
-    ];
+    services.displayManager.gdm.enable = true;
+    services.desktopManager.gnome.enable = true;
 
     programs.dconf.profiles.user.databases = [{
       settings = {
@@ -43,25 +48,12 @@ enable = {
           enabled-extensions = $v.extensionUuids;
           favorite-apps = $path.dockItems;
         };
+        "org/gnome/mutter".experimental-features = [
+            "scale-monitor-framebuffer"
+            "xwayland-native-scaling"
+            "variable-refresh-rate"
+        ];
       };
-    }];
-  };
-};
-
-variableRefreshRate = {
-  _meta = { 
-    type = $type.boolean; 
-    brief = "Enable Experimental Variable Refresh Rate (VRR) support"; 
-    default = false;
-  };
-  
-  ! {
-    programs.dconf.profiles.user.databases = [{
-      settings."org/gnome/mutter".experimental-features = [
-        "scale-monitor-framebuffer"
-        "xwayland-native-scaling"
-        "variable-refresh-rate"
-      ];
     }];
   };
 };
@@ -70,6 +62,9 @@ defaultAccentColor = {
   _meta = {
     type = $type.enum [ "blue" "teal" "purple" "red" "orange" "yellow" "green" "pink" "grey" ];
     brief = "Primary accent color for the interface";
+    description = ''
+        Sets the system-wide accent color for GNOME components and supported GTK4 applications.
+    '';
     default = "purple";
   };
 };
