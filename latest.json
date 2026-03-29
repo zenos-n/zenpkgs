@@ -1,0 +1,7 @@
+{
+  "id": "29.03.2026-1",
+  "title": "About damn time",
+  "date": "29.03.2026",
+  "authors": ["doromiert"],
+  "content": "## Finally, a working framework \n After I (doromiert) took a slight detour off ZenOS to work on side projects like [Tic Tac Toe 2](https://github.com/doromiert/tic-tac-toe-2) and a crude implementation of the Zane AI assistant, I'm finally back to working on ZenOS. \n And, well, we finally have a functional (at least in theory) ZONE framework for ZenOS. What does that mean? Well, basically, users won't have to deal with nix as much thanks to zcfg, zmdl, zstr and zpkg, the custom implementation of nix the ZenOS way. \n\n What this means for you is basically: \n 1. configuration and contributing will be simpler \n 2. We can finally get around to implementing the actual OS \n\n Gotta say, I personally am pretty excited about this."
+}
