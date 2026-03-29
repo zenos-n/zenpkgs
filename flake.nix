@@ -233,7 +233,6 @@
         zenos = (zenCore.mkPackageTree prev ./pkgs) // {
           legacy = prev;
           # Expose the test application built directly from a .zpkg spec
-          test-app = zpkgBuilder final ./pkgs/test-app.zpkg;
         };
       };
 

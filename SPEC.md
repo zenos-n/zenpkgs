@@ -27,7 +27,7 @@ All three share a common syntax foundation and the same `$variable` system. They
 - Attribute paths: `key.subkey = value`
 - String interpolation: `"hello ${$path.username}"`
 - Comments: `# single line only`
-- Semicolons are **optional** — both `;` and newline-terminated assignments are valid
+- Semicolons are **required** — same rules as Nix
 - Lists use `[ ]` with space-separated items (same as Nix)
 - Multiline strings: `'' ... ''` (same as Nix)
 
@@ -55,9 +55,9 @@ Available in all three file types unless noted:
 Defines a local variable scoped to the current block:
 
 ```nix
-_let name: $type.string = "default"
-_let port: $type.int = 8080
-_let tags: $type.list = [ "web" "api" ]
+_let name: $type.string = "default";
+_let port: $type.int = 8080;
+_let tags: $type.list = [ "web" "api" ];
 ```
 
 Access via `$v.name`, `$v.port`, etc.
@@ -68,13 +68,13 @@ Carries documentation and type metadata. Structure varies slightly per file type
 
 ```nix
 _meta = {
-  brief = "Short one-liner description"
+  brief = "Short one-liner description";
   description = ''
     Longer markdown description.
-  ''
-  maintainers = [ $m.doromiert ]
-  license = $l.napalm
-}
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napalm;
+};
 ```
 
 ---
@@ -94,8 +94,8 @@ The full redesign introduces the following over the current `zen-core.nix` imple
 Setting a module to `true` enables it with all defaults. Setting to `false` explicitly disables it.
 
 ```nix
-system.programs.keepassxc = true
-system.programs.firefox = false  # explicitly disabled
+system.programs.keepassxc = true;
+system.programs.firefox = false;  # explicitly disabled
 ```
 
 When set to `true`, all children default to their `_meta.default` values defined in the corresponding `.zmdl`.
@@ -106,22 +106,22 @@ Partial config merges with defaults for unset fields:
 
 ```nix
 system.programs.keepassxc = {
-  autostart = true
-  theme = "light"
-}
+  autostart = true;
+  theme = "light";
+};
 ```
 
 #### 2.2.3 User Scoping
 
 ```nix
 users.alex = {
-  programs.keepassxc = true
+  programs.keepassxc = true;
 
   legacy = {
-    isNormalUser = true
-    shell = $pkgs.zsh
-  }
-}
+    isNormalUser = true;
+    shell = $pkgs.zsh;
+  };
+};
 ```
 
 #### 2.2.4 Package Selection
@@ -130,10 +130,10 @@ Packages are selected from the `pkgs.zenos` tree by path:
 
 ```nix
 system.packages = {
-  utils.bat = true
-  utils.ripgrep = true
-  dev.rust = true
-}
+  utils.bat = true;
+  utils.ripgrep = true;
+  dev.rust = true;
+};
 ```
 
 #### 2.2.5 Legacy Passthrough
@@ -142,10 +142,10 @@ Direct NixOS config passthrough via `legacy`:
 
 ```nix
 legacy = {
-  networking.hostName = "zephyr"
-  boot.loader.systemd-boot.enable = true
-  time.timeZone = "Europe/Warsaw"
-}
+  networking.hostName = "zephyr";
+  boot.loader.systemd-boot.enable = true;
+  time.timeZone = "Europe/Warsaw";
+};
 ```
 
 #### 2.2.6 Imports
@@ -157,54 +157,54 @@ See Part 5 — `_import` is universal across all file types.
 ```nix
 # Only applies if condition is true at eval time
 if $cfg.system.desktop.enable {
-  system.programs.pipewire = true
+  system.programs.pipewire = true;
 }
 ```
 
 #### 2.2.8 Full Example
 
 ```nix
-conf("hardware.zcfg")
+conf("hardware.zcfg");
 
 legacy = {
-  networking.hostName = "zephyr"
-  time.timeZone = "Europe/Warsaw"
-  boot.loader.systemd-boot.enable = true
-  system.stateVersion = "25.11"
-}
+  networking.hostName = "zephyr";
+  time.timeZone = "Europe/Warsaw";
+  boot.loader.systemd-boot.enable = true;
+  system.stateVersion = "25.11";
+};
 
 system = {
   packages = {
-    utils.bat = true
-    utils.ripgrep = true
-    dev.rust = true
-  }
+    utils.bat = true;
+    utils.ripgrep = true;
+    dev.rust = true;
+  };
 
   programs = {
-    pipewire = true
-    bluetooth = { enable = true }
-  }
-}
+    pipewire = true;
+    bluetooth = { enable = true; };
+  };
+};
 
 users.alex = {
   legacy = {
-    isNormalUser = true
-    shell = $pkgs.zsh
-    extraGroups = [ "wheel" "audio" "video" ]
-  }
+    isNormalUser = true;
+    shell = $pkgs.zsh;
+    extraGroups = [ "wheel" "audio" "video" ];
+  };
 
   programs = {
     keepassxc = {
-      autostart = true
-      theme = "dark"
-    }
-    firefox = true
-  }
+      autostart = true;
+      theme = "dark";
+    };
+    firefox = true;
+  };
 
   packages = {
-    utils.bat = true
-  }
-}
+    utils.bat = true;
+  };
+};
 ```
 
 ---
@@ -219,25 +219,25 @@ users.alex = {
 
 ```nix
 _meta = {
-  brief = "Module description"
-  description = ''...''
-  maintainers = [ $m.doromiert ]
-  license = $l.napalm
-}
+  brief = "Module description";
+  description = ''...'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napalm;
+};
 
 # Options are declared as named attribute sets with _meta.type
 # Actions implement the config changes
 
 optionName = {
   _meta = {
-    type = $type.boolean
-    default = false
-    brief = "Brief description of this option"
-  }
+    type = $type.boolean;
+    default = false;
+    brief = "Brief description of this option";
+  };
   ! { ... }    # _action: applies when this option's path is truthy
   s! { ... }   # _saction: system-level NixOS config
   u! { ... }   # _uaction: cascades to all users (or current user if in user scope)
-}
+};
 ```
 
 ### 3.3 Action Shorthands
@@ -289,8 +289,8 @@ Conditional actions can require additional conditions beyond the option's own va
 
 ```nix
 s! [ $path.enable $cfg.system.desktop.enable ] {
-  services.pipewire.enable = true
-}
+  services.pipewire.enable = true;
+};
 ```
 
 All conditions in `[ ]` must be truthy for the block to apply. Unconditional actions (`!!`) do not accept dependency guards — they always run.
@@ -301,12 +301,12 @@ The `enableOption` helper creates a standard boolean toggle with a generated des
 
 ```nix
 enable = enableOption {
-  _meta.brief = "Install and enable $name"
+  _meta.brief = "Install and enable $name";
 
   s! {
-    environment.systemPackages = [ $pkgs.someapp ]
-  }
-}
+    environment.systemPackages = [ $pkgs.someapp ];
+  };
+};
 ```
 
 This is equivalent to `_meta.type = $type.boolean` + a default of `false`.
@@ -314,15 +314,15 @@ This is equivalent to `_meta.type = $type.boolean` + a default of `false`.
 ### 3.5 `_let` Variables
 
 ```nix
-_let defaultPort: $type.int = 8080
+_let defaultPort: $type.int = 8080;
 
 port = {
   _meta = {
-    type = $type.int
-    default = $v.defaultPort
-    brief = "Port to listen on"
-  }
-}
+    type = $type.int;
+    default = $v.defaultPort;
+    brief = "Port to listen on";
+  };
+};
 ```
 
 ### 3.6 Freeform Scopes
@@ -331,12 +331,12 @@ port = {
 
 ```nix
 (freeform instance) = {
-  _meta.brief = "A named $name instance"
+  _meta.brief = "A named $name instance";
 
   s! {
-    services.myapp.instances.$f.instance = { ... }
-  }
-}
+    services.myapp.instances.$f.instance = { ... };
+  };
+};
 ```
 
 ### 3.7 Type System (`$type`)
@@ -412,57 +412,57 @@ $type.enum [ "dark" "light" "classic" ]   # one of these string literals
 
 ```nix
 _meta = {
-  brief = "KeePassXC Password Manager"
-  description = "Installs KeePassXC and manages its configuration."
-  maintainers = [ $m.doromiert ]
-  license = $l.napalm
-}
+  brief = "KeePassXC Password Manager";
+  description = "Installs KeePassXC and manages its configuration.";
+  maintainers = [ $m.doromiert ];
+  license = $l.napalm;
+};
 
 # Unconditional: always register the config directory structure
 s!! {
-  environment.etc."zenos/keepassxc".source = ./assets/keepassxc-defaults
-}
+  environment.etc."zenos/keepassxc".source = ./assets/keepassxc-defaults;
+};
 
 enable = enableOption {
-  _meta.brief = "Install $name"
-  _meta.description = "Installs KeePassXC and writes the default config file."
+  _meta.brief = "Install $name";
+  _meta.description = "Installs KeePassXC and writes the default config file.";
 
   u! {
     legacy.home-manager = {
-      home.packages = [ $pkgs.keepassxc ]
+      home.packages = [ $pkgs.keepassxc ];
       home.file.".config/keepassxc/keepassxc.ini".text = ''
         [General]
         ConfigVersion=2
 
         [GUI]
         ApplicationTheme=${$path.theme}
-      ''
-    }
-  }
+      '';
+    };
+  };
 
   s! {
-    environment.systemPackages = [ $pkgs.keepassxc ]
+    environment.systemPackages = [ $pkgs.keepassxc ];
     services.xserver.displayManager.sessionCommands =
-      if $path.autostart then "${$pkgs.keepassxc}/bin/keepassxc &" else ""
-  }
-}
+      if $path.autostart then "${$pkgs.keepassxc}/bin/keepassxc &" else "";
+  };
+};
 
 autostart = {
   _meta = {
-    type = $type.boolean
-    default = false
-    brief = "Launch $name automatically on login"
-    description = "Adds KeePassXC to display manager session commands."
-  }
-}
+    type = $type.boolean;
+    default = false;
+    brief = "Launch $name automatically on login";
+    description = "Adds KeePassXC to display manager session commands.";
+  };
+};
 
 theme = {
   _meta = {
-    type = $type.enum [ "dark" "light" "classic" ]
-    default = "dark"
-    brief = "UI theme for $name"
-  }
-}
+    type = $type.enum [ "dark" "light" "classic" ];
+    default = "dark";
+    brief = "UI theme for $name";
+  };
+};
 ```
 
 ---
@@ -485,19 +485,19 @@ theme = {
 
 ```nix
 _meta = {
-  brief = "Short description"
-  description = "Longer description"
-  version = "1.2.3"
-  maintainers = [ $m.doromiert ]
-  license = $l.mit
+  brief = "Short description";
+  description = "Longer description";
+  version = "1.2.3";
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
 
   deps = {
-    global  = [ $pkgs.zlib $pkgs.openssl ]  # base pool
-    build   = ++[ $pkgs.rustc $pkgs.cargo ] # global + build tools
-    run     = --[ $pkgs.openssl ]           # global minus openssl at runtime
-    export  = [ $pkgs.zlib ]               # propagated to dependents (overwrites global)
-  }
-}
+    global  = [ $pkgs.zlib $pkgs.openssl ];  # base pool
+    build   = ++[ $pkgs.rustc $pkgs.cargo ]; # global + build tools
+    run     = --[ $pkgs.openssl ];           # global minus openssl at runtime
+    export  = [ $pkgs.zlib ];               # propagated to dependents (overwrites global)
+  };
+};
 ```
 
 #### 4.3.1 Dep Cascade Rules
@@ -531,27 +531,27 @@ Accepts any fetcher from the injected `src.*` namespace, or a raw string (falls 
 ```nix
 # GitHub
 _src = src.github {
-  owner = "sharkdp"
-  repo = "bat"
-  rev = "v0.24.0"
-  hash = "sha256-..."
-}
+  owner = "sharkdp";
+  repo = "bat";
+  rev = "v0.24.0";
+  hash = "sha256-...";
+};
 
 # URL tarball
 _src = src.tarball {
-  url = "https://example.com/app-1.0.tar.gz"
-  hash = "sha256-..."
-}
+  url = "https://example.com/app-1.0.tar.gz";
+  hash = "sha256-...";
+};
 
 # Plain URL string (shorthand for fetchTarball)
-_src = "https://example.com/app-1.0.tar.gz"
+_src = "https://example.com/app-1.0.tar.gz";
 
 # Git
 _src = src.git {
-  url = "https://github.com/foo/bar"
-  rev = "abc1234"
-  hash = "sha256-..."
-}
+  url = "https://github.com/foo/bar";
+  rev = "abc1234";
+  hash = "sha256-...";
+};
 ```
 
 Available fetchers: `src.github`, `src.url`, `src.tarball`, `src.git`
@@ -562,29 +562,29 @@ Available fetchers: `src.github`, `src.url`, `src.tarball`, `src.git`
 
 ```nix
 _build = {
-  type = $type.stdenv  # optional, this is the default
+  type = $type.stdenv;  # optional, this is the default
 
   buildPhase = ''
     make -j$NIX_BUILD_CORES
-  ''
+  '';
   installPhase = ''
     make install PREFIX=$out
-  ''
-}
+  '';
+};
 ```
 
 #### Cargo / Rust
 
 ```nix
 _build = {
-  type = $type.cargo
-  cargoHash = "sha256-..."
+  type = $type.cargo;
+  cargoHash = "sha256-...";
 
   # Optional overrides
   postConfigure = ''
     export LIBGIT2_SYS_USE_PKG_CONFIG=1
-  ''
-}
+  '';
+};
 ```
 
 ### 4.6 ADL — Auto Dynamic Linking
@@ -595,22 +595,22 @@ To disable:
 
 ```nix
 _build = {
-  type = $type.cargo
-  cargoHash = "sha256-..."
-  adl = false  # opt out
-}
+  type = $type.cargo;
+  cargoHash = "sha256-...";
+  adl = false;  # opt out
+};
 ```
 
 For Rust packages, ADL operates on `sys` crates (e.g. `zlib-sys`, `libgit2-sys`) that have system library counterparts. Non-sys crates are left as-is. You can explicitly control which crates get the ADL treatment:
 
 ```nix
 _build = {
-  type = $type.cargo
-  cargoHash = "sha256-..."
+  type = $type.cargo;
+  cargoHash = "sha256-...";
   adl = {
-    shared = [ "zlib-sys" "libgit2-sys" ]  # explicit allowlist
-  }
-}
+    shared = [ "zlib-sys" "libgit2-sys" ];  # explicit allowlist
+  };
+};
 ```
 
 For stdenv packages, ADL runs `ldd` on the output and auto-generates `makeLibraryPath` from whatever is dynamically linked.
@@ -634,34 +634,34 @@ postConfigure = ''
 
 ```nix
 _meta = {
-  brief = "A cat(1) clone with wings"
-  version = "0.24.0"
-  maintainers = [ $m.doromiert ]
-  license = $l.mit
+  brief = "A cat(1) clone with wings";
+  version = "0.24.0";
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
 
   deps = {
-    global = [ $pkgs.zlib $pkgs.libgit2 ]
-    build  = ++[ $pkgs.pkg-config $pkgs.rustc $pkgs.cargo ]
-    run    = --[ $pkgs.libgit2 ] # don't need libgit2 at runtime in this build
-  }
-}
+    global = [ $pkgs.zlib $pkgs.libgit2 ];
+    build  = ++[ $pkgs.pkg-config $pkgs.rustc $pkgs.cargo ];
+    run    = --[ $pkgs.libgit2 ]; # don't need libgit2 at runtime in this build
+  };
+};
 
 _src = src.github {
-  owner = "sharkdp"
-  repo  = "bat"
-  rev   = "v0.24.0"
-  hash  = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
-}
+  owner = "sharkdp";
+  repo  = "bat";
+  rev   = "v0.24.0";
+  hash  = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
+};
 
 _build = {
-  type      = $type.cargo
-  cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="
+  type      = $type.cargo;
+  cargoHash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=";
 
   postConfigure = ''
     echo "zlib at: ${$deps.zlib}"
     export ZLIB_ROOT=${$deps.zlib}
-  ''
-}
+  '';
+};
 ```
 
 ---
@@ -676,16 +676,16 @@ _build = {
 
 ```nix
 # Bare import — deep recursive merge into current scope
-_import "hardware.zcfg"
-_import "./themes/dark.zcfg"
-_import /etc/zenos/shared.zcfg   # absolute path
+_import "hardware.zcfg";
+_import "./themes/dark.zcfg";
+_import /etc/zenos/shared.zcfg;   # absolute path
 
 # Bound import — result assigned to a variable, accessible via $v.name
-_import colors: $type.set = "./themes/colors.zcfg"
-_import port: $type.int = "./defaults/ports.zcfg"
+_import colors: $type.set = "./themes/colors.zcfg";
+_import port: $type.int = "./defaults/ports.zcfg";
 
 # Untyped bound import — type inferred
-_import hw = "./hardware.zcfg"
+_import hw = "./hardware.zcfg";
 ```
 
 ### 5.3 Rules
@@ -710,16 +710,16 @@ _import hw = "./hardware.zcfg"
 
 ```nix
 # Bare:
-_import "hardware.zcfg"
+_import "hardware.zcfg";
 → __z_import_0 = import ./hardware.zcfg __zargs;
   # (merged at mkConfig time via lib.recursiveUpdate)
 
 # Bound (typed):
-_import colors: $type.set = "./themes/colors.zcfg"
+_import colors: $type.set = "./themes/colors.zcfg";
 → _v.colors = import ./themes/colors.zcfg __zargs;
 
 # Bound (untyped):
-_import hw = "./hardware.zcfg"
+_import hw = "./hardware.zcfg";
 → _v.hw = import ./hardware.zcfg __zargs;
 ```
 
@@ -731,57 +731,57 @@ Bare imports are collected and merged in order before the rest of the file's con
 
 ```nix
 # host.zcfg
-_import "hardware.zcfg"
-_import "users.zcfg"
+_import "hardware.zcfg";
+_import "users.zcfg";
 
-legacy.networking.hostName = "zephyr"
+legacy.networking.hostName = "zephyr";
 ```
 
 ```nix
 # hardware.zcfg
 legacy = {
-  boot.loader.systemd-boot.enable = true
-  fileSystems."/".device = "/dev/nvme0n1p2"
-}
+  boot.loader.systemd-boot.enable = true;
+  fileSystems."/".device = "/dev/nvme0n1p2";
+};
 ```
 
 #### `.zmdl` — importing shared option defaults
 
 ```nix
 # keepassxc.zmdl
-_import defaults: $type.set = "../shared/app-defaults.zmdl"
+_import defaults: $type.set = "../shared/app-defaults.zmdl";
 
 theme = {
   _meta = {
-    type = $type.enum [ "dark" "light" "classic" ]
-    default = $v.defaults.theme
-    brief = "UI theme"
-  }
-}
+    type = $type.enum [ "dark" "light" "classic" ];
+    default = $v.defaults.theme;
+    brief = "UI theme";
+  };
+};
 ```
 
 #### `.zpkg` — importing shared build config
 
 ```nix
 # bat.zpkg
-_import rust: $type.set = "../shared/rust-build.zpkg"
+_import rust: $type.set = "../shared/rust-build.zpkg";
 
 _meta = {
-  brief = "A cat(1) clone with wings"
-  version = "0.24.0"
-  deps = $v.rust.deps
-}
+  brief = "A cat(1) clone with wings";
+  version = "0.24.0";
+  deps = $v.rust.deps;
+};
 
 _src = src.github {
-  owner = "sharkdp"
-  repo  = "bat"
-  rev   = "v0.24.0"
-  hash  = "sha256-..."
-}
+  owner = "sharkdp";
+  repo  = "bat";
+  rev   = "v0.24.0";
+  hash  = "sha256-...";
+};
 
 _build = $v.rust.build // {
-  cargoHash = "sha256-..."
-}
+  cargoHash = "sha256-...";
+};
 ```
 
 ---

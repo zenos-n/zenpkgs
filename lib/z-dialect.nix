@@ -42,7 +42,7 @@ let
 
       # 5. Freeform & Variable Keyword Mappings
       # Path-embedded `$f` evaluates to a system string placeholder for dynamic replacement during `mkConfig`
-      s10 = replaceRegex "\\(\\$f\\.([a-zA-Z0-9_]+)\\)" (g: "\"__Z_FREEFORM_ID__\"") s9;
+      s10 = replaceRegex "\\(\\$f\\.([a-zA-Z0-9_]+)\\)" (g: "__Z_FREEFORM_ID__") s9;
       s11 = replaceRegex "\\$f\\.([a-zA-Z0-9_]+)" (g: "\"__Z_FREEFORM_ID__\"") s10;
       s12 = replaceRegex "\\$v\\.([a-zA-Z0-9_]+)" (g: "_v.${builtins.elemAt g 0}") s11;
 

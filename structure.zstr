@@ -26,6 +26,14 @@ system = {
       maintainers = [ $m.doromiert ];
     };
   };
+  services = {
+    _meta = {
+      brief = "System-level services";
+      description = "This is a shim for NixOS's built-in services.";
+      maintainers = [ ];
+      type = (alias nixpkgs.services);
+    };
+  };
   programs = {
     _meta = {
       brief = "Global program configurations";
@@ -48,6 +56,7 @@ desktops = {
     maintainers = [ $m.doromiert ];
     type = (zmdl desktops);
   };
+
 };
 
 users = {
@@ -63,6 +72,14 @@ users = {
         This is how you configure users for ZenOS.
       '';
       type = (zmdl userModules);
+    };
+    services = {
+      _meta = {
+        brief = "User-level services";
+        description = "This is a shim for NixOS's built-in services.";
+        maintainers = [ ];
+        type = (alias nixpkgs.home-manager.users.($f.user).services);
+      };
     };
     packages = {
       _meta = {
@@ -97,7 +114,7 @@ users = {
       legacy._meta = {
         brief = "Legacy program modules";
         description = "Lets you configure programs from nixos directly.";
-        type = (alias nixpkgs.users.users.($f.user).programs);
+        type = (alias nixpkgs.home-manager.users.($f.user).programs);
         default = { };
       };
     };
