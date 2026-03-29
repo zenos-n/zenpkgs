@@ -55,9 +55,11 @@ let
         node:
         if node ? _type && node._type == "enableOption" then
           lib.mkEnableOption (node._meta.brief or "Enable module")
-else if node ? _meta && node._meta ? type then
+        else if node ? _meta && node._meta ? type then
           lib.mkOption {
-            type = (mapZType node._meta.type) // { _zmeta = node._meta; }; # <-- TUNNEL META HERE
+            type = (mapZType node._meta.type) // {
+              _zmeta = node._meta;
+            }; # <-- TUNNEL META HERE
             default = node._meta.default or null;
             description = node._meta.description or node._meta.brief or "";
           }
@@ -177,7 +179,7 @@ rec {
         extraArgs = { inherit config; };
       };
 
-in
+    in
     {
       # Removed the default legacy mapping hack!
       options = lib.setAttrByPath (namespacePath ++ [ name ]) (mkOptions ast);
@@ -201,44 +203,49 @@ in
       };
 
       processStructure =
-          node:
-          let
-            isAlias = node ? _meta && node._meta ? type && node._meta.type._type == "alias";
-            isPackages = node ? _meta && node._meta ? type && node._meta.type._type == "packages";
-            isPrograms = node ? _meta && node._meta ? type && node._meta.type._type == "programs";
-            isZmdl = node ? _meta && node._meta ? type && node._meta.type._type == "zmdl";
+        node:
+        let
+          isAlias = node ? _meta && node._meta ? type && node._meta.type._type == "alias";
+          isPackages = node ? _meta && node._meta ? type && node._meta.type._type == "packages";
+          isPrograms = node ? _meta && node._meta ? type && node._meta.type._type == "programs";
+          isZmdl = node ? _meta && node._meta ? type && node._meta.type._type == "zmdl";
 
-            children = builtins.removeAttrs node [ "_meta" ];
-            mappedChildren = lib.mapAttrs (n: v: processStructure v) children;
-          in
-          if isAlias && children == { } then
-            lib.mkOption {
-              type = (lib.types.attrsOf lib.types.anything) // { _zmeta = node._meta; };
-              description = node._meta.brief or "Alias to ${node._meta.type.target}";
-              default = { };
-            }
-          else if isPackages then
-            lib.mkOption {
-              type = (lib.types.attrsOf lib.types.anything) // { _zmeta = node._meta; };
-              default = { };
-              description = node._meta.brief or "Packages scope";
-            }
-          else if node ? __z_freeform_user then
-            lib.mkOption {
-              type = lib.types.attrsOf (
-                lib.types.submodule {
-                  options = processStructure node.__z_freeform_user;
-                }
-              );
-              default = { };
-            }
-         else if isAlias then
-            # Alias with children: expose as a freeform submodule so that:
-            # - undeclared keys (e.g. isNormalUser, shell) are accepted and preserved
-            #   for the alias mapping in coreModule (users.users.<name> / hm passthrough)
-            # - declared children (e.g. home-manager) get their own typed sub-options
-            lib.mkOption {
-              type = (lib.types.submoduleWith {
+          children = builtins.removeAttrs node [ "_meta" ];
+          mappedChildren = lib.mapAttrs (n: v: processStructure v) children;
+        in
+        if isAlias && children == { } then
+          lib.mkOption {
+            type = (lib.types.attrsOf lib.types.anything) // {
+              _zmeta = node._meta;
+            };
+            description = node._meta.brief or "Alias to ${node._meta.type.target}";
+            default = { };
+          }
+        else if isPackages then
+          lib.mkOption {
+            type = (lib.types.attrsOf lib.types.anything) // {
+              _zmeta = node._meta;
+            };
+            default = { };
+            description = node._meta.brief or "Packages scope";
+          }
+        else if node ? __z_freeform_user then
+          lib.mkOption {
+            type = lib.types.attrsOf (
+              lib.types.submodule {
+                options = processStructure node.__z_freeform_user;
+              }
+            );
+            default = { };
+          }
+        else if isAlias then
+          # Alias with children: expose as a freeform submodule so that:
+          # - undeclared keys (e.g. isNormalUser, shell) are accepted and preserved
+          #   for the alias mapping in coreModule (users.users.<name> / hm passthrough)
+          # - declared children (e.g. home-manager) get their own typed sub-options
+          lib.mkOption {
+            type =
+              (lib.types.submoduleWith {
                 modules = [
                   {
                     freeformType = lib.types.attrsOf lib.types.anything;
@@ -251,16 +258,19 @@ in
                     };
                   }
                 ];
-              }) // { _zmeta = node._meta; }; # Keep this for standard fallback
-              description = node._meta.brief or "Alias to ${node._meta.type.target}";
-              default = { };
-            }
-          else if isPrograms || isZmdl then
-            mappedChildren
-          else if builtins.isAttrs node then
-            mappedChildren
-          else
-            { };
+              })
+              // {
+                _zmeta = node._meta;
+              }; # Keep this for standard fallback
+            description = node._meta.brief or "Alias to ${node._meta.type.target}";
+            default = { };
+          }
+        else if isPrograms || isZmdl then
+          mappedChildren
+        else if builtins.isAttrs node then
+          mappedChildren
+        else
+          { };
 
     in
     {
