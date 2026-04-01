@@ -7,7 +7,7 @@
 }:
 let
   # --- DEBUG ---
-  DEBUG = true;
+  DEBUG = false;
 
   # 1. Prepare Pkgs with Overlays
   pkgs = import inputs.nixpkgs {
@@ -37,7 +37,7 @@ let
         nixpkgs.pkgs = pkgs;
         fileSystems."/".device = "/dev/null";
         boot.loader.systemd-boot.enable = true;
-        system.stateVersion = "2.5.11";
+        system.stateVersion = "25.05";
         _module.check = false;
         _module.args.lib = lib;
         _module.args.isDocs = true;
@@ -55,7 +55,7 @@ let
       {
         fileSystems."/".device = "/dev/null";
         boot.loader.systemd-boot.enable = true;
-        system.stateVersion = "2.5.11";
+        system.stateVersion = "25.05";
 
         # 2. Provide a dummy user to ensure the submodule types are processed
         # This helps the evaluator realize home-manager.users.<name> is a valid path
@@ -193,9 +193,25 @@ let
   # --- METADATA HARVESTER ---
   moduleMetadata =
     let
-      allFiles = lib.flatten (lib.attrValues moduleTree);
-      processFile =
-        path:
+      # Walk the moduleTree preserving namespace context
+      collectFiles =
+        prefix: tree:
+        if builtins.isList tree then
+          map (p: {
+            path = p;
+            ns = prefix;
+          }) tree
+        else if builtins.isAttrs tree then
+          lib.flatten (
+            lib.mapAttrsToList (k: v: collectFiles (if prefix == "" then k else "${prefix}.${k}") v) tree
+          )
+        else
+          [ ];
+
+      allEntries = collectFiles "" moduleTree;
+
+      processEntry =
+        { path, ns }:
         let
           mod = importZenMetadata path;
           meta = {
@@ -206,16 +222,15 @@ let
             dependencies = mod.meta.dependencies or mod.dependencies or [ ];
             _file = toString path;
           };
-          name = lib.removeSuffix ".zmdl" (lib.removeSuffix ".nix" (baseNameOf path));
+          base = lib.removeSuffix ".zmdl" (lib.removeSuffix ".nix" (baseNameOf path));
+          name = if ns == "" then base else "${ns}.${base}";
         in
-        [
-          {
-            inherit name;
-            value = meta;
-          }
-        ];
+        {
+          inherit name;
+          value = meta;
+        };
     in
-    lib.listToAttrs (lib.flatten (map processFile allFiles));
+    lib.listToAttrs (map processEntry allEntries);
 
   # --- PACKAGE WALKER ---
   showPackages =
@@ -613,16 +628,19 @@ let
                       else
                         null;
                     directSub = t.getSubOptions or null;
+
+                    elemContent = if elemSub != null then elemSub [ ] else { };
+                    directContent = if directSub != null then directSub [ ] else { };
                   in
-                  if elemSub != null then
+                  if elemSub != null && elemContent != { } then
                     {
                       "<name>" = {
                         _type = "_container";
-                        content = elemSub [ ];
+                        content = elemContent;
                       };
                     }
-                  else if directSub != null then
-                    directSub [ ]
+                  else if directSub != null && directContent != { } then
+                    directContent
                   else
                     { }
                 else if isContainer v then
@@ -697,11 +715,7 @@ let
             type = typeFinal;
           };
 
-          metaObj =
-            if builtins.isFunction (builtins.tryEval warnMissing).value then
-              warnMissing path baseMeta
-            else
-              baseMeta;
+          metaObj = warnMissing path baseMeta;
 
           validChildren =
             if rawChildren != null && builtins.isAttrs rawChildren then
@@ -720,7 +734,10 @@ let
                 "declarativeConfig"
                 "package"
                 "_freeformOptions"
-                "_zmeta_passthrough" # <-- Added here
+                "_zmeta_passthrough"
+                "_action_unconditional"
+                "_saction_unconditional"
+                "_uaction_unconditional"
               ]
             else
               { };

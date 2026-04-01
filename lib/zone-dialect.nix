@@ -30,8 +30,19 @@ let
           (g: "__z_freeform_${builtins.elemAt g 0} =")
           s4_2;
 
-      # 3. Action Shorthands: `s! {`, `u! {`, `! {`
-      s6 = replaceRegex "(^|[[:space:]]+)s![[:space:]]*\\{" (g: "${builtins.elemAt g 0}_saction = {") s5;
+      s_action_cond = replaceRegex ''(^|[[:space:]]+)![[:space:]]*[[](.*)[]][[:space:]]*\{'' (
+        g:
+        "${builtins.elemAt g 0}\"__z_action_cond_${builtins.elemAt g 1}\" = __zargs.lib.mkIf (${builtins.elemAt g 1}) {"
+      ) s5;
+
+      s_action_uncond_cond = replaceRegex ''(^|[[:space:]]+)!![[:space:]]*[[](.*)[]][[:space:]]*\{'' (
+        g:
+        "${builtins.elemAt g 0}\"__z_action_uncond_cond_${builtins.elemAt g 1}\" = __zargs.lib.mkIf (${builtins.elemAt g 1}) {"
+      ) s_action_cond;
+
+      s6 = replaceRegex ''(^|[[:space:]]+)s![[:space:]]*\{'' (
+        g: "${builtins.elemAt g 0}_saction = {"
+      ) s_action_uncond_cond;
       s7 = replaceRegex "(^|[[:space:]]+)u![[:space:]]*\\{" (g: "${builtins.elemAt g 0}_uaction = {") s6;
       s8 = replaceRegex "(^|[[:space:]]+)![[:space:]]*\\{" (g: "${builtins.elemAt g 0}_action = {") s7;
       s8_1 = replaceRegex "(^|[[:space:]]+)s!![[:space:]]*\\{" (
@@ -138,7 +149,7 @@ let
 
           bool = {
             _type = "ztype";
-            name = "bool";
+            name = "boolean";
           };
           boolean = {
             _type = "ztype";
@@ -167,6 +178,15 @@ let
           list = {
             _type = "ztype";
             name = "list";
+            __functor = self: args: {
+              _type = "ztype";
+              name = "list";
+              elemType =
+                if builtins.isList args then
+                  (if builtins.length args > 0 then builtins.head args else null)
+                else
+                  args;
+            };
           };
           path = {
             _type = "ztype";
@@ -188,6 +208,11 @@ let
             _type = "ztype";
             name = "function";
             inherit args;
+          };
+          functionTo = innerType: {
+            _type = "ztype";
+            name = "functionTo";
+            inherit innerType;
           };
           enum = vals: {
             _type = "ztype";

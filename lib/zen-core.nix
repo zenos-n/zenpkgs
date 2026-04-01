@@ -50,32 +50,26 @@ let
     in
     lib.flatten (map processEntry entries);
 
-  # Updated Package Tree Generator
+  # inside zen-core.nix
   mkPackageTree =
-    pkgs: root:
+    zpkgBuilder: pkgs: root:
     let
-      # Look for all .nix files [cite: 52]
-      isPkg = n: t: t == "regular" && lib.hasSuffix ".nix" n;
+      # look for both .nix and .zpkg
+      isPkg = n: t: t == "regular" && (lib.hasSuffix ".nix" n || lib.hasSuffix ".zpkg" n);
       files = walkDir root isPkg;
 
       toPackageAttr =
         entry:
         let
-          # Filename without .nix becomes the attribute key
-          pname = lib.removeSuffix ".nix" entry.name;
-
-          # Create the nested path: e.g., pkgs/utils/test.nix -> [ "utils" "test" ]
+          isZpkg = lib.hasSuffix ".zpkg" entry.name;
+          pname = if isZpkg then lib.removeSuffix ".zpkg" entry.name else lib.removeSuffix ".nix" entry.name;
           attrPath = entry.relPath ++ [ pname ];
-
-          # IMPORTANT: Use pkgs.callPackage so it can inject stdenv/lib
-          pkg = pkgs.callPackage entry.absPath { };
+          # fix: use zpkgBuilder for .zpkg, callPackage for .nix
+          pkg = if isZpkg then zpkgBuilder pkgs entry.absPath else pkgs.callPackage entry.absPath { };
         in
         lib.setAttrByPath attrPath pkg;
-
-      attrList = map toPackageAttr files;
     in
-    # Merge all individual attribute paths into one nested tree
-    lib.foldl' lib.recursiveUpdate { } attrList;
+    lib.foldl' lib.recursiveUpdate { } (map toPackageAttr files);
 
   importZcfg =
     path: args:

@@ -5,7 +5,7 @@
 }:
 let
 
-  zDialect = import ./z-dialect.nix { inherit lib; };
+  zDialect = import ./zone-dialect.nix { inherit lib; };
   maintainers = import ./maintainers.nix;
   licenses = import ./licenses.nix;
 
@@ -26,7 +26,9 @@ let
     else if ztype.name == "set" then
       lib.types.attrs
     else if ztype.name == "list" then
-      lib.types.listOf lib.types.anything
+      lib.types.listOf (
+        if (ztype.elemType or null) != null then mapZType ztype.elemType else lib.types.anything
+      )
     else if ztype.name == "path" then
       lib.types.path
     else if ztype.name == "package" then
@@ -34,11 +36,7 @@ let
     else if ztype.name == "packages" then
       lib.types.attrsOf lib.types.anything
     else if ztype.name == "color" then
-      lib.types.str
-      // {
-        # Transforms standard Hex/RGB strings by stripping the hashtag at compile time
-        apply = v: if builtins.isString v then builtins.replaceStrings [ "#" ] [ "" ] v else v;
-      }
+      lib.types.coercedTo lib.types.str (v: builtins.replaceStrings [ "#" ] [ "" ] v) lib.types.str
     else if ztype.name == "enum" then
       lib.types.enum ztype.values
     else if ztype.name == "either" then
@@ -57,43 +55,78 @@ let
         node:
         if node ? _type && node._type == "enableOption" then
           lib.mkEnableOption (node._meta.brief or "Enable module")
-        else if node ? _meta && node._meta ? type then
-          lib.mkOption {
-            type = (mapZType node._meta.type) // {
-              _zmeta = node._meta;
-            }; # <-- TUNNEL META HERE
-            default = node._meta.default or null;
-            description = node._meta.description or node._meta.brief or "";
-          }
         else if builtins.isAttrs node then
           let
-            # Detect if any key is a freeform identifier (e.g., __z_freeform_service)
             freeformKey = lib.findFirst (n: lib.hasPrefix "__z_freeform_" n) null (builtins.attrNames node);
+            hasFreeform = freeformKey != null;
+            hasMeta = node ? _meta;
+            hasType = hasMeta && node._meta ? type;
+
+            children = builtins.removeAttrs node [
+              "_meta"
+              "_action"
+              "_saction"
+              "_uaction"
+              "_action_unconditional"
+              "_saction_unconditional"
+              "_uaction_unconditional"
+              "_type"
+              "_v"
+            ];
+
+            cleanChildren = builtins.removeAttrs children (if hasFreeform then [ freeformKey ] else [ ]);
+            hasChildren = cleanChildren != { };
+
+            # extract the internal schema
+            innerOptions =
+              if hasFreeform then walk node.${freeformKey} else lib.mapAttrs (n: v: walk v) cleanChildren;
+
+            actualType =
+              if hasType then
+                let
+                  zt = node._meta.type;
+                in
+                if zt.name == "list" && hasFreeform then
+                  lib.types.listOf (lib.types.submodule { options = innerOptions; })
+                else if zt.name == "list" && zt ? elemType && zt.elemType != null then
+                  lib.types.listOf (mapZType zt.elemType)
+                else if zt.name == "packages" && hasFreeform then
+                  lib.types.attrsOf (lib.types.submodule { options = innerOptions; })
+                else
+                  mapZType zt
+              else if hasFreeform then
+                lib.types.attrsOf (lib.types.submodule { options = innerOptions; })
+              else if hasChildren then
+                lib.types.submodule { options = innerOptions; }
+              else
+                lib.types.unspecified;
+
           in
-          if freeformKey != null then
-            let
-              actualName = lib.removePrefix "__z_freeform_" freeformKey;
-            in
-            lib.mkOption {
-              # Creates an attrsOf where each key resolves the $f variable
-              type = lib.types.attrsOf (
-                lib.types.submodule {
-                  options = walk node.${freeformKey};
-                }
-              );
-              description = "Freeform configuration for ${actualName}";
-            }
+          if hasMeta || hasFreeform || hasChildren then
+            # wrap in mkOption if it has meta, meaning parent container descriptions survive
+            if hasMeta || hasFreeform then
+              lib.mkOption {
+                type = actualType // (if hasMeta then { _zmeta = node._meta; } else { });
+                default =
+                  if hasMeta && node._meta ? default then
+                    node._meta.default
+                  else if !hasType && !hasFreeform && hasChildren then
+                    { }
+                  else
+                    lib.modules.mkOptionDefault null;
+                description =
+                  if hasMeta then
+                    (node._meta.description or node._meta.brief or "")
+                  else if hasFreeform then
+                    "Collection of ${lib.removePrefix "__z_freeform_" freeformKey}"
+                  else
+                    "";
+              }
+            else
+              # naked directory with no meta, return raw
+              innerOptions
           else
-            lib.mapAttrs (n: v: walk v) (
-              builtins.removeAttrs node [
-                "_meta"
-                "_action"
-                "_saction"
-                "_uaction"
-                "_type"
-                "_v"
-              ]
-            )
+            { }
         else
           { };
     in
@@ -127,16 +160,27 @@ let
       walk =
         cfgNode: astNode:
         let
+          # Detect freeform scope
+          freeformKey = lib.findFirst (k: lib.hasPrefix "__z_freeform_" k) null (builtins.attrNames astNode);
+          isFreeform = freeformKey != null;
+
+          # For freeform nodes, expand an action across all live config instances
+          expandFreeform =
+            rawAction:
+            if isFreeform && builtins.isAttrs cfgNode && cfgNode != { } then
+              lib.mkMerge (lib.mapAttrsToList (inst: _: replaceFreeform inst rawAction) cfgNode)
+            else
+              rawAction;
+
           isEnabled = if astNode ? _type && astNode._type == "enableOption" then cfgNode else true;
 
           # SCOPE AWARENESS: Filter actions based on where this module is currently mounted
-          action = if isUserScope then { } else astNode._action or { };
-          saction = if isUserScope then { } else astNode._saction or { };
+          action = if isUserScope then { } else expandFreeform (astNode._action or { });
+          saction = if isUserScope then { } else expandFreeform (astNode._saction or { });
 
           uaction =
             if isUserScope then
-              # If in user scope, _uaction applies directly to this specific user
-              astNode._uaction or { }
+              expandFreeform (astNode._uaction or { })
             else if astNode ? _uaction then
               {
                 # If enabled globally, _uaction cascades down to all registered users
@@ -148,11 +192,20 @@ let
             else
               { };
 
-          # Merge unconditional actions (these ignore the 'isEnabled' check)
+          # Extract conditional actions
+          condActionKeys = lib.filterAttrs (k: v: lib.hasPrefix "__z_action_cond_" k) astNode;
+          condUncondKeys = lib.filterAttrs (k: v: lib.hasPrefix "__z_action_uncond_cond_" k) astNode;
+
+          condActions =
+            if isUserScope then { } else expandFreeform (lib.mkMerge (builtins.attrValues condActionKeys));
+          condUncondActions = expandFreeform (lib.mkMerge (builtins.attrValues condUncondKeys));
+
+          # Merge unconditional actions
           unconditionalAction = lib.mkMerge [
-            (astNode._action_unconditional or { })
-            (if isUserScope then { } else astNode._saction_unconditional or { })
-            (if isUserScope then astNode._uaction_unconditional or { } else { })
+            (expandFreeform (astNode._action_unconditional or { }))
+            (if isUserScope then { } else expandFreeform (astNode._saction_unconditional or { }))
+            (if isUserScope then expandFreeform (astNode._uaction_unconditional or { }) else { })
+            condUncondActions
           ];
 
           # Existing logic for standard actions
@@ -160,23 +213,41 @@ let
             action
             saction
             uaction
+            condActions
           ];
 
-          # Update currentConfig to merge both
           currentConfig = lib.mkMerge [
             unconditionalAction
             (lib.mkIf (isEnabled && mergedAction != { }) mergedAction)
           ];
 
-          children = builtins.removeAttrs astNode [
-            "_meta"
-            "_action"
-            "_saction"
-            "_uaction"
-            "_type"
-            "_v"
-          ];
-          childConfigs = lib.mapAttrsToList (n: v: walk (cfgNode.${n} or { }) v) children;
+          children = builtins.removeAttrs astNode (
+            [
+              "_meta"
+              "_action"
+              "_saction"
+              "_uaction"
+              "_action_unconditional"
+              "_saction_unconditional"
+              "_uaction_unconditional"
+              "_type"
+              "_v"
+            ]
+            ++ builtins.attrNames condActionKeys
+            ++ builtins.attrNames condUncondKeys
+          );
+
+          # For freeform nodes iterate over actual config instances rather than the __z_freeform_* key
+          childConfigs =
+            if isFreeform then
+              let
+                subAst = astNode.${freeformKey};
+              in
+              lib.mapAttrsToList (inst: instCfg: walk instCfg (replaceFreeform inst subAst)) (
+                if builtins.isAttrs cfgNode then cfgNode else { }
+              )
+            else
+              lib.mapAttrsToList (n: v: walk (cfgNode.${n} or { }) v) children;
         in
         lib.mkMerge ([ currentConfig ] ++ childConfigs);
     in
@@ -355,7 +426,8 @@ rec {
         path: node:
         if lib.isOption node then
           let
-            hasMeta = node ? meta && node.meta != { };
+            zmeta = node.type._zmeta or null;
+            hasMeta = zmeta != null && zmeta != { };
             isLegacy = builtins.elem "legacy" path;
 
             # Trace missing metadata at evaluation time
@@ -367,7 +439,7 @@ rec {
 
           in
           traceWarning {
-            _meta = if hasMeta then node.meta else { brief = node.description or null; };
+            _meta = if hasMeta then zmeta else { brief = node.description or null; };
           }
         else if builtins.isAttrs node then
           lib.mapAttrs (k: v: processNode (path ++ [ k ]) v) (

@@ -1,90 +1,318 @@
 _meta = {
   brief = "GNOME desktop environment";
-  description = ''This module provides a comprehensive GNOME configuration tailored for ZenOS.
-    It handles the installation of core GNOME packages, audio/video plugins (GStreamer),
-    and manages default settings via dconf.
+  description = ''
+    This module provides a comprehensive GNOME configuration tailored for ZenOS.
+        It handles the installation of core GNOME packages, audio/video plugins (GStreamer),
+        and manages default settings via dconf.
 
-    **Key Features:**
-    - Automatic extension management via UUID injection
-    - Integrated variable refresh rate (VRR) support for gaming
-    - Optional curated app suite and bloat removal
-    - System-wide dark mode and accent color enforcement
+        **Key Features:**
+        - Automatic extension management via UUID injection
+        - Integrated variable refresh rate (VRR) support for gaming
+        - Optional curated app suite and bloat removal
+        - System-wide dark mode and accent color enforcement
 
-    Integrates with `services.flatpak` and standard NixOS desktop managers.
+        Integrates with `services.flatpak` and standard NixOS desktop managers.
   '';
   license = $l.napalm;
   maintainers = [ $m.doromiert ];
 };
 
-# Internal constants
-_let extensionUuids: $type.list = [
-  "appindicatorsupport@rgcjonas.gmail.com"
-  "dash-to-dock@micxgx.gmail.com"
-  "just-perfection-desktop@just-perfection"
-  "blur-my-shell@aunetx"
-];
-
 enable = {
-  _meta = { 
-    type = $type.boolean; 
+  _meta = {
+    type = $type.boolean;
     brief = "Enable the Gnome Desktop Base Module";
 
     default = false;
   };
-  
+
   ! {
+    environment.systemPackages = with pkgs; [
+      # Core Utils
+      wl-clipboard
+      dconf-editor
+      gnome-tweaks
+      gnome-extension-manager
+      resources
+      pika-backup
+
+      # Multimedia (GStreamer)
+      gst_all_1.gstreamer
+      gst_all_1.gst-plugins-base
+      gst_all_1.gst-plugins-good
+      gst_all_1.gst-plugins-bad
+      gst_all_1.gst-plugins-ugly
+      gst_all_1.gst-libav
+      gst_all_1.gst-vaapi
+    ];
+
     services.displayManager.gdm.enable = true;
     services.desktopManager.gnome.enable = true;
 
-    programs.dconf.profiles.user.databases = [{
-      settings = {
-        "org/gnome/desktop/interface" = {
-          accent-color = $path.defaultAccentColor;
-          color-scheme = if $path.defaultDarkMode then "prefer-dark" else "prefer-light";
-          show-battery-percentage = true;
-        };
-        "org/gnome/shell" = {
-          disable-user-extensions = false;
-          enabled-extensions = $v.extensionUuids;
-          favorite-apps = $path.dockItems;
-        };
-        "org/gnome/mutter".experimental-features = [
+    programs.dconf.profiles.user.databases = [
+      {
+        settings = {
+          "org/gnome/desktop/interface" = {
+            accent-color = $path.defaultAccentColor;
+            color-scheme = if $path.defaultDarkMode then "prefer-dark" else "prefer-light";
+            show-battery-percentage = true;
+          };
+          "org/gnome/shell" = {
+            disable-user-extensions = false;
+          };
+          "org/gnome/mutter".experimental-features = [
             "scale-monitor-framebuffer"
             "xwayland-native-scaling"
             "variable-refresh-rate"
-        ];
-      };
-    }];
+          ];
+        };
+      }
+    ];
   };
 };
 
 defaultAccentColor = {
   _meta = {
-    type = $type.enum [ "blue" "teal" "purple" "red" "orange" "yellow" "green" "pink" "grey" ];
+    type = $type.enum [
+      "blue"
+      "teal"
+      "purple"
+      "red"
+      "orange"
+      "yellow"
+      "green"
+      "pink"
+      "grey"
+    ];
     brief = "Primary accent color for the interface";
     description = ''
-        Sets the system-wide accent color for GNOME components and supported GTK4 applications.
+      Sets the system-wide accent color for GNOME components and supported GTK4 applications.
     '';
     default = "purple";
+  };
+  ! {
+
+    programs.dconf.profiles.user.databases = [
+      {
+        settings = {
+          "org/gnome/desktop/interface" = {
+            accent-color = $path.defaultAccentColor;
+            color-scheme = if $path.defaultDarkMode then "prefer-dark" else "prefer-light";
+            show-battery-percentage = true;
+          };
+          "org/gnome/shell" = {
+            disable-user-extensions = false;
+          };
+          "org/gnome/mutter".experimental-features = [
+            "scale-monitor-framebuffer"
+            "xwayland-native-scaling"
+            "variable-refresh-rate"
+          ];
+        };
+      }
+    ];
   };
 };
 
 defaultDarkMode = {
-  _meta = { 
-    type = $type.boolean; 
-    brief = "Default to dark mode"; 
+  _meta = {
+    type = $type.boolean;
+    brief = "Default to dark mode";
     default = true;
+  };
+  ! {
+
+    programs.dconf.profiles.user.databases = [
+      {
+        settings = {
+          "org/gnome/desktop/interface" = {
+            accent-color = $path.defaultAccentColor;
+            color-scheme = if $path.defaultDarkMode then "prefer-dark" else "prefer-light";
+            show-battery-percentage = true;
+          };
+          "org/gnome/shell" = {
+            disable-user-extensions = false;
+          };
+          "org/gnome/mutter".experimental-features = [
+            "scale-monitor-framebuffer"
+            "xwayland-native-scaling"
+            "variable-refresh-rate"
+          ];
+        };
+      }
+    ];
   };
 };
 
 dockItems = {
-  _meta = { 
-    type = $type.list ; 
-    brief = "Default applications in the Dash";
+  _meta = {
+    type = $type.list;
+    brief = "Applications in the Dash";
+    description = ''
+      List of .desktop file identifiers to be pinned to the GNOME dash.
+    '';
     default = [
       "org.gnome.Settings.desktop"
       "org.gnome.Nautilus.desktop"
       "firefox.desktop"
+    ];
+  };
+
+  ! {
+    programs.dconf.profiles.user.databases = [
+      {
+        settings = {
+          "org/gnome/desktop/interface" = {
+            accent-color = $path.defaultAccentColor;
+            color-scheme = if $path.defaultDarkMode then "prefer-dark" else "prefer-light";
+            show-battery-percentage = true;
+          };
+          "org/gnome/shell" = {
+            disable-user-extensions = false;
+          };
+          "org/gnome/mutter".experimental-features = [
+            "scale-monitor-framebuffer"
+            "xwayland-native-scaling"
+            "variable-refresh-rate"
+          ];
+        };
+      }
+    ];
+  };
+};
+
+localsearch = {
+  _meta = {
+    brief = "GNOME LocalSearch file indexing";
+    description = ''
+      Controls the background indexing services for file search and metadata extraction.
+    '';
+  };
+  enable = {
+    _meta = {
+      type = $type.boolean;
+      brief = "Enable LocalSearch file indexing";
+      description = ''
+        Whether to enable LocalSearch file indexing.
+        Usually, better to keep it enabled, but it might hurt performance on lower-end devices.
+      '';
+      default = true;
+    };
+    !! {
+      services.gnome.tinysparql.enable = $path.localsearch.enable;
+      services.gnome.localsearch.enable = $path.localsearch.enable;
+    };
+  };
+  recursiveDirs = {
+    _meta = {
+      type = ($type.list $type.str);
+      brief = "Directories to index recursively";
+      default = [
+        "&DESKTOP"
+        "&DOCUMENTS"
+        "&MUSIC"
+        "&PICTURES"
+        "&VIDEOS"
+      ];
+    };
+    !! {
+      dconf.settings."/org/freedesktop/tracker/miner/files".index-recursive-directories =
+        $path.localsearch.recursiveDirs;
+    };
+  };
+  singleDirs = {
+    _meta = {
+      type = ($type.list $type.str);
+      brief = "Directories to index non-recursively";
+      default = [
+        "$HOME"
+        "&DOWNLOAD"
+      ];
+    };
+    !! {
+      dconf.settings."/org/freedesktop/tracker/miner/files".index-single-directories =
+        $path.localsearch.singleDirs;
+    };
+  };
+  ignoredDirs = {
+    _meta = {
+      type = ($type.list $type.str);
+      brief = "Directories to exclude from indexing";
+      default = [
+        # build/vcs artifacts
+        "po"
+        "CVS"
+        "core-dumps"
+        "lost+found"
+        ".git"
+        ".hg"
+        ".svn"
+        # dev environments
+        ".venv"
+        ".direnv"
+        "node_modules"
+        "dist"
+        "build"
+        "target" # rust/cargo
+        "__pycache__"
+        ".mypy_cache"
+        ".pytest_cache"
+        # editors
+        ".vscode"
+        ".idea"
+      ];
+    };
+    !! {
+      dconf.settings."/org/freedesktop/tracker/miner/files".ignored-directories =
+        $path.localsearch.ignoredDirs;
+    };
+  };
+};
+extraPackages = {
+  _meta = {
+    type = $type.boolean;
+    brief = "Extra curated GNOME apps";
+    description = ''
+      Enabling this option installs a few select apps first-party and third-party that were handpicked by the ZenOS team by the basis of utility and whether they fit the GNOME desktop environment.
+      These include:
+      - 
+    '';
+    default = true;
+  };
+
+  ! {
+
+    environment.systemPackages = with pkgs; [
+      icon-library
+      letterpress
+      biblioteca
+      dialect
+      raider
+      wike
+      curtail
+      czkawka
+      hieroglyphic
+      switcheroo
+      rnote
+      helvum
+    ];
+  };
+};
+
+excludeGnomeConsole = {
+  _meta = {
+    type = $type.bool;
+    brief = "Include the default GNOME console";
+    description = ''
+      Whether to include, the modern GNOME Console (kgx).
+
+      Usually better to keep this option enabled unless you have an alternative of your own (like Kitty, Alacritty or BlackBox).
+    '';
+    default = false;
+  };
+
+  ! {
+    environment.gnome.excludePackages = with pkgs; [
+      $pkgs.legacy.gnome-console
     ];
   };
 };
