@@ -8,6 +8,7 @@ let
   zDialect = import ./zone-dialect.nix { inherit lib; };
   maintainers = import ./maintainers.nix;
   licenses = import ./licenses.nix;
+  attachMeta = type: meta: type // { _zmeta = meta; };
 
   mapZType =
     ztype:
@@ -296,6 +297,7 @@ rec {
       config,
       lib,
       pkgs,
+      isDocs ? false,
       ...
     }:
     let
@@ -319,17 +321,14 @@ rec {
         in
         if isAlias && children == { } then
           lib.mkOption {
-            type = (lib.types.attrsOf lib.types.anything) // {
-              _zmeta = node._meta;
-            };
+            # Attach meta to the type object directly
+            type = attachMeta (lib.types.attrsOf lib.types.anything) node._meta;
             description = node._meta.brief or "Alias to ${node._meta.type.target}";
             default = { };
           }
         else if isPackages then
           lib.mkOption {
-            type = (lib.types.attrsOf lib.types.anything) // {
-              _zmeta = node._meta;
-            };
+            type = attachMeta (lib.types.attrsOf lib.types.anything) node._meta;
             default = { };
             description = node._meta.brief or "Packages scope";
           }
@@ -343,34 +342,31 @@ rec {
             default = { };
           }
         else if isAlias then
-          # Alias with children: expose as a freeform submodule so that:
-          # - undeclared keys (e.g. isNormalUser, shell) are accepted and preserved
-          #   for the alias mapping in coreModule (users.users.<name> / hm passthrough)
-          # - declared children (e.g. home-manager) get their own typed sub-options
           lib.mkOption {
-            type =
-              (lib.types.submoduleWith {
-                modules = [
-                  {
-                    freeformType = lib.types.attrsOf lib.types.anything;
-                    options = mappedChildren // {
-                      # NEW: Inject metadata safely inside the submodule
-                      _zmeta_passthrough = lib.mkOption {
-                        internal = true;
-                        default = node._meta;
-                      };
-                    };
-                  }
-                ];
-              })
-              // {
-                _zmeta = node._meta;
-              }; # Keep this for standard fallback
+            # Submodule with metadata attached to the type
+            type = attachMeta (lib.types.submoduleWith {
+              modules = [
+                {
+                  freeformType = lib.types.attrsOf lib.types.anything;
+                  options = mappedChildren;
+                }
+              ];
+            }) node._meta;
             description = node._meta.brief or "Alias to ${node._meta.type.target}";
             default = { };
           }
         else if isPrograms || isZmdl then
+          # For categories, we add a hidden internal option that carries the meta on its TYPE
           mappedChildren
+          // (lib.optionalAttrs isDocs {
+            _zmeta_carrier = lib.mkOption {
+              internal = true; # This stops the doc generator from tracing it as a "naked" option
+              visible = false;
+              type = lib.types.anything // {
+                _zmeta = node._meta;
+              };
+            };
+          })
         else if builtins.isAttrs node then
           mappedChildren
         else
@@ -414,7 +410,6 @@ rec {
       in
       lib.flatten (lib.mapAttrsToList processEntry entries);
 
-  # Auto-Documentation Generator Export
   generateDocs =
     {
       optionsTree,
@@ -424,37 +419,58 @@ rec {
     let
       processNode =
         path: node:
-        if lib.isOption node then
+        # 1. Check if this is an evaluated option (NixOS options tree)
+        if (node ? _type && node._type == "option") || (node ? definitions && node ? type) then
           let
+            # Metadata is stored on the type object
             zmeta = node.type._zmeta or null;
             hasMeta = zmeta != null && zmeta != { };
             isLegacy = builtins.elem "legacy" path;
+            isInternal = node.internal or false;
 
-            # Trace missing metadata at evaluation time
             traceWarning =
-              if (!hasMeta && !isLegacy) then
+              if (!hasMeta && !isLegacy && !isInternal) then
                 builtins.trace "ZONE DOC WARNING: Missing metadata for option ${lib.concatStringsSep "." path}"
               else
                 (x: x);
-
           in
           traceWarning {
-            _meta = if hasMeta then zmeta else { brief = node.description or null; };
+            _meta =
+              if hasMeta then
+                zmeta
+              else
+                { brief = node.description or (if node ? default then builtins.toJSON node.default else null); };
           }
+        # 2. Check if this is a category (attribute set)
         else if builtins.isAttrs node then
-          lib.mapAttrs (k: v: processNode (path ++ [ k ]) v) (
-            lib.filterAttrs (k: v: k != "_module" && k != "_type") node
+          let
+            # Look for our carrier option to get category metadata
+            zmeta = node._zmeta_carrier.type._zmeta or null;
+            hasMeta = zmeta != null;
+            isLegacy = builtins.elem "legacy" path;
+
+            children = lib.filterAttrs (k: v: k != "_module" && k != "_type" && k != "_zmeta_carrier") node;
+
+            traceWarning =
+              if (!hasMeta && !isLegacy) then
+                builtins.trace "ZONE DOC WARNING: Missing metadata for category ${lib.concatStringsSep "." path}"
+              else
+                (x: x);
+          in
+          traceWarning (
+            (if hasMeta then { _meta = zmeta; } else { })
+            // lib.mapAttrs (k: v: processNode (path ++ [ k ]) v) children
           )
         else
           { };
 
       optDocs = processNode [ "zenos" ] (optionsTree.zenos or { });
       pkgDocs = processNode [ "pkgs" ] (pkgsTree.zenos or { });
-
     in
     builtins.toJSON {
       maintainers = maintainersData;
       options = optDocs;
       pkgs = pkgDocs;
     };
+
 }

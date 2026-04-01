@@ -419,19 +419,64 @@ let
         if builtins.isAttrs node && node ? _meta then node._meta else null;
 
       zmeta =
-        if lib.isOption v && v.type ? _zmeta then
-          v.type._zmeta
-        else if lib.isOption v && v.type ? getSubOptions then
-          # NEW: Recover stripped metadata from the submodule's internal passthrough
+        let
+          isValid = m: builtins.isAttrs m && (m ? brief || m ? description);
+          zstrMeta = getZstrMeta path moduleTree;
+        in
+        if lib.isOption v then
           let
-            sub = v.type.getSubOptions [ ];
+            optMeta = if v.type ? _zmeta then v.type._zmeta else { };
+            sub =
+              if v.type ? getSubOptions then
+                v.type.getSubOptions [ ]
+              else if v.type ? nestedTypes.elemType && v.type.nestedTypes.elemType ? getSubOptions then
+                v.type.nestedTypes.elemType.getSubOptions [ ]
+              else
+                { };
+            cMeta =
+              if builtins.isAttrs sub && sub ? _zmeta_carrier && sub._zmeta_carrier.type ? _zmeta then
+                sub._zmeta_carrier.type._zmeta
+              else
+                { };
+            pMeta =
+              if builtins.isAttrs sub && sub ? _zmeta_passthrough && sub._zmeta_passthrough.type ? _zmeta then
+                sub._zmeta_passthrough.type._zmeta
+              else
+                { };
           in
-          if builtins.isAttrs sub && sub ? _zmeta_passthrough then
-            sub._zmeta_passthrough.default
+          if isValid optMeta then
+            optMeta
+          else if isValid cMeta then
+            cMeta
+          else if isValid pMeta then
+            pMeta
           else
-            getZstrMeta path moduleTree
+            zstrMeta
+        else if builtins.isAttrs v then
+          let
+            cMeta =
+              if v ? _zmeta_carrier && v._zmeta_carrier.type ? _zmeta then v._zmeta_carrier.type._zmeta else { };
+            pMeta =
+              if v ? _zmeta_passthrough && v._zmeta_passthrough.type ? _zmeta then
+                v._zmeta_passthrough.type._zmeta
+              else
+                { };
+            iMeta =
+              if v ? _zmeta && v._zmeta.type ? _zmeta then
+                v._zmeta.type._zmeta
+              else
+                (if v ? _zmeta then v._zmeta.default or { } else { });
+          in
+          if isValid cMeta then
+            cMeta
+          else if isValid pMeta then
+            pMeta
+          else if isValid iMeta then
+            iMeta
+          else
+            zstrMeta
         else
-          getZstrMeta path moduleTree;
+          zstrMeta;
 
       hasMeta = zmeta != null;
 
@@ -733,7 +778,9 @@ let
                 "settings"
                 "declarativeConfig"
                 "package"
+                "_zmeta"
                 "_freeformOptions"
+                "_zmeta_carrier"
                 "_zmeta_passthrough"
                 "_action_unconditional"
                 "_saction_unconditional"

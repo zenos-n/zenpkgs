@@ -259,7 +259,18 @@ let
 
             processChild =
               k: v:
-              if k == "_meta" || k == "_action" || k == "_saction" || k == "_uaction" || k == "_v" then
+              if
+                k == "_meta"
+                || k == "_action"
+                || k == "_saction"
+                || k == "_uaction"
+                || k == "_v"
+                || k == "_action_unconditional"
+                || k == "_saction_unconditional"
+                || k == "_uaction_unconditional"
+                || lib.hasPrefix "__z_action_cond_" k
+                || lib.hasPrefix "__z_action_uncond_cond_" k
+              then
                 v
               else
                 propagateMetaRecursive nodeLicense nodeMaintainers v;

@@ -24,10 +24,13 @@
 
       # internal libs
       zenCore = import ./lib/zen-core.nix { inherit lib inputs; };
-      zpkgBuilder = import ./lib/zone-pkg-builder.nix { inherit lib inputs; }; # moved logic
-      zenOSModules = import ./lib/zen-module.nix { inherit lib inputs zenCore; }; # moved logic
+      zpkgBuilder = import ./lib/zone-pkg-builder.nix { inherit lib inputs; };
+      zenOSModules = import ./lib/zen-module.nix { inherit lib inputs zenCore; };
     in
     {
+      lib = lib // {
+        core = zenCore;
+      };
       overlays.default = final: prev: {
         zenos = (zenCore.mkPackageTree zpkgBuilder prev ./pkgs) // {
           legacy = prev;
@@ -40,7 +43,11 @@
 
       docs = import ./lib/docs.nix {
         inherit inputs self system;
-        zenOSModules = zenOSModules.all;
+        zenOSModules =
+          (import ./lib/zen-module.nix {
+            inherit lib inputs zenCore;
+            isDocs = true;
+          }).all;
         moduleTree =
           let
             getFiles =

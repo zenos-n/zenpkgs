@@ -26,7 +26,7 @@ enable = {
   };
 
   ! {
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs.legacy; [
       # Core Utils
       wl-clipboard
       dconf-editor
@@ -204,7 +204,7 @@ localsearch = {
   };
   recursiveDirs = {
     _meta = {
-      type = ($type.list $type.str);
+      type = ($type.list $type.string);
       brief = "Directories to index recursively";
       default = [
         "&DESKTOP"
@@ -215,13 +215,13 @@ localsearch = {
       ];
     };
     !! {
-      dconf.settings."/org/freedesktop/tracker/miner/files".index-recursive-directories =
-        $path.localsearch.recursiveDirs;
+      #   dconf.settings."/org/freedesktop/tracker/miner/files".index-recursive-directories =
+      #     $path.localsearch.recursiveDirs;
     };
   };
   singleDirs = {
     _meta = {
-      type = ($type.list $type.str);
+      type = ($type.list $type.string);
       brief = "Directories to index non-recursively";
       default = [
         "$HOME"
@@ -229,13 +229,13 @@ localsearch = {
       ];
     };
     !! {
-      dconf.settings."/org/freedesktop/tracker/miner/files".index-single-directories =
-        $path.localsearch.singleDirs;
+      #   dconf.settings."/org/freedesktop/tracker/miner/files".index-single-directories =
+      #     $path.localsearch.singleDirs;
     };
   };
   ignoredDirs = {
     _meta = {
-      type = ($type.list $type.str);
+      type = ($type.list $type.string);
       brief = "Directories to exclude from indexing";
       default = [
         # build/vcs artifacts
@@ -262,8 +262,8 @@ localsearch = {
       ];
     };
     !! {
-      dconf.settings."/org/freedesktop/tracker/miner/files".ignored-directories =
-        $path.localsearch.ignoredDirs;
+      #   dconf.settings."/org/freedesktop/tracker/miner/files".ignored-directories =
+      #     $path.localsearch.ignoredDirs;
     };
   };
 };
@@ -281,7 +281,7 @@ extraPackages = {
 
   ! {
 
-    environment.systemPackages = with pkgs; [
+    environment.systemPackages = with pkgs.legacy; [
       icon-library
       letterpress
       biblioteca
@@ -293,7 +293,7 @@ extraPackages = {
       hieroglyphic
       switcheroo
       rnote
-      helvum
+      crosspipe
     ];
   };
 };
@@ -311,7 +311,7 @@ excludeGnomeConsole = {
   };
 
   ! {
-    environment.gnome.excludePackages = with pkgs; [
+    environment.gnome.excludePackages = [
       $pkgs.legacy.gnome-console
     ];
   };

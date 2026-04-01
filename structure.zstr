@@ -56,7 +56,6 @@ desktops = {
     maintainers = [ $m.doromiert ];
     type = (zmdl desktops);
   };
-
 };
 
 users = {

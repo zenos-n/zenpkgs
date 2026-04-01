@@ -1,30 +1,46 @@
-{ lib, inputs }:
+{
+  lib,
+  inputs,
+  isDocs ? false,
+}:
 let
   scrubMeta =
-    node:
-    if builtins.isAttrs node then
-      let
-        cleanAttrs = builtins.removeAttrs node [
-          "_meta"
-          "_zmeta_passthrough"
-        ];
-      in
-      lib.mapAttrs (k: v: scrubMeta v) cleanAttrs
+    keepMeta: node:
+    if isDocs then
+      node
+    else if keepMeta then
+      node
+    else if builtins.isAttrs node then
+      # ESCAPE HATCH: ONLY stop on actual derivations or module definitions.
+      # do NOT stop on your custom dialect _type nodes or mkIfs.
+      if lib.isDerivation node || node ? outPath || node ? _module then
+        node
+      else
+        let
+          cleanAttrs = builtins.removeAttrs node [
+            "_meta"
+            "_zmeta_passthrough"
+            "_zmeta_carrier"
+          ];
+        in
+        lib.mapAttrs (k: v: scrubMeta keepMeta v) cleanAttrs
     else if builtins.isList node then
-      map scrubMeta node
+      map (scrubMeta keepMeta) node
     else
       node;
 
-  # targets specifically "legacy" keys and scrubs their contents
+  # update to accept keepMeta flag
   cleanLegacyBlocks =
     node:
-    if builtins.isAttrs node then
+    if isDocs then
+      node
+    else if builtins.isAttrs node then
       lib.mapAttrs (k: v: if k == "legacy" then scrubMeta v else cleanLegacyBlocks v) node
     else if builtins.isList node then
       map cleanLegacyBlocks node
     else
       node;
-  # Recursive Directory Walker
+
   walkDir =
     dir: criteriaFn:
     let
@@ -157,8 +173,11 @@ let
                 else
                   import entry.absPath args;
 
-              legacyConfig = raw.legacy or { };
-              zenosConfig = builtins.removeAttrs raw [ "legacy" ];
+              # SCRUB BEFORE IT ENTERS THE MODULE SYSTEM
+              safeRaw = scrubMeta false raw;
+
+              legacyConfig = safeRaw.legacy or { };
+              zenosConfig = builtins.removeAttrs safeRaw [ "legacy" ];
             in
             {
               config = lib.mkMerge [
@@ -173,6 +192,7 @@ let
             system = "x86_64-linux";
             specialArgs = specialArgs // {
               inherit inputs;
+              isDocs = false;
             };
             modules = modules ++ [ hostModule ];
           };
