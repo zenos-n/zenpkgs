@@ -1,0 +1,125 @@
+_meta = {
+  brief = "declarative disk partitioning and mounting";
+  description = ''
+    handles disk setups, automated partitioning via sgdisk, and mounting.
+    includes logic to conditionally wipe disks if a specific marker file is missing,
+    which is perfect for ephemeral roots or recovering a bricked system on reboot.
+  '';
+  license = $l.napalm;
+  maintainers = [ $m.doromiert ];
+};
+
+enable = {
+  _meta = {
+    type = $type.boolean;
+    brief = "enable zenos disk management";
+    default = false;
+  };
+};
+
+devices = {
+  _meta = {
+    type = $type.set;
+    brief = "disk configurations mapped by arbitrary name. highly recommend setting 'device' to a /dev/disk/by-id/ path.";
+    default = {};
+  };
+
+  ! {
+    # ensure partitioning tools are available early in boot
+    boot.initrd.extraUtilsCommands = ''
+      copy_bin_and_libs ${$pkgs.legacy.gptfdisk}/bin/sgdisk
+      copy_bin_and_libs ${$pkgs.legacy.util-linux}/bin/blkid
+      copy_bin_and_libs ${$pkgs.legacy.dosfstools}/bin/mkfs.vfat
+      copy_bin_and_libs ${$pkgs.legacy.e2fsprogs}/bin/mkfs.ext4
+    '';
+
+    environment.systemPackages = with $pkgs.legacy; [
+      gptfdisk
+      dosfstools
+      e2fsprogs
+    ];
+
+    # dynamically map the file systems for fstab
+    fileSystems = let
+      cfg = $path.system.disks;
+      allParts = $lib.flatten ($lib.mapAttrsToList (dev: devCfg:
+        if devCfg.mode == "unmanaged" then [
+          { mount = devCfg.mount; device = devCfg.device or "/dev/${dev}"; fsType = devCfg.fs; }
+        ] else
+          $lib.mapAttrsToList (partName: partCfg: 
+            { mount = partCfg.mount or "none"; label = partCfg.label; fsType = partCfg.fs or "none"; isSwap = partCfg.isSwap or false; }
+          ) devCfg.partitions
+      ) cfg.devices);
+      mounts = $lib.filter (p: !(p.isSwap) && p.mount != "none") allParts;
+    in $lib.listToAttrs (map (p: $lib.nameValuePair p.mount {
+      device = if p ? label then "/dev/disk/by-partlabel/${p.label}" else p.device;
+      fsType = p.fsType;
+    }) mounts);
+
+    # map out swap devices separately
+    swapDevices = let
+      cfg = $path.system.disks;
+      allParts = $lib.flatten ($lib.mapAttrsToList (dev: devCfg:
+        if devCfg.mode == "managed" then
+          $lib.mapAttrsToList (partName: partCfg: partCfg) devCfg.partitions
+        else []
+      ) cfg.devices);
+      swaps = $lib.filter (p: p.isSwap or false) allParts;
+    in map (p: { device = "/dev/disk/by-partlabel/${p.label}"; }) swaps;
+
+    # the gnarly early-boot check and wipe script
+    boot.initrd.postDeviceCommands = let
+      cfg = $path.system.disks;
+      managed = $lib.filterAttrs (n: v: v.mode == "managed") cfg.devices;
+      
+      buildWipeScript = devName: devCfg: ''
+        TARGET_DEV="${devCfg.device or "/dev/${devName}"}"
+        WIPE_NEEDED=0
+        MNT="/tmp/zenfs_check"
+        mkdir -p $MNT
+
+        ${$lib.concatStringsSep "\n" ($lib.mapAttrsToList (partName: partCfg: 
+          $lib.optionalString (partCfg ? idFile) ''
+            echo "checking for ${partCfg.idFile} on ${partCfg.label}..."
+            if blkid -L "${partCfg.label}" >/dev/null; then
+              mount /dev/disk/by-partlabel/${partCfg.label} $MNT
+              if [ ! -f "$MNT${partCfg.idFile}" ]; then
+                echo "id file missing. wipe triggered."
+                WIPE_NEEDED=1
+              fi
+              umount $MNT
+            else
+              echo "partition missing. wipe triggered."
+              WIPE_NEEDED=1
+            fi
+          ''
+        ) devCfg.partitions)}
+
+        if [ $WIPE_NEEDED -eq 1 ]; then
+          echo "blitzing $TARGET_DEV..."
+          sgdisk -Z $TARGET_DEV
+          
+          # build partitions sequentially
+          ${let
+              parts = $lib.mapAttrsToList (n: v: v) devCfg.partitions;
+              indexedParts = $lib.imap1 (i: v: { inherit i; cfg = v; }) parts;
+            in $lib.concatMapStringsSep "\n" (p: ''
+              sgdisk -n ${toString p.i}:0:${p.cfg.size} -c ${toString p.i}:"${p.cfg.label}" -t ${toString p.i}:${if p.cfg.isSwap or false then "8200" else "8300"} $TARGET_DEV
+            '') indexedParts}
+            
+          partprobe $TARGET_DEV
+          udevadm settle
+          
+          # format partitions
+          ${let
+              parts = $lib.mapAttrsToList (n: v: v) devCfg.partitions;
+            in $lib.concatMapStringsSep "\n" (p:
+              if p.isSwap or false then "mkswap -L ${p.label} /dev/disk/by-partlabel/${p.label}"
+              else if p.fs == "vfat" || p.fs == "fat32" then "mkfs.vfat -F 32 -n ${p.label} /dev/disk/by-partlabel/${p.label}"
+              else "mkfs.${p.fs} -L ${p.label} /dev/disk/by-partlabel/${p.label}"
+            ) parts}
+        fi
+      '';
+    in $lib.concatStringsSep "\n" ($lib.mapAttrsToList buildWipeScript managed);
+  };
+};
