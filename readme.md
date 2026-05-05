@@ -1,7 +1,7 @@
 # ZenPkgs
 
-The nix packages repo for ZenOS
+The nix packages repo for ZenOS.
 
-for now this is just a placeholder readme, will be updated later
+For now this is just a placeholder readme and will be updated later.
 
-btw if you want to contribute, check metadata guidelines.md
+By the way if you want to contribute, check metadata guidelines.md.
