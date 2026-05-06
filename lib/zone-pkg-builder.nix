@@ -1,4 +1,4 @@
-{ lib, inputs }:
+{ lib, ... }:
 let
   zDialect = import ./zone-dialect.nix { inherit lib; };
 in
