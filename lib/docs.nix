@@ -129,7 +129,7 @@ let
       enableOption =
         {
           meta ? { },
-          action ? { },
+          ...
         }:
         {
           _isZenLeaf = true;
@@ -190,48 +190,6 @@ let
     else
       imported;
 
-  # --- METADATA HARVESTER ---
-  moduleMetadata =
-    let
-      # Walk the moduleTree preserving namespace context
-      collectFiles =
-        prefix: tree:
-        if builtins.isList tree then
-          map (p: {
-            path = p;
-            ns = prefix;
-          }) tree
-        else if builtins.isAttrs tree then
-          lib.flatten (
-            lib.mapAttrsToList (k: v: collectFiles (if prefix == "" then k else "${prefix}.${k}") v) tree
-          )
-        else
-          [ ];
-
-      allEntries = collectFiles "" moduleTree;
-
-      processEntry =
-        { path, ns }:
-        let
-          mod = importZenMetadata path;
-          meta = {
-            brief = mod.meta.brief or mod.brief or null;
-            description = mod.meta.description or mod.description or null;
-            maintainers = mod.meta.maintainers or mod.maintainers or [ ];
-            license = mod.meta.license or mod.license or "napalm";
-            dependencies = mod.meta.dependencies or mod.dependencies or [ ];
-            _file = toString path;
-          };
-          base = lib.removeSuffix ".zmdl" (lib.removeSuffix ".nix" (baseNameOf path));
-          name = if ns == "" then base else "${ns}.${base}";
-        in
-        {
-          inherit name;
-          value = meta;
-        };
-    in
-    lib.listToAttrs (map processEntry allEntries);
-
   # --- PACKAGE WALKER ---
   showPackages =
     depth: path: v:
@@ -289,13 +247,20 @@ let
       };
     in
     maybeTrace (
-      if depth == 0 then
-        {
-          meta = metaObj // {
-            debug = "recursion blocked";
-          };
-        }
-      else if isDrv || isZenPkg || isFunc then
+          if isLegacy && depth <= 0 then
+            {
+              meta = metaObj // {
+                debug = "recursion blocked (legacy limit)";
+              };
+            }
+          # global failsafe just in case you write a circular dep in your own packages
+          else if depth <= -50 then
+            {
+              meta = metaObj // {
+                debug = "recursion blocked (global failsafe)";
+              };
+            }
+          else if isDrv || isZenPkg || isFunc then
         { meta = metaObj; }
       else if isSet then
         let
@@ -336,12 +301,17 @@ let
             let
               # AGGRESSIVE FILTERING: Kill language packages, legacy sub-trees, and OS-specific modules.
               notProblematic =
-                !(builtins.elem n problematic)
-                && !(lib.hasPrefix "_" n)
-                && !(lib.hasSuffix "Packages" n) # <-- This saves your RAM (drops python3Packages, etc)
-                && !(lib.hasPrefix "linuxPackages" n)
-                && !(lib.hasPrefix "darwin" n)
-                && !(lib.hasPrefix "pkgs" n && n != "pkgs");
+                if !isLegacy then
+                  # for your own packages, just filter out internal/hidden attrs
+                  !(lib.hasPrefix "_" n)
+                else
+                  # for nixpkgs, deploy the heavy artillery
+                  !(builtins.elem n problematic)
+                  && !(lib.hasPrefix "_" n)
+                  && !(lib.hasSuffix "Packages" n)
+                  && !(lib.hasPrefix "linuxPackages" n)
+                  && !(lib.hasPrefix "darwin" n)
+                  && !(lib.hasPrefix "pkgs" n && n != "pkgs");
             in
             if notProblematic then
               let
