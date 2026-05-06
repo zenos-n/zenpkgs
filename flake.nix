@@ -20,22 +20,32 @@
     let
       lib = nixpkgs.lib;
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
 
-      # internal libs
+      # internal libs (zpkgBuilder is dead)
       zenCore = import ./lib/zen-core.nix { inherit lib inputs; };
-      zpkgBuilder = import ./lib/zone-pkg-builder.nix { inherit lib inputs; };
       zenOSModules = import ./lib/zen-module.nix { inherit lib inputs zenCore; };
     in
     {
       lib = lib // {
         core = zenCore;
       };
+
       overlays.default = final: prev: {
-        zenos = (zenCore.mkPackageTree zpkgBuilder prev ./pkgs) // {
+        # using 'final' here so your packages can actually see each other
+        zenos = (zenCore.mkPackageTree final ./pkgs) // {
           legacy = prev;
         };
       };
+
+      # THIS is what you were missing to make `nix run` and `nix build` work
+      packages.${system} =
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ self.overlays.default ];
+          };
+        in
+        pkgs.zenos;
 
       nixosModules.default = {
         imports = zenOSModules.all;
@@ -55,7 +65,7 @@
               if builtins.pathExists dir then
                 zenCore.walkDir dir (
                   n: t:
-                  t == "regular" && (lib.hasSuffix ".nix" n || lib.hasSuffix ".zmdl" n || lib.hasSuffix ".zpkg" n)
+                  t == "regular" && (lib.hasSuffix ".nix" n || lib.hasSuffix ".zmdl" n)
                 )
               else
                 [ ];

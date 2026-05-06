@@ -19,67 +19,74 @@ enable = {
 
 devices = {
   _meta = {
-    type = $type.set;
-    brief = "disk configurations mapped by arbitrary name. highly recommend setting 'device' to a /dev/disk/by-id/ path.";
+    brief = "disk configurations mapped by arbitrary name or direct hardware path. freeform keys FTW.";
     default = {};
   };
 
-  ! {
-    # ensure partitioning tools are available early in boot
-    boot.initrd.extraUtilsCommands = ''
-      copy_bin_and_libs ${$pkgs.legacy.gptfdisk}/bin/sgdisk
-      copy_bin_and_libs ${$pkgs.legacy.util-linux}/bin/blkid
-      copy_bin_and_libs ${$pkgs.legacy.dosfstools}/bin/mkfs.vfat
-      copy_bin_and_libs ${$pkgs.legacy.e2fsprogs}/bin/mkfs.ext4
-    '';
+  (freeform device) = {
+    mode = {
+      _meta = { type = $type.string; default = "unmanaged"; };
+    };
+    device = {
+      _meta = { type = $type.string; default = ""; brief = "override the hardware path if you want to use a friendly name for the key"; };
+    };
+    fs = {
+      _meta = { type = $type.string; default = "none"; };
+    };
+    mount = {
+      _meta = { type = $type.string; default = "none"; };
+    };
 
-    environment.systemPackages = with $pkgs.legacy; [
-      gptfdisk
-      dosfstools
-      e2fsprogs
-    ];
+    partitions = {
+      _meta = { default = {}; };
+      (freeform part) = {
+        mount = { _meta = { type = $type.string; default = "none"; }; };
+        size = { _meta = { type = $type.string; default = "0"; }; };
+        fs = { _meta = { type = $type.string; default = "ext4"; }; };
+        label = { _meta = { type = $type.string; default = "unlabeled"; }; };
+        isSwap = { _meta = { type = $type.boolean; default = false; }; };
+        idFile = { _meta = { type = $type.string; default = ""; }; };
+      };
+    };
 
-    # dynamically map the file systems for fstab
-    fileSystems = let
-      cfg = $path.system.disks;
-      allParts = $lib.flatten ($lib.mapAttrsToList (dev: devCfg:
-        if devCfg.mode == "unmanaged" then [
-          { mount = devCfg.mount; device = devCfg.device or "/dev/${dev}"; fsType = devCfg.fs; }
-        ] else
-          $lib.mapAttrsToList (partName: partCfg: 
-            { mount = partCfg.mount or "none"; label = partCfg.label; fsType = partCfg.fs or "none"; isSwap = partCfg.isSwap or false; }
-          ) devCfg.partitions
-      ) cfg.devices);
-      mounts = $lib.filter (p: !(p.isSwap) && p.mount != "none") allParts;
-    in $lib.listToAttrs (map (p: $lib.nameValuePair p.mount {
-      device = if p ? label then "/dev/disk/by-partlabel/${p.label}" else p.device;
-      fsType = p.fsType;
-    }) mounts);
+    !! {
+      # everything in here executes per-device and merges natively
+      fileSystems = let 
+        devCfg = $path.system.disks.devices."${$f.device}";
+        target = if devCfg.device != "" then devCfg.device else $f.device;
+      in if devCfg.mode == "unmanaged" && devCfg.mount != "none" then {
+        ${devCfg.mount} = {
+          device = target;
+          fsType = devCfg.fs;
+        };
+      } else if devCfg.mode == "managed" then
+        $lib.listToAttrs (
+          map (p: $lib.nameValuePair p.mount {
+            device = "/dev/disk/by-partlabel/${p.label}";
+            fsType = p.fs;
+          }) ($lib.filter (p: !p.isSwap && p.mount != "none") ($lib.attrValues devCfg.partitions))
+        )
+      else {};
 
-    # map out swap devices separately
-    swapDevices = let
-      cfg = $path.system.disks;
-      allParts = $lib.flatten ($lib.mapAttrsToList (dev: devCfg:
-        if devCfg.mode == "managed" then
-          $lib.mapAttrsToList (partName: partCfg: partCfg) devCfg.partitions
-        else []
-      ) cfg.devices);
-      swaps = $lib.filter (p: p.isSwap or false) allParts;
-    in map (p: { device = "/dev/disk/by-partlabel/${p.label}"; }) swaps;
+      swapDevices = let
+        devCfg = $path.system.disks.devices."${$f.device}";
+      in if devCfg.mode == "managed" then
+        map (p: { device = "/dev/disk/by-partlabel/${p.label}"; })
+          ($lib.filter (p: p.isSwap) ($lib.attrValues devCfg.partitions))
+      else [];
 
-    # the gnarly early-boot check and wipe script
-    boot.initrd.postDeviceCommands = let
-      cfg = $path.system.disks;
-      managed = $lib.filterAttrs (n: v: v.mode == "managed") cfg.devices;
-      
-      buildWipeScript = devName: devCfg: ''
-        TARGET_DEV="${devCfg.device or "/dev/${devName}"}"
+      boot.initrd.postDeviceCommands = let
+        devCfg = $path.system.disks.devices."${$f.device}";
+        target = if devCfg.device != "" then devCfg.device else $f.device;
+      in if devCfg.mode == "managed" then ''
+        TARGET_DEV="${target}"
         WIPE_NEEDED=0
-        MNT="/tmp/zenfs_check"
+        # clean up the mount path so it doesn't break if target has slashes
+        MNT="/tmp/zenfs_check_${$lib.replaceStrings ["/"] ["_"] target}"
         mkdir -p $MNT
 
-        ${$lib.concatStringsSep "\n" ($lib.mapAttrsToList (partName: partCfg: 
-          $lib.optionalString (partCfg ? idFile) ''
+        ${$lib.concatStringsSep "\n" ($lib.mapAttrsToList (partName: partCfg:
+          $lib.optionalString (partCfg.idFile != "") ''
             echo "checking for ${partCfg.idFile} on ${partCfg.label}..."
             if blkid -L "${partCfg.label}" >/dev/null; then
               mount /dev/disk/by-partlabel/${partCfg.label} $MNT
@@ -104,7 +111,7 @@ devices = {
               parts = $lib.mapAttrsToList (n: v: v) devCfg.partitions;
               indexedParts = $lib.imap1 (i: v: { inherit i; cfg = v; }) parts;
             in $lib.concatMapStringsSep "\n" (p: ''
-              sgdisk -n ${toString p.i}:0:${p.cfg.size} -c ${toString p.i}:"${p.cfg.label}" -t ${toString p.i}:${if p.cfg.isSwap or false then "8200" else "8300"} $TARGET_DEV
+              sgdisk -n ${toString p.i}:0:${p.cfg.size} -c ${toString p.i}:"${p.cfg.label}" -t ${toString p.i}:${if p.cfg.isSwap then "8200" else "8300"} $TARGET_DEV
             '') indexedParts}
             
           partprobe $TARGET_DEV
@@ -114,12 +121,28 @@ devices = {
           ${let
               parts = $lib.mapAttrsToList (n: v: v) devCfg.partitions;
             in $lib.concatMapStringsSep "\n" (p:
-              if p.isSwap or false then "mkswap -L ${p.label} /dev/disk/by-partlabel/${p.label}"
+              if p.isSwap then "mkswap -L ${p.label} /dev/disk/by-partlabel/${p.label}"
               else if p.fs == "vfat" || p.fs == "fat32" then "mkfs.vfat -F 32 -n ${p.label} /dev/disk/by-partlabel/${p.label}"
               else "mkfs.${p.fs} -L ${p.label} /dev/disk/by-partlabel/${p.label}"
             ) parts}
         fi
-      '';
-    in $lib.concatStringsSep "\n" ($lib.mapAttrsToList buildWipeScript managed);
+      '' else "";
+    };
+  };
+
+  ! {
+    # global tools need to be injected once, independent of the per-device logic
+    boot.initrd.extraUtilsCommands = ''
+      copy_bin_and_libs ${$pkgs.legacy.gptfdisk}/bin/sgdisk
+      copy_bin_and_libs ${$pkgs.legacy.util-linux}/bin/blkid
+      copy_bin_and_libs ${$pkgs.legacy.dosfstools}/bin/mkfs.vfat
+      copy_bin_and_libs ${$pkgs.legacy.e2fsprogs}/bin/mkfs.ext4
+    '';
+
+    environment.systemPackages = with $pkgs.legacy; [
+      gptfdisk
+      dosfstools
+      e2fsprogs
+    ];
   };
 };

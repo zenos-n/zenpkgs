@@ -12,7 +12,6 @@ let
       node
     else if builtins.isAttrs node then
       # ESCAPE HATCH: ONLY stop on actual derivations or module definitions.
-      # do NOT stop on your custom dialect _type nodes or mkIfs.
       if lib.isDerivation node || node ? outPath || node ? _module then
         node
       else
@@ -29,7 +28,6 @@ let
     else
       node;
 
-  # update to accept keepMeta flag
   cleanLegacyBlocks =
     node:
     if isDocs then
@@ -66,22 +64,19 @@ let
     in
     lib.flatten (map processEntry entries);
 
-  # inside zen-core.nix
+  # much cleaner now
   mkPackageTree =
-    zpkgBuilder: pkgs: root:
+    pkgs: root:
     let
-      # look for both .nix and .zpkg
-      isPkg = n: t: t == "regular" && (lib.hasSuffix ".nix" n || lib.hasSuffix ".zpkg" n);
+      isPkg = n: t: t == "regular" && lib.hasSuffix ".nix" n;
       files = walkDir root isPkg;
 
       toPackageAttr =
         entry:
         let
-          isZpkg = lib.hasSuffix ".zpkg" entry.name;
-          pname = if isZpkg then lib.removeSuffix ".zpkg" entry.name else lib.removeSuffix ".nix" entry.name;
+          pname = lib.removeSuffix ".nix" entry.name;
           attrPath = entry.relPath ++ [ pname ];
-          # fix: use zpkgBuilder for .zpkg, callPackage for .nix
-          pkg = if isZpkg then zpkgBuilder pkgs entry.absPath else pkgs.callPackage entry.absPath { };
+          pkg = pkgs.callPackage entry.absPath { };
         in
         lib.setAttrByPath attrPath pkg;
     in
@@ -93,7 +88,6 @@ let
       hostDir = builtins.dirOf path;
       content = builtins.readFile path;
 
-      # THE HACK: Bypass Nix parser constraint by converting boolean assignments
       parts = builtins.split "([a-zA-Z0-9_.-]+)[ \t]*=[ \t]*(true|false)[ \t]*;" content;
       transformed = lib.concatStrings (
         map (
@@ -104,7 +98,6 @@ let
               rhs = builtins.elemAt p 1;
               cleanLhs = lib.trim lhs;
             in
-            # Ignore .enable suffixes to protect standard Nix patterns
             if lib.hasSuffix "enable" cleanLhs || lib.hasSuffix "_enable" cleanLhs then
               "${lhs} = ${rhs};"
             else
@@ -125,16 +118,11 @@ let
 
       raw = builtins.scopedImport scope tempFile;
 
-      # AST CLEANUP: Revert isolated `._enable` sets back to booleans
-      # to prevent breaking standard NixOS module options.
       squashEnables =
         path: val:
         if builtins.isAttrs val then
           let
-            # Flag if we have entered the 'packages' namespace
             isPkgPath = builtins.elem "packages" path;
-
-            # Squash only if it's an isolated _enable AND we aren't configuring packages
             canSquash = (val ? _enable) && (builtins.length (builtins.attrNames val) == 1) && !isPkgPath;
           in
           if canSquash then val._enable else lib.mapAttrs (n: v: squashEnables (path ++ [ n ]) v) val
@@ -148,7 +136,6 @@ let
     in
     squashedRaw;
 
-  # Host Generator
   mkHosts =
     {
       root,
@@ -165,15 +152,14 @@ let
           name = builtins.concatStringsSep "." entry.relPath;
 
           hostModule =
-            args@{ pkgs, ... }: # Capture pkgs from the module args
+            args@{ pkgs, ... }:
             let
               raw =
                 if (lib.hasSuffix ".zcfg" entry.name || lib.hasSuffix ".nzo" entry.name) then
-                  importZcfg entry.absPath (args // { inherit pkgs; }) # Pass it here
+                  importZcfg entry.absPath (args // { inherit pkgs; })
                 else
                   import entry.absPath args;
 
-              # SCRUB BEFORE IT ENTERS THE MODULE SYSTEM
               safeRaw = scrubMeta false raw;
 
               legacyConfig = safeRaw.legacy or { };
