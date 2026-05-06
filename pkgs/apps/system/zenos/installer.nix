@@ -64,7 +64,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "ZenOS Setup - Unified Installer and OOBE";
-    license = licenses.gpl3Plus;
+    license = licenses.napalm;
     platforms = platforms.linux;
   };
 }

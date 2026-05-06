@@ -21,23 +21,34 @@
       lib = nixpkgs.lib;
       system = "x86_64-linux";
 
-      # internal libs (zpkgBuilder is dead)
+      # load custom metadata
+      # paths are relative to flake.nix
+      customLicenses = import ./lib/licenses.nix;
+      customMaintainers = import ./lib/maintainers.nix;
+
+      # internal libs
       zenCore = import ./lib/zen-core.nix { inherit lib inputs; };
       zenOSModules = import ./lib/zen-module.nix { inherit lib inputs zenCore; };
     in
     {
       lib = lib // {
         core = zenCore;
+        licenses = lib.licenses // customLicenses;
+        maintainers = lib.maintainers // customMaintainers;
       };
 
       overlays.default = final: prev: {
-        # using 'final' here so your packages can actually see each other
+        # use 'prev.lib' to avoid infinite recursion
+        lib = prev.lib // {
+          licenses = prev.lib.licenses // customLicenses;
+          maintainers = prev.lib.maintainers // customMaintainers;
+        };
+
         zenos = (zenCore.mkPackageTree final ./pkgs) // {
           legacy = prev;
         };
       };
 
-      # THIS is what you were missing to make `nix run` and `nix build` work
       packages.${system} =
         let
           pkgs = import nixpkgs {
