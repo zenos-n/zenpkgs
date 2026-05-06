@@ -1,6 +1,5 @@
 { lib
 , stdenv
-, fetchFromGitHub
 , meson
 , ninja
 , pkg-config
@@ -18,9 +17,10 @@
 , desktop-file-utils
 , appstream
 , libxml2
+, ...
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation  {
   pname = "zenos-setup";
   version = "0.1.0";
 
