@@ -34,9 +34,9 @@ stdenv.mkDerivation  {
     gobject-introspection
     wrapGAppsHook4
     python3
-    desktop-file-utils # provides update-desktop-database
-    appstream         # provides appstreamcli
-    libxml2           # often needed for appstream/desktop validation
+    desktop-file-utils
+    appstream
+    libxml2
   ];
 
   buildInputs = [
@@ -54,7 +54,6 @@ stdenv.mkDerivation  {
     python3.pkgs.babel
   ];
 
-  # since we aren't using buildPythonApplication, we handle the PATH and PYTHONPATH manually
   postInstall = ''
     wrapProgram $out/bin/zenos-setup \
       --prefix PYTHONPATH : "$PYTHONPATH" \
