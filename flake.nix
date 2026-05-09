@@ -8,6 +8,7 @@
     illogical-impulse.url = "github:soymou/illogical-flake";
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nixcord.url = "github:kaylorben/nixcord";
+    popcorn-kernel.url = "github:zenos-n/popcorn";
   };
 
   outputs =
@@ -37,17 +38,32 @@
         maintainers = lib.maintainers // customMaintainers;
       };
 
-      overlays.default = final: prev: {
-        # use 'prev.lib' to avoid infinite recursion
-        lib = prev.lib // {
-          licenses = prev.lib.licenses // customLicenses;
-          maintainers = prev.lib.maintainers // customMaintainers;
-        };
+      overlays.default =
+        final: prev:
+        let
+          popcornFlat = inputs.popcorn-kernel.packages.${system};
 
-        zenos = (zenCore.mkPackageTree final ./pkgs) // {
-          legacy = prev;
+          # read variant names directly from popcorn's source tree
+          scriptsDir = builtins.readDir "${inputs.popcorn-kernel}/scripts";
+          variantNames = builtins.attrNames (lib.filterAttrs (_: t: t == "directory") scriptsDir);
+
+          # group flat "variant-device" -> { variant.device = pkg; }
+          popcornNested = lib.genAttrs variantNames (
+            variant:
+            let
+              prefix = "${variant}-";
+              matching = lib.filterAttrs (n: _: lib.hasPrefix prefix n) popcornFlat;
+            in
+            lib.mapAttrs' (n: v: lib.nameValuePair (lib.removePrefix prefix n) v) matching
+          );
+        in
+        {
+
+          zenos = (zenCore.mkPackageTree final ./pkgs) // {
+            legacy = prev;
+            system.kernels.popcorn = popcornNested;
+          };
         };
-      };
 
       packages.${system} =
         let
@@ -74,10 +90,7 @@
             getFiles =
               dir:
               if builtins.pathExists dir then
-                zenCore.walkDir dir (
-                  n: t:
-                  t == "regular" && (lib.hasSuffix ".nix" n || lib.hasSuffix ".zmdl" n)
-                )
+                zenCore.walkDir dir (n: t: t == "regular" && (lib.hasSuffix ".nix" n || lib.hasSuffix ".zmdl" n))
               else
                 [ ];
 
