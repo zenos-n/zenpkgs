@@ -7,7 +7,7 @@
 
 stdenv.mkDerivation {
   pname = "destination-2";
-  version = "1.0.0";
+  version = "1.1.0";
 
   src = fetchFromGitHub {
     owner = "zenos-n";
@@ -23,37 +23,60 @@ stdenv.mkDerivation {
         mkdir -p $out/share/gnome-background-properties
         mkdir -p $out/share/wallpapers
 
+        # Initialize GNOME XML header
         cat <<EOF > $out/share/gnome-background-properties/destination-2.xml
     <?xml version="1.0"?>
     <!DOCTYPE wallpapers SYSTEM "gnome-wp-list.dtd">
     <wallpapers>
     EOF
 
-        # Using find to handle the spaces in filenames (e.g., 'blue dark.png')
-        find . -maxdepth 1 -name "*.png" -type f | while read img; do
-          fn=$(basename "$img")
+        # 1. We loop through the 'dark' versions first to find the primary pairs
+        # 2. We use 'grep -v' to specifically ignore files with '.light' (archival)
+        find . -name "* dark.png" -type f | grep -v "\.light" | while read dark_path; do
 
-          # Create a pretty name (e.g., "blue dark" -> "Blue Dark")
-          pretty_name=$(echo "''${fn%.*}" | sed 's/\b\(.\)/\u\1/g')
-          # Create a unique, filesystem-safe name for KDE folders
-          safe_name="Destination-2-$(echo "''${fn%.*}" | tr ' ' '-')"
+          # Extract core name (e.g., "./blue dark.png" -> "blue")
+          filename=$(basename "$dark_path")
+          color_name=$(echo "$filename" | sed 's/ dark.png//')
 
-          cp "$img" "$out/share/backgrounds/destination-2/$fn"
+          # Define the expected light counterpart
+          light_path="./$color_name light.png"
 
-          cat <<EOF >> $out/share/gnome-background-properties/destination-2.xml
+          # Pretty UI names (e.g., "blue" -> "Blue")
+          pretty_name=$(echo "$color_name" | sed 's/\b\(.\)/\u\1/g')
+          # Safe directory name (e.g., "Destination-2-Blue")
+          safe_name="Destination-2-$(echo "$color_name" | tr ' ' '-')"
+
+          # Copy images to central location
+          cp "$dark_path" "$out/share/backgrounds/destination-2/$filename"
+
+          if [ -f "$light_path" ]; then
+            # If light version exists, copy it and create a paired GNOME entry
+            light_filename=$(basename "$light_path")
+            cp "$light_path" "$out/share/backgrounds/destination-2/$light_filename"
+
+            cat <<EOF >> $out/share/gnome-background-properties/destination-2.xml
       <static>
         <name>Destination 2 ($pretty_name)</name>
-        <filename>$out/share/backgrounds/destination-2/$fn</filename>
+        <filename>$out/share/backgrounds/destination-2/$light_filename</filename>
+        <filename-dark>$out/share/backgrounds/destination-2/$filename</filename-dark>
         <options>zoom</options>
       </static>
     EOF
+          else
+            # Fallback for dark-only versions
+            cat <<EOF >> $out/share/gnome-background-properties/destination-2.xml
+      <static>
+        <name>Destination 2 ($pretty_name)</name>
+        <filename>$out/share/backgrounds/destination-2/$filename</filename>
+        <options>zoom</options>
+      </static>
+    EOF
+          fi
 
-          # KDE Plasma requires a folder per wallpaper entry
+          # KDE Structure (One folder per variant)
           kdir="$out/share/wallpapers/$safe_name"
           mkdir -p "$kdir/contents/images"
-
-          # Use symlinks for KDE to save space (linking to the backgrounds folder)
-          ln -s "$out/share/backgrounds/destination-2/$fn" "$kdir/contents/images/$fn"
+          ln -s "$out/share/backgrounds/destination-2/$filename" "$kdir/contents/images/$filename"
 
           cat <<EOF > "$kdir/metadata.desktop"
     [Desktop Entry]
