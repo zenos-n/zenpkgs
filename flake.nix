@@ -69,25 +69,56 @@
             name: pkg:
             let
               info = parse name;
-              assetName = "Popcorn-1.0.0${info.variant}-${info.device}.zip";
-            in
-            final.stdenv.mkDerivation {
-              pname = "${name}-bin";
-              version = "1.0.0";
-              src = final.fetchurl {
-                url = "https://github.com/zenos-n/popcorn/releases/download/1.0.0/${assetName}";
-                sha256 = hashes.${assetName} or lib.fakeSha256;
+              assetName = "Popcorn-1.1.0${info.variant}-${info.device}.zip";
+              kver = "7.0.2";
+
+              # this now represents the full unpacked source + binary
+              unpacked = final.stdenv.mkDerivation {
+                pname = "${name}-bin-unpacked";
+                version = kver;
+                src = final.fetchurl {
+                  url = "https://github.com/zenos-n/popcorn/releases/download/1.1.0/${assetName}";
+                  sha256 = hashes.${assetName} or lib.fakeSha256;
+                };
+                nativeBuildInputs = [ final.unzip ];
+                unpackPhase = "unzip $src";
+                # we organize the outputs so nixos can find them
+                installPhase = ''
+                  mkdir -p $out/lib/modules/${kver}
+                  mkdir -p $dev/lib/modules/${kver}
+
+                  # move bzImage/System.map to out
+                  cp bzImage System.map $out/
+                  cp -r lib/modules/${kver}/* $out/lib/modules/${kver}/
+
+                  # move everything else (headers/scripts) to dev for module building
+                  cp -r * $dev/lib/modules/${kver}/
+                  ln -s $dev/lib/modules/${kver} $out/lib/modules/${kver}/build
+                '';
+                outputs = [
+                  "out"
+                  "dev"
+                ];
               };
-              nativeBuildInputs = [ final.unzip ];
-              unpackPhase = "unzip $src";
-              installPhase = "mkdir -p $out && cp -r * $out/";
-            };
+
+              rawKernel = unpacked // {
+                override = _: rawKernel;
+                config = { }; # if you can, grab the actual .config from the zip here
+                features = {
+                  efiBootStub = true;
+                  ia32Emulation = true;
+                };
+                kernelOlder = lib.versionOlder kver;
+                kernelAtLeast = lib.versionAtLeast kver;
+                commonMakeFlags = [ ];
+              };
+            in
+            final.linuxPackagesFor rawKernel;
 
           # 3. nesting logic: (src|bin) -> variant -> device
           nestKernels =
             pkgs:
             let
-              # get all unique variants: ["D" "L" "S"]
               variants = lib.unique (map (n: (parse n).variant) (lib.attrNames pkgs));
             in
             lib.genAttrs variants (
@@ -95,7 +126,23 @@
               let
                 matching = lib.filterAttrs (n: _: (parse n).variant == v) pkgs;
               in
-              lib.mapAttrs' (n: pkg: lib.nameValuePair (parse n).device pkg) matching
+              lib.mapAttrs' (
+                n: pkg:
+                let
+                  device = (parse n).device;
+                  # the trick: if it's already a set (from mkBin), grab the kernel.
+                  # if it's a raw derivation (src), it IS the kernel.
+                  kernel = if pkg ? kernel then pkg.kernel else pkg;
+
+                  # ensure it's overridable so linuxPackagesFor doesn't choke
+                  overridable = if kernel ? override then kernel else (kernel // { override = _: overridable; });
+
+                  # get the full package set nixos wants
+                  pkgSet = if pkg ? kernel then pkg else (final.linuxPackagesFor overridable);
+                in
+                # Merge them. kernel // pkgSet makes it a derivation (leaf) that HAS set attributes.
+                lib.nameValuePair device (kernel // pkgSet)
+              ) matching
             );
 
           popcornBin = lib.mapAttrs mkBin popcornFiltered;
@@ -107,7 +154,7 @@
             legacy = prev;
             system.kernels.popcorn = {
               src = nestKernels popcornFiltered;
-              bin = nestKernels popcornBin;
+              # bin = nestKernels popcornBin;
             };
           };
         };
