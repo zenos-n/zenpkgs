@@ -41,6 +41,10 @@
       overlays.default =
         final: prev:
         let
+          lib = prev.lib // {
+            licenses = prev.lib.licenses // customLicenses;
+            maintainers = prev.lib.maintainers // customMaintainers;
+          };
           popcornFlat = inputs.popcorn-kernel.packages.${system};
 
           # read variant names directly from popcorn's source tree
@@ -58,6 +62,7 @@
           );
         in
         {
+          lib = lib;
 
           zenos = (zenCore.mkPackageTree final ./pkgs) // {
             legacy = prev;
