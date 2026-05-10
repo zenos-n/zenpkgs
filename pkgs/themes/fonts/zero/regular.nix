@@ -22,7 +22,7 @@ pkgs.stdenv.mkDerivation rec {
 
     # run the builder for the standard version
     # assumes builder.py and glyphs/ are in the root of the source
-    python3 builder.py --src ./glyphs --output Zero-Mono.otf
+    python3 builder.py --src ./glyphs --output Zero-Regular.otf
 
     runHook postBuild
   '';
@@ -31,7 +31,7 @@ pkgs.stdenv.mkDerivation rec {
     runHook preInstall
 
     mkdir -p $out/share/fonts/opentype
-    cp Zero-Mono.otf $out/share/fonts/opentype/
+    cp Zero-Regular.otf $out/share/fonts/opentype/
 
     runHook postInstall
   '';
