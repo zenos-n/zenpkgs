@@ -9,8 +9,8 @@ pkgs.stdenv.mkDerivation rec {
   src = pkgs.fetchFromGitHub {
     owner = "negative-zero-inft";
     repo = "zero-font";
-    rev = "v${version}";
-    hash = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # run nix-prefetch-url or let it fail to get the real hash
+    rev = "${version}";
+    hash = "sha256-PnrdkHBDUYwJe/KPPEgFKxoJEpWMVZyuewCy+1Wn6qk=";
   };
 
   nativeBuildInputs = [
@@ -37,9 +37,9 @@ pkgs.stdenv.mkDerivation rec {
   '';
 
   meta = with pkgs.lib; {
-    description = "Zero pixel-display typeface";
+    description = "Zero display typeface";
     homepage = "https://github.com/negative-zero-inft/zero-font";
-    license = licenses.unfree; # or whatever 'NAPALM anti-license' maps to in your head
+    license = licenses.napalm;
     platforms = platforms.all;
     maintainers = [ ];
   };
