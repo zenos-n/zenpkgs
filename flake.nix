@@ -37,39 +37,80 @@
         licenses = lib.licenses // customLicenses;
         maintainers = lib.maintainers // customMaintainers;
       };
-
       overlays.default =
         final: prev:
         let
           lib = prev.lib // {
+            # keeping your custom lib extensions
             licenses = prev.lib.licenses // customLicenses;
             maintainers = prev.lib.maintainers // customMaintainers;
           };
-          popcornFlat = inputs.popcorn-kernel.packages.${system};
 
-          # read variant names directly from popcorn's source tree
-          scriptsDir = builtins.readDir "${inputs.popcorn-kernel}/scripts";
-          variantNames = builtins.attrNames (lib.filterAttrs (_: t: t == "directory") scriptsDir);
+          # 1. get the raw packages and nix the "-release" junk
+          popcornRaw = inputs.popcorn-kernel.packages.${system};
+          popcornFiltered = lib.filterAttrs (n: _: !(lib.hasSuffix "-release" n)) popcornRaw;
 
-          # group flat "variant-device" -> { variant.device = pkg; }
-          popcornNested = lib.genAttrs variantNames (
-            variant:
+          # helper to turn "popcorn-L-generic" into { variant = "L"; device = "generic"; }
+          parse =
+            name:
             let
-              prefix = "${variant}-";
-              matching = lib.filterAttrs (n: _: lib.hasPrefix prefix n) popcornFlat;
+              parts = lib.splitString "-" (lib.removePrefix "popcorn-" name);
             in
-            lib.mapAttrs' (n: v: lib.nameValuePair (lib.removePrefix prefix n) v) matching
-          );
+            {
+              variant = lib.head parts;
+              device = lib.concatStringsSep "-" (lib.tail parts);
+            };
+
+          # 2. auto-gen the -bin derivations
+          # we import a generated file for hashes. if it doesn't exist yet, we fallback to fake
+          hashes = if builtins.pathExists ./lib/popcorn-sha.nix then import ./lib/popcorn-sha.nix else { };
+
+          mkBin =
+            name: pkg:
+            let
+              info = parse name;
+              assetName = "Popcorn-1.0.0${info.variant}-${info.device}.zip";
+            in
+            final.stdenv.mkDerivation {
+              pname = "${name}-bin";
+              version = "1.0.0";
+              src = final.fetchurl {
+                url = "https://github.com/zenos-n/popcorn/releases/download/1.0.0/${assetName}";
+                sha256 = hashes.${assetName} or lib.fakeSha256;
+              };
+              nativeBuildInputs = [ final.unzip ];
+              unpackPhase = "unzip $src";
+              installPhase = "mkdir -p $out && cp -r * $out/";
+            };
+
+          # 3. nesting logic: (src|bin) -> variant -> device
+          nestKernels =
+            pkgs:
+            let
+              # get all unique variants: ["D" "L" "S"]
+              variants = lib.unique (map (n: (parse n).variant) (lib.attrNames pkgs));
+            in
+            lib.genAttrs variants (
+              v:
+              let
+                matching = lib.filterAttrs (n: _: (parse n).variant == v) pkgs;
+              in
+              lib.mapAttrs' (n: pkg: lib.nameValuePair (parse n).device pkg) matching
+            );
+
+          popcornBin = lib.mapAttrs mkBin popcornFiltered;
+
         in
         {
           lib = lib;
-
           zenos = (zenCore.mkPackageTree final ./pkgs) // {
             legacy = prev;
-            system.kernels.popcorn = popcornNested;
+            system.kernels.popcorn = {
+              src = nestKernels popcornFiltered;
+              bin = nestKernels popcornBin;
+            };
           };
         };
-
       packages.${system} =
         let
           pkgs = import nixpkgs {
