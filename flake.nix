@@ -61,101 +61,56 @@
               device = lib.concatStringsSep "-" (lib.tail parts);
             };
 
-          # 2. auto-gen the -bin derivations
-          # we import a generated file for hashes. if it doesn't exist yet, we fallback to fake
-          hashes = if builtins.pathExists ./lib/popcorn-sha.nix then import ./lib/popcorn-sha.nix else { };
-
-          mkBin =
-            name: pkg:
-            let
-              info = parse name;
-              assetName = "Popcorn-1.1.0${info.variant}-${info.device}.zip";
-              kver = "7.0.2";
-
-              # this now represents the full unpacked source + binary
-              unpacked = final.stdenv.mkDerivation {
-                pname = "${name}-bin-unpacked";
-                version = kver;
-                src = final.fetchurl {
-                  url = "https://github.com/zenos-n/popcorn/releases/download/1.1.0/${assetName}";
-                  sha256 = hashes.${assetName} or lib.fakeSha256;
-                };
-                nativeBuildInputs = [ final.unzip ];
-                unpackPhase = "unzip $src";
-                # we organize the outputs so nixos can find them
-                installPhase = ''
-                  mkdir -p $out/lib/modules/${kver}
-                  mkdir -p $dev/lib/modules/${kver}
-
-                  # move bzImage/System.map to out
-                  cp bzImage System.map $out/
-                  cp -r lib/modules/${kver}/* $out/lib/modules/${kver}/
-
-                  # move everything else (headers/scripts) to dev for module building
-                  cp -r * $dev/lib/modules/${kver}/
-                  ln -s $dev/lib/modules/${kver} $out/lib/modules/${kver}/build
-                '';
-                outputs = [
-                  "out"
-                  "dev"
-                ];
-              };
-
-              rawKernel = unpacked // {
-                override = _: rawKernel;
-                config = { }; # if you can, grab the actual .config from the zip here
-                features = {
-                  efiBootStub = true;
-                  ia32Emulation = true;
-                };
-                kernelOlder = lib.versionOlder kver;
-                kernelAtLeast = lib.versionAtLeast kver;
-                commonMakeFlags = [ ];
-              };
-            in
-            final.linuxPackagesFor rawKernel;
-
-          # 3. nesting logic: (src|bin) -> variant -> device
           nestKernels =
             pkgs:
             let
-              variants = lib.unique (map (n: (parse n).variant) (lib.attrNames pkgs));
+              # instead of just taking the variant name, we decide which ones are "roots"
+              # we want 'generic-release' to effectively become 'generic' in the final attrset
+              allNames = lib.attrNames pkgs;
+              variants = lib.unique (
+                map (
+                  n:
+                  let
+                    v = (parse n).variant;
+                  in
+                  if lib.hasSuffix "-release" v then lib.removeSuffix "-release" v else v
+                ) allNames
+              );
             in
             lib.genAttrs variants (
               v:
               let
-                matching = lib.filterAttrs (n: _: (parse n).variant == v) pkgs;
+                # grab both the normal and the -release version for this variant
+                matching = lib.filterAttrs (
+                  n: _:
+                  let
+                    var = (parse n).variant;
+                  in
+                  var == v || var == "${v}-release"
+                ) pkgs;
               in
               lib.mapAttrs' (
                 n: pkg:
                 let
-                  device = (parse n).device;
-                  # the trick: if it's already a set (from mkBin), grab the kernel.
-                  # if it's a raw derivation (src), it IS the kernel.
+                  p = parse n;
+                  device = p.device;
+                  # if the variant is the release version, we might want to map it to 'default'
+                  # or just keep it as the primary device name
                   kernel = if pkg ? kernel then pkg.kernel else pkg;
-
-                  # ensure it's overridable so linuxPackagesFor doesn't choke
                   overridable = if kernel ? override then kernel else (kernel // { override = _: overridable; });
-
-                  # get the full package set nixos wants
                   pkgSet = if pkg ? kernel then pkg else (final.linuxPackagesFor overridable);
                 in
-                # Merge them. kernel // pkgSet makes it a derivation (leaf) that HAS set attributes.
                 lib.nameValuePair device (kernel // pkgSet)
               ) matching
             );
-
-          popcornBin = lib.mapAttrs mkBin popcornFiltered;
-
         in
         {
           lib = lib;
           zenos = (zenCore.mkPackageTree final ./pkgs) // {
             legacy = prev;
-            system.kernels.popcorn = {
-              src = nestKernels popcornFiltered;
-              # bin = nestKernels popcornBin;
-            };
+            system.kernels.popcorn = nestKernels popcornFiltered;
+            # bin = nestKernels popcornBin;
+
           };
         };
       packages.${system} =
@@ -169,6 +124,14 @@
 
       nixosModules.default = {
         imports = zenOSModules.all;
+
+        # Add binary cache settings here
+        nix.settings = {
+          substituters = [ "https://popcorn-kernel.cachix.org" ];
+          trusted-public-keys = [
+            "popcorn-kernel.cachix.org-1:K+G41DukvEC4G8sYrrb5ufsAmasSOkWx7KAYtoSmaww="
+          ];
+        };
       };
 
       docs = import ./lib/docs.nix {
