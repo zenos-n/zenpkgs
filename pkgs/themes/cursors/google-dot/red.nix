@@ -23,19 +23,11 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = ''
-      Custom rEFInd bootloader theme for ZenOS
+      Google Cursor
 
-      **ZenOS rEFInd Theme** provides a clean, modern look for the rEFInd
-      bootloader. It includes custom icons, high-resolution backgrounds,
-      and configuration settings optimized for the ZenOS minimal aesthetic.
-
-      **Features:**
-      - Fullscreen high-detail banner support.
-      - Branded icon sets for various operating systems.
-      - Streamlined UI hiding unnecessary boot elements.
+      An OpenSource cursor theme inspired by Google.
     '';
-    license = licenses.napalm;
-    maintainers = with maintainers; [ doromiert ];
-    platforms = platforms.linux;
+    license = licenses.gpl3;
+    platforms = platforms.all;
   };
 }
