@@ -1,0 +1,102 @@
+_meta = {
+    brief = "Declarative disk partitioning and mounting";
+    description = ''
+        Handles disk setups, automated partitioning via sgdisk, and mounting.
+        Includes logic to conditionally wipe disks if a specific marker file is missing,
+    '';
+    license = $l.napalm;
+    maintainers = [ $m.doromiert ];
+};
+
+(freeform device) = {
+    _meta = {
+        brief = "The device to configure";
+        description = ''
+            The WWN ID of the hard drive to configure, these can be found in /dev/disk/by-id/
+
+            Example: "ata-HS-SSD-E100_512G_30030120659"
+        '';
+    };
+    managed = {
+        _meta = {
+            brief = "Whether the disk is managed or not";
+            description = ''
+                If enabled, ZenOS will automatically format and partition the hard drive according to the configuration.
+            '';
+            type = $type.boolean;
+        };
+        !{
+
+        };
+    };
+    partitions = {
+        _meta = {
+            brief = "The partitions on this hard drive.";
+        }
+        (freeform partition) = {
+            mount = {
+                _meta = {
+                    brief = "The mount point of this partition";
+                    type = $type.string;
+                };
+
+                !{
+
+                };
+            };
+            size = {
+                _meta = {
+                    brief = "The size of the partition";
+                    description = ''
+                        Can be provided as:
+                            - TB
+                            - GB
+                            - MB
+                            - KB
+
+                        Set to empty for the partition to use the remaining hard drive space divided among other partitions with no set size.
+                    '';
+                    type = $type.string;
+                };
+
+                !{
+
+                };
+            };
+            filesystem = {
+                _meta = {
+                    brief = "The filesystem to use on this partition";
+                    type = $type.enum [ "fat16" "fat32" "ntfs" "btrfs" "ext3" "ext4" "linuxswap" "xfs" ];
+                };
+
+                !{
+
+                };
+            };
+            label = {
+                _meta = {
+                    brief = "The label for this partition";
+                    type = $type.string;
+                };
+                !{
+
+                };
+            };
+            id = {
+                _meta = {
+                    brief = "The ID for this partition";
+                    description = ''
+                        The UUID for this partition.
+                        If this hard drive is managed, you shouldn't touch this value.
+
+                        Example: 5d383f5d-2d76-46ea-9b93-071618782cb6
+                    '';
+                    type = $type.string;
+                };
+                !{
+
+                };
+            };
+        };
+    };
+};
