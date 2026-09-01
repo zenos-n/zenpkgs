@@ -320,6 +320,7 @@
             imports = [ ./nixos-modules/installed-base.nix ];
             nix.registry.zenpkgs.flake = self;
           };
+          disks = ./nixos-modules/disks.nix;
           oobe = ./nixos-modules/oobe.nix;
           webapps = {
             imports = [
