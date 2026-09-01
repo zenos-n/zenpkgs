@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   pkgs,
@@ -9,7 +10,12 @@ stdenv.mkDerivation {
   pname = "zenos-fastfetch";
   version = "1.0";
 
-  src = ./src;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "fastfetch-config";
+    rev = "251097014340b0942f978c66698e0bf803517369";
+    hash = "sha256-Rhq5uFVZ/KOvHZucfFA+5Aoa1pl9NQf0xJQHnINQumQ=";
+  };
 
   nativeBuildInputs = [ pkgs.makeWrapper ];
 
@@ -18,8 +24,8 @@ stdenv.mkDerivation {
     mkdir -p $out/bin
 
     # Copy resource files
-    cp resources/ascii.txt $out/share/fastfetch/presets/
-    cp resources/zenos.jsonc $out/share/fastfetch/presets/
+    cp $src/ascii.txt $out/share/fastfetch/presets/
+    cp $src/config.jsonc $out/share/fastfetch/presets/zenos.jsonc
 
     # CRITICAL: Patch the config to point to the global store path instead of ~/.config
     substituteInPlace $out/share/fastfetch/presets/zenos.jsonc \

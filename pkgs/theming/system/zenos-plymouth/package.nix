@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   pkgs,
@@ -14,7 +15,12 @@ stdenv.mkDerivation {
   pname = "zenos-plymouth";
   version = "1.0";
 
-  src = ./src;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "plymouth-theme";
+    rev = "e6478d286075ec85ca8827d3625ed7ecd508c656";
+    hash = "sha256-ltX1704M5umTuq78HfapUdUHB1Esfa8PUoSsk7Tg1DU=";
+  };
 
   nativeBuildInputs = with pkgs; [
     imagemagick

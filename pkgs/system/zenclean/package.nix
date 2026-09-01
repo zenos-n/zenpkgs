@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   python3,
@@ -9,7 +10,12 @@ stdenv.mkDerivation {
   pname = "zenos-maintenance";
   version = "0.1.0";
 
-  src = ./src;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "zenclean";
+    rev = "58514194ad8e29a5924dd12322ab3369421a9040";
+    hash = "sha256-O14SrFdwrV0M034nYHOMiAk/aLS3MF8CvfDdmV+jU+s=";
+  };
   nativeBuildInputs = [ python3.pkgs.wrapPython ];
   buildInputs = [ python3 ];
   propagatedBuildInputs = [ python3.pkgs.dbus-python ];

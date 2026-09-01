@@ -48,7 +48,7 @@ in
         noto-fonts
         noto-fonts-color-emoji
         nerd-fonts.atkynson-mono
-        zenos.theming.fonts.zero-font
+        zenos.theming.fonts.zero.regular
       ];
 
       fontDir.enable = true;

@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   pkgs,
@@ -9,7 +10,12 @@ stdenv.mkDerivation {
   pname = "zenos-rebuild";
   version = "1.0";
 
-  src = ./src;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "zenos-rebuild";
+    rev = "a1926938ab60cbac493bd4cd1bb48feb4afaac21";
+    hash = "sha256-pyJ5Jb2CDM83r3QmoNtrwKnHE3HWfccs7ekOroPRutM=";
+  };
 
   propagatedBuildInputs = with pkgs; [
     libnotify

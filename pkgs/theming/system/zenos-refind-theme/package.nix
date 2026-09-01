@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   ...
@@ -8,7 +9,12 @@ stdenv.mkDerivation {
   pname = "zenos-refind-theme";
   version = "1.0";
 
-  src = ./src;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "refind-theme";
+    rev = "abce6b9ed49e1a7291e94d21d08b0189f39caf59";
+    hash = "sha256-wpH6ctF1awFW+HPLBotBxqRRxabO8/yhxdJYqm0QxgQ=";
+  };
 
   dontUnpack = true;
 
@@ -33,15 +39,14 @@ stdenv.mkDerivation {
 
     # Hide everything
     hideui singleuser,arrows
-    showtools
-    dont_scan_tools memtest,shell,mok_tool
+    dont_scan_tools shell,shell.efi,shellx64.efi,memtest,memtest.efi,memtest86.efi,mok_tool,MokManager.efi,mmx64.efi
 
     EOF
   '';
 
   installPhase = ''
     mkdir $out/boot/EFI/refind/themes/zenos-refind-theme -p
-    cp -r $src/resources $out/boot/EFI/refind/themes/zenos-refind-theme/
+    cp -r $src $out/boot/EFI/refind/themes/zenos-refind-theme/resources
     cp -r theme.conf $out/boot/EFI/refind/themes/zenos-refind-theme/
   '';
 

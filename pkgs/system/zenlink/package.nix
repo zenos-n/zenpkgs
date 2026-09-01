@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   makeWrapper,
@@ -37,15 +38,21 @@ stdenv.mkDerivation {
   pname = "zenlink";
   version = "1.0.0";
 
-  src = ./src/scripts;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "zenlink";
+    rev = "12bd434f5fd97bb647ea55b4bcf8d83645d8715a";
+    hash = "sha256-0sQnvjfENhHOadD/39NXJrllGP2Bwir7TDlbC1/Bj2w=";
+  };
+  dontUnpack = true;
 
   nativeBuildInputs = [ makeWrapper ];
 
   installPhase = ''
-    install -Dm755 zl-config.sh $out/bin/zl-config
-    install -Dm755 zl-daemon.py $out/bin/zl-daemon
-    install -Dm755 zl-installer.sh $out/bin/zl-installer
-    install -Dm755 zl-debug-phone.sh $out/bin/zl-debug-phone
+    install -Dm755 $src/scripts/zl-config.sh $out/bin/zl-config
+    install -Dm755 $src/scripts/zl-daemon.py $out/bin/zl-daemon
+    install -Dm755 $src/scripts/zl-installer.sh $out/bin/zl-installer
+    install -Dm755 $src/scripts/zl-debug-phone.sh $out/bin/zl-debug-phone
   '';
 
   fixupPhase = ''

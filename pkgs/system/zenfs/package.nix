@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   python3,
@@ -13,7 +14,12 @@ stdenv.mkDerivation {
   pname = "zenfs";
   version = "2.0";
 
-  src = ./src;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "zenfs";
+    rev = "c0b7552f3111b5a4169f98a288ed6d98b78c4e9b";
+    hash = "sha256-tXBB1DrOUcBNmaZykwr5M06mDwrmd+g/GiOmMlEdiXA=";
+  };
   dontUnpack = false;
 
   nativeBuildInputs = [ makeWrapper ];

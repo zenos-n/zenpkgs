@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   pkgs,
@@ -25,7 +26,12 @@ stdenv.mkDerivation {
   pname = "zenboot";
   version = "1.0";
 
-  src = ./src;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "zenboot";
+    rev = "0c978cc5a9fe15389fdcd734e2d5acc622abbf01";
+    hash = "sha256-rixWU3G3TiAejqzdjhfknMdJis9yXBdlCjHuPp+uFxk=";
+  };
   dontUnpack = true;
   nativeBuildInputs = with pkgs; [
     refind

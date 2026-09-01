@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   hicolor-icon-theme,
@@ -9,7 +10,12 @@ stdenv.mkDerivation {
   pname = "zenos-icons";
   version = "1.0";
 
-  src = ./src;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "zenos-icons";
+    rev = "d9a053bd0e625973bdf7eb59315ee4a77bee6434";
+    hash = "sha256-KxNRIFO3b4zuXGrpu1xOxyU0PbTiWJ9rFVvc1UsrU+g=";
+  };
   propagatedBuildInputs = [ hicolor-icon-theme ];
   dontUnpack = true;
 

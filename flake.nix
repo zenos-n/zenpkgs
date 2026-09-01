@@ -423,6 +423,27 @@
             assert pkgs.zenos.legacy.firefox.outPath == pkgs.firefox.outPath;
             assert !(pkgs ? legacy);
             pkgs.runCommand "zenpkgs-legacy-interface-check" { } "touch $out";
+          source-policy = pkgs.runCommand "zenpkgs-source-policy-check" { src = self; } ''
+            bundled_dir="$(${pkgs.findutils}/bin/find "$src/pkgs" -type d \
+              \( -name src -o -name resources -o -name assets \) -print -quit)"
+            if [ -n "$bundled_dir" ]; then
+              echo "bundled package source directory is forbidden: $bundled_dir" >&2
+              exit 1
+            fi
+
+            bundled_file="$(${pkgs.findutils}/bin/find "$src/pkgs" -type f \
+              \( -name '*.zip' -o -name '*.tar' -o -name '*.tar.gz' \
+              -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \
+              -o -name '*.svg' -o -name '*.ttf' -o -name '*.otf' \
+              -o -name '*.woff' -o -name '*.woff2' -o -name '*.mp4' \
+              -o -name '*.webm' \) -print -quit)"
+            if [ -n "$bundled_file" ]; then
+              echo "bundled package payload is forbidden: $bundled_file" >&2
+              exit 1
+            fi
+
+            touch "$out"
+          '';
           installed-base = installedSystemChecks.installed-base;
           oobe = installedSystemChecks.oobe;
         }

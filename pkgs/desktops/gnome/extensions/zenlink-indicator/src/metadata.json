@@ -1,8 +1,0 @@
-{
-  "name": "ZenLink Control",
-  "description": "Quick Settings toggle for ZenLink (Android-Linux Audio/Video Bridge)",
-  "uuid": "zenlink@neg-zero.com",
-  "shell-version": [ "45", "46", "47", "48", "49" ],
-  "url": "https://github.com/zenos-n/zenpkgs/tree/main/pkgs/desktops/gnome/extensions/zenlink-indicator",
-  "version": 2
-}

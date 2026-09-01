@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   pkgs,
@@ -9,7 +10,12 @@ stdenv.mkDerivation {
   pname = "zenlink-indicator";
   version = "1.0";
 
-  src = ./src;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "zenlink-indicator";
+    rev = "da98d3f4915370dcd668830ba8620aa57e5b25eb";
+    hash = "sha256-R58/HbEthHAAg/wqvyMpO8MAdXUcfBLGPwifGAzfJfk=";
+  };
 
   unpackPhase = " ";
 

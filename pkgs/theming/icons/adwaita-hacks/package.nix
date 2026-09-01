@@ -1,4 +1,5 @@
 {
+  fetchFromGitHub,
   lib,
   stdenv,
   ...
@@ -8,7 +9,12 @@ stdenv.mkDerivation {
   pname = "adwaita-hacks";
   version = "1.0";
 
-  src = ./src;
+  src = fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "adwaita-hacks";
+    rev = "43fcf4a6448ae3ce4c386950f656e649d745bb1f";
+    hash = "sha256-llATSR56yVWDKm6w+3071X77bpl8UDJ9GHKz//F2BoM=";
+  };
   dontUnpack = true;
   # Compatibility aliases intentionally resolve through the inherited Adwaita theme.
   dontCheckForBrokenSymlinks = true;
