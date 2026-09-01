@@ -83,29 +83,8 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.sharedModules = [
       (
-        { lib, ... }:
+        { ... }:
         {
-          home.activation.firefoxRescue = lib.hm.dag.entryBefore [ "linkGeneration" ] ''
-            for p_ini in $HOME/.mozilla/firefox/profiles.ini; do
-              if [ ! -f "$p_ini" ] && [ ! -L "$p_ini" ]; then
-                mkdir -p $(dirname "$p_ini")
-                cat > "$p_ini" <<EOF
-            [Profile0]
-            Name=default
-            IsRelative=1
-            Path=default
-            Default=1
-
-            [General]
-            StartWithLastProfile=1
-            Version=2
-            EOF
-              elif [ -f "$p_ini" ] && [ ! -s "$p_ini" ] && [ ! -L "$p_ini" ]; then
-                mv "$p_ini" "$p_ini.bak.$(date +%s)"
-              fi
-            done
-          '';
-
           programs.firefox = {
             enable = true;
             profiles.default = {
@@ -126,9 +105,9 @@ in
           };
 
           home.file = {
-            ".mozilla/firefox/default/chrome/userChrome.css".source = customChromeCss;
-            ".mozilla/firefox/default/chrome/userContent.css".source = customContentCss;
-            ".mozilla/firefox/default/chrome/gnome-theme".source = gnomeThemeRepo;
+            ".config/mozilla/firefox/default/chrome/userChrome.css".source = customChromeCss;
+            ".config/mozilla/firefox/default/chrome/userContent.css".source = customContentCss;
+            ".config/mozilla/firefox/default/chrome/gnome-theme".source = gnomeThemeRepo;
           };
         }
       )
