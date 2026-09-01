@@ -306,8 +306,17 @@
           legacy = legacyTree;
           programs = programsTree;
           masterful-gestures = inputs.masterful-gestures.nixosModules.default;
-          installed-base = ./nixos-modules/installed-base.nix;
+          installed-base = {
+            imports = [ ./nixos-modules/installed-base.nix ];
+            nix.registry.zenpkgs.flake = self;
+          };
           oobe = ./nixos-modules/oobe.nix;
+          webapps = {
+            imports = [
+              inputs.home-manager.nixosModules.home-manager
+              ./nixos-modules/webapps.nix
+            ];
+          };
           # popcorn-cache = ./nixos-modules/popcorn-cache.nix;
           interface = {
             imports = [
@@ -388,6 +397,22 @@
         // (flatten [ "zenos" ] (interface.buildPackageTree pkgs registry))
       );
 
+      legacyPackages = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ self.overlays.default ];
+            config.allowUnfree = true;
+          };
+        in
+        {
+          legacy = pkgs.zenos.legacy // {
+            nvim = pkgs.zenos.legacy.neovim;
+          };
+        }
+      );
+
       checks = forAllSystems (
         system:
         let
@@ -411,6 +436,7 @@
             interfaceModule = self.nixosModules.interface;
             installedBaseModule = self.nixosModules.installed-base;
             oobeModule = self.nixosModules.oobe;
+            webappsModule = self.nixosModules.webapps;
           };
         in
         {
@@ -423,6 +449,9 @@
             assert pkgs.zenos.legacy.firefox.outPath == pkgs.firefox.outPath;
             assert !(pkgs ? legacy);
             pkgs.runCommand "zenpkgs-legacy-interface-check" { } "touch $out";
+          legacy-packages =
+            assert self.legacyPackages.${system}.legacy.nvim.outPath == pkgs.neovim.outPath;
+            pkgs.runCommand "zenpkgs-legacy-packages-check" { } "touch $out";
           source-policy = pkgs.runCommand "zenpkgs-source-policy-check" { src = self; } ''
             bundled_dir="$(${pkgs.findutils}/bin/find "$src/pkgs" -type d \
               \( -name src -o -name resources -o -name assets \) -print -quit)"
@@ -446,6 +475,7 @@
           '';
           installed-base = installedSystemChecks.installed-base;
           oobe = installedSystemChecks.oobe;
+          webapps = installedSystemChecks.webapps;
         }
       );
     };

@@ -256,8 +256,8 @@ in
       "d ${oobeHome}/.local/share 0700 ${cfg.userName} users -"
       "d ${oobeHome}/.local/share/gnome-shell 0700 ${cfg.userName} users -"
       "f ${oobeHome}/.local/share/gnome-shell/lock-warning-shown 0600 ${cfg.userName} users -"
-      "z /Config/ZenOS/Flake 0775 ${cfg.userName} users -"
-      "Z /Config/ZenOS/Flake - ${cfg.userName} users -"
+      "z /Config/ZenOS 0775 ${cfg.userName} users -"
+      "Z /Config/ZenOS - ${cfg.userName} users -"
     ];
   };
 }

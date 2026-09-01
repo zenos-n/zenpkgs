@@ -260,4 +260,66 @@
       "enable"
     ];
   }
+  {
+    id = "system.services.ssh.enable";
+    target = [
+      "zenos"
+      "system"
+      "services"
+      "ssh"
+      "enable"
+    ];
+    legacyPath = [
+      "services"
+      "openssh"
+      "enable"
+    ];
+  }
+  {
+    id = "system.services.ssh.open-firewall";
+    target = [
+      "zenos"
+      "system"
+      "services"
+      "ssh"
+      "openFirewall"
+    ];
+    legacyPath = [
+      "services"
+      "openssh"
+      "openFirewall"
+    ];
+  }
+  {
+    id = "system.services.ssh.password-authentication";
+    target = [
+      "zenos"
+      "system"
+      "services"
+      "ssh"
+      "passwordAuthentication"
+    ];
+    legacyPath = [
+      "services"
+      "openssh"
+      "settings"
+      "PasswordAuthentication"
+    ];
+  }
+  {
+    id = "system.services.ssh.permit-root-login";
+    target = [
+      "zenos"
+      "system"
+      "services"
+      "ssh"
+      "permitRootLogin"
+    ];
+    legacyPath = [
+      "services"
+      "openssh"
+      "settings"
+      "PermitRootLogin"
+    ];
+  }
 ]

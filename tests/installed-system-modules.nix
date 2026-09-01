@@ -5,6 +5,7 @@
   oobeModule,
   pkgs,
   system,
+  webappsModule,
 }:
 
 let
@@ -21,9 +22,38 @@ let
     installedBaseModule
     {
       zenos.desktops.gnome.enable = true;
+      zenos.system.services.ssh = {
+        enable = true;
+        openFirewall = true;
+        passwordAuthentication = false;
+        permitRootLogin = "no";
+      };
     }
   ];
   final = finalSystem.config;
+
+  webappsSystem = mkSystem [
+    interfaceModule
+    installedBaseModule
+    webappsModule
+    {
+      users.users.web = {
+        isNormalUser = true;
+        home = "/home/web";
+      };
+      zenos.system.webApps = {
+        enable = true;
+        users.web = {
+          base = "firefox";
+          apps.example = {
+            name = "Example";
+            url = "https://example.com";
+          };
+        };
+      };
+    }
+  ];
+  webapps = webappsSystem.config;
 
   disabledSystem = mkSystem [
     interfaceModule
@@ -120,6 +150,7 @@ in
     assert final.system.nixos.distroId == "zenos";
     assert final.system.nixos.distroName == "ZenOS";
     assert final.nixpkgs.config.allowUnfree;
+    assert final.nix.registry ? zenpkgs;
     assert final.networking.networkmanager.enable;
     assert final.services.pipewire.enable;
     assert final.services.pipewire.alsa.enable;
@@ -128,6 +159,10 @@ in
     assert final.hardware.enableRedistributableFirmware;
     assert final.boot.loader.efi.canTouchEfiVariables;
     assert final.services.displayManager.gdm.enable;
+    assert final.services.openssh.enable;
+    assert final.services.openssh.openFirewall;
+    assert !final.services.openssh.settings.PasswordAuthentication;
+    assert final.services.openssh.settings.PermitRootLogin == "no";
     assert !final.services.displayManager.autoLogin.enable;
     assert final.services.displayManager.autoLogin.user == null;
     assert final.services.displayManager.defaultSession == null;
@@ -146,8 +181,14 @@ in
     assert !(disabled.users.users ? zenos);
     assert !(disabled.systemd.user.services ? zenos-oobe);
     assert !(disabled.environment.sessionVariables ? ZENOS_OOBE);
-    assert !(lib.any (lib.hasInfix "/Config/ZenOS/Flake") disabled.systemd.tmpfiles.rules);
+    assert !(lib.any (lib.hasInfix "/Config/ZenOS") disabled.systemd.tmpfiles.rules);
     pkgs.runCommand "zenpkgs-installed-base-check" { } "touch $out";
+
+  webapps =
+    assert webapps.home-manager.users.web.zenos.webApps.enable;
+    assert webapps.home-manager.users.web.zenos.webApps.base == "firefox";
+    assert webapps.home-manager.users.web.xdg.desktopEntries.example.name == "Example";
+    pkgs.runCommand "zenpkgs-webapps-check" { } "touch $out";
 
   oobe =
     assert temporary.zenos.oobe.userName == "zenos";
@@ -185,11 +226,11 @@ in
     ) invalidSetupAssertions;
     assert dconfDatabase.settings."org/gnome/desktop/lockdown".disable-log-out;
     assert lib.elem "/org/gnome/shell/enabled-extensions" dconfDatabase.locks;
-    assert lib.elem "z /Config/ZenOS/Flake 0775 zenos users -" temporary.systemd.tmpfiles.rules;
-    assert lib.elem "Z /Config/ZenOS/Flake - zenos users -" temporary.systemd.tmpfiles.rules;
+    assert lib.elem "z /Config/ZenOS 0775 zenos users -" temporary.systemd.tmpfiles.rules;
+    assert lib.elem "Z /Config/ZenOS - zenos users -" temporary.systemd.tmpfiles.rules;
     assert lib.elem "f /run/zenos-oobe/.local/share/gnome-shell/lock-warning-shown 0600 zenos users -"
       temporary.systemd.tmpfiles.rules;
-    assert !(lib.elem "d /Config/ZenOS/Flake 0775 zenos users -" temporary.systemd.tmpfiles.rules);
+    assert !(lib.elem "d /Config/ZenOS 0775 zenos users -" temporary.systemd.tmpfiles.rules);
     pkgs.runCommand "zenpkgs-oobe-check" { } ''
       extension=${extensionPackage}/share/gnome-shell/extensions/zenos-oobe-mode@neg-zero.com
       mode=${extensionPackage}/share/gnome-shell/modes/zenos-oobe.json

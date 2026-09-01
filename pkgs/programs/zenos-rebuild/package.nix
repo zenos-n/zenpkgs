@@ -13,8 +13,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "zenos-n";
     repo = "zenos-rebuild";
-    rev = "a1926938ab60cbac493bd4cd1bb48feb4afaac21";
-    hash = "sha256-pyJ5Jb2CDM83r3QmoNtrwKnHE3HWfccs7ekOroPRutM=";
+    rev = "75d451e2df3fadaa86a05540fbb3c3c6896d79a5";
+    hash = "sha256-wf61uXZsWkHl+a+bUnZi3/3t12auShgFfeRs4fzOC38=";
   };
 
   propagatedBuildInputs = with pkgs; [
