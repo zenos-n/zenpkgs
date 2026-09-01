@@ -393,6 +393,7 @@
           registry-docs = pkgs.writeText "zenpkgs-registry.json" (
             builtins.toJSON (interface.registryDocs registry)
           );
+          zenos-rebuild = pkgs.zenos.apps.system.zenos-rebuild;
         }
         // (flatten [ "zenos" ] (interface.buildPackageTree pkgs registry))
       );
