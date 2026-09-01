@@ -45,7 +45,7 @@ in
 
     users.mutableUsers = lib.mkDefault false;
 
-    zenos.system.release.stateVersion = lib.mkDefault "26.05";
+    zenos.system.release.stateVersion = lib.mkDefault "1.0.0";
 
     nix.settings.experimental-features = lib.mkDefault [
       "nix-command"
