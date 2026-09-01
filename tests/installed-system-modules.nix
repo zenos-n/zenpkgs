@@ -127,6 +127,8 @@ in
     assert final.hardware.enableRedistributableFirmware;
     assert final.boot.loader.efi.canTouchEfiVariables;
     assert final.services.displayManager.gdm.enable;
+    assert !final.services.displayManager.autoLogin.enable;
+    assert final.services.displayManager.autoLogin.user == null;
     assert final.services.displayManager.defaultSession == "gnome";
     assert !final.users.mutableUsers;
     assert !final.services.greetd.enable;

@@ -39,7 +39,7 @@ stdenv.mkDerivation {
 
     # Hide everything
     hideui singleuser,arrows
-    dont_scan_tools shell,shell.efi,shellx64.efi,memtest,memtest.efi,memtest86.efi,mok_tool,MokManager.efi,mmx64.efi
+    showtools shutdown,reboot,firmware
 
     EOF
   '';
