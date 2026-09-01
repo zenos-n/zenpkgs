@@ -81,31 +81,31 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.activation.firefoxRescue = lib.hm.dag.entryBefore [ "linkGeneration" ] ''
-      for p_ini in $HOME/.mozilla/firefox/profiles.ini; do
-        if [ ! -f "$p_ini" ] && [ ! -L "$p_ini" ]; then
-          mkdir -p $(dirname "$p_ini")
-          cat > "$p_ini" <<EOF
-      [Profile0]
-      Name=default
-      IsRelative=1
-      Path=default
-      Default=1
-
-      [General]
-      StartWithLastProfile=1
-      Version=2
-      EOF
-        elif [ -f "$p_ini" ] && [ ! -s "$p_ini" ] && [ ! -L "$p_ini" ]; then
-          mv "$p_ini" "$p_ini.bak.$(date +%s)"
-        fi
-      done
-    '';
-
     home-manager.sharedModules = [
       (
         { ... }:
         {
+          home.activation.firefoxRescue = lib.hm.dag.entryBefore [ "linkGeneration" ] ''
+            for p_ini in $HOME/.mozilla/firefox/profiles.ini; do
+              if [ ! -f "$p_ini" ] && [ ! -L "$p_ini" ]; then
+                mkdir -p $(dirname "$p_ini")
+                cat > "$p_ini" <<EOF
+            [Profile0]
+            Name=default
+            IsRelative=1
+            Path=default
+            Default=1
+
+            [General]
+            StartWithLastProfile=1
+            Version=2
+            EOF
+              elif [ -f "$p_ini" ] && [ ! -s "$p_ini" ] && [ ! -L "$p_ini" ]; then
+                mv "$p_ini" "$p_ini.bak.$(date +%s)"
+              fi
+            done
+          '';
+
           programs.firefox = {
             enable = true;
             profiles.default = {
