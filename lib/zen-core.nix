@@ -66,17 +66,24 @@ let
 
   # much cleaner now
   mkPackageTree =
-    pkgs: root:
+    pkgs: legacyPkgs: root:
     let
-      isPkg = n: t: t == "regular" && lib.hasSuffix ".nix" n;
+      isPkg = n: t: t == "regular" && (lib.hasSuffix ".nix" n || lib.hasSuffix ".zpkg" n);
       files = walkDir root isPkg;
 
       toPackageAttr =
         entry:
         let
-          pname = lib.removeSuffix ".nix" entry.name;
+          pname = lib.removeSuffix ".zpkg" (lib.removeSuffix ".nix" entry.name);
           attrPath = entry.relPath ++ [ pname ];
-          pkg = pkgs.callPackage entry.absPath { };
+          pkg =
+            if lib.hasSuffix ".zpkg" entry.name then
+              (import ./zone-pkg-builder.nix { inherit lib; }) {
+                inherit pkgs legacyPkgs;
+                filepath = entry.absPath;
+              }
+            else
+              pkgs.callPackage entry.absPath { };
         in
         lib.setAttrByPath attrPath pkg;
     in

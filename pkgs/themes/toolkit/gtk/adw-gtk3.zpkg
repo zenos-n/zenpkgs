@@ -1,0 +1,10 @@
+_meta = {
+  brief = "Unofficial GTK 3 port of libadwaita";
+  description = "Exposes the upstream nixpkgs package through the ZenOS toolkit theme interface.";
+  maintainers = [ $m.doromiert ];
+};
+
+_interface = {
+  from = "nixpkgs";
+  path = [ "adw-gtk3" ];
+};

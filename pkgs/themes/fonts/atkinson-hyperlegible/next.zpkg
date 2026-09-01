@@ -1,0 +1,10 @@
+_meta = {
+  brief = "Atkinson Hyperlegible Next";
+  description = "Exposes the upstream nixpkgs font package through the ZenOS font interface.";
+  maintainers = [ $m.doromiert ];
+};
+
+_interface = {
+  from = "nixpkgs";
+  path = [ "atkinson-hyperlegible-next" ];
+};

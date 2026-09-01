@@ -106,7 +106,7 @@
         in
         {
           lib = lib;
-          zenos = (zenCore.mkPackageTree final ./pkgs) // {
+          zenos = (zenCore.mkPackageTree final prev ./pkgs) // {
             legacy = prev;
             system.kernels.popcorn = nestKernels popcornFiltered;
             # bin = nestKernels popcornBin;
@@ -120,7 +120,28 @@
             overlays = [ self.overlays.default ];
           };
         in
-        pkgs.zenos;
+        {
+          interface-adw-gtk3 = pkgs.zenos.themes.toolkit.gtk.adw-gtk3;
+          interface-atkinson-hyperlegible-next = pkgs.zenos.themes.fonts.atkinson-hyperlegible.next;
+        };
+
+      checks.${system} =
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ self.overlays.default ];
+          };
+          adw = pkgs.zenos.themes.toolkit.gtk.adw-gtk3;
+          font = pkgs.zenos.themes.fonts.atkinson-hyperlegible.next;
+        in
+        {
+          interface-packages =
+            assert adw.drvPath == pkgs.adw-gtk3.drvPath;
+            assert font.drvPath == pkgs.atkinson-hyperlegible-next.drvPath;
+            assert adw._zmeta.mode == "interface";
+            assert font._zmeta.interface.path == [ "atkinson-hyperlegible-next" ];
+            pkgs.runCommand "zenpkgs-interface-packages" { } "touch $out";
+        };
 
       nixosModules.default = {
         imports = zenOSModules.all;
@@ -180,7 +201,12 @@
               else
                 e.absPath
             ) allFiles;
-            packages = map (e: e.absPath) (getFiles ./pkgs);
+            packages = map (e: e.absPath) (
+              if builtins.pathExists ./pkgs then
+                zenCore.walkDir ./pkgs (n: t: t == "regular" && (lib.hasSuffix ".nix" n || lib.hasSuffix ".zpkg" n))
+              else
+                [ ]
+            );
           };
       };
 

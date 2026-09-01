@@ -1,9 +1,13 @@
 { lib, ... }:
+
+{
+  pkgs,
+  legacyPkgs,
+  filepath,
+}:
+
 let
   zDialect = import ./zone-dialect.nix { inherit lib; };
-in
-pkgs: filepath:
-let
   content = builtins.readFile filepath;
   name = lib.removeSuffix ".zpkg" (builtins.baseNameOf filepath);
 
@@ -27,50 +31,79 @@ let
   };
 
   meta = evaluated._meta or { };
-  rawSrc = evaluated._src or (throw "ZenOS Error: Missing _src in ${filepath}");
-  src = if builtins.isString rawSrc then builtins.fetchTarball rawSrc else rawSrc;
+  interface = evaluated._interface or null;
+  hasBuildMode = evaluated ? _src || evaluated ? _build;
 
-  buildConf = evaluated._build or { };
-  buildType = buildConf.type.name or "stdenv";
+  interfacePath = if interface == null then [ ] else interface.path or [ ];
+  interfaceSource = if interface == null then null else interface.from or null;
+  target = lib.attrByPath interfacePath null legacyPkgs;
 
-  drvArgs = {
-    pname = name;
-    version = meta.version or "0.1.0";
-    inherit src;
-    meta = {
-      description = meta.brief or "";
-      license = meta.license or null;
-    };
-    buildInputs = meta.deps or [ ];
-    nativeBuildInputs = meta.buildDeps or [ ];
-    propagatedBuildInputs = meta.exportDeps or [ ];
-  };
+  buildPackage =
+    let
+      rawSrc = evaluated._src or (throw "ZenOS Error: Missing _src in ${toString filepath}");
+      src = if builtins.isString rawSrc then builtins.fetchTarball rawSrc else rawSrc;
+      buildConf = evaluated._build or { };
+      buildType = buildConf.type.name or "stdenv";
+      drvArgs = {
+        pname = name;
+        version = meta.version or "0.1.0";
+        inherit src;
+        meta = {
+          description = meta.brief or "";
+          license = meta.license or null;
+        };
+        buildInputs = meta.deps or [ ];
+        nativeBuildInputs = meta.buildDeps or [ ];
+        propagatedBuildInputs = meta.exportDeps or [ ];
+      };
+    in
+    if buildType == "cargo" then
+      pkgs.rustPlatform.buildRustPackage (
+        drvArgs
+        // {
+          cargoHash = buildConf.cargoHash or lib.fakeHash;
+          RUSTFLAGS = "-C prefer-dynamic";
+          postConfigure = buildConf.postConfigure or "";
+          postFixup = ''
+            for bin in $out/bin/*; do
+              patchelf --add-rpath "${pkgs.lib.makeLibraryPath drvArgs.buildInputs}" "$bin" || true
+            done
+            ${buildConf.postFixup or ""}
+          '';
+        }
+        // (builtins.removeAttrs buildConf [
+          "type"
+          "cargoHash"
+          "postConfigure"
+          "postFixup"
+        ])
+      )
+    else
+      pkgs.stdenv.mkDerivation (drvArgs // buildConf);
 in
-if buildType == "cargo" then
-  pkgs.rustPlatform.buildRustPackage (
-    drvArgs
+if interface != null then
+  assert !hasBuildMode;
+  assert interfaceSource == "nixpkgs";
+  assert interfacePath != [ ];
+  if target == null then
+    throw "ZenOS interface ${toString filepath} cannot resolve nixpkgs.${lib.concatStringsSep "." interfacePath}"
+  else if !lib.isDerivation target then
+    throw "ZenOS interface ${toString filepath} did not resolve to a derivation"
+  else
+    target
     // {
-      cargoHash = buildConf.cargoHash or lib.fakeHash;
-      RUSTFLAGS = "-C prefer-dynamic";
-      postConfigure = ''
-        echo "[ZenOS ADL] Forcing cdylib injection..."
-        find $CARGO_HOME/registry/src/ -name "Cargo.toml" -exec sed -i 's/crate-type = \["rlib"\]/crate-type = \["cdylib"\]/g' {} + || true
-        ${buildConf.postConfigure or ""}
-      '';
-      postFixup = ''
-        echo "[ZenOS ADL] Managing RPATH..."
-        for bin in $out/bin/*; do
-          patchelf --add-rpath "${pkgs.lib.makeLibraryPath drvArgs.buildInputs}" "$bin" || true
-        done
-        ${buildConf.postFixup or ""}
-      '';
+      _zmeta = {
+        schemaVersion = 1;
+        mode = "interface";
+        interface = {
+          from = "nixpkgs";
+          path = interfacePath;
+        };
+        brief = meta.brief or (target.meta.description or name);
+        description = meta.description or meta.brief or (target.meta.description or name);
+        maintainers = meta.maintainers or [ ];
+      };
     }
-    // (builtins.removeAttrs buildConf [
-      "type"
-      "cargoHash"
-      "postConfigure"
-      "postFixup"
-    ])
-  )
 else
-  pkgs.stdenv.mkDerivation (drvArgs // buildConf)
+  assert hasBuildMode;
+  buildPackage

@@ -32,7 +32,7 @@ _meta = {
     partitions = {
         _meta = {
             brief = "The partitions on this hard drive.";
-        }
+        };
         (freeform partition) = {
             mount = {
                 _meta = {

@@ -39,18 +39,18 @@ Available in all three file types unless noted:
 
 | Variable | Resolves To                             | Available In     |
 | -------- | --------------------------------------- | ---------------- |
-| `$pkgs`  | ZenPkgs package set                     | all              |
-| `$lib`   | nixpkgs lib                             | all              |
-| `$cfg`   | Evaluated global config                 | `.zmdl`, `.zcfg` |
-| `$path`  | Config values at current module's scope | `.zmdl`          |
-| `$name`  | Current module/package name string      | all              |
-| `$type`  | ZenOS type primitives                   | `.zmdl`, `.zpkg` |
-| `$m`     | Maintainers registry                    | all              |
-| `$l`     | Licenses registry                       | all              |
-| `$c`     | Color primitives                        | `.zmdl`          |
-| `$v`     | `_let` variable access                  | `.zmdl`          |
-| `$f`     | Freeform identifier (current key name)  | `.zmdl`, `.zstr` |
-| `$deps`  | Runtime deps (resolved store paths)     | `.zpkg`          |
+| `$pkgs`  | ZenPkgs package set                      | all               |
+| `$lib`   | nixpkgs lib                              | all               |
+| `$cfg`   | Evaluated global config                  | `.zmdl`, `.zcfg`    |
+| `$path`  | Config values at current module's scope  | `.zmdl`            |
+| `$name`  | Current module/package name string       | all               |
+| `$type`  | ZenOS type primitives                    | `.zmdl`, `.zpkg`    |
+| `$m`     | Maintainers registry                     | all               |
+| `$l`     | Licenses registry                        | all               |
+| `$c`     | Color primitives                         | `.zmdl`            |
+| `$v`     | `_let` variable access                    | `.zmdl`            |
+| `$f`     | Freeform identifier (current key name)   | `.zmdl`, `.zstr`    |
+| `$deps`  | Runtime deps (resolved store paths)      | `.zpkg`            |
 
 ### 1.3 `_let` — Typed Variables
 
@@ -137,6 +137,17 @@ system.packages = {
   dev.rust = true;
 };
 ```
+
+packages can also control branches and leaves separately.
+
+```nix
+system.packages = {
+
+  gnome = true;
+  gnome.someProgram = false;
+};
+```
+the snippet above will install ALL subpackages of gnome except for gnome.someProgram
 
 #### 2.2.5 Legacy Passthrough
 
@@ -484,15 +495,21 @@ theme = {
 
 ### 4.1 Purpose
 
-`.zpkg` files define a single derivation. They compile to a `pkgs.stdenv.mkDerivation` or `pkgs.rustPlatform.buildRustPackage` call (or other builders), with ZenOS ADL applied automatically.
+`.zpkg` files define one package interface. They either expose an existing
+nixpkgs derivation with ZenOS metadata, or build a ZenOS-owned package from
+source. Existing upstream build recipes must use interface mode rather than be
+copied into ZenPkgs.
 
 ### 4.2 Top-Level Keys
 
 | Key      | Required | Description             |
 | -------- | -------- | ----------------------- |
-| `_meta`  | Yes      | Package metadata + deps |
-| `_src`   | Yes      | Source fetcher          |
-| `_build` | Yes      | Build configuration     |
+| `_meta`      | Yes         | ZenOS package metadata                    |
+| `_interface` | Interface   | Existing upstream derivation              |
+| `_src`       | Build       | Source fetcher for ZenOS-owned packages   |
+| `_build`     | Build       | Build configuration for ZenOS-owned code  |
+
+Exactly one mode is allowed: `_interface`, or `_src` plus `_build`.
 
 ### 4.3 `_meta` Block
 
@@ -528,6 +545,33 @@ Each scope starts from `global` and applies modifiers:
 Operators are resolved left-to-right. Multiple `++` and `--` can be chained on the same line.
 
 If `deps` is a flat list (not an attrset), it is treated as `deps.global` with all other scopes inheriting.
+
+#### 4.3.2 Interface Packages
+
+Interface mode reorganizes an existing nixpkgs package and attaches ZenOS
+metadata without copying or rebuilding its upstream recipe:
+
+```nix
+_meta = {
+  brief = "Unofficial GTK 3 port of libadwaita";
+  description = "Exposes the package through the ZenOS toolkit tree.";
+  maintainers = [ $m.doromiert ];
+};
+
+_interface = {
+  from = "nixpkgs";
+  path = [ "adw-gtk3" ];
+};
+```
+
+`from` currently accepts only `"nixpkgs"`. `path` is a non-empty attribute
+path resolved against the upstream package set before ZenOS overlays. The
+result keeps the upstream `drvPath`, `outPath`, version, license, platforms,
+homepage, and override functions. ZenOS metadata is attached as `_zmeta` for
+Lookup, Bazaar, Scaffold, and documentation.
+
+Interface mode forbids `_src`, `_build`, dependency rewriting, and ADL. Use
+build mode only for ZenOS-owned source or a substantive ZenOS patch/override.
 
 #### Nix Mapping
 
