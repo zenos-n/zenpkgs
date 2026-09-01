@@ -33,6 +33,7 @@ in
     );
 
     home-manager = {
+      backupFileExtension = "zenos-backup";
       useGlobalPkgs = true;
       useUserPackages = false;
       users = lib.mapAttrs (
