@@ -1,18 +1,5 @@
 [
   {
-    id = "system.release.state-version";
-    target = [
-      "zenos"
-      "system"
-      "release"
-      "stateVersion"
-    ];
-    legacyPath = [
-      "system"
-      "stateVersion"
-    ];
-  }
-  {
     id = "system.branding.distro-name";
     target = [
       "zenos"

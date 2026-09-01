@@ -120,6 +120,11 @@
               default = null;
               description = "Short source revision included in development release names.";
             };
+            stateVersion = lib.mkOption {
+              type = lib.types.enum [ "1.0.0" ];
+              default = "1.0.0";
+              description = "ZenOS compatibility version used by persistent system state.";
+            };
             full = lib.mkOption {
               type = lib.types.str;
               readOnly = true;
@@ -153,6 +158,11 @@
                 VERSION_ID = release.version;
               };
             };
+            system.stateVersion =
+              {
+                "1.0.0" = "26.05";
+              }
+              .${release.stateVersion};
 
             environment = {
               etc."machine-info".text = lib.mkDefault ''
@@ -427,7 +437,7 @@
             modules = [
               self.nixosModules.interface
               {
-                system.stateVersion = "26.05";
+                zenos.system.release.stateVersion = "1.0.0";
                 zenos.legacy.users.users.contract.isNormalUser = true;
               }
             ];
@@ -465,6 +475,7 @@
           };
           legacy-interface =
             assert legacyConfig.config.users.users.contract.isNormalUser;
+            assert legacyConfig.config.system.stateVersion == "26.05";
             assert pkgs.zenos.legacy.firefox.outPath == pkgs.firefox.outPath;
             assert !(pkgs ? legacy);
             pkgs.runCommand "zenpkgs-legacy-interface-check" { } "touch $out";
