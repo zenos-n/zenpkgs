@@ -26,6 +26,11 @@ stdenvNoCC.mkDerivation {
     gnumake
   ];
 
+  postPatch = ''
+    substituteInPlace lib/shared/theme.js \
+      --replace-fail 'this.configMgr.stylesheetFileName + ".bak"' 'configCss.get_path() + ".bak"'
+  '';
+
   buildPhase = ''
     runHook preBuild
     make build
