@@ -34,7 +34,7 @@ in
 
     home-manager = {
       useGlobalPkgs = true;
-      useUserPackages = true;
+      useUserPackages = false;
       users = lib.mapAttrs (
         name: user:
         {
