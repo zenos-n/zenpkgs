@@ -2,7 +2,6 @@
   lib,
   pkgs,
   config,
-  utils,
   ...
 }:
 
@@ -102,6 +101,18 @@ in
       '';
     };
 
+    extensionPackages = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "GNOME Shell extension packages installed with the desktop.";
+    };
+
+    extensionUuids = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "GNOME Shell extension UUIDs enabled by the base profile.";
+    };
+
     extraPackages = {
       enable = mkEnableOption "installation of extra curated GNOME apps";
     };
@@ -132,25 +143,28 @@ in
   config = mkIf cfg.enable {
     # 1. System Packages & Environment
     environment.systemPackages =
-      utils.removePackagesByName (with pkgs; [
-        # Core Utils
-        wl-clipboard
-        dconf-editor
-        gnome-tweaks
-        gnome-extension-manager
+      subtractLists config.environment.gnome.excludePackages (
+        with pkgs;
+        [
+          # Core Utils
+          wl-clipboard
+          dconf-editor
+          gnome-tweaks
+          gnome-extension-manager
 
-        # Multimedia (GStreamer)
-        gst_all_1.gstreamer
-        gst_all_1.gst-plugins-base
-        gst_all_1.gst-plugins-good
-        gst_all_1.gst-plugins-bad
-        gst_all_1.gst-plugins-ugly
-        gst_all_1.gst-libav
-        gst_all_1.gst-vaapi
-      ]) config.environment.gnome.excludePackages
-      ++ cfg.extensions
-      ++ mkIf (config.services.flatpak.enable or false) [ pkgs.warehouse ]
-      ++ mkIf cfg.extraPackages.enable (
+          # Multimedia (GStreamer)
+          gst_all_1.gstreamer
+          gst_all_1.gst-plugins-base
+          gst_all_1.gst-plugins-good
+          gst_all_1.gst-plugins-bad
+          gst_all_1.gst-plugins-ugly
+          gst_all_1.gst-libav
+          gst_all_1.gst-vaapi
+        ]
+      )
+      ++ cfg.extensionPackages
+      ++ optionals (config.services.flatpak.enable or false) [ pkgs.warehouse ]
+      ++ optionals cfg.extraPackages.enable (
         with pkgs;
         [
           icon-library
@@ -168,13 +182,7 @@ in
         ]
       );
 
-    # 2. Flatpak Configuration
-    services.flatpak.packages = mkIf (config.services.flatpak.enable or false) (
-      [ "com.github.tchx84.Flatseal" ]
-      ++ (optionals cfg.extraPackages.enable [ "studio.planetpeanut.Bobby" ])
-    );
-
-    # 3. Core App Ownership
+    # 2. Core App Ownership
     # GNOME Tour is replaced by the ZenOS OOBE. All other core-app choices are
     # owned by the installer through environment.gnome.excludePackages.
     environment.gnome.excludePackages = [
@@ -182,11 +190,11 @@ in
     ]
     ++ (optional cfg.excludeGnomeConsole pkgs.gnome-console);
 
-    # 4. Tracker Configuration
+    # 3. Tracker Configuration
     services.gnome.tracker-miners.enable = cfg.fileIndexing.enable;
     services.gnome.tracker.enable = cfg.fileIndexing.enable;
 
-    # 5. DConf Configuration
+    # 4. DConf Configuration
     programs.dconf.enable = true;
     programs.dconf.profiles.user.databases = [
       {
@@ -210,7 +218,7 @@ in
 
           "org/gnome/shell" = {
             disable-user-extensions = false;
-            enabled-extensions = extensionUuids;
+            enabled-extensions = cfg.extensionUuids;
             favorite-apps = cfg.dockItems;
           };
 

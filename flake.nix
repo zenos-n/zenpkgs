@@ -432,6 +432,24 @@
               }
             ];
           };
+          gnomeBaseConfig = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              self.nixosModules.desktops.gnome.base."module.nix"
+              {
+                nixpkgs = {
+                  overlays = [ self.overlays.default ];
+                  config.allowUnfree = true;
+                };
+                system.stateVersion = "26.05";
+                zenos.desktops.gnome = {
+                  enable = true;
+                  extensionPackages = [ pkgs.zenos.desktops.gnome.extensions.forge ];
+                  extensionUuids = [ "forge@jmmaranan.com" ];
+                };
+              }
+            ];
+          };
           installedSystemChecks = import ./tests/installed-system-modules.nix {
             inherit nixpkgs pkgs system;
             interfaceModule = self.nixosModules.interface;
@@ -453,6 +471,14 @@
           legacy-packages =
             assert self.legacyPackages.${system}.legacy.nvim.outPath == pkgs.neovim.outPath;
             pkgs.runCommand "zenpkgs-legacy-packages-check" { } "touch $out";
+          gnome-base =
+            assert builtins.elem pkgs.zenos.desktops.gnome.extensions.forge
+              gnomeBaseConfig.config.environment.systemPackages;
+            assert gnomeBaseConfig.config.programs.dconf.profiles.user.databases != [ ];
+            assert
+              (builtins.head gnomeBaseConfig.config.programs.dconf.profiles.user.databases)
+              .settings."org/gnome/shell".enabled-extensions == [ "forge@jmmaranan.com" ];
+            pkgs.runCommand "zenpkgs-gnome-base-check" { } "touch $out";
           source-policy = pkgs.runCommand "zenpkgs-source-policy-check" { src = self; } ''
             bundled_dir="$(${pkgs.findutils}/bin/find "$src/pkgs" -type d \
               \( -name src -o -name resources -o -name assets \) -print -quit)"
