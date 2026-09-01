@@ -83,7 +83,7 @@ in
   config = lib.mkIf cfg.enable {
     home-manager.sharedModules = [
       (
-        { ... }:
+        { lib, ... }:
         {
           home.activation.firefoxRescue = lib.hm.dag.entryBefore [ "linkGeneration" ] ''
             for p_ini in $HOME/.mozilla/firefox/profiles.ini; do
