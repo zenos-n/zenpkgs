@@ -9,6 +9,7 @@ let
   cfg = config.zenos.oobe;
   extensionUuid = "zenos-oobe-mode@neg-zero.com";
   servicePath = "/run/wrappers/bin:/run/current-system/sw/bin";
+  oobeHome = "/run/zenos-oobe";
   napalmLicense =
     lib.licenses.napalm or {
       shortName = "napalm";
@@ -23,7 +24,7 @@ let
       <rect width="1" height="1" fill="#000000"/>
     </svg>
   '';
-  gnomeSessionCommand = "${pkgs.coreutils}/bin/env XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SESSION_DESKTOP=GNOME XDG_CURRENT_DESKTOP=GNOME GNOME_SHELL_SESSION_MODE=zenos-oobe ${config.services.displayManager.sessionData.wrapper} ${pkgs.gnome-session}/bin/gnome-session";
+  gnomeSessionCommand = "${pkgs.coreutils}/bin/env XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SESSION_DESKTOP=GNOME XDG_CURRENT_DESKTOP=GNOME ZENOS_OOBE=1 ${config.services.displayManager.sessionData.wrapper} ${pkgs.gnome-session}/bin/gnome-session --session=zenos-oobe";
 in
 {
   options.zenos.oobe = {
@@ -137,17 +138,25 @@ in
       XDG_SESSION_DESKTOP = "GNOME";
     };
 
-    systemd.user.services."org.gnome.Shell@" = {
+    environment.etc."xdg/gnome-session/sessions/zenos-oobe.session".text = ''
+      [GNOME Session]
+      Name=ZenOS OOBE
+    '';
+
+    systemd.user.targets."gnome-session@zenos-oobe" = {
       overrideStrategy = "asDropin";
-      path = lib.mkForce [ ];
+      unitConfig.Requires = [
+        "gnome-session-services.target"
+        "org.gnome.Shell@zenos-oobe.service"
+      ];
+    };
+
+    systemd.user.services."org.gnome.Shell@zenos-oobe" = {
+      overrideStrategy = "asDropin";
       environment = {
-        PATH = servicePath;
+        PATH = lib.mkForce servicePath;
         ZENOS_OOBE = "1";
       };
-      serviceConfig.ExecStart = lib.mkForce [
-        ""
-        "${pkgs.gnome-shell}/bin/gnome-shell --mode=zenos-oobe"
-      ];
     };
 
     systemd.user.services.zenos-oobe = {
@@ -176,6 +185,9 @@ in
         ${cfg.userName} = {
           isNormalUser = true;
           description = "ZenOS Setup";
+          home = oobeHome;
+          createHome = true;
+          homeMode = "0700";
           initialHashedPassword = "";
           openssh.authorizedKeys.keys = cfg.authorizedKeys;
           extraGroups = [
@@ -192,8 +204,8 @@ in
       systemPackages = [
         cfg.extensionPackage
         cfg.setupPackage
-      ] ++ cfg.extraExtensionPackages;
-      sessionVariables.ZENOS_OOBE = "1";
+      ]
+      ++ cfg.extraExtensionPackages;
       gnome.excludePackages = [ pkgs.gnome-tour ];
     };
 
@@ -240,10 +252,10 @@ in
     systemd.tmpfiles.rules = [
       "d /Config 0755 root root -"
       "d /Config/ZenOS 0755 root root -"
-      "d /home/${cfg.userName}/.local 0700 ${cfg.userName} users -"
-      "d /home/${cfg.userName}/.local/share 0700 ${cfg.userName} users -"
-      "d /home/${cfg.userName}/.local/share/gnome-shell 0700 ${cfg.userName} users -"
-      "f /home/${cfg.userName}/.local/share/gnome-shell/lock-warning-shown 0600 ${cfg.userName} users -"
+      "d ${oobeHome}/.local 0700 ${cfg.userName} users -"
+      "d ${oobeHome}/.local/share 0700 ${cfg.userName} users -"
+      "d ${oobeHome}/.local/share/gnome-shell 0700 ${cfg.userName} users -"
+      "f ${oobeHome}/.local/share/gnome-shell/lock-warning-shown 0600 ${cfg.userName} users -"
       "z /Config/ZenOS/Flake 0775 ${cfg.userName} users -"
       "Z /Config/ZenOS/Flake - ${cfg.userName} users -"
     ];

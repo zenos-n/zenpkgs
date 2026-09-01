@@ -90,7 +90,8 @@ let
   initialSession = temporary.services.greetd.settings.initial_session;
   defaultSession = temporary.services.greetd.settings.default_session;
   setupService = temporary.systemd.user.services.zenos-oobe;
-  shellService = temporary.systemd.user.services."org.gnome.Shell@";
+  shellService = temporary.systemd.user.services."org.gnome.Shell@zenos-oobe";
+  oobeTarget = temporary.systemd.user.targets."gnome-session@zenos-oobe";
   dconfDatabase = builtins.head temporary.programs.dconf.profiles.user.databases;
 
   setupWithoutMainProgram = pkgs.runCommand "dummy-setup-without-main-program" { } ''
@@ -129,12 +130,16 @@ in
     assert final.services.displayManager.gdm.enable;
     assert !final.services.displayManager.autoLogin.enable;
     assert final.services.displayManager.autoLogin.user == null;
-    assert final.services.displayManager.defaultSession == "gnome";
+    assert final.services.displayManager.defaultSession == null;
+    assert !final.services.displayManager.gdm.settings.daemon.AutomaticLoginEnable;
+    assert !final.services.displayManager.gdm.settings.daemon.TimedLoginEnable;
     assert !final.users.mutableUsers;
     assert !final.services.greetd.enable;
     assert !(final.users.users ? zenos);
     assert !(final.systemd.user.services ? zenos-oobe);
     assert !(final.environment.sessionVariables ? ZENOS_OOBE);
+    assert lib.any (lib.hasPrefix "f+ /var/lib/AccountsService/users/gdm-greeter ")
+      final.systemd.tmpfiles.rules;
     assert !disabled.zenos.oobe.enable;
     assert disabled.services.displayManager.gdm.enable;
     assert !disabled.services.greetd.enable;
@@ -153,9 +158,11 @@ in
     assert initialSession.user == "zenos";
     assert defaultSession.user == "zenos";
     assert initialSession.command == defaultSession.command;
-    assert lib.hasInfix "GNOME_SHELL_SESSION_MODE=zenos-oobe" initialSession.command;
+    assert lib.hasInfix "ZENOS_OOBE=1" initialSession.command;
+    assert lib.hasInfix "--session=zenos-oobe" initialSession.command;
     assert !temporary.users.mutableUsers;
     assert temporary.users.users.zenos.isNormalUser;
+    assert temporary.users.users.zenos.home == "/run/zenos-oobe";
     assert temporary.users.users.zenos.initialHashedPassword == "";
     assert temporary.services.openssh.enable;
     assert temporary.services.openssh.settings.PermitEmptyPasswords;
@@ -163,10 +170,11 @@ in
     assert lib.elem setupPackage temporary.environment.systemPackages;
     assert lib.elem extensionPackage temporary.environment.systemPackages;
     assert lib.elem compilerPackage temporary.environment.systemPackages;
-    assert temporary.environment.sessionVariables.ZENOS_OOBE == "1";
+    assert !(temporary.environment.sessionVariables ? ZENOS_OOBE);
+    assert !(builtins.hasAttr "org.gnome.Shell@" temporary.systemd.user.services);
     assert shellService.environment.PATH == "/run/wrappers/bin:/run/current-system/sw/bin";
-    assert lib.elem "${pkgs.gnome-shell}/bin/gnome-shell --mode=zenos-oobe"
-      shellService.serviceConfig.ExecStart;
+    assert shellService.environment.ZENOS_OOBE == "1";
+    assert lib.elem "org.gnome.Shell@zenos-oobe.service" oobeTarget.unitConfig.Requires;
     assert setupService.environment.PATH == "/run/wrappers/bin:/run/current-system/sw/bin";
     assert setupService.environment.ZENOS_OOBE == "1";
     assert setupService.unitConfig.ConditionUser == "zenos";
@@ -179,7 +187,7 @@ in
     assert lib.elem "/org/gnome/shell/enabled-extensions" dconfDatabase.locks;
     assert lib.elem "z /Config/ZenOS/Flake 0775 zenos users -" temporary.systemd.tmpfiles.rules;
     assert lib.elem "Z /Config/ZenOS/Flake - zenos users -" temporary.systemd.tmpfiles.rules;
-    assert lib.elem "f /home/zenos/.local/share/gnome-shell/lock-warning-shown 0600 zenos users -"
+    assert lib.elem "f /run/zenos-oobe/.local/share/gnome-shell/lock-warning-shown 0600 zenos users -"
       temporary.systemd.tmpfiles.rules;
     assert !(lib.elem "d /Config/ZenOS/Flake 0775 zenos users -" temporary.systemd.tmpfiles.rules);
     pkgs.runCommand "zenpkgs-oobe-check" { } ''
