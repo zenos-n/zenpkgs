@@ -84,15 +84,16 @@ rec {
   # [ STANDARD ] ZenOS Platform Definition
   platforms.zenos = [ "x86_64-linux" ];
 
-  # [ STANDARD ] NAPL License Definition
-  licenses.napl = {
-    shortName = "napl";
-    fullName = "The Non-Aggression License 1.1";
+  # [ STANDARD ] NAPALM 2.0 License Definition
+  licenses.napalm = {
+    shortName = "napalm";
+    fullName = "NAPALM: The Non-Aggression Principle Anti-License Mandate 2.0";
     url = "https://github.com/negative-zero-inft/nap-license";
-    free = true;
+    free = false;
     redistributable = true;
     copyleft = true;
   };
+  licenses.napl = licenses.napalm;
 
   recursiveImports =
     path:

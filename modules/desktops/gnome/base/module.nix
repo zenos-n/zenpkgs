@@ -2,6 +2,7 @@
   lib,
   pkgs,
   config,
+  utils,
   ...
 }:
 
@@ -131,15 +132,12 @@ in
   config = mkIf cfg.enable {
     # 1. System Packages & Environment
     environment.systemPackages =
-      with pkgs;
-      [
+      utils.removePackagesByName (with pkgs; [
         # Core Utils
         wl-clipboard
         dconf-editor
         gnome-tweaks
         gnome-extension-manager
-        resources
-        pika-backup
 
         # Multimedia (GStreamer)
         gst_all_1.gstreamer
@@ -149,7 +147,7 @@ in
         gst_all_1.gst-plugins-ugly
         gst_all_1.gst-libav
         gst_all_1.gst-vaapi
-      ]
+      ]) config.environment.gnome.excludePackages
       ++ cfg.extensions
       ++ mkIf (config.services.flatpak.enable or false) [ pkgs.warehouse ]
       ++ mkIf cfg.extraPackages.enable (
@@ -176,24 +174,13 @@ in
       ++ (optionals cfg.extraPackages.enable [ "studio.planetpeanut.Bobby" ])
     );
 
-    # 3. Bloat Removal
-    environment.gnome.excludePackages =
-      with pkgs;
-      [
-        gnome-software
-        gnome-photos
-        gnome-tour
-        gedit
-        cheese
-        gnome-music
-        gnome-maps
-        epiphany
-        gnome-contacts
-        gnome-weather
-        yelp
-        gnome-clocks
-      ]
-      ++ (optional cfg.excludeGnomeConsole pkgs.gnome-console);
+    # 3. Core App Ownership
+    # GNOME Tour is replaced by the ZenOS OOBE. All other core-app choices are
+    # owned by the installer through environment.gnome.excludePackages.
+    environment.gnome.excludePackages = [
+      pkgs.gnome-tour
+    ]
+    ++ (optional cfg.excludeGnomeConsole pkgs.gnome-console);
 
     # 4. Tracker Configuration
     services.gnome.tracker-miners.enable = cfg.fileIndexing.enable;

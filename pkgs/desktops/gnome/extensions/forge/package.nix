@@ -1,48 +1,50 @@
 {
+  fetchFromGitHub,
+  gettext,
+  git,
+  glib,
+  gnumake,
   lib,
-  stdenv,
-  pkgs,
-  ...
+  stdenvNoCC,
 }:
 
-stdenv.mkDerivation {
+stdenvNoCC.mkDerivation {
   pname = "forge";
-  version = "custom";
+  version = "0-unstable-2026-06-25";
 
-  src = ./src/forge;
+  src = fetchFromGitHub {
+    owner = "forge-ext";
+    repo = "forge";
+    rev = "46736af63815b46cadeb1db2988f04d60e6601b8";
+    hash = "sha256-bdoD5k33l0SwwuEmd+EvB0FiVJdbtIMeBrUAjRhSg2s=";
+  };
 
-  dontBuild = true;
+  nativeBuildInputs = [
+    gettext
+    git
+    glib
+    gnumake
+  ];
 
-  installPhase = ''
-    export UUID="forge@jmmaranan.com"
-    dest="$out/share/gnome-shell/extensions/$UUID"
-    mkdir -p "$dest"
-
-    # Copy the precompiled contents directly
-    cp -a . "$dest/"
-
-    # Just in case, ensure schemas are compiled for the store path
-    if [ -d "$dest/schemas" ]; then
-      ${pkgs.glib.dev}/bin/glib-compile-schemas "$dest/schemas"
-    fi
+  buildPhase = ''
+    runHook preBuild
+    make build
+    runHook postBuild
   '';
 
-  meta = with lib; {
-    description = ''
-      Customized version of the Forge GNOME tiling extension
+  installPhase = ''
+    runHook preInstall
+    install -d "$out/share/gnome-shell/extensions/forge@jmmaranan.com"
+    cp -r temp/. "$out/share/gnome-shell/extensions/forge@jmmaranan.com/"
+    runHook postInstall
+  '';
 
-      **Forge (Custom)** is a modified build of the Forge GNOME extension, 
-      tailored specifically for ZenOS. It includes specific tweaks and 
-      patches to ensure compatibility with modern GNOME versions and 
-      integrates seamlessly with the ZenOS tiling workflow.
+  passthru.extensionUuid = "forge@jmmaranan.com";
 
-      **Features:**
-      - Native-like tiling window management for GNOME Shell.
-      - ZenOS-specific compatibility patches and workflow tweaks.
-    '';
-    homepage = "https://zenos.neg-zero.com";
-    license = licenses.napl;
-    maintainers = with maintainers; [ doromiert ];
-    platforms = platforms.zenos;
+  meta = {
+    description = "Forge tiling window manager extension built from GNOME 50-compatible upstream";
+    homepage = "https://github.com/forge-ext/forge";
+    license = lib.licenses.gpl3Only;
+    platforms = lib.platforms.linux;
   };
 }

@@ -10,6 +10,8 @@ stdenv.mkDerivation {
 
   src = ./src;
   dontUnpack = true;
+  # Compatibility aliases intentionally resolve through the inherited Adwaita theme.
+  dontCheckForBrokenSymlinks = true;
 
   installPhase = ''
     mkdir -p $out/share/icons

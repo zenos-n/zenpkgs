@@ -1,0 +1,105 @@
+diff --git a/extension.js b/extension.js
+index b88f509..fb0e8f1 100644
+--- a/extension.js
++++ b/extension.js
+@@ -1069,6 +1069,9 @@ const StackButton = GObject.registerClass(
+ 
+ export default class DashStacksExtension extends Extension {
+   enable() {
++    if (this._settings)
++      return;
++
+     this._settings = this.getSettings();
+     
+     const syncConfig = () => {
+@@ -1125,7 +1128,7 @@ export default class DashStacksExtension extends Extension {
+ 
+     this._injectStacks();
+ 
+-    GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
++    this._layoutIdleId = GLib.idle_add(GLib.PRIORITY_DEFAULT, () => {
+       let dash = Main.overview.dash;
+       let dashBox = dash._box;
+       let dashParent = dashBox.get_parent();
+@@ -1250,11 +1253,17 @@ export default class DashStacksExtension extends Extension {
+         () => this._updateMaxWidth(),
+       );
+ 
++      this._layoutIdleId = null;
+       return GLib.SOURCE_REMOVE;
+     });
+   }
+ 
+   _injectStacks() {
++    if (this._injecting || !this._settings)
++      return;
++
++    this._injecting = true;
++    try {
+     this._buttons.forEach((b) => {
+       if (b.popup) b._closePopup();
+       b.destroy();
+@@ -1276,6 +1286,9 @@ export default class DashStacksExtension extends Extension {
+       this._buttons.push(btn);
+       Main.overview.dash._box.add_child(btn);
+     });
++    } finally {
++      this._injecting = false;
++    }
+   }
+ 
+   _enforceLayout() {
+@@ -1333,10 +1346,6 @@ export default class DashStacksExtension extends Extension {
+       this._enforceTimeoutId = null;
+       return GLib.SOURCE_REMOVE;
+     });
+-    let paddingForShowApps = 80;
+-
+-    dash._box.set_width(totalWidth + paddingForShowApps);
+-    this.dashWrapper.set_width(totalWidth + paddingForShowApps);
+   }
+ 
+   _getStacksConfig() {
+@@ -1355,7 +1364,17 @@ export default class DashStacksExtension extends Extension {
+   }
+ 
+   disable() {
+-    if (this._configSignals) {
++    if (this._layoutIdleId) {
++      GLib.source_remove(this._layoutIdleId);
++      this._layoutIdleId = null;
++    }
++
++    if (this._enforceTimeoutId) {
++      GLib.source_remove(this._enforceTimeoutId);
++      this._enforceTimeoutId = null;
++    }
++
++    if (this._configSignals && this._settings) {
+         this._configSignals.forEach(sig => this._settings.disconnect(sig));
+         this._configSignals = [];
+     }
+@@ -1365,7 +1385,10 @@ export default class DashStacksExtension extends Extension {
+       this._monitorsChangedId = null;
+     }
+ 
+-    if (this._settingsSignal) this._settings.disconnect(this._settingsSignal);
++    if (this._settingsSignal && this._settings)
++      this._settings.disconnect(this._settingsSignal);
++    this._settingsSignal = null;
++
+     this._settings = null;
+ 
+     if (this._originalRedisplay)
+diff --git a/metadata.json b/metadata.json
+index d344e38..70170c3 100644
+--- a/metadata.json
++++ b/metadata.json
+@@ -3,6 +3,7 @@
+   "description": "macos style folder stacks in the dash.",
+   "uuid": "dash-stacks@neg-zero.com",
+   "shell-version": [
++    "50",
+     "49",
+     "48"
+   ],

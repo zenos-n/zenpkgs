@@ -35,7 +35,11 @@ rec {
               if subtree == { } then null else subtree
           # Priority 3: Leaf File
           else if
-            type == "regular" && lib.hasSuffix ".nix" name && name != "default.nix" && name != "package.nix"
+            type == "regular"
+            && lib.hasSuffix ".nix" name
+            && name != "default.nix"
+            && name != "package.nix"
+            && name != "flake.nix"
           then
             path + "/${name}"
           else

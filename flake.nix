@@ -2,7 +2,7 @@
   description = "ZenPkgs - The Core Dependency Hub for ZenOS";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -18,6 +18,10 @@
       url = "github:nix-community/NUR";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    masterful-gestures = {
+      url = "github:doromiert/masterful-gestures";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -26,6 +30,171 @@
       systems = [ "x86_64-linux" ];
       forAllSystems = nixpkgs.lib.genAttrs systems;
       loader = import ./lib/loader.nix { inherit (nixpkgs) lib; };
+      interface = import ./lib/interface.nix { inherit (nixpkgs) lib; };
+      registry = import ./mappings/packages.nix;
+      optionMappings = import ./mappings/options.nix;
+      legacyRoots = [
+        "appstream"
+        "boot"
+        "console"
+        "containers"
+        "docker-containers"
+        "documentation"
+        "dysnomia"
+        "ec2"
+        "environment"
+        "fileSystems"
+        "fonts"
+        "gtk"
+        "hardware"
+        "i18n"
+        "ids"
+        "image"
+        "isSpecialisation"
+        "jobs"
+        "krb5"
+        "lib"
+        "location"
+        "meta"
+        "minifyStaticFiles"
+        "nesting"
+        "networking"
+        "nix"
+        "nixops"
+        "nixpkgs"
+        "oci"
+        "openstack"
+        "passthru"
+        "power"
+        "powerManagement"
+        "programs"
+        "qt"
+        "qt5"
+        "security"
+        "services"
+        "snapraid"
+        "sound"
+        "specialisation"
+        "stubby"
+        "swapDevices"
+        "system"
+        "systemd"
+        "time"
+        "users"
+        "virtualisation"
+        "xdg"
+        "zramSwap"
+      ];
+      legacyOptionModule =
+        { lib, ... }:
+        {
+          imports = map (root: lib.mkAliasOptionModule [ "zenos" "legacy" root ] [ root ]) legacyRoots;
+        };
+      brandingModule =
+        {
+          config,
+          lib,
+          pkgs,
+          ...
+        }:
+        let
+          release = config.zenos.system.release;
+        in
+        {
+          options.zenos.system.release = {
+            version = lib.mkOption {
+              type = lib.types.strMatching "^[0-9]+\\.[0-9]+\\.[0-9]+N$";
+              default = "1.0.0N";
+              description = "ZenOS release version before channel and revision suffixes.";
+            };
+            channel = lib.mkOption {
+              type = lib.types.enum [
+                "beta"
+                "stable"
+              ];
+              default = "beta";
+              description = "ZenOS release channel.";
+            };
+            revision = lib.mkOption {
+              type = lib.types.nullOr lib.types.str;
+              default = null;
+              description = "Short source revision included in development release names.";
+            };
+            full = lib.mkOption {
+              type = lib.types.str;
+              readOnly = true;
+              default =
+                if release.channel == "beta" then
+                  "${release.version}b (${if release.revision == null then "unknown" else release.revision})"
+                else
+                  release.version;
+              description = "Complete user-facing ZenOS release string.";
+            };
+          };
+
+          config = {
+            zenos.system.branding = {
+              distroId = lib.mkDefault "zenos";
+              distroName = lib.mkDefault "ZenOS";
+            };
+
+            system.nixos = {
+              vendorId = lib.mkDefault "zenos";
+              vendorName = lib.mkDefault "ZenOS";
+              extraOSReleaseArgs = {
+                ANSI_COLOR = "0;38;2;197;50;255";
+                DOCUMENTATION_URL = "https://zenos.neg-zero.com";
+                HOME_URL = "https://zenos.neg-zero.com";
+                LOGO = "zenos";
+                PRETTY_NAME = "ZenOS ${release.full}";
+                SUPPORT_URL = "https://zenos.neg-zero.com";
+                VENDOR_URL = "https://neg-zero.com";
+                VERSION = release.full;
+                VERSION_ID = release.version;
+              };
+            };
+
+            environment = {
+              etc."machine-info".text = lib.mkDefault ''
+                PRETTY_HOSTNAME="${config.networking.hostName}"
+              '';
+              shellAliases = {
+                ll = "eza --long --all --group-directories-first --icons=auto";
+                ls = "eza --group-directories-first --icons=auto";
+                tree = "eza --tree --group-directories-first --icons=auto";
+              };
+              systemPackages = [
+                pkgs.zenos.apps.system.eza
+                pkgs.zenos.theming.icons.zenos-icons
+              ];
+            };
+
+            fonts = {
+              packages = [
+                pkgs.zenos.apps.fonts.atkinson-hyperlegible
+                pkgs.zenos.apps.fonts.atkinson-hyperlegible-mono
+                pkgs.zenos.apps.fonts.inter
+                pkgs.zenos.theming.fonts.zero.mono
+                pkgs.zenos.theming.fonts.zero.regular
+              ];
+              fontconfig.defaultFonts = {
+                monospace = [ "AtkynsonMono NF" ];
+                sansSerif = [ "Atkinson Hyperlegible" ];
+              };
+            };
+
+            boot = {
+              initrd.verbose = lib.mkDefault false;
+              kernelParams = lib.mkAfter [
+                "quiet"
+                "splash"
+                "loglevel=3"
+                "rd.systemd.show_status=auto"
+                "rd.udev.log_level=3"
+              ];
+            };
+          };
+        };
 
       # Import Utils with Inputs Context
       utils = import ./lib/utils.nix {
@@ -61,17 +230,17 @@
               lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflate value f) tree);
 
           zenTree = loader.generateTree ./pkgs;
-          legacyTree = loader.generateTree ./legacy/packages;
+          mappedTree = interface.buildPackageTree prev registry;
+          customTree = if zenTree == { } then { } else inflate zenTree final;
         in
-        # 1. Base Legacy (Safeguard)
+        # ZenPkgs owns one internal package namespace. User-facing package
+        # references are prefixed by the zcfg compiler.
         {
-          legacy = prev;
-        }
-        # 2. Legacy Mappers (Custom maps like 'win-browser')
-        // (if legacyTree == { } then { } else inflate legacyTree final)
-        # 3. ZenPkgs Priority (Namespace to 'zenos')
-        // {
-          zenos = if zenTree == { } then { } else inflate zenTree final;
+          lib = prev.lib // {
+            licenses = prev.lib.licenses // utils.licenses;
+            platforms = prev.lib.platforms // utils.platforms;
+          };
+          zenos = lib.recursiveUpdate (lib.recursiveUpdate { legacy = prev; } mappedTree) customTree;
         };
 
     in
@@ -82,6 +251,7 @@
       lib = {
         loader = loader;
         utils = utils;
+        inherit interface registry optionMappings;
       };
 
       # --- NixOS Modules ---
@@ -135,6 +305,19 @@
           zenos = zenosTree;
           legacy = legacyTree;
           programs = programsTree;
+          masterful-gestures = inputs.masterful-gestures.nixosModules.default;
+          installed-base = ./nixos-modules/installed-base.nix;
+          oobe = ./nixos-modules/oobe.nix;
+          # popcorn-cache = ./nixos-modules/popcorn-cache.nix;
+          interface = {
+            imports = [
+              # ./nixos-modules/popcorn-cache.nix
+              (interface.mkOptionModule optionMappings)
+              legacyOptionModule
+              brandingModule
+              inputs.masterful-gestures.nixosModules.default
+            ];
+          };
 
           default = {
             # Pass the collected HM modules to the system arguments.
@@ -143,7 +326,12 @@
 
             imports = [
               ./structure.nix
+              # ./nixos-modules/popcorn-cache.nix
+              legacyOptionModule
+              brandingModule
+              inputs.masterful-gestures.nixosModules.default
               programInjection
+              (interface.mkOptionModule optionMappings)
             ]
             ++ zenosList
             ++ legacyList;
@@ -179,12 +367,65 @@
             config.allowUnfree = true;
           };
 
-          # Since packages are now namespaced under pkgs.zenos,
-          # we grab the top-level categories from that namespace.
-          zenPkgNames =
-            if builtins.pathExists ./pkgs then builtins.attrNames (builtins.readDir ./pkgs) else [ ];
+          flatten =
+            prefix: value:
+            if nixpkgs.lib.isDerivation value then
+              {
+                "${nixpkgs.lib.concatStringsSep "-" prefix}" = value;
+              }
+            else if builtins.isAttrs value then
+              nixpkgs.lib.foldl' nixpkgs.lib.recursiveUpdate { } (
+                nixpkgs.lib.mapAttrsToList (name: child: flatten (prefix ++ [ name ]) child) value
+              )
+            else
+              { };
         in
-        if zenPkgNames == [ ] then { } else nixpkgs.lib.genAttrs zenPkgNames (name: pkgs.zenos.${name})
+        {
+          registry-docs = pkgs.writeText "zenpkgs-registry.json" (
+            builtins.toJSON (interface.registryDocs registry)
+          );
+        }
+        // (flatten [ "zenos" ] (interface.buildPackageTree pkgs registry))
+      );
+
+      checks = forAllSystems (
+        system:
+        let
+          pkgs = import nixpkgs {
+            inherit system;
+            overlays = [ self.overlays.default ];
+            config.allowUnfree = true;
+          };
+          legacyConfig = nixpkgs.lib.nixosSystem {
+            inherit system;
+            modules = [
+              self.nixosModules.interface
+              {
+                system.stateVersion = "26.05";
+                zenos.legacy.users.users.contract.isNormalUser = true;
+              }
+            ];
+          };
+          installedSystemChecks = import ./tests/installed-system-modules.nix {
+            inherit nixpkgs pkgs system;
+            interfaceModule = self.nixosModules.interface;
+            installedBaseModule = self.nixosModules.installed-base;
+            oobeModule = self.nixosModules.oobe;
+          };
+        in
+        {
+          interface = interface.mkCheck {
+            inherit pkgs registry;
+            name = "zenpkgs-interface-check";
+          };
+          legacy-interface =
+            assert legacyConfig.config.users.users.contract.isNormalUser;
+            assert pkgs.zenos.legacy.firefox.outPath == pkgs.firefox.outPath;
+            assert !(pkgs ? legacy);
+            pkgs.runCommand "zenpkgs-legacy-interface-check" { } "touch $out";
+          installed-base = installedSystemChecks.installed-base;
+          oobe = installedSystemChecks.oobe;
+        }
       );
     };
 }

@@ -32,17 +32,11 @@ stdenv.mkDerivation {
 
   meta = with lib; {
     description = ''
-      ZenOS signature typeface for UI and terminals
+      ZenOS signature typeface for titles
 
       **Zero Font** is a custom typeface designed for the ZenOS aesthetic.
-      It includes a standard and condensed variant, optimized for UI legibility 
-      and high-DPI displays.
-
-      **Features:**
-      - Custom glyphs and ligatures.
-      - Precise hinting for UI rendering.
     '';
-    license = licenses.napl;
+    license = licenses.napalm;
     maintainers = with maintainers; [ doromiert ];
     platforms = platforms.linux;
   };

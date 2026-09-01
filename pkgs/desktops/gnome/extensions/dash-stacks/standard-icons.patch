@@ -1,0 +1,13 @@
+diff --git a/schemas/org.gnome.shell.extensions.dash-stacks.gschema.xml b/schemas/org.gnome.shell.extensions.dash-stacks.gschema.xml
+index 8f8df90..7847211 100644
+--- a/schemas/org.gnome.shell.extensions.dash-stacks.gschema.xml
++++ b/schemas/org.gnome.shell.extensions.dash-stacks.gschema.xml
+@@ -2,7 +2,7 @@
+ <schemalist>
+   <schema id="org.gnome.shell.extensions.dash-stacks" path="/org/gnome/shell/extensions/dash-stacks/">
+     <key name="stacks" type="s">
+-      <default>'[{"name":"Downloads","path":"~/Downloads","icon":"folder-download-symbolic","autoIcon":false},{"name":"Projects","path":"~/Documents","icon":"folder-documents-symbolic","autoIcon":false}]'</default>
++      <default>'[{"name":"Downloads","path":"~/Downloads","icon":"folder-download","autoIcon":false},{"name":"Projects","path":"~/Documents","icon":"folder-documents","autoIcon":false}]'</default>
+       <summary>Stacks Configuration</summary>
+       <description>JSON string containing the stacks configuration array.</description>
+     </key>
