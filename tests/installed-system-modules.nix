@@ -228,7 +228,8 @@ in
     assert lib.elem "/org/gnome/shell/enabled-extensions" dconfDatabase.locks;
     assert lib.elem "z /Config/ZenOS 0775 zenos users -" temporary.systemd.tmpfiles.rules;
     assert lib.elem "Z /Config/ZenOS - zenos users -" temporary.systemd.tmpfiles.rules;
-    assert lib.elem "f /run/zenos-oobe/.local/share/gnome-shell/lock-warning-shown 0600 zenos users -"
+    assert lib.elem
+      "f /run/zenos-oobe/.private/Packages/gnome-shell/lock-warning-shown 0600 zenos users -"
       temporary.systemd.tmpfiles.rules;
     assert !(lib.elem "d /Config/ZenOS 0775 zenos users -" temporary.systemd.tmpfiles.rules);
     pkgs.runCommand "zenpkgs-oobe-check" { } ''

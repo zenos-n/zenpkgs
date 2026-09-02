@@ -252,10 +252,10 @@ in
     systemd.tmpfiles.rules = [
       "d /Config 0755 root root -"
       "d /Config/ZenOS 0755 root root -"
-      "d ${oobeHome}/.local 0700 ${cfg.userName} users -"
-      "d ${oobeHome}/.local/share 0700 ${cfg.userName} users -"
-      "d ${oobeHome}/.local/share/gnome-shell 0700 ${cfg.userName} users -"
-      "f ${oobeHome}/.local/share/gnome-shell/lock-warning-shown 0600 ${cfg.userName} users -"
+      "d ${oobeHome}/.private 0700 ${cfg.userName} users -"
+      "d ${oobeHome}/.private/Packages 0700 ${cfg.userName} users -"
+      "d ${oobeHome}/.private/Packages/gnome-shell 0700 ${cfg.userName} users -"
+      "f ${oobeHome}/.private/Packages/gnome-shell/lock-warning-shown 0600 ${cfg.userName} users -"
       "z /Config/ZenOS 0775 ${cfg.userName} users -"
       "Z /Config/ZenOS - ${cfg.userName} users -"
     ];

@@ -279,7 +279,7 @@ in
 
     profileDir = mkOption {
       type = types.path;
-      default = "${config.home.homeDirectory}/.local/share/pwamaker-profiles";
+      default = "${config.xdg.dataHome}/pwamaker-profiles";
       description = ''
         Profile storage directory
 

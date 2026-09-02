@@ -12,25 +12,6 @@ let
   enabled = cfg.enable && cfg.base == "brave";
 in
 {
-  meta = {
-    description = ''
-      Brave browser backend for ZenOS webapps
-
-      Configures Brave Browser as the execution backend for the ZenOS WebApps system. 
-      This module handles the generation of isolated profiles and PWA wrappers using 
-      Brave's `--app` flags. It is intended for users who prefer Brave-based rendering 
-      for their web applications.
-
-      > **Maintenance Warning:** This backend is **experimental** and community-maintained. 
-      > The core ZenOS maintainer (doromiert) does not officially test or support Brave. 
-      > Issues specific to this backend will be closed unless accompanied by a PR. 
-      > For a supported experience, use the `firefox` backend.
-    '';
-    maintainers = with lib.maintainers; [ doromiert ];
-    license = lib.licenses.napl;
-    platforms = lib.platforms.zenos;
-  };
-
   options.zenos.webApps.bravePackage = mkOption {
     type = types.package;
     default = pkgs.brave;

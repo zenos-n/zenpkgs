@@ -104,10 +104,10 @@ in
             };
           };
 
-          home.file = {
-            ".config/mozilla/firefox/default/chrome/userChrome.css".source = customChromeCss;
-            ".config/mozilla/firefox/default/chrome/userContent.css".source = customContentCss;
-            ".config/mozilla/firefox/default/chrome/gnome-theme".source = gnomeThemeRepo;
+          xdg.configFile = {
+            "mozilla/firefox/default/chrome/userChrome.css".source = customChromeCss;
+            "mozilla/firefox/default/chrome/userContent.css".source = customContentCss;
+            "mozilla/firefox/default/chrome/gnome-theme".source = gnomeThemeRepo;
           };
         }
       )

@@ -181,8 +181,8 @@ in
         RemainAfterExit = true;
       };
       script = ''
-        mkdir -p %h/.config/burn-my-windows/profiles
-        cat > %h/.config/burn-my-windows/profiles/nix-managed.conf <<EOF
+        mkdir -p %h/.private/Config/burn-my-windows/profiles
+        cat > %h/.private/Config/burn-my-windows/profiles/nix-managed.conf <<EOF
         ${generateProfileContent cfg.settings}
         EOF
       '';
