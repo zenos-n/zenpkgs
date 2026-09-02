@@ -1,6 +1,7 @@
 {
   fetchFromGitHub,
   lib,
+  makeWrapper,
   stdenv,
   pkgs,
   ...
@@ -13,8 +14,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "zenos-n";
     repo = "zenos-rebuild";
-    rev = "75d451e2df3fadaa86a05540fbb3c3c6896d79a5";
-    hash = "sha256-wf61uXZsWkHl+a+bUnZi3/3t12auShgFfeRs4fzOC38=";
+    rev = "aefdcb87f40bdb432e91ffdb76887b669a4a4690";
+    hash = "sha256-lFu+UmiLwu9A71MgBTymjfmMoIqsF624r6LNw9BrgkM=";
   };
 
   propagatedBuildInputs = with pkgs; [
@@ -24,6 +25,7 @@ stdenv.mkDerivation {
 
   nativeBuildInputs = with pkgs; [
     bash
+    makeWrapper
   ];
 
   dontUnpack = true;
@@ -31,6 +33,9 @@ stdenv.mkDerivation {
   installPhase = ''
     mkdir -p $out/bin
     install -Dm755 $src/scripts/zenos-rebuild.sh $out/bin/zenos-rebuild
+    patchShebangs $out/bin/zenos-rebuild
+    wrapProgram $out/bin/zenos-rebuild \
+      --prefix PATH : ${lib.makeBinPath [ pkgs.tmux ]}
   '';
 
   meta = with lib; {
