@@ -1,0 +1,7 @@
+declarationOrder = 25;
+id = "gnome-console";
+target = [ "apps" "system" "gnome-console" ];
+sourcePath = [ "gnome-console" ];
+aliases = [ [ "catalog" "gnome-console" ] ];
+status = "active";
+meta = { displayName = "gnome-console"; summary = "Curated gnome-console package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

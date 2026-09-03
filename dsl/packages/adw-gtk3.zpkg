@@ -1,0 +1,7 @@
+declarationOrder = 71;
+id = "adw-gtk3";
+target = [ "apps" "themes" "adw-gtk3" ];
+sourcePath = [ "adw-gtk3" ];
+aliases = [ [ "catalog" "adw-gtk3" ] ];
+status = "active";
+meta = { displayName = "adw-gtk3"; summary = "Curated adw-gtk3 package for ZenOS"; support = "core"; tags = [ "system" ]; category = "themes"; };

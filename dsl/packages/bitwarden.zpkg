@@ -1,0 +1,7 @@
+declarationOrder = 58;
+id = "bitwarden";
+target = [ "apps" "advanced" "bitwarden" ];
+sourcePath = [ "bitwarden-desktop" ];
+aliases = [ [ "catalog" "bitwarden" ] ];
+status = "active";
+meta = { displayName = "bitwarden"; summary = "Curated bitwarden package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

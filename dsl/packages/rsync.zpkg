@@ -1,0 +1,7 @@
+declarationOrder = 110;
+id = "rsync";
+target = [ "apps" "recovery" "rsync" ];
+sourcePath = [ "rsync" ];
+aliases = [ [ "catalog" "rsync" ] ];
+status = "active";
+meta = { displayName = "rsync"; summary = "Curated rsync package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

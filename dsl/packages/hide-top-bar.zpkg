@@ -1,0 +1,7 @@
+declarationOrder = 83;
+id = "hide-top-bar";
+target = [ "apps" "gnome-extensions" "hide-top-bar" ];
+sourcePath = [ "gnomeExtensions" "hide-top-bar" ];
+aliases = [ [ "catalog" "hide-top-bar" ] ];
+status = "active";
+meta = { displayName = "hide-top-bar"; summary = "Curated hide-top-bar package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

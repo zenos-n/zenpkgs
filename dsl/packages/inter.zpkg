@@ -1,0 +1,7 @@
+declarationOrder = 69;
+id = "inter";
+target = [ "apps" "fonts" "inter" ];
+sourcePath = [ "inter" ];
+aliases = [ [ "catalog" "inter" ] ];
+status = "active";
+meta = { displayName = "inter"; summary = "Curated inter package for ZenOS"; support = "core"; tags = [ "system" ]; category = "fonts"; };

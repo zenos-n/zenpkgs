@@ -1,0 +1,7 @@
+declarationOrder = 20;
+id = "github-cli";
+target = [ "apps" "development" "github-cli" ];
+sourcePath = [ "gh" ];
+aliases = [ [ "catalog" "github-cli" ] ];
+status = "active";
+meta = { displayName = "github-cli"; summary = "Curated github-cli package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };

@@ -1,0 +1,7 @@
+declarationOrder = 0;
+id = "firefox";
+target = [ "apps" "browsers" "firefox" ];
+sourcePath = [ "firefox" ];
+aliases = [ [ "catalog" "firefox" ] ];
+status = "active";
+meta = { displayName = "Mozilla Firefox"; summary = "Curated Mozilla Firefox package for ZenOS"; support = "curated"; tags = [ "browser" "desktop" ]; category = "browsers"; };

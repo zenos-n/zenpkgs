@@ -1,0 +1,7 @@
+declarationOrder = 75;
+id = "hide-cursor";
+target = [ "apps" "gnome-extensions" "hide-cursor" ];
+sourcePath = [ "gnomeExtensions" "hide-cursor" ];
+aliases = [ [ "catalog" "hide-cursor" ] ];
+status = "active";
+meta = { displayName = "hide-cursor"; summary = "Curated hide-cursor package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

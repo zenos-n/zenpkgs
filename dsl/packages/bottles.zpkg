@@ -1,0 +1,7 @@
+declarationOrder = 11;
+id = "bottles";
+target = [ "apps" "gaming" "bottles" ];
+sourcePath = [ "bottles" ];
+aliases = [ [ "catalog" "bottles" ] ];
+status = "active";
+meta = { displayName = "bottles"; summary = "Curated bottles package for ZenOS"; support = "curated"; tags = [ ]; category = "gaming"; };

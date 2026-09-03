@@ -1,0 +1,7 @@
+declarationOrder = 34;
+id = "ncurses";
+target = [ "apps" "system" "ncurses" ];
+sourcePath = [ "ncurses" ];
+aliases = [ [ "catalog" "ncurses" ] ];
+status = "active";
+meta = { displayName = "ncurses"; summary = "Curated ncurses package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

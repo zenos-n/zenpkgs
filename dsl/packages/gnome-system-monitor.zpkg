@@ -1,0 +1,7 @@
+declarationOrder = 26;
+id = "gnome-system-monitor";
+target = [ "apps" "system" "gnome-system-monitor" ];
+sourcePath = [ "gnome-system-monitor" ];
+aliases = [ [ "catalog" "gnome-system-monitor" ] ];
+status = "active";
+meta = { displayName = "gnome-system-monitor"; summary = "Curated gnome-system-monitor package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

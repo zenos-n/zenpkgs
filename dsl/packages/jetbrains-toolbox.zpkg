@@ -1,0 +1,7 @@
+declarationOrder = 22;
+id = "jetbrains-toolbox";
+target = [ "apps" "development" "jetbrains-toolbox" ];
+sourcePath = [ "jetbrains-toolbox" ];
+aliases = [ [ "catalog" "jetbrains-toolbox" ] ];
+status = "active";
+meta = { displayName = "jetbrains-toolbox"; summary = "Curated jetbrains-toolbox package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };

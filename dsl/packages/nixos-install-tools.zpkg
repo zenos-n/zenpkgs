@@ -1,0 +1,7 @@
+declarationOrder = 129;
+id = "nixos-install-tools";
+target = [ "apps" "recovery" "nixos-install-tools" ];
+sourcePath = [ "nixos-install-tools" ];
+aliases = [ [ "catalog" "nixos-install-tools" ] ];
+status = "active";
+meta = { displayName = "nixos-install-tools"; summary = "Curated nixos-install-tools package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

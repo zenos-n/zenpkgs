@@ -1,0 +1,7 @@
+declarationOrder = 4;
+id = "ungoogled-chromium";
+target = [ "apps" "browsers" "ungoogled-chromium" ];
+sourcePath = [ "ungoogled-chromium" ];
+aliases = [ [ "catalog" "ungoogled-chromium" ] ];
+status = "active";
+meta = { displayName = "ungoogled-chromium"; summary = "Curated ungoogled-chromium package for ZenOS"; support = "curated"; tags = [ ]; category = "browsers"; };

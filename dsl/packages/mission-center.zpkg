@@ -1,0 +1,7 @@
+declarationOrder = 45;
+id = "mission-center";
+target = [ "apps" "utilities" "mission-center" ];
+sourcePath = [ "mission-center" ];
+aliases = [ [ "catalog" "mission-center" ] ];
+status = "active";
+meta = { displayName = "mission-center"; summary = "Curated mission-center package for ZenOS"; support = "curated"; tags = [ ]; category = "utilities"; };

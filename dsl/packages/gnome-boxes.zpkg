@@ -1,0 +1,7 @@
+declarationOrder = 40;
+id = "gnome-boxes";
+target = [ "apps" "utilities" "gnome-boxes" ];
+sourcePath = [ "gnome-boxes" ];
+aliases = [ [ "catalog" "gnome-boxes" ] ];
+status = "active";
+meta = { displayName = "gnome-boxes"; summary = "Curated gnome-boxes package for ZenOS"; support = "curated"; tags = [ ]; category = "utilities"; };

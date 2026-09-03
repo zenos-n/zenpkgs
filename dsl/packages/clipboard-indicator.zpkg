@@ -1,0 +1,7 @@
+declarationOrder = 88;
+id = "clipboard-indicator";
+target = [ "apps" "gnome-extensions" "clipboard-indicator" ];
+sourcePath = [ "gnomeExtensions" "clipboard-indicator" ];
+aliases = [ [ "catalog" "clipboard-indicator" ] ];
+status = "active";
+meta = { displayName = "clipboard-indicator"; summary = "Curated clipboard-indicator package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

@@ -1,0 +1,7 @@
+declarationOrder = 84;
+id = "mouse-tail";
+target = [ "apps" "gnome-extensions" "mouse-tail" ];
+sourcePath = [ "gnomeExtensions" "mouse-tail" ];
+aliases = [ [ "catalog" "mouse-tail" ] ];
+status = "active";
+meta = { displayName = "mouse-tail"; summary = "Curated mouse-tail package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

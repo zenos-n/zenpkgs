@@ -1,0 +1,7 @@
+declarationOrder = 73;
+id = "app-hider";
+target = [ "apps" "gnome-extensions" "app-hider" ];
+sourcePath = [ "gnomeExtensions" "app-hider" ];
+aliases = [ [ "catalog" "app-hider" ] ];
+status = "active";
+meta = { displayName = "app-hider"; summary = "Curated app-hider package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

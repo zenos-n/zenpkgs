@@ -1,0 +1,7 @@
+declarationOrder = 124;
+id = "zip";
+target = [ "apps" "recovery" "zip" ];
+sourcePath = [ "zip" ];
+aliases = [ [ "catalog" "zip" ] ];
+status = "active";
+meta = { displayName = "zip"; summary = "Curated zip package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

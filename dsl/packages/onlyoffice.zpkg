@@ -1,0 +1,7 @@
+declarationOrder = 47;
+id = "onlyoffice";
+target = [ "apps" "office" "onlyoffice" ];
+sourcePath = [ "onlyoffice-desktopeditors" ];
+aliases = [ [ "catalog" "onlyoffice" ] ];
+status = "active";
+meta = { displayName = "onlyoffice"; summary = "Curated onlyoffice package for ZenOS"; support = "curated"; tags = [ ]; category = "office"; };

@@ -1,0 +1,7 @@
+declarationOrder = 28;
+id = "gnome-extensions-app";
+target = [ "apps" "system" "gnome-extensions-app" ];
+sourcePath = [ "gnome-extension-manager" ];
+aliases = [ [ "catalog" "gnome-extensions-app" ] ];
+status = "active";
+meta = { displayName = "gnome-extensions-app"; summary = "Curated gnome-extensions-app package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

@@ -1,0 +1,7 @@
+declarationOrder = 67;
+id = "atkinson-hyperlegible";
+target = [ "apps" "fonts" "atkinson-hyperlegible" ];
+sourcePath = [ "atkinson-hyperlegible" ];
+aliases = [ [ "catalog" "atkinson-hyperlegible" ] ];
+status = "active";
+meta = { displayName = "atkinson-hyperlegible"; summary = "Curated atkinson-hyperlegible package for ZenOS"; support = "core"; tags = [ "system" ]; category = "fonts"; };

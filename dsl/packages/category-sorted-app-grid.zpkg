@@ -1,0 +1,7 @@
+declarationOrder = 81;
+id = "category-sorted-app-grid";
+target = [ "apps" "gnome-extensions" "category-sorted-app-grid" ];
+sourcePath = [ "gnomeExtensions" "category-sorted-app-grid" ];
+aliases = [ [ "catalog" "category-sorted-app-grid" ] ];
+status = "active";
+meta = { displayName = "category-sorted-app-grid"; summary = "Curated category-sorted-app-grid package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

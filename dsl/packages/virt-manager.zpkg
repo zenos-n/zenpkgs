@@ -1,0 +1,7 @@
+declarationOrder = 53;
+id = "virt-manager";
+target = [ "apps" "advanced" "virt-manager" ];
+sourcePath = [ "virt-manager" ];
+aliases = [ [ "catalog" "virt-manager" ] ];
+status = "active";
+meta = { displayName = "virt-manager"; summary = "Curated virt-manager package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

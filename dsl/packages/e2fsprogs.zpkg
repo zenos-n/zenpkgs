@@ -1,0 +1,7 @@
+declarationOrder = 98;
+id = "e2fsprogs";
+target = [ "apps" "recovery" "e2fsprogs" ];
+sourcePath = [ "e2fsprogs" ];
+aliases = [ [ "catalog" "e2fsprogs" ] ];
+status = "active";
+meta = { displayName = "e2fsprogs"; summary = "Curated e2fsprogs package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

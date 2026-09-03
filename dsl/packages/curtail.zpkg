@@ -1,0 +1,7 @@
+declarationOrder = 39;
+id = "curtail";
+target = [ "apps" "utilities" "curtail" ];
+sourcePath = [ "curtail" ];
+aliases = [ [ "catalog" "curtail" ] ];
+status = "active";
+meta = { displayName = "curtail"; summary = "Curated curtail package for ZenOS"; support = "curated"; tags = [ ]; category = "utilities"; };

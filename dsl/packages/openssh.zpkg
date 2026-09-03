@@ -1,0 +1,7 @@
+declarationOrder = 113;
+id = "openssh";
+target = [ "apps" "recovery" "openssh" ];
+sourcePath = [ "openssh" ];
+aliases = [ [ "catalog" "openssh" ] ];
+status = "active";
+meta = { displayName = "openssh"; summary = "Curated openssh package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

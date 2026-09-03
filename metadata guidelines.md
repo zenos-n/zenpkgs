@@ -1,10 +1,44 @@
 # ZenPkgs Metadata Standards
 
-To ensure the documentation site renders correctly and builds pass CI, all Packages and Modules must adhere to the following metadata schema.
+To ensure the documentation site renders correctly and builds pass CI, all packages and modules must adhere to the following metadata schema.
+
+Package interface declarations live in `dsl/packages/*.zpkg`. Nix files remain
+valid for the flake, internal backend, tests, package implementations, and
+modules, but new contributor declarations under `dsl/` must use `.zpkg`.
+During shadow parity, update the corresponding `mappings/packages.nix` entry in
+the same commit; the generated candidate must remain exactly equal to the active
+legacy registry.
+
+## Package Interface Declarations
+
+Add one `.zpkg` file per curated nixpkgs interface. Declare the complete
+registry contract explicitly:
+
+```zpkg
+declarationOrder = 130;
+id = "example";
+target = [ "apps" "utilities" "example" ];
+sourcePath = [ "example" ];
+aliases = [ [ "catalog" "example" ] ];
+status = "active";
+meta = {
+  displayName = "Example";
+  summary = "Curated Example package for ZenOS";
+  support = "curated";
+  tags = [ "utility" ];
+  category = "utilities";
+};
+```
+
+`declarationOrder` must be unique and controls deterministic registry ordering.
+Use `sourcePath = null`, `aliases = [ ]`, and `status = "unavailable"` for a
+catalog entry that does not currently resolve to nixpkgs. The DSL tree is
+compiled in interface mode; package build recipes still live under `pkgs/`.
 
 ## 1. Required Fields
 
-Every `package.nix` (in `meta` set) and `module.nix` (top-level `meta` set) **MUST** contain:
+Every package implementation's `package.nix` (`meta` set) and every
+`module.nix` (top-level `meta` set) **MUST** contain:
 
 | Field         | Type              | Description                                                   |
 | :------------ | :---------------- | :------------------------------------------------------------ |
@@ -73,5 +107,6 @@ Options declared via `mkOption` **MUST** follow the **First Line Rule**.
 Run the audit tool to verify compliance:
 
 ```bash
+nix flake check --show-trace
 nix eval --file tests/integrity.nix --json | jq
 ```

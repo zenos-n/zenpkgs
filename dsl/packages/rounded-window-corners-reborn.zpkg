@@ -1,0 +1,7 @@
+declarationOrder = 79;
+id = "rounded-window-corners-reborn";
+target = [ "apps" "gnome-extensions" "rounded-window-corners-reborn" ];
+sourcePath = [ "gnomeExtensions" "rounded-window-corners-reborn" ];
+aliases = [ [ "catalog" "rounded-window-corners-reborn" ] ];
+status = "active";
+meta = { displayName = "rounded-window-corners-reborn"; summary = "Curated rounded-window-corners-reborn package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

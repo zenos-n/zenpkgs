@@ -1,0 +1,7 @@
+declarationOrder = 68;
+id = "atkinson-hyperlegible-mono";
+target = [ "apps" "fonts" "atkinson-hyperlegible-mono" ];
+sourcePath = [ "nerd-fonts" "atkynson-mono" ];
+aliases = [ [ "catalog" "atkinson-hyperlegible-mono" ] ];
+status = "active";
+meta = { displayName = "atkinson-hyperlegible-mono"; summary = "Curated atkinson-hyperlegible-mono package for ZenOS"; support = "core"; tags = [ "system" ]; category = "fonts"; };

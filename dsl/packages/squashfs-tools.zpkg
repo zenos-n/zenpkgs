@@ -1,0 +1,7 @@
+declarationOrder = 127;
+id = "squashfs-tools";
+target = [ "apps" "recovery" "squashfs-tools" ];
+sourcePath = [ "squashfsTools" ];
+aliases = [ [ "catalog" "squashfs-tools" ] ];
+status = "active";
+meta = { displayName = "squashfs-tools"; summary = "Curated squashfs-tools package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

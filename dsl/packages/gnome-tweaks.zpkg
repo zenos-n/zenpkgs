@@ -1,0 +1,7 @@
+declarationOrder = 29;
+id = "gnome-tweaks";
+target = [ "apps" "system" "gnome-tweaks" ];
+sourcePath = [ "gnome-tweaks" ];
+aliases = [ [ "catalog" "gnome-tweaks" ] ];
+status = "active";
+meta = { displayName = "gnome-tweaks"; summary = "Curated gnome-tweaks package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

@@ -1,0 +1,7 @@
+declarationOrder = 101;
+id = "f2fs-tools";
+target = [ "apps" "recovery" "f2fs-tools" ];
+sourcePath = [ "f2fs-tools" ];
+aliases = [ [ "catalog" "f2fs-tools" ] ];
+status = "active";
+meta = { displayName = "f2fs-tools"; summary = "Curated f2fs-tools package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

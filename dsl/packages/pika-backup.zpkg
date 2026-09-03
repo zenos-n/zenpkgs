@@ -1,0 +1,7 @@
+declarationOrder = 37;
+id = "pika-backup";
+target = [ "apps" "utilities" "pika-backup" ];
+sourcePath = [ "pika-backup" ];
+aliases = [ [ "catalog" "pika-backup" ] ];
+status = "active";
+meta = { displayName = "pika-backup"; summary = "Curated pika-backup package for ZenOS"; support = "curated"; tags = [ ]; category = "utilities"; };

@@ -479,7 +479,8 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
         "nur": "nur",
-        "vsc-extensions": "vsc-extensions"
+        "vsc-extensions": "vsc-extensions",
+        "zenos-next": "zenos-next"
       }
     },
     "systems": {
@@ -533,6 +534,23 @@
       "original": {
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
+        "type": "github"
+      }
+    },
+    "zenos-next": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788464960,
+        "narHash": "sha256-8Y1gJLsIJWDSWWrtoSxEL8eCmeT+kMYTWeH/rGYi0Hw=",
+        "owner": "doromiert",
+        "repo": "zenos-next",
+        "rev": "c24244cbf474ce21f4c16257eff7a94eeaa8928b",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doromiert",
+        "repo": "zenos-next",
+        "rev": "c24244cbf474ce21f4c16257eff7a94eeaa8928b",
         "type": "github"
       }
     }

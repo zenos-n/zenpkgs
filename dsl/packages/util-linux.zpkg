@@ -1,0 +1,7 @@
+declarationOrder = 97;
+id = "util-linux";
+target = [ "apps" "recovery" "util-linux" ];
+sourcePath = [ "util-linux" ];
+aliases = [ [ "catalog" "util-linux" ] ];
+status = "active";
+meta = { displayName = "util-linux"; summary = "Curated util-linux package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

@@ -1,0 +1,7 @@
+declarationOrder = 123;
+id = "tar";
+target = [ "apps" "recovery" "tar" ];
+sourcePath = [ "gnutar" ];
+aliases = [ [ "catalog" "tar" ] ];
+status = "active";
+meta = { displayName = "tar"; summary = "Curated tar package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

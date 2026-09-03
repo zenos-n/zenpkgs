@@ -1,0 +1,7 @@
+declarationOrder = 128;
+id = "arch-install-scripts";
+target = [ "apps" "recovery" "arch-install-scripts" ];
+sourcePath = [ "arch-install-scripts" ];
+aliases = [ [ "catalog" "arch-install-scripts" ] ];
+status = "active";
+meta = { displayName = "arch-install-scripts"; summary = "Curated arch-install-scripts package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

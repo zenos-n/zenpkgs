@@ -1,0 +1,7 @@
+declarationOrder = 106;
+id = "cryptsetup";
+target = [ "apps" "recovery" "cryptsetup" ];
+sourcePath = [ "cryptsetup" ];
+aliases = [ [ "catalog" "cryptsetup" ] ];
+status = "active";
+meta = { displayName = "cryptsetup"; summary = "Curated cryptsetup package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

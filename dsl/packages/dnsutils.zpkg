@@ -1,0 +1,7 @@
+declarationOrder = 116;
+id = "dnsutils";
+target = [ "apps" "recovery" "dnsutils" ];
+sourcePath = [ "bind" "dnsutils" ];
+aliases = [ [ "catalog" "dnsutils" ] ];
+status = "active";
+meta = { displayName = "dnsutils"; summary = "Curated dnsutils package for ZenOS"; support = "core"; tags = [ "network" "recovery" ]; category = "recovery"; };

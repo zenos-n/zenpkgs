@@ -22,6 +22,10 @@
       url = "github:doromiert/masterful-gestures";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    zenos-next = {
+      url = "github:doromiert/zenos-next/c24244cbf474ce21f4c16257eff7a94eeaa8928b";
+      flake = false;
+    };
   };
 
   outputs =
@@ -31,8 +35,66 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
       loader = import ./lib/loader.nix { inherit (nixpkgs) lib; };
       interface = import ./lib/interface.nix { inherit (nixpkgs) lib; };
+      dslBundleAdapter = import ./lib/dsl-bundle.nix { inherit (nixpkgs) lib; };
       registry = import ./mappings/packages.nix;
       optionMappings = import ./mappings/options.nix;
+      mkDslArtifacts =
+        system:
+        let
+          bootstrapPkgs = import nixpkgs {
+            inherit system;
+            config.allowUnfree = true;
+          };
+          zenDsl = bootstrapPkgs.callPackage (inputs.zenos-next + "/packages/zen-dsl.nix") { };
+          bundle = bootstrapPkgs.runCommand "zenpkgs-dsl-bundle" {
+            nativeBuildInputs = [
+              zenDsl
+              bootstrapPkgs.python3
+            ];
+            src = ./dsl;
+          } ''
+            mkdir -p "$out/interfaces"
+            zen-dsl compile-tree \
+              --root "$src" \
+              --output "$out/bundle.json" \
+              --mode interface
+
+            python3 - "$out/bundle.json" "$out/interfaces" <<'PY'
+            import json
+            from pathlib import Path
+            import sys
+
+            bundle_path = Path(sys.argv[1])
+            output_root = Path(sys.argv[2])
+            with bundle_path.open(encoding="utf-8") as source_file:
+                compiled_bundle = json.load(source_file)
+
+            for source in compiled_bundle["sources"]:
+                if source["kind"] != "zpkg":
+                    continue
+                relative = Path(source["path"])
+                if relative.is_absolute() or ".." in relative.parts:
+                    raise ValueError(f"unsafe bundle source path: {source['path']}")
+                destination = output_root / f"{source['path']}.nix"
+                destination.parent.mkdir(parents=True, exist_ok=True)
+                destination.write_text(source["compiledNix"], encoding="utf-8")
+            PY
+          '';
+          bundleJSON = builtins.fromJSON (builtins.readFile "${bundle}/bundle.json");
+          candidateRegistry = dslBundleAdapter.registryFromBundle {
+            bundle = bundleJSON;
+            bundlePath = bundle;
+          };
+        in
+        {
+          inherit
+            bootstrapPkgs
+            bundle
+            bundleJSON
+            candidateRegistry
+            zenDsl
+            ;
+        };
       legacyRoots = [
         "appstream"
         "boot"
@@ -270,7 +332,13 @@
       lib = {
         loader = loader;
         utils = utils;
-        inherit interface registry optionMappings;
+        dslRegistryFor = system: (mkDslArtifacts system).candidateRegistry;
+        inherit
+          dslBundleAdapter
+          interface
+          optionMappings
+          registry
+          ;
       };
 
       # --- NixOS Modules ---
@@ -390,6 +458,7 @@
       packages = forAllSystems (
         system:
         let
+          dsl = mkDslArtifacts system;
           pkgs = import nixpkgs {
             inherit system;
             overlays = [ self.overlays.default ];
@@ -410,9 +479,11 @@
               { };
         in
         {
+          dsl-bundle = dsl.bundle;
           registry-docs = pkgs.writeText "zenpkgs-registry.json" (
             builtins.toJSON (interface.registryDocs registry)
           );
+          zen-dsl = dsl.zenDsl;
           zenos-rebuild = pkgs.zenos.programs.zenos-rebuild;
         }
         // (flatten [ "zenos" ] (interface.buildPackageTree pkgs registry))
@@ -437,6 +508,7 @@
       checks = forAllSystems (
         system:
         let
+          dsl = mkDslArtifacts system;
           pkgs = import nixpkgs {
             inherit system;
             overlays = [ self.overlays.default ];
@@ -477,6 +549,12 @@
             oobeModule = self.nixosModules.oobe;
             webappsModule = self.nixosModules.webapps;
           };
+          dslShadowChecks = import ./tests/dsl-shadow.nix {
+            candidateRegistry = dsl.candidateRegistry;
+            legacyRegistry = registry;
+            inherit interface pkgs;
+            inherit (nixpkgs) lib;
+          };
         in
         {
           interface = interface.mkCheck {
@@ -501,6 +579,12 @@
               .settings."org/gnome/shell".enabled-extensions == [ "forge@jmmaranan.com" ];
             pkgs.runCommand "zenpkgs-gnome-base-check" { } "touch $out";
           source-policy = pkgs.runCommand "zenpkgs-source-policy-check" { src = self; } ''
+            dsl_nix="$(${pkgs.findutils}/bin/find "$src/dsl" -type f -name '*.nix' -print -quit)"
+            if [ -n "$dsl_nix" ]; then
+              echo "Nix contributor declaration is forbidden in dsl/: $dsl_nix" >&2
+              exit 1
+            fi
+
             bundled_dir="$(${pkgs.findutils}/bin/find "$src/pkgs" -type d \
               \( -name src -o -name resources -o -name assets \) -print -quit)"
             if [ -n "$bundled_dir" ]; then
@@ -525,6 +609,7 @@
           oobe = installedSystemChecks.oobe;
           webapps = installedSystemChecks.webapps;
         }
+        // dslShadowChecks
       );
     };
 }

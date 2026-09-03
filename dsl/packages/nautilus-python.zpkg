@@ -1,0 +1,7 @@
+declarationOrder = 24;
+id = "nautilus-python";
+target = [ "apps" "system" "nautilus-python" ];
+sourcePath = [ "nautilus-python" ];
+aliases = [ [ "catalog" "nautilus-python" ] ];
+status = "active";
+meta = { displayName = "nautilus-python"; summary = "Curated nautilus-python package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

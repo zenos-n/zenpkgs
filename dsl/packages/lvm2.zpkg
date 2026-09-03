@@ -1,0 +1,7 @@
+declarationOrder = 105;
+id = "lvm2";
+target = [ "apps" "recovery" "lvm2" ];
+sourcePath = [ "lvm2" ];
+aliases = [ [ "catalog" "lvm2" ] ];
+status = "active";
+meta = { displayName = "lvm2"; summary = "Curated lvm2 package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

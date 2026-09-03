@@ -1,0 +1,7 @@
+declarationOrder = 32;
+id = "fish";
+target = [ "apps" "system" "fish" ];
+sourcePath = [ "fish" ];
+aliases = [ [ "catalog" "fish" ] ];
+status = "active";
+meta = { displayName = "fish"; summary = "Curated fish package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

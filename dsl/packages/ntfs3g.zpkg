@@ -1,0 +1,7 @@
+declarationOrder = 104;
+id = "ntfs3g";
+target = [ "apps" "recovery" "ntfs3g" ];
+sourcePath = [ "ntfs3g" ];
+aliases = [ [ "catalog" "ntfs3g" ] ];
+status = "active";
+meta = { displayName = "ntfs3g"; summary = "Curated ntfs3g package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

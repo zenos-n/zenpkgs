@@ -1,0 +1,7 @@
+declarationOrder = 87;
+id = "gsconnect";
+target = [ "apps" "gnome-extensions" "gsconnect" ];
+sourcePath = [ "gnomeExtensions" "gsconnect" ];
+aliases = [ [ "catalog" "gsconnect" ] ];
+status = "active";
+meta = { displayName = "gsconnect"; summary = "Curated gsconnect package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };
