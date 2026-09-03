@@ -1,0 +1,53 @@
+# Source: modules/core/system-meta.nix
+# Unsupported: internal/readOnly option flags have no ZMDL fields.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "system.version";
+  brief = "ZenOS version information";
+  description = ''
+    Provides foundational operating-system release metadata for internal system use.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+type = {
+  _meta = {
+    type = $type.string;
+    default = "beta";
+    brief = "Release lifecycle type";
+    description = "Defines the stability track of the current release.";
+  };
+};
+
+majorVer = {
+  _meta = {
+    type = $type.string;
+    default = "1.0";
+    brief = "Major version identifier";
+    description = "The primary version number assigned to the current ZenOS release cycle.";
+  };
+};
+
+variant = {
+  _meta = {
+    type = $type.string;
+    default = "N";
+    brief = "Version variant code";
+    description = "The edition or flavor code for the release.";
+  };
+};
+
+full = {
+  _meta = {
+    type = $type.string;
+    default = $lib.mkVersionString {
+      major = $path.majorVer;
+      variant = $path.variant;
+      type = $path.type;
+    };
+    brief = "Complete version string";
+    description = "The constructed version identifier combining version, variant, and lifecycle.";
+  };
+};

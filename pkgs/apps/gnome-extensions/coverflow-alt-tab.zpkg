@@ -1,0 +1,5 @@
+id = "coverflow-alt-tab";
+sourcePath = [ "gnomeExtensions" "coverflow-alt-tab" ];
+aliases = [ [ "catalog" "coverflow-alt-tab" ] ];
+status = "active";
+meta = { displayName = "coverflow-alt-tab"; summary = "Curated coverflow-alt-tab package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

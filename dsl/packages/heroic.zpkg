@@ -1,7 +1,0 @@
-declarationOrder = 9;
-id = "heroic";
-target = [ "apps" "gaming" "heroic" ];
-sourcePath = [ "heroic" ];
-aliases = [ [ "catalog" "heroic" ] ];
-status = "active";
-meta = { displayName = "heroic"; summary = "Curated heroic package for ZenOS"; support = "curated"; tags = [ ]; category = "gaming"; };

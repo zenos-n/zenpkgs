@@ -1,0 +1,5 @@
+id = "date-menu-formatter";
+sourcePath = [ "gnomeExtensions" "date-menu-formatter" ];
+aliases = [ [ "catalog" "date-menu-formatter" ] ];
+status = "active";
+meta = { displayName = "date-menu-formatter"; summary = "Curated date-menu-formatter package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

@@ -1,0 +1,5 @@
+id = "gnome-disks";
+sourcePath = [ "gnome-disk-utility" ];
+aliases = [ [ "catalog" "gnome-disks" ] ];
+status = "active";
+meta = { displayName = "gnome-disks"; summary = "Curated gnome-disks package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

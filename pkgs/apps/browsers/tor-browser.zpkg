@@ -1,0 +1,5 @@
+id = "tor-browser";
+sourcePath = [ "tor-browser" ];
+aliases = [ [ "catalog" "tor-browser" ] ];
+status = "active";
+meta = { displayName = "tor-browser"; summary = "Curated tor-browser package for ZenOS"; support = "curated"; tags = [ ]; category = "browsers"; };

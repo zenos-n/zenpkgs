@@ -1,0 +1,184 @@
+# Source: modules/desktops/gnome/base/module.nix
+# Schema migration: the canonical module id uses singular desktop.gnome.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome";
+  brief = "GNOME desktop environment for ZenOS";
+  description = ''
+    Configures GNOME, its core utilities and multimedia support, Tracker indexing,
+    extension integration, curated applications, and desktop-wide dconf defaults.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable the GNOME desktop base module";
+
+  s! {
+    services.displayManager.gdm.enable = true;
+    services.desktopManager.gnome.enable = true;
+
+    environment.systemPackages =
+      ($lib.subtractLists
+        ($cfg.legacy.environment.gnome.excludePackages or [ ])
+        (with $pkgs; [
+          legacy.wl-clipboard
+          legacy.dconf-editor
+          legacy.gnome-tweaks
+          legacy.gnome-extension-manager
+          legacy.gst_all_1.gstreamer
+          legacy.gst_all_1.gst-plugins-base
+          legacy.gst_all_1.gst-plugins-good
+          legacy.gst_all_1.gst-plugins-bad
+          legacy.gst_all_1.gst-plugins-ugly
+          legacy.gst_all_1.gst-libav
+          legacy.gst_all_1.gst-vaapi
+        ]))
+      ++ $path.extensionPackages
+      ++ ($lib.optionals ($cfg.legacy.services.flatpak.enable or false) [ $pkgs.legacy.warehouse ])
+      ++ ($lib.optionals $path.extraPackages.enable (with $pkgs; [
+        legacy.icon-library
+        legacy.letterpress
+        legacy.biblioteca
+        legacy.dialect
+        legacy.raider
+        legacy.wike
+        legacy.curtail
+        legacy.czkawka
+        legacy.hieroglyphic
+        legacy.switcheroo
+        legacy.rnote
+        legacy.helvum
+      ]));
+
+    environment.gnome.excludePackages = [ $pkgs.legacy.gnome-tour ]
+      ++ ($lib.optional $path.excludeGnomeConsole $pkgs.legacy.gnome-console);
+
+    services.gnome.tracker-miners.enable = $path.fileIndexing.enable;
+    services.gnome.tracker.enable = $path.fileIndexing.enable;
+    programs.dconf.enable = true;
+    programs.dconf.profiles.user.databases = [
+      {
+        settings = {
+          "org/gnome/desktop/notifications".show-in-lock-screen = false;
+          "org/gnome/desktop/interface" = {
+            accent-color = $path.defaultAccentColor;
+            color-scheme = if $path.defaultDarkMode then "prefer-dark" else "prefer-light";
+            enable-hot-corners = false;
+            gtk-enable-primary-paste = false;
+            clock-show-weekday = true;
+            show-battery-percentage = true;
+          };
+          "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
+          "org/gnome/shell" = {
+            disable-user-extensions = false;
+            enabled-extensions = $path.extensionUuids;
+            favorite-apps = $path.dockItems;
+          };
+          "org/gnome/desktop/wm/preferences" = {
+            edge-tiling = false;
+            action-double-click-titlebar = "toggle-maximize";
+            button-layout = "appmenu:minimize,maximize,close";
+          };
+          "org/gnome/mutter" = {
+            edge-tiling = false;
+            center-new-windows = true;
+            dynamic-workspaces = true;
+            experimental-features = [
+              "scale-monitor-framebuffer"
+              "xwayland-native-scaling"
+            ] ++ ($lib.optional $path.variableRefreshRate "variable-refresh-rate");
+          };
+        };
+      }
+    ];
+    services.udev.packages = [ $pkgs.legacy.gnome-settings-daemon ];
+  };
+};
+
+defaultAccentColor = {
+  _meta = {
+    type = $type.enum [ "blue" "teal" "purple" "red" "orange" "yellow" "green" "pink" "grey" ];
+    default = "purple";
+    brief = "Primary accent color for the interface";
+    description = "Sets the system-wide accent color for GNOME and supported GTK4 applications.";
+  };
+};
+
+defaultDarkMode = {
+  _meta = {
+    type = $type.boolean;
+    default = true;
+    brief = "Enable system-wide dark mode";
+    description = "Prefer the dark color scheme across the desktop and applications.";
+  };
+};
+
+fileIndexing.enable = {
+  _meta = {
+    type = $type.boolean;
+    default = true;
+    brief = "Enable Tracker file indexing";
+    description = "Controls GNOME file search and metadata extraction services.";
+  };
+};
+
+dockItems = {
+  _meta = {
+    type = $type.list [ $type.string ];
+    default = [
+      "firefox.desktop"
+      "org.gnome.Nautilus.desktop"
+      "org.gnome.Terminal.desktop"
+      "kitty.desktop"
+    ];
+    brief = "Default favorite applications in the dock";
+    description = "Desktop identifiers pinned to the GNOME Dash by default.";
+  };
+};
+
+extensionPackages = {
+  _meta = {
+    type = $type.list [ $type.package ];
+    default = [ ];
+    brief = "GNOME Shell extension packages";
+    description = "Extension packages installed with the desktop.";
+  };
+};
+
+extensionUuids = {
+  _meta = {
+    type = $type.list [ $type.string ];
+    default = [ ];
+    brief = "Enabled GNOME Shell extension UUIDs";
+    description = "Extension UUIDs enabled by the base profile.";
+  };
+};
+
+extraPackages.enable = {
+  _meta = {
+    type = $type.boolean;
+    default = false;
+    brief = "Install extra curated GNOME applications";
+  };
+};
+
+excludeGnomeConsole = {
+  _meta = {
+    type = $type.boolean;
+    default = false;
+    brief = "Remove the default GNOME Console";
+    description = "Adds GNOME Console to the desktop exclusion list.";
+  };
+};
+
+variableRefreshRate = {
+  _meta = {
+    type = $type.boolean;
+    default = true;
+    brief = "Enable Variable Refresh Rate support";
+    description = "Activates experimental VRR support in Mutter.";
+  };
+};

@@ -1,0 +1,5 @@
+id = "cockpit";
+sourcePath = [ "cockpit" ];
+aliases = [ [ "catalog" "cockpit" ] ];
+status = "active";
+meta = { displayName = "cockpit"; summary = "Curated cockpit package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

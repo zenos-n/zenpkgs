@@ -1,0 +1,5 @@
+id = "nmap";
+sourcePath = [ "nmap" ];
+aliases = [ [ "catalog" "nmap" ] ];
+status = "active";
+meta = { displayName = "nmap"; summary = "Curated nmap package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

@@ -1,0 +1,5 @@
+id = "neovim";
+sourcePath = [ "neovim" ];
+aliases = [ [ "catalog" "neovim" ] ];
+status = "active";
+meta = { displayName = "neovim"; summary = "Curated neovim package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };

@@ -1,0 +1,5 @@
+id = "git";
+sourcePath = [ "git" ];
+aliases = [ [ "catalog" "git" ] ];
+status = "active";
+meta = { displayName = "git"; summary = "Curated git package for ZenOS"; support = "core"; tags = [ "system" ]; category = "development-tools"; };

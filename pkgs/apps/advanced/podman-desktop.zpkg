@@ -1,0 +1,5 @@
+id = "podman-desktop";
+sourcePath = [ "podman-desktop" ];
+aliases = [ [ "catalog" "podman-desktop" ] ];
+status = "active";
+meta = { displayName = "podman-desktop"; summary = "Curated podman-desktop package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

@@ -1,0 +1,5 @@
+id = "impression";
+sourcePath = [ "impression" ];
+aliases = [ [ "catalog" "impression" ] ];
+status = "active";
+meta = { displayName = "impression"; summary = "Curated impression package for ZenOS"; support = "curated"; tags = [ ]; category = "utilities"; };

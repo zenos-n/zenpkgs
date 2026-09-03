@@ -1,0 +1,5 @@
+id = "wget";
+sourcePath = [ "wget" ];
+aliases = [ [ "catalog" "wget" ] ];
+status = "active";
+meta = { displayName = "wget"; summary = "Curated wget package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

@@ -1,0 +1,5 @@
+id = "nano";
+sourcePath = [ "nano" ];
+aliases = [ [ "catalog" "nano" ] ];
+status = "active";
+meta = { displayName = "nano"; summary = "Curated nano package for ZenOS"; support = "core"; tags = [ "system" ]; category = "development-tools"; };

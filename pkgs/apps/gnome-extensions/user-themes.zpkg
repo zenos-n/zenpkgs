@@ -1,0 +1,5 @@
+id = "user-themes";
+sourcePath = [ "gnomeExtensions" "user-themes" ];
+aliases = [ [ "catalog" "user-themes" ] ];
+status = "active";
+meta = { displayName = "user-themes"; summary = "Curated user-themes package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

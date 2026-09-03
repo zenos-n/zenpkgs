@@ -1,7 +1,0 @@
-declarationOrder = 119;
-id = "dmidecode";
-target = [ "apps" "recovery" "dmidecode" ];
-sourcePath = [ "dmidecode" ];
-aliases = [ [ "catalog" "dmidecode" ] ];
-status = "active";
-meta = { displayName = "dmidecode"; summary = "Curated dmidecode package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

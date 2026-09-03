@@ -1,7 +1,0 @@
-declarationOrder = 6;
-id = "epiphany";
-target = [ "apps" "browsers" "epiphany" ];
-sourcePath = [ "epiphany" ];
-aliases = [ [ "catalog" "epiphany" ] ];
-status = "active";
-meta = { displayName = "epiphany"; summary = "Curated epiphany package for ZenOS"; support = "curated"; tags = [ ]; category = "browsers"; };

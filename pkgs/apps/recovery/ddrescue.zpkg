@@ -1,0 +1,5 @@
+id = "ddrescue";
+sourcePath = [ "ddrescue" ];
+aliases = [ [ "catalog" "ddrescue" ] ];
+status = "active";
+meta = { displayName = "ddrescue"; summary = "Curated ddrescue package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

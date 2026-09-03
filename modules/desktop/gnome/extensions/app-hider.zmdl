@@ -1,0 +1,55 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.app-hider";
+  brief = "Hide specific applications from the GNOME app grid and search";
+  description = ''
+    Hide specific applications from the GNOME app grid and search
+
+    This module installs and configures the **App Hider** extension for GNOME.
+    It allows hiding specific applications from the application grid and search results.
+
+    **Features:**
+    - Hide apps from the app grid.
+    - Hide apps from search results.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Whether to enable App Hider GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.apps.gnome-extensions.app-hider ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/app-hider" = {
+        hidden-apps = $path.hidden-apps;
+        hidden-search-apps = $path.hidden-search-apps;
+      };
+    } ];
+  };
+};
+
+hidden-apps = {
+  _meta = {
+    type = $type.list [ $type.string ];
+    default = [ ];
+    description = ''
+      List of hidden application IDs
+
+      Applications that are hidden from the standard app grid.
+    '';
+  };
+};
+
+hidden-search-apps = {
+  _meta = {
+    type = $type.list [ $type.string ];
+    default = [ ];
+    description = ''
+      List of applications hidden from search
+
+      Applications that are hidden specifically from GNOME Shell search results.
+    '';
+  };
+};

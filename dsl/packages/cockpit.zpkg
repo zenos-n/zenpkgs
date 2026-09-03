@@ -1,7 +1,0 @@
-declarationOrder = 59;
-id = "cockpit";
-target = [ "apps" "advanced" "cockpit" ];
-sourcePath = [ "cockpit" ];
-aliases = [ [ "catalog" "cockpit" ] ];
-status = "active";
-meta = { displayName = "cockpit"; summary = "Curated cockpit package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

@@ -1,0 +1,54 @@
+# Source: nixos-modules/webapps.nix
+# Metadata is synthesized because the contributor module has no top-level meta set.
+# Unsupported: importing the four Home Manager Nix modules is not valid ZMDL; this bridge assumes
+# the corresponding user ZMDLs are attached by ZSTR before per-user values are forwarded.
+# Unsupported: attrsOf typed user records are represented as a freeform attrs option.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "system.web-apps";
+  brief = "Per-user ZenOS progressive web applications";
+  description = ''
+    Configures Home Manager defaults for normal users and forwards enabled per-user
+    web application settings into the user-side web-apps module.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable per-user ZenOS web applications";
+
+  s!! {
+    home-manager = {
+      backupFileExtension = "zenos-backup";
+      useGlobalPkgs = true;
+      useUserPackages = false;
+      users = $lib.mapAttrs (userName: user: {
+        home = {
+          username = userName;
+          homeDirectory = user.home;
+          stateVersion = $cfg.legacy.system.stateVersion;
+        };
+      }) ($lib.filterAttrs (userName: user: user.isNormalUser) ($cfg.legacy.users.users or { }));
+    };
+  };
+
+  s! {
+    assertions = $lib.mapAttrsToList (userName: userConfig: {
+      assertion = $lib.hasAttr userName ($cfg.legacy.users.users or { });
+      message = "system.webApps.users.${userName} must name a declared system user";
+    }) $path.users;
+    home-manager.users = $lib.mapAttrs (userName: userConfig: {
+      zenos.webApps = userConfig // { enable = true; };
+    }) $path.users;
+  };
+};
+
+users = {
+  _meta = {
+    default = { };
+    brief = "Per-user web application values";
+    description = "Freeform values forwarded to the typed user web-apps module.";
+  };
+};

@@ -1,0 +1,25 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.hide-minimized";
+  brief = "Exclude minimized windows from the activities overview";
+  description = ''
+    Exclude minimized windows from the activities overview
+
+    This module installs and configures the **Hide Minimized** extension for GNOME.
+    It modifies the window management behavior so that minimized windows are hidden
+    from the Overview, reducing visual clutter during multitasking.
+
+    **Features:**
+    - Hides minimized windows from the activities overview.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Whether to enable Hide Minimized GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.apps.gnome-extensions.hide-minimized ];
+  };
+};

@@ -1,0 +1,5 @@
+id = "alphabetical-app-grid";
+sourcePath = [ "gnomeExtensions" "alphabetical-app-grid" ];
+aliases = [ [ "catalog" "alphabetical-app-grid" ] ];
+status = "active";
+meta = { displayName = "alphabetical-app-grid"; summary = "Curated alphabetical-app-grid package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

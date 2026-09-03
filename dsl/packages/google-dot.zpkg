@@ -1,7 +1,0 @@
-declarationOrder = 70;
-id = "google-dot";
-target = [ "apps" "cursors" "google-dot" ];
-sourcePath = [ "google-cursor" ];
-aliases = [ [ "catalog" "google-dot" ] ];
-status = "active";
-meta = { displayName = "google-dot"; summary = "Curated google-dot package for ZenOS"; support = "core"; tags = [ "system" ]; category = "cursors"; };

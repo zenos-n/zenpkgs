@@ -1,0 +1,71 @@
+# Source: modules/zenos-maintenance/module.nix
+# Unsupported: generated JSON config uses an undeclared updateCommand option and is unused by the source service.
+# The source cleanOnShutdown and cleanOnReboot options have no implementation; that behavior is preserved.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "system.maintenance";
+  brief = "ZenOS maintenance and optimization service";
+  description = ''
+    Installs the ZenOS maintenance service and daily timer for cleanup,
+    optimization, and update work.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable the ZenOS maintenance system";
+
+  s! {
+    systemd.services.zenos-maintenance = {
+      description = "ZenOS System Maintenance Service";
+      serviceConfig = {
+        Type = "oneshot";
+        ExecStart = "${$pkgs.system.zenclean}/bin/zenos-maintenance";
+        User = "root";
+      };
+    };
+    systemd.timers.zenos-maintenance = {
+      description = "Timer for ZenOS Maintenance";
+      wantedBy = [ "timers.target" ];
+      timerConfig = {
+        OnBootSec = "10m";
+        OnUnitActiveSec = "1d";
+        Persistent = true;
+      };
+    };
+  };
+};
+
+garbageCollectionAge = {
+  _meta = {
+    type = $type.string;
+    default = "14d";
+    brief = "Retention period for Nix store garbage";
+  };
+};
+
+notificationFrequencyDays = {
+  _meta = {
+    type = $type.int;
+    default = 7;
+    brief = "User maintenance notification interval in days";
+  };
+};
+
+cleanOnShutdown = {
+  _meta = {
+    type = $type.boolean;
+    default = false;
+    brief = "Request cleanup during system shutdown";
+  };
+};
+
+cleanOnReboot = {
+  _meta = {
+    type = $type.boolean;
+    default = false;
+    brief = "Request cleanup during system reboot";
+  };
+};

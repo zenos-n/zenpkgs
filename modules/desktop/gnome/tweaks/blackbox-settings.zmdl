@@ -1,0 +1,43 @@
+# Source: modules/desktops/gnome/tweaks/blackbox-settings/module.nix
+# Unsupported: internal/readOnly option flags have no ZMDL fields.
+# Schema migration: the module id uses singular desktop.gnome.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.tweaks.blackbox-settings";
+  brief = "Native BlackBox terminal theming for ZenOS";
+  description = ''
+    Installs BlackBox and Atkynson Mono, then configures its font, window size,
+    padding, header bar, and floating controls through dconf.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable BlackBox terminal theming";
+
+  s! {
+    environment.systemPackages = [
+      $pkgs.legacy.blackbox-terminal
+      $pkgs.legacy.nerd-fonts.atkynson-mono
+    ];
+    programs.dconf.profiles.user.databases = [
+      {
+        settings."com/raggesilver/BlackBox" = {
+          floating-controls = true;
+          font = "Atkynson Mono NF 11";
+          show-headerbar = false;
+          terminal-padding = $lib.gvariant.mkTuple [
+            ($lib.gvariant.mkUint32 5)
+            ($lib.gvariant.mkUint32 5)
+            ($lib.gvariant.mkUint32 5)
+            ($lib.gvariant.mkUint32 5)
+          ];
+          window-height = $lib.gvariant.mkUint32 550;
+          window-width = $lib.gvariant.mkUint32 900;
+        };
+      }
+    ];
+  };
+};

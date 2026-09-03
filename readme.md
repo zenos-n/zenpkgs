@@ -2,13 +2,17 @@
 
 The Nix packages repository for ZenOS.
 
-Curated nixpkgs interfaces are declared in `dsl/packages/*.zpkg`. The flake
-compiles that tree in interface mode and uses the result for the overlay,
-registry documentation, and flattened public package outputs. The 130-entry
-normalized contract in `tests/fixtures/package-registry.json` protects the
-126 active mappings and every declared target, alias, and nixpkgs source path.
+Curated nixpkgs interfaces are named leaves under `pkgs/`. A source such as
+`pkgs/apps/browsers/firefox.zpkg` mechanically defines
+`pkgs.zenos.apps.browsers.firefox`; its `id` must match the leaf name. The flake
+compiles the repository root in interface mode and uses the path-sorted result
+for the overlay, registry documentation, and flattened public package outputs.
+The 130-entry normalized contract in `tests/fixtures/package-registry.json`
+protects the 126 active mappings and every derived target, declared alias, and
+nixpkgs source path.
 
-The `.zpkg` files are the only package registry declaration source. See
+The `.zpkg` files are the only package registry declaration source. Package
+aliases remain in the canonical leaf's `aliases` field. See
 [metadata guidelines.md](metadata%20guidelines.md) for the schema and validation
 commands.
 
@@ -17,3 +21,11 @@ generated compiler output in the store instead of the repository. The compiler
 is built with a clean, overlay-free nixpkgs bootstrap to avoid a circular
 dependency. Evaluators and CI must allow IFD until ZenOS provides a native
 evaluator plugin or another non-IFD compiler boundary.
+
+Named ZMDL leaves live under `modules/` and map mechanically to `zenos.<path>`;
+their `_meta.id` must equal that path without the `modules/` prefix or `.zmdl`
+suffix. Generated modules remain private migration candidates and are not active
+in public module outputs, while the existing `.nix` implementations remain for
+parity. See
+[DSL module candidate checks](docs/dsl-module-candidates.md) for the mapping,
+static evaluation/parity checks, blocker exceptions, and VM commands.

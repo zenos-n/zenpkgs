@@ -1,0 +1,207 @@
+# Source: nixos-modules/oobe.nix
+# Unsupported: the setupPackage.meta ? mainProgram assertion uses attribute-existence syntax
+# that production ZMDL does not support; the runtime launch command still uses getExe.
+# Unsupported: mkDefault/mkForce priorities are flattened to ordinary assignments.
+# Unsupported: fallback license construction uses the canonical registry.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "system.oobe";
+  brief = "Temporary ZenOS out-of-box experience";
+  description = ''
+    Creates a disposable GNOME setup account and session, starts the Setup app,
+    enables remote access, locks down the shell, and prepares runtime directories.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.linux;
+};
+
+_let extensionUuid: $type.string = "zenos-oobe-mode@neg-zero.com";
+_let servicePath: $type.string = "/run/wrappers/bin:/run/current-system/sw/bin";
+_let oobeHome: $type.string = "/run/zenos-oobe";
+_let blackWallpaper: $type.package = $pkgs.legacy.writeText "zenos-oobe-black.svg" ''
+  <svg xmlns="http://www.w3.org/2000/svg" width="1" height="1">
+    <rect width="1" height="1" fill="#000000"/>
+  </svg>
+'';
+
+enable = enableOption {
+  _meta.brief = "Enable the temporary ZenOS out-of-box experience";
+
+  s! {
+    services.desktopManager.gnome.enable = true;
+    services.displayManager.gdm.enable = false;
+    services.gnome.gnome-initial-setup.enable = false;
+    services.openssh = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        KbdInteractiveAuthentication = false;
+        PasswordAuthentication = true;
+        PermitEmptyPasswords = true;
+        PermitRootLogin = "no";
+      };
+    };
+    services.greetd = {
+      enable = true;
+      restart = false;
+      settings = {
+        initial_session = {
+          command = "${$pkgs.legacy.coreutils}/bin/env XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SESSION_DESKTOP=GNOME XDG_CURRENT_DESKTOP=GNOME ZENOS_OOBE=1 ${$cfg.legacy.services.displayManager.sessionData.wrapper} ${$pkgs.legacy.gnome-session}/bin/gnome-session --session=zenos-oobe";
+          user = $path.userName;
+        };
+        default_session = {
+          command = "${$pkgs.legacy.coreutils}/bin/env XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SESSION_DESKTOP=GNOME XDG_CURRENT_DESKTOP=GNOME ZENOS_OOBE=1 ${$cfg.legacy.services.displayManager.sessionData.wrapper} ${$pkgs.legacy.gnome-session}/bin/gnome-session --session=zenos-oobe";
+          user = $path.userName;
+        };
+      };
+    };
+    systemd.services.greetd.environment = {
+      XDG_SESSION_TYPE = "wayland";
+      XDG_SESSION_CLASS = "user";
+      XDG_SESSION_DESKTOP = "GNOME";
+    };
+    environment.etc."xdg/gnome-session/sessions/zenos-oobe.session".text = ''
+      [GNOME Session]
+      Name=ZenOS OOBE
+    '';
+    systemd.user.targets."gnome-session@zenos-oobe" = {
+      overrideStrategy = "asDropin";
+      unitConfig.Requires = [
+        "gnome-session-services.target"
+        "org.gnome.Shell@zenos-oobe.service"
+      ];
+    };
+    systemd.user.services."org.gnome.Shell@zenos-oobe" = {
+      overrideStrategy = "asDropin";
+      environment = { PATH = $v.servicePath; ZENOS_OOBE = "1"; };
+    };
+    systemd.user.services.zenos-oobe = {
+      description = "ZenOS out-of-box experience";
+      wantedBy = [ "graphical-session.target" ];
+      after = [ "gnome-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      path = [ ];
+      environment = { PATH = $v.servicePath; ZENOS_OOBE = "1"; };
+      unitConfig.ConditionUser = $path.userName;
+      serviceConfig = {
+        Type = "exec";
+        ExecStart = "${$lib.getExe $path.setupPackage} --oobe";
+        Restart = "on-failure";
+        RestartSec = 2;
+      };
+    };
+    users.mutableUsers = false;
+    users.users.root.hashedPassword = "!";
+    users.users.($path.userName) = {
+      isNormalUser = true;
+      description = "ZenOS Setup";
+      home = $v.oobeHome;
+      createHome = true;
+      homeMode = "0700";
+      initialHashedPassword = "";
+      openssh.authorizedKeys.keys = $path.authorizedKeys;
+      extraGroups = [ "input" "networkmanager" "video" "wheel" ];
+    };
+    environment = {
+      systemPackages = [ $path.extensionPackage $path.setupPackage ] ++ $path.extraExtensionPackages;
+      gnome.excludePackages = [ $pkgs.legacy.gnome-tour ];
+    };
+    hardware.graphics.enable = true;
+    programs.dconf.profiles.user.databases = [
+      {
+        settings = {
+          "org/gnome/shell" = {
+            disable-user-extensions = false;
+            enabled-extensions = [ $v.extensionUuid ] ++ $path.extraExtensionUuids;
+            favorite-apps = $lib.gvariant.mkEmptyArray $lib.gvariant.type.string;
+          };
+          "org/gnome/desktop/interface" = {
+            color-scheme = "prefer-dark";
+            enable-animations = true;
+          };
+          "org/gnome/desktop/background" = {
+            color-shading-type = "solid";
+            picture-options = "none";
+            picture-uri = "file://${$v.blackWallpaper}";
+            picture-uri-dark = "file://${$v.blackWallpaper}";
+            primary-color = "#000000";
+            secondary-color = "#000000";
+          };
+          "org/gnome/desktop/lockdown" = {
+            disable-lock-screen = true;
+            disable-log-out = true;
+            disable-user-switching = true;
+          };
+          "org/gnome/desktop/session".idle-delay = $lib.gvariant.mkUint32 0;
+          "org/gnome/settings-daemon/plugins/power" = {
+            sleep-inactive-ac-type = "nothing";
+            sleep-inactive-battery-type = "nothing";
+          };
+        };
+        locks = [
+          "/org/gnome/shell/disable-user-extensions"
+          "/org/gnome/shell/enabled-extensions"
+        ];
+      }
+    ];
+    systemd.tmpfiles.rules = [
+      "d /Config 0755 root root -"
+      "d /Config/ZenOS 0755 root root -"
+      "d ${$v.oobeHome}/.private 0700 ${$path.userName} users -"
+      "d ${$v.oobeHome}/.private/Packages 0700 ${$path.userName} users -"
+      "d ${$v.oobeHome}/.private/Packages/gnome-shell 0700 ${$path.userName} users -"
+      "f ${$v.oobeHome}/.private/Packages/gnome-shell/lock-warning-shown 0600 ${$path.userName} users -"
+      "z /Config/ZenOS 0775 ${$path.userName} users -"
+      "Z /Config/ZenOS - ${$path.userName} users -"
+    ];
+  };
+};
+
+setupPackage = {
+  _meta = {
+    type = $type.package;
+    brief = "Setup application package launched by OOBE";
+    example = "pkgs.zenos.setup";
+  };
+};
+
+extensionPackage = {
+  _meta = {
+    type = $type.package;
+    brief = "GNOME Shell extension and mode package for OOBE";
+    example = "pkgs.zenos.oobe-extension";
+  };
+};
+
+extraExtensionPackages = {
+  _meta = {
+    type = $type.list [ $type.package ];
+    default = [ ];
+    brief = "Additional OOBE GNOME extension packages";
+  };
+};
+
+extraExtensionUuids = {
+  _meta = {
+    type = $type.list [ $type.string ];
+    default = [ ];
+    brief = "Additional OOBE GNOME extension UUIDs";
+  };
+};
+
+authorizedKeys = {
+  _meta = {
+    type = $type.list [ $type.string ];
+    default = [ ];
+    brief = "SSH keys accepted by the OOBE account";
+  };
+};
+
+userName = {
+  _meta = {
+    type = $type.string;
+    default = "zenos";
+    brief = "Temporary OOBE account name";
+  };
+};

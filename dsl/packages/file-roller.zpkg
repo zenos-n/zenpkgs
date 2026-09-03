@@ -1,7 +1,0 @@
-declarationOrder = 41;
-id = "file-roller";
-target = [ "apps" "utilities" "file-roller" ];
-sourcePath = [ "file-roller" ];
-aliases = [ [ "catalog" "file-roller" ] ];
-status = "active";
-meta = { displayName = "file-roller"; summary = "Curated file-roller package for ZenOS"; support = "curated"; tags = [ ]; category = "utilities"; };

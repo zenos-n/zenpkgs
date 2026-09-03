@@ -1,7 +1,0 @@
-declarationOrder = 60;
-id = "ventoy";
-target = [ "apps" "advanced" "ventoy" ];
-sourcePath = null;
-aliases = [ ];
-status = "unavailable";
-meta = { displayName = "ventoy"; summary = "Curated ventoy package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

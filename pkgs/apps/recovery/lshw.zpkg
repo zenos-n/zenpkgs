@@ -1,0 +1,5 @@
+id = "lshw";
+sourcePath = [ "lshw" ];
+aliases = [ [ "catalog" "lshw" ] ];
+status = "active";
+meta = { displayName = "lshw"; summary = "Curated lshw package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

@@ -1,0 +1,49 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.auto-theme-switcher";
+  brief = "Automatic light and dark theme switching for GNOME";
+  description = ''
+    Automatic light and dark theme switching for GNOME
+
+    This module installs and configures the **Auto Theme Switcher** extension for GNOME.
+    It automatically toggles the system theme between light and dark modes based on
+    custom coordinates or system location services.
+
+    **Features:**
+    - Set custom coordinates (Latitude/Longitude).
+    - Define a human-readable location name.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Whether to enable Auto Theme Switcher GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.legacy.gnomeExtensions.auto-theme-switcher ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/auto-theme-switcher" = {
+        manual-latitude = $path.location.latitude;
+        manual-longitude = $path.location.longitude;
+        location-name = $path.location.name;
+      };
+    } ];
+  };
+};
+
+location.name = { _meta = { type = $type.string; default = ""; example = "San Francisco"; description = ''
+  Human-readable location label
+
+  Custom name used to identify the location in the user interface.
+''; }; };
+location.latitude = { _meta = { type = $type.string; default = ""; example = "37.7749"; description = ''
+  Geographic latitude
+
+  Latitude coordinate used for sunset and sunrise calculations.
+''; }; };
+location.longitude = { _meta = { type = $type.string; default = ""; example = "-122.4194"; description = ''
+  Geographic longitude
+
+  Longitude coordinate used for sunset and sunrise calculations.
+''; }; };

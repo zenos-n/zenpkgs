@@ -1,0 +1,5 @@
+id = "gparted-live";
+sourcePath = [ "gparted" ];
+aliases = [ [ "catalog" "gparted-live" ] ];
+status = "active";
+meta = { displayName = "gparted-live"; summary = "Curated gparted-live package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

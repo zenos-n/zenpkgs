@@ -1,7 +1,0 @@
-declarationOrder = 21;
-id = "docker";
-target = [ "apps" "development" "docker" ];
-sourcePath = [ "docker" ];
-aliases = [ [ "catalog" "docker" ] ];
-status = "active";
-meta = { displayName = "docker"; summary = "Curated docker package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };

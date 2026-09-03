@@ -1,7 +1,0 @@
-declarationOrder = 1;
-id = "librewolf";
-target = [ "apps" "browsers" "librewolf" ];
-sourcePath = [ "librewolf" ];
-aliases = [ [ "catalog" "librewolf" ] ];
-status = "active";
-meta = { displayName = "librewolf"; summary = "Curated librewolf package for ZenOS"; support = "curated"; tags = [ ]; category = "browsers"; };

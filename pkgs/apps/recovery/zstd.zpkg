@@ -1,0 +1,5 @@
+id = "zstd";
+sourcePath = [ "zstd" ];
+aliases = [ [ "catalog" "zstd" ] ];
+status = "active";
+meta = { displayName = "zstd"; summary = "Curated zstd package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

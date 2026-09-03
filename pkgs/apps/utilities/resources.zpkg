@@ -1,0 +1,5 @@
+id = "resources";
+sourcePath = [ "resources" ];
+aliases = [ [ "catalog" "resources" ] ];
+status = "active";
+meta = { displayName = "resources"; summary = "Curated resources package for ZenOS"; support = "curated"; tags = [ ]; category = "utilities"; };

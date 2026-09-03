@@ -1,7 +1,0 @@
-declarationOrder = 50;
-id = "apostrophe";
-target = [ "apps" "office" "apostrophe" ];
-sourcePath = [ "apostrophe" ];
-aliases = [ [ "catalog" "apostrophe" ] ];
-status = "active";
-meta = { displayName = "apostrophe"; summary = "Curated apostrophe package for ZenOS"; support = "curated"; tags = [ ]; category = "office"; };

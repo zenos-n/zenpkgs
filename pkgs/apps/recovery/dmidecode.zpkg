@@ -1,0 +1,5 @@
+id = "dmidecode";
+sourcePath = [ "dmidecode" ];
+aliases = [ [ "catalog" "dmidecode" ] ];
+status = "active";
+meta = { displayName = "dmidecode"; summary = "Curated dmidecode package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

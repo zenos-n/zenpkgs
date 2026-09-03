@@ -1,0 +1,5 @@
+id = "vscode";
+sourcePath = [ "vscode" ];
+aliases = [ [ "catalog" "vscode" ] ];
+status = "active";
+meta = { displayName = "vscode"; summary = "Curated vscode package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };

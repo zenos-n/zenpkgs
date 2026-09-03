@@ -1,7 +1,0 @@
-declarationOrder = 108;
-id = "efibootmgr";
-target = [ "apps" "recovery" "efibootmgr" ];
-sourcePath = [ "efibootmgr" ];
-aliases = [ [ "catalog" "efibootmgr" ] ];
-status = "active";
-meta = { displayName = "efibootmgr"; summary = "Curated efibootmgr package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

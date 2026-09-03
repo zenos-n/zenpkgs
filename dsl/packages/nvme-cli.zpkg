@@ -1,7 +1,0 @@
-declarationOrder = 94;
-id = "nvme-cli";
-target = [ "apps" "recovery" "nvme-cli" ];
-sourcePath = [ "nvme-cli" ];
-aliases = [ [ "catalog" "nvme-cli" ] ];
-status = "active";
-meta = { displayName = "nvme-cli"; summary = "Curated nvme-cli package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

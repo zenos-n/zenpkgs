@@ -1,7 +1,0 @@
-declarationOrder = 114;
-id = "iproute2";
-target = [ "apps" "recovery" "iproute2" ];
-sourcePath = [ "iproute2" ];
-aliases = [ [ "catalog" "iproute2" ] ];
-status = "active";
-meta = { displayName = "iproute2"; summary = "Curated iproute2 package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

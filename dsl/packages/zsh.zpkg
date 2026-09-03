@@ -1,7 +1,0 @@
-declarationOrder = 33;
-id = "zsh";
-target = [ "apps" "system" "zsh" ];
-sourcePath = [ "zsh" ];
-aliases = [ [ "catalog" "zsh" ] ];
-status = "active";
-meta = { displayName = "zsh"; summary = "Curated zsh package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

@@ -1,7 +1,0 @@
-declarationOrder = 93;
-id = "smartmontools";
-target = [ "apps" "recovery" "smartmontools" ];
-sourcePath = [ "smartmontools" ];
-aliases = [ [ "catalog" "smartmontools" ] ];
-status = "active";
-meta = { displayName = "smartmontools"; summary = "Curated smartmontools package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

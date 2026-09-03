@@ -1,0 +1,52 @@
+# Source: hm-modules/zenlink/module.nix
+# Unsupported: internal/readOnly/defaultText option fields have no ZMDL equivalents.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "users.programs.zenlink";
+  brief = "Android to ZenOS communication bridge";
+  description = ''
+    Installs ZenLink for the current user and optionally starts its daemon with
+    the graphical session. Runtime state remains intentionally unmanaged.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable the ZenLink Android bridge service";
+
+  u! {
+    home.packages = [ $path.package ];
+    systemd.zenlink = if $path.autoStart then {
+      Unit = {
+        Description = "ZenLink Daemon";
+        After = [ "graphical-session.target" "pipewire.service" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${$path.package}/bin/zl-daemon";
+        Restart = "on-failure";
+        RestartSec = "3s";
+        Environment = "PATH=${$lib.makeBinPath [ $path.package ]}:$PATH";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    } else { };
+  };
+};
+
+package = {
+  _meta = {
+    type = $type.package;
+    default = $pkgs.system.zenlink;
+    brief = "ZenLink package";
+  };
+};
+
+autoStart = {
+  _meta = {
+    type = $type.boolean;
+    default = true;
+    brief = "Start ZenLink with the graphical session";
+  };
+};

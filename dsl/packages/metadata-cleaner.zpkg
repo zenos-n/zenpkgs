@@ -1,7 +1,0 @@
-declarationOrder = 38;
-id = "metadata-cleaner";
-target = [ "apps" "utilities" "metadata-cleaner" ];
-sourcePath = [ "metadata-cleaner" ];
-aliases = [ [ "catalog" "metadata-cleaner" ] ];
-status = "active";
-meta = { displayName = "metadata-cleaner"; summary = "Curated metadata-cleaner package for ZenOS"; support = "curated"; tags = [ ]; category = "utilities"; };

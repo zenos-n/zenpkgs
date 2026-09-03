@@ -1,0 +1,21 @@
+# Source: nixos-modules/disks.nix
+# Metadata is synthesized because the contributor module has no top-level meta set.
+# The freeform action emits nothing for an empty disk set, matching the source mkIf.
+# Unsupported: the external system.disks.<name> freeform must ultimately be owned by ZSTR.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "system.disks";
+  brief = "Declarative ZenOS disk layout";
+  description = "Forwards freeform ZenOS disk device definitions to Disko.";
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.linux;
+};
+
+(freeform device) = {
+  _meta.brief = "Disko device ${$f.device}";
+
+  s!! {
+    disko.devices.($f.device) = $path.device.($f.device);
+  };
+};

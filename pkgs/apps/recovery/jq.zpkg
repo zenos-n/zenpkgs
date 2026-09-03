@@ -1,0 +1,5 @@
+id = "jq";
+sourcePath = [ "jq" ];
+aliases = [ [ "catalog" "jq" ] ];
+status = "active";
+meta = { displayName = "jq"; summary = "Curated jq package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

@@ -1,7 +1,0 @@
-declarationOrder = 3;
-id = "helium-browser";
-target = [ "apps" "browsers" "helium-browser" ];
-sourcePath = null;
-aliases = [ ];
-status = "unavailable";
-meta = { displayName = "helium-browser"; summary = "Curated helium-browser package for ZenOS"; support = "curated"; tags = [ ]; category = "browsers"; };

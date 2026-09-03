@@ -1,0 +1,5 @@
+id = "compiz-windows-effect";
+sourcePath = [ "gnomeExtensions" "compiz-windows-effect" ];
+aliases = [ [ "catalog" "compiz-windows-effect" ] ];
+status = "active";
+meta = { displayName = "compiz-windows-effect"; summary = "Curated compiz-windows-effect package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

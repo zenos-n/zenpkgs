@@ -1,0 +1,5 @@
+id = "smartmontools";
+sourcePath = [ "smartmontools" ];
+aliases = [ [ "catalog" "smartmontools" ] ];
+status = "active";
+meta = { displayName = "smartmontools"; summary = "Curated smartmontools package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

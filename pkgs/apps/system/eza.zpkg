@@ -1,0 +1,5 @@
+id = "eza";
+sourcePath = [ "eza" ];
+aliases = [ [ "catalog" "eza" ] ];
+status = "active";
+meta = { displayName = "eza"; summary = "Curated eza package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

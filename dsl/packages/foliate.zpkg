@@ -1,7 +1,0 @@
-declarationOrder = 51;
-id = "foliate";
-target = [ "apps" "office" "foliate" ];
-sourcePath = [ "foliate" ];
-aliases = [ [ "catalog" "foliate" ] ];
-status = "active";
-meta = { displayName = "foliate"; summary = "Curated foliate package for ZenOS"; support = "curated"; tags = [ ]; category = "office"; };

@@ -1,7 +1,0 @@
-declarationOrder = 15;
-id = "zed";
-target = [ "apps" "development" "zed" ];
-sourcePath = [ "zed-editor" ];
-aliases = [ [ "catalog" "zed" ] ];
-status = "active";
-meta = { displayName = "zed"; summary = "Curated zed package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };

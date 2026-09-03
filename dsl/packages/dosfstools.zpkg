@@ -1,7 +1,0 @@
-declarationOrder = 102;
-id = "dosfstools";
-target = [ "apps" "recovery" "dosfstools" ];
-sourcePath = [ "dosfstools" ];
-aliases = [ [ "catalog" "dosfstools" ] ];
-status = "active";
-meta = { displayName = "dosfstools"; summary = "Curated dosfstools package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

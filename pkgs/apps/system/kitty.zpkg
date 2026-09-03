@@ -1,0 +1,5 @@
+id = "kitty";
+sourcePath = [ "kitty" ];
+aliases = [ [ "catalog" "kitty" ] ];
+status = "active";
+meta = { displayName = "kitty"; summary = "Curated kitty package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

@@ -9,8 +9,11 @@
 
 let
   normalize = value: interface.registryDocs value;
-  actual = normalize registry;
-  expected = normalize expectedRegistry;
+  pathKey = entry: lib.concatStringsSep "/" entry.target;
+  sortPackages = value: value // { packages = lib.sort (left: right: pathKey left < pathKey right) value.packages; };
+  actual = normalize (sortPackages registry);
+  expected = normalize (sortPackages expectedRegistry);
+  expectedSorted = sortPackages expectedRegistry;
   activeEntries = builtins.filter (entry: entry.status == "active") registry.packages;
   expectedActiveEntries = builtins.filter (entry: entry.status == "active") expectedRegistry.packages;
   registryPaths =
@@ -22,9 +25,10 @@ let
         sourcePath
         target
         ;
-    }) value.packages;
+    }) (sortPackages value).packages;
   packagePaths = value: lib.concatMap (entry: [ entry.target ] ++ entry.aliases) value.packages;
   activePaths = lib.concatMap (entry: [ entry.target ] ++ entry.aliases) activeEntries;
+  registryPathKeys = map pathKey registry.packages;
   outputName = path: lib.concatStringsSep "-" ([ "zenos" ] ++ path);
   outputIdentities = lib.concatMap (
     entry:
@@ -62,8 +66,9 @@ in
     assert builtins.length (registryPaths expectedRegistry) == 130;
     assert builtins.length (packagePaths expectedRegistry) == 256;
     assert builtins.length activePaths == 252;
+    assert registryPathKeys == lib.sort builtins.lessThan registryPathKeys;
     assert registryPaths registry == registryPaths expectedRegistry;
-    assert packagePaths registry == packagePaths expectedRegistry;
+    assert packagePaths registry == packagePaths expectedSorted;
     pass "zenpkgs-package-registry-paths";
 
   public-package-outputs =

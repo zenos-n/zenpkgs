@@ -1,0 +1,53 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.notification-timeout";
+  brief = "Custom notification duration management for GNOME";
+  description = ''
+    Custom notification duration management for GNOME
+
+    This module installs and configures the **Notification Timeout** extension for GNOME.
+    It allows setting a custom timeout for notifications, ensuring they disappear
+    automatically after a specified duration.
+
+    **Features:**
+    - Configurable timeout duration in milliseconds.
+    - Option to ignore user idle state.
+    - Force all notifications to be treated as normal priority.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Notification Timeout GNOME extension configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.apps.gnome-extensions.notification-timeout ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/notification-timeout" = {
+        ignore-idle = $path.ignore-idle;
+        always-normal = $path.always-normal;
+        timeout = $path.timeout;
+      };
+    } ];
+  };
+};
+
+ignore-idle = { _meta = { type = $type.bool; default = true; description = ''
+  Ignore user idle state for timeouts
+
+  When enabled, notifications will always timeout regardless of whether the
+  user is currently active or idle.
+''; }; };
+always-normal = { _meta = { type = $type.bool; default = true; description = ''
+  Force normal priority for all notifications
+
+  Treats all incoming notifications as normal priority, preventing them
+  from persisting indefinitely even if sent with high priority.
+''; }; };
+timeout = { _meta = { type = $type.int; default = 3000; description = ''
+  Global notification display duration
+
+  Duration in milliseconds after which notifications will automatically
+  be dismissed from the screen.
+''; }; };

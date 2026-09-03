@@ -1,0 +1,5 @@
+id = "mokutil";
+sourcePath = [ "mokutil" ];
+aliases = [ [ "catalog" "mokutil" ] ];
+status = "active";
+meta = { displayName = "mokutil"; summary = "Curated mokutil package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

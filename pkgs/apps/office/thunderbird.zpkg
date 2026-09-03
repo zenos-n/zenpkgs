@@ -1,0 +1,5 @@
+id = "thunderbird";
+sourcePath = [ "thunderbird" ];
+aliases = [ [ "catalog" "thunderbird" ] ];
+status = "active";
+meta = { displayName = "thunderbird"; summary = "Curated thunderbird package for ZenOS"; support = "curated"; tags = [ ]; category = "office"; };

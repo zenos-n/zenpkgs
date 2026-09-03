@@ -1,7 +1,0 @@
-declarationOrder = 64;
-id = "openssl";
-target = [ "apps" "security-tools" "openssl" ];
-sourcePath = [ "openssl" ];
-aliases = [ [ "catalog" "openssl" ] ];
-status = "active";
-meta = { displayName = "openssl"; summary = "Curated openssl package for ZenOS"; support = "core"; tags = [ "system" ]; category = "security-tools"; };

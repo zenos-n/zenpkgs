@@ -1,0 +1,147 @@
+# Source: modules/zenboot/module.nix
+# Unsupported: mkDefault priority on conflicting boot loaders is not implemented by the production backend.
+# Unsupported: the strMatching constraint on the Plymouth color is represented as a documented string.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "system.boot.loader.zenboot";
+  brief = "ZenOS ZenBoot bootloader configuration";
+  description = ''
+    Configures ZenBoot, EFI installation, generation retention, mouse support,
+    activation, and optional ZenOS Plymouth integration.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable ZenBoot";
+
+  s! {
+    boot.loader.grub.enable = false;
+    boot.loader.systemd-boot.enable = false;
+    assertions = [
+      {
+        assertion = ($cfg.system.boot.loader.efi.canTouchEfiVariables or false) || (!$path.use_nvram);
+        message = "ZenBoot: 'use_nvram' requires EFI variable access.";
+      }
+    ];
+    environment.systemPackages = [
+      ($pkgs.system.zenboot.override {
+        resolution = $path.resolution;
+        scannedDevices = $path.scannedDevices;
+        extraIncludedFiles = $path.extraIncludedFiles;
+        extraConfig = $path.extraConfig;
+        timeout = $path.timeout;
+        use_nvram = $path.use_nvram;
+        enable_mouse = $path.enable_mouse;
+        maxGenerations = $path.maxGenerations;
+        osIcon = $path.osIcon;
+        espMountPoint = $cfg.system.boot.loader.efi.efiSysMountPoint;
+        profileDir = "/nix/var/nix/profiles/system";
+      })
+    ];
+    system.activationScripts.zenboot = ''
+      echo " [ZenBoot] Updating bootloader configuration..."
+      ${$pkgs.system.zenboot.override {
+        resolution = $path.resolution;
+        scannedDevices = $path.scannedDevices;
+        extraIncludedFiles = $path.extraIncludedFiles;
+        extraConfig = $path.extraConfig;
+        timeout = $path.timeout;
+        use_nvram = $path.use_nvram;
+        enable_mouse = $path.enable_mouse;
+        maxGenerations = $path.maxGenerations;
+        osIcon = $path.osIcon;
+        espMountPoint = $cfg.system.boot.loader.efi.efiSysMountPoint;
+        profileDir = "/nix/var/nix/profiles/system";
+      }}/bin/zenboot-setup
+    '';
+    boot.plymouth = if $path.plymouth.enable then {
+      enable = true;
+      theme = "zenos";
+      themePackages = [
+        ($pkgs.theming.system.zenos-plymouth.override {
+          distroName = $path.distroName;
+          releaseVersion = $cfg.legacy.system.nixos.label;
+          deviceName = if ($cfg.system.branding.prettyName or null) != null
+            then $cfg.system.branding.prettyName
+            else $cfg.legacy.networking.hostName;
+          icon = if ($cfg.system.branding.icon or null) != null
+            then $cfg.system.branding.icon
+            else "negzero";
+          color = $path.plymouth.color;
+        })
+      ];
+    } else { };
+  };
+};
+
+plymouth.enable = {
+  _meta = {
+    type = $type.boolean;
+    default = false;
+    brief = "Enable the ZenOS Plymouth theme";
+  };
+};
+
+plymouth.color = {
+  _meta = {
+    type = $type.string;
+    default = "C532FF";
+    brief = "Boot animation glow color";
+    description = "Six hexadecimal digits without a leading hash sign.";
+  };
+};
+
+osIcon = {
+  _meta = {
+    type = $type.enum [ "zenos" "freebsd" "usb" "unknown" "android" "arch" "windows" "mac" ];
+    default = "zenos";
+    brief = "Boot menu operating-system icon";
+  };
+};
+
+distroName = {
+  _meta = { type = $type.string; default = "ZenOS"; brief = "Distribution name"; };
+};
+
+resolution = {
+  _meta = { type = $type.string; default = "max"; brief = "Boot menu screen resolution"; };
+};
+
+timeout = {
+  _meta = { type = $type.int; default = 5; brief = "Boot menu timeout in seconds"; };
+};
+
+maxGenerations = {
+  _meta = { type = $type.int; default = 10; brief = "Generations included in the boot menu"; };
+};
+
+use_nvram = {
+  _meta = { type = $type.boolean; default = false; brief = "Write boot variables to NVRAM"; };
+};
+
+enable_mouse = {
+  _meta = { type = $type.boolean; default = true; brief = "Enable boot menu mouse support"; };
+};
+
+scannedDevices = {
+  _meta = {
+    type = $type.list [ ($type.enum [ "internal" "external" "optical" "netboot" "hdbios" "biosexternal" "cd" "manual" "firmware" ]) ];
+    default = [ "external" "optical" "manual" ];
+    brief = "Device types scanned by ZenBoot";
+  };
+};
+
+extraConfig = {
+  _meta = { type = $type.lines; default = ""; brief = "Additional refind.conf lines"; };
+};
+
+extraIncludedFiles = {
+  _meta = {
+    type = $type.either [ $type.null ($type.set [ $type.path ]) ];
+    default = null;
+    brief = "Additional boot configuration files";
+  };
+};

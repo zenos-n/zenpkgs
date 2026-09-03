@@ -1,0 +1,60 @@
+# Source: nixos-modules/installed-base.nix
+# Unsupported: mkDefault/mkForce priorities are emitted as ordinary assignments because action
+# weight lowering is not implemented per assignment by the production ZMDL backend.
+# Unsupported: fallback license construction and optional maintainer lookup are replaced by
+# canonical registries supported by ZMDL.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "system.installed-base";
+  brief = "Reusable ZenOS installed-system baseline";
+  description = ''
+    Supplies conservative package, user, networking, audio, firmware, boot, and
+    GNOME login defaults shared by final and temporary OOBE installations.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.linux;
+};
+
+enable = enableOption {
+  _meta.default = true;
+  _meta.brief = "Apply the installed-system baseline";
+
+  s! {
+    nixpkgs.config.allowUnfree = true;
+    users.mutableUsers = false;
+    zenos.system.release.stateVersion = "1.0.0";
+    nix.settings.experimental-features = [ "nix-command" "flakes" ];
+    networking.networkmanager.enable = true;
+    security = {
+      rtkit.enable = true;
+      sudo.wheelNeedsPassword = false;
+    };
+    services.pipewire = {
+      enable = true;
+      alsa.enable = true;
+      pulse.enable = true;
+    };
+    programs.dconf.enable = true;
+    hardware.enableRedistributableFirmware = true;
+    boot.loader.efi.canTouchEfiVariables = true;
+
+    services.displayManager = if ($cfg.desktop.gnome.enable or false) then {
+      autoLogin = { enable = false; user = null; };
+      gdm = {
+        enable = true;
+        settings.daemon = {
+          AutomaticLoginEnable = false;
+          TimedLoginEnable = false;
+        };
+      };
+    } else { };
+
+    systemd.tmpfiles.rules = if ($cfg.legacy.services.displayManager.gdm.enable or false) then
+      [ "d /var/lib/AccountsService/users 0755 root root -" ]
+      ++ ($lib.map (user:
+        "f+ /var/lib/AccountsService/users/${user} 0644 root root - [User]\\nSystemAccount=true\\n"
+      ) [ "gdm-greeter" "gdm-greeter-2" "gdm-greeter-3" "gdm-greeter-4" "gdm-greeter-5" ])
+    else [ ];
+  };
+};

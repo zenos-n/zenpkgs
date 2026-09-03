@@ -1,0 +1,5 @@
+id = "libreoffice";
+sourcePath = [ "libreoffice" ];
+aliases = [ [ "catalog" "libreoffice" ] ];
+status = "active";
+meta = { displayName = "libreoffice"; summary = "Curated libreoffice package for ZenOS"; support = "curated"; tags = [ ]; category = "office"; };

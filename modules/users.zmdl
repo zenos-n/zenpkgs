@@ -1,0 +1,40 @@
+# Source: modules/core/user-wrapper.nix
+# Unsupported: ZMDL cannot declare the nested Home Manager shim submodules.
+# Unsupported: recursive package-tree lookup and derivation detection are not representable.
+# Unsupported: zenUserModules imports and the source's undeclared groups, keys, and shell fields are not emitted.
+# Unsupported: the external users.<name> freeform belongs to ZSTR; the internal user marker is a
+# migration placeholder until that structure attachment exists.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "users";
+  brief = "Enhanced user management for ZenOS";
+  description = ''
+    Provides a unified system-side bridge for user and Home Manager configuration.
+
+    Arbitrary user records are forwarded to NixOS and Home Manager. The production
+    grammar does not yet model the original nested shim types or recursively resolve
+    package selector trees, so those constructs are recorded above rather than hidden.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+(freeform user) = {
+  _meta.brief = "Configuration for user ${$f.user}";
+
+  s!! {
+    users.users.($f.user) = $path.user.($f.user).legacy or { };
+    home-manager.users.($f.user) = {
+      home = $path.user.($f.user).home or { };
+      xdg = $path.user.($f.user).xdg or { };
+      programs = $path.user.($f.user).programs or { };
+      services = $path.user.($f.user).services or { };
+      dconf = $path.user.($f.user).dconf or { };
+      gtk = $path.user.($f.user).gtk or { };
+      qt = $path.user.($f.user).qt or { };
+      systemd = $path.user.($f.user).systemd or { };
+      wayland = $path.user.($f.user).wayland or { };
+    };
+  };
+};

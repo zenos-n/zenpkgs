@@ -1,0 +1,65 @@
+# Source: modules/zenfs/module.nix
+# Unsupported: builtins.toJSON/writeText generation for offload_config.json is not in production ZMDL.
+# Unsupported: the source references undeclared fhs.configMap, drives.mainDrive, and database values.
+# Unsupported: the offload service and timer are omitted together to avoid scheduling a missing unit.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "system.zenfs";
+  brief = "ZenOS filesystem hierarchy and roaming manager";
+  description = ''
+    Manages the ZenFS file watcher and declares roaming and indexing controls.
+    JSON-backed offloading remains blocked on generated-file support in ZMDL.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable system-wide ZenFS integration";
+
+  s! {
+    systemd.services.zenfs-watcher = {
+      description = "ZenFS File Change Watcher";
+      wantedBy = [ "multi-user.target" ];
+      serviceConfig = {
+        Type = "simple";
+        ExecStart = "${$pkgs.system.zenfs}/bin/zenfs watcher";
+        Restart = "always";
+      };
+    };
+  };
+};
+
+roaming.enable = {
+  _meta = {
+    type = $type.boolean;
+    default = false;
+    brief = "Enable roaming user profile support";
+  };
+};
+
+roaming.offloadThreshold = {
+  _meta = {
+    type = $type.int;
+    default = 90;
+    brief = "Disk usage percentage that triggers offloading";
+  };
+};
+
+roaming.roamingSafeLimit = {
+  _meta = {
+    type = $type.int;
+    default = 50;
+    brief = "Target disk usage after offloading";
+  };
+};
+
+database.ignoredFiles = {
+  _meta = {
+    type = $type.list [ $type.string ];
+    default = [ ];
+    brief = "Files ignored by ZenFS indexing";
+    description = "Patterns or file names skipped by roaming and categorization services.";
+  };
+};

@@ -1,0 +1,5 @@
+id = "mdadm";
+sourcePath = [ "mdadm" ];
+aliases = [ [ "catalog" "mdadm" ] ];
+status = "active";
+meta = { displayName = "mdadm"; summary = "Curated mdadm package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

@@ -1,0 +1,5 @@
+id = "curl";
+sourcePath = [ "curl" ];
+aliases = [ [ "catalog" "curl" ] ];
+status = "active";
+meta = { displayName = "curl"; summary = "Curated curl package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

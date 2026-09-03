@@ -1,0 +1,5 @@
+id = "obsidian";
+sourcePath = [ "obsidian" ];
+aliases = [ [ "catalog" "obsidian" ] ];
+status = "active";
+meta = { displayName = "obsidian"; summary = "Curated obsidian package for ZenOS"; support = "curated"; tags = [ ]; category = "office"; };

@@ -1,0 +1,5 @@
+id = "xfsprogs";
+sourcePath = [ "xfsprogs" ];
+aliases = [ [ "catalog" "xfsprogs" ] ];
+status = "active";
+meta = { displayName = "xfsprogs"; summary = "Curated xfsprogs package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

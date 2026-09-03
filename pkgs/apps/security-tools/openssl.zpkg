@@ -1,0 +1,5 @@
+id = "openssl";
+sourcePath = [ "openssl" ];
+aliases = [ [ "catalog" "openssl" ] ];
+status = "active";
+meta = { displayName = "openssl"; summary = "Curated openssl package for ZenOS"; support = "core"; tags = [ "system" ]; category = "security-tools"; };

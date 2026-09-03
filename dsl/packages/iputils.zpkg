@@ -1,7 +1,0 @@
-declarationOrder = 115;
-id = "iputils";
-target = [ "apps" "recovery" "iputils" ];
-sourcePath = [ "iputils" ];
-aliases = [ [ "catalog" "iputils" ] ];
-status = "active";
-meta = { displayName = "iputils"; summary = "Curated iputils package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

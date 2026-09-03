@@ -1,0 +1,5 @@
+id = "atkinson-hyperlegible";
+sourcePath = [ "atkinson-hyperlegible" ];
+aliases = [ [ "catalog" "atkinson-hyperlegible" ] ];
+status = "active";
+meta = { displayName = "atkinson-hyperlegible"; summary = "Curated atkinson-hyperlegible package for ZenOS"; support = "core"; tags = [ "system" ]; category = "fonts"; };

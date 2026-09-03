@@ -1,0 +1,5 @@
+id = "pciutils";
+sourcePath = [ "pciutils" ];
+aliases = [ [ "catalog" "pciutils" ] ];
+status = "active";
+meta = { displayName = "pciutils"; summary = "Curated pciutils package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

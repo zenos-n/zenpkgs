@@ -1,0 +1,5 @@
+id = "gptfdisk";
+sourcePath = [ "gptfdisk" ];
+aliases = [ [ "catalog" "gptfdisk" ] ];
+status = "active";
+meta = { displayName = "gptfdisk"; summary = "Curated gptfdisk package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

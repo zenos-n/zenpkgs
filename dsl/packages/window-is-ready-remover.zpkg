@@ -1,7 +1,0 @@
-declarationOrder = 85;
-id = "window-is-ready-remover";
-target = [ "apps" "gnome-extensions" "window-is-ready-remover" ];
-sourcePath = [ "gnomeExtensions" "window-is-ready-remover" ];
-aliases = [ [ "catalog" "window-is-ready-remover" ] ];
-status = "active";
-meta = { displayName = "window-is-ready-remover"; summary = "Curated window-is-ready-remover package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

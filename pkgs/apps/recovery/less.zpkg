@@ -1,0 +1,5 @@
+id = "less";
+sourcePath = [ "less" ];
+aliases = [ [ "catalog" "less" ] ];
+status = "active";
+meta = { displayName = "less"; summary = "Curated less package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

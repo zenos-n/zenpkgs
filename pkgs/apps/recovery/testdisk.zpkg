@@ -1,0 +1,5 @@
+id = "testdisk";
+sourcePath = [ "testdisk" ];
+aliases = [ [ "catalog" "testdisk" ] ];
+status = "active";
+meta = { displayName = "testdisk"; summary = "Curated testdisk package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

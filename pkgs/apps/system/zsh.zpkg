@@ -1,0 +1,5 @@
+id = "zsh";
+sourcePath = [ "zsh" ];
+aliases = [ [ "catalog" "zsh" ] ];
+status = "active";
+meta = { displayName = "zsh"; summary = "Curated zsh package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

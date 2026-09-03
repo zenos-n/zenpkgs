@@ -1,7 +1,0 @@
-declarationOrder = 57;
-id = "keepassxc";
-target = [ "apps" "advanced" "keepassxc" ];
-sourcePath = [ "keepassxc" ];
-aliases = [ [ "catalog" "keepassxc" ] ];
-status = "active";
-meta = { displayName = "keepassxc"; summary = "Curated keepassxc package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

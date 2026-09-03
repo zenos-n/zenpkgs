@@ -1,0 +1,5 @@
+id = "gparted";
+sourcePath = [ "gparted" ];
+aliases = [ [ "catalog" "gparted" ] ];
+status = "active";
+meta = { displayName = "gparted"; summary = "Curated gparted package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

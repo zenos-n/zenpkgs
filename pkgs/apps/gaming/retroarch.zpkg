@@ -1,0 +1,5 @@
+id = "retroarch";
+sourcePath = [ "retroarch" ];
+aliases = [ [ "catalog" "retroarch" ] ];
+status = "active";
+meta = { displayName = "retroarch"; summary = "Curated retroarch package for ZenOS"; support = "curated"; tags = [ ]; category = "gaming"; };

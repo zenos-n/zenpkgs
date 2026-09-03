@@ -1,7 +1,0 @@
-declarationOrder = 74;
-id = "hide-minimized";
-target = [ "apps" "gnome-extensions" "hide-minimized" ];
-sourcePath = [ "gnomeExtensions" "hide-minimized" ];
-aliases = [ [ "catalog" "hide-minimized" ] ];
-status = "active";
-meta = { displayName = "hide-minimized"; summary = "Curated hide-minimized package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

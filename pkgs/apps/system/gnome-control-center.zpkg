@@ -1,0 +1,5 @@
+id = "gnome-control-center";
+sourcePath = [ "gnome-control-center" ];
+aliases = [ [ "catalog" "gnome-control-center" ] ];
+status = "active";
+meta = { displayName = "gnome-control-center"; summary = "Curated gnome-control-center package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

@@ -1,7 +1,0 @@
-declarationOrder = 8;
-id = "steam";
-target = [ "apps" "gaming" "steam" ];
-sourcePath = [ "steam" ];
-aliases = [ [ "catalog" "steam" ] ];
-status = "active";
-meta = { displayName = "steam"; summary = "Curated steam package for ZenOS"; support = "curated"; tags = [ ]; category = "gaming"; };

@@ -1,7 +1,0 @@
-declarationOrder = 31;
-id = "btop";
-target = [ "apps" "system" "btop" ];
-sourcePath = [ "btop" ];
-aliases = [ [ "catalog" "btop" ] ];
-status = "active";
-meta = { displayName = "btop"; summary = "Curated btop package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

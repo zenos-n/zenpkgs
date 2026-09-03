@@ -1,0 +1,5 @@
+id = "bitwarden";
+sourcePath = [ "bitwarden-desktop" ];
+aliases = [ [ "catalog" "bitwarden" ] ];
+status = "active";
+meta = { displayName = "bitwarden"; summary = "Curated bitwarden package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

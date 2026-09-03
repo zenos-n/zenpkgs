@@ -1,0 +1,90 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.quake-terminal";
+  brief = "Dropdown application integration for GNOME Shell";
+  description = ''
+    Dropdown application integration for GNOME Shell
+
+    This module installs and configures the **Quake Terminal** extension for GNOME.
+    It provides a dropdown terminal (Quake-style) that can be toggled with a
+    keyboard shortcut.
+
+    **Features:**
+    - Dropdown terminal functionality for any app (defaults to gnome-terminal).
+    - Configurable size, position, and animation.
+    - Multi-monitor support.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+_let mkGVariantString: $type.function [ $type.string ] = value: "'${value}'";
+_let serializeLaunchArgs: $type.function [ $type.attrs ] = args:
+  if args == { } then "@a{ss} {}"
+  else
+    let
+      pairs = $lib.mapAttrsToList
+        (key: value: "${$v.mkGVariantString key}: ${$v.mkGVariantString value}")
+        args;
+    in "{${$lib.concatStringsSep ", " pairs}}";
+
+enable = enableOption {
+  _meta.description = "Quake Terminal GNOME extension configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.legacy.gnomeExtensions.quake-terminal ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/quake-terminal" = {
+        terminal-id = $path.app.id;
+        terminal-shortcut = $path.app.shortcut;
+        vertical-size = $path.layout.size.vertical;
+        horizontal-size = $path.layout.size.horizontal;
+        horizontal-alignment = $path.layout.alignment;
+        render-on-current-monitor = $path.monitors.render-on-current;
+        render-on-primary-monitor = $path.monitors.render-on-primary;
+        monitor-screen = $path.monitors.monitor-index;
+        auto-hide-window = $path.behavior.auto-hide;
+        always-on-top = $path.behavior.always-on-top;
+        animation-time = $path.behavior.animation-time;
+        skip-taskbar = $path.behavior.skip-taskbar;
+      };
+    } ];
+    systemd.user.services.quake-terminal-setup = {
+      description = "Apply Quake Terminal specific configuration";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      serviceConfig = { Type = "oneshot"; RemainAfterExit = true; };
+      script = ''
+        ${$pkgs.legacy.dconf}/bin/dconf write /org/gnome/shell/extensions/quake-terminal/terminal-args "${$lib.escapeShellArg ($v.serializeLaunchArgs $path.app.launch-args)}"
+      '';
+    };
+  };
+};
+
+app.id = { _meta = { type = $type.string; default = "org.gnome.Terminal.desktop"; description = ''
+  Target application for dropdown
+
+  The desktop entry ID of the application that should behave as the
+  Quake-style terminal.
+''; }; };
+app.shortcut = { _meta = { type = $type.string; default = "<Alt>Tab"; description = ''
+  Toggle keyboard shortcut
+
+  Key combination used to reveal and conceal the dropdown window.
+''; }; };
+app.launch-args = { _meta = { type = $type.set [ $type.string ]; default = { }; description = ''
+  Application command arguments
+
+  Custom key-value pairs passed to the application upon launch
+  (e.g., terminal profile or shell flags).
+''; }; };
+layout.size.vertical = { _meta = { type = $type.int; default = 50; description = "Window height as a percentage of monitor height"; }; };
+layout.size.horizontal = { _meta = { type = $type.int; default = 100; description = "Window width as a percentage of monitor width"; }; };
+layout.alignment = { _meta = { type = $type.int; default = 1; description = "Horizontal alignment of the dropdown window (0: left, 1: center, 2: right)"; }; };
+monitors.render-on-current = { _meta = { type = $type.bool; default = true; description = "Display the dropdown on the monitor containing the mouse cursor"; }; };
+monitors.render-on-primary = { _meta = { type = $type.bool; default = false; description = "Always display the dropdown on the primary monitor"; }; };
+monitors.monitor-index = { _meta = { type = $type.int; default = 0; description = "Specific hardware monitor index to use if primary/current is disabled"; }; };
+behavior.auto-hide = { _meta = { type = $type.bool; default = true; description = "Hide the window automatically when it loses input focus"; }; };
+behavior.always-on-top = { _meta = { type = $type.bool; default = true; description = "Force the window to remain above all other window actors"; }; };
+behavior.animation-time = { _meta = { type = $type.float; default = 0.2; description = "Visual transition duration in seconds for slide events"; }; };
+behavior.skip-taskbar = { _meta = { type = $type.bool; default = true; description = "Prevent the dropdown window from appearing in the taskbar or Alt-Tab switcher"; }; };

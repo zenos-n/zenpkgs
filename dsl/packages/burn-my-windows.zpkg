@@ -1,7 +1,0 @@
-declarationOrder = 76;
-id = "burn-my-windows";
-target = [ "apps" "gnome-extensions" "burn-my-windows" ];
-sourcePath = [ "gnomeExtensions" "burn-my-windows" ];
-aliases = [ [ "catalog" "burn-my-windows" ] ];
-status = "active";
-meta = { displayName = "burn-my-windows"; summary = "Curated burn-my-windows package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

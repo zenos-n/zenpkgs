@@ -1,0 +1,5 @@
+id = "exfatprogs";
+sourcePath = [ "exfatprogs" ];
+aliases = [ [ "catalog" "exfatprogs" ] ];
+status = "active";
+meta = { displayName = "exfatprogs"; summary = "Curated exfatprogs package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

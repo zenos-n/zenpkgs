@@ -1,0 +1,26 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.places-status-indicator";
+  brief = "Filesystem navigation menu for the GNOME top bar";
+  description = ''
+    Filesystem navigation menu for the GNOME top bar
+
+    This module installs and configures the **Places Status Indicator** extension
+    for GNOME. It adds a menu to the top bar for quick navigation to bookmarked
+    places, mounted volumes, and network locations.
+
+    **Features:**
+    - Quick access to home folder, documents, downloads, etc.
+    - Access to network locations and mounted drives.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Places Status Indicator GNOME extension configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.legacy.gnomeExtensions.places-status-indicator ];
+  };
+};

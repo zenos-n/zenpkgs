@@ -1,0 +1,196 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.forge";
+  brief = "Tiling window management for GNOME Shell";
+  description = ''
+    Tiling window management for GNOME Shell
+
+    This module installs and configures the **Forge** extension for GNOME.
+    Forge transforms the GNOME Shell into a tiling window manager, offering automatic
+    tiling, window gaps, and extensive keyboard shortcuts.
+
+    **Features:**
+    - Automatic tiling and stacking.
+    - Customizable window gaps and borders.
+    - Extensive keyboard shortcuts for moving, resizing, and focusing windows.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+_let formatPart: $type.function "key" = part:
+  let lower = $lib.toLower part;
+  in if lower == "super" then "<Super>"
+     else if lower == "ctrl" || lower == "control" then "<Ctrl>"
+     else if lower == "alt" then "<Alt>"
+     else if lower == "shift" then "<Shift>"
+     else part;
+_let serializeKeybind: $type.function "keys" = values: [ ($lib.concatMapStrings $v.formatPart values) ];
+_let hexToDecMap: $type.attrs = { "0" = 0; "1" = 1; "2" = 2; "3" = 3; "4" = 4; "5" = 5; "6" = 6; "7" = 7; "8" = 8; "9" = 9; "a" = 10; "b" = 11; "c" = 12; "d" = 13; "e" = 14; "f" = 15; "A" = 10; "B" = 11; "C" = 12; "D" = 13; "E" = 14; "F" = 15; };
+_let hexCharToInt: $type.function "char" = c: if $lib.hasAttr c $v.hexToDecMap then $lib.getAttr c $v.hexToDecMap else 0;
+_let parseHexByte: $type.function "byte" = str: ($v.hexCharToInt ($lib.substring 0 1 str) * 16) + $v.hexCharToInt ($lib.substring 1 1 str);
+_let serializeFloat: $type.function "float" = value: let str = $lib.toString value; in if $lib.hasInfix "." str then str else "${str}.0";
+_let toRgbaString: $type.function "color" = value:
+  if $lib.isString value && $lib.hasPrefix "#" value then
+    let
+      hex = $lib.removePrefix "#" value;
+      r = $lib.toString ($v.parseHexByte ($lib.substring 0 2 hex));
+      g = $lib.toString ($v.parseHexByte ($lib.substring 2 2 hex));
+      b = $lib.toString ($v.parseHexByte ($lib.substring 4 2 hex));
+      a = if $lib.stringLength hex == 8 then $v.serializeFloat ($v.parseHexByte ($lib.substring 6 2 hex) / 255.0) else "1.0";
+    in "rgba(${r}, ${g}, ${b}, ${a})"
+  else value;
+
+enable = enableOption {
+  _meta.description = "Whether to enable Forge GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.legacy.gnomeExtensions.forge ];
+      programs.dconf.profiles.user.databases = [ {
+        settings = {
+          "org/gnome/shell/extensions/forge" = {
+            focus-border-toggle = $path.appearance.borders.focus.toggle;
+            focus-border-size = $lib.gvariant.mkUint32 $path.appearance.borders.focus.size;
+            focus-border-color = $v.toRgbaString $path.appearance.borders.focus.color;
+            split-border-toggle = $path.appearance.borders.split.toggle;
+            split-border-color = $v.toRgbaString $path.appearance.borders.split.color;
+            window-gap-size = $lib.gvariant.mkUint32 $path.appearance.gaps.size;
+            window-gap-size-increment = $lib.gvariant.mkUint32 $path.appearance.gaps.increment;
+            window-gap-hidden-on-single = $path.appearance.gaps.hide-on-single;
+            showtab-decoration-enabled = $path.appearance.decorations.tabs;
+            preview-hint-enabled = $path.appearance.decorations.preview-hint;
+            tiling-mode-enabled = $path.tiling.enable;
+            primary-layout-mode = $path.tiling.primary-mode;
+            stacked-tiling-mode-enabled = $path.tiling.stacked;
+            tabbed-tiling-mode-enabled = $path.tiling.tabbed.enable;
+            auto-exit-tabbed = $path.tiling.tabbed.auto-exit;
+            auto-split-enabled = $path.tiling.auto-split;
+            workspace-skip-tile = $path.tiling.workspace-skip;
+            move-pointer-focus-enabled = $path.interaction.mouse.move-pointer-focus;
+            focus-on-hover-enabled = $path.interaction.mouse.focus-on-hover;
+            dnd-center-layout = $path.interaction.dnd-center-layout;
+            float-always-on-top-enabled = $path.interaction.float-always-on-top;
+            resize-amount = $lib.gvariant.mkUint32 $path.interaction.resize-amount;
+            quick-settings-enabled = $path.general.quick-settings;
+            logging-enabled = $path.general.logging.enable;
+            log-level = $lib.gvariant.mkUint32 $path.general.logging.level;
+            css-updated = $path.general.css.updated;
+            css-last-update = $lib.gvariant.mkUint32 $path.general.css.last-update;
+          };
+          "org/gnome/shell/extensions/forge/keybindings" = {
+            focus-border-toggle = $v.serializeKeybind $path.keybindings.focus-border-toggle;
+            window-gap-size-increase = $v.serializeKeybind $path.keybindings.window-gap-size-increase;
+            window-gap-size-decrease = $v.serializeKeybind $path.keybindings.window-gap-size-decrease;
+            con-split-layout-toggle = $v.serializeKeybind $path.keybindings.con-split-layout-toggle;
+            con-split-horizontal = $v.serializeKeybind $path.keybindings.con-split-horizontal;
+            con-split-vertical = $v.serializeKeybind $path.keybindings.con-split-vertical;
+            con-stacked-layout-toggle = $v.serializeKeybind $path.keybindings.con-stacked-layout-toggle;
+            con-tabbed-layout-toggle = $v.serializeKeybind $path.keybindings.con-tabbed-layout-toggle;
+            con-tabbed-showtab-decoration-toggle = $v.serializeKeybind $path.keybindings.con-tabbed-showtab-decoration-toggle;
+            window-swap-left = $v.serializeKeybind $path.keybindings.window-swap-left;
+            window-swap-down = $v.serializeKeybind $path.keybindings.window-swap-down;
+            window-swap-up = $v.serializeKeybind $path.keybindings.window-swap-up;
+            window-swap-right = $v.serializeKeybind $path.keybindings.window-swap-right;
+            window-move-left = $v.serializeKeybind $path.keybindings.window-move-left;
+            window-move-down = $v.serializeKeybind $path.keybindings.window-move-down;
+            window-move-up = $v.serializeKeybind $path.keybindings.window-move-up;
+            window-move-right = $v.serializeKeybind $path.keybindings.window-move-right;
+            window-focus-left = $v.serializeKeybind $path.keybindings.window-focus-left;
+            window-focus-down = $v.serializeKeybind $path.keybindings.window-focus-down;
+            window-focus-up = $v.serializeKeybind $path.keybindings.window-focus-up;
+            window-focus-right = $v.serializeKeybind $path.keybindings.window-focus-right;
+            window-toggle-float = $v.serializeKeybind $path.keybindings.window-toggle-float;
+            window-toggle-always-float = $v.serializeKeybind $path.keybindings.window-toggle-always-float;
+            workspace-active-tile-toggle = $v.serializeKeybind $path.keybindings.workspace-active-tile-toggle;
+            prefs-open = $v.serializeKeybind $path.keybindings.prefs-open;
+            prefs-tiling-toggle = $v.serializeKeybind $path.keybindings.prefs-tiling-toggle;
+            mod-mask-mouse-tile = $path.keybindings.mod-mask-mouse-tile;
+            window-swap-last-active = $v.serializeKeybind $path.keybindings.window-swap-last-active;
+            window-snap-one-third-right = $v.serializeKeybind $path.keybindings.window-snap-one-third-right;
+            window-snap-two-third-right = $v.serializeKeybind $path.keybindings.window-snap-two-third-right;
+            window-snap-one-third-left = $v.serializeKeybind $path.keybindings.window-snap-one-third-left;
+            window-snap-two-third-left = $v.serializeKeybind $path.keybindings.window-snap-two-third-left;
+            window-snap-center = $v.serializeKeybind $path.keybindings.window-snap-center;
+            window-resize-left-increase = $v.serializeKeybind $path.keybindings.window-resize-left-increase;
+            window-resize-left-decrease = $v.serializeKeybind $path.keybindings.window-resize-left-decrease;
+            window-resize-bottom-increase = $v.serializeKeybind $path.keybindings.window-resize-bottom-increase;
+            window-resize-bottom-decrease = $v.serializeKeybind $path.keybindings.window-resize-bottom-decrease;
+            window-resize-top-increase = $v.serializeKeybind $path.keybindings.window-resize-top-increase;
+            window-resize-top-decrease = $v.serializeKeybind $path.keybindings.window-resize-top-decrease;
+            window-resize-right-increase = $v.serializeKeybind $path.keybindings.window-resize-right-increase;
+            window-resize-right-decrease = $v.serializeKeybind $path.keybindings.window-resize-right-decrease;
+          };
+        };
+    } ];
+  };
+};
+
+appearance.borders.focus.toggle = { _meta = { type = $type.bool; default = true; description = "Display border on focused window"; }; };
+appearance.borders.focus.size = { _meta = { type = $type.int; default = 3; description = "Focused window border pixel thickness"; }; };
+appearance.borders.focus.color = { _meta = { type = $type.string; default = "rgba(236, 94, 94, 1)"; description = "CSS color for focused border"; }; };
+appearance.borders.split.toggle = { _meta = { type = $type.bool; default = true; description = "Display split direction indicator"; }; };
+appearance.borders.split.color = { _meta = { type = $type.string; default = "rgba(255, 246, 108, 1)"; description = "CSS color for split indicator"; }; };
+appearance.gaps.size = { _meta = { type = $type.int; default = 4; description = "Base gap size between tiled windows"; }; };
+appearance.gaps.increment = { _meta = { type = $type.int; default = 1; description = "Multiplier for gap size adjustments"; }; };
+appearance.gaps.hide-on-single = { _meta = { type = $type.bool; default = false; description = "Suppress gaps for single windows"; }; };
+appearance.decorations.tabs = { _meta = { type = $type.bool; default = true; description = "Display tab decorations for stacked windows"; }; };
+appearance.decorations.preview-hint = { _meta = { type = $type.bool; default = true; description = "Display preview area during drag-and-drop"; }; };
+tiling.enable = { _meta = { type = $type.bool; default = true; description = "Global tiling mode master switch"; }; };
+tiling.primary-mode = { _meta = { type = $type.enum [ "tiling" "stacking" ]; default = "tiling"; description = "Default layout strategy for new windows"; }; };
+tiling.stacked = { _meta = { type = $type.bool; default = true; description = "Enable stacked layout capabilities"; }; };
+tiling.tabbed.enable = { _meta = { type = $type.bool; default = true; description = "Enable tabbed layout capabilities"; }; };
+tiling.tabbed.auto-exit = { _meta = { type = $type.bool; default = true; description = "Automatically exit tabbed mode for single windows"; }; };
+tiling.auto-split = { _meta = { type = $type.bool; default = true; description = "Automatically select split axis based on window dimensions"; }; };
+tiling.workspace-skip = { _meta = { type = $type.string; default = ""; description = "Indices of workspaces to exclude from tiling"; }; };
+interaction.mouse.move-pointer-focus = { _meta = { type = $type.bool; default = false; description = "Sync pointer location with keyboard focus changes"; }; };
+interaction.mouse.focus-on-hover = { _meta = { type = $type.bool; default = false; description = "Follow-mouse focus policy"; }; };
+interaction.dnd-center-layout = { _meta = { type = $type.enum [ "tabbed" "stacked" ]; default = "tabbed"; description = "Layout used for drops into window center"; }; };
+interaction.float-always-on-top = { _meta = { type = $type.bool; default = true; description = "Keep floating windows above tiled ones"; }; };
+interaction.resize-amount = { _meta = { type = $type.int; default = 15; description = "Pixel increment for window resizing operations"; }; };
+general.quick-settings = { _meta = { type = $type.bool; default = true; description = "Add Forge toggle to system quick settings"; }; };
+general.logging.enable = { _meta = { type = $type.bool; default = false; description = "Enable extension event logging"; }; };
+general.logging.level = { _meta = { type = $type.int; default = 0; description = "Verbosity level for extension logs"; }; };
+general.css.updated = { _meta = { type = $type.string; default = ""; description = "Timestamp of the last CSS injection"; }; };
+general.css.last-update = { _meta = { type = $type.int; default = 1; description = "Internal CSS schema version"; }; };
+
+keybindings.focus-border-toggle = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "x" ]; description = "Shortcut to toggle focused window border\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-gap-size-increase = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "super" "plus" ]; description = "Shortcut to increase window gaps\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-gap-size-decrease = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "super" "minus" ]; description = "Shortcut to decrease window gaps\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.con-split-layout-toggle = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "g" ]; description = "Shortcut to toggle split orientation\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.con-split-horizontal = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "z" ]; description = "Shortcut to force horizontal split\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.con-split-vertical = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "v" ]; description = "Shortcut to force vertical split\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.con-stacked-layout-toggle = { _meta = { type = $type.list [ $type.string ]; default = [ "shift" "super" "s" ]; description = "Shortcut to toggle stacked layout\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.con-tabbed-layout-toggle = { _meta = { type = $type.list [ $type.string ]; default = [ "shift" "super" "t" ]; description = "Shortcut to toggle tabbed layout\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.con-tabbed-showtab-decoration-toggle = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "alt" "y" ]; description = "Shortcut to toggle tab decorations\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-swap-left = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "super" "h" ]; description = "Shortcut to swap window with left neighbor\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-swap-down = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "super" "j" ]; description = "Shortcut to swap window with lower neighbor\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-swap-up = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "super" "k" ]; description = "Shortcut to swap window with upper neighbor\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-swap-right = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "super" "l" ]; description = "Shortcut to swap window with right neighbor\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-move-left = { _meta = { type = $type.list [ $type.string ]; default = [ "shift" "super" "h" ]; description = "Shortcut to move window left\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-move-down = { _meta = { type = $type.list [ $type.string ]; default = [ "shift" "super" "j" ]; description = "Shortcut to move window down\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-move-up = { _meta = { type = $type.list [ $type.string ]; default = [ "shift" "super" "k" ]; description = "Shortcut to move window up\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-move-right = { _meta = { type = $type.list [ $type.string ]; default = [ "shift" "super" "l" ]; description = "Shortcut to move window right\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-focus-left = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "h" ]; description = "Shortcut to focus left neighbor\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-focus-down = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "j" ]; description = "Shortcut to focus lower neighbor\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-focus-up = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "k" ]; description = "Shortcut to focus upper neighbor\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-focus-right = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "l" ]; description = "Shortcut to focus right neighbor\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-toggle-float = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "c" ]; description = "Shortcut to toggle floating for active window\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-toggle-always-float = { _meta = { type = $type.list [ $type.string ]; default = [ "shift" "super" "c" ]; description = "Shortcut to force permanent float for app\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.workspace-active-tile-toggle = { _meta = { type = $type.list [ $type.string ]; default = [ "shift" "super" "w" ]; description = "Shortcut to toggle tiling for current desktop\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.prefs-open = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "period" ]; description = "Shortcut to open Forge preferences\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.prefs-tiling-toggle = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "w" ]; description = "Shortcut to toggle tiling mode\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.mod-mask-mouse-tile = { _meta = { type = $type.enum [ "Super" "Ctrl" "Shift" "Alt" "None" ]; default = "None"; description = "Modifier key for mouse-based tiling operations"; }; };
+keybindings.window-swap-last-active = { _meta = { type = $type.list [ $type.string ]; default = [ "super" "return" ]; description = "Shortcut to swap with previously active window\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-snap-one-third-right = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "alt" "g" ]; description = "Snap active window to 1/3 right\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-snap-two-third-right = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "alt" "t" ]; description = "Snap active window to 2/3 right\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-snap-one-third-left = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "alt" "d" ]; description = "Snap active window to 1/3 left\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-snap-two-third-left = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "alt" "e" ]; description = "Snap active window to 2/3 left\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-snap-center = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "alt" "c" ]; description = "Snap active window to center\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-resize-left-increase = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "super" "y" ]; description = "Resize window leftwards\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-resize-left-decrease = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "shift" "super" "o" ]; description = "Shrink window from left\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-resize-bottom-increase = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "super" "u" ]; description = "Resize window downwards\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-resize-bottom-decrease = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "shift" "super" "i" ]; description = "Shrink window from bottom\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-resize-top-increase = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "super" "i" ]; description = "Resize window upwards\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-resize-top-decrease = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "shift" "super" "u" ]; description = "Shrink window from top\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-resize-right-increase = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "super" "o" ]; description = "Resize window rightwards\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };
+keybindings.window-resize-right-decrease = { _meta = { type = $type.list [ $type.string ]; default = [ "ctrl" "shift" "super" "y" ]; description = "Shrink window from right\n\nDefine as a list of keys, e.g., [ \"super\" \"q\" ]. \nSupported modifiers: super, ctrl, alt, shift."; }; };

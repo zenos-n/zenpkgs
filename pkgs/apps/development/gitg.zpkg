@@ -1,0 +1,5 @@
+id = "gitg";
+sourcePath = [ "gitg" ];
+aliases = [ [ "catalog" "gitg" ] ];
+status = "active";
+meta = { displayName = "gitg"; summary = "Curated gitg package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };

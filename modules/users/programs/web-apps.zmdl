@@ -1,0 +1,146 @@
+# Source: hm-modules/webapps/module.nix
+# Unsupported: typed nested extension, search, and app submodules cannot be declared in production ZMDL.
+# Unsupported: app-name-derived id defaults and per-app default injection are therefore not available.
+# Unsupported: profileDir is represented as a string because dynamic path defaults are not supported.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "users.programs.web-apps";
+  brief = "Declarative isolated web application manager";
+  description = ''
+    Creates isolated browser-backed web applications, desktop entries, optional
+    URL dispatch, and MIME defaults for a user's desktop session.
+
+    The freeform app records retain user-provided values, but the original nested
+    submodule validation and defaults require future ZMDL schema support.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable declarative ZenOS web applications";
+
+  u! {
+    home.packages = if $path.dispatcher.enable then [
+      ($pkgs.legacy.writeScriptBin "pwa-dispatcher" ''
+        #!${$pkgs.legacy.bash}/bin/bash
+        URL="$1"
+
+        if [ -z "$URL" ]; then
+          exec ${$path.dispatcher.fallbackBrowser}
+        fi
+
+        ${$lib.concatStrings ($lib.mapAttrsToList (appName: app:
+          $lib.optionalString (app.openUrls != [ ])
+            ($lib.concatMapStrings (pattern: ''
+              if [[ "$URL" == *"${pattern}"* ]]; then
+                exec ${$path.backend.getRunCommand app.id} "$URL"
+              fi
+            '') app.openUrls)
+        ) $path.apps)}
+
+        exec ${$path.dispatcher.fallbackBrowser} "$URL"
+      '')
+    ] else [ ];
+
+    xdg.desktopEntries =
+      (if $path.dispatcher.enable then {
+        pwa-dispatcher = {
+          name = "PWA Dispatcher";
+          genericName = "Web Browser Dispatcher";
+          exec = "pwa-dispatcher %U";
+          icon = "web-browser";
+          categories = [ "Network" "WebBrowser" ];
+          mimeType = [
+            "text/html"
+            "text/xml"
+            "application/xhtml+xml"
+            "x-scheme-handler/http"
+            "x-scheme-handler/https"
+          ];
+        };
+      } else { })
+      // ($lib.mapAttrs (key: app: {
+        name = app.name;
+        genericName = "Web Application";
+        exec = "${$path.backend.getRunCommand app.id} %U";
+        icon = app.icon;
+        categories = app.categories;
+        settings = {
+          Keywords = $lib.concatStringsSep ";" app.keywords;
+          StartupWMClass = $path.backend.getWmClass app.id;
+        };
+      }) $path.apps);
+
+    xdg.mimeApps = if $path.dispatcher.enable then {
+      enable = true;
+      defaultApplications = {
+        "x-scheme-handler/http" = "pwa-dispatcher.desktop";
+        "x-scheme-handler/https" = "pwa-dispatcher.desktop";
+        "text/html" = "pwa-dispatcher.desktop";
+        "application/xhtml+xml" = "pwa-dispatcher.desktop";
+      };
+    } else { };
+  };
+};
+
+base = {
+  _meta = {
+    type = $type.enum [ "firefox" "brave" "chrome" "helium" ];
+    default = "firefox";
+    brief = "Browser backend for web applications";
+  };
+};
+
+profileDir = {
+  _meta = {
+    type = $type.string;
+    default = "${$cfg.legacy.xdg.dataHome}/pwamaker-profiles";
+    brief = "Web application profile storage directory";
+  };
+};
+
+backend.getRunCommand = {
+  _meta = {
+    type = $type.functionTo [ $type.string ];
+    default = id: "echo 'No backend configured'";
+    brief = "Internal launch-command generator";
+  };
+};
+
+backend.getWmClass = {
+  _meta = {
+    type = $type.functionTo [ $type.string ];
+    default = id: "PWA-${id}";
+    brief = "Internal window-class generator";
+  };
+};
+
+dispatcher.enable = {
+  _meta = {
+    type = $type.boolean;
+    default = false;
+    brief = "Enable the internal URL dispatcher";
+  };
+};
+
+dispatcher.fallbackBrowser = {
+  _meta = {
+    type = $type.string;
+    default = "firefox";
+    brief = "Fallback browser command";
+  };
+};
+
+apps = {
+  _meta = {
+    default = { };
+    brief = "Freeform web application definitions";
+    description = ''
+      App records retain the source fields id, name, url, icon, extensions,
+      search, enablePasswordManager, layoutStart, layoutEnd, userChrome,
+      userContent, extraPrefs, categories, keywords, and openUrls.
+    '';
+  };
+};

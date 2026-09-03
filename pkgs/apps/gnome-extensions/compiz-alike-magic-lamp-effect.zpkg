@@ -1,0 +1,5 @@
+id = "compiz-alike-magic-lamp-effect";
+sourcePath = [ "gnomeExtensions" "compiz-alike-magic-lamp-effect" ];
+aliases = [ [ "catalog" "compiz-alike-magic-lamp-effect" ] ];
+status = "active";
+meta = { displayName = "compiz-alike-magic-lamp-effect"; summary = "Curated compiz-alike-magic-lamp-effect package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

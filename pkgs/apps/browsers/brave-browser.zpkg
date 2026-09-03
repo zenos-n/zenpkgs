@@ -1,0 +1,5 @@
+id = "brave-browser";
+sourcePath = [ "brave" ];
+aliases = [ [ "catalog" "brave-browser" ] ];
+status = "active";
+meta = { displayName = "Brave"; summary = "Curated Brave package for ZenOS"; support = "curated"; tags = [ ]; category = "browsers"; };

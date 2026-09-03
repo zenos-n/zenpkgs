@@ -1,0 +1,5 @@
+id = "steam";
+sourcePath = [ "steam" ];
+aliases = [ [ "catalog" "steam" ] ];
+status = "active";
+meta = { displayName = "steam"; summary = "Curated steam package for ZenOS"; support = "curated"; tags = [ ]; category = "gaming"; };

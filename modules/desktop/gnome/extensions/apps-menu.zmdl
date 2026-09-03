@@ -1,0 +1,40 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.apps-menu";
+  brief = "Traditional category-based application menu for GNOME";
+  description = ''
+    Traditional category-based application menu for GNOME
+
+    This module installs and configures the **Apps Menu** extension for GNOME.
+    It adds a traditional application menu to the top bar, organized by category.
+
+    **Features:**
+    - Provides a category-based application menu.
+    - Configurable keyboard shortcut to toggle the menu.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Whether to enable Apps Menu GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.legacy.gnomeExtensions.apps-menu ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/apps-menu".apps-menu-toggle-menu = $path.apps-menu-toggle-menu;
+    } ];
+  };
+};
+
+apps-menu-toggle-menu = {
+  _meta = {
+    type = $type.list [ $type.string ];
+    default = [ "<Alt>F1" ];
+    description = ''
+      Menu toggle keyboard shortcut
+
+      Keybinding to open the applications menu.
+    '';
+  };
+};

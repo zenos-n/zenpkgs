@@ -1,7 +1,0 @@
-declarationOrder = 16;
-id = "gnome-builder";
-target = [ "apps" "development" "gnome-builder" ];
-sourcePath = [ "gnome-builder" ];
-aliases = [ [ "catalog" "gnome-builder" ] ];
-status = "active";
-meta = { displayName = "gnome-builder"; summary = "Curated gnome-builder package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };

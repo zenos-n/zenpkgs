@@ -1,7 +1,0 @@
-declarationOrder = 95;
-id = "parted";
-target = [ "apps" "recovery" "parted" ];
-sourcePath = [ "parted" ];
-aliases = [ [ "catalog" "parted" ] ];
-status = "active";
-meta = { displayName = "parted"; summary = "Curated parted package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

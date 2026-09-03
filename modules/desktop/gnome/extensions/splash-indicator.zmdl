@@ -1,0 +1,26 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.splash-indicator";
+  brief = "Visual login feedback screen for GNOME Shell";
+  description = ''
+    Visual login feedback screen for GNOME Shell
+
+    This module installs and configures the **Splash Indicator** extension for GNOME.
+    It displays a splash screen during system startup or login, providing visual
+    feedback while the desktop environment is loading.
+
+    **Features:**
+    - Visual splash screen on login.
+    - Customizable appearance (via extension settings).
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Splash Indicator GNOME extension configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.legacy.gnomeExtensions.splash-indicator ];
+  };
+};

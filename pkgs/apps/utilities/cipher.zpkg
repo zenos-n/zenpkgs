@@ -1,0 +1,5 @@
+id = "cipher";
+sourcePath = [ "decoder" ];
+aliases = [ [ "catalog" "cipher" ] ];
+status = "active";
+meta = { displayName = "cipher"; summary = "Curated cipher package for ZenOS"; support = "curated"; tags = [ ]; category = "utilities"; };

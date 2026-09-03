@@ -2,9 +2,10 @@
 
 To ensure the documentation site renders correctly and builds pass CI, all packages and modules must adhere to the following metadata schema.
 
-Package interface declarations live in `dsl/packages/*.zpkg`. Nix files remain
-valid for the flake, internal backend, tests, package implementations, and
-modules, but new contributor declarations under `dsl/` must use `.zpkg`.
+Package interface declarations are named leaves at `pkgs/<path>.zpkg`. Their
+location mechanically defines `pkgs.zenos.<path>`; `package.zpkg` is not a valid
+leaf name. Nix files remain valid for the flake, internal backend, tests, package
+implementations, and modules. The repository has no `dsl/` wrapper directory.
 The compiled DSL registry directly supplies the package overlay and public flake
 package outputs. `tests/fixtures/package-registry.json` is a normalized contract,
 not a second declaration source; checks require all 130 entries, 126 active
@@ -12,13 +13,12 @@ entries, and their target, alias, and source paths to remain exact.
 
 ## Package Interface Declarations
 
-Add one `.zpkg` file per curated nixpkgs interface. Declare the complete
-registry contract explicitly:
+Add one `.zpkg` file per curated nixpkgs interface at its canonical target path.
+For example, `pkgs/apps/utilities/example.zpkg` declares
+`pkgs.zenos.apps.utilities.example`:
 
 ```zpkg
-declarationOrder = 130;
 id = "example";
-target = [ "apps" "utilities" "example" ];
 sourcePath = [ "example" ];
 aliases = [ [ "catalog" "example" ] ];
 status = "active";
@@ -31,13 +31,25 @@ meta = {
 };
 ```
 
-`declarationOrder` must be unique and controls deterministic registry ordering.
-Use `sourcePath = null`, `aliases = [ ]`, and `status = "unavailable"` for a
-catalog entry that does not currently resolve to nixpkgs. The DSL tree is
-compiled in interface mode; package build recipes still live under `pkgs/`.
+`id` must equal the leaf filename, excluding `.zpkg`. Targets are derived from
+the path and registry entries are sorted by source path; do not declare `target`
+or `declarationOrder`. Keep aliases in the canonical ZPKG's `aliases` field. Use
+`sourcePath = null`, `aliases = [ ]`, and `status = "unavailable"` for a catalog
+entry that does not currently resolve to nixpkgs. The repository root is
+compiled in interface mode; package build recipes remain as `.nix` files under
+`pkgs/`.
 Compilation uses import-from-derivation (IFD), so local evaluators and CI must
 allow IFD. Its compiler bootstrap imports nixpkgs without the ZenPkgs overlay,
 which keeps registry generation independent of the package tree it creates.
+
+## Module Interface Declarations
+
+ZMDL sources are named leaves at `modules/<path>.zmdl`; `module.zmdl` is not a
+valid leaf name. The path mechanically defines the module identity
+`zenos.<path>`, and `_meta.id` must exactly equal `<path>` with `/` replaced by
+`.`. Desktop modules use the singular `modules/desktop/` root. The canonical
+attachments live in the repository-root `structure.zstr`. Existing `.nix`
+module implementations are retained temporarily as parity references.
 
 ## 1. Required Fields
 

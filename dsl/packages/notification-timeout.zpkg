@@ -1,7 +1,0 @@
-declarationOrder = 89;
-id = "notification-timeout";
-target = [ "apps" "gnome-extensions" "notification-timeout" ];
-sourcePath = [ "gnomeExtensions" "notification-timeout" ];
-aliases = [ [ "catalog" "notification-timeout" ] ];
-status = "active";
-meta = { displayName = "notification-timeout"; summary = "Curated notification-timeout package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };

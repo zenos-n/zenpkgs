@@ -1,0 +1,5 @@
+id = "nautilus";
+sourcePath = [ "nautilus" ];
+aliases = [ [ "catalog" "nautilus" ] ];
+status = "active";
+meta = { displayName = "nautilus"; summary = "Curated nautilus package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };

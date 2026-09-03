@@ -1,0 +1,102 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.customize-clock-on-lockscreen";
+  brief = "Fine-grained typography control for the GNOME lock screen";
+  description = ''
+    Fine-grained typography control for the GNOME lock screen
+
+    This module installs and configures the **Customize Clock on Lockscreen** extension for GNOME. It allows extensive customization of the clock,
+    date, and hint text on the lock screen.
+
+    **Features:**
+    - Run custom commands to display text (e.g., `whoami`).
+    - Customize clock style (Digital, Analog, LED).
+    - Adjust fonts and colors for all elements.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+_let hexToDecMap: $type.attrs = { "0" = 0; "1" = 1; "2" = 2; "3" = 3; "4" = 4; "5" = 5; "6" = 6; "7" = 7; "8" = 8; "9" = 9; "a" = 10; "b" = 11; "c" = 12; "d" = 13; "e" = 14; "f" = 15; "A" = 10; "B" = 11; "C" = 12; "D" = 13; "E" = 14; "F" = 15; };
+_let hexValue: $type.function "char" = c: if $lib.hasAttr c $v.hexToDecMap then $lib.getAttr c $v.hexToDecMap else 0;
+_let parseHexByte: $type.function "byte" = s: ($v.hexValue ($lib.substring 0 1 s) * 16) + $v.hexValue ($lib.substring 1 1 s);
+_let serializeFloat: $type.function "float" = f: let s = $lib.toString f; in if $lib.hasInfix "." s then s else "${s}.0";
+_let toRgbaString: $type.function "color" = val:
+  if $lib.isString val && $lib.hasPrefix "#" val then
+    let
+      hex = $lib.removePrefix "#" val;
+      r = $lib.toString ($v.parseHexByte ($lib.substring 0 2 hex));
+      g = $lib.toString ($v.parseHexByte ($lib.substring 2 2 hex));
+      b = $lib.toString ($v.parseHexByte ($lib.substring 4 2 hex));
+      a = if $lib.stringLength hex == 8 then $v.serializeFloat ($v.parseHexByte ($lib.substring 6 2 hex) / 255.0) else "1.0";
+    in "rgba(${r}, ${g}, ${b}, ${a})"
+  else val;
+
+enable = enableOption {
+  _meta.description = "Whether to enable Customize Clock on Lockscreen GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.legacy.gnomeExtensions.customize-clock-on-lock-screen ];
+      programs.dconf.profiles.user.databases = [ {
+        settings."org/gnome/shell/extensions/customize-clock-on-lockscreen" = {
+          remove-command-output = !$path.command.enable;
+          remove-time = !$path.time.enable;
+          remove-date = !$path.date.enable;
+          remove-hint = !$path.hint.enable;
+          command = $path.command.text;
+          custom-time-text = $path.time.text;
+          custom-date-text = $path.date.text;
+          clock-style = $path.time.style;
+          command-output-font-color = $v.toRgbaString $path.command.font.color;
+          command-output-font-size = $lib.gvariant.mkInt32 $path.command.font.size;
+          command-output-font-family = $path.command.font.family;
+          command-output-font-weight = $path.command.font.weight;
+          command-output-font-style = $path.command.font.style;
+          time-font-color = $v.toRgbaString $path.time.font.color;
+          time-font-size = $lib.gvariant.mkInt32 $path.time.font.size;
+          time-font-family = $path.time.font.family;
+          time-font-weight = $path.time.font.weight;
+          time-font-style = $path.time.font.style;
+          date-font-color = $v.toRgbaString $path.date.font.color;
+          date-font-size = $lib.gvariant.mkInt32 $path.date.font.size;
+          date-font-family = $path.date.font.family;
+          date-font-weight = $path.date.font.weight;
+          date-font-style = $path.date.font.style;
+          hint-font-color = $v.toRgbaString $path.hint.font.color;
+          hint-font-size = $lib.gvariant.mkInt32 $path.hint.font.size;
+          hint-font-family = $path.hint.font.family;
+          hint-font-weight = $path.hint.font.weight;
+          hint-font-style = $path.hint.font.style;
+        };
+    } ];
+  };
+};
+
+command.enable = { _meta = { type = $type.bool; default = true; description = "Display output from a custom shell command"; }; };
+command.text = { _meta = { type = $type.string; default = "whoami"; description = "Shell command to execute for output display"; }; };
+command.font.color = { _meta = { type = $type.string; default = "rgba(255, 244, 177, 1.0)"; description = "CSS color (Hex or RGBA)"; }; };
+command.font.size = { _meta = { type = $type.int; default = 48; description = "Font size in points (20-96)"; }; };
+command.font.family = { _meta = { type = $type.string; default = "Default"; description = "Font family name"; }; };
+command.font.weight = { _meta = { type = $type.string; default = "Default"; description = "Typography weight"; }; };
+command.font.style = { _meta = { type = $type.string; default = "Default"; description = "Typography style"; }; };
+time.enable = { _meta = { type = $type.bool; default = true; description = "Show the lock screen clock"; }; };
+time.text = { _meta = { type = $type.string; default = ""; description = "Custom strftime format pattern"; }; };
+time.style = { _meta = { type = $type.enum [ "digital" "analog" "led" ]; default = "digital"; description = "Clock face rendering style"; }; };
+time.font.color = { _meta = { type = $type.string; default = "rgba(160, 230, 163, 1.0)"; description = "CSS color (Hex or RGBA)"; }; };
+time.font.size = { _meta = { type = $type.int; default = 96; description = "Font size in points (20-96)"; }; };
+time.font.family = { _meta = { type = $type.string; default = "Default"; description = "Font family name"; }; };
+time.font.weight = { _meta = { type = $type.string; default = "Default"; description = "Typography weight"; }; };
+time.font.style = { _meta = { type = $type.string; default = "Default"; description = "Typography style"; }; };
+date.enable = { _meta = { type = $type.bool; default = true; description = "Show the lock screen date"; }; };
+date.text = { _meta = { type = $type.string; default = ""; description = "Custom date format pattern"; }; };
+date.font.color = { _meta = { type = $type.string; default = "rgba(242, 92, 84, 1.0)"; description = "CSS color (Hex or RGBA)"; }; };
+date.font.size = { _meta = { type = $type.int; default = 28; description = "Font size in points (20-96)"; }; };
+date.font.family = { _meta = { type = $type.string; default = "Default"; description = "Font family name"; }; };
+date.font.weight = { _meta = { type = $type.string; default = "Default"; description = "Typography weight"; }; };
+date.font.style = { _meta = { type = $type.string; default = "Default"; description = "Typography style"; }; };
+hint.enable = { _meta = { type = $type.bool; default = true; description = "Show the 'swipe up to unlock' hint"; }; };
+hint.font.color = { _meta = { type = $type.string; default = "rgba(212, 237, 138, 1.0)"; description = "CSS color (Hex or RGBA)"; }; };
+hint.font.size = { _meta = { type = $type.int; default = 20; description = "Font size in points (20-96)"; }; };
+hint.font.family = { _meta = { type = $type.string; default = "Default"; description = "Font family name"; }; };
+hint.font.weight = { _meta = { type = $type.string; default = "Default"; description = "Typography weight"; }; };
+hint.font.style = { _meta = { type = $type.string; default = "Default"; description = "Typography style"; }; };

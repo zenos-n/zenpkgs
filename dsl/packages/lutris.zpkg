@@ -1,7 +1,0 @@
-declarationOrder = 10;
-id = "lutris";
-target = [ "apps" "gaming" "lutris" ];
-sourcePath = [ "lutris" ];
-aliases = [ [ "catalog" "lutris" ] ];
-status = "active";
-meta = { displayName = "lutris"; summary = "Curated lutris package for ZenOS"; support = "curated"; tags = [ ]; category = "gaming"; };

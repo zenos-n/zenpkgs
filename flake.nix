@@ -23,7 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zenos-next = {
-      url = "github:doromiert/zenos-next/c24244cbf474ce21f4c16257eff7a94eeaa8928b";
+      url = "github:doromiert/zenos-next/378e4f0216101fc654ba062e70a91e6e3965d2a9";
       flake = false;
     };
   };
@@ -50,15 +50,15 @@
               zenDsl
               bootstrapPkgs.python3
             ];
-            src = ./dsl;
+            src = self;
           } ''
-            mkdir -p "$out/interfaces"
+            mkdir -p "$out/interfaces" "$out/modules"
             zen-dsl compile-tree \
               --root "$src" \
               --output "$out/bundle.json" \
               --mode interface
 
-            python3 - "$out/bundle.json" "$out/interfaces" <<'PY'
+            python3 - "$out/bundle.json" "$out" <<'PY'
             import json
             from pathlib import Path
             import sys
@@ -68,19 +68,51 @@
             with bundle_path.open(encoding="utf-8") as source_file:
                 compiled_bundle = json.load(source_file)
 
+            def canonical_source(source):
+                raw_path = source.get("path")
+                kind = source.get("kind")
+                if not isinstance(raw_path, str):
+                    raise ValueError("bundle source path must be a string")
+                relative = Path(raw_path)
+                if relative.is_absolute() or ".." in relative.parts or relative.as_posix() != raw_path:
+                    raise ValueError(f"unsafe bundle source path: {raw_path}")
+                if kind == "zstr":
+                    if raw_path != "structure.zstr":
+                        raise ValueError(f"structure must be repository-root structure.zstr: {raw_path}")
+                    return
+                roots = {"zpkg": ("pkgs", ".zpkg", "package"), "zmdl": ("modules", ".zmdl", "module")}
+                if kind not in roots:
+                    raise ValueError(f"unsupported repository DSL source: {raw_path}")
+                root, suffix, reserved_leaf = roots[kind]
+                if len(relative.parts) < 2 or relative.parts[0] != root or relative.suffix != suffix:
+                    raise ValueError(f"noncanonical {kind} source location: {raw_path}")
+                if relative.stem == reserved_leaf:
+                    raise ValueError(f"reserved {kind} leaf name: {raw_path}")
+
+            destinations = set()
             for source in compiled_bundle["sources"]:
-                if source["kind"] != "zpkg":
+                canonical_source(source)
+                if source["kind"] not in {"zpkg", "zmdl"}:
                     continue
                 relative = Path(source["path"])
-                if relative.is_absolute() or ".." in relative.parts:
-                    raise ValueError(f"unsafe bundle source path: {source['path']}")
-                destination = output_root / f"{source['path']}.nix"
+                compiled = source.get("compiledNix")
+                if not isinstance(compiled, str) or not compiled:
+                    raise ValueError(f"missing compiled Nix for bundle source: {source['path']}")
+                subtree = "interfaces" if source["kind"] == "zpkg" else "modules"
+                destination = output_root / subtree / f"{source['path']}.nix"
+                if destination in destinations:
+                    raise ValueError(f"duplicate compiled module destination: {destination}")
+                destinations.add(destination)
                 destination.parent.mkdir(parents=True, exist_ok=True)
-                destination.write_text(source["compiledNix"], encoding="utf-8")
+                destination.write_text(compiled, encoding="utf-8")
             PY
           '';
           bundleJSON = builtins.fromJSON (builtins.readFile "${bundle}/bundle.json");
           registry = dslBundleAdapter.registryFromBundle {
+            bundle = bundleJSON;
+            bundlePath = bundle;
+          };
+          candidates = dslBundleAdapter.modulesFromBundle {
             bundle = bundleJSON;
             bundlePath = bundle;
           };
@@ -90,6 +122,7 @@
             bootstrapPkgs
             bundle
             bundleJSON
+            candidates
             registry
             zenDsl
             ;
@@ -561,6 +594,10 @@
             inherit interface pkgs registry;
             inherit (nixpkgs) lib;
           };
+          dslModuleContract = import ./tests/dsl-module-parity.nix {
+            inherit pkgs;
+            inherit (dsl) candidates;
+          };
         in
         {
           interface = interface.mkCheck {
@@ -585,14 +622,13 @@
               .settings."org/gnome/shell".enabled-extensions == [ "forge@jmmaranan.com" ];
             pkgs.runCommand "zenpkgs-gnome-base-check" { } "touch $out";
           source-policy = pkgs.runCommand "zenpkgs-source-policy-check" { src = self; } ''
-            if [ -e "$src/mappings/packages.nix" ]; then
-              echo "mappings/packages.nix must not be used for package declarations" >&2
+            if [ -e "$src/dsl" ]; then
+              echo "dsl/ must not exist; DSL sources belong in named root trees" >&2
               exit 1
             fi
 
-            dsl_nix="$(${pkgs.findutils}/bin/find "$src/dsl" -type f -name '*.nix' -print -quit)"
-            if [ -n "$dsl_nix" ]; then
-              echo "Nix contributor declaration is forbidden in dsl/: $dsl_nix" >&2
+            if [ -e "$src/mappings/packages.nix" ]; then
+              echo "mappings/packages.nix must not be used for package declarations" >&2
               exit 1
             fi
 
@@ -619,6 +655,7 @@
           installed-base = installedSystemChecks.installed-base;
           oobe = installedSystemChecks.oobe;
           webapps = installedSystemChecks.webapps;
+          dsl-module-contract = dslModuleContract;
         }
         // registryChecks
       );

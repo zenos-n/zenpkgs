@@ -1,7 +1,0 @@
-declarationOrder = 52;
-id = "papers";
-target = [ "apps" "office" "papers" ];
-sourcePath = [ "papers" ];
-aliases = [ [ "catalog" "papers" ] ];
-status = "active";
-meta = { displayName = "papers"; summary = "Curated papers package for ZenOS"; support = "curated"; tags = [ ]; category = "office"; };

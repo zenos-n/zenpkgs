@@ -1,0 +1,37 @@
+# Source: hm-modules/webapps/firefox/module.nix
+# Unsupported: the patched Firefox derivation, MozLZ4 helper, symlink joins, wrapper construction,
+# activation DAG, generated profile files, extension downloads, and stale-profile cleanup require
+# package-build and Home Manager activation primitives outside production ZMDL.
+# Unsupported: the cross-module condition webApps.enable && webApps.base == "firefox" cannot own
+# actions in this separately attached ZMDL without changing the public option schema.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "users.programs.web-apps.backends.firefox";
+  brief = "Firefox backend for ZenOS web applications";
+  description = ''
+    Declares the Firefox backend inputs used by isolated ZenOS web applications.
+
+    The contributor implementation builds a patched Firefox and generates binary
+    and textual profile state during Home Manager activation. Those operations are
+    explicitly blocked above until production ZMDL exposes matching primitives.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+firefox.nativeMessagingHosts = {
+  _meta = {
+    type = $type.list [ $type.package ];
+    default = [ ];
+    brief = "Firefox native messaging host packages";
+  };
+};
+
+firefox.firefoxGnomeTheme = {
+  _meta = {
+    type = $type.either [ $type.null $type.path ];
+    default = null;
+    brief = "Firefox GNOME theme directory";
+  };
+};

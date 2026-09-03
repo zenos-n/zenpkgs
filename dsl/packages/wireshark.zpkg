@@ -1,7 +1,0 @@
-declarationOrder = 55;
-id = "wireshark";
-target = [ "apps" "advanced" "wireshark" ];
-sourcePath = [ "wireshark" ];
-aliases = [ [ "catalog" "wireshark" ] ];
-status = "active";
-meta = { displayName = "wireshark"; summary = "Curated wireshark package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };

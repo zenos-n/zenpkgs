@@ -1,0 +1,25 @@
+# Source: hm-modules/webapps/brave/module.nix
+# Metadata is synthesized because the contributor backend file has no top-level meta set.
+# Unsupported: cross-module backend selection and hm.dag profile cleanup cannot be expressed
+# from a separately attached production ZMDL without adding a new public enable option.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "users.programs.web-apps.backends.brave";
+  brief = "Experimental Brave backend for ZenOS web applications";
+  description = ''
+    Declares the Brave package used for PWA execution. Backend function injection,
+    experimental warnings, profile creation, and stale-profile cleanup remain blocked
+    on cross-module action guards and Home Manager DAG support.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+bravePackage = {
+  _meta = {
+    type = $type.package;
+    default = $pkgs.legacy.brave;
+    brief = "Brave browser package";
+  };
+};

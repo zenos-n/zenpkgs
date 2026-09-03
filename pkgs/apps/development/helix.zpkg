@@ -1,0 +1,5 @@
+id = "helix";
+sourcePath = [ "helix" ];
+aliases = [ [ "catalog" "helix" ] ];
+status = "active";
+meta = { displayName = "helix"; summary = "Curated helix package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };

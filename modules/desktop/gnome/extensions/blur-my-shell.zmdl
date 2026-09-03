@@ -1,0 +1,304 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.blur-my-shell";
+  brief = "Aesthetic blur effects for GNOME Shell components";
+  description = ''
+    Aesthetic blur effects for GNOME Shell components
+
+    This module installs and configures the **Blur My Shell** extension for GNOME.
+    It adds a blur look to different parts of the GNOME Shell, including the top panel,
+    dash, overview, and applications.
+
+    **Features:**
+    - Global blur settings (sigma, brightness, noise).
+    - Per-component configuration (Panel, Dock, Overview, Lockscreen).
+    - Advanced pipeline support for custom effects.
+    - Application whitelist/blacklist.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+_let mkVariant: $type.function "value" = value: "<${value}>";
+_let mkString: $type.function "value" = value: "'${value}'";
+_let mkFloat: $type.function "float" = value: let str = $lib.toString value; in if $lib.hasInfix "." str then str else "${str}.0";
+_let serializeValue: $type.function "value" = value:
+  if $lib.isBool value then (if value then "true" else "false")
+  else if $lib.isInt value then $lib.toString value
+  else if $lib.isFloat value then $v.mkFloat value
+  else if $lib.isString value then $v.mkString value
+  else $lib.throwIfNot false "Unsupported type in pipeline params: ${$lib.typeOf value}" "";
+_let serializeParams: $type.function "params" = params:
+  if params == { } then "@a{sv} {}"
+  else
+    let
+      keys = $lib.sort (a: b: a < b) ($lib.attrNames params);
+      pairs = $lib.map (key: "${$v.mkString key}: ${$v.mkVariant ($v.serializeValue ($lib.getAttr key params))}") keys;
+    in "{${$lib.concatStringsSep ", " pairs}}";
+_let padId: $type.function "index" = index:
+  let
+    str = $lib.toString index;
+    zeros = "000000000000";
+  in "effect_${$lib.substring 0 (12 - $lib.stringLength str) zeros}${str}";
+_let normalizeEffect: $type.function "effect" = index: effectAttrs:
+  let
+    generatedId = $v.padId index;
+    process = type: params: { inherit type params; id = effectAttrs.id or generatedId; };
+  in if $lib.hasAttrByPath [ "blur" "gaussian" ] effectAttrs then process "native_static_gaussian_blur" ($lib.getAttrFromPath [ "blur" "gaussian" ] effectAttrs)
+     else if $lib.hasAttrByPath [ "blur" "monte_carlo" ] effectAttrs then process "monte_carlo_blur" ($lib.getAttrFromPath [ "blur" "monte_carlo" ] effectAttrs)
+     else if $lib.hasAttr "corner" effectAttrs then process "corner" effectAttrs.corner
+     else if $lib.hasAttr "noise" effectAttrs then process "noise" effectAttrs.noise
+     else if $lib.hasAttr "color" effectAttrs then process "color" effectAttrs.color
+     else if $lib.hasAttr "pixelize" effectAttrs then process "pixelize" effectAttrs.pixelize
+     else if $lib.hasAttr "derivative" effectAttrs then process "derivative" effectAttrs.derivative
+     else if $lib.hasAttr "type" effectAttrs then process effectAttrs.type (effectAttrs.params or { })
+     else $lib.throwIfNot false "Unknown effect type in pipeline configuration" { };
+_let serializeEffect: $type.function "effect" = index: effectAttrs:
+  let
+    normalized = $v.normalizeEffect index effectAttrs;
+    dict = "{'type': ${$v.mkVariant ($v.mkString normalized.type)}, 'id': ${$v.mkVariant ($v.mkString normalized.id)}, 'params': ${$v.mkVariant ($v.serializeParams normalized.params)}}";
+  in $v.mkVariant dict;
+_let serializePipeline: $type.function "pipeline" = pipeline:
+  let serializedEffects = $lib.imap0 $v.serializeEffect pipeline.effects;
+  in "{'name': ${$v.mkVariant ($v.mkString pipeline.name)}, 'effects': ${$v.mkVariant "[${$lib.concatStringsSep ", " serializedEffects}]"}}";
+_let pipelinesGVariant: $type.string = "{${$lib.concatStringsSep ", " ($lib.mapAttrsToList (id: pipeline: "${$v.mkString id}: ${$v.serializePipeline pipeline}") $path.general.pipelines)}}";
+
+enable = enableOption {
+  _meta.description = "Whether to enable Blur My Shell GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.legacy.gnomeExtensions.blur-my-shell ];
+      programs.dconf.profiles.user.databases = [ {
+        settings = {
+          "org/gnome/shell/extensions/blur-my-shell" = {
+            settings-version = $path.general.settings-version;
+            sigma = $path.general.sigma;
+            brightness = $path.general.brightness;
+            color = $path.general.color;
+            noise-amount = $path.general.noise-amount;
+            noise-lightness = $path.general.noise-lightness;
+            color-and-noise = $path.general.color-and-noise;
+            hacks-level = $path.general.hacks-level;
+            debug = $path.general.debug;
+          };
+          "org/gnome/shell/extensions/blur-my-shell/overview" = {
+            blur = $path.overview.blur;
+            pipeline = $path.overview.pipeline;
+            customize = $path.overview.customize;
+            sigma = $path.overview.sigma;
+            brightness = $path.overview.brightness;
+            color = $path.overview.color;
+            noise-amount = $path.overview.noise-amount;
+            noise-lightness = $path.overview.noise-lightness;
+            style-components = $path.overview.style-components;
+          };
+          "org/gnome/shell/extensions/blur-my-shell/appfolder" = {
+            blur = $path.appfolder.blur;
+            customize = $path.appfolder.customize;
+            sigma = $path.appfolder.sigma;
+            brightness = $path.appfolder.brightness;
+            color = $path.appfolder.color;
+            noise-amount = $path.appfolder.noise-amount;
+            noise-lightness = $path.appfolder.noise-lightness;
+            style-dialogs = $path.appfolder.style-dialogs;
+          };
+          "org/gnome/shell/extensions/blur-my-shell/panel" = {
+            blur = $path.panel.blur;
+            pipeline = $path.panel.pipeline;
+            customize = $path.panel.customize;
+            sigma = $path.panel.sigma;
+            brightness = $path.panel.brightness;
+            color = $path.panel.color;
+            noise-amount = $path.panel.noise-amount;
+            noise-lightness = $path.panel.noise-lightness;
+            static-blur = $path.panel.static-blur;
+            unblur-in-overview = $path.panel.unblur-in-overview;
+            force-light-text = $path.panel.force-light-text;
+            override-background = $path.panel.override-background;
+            style-panel = $path.panel.style-panel;
+            override-background-dynamically = $path.panel.override-background-dynamically;
+          };
+          "org/gnome/shell/extensions/blur-my-shell/dash-to-dock" = {
+            blur = $path.dash-to-dock.blur;
+            pipeline = $path.dash-to-dock.pipeline;
+            customize = $path.dash-to-dock.customize;
+            sigma = $path.dash-to-dock.sigma;
+            brightness = $path.dash-to-dock.brightness;
+            color = $path.dash-to-dock.color;
+            noise-amount = $path.dash-to-dock.noise-amount;
+            noise-lightness = $path.dash-to-dock.noise-lightness;
+            static-blur = $path.dash-to-dock.static-blur;
+            override-background = $path.dash-to-dock.override-background;
+            style-dash-to-dock = $path.dash-to-dock.style-dash-to-dock;
+            unblur-in-overview = $path.dash-to-dock.unblur-in-overview;
+            corner-radius = $path.dash-to-dock.corner-radius;
+          };
+          "org/gnome/shell/extensions/blur-my-shell/applications" = {
+            blur = $path.applications.blur;
+            customize = $path.applications.customize;
+            sigma = $path.applications.sigma;
+            brightness = $path.applications.brightness;
+            color = $path.applications.color;
+            noise-amount = $path.applications.noise-amount;
+            noise-lightness = $path.applications.noise-lightness;
+            opacity = $path.applications.opacity;
+            dynamic-opacity = $path.applications.dynamic-opacity;
+            blur-on-overview = $path.applications.blur-on-overview;
+            enable-all = $path.applications.enable-all;
+            whitelist = $path.applications.whitelist;
+            blacklist = $path.applications.blacklist;
+          };
+          "org/gnome/shell/extensions/blur-my-shell/screenshot" = {
+            blur = $path.screenshot.blur;
+            pipeline = $path.screenshot.pipeline;
+            customize = $path.screenshot.customize;
+            sigma = $path.screenshot.sigma;
+            brightness = $path.screenshot.brightness;
+            color = $path.screenshot.color;
+            noise-amount = $path.screenshot.noise-amount;
+            noise-lightness = $path.screenshot.noise-lightness;
+          };
+          "org/gnome/shell/extensions/blur-my-shell/lockscreen" = {
+            blur = $path.lockscreen.blur;
+            pipeline = $path.lockscreen.pipeline;
+            customize = $path.lockscreen.customize;
+            sigma = $path.lockscreen.sigma;
+            brightness = $path.lockscreen.brightness;
+            color = $path.lockscreen.color;
+            noise-amount = $path.lockscreen.noise-amount;
+            noise-lightness = $path.lockscreen.noise-lightness;
+          };
+          "org/gnome/shell/extensions/blur-my-shell/window-list" = {
+            blur = $path.window-list.blur;
+            pipeline = $path.window-list.pipeline;
+            customize = $path.window-list.customize;
+            sigma = $path.window-list.sigma;
+            brightness = $path.window-list.brightness;
+            color = $path.window-list.color;
+            noise-amount = $path.window-list.noise-amount;
+            noise-lightness = $path.window-list.noise-lightness;
+          };
+          "org/gnome/shell/extensions/blur-my-shell/coverflow-alt-tab" = {
+            blur = $path.coverflow-alt-tab.blur;
+            pipeline = $path.coverflow-alt-tab.pipeline;
+          };
+          "org/gnome/shell/extensions/blur-my-shell/hidetopbar".compatibility = $path.hidetopbar.compatibility;
+          "org/gnome/shell/extensions/blur-my-shell/dash-to-panel".blur-original-panel = $path.dash-to-panel.blur-original-panel;
+        };
+      } ];
+      systemd.user.services.blur-my-shell-pipelines = {
+        description = "Apply Blur My Shell pipelines configuration";
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        serviceConfig = { Type = "oneshot"; RemainAfterExit = true; };
+        script = ''
+          ${$pkgs.legacy.dconf}/bin/dconf write /org/gnome/shell/extensions/blur-my-shell/pipelines ${$lib.escapeShellArg $v.pipelinesGVariant}
+        '';
+    };
+  };
+};
+
+general.settings-version = { _meta = { type = $type.int; default = 1; description = "Internal version tracker for settings"; }; };
+general.sigma = { _meta = { type = $type.int; default = 30; description = "Global gaussian sigma (blur radius)"; }; };
+general.brightness = { _meta = { type = $type.float; default = 0.6; description = "Global brightness adjustment for blur"; }; };
+general.color = { _meta = { type = $type.string; default = "(0.0,0.0,0.0,0.0)"; description = "Global color mix (GVariant tuple)"; }; };
+general.noise-amount = { _meta = { type = $type.float; default = 0.0; description = "Global film grain/noise intensity"; }; };
+general.noise-lightness = { _meta = { type = $type.float; default = 0.0; description = "Global noise lightness adjustment"; }; };
+general.color-and-noise = { _meta = { type = $type.bool; default = true; description = "Apply color and noise filters globally"; }; };
+general.hacks-level = { _meta = { type = $type.int; default = 1; description = "Performance/Compatibility hack level (0-2)"; }; };
+general.debug = { _meta = { type = $type.bool; default = false; description = "Enable verbose console output for debugging"; }; };
+general.pipelines = { _meta = { type = $type.set [ $type.attrs ]; default = { }; description = "Advanced effect pipeline definitions"; }; };
+
+overview.blur = { _meta = { type = $type.bool; default = true; description = "Whether to activate blur for this component"; }; };
+overview.customize = { _meta = { type = $type.bool; default = false; description = "Whether to customize sigma/brightness or use global values"; }; };
+overview.sigma = { _meta = { type = $type.int; default = 30; description = "Gaussian sigma (blur strength)"; }; };
+overview.brightness = { _meta = { type = $type.float; default = 0.6; description = "Brightness of the blur effect"; }; };
+overview.color = { _meta = { type = $type.string; default = "(0.0,0.0,0.0,0.0)"; description = "Color to mix with the blur (GVariant tuple string)"; }; };
+overview.noise-amount = { _meta = { type = $type.float; default = 0.0; description = "Amount of noise to add"; }; };
+overview.noise-lightness = { _meta = { type = $type.float; default = 0.0; description = "Lightness of the noise"; }; };
+overview.pipeline = { _meta = { type = $type.string; default = "pipeline_default"; description = "Pipeline applied to the overview background"; }; };
+overview.style-components = { _meta = { type = $type.int; default = 1; description = "Component transparency style (0-3)"; }; };
+
+appfolder.blur = { _meta = { type = $type.bool; default = true; description = "Whether to activate blur for this component"; }; };
+appfolder.customize = { _meta = { type = $type.bool; default = false; description = "Whether to customize sigma/brightness or use global values"; }; };
+appfolder.sigma = { _meta = { type = $type.int; default = 30; description = "Gaussian sigma (blur strength)"; }; };
+appfolder.brightness = { _meta = { type = $type.float; default = 0.6; description = "Brightness of the blur effect"; }; };
+appfolder.color = { _meta = { type = $type.string; default = "(0.0,0.0,0.0,0.0)"; description = "Color to mix with the blur (GVariant tuple string)"; }; };
+appfolder.noise-amount = { _meta = { type = $type.float; default = 0.0; description = "Amount of noise to add"; }; };
+appfolder.noise-lightness = { _meta = { type = $type.float; default = 0.0; description = "Lightness of the noise"; }; };
+appfolder.style-dialogs = { _meta = { type = $type.int; default = 1; description = "Folder dialog visual style (0-3)"; }; };
+
+panel.blur = { _meta = { type = $type.bool; default = true; description = "Whether to activate blur for this component"; }; };
+panel.customize = { _meta = { type = $type.bool; default = false; description = "Whether to customize sigma/brightness or use global values"; }; };
+panel.sigma = { _meta = { type = $type.int; default = 30; description = "Gaussian sigma (blur strength)"; }; };
+panel.brightness = { _meta = { type = $type.float; default = 0.6; description = "Brightness of the blur effect"; }; };
+panel.color = { _meta = { type = $type.string; default = "(0.0,0.0,0.0,0.0)"; description = "Color to mix with the blur (GVariant tuple string)"; }; };
+panel.noise-amount = { _meta = { type = $type.float; default = 0.0; description = "Amount of noise to add"; }; };
+panel.noise-lightness = { _meta = { type = $type.float; default = 0.0; description = "Lightness of the noise"; }; };
+panel.pipeline = { _meta = { type = $type.string; default = "pipeline_default"; description = "Pipeline applied to the panel"; }; };
+panel.static-blur = { _meta = { type = $type.bool; default = true; description = "Use static image blur instead of live blur"; }; };
+panel.unblur-in-overview = { _meta = { type = $type.bool; default = true; description = "Disable blur when entering the overview"; }; };
+panel.force-light-text = { _meta = { type = $type.bool; default = false; description = "Force white text on blurred panel"; }; };
+panel.override-background = { _meta = { type = $type.bool; default = true; description = "Force panel background override"; }; };
+panel.style-panel = { _meta = { type = $type.int; default = 0; description = "Panel transparency style (0-3)"; }; };
+panel.override-background-dynamically = { _meta = { type = $type.bool; default = false; description = "Toggle blur based on window overlap"; }; };
+
+dash-to-dock.blur = { _meta = { type = $type.bool; default = true; description = "Whether to activate blur for this component"; }; };
+dash-to-dock.customize = { _meta = { type = $type.bool; default = false; description = "Whether to customize sigma/brightness or use global values"; }; };
+dash-to-dock.sigma = { _meta = { type = $type.int; default = 30; description = "Gaussian sigma (blur strength)"; }; };
+dash-to-dock.brightness = { _meta = { type = $type.float; default = 0.6; description = "Brightness of the blur effect"; }; };
+dash-to-dock.color = { _meta = { type = $type.string; default = "(0.0,0.0,0.0,0.0)"; description = "Color to mix with the blur (GVariant tuple string)"; }; };
+dash-to-dock.noise-amount = { _meta = { type = $type.float; default = 0.0; description = "Amount of noise to add"; }; };
+dash-to-dock.noise-lightness = { _meta = { type = $type.float; default = 0.0; description = "Lightness of the noise"; }; };
+dash-to-dock.pipeline = { _meta = { type = $type.string; default = "pipeline_default_rounded"; description = "Pipeline applied to the dock"; }; };
+dash-to-dock.static-blur = { _meta = { type = $type.bool; default = true; description = "Use static blur for the dock"; }; };
+dash-to-dock.override-background = { _meta = { type = $type.bool; default = true; description = "Override dock background settings"; }; };
+dash-to-dock.style-dash-to-dock = { _meta = { type = $type.int; default = 0; description = "Dock transparency style (0-2)"; }; };
+dash-to-dock.unblur-in-overview = { _meta = { type = $type.bool; default = false; description = "Disable blur in activity overview"; }; };
+dash-to-dock.corner-radius = { _meta = { type = $type.int; default = 12; description = "Corner rounding radius for the blur actor"; }; };
+
+applications.blur = { _meta = { type = $type.bool; default = false; description = "Whether to activate blur for this component"; }; };
+applications.customize = { _meta = { type = $type.bool; default = true; description = "Whether to customize sigma/brightness or use global values"; }; };
+applications.sigma = { _meta = { type = $type.int; default = 30; description = "Gaussian sigma (blur strength)"; }; };
+applications.brightness = { _meta = { type = $type.float; default = 1.0; description = "Brightness of the blur effect"; }; };
+applications.color = { _meta = { type = $type.string; default = "(0.0,0.0,0.0,0.0)"; description = "Color to mix with the blur (GVariant tuple string)"; }; };
+applications.noise-amount = { _meta = { type = $type.float; default = 0.0; description = "Amount of noise to add"; }; };
+applications.noise-lightness = { _meta = { type = $type.float; default = 0.0; description = "Lightness of the noise"; }; };
+applications.opacity = { _meta = { type = $type.int; default = 215; description = "Alpha opacity for blurred windows"; }; };
+applications.dynamic-opacity = { _meta = { type = $type.bool; default = true; description = "Restore full opacity on window focus"; }; };
+applications.blur-on-overview = { _meta = { type = $type.bool; default = false; description = "Keep window blur active in overview"; }; };
+applications.enable-all = { _meta = { type = $type.bool; default = false; description = "Attempt to blur all window actors"; }; };
+applications.whitelist = { _meta = { type = $type.list [ $type.string ]; default = [ ]; description = "App IDs to explicitly include in blur"; }; };
+applications.blacklist = { _meta = { type = $type.list [ $type.string ]; default = [ "Plank" "com.desktop.ding" "Conky" ]; description = "App IDs to explicitly exclude from blur"; }; };
+
+screenshot.blur = { _meta = { type = $type.bool; default = true; description = "Whether to activate blur for this component"; }; };
+screenshot.customize = { _meta = { type = $type.bool; default = false; description = "Whether to customize sigma/brightness or use global values"; }; };
+screenshot.sigma = { _meta = { type = $type.int; default = 30; description = "Gaussian sigma (blur strength)"; }; };
+screenshot.brightness = { _meta = { type = $type.float; default = 0.6; description = "Brightness of the blur effect"; }; };
+screenshot.color = { _meta = { type = $type.string; default = "(0.0,0.0,0.0,0.0)"; description = "Color to mix with the blur (GVariant tuple string)"; }; };
+screenshot.noise-amount = { _meta = { type = $type.float; default = 0.0; description = "Amount of noise to add"; }; };
+screenshot.noise-lightness = { _meta = { type = $type.float; default = 0.0; description = "Lightness of the noise"; }; };
+screenshot.pipeline = { _meta = { type = $type.string; default = "pipeline_default"; description = "Pipeline for the screenshot interface"; }; };
+
+lockscreen.blur = { _meta = { type = $type.bool; default = true; description = "Whether to activate blur for this component"; }; };
+lockscreen.customize = { _meta = { type = $type.bool; default = false; description = "Whether to customize sigma/brightness or use global values"; }; };
+lockscreen.sigma = { _meta = { type = $type.int; default = 30; description = "Gaussian sigma (blur strength)"; }; };
+lockscreen.brightness = { _meta = { type = $type.float; default = 0.6; description = "Brightness of the blur effect"; }; };
+lockscreen.color = { _meta = { type = $type.string; default = "(0.0,0.0,0.0,0.0)"; description = "Color to mix with the blur (GVariant tuple string)"; }; };
+lockscreen.noise-amount = { _meta = { type = $type.float; default = 0.0; description = "Amount of noise to add"; }; };
+lockscreen.noise-lightness = { _meta = { type = $type.float; default = 0.0; description = "Lightness of the noise"; }; };
+lockscreen.pipeline = { _meta = { type = $type.string; default = "pipeline_default"; description = "Pipeline for the lockscreen background"; }; };
+
+window-list.blur = { _meta = { type = $type.bool; default = true; description = "Whether to activate blur for this component"; }; };
+window-list.customize = { _meta = { type = $type.bool; default = false; description = "Whether to customize sigma/brightness or use global values"; }; };
+window-list.sigma = { _meta = { type = $type.int; default = 30; description = "Gaussian sigma (blur strength)"; }; };
+window-list.brightness = { _meta = { type = $type.float; default = 0.6; description = "Brightness of the blur effect"; }; };
+window-list.color = { _meta = { type = $type.string; default = "(0.0,0.0,0.0,0.0)"; description = "Color to mix with the blur (GVariant tuple string)"; }; };
+window-list.noise-amount = { _meta = { type = $type.float; default = 0.0; description = "Amount of noise to add"; }; };
+window-list.noise-lightness = { _meta = { type = $type.float; default = 0.0; description = "Lightness of the noise"; }; };
+window-list.pipeline = { _meta = { type = $type.string; default = "pipeline_default"; description = "Pipeline for the window list bar"; }; };
+
+coverflow-alt-tab.blur = { _meta = { type = $type.bool; default = true; description = "Enable blur for coverflow switcher"; }; };
+coverflow-alt-tab.pipeline = { _meta = { type = $type.string; default = "pipeline_default"; description = "Pipeline for the coverflow background"; }; };
+hidetopbar.compatibility = { _meta = { type = $type.bool; default = false; description = "Toggle compatibility hacks for Hide Top Bar"; }; };
+dash-to-panel.blur-original-panel = { _meta = { type = $type.bool; default = true; description = "Blur the Dash to Panel actor"; }; };

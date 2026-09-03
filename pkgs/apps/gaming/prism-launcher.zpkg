@@ -1,0 +1,5 @@
+id = "prism-launcher";
+sourcePath = [ "prismlauncher" ];
+aliases = [ [ "catalog" "prism-launcher" ] ];
+status = "active";
+meta = { displayName = "prism-launcher"; summary = "Curated prism-launcher package for ZenOS"; support = "curated"; tags = [ ]; category = "gaming"; };

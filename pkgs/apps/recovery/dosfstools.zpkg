@@ -1,0 +1,5 @@
+id = "dosfstools";
+sourcePath = [ "dosfstools" ];
+aliases = [ [ "catalog" "dosfstools" ] ];
+status = "active";
+meta = { displayName = "dosfstools"; summary = "Curated dosfstools package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

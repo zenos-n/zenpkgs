@@ -1,7 +1,0 @@
-declarationOrder = 66;
-id = "gnome-console-live";
-target = [ "apps" "recovery" "gnome-console-live" ];
-sourcePath = [ "gnome-console" ];
-aliases = [ [ "catalog" "gnome-console-live" ] ];
-status = "active";
-meta = { displayName = "gnome-console-live"; summary = "Curated gnome-console-live package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

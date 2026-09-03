@@ -1,7 +1,0 @@
-declarationOrder = 118;
-id = "usbutils";
-target = [ "apps" "recovery" "usbutils" ];
-sourcePath = [ "usbutils" ];
-aliases = [ [ "catalog" "usbutils" ] ];
-status = "active";
-meta = { displayName = "usbutils"; summary = "Curated usbutils package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

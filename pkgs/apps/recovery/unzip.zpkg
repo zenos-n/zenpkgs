@@ -1,0 +1,5 @@
+id = "unzip";
+sourcePath = [ "unzip" ];
+aliases = [ [ "catalog" "unzip" ] ];
+status = "active";
+meta = { displayName = "unzip"; summary = "Curated unzip package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

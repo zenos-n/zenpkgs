@@ -1,0 +1,67 @@
+# Source: modules/zenos-plymouth/module.nix
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "system.boot.plymouth.theme.zenos";
+  brief = "ZenOS Plymouth boot animation";
+  description = ''
+    Configures the ZenOS Plymouth splash package, distribution and device labels,
+    central icon, and animated glow color.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable the ZenOS Plymouth boot animation";
+
+  s! {
+    boot.plymouth = {
+      enable = true;
+      theme = "zenos";
+      themePackages = [
+        ($pkgs.plymouth.override {
+          distroName = $path.distroName;
+          releaseVersion = $path.releaseVersion;
+          deviceName = $path.deviceName;
+          icon = $path.icon;
+          color = $path.color;
+        })
+      ];
+    };
+  };
+};
+
+distroName = {
+  _meta = { type = $type.string; default = "ZenOS"; brief = "Operating-system display name"; };
+};
+
+releaseVersion = {
+  _meta = { type = $type.string; default = "1.0N"; brief = "Displayed release version"; };
+};
+
+deviceName = {
+  _meta = {
+    type = $type.string;
+    default = $cfg.legacy.networking.hostName;
+    brief = "Displayed device name";
+  };
+};
+
+icon = {
+  _meta = {
+    type = $type.enum [ "negzero" "zenos" "tablet" "laptop" "desktop" "server" "smartphone" "zerobox" "tv" ];
+    default = "negzero";
+    brief = "Central boot-screen icon";
+  };
+};
+
+color = {
+  _meta = {
+    type = $type.string;
+    default = "C532FF";
+    brief = "Animated glow color";
+    description = "Hexadecimal glow color without a leading hash sign.";
+    example = "FF5555";
+  };
+};

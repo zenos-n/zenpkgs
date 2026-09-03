@@ -1,0 +1,5 @@
+id = "btrfs-progs";
+sourcePath = [ "btrfs-progs" ];
+aliases = [ [ "catalog" "btrfs-progs" ] ];
+status = "active";
+meta = { displayName = "btrfs-progs"; summary = "Curated btrfs-progs package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };

@@ -1,0 +1,157 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  id = "desktop.gnome.extensions.paperwm";
+  brief = "Scrollable tiling window manager for GNOME Shell";
+  description = ''
+    Scrollable tiling window manager for GNOME Shell
+
+    This module installs and configures the **PaperWM** extension for GNOME.
+    PaperWM implements a scrollable tiling window manager, inspired by 10/GUI concepts.
+    It arranges windows in a horizontal ribbon, allowing for efficient navigation
+    and management.
+
+    **Features:**
+    - Scrollable tiling layout.
+    - Extensive keyboard navigation.
+    - Touchpad gesture support.
+    - Customizable appearance (margins, borders, minimap).
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "PaperWM GNOME extension configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.legacy.gnomeExtensions.paperwm ];
+    programs.dconf.profiles.user.databases = [ {
+      settings = {
+        "org/gnome/shell/extensions/paperwm" = {
+          window-gap = $path.layout.window-gap;
+          horizontal-margin = $path.layout.margins.horizontal;
+          vertical-margin = $path.layout.margins.vertical;
+          selection-border-size = $path.layout.selection-border-size;
+          show-minimap = $path.layout.show-minimap;
+          focus-follows-mouse = $path.behavior.focus-follows-mouse;
+          cycle-on-edge = $path.behavior.cycle-on-edge;
+          use-default-overview = $path.behavior.use-default-overview;
+          window-switcher-preview-scale = $path.previews.switcher-scale;
+          only-scratch-in-overview = $path.previews.overview.only-scratch;
+          disable-scratch-in-overview = $path.previews.overview.disable-scratch;
+          gesture-enabled = $path.gestures.enable;
+          gesture-horizontal-fingers = $path.gestures.fingers.horizontal;
+          gesture-workspace-fingers = $path.gestures.fingers.workspace;
+          swipe-sensitivity = $path.gestures.swipe.sensitivity;
+          swipe-friction = $path.gestures.swipe.friction;
+        };
+        "org/gnome/shell/extensions/paperwm/keybindings" = {
+          new-window = $path.keybindings.new-window;
+          live-alt-tab = $path.keybindings.live-alt-tab;
+          live-alt-tab-backward = $path.keybindings.live-alt-tab-backward;
+          previous-workspace = $path.keybindings.previous-workspace;
+          switch-monitor-right = $path.keybindings.switch-monitor-right;
+          switch-monitor-left = $path.keybindings.switch-monitor-left;
+          move-right = $path.keybindings.move-right;
+          move-left = $path.keybindings.move-left;
+          move-up = $path.keybindings.move-up;
+          move-down = $path.keybindings.move-down;
+          close-window = $path.keybindings.close-window;
+          toggle-maximize-width = $path.keybindings.toggle-maximize-width;
+          paper-toggle-fullscreen = $path.keybindings.paper-toggle-fullscreen;
+        };
+      };
+    } ];
+  };
+};
+
+layout.margins.horizontal = { _meta = { type = $type.int; default = 20; description = ''
+  Minimum horizontal window margin
+
+  The base pixel distance between windows and the left/right screen edges.
+''; }; };
+layout.margins.vertical = { _meta = { type = $type.int; default = 20; description = ''
+  Minimum vertical window margin
+
+  The base pixel distance between windows and the top/bottom screen edges.
+''; }; };
+layout.window-gap = { _meta = { type = $type.int; default = 10; description = ''
+  Pixel spacing between tiled windows
+
+  Determines the distance between adjacent window actors in the
+  horizontal ribbon.
+''; }; };
+layout.selection-border-size = { _meta = { type = $type.int; default = 4; description = ''
+  Selection indicator border width
+
+  Pixel thickness of the border drawn around the currently focused window.
+''; }; };
+layout.show-minimap = { _meta = { type = $type.bool; default = true; description = ''
+  Display the navigation minimap
+
+  Whether to render the miniature overview of the window ribbon
+  at the bottom of the screen.
+''; }; };
+
+behavior.focus-follows-mouse = { _meta = { type = $type.bool; default = false; description = ''
+  Enable focus-follows-mouse policy
+
+  When enabled, window focus automatically shifts to the actor beneath
+  the mouse cursor.
+''; }; };
+behavior.cycle-on-edge = { _meta = { type = $type.bool; default = true; description = ''
+  Loop navigation at ribbon edges
+
+  If enabled, navigating past the last window in a ribbon will loop back
+  to the first window.
+''; }; };
+behavior.use-default-overview = { _meta = { type = $type.bool; default = false; description = ''
+  Use standard GNOME overview
+
+  Disables PaperWM's specialized overview and uses the default
+  GNOME Shell activities view instead.
+''; }; };
+
+previews.switcher-scale = { _meta = { type = $type.float; default = 0.5; description = ''
+  Scale factor for window switcher thumbnails
+
+  Determines the size of previews in the Alt-Tab and overview
+  interfaces relative to screen size.
+''; }; };
+previews.overview.only-scratch = { _meta = { type = $type.bool; default = false; description = ''
+  Only show scratchpad windows in overview
+
+  Filters the overview to only display windows that have been
+  moved to the scratchpad area.
+''; }; };
+previews.overview.disable-scratch = { _meta = { type = $type.bool; default = false; description = ''
+  Hide scratchpad windows in overview
+
+  Completely hides windows in the scratchpad area when entering
+  the activities overview.
+''; }; };
+
+gestures.enable = { _meta = { type = $type.bool; default = true; description = ''
+  Enable touchpad gesture support
+
+  Activates custom touchpad swipe gestures for navigating and
+  manipulating the window ribbon.
+''; }; };
+gestures.fingers.horizontal = { _meta = { type = $type.int; default = 3; description = "Number of fingers for horizontal ribbon scrolling"; }; };
+gestures.fingers.workspace = { _meta = { type = $type.int; default = 4; description = "Number of fingers for switching virtual workspaces"; }; };
+gestures.swipe.sensitivity = { _meta = { type = $type.float; default = 1.0; description = "Responsiveness multiplier for touch input"; }; };
+gestures.swipe.friction = { _meta = { type = $type.float; default = 1.0; description = "Resistance factor for swipe physics simulation"; }; };
+
+keybindings.new-window = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Return" ]; description = "Shortcut to launch a new terminal window"; }; };
+keybindings.live-alt-tab = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Tab" ]; description = "Shortcut to cycle through windows in the current ribbon"; }; };
+keybindings.live-alt-tab-backward = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>Tab" ]; description = "Shortcut to cycle backward through windows"; }; };
+keybindings.previous-workspace = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Escape" ]; description = "Shortcut to return to the last used workspace"; }; };
+keybindings.switch-monitor-right = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>u" ]; description = "Shortcut to move focus to the monitor on the right"; }; };
+keybindings.switch-monitor-left = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>i" ]; description = "Shortcut to move focus to the monitor on the left"; }; };
+keybindings.move-right = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>l" ]; description = "Shortcut to move focused window to the right"; }; };
+keybindings.move-left = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>h" ]; description = "Shortcut to move focused window to the left"; }; };
+keybindings.move-up = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>k" ]; description = "Shortcut to move focused window upward (stacking)"; }; };
+keybindings.move-down = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>j" ]; description = "Shortcut to move focused window downward (stacking)"; }; };
+keybindings.close-window = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>q" ]; description = "Shortcut to close the active application window"; }; };
+keybindings.toggle-maximize-width = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>f" ]; description = "Shortcut to toggle window between current width and full ribbon width"; }; };
+keybindings.paper-toggle-fullscreen = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>f" ]; description = "Shortcut to toggle window between ribbon and full screen"; }; };
