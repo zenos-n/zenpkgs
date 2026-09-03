@@ -36,7 +36,6 @@
       loader = import ./lib/loader.nix { inherit (nixpkgs) lib; };
       interface = import ./lib/interface.nix { inherit (nixpkgs) lib; };
       dslBundleAdapter = import ./lib/dsl-bundle.nix { inherit (nixpkgs) lib; };
-      registry = import ./mappings/packages.nix;
       optionMappings = import ./mappings/options.nix;
       mkDslArtifacts =
         system:
@@ -81,7 +80,7 @@
             PY
           '';
           bundleJSON = builtins.fromJSON (builtins.readFile "${bundle}/bundle.json");
-          candidateRegistry = dslBundleAdapter.registryFromBundle {
+          registry = dslBundleAdapter.registryFromBundle {
             bundle = bundleJSON;
             bundlePath = bundle;
           };
@@ -91,10 +90,14 @@
             bootstrapPkgs
             bundle
             bundleJSON
-            candidateRegistry
+            registry
             zenDsl
             ;
         };
+      # Registry compilation is bootstrapped from nixpkgs without the ZenPkgs
+      # overlay, so the overlay cannot depend on itself.
+      registryFor = system: (mkDslArtifacts system).registry;
+      registry = registryFor (builtins.head systems);
       legacyRoots = [
         "appstream"
         "boot"
@@ -279,6 +282,7 @@
         final: prev:
         let
           lib = prev.lib;
+          registry = registryFor prev.stdenv.hostPlatform.system;
           inflate =
             tree: f:
             if builtins.isPath tree then
@@ -332,7 +336,7 @@
       lib = {
         loader = loader;
         utils = utils;
-        dslRegistryFor = system: (mkDslArtifacts system).candidateRegistry;
+        dslRegistryFor = registryFor;
         inherit
           dslBundleAdapter
           interface
@@ -459,6 +463,7 @@
         system:
         let
           dsl = mkDslArtifacts system;
+          registry = dsl.registry;
           pkgs = import nixpkgs {
             inherit system;
             overlays = [ self.overlays.default ];
@@ -509,6 +514,7 @@
         system:
         let
           dsl = mkDslArtifacts system;
+          registry = dsl.registry;
           pkgs = import nixpkgs {
             inherit system;
             overlays = [ self.overlays.default ];
@@ -549,10 +555,10 @@
             oobeModule = self.nixosModules.oobe;
             webappsModule = self.nixosModules.webapps;
           };
-          dslShadowChecks = import ./tests/dsl-shadow.nix {
-            candidateRegistry = dsl.candidateRegistry;
-            legacyRegistry = registry;
-            inherit interface pkgs;
+          registryChecks = import ./tests/package-registry.nix {
+            expectedRegistry = builtins.fromJSON (builtins.readFile ./tests/fixtures/package-registry.json);
+            publicPackages = self.packages.${system};
+            inherit interface pkgs registry;
             inherit (nixpkgs) lib;
           };
         in
@@ -579,6 +585,11 @@
               .settings."org/gnome/shell".enabled-extensions == [ "forge@jmmaranan.com" ];
             pkgs.runCommand "zenpkgs-gnome-base-check" { } "touch $out";
           source-policy = pkgs.runCommand "zenpkgs-source-policy-check" { src = self; } ''
+            if [ -e "$src/mappings/packages.nix" ]; then
+              echo "mappings/packages.nix must not be used for package declarations" >&2
+              exit 1
+            fi
+
             dsl_nix="$(${pkgs.findutils}/bin/find "$src/dsl" -type f -name '*.nix' -print -quit)"
             if [ -n "$dsl_nix" ]; then
               echo "Nix contributor declaration is forbidden in dsl/: $dsl_nix" >&2
@@ -609,7 +620,7 @@
           oobe = installedSystemChecks.oobe;
           webapps = installedSystemChecks.webapps;
         }
-        // dslShadowChecks
+        // registryChecks
       );
     };
 }

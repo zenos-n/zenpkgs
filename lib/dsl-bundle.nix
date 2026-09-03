@@ -100,10 +100,11 @@ in
       ) sources;
       ordered = lib.sort (left: right: left.declarationOrder < right.declarationOrder) decoded;
       orders = map (entry: entry.declarationOrder) ordered;
+      expectedOrders = lib.range 0 (builtins.length ordered - 1);
     in
     assert bundle.bundleVersion == "zenlang.bundle/1";
     assert builtins.length sources == builtins.length bundle.sources;
-    assert builtins.length orders == builtins.length (lib.unique orders);
+    assert orders == expectedOrders;
     {
       schemaVersion = 1;
       packages = map (entry: removeAttrs entry [ "declarationOrder" ]) ordered;

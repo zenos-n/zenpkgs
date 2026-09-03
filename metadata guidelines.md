@@ -5,9 +5,10 @@ To ensure the documentation site renders correctly and builds pass CI, all packa
 Package interface declarations live in `dsl/packages/*.zpkg`. Nix files remain
 valid for the flake, internal backend, tests, package implementations, and
 modules, but new contributor declarations under `dsl/` must use `.zpkg`.
-During shadow parity, update the corresponding `mappings/packages.nix` entry in
-the same commit; the generated candidate must remain exactly equal to the active
-legacy registry.
+The compiled DSL registry directly supplies the package overlay and public flake
+package outputs. `tests/fixtures/package-registry.json` is a normalized contract,
+not a second declaration source; checks require all 130 entries, 126 active
+entries, and their target, alias, and source paths to remain exact.
 
 ## Package Interface Declarations
 
@@ -34,6 +35,9 @@ meta = {
 Use `sourcePath = null`, `aliases = [ ]`, and `status = "unavailable"` for a
 catalog entry that does not currently resolve to nixpkgs. The DSL tree is
 compiled in interface mode; package build recipes still live under `pkgs/`.
+Compilation uses import-from-derivation (IFD), so local evaluators and CI must
+allow IFD. Its compiler bootstrap imports nixpkgs without the ZenPkgs overlay,
+which keeps registry generation independent of the package tree it creates.
 
 ## 1. Required Fields
 
@@ -110,3 +114,7 @@ Run the audit tool to verify compliance:
 nix flake check --show-trace
 nix eval --file tests/integrity.nix --json | jq
 ```
+
+Registry changes must also update `tests/fixtures/package-registry.json` in the
+same change. Review that JSON diff as the explicit public path and metadata
+contract change.
