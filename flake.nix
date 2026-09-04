@@ -23,7 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     zenos-next = {
-      url = "github:doromiert/zenos-next/378e4f0216101fc654ba062e70a91e6e3965d2a9";
+      url = "github:doromiert/zenos-next/a813a8efcf6c6c594813d2845b549f61c8678323";
       flake = false;
     };
   };

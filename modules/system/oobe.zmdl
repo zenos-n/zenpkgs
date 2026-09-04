@@ -5,7 +5,6 @@
 # Unsupported: fallback license construction uses the canonical registry.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "system.oobe";
   brief = "Temporary ZenOS out-of-box experience";
   description = ''
     Creates a disposable GNOME setup account and session, starts the Setup app,
@@ -19,7 +18,7 @@ _meta = {
 _let extensionUuid: $type.string = "zenos-oobe-mode@neg-zero.com";
 _let servicePath: $type.string = "/run/wrappers/bin:/run/current-system/sw/bin";
 _let oobeHome: $type.string = "/run/zenos-oobe";
-_let blackWallpaper: $type.package = $pkgs.legacy.writeText "zenos-oobe-black.svg" ''
+_let blackWallpaper: $type.package = $pkgs.zenos.legacy.writeText "zenos-oobe-black.svg" ''
   <svg xmlns="http://www.w3.org/2000/svg" width="1" height="1">
     <rect width="1" height="1" fill="#000000"/>
   </svg>
@@ -47,11 +46,11 @@ enable = enableOption {
       restart = false;
       settings = {
         initial_session = {
-          command = "${$pkgs.legacy.coreutils}/bin/env XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SESSION_DESKTOP=GNOME XDG_CURRENT_DESKTOP=GNOME ZENOS_OOBE=1 ${$cfg.legacy.services.displayManager.sessionData.wrapper} ${$pkgs.legacy.gnome-session}/bin/gnome-session --session=zenos-oobe";
+          command = "${$pkgs.zenos.legacy.coreutils}/bin/env XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SESSION_DESKTOP=GNOME XDG_CURRENT_DESKTOP=GNOME ZENOS_OOBE=1 ${$cfg.legacy.services.displayManager.sessionData.wrapper} ${$pkgs.zenos.legacy.gnome-session}/bin/gnome-session --session=zenos-oobe";
           user = $path.userName;
         };
         default_session = {
-          command = "${$pkgs.legacy.coreutils}/bin/env XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SESSION_DESKTOP=GNOME XDG_CURRENT_DESKTOP=GNOME ZENOS_OOBE=1 ${$cfg.legacy.services.displayManager.sessionData.wrapper} ${$pkgs.legacy.gnome-session}/bin/gnome-session --session=zenos-oobe";
+          command = "${$pkgs.zenos.legacy.coreutils}/bin/env XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SESSION_DESKTOP=GNOME XDG_CURRENT_DESKTOP=GNOME ZENOS_OOBE=1 ${$cfg.legacy.services.displayManager.sessionData.wrapper} ${$pkgs.zenos.legacy.gnome-session}/bin/gnome-session --session=zenos-oobe";
           user = $path.userName;
         };
       };
@@ -105,7 +104,7 @@ enable = enableOption {
     };
     environment = {
       systemPackages = [ $path.extensionPackage $path.setupPackage ] ++ $path.extraExtensionPackages;
-      gnome.excludePackages = [ $pkgs.legacy.gnome-tour ];
+      gnome.excludePackages = [ $pkgs.zenos.legacy.gnome-tour ];
     };
     hardware.graphics.enable = true;
     programs.dconf.profiles.user.databases = [

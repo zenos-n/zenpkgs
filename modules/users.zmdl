@@ -6,7 +6,6 @@
 # migration placeholder until that structure attachment exists.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "users";
   brief = "Enhanced user management for ZenOS";
   description = ''
     Provides a unified system-side bridge for user and Home Manager configuration.

@@ -1,0 +1,59 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Grid-based window organization and layout manager";
+  description = ''
+    Grid-based window organization and layout manager
+
+    This module installs and configures the **Tactile** extension for GNOME.
+    Tactile is a tiling window manager extension that allows you to organize
+    windows using a custom grid layout and keyboard shortcuts.
+
+    **Features:**
+    - Custom grid layouts.
+    - Keyboard-driven window placement.
+    - Multi-monitor support.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Tactile GNOME extension configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.tactile ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/tactile" = {
+        show-tiles = $path.keybindings.global.show-tiles;
+        hide-tiles = $path.keybindings.global.hide-tiles;
+        show-settings = $path.keybindings.global.show-settings;
+        monitor-next = $path.keybindings.monitors.next;
+        monitor-prev = $path.keybindings.monitors.prev;
+        layout-1 = $path.keybindings.layouts.one;
+        layout-2 = $path.keybindings.layouts.two;
+        layout-3 = $path.keybindings.layouts.three;
+        text-color = $path.appearance.colors.text;
+        border-color = $path.appearance.colors.border;
+        background-color = $path.appearance.colors.background;
+        text-size = $path.appearance.sizes.text;
+        border-size = $path.appearance.sizes.border;
+        gap-size = $path.appearance.gap-size;
+      };
+    } ];
+  };
+};
+
+keybindings.global.show-tiles = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>t" ]; description = "Shortcut to reveal the tiling grid overlay"; }; };
+keybindings.global.hide-tiles = { _meta = { type = $type.list [ $type.string ]; default = [ "Escape" ]; description = "Shortcut to conceal the tiling grid overlay"; }; };
+keybindings.global.show-settings = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super><Shift>t" ]; description = "Shortcut to open the Tactile settings panel"; }; };
+keybindings.monitors.next = { _meta = { type = $type.list [ $type.string ]; default = [ "n" ]; description = "Key to move tiles overlay to the next monitor"; }; };
+keybindings.monitors.prev = { _meta = { type = $type.list [ $type.string ]; default = [ "p" ]; description = "Key to move tiles overlay to the previous monitor"; }; };
+keybindings.layouts.one = { _meta = { type = $type.list [ $type.string ]; default = [ "1" ]; description = "Shortcut to activate grid layout 1"; }; };
+keybindings.layouts.two = { _meta = { type = $type.list [ $type.string ]; default = [ "2" ]; description = "Shortcut to activate grid layout 2"; }; };
+keybindings.layouts.three = { _meta = { type = $type.list [ $type.string ]; default = [ "3" ]; description = "Shortcut to activate grid layout 3"; }; };
+appearance.colors.text = { _meta = { type = $type.string; default = "rgba(255, 255, 255, 1)"; description = "CSS color for grid labels"; }; };
+appearance.colors.border = { _meta = { type = $type.string; default = "rgba(255, 255, 255, 1)"; description = "CSS color for tile boundaries"; }; };
+appearance.colors.background = { _meta = { type = $type.string; default = "rgba(0, 0, 0, 0.5)"; description = "CSS color for tile background area"; }; };
+appearance.sizes.text = { _meta = { type = $type.int; default = 24; description = "Pixel font size for grid labels"; }; };
+appearance.sizes.border = { _meta = { type = $type.int; default = 2; description = "Pixel thickness for grid boundaries"; }; };
+appearance.gap-size = { _meta = { type = $type.int; default = 10; description = "Pixel spacing between individual tiles in the grid"; }; };

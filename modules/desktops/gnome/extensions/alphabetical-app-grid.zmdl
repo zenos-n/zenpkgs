@@ -1,0 +1,82 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Alphabetical sorting for the GNOME application grid";
+  description = ''
+    Alphabetical sorting for the GNOME application grid
+
+    This module installs and configures the **Alphabetical App Grid** extension for GNOME.
+    It enforces alphabetical sorting on the application grid and folders, ensuring a
+    consistent layout.
+
+    **Features:**
+    - Automatically sorts folder contents.
+    - Configurable positioning for folders vs files.
+    - Optional integration with favorite apps (GNOME 40+).
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Whether to enable Alphabetical App Grid GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.apps.gnome-extensions.alphabetical-app-grid ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/alphabetical-app-grid" = {
+        sort-folder-contents = $path.sort-folder-contents;
+        folder-order-position = $path.folder-order-position;
+        show-favourite-apps = $path.show-favourite-apps;
+        logging-enabled = $path.logging-enabled;
+      };
+    } ];
+  };
+};
+
+sort-folder-contents = {
+  _meta = {
+    type = $type.bool;
+    default = true;
+    description = ''
+      Sort folder contents alphabetically
+
+      Whether the contents of folders should be sorted alphabetically.
+    '';
+  };
+};
+
+folder-order-position = {
+  _meta = {
+    type = $type.string;
+    default = "alphabetical";
+    description = ''
+      Position of folders in the grid
+
+      Where to place folders when ordering the application grid (e.g., 'alphabetical').
+    '';
+  };
+};
+
+show-favourite-apps = {
+  _meta = {
+    type = $type.bool;
+    default = false;
+    description = ''
+      Display favorite apps in the grid
+
+      Allows displaying the favourite apps on the app grid (GNOME 40+).
+    '';
+  };
+};
+
+logging-enabled = {
+  _meta = {
+    type = $type.bool;
+    default = false;
+    description = ''
+      Enable system logging for the extension
+
+      Allow the extension to send messages to the system logs for debugging.
+    '';
+  };
+};

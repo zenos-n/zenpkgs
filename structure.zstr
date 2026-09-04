@@ -1,70 +1,78 @@
-desktop.gnome._meta.type = (zmdl modules.desktop.gnome);
-desktop.gnome.extensions.alphabetical-app-grid._meta.type = (zmdl modules.desktop.gnome.extensions.alphabetical-app-grid);
-desktop.gnome.extensions.app-hider._meta.type = (zmdl modules.desktop.gnome.extensions.app-hider);
-desktop.gnome.extensions.appindicator._meta.type = (zmdl modules.desktop.gnome.extensions.appindicator);
-desktop.gnome.extensions.apps-menu._meta.type = (zmdl modules.desktop.gnome.extensions.apps-menu);
-desktop.gnome.extensions.astra-monitor._meta.type = (zmdl modules.desktop.gnome.extensions.astra-monitor);
-desktop.gnome.extensions.auto-theme-switcher._meta.type = (zmdl modules.desktop.gnome.extensions.auto-theme-switcher);
-desktop.gnome.extensions.blur-my-shell._meta.type = (zmdl modules.desktop.gnome.extensions.blur-my-shell);
-desktop.gnome.extensions.burn-my-windows._meta.type = (zmdl modules.desktop.gnome.extensions.burn-my-windows);
-desktop.gnome.extensions.caffeine._meta.type = (zmdl modules.desktop.gnome.extensions.caffeine);
-desktop.gnome.extensions.category-sorted-app-grid._meta.type = (zmdl modules.desktop.gnome.extensions.category-sorted-app-grid);
-desktop.gnome.extensions.clipboard-indicator._meta.type = (zmdl modules.desktop.gnome.extensions.clipboard-indicator);
-desktop.gnome.extensions.compiz-alike-magic-lamp-effect._meta.type = (zmdl modules.desktop.gnome.extensions.compiz-alike-magic-lamp-effect);
-desktop.gnome.extensions.compiz-windows-effect._meta.type = (zmdl modules.desktop.gnome.extensions.compiz-windows-effect);
-desktop.gnome.extensions.copyous._meta.type = (zmdl modules.desktop.gnome.extensions.copyous);
-desktop.gnome.extensions.coverflow-alt-tab._meta.type = (zmdl modules.desktop.gnome.extensions.coverflow-alt-tab);
-desktop.gnome.extensions.customize-clock-on-lockscreen._meta.type = (zmdl modules.desktop.gnome.extensions.customize-clock-on-lockscreen);
-desktop.gnome.extensions.dash-in-panel._meta.type = (zmdl modules.desktop.gnome.extensions.dash-in-panel);
-desktop.gnome.extensions.dash-to-dock._meta.type = (zmdl modules.desktop.gnome.extensions.dash-to-dock);
-desktop.gnome.extensions.dash-to-panel._meta.type = (zmdl modules.desktop.gnome.extensions.dash-to-panel);
-desktop.gnome.extensions.date-menu-formatter._meta.type = (zmdl modules.desktop.gnome.extensions.date-menu-formatter);
-desktop.gnome.extensions.extension-list._meta.type = (zmdl modules.desktop.gnome.extensions.extension-list);
-desktop.gnome.extensions.forge._meta.type = (zmdl modules.desktop.gnome.extensions.forge);
-desktop.gnome.extensions.gsconnect._meta.type = (zmdl modules.desktop.gnome.extensions.gsconnect);
-desktop.gnome.extensions.hide-cursor._meta.type = (zmdl modules.desktop.gnome.extensions.hide-cursor);
-desktop.gnome.extensions.hide-minimized._meta.type = (zmdl modules.desktop.gnome.extensions.hide-minimized);
-desktop.gnome.extensions.hide-top-bar._meta.type = (zmdl modules.desktop.gnome.extensions.hide-top-bar);
-desktop.gnome.extensions.just-perfection._meta.type = (zmdl modules.desktop.gnome.extensions.just-perfection);
-desktop.gnome.extensions.lockscreen-extension._meta.type = (zmdl modules.desktop.gnome.extensions.lockscreen-extension);
-desktop.gnome.extensions.mouse-tail._meta.type = (zmdl modules.desktop.gnome.extensions.mouse-tail);
-desktop.gnome.extensions.mpris-label._meta.type = (zmdl modules.desktop.gnome.extensions.mpris-label);
-desktop.gnome.extensions.notification-timeout._meta.type = (zmdl modules.desktop.gnome.extensions.notification-timeout);
-desktop.gnome.extensions.paperwm._meta.type = (zmdl modules.desktop.gnome.extensions.paperwm);
-desktop.gnome.extensions.places-status-indicator._meta.type = (zmdl modules.desktop.gnome.extensions.places-status-indicator);
-desktop.gnome.extensions.quake-terminal._meta.type = (zmdl modules.desktop.gnome.extensions.quake-terminal);
-desktop.gnome.extensions.rounded-window-corners-reborn._meta.type = (zmdl modules.desktop.gnome.extensions.rounded-window-corners-reborn);
-desktop.gnome.extensions.search-light._meta.type = (zmdl modules.desktop.gnome.extensions.search-light);
-desktop.gnome.extensions.space-bar._meta.type = (zmdl modules.desktop.gnome.extensions.space-bar);
-desktop.gnome.extensions.splash-indicator._meta.type = (zmdl modules.desktop.gnome.extensions.splash-indicator);
-desktop.gnome.extensions.tactile._meta.type = (zmdl modules.desktop.gnome.extensions.tactile);
-desktop.gnome.extensions.tiling-assistant._meta.type = (zmdl modules.desktop.gnome.extensions.tiling-assistant);
-desktop.gnome.extensions.user-themes._meta.type = (zmdl modules.desktop.gnome.extensions.user-themes);
-desktop.gnome.extensions.vitals._meta.type = (zmdl modules.desktop.gnome.extensions.vitals);
-desktop.gnome.extensions.weather-or-not._meta.type = (zmdl modules.desktop.gnome.extensions.weather-or-not);
-desktop.gnome.extensions.window-is-ready-remover._meta.type = (zmdl modules.desktop.gnome.extensions.window-is-ready-remover);
-desktop.gnome.extensions.zenlink-indicator._meta.type = (zmdl modules.desktop.gnome.extensions.zenlink-indicator);
-desktop.gnome.tweaks.blackbox-settings._meta.type = (zmdl modules.desktop.gnome.tweaks.blackbox-settings);
-desktop.gnome.tweaks.firefox-theming._meta.type = (zmdl modules.desktop.gnome.tweaks.firefox-theming);
-desktop.gnome.tweaks.zenos-extensions._meta.type = (zmdl modules.desktop.gnome.tweaks.zenos-extensions);
-desktop.gnome.tweaks.zenos-fonts._meta.type = (zmdl modules.desktop.gnome.tweaks.zenos-fonts);
-desktop.gnome.tweaks.zero-clock._meta.type = (zmdl modules.desktop.gnome.tweaks.zero-clock);
-desktop.illogical-impulse._meta.type = (zmdl modules.desktop.illogical-impulse);
-system.boot.loader.zenboot._meta.type = (zmdl modules.system.boot.loader.zenboot);
-system.boot.plymouth.theme.zenos._meta.type = (zmdl modules.system.boot.plymouth.theme.zenos);
-system.disks._meta.type = (zmdl modules.system.disks);
-system.installed-base._meta.type = (zmdl modules.system.installed-base);
-system.maintenance._meta.type = (zmdl modules.system.maintenance);
-system.oobe._meta.type = (zmdl modules.system.oobe);
-system.packages._meta.type = (zmdl modules.system.packages);
-system.syncthing._meta.type = (zmdl modules.system.syncthing);
-system.version._meta.type = (zmdl modules.system.version);
-system.web-apps._meta.type = (zmdl modules.system.web-apps);
-system.zenfs._meta.type = (zmdl modules.system.zenfs);
-users._meta.type = (zmdl modules.users);
-users.programs.janitor._meta.type = (zmdl modules.users.programs.janitor);
-users.programs.web-apps._meta.type = (zmdl modules.users.programs.web-apps);
-users.programs.web-apps.backends.brave._meta.type = (zmdl modules.users.programs.web-apps.backends.brave);
-users.programs.web-apps.backends.chrome._meta.type = (zmdl modules.users.programs.web-apps.backends.chrome);
-users.programs.web-apps.backends.firefox._meta.type = (zmdl modules.users.programs.web-apps.backends.firefox);
-users.programs.zenlink._meta.type = (zmdl modules.users.programs.zenlink);
+_meta = {
+  zenosVersion = 0.1.0;
+  id = "zenos.structure";
+  brief = "ZenOS configuration structure";
+  description = "Canonical roots and routing for ZenOS configuration.";
+  maintainers = [ $m.doromiert ];
+  license = $l.napalm;
+};
+
+legacy = {
+  _meta = {
+    brief = "Upstream options exposed through Zen DSL";
+    description = "Typed compatibility routes to pinned upstream options.";
+    maintainers = [ ];
+  };
+};
+
+system = {
+  _meta = {
+    brief = "Global system configuration for ZenOS";
+    description = "Core configuration that applies globally.";
+    maintainers = [ $m.doromiert ];
+  };
+  packages = {
+    _meta = {
+      type = (packages);
+      brief = "System package selectors";
+      description = "Boolean selectors over the pkgs.zenos tree.";
+      maintainers = [ $m.doromiert ];
+    };
+  };
+  programs = {
+    _meta = {
+      type = (programs);
+      brief = "System program selectors";
+      description = "Typed program configuration in system scope.";
+      maintainers = [ $m.doromiert ];
+    };
+  };
+};
+
+desktops = {
+  _meta = {
+    brief = "Desktop environments";
+    description = "Desktop environment and window manager configuration.";
+    maintainers = [ $m.doromiert ];
+  };
+};
+
+users = {
+  _meta = {
+    brief = "Per-user configuration";
+    description = "Configuration and selectors scoped to individual users.";
+    maintainers = [ $m.doromiert ];
+  };
+  (freeform user) = {
+    _meta = {
+      brief = "User options";
+      description = "Configuration for user $f.user.";
+    };
+    packages = {
+      _meta = {
+        type = (packages);
+        brief = "User package selectors";
+        description = "Boolean selectors over the pkgs.zenos tree.";
+        maintainers = [ $m.doromiert ];
+      };
+    };
+    programs = {
+      _meta = {
+        type = (programs);
+        brief = "User program selectors";
+        description = "Typed program configuration in user scope.";
+        maintainers = [ $m.doromiert ];
+      };
+    };
+  };
+};

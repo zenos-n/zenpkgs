@@ -4,9 +4,10 @@ The Nix packages repository for ZenOS.
 
 Curated nixpkgs interfaces are named leaves under `pkgs/`. A source such as
 `pkgs/apps/browsers/firefox.zpkg` mechanically defines
-`pkgs.zenos.apps.browsers.firefox`; its `id` must match the leaf name. The flake
-compiles the repository root in interface mode and uses the path-sorted result
-for the overlay, registry documentation, and flattened public package outputs.
+`pkgs.zenos.apps.browsers.firefox`; its identity remains derived from that full
+path while its interface `id` matches the leaf name. The flake compiles the
+repository root in interface mode and uses the path-sorted result for the
+overlay, registry documentation, and flattened public package outputs.
 The 130-entry normalized contract in `tests/fixtures/package-registry.json`
 protects the 126 active mappings and every derived target, declared alias, and
 nixpkgs source path.
@@ -23,9 +24,9 @@ dependency. Evaluators and CI must allow IFD until ZenOS provides a native
 evaluator plugin or another non-IFD compiler boundary.
 
 Named ZMDL leaves live under `modules/` and map mechanically to `zenos.<path>`;
-their `_meta.id` must equal that path without the `modules/` prefix or `.zmdl`
-suffix. Generated modules remain private migration candidates and are not active
-in public module outputs, while the existing `.nix` implementations remain for
-parity. See
+their identity is compiler-derived and `_meta.id` must not be authored. Generated
+modules remain one target-neutral set of private migration candidates and are
+not active in public module outputs, while the existing `.nix` implementations
+remain for parity. See
 [DSL module candidate checks](docs/dsl-module-candidates.md) for the mapping,
 static evaluation/parity checks, blocker exceptions, and VM commands.

@@ -3,7 +3,6 @@
 # The source cleanOnShutdown and cleanOnReboot options have no implementation; that behavior is preserved.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "system.maintenance";
   brief = "ZenOS maintenance and optimization service";
   description = ''
     Installs the ZenOS maintenance service and daily timer for cleanup,

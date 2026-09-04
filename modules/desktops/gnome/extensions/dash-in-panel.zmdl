@@ -1,0 +1,63 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Merges the GNOME Dash into the top panel";
+  description = ''
+    Merges the GNOME Dash into the top panel
+
+    This module installs and configures the **Dash In Panel** extension for GNOME.
+    It merges the Dash into the Top Bar, saving vertical screen space and
+    providing quick access to applications and indicators.
+
+    **Features:**
+    - Integrate Dash into the top panel.
+    - Customize panel icons, margins, and visibility.
+    - Indicators for running applications.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Whether to enable Dash In Panel GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.dash-in-panel ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/dash-in-panel" = {
+        panel-height = $path.layout.panel-height;
+        icon-size = $path.layout.icon-size;
+        button-margin = $path.layout.button-margin;
+        move-date = $path.layout.move-clock-right;
+        center-dash = $path.layout.center-dash;
+        show-overview = $path.behavior.show-overview-on-startup;
+        show-dash = $path.behavior.show-dash-in-overview;
+        scroll-panel = $path.behavior.scroll-on-panel;
+        click-changed = $path.behavior.minimize-on-click;
+        cycle-windows = $path.behavior.cycle-windows;
+        show-activities = $path.visibility.activities-button;
+        show-apps = $path.visibility.app-grid-button;
+        show-label = $path.visibility.app-label-on-hover;
+        show-running = $path.visibility.only-running-apps;
+        colored-dot = $path.indicators.use-dominant-color;
+        dim-dot = $path.indicators.dim-on-inactive-workspace;
+      };
+    } ];
+  };
+};
+
+layout.panel-height = { _meta = { type = $type.int; default = 32; description = "Vertical pixel height for the consolidated top panel"; }; };
+layout.icon-size = { _meta = { type = $type.int; default = 20; description = "Pixel dimensions for application icons in the panel"; }; };
+layout.button-margin = { _meta = { type = $type.int; default = 2; description = "Pixel spacing around application launch buttons"; }; };
+layout.move-clock-right = { _meta = { type = $type.bool; default = true; description = "Shift the clock and date menu to the right side of the panel"; }; };
+layout.center-dash = { _meta = { type = $type.bool; default = false; description = "Center the taskbar/dash elements within the top panel"; }; };
+behavior.show-overview-on-startup = { _meta = { type = $type.bool; default = false; description = "Automatically enter activity overview when logging in"; }; };
+behavior.show-dash-in-overview = { _meta = { type = $type.bool; default = false; description = "Maintain panel-dash visibility when in overview mode"; }; };
+behavior.scroll-on-panel = { _meta = { type = $type.bool; default = true; description = "Switch virtual workspaces by scrolling on the top panel"; }; };
+behavior.minimize-on-click = { _meta = { type = $type.bool; default = true; description = "Hide the focused window when its icon is clicked"; }; };
+behavior.cycle-windows = { _meta = { type = $type.bool; default = true; description = "Switch between open windows of the same app on icon click"; }; };
+visibility.activities-button = { _meta = { type = $type.bool; default = false; description = "Display the 'Activities' label in the top bar"; }; };
+visibility.app-grid-button = { _meta = { type = $type.bool; default = true; description = "Display the 'Show Applications' grid button in the panel"; }; };
+visibility.app-label-on-hover = { _meta = { type = $type.bool; default = true; description = "Show application name tooltips when hovering over icons"; }; };
+visibility.only-running-apps = { _meta = { type = $type.bool; default = false; description = "Hide pinned favorites and only show active windows"; }; };
+indicators.use-dominant-color = { _meta = { type = $type.bool; default = true; description = "Color running dots based on the application's primary icon color"; }; };
+indicators.dim-on-inactive-workspace = { _meta = { type = $type.bool; default = false; description = "Fade the running indicator for apps not on the current desktop"; }; };

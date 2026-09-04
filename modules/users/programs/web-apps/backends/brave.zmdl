@@ -4,7 +4,6 @@
 # from a separately attached production ZMDL without adding a new public enable option.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "users.programs.web-apps.backends.brave";
   brief = "Experimental Brave backend for ZenOS web applications";
   description = ''
     Declares the Brave package used for PWA execution. Backend function injection,
@@ -19,7 +18,7 @@ _meta = {
 bravePackage = {
   _meta = {
     type = $type.package;
-    default = $pkgs.legacy.brave;
+    default = $pkgs.zenos.legacy.brave;
     brief = "Brave browser package";
   };
 };

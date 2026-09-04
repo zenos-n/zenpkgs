@@ -4,7 +4,6 @@
 # Unsupported: the offload service and timer are omitted together to avoid scheduling a missing unit.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "system.zenfs";
   brief = "ZenOS filesystem hierarchy and roaming manager";
   description = ''
     Manages the ZenFS file watcher and declares roaming and indexing controls.

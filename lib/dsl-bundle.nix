@@ -46,7 +46,7 @@ let
       }
     else if source.kind == "zmdl" then
       let
-        segments = canonicalSegments {
+        modulePath = canonicalSegments {
           inherit source;
           root = "modules";
           suffix = ".zmdl";
@@ -54,11 +54,9 @@ let
         };
       in
       {
-        inherit segments source;
-        compileTarget = if builtins.head segments == "users" then "user" else "system";
+        inherit modulePath source;
+        identity = lib.concatStringsSep "." ([ "zenos" ] ++ modulePath);
         kind = "zmdl";
-        moduleId = lib.concatStringsSep "." segments;
-        sourceModule = lib.removeSuffix ".zmdl" source.path;
       }
     else if source.kind == "zstr" then
       require (source.path == "structure.zstr") "structure must be repository-root structure.zstr" {
@@ -74,7 +72,7 @@ let
       sources = map canonicalSource bundle.sources;
       structures = builtins.filter (entry: entry.kind == "zstr") sources;
     in
-    require (bundle.bundleVersion == "zenlang.bundle/1") "unsupported bundle version"
+    require (bundle.bundleVersion == "zenlang.bundle/2") "unsupported bundle version"
       (require (builtins.length structures == 1) "repository requires exactly one root structure.zstr"
         (builtins.deepSeq sources sources));
 
@@ -137,7 +135,7 @@ let
         "status"
       ];
     in
-    assert descriptor.descriptorVersion == "zenlang.semantic/1";
+    assert descriptor.descriptorVersion == "zenlang.semantic/2";
     assert descriptor.kind == "zpkg";
     assert descriptor.imports == [ ];
     assert descriptor.dependencies == {
@@ -157,42 +155,6 @@ let
         ;
     };
 
-  valuesAtPath =
-    path: statements:
-    lib.concatMap (
-      statement:
-      if
-        statement.type != "assignment"
-        || statement.operator != "="
-        || !builtins.isList statement.target
-      then
-        [ ]
-      else
-        let
-          target = pathFromDescriptor statement.target;
-          nested =
-            builtins.length target < builtins.length path
-            && lib.take (builtins.length target) path == target
-            && statement.value.type == "attr-set";
-        in
-        if target == path then
-          [ statement.value ]
-        else if nested then
-          valuesAtPath (lib.drop (builtins.length target) path) statement.value.statements
-        else
-          [ ]
-    ) statements;
-
-  moduleMetadataId =
-    source:
-    let
-      values = valuesAtPath [ "_meta" "id" ] source.descriptor.statements;
-      value = require (builtins.length values == 1) "${source.path} must declare exactly one _meta.id" (
-        builtins.head values
-      );
-      id = decodeValue value;
-    in
-    require (builtins.isString id && id != "") "${source.path} has an invalid _meta.id" id;
 in
 {
   inherit decodeInterface decodeValue;
@@ -204,83 +166,59 @@ in
     }:
     let
       sources = builtins.filter (source: source.kind == "zmdl") (canonicalSources bundle);
-      attachments =
-        if bundle ? structure && bundle.structure ? attachments then
-          bundle.structure.attachments
+      moduleRecords =
+        if bundle ? modules && builtins.isList bundle.modules then
+          bundle.modules
         else
-          throw "ZenPkgs DSL adapter: bundle has no structure attachments";
+          throw "ZenPkgs DSL adapter: bundle has no path-derived module records";
       sourcePaths = map (entry: entry.source.path) sources;
-      moduleIds = map (entry: entry.moduleId) sources;
-      sourceModules = map (entry: entry.sourceModule) sources;
-      attachmentModules = map (attachment: attachment.module) attachments;
-      attachmentPaths = map (attachment: builtins.toJSON attachment.path) attachments;
+      recordPaths = map (record: record.path or null) moduleRecords;
+      optionPaths = map (record: builtins.toJSON (record.optionPath or null)) moduleRecords;
+      identities = map (record: record.identity or null) moduleRecords;
       duplicateSources = duplicates sourcePaths;
-      duplicateModules = duplicates moduleIds;
-      duplicateAttachments = duplicates attachmentModules;
-      duplicateAttachmentPaths = duplicates attachmentPaths;
-      missingAttachments = lib.subtractLists attachmentModules sourceModules;
-      orphanAttachments = lib.subtractLists sourceModules attachmentModules;
+      duplicateRecords = duplicates recordPaths;
+      duplicatePaths = duplicates optionPaths;
+      duplicateIdentities = duplicates identities;
+      missingRecords = lib.subtractLists recordPaths sourcePaths;
+      orphanRecords = lib.subtractLists sourcePaths recordPaths;
 
       candidateFor =
         canonical:
         let
           source = canonical.source;
-          moduleId = canonical.moduleId;
-          matches = builtins.filter (attachment: attachment.module == canonical.sourceModule) attachments;
-          attachment = require (builtins.length matches == 1) "module ${moduleId} must have exactly one attachment" (
-            builtins.head matches
-          );
+          matches = builtins.filter (record: (record.path or null) == source.path) moduleRecords;
+          record = require (builtins.length matches == 1)
+            "module ${canonical.identity} must have exactly one compiler record"
+            (builtins.head matches);
+          expectedOptionPath = [ "zenos" ] ++ canonical.modulePath;
+          identity = record.identity or null;
           module = bundlePath + "/modules/${source.path}.nix";
-          attachmentTarget = attachment.target or null;
-          compileTarget = canonical.compileTarget;
-          metadataId = moduleMetadataId source;
-          expectedMetadataId = canonical.moduleId;
         in
-        require (metadataId == expectedMetadataId)
-          "module ${source.path} _meta.id must be ${expectedMetadataId}, got ${metadataId}"
-          (require (attachment.path == canonical.segments)
-            "module ${source.path} attachment must be ${builtins.toJSON canonical.segments}"
-            (require (attachmentTarget == compileTarget)
-              "module ${source.path} must compile for ${canonical.compileTarget}"
-              (require (source ? compiledNix && builtins.isString source.compiledNix && source.compiledNix != "")
-                "module ${moduleId} has no compiled Nix"
-                (require (builtins.pathExists module) "compiled module ${toString module} is missing" {
-                  inherit
-                    compileTarget
-                    module
-                    moduleId
-                    ;
-                  attachmentPath = canonical.segments;
-                  sourcePath = source.path;
-                }))));
+        require (identity == canonical.identity)
+          "module ${source.path} compiler identity must be ${canonical.identity}, got ${toString identity}"
+          (require ((record.optionPath or null) == expectedOptionPath)
+            "module ${source.path} compiler option path must be ${builtins.toJSON expectedOptionPath}"
+            (require (source ? compiledNix && builtins.isString source.compiledNix && source.compiledNix != "")
+              "module ${identity} has no compiled Nix"
+              (require (builtins.pathExists module) "compiled module ${toString module} is missing" {
+                inherit identity module;
+                modulePath = canonical.modulePath;
+                optionPath = record.optionPath;
+                sourcePath = record.path;
+              })));
 
       candidates = map candidateFor sources;
       validated =
         require (duplicateSources == [ ]) "duplicate ZMDL sources: ${builtins.toJSON duplicateSources}"
-            (require (duplicateModules == [ ]) "duplicate compiled modules: ${builtins.toJSON duplicateModules}"
-              (require (duplicateAttachments == [ ])
-                "duplicate module attachments: ${builtins.toJSON duplicateAttachments}"
-                (require (duplicateAttachmentPaths == [ ])
-                  "duplicate attachment paths: ${builtins.toJSON duplicateAttachmentPaths}"
-                  (require (missingAttachments == [ ])
-                    "missing module attachments: ${builtins.toJSON missingAttachments}"
-                    (require (orphanAttachments == [ ])
-                      "attachments without ZMDL sources: ${builtins.toJSON orphanAttachments}"
-                      candidates)))));
+          (require (duplicateRecords == [ ]) "duplicate module records: ${builtins.toJSON duplicateRecords}"
+            (require (duplicatePaths == [ ]) "duplicate module option paths: ${builtins.toJSON duplicatePaths}"
+              (require (duplicateIdentities == [ ])
+                "duplicate module identities: ${builtins.toJSON duplicateIdentities}"
+                (require (missingRecords == [ ]) "ZMDL sources without module records: ${builtins.toJSON missingRecords}"
+                  (require (orphanRecords == [ ]) "module records without ZMDL sources: ${builtins.toJSON orphanRecords}"
+                    candidates)))));
     in
-    {
-      all = validated;
-      records = {
-        system = builtins.filter (candidate: candidate.compileTarget == "system") validated;
-        user = builtins.filter (candidate: candidate.compileTarget == "user") validated;
-      };
-      system = map (candidate: candidate.module) (
-        builtins.filter (candidate: candidate.compileTarget == "system") validated
-      );
-      user = map (candidate: candidate.module) (
-        builtins.filter (candidate: candidate.compileTarget == "user") validated
-      );
-    };
+    validated;
 
   registryFromBundle =
     {

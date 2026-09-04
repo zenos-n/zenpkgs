@@ -1,0 +1,48 @@
+# Source: modules/desktops/gnome/tweaks/zero-clock/module.nix
+# Schema migration: extension assignments use path-derived zenos.desktops.gnome.
+# Unsupported: internal/readOnly option flags have no ZMDL fields.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "GNOME lock-screen and top-bar clock font tweak";
+  description = ''
+    Applies ZeroMono to the lock-screen time and ZeroClock to the lock-screen
+    date and top-bar clock through GNOME extensions.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable the Zero GNOME clock font tweak";
+
+  s! {
+    zenos.desktops.gnome.extensions = {
+      customize-clock-on-lockscreen = {
+        enable = true;
+        time = {
+          enable = true;
+          text = "%H%n%M";
+          font = { family = "ZeroMono"; weight = "100"; size = 84; };
+        };
+        date = {
+          enable = true;
+          text = "%d.%m.%Y";
+          font = { family = "ZeroClock"; weight = "100"; size = 24; };
+        };
+      };
+      user-theme = {
+        enable = true;
+        theme.cssOverride = ''
+          /* The Top Bar Clock */
+          .clock-display {
+              font-family: 'ZeroClock', sans-serif !important;
+              font-weight: normal !important;
+              font-style: normal !important;
+              font-size: 12px;
+          }
+        '';
+      };
+    };
+  };
+};

@@ -4,7 +4,6 @@
 # from a separately attached production ZMDL without adding a new public enable option.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "users.programs.web-apps.backends.chrome";
   brief = "Experimental Chrome backend for ZenOS web applications";
   description = ''
     Declares the Chrome package used for PWA execution. Backend function injection,
@@ -19,7 +18,7 @@ _meta = {
 chromePackage = {
   _meta = {
     type = $type.package;
-    default = $pkgs.legacy.google-chrome;
+    default = $pkgs.zenos.legacy.google-chrome;
     brief = "Chrome-compatible browser package";
   };
 };

@@ -1,0 +1,83 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Media metadata display for the GNOME top bar";
+  description = ''
+    Media metadata display for the GNOME top bar
+
+    This module installs and configures the **MPRIS Label** extension for GNOME.
+    It displays the currently playing media metadata (artist, title, etc.) in the top bar,
+    with customizable fields, layout, and mouse actions.
+
+    **Features:**
+    - Customizable metadata fields (Artist, Title, etc.).
+    - configurable mouse click and scroll actions.
+    - Extensive layout and formatting options.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "MPRIS Label GNOME extension configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.mpris-label ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/mpris-label" = {
+        left-padding = $path.layout.padding-left;
+        right-padding = $path.layout.padding-right;
+        max-string-length = $path.layout.max-string-length;
+        extension-index = $path.layout.extension-index;
+        extension-place = $path.layout.extension-place;
+        refresh-rate = $path.layout.refresh-rate;
+        button-placeholder = $path.layout.button-placeholder;
+        font-color = $path.layout.font-color;
+        label-filtered-list = $path.layout.filtered-list;
+        divider-string = $path.layout.divider-string;
+        first-field = $path.fields.first;
+        second-field = $path.fields.second;
+        last-field = $path.fields.last;
+        left-click-action = $path.actions.left.click;
+        left-double-click-action = $path.actions.left.double-click;
+        right-click-action = $path.actions.right.click;
+        right-double-click-action = $path.actions.right.double-click;
+        middle-click-action = $path.actions.middle.click;
+        middle-double-click-action = $path.actions.middle.double-click;
+        thumb-forward-action = $path.actions.thumb.forward;
+        thumb-double-forward-action = $path.actions.thumb.double-forward;
+        thumb-backward-action = $path.actions.thumb.backward;
+        thumb-double-backward-action = $path.actions.thumb.double-backward;
+        scroll-action = $path.actions.scroll;
+        volume-control-scheme = $path.actions.volume-control-scheme;
+      };
+    } ];
+  };
+};
+
+layout.padding-left = { _meta = { type = $type.int; default = 30; description = "Horizontal pixel padding on the left side of the label"; }; };
+layout.padding-right = { _meta = { type = $type.int; default = 30; description = "Horizontal pixel padding on the right side of the label"; }; };
+layout.max-string-length = { _meta = { type = $type.int; default = 30; description = "Maximum character count for the metadata string before truncation"; }; };
+layout.extension-index = { _meta = { type = $type.int; default = 3; description = "Relative sorting index for top bar placement"; }; };
+layout.extension-place = { _meta = { type = $type.enum [ "left" "center" "right" ]; default = "right"; description = "Panel container for the label"; }; };
+layout.refresh-rate = { _meta = { type = $type.int; default = 300; description = "Time in milliseconds between metadata polling updates"; }; };
+layout.button-placeholder = { _meta = { type = $type.string; default = "＿"; description = "Text displayed when no media metadata is available"; }; };
+layout.divider-string = { _meta = { type = $type.string; default = " | "; description = "Character sequence used to separate metadata fields"; }; };
+layout.font-color = { _meta = { type = $type.string; default = ""; description = "Custom CSS color for the label text"; }; };
+layout.filtered-list = { _meta = { type = $type.string; default = "remaster,remix,featuring,live"; description = "Comma-separated list of terms to strip from metadata"; }; };
+
+fields.first = { _meta = { type = $type.string; default = "xesam:artist"; description = "Primary xesam metadata key to display"; }; };
+fields.second = { _meta = { type = $type.string; default = "xesam:title"; description = "Secondary xesam metadata key to display"; }; };
+fields.last = { _meta = { type = $type.string; default = ""; description = "Tertiary xesam metadata key to display"; }; };
+
+actions.left.click = { _meta = { type = $type.string; default = "play-pause"; description = "Action performed on primary mouse click"; }; };
+actions.left.double-click = { _meta = { type = $type.string; default = "next-track"; description = "Action performed on primary double-click"; }; };
+actions.right.click = { _meta = { type = $type.string; default = "activate-player"; description = "Action performed on secondary mouse click"; }; };
+actions.right.double-click = { _meta = { type = $type.string; default = "prev-track"; description = "Action performed on secondary double-click"; }; };
+actions.middle.click = { _meta = { type = $type.string; default = "play-pause"; description = "Action performed on middle mouse click"; }; };
+actions.middle.double-click = { _meta = { type = $type.string; default = "none"; description = "Action performed on middle double-click"; }; };
+actions.thumb.forward = { _meta = { type = $type.string; default = "next-track"; description = "Action performed on mouse button 5"; }; };
+actions.thumb.double-forward = { _meta = { type = $type.string; default = "none"; description = "Action performed on button 5 double-click"; }; };
+actions.thumb.backward = { _meta = { type = $type.string; default = "prev-track"; description = "Action performed on mouse button 4"; }; };
+actions.thumb.double-backward = { _meta = { type = $type.string; default = "none"; description = "Action performed on button 4 double-click"; }; };
+actions.scroll = { _meta = { type = $type.string; default = "volume-controls"; description = "Action performed on mouse wheel scroll over label"; }; };
+actions.volume-control-scheme = { _meta = { type = $type.string; default = "application"; description = "Target for volume adjustments (application or system)"; }; };

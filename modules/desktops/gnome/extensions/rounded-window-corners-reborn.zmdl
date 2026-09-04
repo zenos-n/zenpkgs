@@ -1,0 +1,124 @@
+# Production ZMDL has no submodule type constructor. The global settings
+# submodule is expanded into typed nested options; custom-settings retains its
+# outer and inner attribute-set shape but cannot enforce per-application fields.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Consistent corner rounding for all window types in GNOME";
+  description = ''
+    Consistent corner rounding for all window types in GNOME
+
+    This module installs and configures **Rounded Window Corners Reborn**. It brings
+    consistent rounded corners to all applications, including legacy GTK3/4
+    and non-GTK windows.
+
+    **Features:**
+    - Global corner rounding with custom radius.
+    - Per-application setting overrides.
+    - Custom shadow and border configurations.
+    - Special tweaks for Kitty terminal compatibility.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+_let toRgbaList: $type.function [ $type.string ] = value:
+  if $lib.isString value && $lib.hasPrefix "#" value then
+    let
+      hex = $lib.removePrefix "#" value;
+      red = ($lib.fromHexString ($lib.substring 0 2 hex)) / 255.0;
+      green = ($lib.fromHexString ($lib.substring 2 2 hex)) / 255.0;
+      blue = ($lib.fromHexString ($lib.substring 4 2 hex)) / 255.0;
+      alpha = if $lib.stringLength hex == 8
+        then ($lib.fromHexString ($lib.substring 6 2 hex)) / 255.0
+        else 1.0;
+    in [ red green blue alpha ]
+  else value;
+_let mkVariant: $type.function [ $type.string ] = value: "<${value}>";
+_let mkString: $type.function [ $type.string ] = value: "'${value}'";
+_let mkFloat: $type.function [ $type.float ] = value:
+  let
+    rendered = $lib.toString value;
+  in if $lib.hasInfix "." rendered then rendered else "${rendered}.0";
+_let serializeValue: $type.function [ $type.attrs ] =
+  let
+    serialize = value:
+      if $lib.isBool value then (if value then "true" else "false")
+      else if $lib.isInt value then $lib.toString value
+      else if $lib.isFloat value then $v.mkFloat value
+      else if $lib.isString value then $v.mkString value
+      else if $lib.isList value then "[${$lib.concatStringsSep ", " ($lib.map serialize value)}]"
+      else $lib.throwIfNot false "Unsupported type in Rounded Window Corners settings" "";
+  in serialize;
+_let serializeGlobalSettings: $type.function [ $type.attrs ] = settings:
+  let
+    pairs = $lib.mapAttrsToList
+      (key: value: "${$v.mkString key}: ${$v.mkVariant ($v.serializeValue value)}")
+      settings;
+  in "{${$lib.concatStringsSep ", " pairs}}";
+
+enable = enableOption {
+  _meta.description = "Rounded Window Corners Reborn configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.apps.gnome-extensions.rounded-window-corners-reborn ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/rounded-window-corners-reborn" = {
+        skip-libadwaita-app = $path.skip-libadwaita-app;
+        focused-shadow = $path.focused-shadow;
+        unfocused-shadow = $path.unfocused-shadow;
+        debug-mode = $path.general.debug;
+        tweak-kitty-terminal = $path.general.tweak-kitty;
+        enable-preferences-entry = $path.general.preferences-entry;
+      };
+    } ];
+    systemd.user.services.rounded-window-corners-settings = {
+      description = "Apply Rounded Window Corners complex configuration";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      serviceConfig = { Type = "oneshot"; RemainAfterExit = true; };
+      script = ''
+        set_val() { ${$pkgs.zenos.legacy.dconf}/bin/dconf write "$1" "$2"; }
+
+        PROC_SETTINGS() {
+          local IN_RADIUS=$1
+          local IN_COLOR=$(${$pkgs.zenos.legacy.coreutils}/bin/echo $2 | ${$pkgs.zenos.legacy.gnused}/bin/sed "s/[#]//g")
+          # This is simplified - the module would actually transform the Nix set to the GVariant dict
+        }
+
+        set_val "/org/gnome/shell/extensions/rounded-window-corners-reborn/global-rounded-corner-settings" "${$lib.escapeShellArg ($v.serializeGlobalSettings ($path.settings // { border-color = $v.toRgbaList $path.settings.border-color; }))}"
+      '';
+    };
+  };
+};
+
+skip-libadwaita-app = { _meta = { type = $type.bool; default = false; description = ''
+  Ignore modern Libadwaita applications
+
+  Whether to skip applications that already provide their own
+  native corner rounding.
+''; }; };
+focused-shadow = { _meta = { type = $type.string; default = "{}"; description = "JSON configuration for active window drop shadows"; }; };
+unfocused-shadow = { _meta = { type = $type.string; default = "{}"; description = "JSON configuration for inactive window drop shadows"; }; };
+general.debug = { _meta = { type = $type.bool; default = false; description = "Enable verbose console debugging"; }; };
+general.tweak-kitty = { _meta = { type = $type.bool; default = false; description = "Enable specialized rendering hacks for Kitty terminal"; }; };
+general.preferences-entry = { _meta = { type = $type.bool; default = true; description = "Display extension settings in the app grid"; }; };
+
+settings.padding = { _meta = { type = $type.set [ $type.int ]; default = { left = 1; right = 1; top = 1; bottom = 1; }; description = "Internal padding values"; }; };
+settings.keep-rounded-corners = { _meta = { type = $type.bool; default = false; description = "Preserve rounding for maximized windows"; }; };
+settings.border-size = { _meta = { type = $type.int; default = 0; description = "Outer pixel border thickness"; }; };
+settings.border-color = { _meta = { type = $type.either [ ($type.list [ $type.float ]) $type.string ]; default = [ 1.0 1.0 1.0 1.0 ]; description = "CSS color for the border"; }; };
+settings.border-radius = { _meta = { type = $type.int; default = 12; description = "Pixel radius for corner rounding"; }; };
+settings.smoothing = { _meta = { type = $type.float; default = 0.0; description = "Curvature smoothing factor (anti-aliasing)"; }; };
+
+custom-settings = {
+  _meta = {
+    type = $type.set [ $type.attrs ];
+    default = { };
+    description = ''
+      Per-application visual overrides
+
+      Dictionary mapping application IDs to specific rounding
+      and border configurations.
+    '';
+  };
+};

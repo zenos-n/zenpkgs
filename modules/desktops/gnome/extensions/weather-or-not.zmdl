@@ -1,0 +1,42 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Flexible weather indicator positioning for the panel";
+  description = ''
+    Flexible weather indicator positioning for the panel
+
+    This module installs and configures the **Weather Or Not** extension for GNOME.
+    It allows you to decouple the weather indicator from the date menu and place
+    it in various positions across the top bar.
+
+    **Features:**
+    - Move weather to the left, center, or right of the clock.
+    - Integrated panel alignment options.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Weather Or Not GNOME extension configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.weather-or-not ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/weatherornot".position = $path.position;
+    } ];
+  };
+};
+
+position = { _meta = { type = $type.enum [
+  "left"
+  "clock-left"
+  "clock-left-centered"
+  "clock-right-centered"
+  "clock-right"
+  "right"
+]; default = "clock-right"; description = ''
+  Panel anchor position for the weather icon
+
+  Determines where the weather information is rendered relative to the
+  system clock or panel edges.
+''; }; };

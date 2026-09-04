@@ -3,7 +3,6 @@
 # Unsupported: the strMatching constraint on the Plymouth color is represented as a documented string.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "system.boot.loader.zenboot";
   brief = "ZenOS ZenBoot bootloader configuration";
   description = ''
     Configures ZenBoot, EFI installation, generation retention, mouse support,

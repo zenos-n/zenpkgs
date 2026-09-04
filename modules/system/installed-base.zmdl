@@ -5,7 +5,6 @@
 # canonical registries supported by ZMDL.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "system.installed-base";
   brief = "Reusable ZenOS installed-system baseline";
   description = ''
     Supplies conservative package, user, networking, audio, firmware, boot, and
@@ -39,7 +38,7 @@ enable = enableOption {
     hardware.enableRedistributableFirmware = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    services.displayManager = if ($cfg.desktop.gnome.enable or false) then {
+    services.displayManager = if ($cfg.desktops.gnome.enable or false) then {
       autoLogin = { enable = false; user = null; };
       gdm = {
         enable = true;

@@ -2,23 +2,23 @@
 
 `mkDslArtifacts` compiles the repository root and materializes every ZMDL source
 as `modules/<source-path>.nix` inside the bundle store path. Canonical sources
-are named `modules/<path>.zmdl` leaves. Their path-derived `_meta.id` is `<path>`
-with `/` replaced by `.`, and their option attachment is `zenos.<path>`. The
-bundle adapter rejects noncanonical locations, reserved `module.zmdl` leaves,
-ID mismatches, attachment-path drift, compile-target drift, and
-source/ID/attachment duplicates before returning private `system` and `user`
-candidate lists. These lists are test inputs only. They are not imported by the
-public `nixosModules` or `homeManagerModules` outputs.
+are named `modules/<path>.zmdl` leaves. The compiler derives their canonical
+identity and option path as `zenos.<path>`; ZMDL authors must not declare
+`_meta.id`. The bundle adapter consumes the compiler's path-derived `modules`
+records and rejects noncanonical locations, reserved `module.zmdl` leaves,
+source/record drift, identity or option-path mismatches, missing compiler output,
+and source/path/identity duplicates before returning one target-neutral private
+candidate list. This list is a test input only. It is not imported by the public
+`nixosModules` or `homeManagerModules` outputs. The `s!`, `u!`, and `!` action
+forms own configuration routing; module source directories do not.
 
 The `dsl-module-contract` check is structural and non-activating. It requires:
 
 1. Exactly 70 ZMDL sources are discovered and compiled.
-2. Every path-derived module ID is unique and matches `_meta.id`.
-3. The repository has exactly one root `structure.zstr`, with exactly one
-   attachment for every ZMDL and no orphan attachments.
-4. Every attachment path and `system` or `user` compile target matches the
-   canonical source path.
-5. Every generated Nix file passes `nix-instantiate --parse`.
+2. Every source path, module path, option path, and canonical identity is unique.
+3. Every compiler record maps `modules/<path>.zmdl` to identity and option path
+   `zenos.<path>`.
+4. Every generated Nix file passes `nix-instantiate --parse`.
 
 The parser check does not invoke a generated module function. No check evaluates
 candidate options or config through NixOS or Home Manager, compares candidates
@@ -44,8 +44,12 @@ The next task is to add the missing compiler and schema semantics, then introduc
 isolated option/config evaluation tests per module family before any candidate is
 eligible for an active output.
 
-Run the non-activation contract from a test VM or development host:
+Run the non-activation contract and then the complete flake checks in a ZenOS
+VM. Until the checked-in `zenos-next` input is advanced to the companion
+path-derived compiler revision that emits `zenlang.bundle/2` and
+`zenlang.semantic/2`, override it with the local checkout:
 
 ```bash
-nix build path:/home/doromiert/Projects/zenpkgs#checks.x86_64-linux.dsl-module-contract --no-link --print-build-logs
+nix build path:/home/doromiert/Projects/zenpkgs#checks.x86_64-linux.dsl-module-contract --override-input zenos-next path:/home/doromiert/Projects/zenos-next --no-link --print-build-logs
+nix flake check path:/home/doromiert/Projects/zenpkgs --override-input zenos-next path:/home/doromiert/Projects/zenos-next --print-build-logs
 ```

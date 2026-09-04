@@ -2,7 +2,6 @@
 # Unsupported: internal/readOnly/defaultText option fields have no ZMDL equivalents.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "users.programs.zenlink";
   brief = "Android to ZenOS communication bridge";
   description = ''
     Installs ZenLink for the current user and optionally starts its daemon with

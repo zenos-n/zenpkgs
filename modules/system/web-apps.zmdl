@@ -5,7 +5,6 @@
 # Unsupported: attrsOf typed user records are represented as a freeform attrs option.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "system.web-apps";
   brief = "Per-user ZenOS progressive web applications";
   description = ''
     Configures Home Manager defaults for normal users and forwards enabled per-user

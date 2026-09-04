@@ -2,7 +2,6 @@
 # Unsupported: internal/readOnly option flags have no ZMDL fields.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "system.version";
   brief = "ZenOS version information";
   description = ''
     Provides foundational operating-system release metadata for internal system use.

@@ -1,0 +1,108 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Retro window opening and closing animations for GNOME";
+  description = ''
+    Retro window opening and closing animations for GNOME
+
+    This module installs and configures the **Burn My Windows** extension for GNOME.
+    It adds retro-style window opening and closing effects, such as fire,
+    tv-glitch, and hexagon.
+
+    **Features:**
+    - Configure active effects and profiles.
+    - Generate custom Nix-managed effect profiles.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+_let serializeFloat: $type.function "float" = v:
+  let s = $lib.toString v; in if $lib.hasInfix "." s then s else "${s}.0";
+_let serializeIniValue: $type.function "value" = v:
+  if $lib.isBool v then (if v then "true" else "false")
+  else if $lib.isFloat v then $v.serializeFloat v
+  else $lib.toString v;
+_let generateProfileContent: $type.function "settings" = settings: ''
+  [burn-my-windows-profile]
+  ${$lib.concatStringsSep "\n" ($lib.mapAttrsToList (k: v: "${k}=${$v.serializeIniValue v}") settings)}
+'';
+
+enable = enableOption {
+  _meta.description = "Whether to enable Burn My Windows GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.apps.gnome-extensions.burn-my-windows ];
+      programs.dconf.profiles.user.databases = [ {
+        settings."org/gnome/shell/extensions/burn-my-windows" = {
+          active-profile = if $path.settings != { } then "nix-managed.conf" else $path.active-profile;
+          preview-effect = $path.preview-effect;
+          test-mode = $path.test-mode;
+          show-support-dialog = $path.show-support-dialog;
+          last-prefs-version = $path.last-prefs-version;
+          last-extension-version = $path.last-extension-version;
+          prefs-open-count = $path.prefs-open-count;
+        };
+      } ];
+      systemd.user.services.burn-my-windows-profile = $lib.mkIf ($path.settings != { }) {
+        description = "Generate Burn My Windows Nix-managed profile";
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        serviceConfig = { Type = "oneshot"; RemainAfterExit = true; };
+        script = ''
+          mkdir -p %h/.private/Config/burn-my-windows/profiles
+          cat > %h/.private/Config/burn-my-windows/profiles/nix-managed.conf <<EOF
+          ${$v.generateProfileContent $path.settings}
+          EOF
+        '';
+    };
+  };
+};
+
+active-profile = { _meta = { type = $type.string; default = ""; description = ''
+  Currently selected animation profile
+
+  The filename of the active effect profile (e.g., 'fire.conf').
+  Overridden if 'settings' attribute is defined.
+''; }; };
+preview-effect = { _meta = { type = $type.string; default = ""; description = ''
+  Nickname of the effect for preview
+
+  The effect with this nick will be used for the next window animation.
+''; }; };
+test-mode = { _meta = { type = $type.bool; default = false; description = ''
+  Enable single-frame animation testing
+
+  If set to true, all animations will show only one still frame.
+''; }; };
+show-support-dialog = { _meta = { type = $type.bool; default = true; description = ''
+  Display the ask-for-support dialog
+
+  Whether to allow the extension to show its periodic donation dialog.
+''; }; };
+last-prefs-version = { _meta = { type = $type.int; default = 0; description = ''
+  Internal version of last used preferences
+
+  Tracks updates between the preferences dialog and the extension core.
+''; }; };
+last-extension-version = { _meta = { type = $type.int; default = 0; description = ''
+  Internal version of the extension core
+
+  Tracks the version of the extension code for compatibility checks.
+''; }; };
+prefs-open-count = { _meta = { type = $type.int; default = 0; description = ''
+  Preferences dialog interaction counter
+
+  Tracks how many times the settings interface has been opened.
+''; }; };
+settings = {
+  _meta = {
+    type = $type.set [ ($type.either [ $type.bool $type.int $type.float $type.string ]) ];
+    default = { };
+    description = ''
+      Declarative effect parameters for the managed profile
+
+      Generates a custom INI profile at `~/.config/burn-my-windows/profiles/nix-managed.conf`.
+    '';
+    example = { fire-enable-effect = true; doom-enable-effect = true; glide-animation-time = 150; };
+  };
+};

@@ -1,0 +1,75 @@
+# Source: modules/desktops/gnome/tweaks/firefox-theming/module.nix
+# Unsupported: internal/readOnly option flags have no ZMDL fields.
+# Schema migration: the module id uses path-derived desktops.gnome.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Native GNOME theming for Firefox";
+  description = ''
+    Fetches firefox-gnome-theme, enables Firefox profile CSS support, writes the
+    theme imports, and applies the contributor module's profile preferences.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+_let gnomeThemeRepo: $type.package = $pkgs.zenos.legacy.fetchFromGitHub {
+  owner = "rafaelmardojai";
+  repo = "firefox-gnome-theme";
+  rev = "v143";
+  sha256 = "sha256-0E3TqvXAy81qeM/jZXWWOTZ14Hs1RT7o78UyZM+Jbr4=";
+};
+
+_let customChromeCss: $type.package = $pkgs.zenos.legacy.writeText "userChrome.css" ''
+  @import "gnome-theme/userChrome.css";
+'';
+
+_let customContentCss: $type.package = $pkgs.zenos.legacy.writeText "userContent.css" ''
+  @import "gnome-theme/userContent.css";
+'';
+
+enable = enableOption {
+  _meta.brief = "Enable Firefox GNOME integration";
+
+  u! {
+    programs.firefox = {
+      enable = true;
+      profiles.default = {
+        id = 0;
+        name = "default";
+        isDefault = true;
+        settings = {
+          "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
+          "svg.context-properties.content.enabled" = true;
+          "browser.tabs.drawInTitlebar" = true;
+          "browser.uidensity" = 1;
+          "gnomeTheme.hideSingleTab" = $path.theme.hideSingleTab;
+          "gnomeTheme.normalWidthTabs" = $path.theme.normalWidthTabs;
+          "gnomeTheme.bookmarksToolbarUnderTabs" = $path.theme.bookmarksToolbarUnderTabs;
+          "widget.gtk.rounded-bottom-corners.enabled" = $path.theme.roundedBottomCorners;
+        };
+      };
+    };
+    xdg.configFile = {
+      "mozilla/firefox/default/chrome/userChrome.css".source = $v.customChromeCss;
+      "mozilla/firefox/default/chrome/userContent.css".source = $v.customContentCss;
+      "mozilla/firefox/default/chrome/gnome-theme".source = $v.gnomeThemeRepo;
+    };
+  };
+};
+
+theme.hideSingleTab = {
+  _meta = { type = $type.boolean; default = true; brief = "Hide the tab bar when one tab is open"; };
+};
+
+theme.normalWidthTabs = {
+  _meta = { type = $type.boolean; default = false; brief = "Use standard-width tabs"; };
+};
+
+theme.bookmarksToolbarUnderTabs = {
+  _meta = { type = $type.boolean; default = true; brief = "Place bookmarks below the tab bar"; };
+};
+
+theme.roundedBottomCorners = {
+  _meta = { type = $type.boolean; default = true; brief = "Enable rounded browser bottom corners"; };
+};

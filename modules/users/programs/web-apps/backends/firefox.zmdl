@@ -6,7 +6,6 @@
 # actions in this separately attached ZMDL without changing the public option schema.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "users.programs.web-apps.backends.firefox";
   brief = "Firefox backend for ZenOS web applications";
   description = ''
     Declares the Firefox backend inputs used by isolated ZenOS web applications.

@@ -1,0 +1,25 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Automatic category-based sorting for the GNOME application grid";
+  description = ''
+    Automatic category-based sorting for the GNOME application grid
+
+    This module installs and configures the **Category Sorted App Grid** extension
+    for GNOME. It automatically organizes the application grid by category,
+    ensuring a tidy and accessible layout.
+
+    **Features:**
+    - Automatically sorts apps into category folders.
+    - Keeps the app grid organized without manual intervention.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = "Whether to enable Category Sorted App Grid GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.apps.gnome-extensions.category-sorted-app-grid ];
+  };
+};

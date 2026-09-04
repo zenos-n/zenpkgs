@@ -1,0 +1,74 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Visual trail effect for the GNOME mouse cursor";
+  description = ''
+    Visual trail effect for the GNOME mouse cursor
+
+    This module installs and configures the **Mouse Tail** extension for GNOME.
+    It adds a customizable trail effect to the mouse cursor, which can be useful for
+    presentations or accessibility to locate the cursor easily.
+
+    **Features:**
+    - Customizable fade duration and line width.
+    - RGB color and transparency support.
+    - Performance tuning via rendering modes.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+_let hexToRgbList: $type.function [ $type.string ] = value:
+  if $lib.isString value && $lib.hasPrefix "#" value then
+    let
+      hex = $lib.removePrefix "#" value;
+    in [
+      (($lib.fromHexString ($lib.substring 0 2 hex)) / 255.0)
+      (($lib.fromHexString ($lib.substring 2 2 hex)) / 255.0)
+      (($lib.fromHexString ($lib.substring 4 2 hex)) / 255.0)
+    ]
+  else value;
+
+enable = enableOption {
+  _meta.description = "Mouse Tail GNOME extension configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.apps.gnome-extensions.mouse-tail ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/mouse-tail" = {
+        fade-duration = $path.fade-duration;
+        line-width = $path.line-width;
+        color = $v.hexToRgbList $path.color;
+        alpha = $path.alpha;
+        render-mode = $path.render-mode;
+      };
+    } ];
+  };
+};
+
+fade-duration = { _meta = { type = $type.int; default = 200; description = ''
+  Trail persistence duration
+
+  Specifies how long the trail segments take to fade out in milliseconds.
+''; }; };
+line-width = { _meta = { type = $type.int; default = 8; description = ''
+  Trail line thickness
+
+  Pixel width for the rendered mouse trail segments.
+''; }; };
+color = { _meta = { type = $type.either [ ($type.list [ $type.float ]) $type.string ]; default = [ 1.0 1.0 1.0 ]; description = ''
+  Visual color of the trail
+
+  Accepts a list of RGB floats ([1.0 0.0 0.0]) or a Hex string ('#FF0000').
+''; }; };
+alpha = { _meta = { type = $type.float; default = 0.5; description = ''
+  Trail alpha transparency
+
+  Transparency level of the mouse trail, where 0.0 is invisible
+  and 1.0 is fully opaque.
+''; }; };
+render-mode = { _meta = { type = $type.enum [ "precise" "balance" "fast" ]; default = "precise"; description = ''
+  Graphic rendering strategy
+
+  Optimizes the trail rendering for either visual precision
+  or performance.
+''; }; };

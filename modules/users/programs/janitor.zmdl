@@ -4,7 +4,6 @@
 # Unsupported: all three user services are omitted because their ExecStart requires that generated file.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "users.programs.janitor";
   brief = "Automated organization for ZenOS user directories";
   description = ''
     Declares rule-based sorting, virtual music-library, and machine-learning

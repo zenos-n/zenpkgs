@@ -1,7 +1,6 @@
 # Source: modules/zenos-plymouth/module.nix
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "system.boot.plymouth.theme.zenos";
   brief = "ZenOS Plymouth boot animation";
   description = ''
     Configures the ZenOS Plymouth splash package, distribution and device labels,

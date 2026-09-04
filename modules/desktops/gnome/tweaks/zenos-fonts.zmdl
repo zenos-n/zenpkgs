@@ -1,0 +1,46 @@
+# Source: modules/desktops/gnome/tweaks/zenos-fonts/module.nix
+# Unsupported: mkForce priority for font-name is emitted as a normal assignment.
+# Schema migration: the module id uses path-derived desktops.gnome.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "ZenOS system typography overrides";
+  description = ''
+    Installs the Atkinson, Noto, and Zero font stack and applies matching GNOME
+    interface, document, monospace, and title-bar defaults for each user.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable the ZenOS typography stack";
+
+  s! {
+    fonts = {
+      packages = [
+        $pkgs.zenos.legacy.atkinson-hyperlegible-next
+        $pkgs.zenos.legacy.noto-fonts
+        $pkgs.zenos.legacy.noto-fonts-color-emoji
+        $pkgs.zenos.legacy.nerd-fonts.atkynson-mono
+        $pkgs.theming.fonts.zero.regular
+      ];
+      fontDir.enable = true;
+      fontconfig.defaultFonts = {
+        monospace = [ "AtkynsonMono NF" ];
+        sansSerif = [ "Atkinson Hyperlegible Next" "Symbols Nerd Font" ];
+        serif = [ "Noto Serif" ];
+      };
+    };
+  };
+
+  u! {
+    dconf.settings."org/gnome/desktop/interface" = {
+      font-name = "Atkinson Hyperlegible Next 11";
+      document-font-name = "Atkinson Hyperlegible Next 11";
+      monospace-font-name = "AtkynsonMono NF 10";
+    };
+    dconf.settings."org/gnome/desktop/wm/preferences".titlebar-font =
+      "Atkinson Hyperlegible Next Bold 11";
+  };
+};

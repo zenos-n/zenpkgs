@@ -1,0 +1,179 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Mobile device integration via GSConnect and KDE Connect";
+  description = ''
+    Mobile device integration via GSConnect and KDE Connect
+
+    This module provides deep integration for **GSConnect**, a complete implementation
+    of the KDE Connect protocol for GNOME Shell.
+
+    ### Features
+    - **Notification Sync:** Receive and reply to Android notifications on your desktop.
+    - **File Transfer:** Wireless sharing of files and URLs between devices.
+    - **Media Control:** Remotely control your desktop's media players or vice versa.
+    - **Telephony:** See incoming calls and SMS messages on your computer.
+    - **Remote Input:** Use your mobile device as a touchpad or keyboard for your PC.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+_let mkVariant: $type.function "value" = value: "<${value}>";
+_let mkString: $type.function "value" = value: "'${value}'";
+_let serializeCmd: $type.function "command" = attrs:
+  " {'name': ${$v.mkVariant ($v.mkString (attrs.name or ""))}, 'command': ${$v.mkVariant ($v.mkString (attrs.command or ""))}}";
+_let serializeCommandList: $type.function "commands" = commands:
+  if commands == { } then "@a{sv} {}"
+  else "{${$lib.concatStringsSep ", " ($lib.mapAttrsToList (key: value: "${$v.mkString key}: ${$v.mkVariant ($v.serializeCmd value)}") commands)}}";
+_let bool: $type.function "boolean" = value: if value then "true" else "false";
+
+enable = enableOption {
+  _meta.description = "Whether to enable GSConnect GNOME extension configuration.";
+  s! {
+    environment.systemPackages = [ $pkgs.apps.gnome-extensions.gsconnect ];
+      programs.dconf.profiles.user.databases = [ {
+        settings."org/gnome/shell/extensions/gsconnect" = {
+          enabled = $path.enabled;
+          show-indicators = $path.show-indicators;
+          keep-alive-when-locked = $path.keep-alive-when-locked;
+          create-native-messaging-hosts = $path.create-native-messaging-hosts;
+          id = $path.id;
+          name = $path.name;
+          debug = $path.debug;
+          discoverable = $path.discoverable;
+        };
+      } ];
+      systemd.user.services.gsconnect-device-config = {
+        description = "Apply GSConnect device defaults";
+        wantedBy = [ "graphical-session.target" ];
+        partOf = [ "graphical-session.target" ];
+        serviceConfig = { Type = "oneshot"; RemainAfterExit = true; };
+        script = ''
+          set_val() { ${$pkgs.zenos.legacy.dconf}/bin/dconf write "$1" "$2"; }
+          DEVICES_RAW=$(${$pkgs.zenos.legacy.dconf}/bin/dconf read /org/gnome/shell/extensions/gsconnect/devices)
+          if [ -z "$DEVICES_RAW" ] || [ "$DEVICES_RAW" = "@as []" ]; then exit 0; fi
+          DEVICES=$(echo "$DEVICES_RAW" | sed "s/[[']//g;s/,/ /g;s/]//g")
+
+          for ID in $DEVICES; do
+            BASE="/org/gnome/shell/extensions/gsconnect/device/$ID"
+            set_val "$BASE/plugin/battery/send-statistics" "${$v.bool $path.device-defaults.battery.send-statistics}"
+            set_val "$BASE/plugin/battery/low-battery-notification" "${$v.bool $path.device-defaults.battery.low-battery-notification}"
+            set_val "$BASE/plugin/battery/custom-battery-notification" "${$v.bool $path.device-defaults.battery.custom-battery-notification}"
+            set_val "$BASE/plugin/battery/custom-battery-notification-value" "uint32 ${$lib.toString $path.device-defaults.battery.custom-battery-notification-value}"
+            set_val "$BASE/plugin/battery/full-battery-notification" "${$v.bool $path.device-defaults.battery.full-battery-notification}"
+            set_val "$BASE/plugin/clipboard/receive-content" "${$v.bool $path.device-defaults.clipboard.receive-content}"
+            set_val "$BASE/plugin/clipboard/send-content" "${$v.bool $path.device-defaults.clipboard.send-content}"
+            set_val "$BASE/plugin/contacts/contacts-source" "${$v.bool $path.device-defaults.contacts.contacts-source}"
+            set_val "$BASE/plugin/mousepad/share-control" "${$v.bool $path.device-defaults.mousepad.share-control}"
+            set_val "$BASE/plugin/mpris/share-players" "${$v.bool $path.device-defaults.mpris.share-players}"
+            set_val "$BASE/plugin/notification/send-notifications" "${$v.bool $path.device-defaults.notification.send-notifications}"
+            set_val "$BASE/plugin/notification/send-active" "${$v.bool $path.device-defaults.notification.send-active}"
+            set_val "$BASE/plugin/notification/applications" "${$lib.escapeShellArg $path.device-defaults.notification.applications}"
+            set_val "$BASE/plugin/runcommand/command-list" "${$lib.escapeShellArg ($v.serializeCommandList $path.device-defaults.runcommand.command-list)}"
+            set_val "$BASE/plugin/sftp/automount" "${$v.bool $path.device-defaults.sftp.automount}"
+            set_val "$BASE/plugin/share/receive-files" "${$v.bool $path.device-defaults.share.receive-files}"
+            set_val "$BASE/plugin/share/receive-directory" "'${$path.device-defaults.share.receive-directory}'"
+            set_val "$BASE/plugin/share/launch-urls" "${$v.bool $path.device-defaults.share.launch-urls}"
+            set_val "$BASE/plugin/sms/legacy-sms" "${$v.bool $path.device-defaults.sms.legacy-sms}"
+            set_val "$BASE/plugin/systemvolume/share-sinks" "${$v.bool $path.device-defaults.systemvolume.share-sinks}"
+            set_val "$BASE/plugin/telephony/ringing-volume" "'${$path.device-defaults.telephony.ringing-volume}'"
+            set_val "$BASE/plugin/telephony/ringing-pause" "${$v.bool $path.device-defaults.telephony.ringing-pause}"
+            set_val "$BASE/plugin/telephony/talking-volume" "'${$path.device-defaults.telephony.talking-volume}'"
+            set_val "$BASE/plugin/telephony/talking-microphone" "${$v.bool $path.device-defaults.telephony.talking-microphone}"
+            set_val "$BASE/plugin/telephony/talking-pause" "${$v.bool $path.device-defaults.telephony.talking-pause}"
+          done
+        '';
+    };
+  };
+};
+
+enabled = { _meta = { type = $type.bool; default = true; description = ''
+  Master switch for extension functionality
+
+  Enables or disables the GSConnect background service and shell integration.
+''; }; };
+show-indicators = { _meta = { type = $type.bool; default = false; description = ''
+  Display connection status in top bar
+
+  Whether to show the persistent connection status and device
+  indicators in the GNOME panel.
+''; }; };
+keep-alive-when-locked = { _meta = { type = $type.bool; default = true; description = ''
+  Maintain background connections during lock
+
+  Ensures that devices remain paired and reachable even when the
+  desktop session is locked.
+''; }; };
+create-native-messaging-hosts = { _meta = { type = $type.bool; default = true; description = ''
+  Enable browser integration features
+
+  Configures native messaging manifests to allow sharing links
+  directly from web browsers to remote devices.
+''; }; };
+id = { _meta = { type = $type.string; default = ""; description = ''
+  Unique machine identifier
+
+  The UUID or identifier used to register this machine within
+  the KDE Connect network.
+''; }; };
+name = { _meta = { type = $type.string; default = ""; description = ''
+  Network broadcast name
+
+  The human-readable label shown to other devices when
+  discovering this machine on the local network.
+''; }; };
+debug = { _meta = { type = $type.bool; default = false; description = ''
+  Enable verbose troubleshooting logs
+
+  Activates detailed logging for diagnostic purposes.
+''; }; };
+discoverable = { _meta = { type = $type.bool; default = true; description = ''
+  Make machine visible on local network
+
+  Whether this system should announce itself via MDNS for
+  remote device discovery.
+''; }; };
+
+device-defaults.battery.send-statistics = { _meta = { type = $type.bool; default = false; description = "Transmit battery health data to connected device"; }; };
+device-defaults.battery.low-battery-notification = { _meta = { type = $type.bool; default = true; description = "Alert when the remote battery level is critically low"; }; };
+device-defaults.battery.custom-battery-notification = { _meta = { type = $type.bool; default = false; description = "Enable alerts for specific battery percentage thresholds"; }; };
+device-defaults.battery.custom-battery-notification-value = { _meta = { type = $type.int; default = 80; description = "Trigger threshold for custom battery alerts"; }; };
+device-defaults.battery.full-battery-notification = { _meta = { type = $type.bool; default = false; description = "Alert when remote battery reaches full charge"; }; };
+device-defaults.clipboard.receive-content = { _meta = { type = $type.bool; default = false; description = "Accept incoming clipboard data from external devices"; }; };
+device-defaults.clipboard.send-content = { _meta = { type = $type.bool; default = false; description = "Broadcast local clipboard data to external devices"; }; };
+device-defaults.contacts.contacts-source = { _meta = { type = $type.bool; default = true; description = "Permit contact list synchronization with remote devices"; }; };
+device-defaults.mousepad.share-control = { _meta = { type = $type.bool; default = true; description = "Allow remote cursor and input manipulation"; }; };
+device-defaults.mpris.share-players = { _meta = { type = $type.bool; default = true; description = "Export media player controls to connected devices"; }; };
+device-defaults.notification.send-notifications = { _meta = { type = $type.bool; default = true; description = "Forward desktop notifications to connected devices"; }; };
+device-defaults.notification.send-active = { _meta = { type = $type.bool; default = true; description = "Restrict notification forwarding to active session state"; }; };
+device-defaults.notification.applications = { _meta = { type = $type.string; default = "{}"; description = "JSON configuration for per-application notification rules"; }; };
+device-defaults.runcommand.command-list = {
+  _meta = {
+    type = $type.set [ $type.attrs ];
+    default = {
+      lock = { name = "Lock"; command = "xdg-screensaver lock"; };
+      restart = { name = "Restart"; command = "systemctl reboot"; };
+      logout = { name = "Log Out"; command = "gnome-session-quit --logout --no-prompt"; };
+      poweroff = { name = "Power Off"; command = "systemctl poweroff"; };
+      suspend = { name = "Suspend"; command = "systemctl suspend"; };
+    };
+    description = ''
+      Managed set of executable remote commands
+
+      Dictionary of commands that can be triggered from a connected
+      Android or iOS device.
+    '';
+  };
+};
+device-defaults.sftp.automount = { _meta = { type = $type.bool; default = true; description = "Mount remote filesystem automatically upon connection"; }; };
+device-defaults.share.receive-files = { _meta = { type = $type.bool; default = true; description = "Allow remote devices to push files to the desktop"; }; };
+device-defaults.share.receive-directory = { _meta = { type = $type.string; default = ""; description = "Destination path for incoming wireless transfers"; }; };
+device-defaults.share.launch-urls = { _meta = { type = $type.bool; default = false; description = "Automatically open received links in the default browser"; }; };
+device-defaults.sms.legacy-sms = { _meta = { type = $type.bool; default = false; description = "Enable compatibility mode for older Android SMS stacks"; }; };
+device-defaults.systemvolume.share-sinks = { _meta = { type = $type.bool; default = true; description = "Permit remote control of desktop audio outputs"; }; };
+device-defaults.telephony.ringing-volume = { _meta = { type = $type.string; default = "lower"; description = "Audio behavior during incoming call events"; }; };
+device-defaults.telephony.ringing-pause = { _meta = { type = $type.bool; default = false; description = "Suspend media playback when phone is ringing"; }; };
+device-defaults.telephony.talking-volume = { _meta = { type = $type.string; default = "mute"; description = "Audio behavior during active call events"; }; };
+device-defaults.telephony.talking-microphone = { _meta = { type = $type.bool; default = true; description = "Automatically mute local mic during voice calls"; }; };
+device-defaults.telephony.talking-pause = { _meta = { type = $type.bool; default = true; description = "Suspend media playback during active calls"; }; };

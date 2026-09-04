@@ -46,10 +46,11 @@ which keeps registry generation independent of the package tree it creates.
 
 ZMDL sources are named leaves at `modules/<path>.zmdl`; `module.zmdl` is not a
 valid leaf name. The path mechanically defines the module identity
-`zenos.<path>`, and `_meta.id` must exactly equal `<path>` with `/` replaced by
-`.`. Desktop modules use the singular `modules/desktop/` root. The canonical
-attachments live in the repository-root `structure.zstr`. Existing `.nix`
-module implementations are retained temporarily as parity references.
+`zenos.<path>`; `_meta.id` is derived and must not be authored. Desktop modules
+use the plural `modules/desktops/` root. The repository-root `structure.zstr`
+defines schema only and does not register module files. Existing `.nix` module
+implementations are retained temporarily as parity references. Module actions
+own system, user, or target-neutral routing independently of source paths.
 
 ## 1. Required Fields
 

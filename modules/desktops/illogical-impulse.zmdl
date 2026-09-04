@@ -1,0 +1,18 @@
+# Source: modules/desktops/ii/module.nix
+# Schema migration: the canonical module id uses path-derived desktops.
+# The source enable branch is empty, so this equivalent intentionally has no action.
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Illogical Impulse Hyprland desktop";
+  description = ''
+    Declares the Illogical Impulse Hyprland-based desktop toggle. The contributor
+    module currently contains no implementation settings.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.brief = "Enable the Illogical Impulse desktop module";
+};

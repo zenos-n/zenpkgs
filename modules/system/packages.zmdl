@@ -5,7 +5,6 @@
 # Direct derivation-valued selectors remain supported by this freeform action.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "system.packages";
   brief = "Automated package resolution for ZenOS system sets";
   description = ''
     Installs directly selected system packages from a freeform package namespace.

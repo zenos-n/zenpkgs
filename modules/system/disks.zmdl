@@ -4,7 +4,6 @@
 # Unsupported: the external system.disks.<name> freeform must ultimately be owned by ZSTR.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "system.disks";
   brief = "Declarative ZenOS disk layout";
   description = "Forwards freeform ZenOS disk device definitions to Disko.";
   maintainers = [ $m.doromiert ];

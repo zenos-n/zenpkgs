@@ -540,17 +540,17 @@
     "zenos-next": {
       "flake": false,
       "locked": {
-        "lastModified": 1788474345,
-        "narHash": "sha256-e+AMZEqu2Wv61WHMkSU9Jn1P+tGITzMN3Di17x3OZ14=",
+        "lastModified": 1788539773,
+        "narHash": "sha256-Txk4DZ0css0k1ND4u7sVZgAKHINPM1ZYl7nCqAR4nMs=",
         "owner": "doromiert",
         "repo": "zenos-next",
-        "rev": "378e4f0216101fc654ba062e70a91e6e3965d2a9",
+        "rev": "a813a8efcf6c6c594813d2845b549f61c8678323",
         "type": "github"
       },
       "original": {
         "owner": "doromiert",
         "repo": "zenos-next",
-        "rev": "378e4f0216101fc654ba062e70a91e6e3965d2a9",
+        "rev": "a813a8efcf6c6c594813d2845b549f61c8678323",
         "type": "github"
       }
     }

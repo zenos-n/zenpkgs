@@ -2,14 +2,25 @@
 
 let
   expectedModuleCount = 70;
-  moduleCount = builtins.length candidates.all;
-  categorizedCount = builtins.length candidates.records.system + builtins.length candidates.records.user;
-  moduleIds = map (candidate: candidate.moduleId) candidates.all;
-  generatedModules = map (candidate: candidate.module) candidates.all;
+  moduleCount = builtins.length candidates;
+  sourcePaths = map (candidate: candidate.sourcePath) candidates;
+  modulePaths = map (candidate: builtins.toJSON candidate.modulePath) candidates;
+  optionPaths = map (candidate: builtins.toJSON candidate.optionPath) candidates;
+  identities = map (candidate: candidate.identity) candidates;
+  generatedModules = map (candidate: candidate.module) candidates;
+  recordsArePathDerived = pkgs.lib.all (
+    candidate:
+    candidate.sourcePath == "modules/${pkgs.lib.concatStringsSep "/" candidate.modulePath}.zmdl"
+    && candidate.optionPath == [ "zenos" ] ++ candidate.modulePath
+    && candidate.identity == pkgs.lib.concatStringsSep "." candidate.optionPath
+  ) candidates;
 in
 assert moduleCount == expectedModuleCount;
-assert categorizedCount == expectedModuleCount;
-assert builtins.length (pkgs.lib.unique moduleIds) == expectedModuleCount;
+assert builtins.length (pkgs.lib.unique sourcePaths) == expectedModuleCount;
+assert builtins.length (pkgs.lib.unique modulePaths) == expectedModuleCount;
+assert builtins.length (pkgs.lib.unique optionPaths) == expectedModuleCount;
+assert builtins.length (pkgs.lib.unique identities) == expectedModuleCount;
+assert recordsArePathDerived;
 pkgs.runCommand "zenpkgs-dsl-module-contract" { inherit generatedModules; } ''
   export HOME="$TMPDIR/home"
   export NIX_STATE_DIR="$TMPDIR/nix-state"

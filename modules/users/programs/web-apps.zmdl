@@ -4,7 +4,6 @@
 # Unsupported: profileDir is represented as a string because dynamic path defaults are not supported.
 _meta = {
   zenosVersion = 1.0.0Na;
-  id = "users.programs.web-apps";
   brief = "Declarative isolated web application manager";
   description = ''
     Creates isolated browser-backed web applications, desktop entries, optional
@@ -23,8 +22,8 @@ enable = enableOption {
 
   u! {
     home.packages = if $path.dispatcher.enable then [
-      ($pkgs.legacy.writeScriptBin "pwa-dispatcher" ''
-        #!${$pkgs.legacy.bash}/bin/bash
+      ($pkgs.zenos.legacy.writeScriptBin "pwa-dispatcher" ''
+        #!${$pkgs.zenos.legacy.bash}/bin/bash
         URL="$1"
 
         if [ -z "$URL" ]; then

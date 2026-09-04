@@ -1,0 +1,99 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  brief = "Advanced window snapping and tiling features for GNOME";
+  description = ''
+    Advanced window snapping and tiling features for GNOME
+
+    This module installs and configures **Tiling Assistant**, which brings advanced
+    window management features to GNOME Shell, similar to Windows' "Snap Assist".
+
+    **Features:**
+    - Snap Layouts: Easily tile windows into halves, quarters, or custom layouts.
+    - Tiling Grouping: Move or resize tiled windows as a cohesive unit.
+    - Screen Edge Tiling: Drag windows to edges to trigger specific snap patterns.
+    - Window Previews: See thumbnails of tiled windows for quick selection.
+  '';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+_let mkVariant: $type.function [ $type.string ] = v: "<${v}>";
+_let mkString: $type.function [ $type.string ] = v: "'${v}'";
+_let serializeSettings: $type.function [ $type.string ] = settings:
+  if settings == { } then
+    "@a{sv} {}"
+  else
+    let
+      pairs = $lib.mapAttrsToList (
+        k: v:
+          "${$v.mkString k}: ${
+            $v.mkVariant (
+              if $lib.isBool v then
+                (if v then "true" else "false")
+              else if $lib.isInt v then
+                "${v}"
+              else if $lib.isString v then
+                $v.mkString v
+              else
+                $lib.throwIfNot false "Unknown type for Tiling Assistant overridden setting: ${k}" ""
+            )
+          }"
+      ) settings;
+    in "{${$lib.concatStringsSep ", " pairs}}";
+
+enable = enableOption {
+  _meta.description = "Tiling Assistant GNOME extension configuration";
+  s! {
+    environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.tiling-assistant ];
+    programs.dconf.profiles.user.databases = [ {
+      settings."org/gnome/shell/extensions/tiling-assistant" = {
+        enable-tiling-popup = $path.enable-tiling-popup;
+        active-window-hint = $path.active-window-hint;
+        window-gap = $path.window-gap;
+        single-screen-gap = $path.single-screen-gap;
+        tile-top-half = $path.tile-top-half;
+        tile-bottom-half = $path.tile-bottom-half;
+        tile-left-half = $path.tile-left-half;
+        tile-right-half = $path.tile-right-half;
+      };
+    } ];
+    systemd.user.services.tiling-assistant-overrides = {
+      description = "Apply Tiling Assistant overridden settings";
+      wantedBy = [ "graphical-session.target" ];
+      partOf = [ "graphical-session.target" ];
+      serviceConfig = {
+        Type = "oneshot";
+        RemainAfterExit = true;
+      };
+      script = ''
+        ${$pkgs.zenos.legacy.dconf}/bin/dconf write /org/gnome/shell/extensions/tiling-assistant/overridden-settings "${$lib.escapeShellArg ($v.serializeSettings $path.overridden-settings)}"
+      '';
+    };
+  };
+};
+
+enable-tiling-popup = { _meta = { type = $type.bool; default = true; description = ''
+  Show snapping helper popup
+
+  Whether to display the window picker helper when a window is
+  snapped to a screen edge.
+''; }; };
+active-window-hint = { _meta = { type = $type.int; default = 1; description = ''
+  Visual indicator for focused window
+
+  Configures the style of the border drawn around the active
+  window (0: Disabled, 1: Outer, 2: Inner).
+''; }; };
+window-gap = { _meta = { type = $type.int; default = 10; description = "Pixel spacing between tiled application windows"; }; };
+single-screen-gap = { _meta = { type = $type.int; default = 10; description = "Pixel spacing between a single tiled window and the screen edges"; }; };
+overridden-settings = { _meta = { type = $type.attrs; default = { }; description = ''
+  Manual GSettings overrides
+
+  Dictionary of internal extension keys to be forced via GVariant
+  dictionary injection.
+''; }; };
+tile-top-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Up" ]; description = "Shortcut to snap window to top half"; }; };
+tile-bottom-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Down" ]; description = "Shortcut to snap window to bottom half"; }; };
+tile-left-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Left" ]; description = "Shortcut to snap window to left half"; }; };
+tile-right-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Right" ]; description = "Shortcut to snap window to right half"; }; };
