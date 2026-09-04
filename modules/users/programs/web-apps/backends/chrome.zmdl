@@ -1,4 +1,4 @@
-# Source: hm-modules/webapps/chrome/module.nix
+# Transitional parity source: lib/compat/user-modules/webapps/chrome/module.nix
 # Metadata is synthesized because the contributor backend file has no top-level meta set.
 # Unsupported: cross-module backend selection and hm.dag profile cleanup cannot be expressed
 # from a separately attached production ZMDL without adding a new public enable option.

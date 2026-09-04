@@ -1,4 +1,4 @@
-# Source: modules/zenos-plymouth/module.nix
+# Transitional parity source: lib/compat/modules/zenos-plymouth/module.nix
 _meta = {
   zenosVersion = 1.0.0Na;
   brief = "ZenOS Plymouth boot animation";

@@ -1,5 +1,16 @@
-id = "jetbrains-toolbox";
-sourcePath = [ "jetbrains-toolbox" ];
-aliases = [ [ "catalog" "jetbrains-toolbox" ] ];
-status = "active";
-meta = { displayName = "jetbrains-toolbox"; summary = "Curated jetbrains-toolbox package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };
+_meta = {
+  _name = "jetbrains-toolbox";
+  _summary = "Curated jetbrains-toolbox package for ZenOS";
+  _description = "Curated jetbrains-toolbox package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.jetbrains-toolbox;

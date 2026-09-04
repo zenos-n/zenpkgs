@@ -1,5 +1,16 @@
-id = "neovim";
-sourcePath = [ "neovim" ];
-aliases = [ [ "catalog" "neovim" ] ];
-status = "active";
-meta = { displayName = "neovim"; summary = "Curated neovim package for ZenOS"; support = "curated"; tags = [ ]; category = "development"; };
+_meta = {
+  _name = "neovim";
+  _summary = "Curated neovim package for ZenOS";
+  _description = "Curated neovim package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.neovim;

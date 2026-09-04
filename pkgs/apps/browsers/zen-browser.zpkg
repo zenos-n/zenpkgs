@@ -1,5 +1,0 @@
-id = "zen-browser";
-sourcePath = null;
-aliases = [ ];
-status = "unavailable";
-meta = { displayName = "zen-browser"; summary = "Curated zen-browser package for ZenOS"; support = "curated"; tags = [ ]; category = "browsers"; };

@@ -1,4 +1,4 @@
-# Source: modules/zenboot/module.nix
+# Transitional parity source: lib/compat/modules/zenboot/module.nix
 # Unsupported: mkDefault priority on conflicting boot loaders is not implemented by the production backend.
 # Unsupported: the strMatching constraint on the Plymouth color is represented as a documented string.
 _meta = {

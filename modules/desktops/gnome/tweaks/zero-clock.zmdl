@@ -1,4 +1,4 @@
-# Source: modules/desktops/gnome/tweaks/zero-clock/module.nix
+# Transitional parity source: lib/compat/modules/desktops/gnome/tweaks/zero-clock/module.nix
 # Schema migration: extension assignments use path-derived zenos.desktops.gnome.
 # Unsupported: internal/readOnly option flags have no ZMDL fields.
 _meta = {

@@ -1,5 +1,16 @@
-id = "ddrescue";
-sourcePath = [ "ddrescue" ];
-aliases = [ [ "catalog" "ddrescue" ] ];
-status = "active";
-meta = { displayName = "ddrescue"; summary = "Curated ddrescue package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };
+_meta = {
+  _name = "ddrescue";
+  _summary = "Curated ddrescue package for ZenOS";
+  _description = "Curated ddrescue package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.ddrescue;

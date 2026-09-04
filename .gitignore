@@ -1,21 +1,2 @@
-result*
-flake.lock
-options.json
-
-# Package payloads belong in dedicated repositories.
-/pkgs/**/src/
-/pkgs/**/resources/
-/pkgs/**/assets/
-/pkgs/**/*.zip
-/pkgs/**/*.tar
-/pkgs/**/*.tar.gz
-/pkgs/**/*.png
-/pkgs/**/*.jpg
-/pkgs/**/*.jpeg
-/pkgs/**/*.svg
-/pkgs/**/*.ttf
-/pkgs/**/*.otf
-/pkgs/**/*.woff
-/pkgs/**/*.woff2
-/pkgs/**/*.mp4
-/pkgs/**/*.webm
+__pycache__/
+*.py[cod]

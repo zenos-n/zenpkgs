@@ -1,28 +1,11 @@
-# Source: modules/core/system-pkgs.nix
-# Unsupported: recursive package-tree traversal and empty-set path lookup require evaluator-side reflection.
-# Unsupported: the external system.packages selector tree is owned by ZSTR; package is an internal
-# freeform placeholder until that attachment exists.
-# Direct derivation-valued selectors remain supported by this freeform action.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Automated package resolution for ZenOS system sets";
+  brief = "ZenOS system package selectors";
   description = ''
-    Installs directly selected system packages from a freeform package namespace.
-
-    The Nix module also recursively traverses nested sets and treats empty leaves as
-    package-path lookups. Production ZMDL cannot express that reflection yet.
+    System package selectors are boolean leaves resolved by the structure runtime
+    against filesystem-derived paths in pkgs.zenos.
   '';
   maintainers = [ $m.doromiert ];
   license = $l.napl;
   platforms = $lib.platforms.zenos;
-};
-
-(freeform package) = {
-  _meta.brief = "System package selector ${$f.package}";
-
-  s!! {
-    environment.systemPackages = $lib.optional
-      ($lib.isDerivation $path.package.($f.package))
-      $path.package.($f.package);
-  };
 };

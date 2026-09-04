@@ -1,4 +1,4 @@
-# Source: modules/desktops/gnome/tweaks/zenos-fonts/module.nix
+# Transitional parity source: lib/compat/modules/desktops/gnome/tweaks/zenos-fonts/module.nix
 # Unsupported: mkForce priority for font-name is emitted as a normal assignment.
 # Schema migration: the module id uses path-derived desktops.gnome.
 _meta = {

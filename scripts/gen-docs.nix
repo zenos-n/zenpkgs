@@ -326,6 +326,184 @@ let
     else
       { };
 
+  formatLegacyPackages =
+    depth: tree:
+    let
+      evaluated = builtins.tryEval tree;
+      value = if evaluated.success then evaluated.value else null;
+      derivation = builtins.tryEval (value != null && lib.isDerivation value);
+      blocked = [
+        "__attrs"
+        "__info"
+        "__splicedPackages"
+        "buildPackages"
+        "debugPackages"
+        "lib"
+        "modules"
+        "nixos"
+        "nixosTests"
+        "pkgs"
+        "releaseTools"
+        "source"
+        "src"
+        "stdenv"
+        "targetPackages"
+        "testers"
+        "tests"
+      ];
+    in
+    if !evaluated.success || value == null then
+      { }
+    else if derivation.success && derivation.value then
+      formatPackages value { }
+    else if builtins.isAttrs value then
+      let
+        names = builtins.filter (
+          name:
+          depth > 0
+          && !(builtins.elem name blocked)
+          && !(lib.hasPrefix "_" name)
+          && !(lib.hasSuffix "Packages" name)
+          && !(lib.hasPrefix "linuxPackages" name)
+          && !(lib.hasPrefix "darwin" name)
+          && !(lib.hasPrefix "pkgs" name)
+          && (
+            let
+              child = builtins.tryEval value.${name};
+            in
+            child.success && child.value != null && !(builtins.isFunction child.value)
+          )
+        ) (builtins.attrNames value);
+        children = lib.listToAttrs (
+          map (name: {
+            inherit name;
+            value = formatLegacyPackages (depth - 1) value.${name};
+          }) names
+        );
+        sub = lib.filterAttrs (_: child: child != { }) children;
+      in
+      {
+        meta = {
+          description = "Legacy Nixpkgs package set";
+          longDescription = null;
+          homepage = null;
+          license = null;
+          platforms = [ ];
+          maintainers = [ ];
+          version = null;
+        };
+      }
+      // lib.optionalAttrs (sub != { }) { inherit sub; }
+    else
+      { };
+
+  formatLegacyOptions =
+    path: tree:
+    let
+      evaluated = builtins.tryEval tree;
+      value = if evaluated.success then evaluated.value else null;
+      name = if path == [ ] then "legacy" else lib.last path;
+      repeating =
+        name != "<name>"
+        && (
+          lib.count (item: item == name) path > 1
+          || lib.length path > 15
+          || lib.count (item: item == "specialisation") path > 1
+          || lib.count (item: item == "configuration") path > 2
+          || (lib.count (item: item == "programs") path > 1 && name != "programs")
+        );
+      isOption = value != null && lib.isOption value;
+      safeDefault =
+        if !isOption then
+          null
+        else if value ? defaultText then
+          if builtins.isString value.defaultText then
+            value.defaultText
+          else if builtins.isAttrs value.defaultText && value.defaultText ? text then
+            value.defaultText.text
+          else
+            "<complex>"
+        else if value ? default then
+          let
+            typeName = value.type.name or "unknown";
+            safeType = builtins.elem typeName [
+              "bool"
+              "boolean"
+              "enum"
+              "int"
+              "integer"
+              "port"
+              "str"
+              "string"
+            ];
+            result = builtins.tryEval (builtins.deepSeq value.default value.default);
+          in
+          if safeType && result.success then result.value else "<complex>"
+        else
+          null;
+      optionChildren =
+        if !isOption then
+          { }
+        else
+          let
+            type = value.type;
+            nested = type.nestedTypes.elemType or null;
+            childType = if nested != null then nested else type;
+            attempted = builtins.tryEval (
+              if childType ? getSubOptions then childType.getSubOptions [ ] else { }
+            );
+            children = if attempted.success then attempted.value else { };
+          in
+          if nested != null && children != { } then { "<name>" = children; } else children;
+      rawChildren =
+        if isOption then
+          optionChildren
+        else if builtins.isAttrs value then
+          removeAttrs value [ "_module" ]
+        else
+          { };
+      formattedChildren = lib.mapAttrs (
+        childName: child: formatLegacyOptions (path ++ [ childName ]) child
+      ) rawChildren;
+      sub = lib.filterAttrs (
+        childName: child: child != { } && !(lib.hasPrefix "_" childName)
+      ) formattedChildren;
+      description = if isOption then processDesc (value.description or null) null else null;
+      meta =
+        if isOption then
+          {
+            description = description.description;
+            type = resolveType value.type;
+            default = safeDefault;
+            example = null;
+            longDescription = description.longDescription;
+            license = null;
+            maintainers = [ ];
+            platforms = [ ];
+          }
+        else
+          {
+            description = if repeating then "Recursion limit reached" else "Legacy option set";
+            type = "set";
+            default = null;
+            example = null;
+            longDescription = null;
+            license = null;
+            maintainers = [ ];
+            platforms = [ ];
+          };
+    in
+    if !evaluated.success || value == null then
+      { }
+    else if repeating then
+      { inherit meta; }
+    else if isOption then
+      { inherit meta; } // lib.optionalAttrs (sub != { }) { inherit sub; }
+    else if builtins.isAttrs value then
+      { inherit meta; } // lib.optionalAttrs (sub != { }) { inherit sub; }
+    else
+      { };
+
   # --- Filtering ---
 
   filterModules =
@@ -340,8 +518,6 @@ let
     ) modules;
 
   zenosModules = filterModules (lib.collect builtins.isPath (flake.nixosModules.zenos or { }));
-  legacyModules = filterModules (lib.collect builtins.isPath (flake.nixosModules.legacy or { }));
-  programModules = filterModules (lib.collect builtins.isPath (flake.nixosModules.programs or { }));
 
   isLocal =
     opt:
@@ -372,8 +548,6 @@ let
   nixosEval = lib.evalModules {
     modules =
       zenosModules
-      ++ legacyModules
-      ++ programModules
       ++ [
         (
           { config, lib, ... }:
@@ -393,8 +567,7 @@ let
               default = { };
               type = lib.types.attrsOf (
                 lib.types.submodule {
-                  # [ FIX ] Import modules directly instead of nesting in options
-                  imports = programModules;
+                  imports = [ ];
                 }
               );
             };
@@ -430,10 +603,25 @@ let
     };
   };
 
-  # --- EVALUATION 2: Home Manager (User Modules) ---
+  legacyEval = flake.inputs.nixpkgs.lib.nixosSystem {
+    inherit system;
+    modules = [
+      flake.inputs.home-manager.nixosModules.home-manager
+      {
+        nixpkgs.pkgs = pkgs;
+        fileSystems."/".device = "/dev/null";
+        boot.loader.systemd-boot.enable = true;
+        system.stateVersion = "26.05";
+        home-manager.useGlobalPkgs = true;
+        home-manager.useUserPackages = true;
+      }
+    ];
+  };
 
-  zenHmTree = loader.generateTree ../hm-modules;
-  zenUserModules = lib.collect builtins.isPath zenHmTree;
+  # --- EVALUATION 2: Internal user-action backend ---
+
+  zenUserBackendTree = loader.generateTree ../lib/compat/user-modules;
+  zenUserModules = lib.collect builtins.isPath zenUserBackendTree;
 
   hmEval = lib.evalModules {
     modules = zenUserModules ++ [
@@ -441,7 +629,10 @@ let
         home.homeDirectory = "/home/docs";
         home.stateVersion = "24.11";
         home.username = "docs";
-        xdg.enable = true;
+        xdg = {
+          enable = true;
+          dataHome = "/home/docs/.local/share";
+        };
         _module.args.pkgs = pkgs;
       }
       (
@@ -509,14 +700,14 @@ let
   # --- PROCESSING ---
 
   rawTree = pruneTree nixosEval.options;
-  # [ FIX ] Expose full NixOS options as 'legacy'
-  systemLegacy = removeAttrs nixosEval.options [
-    "zenos"
-    "_module"
-  ];
-  localTree = (if rawTree != null then removeAttrs rawTree [ "packages" ] else { }) // {
-    legacy = systemLegacy;
-  };
+  localTree =
+    if rawTree != null then
+      removeAttrs rawTree [
+        "legacy"
+        "packages"
+      ]
+    else
+      { };
 
   # [ UPDATE ] Shim: Map 'zenos' attribute in Nix tree to 'metaOverlay.options' root (skipping 'zenos' key in JSON)
   baseOptions =
@@ -604,16 +795,9 @@ let
     "assertions"
   ];
 
-  # [ FIX ] Expose full HM options as 'legacy' inside the user module
-  hmLegacy = removeAttrs hmEval.options [
-    "zenos"
-    "_module"
-  ];
-  hmRawTreeClean = (if hmRawTree != null then removeAttrs hmRawTree hmStubKeys else { }) // {
-    legacy = hmLegacy;
-  };
+  hmRawTreeClean = if hmRawTree != null then removeAttrs hmRawTree hmStubKeys else { };
 
-  # [ UPDATE ] Shim: Map 'zenos' in HM tree to 'metaOverlay.options' root
+  # Map the backend's ZenOS tree to the unified metadata root.
   hmOptions =
     if hmRawTreeClean != null then
       formatOptions hmRawTreeClean {
@@ -631,19 +815,15 @@ let
     let
       base = baseOptionsRefined.sub or { };
       hmZenosChildren = hmOptionsClean.sub.zenos.sub or { };
-      hmLegacyChildren = hmOptionsClean.sub.legacy or { };
-      hmUserContent = hmZenosChildren // {
-        legacy = hmLegacyChildren;
-      };
     in
     if (base ? zenos && base.zenos.sub ? users && base.zenos.sub.users.sub ? "<name>") then
       lib.recursiveUpdate base {
-        zenos.sub.users.sub."<name>".sub = hmUserContent;
+        zenos.sub.users.sub."<name>".sub = hmZenosChildren;
       }
     else
       base;
 
-  finalOptions =
+  zenosOptions =
     if treeWithHm ? zenos && treeWithHm.zenos ? sub then
       let
         zenosChildren = treeWithHm.zenos.sub;
@@ -653,16 +833,40 @@ let
     else
       treeWithHm;
 
-  packagesTree = flake.packages.${system} or { };
-
-  # [ UPDATE ] Shim: Map 'zenos' pkg scope to 'metaOverlay.pkgs' root (skipping 'zenos' key in JSON)
-  packagesJson = formatPackages packagesTree {
-    sub = {
-      zenos = {
-        sub = metaOverlay.pkgs.sub or metaOverlay.pkgs;
-      };
+  legacyOptions = formatLegacyOptions [ "legacy" ] (
+    removeAttrs legacyEval.options [
+      "_module"
+      "zenos"
+    ]
+  );
+  nixosUserLegacy = legacyOptions.sub.users.sub.users.sub."<name>" or {
+    meta = {
+      description = "NixOS user options";
+      type = "set";
+    };
+    sub = { };
+  };
+  homeManagerLegacy = legacyOptions.sub."home-manager".sub.users.sub."<name>" or {
+    meta = {
+      description = "Home Manager user options";
+      type = "set";
+    };
+    sub = { };
+  };
+  userLegacy = nixosUserLegacy // {
+    sub = (nixosUserLegacy.sub or { }) // {
+      homeManager = homeManagerLegacy;
     };
   };
+  finalOptions = lib.recursiveUpdate (zenosOptions // { legacy = legacyOptions; }) {
+    users.sub."<name>".sub.legacy = userLegacy;
+  };
+
+  packagesTree = removeAttrs pkgs.zenos [ "legacy" ];
+
+  # [ UPDATE ] Shim: Map 'zenos' pkg scope to 'metaOverlay.pkgs' root (skipping 'zenos' key in JSON)
+  packagesJson = formatPackages packagesTree (metaOverlay.pkgs or { });
+  legacyPackagesJson = formatLegacyPackages 2 pkgs.zenos.legacy;
 
   usedMaintainersList = lib.attrValues maintainers;
   usedMaintainers = lib.listToAttrs (
@@ -675,6 +879,8 @@ let
 in
 {
   options = finalOptions;
-  pkgs = packagesJson.sub or { };
+  pkgs = (packagesJson.sub or { }) // {
+    legacy = legacyPackagesJson;
+  };
   maintainers = usedMaintainers;
 }

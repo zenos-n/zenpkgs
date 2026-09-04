@@ -1,14 +1,9 @@
-# Source: legacy/modules/syncthing.nix
-# Unsupported: root-target inspection, empty-set equality conflict detection, and conditional
-# warning generation cannot be represented by production ZMDL module-local aliases/actions.
-# Unsupported: the external system.syncthing freeform must ultimately be owned by ZSTR.
-# The unconditional forward mapping is preserved with a freeform service scope.
 _meta = {
   zenosVersion = 1.0.0Na;
   brief = "Legacy Syncthing configuration mapping";
   description = ''
     Forwards the ZenOS Syncthing abstraction to the upstream services.syncthing
-    namespace. Conflict and bypass warnings remain explicitly blocked above.
+    namespace.
   '';
   maintainers = [ $m.doromiert ];
   license = $l.napl;
@@ -19,6 +14,6 @@ _meta = {
   _meta.brief = "Syncthing setting ${$f.setting}";
 
   s!! {
-    services.syncthing.($f.setting) = $path.setting.($f.setting);
+    services.syncthing.($f.setting) = $path.($f.setting);
   };
 };

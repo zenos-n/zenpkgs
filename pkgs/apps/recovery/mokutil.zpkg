@@ -1,5 +1,16 @@
-id = "mokutil";
-sourcePath = [ "mokutil" ];
-aliases = [ [ "catalog" "mokutil" ] ];
-status = "active";
-meta = { displayName = "mokutil"; summary = "Curated mokutil package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };
+_meta = {
+  _name = "mokutil";
+  _summary = "Curated mokutil package for ZenOS";
+  _description = "Curated mokutil package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.mokutil;

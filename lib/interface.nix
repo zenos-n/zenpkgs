@@ -1,7 +1,7 @@
 { lib }:
 
 let
-  activeEntries = registry: builtins.filter (entry: entry.status == "active") registry.packages;
+  activeEntries = registry: registry.packages;
 
   duplicateValues =
     values:
@@ -17,26 +17,12 @@ let
       entries = registry.packages;
       ids = map (entry: entry.id) entries;
       targets = map (entry: pathString entry.target) entries;
-      aliases = lib.concatMap (entry: map pathString entry.aliases) entries;
-      statusesValid = lib.all (
-        entry:
-        builtins.elem entry.status [
-          "active"
-          "unavailable"
-          "deprecated"
-        ]
-      ) entries;
-      activeValid = lib.all (
-        entry: entry.status != "active" || (entry.sourcePath != null && entry.aliases != [ ])
-      ) entries;
+      entriesValid = lib.all (entry: entry.sourcePath != null) entries;
     in
     assert registry.schemaVersion == 1;
     assert duplicateValues ids == [ ];
     assert duplicateValues targets == [ ];
-    assert duplicateValues aliases == [ ];
-    assert lib.intersectLists targets aliases == [ ];
-    assert statusesValid;
-    assert activeValid;
+    assert entriesValid;
     registry;
 
   decorate =
@@ -47,9 +33,7 @@ let
         zenos = entry.meta // {
           registryId = entry.id;
           inherit (entry)
-            aliases
             sourcePath
-            status
             target
             ;
           legacyPath = entry.sourcePath;
@@ -67,9 +51,7 @@ let
           path = entry.sourcePath;
         };
         inherit (entry)
-          aliases
           id
-          status
           target
           ;
         inherit (entry) meta;
@@ -92,9 +74,8 @@ let
     pkgs: tree: entry:
     let
       package = resolve pkgs entry;
-      paths = [ entry.target ] ++ entry.aliases;
     in
-    lib.foldl' (result: path: lib.recursiveUpdate result (lib.setAttrByPath path package)) tree paths;
+    lib.recursiveUpdate tree (lib.setAttrByPath entry.target package);
 in
 rec {
   buildPackageTree =
@@ -111,17 +92,11 @@ rec {
         inherit (entry)
           id
           target
-          aliases
           sourcePath
-          status
           meta
           ;
       }) checked.packages;
     };
-
-  mkOptionModule = mappings: {
-    imports = map (entry: lib.mkAliasOptionModule entry.target entry.legacyPath) mappings;
-  };
 
   mkCheck =
     {

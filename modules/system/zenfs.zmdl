@@ -1,4 +1,4 @@
-# Source: modules/zenfs/module.nix
+# Transitional parity source: lib/compat/modules/zenfs/module.nix
 # Unsupported: builtins.toJSON/writeText generation for offload_config.json is not in production ZMDL.
 # Unsupported: the source references undeclared fhs.configMap, drives.mainDrive, and database values.
 # Unsupported: the offload service and timer are omitted together to avoid scheduling a missing unit.

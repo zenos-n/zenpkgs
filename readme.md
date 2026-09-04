@@ -9,12 +9,12 @@ path while its interface `id` matches the leaf name. The flake compiles the
 repository root in interface mode and uses the path-sorted result for the
 overlay, registry documentation, and flattened public package outputs.
 The 130-entry normalized contract in `tests/fixtures/package-registry.json`
-protects the 126 active mappings and every derived target, declared alias, and
+protects the 126 active mappings and every derived target and
 nixpkgs source path.
 
-The `.zpkg` files are the only package registry declaration source. Package
-aliases remain in the canonical leaf's `aliases` field. See
-[metadata guidelines.md](metadata%20guidelines.md) for the schema and validation
+The `.zpkg` files are the only package registry declaration source. Each file
+has one public package path derived from its location. See
+[metadata guidelines](docs/metadata-guidelines.md) for the schema and validation
 commands.
 
 Package registry compilation uses Nix import-from-derivation (IFD), keeping
@@ -30,3 +30,11 @@ not active in public module outputs, while the existing `.nix` implementations
 remain for parity. See
 [DSL module candidate checks](docs/dsl-module-candidates.md) for the mapping,
 static evaluation/parity checks, blocker exceptions, and VM commands.
+
+ZenOS has one module and configuration graph. System and user actions are
+declared together below `modules/`; Home Manager is only an internal lowering
+backend for user actions and is not exposed as a separate module tree.
+
+The only root entries are the documented canonical files and directories plus
+`.git/`, `.gitignore`, `.github/`, and `.vscode/`. Run the source-policy check
+through `path:.` to include ignored and untracked working-tree entries.

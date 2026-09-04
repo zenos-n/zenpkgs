@@ -1,4 +1,4 @@
-# Source: hm-modules/janitor/module.nix
+# Transitional parity source: lib/compat/user-modules/janitor/module.nix
 # Unsupported: nested watched-directory submodules cannot be typed in production ZMDL.
 # Unsupported: builtins.toJSON/writeText generation for janitor_config.json is unavailable.
 # Unsupported: all three user services are omitted because their ExecStart requires that generated file.

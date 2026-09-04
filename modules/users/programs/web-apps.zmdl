@@ -1,4 +1,4 @@
-# Source: hm-modules/webapps/module.nix
+# Transitional parity source: lib/compat/user-modules/webapps/module.nix
 # Unsupported: typed nested extension, search, and app submodules cannot be declared in production ZMDL.
 # Unsupported: app-name-derived id defaults and per-app default injection are therefore not available.
 # Unsupported: profileDir is represented as a string because dynamic path defaults are not supported.

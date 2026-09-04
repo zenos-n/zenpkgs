@@ -1,5 +1,16 @@
-id = "e2fsprogs";
-sourcePath = [ "e2fsprogs" ];
-aliases = [ [ "catalog" "e2fsprogs" ] ];
-status = "active";
-meta = { displayName = "e2fsprogs"; summary = "Curated e2fsprogs package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };
+_meta = {
+  _name = "e2fsprogs";
+  _summary = "Curated e2fsprogs package for ZenOS";
+  _description = "Curated e2fsprogs package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.e2fsprogs;

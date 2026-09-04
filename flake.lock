@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "disko": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1781152676,
+        "narHash": "sha256-RxWs5ND31KzTG7wvMM+PMfUjyNpmIEr999lqNARaM5o=",
+        "owner": "nix-community",
+        "repo": "disko",
+        "rev": "ff8702b4de27f72b4c78573dfb89ec74e36abdf1",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "disko",
+        "type": "github"
+      }
+    },
     "flake-compat": {
       "flake": false,
       "locked": {
@@ -469,6 +489,7 @@
     },
     "root": {
       "inputs": {
+        "disko": "disko",
         "home-manager": "home-manager",
         "jovian": "jovian",
         "masterful-gestures": "masterful-gestures",
@@ -479,8 +500,7 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
         "nur": "nur",
-        "vsc-extensions": "vsc-extensions",
-        "zenos-next": "zenos-next"
+        "vsc-extensions": "vsc-extensions"
       }
     },
     "systems": {
@@ -534,23 +554,6 @@
       "original": {
         "owner": "nix-community",
         "repo": "nix-vscode-extensions",
-        "type": "github"
-      }
-    },
-    "zenos-next": {
-      "flake": false,
-      "locked": {
-        "lastModified": 1788539773,
-        "narHash": "sha256-Txk4DZ0css0k1ND4u7sVZgAKHINPM1ZYl7nCqAR4nMs=",
-        "owner": "doromiert",
-        "repo": "zenos-next",
-        "rev": "a813a8efcf6c6c594813d2845b549f61c8678323",
-        "type": "github"
-      },
-      "original": {
-        "owner": "doromiert",
-        "repo": "zenos-next",
-        "rev": "a813a8efcf6c6c594813d2845b549f61c8678323",
         "type": "github"
       }
     }

@@ -1,5 +1,16 @@
-id = "util-linux";
-sourcePath = [ "util-linux" ];
-aliases = [ [ "catalog" "util-linux" ] ];
-status = "active";
-meta = { displayName = "util-linux"; summary = "Curated util-linux package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };
+_meta = {
+  _name = "util-linux";
+  _summary = "Curated util-linux package for ZenOS";
+  _description = "Curated util-linux package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.util-linux;

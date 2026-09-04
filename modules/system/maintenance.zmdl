@@ -1,4 +1,4 @@
-# Source: modules/zenos-maintenance/module.nix
+# Transitional parity source: lib/compat/modules/zenos-maintenance/module.nix
 # Unsupported: generated JSON config uses an undeclared updateCommand option and is unused by the source service.
 # The source cleanOnShutdown and cleanOnReboot options have no implementation; that behavior is preserved.
 _meta = {

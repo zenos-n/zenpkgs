@@ -25,7 +25,7 @@ system = {
     _meta = {
       type = (packages);
       brief = "System package selectors";
-      description = "Boolean selectors over the pkgs.zenos tree.";
+      description = "Boolean selectors resolved by the structure runtime against filesystem-derived pkgs.zenos paths.";
       maintainers = [ $m.doromiert ];
     };
   };
@@ -62,7 +62,7 @@ users = {
       _meta = {
         type = (packages);
         brief = "User package selectors";
-        description = "Boolean selectors over the pkgs.zenos tree.";
+        description = "Boolean selectors resolved by the structure runtime against filesystem-derived pkgs.zenos paths.";
         maintainers = [ $m.doromiert ];
       };
     };

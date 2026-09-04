@@ -1,4 +1,4 @@
-# Source: nixos-modules/oobe.nix
+# Transitional parity source: lib/compat/system-modules/oobe.nix
 # Unsupported: the setupPackage.meta ? mainProgram assertion uses attribute-existence syntax
 # that production ZMDL does not support; the runtime launch command still uses getExe.
 # Unsupported: mkDefault/mkForce priorities are flattened to ordinary assignments.

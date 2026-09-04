@@ -1,5 +1,16 @@
-id = "efibootmgr";
-sourcePath = [ "efibootmgr" ];
-aliases = [ [ "catalog" "efibootmgr" ] ];
-status = "active";
-meta = { displayName = "efibootmgr"; summary = "Curated efibootmgr package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };
+_meta = {
+  _name = "efibootmgr";
+  _summary = "Curated efibootmgr package for ZenOS";
+  _description = "Curated efibootmgr package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.efibootmgr;

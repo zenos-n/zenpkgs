@@ -8,8 +8,8 @@ leaf name. Nix files remain valid for the flake, internal backend, tests, packag
 implementations, and modules. The repository has no `dsl/` wrapper directory.
 The compiled DSL registry directly supplies the package overlay and public flake
 package outputs. `tests/fixtures/package-registry.json` is a normalized contract,
-not a second declaration source; checks require all 130 entries, 126 active
-entries, and their target, alias, and source paths to remain exact.
+not a second declaration source; checks require all 126 path-derived entries and
+their target and imported Nixpkgs paths to remain exact.
 
 ## Package Interface Declarations
 
@@ -18,26 +18,29 @@ For example, `pkgs/apps/utilities/example.zpkg` declares
 `pkgs.zenos.apps.utilities.example`:
 
 ```zpkg
-id = "example";
-sourcePath = [ "example" ];
-aliases = [ [ "catalog" "example" ] ];
-status = "active";
-meta = {
-  displayName = "Example";
-  summary = "Curated Example package for ZenOS";
-  support = "curated";
-  tags = [ "utility" ];
-  category = "utilities";
+_meta = {
+  _name = "Example";
+  _summary = "Curated Example package for ZenOS";
+  _description = "Curated Example package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "utility" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
 };
+
+import $pkgs.legacy.example;
 ```
 
-`id` must equal the leaf filename, excluding `.zpkg`. Targets are derived from
-the path and registry entries are sorted by source path; do not declare `target`
-or `declarationOrder`. Keep aliases in the canonical ZPKG's `aliases` field. Use
-`sourcePath = null`, `aliases = [ ]`, and `status = "unavailable"` for a catalog
-entry that does not currently resolve to nixpkgs. The repository root is
-compiled in interface mode; package build recipes remain as `.nix` files under
-`pkgs/`.
+Identity comes only from the file path. Do not declare `_id`, `_target`,
+`_sourcePath`, `_status`, `_aliases`, `_category`, or `_declarationOrder`.
+Unavailable curated-app entries belong only to ZenOS Setup and do not get ZPKG
+files. The repository root is compiled in interface mode; transitional Nix
+recipes remain under `lib/compat/`.
 Compilation uses import-from-derivation (IFD), so local evaluators and CI must
 allow IFD. Its compiler bootstrap imports nixpkgs without the ZenPkgs overlay,
 which keeps registry generation independent of the package tree it creates.

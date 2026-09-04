@@ -1,4 +1,4 @@
-# Source: modules/desktops/ii/module.nix
+# Transitional parity source: lib/compat/modules/desktops/ii/module.nix
 # Schema migration: the canonical module id uses path-derived desktops.
 # The source enable branch is empty, so this equivalent intentionally has no action.
 _meta = {

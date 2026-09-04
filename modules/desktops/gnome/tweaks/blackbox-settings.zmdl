@@ -1,4 +1,4 @@
-# Source: modules/desktops/gnome/tweaks/blackbox-settings/module.nix
+# Transitional parity source: lib/compat/modules/desktops/gnome/tweaks/blackbox-settings/module.nix
 # Unsupported: internal/readOnly option flags have no ZMDL fields.
 # Schema migration: the module id uses path-derived desktops.gnome.
 _meta = {

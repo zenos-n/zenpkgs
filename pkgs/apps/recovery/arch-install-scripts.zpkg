@@ -1,5 +1,16 @@
-id = "arch-install-scripts";
-sourcePath = [ "arch-install-scripts" ];
-aliases = [ [ "catalog" "arch-install-scripts" ] ];
-status = "active";
-meta = { displayName = "arch-install-scripts"; summary = "Curated arch-install-scripts package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };
+_meta = {
+  _name = "arch-install-scripts";
+  _summary = "Curated arch-install-scripts package for ZenOS";
+  _description = "Curated arch-install-scripts package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.arch-install-scripts;

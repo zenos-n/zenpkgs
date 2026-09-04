@@ -1,7 +1,7 @@
 { lib, pkgs }:
 
 # ZenOS Package Map
-# Location: legacy/pkgs.nix
+# Transitional compatibility helper; retained below lib/ until DSL cutover.
 {
   # --- Category: Desktops ---
   desktops = {

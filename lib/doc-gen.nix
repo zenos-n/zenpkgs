@@ -294,12 +294,9 @@ let
   nixosModuleList = collectModules flake.nixosModules;
   nixosDocs = if nixosModuleList != [ ] then getModuleDocs nixosModuleList "nixos" else { };
 
-  hmModuleList = collectModules flake.homeManagerModules;
-  hmDocs = if hmModuleList != [ ] then getModuleDocs hmModuleList "home-manager" else { };
-
 in
 {
-  inherit packages nixosDocs hmDocs;
+  inherit packages nixosDocs;
   meta = {
     generatedAt = "timestamp-placeholder";
     flakeDescription = flake.description or "ZenPkgs";

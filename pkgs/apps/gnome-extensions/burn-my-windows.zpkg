@@ -1,5 +1,16 @@
-id = "burn-my-windows";
-sourcePath = [ "gnomeExtensions" "burn-my-windows" ];
-aliases = [ [ "catalog" "burn-my-windows" ] ];
-status = "active";
-meta = { displayName = "burn-my-windows"; summary = "Curated burn-my-windows package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };
+_meta = {
+  _name = "burn-my-windows";
+  _summary = "Curated burn-my-windows package for ZenOS";
+  _description = "Curated burn-my-windows package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.gnomeExtensions.burn-my-windows;

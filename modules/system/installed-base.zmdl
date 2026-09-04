@@ -1,4 +1,4 @@
-# Source: nixos-modules/installed-base.nix
+# Transitional parity source: lib/compat/system-modules/installed-base.nix
 # Unsupported: mkDefault/mkForce priorities are emitted as ordinary assignments because action
 # weight lowering is not implemented per assignment by the production ZMDL backend.
 # Unsupported: fallback license construction and optional maintainer lookup are replaced by

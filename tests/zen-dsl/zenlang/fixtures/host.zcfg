@@ -1,0 +1,16 @@
+_import "hardware.zcfg";
+_import defaults: $type.set [ $type.string ] = "defaults.zcfg";
+
+legacy = {
+  networking.hostName = "zephyr";
+  fileSystems."/".device = "/dev/nvme0n1p2";
+};
+
+system.packages = {
+  utils.bat = true;
+  dev.rust = false;
+};
+
+if $cfg.system.desktop.enable or false {
+  system.programs.pipewire = true;
+};

@@ -516,13 +516,10 @@ let
   # A. Exported Modules (from Flake)
   exportedModules =
     (collectModules flake.nixosModules.zenos)
-    ++ (collectModules flake.nixosModules.programs)
-    ++ (collectModules flake.nixosModules.legacy)
-    ++ (collectModules flake.homeManagerModules.zenos)
-    ++ (collectModules flake.homeManagerModules.legacy);
+    ++ (collectModules flake.nixosModules.legacy);
 
   # B. Raw Scan (from Disk)
-  rawModules = deepFindModules ../modules;
+  rawModules = deepFindModules ../lib/compat/modules;
 
   # C. Unique List (Paths)
   allModulePaths = lib.unique (exportedModules ++ rawModules);
@@ -534,7 +531,6 @@ let
   globalEval = lib.evalModules {
     modules =
       (collectModules flake.nixosModules.zenos)
-      ++ (collectModules flake.nixosModules.programs)
       ++ [ mockUniversal ];
     specialArgs = {
       inherit pkgs;

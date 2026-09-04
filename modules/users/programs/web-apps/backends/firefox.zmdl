@@ -1,4 +1,4 @@
-# Source: hm-modules/webapps/firefox/module.nix
+# Transitional parity source: lib/compat/user-modules/webapps/firefox/module.nix
 # Unsupported: the patched Firefox derivation, MozLZ4 helper, symlink joins, wrapper construction,
 # activation DAG, generated profile files, extension downloads, and stale-profile cleanup require
 # package-build and Home Manager activation primitives outside production ZMDL.

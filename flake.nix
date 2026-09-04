@@ -7,6 +7,10 @@
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    disko = {
+      url = "github:nix-community/disko";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixos-hardware.url = "github:nixos/nixos-hardware";
     nix-flatpak.url = "github:gmodena/nix-flatpak";
     jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
@@ -22,10 +26,6 @@
       url = "github:doromiert/masterful-gestures";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    zenos-next = {
-      url = "github:doromiert/zenos-next/a813a8efcf6c6c594813d2845b549f61c8678323";
-      flake = false;
-    };
   };
 
   outputs =
@@ -36,7 +36,6 @@
       loader = import ./lib/loader.nix { inherit (nixpkgs) lib; };
       interface = import ./lib/interface.nix { inherit (nixpkgs) lib; };
       dslBundleAdapter = import ./lib/dsl-bundle.nix { inherit (nixpkgs) lib; };
-      optionMappings = import ./mappings/options.nix;
       mkDslArtifacts =
         system:
         let
@@ -44,7 +43,9 @@
             inherit system;
             config.allowUnfree = true;
           };
-          zenDsl = bootstrapPkgs.callPackage (inputs.zenos-next + "/packages/zen-dsl.nix") { };
+          zenDsl = bootstrapPkgs.callPackage ./lib/zen-dsl/package.nix {
+            testSuite = ./tests/zen-dsl;
+          };
           bundle = bootstrapPkgs.runCommand "zenpkgs-dsl-bundle" {
             nativeBuildInputs = [
               zenDsl
@@ -52,9 +53,13 @@
             ];
             src = self;
           } ''
+            mkdir -p source
+            cp "$src/structure.zstr" source/structure.zstr
+            cp -R "$src/pkgs" source/pkgs
+            cp -R "$src/modules" source/modules
             mkdir -p "$out/interfaces" "$out/modules"
             zen-dsl compile-tree \
-              --root "$src" \
+              --root source \
               --output "$out/bundle.json" \
               --mode interface
 
@@ -131,62 +136,15 @@
       # overlay, so the overlay cannot depend on itself.
       registryFor = system: (mkDslArtifacts system).registry;
       registry = registryFor (builtins.head systems);
-      legacyRoots = [
-        "appstream"
-        "boot"
-        "console"
-        "containers"
-        "docker-containers"
-        "documentation"
-        "dysnomia"
-        "ec2"
-        "environment"
-        "fileSystems"
-        "fonts"
-        "gtk"
-        "hardware"
-        "i18n"
-        "ids"
-        "image"
-        "isSpecialisation"
-        "jobs"
-        "krb5"
-        "lib"
-        "location"
-        "meta"
-        "minifyStaticFiles"
-        "nesting"
-        "networking"
-        "nix"
-        "nixops"
-        "nixpkgs"
-        "oci"
-        "openstack"
-        "passthru"
-        "power"
-        "powerManagement"
-        "programs"
-        "qt"
-        "qt5"
-        "security"
-        "services"
-        "snapraid"
-        "sound"
-        "specialisation"
-        "stubby"
-        "swapDevices"
-        "system"
-        "systemd"
-        "time"
-        "users"
-        "virtualisation"
-        "xdg"
-        "zramSwap"
-      ];
       legacyOptionModule =
-        { lib, ... }:
+        { config, lib, ... }:
         {
-          imports = map (root: lib.mkAliasOptionModule [ "zenos" "legacy" root ] [ root ]) legacyRoots;
+          options.zenos.legacy = lib.mkOption {
+            type = lib.types.lazyAttrsOf lib.types.raw;
+            readOnly = true;
+            default = removeAttrs config [ "zenos" ];
+            description = "Lazy mirror of the NixOS root excluding zenos";
+          };
         };
       brandingModule =
         {
@@ -338,7 +296,7 @@
             else
               lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflate value f) tree);
 
-          zenTree = loader.generateTree ./pkgs;
+          zenTree = loader.generateTree ./lib/compat/package-recipes;
           mappedTree = interface.buildPackageTree prev registry;
           customTree = if zenTree == { } then { } else inflate zenTree final;
           patchedSeahorse = prev.seahorse.overrideAttrs (old: {
@@ -373,7 +331,6 @@
         inherit
           dslBundleAdapter
           interface
-          optionMappings
           registry
           ;
       };
@@ -381,112 +338,60 @@
       # --- NixOS Modules ---
       nixosModules =
         let
-          zenosTree = loader.generateTree ./modules;
-          legacyTree = loader.generateTree ./legacy/modules;
-          programsTree = loader.generateTree ./program-modules;
+          zenosTree = loader.generateTree ./lib/compat/modules;
+          legacyTree = loader.generateTree ./lib/compat/legacy/modules;
 
-          # [ HM INJECTION ]
-          # Load HM modules for injection into users.
-          # We collect these as a list of paths to pass to user-wrapper.nix via _module.args.
-          zenHmTree = loader.generateTree ./hm-modules;
-          zenHmList = nixpkgs.lib.collect builtins.isPath zenHmTree;
+          # Transitional user-action backend implementations. These are part of
+          # the unified ZenOS module graph, not a separate public module tree.
+          zenUserBackendTree = loader.generateTree ./lib/compat/user-modules;
+          zenUserBackendList = nixpkgs.lib.collect builtins.isPath zenUserBackendTree;
 
-          zenosList = nixpkgs.lib.collect builtins.isPath zenosTree;
-          legacyList = nixpkgs.lib.collect builtins.isPath legacyTree;
-          programsList = nixpkgs.lib.collect builtins.isPath programsTree;
-
-          # Dynamic Injection for Program Modules
-          programInjection =
-            { lib, ... }:
-            {
-              # 1. Define the Options (Type/Structure)
-              options = {
-                users.users = lib.mkOption {
-                  type = lib.types.attrsOf (
-                    lib.types.submodule {
-                      # Extend the user submodule to include 'programs'
-                      imports = [
-                        {
-                          options.programs = {
-                            imports = programsList;
-                          };
-                        }
-                      ];
-                    }
-                  );
-                };
-              };
-
-              # 2. Define the Configuration (Values)
-              config = {
-                system.programs = {
-                  imports = programsList;
-                };
-              };
-            };
+          coreModules = nixpkgs.lib.collect builtins.isPath zenosTree.core;
+          gnomeBaseModule = zenosTree.desktops.gnome.base."module.nix";
+          transitionalSystemModules = [
+            ./lib/compat/system-modules/installed-base.nix
+            ./lib/compat/system-modules/disks.nix
+            ./lib/compat/system-modules/oobe.nix
+            ./lib/compat/system-modules/webapps.nix
+          ];
         in
         {
           zenos = zenosTree;
           legacy = legacyTree;
-          programs = programsTree;
           masterful-gestures = inputs.masterful-gestures.nixosModules.default;
           installed-base = {
-            imports = [ ./nixos-modules/installed-base.nix ];
+            imports = [ ./lib/compat/system-modules/installed-base.nix ];
             nix.registry.zenpkgs.flake = self;
           };
-          disks = ./nixos-modules/disks.nix;
-          oobe = ./nixos-modules/oobe.nix;
+          disks = ./lib/compat/system-modules/disks.nix;
+          oobe = ./lib/compat/system-modules/oobe.nix;
           webapps = {
             imports = [
               inputs.home-manager.nixosModules.home-manager
-              ./nixos-modules/webapps.nix
+              ./lib/compat/system-modules/webapps.nix
             ];
           };
-          # popcorn-cache = ./nixos-modules/popcorn-cache.nix;
+          # Popcorn remains disabled pending a complete module.
           interface = {
             imports = [
-              # ./nixos-modules/popcorn-cache.nix
-              (interface.mkOptionModule optionMappings)
               legacyOptionModule
               brandingModule
-              inputs.masterful-gestures.nixosModules.default
             ];
           };
 
           default = {
-            # Pass the collected HM modules to the system arguments.
-            # This allows user-wrapper.nix to access them via { zenUserModules, ... }
-            _module.args.zenUserModules = zenHmList;
+            _module.args.zenUserModules = zenUserBackendList;
+            nix.registry.zenpkgs.flake = self;
 
             imports = [
-              ./structure.nix
-              # ./nixos-modules/popcorn-cache.nix
+              inputs.home-manager.nixosModules.home-manager
+              inputs.disko.nixosModules.disko
               legacyOptionModule
               brandingModule
-              inputs.masterful-gestures.nixosModules.default
-              programInjection
-              (interface.mkOptionModule optionMappings)
             ]
-            ++ zenosList
-            ++ legacyList;
-          };
-        }
-        // zenosTree;
-
-      # --- Home Manager Modules ---
-      homeManagerModules =
-        let
-          zenosTree = loader.generateTree ./hm-modules;
-          legacyTree = loader.generateTree ./legacy/home;
-
-          zenosList = nixpkgs.lib.collect builtins.isPath zenosTree;
-          legacyList = nixpkgs.lib.collect builtins.isPath legacyTree;
-        in
-        {
-          zenos = zenosTree;
-          legacy = legacyTree;
-          default = {
-            imports = zenosList ++ legacyList;
+            ++ coreModules
+            ++ [ gnomeBaseModule ]
+            ++ transitionalSystemModules;
           };
         }
         // zenosTree;
@@ -622,31 +527,54 @@
               .settings."org/gnome/shell".enabled-extensions == [ "forge@jmmaranan.com" ];
             pkgs.runCommand "zenpkgs-gnome-base-check" { } "touch $out";
           source-policy = pkgs.runCommand "zenpkgs-source-policy-check" { src = self; } ''
-            if [ -e "$src/dsl" ]; then
-              echo "dsl/ must not exist; DSL sources belong in named root trees" >&2
+            required='AGENTS.md LICENSE docs flake.lock flake.nix lib modules pkgs readme.md scripts structure.zstr tests'
+            allowed="$required .git .gitignore .github .vscode"
+            for name in AGENTS.md LICENSE flake.lock flake.nix readme.md structure.zstr; do
+              if [ ! -f "$src/$name" ] || [ -L "$src/$name" ]; then
+                echo "required ZenPkgs root file is missing or invalid: $name" >&2
+                exit 1
+              fi
+            done
+            for name in docs lib modules pkgs scripts tests; do
+              if [ ! -d "$src/$name" ] || [ -L "$src/$name" ]; then
+                echo "required ZenPkgs root directory is missing or invalid: $name" >&2
+                exit 1
+              fi
+            done
+            if [ -e "$src/.gitignore" ] && { [ ! -f "$src/.gitignore" ] || [ -L "$src/.gitignore" ]; }; then
+              echo "ZenPkgs .gitignore must be a regular file" >&2
               exit 1
             fi
+            for name in .git .github .vscode; do
+              if [ -e "$src/$name" ] && { [ ! -d "$src/$name" ] || [ -L "$src/$name" ]; }; then
+                echo "ZenPkgs $name must be a directory" >&2
+                exit 1
+              fi
+            done
 
-            if [ -e "$src/mappings/packages.nix" ]; then
-              echo "mappings/packages.nix must not be used for package declarations" >&2
+            for entry in "$src"/* "$src"/.[!.]* "$src"/..?*; do
+              [ -e "$entry" ] || [ -L "$entry" ] || continue
+              name="''${entry##*/}"
+              case " $allowed " in
+                *" $name "*) ;;
+                *) echo "forbidden ZenPkgs root entry: $name" >&2; exit 1 ;;
+              esac
+              if [ -L "$entry" ]; then
+                echo "symlinked ZenPkgs root entry is forbidden: $name" >&2
+                exit 1
+              fi
+            done
+
+            invalid_package="$(${pkgs.findutils}/bin/find "$src/pkgs" \
+              \( -type l -o -type f ! -name '*.zpkg' \) -print -quit)"
+            if [ -n "$invalid_package" ]; then
+              echo "only ZPKG files are allowed in pkgs/: $invalid_package" >&2
               exit 1
             fi
-
-            bundled_dir="$(${pkgs.findutils}/bin/find "$src/pkgs" -type d \
-              \( -name src -o -name resources -o -name assets \) -print -quit)"
-            if [ -n "$bundled_dir" ]; then
-              echo "bundled package source directory is forbidden: $bundled_dir" >&2
-              exit 1
-            fi
-
-            bundled_file="$(${pkgs.findutils}/bin/find "$src/pkgs" -type f \
-              \( -name '*.zip' -o -name '*.tar' -o -name '*.tar.gz' \
-              -o -name '*.png' -o -name '*.jpg' -o -name '*.jpeg' \
-              -o -name '*.svg' -o -name '*.ttf' -o -name '*.otf' \
-              -o -name '*.woff' -o -name '*.woff2' -o -name '*.mp4' \
-              -o -name '*.webm' \) -print -quit)"
-            if [ -n "$bundled_file" ]; then
-              echo "bundled package payload is forbidden: $bundled_file" >&2
+            invalid_module="$(${pkgs.findutils}/bin/find "$src/modules" \
+              \( -type l -o -type f ! -name '*.zmdl' \) -print -quit)"
+            if [ -n "$invalid_module" ]; then
+              echo "only ZMDL files are allowed in modules/: $invalid_module" >&2
               exit 1
             fi
 
@@ -656,6 +584,11 @@
           oobe = installedSystemChecks.oobe;
           webapps = installedSystemChecks.webapps;
           dsl-module-contract = dslModuleContract;
+          zen-dsl = dsl.zenDsl;
+          dsl-vm = import ./tests/zen-dsl/vm.nix {
+            inherit pkgs;
+            zenDsl = dsl.zenDsl;
+          };
         }
         // registryChecks
       );

@@ -1,4 +1,4 @@
-# Source: modules/desktops/gnome/base/module.nix
+# Transitional parity source: lib/compat/modules/desktops/gnome/base/module.nix
 # Schema migration: the canonical module id uses path-derived desktops.gnome.
 _meta = {
   zenosVersion = 1.0.0Na;

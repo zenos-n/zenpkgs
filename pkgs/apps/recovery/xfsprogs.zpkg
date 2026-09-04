@@ -1,5 +1,16 @@
-id = "xfsprogs";
-sourcePath = [ "xfsprogs" ];
-aliases = [ [ "catalog" "xfsprogs" ] ];
-status = "active";
-meta = { displayName = "xfsprogs"; summary = "Curated xfsprogs package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };
+_meta = {
+  _name = "xfsprogs";
+  _summary = "Curated xfsprogs package for ZenOS";
+  _description = "Curated xfsprogs package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.xfsprogs;

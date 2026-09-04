@@ -1,4 +1,4 @@
-# Source: hm-modules/zenlink/module.nix
+# Transitional parity source: lib/compat/user-modules/zenlink/module.nix
 # Unsupported: internal/readOnly/defaultText option fields have no ZMDL equivalents.
 _meta = {
   zenosVersion = 1.0.0Na;

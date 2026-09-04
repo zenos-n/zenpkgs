@@ -1,5 +1,16 @@
-id = "app-hider";
-sourcePath = [ "gnomeExtensions" "app-hider" ];
-aliases = [ [ "catalog" "app-hider" ] ];
-status = "active";
-meta = { displayName = "app-hider"; summary = "Curated app-hider package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };
+_meta = {
+  _name = "app-hider";
+  _summary = "Curated app-hider package for ZenOS";
+  _description = "Curated app-hider package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.gnomeExtensions.app-hider;

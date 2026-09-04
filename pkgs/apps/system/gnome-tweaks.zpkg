@@ -1,5 +1,16 @@
-id = "gnome-tweaks";
-sourcePath = [ "gnome-tweaks" ];
-aliases = [ [ "catalog" "gnome-tweaks" ] ];
-status = "active";
-meta = { displayName = "gnome-tweaks"; summary = "Curated gnome-tweaks package for ZenOS"; support = "curated"; tags = [ ]; category = "system"; };
+_meta = {
+  _name = "gnome-tweaks";
+  _summary = "Curated gnome-tweaks package for ZenOS";
+  _description = "Curated gnome-tweaks package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.gnome-tweaks;

@@ -1,5 +1,16 @@
-id = "compiz-windows-effect";
-sourcePath = [ "gnomeExtensions" "compiz-windows-effect" ];
-aliases = [ [ "catalog" "compiz-windows-effect" ] ];
-status = "active";
-meta = { displayName = "compiz-windows-effect"; summary = "Curated compiz-windows-effect package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };
+_meta = {
+  _name = "compiz-windows-effect";
+  _summary = "Curated compiz-windows-effect package for ZenOS";
+  _description = "Curated compiz-windows-effect package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.gnomeExtensions.compiz-windows-effect;

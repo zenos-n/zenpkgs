@@ -8,10 +8,10 @@ let
   cfg = config.zenos.system.webApps;
   normalUsers = lib.filterAttrs (_: user: user.isNormalUser) config.users.users;
   webAppModules = [
-    ../hm-modules/webapps/module.nix
-    ../hm-modules/webapps/firefox/module.nix
-    ../hm-modules/webapps/brave/module.nix
-    ../hm-modules/webapps/chrome/module.nix
+    ../user-modules/webapps/module.nix
+    ../user-modules/webapps/firefox/module.nix
+    ../user-modules/webapps/brave/module.nix
+    ../user-modules/webapps/chrome/module.nix
   ];
 in
 {

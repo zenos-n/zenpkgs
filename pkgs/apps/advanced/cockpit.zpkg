@@ -1,5 +1,16 @@
-id = "cockpit";
-sourcePath = [ "cockpit" ];
-aliases = [ [ "catalog" "cockpit" ] ];
-status = "active";
-meta = { displayName = "cockpit"; summary = "Curated cockpit package for ZenOS"; support = "curated"; tags = [ ]; category = "advanced"; };
+_meta = {
+  _name = "cockpit";
+  _summary = "Curated cockpit package for ZenOS";
+  _description = "Curated cockpit package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.cockpit;

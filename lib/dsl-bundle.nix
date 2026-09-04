@@ -104,6 +104,8 @@ let
       decodeAssignments value.statements
     else if value.type == "group" then
       decodeValue value.value
+    else if value.type == "variable" then
+      "${"$"}${value.name}${lib.optionalString (value.path != [ ]) ".${lib.concatStringsSep "." (pathFromDescriptor value.path)}"}"
     else
       throw "ZenPkgs DSL adapter cannot decode ${value.type or "an unknown value type"}"
     ;
@@ -123,36 +125,43 @@ let
   decodeInterface =
     descriptor:
     let
-      fields = lib.foldl' (
-        result: field:
-        lib.recursiveUpdate result (lib.setAttrByPath field.path (decodeValue field.value))
-      ) { } descriptor.fields;
-      expectedFields = [
-        "aliases"
-        "id"
-        "meta"
-        "sourcePath"
-        "status"
-      ];
+      metadata = lib.mapAttrs (_: decodeValue) descriptor.metadata;
+      packageImport = descriptor.packageImport;
+      importPath = pathFromDescriptor packageImport.path;
+      dependencies = metadata.dependencies or { };
+      normalizeMaintainer = value: lib.removePrefix "$m." value;
+      meta = removeAttrs metadata [ "dependencies" ] // {
+        packageVersion =
+          if (metadata.packageVersion or "") == "" then
+            metadata.zenosVersion
+          else
+            metadata.packageVersion;
+        maintainers = map normalizeMaintainer (metadata.maintainers or [ ]);
+        dependencies = {
+          general = dependencies._general or [ ];
+          build = dependencies._build or [ ];
+          runtime = dependencies._runtime or [ ];
+        };
+      };
     in
     assert descriptor.descriptorVersion == "zenlang.semantic/2";
     assert descriptor.kind == "zpkg";
     assert descriptor.imports == [ ];
-    assert descriptor.dependencies == {
-      global = [ ];
-      build = [ ];
-      run = [ ];
-      export = [ ];
-    };
-    assert builtins.attrNames fields == expectedFields;
+    assert packageImport.type == "variable";
+    assert packageImport.name == "pkgs";
+    assert builtins.length importPath >= 2;
+    assert builtins.head importPath == "legacy";
+    assert builtins.all (field: builtins.hasAttr field metadata) [
+      "description"
+      "maintainers"
+      "name"
+      "summary"
+      "tags"
+      "zenosVersion"
+    ];
     {
-      inherit (fields)
-        aliases
-        id
-        meta
-        sourcePath
-        status
-        ;
+      inherit meta;
+      sourcePath = builtins.tail importPath;
     };
 
 in
@@ -233,12 +242,13 @@ in
           source = canonical.source;
           entry = decodeInterface (import (bundlePath + "/interfaces/${source.path}.nix") { });
         in
-        require (entry.id == canonical.id)
-          "package ${source.path} id must match leaf ${canonical.id}, got ${entry.id}"
-          {
-            inherit source;
-            entry = entry // { target = canonical.target; };
-          }
+        {
+          inherit source;
+          entry = entry // {
+            id = canonical.id;
+            target = canonical.target;
+          };
+        }
       ) sources;
       ordered = lib.sort (
         left: right:

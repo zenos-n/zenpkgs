@@ -1,4 +1,4 @@
-# Source: nixos-modules/webapps.nix
+# Transitional parity source: lib/compat/system-modules/webapps.nix
 # Metadata is synthesized because the contributor module has no top-level meta set.
 # Unsupported: importing the four Home Manager Nix modules is not valid ZMDL; this bridge assumes
 # the corresponding user ZMDLs are attached by ZSTR before per-user values are forwarded.

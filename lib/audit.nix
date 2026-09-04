@@ -216,9 +216,5 @@ in
       map (m: auditModule m "nixos") (collectModules flake.nixosModules)
     );
 
-    # Check 3: Home Manager Modules
-    hmModules = lib.filter (x: x != null) (
-      map (m: auditModule m "home-manager") (collectModules flake.homeManagerModules)
-    );
   };
 }

@@ -1,5 +1,0 @@
-id = "flatseal";
-sourcePath = null;
-aliases = [ ];
-status = "unavailable";
-meta = { displayName = "flatseal"; summary = "Curated flatseal package for ZenOS"; support = "curated"; tags = [ ]; category = "utilities"; };

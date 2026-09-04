@@ -1,0 +1,82 @@
+_meta = {
+  zenosVersion = 0.1.0;
+  id = "zenos.structure";
+  brief = "ZenOS configuration structure";
+  description = "Canonical roots and routing for ZenOS configuration.";
+  maintainers = [ $m.doromiert ];
+  license = $l.napalm;
+};
+
+# This root is reserved for Zen DSL routes to upstream options. D13 still
+# decides the granularity of the typed aliases placed below it.
+legacy = {
+  _meta = {
+    brief = "Upstream options exposed through Zen DSL";
+    description = "Typed compatibility routes to pinned upstream options.";
+    maintainers = [ ];
+  };
+};
+
+system = {
+  _meta = {
+    brief = "Global system configuration for ZenOS";
+    description = "Core configuration that applies globally.";
+    maintainers = [ $m.doromiert ];
+  };
+  packages = {
+    _meta = {
+      type = (packages);
+      brief = "System package selectors";
+      description = "Boolean selectors over the pkgs.zenos tree.";
+      maintainers = [ $m.doromiert ];
+    };
+  };
+  programs = {
+    _meta = {
+      type = (programs);
+      brief = "System program selectors";
+      description = "Typed program configuration in system scope.";
+      maintainers = [ $m.doromiert ];
+    };
+  };
+};
+
+# modules/desktops/gnome.zmdl contributes zenos.desktops.gnome mechanically.
+# ZSTR permits the root but does not attach or register that module.
+desktops = {
+  _meta = {
+    brief = "Desktop environments";
+    description = "Desktop environment and window manager configuration.";
+    maintainers = [ $m.doromiert ];
+  };
+};
+
+users = {
+  _meta = {
+    brief = "Per-user configuration";
+    description = "Configuration and selectors scoped to individual users.";
+    maintainers = [ $m.doromiert ];
+  };
+  (freeform user) = {
+    _meta = {
+      brief = "User options";
+      description = "Configuration for user $f.user.";
+    };
+    packages = {
+      _meta = {
+        type = (packages);
+        brief = "User package selectors";
+        description = "Boolean selectors over the pkgs.zenos tree.";
+        maintainers = [ $m.doromiert ];
+      };
+    };
+    programs = {
+      _meta = {
+        type = (programs);
+        brief = "User program selectors";
+        description = "Typed program configuration in user scope.";
+        maintainers = [ $m.doromiert ];
+      };
+    };
+  };
+};

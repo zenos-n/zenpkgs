@@ -1,4 +1,4 @@
-# Source: modules/core/system-meta.nix
+# Transitional parity source: lib/compat/modules/core/system-meta.nix
 # Unsupported: internal/readOnly option flags have no ZMDL fields.
 _meta = {
   zenosVersion = 1.0.0Na;

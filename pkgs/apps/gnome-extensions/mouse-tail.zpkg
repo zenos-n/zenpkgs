@@ -1,5 +1,16 @@
-id = "mouse-tail";
-sourcePath = [ "gnomeExtensions" "mouse-tail" ];
-aliases = [ [ "catalog" "mouse-tail" ] ];
-status = "active";
-meta = { displayName = "mouse-tail"; summary = "Curated mouse-tail package for ZenOS"; support = "core"; tags = [ "system" ]; category = "gnome-extensions"; };
+_meta = {
+  _name = "mouse-tail";
+  _summary = "Curated mouse-tail package for ZenOS";
+  _description = "Curated mouse-tail package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.gnomeExtensions.mouse-tail;

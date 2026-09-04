@@ -1,5 +1,16 @@
-id = "gnome-disks";
-sourcePath = [ "gnome-disk-utility" ];
-aliases = [ [ "catalog" "gnome-disks" ] ];
-status = "active";
-meta = { displayName = "gnome-disks"; summary = "Curated gnome-disks package for ZenOS"; support = "core"; tags = [ "system" ]; category = "recovery"; };
+_meta = {
+  _name = "gnome-disks";
+  _summary = "Curated gnome-disks package for ZenOS";
+  _description = "Curated gnome-disks package for ZenOS";
+  _zenosVersion = "1.0.0";
+  _packageVersion = "";
+  _tags = [ "system" ];
+  _maintainers = [ $m.doromiert ];
+  _dependencies = {
+    _general = [ ];
+    _build = [ ];
+    _runtime = [ ];
+  };
+};
+
+import $pkgs.legacy.gnome-disk-utility;
