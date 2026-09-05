@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "packages": [
     {
-      "id": "firefox",
+      "id": "pkgs.apps.browsers.firefox",
       "target": [
         "apps",
         "browsers",
@@ -14,7 +14,7 @@
       "meta": {
         "name": "Mozilla Firefox",
         "summary": "Curated Mozilla Firefox package for ZenOS",
-        "description": "Curated Mozilla Firefox package for ZenOS",
+        "description": "\n    Curated Mozilla Firefox package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -28,11 +28,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "librewolf",
+      "id": "pkgs.apps.browsers.librewolf",
       "target": [
         "apps",
         "browsers",
@@ -44,7 +45,7 @@
       "meta": {
         "name": "librewolf",
         "summary": "Curated librewolf package for ZenOS",
-        "description": "Curated librewolf package for ZenOS",
+        "description": "\n    Curated librewolf package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -55,11 +56,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "ungoogled-chromium",
+      "id": "pkgs.apps.browsers.ungoogled-chromium",
       "target": [
         "apps",
         "browsers",
@@ -71,7 +73,7 @@
       "meta": {
         "name": "ungoogled-chromium",
         "summary": "Curated ungoogled-chromium package for ZenOS",
-        "description": "Curated ungoogled-chromium package for ZenOS",
+        "description": "\n    Curated ungoogled-chromium package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -82,11 +84,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "brave-browser",
+      "id": "pkgs.apps.browsers.brave-browser",
       "target": [
         "apps",
         "browsers",
@@ -98,7 +101,7 @@
       "meta": {
         "name": "Brave",
         "summary": "Curated Brave package for ZenOS",
-        "description": "Curated Brave package for ZenOS",
+        "description": "\n    Curated Brave package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -109,11 +112,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "epiphany",
+      "id": "pkgs.apps.browsers.epiphany",
       "target": [
         "apps",
         "browsers",
@@ -125,7 +129,7 @@
       "meta": {
         "name": "epiphany",
         "summary": "Curated epiphany package for ZenOS",
-        "description": "Curated epiphany package for ZenOS",
+        "description": "\n    Curated epiphany package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -136,11 +140,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "tor-browser",
+      "id": "pkgs.apps.browsers.tor-browser",
       "target": [
         "apps",
         "browsers",
@@ -152,7 +157,7 @@
       "meta": {
         "name": "tor-browser",
         "summary": "Curated tor-browser package for ZenOS",
-        "description": "Curated tor-browser package for ZenOS",
+        "description": "\n    Curated tor-browser package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -163,11 +168,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "steam",
+      "id": "pkgs.apps.gaming.steam",
       "target": [
         "apps",
         "gaming",
@@ -179,7 +185,7 @@
       "meta": {
         "name": "steam",
         "summary": "Curated steam package for ZenOS",
-        "description": "Curated steam package for ZenOS",
+        "description": "\n    Curated steam package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -190,11 +196,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "heroic",
+      "id": "pkgs.apps.gaming.heroic",
       "target": [
         "apps",
         "gaming",
@@ -206,7 +213,7 @@
       "meta": {
         "name": "heroic",
         "summary": "Curated heroic package for ZenOS",
-        "description": "Curated heroic package for ZenOS",
+        "description": "\n    Curated heroic package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -217,11 +224,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "lutris",
+      "id": "pkgs.apps.gaming.lutris",
       "target": [
         "apps",
         "gaming",
@@ -233,7 +241,7 @@
       "meta": {
         "name": "lutris",
         "summary": "Curated lutris package for ZenOS",
-        "description": "Curated lutris package for ZenOS",
+        "description": "\n    Curated lutris package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -244,11 +252,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "bottles",
+      "id": "pkgs.apps.gaming.bottles",
       "target": [
         "apps",
         "gaming",
@@ -260,7 +269,7 @@
       "meta": {
         "name": "bottles",
         "summary": "Curated bottles package for ZenOS",
-        "description": "Curated bottles package for ZenOS",
+        "description": "\n    Curated bottles package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -271,11 +280,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "prism-launcher",
+      "id": "pkgs.apps.gaming.prism-launcher",
       "target": [
         "apps",
         "gaming",
@@ -287,7 +297,7 @@
       "meta": {
         "name": "prism-launcher",
         "summary": "Curated prism-launcher package for ZenOS",
-        "description": "Curated prism-launcher package for ZenOS",
+        "description": "\n    Curated prism-launcher package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -298,11 +308,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "retroarch",
+      "id": "pkgs.apps.gaming.retroarch",
       "target": [
         "apps",
         "gaming",
@@ -314,7 +325,7 @@
       "meta": {
         "name": "retroarch",
         "summary": "Curated retroarch package for ZenOS",
-        "description": "Curated retroarch package for ZenOS",
+        "description": "\n    Curated retroarch package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -325,11 +336,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "vscode",
+      "id": "pkgs.apps.development.vscode",
       "target": [
         "apps",
         "development",
@@ -341,7 +353,7 @@
       "meta": {
         "name": "vscode",
         "summary": "Curated vscode package for ZenOS",
-        "description": "Curated vscode package for ZenOS",
+        "description": "\n    Curated vscode package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -352,11 +364,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "zed",
+      "id": "pkgs.apps.development.zed",
       "target": [
         "apps",
         "development",
@@ -368,7 +381,7 @@
       "meta": {
         "name": "zed",
         "summary": "Curated zed package for ZenOS",
-        "description": "Curated zed package for ZenOS",
+        "description": "\n    Curated zed package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -379,11 +392,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gnome-builder",
+      "id": "pkgs.apps.development.gnome-builder",
       "target": [
         "apps",
         "development",
@@ -395,7 +409,7 @@
       "meta": {
         "name": "gnome-builder",
         "summary": "Curated gnome-builder package for ZenOS",
-        "description": "Curated gnome-builder package for ZenOS",
+        "description": "\n    Curated gnome-builder package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -406,11 +420,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "neovim",
+      "id": "pkgs.apps.development.neovim",
       "target": [
         "apps",
         "development",
@@ -422,7 +437,7 @@
       "meta": {
         "name": "neovim",
         "summary": "Curated neovim package for ZenOS",
-        "description": "Curated neovim package for ZenOS",
+        "description": "\n    Curated neovim package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -433,11 +448,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "helix",
+      "id": "pkgs.apps.development.helix",
       "target": [
         "apps",
         "development",
@@ -449,7 +465,7 @@
       "meta": {
         "name": "helix",
         "summary": "Curated helix package for ZenOS",
-        "description": "Curated helix package for ZenOS",
+        "description": "\n    Curated helix package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -460,11 +476,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gitg",
+      "id": "pkgs.apps.development.gitg",
       "target": [
         "apps",
         "development",
@@ -476,7 +493,7 @@
       "meta": {
         "name": "gitg",
         "summary": "Curated gitg package for ZenOS",
-        "description": "Curated gitg package for ZenOS",
+        "description": "\n    Curated gitg package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -487,11 +504,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "github-cli",
+      "id": "pkgs.apps.development.github-cli",
       "target": [
         "apps",
         "development",
@@ -503,7 +521,7 @@
       "meta": {
         "name": "github-cli",
         "summary": "Curated github-cli package for ZenOS",
-        "description": "Curated github-cli package for ZenOS",
+        "description": "\n    Curated github-cli package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -514,11 +532,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "docker",
+      "id": "pkgs.apps.development.docker",
       "target": [
         "apps",
         "development",
@@ -530,7 +549,7 @@
       "meta": {
         "name": "docker",
         "summary": "Curated docker package for ZenOS",
-        "description": "Curated docker package for ZenOS",
+        "description": "\n    Curated docker package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -541,11 +560,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "jetbrains-toolbox",
+      "id": "pkgs.apps.development.jetbrains-toolbox",
       "target": [
         "apps",
         "development",
@@ -557,7 +577,7 @@
       "meta": {
         "name": "jetbrains-toolbox",
         "summary": "Curated jetbrains-toolbox package for ZenOS",
-        "description": "Curated jetbrains-toolbox package for ZenOS",
+        "description": "\n    Curated jetbrains-toolbox package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -568,11 +588,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "nautilus",
+      "id": "pkgs.apps.system.nautilus",
       "target": [
         "apps",
         "system",
@@ -584,7 +605,7 @@
       "meta": {
         "name": "nautilus",
         "summary": "Curated nautilus package for ZenOS",
-        "description": "Curated nautilus package for ZenOS",
+        "description": "\n    Curated nautilus package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -595,11 +616,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "nautilus-python",
+      "id": "pkgs.apps.system.nautilus-python",
       "target": [
         "apps",
         "system",
@@ -611,7 +633,7 @@
       "meta": {
         "name": "nautilus-python",
         "summary": "Curated nautilus-python package for ZenOS",
-        "description": "Curated nautilus-python package for ZenOS",
+        "description": "\n    Curated nautilus-python package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -622,11 +644,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gnome-console",
+      "id": "pkgs.apps.system.gnome-console",
       "target": [
         "apps",
         "system",
@@ -638,7 +661,7 @@
       "meta": {
         "name": "gnome-console",
         "summary": "Curated gnome-console package for ZenOS",
-        "description": "Curated gnome-console package for ZenOS",
+        "description": "\n    Curated gnome-console package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -649,11 +672,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gnome-system-monitor",
+      "id": "pkgs.apps.system.gnome-system-monitor",
       "target": [
         "apps",
         "system",
@@ -665,7 +689,7 @@
       "meta": {
         "name": "gnome-system-monitor",
         "summary": "Curated gnome-system-monitor package for ZenOS",
-        "description": "Curated gnome-system-monitor package for ZenOS",
+        "description": "\n    Curated gnome-system-monitor package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -676,11 +700,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gnome-control-center",
+      "id": "pkgs.apps.system.gnome-control-center",
       "target": [
         "apps",
         "system",
@@ -692,7 +717,7 @@
       "meta": {
         "name": "gnome-control-center",
         "summary": "Curated gnome-control-center package for ZenOS",
-        "description": "Curated gnome-control-center package for ZenOS",
+        "description": "\n    Curated gnome-control-center package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -703,11 +728,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gnome-extensions-app",
+      "id": "pkgs.apps.system.gnome-extensions-app",
       "target": [
         "apps",
         "system",
@@ -719,7 +745,7 @@
       "meta": {
         "name": "gnome-extensions-app",
         "summary": "Curated gnome-extensions-app package for ZenOS",
-        "description": "Curated gnome-extensions-app package for ZenOS",
+        "description": "\n    Curated gnome-extensions-app package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -730,11 +756,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gnome-tweaks",
+      "id": "pkgs.apps.system.gnome-tweaks",
       "target": [
         "apps",
         "system",
@@ -746,7 +773,7 @@
       "meta": {
         "name": "gnome-tweaks",
         "summary": "Curated gnome-tweaks package for ZenOS",
-        "description": "Curated gnome-tweaks package for ZenOS",
+        "description": "\n    Curated gnome-tweaks package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -757,11 +784,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "kitty",
+      "id": "pkgs.apps.system.kitty",
       "target": [
         "apps",
         "system",
@@ -773,7 +801,7 @@
       "meta": {
         "name": "kitty",
         "summary": "Curated kitty package for ZenOS",
-        "description": "Curated kitty package for ZenOS",
+        "description": "\n    Curated kitty package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -784,11 +812,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "btop",
+      "id": "pkgs.apps.system.btop",
       "target": [
         "apps",
         "system",
@@ -800,7 +829,7 @@
       "meta": {
         "name": "btop",
         "summary": "Curated btop package for ZenOS",
-        "description": "Curated btop package for ZenOS",
+        "description": "\n    Curated btop package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -811,11 +840,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "fish",
+      "id": "pkgs.apps.system.fish",
       "target": [
         "apps",
         "system",
@@ -827,7 +857,7 @@
       "meta": {
         "name": "fish",
         "summary": "Curated fish package for ZenOS",
-        "description": "Curated fish package for ZenOS",
+        "description": "\n    Curated fish package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -838,11 +868,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "zsh",
+      "id": "pkgs.apps.system.zsh",
       "target": [
         "apps",
         "system",
@@ -854,7 +885,7 @@
       "meta": {
         "name": "zsh",
         "summary": "Curated zsh package for ZenOS",
-        "description": "Curated zsh package for ZenOS",
+        "description": "\n    Curated zsh package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -865,11 +896,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "ncurses",
+      "id": "pkgs.apps.system.ncurses",
       "target": [
         "apps",
         "system",
@@ -881,7 +913,7 @@
       "meta": {
         "name": "ncurses",
         "summary": "Curated ncurses package for ZenOS",
-        "description": "Curated ncurses package for ZenOS",
+        "description": "\n    Curated ncurses package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -892,11 +924,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "eza",
+      "id": "pkgs.apps.system.eza",
       "target": [
         "apps",
         "system",
@@ -908,7 +941,7 @@
       "meta": {
         "name": "eza",
         "summary": "Curated eza package for ZenOS",
-        "description": "Curated eza package for ZenOS",
+        "description": "\n    Curated eza package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -919,11 +952,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "pika-backup",
+      "id": "pkgs.apps.utilities.pika-backup",
       "target": [
         "apps",
         "utilities",
@@ -935,7 +969,7 @@
       "meta": {
         "name": "pika-backup",
         "summary": "Curated pika-backup package for ZenOS",
-        "description": "Curated pika-backup package for ZenOS",
+        "description": "\n    Curated pika-backup package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -946,11 +980,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "metadata-cleaner",
+      "id": "pkgs.apps.utilities.metadata-cleaner",
       "target": [
         "apps",
         "utilities",
@@ -962,7 +997,7 @@
       "meta": {
         "name": "metadata-cleaner",
         "summary": "Curated metadata-cleaner package for ZenOS",
-        "description": "Curated metadata-cleaner package for ZenOS",
+        "description": "\n    Curated metadata-cleaner package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -973,11 +1008,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "curtail",
+      "id": "pkgs.apps.utilities.curtail",
       "target": [
         "apps",
         "utilities",
@@ -989,7 +1025,7 @@
       "meta": {
         "name": "curtail",
         "summary": "Curated curtail package for ZenOS",
-        "description": "Curated curtail package for ZenOS",
+        "description": "\n    Curated curtail package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1000,11 +1036,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gnome-boxes",
+      "id": "pkgs.apps.utilities.gnome-boxes",
       "target": [
         "apps",
         "utilities",
@@ -1016,7 +1053,7 @@
       "meta": {
         "name": "gnome-boxes",
         "summary": "Curated gnome-boxes package for ZenOS",
-        "description": "Curated gnome-boxes package for ZenOS",
+        "description": "\n    Curated gnome-boxes package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1027,11 +1064,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "file-roller",
+      "id": "pkgs.apps.utilities.file-roller",
       "target": [
         "apps",
         "utilities",
@@ -1043,7 +1081,7 @@
       "meta": {
         "name": "file-roller",
         "summary": "Curated file-roller package for ZenOS",
-        "description": "Curated file-roller package for ZenOS",
+        "description": "\n    Curated file-roller package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1054,11 +1092,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "impression",
+      "id": "pkgs.apps.utilities.impression",
       "target": [
         "apps",
         "utilities",
@@ -1070,7 +1109,7 @@
       "meta": {
         "name": "impression",
         "summary": "Curated impression package for ZenOS",
-        "description": "Curated impression package for ZenOS",
+        "description": "\n    Curated impression package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1081,11 +1120,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "cipher",
+      "id": "pkgs.apps.utilities.cipher",
       "target": [
         "apps",
         "utilities",
@@ -1097,7 +1137,7 @@
       "meta": {
         "name": "cipher",
         "summary": "Curated cipher package for ZenOS",
-        "description": "Curated cipher package for ZenOS",
+        "description": "\n    Curated cipher package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1108,11 +1148,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "resources",
+      "id": "pkgs.apps.utilities.resources",
       "target": [
         "apps",
         "utilities",
@@ -1124,7 +1165,7 @@
       "meta": {
         "name": "resources",
         "summary": "Curated resources package for ZenOS",
-        "description": "Curated resources package for ZenOS",
+        "description": "\n    Curated resources package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1135,11 +1176,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "mission-center",
+      "id": "pkgs.apps.utilities.mission-center",
       "target": [
         "apps",
         "utilities",
@@ -1151,7 +1193,7 @@
       "meta": {
         "name": "mission-center",
         "summary": "Curated mission-center package for ZenOS",
-        "description": "Curated mission-center package for ZenOS",
+        "description": "\n    Curated mission-center package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1162,11 +1204,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "libreoffice",
+      "id": "pkgs.apps.office.libreoffice",
       "target": [
         "apps",
         "office",
@@ -1178,7 +1221,7 @@
       "meta": {
         "name": "libreoffice",
         "summary": "Curated libreoffice package for ZenOS",
-        "description": "Curated libreoffice package for ZenOS",
+        "description": "\n    Curated libreoffice package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1189,11 +1232,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "onlyoffice",
+      "id": "pkgs.apps.office.onlyoffice",
       "target": [
         "apps",
         "office",
@@ -1205,7 +1249,7 @@
       "meta": {
         "name": "onlyoffice",
         "summary": "Curated onlyoffice package for ZenOS",
-        "description": "Curated onlyoffice package for ZenOS",
+        "description": "\n    Curated onlyoffice package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1216,11 +1260,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "thunderbird",
+      "id": "pkgs.apps.office.thunderbird",
       "target": [
         "apps",
         "office",
@@ -1232,7 +1277,7 @@
       "meta": {
         "name": "thunderbird",
         "summary": "Curated thunderbird package for ZenOS",
-        "description": "Curated thunderbird package for ZenOS",
+        "description": "\n    Curated thunderbird package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1243,11 +1288,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "obsidian",
+      "id": "pkgs.apps.office.obsidian",
       "target": [
         "apps",
         "office",
@@ -1259,7 +1305,7 @@
       "meta": {
         "name": "obsidian",
         "summary": "Curated obsidian package for ZenOS",
-        "description": "Curated obsidian package for ZenOS",
+        "description": "\n    Curated obsidian package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1270,11 +1316,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "apostrophe",
+      "id": "pkgs.apps.office.apostrophe",
       "target": [
         "apps",
         "office",
@@ -1286,7 +1333,7 @@
       "meta": {
         "name": "apostrophe",
         "summary": "Curated apostrophe package for ZenOS",
-        "description": "Curated apostrophe package for ZenOS",
+        "description": "\n    Curated apostrophe package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1297,11 +1344,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "foliate",
+      "id": "pkgs.apps.office.foliate",
       "target": [
         "apps",
         "office",
@@ -1313,7 +1361,7 @@
       "meta": {
         "name": "foliate",
         "summary": "Curated foliate package for ZenOS",
-        "description": "Curated foliate package for ZenOS",
+        "description": "\n    Curated foliate package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1324,11 +1372,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "papers",
+      "id": "pkgs.apps.office.papers",
       "target": [
         "apps",
         "office",
@@ -1340,7 +1389,7 @@
       "meta": {
         "name": "papers",
         "summary": "Curated papers package for ZenOS",
-        "description": "Curated papers package for ZenOS",
+        "description": "\n    Curated papers package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1351,11 +1400,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "virt-manager",
+      "id": "pkgs.apps.advanced.virt-manager",
       "target": [
         "apps",
         "advanced",
@@ -1367,7 +1417,7 @@
       "meta": {
         "name": "virt-manager",
         "summary": "Curated virt-manager package for ZenOS",
-        "description": "Curated virt-manager package for ZenOS",
+        "description": "\n    Curated virt-manager package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1378,11 +1428,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "podman-desktop",
+      "id": "pkgs.apps.advanced.podman-desktop",
       "target": [
         "apps",
         "advanced",
@@ -1394,7 +1445,7 @@
       "meta": {
         "name": "podman-desktop",
         "summary": "Curated podman-desktop package for ZenOS",
-        "description": "Curated podman-desktop package for ZenOS",
+        "description": "\n    Curated podman-desktop package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1405,11 +1456,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "wireshark",
+      "id": "pkgs.apps.advanced.wireshark",
       "target": [
         "apps",
         "advanced",
@@ -1421,7 +1473,7 @@
       "meta": {
         "name": "wireshark",
         "summary": "Curated wireshark package for ZenOS",
-        "description": "Curated wireshark package for ZenOS",
+        "description": "\n    Curated wireshark package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1432,11 +1484,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gparted",
+      "id": "pkgs.apps.advanced.gparted",
       "target": [
         "apps",
         "advanced",
@@ -1448,7 +1501,7 @@
       "meta": {
         "name": "gparted",
         "summary": "Curated gparted package for ZenOS",
-        "description": "Curated gparted package for ZenOS",
+        "description": "\n    Curated gparted package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1459,11 +1512,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "keepassxc",
+      "id": "pkgs.apps.advanced.keepassxc",
       "target": [
         "apps",
         "advanced",
@@ -1475,7 +1529,7 @@
       "meta": {
         "name": "keepassxc",
         "summary": "Curated keepassxc package for ZenOS",
-        "description": "Curated keepassxc package for ZenOS",
+        "description": "\n    Curated keepassxc package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1486,11 +1540,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "bitwarden",
+      "id": "pkgs.apps.advanced.bitwarden",
       "target": [
         "apps",
         "advanced",
@@ -1502,7 +1557,7 @@
       "meta": {
         "name": "bitwarden",
         "summary": "Curated bitwarden package for ZenOS",
-        "description": "Curated bitwarden package for ZenOS",
+        "description": "\n    Curated bitwarden package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1513,11 +1568,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "cockpit",
+      "id": "pkgs.apps.advanced.cockpit",
       "target": [
         "apps",
         "advanced",
@@ -1529,7 +1585,7 @@
       "meta": {
         "name": "cockpit",
         "summary": "Curated cockpit package for ZenOS",
-        "description": "Curated cockpit package for ZenOS",
+        "description": "\n    Curated cockpit package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1540,11 +1596,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "nmap",
+      "id": "pkgs.apps.advanced.nmap",
       "target": [
         "apps",
         "advanced",
@@ -1556,7 +1613,7 @@
       "meta": {
         "name": "nmap",
         "summary": "Curated nmap package for ZenOS",
-        "description": "Curated nmap package for ZenOS",
+        "description": "\n    Curated nmap package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [],
@@ -1567,11 +1624,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "git",
+      "id": "pkgs.apps.development-tools.git",
       "target": [
         "apps",
         "development-tools",
@@ -1583,7 +1641,7 @@
       "meta": {
         "name": "git",
         "summary": "Curated git package for ZenOS",
-        "description": "Curated git package for ZenOS",
+        "description": "\n    Curated git package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1596,11 +1654,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "nano",
+      "id": "pkgs.apps.development-tools.nano",
       "target": [
         "apps",
         "development-tools",
@@ -1612,7 +1671,7 @@
       "meta": {
         "name": "nano",
         "summary": "Curated nano package for ZenOS",
-        "description": "Curated nano package for ZenOS",
+        "description": "\n    Curated nano package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1625,11 +1684,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "openssl",
+      "id": "pkgs.apps.security-tools.openssl",
       "target": [
         "apps",
         "security-tools",
@@ -1641,7 +1701,7 @@
       "meta": {
         "name": "openssl",
         "summary": "Curated openssl package for ZenOS",
-        "description": "Curated openssl package for ZenOS",
+        "description": "\n    Curated openssl package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1654,11 +1714,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gparted-live",
+      "id": "pkgs.apps.recovery.gparted-live",
       "target": [
         "apps",
         "recovery",
@@ -1670,7 +1731,7 @@
       "meta": {
         "name": "gparted-live",
         "summary": "Curated gparted-live package for ZenOS",
-        "description": "Curated gparted-live package for ZenOS",
+        "description": "\n    Curated gparted-live package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1683,11 +1744,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gnome-console-live",
+      "id": "pkgs.apps.recovery.gnome-console-live",
       "target": [
         "apps",
         "recovery",
@@ -1699,7 +1761,7 @@
       "meta": {
         "name": "gnome-console-live",
         "summary": "Curated gnome-console-live package for ZenOS",
-        "description": "Curated gnome-console-live package for ZenOS",
+        "description": "\n    Curated gnome-console-live package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1712,11 +1774,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "atkinson-hyperlegible",
+      "id": "pkgs.apps.fonts.atkinson-hyperlegible",
       "target": [
         "apps",
         "fonts",
@@ -1728,7 +1791,7 @@
       "meta": {
         "name": "atkinson-hyperlegible",
         "summary": "Curated atkinson-hyperlegible package for ZenOS",
-        "description": "Curated atkinson-hyperlegible package for ZenOS",
+        "description": "\n    Curated atkinson-hyperlegible package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1741,11 +1804,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "atkinson-hyperlegible-mono",
+      "id": "pkgs.apps.fonts.atkinson-hyperlegible-mono",
       "target": [
         "apps",
         "fonts",
@@ -1758,7 +1822,7 @@
       "meta": {
         "name": "atkinson-hyperlegible-mono",
         "summary": "Curated atkinson-hyperlegible-mono package for ZenOS",
-        "description": "Curated atkinson-hyperlegible-mono package for ZenOS",
+        "description": "\n    Curated atkinson-hyperlegible-mono package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1771,11 +1835,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "inter",
+      "id": "pkgs.apps.fonts.inter",
       "target": [
         "apps",
         "fonts",
@@ -1787,7 +1852,7 @@
       "meta": {
         "name": "inter",
         "summary": "Curated inter package for ZenOS",
-        "description": "Curated inter package for ZenOS",
+        "description": "\n    Curated inter package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1800,11 +1865,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "google-dot",
+      "id": "pkgs.apps.cursors.google-dot",
       "target": [
         "apps",
         "cursors",
@@ -1816,7 +1882,7 @@
       "meta": {
         "name": "google-dot",
         "summary": "Curated google-dot package for ZenOS",
-        "description": "Curated google-dot package for ZenOS",
+        "description": "\n    Curated google-dot package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1829,11 +1895,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "adw-gtk3",
+      "id": "pkgs.apps.themes.adw-gtk3",
       "target": [
         "apps",
         "themes",
@@ -1845,7 +1912,7 @@
       "meta": {
         "name": "adw-gtk3",
         "summary": "Curated adw-gtk3 package for ZenOS",
-        "description": "Curated adw-gtk3 package for ZenOS",
+        "description": "\n    Curated adw-gtk3 package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1858,11 +1925,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "user-themes",
+      "id": "pkgs.apps.gnome-extensions.user-themes",
       "target": [
         "apps",
         "gnome-extensions",
@@ -1875,7 +1943,7 @@
       "meta": {
         "name": "user-themes",
         "summary": "Curated user-themes package for ZenOS",
-        "description": "Curated user-themes package for ZenOS",
+        "description": "\n    Curated user-themes package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1888,11 +1956,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "app-hider",
+      "id": "pkgs.apps.gnome-extensions.app-hider",
       "target": [
         "apps",
         "gnome-extensions",
@@ -1905,7 +1974,7 @@
       "meta": {
         "name": "app-hider",
         "summary": "Curated app-hider package for ZenOS",
-        "description": "Curated app-hider package for ZenOS",
+        "description": "\n    Curated app-hider package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1918,11 +1987,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "hide-minimized",
+      "id": "pkgs.apps.gnome-extensions.hide-minimized",
       "target": [
         "apps",
         "gnome-extensions",
@@ -1935,7 +2005,7 @@
       "meta": {
         "name": "hide-minimized",
         "summary": "Curated hide-minimized package for ZenOS",
-        "description": "Curated hide-minimized package for ZenOS",
+        "description": "\n    Curated hide-minimized package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1948,11 +2018,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "hide-cursor",
+      "id": "pkgs.apps.gnome-extensions.hide-cursor",
       "target": [
         "apps",
         "gnome-extensions",
@@ -1965,7 +2036,7 @@
       "meta": {
         "name": "hide-cursor",
         "summary": "Curated hide-cursor package for ZenOS",
-        "description": "Curated hide-cursor package for ZenOS",
+        "description": "\n    Curated hide-cursor package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -1978,11 +2049,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "burn-my-windows",
+      "id": "pkgs.apps.gnome-extensions.burn-my-windows",
       "target": [
         "apps",
         "gnome-extensions",
@@ -1995,7 +2067,7 @@
       "meta": {
         "name": "burn-my-windows",
         "summary": "Curated burn-my-windows package for ZenOS",
-        "description": "Curated burn-my-windows package for ZenOS",
+        "description": "\n    Curated burn-my-windows package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2008,11 +2080,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "compiz-windows-effect",
+      "id": "pkgs.apps.gnome-extensions.compiz-windows-effect",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2025,7 +2098,7 @@
       "meta": {
         "name": "compiz-windows-effect",
         "summary": "Curated compiz-windows-effect package for ZenOS",
-        "description": "Curated compiz-windows-effect package for ZenOS",
+        "description": "\n    Curated compiz-windows-effect package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2038,11 +2111,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "compiz-alike-magic-lamp-effect",
+      "id": "pkgs.apps.gnome-extensions.compiz-alike-magic-lamp-effect",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2055,7 +2129,7 @@
       "meta": {
         "name": "compiz-alike-magic-lamp-effect",
         "summary": "Curated compiz-alike-magic-lamp-effect package for ZenOS",
-        "description": "Curated compiz-alike-magic-lamp-effect package for ZenOS",
+        "description": "\n    Curated compiz-alike-magic-lamp-effect package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2068,11 +2142,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "rounded-window-corners-reborn",
+      "id": "pkgs.apps.gnome-extensions.rounded-window-corners-reborn",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2085,7 +2160,7 @@
       "meta": {
         "name": "rounded-window-corners-reborn",
         "summary": "Curated rounded-window-corners-reborn package for ZenOS",
-        "description": "Curated rounded-window-corners-reborn package for ZenOS",
+        "description": "\n    Curated rounded-window-corners-reborn package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2098,11 +2173,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "alphabetical-app-grid",
+      "id": "pkgs.apps.gnome-extensions.alphabetical-app-grid",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2115,7 +2191,7 @@
       "meta": {
         "name": "alphabetical-app-grid",
         "summary": "Curated alphabetical-app-grid package for ZenOS",
-        "description": "Curated alphabetical-app-grid package for ZenOS",
+        "description": "\n    Curated alphabetical-app-grid package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2128,11 +2204,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "category-sorted-app-grid",
+      "id": "pkgs.apps.gnome-extensions.category-sorted-app-grid",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2145,7 +2222,7 @@
       "meta": {
         "name": "category-sorted-app-grid",
         "summary": "Curated category-sorted-app-grid package for ZenOS",
-        "description": "Curated category-sorted-app-grid package for ZenOS",
+        "description": "\n    Curated category-sorted-app-grid package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2158,11 +2235,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "coverflow-alt-tab",
+      "id": "pkgs.apps.gnome-extensions.coverflow-alt-tab",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2175,7 +2253,7 @@
       "meta": {
         "name": "coverflow-alt-tab",
         "summary": "Curated coverflow-alt-tab package for ZenOS",
-        "description": "Curated coverflow-alt-tab package for ZenOS",
+        "description": "\n    Curated coverflow-alt-tab package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2188,11 +2266,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "hide-top-bar",
+      "id": "pkgs.apps.gnome-extensions.hide-top-bar",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2205,7 +2284,7 @@
       "meta": {
         "name": "hide-top-bar",
         "summary": "Curated hide-top-bar package for ZenOS",
-        "description": "Curated hide-top-bar package for ZenOS",
+        "description": "\n    Curated hide-top-bar package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2218,11 +2297,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "mouse-tail",
+      "id": "pkgs.apps.gnome-extensions.mouse-tail",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2235,7 +2315,7 @@
       "meta": {
         "name": "mouse-tail",
         "summary": "Curated mouse-tail package for ZenOS",
-        "description": "Curated mouse-tail package for ZenOS",
+        "description": "\n    Curated mouse-tail package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2248,11 +2328,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "window-is-ready-remover",
+      "id": "pkgs.apps.gnome-extensions.window-is-ready-remover",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2265,7 +2346,7 @@
       "meta": {
         "name": "window-is-ready-remover",
         "summary": "Curated window-is-ready-remover package for ZenOS",
-        "description": "Curated window-is-ready-remover package for ZenOS",
+        "description": "\n    Curated window-is-ready-remover package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2278,11 +2359,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "date-menu-formatter",
+      "id": "pkgs.apps.gnome-extensions.date-menu-formatter",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2295,7 +2377,7 @@
       "meta": {
         "name": "date-menu-formatter",
         "summary": "Curated date-menu-formatter package for ZenOS",
-        "description": "Curated date-menu-formatter package for ZenOS",
+        "description": "\n    Curated date-menu-formatter package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2308,11 +2390,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gsconnect",
+      "id": "pkgs.apps.gnome-extensions.gsconnect",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2325,7 +2408,7 @@
       "meta": {
         "name": "gsconnect",
         "summary": "Curated gsconnect package for ZenOS",
-        "description": "Curated gsconnect package for ZenOS",
+        "description": "\n    Curated gsconnect package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2338,11 +2421,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "clipboard-indicator",
+      "id": "pkgs.apps.gnome-extensions.clipboard-indicator",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2355,7 +2439,7 @@
       "meta": {
         "name": "clipboard-indicator",
         "summary": "Curated clipboard-indicator package for ZenOS",
-        "description": "Curated clipboard-indicator package for ZenOS",
+        "description": "\n    Curated clipboard-indicator package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2368,11 +2452,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "notification-timeout",
+      "id": "pkgs.apps.gnome-extensions.notification-timeout",
       "target": [
         "apps",
         "gnome-extensions",
@@ -2385,7 +2470,7 @@
       "meta": {
         "name": "notification-timeout",
         "summary": "Curated notification-timeout package for ZenOS",
-        "description": "Curated notification-timeout package for ZenOS",
+        "description": "\n    Curated notification-timeout package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2398,11 +2483,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gnome-disks",
+      "id": "pkgs.apps.recovery.gnome-disks",
       "target": [
         "apps",
         "recovery",
@@ -2414,7 +2500,7 @@
       "meta": {
         "name": "gnome-disks",
         "summary": "Curated gnome-disks package for ZenOS",
-        "description": "Curated gnome-disks package for ZenOS",
+        "description": "\n    Curated gnome-disks package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2427,11 +2513,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "testdisk",
+      "id": "pkgs.apps.recovery.testdisk",
       "target": [
         "apps",
         "recovery",
@@ -2443,7 +2530,7 @@
       "meta": {
         "name": "testdisk",
         "summary": "Curated testdisk package for ZenOS",
-        "description": "Curated testdisk package for ZenOS",
+        "description": "\n    Curated testdisk package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2456,11 +2543,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "ddrescue",
+      "id": "pkgs.apps.recovery.ddrescue",
       "target": [
         "apps",
         "recovery",
@@ -2472,7 +2560,7 @@
       "meta": {
         "name": "ddrescue",
         "summary": "Curated ddrescue package for ZenOS",
-        "description": "Curated ddrescue package for ZenOS",
+        "description": "\n    Curated ddrescue package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2485,11 +2573,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "smartmontools",
+      "id": "pkgs.apps.recovery.smartmontools",
       "target": [
         "apps",
         "recovery",
@@ -2501,7 +2590,7 @@
       "meta": {
         "name": "smartmontools",
         "summary": "Curated smartmontools package for ZenOS",
-        "description": "Curated smartmontools package for ZenOS",
+        "description": "\n    Curated smartmontools package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2514,11 +2603,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "nvme-cli",
+      "id": "pkgs.apps.recovery.nvme-cli",
       "target": [
         "apps",
         "recovery",
@@ -2530,7 +2620,7 @@
       "meta": {
         "name": "nvme-cli",
         "summary": "Curated nvme-cli package for ZenOS",
-        "description": "Curated nvme-cli package for ZenOS",
+        "description": "\n    Curated nvme-cli package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2543,11 +2633,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "parted",
+      "id": "pkgs.apps.recovery.parted",
       "target": [
         "apps",
         "recovery",
@@ -2559,7 +2650,7 @@
       "meta": {
         "name": "parted",
         "summary": "Curated parted package for ZenOS",
-        "description": "Curated parted package for ZenOS",
+        "description": "\n    Curated parted package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2572,11 +2663,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "gptfdisk",
+      "id": "pkgs.apps.recovery.gptfdisk",
       "target": [
         "apps",
         "recovery",
@@ -2588,7 +2680,7 @@
       "meta": {
         "name": "gptfdisk",
         "summary": "Curated gptfdisk package for ZenOS",
-        "description": "Curated gptfdisk package for ZenOS",
+        "description": "\n    Curated gptfdisk package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2601,11 +2693,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "util-linux",
+      "id": "pkgs.apps.recovery.util-linux",
       "target": [
         "apps",
         "recovery",
@@ -2617,7 +2710,7 @@
       "meta": {
         "name": "util-linux",
         "summary": "Curated util-linux package for ZenOS",
-        "description": "Curated util-linux package for ZenOS",
+        "description": "\n    Curated util-linux package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2630,11 +2723,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "e2fsprogs",
+      "id": "pkgs.apps.recovery.e2fsprogs",
       "target": [
         "apps",
         "recovery",
@@ -2646,7 +2740,7 @@
       "meta": {
         "name": "e2fsprogs",
         "summary": "Curated e2fsprogs package for ZenOS",
-        "description": "Curated e2fsprogs package for ZenOS",
+        "description": "\n    Curated e2fsprogs package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2659,11 +2753,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "btrfs-progs",
+      "id": "pkgs.apps.recovery.btrfs-progs",
       "target": [
         "apps",
         "recovery",
@@ -2675,7 +2770,7 @@
       "meta": {
         "name": "btrfs-progs",
         "summary": "Curated btrfs-progs package for ZenOS",
-        "description": "Curated btrfs-progs package for ZenOS",
+        "description": "\n    Curated btrfs-progs package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2688,11 +2783,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "xfsprogs",
+      "id": "pkgs.apps.recovery.xfsprogs",
       "target": [
         "apps",
         "recovery",
@@ -2704,7 +2800,7 @@
       "meta": {
         "name": "xfsprogs",
         "summary": "Curated xfsprogs package for ZenOS",
-        "description": "Curated xfsprogs package for ZenOS",
+        "description": "\n    Curated xfsprogs package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2717,11 +2813,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "f2fs-tools",
+      "id": "pkgs.apps.recovery.f2fs-tools",
       "target": [
         "apps",
         "recovery",
@@ -2733,7 +2830,7 @@
       "meta": {
         "name": "f2fs-tools",
         "summary": "Curated f2fs-tools package for ZenOS",
-        "description": "Curated f2fs-tools package for ZenOS",
+        "description": "\n    Curated f2fs-tools package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2746,11 +2843,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "dosfstools",
+      "id": "pkgs.apps.recovery.dosfstools",
       "target": [
         "apps",
         "recovery",
@@ -2762,7 +2860,7 @@
       "meta": {
         "name": "dosfstools",
         "summary": "Curated dosfstools package for ZenOS",
-        "description": "Curated dosfstools package for ZenOS",
+        "description": "\n    Curated dosfstools package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2775,11 +2873,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "exfatprogs",
+      "id": "pkgs.apps.recovery.exfatprogs",
       "target": [
         "apps",
         "recovery",
@@ -2791,7 +2890,7 @@
       "meta": {
         "name": "exfatprogs",
         "summary": "Curated exfatprogs package for ZenOS",
-        "description": "Curated exfatprogs package for ZenOS",
+        "description": "\n    Curated exfatprogs package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2804,11 +2903,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "ntfs3g",
+      "id": "pkgs.apps.recovery.ntfs3g",
       "target": [
         "apps",
         "recovery",
@@ -2820,7 +2920,7 @@
       "meta": {
         "name": "ntfs3g",
         "summary": "Curated ntfs3g package for ZenOS",
-        "description": "Curated ntfs3g package for ZenOS",
+        "description": "\n    Curated ntfs3g package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2833,11 +2933,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "lvm2",
+      "id": "pkgs.apps.recovery.lvm2",
       "target": [
         "apps",
         "recovery",
@@ -2849,7 +2950,7 @@
       "meta": {
         "name": "lvm2",
         "summary": "Curated lvm2 package for ZenOS",
-        "description": "Curated lvm2 package for ZenOS",
+        "description": "\n    Curated lvm2 package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2862,11 +2963,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "cryptsetup",
+      "id": "pkgs.apps.recovery.cryptsetup",
       "target": [
         "apps",
         "recovery",
@@ -2878,7 +2980,7 @@
       "meta": {
         "name": "cryptsetup",
         "summary": "Curated cryptsetup package for ZenOS",
-        "description": "Curated cryptsetup package for ZenOS",
+        "description": "\n    Curated cryptsetup package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2891,11 +2993,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "mdadm",
+      "id": "pkgs.apps.recovery.mdadm",
       "target": [
         "apps",
         "recovery",
@@ -2907,7 +3010,7 @@
       "meta": {
         "name": "mdadm",
         "summary": "Curated mdadm package for ZenOS",
-        "description": "Curated mdadm package for ZenOS",
+        "description": "\n    Curated mdadm package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2920,11 +3023,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "efibootmgr",
+      "id": "pkgs.apps.recovery.efibootmgr",
       "target": [
         "apps",
         "recovery",
@@ -2936,7 +3040,7 @@
       "meta": {
         "name": "efibootmgr",
         "summary": "Curated efibootmgr package for ZenOS",
-        "description": "Curated efibootmgr package for ZenOS",
+        "description": "\n    Curated efibootmgr package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2949,11 +3053,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "mokutil",
+      "id": "pkgs.apps.recovery.mokutil",
       "target": [
         "apps",
         "recovery",
@@ -2965,7 +3070,7 @@
       "meta": {
         "name": "mokutil",
         "summary": "Curated mokutil package for ZenOS",
-        "description": "Curated mokutil package for ZenOS",
+        "description": "\n    Curated mokutil package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -2978,11 +3083,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "rsync",
+      "id": "pkgs.apps.recovery.rsync",
       "target": [
         "apps",
         "recovery",
@@ -2994,7 +3100,7 @@
       "meta": {
         "name": "rsync",
         "summary": "Curated rsync package for ZenOS",
-        "description": "Curated rsync package for ZenOS",
+        "description": "\n    Curated rsync package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3007,11 +3113,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "curl",
+      "id": "pkgs.apps.recovery.curl",
       "target": [
         "apps",
         "recovery",
@@ -3023,7 +3130,7 @@
       "meta": {
         "name": "curl",
         "summary": "Curated curl package for ZenOS",
-        "description": "Curated curl package for ZenOS",
+        "description": "\n    Curated curl package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3036,11 +3143,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "wget",
+      "id": "pkgs.apps.recovery.wget",
       "target": [
         "apps",
         "recovery",
@@ -3052,7 +3160,7 @@
       "meta": {
         "name": "wget",
         "summary": "Curated wget package for ZenOS",
-        "description": "Curated wget package for ZenOS",
+        "description": "\n    Curated wget package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3065,11 +3173,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "openssh",
+      "id": "pkgs.apps.recovery.openssh",
       "target": [
         "apps",
         "recovery",
@@ -3081,7 +3190,7 @@
       "meta": {
         "name": "openssh",
         "summary": "Curated openssh package for ZenOS",
-        "description": "Curated openssh package for ZenOS",
+        "description": "\n    Curated openssh package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3094,11 +3203,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "iproute2",
+      "id": "pkgs.apps.recovery.iproute2",
       "target": [
         "apps",
         "recovery",
@@ -3110,7 +3220,7 @@
       "meta": {
         "name": "iproute2",
         "summary": "Curated iproute2 package for ZenOS",
-        "description": "Curated iproute2 package for ZenOS",
+        "description": "\n    Curated iproute2 package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3123,11 +3233,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "iputils",
+      "id": "pkgs.apps.recovery.iputils",
       "target": [
         "apps",
         "recovery",
@@ -3139,7 +3250,7 @@
       "meta": {
         "name": "iputils",
         "summary": "Curated iputils package for ZenOS",
-        "description": "Curated iputils package for ZenOS",
+        "description": "\n    Curated iputils package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3152,11 +3263,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "dnsutils",
+      "id": "pkgs.apps.recovery.dnsutils",
       "target": [
         "apps",
         "recovery",
@@ -3169,7 +3281,7 @@
       "meta": {
         "name": "dnsutils",
         "summary": "Curated dnsutils package for ZenOS",
-        "description": "Curated dnsutils package for ZenOS",
+        "description": "\n    Curated dnsutils package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3183,11 +3295,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "pciutils",
+      "id": "pkgs.apps.recovery.pciutils",
       "target": [
         "apps",
         "recovery",
@@ -3199,7 +3312,7 @@
       "meta": {
         "name": "pciutils",
         "summary": "Curated pciutils package for ZenOS",
-        "description": "Curated pciutils package for ZenOS",
+        "description": "\n    Curated pciutils package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3212,11 +3325,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "usbutils",
+      "id": "pkgs.apps.recovery.usbutils",
       "target": [
         "apps",
         "recovery",
@@ -3228,7 +3342,7 @@
       "meta": {
         "name": "usbutils",
         "summary": "Curated usbutils package for ZenOS",
-        "description": "Curated usbutils package for ZenOS",
+        "description": "\n    Curated usbutils package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3241,11 +3355,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "dmidecode",
+      "id": "pkgs.apps.recovery.dmidecode",
       "target": [
         "apps",
         "recovery",
@@ -3257,7 +3372,7 @@
       "meta": {
         "name": "dmidecode",
         "summary": "Curated dmidecode package for ZenOS",
-        "description": "Curated dmidecode package for ZenOS",
+        "description": "\n    Curated dmidecode package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3270,11 +3385,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "lshw",
+      "id": "pkgs.apps.recovery.lshw",
       "target": [
         "apps",
         "recovery",
@@ -3286,7 +3402,7 @@
       "meta": {
         "name": "lshw",
         "summary": "Curated lshw package for ZenOS",
-        "description": "Curated lshw package for ZenOS",
+        "description": "\n    Curated lshw package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3299,11 +3415,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "jq",
+      "id": "pkgs.apps.recovery.jq",
       "target": [
         "apps",
         "recovery",
@@ -3315,7 +3432,7 @@
       "meta": {
         "name": "jq",
         "summary": "Curated jq package for ZenOS",
-        "description": "Curated jq package for ZenOS",
+        "description": "\n    Curated jq package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3328,11 +3445,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "less",
+      "id": "pkgs.apps.recovery.less",
       "target": [
         "apps",
         "recovery",
@@ -3344,7 +3462,7 @@
       "meta": {
         "name": "less",
         "summary": "Curated less package for ZenOS",
-        "description": "Curated less package for ZenOS",
+        "description": "\n    Curated less package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3357,11 +3475,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "tar",
+      "id": "pkgs.apps.recovery.tar",
       "target": [
         "apps",
         "recovery",
@@ -3373,7 +3492,7 @@
       "meta": {
         "name": "tar",
         "summary": "Curated tar package for ZenOS",
-        "description": "Curated tar package for ZenOS",
+        "description": "\n    Curated tar package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3386,11 +3505,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "zip",
+      "id": "pkgs.apps.recovery.zip",
       "target": [
         "apps",
         "recovery",
@@ -3402,7 +3522,7 @@
       "meta": {
         "name": "zip",
         "summary": "Curated zip package for ZenOS",
-        "description": "Curated zip package for ZenOS",
+        "description": "\n    Curated zip package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3415,11 +3535,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "unzip",
+      "id": "pkgs.apps.recovery.unzip",
       "target": [
         "apps",
         "recovery",
@@ -3431,7 +3552,7 @@
       "meta": {
         "name": "unzip",
         "summary": "Curated unzip package for ZenOS",
-        "description": "Curated unzip package for ZenOS",
+        "description": "\n    Curated unzip package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3444,11 +3565,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "zstd",
+      "id": "pkgs.apps.recovery.zstd",
       "target": [
         "apps",
         "recovery",
@@ -3460,7 +3582,7 @@
       "meta": {
         "name": "zstd",
         "summary": "Curated zstd package for ZenOS",
-        "description": "Curated zstd package for ZenOS",
+        "description": "\n    Curated zstd package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3473,11 +3595,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "squashfs-tools",
+      "id": "pkgs.apps.recovery.squashfs-tools",
       "target": [
         "apps",
         "recovery",
@@ -3489,7 +3612,7 @@
       "meta": {
         "name": "squashfs-tools",
         "summary": "Curated squashfs-tools package for ZenOS",
-        "description": "Curated squashfs-tools package for ZenOS",
+        "description": "\n    Curated squashfs-tools package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3502,11 +3625,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "arch-install-scripts",
+      "id": "pkgs.apps.recovery.arch-install-scripts",
       "target": [
         "apps",
         "recovery",
@@ -3518,7 +3642,7 @@
       "meta": {
         "name": "arch-install-scripts",
         "summary": "Curated arch-install-scripts package for ZenOS",
-        "description": "Curated arch-install-scripts package for ZenOS",
+        "description": "\n    Curated arch-install-scripts package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3531,11 +3655,12 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     },
     {
-      "id": "nixos-install-tools",
+      "id": "pkgs.apps.recovery.nixos-install-tools",
       "target": [
         "apps",
         "recovery",
@@ -3547,7 +3672,7 @@
       "meta": {
         "name": "nixos-install-tools",
         "summary": "Curated nixos-install-tools package for ZenOS",
-        "description": "Curated nixos-install-tools package for ZenOS",
+        "description": "\n    Curated nixos-install-tools package for ZenOS\n  ",
         "zenosVersion": "1.0.0",
         "packageVersion": "1.0.0",
         "tags": [
@@ -3560,7 +3685,8 @@
           "general": [],
           "build": [],
           "runtime": []
-        }
+        },
+        "license": null
       }
     }
   ]

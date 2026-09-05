@@ -3,7 +3,7 @@
 # The source enable branch is empty, so this equivalent intentionally has no action.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Illogical Impulse Hyprland desktop";
+  summary = "Illogical Impulse Hyprland desktop";
   description = ''
     Declares the Illogical Impulse Hyprland-based desktop toggle. The contributor
     module currently contains no implementation settings.
@@ -14,5 +14,5 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable the Illogical Impulse desktop module";
+  _meta.summary = "Enable the Illogical Impulse desktop module";
 };

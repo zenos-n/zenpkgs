@@ -1,15 +1,15 @@
 _meta = {
-  _name = "rustc";
-  _summary = "Rust compiler";
-  _description = "Pinned Nixpkgs Rust compiler";
-  _zenosVersion = "1.0.0";
-  _packageVersion = "";
-  _tags = [ "development" ];
-  _maintainers = [ $m.doromiert ];
-  _dependencies = {
-    _general = [ ];
-    _build = [ ];
-    _runtime = [ ];
+  name = "rustc";
+  summary = "Rust compiler";
+  description = ''Pinned Nixpkgs Rust compiler'';
+  zenosVersion = "1.0.0";
+  packageVersion = "";
+  tags = [ "development" ];
+  maintainers = [ $m.doromiert ];
+  dependencies = {
+    general = [ ];
+    build = [ ];
+    runtime = [ ];
   };
 };
 

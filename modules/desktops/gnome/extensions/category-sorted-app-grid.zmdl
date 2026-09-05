@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Automatic category-based sorting for the GNOME application grid";
+  summary = "Automatic category-based sorting for the GNOME application grid";
   description = ''
     Automatic category-based sorting for the GNOME application grid
 
@@ -18,7 +18,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable Category Sorted App Grid GNOME extension configuration.";
+  _meta.description = ''Whether to enable Category Sorted App Grid GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.category-sorted-app-grid ];
   };

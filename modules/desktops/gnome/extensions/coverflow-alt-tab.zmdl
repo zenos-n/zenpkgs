@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Configures the Coverflow Alt-Tab GNOME extension";
+  summary = "Configures the Coverflow Alt-Tab GNOME extension";
   description = ''
     Configures the Coverflow Alt-Tab GNOME extension
     **Context**
@@ -17,7 +17,7 @@ _meta = {
   platforms = $lib.platforms.zenos;
 };
 
-_let hexToDecMap: $type.attrs = { "0" = 0; "1" = 1; "2" = 2; "3" = 3; "4" = 4; "5" = 5; "6" = 6; "7" = 7; "8" = 8; "9" = 9; "a" = 10; "b" = 11; "c" = 12; "d" = 13; "e" = 14; "f" = 15; "A" = 10; "B" = 11; "C" = 12; "D" = 13; "E" = 14; "F" = 15; };
+_let hexToDecMap: $type.set [ $type.int ] = { "0" = 0; "1" = 1; "2" = 2; "3" = 3; "4" = 4; "5" = 5; "6" = 6; "7" = 7; "8" = 8; "9" = 9; "a" = 10; "b" = 11; "c" = 12; "d" = 13; "e" = 14; "f" = 15; "A" = 10; "B" = 11; "C" = 12; "D" = 13; "E" = 14; "F" = 15; };
 _let hexCharToInt: $type.function "char" = c:
   $lib.throwIfNot ($lib.hasAttr c $v.hexToDecMap) "Invalid hex character: ${c}" ($lib.getAttr c $v.hexToDecMap);
 _let parseHexByte: $type.function "byte" = s: ($v.hexCharToInt ($lib.substring 0 1 s) * 16) + $v.hexCharToInt ($lib.substring 1 1 s);
@@ -38,7 +38,7 @@ _let normalizeColor: $type.function "color" = value:
   else value;
 
 enable = enableOption {
-  _meta.description = "Whether to enable Coverflow Alt-Tab GNOME extension configuration.";
+  _meta.description = ''Whether to enable Coverflow Alt-Tab GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.coverflow-alt-tab ];
       programs.dconf.profiles.user.databases = [ {
@@ -93,48 +93,48 @@ enable = enableOption {
   };
 };
 
-hide-panel = { _meta = { type = $type.bool; default = true; description = "Hide the panel when showing coverflow"; }; };
-enforce-primary-monitor = { _meta = { type = $type.bool; default = false; description = "Always show the switcher on the primary monitor"; }; };
-animation-time = { _meta = { type = $type.float; default = 0.2; description = "The duration of coverflow animations in ms"; }; };
-dim-factor = { _meta = { type = $type.float; default = 1.0; description = "Dim factor for background"; }; };
-position = { _meta = { type = $type.enum [ "Top" "Bottom" ]; default = "Bottom"; description = "Position of icon and window title"; }; };
-offset = { _meta = { type = $type.int; default = 0; description = "Set a vertical offset"; }; };
-icon-style = { _meta = { type = $type.enum [ "Classic" "Overlay" "Attached" ]; default = "Classic"; description = "Icon style"; }; };
-overlay-icon-opacity = { _meta = { type = $type.float; default = 1.0; description = "The opacity of the overlay icon"; }; };
-overlay-icon-size = { _meta = { type = $type.float; default = 128.0; description = "The icon size in pixels"; }; };
-switcher-style = { _meta = { type = $type.enum [ "Coverflow" "Timeline" ]; default = "Coverflow"; description = "Switcher style"; }; };
-easing-function = { _meta = { type = $type.string; default = "ease-out-cubic"; description = "Easing function used in animations"; }; };
-current-workspace-only = { _meta = { type = $type.enum [ "current" "all" "all-currentfirst" ]; default = "current"; description = "Show windows from current workspace only"; }; };
-switch-per-monitor = { _meta = { type = $type.bool; default = false; description = "Per monitor window switch"; }; };
-icon-has-shadow = { _meta = { type = $type.bool; default = false; description = "Icon has shadow switch"; }; };
-randomize-animation-times = { _meta = { type = $type.bool; default = false; description = "Randomize animation times switch"; }; };
-preview-to-monitor-ratio = { _meta = { type = $type.float; default = 0.5; description = "The maximum ratio of the preview dimensions with the monitor dimensions"; }; };
-preview-scaling-factor = { _meta = { type = $type.float; default = 0.8; description = "Scales the previews as they spread out to the sides"; }; };
-coverflow-window-angle = { _meta = { type = $type.float; default = 90.0; description = "In Coverflow switcher, angle of off-center windows"; }; };
-coverflow-window-offset-width = { _meta = { type = $type.float; default = 50.0; description = "In Coverflow switcher, distance from center of off-center windows"; }; };
-bind-to-switch-applications = { _meta = { type = $type.bool; default = true; description = "Bind to 'switch-applications' keybinding"; }; };
-bind-to-switch-windows = { _meta = { type = $type.bool; default = true; description = "Bind to 'switch-windows' keybinding"; }; };
-highlight-mouse-over = { _meta = { type = $type.bool; default = false; description = "Highlight window under mouse"; }; };
-highlight-use-theme-color = { _meta = { type = $type.bool; default = true; description = "Use theme color for highlight"; }; };
-raise-mouse-over = { _meta = { type = $type.bool; default = true; description = "Raise window under mouse"; }; };
-perspective-correction-method = { _meta = { type = $type.string; default = "Move Camera"; description = "Method to correct off-center monitor perspective"; }; };
-desaturate-factor = { _meta = { type = $type.float; default = 0.0; description = "Amount to Desaturate the Background Application Switcher"; }; };
-blur-radius = { _meta = { type = $type.float; default = 0.0; description = "Radius of Blur Applied to the Background Application Switcher"; }; };
-switcher-looping-method = { _meta = { type = $type.enum [ "Flip Stack" "Carousel" ]; default = "Flip Stack"; description = "How the windows cycle through the coverflow"; }; };
-switch-application-behaves-like-switch-windows = { _meta = { type = $type.bool; default = false; description = "The application-switcher keybinding action behaves the same as the window-switcher"; }; };
-use-tint = { _meta = { type = $type.bool; default = true; description = "Whether to Use a Tint Color on the Background Application Switcher"; }; };
-tint-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(0.0,0.0,0.0)"; description = "Tint Color Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)')"; }; };
-switcher-background-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(0.0,0.0,0.0)"; description = "Switcher Background Color Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)')"; }; };
-tint-blend = { _meta = { type = $type.float; default = 0.0; description = "Amount to Blend Tint Color"; }; };
-tint-use-theme-color = { _meta = { type = $type.bool; default = true; description = "Use theme color for tint"; }; };
-use-glitch-effect = { _meta = { type = $type.bool; default = false; description = "Use a 'glitch effect' on the background application switcher"; }; };
-invert-swipes = { _meta = { type = $type.bool; default = false; description = "Invert System Scroll Direction Setting"; }; };
-highlight-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(1.0,1.0,1.0)"; description = "Highlight Color Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)')"; }; };
-coverflow-switch-windows = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = "Switch Windows Keyboard Shortcut"; }; };
-coverflow-switch-windows-backward = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = "Switch Windows Backward Keyboard Shortcut"; }; };
-coverflow-switch-applications = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = "Switch Applications Keyboard Shortcut"; }; };
-coverflow-switch-applications-backward = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = "Switch Applications Backward Keyboard Shortcut"; }; };
-prefs-default-width = { _meta = { type = $type.float; default = 700.0; description = "Default width for the preferences window"; }; };
-prefs-default-height = { _meta = { type = $type.float; default = 600.0; description = "Default height for the preferences window"; }; };
-verbose-logging = { _meta = { type = $type.bool; default = false; description = "Whether to log lots of messages or not"; }; };
-icon-add-remove-effects = { _meta = { type = $type.string; default = "Fade Only"; description = "Whether to fade, scale, or both fade and scale icons in and out"; }; };
+hide-panel = { _meta = { type = $type.bool; default = true; description = ''Hide the panel when showing coverflow''; }; };
+enforce-primary-monitor = { _meta = { type = $type.bool; default = false; description = ''Always show the switcher on the primary monitor''; }; };
+animation-time = { _meta = { type = $type.float; default = 0.2; description = ''The duration of coverflow animations in ms''; }; };
+dim-factor = { _meta = { type = $type.float; default = 1.0; description = ''Dim factor for background''; }; };
+position = { _meta = { type = $type.enum [ "Top" "Bottom" ]; default = "Bottom"; description = ''Position of icon and window title''; }; };
+offset = { _meta = { type = $type.int; default = 0; description = ''Set a vertical offset''; }; };
+icon-style = { _meta = { type = $type.enum [ "Classic" "Overlay" "Attached" ]; default = "Classic"; description = ''Icon style''; }; };
+overlay-icon-opacity = { _meta = { type = $type.float; default = 1.0; description = ''The opacity of the overlay icon''; }; };
+overlay-icon-size = { _meta = { type = $type.float; default = 128.0; description = ''The icon size in pixels''; }; };
+switcher-style = { _meta = { type = $type.enum [ "Coverflow" "Timeline" ]; default = "Coverflow"; description = ''Switcher style''; }; };
+easing-function = { _meta = { type = $type.string; default = "ease-out-cubic"; description = ''Easing function used in animations''; }; };
+current-workspace-only = { _meta = { type = $type.enum [ "current" "all" "all-currentfirst" ]; default = "current"; description = ''Show windows from current workspace only''; }; };
+switch-per-monitor = { _meta = { type = $type.bool; default = false; description = ''Per monitor window switch''; }; };
+icon-has-shadow = { _meta = { type = $type.bool; default = false; description = ''Icon has shadow switch''; }; };
+randomize-animation-times = { _meta = { type = $type.bool; default = false; description = ''Randomize animation times switch''; }; };
+preview-to-monitor-ratio = { _meta = { type = $type.float; default = 0.5; description = ''The maximum ratio of the preview dimensions with the monitor dimensions''; }; };
+preview-scaling-factor = { _meta = { type = $type.float; default = 0.8; description = ''Scales the previews as they spread out to the sides''; }; };
+coverflow-window-angle = { _meta = { type = $type.float; default = 90.0; description = ''In Coverflow switcher, angle of off-center windows''; }; };
+coverflow-window-offset-width = { _meta = { type = $type.float; default = 50.0; description = ''In Coverflow switcher, distance from center of off-center windows''; }; };
+bind-to-switch-applications = { _meta = { type = $type.bool; default = true; description = ''Bind to 'switch-applications' keybinding''; }; };
+bind-to-switch-windows = { _meta = { type = $type.bool; default = true; description = ''Bind to 'switch-windows' keybinding''; }; };
+highlight-mouse-over = { _meta = { type = $type.bool; default = false; description = ''Highlight window under mouse''; }; };
+highlight-use-theme-color = { _meta = { type = $type.bool; default = true; description = ''Use theme color for highlight''; }; };
+raise-mouse-over = { _meta = { type = $type.bool; default = true; description = ''Raise window under mouse''; }; };
+perspective-correction-method = { _meta = { type = $type.string; default = "Move Camera"; description = ''Method to correct off-center monitor perspective''; }; };
+desaturate-factor = { _meta = { type = $type.float; default = 0.0; description = ''Amount to Desaturate the Background Application Switcher''; }; };
+blur-radius = { _meta = { type = $type.float; default = 0.0; description = ''Radius of Blur Applied to the Background Application Switcher''; }; };
+switcher-looping-method = { _meta = { type = $type.enum [ "Flip Stack" "Carousel" ]; default = "Flip Stack"; description = ''How the windows cycle through the coverflow''; }; };
+switch-application-behaves-like-switch-windows = { _meta = { type = $type.bool; default = false; description = ''The application-switcher keybinding action behaves the same as the window-switcher''; }; };
+use-tint = { _meta = { type = $type.bool; default = true; description = ''Whether to Use a Tint Color on the Background Application Switcher''; }; };
+tint-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(0.0,0.0,0.0)"; description = ''Tint Color Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)')''; }; };
+switcher-background-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(0.0,0.0,0.0)"; description = ''Switcher Background Color Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)')''; }; };
+tint-blend = { _meta = { type = $type.float; default = 0.0; description = ''Amount to Blend Tint Color''; }; };
+tint-use-theme-color = { _meta = { type = $type.bool; default = true; description = ''Use theme color for tint''; }; };
+use-glitch-effect = { _meta = { type = $type.bool; default = false; description = ''Use a 'glitch effect' on the background application switcher''; }; };
+invert-swipes = { _meta = { type = $type.bool; default = false; description = ''Invert System Scroll Direction Setting''; }; };
+highlight-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(1.0,1.0,1.0)"; description = ''Highlight Color Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)')''; }; };
+coverflow-switch-windows = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = ''Switch Windows Keyboard Shortcut''; }; };
+coverflow-switch-windows-backward = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = ''Switch Windows Backward Keyboard Shortcut''; }; };
+coverflow-switch-applications = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = ''Switch Applications Keyboard Shortcut''; }; };
+coverflow-switch-applications-backward = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = ''Switch Applications Backward Keyboard Shortcut''; }; };
+prefs-default-width = { _meta = { type = $type.float; default = 700.0; description = ''Default width for the preferences window''; }; };
+prefs-default-height = { _meta = { type = $type.float; default = 600.0; description = ''Default height for the preferences window''; }; };
+verbose-logging = { _meta = { type = $type.bool; default = false; description = ''Whether to log lots of messages or not''; }; };
+icon-add-remove-effects = { _meta = { type = $type.string; default = "Fade Only"; description = ''Whether to fade, scale, or both fade and scale icons in and out''; }; };

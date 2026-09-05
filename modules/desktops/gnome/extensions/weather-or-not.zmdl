@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Flexible weather indicator positioning for the panel";
+  summary = "Flexible weather indicator positioning for the panel";
   description = ''
     Flexible weather indicator positioning for the panel
 
@@ -18,7 +18,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Weather Or Not GNOME extension configuration";
+  _meta.description = ''Weather Or Not GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.weather-or-not ];
     programs.dconf.profiles.user.databases = [ {

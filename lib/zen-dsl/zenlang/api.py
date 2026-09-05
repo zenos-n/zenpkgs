@@ -3,6 +3,7 @@ from __future__ import annotations
 import errno
 import os
 import stat
+from dataclasses import fields, is_dataclass, replace
 from pathlib import Path
 from typing import Any
 
@@ -13,6 +14,7 @@ from .model import (
     FileKind,
     ImportStatement,
     Interpolation,
+    MarkdownImport,
     Span,
     ResolvedImport,
     StringExpr,
@@ -20,7 +22,12 @@ from .model import (
     ZenLangError,
 )
 from .parser import parse_tokens
-from .validation import validate, validate_document_contract, validate_import_merges
+from .validation import (
+    validate,
+    validate_document_contract,
+    validate_import_merges,
+    validate_markdown_imports,
+)
 
 
 _MAX_IMPORT_DEPTH = 256
@@ -33,10 +40,13 @@ _PhysicalIdentity = tuple[int, int]
 
 
 def parse(text: str, source: str, *, validate_semantics: bool = True) -> Document:
+    """Parse a source fragment; parse_file also enforces the complete file contract."""
     kind = FileKind.from_source(source)
     document = parse_tokens(lex(text, source), kind)
     if validate_semantics:
-        validate(document)
+        document = replace(document, diagnostics=tuple(dict.fromkeys((*document.diagnostics, *validate(document)))))
+    else:
+        validate_markdown_imports(document)
     return document
 
 
@@ -167,6 +177,9 @@ class _ImportResolver:
         self.total_source_bytes += source_bytes
         self.sources[label] = text
         document = parse(text, label, validate_semantics=False)
+        before_markdown = self.total_source_bytes
+        document = self._resolve_markdown(document, path)
+        source_bytes += self.total_source_bytes - before_markdown
         self.stack.append((identity, path))
         try:
             bare: list[ResolvedImport] = []
@@ -217,12 +230,14 @@ class _ImportResolver:
                 document.span,
                 tuple(dict.fromkeys(diagnostics)),
             )
+            if self.validate_semantics:
+                warnings = validate(result, metadata_warnings=not imported)
+                if not imported:
+                    validate_document_contract(result)
+                validate_import_merges(result)
+                result = replace(result, diagnostics=tuple(dict.fromkeys((*result.diagnostics, *warnings))))
             self.expanded_import_counts[id(result)] = expanded_import_count
             self.expanded_source_bytes[id(result)] = expanded_source_bytes
-            if self.validate_semantics:
-                validate(result)
-                validate_document_contract(result)
-                validate_import_merges(result)
             self.cache[cache_key] = result
             return result
         finally:
@@ -262,6 +277,47 @@ class _ImportResolver:
                 Diagnostic("ZEN303", f"import must use the same .{kind.value} file extension", statement.path.span)
             )
         return self.load(target, str(target), statement.path.span, imported=True)
+
+    def _resolve_markdown(self, value: Any, current_path: Path) -> Any:
+        if isinstance(value, MarkdownImport):
+            relative = _import_path(value)
+            span = value.path.span
+            if not relative or "\0" in relative or Path(relative).is_absolute() or "://" in relative:
+                raise ZenLangError(Diagnostic("ZEN302", "Markdown imports require a nonempty relative filesystem path without NUL bytes", span))
+            target = _logical_path(current_path.parent / relative)
+            _require_within_root(target, self.root, span)
+            if target.suffix != ".md":
+                raise ZenLangError(Diagnostic("ZEN303", "Markdown imports require a .md file extension", span))
+            descriptor, metadata = _open_source(
+                target, str(target), span, imported=True,
+                root=self.root, root_descriptor=self.root_descriptor,
+            )
+            try:
+                # Check the opened target, not a pre-open realpath. DSL symlinks
+                # retain their existing rules; only Markdown is physically confined.
+                physical_root = Path(os.readlink(f"/proc/self/fd/{self.root_descriptor}"))
+                physical_target = Path(os.readlink(f"/proc/self/fd/{descriptor}"))
+                _require_within_root(physical_target, physical_root, span, subject="Markdown import")
+            except (OSError, ValueError) as error:
+                os.close(descriptor)
+                raise ZenLangError(Diagnostic("ZEN304", f"cannot verify Markdown import target: {target}", span, notes=(str(error),))) from error
+            except ZenLangError:
+                os.close(descriptor)
+                raise
+            text, size = _read_source(
+                descriptor, metadata, str(target), span, imported=True,
+                remaining_total_bytes=_MAX_TOTAL_SOURCE_BYTES - self.total_source_bytes,
+            )
+            self.total_source_bytes += size
+            return StringExpr((StringText(text, value.span),), True, value.span)
+        if isinstance(value, tuple):
+            return tuple(self._resolve_markdown(item, current_path) for item in value)
+        if is_dataclass(value):
+            return replace(value, **{
+                field.name: self._resolve_markdown(getattr(value, field.name), current_path)
+                for field in fields(value) if field.name != "span"
+            })
+        return value
 
 
 def _logical_path(path: str | Path) -> Path:
@@ -532,7 +588,7 @@ def _raise_total_source_too_large(span: Span) -> None:
     )
 
 
-def _import_path(statement: ImportStatement) -> str:
+def _import_path(statement: ImportStatement | MarkdownImport) -> str:
     if not isinstance(statement.path, StringExpr):
         return statement.path.value
     if any(isinstance(part, Interpolation) for part in statement.path.parts):

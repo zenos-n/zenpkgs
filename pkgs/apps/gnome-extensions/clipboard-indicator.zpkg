@@ -1,15 +1,17 @@
 _meta = {
-  _name = "clipboard-indicator";
-  _summary = "Curated clipboard-indicator package for ZenOS";
-  _description = "Curated clipboard-indicator package for ZenOS";
-  _zenosVersion = "1.0.0";
-  _packageVersion = "";
-  _tags = [ "system" ];
-  _maintainers = [ $m.doromiert ];
-  _dependencies = {
-    _general = [ ];
-    _build = [ ];
-    _runtime = [ ];
+  name = "clipboard-indicator";
+  summary = "Curated clipboard-indicator package for ZenOS";
+  description = ''
+    Curated clipboard-indicator package for ZenOS
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "";
+  tags = [ "system" ];
+  maintainers = [ $m.doromiert ];
+  dependencies = {
+    general = [ ];
+    build = [ ];
+    runtime = [ ];
   };
 };
 

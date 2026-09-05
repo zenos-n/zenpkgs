@@ -3,7 +3,7 @@
 # Unsupported: internal/readOnly option flags have no ZMDL fields.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "GNOME lock-screen and top-bar clock font tweak";
+  summary = "GNOME lock-screen and top-bar clock font tweak";
   description = ''
     Applies ZeroMono to the lock-screen time and ZeroClock to the lock-screen
     date and top-bar clock through GNOME extensions.
@@ -14,7 +14,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable the Zero GNOME clock font tweak";
+  _meta.summary = "Enable the Zero GNOME clock font tweak";
 
   s! {
     zenos.desktops.gnome.extensions = {
@@ -31,7 +31,7 @@ enable = enableOption {
           font = { family = "ZeroClock"; weight = "100"; size = 24; };
         };
       };
-      user-theme = {
+      user-themes = {
         enable = true;
         theme.cssOverride = ''
           /* The Top Bar Clock */

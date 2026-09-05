@@ -1,0 +1,36 @@
+_meta = {
+  zenosVersion = 0.1.0;
+  name = "Mount fixture";
+  summary = "Scoped mount acceptance";
+  description = ''Tests the same definition at independent mounts.'';
+  tags = [ "test" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+enable = enableOption {
+  s! { environment.variables.ZSTR_SYSTEM = $path.message; };
+  u! {
+    home.sessionVariables.ZSTR_USER = $path.message;
+    home.packages = [ $pkgs.tools.one ];
+    xdg.configFile."demo-enabled".text = $path.message;
+  };
+};
+settings = {
+  _meta.default = { first = 1; second = 2; nested = { third = 3; fourth = 4; }; items = [ "default" ]; };
+  first._meta.type = $type.int;
+  second._meta = { type = $type.int; default = 0; };
+  nested.third._meta.type = $type.int;
+  nested.fourth._meta.type = $type.int;
+  items._meta.type = $type.list [ $type.string ];
+};
+message._meta = { type = $type.string; default = "default"; };
+base = enableOption {
+  s!! { environment.variables.ZSTR_BASE = "loaded"; };
+  u!! { home.sessionVariables.ZSTR_BASE = "loaded"; };
+};
+instances = {
+  (freeform instance) = {
+    _meta.type = $type.bool;
+    u! { home.sessionVariables.($f.instance) = "instance"; };
+  };
+};

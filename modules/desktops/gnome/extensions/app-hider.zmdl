@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Hide specific applications from the GNOME app grid and search";
+  summary = "Hide specific applications from the GNOME app grid and search";
   description = ''
     Hide specific applications from the GNOME app grid and search
 
@@ -17,7 +17,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable App Hider GNOME extension configuration.";
+  _meta.description = ''Whether to enable App Hider GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.app-hider ];
     programs.dconf.profiles.user.databases = [ {

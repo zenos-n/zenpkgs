@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Enhanced user management for ZenOS";
+  summary = "Enhanced user management for ZenOS";
   description = ''
     Provides a unified system-side bridge for user and Home Manager configuration.
 
@@ -13,13 +13,13 @@ _meta = {
 };
 
 (freeform user) = {
-  _meta.brief = "Configuration for user ${$f.user}";
+  _meta.summary = "Configuration for user ${$f.user}";
 
   groups = {
     _meta = {
       type = $type.list [ $type.string ];
       default = [ ];
-      brief = "Additional groups for this user";
+      summary = "Additional groups for this user";
     };
   };
 
@@ -27,7 +27,7 @@ _meta = {
     _meta = {
       type = $type.list [ $type.string ];
       default = [ ];
-      brief = "Authorized SSH public keys for this user";
+      summary = "Authorized SSH public keys for this user";
     };
   };
 
@@ -35,7 +35,7 @@ _meta = {
     _meta = {
       type = $type.either [ $type.null $type.package ];
       default = null;
-      brief = "Login shell for this user";
+      summary = "Login shell for this user";
     };
   };
 

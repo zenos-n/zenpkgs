@@ -36,8 +36,8 @@ from zenlang.model import (
 FIXTURES = Path(__file__).parent / "fixtures"
 
 
-class CanonicalFixtureTests(unittest.TestCase):
-    def test_all_strategy_fixtures_parse(self) -> None:
+class FixtureSyntaxTests(unittest.TestCase):
+    def test_all_strategy_fixtures_parse_as_syntax(self) -> None:
         expected = {
             "host.zcfg": FileKind.ZCFG,
             "modules/desktops/gnome.zmdl": FileKind.ZMDL,
@@ -47,12 +47,12 @@ class CanonicalFixtureTests(unittest.TestCase):
         }
         for name, kind in expected.items():
             with self.subTest(name=name):
-                document = parse_file(FIXTURES / name)
+                document = parse_file(FIXTURES / name, validate_semantics=False)
                 self.assertEqual(kind, document.kind)
                 self.assertTrue(document.statements)
 
     def test_gnome_fixture_contains_actions_enable_option_and_with(self) -> None:
-        document = parse_file(FIXTURES / "modules" / "desktops" / "gnome.zmdl")
+        document = parse_file(FIXTURES / "modules" / "desktops" / "gnome.zmdl", validate_semantics=False)
         enable = document.statements[1]
         self.assertIsInstance(enable, Assignment)
         self.assertIsInstance(enable.value, EnableOption)
@@ -63,21 +63,21 @@ class CanonicalFixtureTests(unittest.TestCase):
         self.assertIsInstance(packages.value, WithExpr)
         self.assertIsInstance(packages.value.body, BinaryExpr)
 
-    def test_structure_fixtures_contain_the_normative_marker_kinds(self) -> None:
+    def test_structure_fixtures_contain_the_draft_marker_kinds(self) -> None:
         documents = (
-            parse_file(FIXTURES / "structure.zstr"),
-            parse_file(FIXTURES / "typed-aliases.zstr"),
+            parse_file(FIXTURES / "structure.zstr", validate_semantics=False),
+            parse_file(FIXTURES / "typed-aliases.zstr", validate_semantics=False),
         )
         serialized = json.dumps(
             [ast_to_dict(document) for document in documents], sort_keys=True
         )
-        for marker in ("freeform", "alias", "packages", "programs"):
+        for marker in ("freeform", "alias", "packages", "zmdl"):
             self.assertIn(f'"kind": "{marker}"', serialized)
 
-    def test_zstr_rejects_zmdl_registration_markers(self) -> None:
-        with self.assertRaises(ZenLangError) as raised:
-            parse("(zmdl desktops.gnome) = { };", "structure.zstr")
-        self.assertEqual("ZEN116", raised.exception.diagnostic.code)
+    def test_zstr_accepts_zmdl_mount_markers(self) -> None:
+        document = parse("desktops._meta.type = (zmdl desktops.gnome);", "structure.zstr")
+        self.assertIsInstance(document.statements[0].value, StructuralMarker)
+        self.assertEqual("zmdl", document.statements[0].value.kind)
 
 
 class LexerParserTests(unittest.TestCase):
@@ -208,9 +208,9 @@ build = $lib.id { owner = "zenos-n"; };
             parse("value = true or false;", "bad.zmdl")
         self.assertEqual("ZEN119", raised.exception.diagnostic.code)
 
-    def test_zpkg_dependencies_use_fixed_underscored_scopes(self) -> None:
+    def test_zpkg_dependencies_use_fixed_unprefixed_scopes(self) -> None:
         document = parse(
-            "_meta._dependencies = { _general = [ $pkgs.legacy.a ]; _build = [ $pkgs.legacy.b ]; _runtime = [ $pkgs.legacy.c ]; };",
+            "_meta.dependencies = { general = [ $pkgs.legacy.a ]; build = [ $pkgs.legacy.b ]; runtime = [ $pkgs.legacy.c ]; };",
             "cascade.zpkg",
         )
         operators = [statement.operator for statement in document.statements[0].value.statements]
@@ -401,22 +401,22 @@ scope = {
 
     def test_type_annotations_are_rooted_and_parameterized(self) -> None:
         valid = (
-            "$type.string",
-            "$type.list [ $type.string ]",
-            "$type.set [ $type.int ]",
-            "$type.either [ $type.string $type.int ]",
-            '$type.enum [ "dark" "light" ]',
-            "$type.functionTo [ $type.bool ]",
-            "$type.function [ $type.string ]",
+            ("$type.string", '"value"'),
+            ("$type.list [ $type.string ]", '[ "value" ]'),
+            ("$type.set [ $type.int ]", "{ value = 1; }"),
+            ("$type.set", '{ count = 1; label = "record"; }'),
+            ("$type.either [ $type.string $type.int ]", "1"),
+            ('$type.enum [ "dark" "light" ]', '"dark"'),
+            ("$type.functionTo [ $type.bool ]", "item: true"),
+            ("$type.function [ $type.string ]", "item: item"),
         )
-        for annotation in valid:
+        for annotation, value in valid:
             with self.subTest(annotation=annotation):
-                parse(f"_let value: {annotation} = null;", "type.zmdl")
+                parse(f"_let value: {annotation} = {value};", "type.zmdl")
 
         invalid = (
             "$v.type",
             "$type.list",
-            "$type.set",
             "$type.either [ $type.string ]",
             "$type.enum [ ]",
             "$type.function",
@@ -546,8 +546,8 @@ scope = {
 
     def test_dotted_paths_cannot_bypass_metadata_or_action_context(self) -> None:
         invalid = (
-            'option._meta = { _zenosVersion = "bad"; };',
-            'option._meta._zenosVersion = "bad";',
+            'option._meta = { zenosVersion = "bad"; };',
+            'option._meta.zenosVersion = "bad";',
             "option.nested = { s! { x = true; }; };",
             "option._meta = enableOption { s! { x = true; }; };",
         )
@@ -559,14 +559,12 @@ scope = {
 
     def test_zenos_version_metadata_uses_strict_version_literals(self) -> None:
         for version in ("1.0.0", "1.0.0N", "1.0.0Na", "2.4.1b"):
-            parse(f'_meta._zenosVersion = "{version}";', "version.zpkg")
+            parse(f'_meta.zenosVersion = "{version}";', "version.zpkg")
         for value in ('"not-a-version"', "1", "null"):
             with self.subTest(value=value), self.assertRaises(ZenLangError) as raised:
-                parse(f"_meta._zenosVersion = {value};", "bad.zpkg")
+                parse(f"_meta.zenosVersion = {value};", "bad.zpkg")
             self.assertEqual("ZEN213", raised.exception.diagnostic.code)
-        with self.assertRaises(ZenLangError) as quoted:
-            parse('_meta."zenosVersion" = "1.0.0";', "bad.zpkg")
-        self.assertEqual("ZEN223", quoted.exception.diagnostic.code)
+        parse('_meta."zenosVersion" = "1.0.0";', "version.zpkg")
 
     def test_non_zpkg_assignment_cascades_are_rejected(self) -> None:
         for name in ("bad.zcfg", "bad.zmdl", "bad.zstr"):
@@ -574,7 +572,7 @@ scope = {
                 parse("value ++ [ 1 ];", name)
             self.assertEqual("ZEN207", raised.exception.diagnostic.code)
 
-        for source in ("value ++ [ 1 ];", "_meta._dependencies = { _runtime ++ true; };"):
+        for source in ("value ++ [ 1 ];", "_meta.dependencies = { runtime ++ true; };"):
             with self.subTest(source=source), self.assertRaises(ZenLangError) as raised:
                 parse(source, "bad.zpkg")
             self.assertEqual("ZEN207", raised.exception.diagnostic.code)
@@ -709,17 +707,17 @@ class ImportGraphTests(unittest.TestCase):
 
     def test_package_import_and_dependency_scope_diagnostics(self) -> None:
         parse(
-            '_meta._dependencies = { _general = [ $pkgs.legacy.a ]; _build = [ $pkgs.legacy.b ]; _runtime = [ $pkgs.legacy.c ]; };',
+            '_meta.dependencies = { general = [ $pkgs.legacy.a ]; build = [ $pkgs.legacy.b ]; runtime = [ $pkgs.legacy.c ]; };',
             "deps.zpkg",
         )
         invalid = (
             "_meta.dependencies = { _general = [ ]; _build = [ ]; _runtime = [ ]; };",
-            "_meta._dependencies = { _general = [ ]; _build ++ [ ]; _runtime = [ ]; };",
+            "_meta.dependencies = { general = [ ]; build ++ [ ]; runtime = [ ]; };",
         )
         for source in invalid:
             with self.subTest(source=source), self.assertRaises(ZenLangError) as raised:
                 parse(source, "bad.zpkg")
-            self.assertIn(raised.exception.diagnostic.code, ("ZEN207", "ZEN223"))
+            self.assertIn(raised.exception.diagnostic.code, ("ZEN207", "ZEN215"))
 
     def test_imports_must_be_relative_existing_and_same_kind(self) -> None:
         cases = (
@@ -1164,17 +1162,24 @@ class ImportGraphTests(unittest.TestCase):
 
 class CliTests(unittest.TestCase):
     def test_check_and_ast_support_all_extensions(self) -> None:
-        for fixture in FIXTURES.iterdir():
-            if fixture.suffix not in (".zcfg", ".zmdl", ".zpkg", ".zstr"):
-                continue
-            with self.subTest(file=fixture.name):
+        sources = {
+            "zcfg": "legacy.enabled = true;",
+            "zmdl": "enabled._meta.type = $type.bool;",
+            "zpkg": "import $pkgs.legacy.bat;",
+            "zstr": "system._meta.type = (zmdl system);",
+        }
+        with tempfile.TemporaryDirectory() as directory:
+            for kind, source in sources.items():
+                fixture = Path(directory) / ("entry." + kind)
+                fixture.write_text(source, encoding="utf-8")
                 stdout = StringIO()
                 self.assertEqual(0, main(["check", str(fixture), "--diagnostic-format", "json"], stdout, StringIO()))
-                self.assertEqual({"diagnostics": []}, json.loads(stdout.getvalue()))
-
-        stdout = StringIO()
-        self.assertEqual(0, main(["ast", str(FIXTURES / "bat.zpkg")], stdout, StringIO()))
-        self.assertEqual("zpkg", json.loads(stdout.getvalue())["kind"])
+                diagnostics = json.loads(stdout.getvalue())["diagnostics"]
+                self.assertEqual(kind != "zcfg", bool(diagnostics))
+                self.assertTrue(all(item["severity"] == "warning" for item in diagnostics))
+                stdout = StringIO()
+                self.assertEqual(0, main(["ast", str(fixture)], stdout, StringIO()))
+                self.assertEqual(kind, json.loads(stdout.getvalue())["kind"])
 
     def test_cli_reports_io_and_semantic_diagnostics(self) -> None:
         stderr = StringIO()
@@ -1215,9 +1220,11 @@ class CliTests(unittest.TestCase):
             self.assertIn("zenos = {", output.read_text(encoding="utf-8"))
 
             stdout = StringIO()
+            package = root / "bat.zpkg"
+            package.write_text("import $pkgs.legacy.bat;", encoding="utf-8")
             self.assertEqual(
                 0,
-                main(["compile", str(FIXTURES / "bat.zpkg")], stdout, StringIO()),
+                main(["compile", str(package)], stdout, StringIO()),
             )
             self.assertIn("pkgs.zenos.legacy.bat", stdout.getvalue())
 

@@ -3,7 +3,7 @@
 # outer and inner attribute-set shape but cannot enforce per-application fields.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Consistent corner rounding for all window types in GNOME";
+  summary = "Consistent corner rounding for all window types in GNOME";
   description = ''
     Consistent corner rounding for all window types in GNOME
 
@@ -40,7 +40,7 @@ _let mkFloat: $type.function [ $type.float ] = value:
   let
     rendered = $lib.toString value;
   in if $lib.hasInfix "." rendered then rendered else "${rendered}.0";
-_let serializeValue: $type.function [ $type.attrs ] =
+_let serializeValue: $type.function [ $type.set ] =
   let
     serialize = value:
       if $lib.isBool value then (if value then "true" else "false")
@@ -50,7 +50,7 @@ _let serializeValue: $type.function [ $type.attrs ] =
       else if $lib.isList value then "[${$lib.concatStringsSep ", " ($lib.map serialize value)}]"
       else $lib.throwIfNot false "Unsupported type in Rounded Window Corners settings" "";
   in serialize;
-_let serializeGlobalSettings: $type.function [ $type.attrs ] = settings:
+_let serializeGlobalSettings: $type.function [ $type.set ] = settings:
   let
     pairs = $lib.mapAttrsToList
       (key: value: "${$v.mkString key}: ${$v.mkVariant ($v.serializeValue value)}")
@@ -58,7 +58,7 @@ _let serializeGlobalSettings: $type.function [ $type.attrs ] = settings:
   in "{${$lib.concatStringsSep ", " pairs}}";
 
 enable = enableOption {
-  _meta.description = "Rounded Window Corners Reborn configuration";
+  _meta.description = ''Rounded Window Corners Reborn configuration'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.rounded-window-corners-reborn ];
     programs.dconf.profiles.user.databases = [ {
@@ -97,22 +97,22 @@ skip-libadwaita-app = { _meta = { type = $type.bool; default = false; descriptio
   Whether to skip applications that already provide their own
   native corner rounding.
 ''; }; };
-focused-shadow = { _meta = { type = $type.string; default = "{}"; description = "JSON configuration for active window drop shadows"; }; };
-unfocused-shadow = { _meta = { type = $type.string; default = "{}"; description = "JSON configuration for inactive window drop shadows"; }; };
-general.debug = { _meta = { type = $type.bool; default = false; description = "Enable verbose console debugging"; }; };
-general.tweak-kitty = { _meta = { type = $type.bool; default = false; description = "Enable specialized rendering hacks for Kitty terminal"; }; };
-general.preferences-entry = { _meta = { type = $type.bool; default = true; description = "Display extension settings in the app grid"; }; };
+focused-shadow = { _meta = { type = $type.string; default = "{}"; description = ''JSON configuration for active window drop shadows''; }; };
+unfocused-shadow = { _meta = { type = $type.string; default = "{}"; description = ''JSON configuration for inactive window drop shadows''; }; };
+general.debug = { _meta = { type = $type.bool; default = false; description = ''Enable verbose console debugging''; }; };
+general.tweak-kitty = { _meta = { type = $type.bool; default = false; description = ''Enable specialized rendering hacks for Kitty terminal''; }; };
+general.preferences-entry = { _meta = { type = $type.bool; default = true; description = ''Display extension settings in the app grid''; }; };
 
-settings.padding = { _meta = { type = $type.set [ $type.int ]; default = { left = 1; right = 1; top = 1; bottom = 1; }; description = "Internal padding values"; }; };
-settings.keep-rounded-corners = { _meta = { type = $type.bool; default = false; description = "Preserve rounding for maximized windows"; }; };
-settings.border-size = { _meta = { type = $type.int; default = 0; description = "Outer pixel border thickness"; }; };
-settings.border-color = { _meta = { type = $type.either [ ($type.list [ $type.float ]) $type.string ]; default = [ 1.0 1.0 1.0 1.0 ]; description = "CSS color for the border"; }; };
-settings.border-radius = { _meta = { type = $type.int; default = 12; description = "Pixel radius for corner rounding"; }; };
-settings.smoothing = { _meta = { type = $type.float; default = 0.0; description = "Curvature smoothing factor (anti-aliasing)"; }; };
+settings.padding = { _meta = { type = $type.set [ $type.int ]; default = { left = 1; right = 1; top = 1; bottom = 1; }; description = ''Internal padding values''; }; };
+settings.keep-rounded-corners = { _meta = { type = $type.bool; default = false; description = ''Preserve rounding for maximized windows''; }; };
+settings.border-size = { _meta = { type = $type.int; default = 0; description = ''Outer pixel border thickness''; }; };
+settings.border-color = { _meta = { type = $type.either [ ($type.list [ $type.float ]) $type.string ]; default = [ 1.0 1.0 1.0 1.0 ]; description = ''CSS color for the border''; }; };
+settings.border-radius = { _meta = { type = $type.int; default = 12; description = ''Pixel radius for corner rounding''; }; };
+settings.smoothing = { _meta = { type = $type.float; default = 0.0; description = ''Curvature smoothing factor (anti-aliasing)''; }; };
 
 custom-settings = {
   _meta = {
-    type = $type.set [ $type.attrs ];
+    type = $type.set [ $type.set ];
     default = { };
     description = ''
       Per-application visual overrides

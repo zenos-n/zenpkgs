@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Exclude minimized windows from the activities overview";
+  summary = "Exclude minimized windows from the activities overview";
   description = ''
     Exclude minimized windows from the activities overview
 
@@ -17,7 +17,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable Hide Minimized GNOME extension configuration.";
+  _meta.description = ''Whether to enable Hide Minimized GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.hide-minimized ];
   };

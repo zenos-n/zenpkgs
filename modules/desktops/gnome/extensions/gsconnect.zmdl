@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Mobile device integration via GSConnect and KDE Connect";
+  summary = "Mobile device integration via GSConnect and KDE Connect";
   description = ''
     Mobile device integration via GSConnect and KDE Connect
 
@@ -29,7 +29,7 @@ _let serializeCommandList: $type.function "commands" = commands:
 _let bool: $type.function "boolean" = value: if value then "true" else "false";
 
 enable = enableOption {
-  _meta.description = "Whether to enable GSConnect GNOME extension configuration.";
+  _meta.description = ''Whether to enable GSConnect GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.gsconnect ];
       programs.dconf.profiles.user.databases = [ {
@@ -135,22 +135,22 @@ discoverable = { _meta = { type = $type.bool; default = true; description = ''
   remote device discovery.
 ''; }; };
 
-device-defaults.battery.send-statistics = { _meta = { type = $type.bool; default = false; description = "Transmit battery health data to connected device"; }; };
-device-defaults.battery.low-battery-notification = { _meta = { type = $type.bool; default = true; description = "Alert when the remote battery level is critically low"; }; };
-device-defaults.battery.custom-battery-notification = { _meta = { type = $type.bool; default = false; description = "Enable alerts for specific battery percentage thresholds"; }; };
-device-defaults.battery.custom-battery-notification-value = { _meta = { type = $type.int; default = 80; description = "Trigger threshold for custom battery alerts"; }; };
-device-defaults.battery.full-battery-notification = { _meta = { type = $type.bool; default = false; description = "Alert when remote battery reaches full charge"; }; };
-device-defaults.clipboard.receive-content = { _meta = { type = $type.bool; default = false; description = "Accept incoming clipboard data from external devices"; }; };
-device-defaults.clipboard.send-content = { _meta = { type = $type.bool; default = false; description = "Broadcast local clipboard data to external devices"; }; };
-device-defaults.contacts.contacts-source = { _meta = { type = $type.bool; default = true; description = "Permit contact list synchronization with remote devices"; }; };
-device-defaults.mousepad.share-control = { _meta = { type = $type.bool; default = true; description = "Allow remote cursor and input manipulation"; }; };
-device-defaults.mpris.share-players = { _meta = { type = $type.bool; default = true; description = "Export media player controls to connected devices"; }; };
-device-defaults.notification.send-notifications = { _meta = { type = $type.bool; default = true; description = "Forward desktop notifications to connected devices"; }; };
-device-defaults.notification.send-active = { _meta = { type = $type.bool; default = true; description = "Restrict notification forwarding to active session state"; }; };
-device-defaults.notification.applications = { _meta = { type = $type.string; default = "{}"; description = "JSON configuration for per-application notification rules"; }; };
+device-defaults.battery.send-statistics = { _meta = { type = $type.bool; default = false; description = ''Transmit battery health data to connected device''; }; };
+device-defaults.battery.low-battery-notification = { _meta = { type = $type.bool; default = true; description = ''Alert when the remote battery level is critically low''; }; };
+device-defaults.battery.custom-battery-notification = { _meta = { type = $type.bool; default = false; description = ''Enable alerts for specific battery percentage thresholds''; }; };
+device-defaults.battery.custom-battery-notification-value = { _meta = { type = $type.int; default = 80; description = ''Trigger threshold for custom battery alerts''; }; };
+device-defaults.battery.full-battery-notification = { _meta = { type = $type.bool; default = false; description = ''Alert when remote battery reaches full charge''; }; };
+device-defaults.clipboard.receive-content = { _meta = { type = $type.bool; default = false; description = ''Accept incoming clipboard data from external devices''; }; };
+device-defaults.clipboard.send-content = { _meta = { type = $type.bool; default = false; description = ''Broadcast local clipboard data to external devices''; }; };
+device-defaults.contacts.contacts-source = { _meta = { type = $type.bool; default = true; description = ''Permit contact list synchronization with remote devices''; }; };
+device-defaults.mousepad.share-control = { _meta = { type = $type.bool; default = true; description = ''Allow remote cursor and input manipulation''; }; };
+device-defaults.mpris.share-players = { _meta = { type = $type.bool; default = true; description = ''Export media player controls to connected devices''; }; };
+device-defaults.notification.send-notifications = { _meta = { type = $type.bool; default = true; description = ''Forward desktop notifications to connected devices''; }; };
+device-defaults.notification.send-active = { _meta = { type = $type.bool; default = true; description = ''Restrict notification forwarding to active session state''; }; };
+device-defaults.notification.applications = { _meta = { type = $type.string; default = "{}"; description = ''JSON configuration for per-application notification rules''; }; };
 device-defaults.runcommand.command-list = {
   _meta = {
-    type = $type.set [ $type.attrs ];
+    type = $type.set [ $type.set ];
     default = {
       lock = { name = "Lock"; command = "xdg-screensaver lock"; };
       restart = { name = "Restart"; command = "systemctl reboot"; };
@@ -166,14 +166,14 @@ device-defaults.runcommand.command-list = {
     '';
   };
 };
-device-defaults.sftp.automount = { _meta = { type = $type.bool; default = true; description = "Mount remote filesystem automatically upon connection"; }; };
-device-defaults.share.receive-files = { _meta = { type = $type.bool; default = true; description = "Allow remote devices to push files to the desktop"; }; };
-device-defaults.share.receive-directory = { _meta = { type = $type.string; default = ""; description = "Destination path for incoming wireless transfers"; }; };
-device-defaults.share.launch-urls = { _meta = { type = $type.bool; default = false; description = "Automatically open received links in the default browser"; }; };
-device-defaults.sms.legacy-sms = { _meta = { type = $type.bool; default = false; description = "Enable compatibility mode for older Android SMS stacks"; }; };
-device-defaults.systemvolume.share-sinks = { _meta = { type = $type.bool; default = true; description = "Permit remote control of desktop audio outputs"; }; };
-device-defaults.telephony.ringing-volume = { _meta = { type = $type.string; default = "lower"; description = "Audio behavior during incoming call events"; }; };
-device-defaults.telephony.ringing-pause = { _meta = { type = $type.bool; default = false; description = "Suspend media playback when phone is ringing"; }; };
-device-defaults.telephony.talking-volume = { _meta = { type = $type.string; default = "mute"; description = "Audio behavior during active call events"; }; };
-device-defaults.telephony.talking-microphone = { _meta = { type = $type.bool; default = true; description = "Automatically mute local mic during voice calls"; }; };
-device-defaults.telephony.talking-pause = { _meta = { type = $type.bool; default = true; description = "Suspend media playback during active calls"; }; };
+device-defaults.sftp.automount = { _meta = { type = $type.bool; default = true; description = ''Mount remote filesystem automatically upon connection''; }; };
+device-defaults.share.receive-files = { _meta = { type = $type.bool; default = true; description = ''Allow remote devices to push files to the desktop''; }; };
+device-defaults.share.receive-directory = { _meta = { type = $type.string; default = ""; description = ''Destination path for incoming wireless transfers''; }; };
+device-defaults.share.launch-urls = { _meta = { type = $type.bool; default = false; description = ''Automatically open received links in the default browser''; }; };
+device-defaults.sms.legacy-sms = { _meta = { type = $type.bool; default = false; description = ''Enable compatibility mode for older Android SMS stacks''; }; };
+device-defaults.systemvolume.share-sinks = { _meta = { type = $type.bool; default = true; description = ''Permit remote control of desktop audio outputs''; }; };
+device-defaults.telephony.ringing-volume = { _meta = { type = $type.string; default = "lower"; description = ''Audio behavior during incoming call events''; }; };
+device-defaults.telephony.ringing-pause = { _meta = { type = $type.bool; default = false; description = ''Suspend media playback when phone is ringing''; }; };
+device-defaults.telephony.talking-volume = { _meta = { type = $type.string; default = "mute"; description = ''Audio behavior during active call events''; }; };
+device-defaults.telephony.talking-microphone = { _meta = { type = $type.bool; default = true; description = ''Automatically mute local mic during voice calls''; }; };
+device-defaults.telephony.talking-pause = { _meta = { type = $type.bool; default = true; description = ''Suspend media playback during active calls''; }; };

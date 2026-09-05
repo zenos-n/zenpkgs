@@ -6,7 +6,7 @@
 # actions in this separately attached ZMDL without changing the public option schema.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Firefox backend for ZenOS web applications";
+  summary = "Firefox backend for ZenOS web applications";
   description = ''
     Declares the Firefox backend inputs used by isolated ZenOS web applications.
 
@@ -23,7 +23,7 @@ firefox.nativeMessagingHosts = {
   _meta = {
     type = $type.list [ $type.package ];
     default = [ ];
-    brief = "Firefox native messaging host packages";
+    summary = "Firefox native messaging host packages";
   };
 };
 
@@ -31,6 +31,6 @@ firefox.firefoxGnomeTheme = {
   _meta = {
     type = $type.either [ $type.null $type.path ];
     default = null;
-    brief = "Firefox GNOME theme directory";
+    summary = "Firefox GNOME theme directory";
   };
 };

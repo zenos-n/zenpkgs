@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Alphabetical sorting for the GNOME application grid";
+  summary = "Alphabetical sorting for the GNOME application grid";
   description = ''
     Alphabetical sorting for the GNOME application grid
 
@@ -19,7 +19,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable Alphabetical App Grid GNOME extension configuration.";
+  _meta.description = ''Whether to enable Alphabetical App Grid GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.alphabetical-app-grid ];
     programs.dconf.profiles.user.databases = [ {

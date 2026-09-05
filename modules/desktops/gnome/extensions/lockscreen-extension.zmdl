@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Advanced lock screen background customization for GNOME";
+  summary = "Advanced lock screen background customization for GNOME";
   description = ''
     Advanced lock screen background customization for GNOME
 
@@ -19,7 +19,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Lockscreen Extension configuration";
+  _meta.description = ''Lockscreen Extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.lockscreen-extension ];
     programs.dconf.profiles.user.databases = [ {
@@ -94,38 +94,38 @@ usr-share-backgrounds-folder-path = { _meta = { type = $type.bool; default = tru
   Whether to include images found in /usr/share/backgrounds.
 ''; }; };
 
-primary-color-1 = { _meta = { type = $type.string; default = "red"; description = "Primary gradient color for profile 1"; }; };
-secondary-color-1 = { _meta = { type = $type.string; default = "orange"; description = "Secondary gradient color for profile 1"; }; };
-gradient-direction-1 = { _meta = { type = $type.string; default = "none"; description = "Vector for the color gradient transition (none, vertical, horizontal)"; }; };
-background-image-path-1 = { _meta = { type = $type.string; default = "none"; description = "Full filesystem path to the lockscreen background image"; }; };
-background-size-1 = { _meta = { type = $type.string; default = "cover"; description = "CSS scaling logic for the background (cover, contain)"; }; };
-blur-radius-1 = { _meta = { type = $type.int; default = 0; description = "Intensity of the gaussian blur effect (0-100)"; }; };
-blur-brightness-1 = { _meta = { type = $type.float; default = 0.65; description = "Luminance multiplier for the blurred background (0.0-1.0)"; }; };
-user-background-1 = { _meta = { type = $type.bool; default = true; description = "Permit use of current user wallpaper in this profile"; }; };
+primary-color-1 = { _meta = { type = $type.string; default = "red"; description = ''Primary gradient color for profile 1''; }; };
+secondary-color-1 = { _meta = { type = $type.string; default = "orange"; description = ''Secondary gradient color for profile 1''; }; };
+gradient-direction-1 = { _meta = { type = $type.string; default = "none"; description = ''Vector for the color gradient transition (none, vertical, horizontal)''; }; };
+background-image-path-1 = { _meta = { type = $type.string; default = "none"; description = ''Full filesystem path to the lockscreen background image''; }; };
+background-size-1 = { _meta = { type = $type.string; default = "cover"; description = ''CSS scaling logic for the background (cover, contain)''; }; };
+blur-radius-1 = { _meta = { type = $type.int; default = 0; description = ''Intensity of the gaussian blur effect (0-100)''; }; };
+blur-brightness-1 = { _meta = { type = $type.float; default = 0.65; description = ''Luminance multiplier for the blurred background (0.0-1.0)''; }; };
+user-background-1 = { _meta = { type = $type.bool; default = true; description = ''Permit use of current user wallpaper in this profile''; }; };
 
-primary-color-2 = { _meta = { type = $type.string; default = "red"; description = "Primary gradient color for profile 2"; }; };
-secondary-color-2 = { _meta = { type = $type.string; default = "orange"; description = "Secondary gradient color for profile 2"; }; };
-gradient-direction-2 = { _meta = { type = $type.string; default = "none"; description = "Vector for the color gradient transition (none, vertical, horizontal)"; }; };
-background-image-path-2 = { _meta = { type = $type.string; default = "none"; description = "Full filesystem path to the lockscreen background image"; }; };
-background-size-2 = { _meta = { type = $type.string; default = "cover"; description = "CSS scaling logic for the background (cover, contain)"; }; };
-blur-radius-2 = { _meta = { type = $type.int; default = 0; description = "Intensity of the gaussian blur effect (0-100)"; }; };
-blur-brightness-2 = { _meta = { type = $type.float; default = 0.65; description = "Luminance multiplier for the blurred background (0.0-1.0)"; }; };
-user-background-2 = { _meta = { type = $type.bool; default = true; description = "Permit use of current user wallpaper in this profile"; }; };
+primary-color-2 = { _meta = { type = $type.string; default = "red"; description = ''Primary gradient color for profile 2''; }; };
+secondary-color-2 = { _meta = { type = $type.string; default = "orange"; description = ''Secondary gradient color for profile 2''; }; };
+gradient-direction-2 = { _meta = { type = $type.string; default = "none"; description = ''Vector for the color gradient transition (none, vertical, horizontal)''; }; };
+background-image-path-2 = { _meta = { type = $type.string; default = "none"; description = ''Full filesystem path to the lockscreen background image''; }; };
+background-size-2 = { _meta = { type = $type.string; default = "cover"; description = ''CSS scaling logic for the background (cover, contain)''; }; };
+blur-radius-2 = { _meta = { type = $type.int; default = 0; description = ''Intensity of the gaussian blur effect (0-100)''; }; };
+blur-brightness-2 = { _meta = { type = $type.float; default = 0.65; description = ''Luminance multiplier for the blurred background (0.0-1.0)''; }; };
+user-background-2 = { _meta = { type = $type.bool; default = true; description = ''Permit use of current user wallpaper in this profile''; }; };
 
-primary-color-3 = { _meta = { type = $type.string; default = "red"; description = "Primary gradient color for profile 3"; }; };
-secondary-color-3 = { _meta = { type = $type.string; default = "orange"; description = "Secondary gradient color for profile 3"; }; };
-gradient-direction-3 = { _meta = { type = $type.string; default = "none"; description = "Vector for the color gradient transition (none, vertical, horizontal)"; }; };
-background-image-path-3 = { _meta = { type = $type.string; default = "none"; description = "Full filesystem path to the lockscreen background image"; }; };
-background-size-3 = { _meta = { type = $type.string; default = "cover"; description = "CSS scaling logic for the background (cover, contain)"; }; };
-blur-radius-3 = { _meta = { type = $type.int; default = 0; description = "Intensity of the gaussian blur effect (0-100)"; }; };
-blur-brightness-3 = { _meta = { type = $type.float; default = 0.65; description = "Luminance multiplier for the blurred background (0.0-1.0)"; }; };
-user-background-3 = { _meta = { type = $type.bool; default = true; description = "Permit use of current user wallpaper in this profile"; }; };
+primary-color-3 = { _meta = { type = $type.string; default = "red"; description = ''Primary gradient color for profile 3''; }; };
+secondary-color-3 = { _meta = { type = $type.string; default = "orange"; description = ''Secondary gradient color for profile 3''; }; };
+gradient-direction-3 = { _meta = { type = $type.string; default = "none"; description = ''Vector for the color gradient transition (none, vertical, horizontal)''; }; };
+background-image-path-3 = { _meta = { type = $type.string; default = "none"; description = ''Full filesystem path to the lockscreen background image''; }; };
+background-size-3 = { _meta = { type = $type.string; default = "cover"; description = ''CSS scaling logic for the background (cover, contain)''; }; };
+blur-radius-3 = { _meta = { type = $type.int; default = 0; description = ''Intensity of the gaussian blur effect (0-100)''; }; };
+blur-brightness-3 = { _meta = { type = $type.float; default = 0.65; description = ''Luminance multiplier for the blurred background (0.0-1.0)''; }; };
+user-background-3 = { _meta = { type = $type.bool; default = true; description = ''Permit use of current user wallpaper in this profile''; }; };
 
-primary-color-4 = { _meta = { type = $type.string; default = "red"; description = "Primary gradient color for profile 4"; }; };
-secondary-color-4 = { _meta = { type = $type.string; default = "orange"; description = "Secondary gradient color for profile 4"; }; };
-gradient-direction-4 = { _meta = { type = $type.string; default = "none"; description = "Vector for the color gradient transition (none, vertical, horizontal)"; }; };
-background-image-path-4 = { _meta = { type = $type.string; default = "none"; description = "Full filesystem path to the lockscreen background image"; }; };
-background-size-4 = { _meta = { type = $type.string; default = "cover"; description = "CSS scaling logic for the background (cover, contain)"; }; };
-blur-radius-4 = { _meta = { type = $type.int; default = 0; description = "Intensity of the gaussian blur effect (0-100)"; }; };
-blur-brightness-4 = { _meta = { type = $type.float; default = 0.65; description = "Luminance multiplier for the blurred background (0.0-1.0)"; }; };
-user-background-4 = { _meta = { type = $type.bool; default = true; description = "Permit use of current user wallpaper in this profile"; }; };
+primary-color-4 = { _meta = { type = $type.string; default = "red"; description = ''Primary gradient color for profile 4''; }; };
+secondary-color-4 = { _meta = { type = $type.string; default = "orange"; description = ''Secondary gradient color for profile 4''; }; };
+gradient-direction-4 = { _meta = { type = $type.string; default = "none"; description = ''Vector for the color gradient transition (none, vertical, horizontal)''; }; };
+background-image-path-4 = { _meta = { type = $type.string; default = "none"; description = ''Full filesystem path to the lockscreen background image''; }; };
+background-size-4 = { _meta = { type = $type.string; default = "cover"; description = ''CSS scaling logic for the background (cover, contain)''; }; };
+blur-radius-4 = { _meta = { type = $type.int; default = 0; description = ''Intensity of the gaussian blur effect (0-100)''; }; };
+blur-brightness-4 = { _meta = { type = $type.float; default = 0.65; description = ''Luminance multiplier for the blurred background (0.0-1.0)''; }; };
+user-background-4 = { _meta = { type = $type.bool; default = true; description = ''Permit use of current user wallpaper in this profile''; }; };

@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Manual and automatic screensaver inhibition for GNOME";
+  summary = "Manual and automatic screensaver inhibition for GNOME";
   description = ''
     Manual and automatic screensaver inhibition for GNOME
 
@@ -18,7 +18,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable Caffeine GNOME extension configuration.";
+  _meta.description = ''Whether to enable Caffeine GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.caffeine ];
     programs.dconf.profiles.user.databases = [ {
@@ -136,9 +136,9 @@ toggle-shortcut = { _meta = { type = $type.list [ $type.string ]; default = [ ];
 
   List of key combination strings used to manually enable/disable caffeine.
 ''; }; };
-prefs-default-width = { _meta = { type = $type.int; default = 570; description = "Default width for the preferences window interface"; }; };
-prefs-default-height = { _meta = { type = $type.int; default = 590; description = "Default height for the preferences window interface"; }; };
-indicator-position = { _meta = { type = $type.int; default = 0; description = "Visual offset for the status icon in the panel"; }; };
-indicator-position-index = { _meta = { type = $type.int; default = 0; description = "Logical sorting index for the status icon"; }; };
-indicator-position-max = { _meta = { type = $type.int; default = 1; description = "Maximum index for icon positioning in the indicator menu"; }; };
-cli-toggle = { _meta = { type = $type.bool; default = false; description = "Allow toggling caffeine via command line signals"; }; };
+prefs-default-width = { _meta = { type = $type.int; default = 570; description = ''Default width for the preferences window interface''; }; };
+prefs-default-height = { _meta = { type = $type.int; default = 590; description = ''Default height for the preferences window interface''; }; };
+indicator-position = { _meta = { type = $type.int; default = 0; description = ''Visual offset for the status icon in the panel''; }; };
+indicator-position-index = { _meta = { type = $type.int; default = 0; description = ''Logical sorting index for the status icon''; }; };
+indicator-position-max = { _meta = { type = $type.int; default = 1; description = ''Maximum index for icon positioning in the indicator menu''; }; };
+cli-toggle = { _meta = { type = $type.bool; default = false; description = ''Allow toggling caffeine via command line signals''; }; };

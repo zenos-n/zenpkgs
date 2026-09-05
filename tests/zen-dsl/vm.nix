@@ -14,6 +14,12 @@ pkgs.testers.runNixOSTest {
     ];
 
     environment.etc."zen-dsl-valid/modules/programs/demo.zmdl".text = ''
+      _meta = {
+        zenosVersion = "1.0.0";
+        name = "Demo";
+        summary = "Action routing fixture";
+        description = '''Exercises generic, system, and user action routing.''';
+      };
       enable = enableOption {
         !! { genericRoute = true; };
         s!! {

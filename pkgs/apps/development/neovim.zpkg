@@ -1,15 +1,17 @@
 _meta = {
-  _name = "neovim";
-  _summary = "Curated neovim package for ZenOS";
-  _description = "Curated neovim package for ZenOS";
-  _zenosVersion = "1.0.0";
-  _packageVersion = "";
-  _tags = [ ];
-  _maintainers = [ $m.doromiert ];
-  _dependencies = {
-    _general = [ ];
-    _build = [ ];
-    _runtime = [ ];
+  name = "neovim";
+  summary = "Curated neovim package for ZenOS";
+  description = ''
+    Curated neovim package for ZenOS
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "";
+  tags = [ ];
+  maintainers = [ $m.doromiert ];
+  dependencies = {
+    general = [ ];
+    build = [ ];
+    runtime = [ ];
   };
 };
 

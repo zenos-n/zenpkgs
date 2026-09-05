@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Retro 'Magic Lamp' window animation for GNOME";
+  summary = "Retro 'Magic Lamp' window animation for GNOME";
   description = ''
     Retro 'Magic Lamp' window animation for GNOME
 
@@ -17,7 +17,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable Compiz Alike Magic Lamp Effect GNOME extension configuration.";
+  _meta.description = ''Whether to enable Compiz Alike Magic Lamp Effect GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.compiz-alike-magic-lamp-effect ];
     programs.dconf.profiles.user.databases = [ {

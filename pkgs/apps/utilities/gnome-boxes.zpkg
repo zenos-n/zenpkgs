@@ -1,15 +1,17 @@
 _meta = {
-  _name = "gnome-boxes";
-  _summary = "Curated gnome-boxes package for ZenOS";
-  _description = "Curated gnome-boxes package for ZenOS";
-  _zenosVersion = "1.0.0";
-  _packageVersion = "";
-  _tags = [ ];
-  _maintainers = [ $m.doromiert ];
-  _dependencies = {
-    _general = [ ];
-    _build = [ ];
-    _runtime = [ ];
+  name = "gnome-boxes";
+  summary = "Curated gnome-boxes package for ZenOS";
+  description = ''
+    Curated gnome-boxes package for ZenOS
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "";
+  tags = [ ];
+  maintainers = [ $m.doromiert ];
+  dependencies = {
+    general = [ ];
+    build = [ ];
+    runtime = [ ];
   };
 };
 

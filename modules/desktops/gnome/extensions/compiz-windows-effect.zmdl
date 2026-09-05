@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Wobbly window physics and animations for GNOME";
+  summary = "Wobbly window physics and animations for GNOME";
   description = ''
     Wobbly window physics and animations for GNOME
 
@@ -17,7 +17,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable Compiz Windows Effect GNOME extension configuration.";
+  _meta.description = ''Whether to enable Compiz Windows Effect GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.compiz-windows-effect ];
     programs.dconf.profiles.user.databases = [ {

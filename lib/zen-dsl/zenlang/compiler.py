@@ -7,6 +7,7 @@ from typing import Any
 
 from .api import parse_file
 from .emitter import NixEmitter, emit_attr_name, emit_nix_data, semantic_descriptor
+from .validation import infer_type
 from .model import (
     ActionStatement,
     Assignment,
@@ -69,12 +70,14 @@ def compile_document(
 
 
 def document_descriptor(document: Document) -> dict[str, Any]:
+    statements = _resolved_statements(document)
     return {
         "descriptorVersion": DESCRIPTOR_VERSION,
         "grammarVersion": document.grammar_version,
         "irVersion": document.ir_version,
         "kind": document.kind.value,
-        "statements": semantic_descriptor(_resolved_statements(document)),
+        "statements": semantic_descriptor(statements),
+        **({"nodeMetadata": _node_metadata(statements)} if document.kind is FileKind.ZMDL else {}),
     }
 
 
@@ -106,6 +109,19 @@ def compile_tree(root: str | Path, *, mode: str = "build") -> dict[str, Any]:
     sources = []
     structure = _tree_structure(documents)
     for relative, document in documents.items():
+        diagnostics = []
+        for diagnostic in document.diagnostics:
+            record = diagnostic.to_dict()
+            # Bundle diagnostics carry portable locations, not parser AST spans.
+            record.pop("span")
+            record["source"] = diagnostic.span.source
+            record["line"] = diagnostic.span.start.line
+            record["column"] = diagnostic.span.start.column
+            try:
+                record["source"] = Path(diagnostic.span.source).relative_to(resolved_root).as_posix()
+            except ValueError:
+                pass
+            diagnostics.append(record)
         if document.kind is FileKind.ZMDL:
             compiled = compile_zmdl(document, root=resolved_root)
         else:
@@ -113,7 +129,10 @@ def compile_tree(root: str | Path, *, mode: str = "build") -> dict[str, Any]:
         sources.append(
             {
                 "compiledNix": compiled,
+                **({"mountNix": compile_zmdl_mount(document, root=resolved_root)}
+                   if document.kind is FileKind.ZMDL else {}),
                 "descriptor": document_descriptor(document),
+                "diagnostics": diagnostics,
                 "kind": document.kind.value,
                 "path": relative,
             }
@@ -125,6 +144,7 @@ def compile_tree(root: str | Path, *, mode: str = "build") -> dict[str, Any]:
         "modules": modules,
         "structure": structure,
         "sources": sources,
+        "diagnostics": [diagnostic for source in sources for diagnostic in source["diagnostics"]],
     }
 
 
@@ -281,6 +301,7 @@ def compile_zmdl(
         },
         "modulePath": list(module_path),
         "moduleIdentity": module["identity"],
+        "nodeMetadata": _node_metadata(statements),
         "aliases": aliases,
         "statements": semantic_descriptor(statements),
     }
@@ -314,6 +335,53 @@ def compile_zmdl(
         output += "\n".join(f"  {binding}" for binding in bindings) + "\n"
     output += "in\n{\n" + "\n".join(module_lines) + "\n}\n"
     return output
+
+
+def compile_zmdl_mount(document: Document, *, root: str | Path) -> str:
+    """Compile a definition independently of its filesystem identity's location."""
+    _zmdl_module(document, root)
+    statements = _coalesce_zmdl_scope_assignments(_resolved_statements(document))
+    emitter = _MountEmitter({}, {"path": "cfg"})
+    bindings = [emitter.statement(item) for item in statements
+                if isinstance(item, (LetStatement, ResolvedImport))]
+    actions = _zmdl_scope_actions(statements, scope_value="cfg", contexts=(), emitter=emitter)
+    roots: set[str] = set()
+
+    def visit(items: tuple[Any, ...]) -> None:
+        for item in items:
+            if isinstance(item, ActionStatement):
+                if item.scope in ("user", "shared"):
+                    roots.add("home-manager")
+                if item.scope != "user":
+                    for definition in item.body.statements:
+                        if isinstance(definition, Assignment):
+                            roots.add(_static_path(definition.target[:1], definition.span)[0])
+                        elif isinstance(definition, InheritStatement):
+                            roots.update(definition.names)
+            elif isinstance(item, Assignment):
+                body = _option_body(item.value)
+                if body is not None:
+                    visit(body.statements)
+
+    visit(statements)
+    schema = _emit_zmdl_scope_module(statements, emitter, freeform_depth=0)
+    return (
+        "{ config, cfg, lib, pkgs, user ? null, freeform ? { }, shareUserActions ? true, "
+        "maintainers ? lib.maintainers, licenses ? lib.licenses, ... }:\nlet\n"
+        + f"  name = {emit_nix_data(_source_name(document))};\n"
+        + "  _zenDefaults = value: if (value._type or \"\") == \"if\" then "
+        "lib.mkIf value.condition (_zenDefaults value.content) else "
+        "if (value._type or \"\") == \"merge\" then lib.mkMerge (map _zenDefaults value.contents) "
+        "else if (value._type or \"\") == \"override\" then value "
+        "else if builtins.isAttrs value && !(lib.isDerivation value) && !(value ? _type) "
+        "then lib.mapAttrs (_: _zenDefaults) value else lib.mkDefault value;\n"
+        + "\n".join(f"  {binding}" for binding in bindings)
+        + "\nin {\n"
+        + f"  schema = {schema};\n"
+        + f"  actionRoots = {emit_nix_data(sorted(roots))};\n"
+        + "  actions = [\n" + "\n".join(f"    {action}" for action in actions)
+        + "\n  ];\n}\n"
+    )
 
 
 def compile_zpkg(document: Document, *, mode: str = "build") -> str:
@@ -367,27 +435,12 @@ def compile_zpkg(document: Document, *, mode: str = "build") -> str:
             "a ZPKG package import must use $pkgs.legacy.<path>",
             package_import.package.span,
         )
-    required_metadata = {
-        "name",
-        "summary",
-        "description",
-        "zenosVersion",
-        "tags",
-        "maintainers",
-        "dependencies",
-    }
-    missing_metadata = sorted(required_metadata - set(metadata))
-    if missing_metadata:
-        raise CompilationError(
-            "missing ZPKG metadata fields: " + ", ".join(missing_metadata),
-            document.span,
-        )
-
     import_data = [
         semantic_descriptor(statement)
         for statement in local_bindings
         if isinstance(statement, ResolvedImport)
     ]
+    metadata = _normalized_package_metadata(metadata)
     if mode == "interface":
         descriptor = {
             "descriptorVersion": DESCRIPTOR_VERSION,
@@ -406,12 +459,18 @@ def compile_zpkg(document: Document, *, mode: str = "build") -> str:
         return "{ ... }:\n" + emit_nix_data(descriptor) + "\n"
 
     package = emitter.expression(package_import.package)
-    if not local_bindings:
-        return "{ pkgs, ... }:\n" + package + "\n"
-    bindings = "\n".join(
-        f"  {emitter.statement(statement)}" for statement in local_bindings
+    bindings = "\n".join(f"  {emitter.statement(statement)}" for statement in local_bindings)
+    supplied = "{ " + " ".join(
+        f"{emit_attr_name(key)} = {emitter.expression(value)};"
+        for key, value in sorted(metadata.items())
+    ) + " }"
+    return (
+        "{ pkgs, lib ? pkgs.lib, maintainers ? lib.maintainers, licenses ? lib.licenses, ... }:\nlet\n"
+        + f"  name = {emit_nix_data(_source_name(document))};\n"
+        + (bindings + "\n" if bindings else "")
+        + f"  package = {package};\n  suppliedMetadata = {supplied};\n"
+        + "in\npackage // { meta = (package.meta or { }) // suppliedMetadata; }\n"
     )
-    return "{ pkgs, ... }:\nlet\n" + bindings + "\nin\n" + package + "\n"
 
 
 def compile_zstr(document: Document) -> str:
@@ -692,11 +751,25 @@ def _freeform_id(marker: StructuralMarker) -> str:
 
 def _tree_structure(documents: dict[str, Document]) -> dict[str, Any]:
     aliases: list[dict[str, Any]] = []
+    mounts: list[dict[str, Any]] = []
+    nodes: list[dict[str, Any]] = []
 
     def marker_path(marker: StructuralMarker) -> tuple[str, ...]:
         return _static_path(marker.argument, marker.span)
 
-    def visit(statements: tuple[Any, ...], prefix: tuple[str, ...]) -> None:
+    def visit(
+        statements: tuple[Any, ...],
+        prefix: tuple[str, ...],
+        binding_scopes: tuple[str, ...] = (),
+    ) -> None:
+        emitter = _MountEmitter({})
+        local_bindings = " ".join(
+            emitter.statement(item) for item in statements
+            if isinstance(item, LetStatement)
+            or isinstance(item, ResolvedImport) and item.binding is not None
+        )
+        if local_bindings:
+            binding_scopes = (*binding_scopes, local_bindings)
         for statement in statements:
             if isinstance(statement, ResolvedImport) and statement.binding is None:
                 continue
@@ -714,13 +787,35 @@ def _tree_structure(documents: dict[str, Document]) -> dict[str, Any]:
                 elif statement.target.kind == "freeform":
                     freeform = marker_path(statement.target)
                     nested_prefix = (*prefix, "{" + freeform[-1] + "}")
+                    nodes.append({"path": list(nested_prefix)})
                 if isinstance(statement.value, AttrSet):
-                    visit(statement.value.statements, nested_prefix)
+                    visit(statement.value.statements, nested_prefix, binding_scopes)
                 continue
             path = (*prefix, *_assignment_path(statement))
             if isinstance(statement.value, StructuralMarker):
                 marker = statement.value
                 owner = path[:-2] if path[-2:] in (("_meta", "type"), ("_meta", "_type")) else path
+                if marker.kind == "programs":
+                    raise CompilationError("the (programs) marker has no mounting semantics; use (zmdl programs)", marker.span)
+                if marker.kind == "packages" and not (
+                    owner == ("system", "packages")
+                    or len(owner) == 3 and owner[0] == "users"
+                    and owner[1].startswith("{") and owner[2] == "packages"
+                ):
+                    raise CompilationError("package selectors require system.packages or users.<name>.packages", marker.span)
+                if marker.kind == "zmdl":
+                    _static_path(marker.argument, marker.span)
+                if marker.kind in ("zmdl", "packages", "alias"):
+                    target = []
+                    for segment in marker.argument or ():
+                        if isinstance(segment, DynamicSegment):
+                            variable = segment.value
+                            if not isinstance(variable, Variable) or variable.name != "f":
+                                raise CompilationError("mount targets require lexical $f keys", segment.span)
+                            target.append({"freeform": _static_path(variable.path)[0]})
+                        else:
+                            target.append(_static_path((segment,))[0])
+                    mounts.append({"path": list(owner), "kind": marker.kind, "target": target})
                 if marker.kind == "alias":
                     aliases.append(
                         {
@@ -729,13 +824,25 @@ def _tree_structure(documents: dict[str, Document]) -> dict[str, Any]:
                         }
                     )
             elif isinstance(statement.value, AttrSet):
-                visit(statement.value.statements, path)
+                if "_meta" not in path:
+                    node: dict[str, Any] = {"path": list(path)}
+                    metadata, _, _ = _option_parts(statement.value)
+                    if ("type" in metadata or "default" in metadata) and not isinstance(metadata.get("type"), StructuralMarker):
+                        node["optionNix"] = (
+                            "{ lib, pkgs, config, freeform, maintainers ? lib.maintainers, "
+                            "licenses ? lib.licenses, ... }: let name = \"structure\"; in "
+                            + " ".join(f"let {bindings} in" for bindings in binding_scopes)
+                            + " " + _option_declaration(statement.value, emitter, freeform_depth=0)
+                        )
+                    nodes.append(node)
+                visit(statement.value.statements, path, binding_scopes)
 
-    for _relative, document in documents.items():
-        if document.kind is FileKind.ZSTR:
-            visit(document.statements, ())
+    document = documents.get("structure.zstr")
+    if document is not None:
+        visit(_coalesce_zmdl_scope_assignments(_resolved_statements(document)), ())
     aliases.sort(key=lambda item: item["path"])
-    return {"aliases": aliases}
+    return {"mounts": mounts, "nodes": nodes,
+            "present": document is not None}
 
 
 def _emit_static_path(path: tuple[str, ...]) -> str:
@@ -774,6 +881,8 @@ def _zcfg_groups(
                     statement.span,
                 )
             logical_path = (*logical_prefix, *_assignment_path(statement))
+            if logical_path[0] == "_meta":
+                continue
             if isinstance(statement.value, AttrSet):
                 if not statement.value.statements:
                     path = _route_zcfg_path(logical_path, tree_for(conditions), statement.span)
@@ -798,18 +907,8 @@ def _zcfg_groups(
 def _route_zcfg_path(
     path: tuple[str, ...], tree: dict[str, Any], span: Any
 ) -> tuple[str, ...]:
-    if path[0] == "legacy":
-        routed = path[1:]
-        if routed and routed[0] == "zenos":
-            raise CompilationError("legacy cannot contain the zenos option tree", span)
-        return routed
-    if len(path) >= 3 and path[0] == "users" and path[2] == "legacy":
-        user = path[1]
-        _insert_tree(tree, ("zenos", "users", user), {}, span)
-        legacy_path = path[3:]
-        if legacy_path and legacy_path[0] == "homeManager":
-            return ("home-manager", "users", user, *legacy_path[1:])
-        return ("users", "users", user, *legacy_path)
+    if path[:2] == ("legacy", "zenos"):
+        raise CompilationError("legacy cannot contain the zenos option tree", span)
     return ("zenos", *path)
 
 
@@ -881,6 +980,8 @@ def _emit_tree(tree: dict[str, Any], emitter: NixEmitter, indent: int) -> str:
 def _collect_metadata(
     result: dict[str, Expression], path: tuple[str, ...], value: Expression
 ) -> None:
+    while isinstance(value, GroupExpr):
+        value = value.value
     if not path:
         if not isinstance(value, AttrSet):
             raise CompilationError("_meta must be an attribute set", value.span)
@@ -891,16 +992,64 @@ def _collect_metadata(
             _collect_metadata(result, child_path, statement.value)
         return
     if len(path) != 1:
-        raise CompilationError(
-            "nested metadata values are not supported by this backend",
-            value.span,
-        )
+        nested = _nest_zmdl_assignment(tuple(IdentifierSegment(part, value.span) for part in path[1:]), value, value.span)
+        previous = result.get(path[0])
+        if previous is not None and not isinstance(previous, AttrSet):
+            raise CompilationError(f"conflicting metadata field: {path[0]}", value.span)
+        result[path[0]] = AttrSet(_coalesce_assignments((*previous.statements, nested)) if previous else (nested,), False, value.span)
+        return
     field = path[0]
     if field.startswith("_"):
-        field = field[1:]
+        raise CompilationError("fields inside _meta must be unprefixed", value.span)
     if field in result:
-        raise CompilationError(f"duplicate metadata field: _{field}", value.span)
+        raise CompilationError(f"duplicate metadata field: {field}", value.span)
     result[field] = value
+
+
+def _normalized_package_metadata(metadata: dict[str, Expression]) -> dict[str, Expression]:
+    result = dict(metadata)
+    version = result.get("packageVersion")
+    empty = isinstance(version, StringExpr) and all(isinstance(part, StringText) and not part.value for part in version.parts)
+    if (version is None or empty) and "zenosVersion" in result:
+        result["packageVersion"] = result["zenosVersion"]
+    return result
+
+
+def _node_metadata(statements: tuple[Any, ...]) -> list[dict[str, Any]]:
+    """Relative ZMDL node paths; freeform segments are {freeform: identifier}.
+
+    Metadata values use semantic_descriptor. Only zenosVersion is inherited;
+    unresolved versions remain absent. Authored statements are never rewritten.
+    """
+    records: list[dict[str, Any]] = []
+
+    def visit(current: tuple[Any, ...], path: list[Any], inherited: Expression | None) -> None:
+        metadata: dict[str, Expression] = {}
+        for statement in current:
+            if isinstance(statement, Assignment) and not isinstance(statement.target, StructuralMarker):
+                names = _assignment_path(statement)
+                if names[0] == "_meta":
+                    _collect_metadata(metadata, names[1:], statement.value)
+        version = metadata.get("zenosVersion", inherited)
+        if version is not None:
+            metadata["zenosVersion"] = version
+        records.append({"path": path, "metadata": {key: semantic_descriptor(value) for key, value in sorted(metadata.items())}})
+        for statement in current:
+            if not isinstance(statement, Assignment):
+                continue
+            if isinstance(statement.target, StructuralMarker):
+                if statement.target.kind != "freeform":
+                    continue
+                segments = [{"freeform": _freeform_id(statement.target)}]
+            else:
+                segments = list(_assignment_path(statement))
+                if segments[0] == "_meta":
+                    continue
+            body = _option_body(statement.value)
+            visit(body.statements if body else (), [*path, *segments], version)
+
+    visit(_coalesce_zmdl_scope_assignments(statements), [], None)
+    return records
 
 
 def _option_parts(
@@ -932,6 +1081,8 @@ def _option_declaration(
     emitter: NixEmitter,
     *,
     freeform_depth: int,
+    inherited_defaults: tuple[str, ...] = (),
+    type_bindings: dict[str, Expression] | None = None,
 ) -> str:
     metadata, _, enabled = _option_parts(value)
     body = _option_body(value)
@@ -941,17 +1092,19 @@ def _option_declaration(
             body.statements,
             emitter,
             freeform_depth=freeform_depth,
+            inherited_defaults=inherited_defaults,
+            type_bindings=type_bindings,
         )
     else:
         option_type = (
             "lib.types.bool"
             if enabled
-            else _option_type(metadata.get("type"), value, emitter)
+            else _option_type(metadata.get("type"), metadata.get("default", value if body is None else None), emitter, bindings=type_bindings, span=value.span)
         )
     default = metadata.get("default")
     if default is None and enabled:
         default_text = "false"
-    elif default is None and has_scope:
+    elif has_scope:
         default_text = "{ }"
     elif default is None and not isinstance(value, (AttrSet, EnableOption)):
         default_text = emitter.expression(value)
@@ -965,7 +1118,11 @@ def _option_declaration(
         fields.append(f"description = {emitter.expression(description)};")
     if "example" in metadata:
         fields.append(f"example = {emitter.expression(metadata['example'])};")
-    return "lib.mkOption { " + " ".join(fields) + " }"
+    declaration = "lib.mkOption { " + " ".join(fields) + " }"
+    if inherited_defaults and not has_scope:
+        declaration = (f"({declaration} // lib.foldr (value: rest: rest // value) {{ }} "
+                       + "[ " + " ".join(f"({value})" for value in inherited_defaults) + " ])")
+    return declaration
 
 
 def _option_body(value: Expression) -> AttrSet | None:
@@ -1003,11 +1160,15 @@ def _zmdl_submodule_type(
     emitter: NixEmitter,
     *,
     freeform_depth: int,
+    inherited_defaults: tuple[str, ...] = (),
+    type_bindings: dict[str, Expression] | None = None,
 ) -> str:
     module = _emit_zmdl_scope_module(
         statements,
         emitter,
         freeform_depth=freeform_depth,
+        inherited_defaults=inherited_defaults,
+        type_bindings=type_bindings,
     )
     return f"(lib.types.submodule ({{ ... }}: {module}))"
 
@@ -1017,8 +1178,35 @@ def _emit_zmdl_scope_module(
     emitter: NixEmitter,
     *,
     freeform_depth: int,
+    inherited_defaults: tuple[str, ...] = (),
+    type_bindings: dict[str, Expression] | None = None,
 ) -> str:
     effective = _coalesce_zmdl_scope_assignments(statements)
+    type_bindings = dict(type_bindings or {})
+    for statement in effective:
+        if isinstance(statement, LetStatement):
+            type_bindings[statement.name] = statement.annotation
+        elif isinstance(statement, ResolvedImport) and statement.binding is not None and statement.annotation is not None:
+            type_bindings[statement.binding] = statement.annotation
+    metadata: dict[str, Expression] = {}
+    for statement in effective:
+        if isinstance(statement, Assignment) and not isinstance(statement.target, StructuralMarker):
+            path = _assignment_path(statement)
+            if path[0] == "_meta":
+                _collect_metadata(metadata, path[1:], statement.value)
+    default_records = inherited_defaults
+    if "default" in metadata:
+        default_records = (*default_records, "{ default = " + emitter.expression(metadata["default"]) + "; }")
+
+    def child_defaults(key: str) -> tuple[str, ...]:
+        # Parent defaults become ordinary child option defaults. This retains
+        # priority 1500 while allowing partial submodule definitions to merge.
+        return tuple(
+            f"(if ({record}) ? default && builtins.hasAttr ({key}) ({record}).default "
+            f"then {{ default = builtins.getAttr ({key}) ({record}).default; }} else {{ }})"
+            for record in default_records
+        )
+
     option_lines: list[tuple[tuple[str, ...], str]] = []
     freeforms: list[Assignment] = []
     for statement in effective:
@@ -1038,6 +1226,8 @@ def _emit_zmdl_scope_module(
                     statement.value,
                     emitter,
                     freeform_depth=freeform_depth,
+                    inherited_defaults=child_defaults(emit_nix_data(path[0])),
+                    type_bindings=type_bindings,
                 ),
             )
         )
@@ -1076,6 +1266,8 @@ def _emit_zmdl_scope_module(
                 body.statements,
                 child_emitter,
                 freeform_depth=freeform_depth + 1,
+                inherited_defaults=child_defaults(binding),
+                type_bindings=type_bindings,
             )
             child_type = (
                 "(lib.types.submodule ({ name, ... }: let "
@@ -1084,37 +1276,29 @@ def _emit_zmdl_scope_module(
         else:
             metadata, _, _ = _option_parts(freeform.value)
             annotation = metadata.get("type")
-            child_type = (
-                _emit_type(annotation, child_emitter)
-                if annotation is not None
-                else "lib.types.anything"
-            )
+            child_type = _option_type(annotation, metadata.get("default"), child_emitter, bindings=type_bindings, span=freeform.span)
         fields.append(f"freeformType = lib.types.attrsOf {child_type};")
+    if default_records:
+        records = "[ " + " ".join(f"({record})" for record in default_records) + " ]"
+        names = emit_nix_data([path[0] for path, _ in option_lines])
+        # Freeform defaults still instantiate their keys; unknown defaults must
+        # remain definitions so the module system diagnoses them, not drops them.
+        fields.append(
+            "config = lib.mkOptionDefault (builtins.removeAttrs "
+            f"(lib.foldr (record: rest: lib.recursiveUpdate rest (record.default or {{ }})) {{ }} {records}) {names});"
+        )
     return "{ " + " ".join(fields) + " }"
 
 
 def _option_type(
-    annotation: Expression | None, value: Expression, emitter: NixEmitter
+    annotation: Expression | None, value: Expression | None, emitter: NixEmitter,
+    *, bindings: dict[str, Expression] | None = None, span: Any | None = None,
 ) -> str:
-    if annotation is not None:
-        return _emit_type(annotation, emitter)
-    if isinstance(value, Literal):
-        return {
-            "true": "lib.types.bool",
-            "false": "lib.types.bool",
-            "integer": "lib.types.int",
-            "float": "lib.types.float",
-        }.get(
-            value.kind,
-            "lib.types.str" if isinstance(value.value, str) else "lib.types.anything",
-        )
-    if isinstance(value, StringExpr):
-        return "lib.types.str"
-    if isinstance(value, ListExpr):
-        return "lib.types.listOf lib.types.anything"
-    if isinstance(value, AttrSet):
-        return "lib.types.attrs"
-    return "lib.types.anything"
+    if annotation is None and value is not None:
+        annotation = infer_type(value, bindings)
+    if annotation is None:
+        raise CompilationError("cannot infer option type; supply _meta.type (use $type.set for an open record)", span or (value.span if value is not None else None))
+    return _emit_type(annotation, emitter)
 
 
 def _emit_type(annotation: Expression, emitter: NixEmitter) -> str:
@@ -1123,7 +1307,7 @@ def _emit_type(annotation: Expression, emitter: NixEmitter) -> str:
     aliases = {
         "string": "str",
         "boolean": "bool",
-        "set": "attrsOf",
+        "set": "attrs",
         "list": "listOf",
     }
     if (
@@ -1191,6 +1375,18 @@ class _FreeformEmitter(NixEmitter):
         return _FreeformEmitter(self.freeform_bindings, self.variable_roots)
 
 
+class _MountEmitter(_FreeformEmitter):
+    def _variable(self, expression: Variable) -> str:
+        if expression.name == "f" and len(expression.path) == 1:
+            identifier = _static_path(expression.path)[0]
+            if identifier not in self.freeform_bindings:
+                return "freeform." + emit_attr_name(identifier)
+        return super()._variable(expression)
+
+    def child_emitter(self) -> NixEmitter:
+        return _MountEmitter(self.freeform_bindings, self.variable_roots)
+
+
 def _extend_freeform_emitter(
     emitter: NixEmitter,
     identifier: str,
@@ -1202,7 +1398,8 @@ def _extend_freeform_emitter(
         else {}
     )
     bindings[identifier] = binding
-    return _FreeformEmitter(bindings, emitter.variable_roots)
+    cls = _MountEmitter if isinstance(emitter, _MountEmitter) else _FreeformEmitter
+    return cls(bindings, emitter.variable_roots)
 
 
 @dataclass(frozen=True)
@@ -1218,8 +1415,16 @@ def _zmdl_scope_actions(
     scope_value: str,
     contexts: tuple[_FreeformContext, ...],
     emitter: NixEmitter,
+    inherited_weight: Expression | None = None,
 ) -> list[str]:
     effective = _coalesce_zmdl_scope_assignments(statements)
+    metadata: dict[str, Expression] = {}
+    for statement in effective:
+        if isinstance(statement, Assignment) and not isinstance(statement.target, StructuralMarker):
+            path = _assignment_path(statement)
+            if path[0] == "_meta":
+                _collect_metadata(metadata, path[1:], statement.value)
+    weight = metadata.get("weight", inherited_weight)
     declared_names = sorted(
         {
             _assignment_path(statement)[0]
@@ -1229,6 +1434,8 @@ def _zmdl_scope_actions(
             and _assignment_path(statement)[0] != "_meta"
         }
     )
+    if isinstance(emitter, _MountEmitter) and scope_value == "cfg" and "enable" not in declared_names:
+        declared_names.append("enable")
     actions: list[str] = []
     freeforms: list[Assignment] = []
     for statement in effective:
@@ -1245,7 +1452,7 @@ def _zmdl_scope_actions(
         if body is None:
             continue
         child_scope = scope_value + "." + _emit_static_path(path)
-        _, direct_actions, _ = _option_parts(statement.value)
+        option_metadata, direct_actions, _ = _option_parts(statement.value)
         for action in direct_actions:
             actions.extend(
                 _emit_transposed_action(
@@ -1253,6 +1460,7 @@ def _zmdl_scope_actions(
                     contexts,
                     emitter,
                     conditional_base=child_scope,
+                    weight=option_metadata.get("weight", weight),
                 )
             )
         actions.extend(
@@ -1261,6 +1469,7 @@ def _zmdl_scope_actions(
                 scope_value=child_scope,
                 contexts=contexts,
                 emitter=emitter,
+                inherited_weight=weight,
             )
         )
 
@@ -1299,7 +1508,7 @@ def _zmdl_scope_actions(
             identifier,
             key_binding,
         )
-        _, direct_actions, _ = _option_parts(freeform.value)
+        option_metadata, direct_actions, _ = _option_parts(freeform.value)
         for action in direct_actions:
             actions.extend(
                 _emit_transposed_action(
@@ -1307,6 +1516,7 @@ def _zmdl_scope_actions(
                     child_contexts,
                     child_emitter,
                     conditional_base=value_binding,
+                    weight=option_metadata.get("weight", weight),
                 )
             )
         actions.extend(
@@ -1315,6 +1525,7 @@ def _zmdl_scope_actions(
                 scope_value=value_binding,
                 contexts=child_contexts,
                 emitter=child_emitter,
+                inherited_weight=weight,
             )
         )
     return actions
@@ -1326,9 +1537,10 @@ def _emit_transposed_action(
     emitter: NixEmitter,
     *,
     conditional_base: str,
+    weight: Expression | None = None,
 ) -> list[str]:
     if not contexts:
-        return [_emit_action(action, emitter, conditional_base=conditional_base)]
+        return [_emit_action(action, emitter, conditional_base=conditional_base, weight=weight)]
     condition = None
     if not action.unconditional:
         condition = emitter.guard_condition(action.guards, conditional_base)
@@ -1340,18 +1552,31 @@ def _emit_transposed_action(
         rendered_value: str,
         span: Any,
     ) -> None:
+        if weight is not None:
+            rendered_value = f"(lib.mkOverride ({emitter.expression(weight)}) ({rendered_value}))"
         indexes = [
             index
             for index, segment in enumerate(target)
             if isinstance(segment, DynamicSegment)
         ]
-        if action.scope == "user":
+        if action.scope == "user" or (isinstance(emitter, _MountEmitter) and action.scope == "shared"):
             module = "{ " + emitter.path(target) + f" = {rendered_value}; }}"
             module = _with_action_bindings(bindings, emitter, module)
             if condition is not None:
                 module = f"(lib.mkIf ({condition}) {module})"
-            mapped = _map_freeform_contexts(contexts, f"[ {module} ]")
-            fragments.append(f"{{ home-manager.sharedModules = {mapped}; }}")
+            if isinstance(emitter, _MountEmitter):
+                mapped = _map_freeform_contexts(contexts, module)
+                system_value = (
+                    f"(if shareUserActions then {{ home-manager.sharedModules = [ {{ config = _zenDefaults ({mapped}); }} ]; }} else {{ }})"
+                    if action.scope == "user" else mapped
+                )
+                fragments.append(
+                    f"(if user == null then {system_value} "
+                    f"else {{ home-manager.users.${{user}} = {mapped}; }})"
+                )
+            else:
+                mapped = _map_freeform_contexts(contexts, f"[ {module} ]")
+                fragments.append(f"{{ home-manager.sharedModules = {mapped}; }}")
             return
         if not indexes:
             path = _static_path(target, span)
@@ -1409,6 +1634,8 @@ def _emit_transposed_action(
         emit_definition(statement.target, rendered_value, statement.span)
     if action.scope not in ("system", "shared", "user"):
         raise CompilationError(f"unknown action scope: {action.scope!r}", action.span)
+    if isinstance(emitter, _MountEmitter) and action.scope == "system":
+        fragments = [f"(if user == null then {fragment} else {{ }})" for fragment in fragments]
     return fragments
 
 
@@ -1442,8 +1669,37 @@ def _emit_action(
     emitter: NixEmitter,
     *,
     conditional_base: str,
+    weight: Expression | None = None,
 ) -> str:
     body = emitter.attr_set(action.body, 4)
+    weight_text = emitter.expression(weight) if weight is not None else None
+    if weight_text is not None:
+        body = _guarded_mount_body(action.body, emitter, None, weight_text)
+    if isinstance(emitter, _MountEmitter):
+        if not action.unconditional:
+            condition = emitter.guard_condition(action.guards, conditional_base)
+            zen_statements = tuple(
+                item for item in action.body.statements if isinstance(item, Assignment)
+                and not isinstance(item.target, StructuralMarker)
+                and _static_path(item.target[:1]) == ("zenos",)
+            )
+            if zen_statements:
+                bindings = tuple(item for item in action.body.statements if isinstance(item, LetStatement))
+                zen_body = AttrSet((*bindings, *zen_statements), action.body.recursive, action.body.span)
+                other_body = AttrSet(tuple(item for item in action.body.statements if item not in zen_statements),
+                                     action.body.recursive, action.body.span)
+                ordinary = (_guarded_mount_body(other_body, emitter, None, weight_text)
+                            if weight_text is not None else emitter.attr_set(other_body))
+                body = (f"(lib.mkMerge [ (lib.mkIf ({condition}) {ordinary}) "
+                        f"({_guarded_mount_body(zen_body, emitter, condition, weight_text)}) ])")
+            else:
+                body = f"(lib.mkIf ({condition}) {body})"
+        if action.scope == "system":
+            return f"(if user == null then {body} else {{ }})"
+        user_body = f"{{ home-manager.users.${{user}} = {body}; }}"
+        if action.scope == "user":
+            return f"(if user == null then (if shareUserActions then {{ home-manager.sharedModules = [ {{ config = _zenDefaults {body}; }} ]; }} else {{ }}) else {user_body})"
+        return f"(if user == null then {body} else {user_body})"
     if action.scope == "system":
         routed = body
     elif action.scope == "user":
@@ -1456,6 +1712,43 @@ def _emit_action(
         return routed
     condition = emitter.guard_condition(action.guards, conditional_base)
     return f"(lib.mkIf ({condition}) {routed})"
+
+
+def _guarded_mount_body(
+    body: AttrSet, emitter: NixEmitter, condition: str | None, weight: str | None = None,
+) -> str:
+    # Keep submodule definition shapes independent of their own option values.
+    # Guard the authored leaves, without inspecting unevaluated RHS expressions.
+    bindings = []
+    fields = []
+
+    def wrap(value: str) -> str:
+        if weight is not None:
+            value = f"(lib.mkOverride ({weight}) ({value}))"
+        if condition is not None:
+            value = f"(lib.mkIf ({condition}) ({value}))"
+        return value
+
+    for statement in body.statements:
+        if isinstance(statement, LetStatement):
+            bindings.append(statement)
+        elif isinstance(statement, Assignment):
+            value = (
+                _guarded_mount_body(statement.value, emitter, condition, weight)
+                if isinstance(statement.value, AttrSet) and statement.value.statements
+                else wrap(emitter.expression(statement.value))
+            )
+            fields.append(f"{emitter.path(statement.target)} = {value};")
+        elif isinstance(statement, InheritStatement):
+            for name in statement.names:
+                value = emitter.binding_name(name) if statement.source is None else (
+                    f"({emitter.expression(statement.source)}).{emit_attr_name(name)}"
+                )
+                fields.append(f"{emit_attr_name(name)} = {wrap(value)};")
+        else:
+            raise CompilationError("unsupported mounted action statement", statement.span)
+    value = ("rec " if body.recursive else "") + "{ " + " ".join(fields) + " }"
+    return _with_action_bindings(bindings, emitter, value)
 
 
 def _collect_dependency_ops(

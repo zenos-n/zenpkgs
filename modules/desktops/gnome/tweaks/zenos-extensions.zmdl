@@ -3,7 +3,7 @@
 # Unsupported: mkMerge priority provenance is flattened to one conditional expression.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Curated ZenOS GNOME extension set";
+  summary = "Curated ZenOS GNOME extension set";
   description = ''
     Enables the curated extension collection, honors name-based exclusions, and
     applies the contributor module's default settings when requested.
@@ -14,11 +14,11 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable the curated ZenOS GNOME extension set";
+  _meta.summary = "Enable the curated ZenOS GNOME extension set";
 
   s! {
     zenos.desktops.gnome.extensions = {
-      user-theme.enable = !($lib.elem "user-themes" $path.options.excludedExtensions);
+      user-themes.enable = !($lib.elem "user-themes" $path.options.excludedExtensions);
       app-hider.enable = !($lib.elem "app-hider" $path.options.excludedExtensions);
       hide-minimized.enable = !($lib.elem "hide-minimized" $path.options.excludedExtensions);
       hide-cursor.enable = !($lib.elem "hide-cursor" $path.options.excludedExtensions);
@@ -29,7 +29,7 @@ enable = enableOption {
       alphabetical-app-grid.enable = !($lib.elem "alphabetical-app-grid" $path.options.excludedExtensions);
       category-sorted-app-grid.enable = !($lib.elem "category-sorted-app-grid" $path.options.excludedExtensions);
       coverflow-alt-tab.enable = !($lib.elem "coverflow-alt-tab" $path.options.excludedExtensions);
-      hidetopbar.enable = !($lib.elem "hide-top-bar" $path.options.excludedExtensions);
+      hide-top-bar.enable = !($lib.elem "hide-top-bar" $path.options.excludedExtensions);
       mouse-tail.enable = !($lib.elem "mouse-tail" $path.options.excludedExtensions);
       window-is-ready-remover.enable = !($lib.elem "window-is-ready-remover" $path.options.excludedExtensions);
       date-menu-formatter.enable = !($lib.elem "date-menu-formatter" $path.options.excludedExtensions);
@@ -104,7 +104,7 @@ enable = enableOption {
         switcher-background-color = "#ffffff";
         use-glitch-effect = false;
       };
-      hidetopbar = {
+      hide-top-bar = {
         enable-intellihide = false;
         mouse-sensitive = true;
         mouse-sensitive-fullscreen-window = false;
@@ -163,7 +163,7 @@ options.enable = {
   _meta = {
     type = $type.boolean;
     default = true;
-    brief = "Install curated ZenOS GNOME extensions";
+    summary = "Install curated ZenOS GNOME extensions";
   };
 };
 
@@ -171,7 +171,7 @@ options.excludedExtensions = {
   _meta = {
     type = $type.list [ $type.string ];
     default = [ ];
-    brief = "Curated extensions excluded by name";
+    summary = "Curated extensions excluded by name";
   };
 };
 
@@ -179,6 +179,6 @@ options.extensionConfig.enable = {
   _meta = {
     type = $type.boolean;
     default = true;
-    brief = "Apply default ZenOS extension settings";
+    summary = "Apply default ZenOS extension settings";
   };
 };

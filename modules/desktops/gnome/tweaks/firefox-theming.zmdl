@@ -3,7 +3,7 @@
 # Schema migration: the module id uses path-derived desktops.gnome.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Native GNOME theming for Firefox";
+  summary = "Native GNOME theming for Firefox";
   description = ''
     Fetches firefox-gnome-theme, enables Firefox profile CSS support, writes the
     theme imports, and applies the contributor module's profile preferences.
@@ -29,7 +29,7 @@ _let customContentCss: $type.package = $pkgs.zenos.legacy.writeText "userContent
 '';
 
 enable = enableOption {
-  _meta.brief = "Enable Firefox GNOME integration";
+  _meta.summary = "Enable Firefox GNOME integration";
 
   u! {
     programs.firefox = {
@@ -59,17 +59,17 @@ enable = enableOption {
 };
 
 theme.hideSingleTab = {
-  _meta = { type = $type.boolean; default = true; brief = "Hide the tab bar when one tab is open"; };
+  _meta = { type = $type.boolean; default = true; summary = "Hide the tab bar when one tab is open"; };
 };
 
 theme.normalWidthTabs = {
-  _meta = { type = $type.boolean; default = false; brief = "Use standard-width tabs"; };
+  _meta = { type = $type.boolean; default = false; summary = "Use standard-width tabs"; };
 };
 
 theme.bookmarksToolbarUnderTabs = {
-  _meta = { type = $type.boolean; default = true; brief = "Place bookmarks below the tab bar"; };
+  _meta = { type = $type.boolean; default = true; summary = "Place bookmarks below the tab bar"; };
 };
 
 theme.roundedBottomCorners = {
-  _meta = { type = $type.boolean; default = true; brief = "Enable rounded browser bottom corners"; };
+  _meta = { type = $type.boolean; default = true; summary = "Enable rounded browser bottom corners"; };
 };

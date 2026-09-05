@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Scrollable tiling window manager for GNOME Shell";
+  summary = "Scrollable tiling window manager for GNOME Shell";
   description = ''
     Scrollable tiling window manager for GNOME Shell
 
@@ -21,7 +21,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "PaperWM GNOME extension configuration";
+  _meta.description = ''PaperWM GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.paperwm ];
     programs.dconf.profiles.user.databases = [ {
@@ -136,21 +136,21 @@ gestures.enable = { _meta = { type = $type.bool; default = true; description = '
   Activates custom touchpad swipe gestures for navigating and
   manipulating the window ribbon.
 ''; }; };
-gestures.fingers.horizontal = { _meta = { type = $type.int; default = 3; description = "Number of fingers for horizontal ribbon scrolling"; }; };
-gestures.fingers.workspace = { _meta = { type = $type.int; default = 4; description = "Number of fingers for switching virtual workspaces"; }; };
-gestures.swipe.sensitivity = { _meta = { type = $type.float; default = 1.0; description = "Responsiveness multiplier for touch input"; }; };
-gestures.swipe.friction = { _meta = { type = $type.float; default = 1.0; description = "Resistance factor for swipe physics simulation"; }; };
+gestures.fingers.horizontal = { _meta = { type = $type.int; default = 3; description = ''Number of fingers for horizontal ribbon scrolling''; }; };
+gestures.fingers.workspace = { _meta = { type = $type.int; default = 4; description = ''Number of fingers for switching virtual workspaces''; }; };
+gestures.swipe.sensitivity = { _meta = { type = $type.float; default = 1.0; description = ''Responsiveness multiplier for touch input''; }; };
+gestures.swipe.friction = { _meta = { type = $type.float; default = 1.0; description = ''Resistance factor for swipe physics simulation''; }; };
 
-keybindings.new-window = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Return" ]; description = "Shortcut to launch a new terminal window"; }; };
-keybindings.live-alt-tab = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Tab" ]; description = "Shortcut to cycle through windows in the current ribbon"; }; };
-keybindings.live-alt-tab-backward = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>Tab" ]; description = "Shortcut to cycle backward through windows"; }; };
-keybindings.previous-workspace = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Escape" ]; description = "Shortcut to return to the last used workspace"; }; };
-keybindings.switch-monitor-right = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>u" ]; description = "Shortcut to move focus to the monitor on the right"; }; };
-keybindings.switch-monitor-left = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>i" ]; description = "Shortcut to move focus to the monitor on the left"; }; };
-keybindings.move-right = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>l" ]; description = "Shortcut to move focused window to the right"; }; };
-keybindings.move-left = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>h" ]; description = "Shortcut to move focused window to the left"; }; };
-keybindings.move-up = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>k" ]; description = "Shortcut to move focused window upward (stacking)"; }; };
-keybindings.move-down = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>j" ]; description = "Shortcut to move focused window downward (stacking)"; }; };
-keybindings.close-window = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>q" ]; description = "Shortcut to close the active application window"; }; };
-keybindings.toggle-maximize-width = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>f" ]; description = "Shortcut to toggle window between current width and full ribbon width"; }; };
-keybindings.paper-toggle-fullscreen = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>f" ]; description = "Shortcut to toggle window between ribbon and full screen"; }; };
+keybindings.new-window = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Return" ]; description = ''Shortcut to launch a new terminal window''; }; };
+keybindings.live-alt-tab = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Tab" ]; description = ''Shortcut to cycle through windows in the current ribbon''; }; };
+keybindings.live-alt-tab-backward = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>Tab" ]; description = ''Shortcut to cycle backward through windows''; }; };
+keybindings.previous-workspace = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Escape" ]; description = ''Shortcut to return to the last used workspace''; }; };
+keybindings.switch-monitor-right = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>u" ]; description = ''Shortcut to move focus to the monitor on the right''; }; };
+keybindings.switch-monitor-left = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>i" ]; description = ''Shortcut to move focus to the monitor on the left''; }; };
+keybindings.move-right = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>l" ]; description = ''Shortcut to move focused window to the right''; }; };
+keybindings.move-left = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>h" ]; description = ''Shortcut to move focused window to the left''; }; };
+keybindings.move-up = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>k" ]; description = ''Shortcut to move focused window upward (stacking)''; }; };
+keybindings.move-down = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>j" ]; description = ''Shortcut to move focused window downward (stacking)''; }; };
+keybindings.close-window = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>q" ]; description = ''Shortcut to close the active application window''; }; };
+keybindings.toggle-maximize-width = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>f" ]; description = ''Shortcut to toggle window between current width and full ribbon width''; }; };
+keybindings.paper-toggle-fullscreen = { _meta = { type = $type.list [ $type.string ]; default = [ "<Shift><Super>f" ]; description = ''Shortcut to toggle window between ribbon and full screen''; }; };

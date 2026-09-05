@@ -121,6 +121,12 @@ class StringExpr:
 
 
 @dataclass(frozen=True, slots=True)
+class MarkdownImport:
+    path: "StringExpr | PathExpr"
+    span: Span
+
+
+@dataclass(frozen=True, slots=True)
 class GroupExpr:
     value: "Expression"
     span: Span
@@ -320,6 +326,7 @@ Statement: TypeAlias = (
 Expression: TypeAlias = (
     Literal
     | StringExpr
+    | MarkdownImport
     | GroupExpr
     | PathExpr
     | Reference

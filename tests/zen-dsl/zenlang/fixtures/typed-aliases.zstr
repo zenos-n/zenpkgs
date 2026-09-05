@@ -1,8 +1,8 @@
 _meta = {
   zenosVersion = 0.1.0;
   id = "zenos.typed-alias-proposal";
-  brief = "Typed upstream alias proposal";
-  description = "Candidate explicit aliases for the retained legacy namespace.";
+  summary = "Typed upstream alias proposal";
+  description = ''Candidate explicit aliases for the retained legacy namespace.'';
   maintainers = [ $m.doromiert ];
   license = $l.napalm;
 };

@@ -3,7 +3,7 @@
 # Schema migration: the module id uses path-derived desktops.gnome.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Native BlackBox terminal theming for ZenOS";
+  summary = "Native BlackBox terminal theming for ZenOS";
   description = ''
     Installs BlackBox and Atkynson Mono, then configures its font, window size,
     padding, header bar, and floating controls through dconf.
@@ -14,7 +14,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable BlackBox terminal theming";
+  _meta.summary = "Enable BlackBox terminal theming";
 
   s! {
     environment.systemPackages = [

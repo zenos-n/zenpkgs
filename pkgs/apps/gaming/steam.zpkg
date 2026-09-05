@@ -1,15 +1,17 @@
 _meta = {
-  _name = "steam";
-  _summary = "Curated steam package for ZenOS";
-  _description = "Curated steam package for ZenOS";
-  _zenosVersion = "1.0.0";
-  _packageVersion = "";
-  _tags = [ ];
-  _maintainers = [ $m.doromiert ];
-  _dependencies = {
-    _general = [ ];
-    _build = [ ];
-    _runtime = [ ];
+  name = "steam";
+  summary = "Curated steam package for ZenOS";
+  description = ''
+    Curated steam package for ZenOS
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "";
+  tags = [ ];
+  maintainers = [ $m.doromiert ];
+  dependencies = {
+    general = [ ];
+    build = [ ];
+    runtime = [ ];
   };
 };
 

@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Dropdown application integration for GNOME Shell";
+  summary = "Dropdown application integration for GNOME Shell";
   description = ''
     Dropdown application integration for GNOME Shell
 
@@ -19,7 +19,7 @@ _meta = {
 };
 
 _let mkGVariantString: $type.function [ $type.string ] = value: "'${value}'";
-_let serializeLaunchArgs: $type.function [ $type.attrs ] = args:
+_let serializeLaunchArgs: $type.function [ $type.set ] = args:
   if args == { } then "@a{ss} {}"
   else
     let
@@ -29,7 +29,7 @@ _let serializeLaunchArgs: $type.function [ $type.attrs ] = args:
     in "{${$lib.concatStringsSep ", " pairs}}";
 
 enable = enableOption {
-  _meta.description = "Quake Terminal GNOME extension configuration";
+  _meta.description = ''Quake Terminal GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.quake-terminal ];
     programs.dconf.profiles.user.databases = [ {
@@ -77,13 +77,13 @@ app.launch-args = { _meta = { type = $type.set [ $type.string ]; default = { }; 
   Custom key-value pairs passed to the application upon launch
   (e.g., terminal profile or shell flags).
 ''; }; };
-layout.size.vertical = { _meta = { type = $type.int; default = 50; description = "Window height as a percentage of monitor height"; }; };
-layout.size.horizontal = { _meta = { type = $type.int; default = 100; description = "Window width as a percentage of monitor width"; }; };
-layout.alignment = { _meta = { type = $type.int; default = 1; description = "Horizontal alignment of the dropdown window (0: left, 1: center, 2: right)"; }; };
-monitors.render-on-current = { _meta = { type = $type.bool; default = true; description = "Display the dropdown on the monitor containing the mouse cursor"; }; };
-monitors.render-on-primary = { _meta = { type = $type.bool; default = false; description = "Always display the dropdown on the primary monitor"; }; };
-monitors.monitor-index = { _meta = { type = $type.int; default = 0; description = "Specific hardware monitor index to use if primary/current is disabled"; }; };
-behavior.auto-hide = { _meta = { type = $type.bool; default = true; description = "Hide the window automatically when it loses input focus"; }; };
-behavior.always-on-top = { _meta = { type = $type.bool; default = true; description = "Force the window to remain above all other window actors"; }; };
-behavior.animation-time = { _meta = { type = $type.float; default = 0.2; description = "Visual transition duration in seconds for slide events"; }; };
-behavior.skip-taskbar = { _meta = { type = $type.bool; default = true; description = "Prevent the dropdown window from appearing in the taskbar or Alt-Tab switcher"; }; };
+layout.size.vertical = { _meta = { type = $type.int; default = 50; description = ''Window height as a percentage of monitor height''; }; };
+layout.size.horizontal = { _meta = { type = $type.int; default = 100; description = ''Window width as a percentage of monitor width''; }; };
+layout.alignment = { _meta = { type = $type.int; default = 1; description = ''Horizontal alignment of the dropdown window (0: left, 1: center, 2: right)''; }; };
+monitors.render-on-current = { _meta = { type = $type.bool; default = true; description = ''Display the dropdown on the monitor containing the mouse cursor''; }; };
+monitors.render-on-primary = { _meta = { type = $type.bool; default = false; description = ''Always display the dropdown on the primary monitor''; }; };
+monitors.monitor-index = { _meta = { type = $type.int; default = 0; description = ''Specific hardware monitor index to use if primary/current is disabled''; }; };
+behavior.auto-hide = { _meta = { type = $type.bool; default = true; description = ''Hide the window automatically when it loses input focus''; }; };
+behavior.always-on-top = { _meta = { type = $type.bool; default = true; description = ''Force the window to remain above all other window actors''; }; };
+behavior.animation-time = { _meta = { type = $type.float; default = 0.2; description = ''Visual transition duration in seconds for slide events''; }; };
+behavior.skip-taskbar = { _meta = { type = $type.bool; default = true; description = ''Prevent the dropdown window from appearing in the taskbar or Alt-Tab switcher''; }; };

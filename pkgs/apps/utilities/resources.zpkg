@@ -1,15 +1,17 @@
 _meta = {
-  _name = "resources";
-  _summary = "Curated resources package for ZenOS";
-  _description = "Curated resources package for ZenOS";
-  _zenosVersion = "1.0.0";
-  _packageVersion = "";
-  _tags = [ ];
-  _maintainers = [ $m.doromiert ];
-  _dependencies = {
-    _general = [ ];
-    _build = [ ];
-    _runtime = [ ];
+  name = "resources";
+  summary = "Curated resources package for ZenOS";
+  description = ''
+    Curated resources package for ZenOS
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "";
+  tags = [ ];
+  maintainers = [ $m.doromiert ];
+  dependencies = {
+    general = [ ];
+    build = [ ];
+    runtime = [ ];
   };
 };
 

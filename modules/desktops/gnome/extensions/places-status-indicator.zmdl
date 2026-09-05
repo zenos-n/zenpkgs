@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Filesystem navigation menu for the GNOME top bar";
+  summary = "Filesystem navigation menu for the GNOME top bar";
   description = ''
     Filesystem navigation menu for the GNOME top bar
 
@@ -18,7 +18,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Places Status Indicator GNOME extension configuration";
+  _meta.description = ''Places Status Indicator GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.places-status-indicator ];
   };

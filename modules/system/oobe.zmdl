@@ -5,7 +5,7 @@
 # Unsupported: fallback license construction uses the canonical registry.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Temporary ZenOS out-of-box experience";
+  summary = "Temporary ZenOS out-of-box experience";
   description = ''
     Creates a disposable GNOME setup account and session, starts the Setup app,
     enables remote access, locks down the shell, and prepares runtime directories.
@@ -25,7 +25,7 @@ _let blackWallpaper: $type.package = $pkgs.zenos.legacy.writeText "zenos-oobe-bl
 '';
 
 enable = enableOption {
-  _meta.brief = "Enable the temporary ZenOS out-of-box experience";
+  _meta.summary = "Enable the temporary ZenOS out-of-box experience";
 
   s! {
     services.desktopManager.gnome.enable = true;
@@ -160,7 +160,7 @@ enable = enableOption {
 setupPackage = {
   _meta = {
     type = $type.package;
-    brief = "Setup application package launched by OOBE";
+    summary = "Setup application package launched by OOBE";
     example = "pkgs.zenos.setup";
   };
 };
@@ -168,7 +168,7 @@ setupPackage = {
 extensionPackage = {
   _meta = {
     type = $type.package;
-    brief = "GNOME Shell extension and mode package for OOBE";
+    summary = "GNOME Shell extension and mode package for OOBE";
     example = "pkgs.zenos.oobe-extension";
   };
 };
@@ -177,7 +177,7 @@ extraExtensionPackages = {
   _meta = {
     type = $type.list [ $type.package ];
     default = [ ];
-    brief = "Additional OOBE GNOME extension packages";
+    summary = "Additional OOBE GNOME extension packages";
   };
 };
 
@@ -185,7 +185,7 @@ extraExtensionUuids = {
   _meta = {
     type = $type.list [ $type.string ];
     default = [ ];
-    brief = "Additional OOBE GNOME extension UUIDs";
+    summary = "Additional OOBE GNOME extension UUIDs";
   };
 };
 
@@ -193,7 +193,7 @@ authorizedKeys = {
   _meta = {
     type = $type.list [ $type.string ];
     default = [ ];
-    brief = "SSH keys accepted by the OOBE account";
+    summary = "SSH keys accepted by the OOBE account";
   };
 };
 
@@ -201,6 +201,6 @@ userName = {
   _meta = {
     type = $type.string;
     default = "zenos";
-    brief = "Temporary OOBE account name";
+    summary = "Temporary OOBE account name";
   };
 };

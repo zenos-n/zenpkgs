@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Advanced window snapping and tiling features for GNOME";
+  summary = "Advanced window snapping and tiling features for GNOME";
   description = ''
     Advanced window snapping and tiling features for GNOME
 
@@ -43,7 +43,7 @@ _let serializeSettings: $type.function [ $type.string ] = settings:
     in "{${$lib.concatStringsSep ", " pairs}}";
 
 enable = enableOption {
-  _meta.description = "Tiling Assistant GNOME extension configuration";
+  _meta.description = ''Tiling Assistant GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.tiling-assistant ];
     programs.dconf.profiles.user.databases = [ {
@@ -85,15 +85,15 @@ active-window-hint = { _meta = { type = $type.int; default = 1; description = ''
   Configures the style of the border drawn around the active
   window (0: Disabled, 1: Outer, 2: Inner).
 ''; }; };
-window-gap = { _meta = { type = $type.int; default = 10; description = "Pixel spacing between tiled application windows"; }; };
-single-screen-gap = { _meta = { type = $type.int; default = 10; description = "Pixel spacing between a single tiled window and the screen edges"; }; };
-overridden-settings = { _meta = { type = $type.attrs; default = { }; description = ''
+window-gap = { _meta = { type = $type.int; default = 10; description = ''Pixel spacing between tiled application windows''; }; };
+single-screen-gap = { _meta = { type = $type.int; default = 10; description = ''Pixel spacing between a single tiled window and the screen edges''; }; };
+overridden-settings = { _meta = { type = $type.set; default = { }; description = ''
   Manual GSettings overrides
 
   Dictionary of internal extension keys to be forced via GVariant
   dictionary injection.
 ''; }; };
-tile-top-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Up" ]; description = "Shortcut to snap window to top half"; }; };
-tile-bottom-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Down" ]; description = "Shortcut to snap window to bottom half"; }; };
-tile-left-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Left" ]; description = "Shortcut to snap window to left half"; }; };
-tile-right-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Right" ]; description = "Shortcut to snap window to right half"; }; };
+tile-top-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Up" ]; description = ''Shortcut to snap window to top half''; }; };
+tile-bottom-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Down" ]; description = ''Shortcut to snap window to bottom half''; }; };
+tile-left-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Left" ]; description = ''Shortcut to snap window to left half''; }; };
+tile-right-half = { _meta = { type = $type.list [ $type.string ]; default = [ "<Super>Right" ]; description = ''Shortcut to snap window to right half''; }; };

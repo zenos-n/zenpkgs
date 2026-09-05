@@ -1,14 +1,14 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Declarative ZenOS disk layout";
-  description = "Forwards freeform ZenOS disk device definitions to Disko.";
+  summary = "Declarative ZenOS disk layout";
+  description = ''Forwards freeform ZenOS disk device definitions to Disko.'';
   maintainers = [ $m.doromiert ];
   license = $l.napl;
   platforms = $lib.platforms.linux;
 };
 
 (freeform device) = {
-  _meta.brief = "Disko device ${$f.device}";
+  _meta.summary = "Disko device ${$f.device}";
 
   s!! {
     disko.devices.($f.device) = $path.($f.device);

@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Visual login feedback screen for GNOME Shell";
+  summary = "Visual login feedback screen for GNOME Shell";
   description = ''
     Visual login feedback screen for GNOME Shell
 
@@ -18,7 +18,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Splash Indicator GNOME extension configuration";
+  _meta.description = ''Splash Indicator GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.splash-indicator ];
   };

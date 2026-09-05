@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Intelligent panel visibility management for GNOME Shell";
+  summary = "Intelligent panel visibility management for GNOME Shell";
   description = ''
     Intelligent panel visibility management for GNOME Shell
 
@@ -19,7 +19,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable Hide Top Bar GNOME extension configuration.";
+  _meta.description = ''Whether to enable Hide Top Bar GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.hide-top-bar ];
     programs.dconf.profiles.user.databases = [ {

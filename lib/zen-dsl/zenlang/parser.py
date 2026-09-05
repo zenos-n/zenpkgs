@@ -32,6 +32,7 @@ from .model import (
     LetStatement,
     ListExpr,
     Literal,
+    MarkdownImport,
     PathExpr,
     PackageImportStatement,
     Reference,
@@ -66,7 +67,7 @@ _BINARY_PRECEDENCE = {
     TokenKind.SLASH: 80,
 }
 
-_STRUCTURAL_KINDS = frozenset(("freeform", "alias", "packages", "programs"))
+_STRUCTURAL_KINDS = frozenset(("freeform", "alias", "packages", "programs", "zmdl"))
 _LITERAL_KEYWORDS = {"null": None, "true": True, "false": False}
 _EXPRESSION_KEYWORD_STOPS = frozenset(("then", "else", "in"))
 _DEFAULT_PRECEDENCE = 95
@@ -342,6 +343,10 @@ class Parser:
         token = self._current()
         if token.kind in stops:
             self._raise(token, "ZEN107", "expected an expression")
+        if self._is_ident("_import"):
+            start = self._advance()
+            path = self._parse_import_path()
+            return MarkdownImport(path, self._joined(start.span, path.span))
         if self._looks_like_lambda():
             return self._parse_lambda(stops)
         if token.kind in (TokenKind.BANG, TokenKind.MINUS):

@@ -1,11 +1,11 @@
 # Transitional parity source: lib/compat/system-modules/installed-base.nix
-# Unsupported: mkDefault/mkForce priorities are emitted as ordinary assignments because action
-# weight lowering is not implemented per assignment by the production ZMDL backend.
+# Original per-assignment priorities still require separately owned options;
+# _meta.weight applies to an entire owning action, not individual assignments.
 # Unsupported: fallback license construction and optional maintainer lookup are replaced by
 # canonical registries supported by ZMDL.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Reusable ZenOS installed-system baseline";
+  summary = "Reusable ZenOS installed-system baseline";
   description = ''
     Supplies conservative package, user, networking, audio, firmware, boot, and
     GNOME login defaults shared by final and temporary OOBE installations.
@@ -17,12 +17,12 @@ _meta = {
 
 enable = enableOption {
   _meta.default = true;
-  _meta.brief = "Apply the installed-system baseline";
+  _meta.summary = "Apply the installed-system baseline";
 
   s! {
     nixpkgs.config.allowUnfree = true;
     users.mutableUsers = false;
-    zenos.system.release.stateVersion = "1.0.0";
+    system.stateVersion = "26.05";
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
     networking.networkmanager.enable = true;
     security = {

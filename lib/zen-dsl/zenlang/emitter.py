@@ -19,6 +19,7 @@ from .model import (
     IdentifierSegment,
     IfExpr,
     ImportStatement,
+    MarkdownImport,
     InheritStatement,
     Interpolation,
     LambdaExpr,
@@ -178,6 +179,8 @@ class NixEmitter:
             raise NixEmissionError(f"unsupported literal kind: {expression.kind!r}")
         if isinstance(expression, StringExpr):
             return self._string(expression)
+        if isinstance(expression, MarkdownImport):
+            raise NixEmissionError("unresolved Markdown import; use parse_file with an import root")
         if isinstance(expression, GroupExpr):
             return f"({self.expression(expression.value, indent)})"
         if isinstance(expression, PathExpr):
@@ -528,6 +531,8 @@ def emit_statement(
 
 def semantic_descriptor(value: Any) -> Any:
     """Convert AST nodes to a stable, span-free descriptor made only of data."""
+    if isinstance(value, MarkdownImport):
+        raise NixEmissionError("unresolved Markdown import; use parse_file with an import root")
     if isinstance(value, Literal):
         return {"kind": value.kind, "type": "literal", "value": value.value}
     if isinstance(value, StringText):

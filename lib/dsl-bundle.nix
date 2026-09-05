@@ -1,9 +1,15 @@
 { lib }:
 
 let
-  duplicates = values: lib.filter (value: builtins.length (lib.filter (item: item == value) values) > 1) (lib.unique values);
+  duplicates =
+    values:
+    lib.filter (value: builtins.length (lib.filter (item: item == value) values) > 1) (
+      lib.unique values
+    );
 
-  require = condition: message: value: if condition then value else throw "ZenPkgs DSL adapter: ${message}";
+  require =
+    condition: message: value:
+    if condition then value else throw "ZenPkgs DSL adapter: ${message}";
 
   canonicalSegments =
     {
@@ -20,12 +26,16 @@ let
         && lib.hasSuffix suffix source.path;
       relative = lib.removeSuffix suffix (lib.removePrefix prefix source.path);
       segments = lib.splitString "/" relative;
-      segmentsValid = lib.all (segment: builtins.match "^[A-Za-z0-9][A-Za-z0-9_-]*$" segment != null) segments;
+      segmentsValid = lib.all (
+        segment: builtins.match "^[A-Za-z0-9][A-Za-z0-9_-]*$" segment != null
+      ) segments;
       leaf = builtins.elemAt segments (builtins.length segments - 1);
     in
-    require locationValid "noncanonical ${source.kind} source location: ${toString source.path}"
-      (require (segments != [ ] && segmentsValid) "invalid ${source.kind} source path: ${source.path}"
-        (require (leaf != reservedLeaf) "reserved ${source.kind} leaf name: ${source.path}" segments));
+    require locationValid "noncanonical ${source.kind} source location: ${toString source.path}" (
+      require (segments != [ ] && segmentsValid) "invalid ${source.kind} source path: ${source.path}" (
+        require (leaf != reservedLeaf) "reserved ${source.kind} leaf name: ${source.path}" segments
+      )
+    );
 
   canonicalSource =
     source:
@@ -38,12 +48,13 @@ let
           reservedLeaf = "package";
         };
       in
-      {
-        inherit segments source;
-        id = builtins.elemAt segments (builtins.length segments - 1);
-        kind = "zpkg";
-        target = segments;
-      }
+      require (builtins.head segments != "legacy") "pkgs/legacy is reserved for the virtual Nixpkgs view"
+        {
+          inherit segments source;
+          id = lib.concatStringsSep "." ([ "pkgs" ] ++ segments);
+          kind = "zpkg";
+          target = segments;
+        }
     else if source.kind == "zmdl" then
       let
         modulePath = canonicalSegments {
@@ -70,17 +81,24 @@ let
     bundle:
     let
       sources = map canonicalSource bundle.sources;
-      structures = builtins.filter (entry: entry.kind == "zstr") sources;
+      structures = builtins.filter (entry: entry.kind == "zstr") bundle.sources;
     in
-    require (bundle.bundleVersion == "zenlang.bundle/2") "unsupported bundle version"
-      (require (builtins.length structures == 1) "repository requires exactly one root structure.zstr"
-        (builtins.deepSeq sources sources));
+    require (bundle.bundleVersion == "zenlang.bundle/2") "unsupported bundle version" (
+      require (builtins.length structures <= 1) "repository permits only one root structure.zstr" (
+        if structures == [ ] then [ ] else builtins.deepSeq sources sources
+      )
+    );
 
   pathFromDescriptor =
     segments:
     map (
       segment:
-      if builtins.elem (segment.kind or null) [ "identifier" "string" ] then
+      if
+        builtins.elem (segment.kind or null) [
+          "identifier"
+          "string"
+        ]
+      then
         segment.value
       else
         throw "ZenPkgs DSL adapter requires static attribute paths"
@@ -105,10 +123,13 @@ let
     else if value.type == "group" then
       decodeValue value.value
     else if value.type == "variable" then
-      "${"$"}${value.name}${lib.optionalString (value.path != [ ]) ".${lib.concatStringsSep "." (pathFromDescriptor value.path)}"}"
+      "${"$"}${value.name}${
+        lib.optionalString (
+          value.path != [ ]
+        ) ".${lib.concatStringsSep "." (pathFromDescriptor value.path)}"
+      }"
     else
-      throw "ZenPkgs DSL adapter cannot decode ${value.type or "an unknown value type"}"
-    ;
+      throw "ZenPkgs DSL adapter cannot decode ${value.type or "an unknown value type"}";
 
   decodeAssignments =
     statements:
@@ -122,27 +143,70 @@ let
         )
     ) { } statements;
 
-  decodeInterface =
-    descriptor:
+  decodeInterfaceAt =
+    identity: location: descriptor:
     let
-      metadata = lib.mapAttrs (_: decodeValue) descriptor.metadata;
+      metadata = lib.mapAttrs (_: decodeValue) (descriptor.metadata or { });
       packageImport = descriptor.packageImport;
       importPath = pathFromDescriptor packageImport.path;
       dependencies = metadata.dependencies or { };
-      normalizeMaintainer = value: lib.removePrefix "$m." value;
-      meta = removeAttrs metadata [ "dependencies" ] // {
-        packageVersion =
-          if (metadata.packageVersion or "") == "" then
-            metadata.zenosVersion
-          else
-            metadata.packageVersion;
-        maintainers = map normalizeMaintainer (metadata.maintainers or [ ]);
-        dependencies = {
-          general = dependencies._general or [ ];
-          build = dependencies._build or [ ];
-          runtime = dependencies._runtime or [ ];
-        };
+      defaults = {
+        name = "";
+        summary = "";
+        description = "";
+        tags = [ ];
+        maintainers = [ ];
+        license = null;
+        zenosVersion = "";
       };
+      missing = builtins.filter (field: !(builtins.hasAttr field metadata)) (builtins.attrNames defaults);
+      emptyDescriptions =
+        builtins.filter
+          (
+            field:
+            builtins.hasAttr field metadata
+            && builtins.isString metadata.${field}
+            && builtins.match "[[:space:]]*" metadata.${field} != null
+          )
+          [
+            "name"
+            "summary"
+            "description"
+          ];
+      unknown = lib.subtractLists (
+        (builtins.attrNames defaults)
+        ++ [
+          "dependencies"
+          "packageVersion"
+          "weight"
+        ]
+      ) (builtins.attrNames metadata);
+      warnings =
+        lib.optional (!(descriptor ? metadata) || descriptor.metadata == { }) "missing _meta"
+        ++ map (field: "missing _meta.${field}") missing
+        ++ map (field: "empty _meta.${field}") emptyDescriptions
+        ++ map (
+          field:
+          "unknown _meta.${field}"
+          + lib.optionalString (builtins.hasAttr (lib.removePrefix "_" field) defaults) "; use _meta.${lib.removePrefix "_" field}"
+        ) unknown;
+      normalizeMaintainer = value: lib.removePrefix "$m." value;
+      meta =
+        defaults
+        // metadata
+        // {
+          packageVersion =
+            if (metadata.packageVersion or "") == "" then
+              metadata.zenosVersion or ""
+            else
+              metadata.packageVersion;
+          maintainers = map normalizeMaintainer (metadata.maintainers or [ ]);
+          dependencies = {
+            general = dependencies.general or [ ];
+            build = dependencies.build or [ ];
+            runtime = dependencies.runtime or [ ];
+          };
+        };
     in
     assert descriptor.descriptorVersion == "zenlang.semantic/2";
     assert descriptor.kind == "zpkg";
@@ -151,18 +215,50 @@ let
     assert packageImport.name == "pkgs";
     assert builtins.length importPath >= 2;
     assert builtins.head importPath == "legacy";
-    assert builtins.all (field: builtins.hasAttr field metadata) [
-      "description"
-      "maintainers"
+    assert builtins.isAttrs (descriptor.metadata or { });
+    assert lib.all (field: !(metadata ? ${field}) || builtins.isString metadata.${field}) [
       "name"
       "summary"
-      "tags"
+      "description"
       "zenosVersion"
+      "packageVersion"
     ];
-    {
-      inherit meta;
-      sourcePath = builtins.tail importPath;
-    };
+    assert lib.all
+      (
+        field:
+        !(metadata ? ${field})
+        || (builtins.isList metadata.${field} && lib.all builtins.isString metadata.${field})
+      )
+      [
+        "tags"
+        "maintainers"
+      ];
+    assert !(metadata ? license) || builtins.isString metadata.license;
+    assert !(metadata ? description) || (descriptor.metadata.description.multiline or false);
+    assert builtins.isAttrs dependencies;
+    assert lib.all (
+      scope:
+      builtins.elem scope [
+        "general"
+        "build"
+        "runtime"
+      ]
+      && builtins.isList dependencies.${scope}
+      && lib.all builtins.isString dependencies.${scope}
+    ) (builtins.attrNames dependencies);
+    lib.foldr
+      (
+        warning: value:
+        builtins.trace "ZenPkgs metadata warning: ${identity} (${location}): ${warning}" value
+      )
+      {
+        inherit meta;
+        sourcePath = builtins.tail importPath;
+      }
+      warnings;
+
+  decodeInterface =
+    descriptor: decodeInterfaceAt (descriptor.name or "<zpkg>") "<descriptor>" descriptor;
 
 in
 {
@@ -174,9 +270,12 @@ in
       bundlePath,
     }:
     let
-      sources = builtins.filter (source: source.kind == "zmdl") (canonicalSources bundle);
+      exposed = canonicalSources bundle;
+      sources = builtins.filter (source: source.kind == "zmdl") exposed;
       moduleRecords =
-        if bundle ? modules && builtins.isList bundle.modules then
+        if exposed == [ ] then
+          [ ]
+        else if bundle ? modules && builtins.isList bundle.modules then
           bundle.modules
         else
           throw "ZenPkgs DSL adapter: bundle has no path-derived module records";
@@ -196,36 +295,52 @@ in
         let
           source = canonical.source;
           matches = builtins.filter (record: (record.path or null) == source.path) moduleRecords;
-          record = require (builtins.length matches == 1)
-            "module ${canonical.identity} must have exactly one compiler record"
-            (builtins.head matches);
+          record = require (
+            builtins.length matches == 1
+          ) "module ${canonical.identity} must have exactly one compiler record" (builtins.head matches);
           expectedOptionPath = [ "zenos" ] ++ canonical.modulePath;
           identity = record.identity or null;
           module = bundlePath + "/modules/${source.path}.nix";
         in
         require (identity == canonical.identity)
           "module ${source.path} compiler identity must be ${canonical.identity}, got ${toString identity}"
-          (require ((record.optionPath or null) == expectedOptionPath)
-            "module ${source.path} compiler option path must be ${builtins.toJSON expectedOptionPath}"
-            (require (source ? compiledNix && builtins.isString source.compiledNix && source.compiledNix != "")
-              "module ${identity} has no compiled Nix"
-              (require (builtins.pathExists module) "compiled module ${toString module} is missing" {
-                inherit identity module;
-                modulePath = canonical.modulePath;
-                optionPath = record.optionPath;
-                sourcePath = record.path;
-              })));
+          (
+            require ((record.optionPath or null) == expectedOptionPath)
+              "module ${source.path} compiler option path must be ${builtins.toJSON expectedOptionPath}"
+              (
+                require (source ? compiledNix && builtins.isString source.compiledNix && source.compiledNix != "")
+                  "module ${identity} has no compiled Nix"
+                  (
+                    require (builtins.pathExists module) "compiled module ${toString module} is missing" {
+                      inherit identity module;
+                      modulePath = canonical.modulePath;
+                      optionPath = record.optionPath;
+                      sourcePath = record.path;
+                    }
+                  )
+              )
+          );
 
       candidates = map candidateFor sources;
       validated =
         require (duplicateSources == [ ]) "duplicate ZMDL sources: ${builtins.toJSON duplicateSources}"
-          (require (duplicateRecords == [ ]) "duplicate module records: ${builtins.toJSON duplicateRecords}"
-            (require (duplicatePaths == [ ]) "duplicate module option paths: ${builtins.toJSON duplicatePaths}"
-              (require (duplicateIdentities == [ ])
-                "duplicate module identities: ${builtins.toJSON duplicateIdentities}"
-                (require (missingRecords == [ ]) "ZMDL sources without module records: ${builtins.toJSON missingRecords}"
-                  (require (orphanRecords == [ ]) "module records without ZMDL sources: ${builtins.toJSON orphanRecords}"
-                    candidates)))));
+          (
+            require (duplicateRecords == [ ]) "duplicate module records: ${builtins.toJSON duplicateRecords}" (
+              require (duplicatePaths == [ ]) "duplicate module option paths: ${builtins.toJSON duplicatePaths}" (
+                require (duplicateIdentities == [ ])
+                  "duplicate module identities: ${builtins.toJSON duplicateIdentities}"
+                  (
+                    require (missingRecords == [ ])
+                      "ZMDL sources without module records: ${builtins.toJSON missingRecords}"
+                      (
+                        require (
+                          orphanRecords == [ ]
+                        ) "module records without ZMDL sources: ${builtins.toJSON orphanRecords}" candidates
+                      )
+                  )
+              )
+            )
+          );
     in
     validated;
 
@@ -235,12 +350,18 @@ in
       bundlePath,
     }:
     let
-      sources = builtins.filter (source: source.kind == "zpkg") (canonicalSources bundle);
+      packageSources = builtins.filter (source: source.kind == "zpkg") (canonicalSources bundle);
+      duplicateTargets = duplicates (map (source: source.id) packageSources);
+      sources = require (
+        duplicateTargets == [ ]
+      ) "duplicate package identities: ${builtins.toJSON duplicateTargets}" packageSources;
       decoded = map (
         canonical:
         let
           source = canonical.source;
-          entry = decodeInterface (import (bundlePath + "/interfaces/${source.path}.nix") { });
+          entry = decodeInterfaceAt canonical.id source.path (
+            import (bundlePath + "/interfaces/${source.path}.nix") { }
+          );
         in
         {
           inherit source;

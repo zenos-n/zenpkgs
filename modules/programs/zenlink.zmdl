@@ -2,7 +2,7 @@
 # Unsupported: internal/readOnly/defaultText option fields have no ZMDL equivalents.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Android to ZenOS communication bridge";
+  summary = "Android to ZenOS communication bridge";
   description = ''
     Installs ZenLink for the current user and optionally starts its daemon with
     the graphical session. Runtime state remains intentionally unmanaged.
@@ -13,11 +13,11 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable the ZenLink Android bridge service";
+  _meta.summary = "Enable the ZenLink Android bridge service";
 
   u! {
     home.packages = [ $path.package ];
-    systemd.zenlink = if $path.autoStart then {
+    systemd.user.services.zenlink = if $path.autoStart then {
       Unit = {
         Description = "ZenLink Daemon";
         After = [ "graphical-session.target" "pipewire.service" ];
@@ -38,7 +38,7 @@ package = {
   _meta = {
     type = $type.package;
     default = $pkgs.system.zenlink;
-    brief = "ZenLink package";
+    summary = "ZenLink package";
   };
 };
 
@@ -46,6 +46,6 @@ autoStart = {
   _meta = {
     type = $type.boolean;
     default = true;
-    brief = "Start ZenLink with the graphical session";
+    summary = "Start ZenLink with the graphical session";
   };
 };

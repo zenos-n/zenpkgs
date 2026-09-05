@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Visual trail effect for the GNOME mouse cursor";
+  summary = "Visual trail effect for the GNOME mouse cursor";
   description = ''
     Visual trail effect for the GNOME mouse cursor
 
@@ -30,7 +30,7 @@ _let hexToRgbList: $type.function [ $type.string ] = value:
   else value;
 
 enable = enableOption {
-  _meta.description = "Mouse Tail GNOME extension configuration";
+  _meta.description = ''Mouse Tail GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.mouse-tail ];
     programs.dconf.profiles.user.databases = [ {

@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "ZenOS system package selectors";
+  summary = "ZenOS system package selectors";
   description = ''
     System package selectors are boolean leaves resolved by the structure runtime
     against filesystem-derived paths in pkgs.zenos.

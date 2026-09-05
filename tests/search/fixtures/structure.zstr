@@ -1,0 +1,16 @@
+legacy._meta.type = (alias nixpkgs);
+system = {
+  programs._meta.type = (zmdl programs);
+  packages._meta.type = (packages);
+};
+relocated._meta.type = (zmdl programs);
+users = {
+  (freeform user) = {
+    programs._meta.type = (zmdl programs);
+    packages._meta.type = (packages);
+    legacy = {
+      _meta.type = (alias nixpkgs.users.users.($f.user));
+      homeManager._meta.type = (alias nixpkgs.home-manager.users.($f.user));
+    };
+  };
+};

@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Legacy Syncthing configuration mapping";
+  summary = "Legacy Syncthing configuration mapping";
   description = ''
     Forwards the ZenOS Syncthing abstraction to the upstream services.syncthing
     namespace.
@@ -11,7 +11,7 @@ _meta = {
 };
 
 (freeform setting) = {
-  _meta.brief = "Syncthing setting ${$f.setting}";
+  _meta.summary = "Syncthing setting ${$f.setting}";
 
   s!! {
     services.syncthing.($f.setting) = $path.($f.setting);

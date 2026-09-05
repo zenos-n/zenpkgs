@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Automatic light and dark theme switching for GNOME";
+  summary = "Automatic light and dark theme switching for GNOME";
   description = ''
     Automatic light and dark theme switching for GNOME
 
@@ -18,7 +18,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable Auto Theme Switcher GNOME extension configuration.";
+  _meta.description = ''Whether to enable Auto Theme Switcher GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.auto-theme-switcher ];
     programs.dconf.profiles.user.databases = [ {

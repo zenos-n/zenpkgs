@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Media metadata display for the GNOME top bar";
+  summary = "Media metadata display for the GNOME top bar";
   description = ''
     Media metadata display for the GNOME top bar
 
@@ -19,7 +19,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "MPRIS Label GNOME extension configuration";
+  _meta.description = ''MPRIS Label GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.mpris-label ];
     programs.dconf.profiles.user.databases = [ {
@@ -54,30 +54,30 @@ enable = enableOption {
   };
 };
 
-layout.padding-left = { _meta = { type = $type.int; default = 30; description = "Horizontal pixel padding on the left side of the label"; }; };
-layout.padding-right = { _meta = { type = $type.int; default = 30; description = "Horizontal pixel padding on the right side of the label"; }; };
-layout.max-string-length = { _meta = { type = $type.int; default = 30; description = "Maximum character count for the metadata string before truncation"; }; };
-layout.extension-index = { _meta = { type = $type.int; default = 3; description = "Relative sorting index for top bar placement"; }; };
-layout.extension-place = { _meta = { type = $type.enum [ "left" "center" "right" ]; default = "right"; description = "Panel container for the label"; }; };
-layout.refresh-rate = { _meta = { type = $type.int; default = 300; description = "Time in milliseconds between metadata polling updates"; }; };
-layout.button-placeholder = { _meta = { type = $type.string; default = "＿"; description = "Text displayed when no media metadata is available"; }; };
-layout.divider-string = { _meta = { type = $type.string; default = " | "; description = "Character sequence used to separate metadata fields"; }; };
-layout.font-color = { _meta = { type = $type.string; default = ""; description = "Custom CSS color for the label text"; }; };
-layout.filtered-list = { _meta = { type = $type.string; default = "remaster,remix,featuring,live"; description = "Comma-separated list of terms to strip from metadata"; }; };
+layout.padding-left = { _meta = { type = $type.int; default = 30; description = ''Horizontal pixel padding on the left side of the label''; }; };
+layout.padding-right = { _meta = { type = $type.int; default = 30; description = ''Horizontal pixel padding on the right side of the label''; }; };
+layout.max-string-length = { _meta = { type = $type.int; default = 30; description = ''Maximum character count for the metadata string before truncation''; }; };
+layout.extension-index = { _meta = { type = $type.int; default = 3; description = ''Relative sorting index for top bar placement''; }; };
+layout.extension-place = { _meta = { type = $type.enum [ "left" "center" "right" ]; default = "right"; description = ''Panel container for the label''; }; };
+layout.refresh-rate = { _meta = { type = $type.int; default = 300; description = ''Time in milliseconds between metadata polling updates''; }; };
+layout.button-placeholder = { _meta = { type = $type.string; default = "＿"; description = ''Text displayed when no media metadata is available''; }; };
+layout.divider-string = { _meta = { type = $type.string; default = " | "; description = ''Character sequence used to separate metadata fields''; }; };
+layout.font-color = { _meta = { type = $type.string; default = ""; description = ''Custom CSS color for the label text''; }; };
+layout.filtered-list = { _meta = { type = $type.string; default = "remaster,remix,featuring,live"; description = ''Comma-separated list of terms to strip from metadata''; }; };
 
-fields.first = { _meta = { type = $type.string; default = "xesam:artist"; description = "Primary xesam metadata key to display"; }; };
-fields.second = { _meta = { type = $type.string; default = "xesam:title"; description = "Secondary xesam metadata key to display"; }; };
-fields.last = { _meta = { type = $type.string; default = ""; description = "Tertiary xesam metadata key to display"; }; };
+fields.first = { _meta = { type = $type.string; default = "xesam:artist"; description = ''Primary xesam metadata key to display''; }; };
+fields.second = { _meta = { type = $type.string; default = "xesam:title"; description = ''Secondary xesam metadata key to display''; }; };
+fields.last = { _meta = { type = $type.string; default = ""; description = ''Tertiary xesam metadata key to display''; }; };
 
-actions.left.click = { _meta = { type = $type.string; default = "play-pause"; description = "Action performed on primary mouse click"; }; };
-actions.left.double-click = { _meta = { type = $type.string; default = "next-track"; description = "Action performed on primary double-click"; }; };
-actions.right.click = { _meta = { type = $type.string; default = "activate-player"; description = "Action performed on secondary mouse click"; }; };
-actions.right.double-click = { _meta = { type = $type.string; default = "prev-track"; description = "Action performed on secondary double-click"; }; };
-actions.middle.click = { _meta = { type = $type.string; default = "play-pause"; description = "Action performed on middle mouse click"; }; };
-actions.middle.double-click = { _meta = { type = $type.string; default = "none"; description = "Action performed on middle double-click"; }; };
-actions.thumb.forward = { _meta = { type = $type.string; default = "next-track"; description = "Action performed on mouse button 5"; }; };
-actions.thumb.double-forward = { _meta = { type = $type.string; default = "none"; description = "Action performed on button 5 double-click"; }; };
-actions.thumb.backward = { _meta = { type = $type.string; default = "prev-track"; description = "Action performed on mouse button 4"; }; };
-actions.thumb.double-backward = { _meta = { type = $type.string; default = "none"; description = "Action performed on button 4 double-click"; }; };
-actions.scroll = { _meta = { type = $type.string; default = "volume-controls"; description = "Action performed on mouse wheel scroll over label"; }; };
-actions.volume-control-scheme = { _meta = { type = $type.string; default = "application"; description = "Target for volume adjustments (application or system)"; }; };
+actions.left.click = { _meta = { type = $type.string; default = "play-pause"; description = ''Action performed on primary mouse click''; }; };
+actions.left.double-click = { _meta = { type = $type.string; default = "next-track"; description = ''Action performed on primary double-click''; }; };
+actions.right.click = { _meta = { type = $type.string; default = "activate-player"; description = ''Action performed on secondary mouse click''; }; };
+actions.right.double-click = { _meta = { type = $type.string; default = "prev-track"; description = ''Action performed on secondary double-click''; }; };
+actions.middle.click = { _meta = { type = $type.string; default = "play-pause"; description = ''Action performed on middle mouse click''; }; };
+actions.middle.double-click = { _meta = { type = $type.string; default = "none"; description = ''Action performed on middle double-click''; }; };
+actions.thumb.forward = { _meta = { type = $type.string; default = "next-track"; description = ''Action performed on mouse button 5''; }; };
+actions.thumb.double-forward = { _meta = { type = $type.string; default = "none"; description = ''Action performed on button 5 double-click''; }; };
+actions.thumb.backward = { _meta = { type = $type.string; default = "prev-track"; description = ''Action performed on mouse button 4''; }; };
+actions.thumb.double-backward = { _meta = { type = $type.string; default = "none"; description = ''Action performed on button 4 double-click''; }; };
+actions.scroll = { _meta = { type = $type.string; default = "volume-controls"; description = ''Action performed on mouse wheel scroll over label''; }; };
+actions.volume-control-scheme = { _meta = { type = $type.string; default = "application"; description = ''Target for volume adjustments (application or system)''; }; };

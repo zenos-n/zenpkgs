@@ -1,136 +1,134 @@
 # ZenPkgs Metadata Standards
 
-To ensure the documentation site renders correctly and builds pass CI, all packages and modules must adhere to the following metadata schema.
+The sibling `zenos-n-next/design/node-metadata.md`, `zpkg-format.md`,
+`package-tree.md`, and `mounting-and-build-decisions.md` are authoritative.
 
-Package interface declarations are named leaves at `pkgs/<path>.zpkg`. Their
-location mechanically defines `pkgs.zenos.<path>`; `package.zpkg` is not a valid
-leaf name. Nix files remain valid for the flake, internal backend, tests, package
-implementations, and modules. The repository has no `dsl/` wrapper directory.
-The compiled DSL registry directly supplies the package overlay and public flake
-package outputs. `tests/fixtures/package-registry.json` is a normalized contract,
-not a second declaration source; checks require all 126 path-derived entries and
-their target and imported Nixpkgs paths to remain exact.
+## Package Identity
 
-## Package Interface Declarations
+Package declarations are named leaves at `pkgs/<path>.zpkg`. The full filesystem
+path defines the public identity `pkgs.<path>` and internal view
+`pkgs.zenos.<path>`. For example, `pkgs/apps/utilities/example.zpkg` has registry
+ID `pkgs.apps.utilities.example` and target `[ "apps" "utilities" "example" ]`.
+Different directories may contain the same basename. Targets and full identities
+must be unique; there is no basename lookup or alias catalog. Moving a file
+changes its identity.
 
-Add one `.zpkg` file per curated nixpkgs interface at its canonical target path.
-For example, `pkgs/apps/utilities/example.zpkg` declares
-`pkgs.zenos.apps.utilities.example`:
+Do not author `id`, `target`, `sourcePath`, `status`, `aliases`, or `category`
+metadata. The registry's internal `sourcePath` records the imported Nixpkgs
+attribute path, not identity. `package.zpkg` is reserved. `pkgs/legacy/` must not
+exist: public `pkgs.legacy` is a virtual view of pinned Nixpkgs.
+
+Filesystem discovery establishes identity; ZSTR controls exposure. Without a
+root `structure.zstr`, the adapter returns no packages or module candidates.
+Multiple structures are an error. The compiled registry feeds the package
+overlay and flake outputs. `tests/fixtures/package-registry.json` records the
+126-entry normalized contract, not a second declaration source.
+
+## Package Declarations
+
+Only `_meta` is prefixed. Its fields and dependency scopes are unprefixed:
 
 ```zpkg
 _meta = {
-  _name = "Example";
-  _summary = "Curated Example package for ZenOS";
-  _description = "Curated Example package for ZenOS";
-  _zenosVersion = "1.0.0";
-  _packageVersion = "";
-  _tags = [ "utility" ];
-  _maintainers = [ $m.doromiert ];
-  _dependencies = {
-    _general = [ ];
-    _build = [ ];
-    _runtime = [ ];
+  name = "Example";
+  summary = "An example package for ZenOS";
+  description = ''
+    Provides an example utility with **Markdown** documentation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "";
+  tags = [ "utility" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+  dependencies = {
+    general = [ $pkgs.legacy.zlib ];
+    build = [ $pkgs.legacy.pkg-config ];
+    runtime = [ $pkgs.legacy.openssl ];
   };
 };
 
 import $pkgs.legacy.example;
 ```
 
-Identity comes only from the file path. Do not declare `_id`, `_target`,
-`_sourcePath`, `_status`, `_aliases`, `_category`, or `_declarationOrder`.
-Unavailable curated-app entries belong only to ZenOS Setup and do not get ZPKG
-files. The repository root is compiled in interface mode; transitional Nix
-recipes remain under `lib/compat/`.
-Compilation uses import-from-derivation (IFD), so local evaluators and CI must
-allow IFD. Its compiler bootstrap imports nixpkgs without the ZenPkgs overlay,
-which keeps registry generation independent of the package tree it creates.
+`packageVersion` is the original package version; an empty or omitted value
+defaults to `zenosVersion`. Verify the actual license instead of assuming one.
+Package source code, assets, and implementation payload belong in a dedicated
+external repository, not in ZenPkgs. Repository-local Markdown is documentation.
+Custom builder and source-pinning syntax remain undecided.
 
-## Module Interface Declarations
+## Descriptions And Diagnostics
 
-ZMDL sources are named leaves at `modules/<path>.zmdl`; `module.zmdl` is not a
-valid leaf name. The path mechanically defines the module identity
-`zenos.<path>`; `_meta.id` is derived and must not be authored. Desktop modules
-use the plural `modules/desktops/` root. The repository-root `structure.zstr`
-defines schema only and does not register module files. Existing `.nix` module
-implementations are retained temporarily as parity references. Module actions
-own system, user, or target-neutral routing independently of source paths.
+Common descriptive fields are `name`, `summary`, `description`, `tags`,
+`maintainers`, and `license`. Use `summary` for short list/search text and
+`description` for multiline Markdown. Plain paragraphs are valid Markdown;
+headings and formatting are optional. Quoted descriptions are invalid.
 
-## 1. Required Fields
+`description = _import "./description.md";` loads Markdown relative to the
+declaring ZPKG or ZMDL and must remain inside the repository. It does not evaluate
+Nix or parse the Markdown as DSL. The adapter preserves the emitted description
+text, including whitespace, and normalized unprefixed metadata keys.
 
-Every package implementation's `package.nix` (`meta` set) and every
-`module.nix` (top-level `meta` set) **MUST** contain:
+Every exposed package and option node, including branches and freeform schemas,
+must be checked during evaluation and compilation. Missing descriptive fields
+warn with full node path and source location, rather than failing a build.
+Empty descriptions also warn. Unknown metadata fields warn, with a spelling
+suggestion when available. Invalid supplied types, versions, references, scopes,
+weights, defaults, and conflicting identities are errors, not missing metadata.
 
-| Field         | Type              | Description                                                   |
-| :------------ | :---------------- | :------------------------------------------------------------ |
-| `description` | `str` (multiline) | See "The First Line Rule" below.                              |
-| `maintainers` | `list`            | List of maintainers (e.g., `with lib.maintainers; [ user ]`). |
-| `license`     | `set`             | The licensing attribute (default: `lib.licenses.napl`).       |
-| `platforms`   | `list`            | Supported platforms (default: `lib.platforms.zenos`).         |
+For incomplete package descriptors, the adapter uses empty strings for missing
+text/version fields, empty lists for tags and maintainers, and `null` for an
+unknown license. These are diagnostic fallbacks, not assertions about upstream
+metadata. Omitted dependency scopes become empty lists without warnings.
+`weight` is optional and exceptional; omit it for normal backend priority.
 
-## 2. Style Guidelines
+## Dependency Blocker
 
-### The First Line Rule
+`general` dependencies must be available during building and at runtime;
+`build` dependencies only during building; `runtime` dependencies only at
+runtime. Old `global`/`run`/`export` scopes and dependency cascades are unsupported.
+The three scopes are authoritative even for imported Nixpkgs packages.
 
-To unify documentation across packages and options (which do not support `longDescription`), we use the First Line Rule for the `description` field.
+The registry preserves these declarations but does not implement dependency
+availability by decorating metadata. The backend contract for overriding an
+imported package's build inputs and its runtime linkage remains undecided
+(D14/D15 in the authority's `DESIGN-ISSUES.md`). No additive/replacement override
+semantics are assumed here. Until that decision is made, the interface adapter
+retains upstream derivation identity; nonempty dependency declarations must not
+be presented as an implemented build/runtime override.
 
-**Structure:**
+## Module Metadata
 
-```nix
-description = ''
-  Short summary line here (max 80 chars).
+Named ZMDL leaves at `modules/<path>.zmdl` derive identity `zenos.<path>`;
+`module.zmdl` and authored `_meta.id` are invalid. ZSTR mounts module trees and
+controls exposure. System, user, and target-neutral actions determine routing,
+not separate public module roots. Home Manager is an internal lowering backend.
 
-  Detailed explanation paragraphs go here.
-  You can use standard **Markdown**.
+Options additionally describe `type` and, when appropriate, `default`.
+`zenosVersion` inherits from the parent unless explicitly overridden. An
+unresolved effective version warns. Deliberately omitted defaults are allowed;
+evaluation fails only when a required value is unavailable. Metadata records
+and dependency scopes are not option nodes.
 
-  - List items
-  - Code blocks
-'';
-```
+## Verification
 
-#### Line 1: The Summary
+Update `tests/fixtures/package-registry.json` alongside declaration changes and
+review exact public IDs, targets, imported paths, and metadata. Package checks
+cover all 126 mappings, repeated basenames without aliases, invalid/conflicting
+targets, absent/multiple structures, and metadata defaults and scope decoding.
 
-- **Purpose:** Displayed in search results and lists.
-- **Constraints:**
-  - **Do** start with a capital letter.
-  - **Do not** end with a period.
-  - **Do** keep it under 80 characters.
-
-#### Line 2+: The Details
-
-- **Purpose:** Displayed on the detailed documentation page.
-- **Constraints:**
-  - Explain _what_ the module/package does.
-  - Explain _why_ a user would want it.
-  - List integration points.
-  - Separate from the summary with a blank line.
-
-### `maintainers`
-
-- Must map to a valid handle in `lib/maintainers.nix` (or nixpkgs).
-- If you are the sole author, add yourself.
-
-### `platforms`
-
-- **`platforms.zenos`**: Packages/Modules that depend on ZenOS-specific configuration or infrastructure.
-- **`platforms.linux`**: Generic packages that can run on any Linux distro.
-
-## 3. Options Metadata
-
-Options declared via `mkOption` **MUST** follow the **First Line Rule**.
-
-- **`description`**: Mandatory. Use the multiline string format.
-- **`longDescription`**: **FORBIDDEN**. Do not use this attribute in `mkOption` calls; it will cause evaluation errors.
-- **`example`**: Recommended for non-boolean types.
-
-## 4. Enforcement
-
-Run the audit tool to verify compliance:
+Run acceptance checks inside a ZenOS VM, not on the host:
 
 ```bash
-nix flake check --show-trace
-nix eval --file tests/integrity.nix --json | jq
+nix build path:.#checks.x86_64-linux.registry-contract \
+  path:.#checks.x86_64-linux.registry-path-identities \
+  path:.#checks.x86_64-linux.registry-invalid-identities \
+  path:.#checks.x86_64-linux.registry-structure-exposure \
+  path:.#checks.x86_64-linux.registry-metadata-defaults \
+  --no-link --print-build-logs --option allow-import-from-derivation true
 ```
 
-Registry changes must also update `tests/fixtures/package-registry.json` in the
-same change. Review that JSON diff as the explicit public path and metadata
-contract change.
+Compilation uses import-from-derivation with an overlay-free Nixpkgs bootstrap
+to avoid a registry/overlay cycle. Evaluators must allow IFD. Compiler diagnostics
+and runtime mounting checks are separate integration responsibilities; the
+package registry checks do not claim full module activation or dependency
+override coverage.

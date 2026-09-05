@@ -61,10 +61,10 @@ def zmdl_document(source: str, name: str):
 
 def zpkg_source(package: str = "demo") -> str:
     return (
-        '_meta = { _name = "demo"; _summary = "demo"; '
-        '_description = "demo"; _zenosVersion = "1.0.0"; '
-        '_tags = [ ]; _maintainers = [ ]; '
-        '_dependencies = { _general = [ ]; _build = [ ]; _runtime = [ ]; }; }; '
+        '_meta = { name = "demo"; summary = "demo"; '
+        "description = ''demo''; zenosVersion = \"1.0.0\"; "
+        'tags = [ ]; maintainers = [ ]; license = $l.mit; '
+        'dependencies = { general = [ ]; build = [ ]; runtime = [ ]; }; }; '
         f"import $pkgs.legacy.{package};"
     )
 
@@ -89,7 +89,7 @@ class NixEmitterTests(unittest.TestCase):
                 '{\n  __zenlangType = "path";\n  kind = "absolute";\n  value = "/etc/example";\n}',
             ),
             ("source.github", "source.github"),
-            ("$pkgs.zenos.git", "pkgs.zenos.git"),
+            ("$pkgs.apps.development.git", "pkgs.zenos.apps.development.git"),
             ("$pkgs.legacy.epiphany", "pkgs.zenos.legacy.epiphany"),
             ("$name", '"expression"'),
             ("[ 1 true ]", "[\n  1\n  true\n]"),
@@ -108,7 +108,7 @@ class NixEmitterTests(unittest.TestCase):
             ("fn 1 2", "((fn 1) 2)"),
             ("if true then 1 else 2", "(if true then 1 else 2)"),
             ("let value = 1; in value", "(let\n  value = 1;\nin value)"),
-            ("with $pkgs.zenos; git", "(with pkgs.zenos; git)"),
+            ("with $pkgs.apps.development; git", "(with pkgs.zenos.apps.development; git)"),
             ("value: value + 1", "(value: (value + 1))"),
             ("{ value ? 1, ... }: value", "({ value ? 1, ... }: value)"),
         )
@@ -192,6 +192,7 @@ class ZcfgCompilerTests(unittest.TestCase):
         self.assertIn('name = "host";', output)
         self.assertIn('hostName = "zen";', output)
         self.assertIn("zenos = {", output)
+        self.assertRegex(output, r'zenos = \{\s+legacy = \{\s+networking = \{\s+hostName = "zen";')
 
     def test_conditions_imports_and_locals_become_a_module_merge(self) -> None:
         source = """
@@ -213,6 +214,7 @@ if $cfg.feature.enable or false { legacy.services.demo.enable = true; };
         self.assertIn("lib.mkIf (config.zenos.feature.enable or false)", output)
         self.assertIn("services = {", output)
         self.assertIn("demo = {", output)
+        self.assertRegex(output, r"zenos = \{\s+legacy = \{\s+services = \{")
 
     def test_conflicting_assignments_fail_at_compile_time(self) -> None:
         sources = (
@@ -280,10 +282,11 @@ if $cfg.feature.enable or false { legacy.services.demo.enable = true; };
 class ZmdlCompilerTests(unittest.TestCase):
     def test_options_metadata_and_all_action_routes(self) -> None:
         source = """
-_meta.brief = "Desktop module";
+_meta.summary = "Desktop module";
 enable = enableOption {
   _meta.default = true;
-  _meta.brief = "Enable desktop";
+  _meta.summary = "Enable desktop";
+  _meta.description = ''Enable desktop with **Markdown**.'';
   s! [ ($cfg.ready or false) ] { services.demo.enable = true; };
   u! { home.sessionVariables.DEMO = "1"; };
   !! { environment.variables.DEMO = "1"; };
@@ -295,7 +298,7 @@ enable = enableOption {
         self.assertIn("enable = lib.mkOption", output)
         self.assertIn("type = lib.types.bool;", output)
         self.assertIn("default = true;", output)
-        self.assertIn('description = "Enable desktop";', output)
+        self.assertIn('description = "Enable desktop with **Markdown**.";', output)
         self.assertIn("lib.mkIf ((cfg.enable) && (((config.zenos.ready or false))))", output)
         self.assertIn("home-manager.sharedModules", output)
         self.assertIn("lib.mkMerge", output)
@@ -332,7 +335,7 @@ names = { _meta.type = $type.list [ $type.string ]; };
                 """
 enabled = enableOption { _meta.default = true; };
 (freeform user) = {
-  _meta.brief = "User ${$f.user}";
+  _meta.summary = "User ${$f.user}";
   isNormalUser = { _meta.type = $type.bool; _meta.default = false; };
   profiles = {
     (freeform profile) = {
@@ -555,26 +558,37 @@ class ZpkgCompilerTests(unittest.TestCase):
     def test_interface_mode_describes_metadata_and_package_import(self) -> None:
         source = """
 _meta = {
-  _name = "Demo";
-  _summary = "Demo package";
-  _description = "Demo package description";
-  _zenosVersion = "1.0.0";
-  _packageVersion = "";
-  _tags = [ "demo" ];
-  _maintainers = [ $m.doromiert ];
-  _dependencies = {
-    _general = [ $pkgs.legacy.zlib ];
-    _build = [ $pkgs.legacy.pkg-config ];
-    _runtime = [ $pkgs.legacy.openssl ];
+  name = "Demo";
+  summary = "Demo package";
+  description = ''Demo package description'';
+  zenosVersion = "1.0.0";
+  packageVersion = "";
+  tags = [ "demo" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+  dependencies = {
+    general = [ $pkgs.legacy.zlib ];
+    build = [ $pkgs.legacy.pkg-config ];
+    runtime = [ $pkgs.apps.security.openssl ];
   };
 };
 import $pkgs.legacy.demo;
 """
-        output = compile_zpkg(parse(source, "demo.zpkg"), mode="interface")
+        document = parse(source, "demo.zpkg")
+        self.assertEqual((), document.diagnostics)
+        output = compile_zpkg(document, mode="interface")
         self.assertIn('value = "Demo";', output)
         self.assertIn('packageImport = {', output)
         self.assertIn('value = "legacy";', output)
         self.assertIn('type = "variable";', output)
+        for field in ("name", "summary", "description", "zenosVersion", "packageVersion",
+                      "tags", "maintainers", "license", "dependencies"):
+            self.assertIn(field + " =", output)
+            self.assertNotIn("_" + field + " =", output)
+        for scope in ("general", "build", "runtime"):
+            self.assertIn(f'value = "{scope}";', output)
+            self.assertNotIn(f'value = "_{scope}";', output)
+        self.assertIn("multiline = true;", output)
         self.assertNotIn("zenRuntime", output)
         self.assertTrue(output.endswith("}\n"))
 
@@ -588,14 +602,28 @@ import $pkgs.legacy.demo;
             compile_zpkg(parse_file(FIXTURES / "bat.zpkg"), mode="unknown")
 
     def test_package_import_requires_one_legacy_package(self) -> None:
-        metadata = "_meta = { _name = \"x\"; _summary = \"x\"; _description = \"x\"; _zenosVersion = \"1.0.0\"; _tags = [ ]; _maintainers = [ ]; _dependencies = { _general = [ ]; _build = [ ]; _runtime = [ ]; }; };"
+        metadata = zpkg_source().removesuffix("import $pkgs.legacy.demo;")
         for source in (
             metadata,
-            metadata + " import $pkgs.zenos.demo;",
+            metadata + " import $pkgs.apps.demo;",
             metadata + " import $pkgs.legacy.a; import $pkgs.legacy.b;",
         ):
-            with self.subTest(source=source), self.assertRaises((ZenLangError, CompilationError)):
+            with self.subTest(source=source), self.assertRaisesRegex(
+                (ZenLangError, CompilationError), "(exactly one package import|\\$pkgs\\.legacy)"
+            ):
                 compile_zpkg(parse(source, "invalid.zpkg"))
+
+    def test_missing_package_metadata_warns_but_both_modes_compile(self) -> None:
+        document = parse("import $pkgs.legacy.demo;", "pkgs/apps/demo.zpkg")
+        self.assertEqual(["ZEN226", "ZEN228"], [item.code for item in document.diagnostics])
+        for diagnostic in document.diagnostics:
+            self.assertEqual("warning", diagnostic.severity)
+            self.assertTrue(diagnostic.message.startswith("pkgs.apps.demo:"))
+            self.assertEqual("pkgs/apps/demo.zpkg", diagnostic.span.source)
+        for field in ("_meta", "name", "summary", "description", "tags", "maintainers", "license"):
+            self.assertIn(field, document.diagnostics[0].message)
+        self.assertIn("metadata = { };", compile_zpkg(document, mode="interface"))
+        self.assertEqual("{ pkgs, ... }:\npkgs.zenos.legacy.demo\n", compile_zpkg(document, mode="build"))
 
 
 class ZstrCompilerTests(unittest.TestCase):
@@ -627,7 +655,7 @@ class CompilerIntegrationTests(unittest.TestCase):
             "pkgs.zenos.legacy.demo",
             compile_document(
                 parse(
-                    '_meta = { _name = "demo"; _summary = "demo"; _description = "demo"; _zenosVersion = "1.0.0"; _tags = [ ]; _maintainers = [ ]; _dependencies = { _general = [ ]; _build = [ ]; _runtime = [ ]; }; }; import $pkgs.legacy.demo;',
+                    zpkg_source(),
                     "a.zpkg",
                 )
             ),
@@ -669,8 +697,8 @@ class CompilerCliTests(unittest.TestCase):
     def test_compile_supports_all_kinds_and_zpkg_modes(self) -> None:
         cases = (
             ("zmdl", "value = true;", None, "mkOption"),
-            ("zpkg", '_meta = { _name = "demo"; _summary = "demo"; _description = "demo"; _zenosVersion = "1.0.0"; _tags = [ ]; _maintainers = [ ]; _dependencies = { _general = [ ]; _build = [ ]; _runtime = [ ]; }; }; import $pkgs.legacy.demo;', "interface", 'kind = "zpkg"'),
-            ("zpkg", '_meta = { _name = "demo"; _summary = "demo"; _description = "demo"; _zenosVersion = "1.0.0"; _tags = [ ]; _maintainers = [ ]; _dependencies = { _general = [ ]; _build = [ ]; _runtime = [ ]; }; }; import $pkgs.legacy.demo;', "build", "pkgs.zenos.legacy.demo"),
+            ("zpkg", zpkg_source(), "interface", 'kind = "zpkg"'),
+            ("zpkg", zpkg_source(), "build", "pkgs.zenos.legacy.demo"),
             ("zstr", "value = true;", None, 'kind = "zstr"'),
         )
         with tempfile.TemporaryDirectory() as directory:
@@ -690,7 +718,8 @@ class CompilerCliTests(unittest.TestCase):
                     if mode is not None:
                         arguments.extend(("--mode", mode))
                     stdout = StringIO()
-                    self.assertEqual(0, main(arguments, stdout, StringIO()))
+                    stderr = StringIO()
+                    self.assertEqual(0, main(arguments, stdout, stderr), stderr.getvalue())
                     self.assertIn(expected, stdout.getvalue())
 
     def test_zcfg_compile_accepts_legacy_import_with_a_warning(self) -> None:
@@ -754,14 +783,16 @@ class CompilerCliTests(unittest.TestCase):
 
     def test_cli_preserves_backend_error_spans(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
-            source = Path(directory) / "bad.zpkg"
-            source.write_text("value = true;\n_meta.nested.field = 1;\n", encoding="utf-8")
+            source = Path(directory) / "bad.zcfg"
+            source.write_text("value = true;\nlegacy.zenos.forbidden = true;\n", encoding="utf-8")
             stderr = StringIO()
             self.assertEqual(
                 1,
-                main(["compile", str(source), "--mode", "interface"], StringIO(), stderr),
+                main(["compile", str(source)], StringIO(), stderr),
             )
             self.assertIn(f"{source}:2:", stderr.getvalue())
+            self.assertIn("error[ZEN401]", stderr.getvalue())
+            self.assertIn("legacy cannot contain the zenos option tree", stderr.getvalue())
 
 
 class TreeCompilerTests(unittest.TestCase):
@@ -777,7 +808,7 @@ class TreeCompilerTests(unittest.TestCase):
         (modules / "gnome.zmdl").write_text("value = true;", encoding="utf-8")
         (nested / "package.zpkg").write_text(zpkg_source(), encoding="utf-8")
         (root / "structure.zstr").write_text(
-            "desktops = { _meta.brief = \"Desktop environments\"; };",
+            "desktops = { _meta.summary = \"Desktop environments\"; };",
             encoding="utf-8",
         )
         (root / "ignored.txt").write_text("value = false;", encoding="utf-8")
@@ -817,12 +848,15 @@ class TreeCompilerTests(unittest.TestCase):
             )
             self.assertNotIn("target", first["modules"][0])
             self.assertNotIn("scope", first["modules"][0])
-            self.assertEqual({"aliases": []}, first["structure"])
+            self.assertEqual(
+                {"present": True, "mounts": [], "nodes": [{"path": ["desktops"]}]},
+                first["structure"],
+            )
             for source in first["sources"]:
                 self.assertEqual(source["kind"], source["descriptor"]["kind"])
                 self.assertTrue(source["compiledNix"])
 
-    def test_fixture_tree_derives_modules_and_retains_typed_aliases(self) -> None:
+    def test_fixture_tree_derives_modules_and_retains_mounts(self) -> None:
         bundle = compile_tree(FIXTURES, mode="interface")
         gnome = next(
             source
@@ -835,10 +869,16 @@ class TreeCompilerTests(unittest.TestCase):
         )
         self.assertIn("options.zenos.desktops.gnome", gnome["compiledNix"])
         self.assertEqual("zenos.desktops.gnome", bundle["modules"][0]["identity"])
-        self.assertTrue(bundle["structure"]["aliases"])
+        structure = bundle["structure"]
+        self.assertEqual({"present", "mounts", "nodes"}, set(structure))
+        self.assertTrue(structure["present"])
         self.assertIn(
-            ["legacy", "services", "ssh", "port"],
-            [alias["path"] for alias in bundle["structure"]["aliases"]],
+            {"path": ["system", "packages"], "kind": "packages", "target": []},
+            structure["mounts"],
+        )
+        self.assertIn(
+            {"path": ["legacy"], "kind": "alias", "target": ["nixpkgs"]},
+            structure["mounts"],
         )
 
     def test_tree_imports_use_the_explicit_root(self) -> None:
@@ -951,7 +991,15 @@ class TreeCompilerTests(unittest.TestCase):
                     StringIO(),
                 ),
             )
-            self.assertEqual({"diagnostics": []}, json.loads(stdout.getvalue()))
+            diagnostics = json.loads(stdout.getvalue())["diagnostics"]
+            expected = [
+                diagnostic.to_dict()
+                for document in check_tree(root).values()
+                for diagnostic in document.diagnostics
+            ]
+            self.assertEqual(expected, diagnostics)
+            self.assertTrue(diagnostics)
+            self.assertTrue(all(item["severity"] == "warning" for item in diagnostics))
             self.assertEqual(
                 0,
                 main(

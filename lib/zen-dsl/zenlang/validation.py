@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import re
+from dataclasses import fields, is_dataclass
+from difflib import get_close_matches
+from pathlib import PurePath
 
 from .model import (
     ActionStatement,
@@ -27,6 +30,7 @@ from .model import (
     LetStatement,
     ListExpr,
     Literal,
+    MarkdownImport,
     PathExpr,
     PackageImportStatement,
     Reference,
@@ -119,7 +123,9 @@ _RESERVED_BINDINGS = frozenset(
 )
 
 
-def validate(document: Document) -> None:
+def validate(document: Document, *, metadata_warnings: bool = True) -> tuple[Diagnostic, ...]:
+    """Validate supplied values and return metadata diagnostics without mutating the AST."""
+    validate_markdown_imports(document)
     _validate_statements(
         document.statements,
         document.kind,
@@ -135,11 +141,390 @@ def validate(document: Document) -> None:
     _validate_boolean_contexts(document)
     if document.kind is FileKind.ZMDL:
         _validate_zmdl_freeform_declarations(tuple(_effective_statements(document)))
+    _validate_initializers(tuple(_effective_statements(document)))
+    return validate_metadata(document, warn_missing=metadata_warnings)
 
 
 def validate_document_contract(document: Document) -> None:
     if document.kind is FileKind.ZPKG:
         _validate_zpkg_declaration(tuple(_effective_statements(document)), document.span)
+    elif document.kind is FileKind.ZMDL:
+        validate_metadata(document, warn_missing=False, require_option_types=True)
+
+
+_DESCRIPTIVE_FIELDS = ("name", "summary", "description", "tags", "maintainers", "license")
+
+
+def validate_metadata(
+    document: Document, *, warn_missing: bool = True, require_option_types: bool = False,
+) -> tuple[Diagnostic, ...]:
+    """Check declaration nodes, never action targets or arbitrary expression records.
+
+    Dotted declarations and bare imports share a node table so parent versions
+    and locally completed metadata are considered before missing-field warnings.
+    Registry existence and evaluated option types remain compiler checks.
+    """
+    diagnostics: list[Diagnostic] = []
+    nodes: dict[tuple[str, ...], dict[str, Expression]] = {(): {}}
+    spans = {(): document.span}
+    metadata_nodes: set[tuple[str, ...]] = set()
+    environments: dict[tuple[str, ...], dict[str, Expression]] = {}
+    toggles: set[tuple[str, ...]] = set()
+    defaults: dict[tuple[str, ...], Expression] = {}
+    allowed = set(_DESCRIPTIVE_FIELDS) | {"zenosVersion", "type", "default", "weight"}
+    if document.kind is FileKind.ZPKG:
+        allowed |= {"packageVersion", "dependencies"}
+
+    source = PurePath(document.span.source)
+    root_name = source.stem
+    directory = "modules" if document.kind is FileKind.ZMDL else "pkgs"
+    if document.kind in (FileKind.ZMDL, FileKind.ZPKG) and directory in source.parts:
+        index = source.parts.index(directory)
+        root_name = ".".join(("zenos" if directory == "modules" else "pkgs", *source.parts[index + 1:-1], source.stem))
+
+    def node(path: tuple[str, ...], span: object) -> None:
+        for length in range(1, len(path) + 1):
+            prefix = path[:length]
+            nodes.setdefault(prefix, {})
+            spans.setdefault(prefix, span)
+
+    def metadata(path: tuple[str, ...], names: tuple[str, ...], value: Expression) -> None:
+        metadata_nodes.add(path)
+        while isinstance(value, GroupExpr):
+            value = value.value
+        if not names:
+            if not isinstance(value, AttrSet):
+                raise ZenLangError(Diagnostic("ZEN225", "_meta must be an attribute set", value.span))
+            for field in value.statements:
+                if not isinstance(field, Assignment) or not _target_names(field):
+                    raise ZenLangError(Diagnostic("ZEN225", "metadata must contain named field assignments", field.span))
+                metadata(path, _target_names(field), field.value)
+            return
+        name = names[0]
+        if any(part.startswith("_") for part in names):
+            raise ZenLangError(Diagnostic("ZEN223", "fields inside _meta must be unprefixed", value.span))
+        if name not in allowed:
+            suggestion = get_close_matches(name, sorted(allowed), n=1)
+            notes = (f"did you mean {suggestion[0]!r}?",) if suggestion else ()
+            diagnostics.append(Diagnostic("ZEN227", f"{'.'.join((root_name, *path))}: unknown metadata field {name!r}", value.span, "warning", notes))
+            return
+        if name == "dependencies":
+            if len(names) == 1:
+                if not isinstance(value, AttrSet):
+                    raise ZenLangError(Diagnostic("ZEN215", "dependencies must be an attribute set", value.span))
+                for scope in value.statements:
+                    if not isinstance(scope, Assignment):
+                        raise ZenLangError(Diagnostic("ZEN215", "dependencies must contain scope assignments", scope.span))
+                    _validate_dependency_assignment(scope)
+            elif len(names) == 2:
+                segment = IdentifierSegment(names[1], value.span)
+                _validate_dependency_assignment(Assignment((segment,), "=", value, value.span))
+            else:
+                raise ZenLangError(Diagnostic("ZEN215", "dependency scopes must be general, build, or runtime lists", value.span))
+            nodes[path]["dependencies"] = value
+            return
+        if len(names) != 1:
+            raise ZenLangError(Diagnostic("ZEN225", f"metadata {name} does not accept nested fields", value.span))
+        valid = True
+        if name in ("name", "summary", "packageVersion"):
+            valid = isinstance(value, StringExpr)
+        elif name == "description":
+            valid = isinstance(value, StringExpr) and value.multiline or (
+                isinstance(value, MarkdownImport) and document.kind in (FileKind.ZMDL, FileKind.ZPKG)
+            )
+        elif name == "tags":
+            valid = isinstance(value, ListExpr) and all(isinstance(item, StringExpr) for item in value.items)
+        elif name == "maintainers":
+            valid = isinstance(value, ListExpr) and all(_registry_reference(item, "m") for item in value.items)
+        elif name == "license":
+            valid = _registry_reference(value, "l")
+        elif name == "zenosVersion":
+            _validate_zenos_version(value)
+        elif name == "weight":
+            valid = isinstance(value, Literal) and value.kind == "integer" or (
+                isinstance(value, UnaryExpr) and value.operator == "-"
+                and isinstance(value.operand, Literal) and value.operand.kind == "integer"
+            )
+        elif name == "type":
+            if isinstance(value, StructuralMarker):
+                if document.kind is not FileKind.ZSTR:
+                    raise ZenLangError(Diagnostic("ZEN209", "structural metadata types are only valid in ZSTR", value.span))
+            else:
+                _validate_type_annotation(value, document.kind, frozenset(), frozenset(), frozenset())
+        if not valid:
+            label = "a multiline Markdown string or approved Markdown import" if name == "description" else "the documented field type"
+            raise ZenLangError(Diagnostic("ZEN225", f"metadata {name} requires {label}", value.span))
+        nodes[path][name] = value
+
+    def visit(statements: tuple[Statement, ...], prefix: tuple[str, ...], environment: dict[str, Expression]) -> None:
+        visible = dict(environment)
+        for statement in statements:
+            if isinstance(statement, ResolvedImport) and statement.binding is not None:
+                diagnostics.extend(validate_metadata(statement.document, warn_missing=warn_missing))
+                if statement.annotation is not None:
+                    visible[statement.binding] = statement.annotation
+                continue
+            if isinstance(statement, LetStatement):
+                visible[statement.name] = statement.annotation
+                continue
+            if not isinstance(statement, Assignment):
+                continue
+            if isinstance(statement.target, StructuralMarker):
+                marker = statement.target
+                names = ("{freeform:" + (_freeform_name(marker) or "*") + "}",) if marker.kind == "freeform" else ("(" + marker.kind + ")",)
+            else:
+                names = _target_names(statement)
+                if not names:
+                    continue
+            path = (*prefix, *names)
+            if "_meta" in names:
+                index = names.index("_meta")
+                owner = (*prefix, *names[:index])
+                node(owner, statement.span)
+                environments[owner] = dict(visible)
+                metadata(owner, names[index + 1:], statement.value)
+                continue
+            node(path, statement.span)
+            environments[path] = dict(visible)
+            if isinstance(statement.value, EnableOption):
+                toggles.add(path)
+            body = _option_value_body(statement.value)
+            if body is not None:
+                visit(body.statements, path, visible)
+            else:
+                defaults[path] = statement.value
+
+    visit(tuple(_effective_statements(document)), (), {})
+    versions: dict[tuple[str, ...], Expression | None] = {}
+    branches = {path[:-1] for path in nodes if path}
+    exposed = document.kind in (FileKind.ZPKG, FileKind.ZMDL, FileKind.ZSTR)
+    for path in sorted(nodes, key=len):
+        values = nodes[path]
+        label = ".".join((root_name, *path))
+        version = values.get("zenosVersion")
+        if version is None and document.kind is FileKind.ZMDL and path:
+            version = versions.get(path[:-1])
+        versions[path] = version
+        annotation = values.get("type")
+        if annotation is None and path in toggles:
+            annotation = Variable("type", (IdentifierSegment("bool", spans[path]),), spans[path])
+        if require_option_types and path and path not in branches and annotation is None:
+            default = values.get("default", defaults.get(path))
+            if default is None or infer_type(default, environments.get(path, {})) is None:
+                raise ZenLangError(Diagnostic(
+                    "ZEN230", f"{label}: cannot infer option type; supply _meta.type (use $type.set for an open record)", spans[path]
+                ))
+        if annotation is not None and "default" in values and not isinstance(annotation, StructuralMarker):
+            _require_matching_value(annotation, values["default"], environments.get(path, {}), f"{label}: metadata default")
+        if not (warn_missing and exposed):
+            continue
+        missing = [name for name in _DESCRIPTIVE_FIELDS if name not in values]
+        if path not in metadata_nodes:
+            missing.insert(0, "_meta")
+        if missing:
+            diagnostics.append(Diagnostic("ZEN226", f"{label}: missing metadata: {', '.join(missing)}", spans[path], "warning"))
+        for name in ("name", "summary", "description"):
+            value = values.get(name)
+            if isinstance(value, StringExpr) and _is_plain_string(value) and not "".join(part.value for part in value.parts).strip():
+                diagnostics.append(Diagnostic("ZEN226", f"{label}: empty metadata {name}", value.span, "warning"))
+        if version is None and (document.kind is FileKind.ZMDL or not path):
+            diagnostics.append(Diagnostic("ZEN228", f"{label}: unresolved effective zenosVersion", spans[path], "warning"))
+    return tuple(dict.fromkeys(diagnostics))
+
+
+def _registry_reference(value: Expression, namespace: str) -> bool:
+    return isinstance(value, Variable) and value.name == namespace and bool(value.path) and _variable_static_path(value) is not None
+
+
+def infer_type(value: Expression, bindings: dict[str, Expression] | None = None) -> Expression | None:
+    """Infer a complete annotation from data or declared lexical types, never anything."""
+    environment = bindings or {}
+    if isinstance(value, GroupExpr):
+        return infer_type(value.value, environment)
+    if isinstance(value, Variable) and value.name == "v" and len(value.path) == 1:
+        return environment.get(_first_path_name(value))
+
+    def primitive(name: str) -> Variable:
+        return Variable("type", (IdentifierSegment(name, value.span),), value.span)
+
+    def union(annotations: list[Expression | None]) -> Expression | None:
+        if not annotations or any(item is None for item in annotations):
+            return None
+
+        def key(item: object) -> object:
+            if isinstance(item, tuple):
+                return tuple(key(child) for child in item)
+            if is_dataclass(item):
+                return (type(item).__name__, tuple(key(getattr(item, field.name)) for field in fields(item) if field.name != "span"))
+            return item
+
+        unique = {key(item): item for item in annotations}
+        if len(unique) == 1:
+            return next(iter(unique.values()))
+        return CallExpr(primitive("either"), (ListExpr(tuple(unique.values()), value.span),), value.span)
+
+    if isinstance(value, ListExpr):
+        inner = union([infer_type(item, environment) for item in value.items])
+        return None if inner is None else CallExpr(primitive("list"), (ListExpr((inner,), value.span),), value.span)
+    if isinstance(value, IfExpr):
+        if isinstance(value.condition, Literal) and value.condition.kind in ("true", "false"):
+            return infer_type(value.then_value if value.condition.value else value.else_value, environment)
+        return union([infer_type(value.then_value, environment), infer_type(value.else_value, environment)])
+    if isinstance(value, DefaultExpr):
+        return infer_type(value.default, environment)
+    if isinstance(value, LetExpr):
+        local = dict(environment)
+        for statement in value.statements:
+            if isinstance(statement, LetStatement):
+                local[statement.name] = statement.annotation
+        return infer_type(value.body, local)
+    kind = _static_kind(value, environment)
+    if kind in ("bool", "string", "int", "float", "null", "path", "set", "package", "color"):
+        return primitive(kind)
+    return None
+
+
+def _static_kind(value: Expression, bindings: dict[str, Expression]) -> str | None:
+    if isinstance(value, GroupExpr):
+        return _static_kind(value.value, bindings)
+    if isinstance(value, Literal):
+        return {"true": "bool", "false": "bool", "integer": "int", "version": "string"}.get(value.kind, value.kind)
+    for cls, name in ((StringExpr, "string"), (PathExpr, "path"), (ListExpr, "list"), (AttrSet, "set"), (LambdaExpr, "function")):
+        if isinstance(value, cls):
+            return name
+    if isinstance(value, Variable):
+        if value.name == "v" and len(value.path) == 1 and _first_path_name(value) in bindings:
+            kind = _annotation_type(bindings[_first_path_name(value)])
+            return None if kind in ("either", "unknown") else "string" if kind == "enum" else kind
+        if value.name == "pkgs" and value.path:
+            return "package"
+        if value.name in ("name", "f"):
+            return "string"
+        if value.name == "c":
+            return "color"
+    if isinstance(value, UnaryExpr):
+        return "bool" if value.operator == "!" else _static_kind(value.operand, bindings)
+    if isinstance(value, BinaryExpr):
+        if value.operator in _BOOLEAN_BINARY:
+            return "bool"
+        if value.operator in ("++", "//"):
+            return "list" if value.operator == "++" else "set"
+        left, right = _static_kind(value.left, bindings), _static_kind(value.right, bindings)
+        if left in ("int", "float") and right in ("int", "float"):
+            return "float" if "float" in (left, right) else "int"
+        if value.operator == "+" and left == right == "string":
+            return "string"
+    return None
+
+
+def _value_matches(annotation: Expression, value: Expression, bindings: dict[str, Expression]) -> bool:
+    if isinstance(annotation, GroupExpr):
+        return _value_matches(annotation.value, value, bindings)
+    if isinstance(value, GroupExpr):
+        return _value_matches(annotation, value.value, bindings)
+    if isinstance(value, IfExpr):
+        branches = (value.then_value, value.else_value)
+        if isinstance(value.condition, Literal) and value.condition.kind in ("true", "false"):
+            branches = (value.then_value if value.condition.value else value.else_value,)
+        return all(_value_matches(annotation, branch, bindings) for branch in branches)
+    expected = _annotation_type(annotation)
+    actual = _static_kind(value, bindings)
+    parameters = annotation.arguments[0].items if isinstance(annotation, CallExpr) and isinstance(annotation.arguments[0], ListExpr) else ()
+    if expected == "either":
+        return any(_value_matches(parameter, value, bindings) for parameter in parameters)
+    if expected == "enum":
+        if _is_plain_string(value):
+            text = "".join(part.value for part in value.parts)
+            return text in {"".join(part.value for part in item.parts) for item in parameters}
+        return actual in (None, "string")
+    if expected == "list" and isinstance(value, ListExpr):
+        return all(_value_matches(parameters[0], item, bindings) for item in value.items)
+    if expected == "set" and isinstance(value, AttrSet):
+        if not parameters:
+            return True
+        for item in value.statements:
+            if not isinstance(item, Assignment):
+                continue
+            child = item.value
+            if not isinstance(item.target, StructuralMarker) and len(item.target) > 1:
+                child = AttrSet((Assignment(item.target[1:], item.operator, child, item.span),), value.recursive, item.span)
+            if not _value_matches(parameters[0], child, bindings):
+                return False
+        return True
+    if expected == "functionTo":
+        if isinstance(value, LambdaExpr):
+            return _value_matches(parameters[0], value.body, bindings)
+        return actual in (None, "function", "functionTo")
+    if expected == "color":
+        return actual in (None, "color", "string")
+    return actual is None or actual == expected
+
+
+def _require_matching_value(annotation: Expression, value: Expression, bindings: dict[str, Expression], label: str) -> None:
+    if not _value_matches(annotation, value, bindings):
+        raise ZenLangError(Diagnostic("ZEN229", f"{label} is incompatible with $type.{_annotation_type(annotation)}", value.span))
+
+
+def _validate_initializers(value: object, environment: dict[str, Expression] | None = None) -> None:
+    visible = dict(environment or {})
+    if isinstance(value, tuple):
+        for item in value:
+            _validate_initializers(item, visible)
+            if isinstance(item, LetStatement):
+                visible[item.name] = item.annotation
+    elif isinstance(value, LetStatement):
+        _require_matching_value(value.annotation, value.value, visible, f"_let {value.name} initializer")
+        _validate_initializers(value.value, visible)
+    elif is_dataclass(value):
+        for field in fields(value):
+            if field.name not in ("span", "diagnostics"):
+                _validate_initializers(getattr(value, field.name), visible)
+
+
+def validate_markdown_imports(document: Document) -> None:
+    def visit(value: object, path: tuple[str, ...] | None = None) -> None:
+        if isinstance(value, MarkdownImport):
+            if (
+                document.kind not in (FileKind.ZMDL, FileKind.ZPKG)
+                or path is None
+                or "_meta" not in path
+                or path[path.index("_meta"):] != ("_meta", "description")
+            ):
+                raise ZenLangError(Diagnostic(
+                    "ZEN224", "Markdown imports are only valid as _meta.description in ZMDL or ZPKG", value.span
+                ))
+            if isinstance(value.path, StringExpr) and any(isinstance(part, Interpolation) for part in value.path.parts):
+                raise ZenLangError(Diagnostic("ZEN302", "import paths cannot contain interpolation", value.path.span))
+            relative = "".join(part.value for part in value.path.parts) if isinstance(value.path, StringExpr) else value.path.value
+            if not relative or "\0" in relative or PurePath(relative).is_absolute() or "://" in relative:
+                raise ZenLangError(Diagnostic("ZEN302", "Markdown imports require a nonempty relative filesystem path without NUL bytes", value.path.span))
+            if PurePath(relative).suffix != ".md":
+                raise ZenLangError(Diagnostic("ZEN303", "Markdown imports require a .md file extension", value.path.span))
+            return
+        if isinstance(value, Assignment) and path is not None:
+            names = _target_names(value)
+            target = (*path, *(names or ("<dynamic>",)))
+            if isinstance(value.value, (AttrSet, EnableOption, MarkdownImport)):
+                visit(value.value, target)
+            else:
+                visit(value.value)
+            return
+        if isinstance(value, (AttrSet, EnableOption)) and path is not None:
+            body = value.body if isinstance(value, EnableOption) else value
+            visit(body.statements, path)
+            return
+        if isinstance(value, ResolvedImport):
+            validate_markdown_imports(value.document)
+            visit(value.annotation)
+        elif isinstance(value, tuple):
+            for item in value:
+                visit(item, path)
+        elif is_dataclass(value):
+            for field in fields(value):
+                if field.name != "span":
+                    visit(getattr(value, field.name))
+
+    visit(document.statements, ())
 
 
 def _validate_zpkg_declaration(
@@ -159,75 +544,13 @@ def _validate_zpkg_declaration(
                 span,
             )
         )
-    metadata_blocks: list[AttrSet] = []
     for statement in statements:
         if isinstance(statement, (PackageImportStatement, LetStatement, ResolvedImport)):
             continue
-        if not isinstance(statement, Assignment) or _target_names(statement) != ("_meta",):
-            raise ZenLangError(
-                Diagnostic(
-                    "ZEN222",
-                    "ZPKG top-level assignments are limited to one _meta block",
-                    statement.span,
-                )
-            )
-        if not isinstance(statement.value, AttrSet):
-            raise ZenLangError(
-                Diagnostic("ZEN222", "ZPKG _meta must be an attribute set", statement.value.span)
-            )
-        metadata_blocks.append(statement.value)
-    if len(metadata_blocks) != 1:
+        if isinstance(statement, Assignment) and _target_names(statement)[:1] == ("_meta",):
+            continue
         raise ZenLangError(
-            Diagnostic("ZEN222", "a ZPKG requires exactly one _meta block", document_span)
-        )
-
-    fields = {
-        _target_names(statement)[0]: statement
-        for statement in metadata_blocks[0].statements
-        if isinstance(statement, Assignment) and len(_target_names(statement)) == 1
-    }
-    allowed = {
-        "_name",
-        "_summary",
-        "_description",
-        "_zenosVersion",
-        "_packageVersion",
-        "_tags",
-        "_maintainers",
-        "_dependencies",
-    }
-    required = allowed - {"_packageVersion"}
-    if set(fields) - allowed:
-        field = fields[sorted(set(fields) - allowed)[0]]
-        raise ZenLangError(
-            Diagnostic("ZEN222", "unknown ZPKG metadata field", field.span)
-        )
-    missing = sorted(required - set(fields))
-    if missing:
-        raise ZenLangError(
-            Diagnostic(
-                "ZEN222",
-                "missing ZPKG metadata fields: " + ", ".join(missing),
-                metadata_blocks[0].span,
-            )
-        )
-    dependencies = fields["_dependencies"].value
-    if not isinstance(dependencies, AttrSet):
-        raise ZenLangError(
-            Diagnostic("ZEN222", "_dependencies must be an attribute set", dependencies.span)
-        )
-    scopes = {
-        _target_names(statement)[0]
-        for statement in dependencies.statements
-        if isinstance(statement, Assignment) and len(_target_names(statement)) == 1
-    }
-    if scopes != {"_general", "_build", "_runtime"}:
-        raise ZenLangError(
-            Diagnostic(
-                "ZEN222",
-                "_dependencies requires _general, _build, and _runtime",
-                dependencies.span,
-            )
+            Diagnostic("ZEN222", "ZPKG top-level assignments are limited to _meta", statement.span)
         )
 
     package = package_imports[0].package
@@ -317,13 +640,13 @@ def _freeform_body_declares_boolean_item(
         if not isinstance(statement, Assignment):
             continue
         names = _target_names(statement)
-        if names in (("_meta", "type"), ("_meta", "_type")):
+        if names == ("_meta", "type"):
             item_types.append(_annotation_type(statement.value))
         elif names == ("_meta",) and isinstance(statement.value, AttrSet):
             for field in statement.value.statements:
                 if (
                     isinstance(field, Assignment)
-                    and _target_names(field) in (("type",), ("_type",))
+                    and _target_names(field) == ("type",)
                 ):
                     item_types.append(_annotation_type(field.value))
     if not item_types or any(item_type != "bool" for item_type in item_types):
@@ -545,17 +868,13 @@ def _validate_statement(
         return
 
     if isinstance(statement, Assignment):
-        if statement.operator != "=" and (kind is not FileKind.ZPKG or not in_deps):
+        if statement.operator != "=":
             raise ZenLangError(
                 Diagnostic(
                     "ZEN207",
-                    "'++' and '--' assignment operations are only valid in ZPKG dependency cascades",
+                    "'++' and '--' assignment operations are not supported",
                     statement.span,
                 )
-            )
-        if in_deps and not isinstance(statement.value, ListExpr):
-            raise ZenLangError(
-                Diagnostic("ZEN207", "dependency cascade operations require list values", statement.value.span)
             )
         target_freeforms = freeforms
         if isinstance(statement.target, StructuralMarker):
@@ -569,28 +888,16 @@ def _validate_statement(
 
         target_names = _target_names(statement)
         metadata = in_meta or "_meta" in target_names
-        if metadata and kind is FileKind.ZPKG:
-            metadata_names = target_names
-            if "_meta" in metadata_names:
-                metadata_names = metadata_names[metadata_names.index("_meta") + 1 :]
-            if any(not name.startswith("_") for name in metadata_names):
-                raise ZenLangError(
-                    Diagnostic(
-                        "ZEN223",
-                        "metadata fields must start with '_'",
-                        statement.span,
-                    )
-                )
         dependency_set = (
             kind is FileKind.ZPKG
             and metadata
             and bool(target_names)
-            and target_names[-1] == "deps"
+            and target_names[-1] == "dependencies"
             and isinstance(statement.value, AttrSet)
         )
         if in_deps:
             _validate_dependency_assignment(statement)
-        if metadata and target_names and target_names[-1] == "_zenosVersion":
+        if metadata and target_names and target_names[-1] == "zenosVersion":
             _validate_zenos_version(statement.value)
 
         is_option = (
@@ -742,8 +1049,6 @@ def _validate_attr_set(
     in_meta: bool,
     in_deps: bool,
 ) -> None:
-    if in_deps:
-        _validate_dependency_operations(attr_set)
     _validate_statements(
         attr_set.statements,
         kind,
@@ -968,7 +1273,11 @@ def _validate_type_annotation(
     if not isinstance(root, Variable) or root.name != "type" or len(root.path) != 1 or not isinstance(root.path[0], IdentifierSegment):
         raise ZenLangError(Diagnostic("ZEN209", "type annotations must be rooted at $type", annotation.span))
     type_name = root.path[0].name
+    if type_name not in _PARAMETERIZED_TYPES | {"bool", "boolean", "string", "int", "float", "null", "path", "package", "packages", "color"}:
+        raise ZenLangError(Diagnostic("ZEN209", f"unknown type $type.{type_name}", annotation.span))
     arguments = call.arguments if call is not None else ()
+    if type_name == "set" and call is None:
+        return
     if type_name in _PARAMETERIZED_TYPES and not arguments:
         raise ZenLangError(
             Diagnostic("ZEN209", f"$type.{type_name} requires a type parameter", annotation.span)
@@ -1026,7 +1335,7 @@ def _validate_marker(
         FileKind.ZCFG: frozenset(),
         FileKind.ZPKG: frozenset(),
         FileKind.ZMDL: frozenset(("freeform", "alias")),
-        FileKind.ZSTR: frozenset(("freeform", "alias", "packages", "programs")),
+        FileKind.ZSTR: frozenset(("freeform", "alias", "packages", "programs", "zmdl")),
     }[kind]
     if marker.kind not in allowed:
         raise ZenLangError(
@@ -1036,6 +1345,10 @@ def _validate_marker(
                 marker.span,
             )
         )
+    if marker.kind in ("alias", "zmdl") and not marker.argument:
+        raise ZenLangError(Diagnostic("ZEN204", f"({marker.kind}) requires a target path", marker.span))
+    if marker.kind == "packages" and marker.argument:
+        raise ZenLangError(Diagnostic("ZEN204", "(packages) does not accept an argument", marker.span))
     if kind is FileKind.ZMDL and marker.kind == "freeform" and (
         marker.argument is None
         or len(marker.argument) != 1
@@ -1090,6 +1403,8 @@ def _is_scalar_compatible(expression: Expression) -> bool:
 
 
 def _validate_zenos_version(value: Expression) -> None:
+    while isinstance(value, GroupExpr):
+        value = value.value
     candidate: str | None = None
     if isinstance(value, Literal) and value.kind == "version":
         candidate = str(value.value)
@@ -1115,7 +1430,7 @@ def _attr_set_declares_boolean(value: AttrSet) -> bool:
             if _attr_set_metadata_type_is_boolean(annotation):
                 return True
             continue
-        if names not in (("_meta", "type"), ("_meta", "_type")):
+        if names != ("_meta", "type"):
             continue
         return (
             isinstance(annotation, Variable)
@@ -1129,7 +1444,7 @@ def _attr_set_declares_boolean(value: AttrSet) -> bool:
 
 def _attr_set_metadata_type_is_boolean(value: AttrSet) -> bool:
     for statement in value.statements:
-        if isinstance(statement, Assignment) and _target_names(statement) in (("type",), ("_type",)):
+        if isinstance(statement, Assignment) and _target_names(statement) == ("type",):
             annotation = statement.value
             return (
                 isinstance(annotation, Variable)
@@ -1153,16 +1468,16 @@ def _statement_binding(statement: Statement) -> str | None:
 
 def _validate_dependency_assignment(statement: Assignment) -> None:
     names = _target_names(statement)
-    if len(names) != 1 or names[0] not in ("global", "build", "run", "export"):
+    if len(names) != 1 or names[0] not in ("general", "build", "runtime"):
         raise ZenLangError(
             Diagnostic(
                 "ZEN215",
-                "dependency scopes must be global, build, run, or export",
+                "dependency scopes must be general, build, or runtime",
                 statement.span,
             )
         )
     if not isinstance(statement.value, ListExpr):
-        return
+        raise ZenLangError(Diagnostic("ZEN215", "dependency scopes must be lists of package references", statement.value.span))
     for item in statement.value.items:
         _dependency_identity(item)
 
@@ -1174,116 +1489,20 @@ def _dependency_identity(expression: Expression) -> tuple[str, ...]:
     if isinstance(candidate, Variable):
         if (
             candidate.name == "pkgs"
-            and len(candidate.path) >= 2
-            and isinstance(candidate.path[0], IdentifierSegment)
-            and candidate.path[0].name == "zenos"
+            and len(candidate.path) >= 1
             and all(isinstance(part, (IdentifierSegment, StringSegment)) for part in candidate.path)
         ):
             return tuple(
                 part.name if isinstance(part, IdentifierSegment) else part.value
                 for part in candidate.path
             )
-    if isinstance(candidate, AttrSet):
-        fields: dict[str, Expression] = {}
-        for statement in candidate.statements:
-            if not isinstance(statement, Assignment) or statement.operator != "=":
-                break
-            names = _target_names(statement)
-            if len(names) != 1 or names[0] in fields:
-                break
-            fields[names[0]] = statement.value
-        else:
-            if set(fields) <= {"id", "minVersion"} and "id" in fields:
-                identity = _dependency_identity(fields["id"])
-                if "minVersion" in fields and not _is_plain_string(fields["minVersion"]):
-                    raise ZenLangError(
-                        Diagnostic("ZEN215", "dependency minVersion must be a plain string", fields["minVersion"].span)
-                    )
-                return identity
     raise ZenLangError(
         Diagnostic(
             "ZEN215",
-            "dependencies must be $pkgs.zenos.<path> references or { id = ...; minVersion = \"...\"; } records",
+            "dependencies must be $pkgs.<path> package references",
             expression.span,
         )
     )
-
-
-def _dependency_record(expression: Expression) -> tuple[tuple[str, ...], str | None, Expression]:
-    candidate = expression.value if isinstance(expression, GroupExpr) else expression
-    identity = _dependency_identity(candidate)
-    minimum: str | None = None
-    if isinstance(candidate, AttrSet):
-        for statement in candidate.statements:
-            if isinstance(statement, Assignment) and _target_names(statement) == ("minVersion",):
-                value = statement.value
-                if isinstance(value, StringExpr):
-                    minimum = "".join(part.value for part in value.parts if isinstance(part, StringText))
-    return identity, minimum, expression
-
-
-def _validate_dependency_operations(value: AttrSet) -> None:
-    operations: dict[str, list[Assignment]] = {
-        "global": [],
-        "build": [],
-        "run": [],
-        "export": [],
-    }
-    for statement in value.statements:
-        if not isinstance(statement, Assignment):
-            continue
-        names = _target_names(statement)
-        if len(names) == 1 and names[0] in operations:
-            operations[names[0]].append(statement)
-
-    def apply(initial: list[tuple[tuple[str, ...], str | None, Expression]], items: list[Assignment]):
-        result = list(initial)
-        for statement in items:
-            if not isinstance(statement.value, ListExpr):
-                continue
-            records = [_dependency_record(item) for item in statement.value.items]
-            if statement.operator == "=":
-                result = []
-            for identity, minimum, expression in records:
-                existing = next((item for item in result if item[0] == identity), None)
-                if statement.operator == "--":
-                    if existing is None:
-                        raise ZenLangError(
-                            Diagnostic(
-                                "ZEN215",
-                                "cannot remove absent dependency " + ".".join(("$pkgs", *identity)),
-                                expression.span,
-                            )
-                        )
-                    result.remove(existing)
-                elif existing is None:
-                    result.append((identity, minimum, expression))
-                elif existing[1] != minimum:
-                    raise ZenLangError(
-                        Diagnostic(
-                            "ZEN215",
-                            "conflicting duplicate dependency " + ".".join(("$pkgs", *identity)),
-                            expression.span,
-                        )
-                    )
-        return result
-
-    global_dependencies = apply([], operations["global"])
-    all_dependencies = list(global_dependencies)
-    for scope in ("build", "run", "export"):
-        all_dependencies.extend(apply(global_dependencies, operations[scope]))
-    short_names: dict[str, tuple[str, ...]] = {}
-    for identity, _, expression in all_dependencies:
-        previous = short_names.get(identity[-1])
-        if previous is not None and previous != identity:
-            raise ZenLangError(
-                Diagnostic(
-                    "ZEN215",
-                    f"dependency short name {identity[-1]!r} collides",
-                    expression.span,
-                )
-            )
-        short_names[identity[-1]] = identity
 
 
 _FORBIDDEN_REFERENCE_ROOTS = _RESERVED_BINDINGS
@@ -1608,11 +1827,11 @@ def _option_value_type(value: Expression) -> str:
         return "bool"
     if isinstance(value, AttrSet):
         for statement in value.statements:
-            if isinstance(statement, Assignment) and _target_names(statement) in (("_meta", "type"), ("_meta", "_type")):
+            if isinstance(statement, Assignment) and _target_names(statement) == ("_meta", "type"):
                 return _annotation_type(statement.value)
             if isinstance(statement, Assignment) and _target_names(statement) == ("_meta",) and isinstance(statement.value, AttrSet):
                 for field in statement.value.statements:
-                    if isinstance(field, Assignment) and _target_names(field) in (("type",), ("_type",)):
+                    if isinstance(field, Assignment) and _target_names(field) == ("type",):
                         return _annotation_type(field.value)
     return "unknown"
 

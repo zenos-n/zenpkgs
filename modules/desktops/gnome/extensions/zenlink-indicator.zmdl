@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "ZenLink integration indicator for GNOME Shell";
+  summary = "ZenLink integration indicator for GNOME Shell";
   description = ''
     ZenLink integration indicator for GNOME Shell
 
@@ -19,7 +19,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "ZenLink indicator GNOME extension configuration";
+  _meta.description = ''ZenLink indicator GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.desktops.gnome.extensions.zenlink-indicator ];
   };

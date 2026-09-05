@@ -4,7 +4,7 @@
 # Unsupported: the offload service and timer are omitted together to avoid scheduling a missing unit.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "ZenOS filesystem hierarchy and roaming manager";
+  summary = "ZenOS filesystem hierarchy and roaming manager";
   description = ''
     Manages the ZenFS file watcher and declares roaming and indexing controls.
     JSON-backed offloading remains blocked on generated-file support in ZMDL.
@@ -15,7 +15,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable system-wide ZenFS integration";
+  _meta.summary = "Enable system-wide ZenFS integration";
 
   s! {
     systemd.services.zenfs-watcher = {
@@ -34,7 +34,7 @@ roaming.enable = {
   _meta = {
     type = $type.boolean;
     default = false;
-    brief = "Enable roaming user profile support";
+    summary = "Enable roaming user profile support";
   };
 };
 
@@ -42,7 +42,7 @@ roaming.offloadThreshold = {
   _meta = {
     type = $type.int;
     default = 90;
-    brief = "Disk usage percentage that triggers offloading";
+    summary = "Disk usage percentage that triggers offloading";
   };
 };
 
@@ -50,7 +50,7 @@ roaming.roamingSafeLimit = {
   _meta = {
     type = $type.int;
     default = 50;
-    brief = "Target disk usage after offloading";
+    summary = "Target disk usage after offloading";
   };
 };
 
@@ -58,7 +58,7 @@ database.ignoredFiles = {
   _meta = {
     type = $type.list [ $type.string ];
     default = [ ];
-    brief = "Files ignored by ZenFS indexing";
-    description = "Patterns or file names skipped by roaming and categorization services.";
+    summary = "Files ignored by ZenFS indexing";
+    description = ''Patterns or file names skipped by roaming and categorization services.'';
   };
 };

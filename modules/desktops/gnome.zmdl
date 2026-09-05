@@ -2,7 +2,7 @@
 # Schema migration: the canonical module id uses path-derived desktops.gnome.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "GNOME desktop environment for ZenOS";
+  summary = "GNOME desktop environment for ZenOS";
   description = ''
     Configures GNOME, its core utilities and multimedia support, Tracker indexing,
     extension integration, curated applications, and desktop-wide dconf defaults.
@@ -13,7 +13,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable the GNOME desktop base module";
+  _meta.summary = "Enable the GNOME desktop base module";
 
   s! {
     services.displayManager.gdm.enable = true;
@@ -101,8 +101,8 @@ defaultAccentColor = {
   _meta = {
     type = $type.enum [ "blue" "teal" "purple" "red" "orange" "yellow" "green" "pink" "grey" ];
     default = "purple";
-    brief = "Primary accent color for the interface";
-    description = "Sets the system-wide accent color for GNOME and supported GTK4 applications.";
+    summary = "Primary accent color for the interface";
+    description = ''Sets the system-wide accent color for GNOME and supported GTK4 applications.'';
   };
 };
 
@@ -110,8 +110,8 @@ defaultDarkMode = {
   _meta = {
     type = $type.boolean;
     default = true;
-    brief = "Enable system-wide dark mode";
-    description = "Prefer the dark color scheme across the desktop and applications.";
+    summary = "Enable system-wide dark mode";
+    description = ''Prefer the dark color scheme across the desktop and applications.'';
   };
 };
 
@@ -119,8 +119,8 @@ fileIndexing.enable = {
   _meta = {
     type = $type.boolean;
     default = true;
-    brief = "Enable Tracker file indexing";
-    description = "Controls GNOME file search and metadata extraction services.";
+    summary = "Enable Tracker file indexing";
+    description = ''Controls GNOME file search and metadata extraction services.'';
   };
 };
 
@@ -133,8 +133,8 @@ dockItems = {
       "org.gnome.Terminal.desktop"
       "kitty.desktop"
     ];
-    brief = "Default favorite applications in the dock";
-    description = "Desktop identifiers pinned to the GNOME Dash by default.";
+    summary = "Default favorite applications in the dock";
+    description = ''Desktop identifiers pinned to the GNOME Dash by default.'';
   };
 };
 
@@ -142,8 +142,8 @@ extensionPackages = {
   _meta = {
     type = $type.list [ $type.package ];
     default = [ ];
-    brief = "GNOME Shell extension packages";
-    description = "Extension packages installed with the desktop.";
+    summary = "GNOME Shell extension packages";
+    description = ''Extension packages installed with the desktop.'';
   };
 };
 
@@ -151,8 +151,8 @@ extensionUuids = {
   _meta = {
     type = $type.list [ $type.string ];
     default = [ ];
-    brief = "Enabled GNOME Shell extension UUIDs";
-    description = "Extension UUIDs enabled by the base profile.";
+    summary = "Enabled GNOME Shell extension UUIDs";
+    description = ''Extension UUIDs enabled by the base profile.'';
   };
 };
 
@@ -160,7 +160,7 @@ extraPackages.enable = {
   _meta = {
     type = $type.boolean;
     default = false;
-    brief = "Install extra curated GNOME applications";
+    summary = "Install extra curated GNOME applications";
   };
 };
 
@@ -168,8 +168,8 @@ excludeGnomeConsole = {
   _meta = {
     type = $type.boolean;
     default = false;
-    brief = "Remove the default GNOME Console";
-    description = "Adds GNOME Console to the desktop exclusion list.";
+    summary = "Remove the default GNOME Console";
+    description = ''Adds GNOME Console to the desktop exclusion list.'';
   };
 };
 
@@ -177,7 +177,7 @@ variableRefreshRate = {
   _meta = {
     type = $type.boolean;
     default = true;
-    brief = "Enable Variable Refresh Rate support";
-    description = "Activates experimental VRR support in Mutter.";
+    summary = "Enable Variable Refresh Rate support";
+    description = ''Activates experimental VRR support in Mutter.'';
   };
 };

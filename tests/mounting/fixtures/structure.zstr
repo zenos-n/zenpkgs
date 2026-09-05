@@ -1,0 +1,23 @@
+_meta.zenosVersion = 0.1.0;
+_let defaultPort: $type.int = 8080;
+system = {
+  programs._meta.type = (zmdl programs);
+  packages._meta.type = (packages);
+  probe._meta.type = (zmdl system.probe);
+  link._meta.type = (zmdl system.link);
+  priority._meta.type = (zmdl system.priority);
+  services._meta.type = (alias nixpkgs.services);
+  port._meta = { type = $type.int; default = $v.defaultPort; };
+};
+legacy._meta.type = (alias nixpkgs);
+users = {
+  (freeform user) = {
+    label._meta = { type = $type.string; default = $f.user; };
+    programs._meta.type = (zmdl programs);
+    packages._meta.type = (packages);
+    legacy = {
+      _meta.type = (alias nixpkgs.users.users.($f.user));
+      homeManager._meta.type = (alias nixpkgs.home-manager.users.($f.user));
+    };
+  };
+};

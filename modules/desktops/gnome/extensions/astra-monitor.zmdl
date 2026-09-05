@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Customizable system resource monitor for the GNOME panel";
+  summary = "Customizable system resource monitor for the GNOME panel";
   description = ''
     Customizable system resource monitor for the GNOME panel
 
@@ -19,7 +19,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable Astra Monitor GNOME extension configuration.";
+  _meta.description = ''Whether to enable Astra Monitor GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.astra-monitor ];
     programs.dconf.profiles.user.databases = [ {

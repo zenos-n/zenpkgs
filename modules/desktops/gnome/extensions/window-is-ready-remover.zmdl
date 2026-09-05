@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Suppress focus-stealing prevention notifications";
+  summary = "Suppress focus-stealing prevention notifications";
   description = ''
     Suppress focus-stealing prevention notifications
 
@@ -19,7 +19,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Window Is Ready Remover GNOME extension configuration";
+  _meta.description = ''Window Is Ready Remover GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.window-is-ready-remover ];
   };

@@ -2,7 +2,7 @@
 # Unsupported: internal/readOnly option flags have no ZMDL fields.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "ZenOS version information";
+  summary = "ZenOS version information";
   description = ''
     Provides foundational operating-system release metadata for internal system use.
   '';
@@ -15,8 +15,8 @@ type = {
   _meta = {
     type = $type.string;
     default = "beta";
-    brief = "Release lifecycle type";
-    description = "Defines the stability track of the current release.";
+    summary = "Release lifecycle type";
+    description = ''Defines the stability track of the current release.'';
   };
 };
 
@@ -24,8 +24,8 @@ majorVer = {
   _meta = {
     type = $type.string;
     default = "1.0";
-    brief = "Major version identifier";
-    description = "The primary version number assigned to the current ZenOS release cycle.";
+    summary = "Major version identifier";
+    description = ''The primary version number assigned to the current ZenOS release cycle.'';
   };
 };
 
@@ -33,8 +33,8 @@ variant = {
   _meta = {
     type = $type.string;
     default = "N";
-    brief = "Version variant code";
-    description = "The edition or flavor code for the release.";
+    summary = "Version variant code";
+    description = ''The edition or flavor code for the release.'';
   };
 };
 
@@ -46,7 +46,7 @@ full = {
       variant = $path.variant;
       type = $path.type;
     };
-    brief = "Complete version string";
-    description = "The constructed version identifier combining version, variant, and lifecycle.";
+    summary = "Complete version string";
+    description = ''The constructed version identifier combining version, variant, and lifecycle.'';
   };
 };

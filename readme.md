@@ -4,18 +4,33 @@ The Nix packages repository for ZenOS.
 
 Curated nixpkgs interfaces are named leaves under `pkgs/`. A source such as
 `pkgs/apps/browsers/firefox.zpkg` mechanically defines
-`pkgs.zenos.apps.browsers.firefox`; its identity remains derived from that full
-path while its interface `id` matches the leaf name. The flake compiles the
+public identity and registry ID `pkgs.apps.browsers.firefox`, internally
+`pkgs.zenos.apps.browsers.firefox`. Duplicate basenames in different directories
+are legal; targets are exact and unique, with no alternate alias catalog.
+The flake compiles the
 repository root in interface mode and uses the path-sorted result for the
 overlay, registry documentation, and flattened public package outputs.
-The 130-entry normalized contract in `tests/fixtures/package-registry.json`
-protects the 126 active mappings and every derived target and
+The 126-entry normalized contract in `tests/fixtures/package-registry.json`
+protects every full public ID, derived target, metadata record, and imported
 nixpkgs source path.
 
 The `.zpkg` files are the only package registry declaration source. Each file
 has one public package path derived from its location. See
 [metadata guidelines](docs/metadata-guidelines.md) for the schema and validation
 commands.
+
+Only `_meta` is prefixed: its fields use `name`, `summary`, multiline Markdown
+`description`, and dependency scopes `general`, `build`, and `runtime`.
+Missing descriptive metadata warns during evaluation and compilation; it is not
+replaced with guessed upstream information. Empty or omitted `packageVersion`
+defaults to `zenosVersion`. Filesystem paths establish identity, while ZSTR
+controls exposure: without a root structure the adapter exports no packages or
+module candidates; multiple structures fail.
+
+Dependency declarations are authoritative, including for imported packages, but
+the backend's build-input override and runtime-linkage contract is still a design
+blocker (D14/D15). Registry metadata preserves the scopes; it does not implement
+that availability or invent additive/replacement override semantics.
 
 Package registry compilation uses Nix import-from-derivation (IFD), keeping
 generated compiler output in the store instead of the repository. The compiler

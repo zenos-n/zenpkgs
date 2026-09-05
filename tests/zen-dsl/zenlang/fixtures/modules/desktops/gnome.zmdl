@@ -1,13 +1,13 @@
 _meta = {
   zenosVersion = 0.1.0;
-  brief = "The GNOME desktop environment";
-  description = "Standard ZenOS configuration for the GNOME shell and session management";
+  summary = "The GNOME desktop environment";
+  description = ''Standard ZenOS configuration for the GNOME shell and session management'';
   maintainers = [ $m.doromiert ];
   license = $l.napalm;
 };
 
 enable = enableOption {
-  _meta.brief = "Enable the core $name desktop environment";
+  _meta.summary = "Enable the core $name desktop environment";
   _meta.description = ''
     This module provides a comprehensive GNOME configuration tailored for ZenOS.
       It handles the installation of core GNOME packages, audio/video plugins (GStreamer),
@@ -77,7 +77,7 @@ enable = enableOption {
 };
 
 fileIndexing.enable = enableOption {
-  _meta.brief = "Enable file indexing and search with Tracker";
+  _meta.summary = "Enable file indexing and search with Tracker";
   _meta.description = ''
     This option enables the Tracker file indexing and search service, which provides powerful search capabilities for the GNOME desktop environment. When enabled, Tracker will index your files, documents, and media, allowing you to quickly find and access them using the GNOME search functionality.
 
@@ -97,7 +97,7 @@ fileIndexing.enable = enableOption {
 };
 
 minimal = enableOption {
-  _meta.brief = "Remove the default GNOME app suite and install only the gnome shell and core session management";
+  _meta.summary = "Remove the default GNOME app suite and install only the gnome shell and core session management";
   _meta.description = ''
     This option provides a minimalist GNOME experience by stripping down the default app suite to only include the essential components for the shell and session management. It is ideal for users who prefer a lean desktop environment or want to customize their app selection without the overhead of unnecessary applications.
 
@@ -124,7 +124,7 @@ minimal = enableOption {
 
 extraPackages = enableOption {
   _meta = {
-    brief = "Enable extra GNOME packages curated by the ZenOS team";
+    summary = "Enable extra GNOME packages curated by the ZenOS team";
     description = ''
       This option allows users to easily install a curated selection of additional GNOME applications that have been handpicked by the ZenOS team for their utility, performance, and integration with the GNOME desktop environment. These packages include a variety of tools and utilities that enhance the overall user experience, providing additional functionality and customization options for GNOME users.
 

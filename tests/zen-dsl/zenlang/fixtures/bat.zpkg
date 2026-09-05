@@ -1,15 +1,15 @@
 _meta = {
-  _name = "bat";
-  _summary = "A cat(1) clone with wings";
-  _description = "Syntax-highlighting file viewer";
-  _zenosVersion = "1.0.0";
-  _packageVersion = "0.24.0";
-  _tags = [ "cli" "viewer" ];
-  _maintainers = [ $m.doromiert ];
-  _dependencies = {
-    _general = [ ];
-    _build = [ $pkgs.legacy.pkg-config ];
-    _runtime = [ ];
+  name = "bat";
+  summary = "A cat(1) clone with wings";
+  description = ''Syntax-highlighting file viewer'';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.24.0";
+  tags = [ "cli" "viewer" ];
+  maintainers = [ $m.doromiert ];
+  dependencies = {
+    general = [ ];
+    build = [ $pkgs.legacy.pkg-config ];
+    runtime = [ ];
   };
 };
 

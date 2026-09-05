@@ -1,0 +1,6 @@
+_meta.zenosVersion = 0.1.0;
+legacy.networking.hostName = "zcfg-mounted";
+system.probe = true;
+system.packages.legacy.hello = true;
+users.alice.programs.demo = { enable = true; message = "from-zcfg"; };
+users.alice.legacy.homeManager.home.sessionVariables.FROM_ZCFG = "yes";

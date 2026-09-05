@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Shell theme customization and dynamic theme generation";
+  summary = "Shell theme customization and dynamic theme generation";
   description = ''
     Shell theme customization and dynamic theme generation
 
@@ -41,7 +41,7 @@ _let generatedTheme: $type.package = $pkgs.zenos.legacy.writeTextFile {
 };
 
 enable = enableOption {
-  _meta.description = "User Theme GNOME extension configuration";
+  _meta.description = ''User Theme GNOME extension configuration'';
   s! {
     environment.systemPackages =
       [ $pkgs.apps.gnome-extensions.user-themes ]
@@ -64,7 +64,7 @@ theme.activeTheme = { _meta = { type = $type.string; default = ""; description =
   The name of an installed theme (e.g., 'Orchis-Dark') to use as a
   parent. This theme must be present in the system packages.
 ''; }; };
-theme.cssOverride = { _meta = { type = $type.lines; default = ""; description = ''
+theme.cssOverride = { _meta = { type = $type.string; default = ""; description = ''
   Custom CSS rules for GNOME Shell
 
   Raw CSS content to be appended to the shell's stylesheet. If

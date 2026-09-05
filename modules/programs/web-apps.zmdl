@@ -1,10 +1,10 @@
 # Transitional parity source: lib/compat/user-modules/webapps/module.nix
 # Unsupported: typed nested extension, search, and app submodules cannot be declared in production ZMDL.
 # Unsupported: app-name-derived id defaults and per-app default injection are therefore not available.
-# Unsupported: profileDir is represented as a string because dynamic path defaults are not supported.
+# profileDir must be configured explicitly until the library supplies valid contextual logic.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Declarative isolated web application manager";
+  summary = "Declarative isolated web application manager";
   description = ''
     Creates isolated browser-backed web applications, desktop entries, optional
     URL dispatch, and MIME defaults for a user's desktop session.
@@ -18,7 +18,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable declarative ZenOS web applications";
+  _meta.summary = "Enable declarative ZenOS web applications";
 
   u! {
     home.packages = if $path.dispatcher.enable then [
@@ -88,15 +88,19 @@ base = {
   _meta = {
     type = $type.enum [ "firefox" "brave" "chrome" "helium" ];
     default = "firefox";
-    brief = "Browser backend for web applications";
+    summary = "Browser backend for web applications";
   };
 };
 
 profileDir = {
   _meta = {
     type = $type.string;
-    default = "${$cfg.legacy.xdg.dataHome}/pwamaker-profiles";
-    brief = "Web application profile storage directory";
+    summary = "Web application profile storage directory";
+    description = ''
+      Explicitly configure the profile storage directory for each scope using this
+      library. There is no default until the library supplies valid contextual
+      directory logic; reading this option without a value is an error.
+    '';
   };
 };
 
@@ -104,7 +108,7 @@ backend.getRunCommand = {
   _meta = {
     type = $type.functionTo [ $type.string ];
     default = id: "echo 'No backend configured'";
-    brief = "Internal launch-command generator";
+    summary = "Internal launch-command generator";
   };
 };
 
@@ -112,7 +116,7 @@ backend.getWmClass = {
   _meta = {
     type = $type.functionTo [ $type.string ];
     default = id: "PWA-${id}";
-    brief = "Internal window-class generator";
+    summary = "Internal window-class generator";
   };
 };
 
@@ -120,7 +124,7 @@ dispatcher.enable = {
   _meta = {
     type = $type.boolean;
     default = false;
-    brief = "Enable the internal URL dispatcher";
+    summary = "Enable the internal URL dispatcher";
   };
 };
 
@@ -128,14 +132,14 @@ dispatcher.fallbackBrowser = {
   _meta = {
     type = $type.string;
     default = "firefox";
-    brief = "Fallback browser command";
+    summary = "Fallback browser command";
   };
 };
 
 apps = {
   _meta = {
     default = { };
-    brief = "Freeform web application definitions";
+    summary = "Freeform web application definitions";
     description = ''
       App records retain the source fields id, name, url, icon, extensions,
       search, enablePasswordManager, layoutStart, layoutEnd, userChrome,

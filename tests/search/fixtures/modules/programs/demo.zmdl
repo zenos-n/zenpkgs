@@ -1,0 +1,15 @@
+_meta = {
+  zenosVersion = "1.0.0";
+  name = "Search fixture";
+  summary = "Mounted demo";
+  description = ''A **Markdown** description.'';
+};
+message = {
+  _meta.type = $type.string;
+  _meta.default = "hello";
+};
+instances = {
+  (freeform instance) = {
+    label = { _meta.type = $type.string; _meta.default = $f.instance; };
+  };
+};

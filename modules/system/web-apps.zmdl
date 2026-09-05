@@ -5,7 +5,7 @@
 # Unsupported: attrsOf typed user records are represented as a freeform attrs option.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Per-user ZenOS progressive web applications";
+  summary = "Per-user ZenOS progressive web applications";
   description = ''
     Configures Home Manager defaults for normal users and forwards enabled per-user
     web application settings into the user-side web-apps module.
@@ -16,7 +16,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable per-user ZenOS web applications";
+  _meta.summary = "Enable per-user ZenOS web applications";
 
   s!! {
     home-manager = {
@@ -47,7 +47,7 @@ enable = enableOption {
 users = {
   _meta = {
     default = { };
-    brief = "Per-user web application values";
-    description = "Freeform values forwarded to the typed user web-apps module.";
+    summary = "Per-user web application values";
+    description = ''Freeform values forwarded to the typed user web-apps module.'';
   };
 };

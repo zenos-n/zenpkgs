@@ -1,77 +1,117 @@
 _meta = {
   zenosVersion = 0.1.0;
-  id = "zenos.structure";
-  brief = "ZenOS configuration structure";
-  description = "Canonical roots and routing for ZenOS configuration.";
+  name = "ZenOS configuration";
+  summary = "Public configuration mounts";
+  description = ''Defines the public system, desktop, user, and compatibility scopes.'';
+  tags = [ "structure" ];
   maintainers = [ $m.doromiert ];
   license = $l.napalm;
 };
 
-legacy = {
-  _meta = {
-    brief = "Upstream options exposed through Zen DSL";
-    description = "Typed compatibility routes to pinned upstream options.";
-    maintainers = [ ];
-  };
+legacy._meta = {
+  type = (alias nixpkgs);
+  name = "Upstream options";
+  summary = "Lazy NixOS option mirror";
+  description = ''Mirrors the upstream schema without its internal ZenOS root.'';
+  tags = [ "compatibility" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napalm;
 };
 
 system = {
   _meta = {
-    brief = "Global system configuration for ZenOS";
-    description = "Core configuration that applies globally.";
+    type = (zmdl system);
+    name = "System";
+    summary = "System-wide configuration";
+    description = ''Mounts system definitions and system-wide selectors.'';
+    tags = [ "system" ];
     maintainers = [ $m.doromiert ];
+    license = $l.napalm;
   };
-  packages = {
-    _meta = {
-      type = (packages);
-      brief = "System package selectors";
-      description = "Boolean selectors resolved by the structure runtime against filesystem-derived pkgs.zenos paths.";
-      maintainers = [ $m.doromiert ];
-    };
+  packages._meta = {
+    type = (packages);
+    name = "System packages";
+    summary = "Boolean installation selectors";
+    description = ''Selects packages by their full public package path.'';
+    tags = [ "packages" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napalm;
   };
-  programs = {
-    _meta = {
-      type = (programs);
-      brief = "System program selectors";
-      description = "Typed program configuration in system scope.";
-      maintainers = [ $m.doromiert ];
-    };
+  programs._meta = {
+    type = (zmdl programs);
+    name = "System programs";
+    summary = "System-scoped program definitions";
+    description = ''Mounts the shared program tree with system action routing.'';
+    tags = [ "programs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napalm;
   };
 };
 
-desktops = {
-  _meta = {
-    brief = "Desktop environments";
-    description = "Desktop environment and window manager configuration.";
-    maintainers = [ $m.doromiert ];
-  };
+desktops._meta = {
+  type = (zmdl desktops);
+  name = "Desktops";
+  summary = "Desktop environments";
+  description = ''Mounts desktop environment and window manager definitions.'';
+  tags = [ "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napalm;
 };
 
 users = {
   _meta = {
-    brief = "Per-user configuration";
-    description = "Configuration and selectors scoped to individual users.";
+    name = "Users";
+    summary = "Per-user configuration";
+    description = ''Each key identifies an independent user configuration.'';
+    tags = [ "users" ];
     maintainers = [ $m.doromiert ];
+    license = $l.napalm;
   };
   (freeform user) = {
     _meta = {
-      brief = "User options";
-      description = "Configuration for user $f.user.";
+      name = "User";
+      summary = "An individual user scope";
+      description = ''Contains this user's program, package, and upstream options.'';
+      tags = [ "user" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napalm;
     };
-    packages = {
+    packages._meta = {
+      type = (packages);
+      name = "User packages";
+      summary = "User installation selectors";
+      description = ''Selects packages for this user by their full public package path.'';
+      tags = [ "packages" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napalm;
+    };
+    programs._meta = {
+      type = (zmdl programs);
+      name = "User programs";
+      summary = "User-scoped program definitions";
+      description = ''Mounts the same program tree with isolated user action routing.'';
+      tags = [ "programs" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napalm;
+    };
+    legacy = {
       _meta = {
-        type = (packages);
-        brief = "User package selectors";
-        description = "Boolean selectors resolved by the structure runtime against filesystem-derived pkgs.zenos paths.";
+        type = (alias nixpkgs.users.users.($f.user));
+        name = "User compatibility";
+        summary = "Lazy NixOS user option mirror";
+        description = ''Routes values to this user's upstream NixOS account options.'';
+        tags = [ "compatibility" ];
         maintainers = [ $m.doromiert ];
+        license = $l.napalm;
       };
-    };
-    programs = {
-      _meta = {
-        type = (programs);
-        brief = "User program selectors";
-        description = "Typed program configuration in user scope.";
+      homeManager._meta = {
+        type = (alias nixpkgs.home-manager.users.($f.user));
+        name = "User environment compatibility";
+        summary = "Lazy user environment option mirror";
+        description = ''Routes values to this user's Home Manager schema without its ZenOS root.'';
+        tags = [ "compatibility" ];
         maintainers = [ $m.doromiert ];
+        license = $l.napalm;
       };
     };
   };

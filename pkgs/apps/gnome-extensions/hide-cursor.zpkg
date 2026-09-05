@@ -1,15 +1,17 @@
 _meta = {
-  _name = "hide-cursor";
-  _summary = "Curated hide-cursor package for ZenOS";
-  _description = "Curated hide-cursor package for ZenOS";
-  _zenosVersion = "1.0.0";
-  _packageVersion = "";
-  _tags = [ "system" ];
-  _maintainers = [ $m.doromiert ];
-  _dependencies = {
-    _general = [ ];
-    _build = [ ];
-    _runtime = [ ];
+  name = "hide-cursor";
+  summary = "Curated hide-cursor package for ZenOS";
+  description = ''
+    Curated hide-cursor package for ZenOS
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "";
+  tags = [ "system" ];
+  maintainers = [ $m.doromiert ];
+  dependencies = {
+    general = [ ];
+    build = [ ];
+    runtime = [ ];
   };
 };
 

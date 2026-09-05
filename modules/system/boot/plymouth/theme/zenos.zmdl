@@ -1,7 +1,7 @@
 # Transitional parity source: lib/compat/modules/zenos-plymouth/module.nix
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "ZenOS Plymouth boot animation";
+  summary = "ZenOS Plymouth boot animation";
   description = ''
     Configures the ZenOS Plymouth splash package, distribution and device labels,
     central icon, and animated glow color.
@@ -12,7 +12,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable the ZenOS Plymouth boot animation";
+  _meta.summary = "Enable the ZenOS Plymouth boot animation";
 
   s! {
     boot.plymouth = {
@@ -32,18 +32,18 @@ enable = enableOption {
 };
 
 distroName = {
-  _meta = { type = $type.string; default = "ZenOS"; brief = "Operating-system display name"; };
+  _meta = { type = $type.string; default = "ZenOS"; summary = "Operating-system display name"; };
 };
 
 releaseVersion = {
-  _meta = { type = $type.string; default = "1.0N"; brief = "Displayed release version"; };
+  _meta = { type = $type.string; default = "1.0N"; summary = "Displayed release version"; };
 };
 
 deviceName = {
   _meta = {
     type = $type.string;
     default = $cfg.legacy.networking.hostName;
-    brief = "Displayed device name";
+    summary = "Displayed device name";
   };
 };
 
@@ -51,7 +51,7 @@ icon = {
   _meta = {
     type = $type.enum [ "negzero" "zenos" "tablet" "laptop" "desktop" "server" "smartphone" "zerobox" "tv" ];
     default = "negzero";
-    brief = "Central boot-screen icon";
+    summary = "Central boot-screen icon";
   };
 };
 
@@ -59,8 +59,8 @@ color = {
   _meta = {
     type = $type.string;
     default = "C532FF";
-    brief = "Animated glow color";
-    description = "Hexadecimal glow color without a leading hash sign.";
+    summary = "Animated glow color";
+    description = ''Hexadecimal glow color without a leading hash sign.'';
     example = "FF5555";
   };
 };

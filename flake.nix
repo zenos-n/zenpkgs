@@ -36,6 +36,7 @@
       loader = import ./lib/loader.nix { inherit (nixpkgs) lib; };
       interface = import ./lib/interface.nix { inherit (nixpkgs) lib; };
       dslBundleAdapter = import ./lib/dsl-bundle.nix { inherit (nixpkgs) lib; };
+      zstrRuntime = import ./lib/zstr-runtime.nix { inherit (nixpkgs) lib; };
       mkDslArtifacts =
         system:
         let
@@ -54,9 +55,12 @@
             src = self;
           } ''
             mkdir -p source
-            cp "$src/structure.zstr" source/structure.zstr
+            if [ -f "$src/structure.zstr" ]; then
+              cp "$src/structure.zstr" source/structure.zstr
+            fi
             cp -R "$src/pkgs" source/pkgs
             cp -R "$src/modules" source/modules
+            cp -R "$src/docs" source/docs
             mkdir -p "$out/interfaces" "$out/modules"
             zen-dsl compile-tree \
               --root source \
@@ -112,7 +116,15 @@
                 destination.write_text(compiled, encoding="utf-8")
             PY
           '';
-          bundleJSON = builtins.fromJSON (builtins.readFile "${bundle}/bundle.json");
+          bundleJSON =
+            if builtins.pathExists (self + "/structure.zstr") then
+              builtins.fromJSON (builtins.readFile "${bundle}/bundle.json")
+            else {
+              bundleVersion = "zenlang.bundle/2";
+              sources = [ ];
+              modules = [ ];
+              structure = { present = false; mounts = [ ]; nodes = [ ]; };
+            };
           registry = dslBundleAdapter.registryFromBundle {
             bundle = bundleJSON;
             bundlePath = bundle;
@@ -267,6 +279,7 @@
         inherit (nixpkgs) lib;
         inherit inputs self;
       };
+      dslLibrary = { inherit (utils) mkVersionString; };
 
       # --- Package Overlay ---
       zenOverlay =
@@ -316,7 +329,10 @@
             platforms = prev.lib.platforms // utils.platforms;
           };
           seahorse = patchedSeahorse;
-          zenos = lib.recursiveUpdate (lib.recursiveUpdate { legacy = prev; } mappedTree) customTree;
+          zenos =
+            if zstrRuntime.packageExposure (mkDslArtifacts prev.stdenv.hostPlatform.system).bundleJSON then
+              lib.recursiveUpdate (lib.recursiveUpdate { legacy = prev; } mappedTree) customTree
+            else { };
         };
 
     in
@@ -328,6 +344,8 @@
         loader = loader;
         utils = utils;
         dslRegistryFor = registryFor;
+        dslBundleFor = system: (mkDslArtifacts system).bundleJSON;
+        inherit zstrRuntime dslLibrary;
         inherit
           dslBundleAdapter
           interface
@@ -372,14 +390,14 @@
             ];
           };
           # Popcorn remains disabled pending a complete module.
-          interface = {
+          compatibility-interface = {
             imports = [
               legacyOptionModule
               brandingModule
             ];
           };
 
-          default = {
+          compatibility-default = {
             _module.args.zenUserModules = zenUserBackendList;
             nix.registry.zenpkgs.flake = self;
 
@@ -392,6 +410,18 @@
             ++ coreModules
             ++ [ gnomeBaseModule ]
             ++ transitionalSystemModules;
+          };
+          interface = self.nixosModules.default;
+          default = {
+            imports = [
+              inputs.home-manager.nixosModules.home-manager
+              inputs.disko.nixosModules.disko
+              (zstrRuntime.moduleFromBundle {
+                bundle = (mkDslArtifacts (builtins.head systems)).bundleJSON;
+                extraLib = dslLibrary;
+              })
+            ];
+            nixpkgs.overlays = [ self.overlays.default ];
           };
         }
         // zenosTree;
@@ -421,7 +451,7 @@
             else
               { };
         in
-        {
+        if !zstrRuntime.packageExposure dsl.bundleJSON then { } else {
           dsl-bundle = dsl.bundle;
           registry-docs = pkgs.writeText "zenpkgs-registry.json" (
             builtins.toJSON (interface.registryDocs registry)
@@ -441,7 +471,7 @@
             config.allowUnfree = true;
           };
         in
-        {
+        if !zstrRuntime.packageExposure (mkDslArtifacts system).bundleJSON then { } else {
           legacy = pkgs.zenos.legacy // {
             nvim = pkgs.zenos.legacy.neovim;
           };
@@ -461,7 +491,7 @@
           legacyConfig = nixpkgs.lib.nixosSystem {
             inherit system;
             modules = [
-              self.nixosModules.interface
+              self.nixosModules.compatibility-interface
               {
                 zenos.system.release.stateVersion = "1.0.0";
                 zenos.legacy.users.users.contract.isNormalUser = true;
@@ -488,7 +518,7 @@
           };
           installedSystemChecks = import ./tests/installed-system-modules.nix {
             inherit nixpkgs pkgs system;
-            interfaceModule = self.nixosModules.interface;
+            interfaceModule = self.nixosModules.compatibility-interface;
             installedBaseModule = self.nixosModules.installed-base;
             oobeModule = self.nixosModules.oobe;
             webappsModule = self.nixosModules.webapps;
@@ -585,6 +615,23 @@
           webapps = installedSystemChecks.webapps;
           dsl-module-contract = dslModuleContract;
           zen-dsl = dsl.zenDsl;
+          zstr-mounting = import ./tests/mounting/check.nix {
+            inherit (dsl) bootstrapPkgs;
+            inherit nixpkgs;
+            home-manager = inputs.home-manager;
+          };
+          search-index = import ./tests/search/check.nix {
+            inherit (dsl) bootstrapPkgs;
+            inherit nixpkgs;
+            home-manager = inputs.home-manager;
+          };
+          zstr-production = dsl.bootstrapPkgs.writeText "zstr-production-acceptance.json" (
+            # Evaluate the complete derivations, without building their closures
+            # merely because their store paths occur in the acceptance report.
+            builtins.unsafeDiscardStringContext (builtins.toJSON (import ./tests/mounting/production.nix {
+              inherit self nixpkgs system;
+            }))
+          );
           dsl-vm = import ./tests/zen-dsl/vm.nix {
             inherit pkgs;
             zenDsl = dsl.zenDsl;

@@ -17,7 +17,28 @@ let
       entries = registry.packages;
       ids = map (entry: entry.id) entries;
       targets = map (entry: pathString entry.target) entries;
-      entriesValid = lib.all (entry: entry.sourcePath != null) entries;
+      validPath =
+        path:
+        builtins.isList path
+        && path != [ ]
+        && lib.all (
+          segment: builtins.isString segment && builtins.match "^[A-Za-z0-9][A-Za-z0-9_-]*$" segment != null
+        ) path;
+      entriesValid = lib.all (
+        entry:
+        validPath entry.target
+        && builtins.head entry.target != "legacy"
+        && lib.last entry.target != "package"
+        && entry.id == "pkgs.${pathString entry.target}"
+        && builtins.isList entry.sourcePath
+        && entry.sourcePath != [ ]
+        && lib.all (segment: builtins.isString segment && segment != "") entry.sourcePath
+        && lib.all (
+          other:
+          entry.target == other.target
+          || !(lib.hasPrefix "${pathString entry.target}." (pathString other.target))
+        ) entries
+      ) entries;
     in
     assert registry.schemaVersion == 1;
     assert duplicateValues ids == [ ];

@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Custom notification duration management for GNOME";
+  summary = "Custom notification duration management for GNOME";
   description = ''
     Custom notification duration management for GNOME
 
@@ -19,7 +19,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Notification Timeout GNOME extension configuration";
+  _meta.description = ''Notification Timeout GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.notification-timeout ];
     programs.dconf.profiles.user.databases = [ {

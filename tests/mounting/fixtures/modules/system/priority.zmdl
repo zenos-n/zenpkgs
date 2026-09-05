@@ -1,0 +1,15 @@
+_meta.weight = 900;
+base = enableOption {
+  _meta.default = true;
+  s! { environment.variables.ZSTR_PRIORITY = "base"; };
+  u! { home.sessionVariables.ZSTR_PRIORITY = "base"; };
+};
+strong = enableOption {
+  _meta = { default = true; weight = 80; };
+  s! { environment.variables.ZSTR_PRIORITY = "strong"; };
+  u! { home.sessionVariables.ZSTR_PRIORITY = "strong"; };
+};
+conflict = enableOption {
+  _meta.weight = 80;
+  s! { environment.variables.ZSTR_PRIORITY = "conflict"; };
+};

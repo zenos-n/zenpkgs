@@ -3,7 +3,7 @@
 # Schema migration: the module id uses path-derived desktops.gnome.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "ZenOS system typography overrides";
+  summary = "ZenOS system typography overrides";
   description = ''
     Installs the Atkinson, Noto, and Zero font stack and applies matching GNOME
     interface, document, monospace, and title-bar defaults for each user.
@@ -14,7 +14,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable the ZenOS typography stack";
+  _meta.summary = "Enable the ZenOS typography stack";
 
   s! {
     fonts = {

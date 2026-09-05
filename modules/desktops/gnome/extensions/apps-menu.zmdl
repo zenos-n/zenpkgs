@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Traditional category-based application menu for GNOME";
+  summary = "Traditional category-based application menu for GNOME";
   description = ''
     Traditional category-based application menu for GNOME
 
@@ -17,7 +17,7 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.description = "Whether to enable Apps Menu GNOME extension configuration.";
+  _meta.description = ''Whether to enable Apps Menu GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.apps-menu ];
     programs.dconf.profiles.user.databases = [ {

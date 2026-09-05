@@ -1,12 +1,12 @@
-# Transitional parity source: lib/compat/user-modules/webapps/brave/module.nix
+# Transitional parity source: lib/compat/user-modules/webapps/chrome/module.nix
 # Metadata is synthesized because the contributor backend file has no top-level meta set.
 # Unsupported: cross-module backend selection and hm.dag profile cleanup cannot be expressed
 # from a separately attached production ZMDL without adding a new public enable option.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Experimental Brave backend for ZenOS web applications";
+  summary = "Experimental Chrome backend for ZenOS web applications";
   description = ''
-    Declares the Brave package used for PWA execution. Backend function injection,
+    Declares the Chrome package used for PWA execution. Backend function injection,
     experimental warnings, profile creation, and stale-profile cleanup remain blocked
     on cross-module action guards and Home Manager DAG support.
   '';
@@ -15,10 +15,10 @@ _meta = {
   platforms = $lib.platforms.zenos;
 };
 
-bravePackage = {
+chromePackage = {
   _meta = {
     type = $type.package;
-    default = $pkgs.zenos.legacy.brave;
-    brief = "Brave browser package";
+    default = $pkgs.zenos.legacy.google-chrome;
+    summary = "Chrome-compatible browser package";
   };
 };

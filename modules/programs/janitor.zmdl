@@ -4,7 +4,7 @@
 # Unsupported: all three user services are omitted because their ExecStart requires that generated file.
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Automated organization for ZenOS user directories";
+  summary = "Automated organization for ZenOS user directories";
   description = ''
     Declares rule-based sorting, virtual music-library, and machine-learning
     Janitor controls. Service activation remains blocked on generated JSON support.
@@ -15,18 +15,18 @@ _meta = {
 };
 
 enable = enableOption {
-  _meta.brief = "Enable the ZenFS Janitor service";
+  _meta.summary = "Enable the ZenFS Janitor service";
 };
 
 dumb.enable = {
-  _meta = { type = $type.boolean; default = false; brief = "Enable rule-based file sorting"; };
+  _meta = { type = $type.boolean; default = false; summary = "Enable rule-based file sorting"; };
 };
 
 dumb.batchInterval = {
   _meta = {
     type = $type.string;
     default = "5m";
-    brief = "Batch processing idle interval";
+    summary = "Batch processing idle interval";
     example = "5m";
   };
 };
@@ -35,7 +35,7 @@ dumb.gracePeriod = {
   _meta = {
     type = $type.string;
     default = "15m";
-    brief = "Minimum batch age before processing";
+    summary = "Minimum batch age before processing";
     example = "15m";
   };
 };
@@ -43,31 +43,31 @@ dumb.gracePeriod = {
 dumb.watchedDirs = {
   _meta = {
     default = { };
-    brief = "Directories monitored for rule-based sorting";
-    description = "Freeform directory records containing target-to-extension rule maps.";
+    summary = "Directories monitored for rule-based sorting";
+    description = ''Freeform directory records containing target-to-extension rule maps.'';
   };
 };
 
 music.enable = {
-  _meta = { type = $type.boolean; default = false; brief = "Enable the music FUSE library"; };
+  _meta = { type = $type.boolean; default = false; summary = "Enable the music FUSE library"; };
 };
 
 music.sourceDir = {
-  _meta = { type = $type.string; brief = "Source directory for raw music files"; };
+  _meta = { type = $type.string; summary = "Source directory for raw music files"; };
 };
 
 music.mountPoint = {
-  _meta = { type = $type.string; brief = "Music-library FUSE mount point"; };
+  _meta = { type = $type.string; summary = "Music-library FUSE mount point"; };
 };
 
 music.artistSplitSymbols = {
   _meta = {
     type = $type.list [ $type.string ];
     default = [ ";" "," " feat. " "zenfs-reg:\\s*(?:ft\\.|feat)\\s*" ];
-    brief = "Delimiters for multi-artist tags";
+    summary = "Delimiters for multi-artist tags";
   };
 };
 
 ml.enable = {
-  _meta = { type = $type.boolean; default = false; brief = "Enable machine-learning classification"; };
+  _meta = { type = $type.boolean; default = false; summary = "Enable machine-learning classification"; };
 };

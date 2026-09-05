@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "Retro window opening and closing animations for GNOME";
+  summary = "Retro window opening and closing animations for GNOME";
   description = ''
     Retro window opening and closing animations for GNOME
 
@@ -29,7 +29,7 @@ _let generateProfileContent: $type.function "settings" = settings: ''
 '';
 
 enable = enableOption {
-  _meta.description = "Whether to enable Burn My Windows GNOME extension configuration.";
+  _meta.description = ''Whether to enable Burn My Windows GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.burn-my-windows ];
       programs.dconf.profiles.user.databases = [ {

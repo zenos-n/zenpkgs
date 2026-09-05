@@ -1,6 +1,6 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  brief = "System tray icon support for the GNOME top bar";
+  summary = "System tray icon support for the GNOME top bar";
   description = ''
     System tray icon support for the GNOME top bar
 
@@ -27,7 +27,7 @@ _let serializeCustomIcons: $type.function "icons" = icons:
   else "[${$lib.concatStringsSep ", " ($lib.map $v.serializeTuple icons)}]";
 
 enable = enableOption {
-  _meta.description = "Whether to enable AppIndicator GNOME extension configuration.";
+  _meta.description = ''Whether to enable AppIndicator GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.appindicator ];
     programs.dconf.profiles.user.databases = [ {

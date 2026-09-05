@@ -1,0 +1,9 @@
+enable = enableOption {
+  s! {
+    zenos.system.probe.enable = true;
+    environment.variables.ZSTR_LINK = "linked";
+  };
+  u! {
+    xdg.configFile."disabled-record".text = "only when enabled";
+  };
+};
