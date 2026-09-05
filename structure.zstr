@@ -46,6 +46,16 @@ system = {
     maintainers = [ $m.doromiert ];
     license = $l.napalm;
   };
+  syncthing._meta = {
+    type = (alias nixpkgs.services.syncthing);
+    zenosVersion = 1.0.0Na;
+    name = "Syncthing";
+    summary = "Upstream Syncthing configuration";
+    description = ''Exposes the pinned NixOS Syncthing schema at the existing system.syncthing path.'';
+    tags = [ "syncthing" "compatibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napalm;
+  };
 };
 
 desktops._meta = {

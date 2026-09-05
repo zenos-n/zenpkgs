@@ -45,8 +45,8 @@ class MarkdownImportTests(unittest.TestCase):
         for source in (
             '_meta.description = _import "./docs/description.md";',
             '_meta = { description = _import "./docs/description.md"; };',
-            'option._meta.description = _import "./docs/description.md";',
-            'option = { _meta = { description = _import "./docs/description.md"; }; };',
+            'option._meta.description = _import "./docs/description.md"; option._meta.type = $type.string;',
+            'option = { _meta = { description = _import "./docs/description.md"; type = $type.string; }; };',
         ):
             with self.subTest(source=source):
                 document = self.load(source)
@@ -75,7 +75,10 @@ class MarkdownImportTests(unittest.TestCase):
                 document = self.load(source + ' import $pkgs.legacy.demo;')
                 self.assertEqual((), document.diagnostics)
                 self.assertIn(quote_nix_string(text), compile_zpkg(document, mode="interface"))
-                self.assertEqual("{ pkgs, ... }:\npkgs.zenos.legacy.demo\n", compile_zpkg(document, mode="build"))
+                build = compile_zpkg(document, mode="build")
+                self.assertIn('description = ' + quote_nix_string(text) + ';', build)
+                self.assertIn("package = pkgs.zenos.legacy.demo;", build)
+                self.assertIn("(package.meta or { }) // suppliedMetadata", build)
 
     def test_unresolved_expression_is_explicit_and_not_emitted(self):
         value = parse('_meta.description = _import "./description.md";', "entry.zmdl").statements[0].value

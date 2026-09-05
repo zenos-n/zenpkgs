@@ -5,6 +5,7 @@ from dataclasses import fields, is_dataclass
 from difflib import get_close_matches
 from pathlib import PurePath
 
+from .emitter import color_names, normalize_color
 from .model import (
     ActionStatement,
     Assignment,
@@ -247,8 +248,10 @@ def validate_metadata(
             )
         elif name == "type":
             if isinstance(value, StructuralMarker):
-                if document.kind is not FileKind.ZSTR:
-                    raise ZenLangError(Diagnostic("ZEN209", "structural metadata types are only valid in ZSTR", value.span))
+                if document.kind is not FileKind.ZSTR and not (
+                    document.kind is FileKind.ZMDL and value.kind == "alias"
+                ):
+                    raise ZenLangError(Diagnostic("ZEN209", "structural metadata types require ZSTR or a ZMDL alias", value.span))
             else:
                 _validate_type_annotation(value, document.kind, frozenset(), frozenset(), frozenset())
         if not valid:
@@ -371,7 +374,7 @@ def infer_type(value: Expression, bindings: dict[str, Expression] | None = None)
             return infer_type(value.then_value if value.condition.value else value.else_value, environment)
         return union([infer_type(value.then_value, environment), infer_type(value.else_value, environment)])
     if isinstance(value, DefaultExpr):
-        return infer_type(value.default, environment)
+        return union([infer_type(value.value, environment), infer_type(value.default, environment)])
     if isinstance(value, LetExpr):
         local = dict(environment)
         for statement in value.statements:
@@ -401,7 +404,14 @@ def _static_kind(value: Expression, bindings: dict[str, Expression]) -> str | No
         if value.name in ("name", "f"):
             return "string"
         if value.name == "c":
-            return "color"
+            path = _variable_static_path(value)
+            name = path[0] if path else None
+            return "set" if not value.path else "function" if name in ("alpha", "mix", "lighten", "darken") else "color"
+    if isinstance(value, CallExpr):
+        root, arguments = _color_application(value)
+        if root is not None:
+            count = 3 if _variable_static_path(root) == ("mix",) else 2
+            return "color" if len(arguments) == count else "function"
     if isinstance(value, UnaryExpr):
         return "bool" if value.operator == "!" else _static_kind(value.operand, bindings)
     if isinstance(value, BinaryExpr):
@@ -456,8 +466,51 @@ def _value_matches(annotation: Expression, value: Expression, bindings: dict[str
             return _value_matches(parameters[0], value.body, bindings)
         return actual in (None, "function", "functionTo")
     if expected == "color":
+        if _is_plain_string(value):
+            try:
+                normalize_color("".join(part.value for part in value.parts))
+            except ValueError:
+                return False
         return actual in (None, "color", "string")
+    if expected == "packages":
+        return actual in (None, "set", "packages") or isinstance(value, Variable) and value.name == "pkgs"
     return actual is None or actual == expected
+
+
+def _color_application(value: Expression) -> tuple[Variable | None, tuple[Expression, ...]]:
+    arguments: tuple[Expression, ...] = ()
+    while isinstance(value, (GroupExpr, CallExpr)):
+        if isinstance(value, GroupExpr):
+            value = value.value
+        else:
+            arguments = value.arguments + arguments
+            value = value.callee
+    if isinstance(value, Variable) and value.name == "c" and _variable_static_path(value) in (("alpha",), ("mix",), ("lighten",), ("darken",)):
+        return value, arguments
+    return None, ()
+
+
+def _validate_color_call(value: CallExpr) -> None:
+    root, arguments = _color_application(value)
+    if root is None:
+        return
+    count = 3 if _variable_static_path(root) == ("mix",) else 2
+    if len(arguments) > count:
+        raise ZenLangError(Diagnostic("ZEN229", "too many arguments to color operation", value.span))
+    annotation = Variable("type", (IdentifierSegment("color", root.span),), root.span)
+    for index, argument in enumerate(arguments):
+        if index < count - 1:
+            _require_matching_value(annotation, argument, {}, "color argument")
+            continue
+        while isinstance(argument, GroupExpr):
+            argument = argument.value
+        number = argument.value if isinstance(argument, Literal) else None
+        if (isinstance(argument, UnaryExpr) and argument.operator == "-"
+                and isinstance(argument.operand, Literal) and type(argument.operand.value) in (int, float)):
+            number = -argument.operand.value
+        kind = _static_kind(argument, {})
+        if kind not in (None, "float") or (number is not None and not 0.0 <= number <= 1.0):
+            raise ZenLangError(Diagnostic("ZEN229", "color amount must be a float between 0.0 and 1.0", argument.span))
 
 
 def _require_matching_value(annotation: Expression, value: Expression, bindings: dict[str, Expression], label: str) -> None:
@@ -472,13 +525,58 @@ def _validate_initializers(value: object, environment: dict[str, Expression] | N
             _validate_initializers(item, visible)
             if isinstance(item, LetStatement):
                 visible[item.name] = item.annotation
+            elif isinstance(item, ResolvedImport) and item.binding is not None:
+                visible[item.binding] = item.annotation or Variable(
+                    "type", (IdentifierSegment("set", item.span),), item.span,
+                )
     elif isinstance(value, LetStatement):
         _require_matching_value(value.annotation, value.value, visible, f"_let {value.name} initializer")
         _validate_initializers(value.value, visible)
+    elif isinstance(value, ResolvedImport):
+        statements = tuple(_effective_statements(value.document))
+        _validate_initializers(statements)
+        if value.binding is not None and value.annotation is not None:
+            _check_bound_import_value(
+                value.annotation, AttrSet(statements, False, value.document.span),
+                {}, f"bound import {value.binding}",
+            )
     elif is_dataclass(value):
         for field in fields(value):
             if field.name not in ("span", "diagnostics"):
                 _validate_initializers(getattr(value, field.name), visible)
+
+
+def _check_bound_import_value(
+    annotation: Expression, value: Expression, bindings: dict[str, Expression], label: str,
+) -> None:
+    while isinstance(annotation, GroupExpr):
+        annotation = annotation.value
+    while isinstance(value, GroupExpr):
+        value = value.value
+    parameters = annotation.arguments[0].items if isinstance(annotation, CallExpr) else ()
+    kind = _annotation_type(annotation)
+    if kind == "set" and isinstance(value, AttrSet):
+        visible = dict(bindings)
+        for item in value.statements:
+            if isinstance(item, LetStatement):
+                visible[item.name] = item.annotation
+            elif isinstance(item, ResolvedImport) and item.binding is not None:
+                visible[item.binding] = item.annotation or Variable(
+                    "type", (IdentifierSegment("set", item.span),), item.span,
+                )
+            elif isinstance(item, ConditionalStatement):
+                _check_bound_import_value(annotation, item.body, visible, label)
+            elif isinstance(item, Assignment) and parameters:
+                child = item.value
+                if not isinstance(item.target, StructuralMarker) and len(item.target) > 1:
+                    child = AttrSet((Assignment(item.target[1:], item.operator, child, item.span),), False, item.span)
+                _check_bound_import_value(parameters[0], child, visible, label)
+        return
+    if kind == "list" and isinstance(value, ListExpr):
+        for item in value.items:
+            _check_bound_import_value(parameters[0], item, bindings, label)
+        return
+    _require_matching_value(annotation, value, bindings, label)
 
 
 def validate_markdown_imports(document: Document) -> None:
@@ -804,6 +902,7 @@ def _validate_statements(
     top_level: bool,
     in_meta: bool,
     in_deps: bool,
+    alias_metadata: bool = False,
 ) -> None:
     visible = set(variables)
     for statement in statements:
@@ -819,6 +918,7 @@ def _validate_statements(
             top_level=top_level,
             in_meta=in_meta,
             in_deps=in_deps,
+            alias_metadata=alias_metadata,
         )
         binding = _statement_binding(statement)
         if binding is not None:
@@ -840,6 +940,7 @@ def _validate_statement(
     top_level: bool = False,
     in_meta: bool = False,
     in_deps: bool = False,
+    alias_metadata: bool = False,
 ) -> None:
     context = (kind, variables, freeforms, direct_variables)
     if isinstance(statement, ActionStatement):
@@ -888,6 +989,9 @@ def _validate_statement(
 
         target_names = _target_names(statement)
         metadata = in_meta or "_meta" in target_names
+        alias_metadata = kind is FileKind.ZMDL and metadata and (
+            top_level or action_context or alias_metadata
+        )
         dependency_set = (
             kind is FileKind.ZPKG
             and metadata
@@ -922,6 +1026,12 @@ def _validate_statement(
                     statement.value.span,
                 )
             )
+        if alias_metadata and (
+            not in_meta and target_names[-2:] == ("_meta", "type")
+            or in_meta and target_names == ("type",)
+        ) and isinstance(statement.value, StructuralMarker) and statement.value.kind == "alias":
+            _validate_marker(statement.value, kind, variables, target_freeforms, direct_variables)
+            return
         _validate_assignment_value(
             statement.value,
             kind,
@@ -932,6 +1042,7 @@ def _validate_statement(
             freeform_action_container=freeform_option,
             in_meta=metadata,
             in_deps=dependency_set,
+            alias_metadata=alias_metadata and not in_meta and target_names[-1:] == ("_meta",),
         )
         return
 
@@ -990,6 +1101,7 @@ def _validate_assignment_value(
     freeform_action_container: bool,
     in_meta: bool,
     in_deps: bool,
+    alias_metadata: bool = False,
 ) -> None:
     if isinstance(value, EnableOption):
         if kind is not FileKind.ZMDL:
@@ -1033,6 +1145,7 @@ def _validate_assignment_value(
             action_context=direct_action_container,
             in_meta=in_meta,
             in_deps=in_deps,
+            alias_metadata=alias_metadata,
         )
     else:
         _validate_expression(value, kind, variables, freeforms, direct_variables)
@@ -1048,6 +1161,7 @@ def _validate_attr_set(
     action_context: bool,
     in_meta: bool,
     in_deps: bool,
+    alias_metadata: bool = False,
 ) -> None:
     _validate_statements(
         attr_set.statements,
@@ -1059,6 +1173,7 @@ def _validate_attr_set(
         top_level=False,
         in_meta=in_meta,
         in_deps=in_deps,
+        alias_metadata=alias_metadata,
     )
 
 
@@ -1128,6 +1243,7 @@ def _validate_expression(
         _validate_expression(expression.value, *context)
         _validate_expression(expression.default, *context)
     elif isinstance(expression, CallExpr):
+        _validate_color_call(expression)
         _validate_expression(expression.callee, *context)
         for argument in expression.arguments:
             _validate_expression(argument, *context)
@@ -1242,6 +1358,10 @@ def _validate_variable(
             raise ZenLangError(Diagnostic("ZEN208", f"undefined freeform variable {label}", variable.span))
     if variable.name == "name" and variable.path:
         raise ZenLangError(Diagnostic("ZEN208", "$name is a scalar source identity", variable.span))
+    if variable.name == "c" and variable.path:
+        path = _variable_static_path(variable)
+        if path is None or len(path) != 1 or path[0] not in color_names().keys() | {"alpha", "mix", "lighten", "darken"}:
+            raise ZenLangError(Diagnostic("ZEN208", "unknown CSS color primitive", variable.span))
     for segment in variable.path:
         if isinstance(segment, DynamicSegment):
             _validate_variable(segment.value, kind, variables, freeforms, direct_variables)
@@ -1393,6 +1513,12 @@ def _is_scalar_compatible(expression: Expression) -> bool:
         return _is_scalar_compatible(expression.value)
     if isinstance(expression, Literal):
         return expression.value is not None
+    if isinstance(expression, DefaultExpr):
+        return _is_scalar_compatible(expression.value) and _is_scalar_compatible(expression.default)
+    if isinstance(expression, LetExpr):
+        return _is_scalar_compatible(expression.body)
+    if _static_kind(expression, {}) in ("set", "list", "function", "functionTo", "packages"):
+        return False
     if isinstance(expression, BinaryExpr):
         return expression.operator not in ("++", "//")
     if isinstance(expression, (StringExpr, PathExpr, Variable, Reference, SelectionExpr, DefaultExpr, CallExpr, UnaryExpr)):

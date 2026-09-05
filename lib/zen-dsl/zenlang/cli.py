@@ -12,6 +12,7 @@ from .compiler import CompilationError, check_tree, compile_document, compile_tr
 from .diagnostics import render_human, render_json
 from .emitter import NixEmissionError
 from .model import Diagnostic, FileKind, Span, ZenLangError, ast_to_dict
+from .schema_validation import load_schema, schema_requests, validate_zcfg
 from zcfg.cli import write_output_atomic
 from zcfg.model import ZcfgError
 
@@ -23,7 +24,9 @@ def build_parser() -> argparse.ArgumentParser:
     )
     commands = parser.add_subparsers(dest="command", required=True)
     for name, help_text in (
-        ("check", "validate a ZenOS DSL source file"),
+        ("check", "check syntax and local semantics; add --schema for mounted ZCFG validation"),
+        ("validate", "validate ZCFG against an exported mounted runtime schema"),
+        ("schema-requests", "print literal-only ZCFG requests for trusted schema export"),
         ("ast", "print the immutable source AST as JSON"),
         ("compile", "compile a ZenOS DSL source file to Nix"),
     ):
@@ -39,6 +42,12 @@ def build_parser() -> argparse.ArgumentParser:
             default="human",
             help="error output format (default: human)",
         )
+        if name in ("check", "validate", "compile"):
+            command.add_argument(
+                "--schema",
+                required=name == "validate",
+                help="mounted schema JSON for ZCFG (exit 2 when validation is incomplete)",
+            )
         if name == "compile":
             command.add_argument(
                 "-o",
@@ -99,6 +108,19 @@ def main(
 
     try:
         document = parse_file(arguments.file, import_root=arguments.import_root)
+        if arguments.command == "schema-requests":
+            json.dump(schema_requests(document), stdout, indent=2, sort_keys=True, ensure_ascii=False)
+            stdout.write("\n")
+            _write_warnings(document, stderr, arguments.diagnostic_format)
+            return 0
+        if getattr(arguments, "schema", None):
+            result = validate_zcfg(document, load_schema(arguments.schema))
+            if arguments.diagnostic_format == "json":
+                stdout.write(render_json(list(result.diagnostics)) + "\n")
+            else:
+                for diagnostic in result.diagnostics:
+                    stderr.write(render_human(diagnostic, {}) + "\n")
+            return result.exit_code
         if arguments.command == "ast":
             json.dump(ast_to_dict(document), stdout, indent=2, sort_keys=True, ensure_ascii=False)
             stdout.write("\n")
@@ -152,12 +174,22 @@ def _compile(arguments: argparse.Namespace, stdout: TextIO, stderr: TextIO) -> i
     try:
         import_root = arguments.import_root or arguments.root
         document = parse_file(arguments.file, import_root=import_root)
+        if arguments.schema:
+            result = validate_zcfg(document, load_schema(arguments.schema))
+            if arguments.diagnostic_format == "json":
+                stderr.write(render_json(list(result.diagnostics)) + "\n")
+            else:
+                for diagnostic in result.diagnostics:
+                    stderr.write(render_human(diagnostic, {}) + "\n")
+            if result.exit_code:
+                return result.exit_code
         output = compile_document(
             document,
             mode=arguments.mode or "build",
             root=arguments.root,
         )
-        _write_warnings(document, stderr, arguments.diagnostic_format)
+        if not arguments.schema:
+            _write_warnings(document, stderr, arguments.diagnostic_format)
     except ZenLangError as error:
         _write_zenlang_error(error, arguments.diagnostic_format, stderr)
         return 1

@@ -14,6 +14,12 @@ let
           };
           system.packages.apps.development-tools.git = true;
           system.packages.apps.system.btop = false;
+          system.syncthing = {
+            enable = false;
+            guiAddress = "127.0.0.1:8385";
+            overrideDevices = false;
+            settings.options.localAnnounceEnabled = false;
+          };
           users.alice = {
             packages.apps.system.btop = true;
             programs.zenlink = false;
@@ -89,6 +95,12 @@ let
   invalidProfile = (evaluated.extendModules { modules = [ {
     zenos.users.alice.programs.web-apps.profileDir = 42;
   } ]; }).config;
+  invalidSyncthing = (evaluated.extendModules { modules = [ {
+    zenos.system.syncthing.enable = lib.mkForce "not-a-boolean";
+  } ]; }).config;
+  unknownSyncthing = (evaluated.extendModules { modules = [ {
+    zenos.system.syncthing.nonexistentSetting = true;
+  } ]; }).config;
   fails = value: !(builtins.tryEval (builtins.deepSeq value true)).success;
 in
 assert config.networking.hostName == "zstr-production";
@@ -108,6 +120,13 @@ assert fails config.zenos.users.bob.programs.web-apps.profileDir;
 assert suppliedProfiles.zenos.users.alice.programs.web-apps.profileDir == "/srv/test-alice-profiles";
 assert suppliedProfiles.zenos.users.bob.programs.web-apps.profileDir == "/srv/test-bob-profiles";
 assert fails invalidProfile.zenos.users.alice.programs.web-apps.profileDir;
+assert !(sources ? "modules/system/syncthing.zmdl");
+assert !config.services.syncthing.enable;
+assert config.services.syncthing.guiAddress == "127.0.0.1:8385";
+assert !config.services.syncthing.overrideDevices;
+assert !config.services.syncthing.settings.options.localAnnounceEnabled;
+assert fails invalidSyncthing.zenos.system.syncthing;
+assert fails unknownSyncthing.zenos.system.syncthing;
 assert builtins.all (schema: builtins.all (option: option.defaultValid) schema.options) schemas;
 if artifact != "report" then {
   system = config.system.build.toplevel;
@@ -126,4 +145,5 @@ if artifact != "report" then {
   twoUserIsolation = true;
   productionPackageSelectors = true;
   requiredProfileDir = true;
+  typedSyncthingAlias = true;
 }

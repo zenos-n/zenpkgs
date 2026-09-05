@@ -1,0 +1,4 @@
+_meta.zenosVersion = 0.1.0;
+accounts = { (freeform account) = {
+  home._meta.type = (alias nixpkgs.home-manager.users.($f.account));
+}; };

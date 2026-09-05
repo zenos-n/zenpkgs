@@ -497,7 +497,14 @@ rec {
           path = [ ];
         };
       records = lib.concatMap (
-        entry: metadataRecords entry.path (entry.source.descriptor.statements or [ ])
+        entry:
+        if entry.source.kind == "zmdl" then
+          map (record: {
+            path = entry.path ++ map (part: if builtins.isAttrs part then "<name>" else part) record.path;
+            meta = lib.mapAttrs (_: value: safe null (adapter.decodeValue value)) record.metadata;
+          }) entry.source.descriptor.nodeMetadata
+        else
+          metadataRecords entry.path (entry.source.descriptor.statements or [ ])
       ) exposed;
       metadata = lib.foldl' (
         acc: record: acc // { ${key record.path} = (acc.${key record.path} or { }) // record.meta; }

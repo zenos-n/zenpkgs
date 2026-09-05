@@ -37,6 +37,9 @@ export does not invent replacements for them. `default = null` alone must not
 be interpreted as a known null default. Examples are bounded data, not executed.
 
 Descriptive metadata comes from the compiler's data IR and package metadata.
+ZMDL nodes use the compiler's effective `nodeMetadata` records, rebased at every
+mount, including user and freeform placeholders. Inherited `zenosVersion` values
+and explicit child overrides are preserved without reconstructing inheritance.
 Only node-local attribution is used: branch maintainers/licenses never propagate
 to upstream children. A missing authored license is not replaced with an assumed
 license. The index retains compiler node warnings, full original source/line/
@@ -44,7 +47,6 @@ column and message, and each mounted location (including multiple mounts of one
 module). These diagnostics are data in `metadata.warnings`, not hidden. The
 adapter does not independently revalidate the compiler's metadata contract.
 Descriptive metadata expressions the data decoder cannot resolve remain null.
-Inherited effective option versions are not independently reconstructed.
 
 ## Traversal Limits
 
@@ -90,7 +92,8 @@ nix eval --impure --json --expr 'import ./tests/search/production.nix {}'
 nix eval --json --file tests/search/no-structure.nix
 ```
 
-The synthetic bundle checks relocated mounts, dynamically added upstream options,
+The synthetic bundle checks relocated mounts, inherited and overridden versions,
+node-local attribution, dynamically added upstream options,
 NixOS/user/Home Manager mirrors, freeforms, package hierarchy and universe
 exclusions, diagnostics, defaults, type wrappers, recursion stops, and small
 fully serialized samples. Production checks select representative real paths and

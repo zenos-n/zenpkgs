@@ -1,0 +1,2 @@
+_meta.zenosVersion = 0.1.0;
+_meta.type = (alias nixpkgs.nonexistent);

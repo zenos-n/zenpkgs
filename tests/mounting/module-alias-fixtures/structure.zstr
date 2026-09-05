@@ -1,0 +1,6 @@
+system.demo._meta.type = (zmdl system.demo);
+system.ssh._meta.type = (zmdl system.ssh);
+system.hostname._meta.type = (zmdl system.hostname);
+users = { (freeform user) = {
+  aliases._meta.type = (zmdl userModules.aliases);
+}; };

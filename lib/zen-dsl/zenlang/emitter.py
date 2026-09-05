@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import os
 from collections.abc import Mapping, Sequence
 from typing import Any
 
@@ -55,7 +56,7 @@ _NIX_KEYWORDS = frozenset(
     ("assert", "else", "false", "if", "in", "inherit", "let", "null", "or", "rec", "then", "true", "with")
 )
 _DEFAULT_VARIABLE_ROOTS: Mapping[str, str | None] = {
-    "c": "config",
+    "c": None,
     "cfg": "config.zenos",
     "deps": "deps",
     "f": None,
@@ -106,6 +107,84 @@ def is_nix_identifier(value: str) -> bool:
 
 def emit_attr_name(value: str) -> str:
     return value if is_nix_identifier(value) else quote_nix_string(value)
+
+
+def color_names() -> dict[str, str]:
+    """CSS Color 4 named colors, plus the transparent keyword."""
+    entries = """
+aliceblue f0f8ff antiquewhite faebd7 aqua 00ffff aquamarine 7fffd4 azure f0ffff
+beige f5f5dc bisque ffe4c4 black 000000 blanchedalmond ffebcd blue 0000ff
+blueviolet 8a2be2 brown a52a2a burlywood deb887 cadetblue 5f9ea0 chartreuse 7fff00
+chocolate d2691e coral ff7f50 cornflowerblue 6495ed cornsilk fff8dc crimson dc143c
+cyan 00ffff darkblue 00008b darkcyan 008b8b darkgoldenrod b8860b darkgray a9a9a9
+darkgreen 006400 darkgrey a9a9a9 darkkhaki bdb76b darkmagenta 8b008b darkolivegreen 556b2f
+darkorange ff8c00 darkorchid 9932cc darkred 8b0000 darksalmon e9967a darkseagreen 8fbc8f
+darkslateblue 483d8b darkslategray 2f4f4f darkslategrey 2f4f4f darkturquoise 00ced1 darkviolet 9400d3
+deeppink ff1493 deepskyblue 00bfff dimgray 696969 dimgrey 696969 dodgerblue 1e90ff
+firebrick b22222 floralwhite fffaf0 forestgreen 228b22 fuchsia ff00ff gainsboro dcdcdc
+ghostwhite f8f8ff gold ffd700 goldenrod daa520 gray 808080 green 008000
+greenyellow adff2f grey 808080 honeydew f0fff0 hotpink ff69b4 indianred cd5c5c
+indigo 4b0082 ivory fffff0 khaki f0e68c lavender e6e6fa lavenderblush fff0f5
+lawngreen 7cfc00 lemonchiffon fffacd lightblue add8e6 lightcoral f08080 lightcyan e0ffff
+lightgoldenrodyellow fafad2 lightgray d3d3d3 lightgreen 90ee90 lightgrey d3d3d3 lightpink ffb6c1
+lightsalmon ffa07a lightseagreen 20b2aa lightskyblue 87cefa lightslategray 778899 lightslategrey 778899
+lightsteelblue b0c4de lightyellow ffffe0 lime 00ff00 limegreen 32cd32 linen faf0e6
+magenta ff00ff maroon 800000 mediumaquamarine 66cdaa mediumblue 0000cd mediumorchid ba55d3
+mediumpurple 9370db mediumseagreen 3cb371 mediumslateblue 7b68ee mediumspringgreen 00fa9a mediumturquoise 48d1cc
+mediumvioletred c71585 midnightblue 191970 mintcream f5fffa mistyrose ffe4e1 moccasin ffe4b5
+navajowhite ffdead navy 000080 oldlace fdf5e6 olive 808000 olivedrab 6b8e23
+orange ffa500 orangered ff4500 orchid da70d6 palegoldenrod eee8aa palegreen 98fb98
+paleturquoise afeeee palevioletred db7093 papayawhip ffefd5 peachpuff ffdab9 peru cd853f
+pink ffc0cb plum dda0dd powderblue b0e0e6 purple 800080 rebeccapurple 663399
+red ff0000 rosybrown bc8f8f royalblue 4169e1 saddlebrown 8b4513 salmon fa8072
+sandybrown f4a460 seagreen 2e8b57 seashell fff5ee sienna a0522d silver c0c0c0
+skyblue 87ceeb slateblue 6a5acd slategray 708090 slategrey 708090 snow fffafa
+springgreen 00ff7f steelblue 4682b4 tan d2b48c teal 008080 thistle d8bfd8
+tomato ff6347 turquoise 40e0d0 violet ee82ee wheat f5deb3 white ffffff
+whitesmoke f5f5f5 yellow ffff00 yellowgreen 9acd32 transparent 00000000
+""".split()
+    return dict(zip(entries[::2], entries[1::2]))
+
+
+def normalize_color(value: str) -> str:
+    text = value.removeprefix("#")
+    if len(text) not in (6, 8) or any(char not in "0123456789abcdefABCDEF" for char in text):
+        raise ValueError("colors require six or eight hexadecimal digits, optionally prefixed by #")
+    return text.lower()
+
+
+def color_runtime() -> str:
+    """Trusted color operations; interpolation uses premultiplied sRGB channels."""
+    return r'''(let
+      normalize = value:
+        if builtins.isString value && builtins.match "#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8})" value != null
+        then builtins.replaceStrings [ "A" "B" "C" "D" "E" "F" ] [ "a" "b" "c" "d" "e" "f" ]
+          (if builtins.substring 0 1 value == "#" then builtins.substring 1 (-1) value else value)
+        else throw "Zen color requires six or eight hexadecimal digits";
+      digits = "0123456789abcdef";
+      indices = builtins.listToAttrs (builtins.genList (n: { name = builtins.substring n 1 digits; value = n; }) 16);
+      decode = value: let text = normalize value; in
+        builtins.genList (n: if n == 3 && builtins.stringLength text == 6 then 255 else
+          indices.${builtins.substring (n * 2) 1 text} * 16 + indices.${builtins.substring (n * 2 + 1) 1 text}) 4;
+      byte = value: let n = builtins.floor (value + 0.5); in
+        builtins.substring (builtins.div n 16) 1 digits + builtins.substring (n - builtins.div n 16 * 16) 1 digits;
+      encode = values: builtins.concatStringsSep "" (builtins.map byte values);
+      amount = value: if builtins.isFloat value && value >= 0.0 && value <= 1.0 then value
+        else throw "Zen color amount must be a float between 0.0 and 1.0";
+      mix = first: second: weight: let
+        a = decode first; b = decode second; t = amount weight;
+        alphaA = builtins.elemAt a 3 / 255.0; alphaB = builtins.elemAt b 3 / 255.0;
+        alpha = (1.0 - t) * alphaA + t * alphaB;
+      in encode (builtins.genList (n: if n == 3 then alpha * 255.0 else
+        if alpha == 0.0 then 0.0 else
+        ((1.0 - t) * builtins.elemAt a n * alphaA + t * builtins.elemAt b n * alphaB) / alpha) 4);
+    in {
+      inherit normalize mix;
+      alpha = value: weight: let channels = decode value; in encode
+        (builtins.genList (n: if n == 3 then amount weight * 255.0 else builtins.elemAt channels n) 4);
+      lighten = value: weight: mix value "ffffff" weight;
+      darken = value: weight: mix value "000000" weight;
+    })'''
 
 
 def emit_nix_data(value: Any, indent: int = 0) -> str:
@@ -184,14 +263,8 @@ class NixEmitter:
         if isinstance(expression, GroupExpr):
             return f"({self.expression(expression.value, indent)})"
         if isinstance(expression, PathExpr):
-            return emit_nix_data(
-                {
-                    "__zenlangType": "path",
-                    "kind": "absolute" if expression.value.startswith("/") else "relative",
-                    "value": expression.value,
-                },
-                indent,
-            )
+            path = os.path.abspath(os.path.join(os.path.dirname(expression.span.source), expression.value))
+            return f"(/. + {quote_nix_string(path)})"
         if isinstance(expression, Reference):
             return self._reference(expression)
         if isinstance(expression, Variable):
@@ -235,6 +308,8 @@ class NixEmitter:
                 f"{self.expression(expression.default, indent)})"
             )
         if isinstance(expression, CallExpr):
+            if isinstance(expression.callee, Variable) and expression.callee.name == "type":
+                return self.type_expression(expression)
             parts = [self.expression(expression.callee, indent)]
             parts.extend(
                 self.expression(argument, indent) for argument in expression.arguments
@@ -303,7 +378,23 @@ class NixEmitter:
                 f"{self.document_value(statement.document, indent, annotation=statement.annotation)};"
             )
         if isinstance(statement, LetStatement):
-            return f"{self.binding_name(statement.name)} = {self.expression(statement.value, indent)};"
+            name = self.binding_name(statement.name)
+            annotation = self.type_expression(statement.annotation)
+            value = self.expression(statement.value, indent)
+            checked = (
+                "(lib.evalModules { modules = [ { "
+                f"options.value = lib.mkOption {{ type = {annotation}; }}; "
+                f"config.value = {value}; }} ]; }}).config.value"
+            )
+            span = statement.span
+            message = quote_nix_string(
+                f"_let {statement.name} annotation mismatch: "
+                f"{span.source}:{span.start.line}:{span.start.column}"
+            )
+            return (
+                f"{name} = (builtins.addErrorContext {message} "
+                f"((_zenCheckedValue: builtins.deepSeq _zenCheckedValue _zenCheckedValue) ({checked})));"
+            )
         if isinstance(statement, ConditionalStatement):
             return (
                 f"config = lib.mkIf {self.expression(statement.condition, indent)} "
@@ -322,8 +413,14 @@ class NixEmitter:
         raise NixEmissionError(f"unsupported statement: {type(statement).__name__}")
 
     def attr_set(self, attr_set: AttrSet, indent: int = 0) -> str:
+        locals_ = [
+            self.statement(statement, indent + 2)
+            for statement in attr_set.statements
+            if isinstance(statement, (LetStatement, ResolvedImport))
+        ]
         bindings, fragments = self._partition_statements(
-            attr_set.statements, indent + 2
+            tuple(statement for statement in attr_set.statements
+                  if not isinstance(statement, (LetStatement, ResolvedImport))), indent + 2
         )
         prefix = "rec " if attr_set.recursive else ""
         padding = " " * (indent + 2)
@@ -337,17 +434,19 @@ class NixEmitter:
                 + " " * indent
                 + "}"
             )
-        if not fragments:
-            return plain
-        items = [plain, *fragments] if bindings else fragments
-        item_padding = " " * (indent + 2)
-        return (
-            "lib.mkMerge [\n"
-            + "\n".join(f"{item_padding}{item}" for item in items)
-            + "\n"
-            + " " * indent
-            + "]"
-        )
+        if fragments:
+            items = [plain, *fragments] if bindings else fragments
+            item_padding = " " * (indent + 2)
+            plain = (
+                "(lib.mkMerge [\n"
+                + "\n".join(f"{item_padding}{item}" for item in items)
+                + "\n"
+                + " " * indent
+                + "])"
+            )
+        if locals_:
+            return "(let " + " ".join(locals_) + " in " + plain + ")"
+        return plain
 
     def document_value(
         self,
@@ -356,15 +455,25 @@ class NixEmitter:
         *,
         annotation: Expression | None = None,
     ) -> str:
-        statements = _flatten_resolved_imports(getattr(document, "statements"))
-        descriptor = {
-            "grammarVersion": getattr(document, "grammar_version"),
-            "irVersion": getattr(document, "ir_version"),
-            "kind": getattr(document, "kind").value,
-            "statements": semantic_descriptor(statements),
-            "typeAnnotation": semantic_descriptor(annotation),
-        }
-        return emit_nix_data(descriptor, indent)
+        # Import resolution and merge precedence are shared with document lowering.
+        from .compiler import _coalesce_zmdl_scope_assignments, _resolved_statements
+
+        statements = _coalesce_zmdl_scope_assignments(_resolved_statements(document))
+        value = self.attr_set(AttrSet(statements, False, document.span), indent)
+        check = self.type_expression(annotation) if annotation is not None else "(lib.types.attrsOf lib.types.anything)"
+        checked = (
+            "(lib.evalModules { modules = [ { "
+            f"options.value = lib.mkOption {{ type = {check}; }}; "
+            f"config.value = {value}; }} ]; }}).config.value"
+        )
+        if annotation is None:
+            return "(" + checked + ")"
+        message = quote_nix_string(f"bound-import annotation mismatch: {document.span.source}")
+        return (
+            f"(let _zenCheckedValue = {checked}; "
+            f"in builtins.addErrorContext {message} "
+            "(builtins.deepSeq _zenCheckedValue _zenCheckedValue))"
+        )
 
     def path(
         self,
@@ -425,7 +534,17 @@ class NixEmitter:
                 quoted = quote_nix_string(part.value)
                 pieces.append(quoted[1:-1])
             elif isinstance(part, Interpolation):
-                pieces.append("${" + self.expression(part.expression) + "}")
+                value = self.expression(part.expression)
+                message = quote_nix_string(
+                    f"{part.span.source}:{part.span.start.line}: string interpolation requires a scalar, path, or package"
+                )
+                pieces.append("${((value: let kind = builtins.typeOf value; in "
+                    'if kind == "string" then value '
+                    'else if kind == "bool" || kind == "int" || kind == "float" then builtins.toJSON value '
+                    'else if kind == "path" then "${value}" '
+                    'else if kind == "set" && (value.type or null) == "derivation" '
+                    '&& builtins.isString (value.outPath or null) then value.outPath '
+                    'else throw ' + message + ") (" + value + "))}")
         return '"' + "".join(pieces) + '"'
 
     def _reference(self, expression: Reference) -> str:
@@ -436,6 +555,20 @@ class NixEmitter:
         return root + suffix
 
     def _variable(self, expression: Variable) -> str:
+        if expression.name == "type":
+            return self.type_expression(expression)
+        if expression.name == "c":
+            names = color_names()
+            if not expression.path:
+                return f"({emit_nix_data(names)} // (builtins.removeAttrs {color_runtime()} [ \"normalize\" ]))"
+            if len(expression.path) != 1 or not isinstance(expression.path[0], (IdentifierSegment, StringSegment)):
+                raise NixEmissionError("$c requires a named color or color operation")
+            name = self.segment_value(expression.path[0])
+            if name in names:
+                return quote_nix_string(names[name])
+            if name in ("alpha", "mix", "lighten", "darken"):
+                return f"{color_runtime()}.{name}"
+            raise NixEmissionError(f"unknown CSS color primitive $c.{name}")
         if expression.name == "name" and not expression.path:
             source_name = expression.span.source.rsplit("/", 1)[-1]
             source_name = source_name.rsplit(".", 1)[0]
@@ -466,6 +599,44 @@ class NixEmitter:
         else:
             remaining = expression.path
         return root + "".join(f".{self.segment(segment)}" for segment in remaining)
+
+    def type_expression(self, annotation: Expression) -> str:
+        if isinstance(annotation, GroupExpr):
+            return self.type_expression(annotation.value)
+        root = annotation.callee if isinstance(annotation, CallExpr) else annotation
+        if not isinstance(root, Variable) or root.name != "type" or len(root.path) != 1:
+            raise NixEmissionError("type expressions require a $type primitive", annotation.span)
+        name = self.segment_value(root.path[0])
+        if isinstance(annotation, CallExpr):
+            if len(annotation.arguments) != 1 or not isinstance(annotation.arguments[0], ListExpr):
+                raise NixEmissionError("type parameters must be enclosed in brackets", annotation.span)
+            items = annotation.arguments[0].items
+            if name in ("list", "set", "functionTo") and len(items) == 1:
+                function = {"list": "listOf", "set": "attrsOf", "functionTo": "functionTo"}[name]
+                return f"(lib.types.{function} {self.type_expression(items[0])})"
+            if name == "enum":
+                return f"(lib.types.enum {self.expression(annotation.arguments[0])})"
+            if name == "either" and len(items) >= 2:
+                result = self.type_expression(items[-1])
+                for item in reversed(items[:-1]):
+                    result = f"(lib.types.either {self.type_expression(item)} {result})"
+                return result
+            raise NixEmissionError(f"unsupported type application $type.{name}", annotation.span)
+        if name == "color":
+            return ('(let color = lib.types.mkOptionType { name = "zenColor"; '
+                'functor = (lib.types.defaultFunctor "zenColor") // { type = color; }; '
+                'description = "six- or eight-digit hexadecimal color"; '
+                'check = value: builtins.isString value && builtins.match "#?([0-9a-fA-F]{6}|[0-9a-fA-F]{8})" value != null; '
+                'merge = loc: defs: lib.types.str.merge loc (builtins.map (def: def // { value = '
+                + color_runtime() + '.normalize def.value; }) defs); }; in color)')
+        if name == "packages":
+            return "(lib.types.attrsOf lib.types.anything)"
+        if name == "null":
+            return "(lib.types.enum [ null ])"
+        aliases = {"string": "str", "boolean": "bool", "set": "attrs"}
+        if name in ("string", "boolean", "bool", "int", "float", "path", "package", "set"):
+            return "lib.types." + aliases.get(name, name)
+        raise NixEmissionError(f"unsupported type primitive $type.{name}", annotation.span)
 
     def _list(self, expression: ListExpr, indent: int) -> str:
         if not expression.items:

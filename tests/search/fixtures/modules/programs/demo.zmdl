@@ -3,13 +3,17 @@ _meta = {
   name = "Search fixture";
   summary = "Mounted demo";
   description = ''A **Markdown** description.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
 };
 message = {
   _meta.type = $type.string;
   _meta.default = "hello";
 };
 instances = {
+  _meta.zenosVersion = "2.0.0";
   (freeform instance) = {
+    _meta.zenosVersion = "3.0.0";
     label = { _meta.type = $type.string; _meta.default = $f.instance; };
   };
 };

@@ -8,6 +8,7 @@ _meta = {
 };
 
 (freeform device) = {
+  _meta.type = $type.set;
   _meta.summary = "Disko device ${$f.device}";
 
   s!! {

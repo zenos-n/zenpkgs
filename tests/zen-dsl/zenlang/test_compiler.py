@@ -79,14 +79,13 @@ class NixEmitterTests(unittest.TestCase):
             ("42", "42"),
             ("3.5", "3.5"),
             ("1.2.3Nb", '"1.2.3Nb"'),
-            ('"a\\n\\"b ${$v.name}"', '"a\\n\\"b ${name}"'),
             (
                 "./source",
-                '{\n  __zenlangType = "path";\n  kind = "relative";\n  value = "./source";\n}',
+                f"(/. + {quote_nix_string(str(Path('source').absolute()))})",
             ),
             (
                 "/etc/example",
-                '{\n  __zenlangType = "path";\n  kind = "absolute";\n  value = "/etc/example";\n}',
+                '(/. + "/etc/example")',
             ),
             ("source.github", "source.github"),
             ("$pkgs.apps.development.git", "pkgs.zenos.apps.development.git"),
@@ -98,6 +97,29 @@ class NixEmitterTests(unittest.TestCase):
         for source, expected in cases:
             with self.subTest(source=source):
                 self.assertEqual(expected, emit_expression(expression(source)))
+
+    @unittest.skipUnless(shutil.which("nix-instantiate"), "Nix evaluation requires the VM")
+    def test_paths_and_typed_interpolation_evaluate(self) -> None:
+        emitted = emit_expression(expression('"a\\n\\"b ${$v.name}"'))
+        for value, expected in (('"Zen"', 'a\n"b Zen'), ("42", 'a\n"b 42'), ("true", 'a\n"b true')):
+            with self.subTest(value=value):
+                result = subprocess.run(
+                    ["nix-instantiate", "--eval", "--strict", "--json", "--expr",
+                     f"let name = {value}; in {emitted}"],
+                    capture_output=True, text=True,
+                )
+                self.assertEqual(0, result.returncode, result.stderr)
+                self.assertEqual(expected, json.loads(result.stdout))
+        for source, expected in (("./source", str(Path("source").absolute())), ("/etc/example", "/etc/example")):
+            with self.subTest(source=source):
+                emitted = emit_expression(expression(source))
+                result = subprocess.run(
+                    ["nix-instantiate", "--eval", "--strict", "--json", "--expr",
+                     f"let value = {emitted}; in {{ kind = builtins.typeOf value; path = builtins.toString value; }}"],
+                    capture_output=True, text=True,
+                )
+                self.assertEqual(0, result.returncode, result.stderr)
+                self.assertEqual({"kind": "path", "path": expected}, json.loads(result.stdout))
 
     def test_all_operator_and_control_expression_forms_are_parenthesized(self) -> None:
         cases = (
@@ -151,7 +173,9 @@ class NixEmitterTests(unittest.TestCase):
         self.assertEqual("value = 1;", emit_statement(assignment))
         with self.assertRaises(NixEmissionError):
             emit_statement(imported)
-        self.assertEqual("x = 1;", emit_statement(local))
+        self.assertTrue(emit_statement(local).startswith("x = (builtins.addErrorContext"))
+        self.assertIn("type = lib.types.int;", emit_statement(local))
+        self.assertIn("config.value = 1;", emit_statement(local))
         self.assertEqual(
             "config = lib.mkIf true {\n  value = 1;\n};", emit_statement(conditional)
         )
@@ -210,7 +234,8 @@ if $cfg.feature.enable or false { legacy.services.demo.enable = true; };
         self.assertIn("{ pkgs, lib ? pkgs.lib, config ?", output)
         self.assertNotIn("import ", output)
         self.assertIn("base = true;", output)
-        self.assertIn("enabled = true;", output)
+        self.assertIn("enabled = (builtins.addErrorContext", output)
+        self.assertIn("type = lib.types.bool; }; config.value = true;", output)
         self.assertIn("lib.mkIf (config.zenos.feature.enable or false)", output)
         self.assertIn("services = {", output)
         self.assertIn("demo = {", output)
@@ -226,7 +251,7 @@ if $cfg.feature.enable or false { legacy.services.demo.enable = true; };
             with self.subTest(source=source), self.assertRaises(CompilationError):
                 compile_zcfg(parse(source, "bad.zcfg"))
 
-    def test_imports_merge_in_order_and_bound_imports_are_descriptors(self) -> None:
+    def test_imports_merge_in_order_and_bound_imports_are_values(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             (root / "first.zcfg").write_text("value = 1; first = true;", encoding="utf-8")
@@ -241,8 +266,9 @@ if $cfg.feature.enable or false { legacy.services.demo.enable = true; };
             self.assertIn("value = 3;", output)
             self.assertIn("first = true;", output)
             self.assertIn("second = true;", output)
-            self.assertIn('kind = "zcfg";', output)
-            self.assertNotIn("import ", output)
+            self.assertIn('bound = true;', output)
+            self.assertNotIn('kind = "zcfg";', output)
+            self.assertNotRegex(output, r'\bimport\s+["(./]')
 
             (root / "first.zcfg").write_text("value = true;", encoding="utf-8")
             entry.write_text('_import "first.zcfg"; value = false;', encoding="utf-8")
@@ -375,7 +401,7 @@ enabled = enableOption { _meta.default = true; };
 
         disks = compile_zmdl(
             zmdl_document(
-                "(freeform device) = { s!! { disko.devices.($f.device) = $path.($f.device); }; };",
+                "(freeform device) = { _meta.type = $type.set; s!! { disko.devices.($f.device) = $path.($f.device); }; };",
                 "system/disks.zmdl",
             ),
             root=FIXTURES,
@@ -388,7 +414,7 @@ enabled = enableOption { _meta.default = true; };
 
         syncthing = compile_zmdl(
             zmdl_document(
-                "(freeform folder) = { s!! { services.syncthing.folders.($f.folder).path = $path.($f.folder).path; }; };",
+                "(freeform folder) = { _meta.type = $type.set; s!! { services.syncthing.folders.($f.folder).path = $path.($f.folder).path; }; };",
                 "system/syncthing.zmdl",
             ),
             root=FIXTURES,
@@ -403,6 +429,7 @@ enabled = enableOption { _meta.default = true; };
             zmdl_document(
                 """
 (freeform package) = {
+  _meta.type = $type.package;
   s!! {
     environment.systemPackages = $lib.optional
       ($lib.isDerivation $path.($f.package))
@@ -480,6 +507,7 @@ _import "../helpers/base.zmdl";
             zmdl_document(
                 """
 (freeform item) = {
+  _meta.type = $type.set;
   s!! {
     _let record: $type.set [ $type.string ] = { copied = $f.item; };
     _let direct: $type.string = $f.item;
@@ -493,8 +521,10 @@ _import "../helpers/base.zmdl";
             ),
             root=FIXTURES,
         )
-        self.assertIn("let record = {", output)
-        self.assertIn("direct = _zenFreeformKey0;", output)
+        self.assertIn("let record = (builtins.addErrorContext", output)
+        self.assertIn("copied = _zenFreeformKey0;", output)
+        self.assertIn("direct = (builtins.addErrorContext", output)
+        self.assertIn("type = lib.types.str; }; config.value = _zenFreeformKey0;", output)
         self.assertIn("in (record).copied", output)
         self.assertIn("{ copied = lib.mkMerge", output)
         self.assertIn("{ direct = lib.mkMerge", output)
@@ -506,6 +536,7 @@ _import "../helpers/base.zmdl";
 (freeform item) = {
   children = {
     (freeform item) = {
+      _meta.type = $type.set;
       s!! { result.($f.item) = $path.($f.item); };
     };
   };
@@ -592,10 +623,15 @@ import $pkgs.legacy.demo;
         self.assertNotIn("zenRuntime", output)
         self.assertTrue(output.endswith("}\n"))
 
-    def test_build_mode_returns_the_imported_legacy_package(self) -> None:
-        document = parse_file(FIXTURES / "bat.zpkg")
+    def test_build_mode_decorates_the_imported_legacy_package(self) -> None:
+        document = parse(zpkg_source("bat") + '_meta.packageVersion = "0.24.0";', "bat.zpkg")
         output = compile_zpkg(document, mode="build")
-        self.assertEqual("{ pkgs, ... }:\npkgs.zenos.legacy.bat\n", output)
+        self.assertIn("package = pkgs.zenos.legacy.bat;", output)
+        self.assertIn('name = "demo";', output)
+        self.assertIn('packageVersion = "0.24.0";', output)
+        self.assertIn("(package.meta or { }) // suppliedMetadata", output)
+        self.assertIn("builtins.deepSeq suppliedMetadata", output)
+        self.assertNotIn("overrideAttrs", output)
 
     def test_invalid_mode_is_rejected(self) -> None:
         with self.assertRaises(CompilationError):
@@ -623,7 +659,10 @@ import $pkgs.legacy.demo;
         for field in ("_meta", "name", "summary", "description", "tags", "maintainers", "license"):
             self.assertIn(field, document.diagnostics[0].message)
         self.assertIn("metadata = { };", compile_zpkg(document, mode="interface"))
-        self.assertEqual("{ pkgs, ... }:\npkgs.zenos.legacy.demo\n", compile_zpkg(document, mode="build"))
+        output = compile_zpkg(document, mode="build")
+        self.assertIn("package = pkgs.zenos.legacy.demo;", output)
+        self.assertIn("suppliedMetadata = {  };", output)
+        self.assertIn("(package.meta or { }) // suppliedMetadata", output)
 
 
 class ZstrCompilerTests(unittest.TestCase):
@@ -677,7 +716,7 @@ class CompilerIntegrationTests(unittest.TestCase):
                 root=FIXTURES,
             ),
             compile_zpkg(parse_file(FIXTURES / "bat.zpkg"), mode="interface"),
-            compile_zpkg(parse_file(FIXTURES / "bat.zpkg"), mode="build"),
+            compile_zpkg(parse(zpkg_source("bat"), "bat.zpkg"), mode="build"),
             compile_zstr(parse_file(FIXTURES / "structure.zstr")),
             compile_zstr(parse_file(FIXTURES / "typed-aliases.zstr")),
         )

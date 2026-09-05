@@ -45,7 +45,8 @@ let
   schemaAt = options: path:
     let
       walk = node: rest: prefix:
-        if lib.isOption node then
+        if lib.isOption node && rest == [ ] then node
+        else if lib.isOption node then
           if builtins.elem node.type.name [ "attrsOf" "lazyAttrsOf" ] && rest != [ ] then
             walk (builtins.removeAttrs
               (node.type.nestedTypes.elemType.getSubOptions (prefix ++ [ (builtins.head rest) ]))
@@ -135,8 +136,14 @@ in rec {
       initial = lib.foldl' (tree: node: put node.path
         (x: x // { optionNix = node.optionNix or null; }) tree) emptyNode
         (if present then bundle.structure.nodes or [ ] else [ ]);
+      moduleAliases = node: lib.concatMap (source:
+        sources.${source}.descriptor.aliases or [ ]
+      ) node.definitions;
       tree = lib.foldl' (tree: mount:
-        if mount.kind != "zmdl" then put mount.path (node: node // { inherit mount; }) tree
+        if mount.kind != "zmdl" then put mount.path (node:
+          if moduleAliases node != [ ] then
+            throw "Unsupported ZMDL alias/mount collision at ${lib.showOption mount.path}: precedence is unresolved"
+          else node // { inherit mount; }) tree
         else let
           matches = builtins.filter (record:
             lib.take (builtins.length mount.target) (builtins.tail record.optionPath) == mount.target
@@ -144,7 +151,16 @@ in rec {
         in if matches == [ ] then throw "ZSTR module mount has no source: ${lib.showOption mount.target}"
         else lib.foldl' (result: record:
           put (mount.path ++ lib.drop (builtins.length mount.target) (builtins.tail record.optionPath))
-            (node: node // { definitions = node.definitions ++ [ record.path ]; }) result
+            (node: let
+              aliases = sources.${record.path}.descriptor.aliases or [ ];
+              rootAliases = builtins.filter (alias: alias.path == [ ]) aliases;
+            in if node.mount != null && (aliases != [ ] || (node.mount.moduleLocal or false))
+              || node.definitions != [ ] && (aliases != [ ] || moduleAliases node != [ ]) then
+              throw "Unsupported ZMDL alias collision at ${lib.showOption mount.path}: precedence is unresolved"
+            else node // {
+              definitions = node.definitions ++ [ record.path ];
+              mount = if rootAliases == [ ] then node.mount else (builtins.head rootAliases) // { moduleLocal = true; };
+            }) result
         ) tree matches
       ) initial mounts;
       packages = if packageTree != null then packageTree else pkgs.zenos or { };
@@ -154,7 +170,7 @@ in rec {
       ) (builtins.attrNames (nodeAt [ "users" ]).children);
       instantiate = source: cfg: env: user: shareUserActions:
         import (builtins.toFile "zstr-mounted-module.nix" sources.${source}.mountNix) {
-          inherit config cfg pkgs user shareUserActions;
+          inherit config cfg pkgs user shareUserActions moduleAliasOption;
           lib = lib // extraLib;
           freeform = env;
         };
@@ -166,14 +182,19 @@ in rec {
       aliasType = schema: lib.types.mkOptionType {
         name = "zstr-upstream-mirror";
         description = "ZSTR-mounted upstream options";
-        check = builtins.isAttrs;
+        check = value: if lib.isOption schema then schema.type.check value else builtins.isAttrs value;
         merge = loc: defs:
+          if lib.isOption schema then schema.type.merge loc defs else
           let evaluated = lib.evalModules {
             modules = [ { options = selectedSchema schema (map (def: def.value) defs); } ]
               ++ map (def: { _file = def.file; config = pruneInactive schema def.value; }) defs;
           }; in definedConfig (builtins.removeAttrs evaluated.options [ "_module" ]) evaluated.config;
-        getSubOptions = _: mirrorOptions schema;
+        getSubOptions = loc: if lib.isOption schema then schema.type.getSubOptions loc else mirrorOptions schema;
       };
+      moduleAliasOption = target:
+        let schema = schemaAt options (aliasTarget { inherit target; } { }); in
+        lib.mkOption ({ type = if lib.isOption schema then schema.type else aliasType schema; }
+          // lib.optionalAttrs (!lib.isOption schema) { default = { }; });
       selectorType = path: lib.types.mkOptionType {
         name = "zstr-package-selectors";
         description = "boolean selectors for public pkgs paths";
@@ -196,7 +217,11 @@ in rec {
           in merge [ ] (map (def: def.value) defs);
       };
       nodeOption = node: path: env: user:
-        if node.optionNix != null then
+        if node.optionNix != null && moduleAliases node != [ ] then
+          throw "Unsupported ZMDL alias/local option collision at ${lib.showOption path}: precedence is unresolved"
+        else if node.mount != null && (node.mount.moduleLocal or false) && node.children == { } then
+          moduleAliasOption ([ "nixpkgs" ] ++ aliasTarget node.mount env)
+        else if node.optionNix != null then
           import (builtins.toFile "zstr-option.nix" node.optionNix) {
             inherit pkgs config;
             lib = lib // extraLib;
@@ -204,7 +229,16 @@ in rec {
           }
         else lib.mkOption { type = nodeType node path env user; default = { }; };
       nodeType = node: path: env: user:
-        if node.mount != null && node.mount.kind == "packages" then selectorType path
+        if builtins.any (alias:
+          alias.path == [ ] && node.children != { }
+          || alias.path != [ ] && (builtins.isAttrs (builtins.head alias.path)
+            && node.children != { } || builtins.isString (builtins.head alias.path)
+            && builtins.hasAttr (builtins.head alias.path) node.children)
+        ) (moduleAliases node) then
+          throw "Unsupported ZMDL alias/local child collision at ${lib.showOption path}: precedence is unresolved"
+        else if node.mount != null && (node.mount.moduleLocal or false) then
+          aliasType (schemaAt options (aliasTarget node.mount env))
+        else if node.mount != null && node.mount.kind == "packages" then selectorType path
         else let
           wildcards = builtins.filter wildcard (builtins.attrNames node.children);
           children = lib.filterAttrs (key: _: !wildcard key) node.children;
@@ -215,7 +249,8 @@ in rec {
           baseType = lib.types.submodule ({ config, ... }: let localConfig = config; in {
             imports = map (source: (instantiate source localConfig env user true).schema) node.definitions;
             options = lib.mapAttrs (key: child: nodeOption child (path ++ [ key ]) env user)
-              children // lib.optionalAttrs (node.definitions != [ ] && !builtins.any
+              children // lib.optionalAttrs (node.definitions != [ ]
+              && !(node.mount != null && node.mount.kind == "alias") && !builtins.any
               (source: (instantiate source localConfig env user true).schema.options ? enable)
               node.definitions) {
               enable = lib.mkOption { type = lib.types.bool; default = false; };
@@ -244,7 +279,7 @@ in rec {
                 }))
               else null;
           });
-        in if node.definitions == [ ] then baseType
+        in if node.definitions == [ ] || node.mount != null && node.mount.kind == "alias" then baseType
         else lib.types.coercedTo lib.types.bool (enable: { inherit enable; }) baseType;
       selectedPackages = prefix: values: lib.concatLists (lib.mapAttrsToList (key: value:
         if builtins.isAttrs value then selectedPackages (prefix ++ [ key ]) value
@@ -257,6 +292,26 @@ in rec {
             builtins.filter (source: builtins.elem root (instantiate source { } { } null true).actionRoots) node.definitions;
           own = lib.concatMap (source: (instantiate source value env user
             (!(lib.take 2 path == [ "system" "programs" ] && hasUserProgramMount path source))).actions) definitions;
+          aliasActions = lib.concatMap (alias:
+            let
+              forward = rest: sourcePath: aliasEnv:
+                if rest == [ ] then map (definition: lib.mkDefinition {
+                  inherit (definition) file;
+                  value = lib.setAttrByPath (aliasTarget alias aliasEnv)
+                    (let selected = pruneInactive (schemaAt options (aliasTarget alias aliasEnv))
+                      (selectDefinition sourcePath definition.value); in
+                    if emptyDefinition selected then selected else
+                      builtins.seq (lib.getAttrFromPath sourcePath config.zenos) selected);
+                }) options.zenos.definitionsWithLocations
+                else let key = builtins.head rest; in
+                  if builtins.isAttrs key then lib.concatMap (name:
+                    forward (builtins.tail rest) (sourcePath ++ [ name ])
+                      (aliasEnv // { ${key.freeform} = name; })
+                  ) (builtins.attrNames (builtins.removeAttrs
+                    (lib.getAttrFromPath sourcePath config.zenos) (key.exclude or [ ])))
+                  else forward (builtins.tail rest) (sourcePath ++ [ key ]) aliasEnv;
+            in forward alias.path (resolve env path) env
+          ) (builtins.filter (alias: alias.path != [ ]) (moduleAliases node));
           mountActions = if node.mount == null then [ ]
             else if node.mount.kind == "packages" then [
               (if user == null then { environment.systemPackages = selectedPackages [ ] value; }
@@ -264,10 +319,12 @@ in rec {
             ]
             else map (definition: lib.mkDefinition {
               inherit (definition) file;
-              value = lib.setAttrByPath (aliasTarget node.mount env)
-                (builtins.seq value (pruneInactive (schemaAt options (aliasTarget node.mount env))
-                  (removeDefinitionAttrs (builtins.attrNames node.children)
-                    (selectDefinition (resolve env path) definition.value))));
+              value = lib.setAttrByPath (aliasTarget node.mount env) (let
+                schema = schemaAt options (aliasTarget node.mount env);
+                selected = selectDefinition (resolve env path) definition.value;
+                pruned = pruneInactive schema (if lib.isOption schema then selected else
+                  removeDefinitionAttrs (builtins.attrNames node.children) selected);
+              in if emptyDefinition pruned then pruned else builtins.seq value pruned);
             }) options.zenos.definitionsWithLocations;
           nested = lib.concatLists (lib.mapAttrsToList (key: child:
             if wildcard key then lib.concatLists (lib.mapAttrsToList (name: childValue:
@@ -276,9 +333,14 @@ in rec {
             ) (builtins.removeAttrs value (builtins.attrNames node.children)))
             else actionsFor root child (path ++ [ key ]) env user (value.${key} or { })
           ) node.children);
-        in own ++ mountActions ++ nested;
+        in own ++ aliasActions ++ mountActions ++ nested;
       staticRoots = node:
         lib.concatMap (source: (instantiate source { } { } null true).actionRoots) node.definitions
+        ++ lib.concatMap (alias:
+          if alias.target == [ "nixpkgs" ] then
+            builtins.attrNames (builtins.removeAttrs options [ "zenos" "_module" ])
+          else [ (builtins.elemAt alias.target 1) ]
+        ) (moduleAliases node)
         ++ (if node.mount == null then [ ]
             else if node.mount.kind == "packages" then [ "environment" "home-manager" ]
             else if node.mount.target == [ "nixpkgs" ] then

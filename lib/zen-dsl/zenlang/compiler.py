@@ -26,6 +26,7 @@ from .model import (
     InheritStatement,
     ResolvedImport,
     IR_VERSION,
+    LetExpr,
     LetStatement,
     ListExpr,
     Literal,
@@ -77,7 +78,9 @@ def document_descriptor(document: Document) -> dict[str, Any]:
         "irVersion": document.ir_version,
         "kind": document.kind.value,
         "statements": semantic_descriptor(statements),
-        **({"nodeMetadata": _node_metadata(statements)} if document.kind is FileKind.ZMDL else {}),
+        **({"nodeMetadata": _node_metadata(statements),
+            "aliases": _zmdl_aliases(_coalesce_zmdl_scope_assignments(statements))}
+           if document.kind is FileKind.ZMDL else {}),
     }
 
 
@@ -248,7 +251,7 @@ def compile_zmdl(
     emitter = NixEmitter({"path": "cfg"})
     top_metadata: dict[str, Expression] = {}
     bindings: list[str] = []
-    aliases: list[dict[str, Any]] = []
+    aliases = _zmdl_aliases(statements)
 
     for statement in statements:
         if isinstance(statement, ResolvedImport):
@@ -272,12 +275,6 @@ def compile_zmdl(
             if statement.target.kind == "freeform":
                 continue
             if statement.target.kind == "alias":
-                aliases.append(
-                    {
-                        "path": semantic_descriptor(statement.target.argument),
-                        "value": semantic_descriptor(statement.value),
-                    }
-                )
                 continue
             raise CompilationError(
                 f"unsupported ZMDL structural marker: {statement.target.kind}",
@@ -341,6 +338,7 @@ def compile_zmdl_mount(document: Document, *, root: str | Path) -> str:
     """Compile a definition independently of its filesystem identity's location."""
     _zmdl_module(document, root)
     statements = _coalesce_zmdl_scope_assignments(_resolved_statements(document))
+    _zmdl_aliases(statements, mounting=True)
     emitter = _MountEmitter({}, {"path": "cfg"})
     bindings = [emitter.statement(item) for item in statements
                 if isinstance(item, (LetStatement, ResolvedImport))]
@@ -367,6 +365,7 @@ def compile_zmdl_mount(document: Document, *, root: str | Path) -> str:
     schema = _emit_zmdl_scope_module(statements, emitter, freeform_depth=0)
     return (
         "{ config, cfg, lib, pkgs, user ? null, freeform ? { }, shareUserActions ? true, "
+        "moduleAliasOption ? (_: throw \"ZMDL aliases require the ZSTR runtime\"), "
         "maintainers ? lib.maintainers, licenses ? lib.licenses, ... }:\nlet\n"
         + f"  name = {emit_nix_data(_source_name(document))};\n"
         + "  _zenDefaults = value: if (value._type or \"\") == \"if\" then "
@@ -393,7 +392,7 @@ def compile_zpkg(document: Document, *, mode: str = "build") -> str:
     local_bindings: list[ResolvedImport | LetStatement] = []
     package_import: PackageImportStatement | None = None
 
-    for statement in _resolved_statements(document):
+    for statement in _coalesce_zmdl_scope_assignments(_resolved_statements(document)):
         if isinstance(statement, ResolvedImport):
             local_bindings.append(statement)
             continue
@@ -469,7 +468,8 @@ def compile_zpkg(document: Document, *, mode: str = "build") -> str:
         + f"  name = {emit_nix_data(_source_name(document))};\n"
         + (bindings + "\n" if bindings else "")
         + f"  package = {package};\n  suppliedMetadata = {supplied};\n"
-        + "in\npackage // { meta = (package.meta or { }) // suppliedMetadata; }\n"
+        + "in\nassert builtins.isAttrs package && (package.type or null) == \"derivation\";\n"
+        + "builtins.deepSeq suppliedMetadata (package // { meta = (package.meta or { }) // suppliedMetadata; })\n"
     )
 
 
@@ -736,6 +736,79 @@ def _reject_zmdl_authored_id(document: Document) -> None:
         )
 
 
+def _zmdl_aliases(
+    statements: tuple[Any, ...], *, mounting: bool = False,
+) -> list[dict[str, Any]]:
+    aliases: list[dict[str, Any]] = []
+
+    def visit(items: tuple[Any, ...], path: list[Any], enabled: bool = False) -> None:
+        initial_count = len(aliases)
+        metadata, actions, _ = _option_parts(AttrSet(items, False, items[0].span)) if items else ({}, [], False)
+        marker = metadata.get("type")
+        if isinstance(marker, StructuralMarker) and marker.kind == "alias":
+            if path and isinstance(path[-1], dict):
+                raise CompilationError(
+                    "aliases directly on freeform items are unsupported; declare a named alias child",
+                    marker.span,
+                )
+            children = [item for item in items if isinstance(item, Assignment)
+                        and (isinstance(item.target, StructuralMarker)
+                             or _assignment_path(item)[0] != "_meta")]
+            if children or actions or "default" in metadata or enabled:
+                raise CompilationError(
+                    "ZMDL alias collisions with local children, actions, or defaults are unsupported; precedence is unresolved",
+                    marker.span,
+                )
+            target: list[Any] = []
+            for segment in marker.argument or ():
+                if isinstance(segment, DynamicSegment):
+                    variable = segment.value
+                    if not isinstance(variable, Variable) or variable.name != "f" or len(variable.path) != 1:
+                        raise CompilationError("alias targets require lexical $f keys", segment.span)
+                    target.append({"freeform": _static_path(variable.path)[0]})
+                else:
+                    target.append(_static_path((segment,))[0])
+            if not target or target[0] != "nixpkgs" or len(target) > 1 and not isinstance(target[1], str):
+                raise CompilationError("ZMDL aliases must target nixpkgs options with a static root", marker.span)
+            aliases.append({"path": path, "kind": "alias", "target": target})
+            return
+        for item in items:
+            if not isinstance(item, Assignment):
+                continue
+            if isinstance(item.target, StructuralMarker):
+                if item.target.kind == "alias":
+                    if mounting:
+                        raise CompilationError(
+                            "record-form ZMDL alias mounting is unspecified; use _meta.type = (alias nixpkgs.<path>)",
+                            item.target.span,
+                        )
+                    aliases.append({"path": semantic_descriptor(item.target.argument),
+                                    "value": semantic_descriptor(item.value)})
+                    continue
+                if item.target.kind != "freeform":
+                    continue
+                excluded = [_assignment_path(child)[0] for child in items
+                            if isinstance(child, Assignment) and not isinstance(child.target, StructuralMarker)
+                            and _assignment_path(child)[0] != "_meta"]
+                child_path = [*path, {"freeform": _freeform_id(item.target), "exclude": excluded}]
+            else:
+                keys = _assignment_path(item)
+                if keys[0] == "_meta":
+                    continue
+                child_path = [*path, *keys]
+            body = _option_body(item.value)
+            if body is not None:
+                visit(body.statements, child_path, isinstance(item.value, EnableOption))
+        if "default" in metadata and len(aliases) != initial_count:
+            raise CompilationError(
+                "ZMDL aliases below local defaults are unsupported; precedence is unresolved",
+                metadata["default"].span,
+            )
+
+    visit(statements, [])
+    return aliases
+
+
 def _freeform_id(marker: StructuralMarker) -> str:
     if (
         marker.argument is None
@@ -866,25 +939,34 @@ def _zcfg_groups(
         current: tuple[Any, ...],
         logical_prefix: tuple[str, ...],
         conditions: tuple[Expression, ...],
+        bindings: tuple[LetStatement | ResolvedImport, ...] = (),
     ) -> None:
+        def scoped(value: Expression) -> Expression:
+            return LetExpr(bindings, value, value.span) if bindings else value
+
         for statement in current:
+            if isinstance(statement, (LetStatement, ResolvedImport)):
+                bindings = (*bindings, statement)
+                continue
             if isinstance(statement, ConditionalStatement):
                 visit(
                     statement.body.statements,
                     logical_prefix,
-                    (*conditions, statement.condition),
+                    (*conditions, scoped(statement.condition)),
+                    bindings,
                 )
                 continue
             if not isinstance(statement, Assignment) or statement.operator != "=":
                 raise CompilationError(
-                    "ZCFG output supports assignments, conditionals, and top-level bindings",
+                    "ZCFG output supports assignments, conditionals, and lexical bindings",
                     statement.span,
                 )
             logical_path = (*logical_prefix, *_assignment_path(statement))
             if logical_path[0] == "_meta":
                 continue
             if isinstance(statement.value, AttrSet):
-                if not statement.value.statements:
+                if not any(not isinstance(item, (LetStatement, ResolvedImport))
+                           for item in statement.value.statements):
                     path = _route_zcfg_path(logical_path, tree_for(conditions), statement.span)
                     if path:
                         _insert_tree(tree_for(conditions), path, {}, statement.span)
@@ -893,12 +975,13 @@ def _zcfg_groups(
                     statement.value.statements,
                     logical_path,
                     conditions,
+                    bindings,
                 )
             else:
                 path = _route_zcfg_path(logical_path, tree_for(conditions), statement.span)
                 if not path:
                     raise CompilationError("legacy must be an attribute set", statement.span)
-                _insert_tree(tree_for(conditions), path, statement.value, statement.span)
+                _insert_tree(tree_for(conditions), path, scoped(statement.value), statement.span)
 
     visit(tuple(statements), (), ())
     return groups
@@ -1086,6 +1169,15 @@ def _option_declaration(
 ) -> str:
     metadata, _, enabled = _option_parts(value)
     body = _option_body(value)
+    local_bindings = tuple(
+        item for item in body.statements if isinstance(item, (LetStatement, ResolvedImport))
+    ) if body is not None else ()
+    type_bindings = dict(type_bindings or {})
+    for item in local_bindings:
+        if isinstance(item, LetStatement):
+            type_bindings[item.name] = item.annotation
+        elif item.annotation is not None:
+            type_bindings[item.binding] = item.annotation
     has_scope = body is not None and _zmdl_scope_has_declarations(body.statements)
     if has_scope:
         option_type = _zmdl_submodule_type(
@@ -1122,7 +1214,7 @@ def _option_declaration(
     if inherited_defaults and not has_scope:
         declaration = (f"({declaration} // lib.foldr (value: rest: rest // value) {{ }} "
                        + "[ " + " ".join(f"({value})" for value in inherited_defaults) + " ])")
-    return declaration
+    return _with_action_bindings(local_bindings, emitter, declaration)
 
 
 def _option_body(value: Expression) -> AttrSet | None:
@@ -1219,6 +1311,17 @@ def _emit_zmdl_scope_module(
         path = _assignment_path(statement)
         if path[0] == "_meta":
             continue
+        alias_metadata, _, _ = _option_parts(statement.value)
+        alias_marker = alias_metadata.get("type")
+        if isinstance(alias_marker, StructuralMarker) and alias_marker.kind == "alias":
+            if isinstance(emitter, _MountEmitter):
+                target = "[ " + " ".join(
+                    f"({emitter.expression(segment.value)})" if isinstance(segment, DynamicSegment)
+                    else emit_nix_data(_static_path((segment,))[0])
+                    for segment in alias_marker.argument
+                ) + " ]"
+                option_lines.append((path, f"moduleAliasOption {target}"))
+            continue
         option_lines.append(
             (
                 path,
@@ -1287,7 +1390,8 @@ def _emit_zmdl_scope_module(
             "config = lib.mkOptionDefault (builtins.removeAttrs "
             f"(lib.foldr (record: rest: lib.recursiveUpdate rest (record.default or {{ }})) {{ }} {records}) {names});"
         )
-    return "{ " + " ".join(fields) + " }"
+    bindings = tuple(item for item in effective if isinstance(item, (LetStatement, ResolvedImport)))
+    return _with_action_bindings(bindings, emitter, "{ " + " ".join(fields) + " }")
 
 
 def _option_type(
@@ -1298,7 +1402,7 @@ def _option_type(
         annotation = infer_type(value, bindings)
     if annotation is None:
         raise CompilationError("cannot infer option type; supply _meta.type (use $type.set for an open record)", span or (value.span if value is not None else None))
-    return _emit_type(annotation, emitter)
+    return emitter.type_expression(annotation)
 
 
 def _emit_type(annotation: Expression, emitter: NixEmitter) -> str:
@@ -1416,8 +1520,15 @@ def _zmdl_scope_actions(
     contexts: tuple[_FreeformContext, ...],
     emitter: NixEmitter,
     inherited_weight: Expression | None = None,
+    binding_scopes: tuple[tuple[int, str], ...] = (),
 ) -> list[str]:
     effective = _coalesce_zmdl_scope_assignments(statements)
+    bindings = " ".join(
+        emitter.statement(item) for item in effective
+        if isinstance(item, (LetStatement, ResolvedImport))
+    )
+    if bindings:
+        binding_scopes = (*binding_scopes, (len(contexts), bindings))
     metadata: dict[str, Expression] = {}
     for statement in effective:
         if isinstance(statement, Assignment) and not isinstance(statement.target, StructuralMarker):
@@ -1437,6 +1548,12 @@ def _zmdl_scope_actions(
     if isinstance(emitter, _MountEmitter) and scope_value == "cfg" and "enable" not in declared_names:
         declared_names.append("enable")
     actions: list[str] = []
+    for statement in effective:
+        if isinstance(statement, ActionStatement):
+            actions.extend(_emit_transposed_action(
+                statement, contexts, emitter, conditional_base=scope_value,
+                weight=weight, binding_scopes=binding_scopes,
+            ))
     freeforms: list[Assignment] = []
     for statement in effective:
         if not isinstance(statement, Assignment):
@@ -1452,17 +1569,6 @@ def _zmdl_scope_actions(
         if body is None:
             continue
         child_scope = scope_value + "." + _emit_static_path(path)
-        option_metadata, direct_actions, _ = _option_parts(statement.value)
-        for action in direct_actions:
-            actions.extend(
-                _emit_transposed_action(
-                    action,
-                    contexts,
-                    emitter,
-                    conditional_base=child_scope,
-                    weight=option_metadata.get("weight", weight),
-                )
-            )
         actions.extend(
             _zmdl_scope_actions(
                 body.statements,
@@ -1470,6 +1576,7 @@ def _zmdl_scope_actions(
                 contexts=contexts,
                 emitter=emitter,
                 inherited_weight=weight,
+                binding_scopes=binding_scopes,
             )
         )
 
@@ -1508,17 +1615,6 @@ def _zmdl_scope_actions(
             identifier,
             key_binding,
         )
-        option_metadata, direct_actions, _ = _option_parts(freeform.value)
-        for action in direct_actions:
-            actions.extend(
-                _emit_transposed_action(
-                    action,
-                    child_contexts,
-                    child_emitter,
-                    conditional_base=value_binding,
-                    weight=option_metadata.get("weight", weight),
-                )
-            )
         actions.extend(
             _zmdl_scope_actions(
                 body.statements,
@@ -1526,6 +1622,7 @@ def _zmdl_scope_actions(
                 contexts=child_contexts,
                 emitter=child_emitter,
                 inherited_weight=weight,
+                binding_scopes=binding_scopes,
             )
         )
     return actions
@@ -1538,9 +1635,11 @@ def _emit_transposed_action(
     *,
     conditional_base: str,
     weight: Expression | None = None,
+    binding_scopes: tuple[tuple[int, str], ...] = (),
 ) -> list[str]:
     if not contexts:
-        return [_emit_action(action, emitter, conditional_base=conditional_base, weight=weight)]
+        value = _emit_action(action, emitter, conditional_base=conditional_base, weight=weight)
+        return [_map_freeform_contexts((), value, binding_scopes)]
     condition = None
     if not action.unconditional:
         condition = emitter.guard_condition(action.guards, conditional_base)
@@ -1565,7 +1664,7 @@ def _emit_transposed_action(
             if condition is not None:
                 module = f"(lib.mkIf ({condition}) {module})"
             if isinstance(emitter, _MountEmitter):
-                mapped = _map_freeform_contexts(contexts, module)
+                mapped = _map_freeform_contexts(contexts, module, binding_scopes)
                 system_value = (
                     f"(if shareUserActions then {{ home-manager.sharedModules = [ {{ config = _zenDefaults ({mapped}); }} ]; }} else {{ }})"
                     if action.scope == "user" else mapped
@@ -1575,7 +1674,7 @@ def _emit_transposed_action(
                     f"else {{ home-manager.users.${{user}} = {mapped}; }})"
                 )
             else:
-                mapped = _map_freeform_contexts(contexts, f"[ {module} ]")
+                mapped = _map_freeform_contexts(contexts, f"[ {module} ]", binding_scopes)
                 fragments.append(f"{{ home-manager.sharedModules = {mapped}; }}")
             return
         if not indexes:
@@ -1583,7 +1682,7 @@ def _emit_transposed_action(
             value = _with_action_bindings(bindings, emitter, rendered_value)
             if condition is not None:
                 value = f"(lib.mkIf ({condition}) {value})"
-            mapped = _map_freeform_contexts(contexts, value)
+            mapped = _map_freeform_contexts(contexts, value, binding_scopes)
             fragments.append(f"{{ {_emit_static_path(path)} = {mapped}; }}")
             return
 
@@ -1601,7 +1700,7 @@ def _emit_transposed_action(
         value = _with_action_bindings(bindings, emitter, value)
         if condition is not None:
             value = f"(lib.mkIf ({condition}) {value})"
-        mapped = _map_freeform_contexts(contexts, value)
+        mapped = _map_freeform_contexts(contexts, value, binding_scopes)
         fragments.append(f"{{ {_emit_static_path(prefix)} = {mapped}; }}")
 
     for statement in action.body.statements:
@@ -1640,7 +1739,7 @@ def _emit_transposed_action(
 
 
 def _with_action_bindings(
-    bindings: list[LetStatement],
+    bindings: list[LetStatement] | tuple[Any, ...],
     emitter: NixEmitter,
     value: str,
 ) -> str:
@@ -1653,9 +1752,16 @@ def _with_action_bindings(
 def _map_freeform_contexts(
     contexts: tuple[_FreeformContext, ...],
     value: str,
+    binding_scopes: tuple[tuple[int, str], ...] = (),
 ) -> str:
     result = value
-    for context in reversed(contexts):
+    for depth in range(len(contexts), -1, -1):
+        for scope_depth, bindings in reversed(binding_scopes):
+            if scope_depth == depth:
+                result = f"(let {bindings} in {result})"
+        if depth == 0:
+            break
+        context = contexts[depth - 1]
         result = (
             "lib.mkMerge (lib.mapAttrsToList "
             f"({context.key_binding}: {context.value_binding}: {result}) "

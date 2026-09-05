@@ -121,6 +121,7 @@ sibling = enableOption {};
             "child = {};", 'child._meta.name = "Documentation only";',
             "child._meta.default = [];", "child = [];", "child._meta.default = [ [] ];",
             "child._meta.default = $lib.id 1;",
+            "child._meta.default = $cfg.untyped or false;",
             '(freeform key) = { _meta.summary = "Open?"; };',
         ):
             with self.subTest(source=source):
@@ -198,7 +199,7 @@ sibling = enableOption {};
                     dependencies = decorated.meta.dependencies;
                 }'''
                 result = subprocess.run(
-                    ["nix-instantiate", "--eval", "--strict", "--read-write-mode", "--json", "--expr", expression],
+                    ["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--json", "--expr", expression],
                     capture_output=True, text=True,
                 )
                 self.assertEqual(0, result.returncode, result.stderr)
@@ -209,6 +210,80 @@ sibling = enableOption {};
                     "packageVersion": expected, "interfacePackageVersion": expected,
                     "dependencies": {"general": [], "build": [], "runtime": []},
                 }, json.loads(result.stdout))
+
+    def test_package_import_metadata_merges_before_normalizing_version(self):
+        (self.root / "base.zpkg").write_text('_meta = { name = "Base"; zenosVersion = "1.0.0"; };', encoding="utf-8")
+        entry = self.root / "demo.zpkg"
+        entry.write_text('_import "base.zpkg"; _meta.zenosVersion = "2.0.0"; import $pkgs.legacy.demo;', encoding="utf-8")
+        document = parse_file(entry, import_root=self.root)
+        self.assertIn('packageVersion = "2.0.0";', compile_zpkg(document))
+        self.assertIn('value = "2.0.0";', compile_zpkg(document, mode="interface"))
+
+    @unittest.skipUnless(shutil.which("nix-instantiate"), "Nix evaluation requires the VM")
+    def test_package_reference_resolution_cannot_be_skipped_by_requesting_drv_path(self):
+        for metadata, arguments, expected in (
+            ('maintainers = [ $m.missing ];', 'maintainers = {}; licenses = {};', "missing"),
+            ('license = $l.missing;', 'maintainers = {}; licenses = {};', "missing"),
+        ):
+            with self.subTest(metadata=metadata):
+                document = parse("_meta = { " + metadata + " }; import $pkgs.legacy.demo;", "demo.zpkg")
+                output = compile_zpkg(document)
+                expression = "((" + output + ") { pkgs.zenos.legacy.demo = { type = \"derivation\"; drvPath = \"unchanged\"; }; " + arguments + " }).drvPath"
+                result = subprocess.run(["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--expr", expression], capture_output=True, text=True)
+                self.assertNotEqual(0, result.returncode)
+                self.assertIn(expected, result.stderr)
+
+    @unittest.skipUnless(shutil.which("nix-instantiate"), "Nix evaluation requires the VM")
+    def test_package_import_must_resolve_to_a_derivation(self):
+        output = compile_zpkg(parse("import $pkgs.legacy.demo;", "demo.zpkg"))
+        result = subprocess.run(
+            ["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--expr", "(" + output + ") { pkgs.zenos.legacy.demo = {}; }"],
+            capture_output=True, text=True,
+        )
+        self.assertNotEqual(0, result.returncode)
+        self.assertIn("assertion", result.stderr)
+
+    @unittest.skipUnless(shutil.which("nix-instantiate"), "Nix evaluation requires the VM")
+    def test_real_imported_package_uses_explicit_repository_registry_context(self):
+        available = subprocess.run(["nix-instantiate", "--find-file", "nixpkgs"], capture_output=True, text=True)
+        if available.returncode:
+            self.skipTest("the VM must provide a Nixpkgs evaluation context")
+        registry = Path(__file__).parents[3] / "lib" / "maintainers.nix"
+        document = parse('''
+_meta = {
+  name = "Authored Hello"; summary = "Imported package";
+  description = ''Markdown for Hello.''; zenosVersion = "1.2.3";
+  maintainers = [ $m.doromiert ]; license = $l.mit;
+};
+import $pkgs.legacy.hello;
+''', "hello.zpkg")
+        output = compile_zpkg(document)
+        expression = '''let
+            upstream = import <nixpkgs> {};
+            lib = upstream.lib;
+            maintainers = import ''' + str(registry) + ''' {};
+            decorated = (''' + output + ''') {
+              pkgs = upstream // { zenos.legacy = upstream; };
+              inherit lib maintainers;
+              licenses = lib.licenses;
+            };
+        in {
+            sameDrv = decorated.drvPath == upstream.hello.drvPath;
+            sameOutput = decorated.outPath == upstream.hello.outPath;
+            maintainer = (builtins.head decorated.meta.maintainers).github;
+            license = decorated.meta.license.spdxId;
+            version = decorated.meta.packageVersion;
+            name = decorated.meta.name;
+        }'''
+        result = subprocess.run(
+            ["nix-instantiate", "--eval", "--strict", "--read-write-mode", "--json", "--expr", expression],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertEqual({
+            "sameDrv": True, "sameOutput": True, "maintainer": "doromiert",
+            "license": "MIT", "version": "1.2.3", "name": "Authored Hello",
+        }, json.loads(result.stdout))
 
 
 if __name__ == "__main__":

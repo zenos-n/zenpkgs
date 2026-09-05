@@ -162,6 +162,22 @@ let
       && !(index.pkgs.legacy.sub.group.sub.deeper ? sub);
     moduleMetadata =
       demo.meta.description == "Mounted demo" && lib.hasInfix "**Markdown**" demo.meta.longDescription;
+    inheritedVersion = demo.meta.zenosVersion == "1.0.0" && demo.sub.message.meta.zenosVersion == "1.0.0";
+    relocatedVersion = index.options.relocated.sub.demo.sub.message.meta.zenosVersion == "1.0.0";
+    userVersion = user.sub.programs.sub.demo.sub.message.meta.zenosVersion == "1.0.0";
+    overriddenVersion = demo.sub.instances.meta.zenosVersion == "2.0.0";
+    freeformVersion =
+      demo.sub.instances.sub."<name>".meta.zenosVersion == "3.0.0"
+      && demo.sub.instances.sub."<name>".sub.label.meta.zenosVersion == "3.0.0";
+    mountedFreeformVersion =
+      index.options.relocated.sub.demo.sub.instances.sub."<name>".sub.label.meta.zenosVersion == "3.0.0"
+      && user.sub.programs.sub.demo.sub.instances.sub."<name>".sub.label.meta.zenosVersion == "3.0.0";
+    localAttribution =
+      demo.meta.maintainers == [ "doromiert" ]
+      && demo.meta.license == "$l.mit"
+      && demo.sub.message.meta.maintainers == [ ]
+      && demo.sub.message.meta.license == null
+      && demo.sub.instances.sub."<name>".sub.label.meta.license == null;
     sourceWarnings = builtins.any (
       d:
       d.source == "modules/programs/demo.zmdl"

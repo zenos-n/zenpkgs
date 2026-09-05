@@ -1,0 +1,20 @@
+_meta.zenosVersion = 0.1.0;
+network._meta.type = (alias nixpkgs.networking);
+host._meta.type = (alias nixpkgs.networking.hostName);
+ports._meta.type = (alias nixpkgs.services.openssh.ports);
+readAlias = enableOption {
+  s! { environment.variables.ALIAS_READ = $path.host; };
+};
+raw._meta.type = (alias nixpkgs);
+accounts = {
+  label._meta.default = "fixed";
+  (freeform account) = {
+    login._meta.type = (alias nixpkgs.users.users.($f.account));
+    home._meta.type = (alias nixpkgs.home-manager.users.($f.account));
+  };
+};
+groups = { (freeform account) = {
+  members = { (freeform account) = {
+    login._meta.type = (alias nixpkgs.users.users.($f.account));
+  }; };
+}; };
