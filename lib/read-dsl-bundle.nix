@@ -7,7 +7,7 @@ let
     inherit name;
     value = builtins.appendContext record.${name} context;
   }) (builtins.filter (name: builtins.isString (record.${name} or null)) [
-    "compiledNix" "mountNix" "optionNix"
+    "compiledNix" "buildNix" "mountNix" "optionNix"
   ]));
 in
 # JSON data cannot carry Nix context; executable strings must retain asset roots.

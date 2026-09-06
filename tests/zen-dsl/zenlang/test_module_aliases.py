@@ -45,21 +45,50 @@ class ModuleAliasTests(unittest.TestCase):
         self.assertEqual(aliases[0]["path"], ["accounts", {"freeform": "account", "exclude": ["label"]}, "home"])
         self.assertEqual(aliases[0]["target"][-1], {"freeform": "account"})
 
-    def test_ambiguous_local_alias_overlays_are_rejected(self):
-        for declaration in ("child._meta.default = true;", "_meta.default = {};", "s!! { services.openssh.enable = true; };"):
-            with self.subTest(declaration=declaration), self.assertRaisesRegex(CompilationError, "precedence is unresolved"):
+    def test_alias_actions_and_defaults_are_rejected_by_forwarding_backend(self):
+        for declaration in ("_meta.default = {};", "_meta = { default = {}; };", "s!! { services.openssh.enable = true; };"):
+            with self.subTest(declaration=declaration), self.assertRaisesRegex(
+                CompilationError, "ZMDL alias actions and defaults are unsupported by the forwarding backend"
+            ):
                 document_descriptor(self.document("ssh = { _meta.type = (alias nixpkgs.services.openssh); " + declaration + " };"))
+
+    def test_alias_local_children_are_retained_for_runtime_ownership_validation(self):
+        for child in ("enable", "local"):
+            with self.subTest(child=child), tempfile.TemporaryDirectory() as directory:
+                root = Path(directory)
+                source = root / "modules/system/demo.zmdl"
+                source.parent.mkdir(parents=True)
+                source.write_text(
+                    "ssh._meta.type = (alias nixpkgs.services.openssh); "
+                    f"ssh.{child}._meta.default = true;", encoding="utf-8"
+                )
+                (root / "structure.zstr").write_text(
+                    "system.demo._meta.type = (zmdl system.demo);", encoding="utf-8"
+                )
+                bundle = compile_tree(root)
+                self.assertEqual(bundle["sources"][0]["descriptor"]["aliases"], [
+                    {"kind": "alias", "path": ["ssh"], "target": ["nixpkgs", "services", "openssh"]}
+                ])
+                ownership = bundle["mountedOwnership"]
+                self.assertIn(["system", "demo", "ssh", child], [
+                    owner["path"] for owner in ownership["ownership"]
+                ])
+                self.assertEqual([alias["path"] for alias in ownership["ownershipAliases"]], [
+                    ["system", "demo", "ssh"]
+                ])
 
     def test_non_upstream_targets_are_rejected(self):
         with self.assertRaisesRegex(CompilationError, "must target nixpkgs"):
             document_descriptor(self.document("ssh._meta.type = (alias zenos.system.ssh);"))
 
     def test_implicit_and_ancestor_defaults_do_not_silently_override_aliases(self):
-        for text in (
-            "ssh = enableOption { _meta.type = (alias nixpkgs.services.openssh); };",
-            "_meta.default = { ssh.enable = true; }; ssh._meta.type = (alias nixpkgs.services.openssh);",
+        for text, diagnostic in (
+            ("ssh = enableOption { _meta.type = (alias nixpkgs.services.openssh); };",
+             "ZMDL alias actions and defaults are unsupported by the forwarding backend"),
+            ("_meta.default = { ssh.enable = true; }; ssh._meta.type = (alias nixpkgs.services.openssh);",
+             "ZMDL aliases below local defaults are unsupported by the forwarding backend"),
         ):
-            with self.subTest(text=text), self.assertRaisesRegex(CompilationError, "precedence is unresolved"):
+            with self.subTest(text=text), self.assertRaisesRegex(CompilationError, diagnostic):
                 document_descriptor(self.document(text))
 
     def test_metadata_block_alias_is_allowed(self):

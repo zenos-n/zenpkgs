@@ -393,7 +393,7 @@ class NixEmitter:
             )
             return (
                 f"{name} = (builtins.addErrorContext {message} "
-                f"((_zenCheckedValue: builtins.deepSeq _zenCheckedValue _zenCheckedValue) ({checked})));"
+                f"{self._force_checked_value(checked, annotation)});"
             )
         if isinstance(statement, ConditionalStatement):
             return (
@@ -469,10 +469,21 @@ class NixEmitter:
         if annotation is None:
             return "(" + checked + ")"
         message = quote_nix_string(f"bound-import annotation mismatch: {document.span.source}")
+        return f"(builtins.addErrorContext {message} {self._force_checked_value(checked, check)})"
+
+    def _force_checked_value(self, value: str, annotation: str) -> str:
+        # Force typed collection members, not arbitrary derivation internals or
+        # values whose declared type intentionally imposes no constraint.
         return (
-            f"(let _zenCheckedValue = {checked}; "
-            f"in builtins.addErrorContext {message} "
-            "(builtins.deepSeq _zenCheckedValue _zenCheckedValue))"
+            "((_zenType: _zenValue: let force = type: value: "
+            'if type.name == "anything" then true '
+            'else if type.name == "listOf" then builtins.all (force type.nestedTypes.elemType) value '
+            'else if type.name == "attrsOf" then builtins.all (force type.nestedTypes.elemType) (builtins.attrValues value) '
+            'else if type.name == "either" then force '
+            '(if type.nestedTypes.left.check value then type.nestedTypes.left else type.nestedTypes.right) value '
+            "else builtins.seq value true; "
+            "in builtins.seq (force _zenType _zenValue) _zenValue) "
+            f"({annotation}) ({value}))"
         )
 
     def path(

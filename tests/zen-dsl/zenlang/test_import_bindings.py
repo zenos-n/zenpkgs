@@ -72,6 +72,34 @@ class ImportBindingTests(unittest.TestCase):
         self.assertEqual({"system": {"selected": "blue"}}, self.evaluate_config(
             compile_zcfg(parse_file(entry, import_root=self.root))))
 
+    def test_package_bindings_do_not_force_recursive_derivation_attributes(self):
+        for annotation, value, selected in (
+            ("$type.package", "$pkgs.legacy.hello", "selected"),
+            ("$type.list [ $type.package ]", "[ $pkgs.legacy.hello ]", "(builtins.head selected)"),
+            ("$type.set [ $type.package ]", "{ hello = $pkgs.legacy.hello; }", "selected.hello"),
+            ("$type.either [ $type.string $type.package ]", "$pkgs.legacy.hello", "selected"),
+        ):
+            with self.subTest(annotation=annotation):
+                document = parse(f"_let selected: {annotation} = {value};", "packages.zmdl")
+                emitted = NixEmitter().statement(document.statements[0])
+                self.assertTrue(self.evaluate("let upstream = import <nixpkgs> {}; "
+                    "pkgs = upstream // { zenos.legacy = upstream; }; " + emitted
+                    + f" in {selected}.outPath == upstream.hello.outPath"))
+
+    def test_bound_package_records_are_checked_without_forcing_package_metadata(self):
+        self.source("packages.zpkg", "hello = $pkgs.legacy.hello;")
+        source = self.source("entry.zpkg", '_import values: $type.set [ $type.package ] = "packages.zpkg"; import $pkgs.legacy.hello;')
+        document = parse_file(source)
+        emitted = NixEmitter().statement(document.statements[0])
+        self.assertTrue(self.evaluate("let upstream = import <nixpkgs> {}; "
+            "pkgs = upstream // { zenos.legacy = upstream; }; " + emitted
+            + " in values.hello.drvPath == upstream.hello.drvPath"))
+
+    def test_typed_collections_do_not_skip_invalid_members_with_derivation_shaped_keys(self):
+        source = '_let value: $type.set [ ($type.either [ $type.string $type.int ]) ] = $lib.id { type = "derivation"; outPath = "fake"; bad = true; };'
+        emitted = NixEmitter().statement(parse(source, "record.zmdl").statements[0])
+        self.assertIn("not of type", self.evaluate("let " + emitted + " in value.type", failure=True))
+
     def test_bound_annotation_validation_is_universal(self):
         for kind in ("zcfg", "zmdl", "zpkg", "zstr"):
             with self.subTest(kind=kind):

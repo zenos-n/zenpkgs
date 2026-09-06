@@ -60,11 +60,14 @@ serialize sibling metadata or recurse into their children.
   resets at each actual bundle mount; it does not reset on recursive upstream
   submodules. Same-named path segments are not mistaken for recursion.
 - Type wrappers: at most 8 unwrap/inline steps per expansion. Attr collections
-  use `<name>` and lists use `*`. Submodule freeform schemas are expanded, with
-  explicit mounted children taking precedence over upstream children.
+  use `<name>` and lists use `*`. Submodule freeform schemas are expanded with
+  disjoint local children. Duplicate schema owners, including local declarations
+  of existing upstream children, are rejected during trusted schema construction
+  before search output, per D12 and `design/mounting-and-build-decisions.md` in
+  the design authority repository.
   Alias roots, including submodules with a mirror freeform type, are upstream.
   Mirrored children inherit upstream provenance; declared local children and
-  mounts replace that provenance along with the schema. A local collection is
+  mounts retain local provenance. A local collection is
   not upstream just because its element schema is an alias.
 - Packages: 16 levels locally, 2 beneath `pkgs.legacy`. Derivations at the
   boundary are still emitted, but deeper package sets are marked `depth-limit`.
@@ -94,14 +97,17 @@ nix build --impure --no-link --print-out-paths --expr '
   }'
 nix eval --impure --json --expr 'import ./tests/search/production.nix {}'
 nix eval --json --file tests/search/no-structure.nix
+PYTHONPATH=lib/zen-dsl python3 tests/search/run-ownership.py \
+  --nixpkgs "$(nix eval --impure --raw --expr '(builtins.getFlake ("path:" + toString ./.)).inputs.nixpkgs.outPath')" \
+  --home-manager "$(nix eval --impure --raw --expr '(builtins.getFlake ("path:" + toString ./.)).inputs.home-manager.outPath')"
 ```
 
 The synthetic bundle checks relocated mounts, inherited and overridden versions,
 node-local attribution, dynamically added upstream options,
-NixOS/user/Home Manager and Syncthing alias roots and descendants, local children
-overlaid on mirrors, and a local `legacy.homeManager` mount replacing an upstream
-child. Mounted overrides retain compiler `nodeMetadata`, including inherited
-versions and node-local attribution. Serializer checks cover direct and wrapped
+NixOS/user/Home Manager and Syncthing alias roots and descendants, all four alias
+mount paths, disjoint local children on mirrors, and a local `legacy.homeManager`
+mount where no upstream child exists. Local mounts retain compiler `nodeMetadata`,
+including inherited versions and node-local attribution. Serializer checks cover direct and wrapped
 mirrors, alias collection elements, and unavailable/depth-limited alias roots.
 The bundle also checks freeforms, package hierarchy and universe
 exclusions, diagnostics, defaults, type wrappers, recursion stops, and small
@@ -110,6 +116,16 @@ serialize only a program, package, and upstream option. The no-structure check
 imports the real script from a filtered production source without root ZSTR.
 None of these checks claim that the entire upstream index was serialized or that
 module activation/runtime behavior was tested.
+
+The ownership runner uses private `/tmp` fixtures and flake inputs without forcing
+production flake outputs. It checks a narrow real-Syncthing alias with a disjoint
+local child as well as the full acceptance fixture, rejection
+of a local `syncthing.enable` declaration duplicating the real upstream leaf, and
+rejection of the local mount when an upstream `homeManager` child is introduced.
+Both negative cases require a nonzero exit, no JSON output, the full mounted path,
+and both local and upstream source diagnostics. Use `--case` to isolate a case
+when another backend path is blocked. Production checks are separate
+and may be blocked by unrelated package integration.
 
 ## Flake Hooks
 

@@ -24,13 +24,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "firefox"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.browsers.librewolf",
@@ -52,13 +65,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "librewolf"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.browsers.ungoogled-chromium",
@@ -80,13 +106,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "ungoogled-chromium"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.browsers.brave-browser",
@@ -108,13 +147,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "brave"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.browsers.epiphany",
@@ -136,13 +188,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "epiphany"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.browsers.tor-browser",
@@ -164,13 +229,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "tor-browser"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gaming.steam",
@@ -192,13 +270,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "steam"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gaming.heroic",
@@ -220,13 +311,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "heroic"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gaming.lutris",
@@ -248,13 +352,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "lutris"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gaming.bottles",
@@ -276,13 +393,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "bottles"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gaming.prism-launcher",
@@ -304,13 +434,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "prismlauncher"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gaming.retroarch",
@@ -332,13 +475,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "retroarch"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development.vscode",
@@ -360,13 +516,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "vscode"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development.zed",
@@ -388,13 +557,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "zed-editor"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development.gnome-builder",
@@ -416,13 +598,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnome-builder"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development.neovim",
@@ -444,13 +639,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "neovim"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development.helix",
@@ -472,13 +680,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "helix"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development.gitg",
@@ -500,13 +721,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gitg"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development.github-cli",
@@ -528,13 +762,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gh"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development.docker",
@@ -556,13 +803,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "docker"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development.jetbrains-toolbox",
@@ -584,13 +844,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "jetbrains-toolbox"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.nautilus",
@@ -612,13 +885,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "nautilus"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.nautilus-python",
@@ -640,13 +926,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "nautilus-python"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.gnome-console",
@@ -668,13 +967,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnome-console"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.gnome-system-monitor",
@@ -696,13 +1008,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnome-system-monitor"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.gnome-control-center",
@@ -724,13 +1049,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnome-control-center"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.gnome-extensions-app",
@@ -752,13 +1090,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnome-extension-manager"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.gnome-tweaks",
@@ -780,13 +1131,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnome-tweaks"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.kitty",
@@ -808,13 +1172,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "kitty"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.btop",
@@ -836,13 +1213,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "btop"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.fish",
@@ -864,13 +1254,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "fish"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.zsh",
@@ -892,13 +1295,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "zsh"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.ncurses",
@@ -920,13 +1336,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "ncurses"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.system.eza",
@@ -948,13 +1377,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "eza"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.utilities.pika-backup",
@@ -976,13 +1418,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "pika-backup"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.utilities.metadata-cleaner",
@@ -1004,13 +1459,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "metadata-cleaner"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.utilities.curtail",
@@ -1032,13 +1500,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "curtail"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.utilities.gnome-boxes",
@@ -1060,13 +1541,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnome-boxes"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.utilities.file-roller",
@@ -1088,13 +1582,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "file-roller"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.utilities.impression",
@@ -1116,13 +1623,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "impression"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.utilities.cipher",
@@ -1144,13 +1664,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "decoder"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.utilities.resources",
@@ -1172,13 +1705,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "resources"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.utilities.mission-center",
@@ -1200,13 +1746,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "mission-center"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.office.libreoffice",
@@ -1228,13 +1787,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "libreoffice"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.office.onlyoffice",
@@ -1256,13 +1828,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "onlyoffice-desktopeditors"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.office.thunderbird",
@@ -1284,13 +1869,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "thunderbird"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.office.obsidian",
@@ -1312,13 +1910,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "obsidian"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.office.apostrophe",
@@ -1340,13 +1951,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "apostrophe"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.office.foliate",
@@ -1368,13 +1992,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "foliate"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.office.papers",
@@ -1396,13 +2033,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "papers"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.advanced.virt-manager",
@@ -1424,13 +2074,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "virt-manager"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.advanced.podman-desktop",
@@ -1452,13 +2115,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "podman-desktop"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.advanced.wireshark",
@@ -1480,13 +2156,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "wireshark"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.advanced.gparted",
@@ -1508,13 +2197,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gparted"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.advanced.keepassxc",
@@ -1536,13 +2238,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "keepassxc"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.advanced.bitwarden",
@@ -1564,13 +2279,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "bitwarden-desktop"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.advanced.cockpit",
@@ -1592,13 +2320,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "cockpit"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.advanced.nmap",
@@ -1620,13 +2361,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "nmap"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development-tools.git",
@@ -1650,13 +2404,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "git"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.development-tools.nano",
@@ -1680,13 +2447,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "nano"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.security-tools.openssl",
@@ -1710,13 +2490,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "openssl"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.gparted-live",
@@ -1740,13 +2533,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gparted"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.gnome-console-live",
@@ -1770,13 +2576,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnome-console"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.fonts.atkinson-hyperlegible",
@@ -1800,13 +2619,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "atkinson-hyperlegible"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.fonts.atkinson-hyperlegible-mono",
@@ -1831,13 +2663,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "nerd-fonts"
+            },
+            {
+              "kind": "identifier",
+              "value": "atkynson-mono"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.fonts.inter",
@@ -1861,13 +2710,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "inter"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.cursors.google-dot",
@@ -1891,13 +2753,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "google-cursor"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.themes.adw-gtk3",
@@ -1921,13 +2796,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "adw-gtk3"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.user-themes",
@@ -1952,13 +2840,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "user-themes"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.app-hider",
@@ -1983,13 +2888,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "app-hider"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.hide-minimized",
@@ -2014,13 +2936,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "hide-minimized"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.hide-cursor",
@@ -2045,13 +2984,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "hide-cursor"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.burn-my-windows",
@@ -2076,13 +3032,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "burn-my-windows"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.compiz-windows-effect",
@@ -2107,13 +3080,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "compiz-windows-effect"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.compiz-alike-magic-lamp-effect",
@@ -2138,13 +3128,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "compiz-alike-magic-lamp-effect"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.rounded-window-corners-reborn",
@@ -2169,13 +3176,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "rounded-window-corners-reborn"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.alphabetical-app-grid",
@@ -2200,13 +3224,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "alphabetical-app-grid"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.category-sorted-app-grid",
@@ -2231,13 +3272,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "category-sorted-app-grid"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.coverflow-alt-tab",
@@ -2262,13 +3320,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "coverflow-alt-tab"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.hide-top-bar",
@@ -2293,13 +3368,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "hide-top-bar"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.mouse-tail",
@@ -2324,13 +3416,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "mouse-tail"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.window-is-ready-remover",
@@ -2355,13 +3464,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "window-is-ready-remover"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.date-menu-formatter",
@@ -2386,13 +3512,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "date-menu-formatter"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.gsconnect",
@@ -2417,13 +3560,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "gsconnect"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.clipboard-indicator",
@@ -2448,13 +3608,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "clipboard-indicator"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.gnome-extensions.notification-timeout",
@@ -2479,13 +3656,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnomeExtensions"
+            },
+            {
+              "kind": "identifier",
+              "value": "notification-timeout"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.gnome-disks",
@@ -2509,13 +3703,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnome-disk-utility"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.testdisk",
@@ -2539,13 +3746,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "testdisk"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.ddrescue",
@@ -2569,13 +3789,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "ddrescue"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.smartmontools",
@@ -2599,13 +3832,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "smartmontools"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.nvme-cli",
@@ -2629,13 +3875,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "nvme-cli"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.parted",
@@ -2659,13 +3918,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "parted"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.gptfdisk",
@@ -2689,13 +3961,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gptfdisk"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.util-linux",
@@ -2719,13 +4004,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "util-linux"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.e2fsprogs",
@@ -2749,13 +4047,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "e2fsprogs"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.btrfs-progs",
@@ -2779,13 +4090,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "btrfs-progs"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.xfsprogs",
@@ -2809,13 +4133,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "xfsprogs"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.f2fs-tools",
@@ -2839,13 +4176,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "f2fs-tools"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.dosfstools",
@@ -2869,13 +4219,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "dosfstools"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.exfatprogs",
@@ -2899,13 +4262,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "exfatprogs"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.ntfs3g",
@@ -2929,13 +4305,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "ntfs3g"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.lvm2",
@@ -2959,13 +4348,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "lvm2"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.cryptsetup",
@@ -2989,13 +4391,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "cryptsetup"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.mdadm",
@@ -3019,13 +4434,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "mdadm"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.efibootmgr",
@@ -3049,13 +4477,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "efibootmgr"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.mokutil",
@@ -3079,13 +4520,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "mokutil"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.rsync",
@@ -3109,13 +4563,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "rsync"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.curl",
@@ -3139,13 +4606,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "curl"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.wget",
@@ -3169,13 +4649,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "wget"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.openssh",
@@ -3199,13 +4692,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "openssh"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.iproute2",
@@ -3229,13 +4735,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "iproute2"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.iputils",
@@ -3259,13 +4778,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "iputils"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.dnsutils",
@@ -3291,13 +4823,30 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "bind"
+            },
+            {
+              "kind": "identifier",
+              "value": "dnsutils"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.pciutils",
@@ -3321,13 +4870,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "pciutils"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.usbutils",
@@ -3351,13 +4913,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "usbutils"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.dmidecode",
@@ -3381,13 +4956,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "dmidecode"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.lshw",
@@ -3411,13 +4999,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "lshw"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.jq",
@@ -3441,13 +5042,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "jq"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.less",
@@ -3471,13 +5085,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "less"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.tar",
@@ -3501,13 +5128,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnutar"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.zip",
@@ -3531,13 +5171,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "zip"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.unzip",
@@ -3561,13 +5214,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "unzip"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.zstd",
@@ -3591,13 +5257,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "zstd"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.squashfs-tools",
@@ -3621,13 +5300,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "squashfsTools"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.arch-install-scripts",
@@ -3651,13 +5343,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "arch-install-scripts"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     },
     {
       "id": "pkgs.apps.recovery.nixos-install-tools",
@@ -3681,13 +5386,26 @@
         "maintainers": [
           "doromiert"
         ],
-        "dependencies": {
-          "general": [],
-          "build": [],
-          "runtime": []
-        },
         "license": null
-      }
+      },
+      "provider": {
+        "kind": "import",
+        "expression": {
+          "type": "variable",
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "nixos-install-tools"
+            }
+          ]
+        }
+      },
+      "dependenciesDeclared": false
     }
   ]
 }

@@ -8,11 +8,6 @@ _meta = {
   packageVersion = "";
   tags = [ ];
   maintainers = [ $m.doromiert ];
-  dependencies = {
-    general = [ ];
-    build = [ ];
-    runtime = [ ];
-  };
 };
 
 import $pkgs.legacy.neovim;

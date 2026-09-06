@@ -42,6 +42,16 @@ let
     else if (value._type or "") == "override" then lib.mkOverride value.priority (removeDefinitionAttrs names value.content)
     else builtins.removeAttrs value names;
 
+  removeDefinitionPath = path: value:
+    if builtins.length path == 1 then removeDefinitionAttrs path value
+    else if (value._type or "") == "merge" then lib.mkMerge (map (removeDefinitionPath path) value.contents)
+    else if (value._type or "") == "if" then lib.mkIf value.condition (removeDefinitionPath path value.content)
+    else if (value._type or "") == "override" then lib.mkOverride value.priority (removeDefinitionPath path value.content)
+    else let key = builtins.head path; in
+      if builtins.hasAttr key value then value // {
+        ${key} = removeDefinitionPath (builtins.tail path) value.${key};
+      } else value;
+
   schemaAt = options: path:
     let
       walk = node: rest: prefix:
@@ -133,16 +143,67 @@ in rec {
         value = source;
       }) (builtins.filter (source: source.kind == "zmdl") bundle.sources));
       moduleRecords = bundle.modules or [ ];
+      # Schema ownership is checked without inspecting configuration values or
+      # action bodies, including options beneath an unused alias/freeform mount.
+      ownershipChecks = lib.concatMap (alias:
+        let
+          env = builtins.listToAttrs (map (part: {
+            name = identifier part; value = part;
+          }) (builtins.filter wildcard alias.path));
+          upstream = schemaAt options (aliasTarget alias env);
+          overlap = schema: rest: upstreamPath:
+            if rest == [ ] then { inherit schema upstreamPath; }
+            else if lib.isOption schema then
+              if builtins.elem schema.type.name [ "attrsOf" "lazyAttrsOf" ] then
+                let prefix = upstreamPath ++ [ builtins.head rest ];
+                    nested = schema.type.nestedTypes.elemType.getSubOptions prefix;
+                in if builtins.attrNames nested == [ ] then { inherit schema upstreamPath; }
+                else overlap nested (builtins.tail rest) prefix
+              else let nested = schema.type.getSubOptions upstreamPath; in
+                if builtins.attrNames nested == [ ] then { inherit schema upstreamPath; }
+                else overlap nested rest upstreamPath
+            else let key = builtins.head rest; in
+              if builtins.hasAttr key schema then
+                overlap schema.${key} (builtins.tail rest) (upstreamPath ++ [ key ])
+              else null;
+        in map (owner:
+          let collision = overlap upstream
+            (lib.drop (builtins.length alias.path) owner.path) (aliasTarget alias env);
+              declarations = if collision == null then [ ] else
+                let collect = schema: if lib.isOption schema then schema.declarations or [ ]
+                  else lib.findFirst (locations: locations != [ ]) [ ]
+                    (map (key: collect schema.${key}) (builtins.attrNames schema));
+                in lib.unique (collect collision.schema);
+          in if collision == null then true else throw
+            ("duplicate mounted option zenos.${lib.showOption owner.path}: ${owner.source} and "
+              + "${alias.source} (upstream ${lib.showOption collision.upstreamPath}"
+              + lib.optionalString (declarations != [ ]) " declared in ${lib.concatStringsSep ", " (map toString declarations)}"
+              + ")")
+        ) (builtins.filter (owner:
+          builtins.length owner.path > builtins.length alias.path
+          && lib.take (builtins.length alias.path) owner.path == alias.path
+        ) bundle.mountedOwnership.ownership)
+      ) (if present then bundle.mountedOwnership.ownershipAliases else [ ]);
+      # The module system needs the type and definition shapes to assemble its
+      # fixed point. Validate when exposing schema, not while collecting it.
+      ownedType = type: type // {
+        name = builtins.deepSeq ownershipChecks type.name;
+        getSubOptions = prefix: builtins.deepSeq ownershipChecks (type.getSubOptions prefix);
+        substSubModules = modules: ownedType (type.substSubModules modules);
+      };
       initial = lib.foldl' (tree: node: put node.path
         (x: x // { optionNix = node.optionNix or null; }) tree) emptyNode
         (if present then bundle.structure.nodes or [ ] else [ ]);
       moduleAliases = node: lib.concatMap (source:
         sources.${source}.descriptor.aliases or [ ]
       ) node.definitions;
+      ownerSource = path: fallback:
+        let owners = builtins.filter (owner: owner.path == path) bundle.mountedOwnership.ownership;
+        in if owners == [ ] then fallback else (builtins.head owners).source;
       tree = lib.foldl' (tree: mount:
         if mount.kind != "zmdl" then put mount.path (node:
-          if moduleAliases node != [ ] then
-            throw "Unsupported ZMDL alias/mount collision at ${lib.showOption mount.path}: precedence is unresolved"
+          if node.mount != null then
+            throw "duplicate mounted option zenos.${lib.showOption mount.path}: ${ownerSource mount.path (lib.concatStringsSep ", " node.definitions)} and structure.zstr (additional ${mount.kind} mount)"
           else node // { inherit mount; }) tree
         else let
           matches = builtins.filter (record:
@@ -150,13 +211,15 @@ in rec {
           ) moduleRecords;
         in if matches == [ ] then throw "ZSTR module mount has no source: ${lib.showOption mount.target}"
         else lib.foldl' (result: record:
-          put (mount.path ++ lib.drop (builtins.length mount.target) (builtins.tail record.optionPath))
+          let mountedPath = mount.path ++ lib.drop (builtins.length mount.target) (builtins.tail record.optionPath); in
+          put mountedPath
             (node: let
               aliases = sources.${record.path}.descriptor.aliases or [ ];
               rootAliases = builtins.filter (alias: alias.path == [ ]) aliases;
-            in if node.mount != null && (aliases != [ ] || (node.mount.moduleLocal or false))
-              || node.definitions != [ ] && (aliases != [ ] || moduleAliases node != [ ]) then
-              throw "Unsupported ZMDL alias collision at ${lib.showOption mount.path}: precedence is unresolved"
+            in if node.mount != null && rootAliases != [ ] then
+              throw "duplicate mounted option zenos.${lib.showOption mountedPath}: ${ownerSource mountedPath "structure.zstr"} and ${record.path}"
+            else if node.mount != null && (node.mount.moduleLocal or false) && aliases != [ ] then
+              throw "duplicate mounted option zenos.${lib.showOption mountedPath}: ${ownerSource mountedPath "structure.zstr"} and ${record.path}"
             else node // {
               definitions = node.definitions ++ [ record.path ];
               mount = if rootAliases == [ ] then node.mount else (builtins.head rootAliases) // { moduleLocal = true; };
@@ -179,6 +242,32 @@ in rec {
         if target == [ ] || builtins.head target != "nixpkgs" then
           throw "ZSTR aliases must target nixpkgs options"
         else builtins.tail target;
+      localOwners = path: builtins.filter (owner:
+        builtins.length owner.path > builtins.length path
+        && lib.take (builtins.length path) owner.path == path
+      ) bundle.mountedOwnership.ownership;
+      removeLocal = path: value: lib.foldl' (value: owner:
+        removeDefinitionPath (lib.drop (builtins.length path) owner.path) value
+      ) value (localOwners path);
+      inheritedAliasSchema = path: env:
+        let
+          ancestors = builtins.filter (alias:
+            builtins.length alias.path < builtins.length path
+            && lib.take (builtins.length alias.path) path == alias.path
+          ) bundle.mountedOwnership.ownershipAliases;
+          alias = lib.foldl' (a: b: if a == null || builtins.length b.path > builtins.length a.path then b else a) null ancestors;
+          walk = schema: rest: prefix:
+            if rest == [ ] then schema
+            else if lib.isOption schema then
+              if builtins.elem schema.type.name [ "attrsOf" "lazyAttrsOf" ] then
+                walk (schema.type.nestedTypes.elemType.getSubOptions prefix)
+                  (builtins.tail rest) (prefix ++ [ builtins.head rest ])
+              else walk (schema.type.getSubOptions prefix) rest prefix
+            else let key = builtins.head rest; in
+              if builtins.hasAttr key schema then walk schema.${key} (builtins.tail rest) (prefix ++ [ key ])
+              else null;
+        in if alias == null then null else
+          walk (schemaAt options (aliasTarget alias env)) (lib.drop (builtins.length alias.path) path) (aliasTarget alias env);
       aliasType = schema: lib.types.mkOptionType {
         name = "zstr-upstream-mirror";
         description = "ZSTR-mounted upstream options";
@@ -191,10 +280,13 @@ in rec {
           }; in definedConfig (builtins.removeAttrs evaluated.options [ "_module" ]) evaluated.config;
         getSubOptions = loc: if lib.isOption schema then schema.type.getSubOptions loc else mirrorOptions schema;
       };
-      moduleAliasOption = target:
+      moduleAliasOption = target: localSchema:
         let schema = schemaAt options (aliasTarget { inherit target; } { }); in
-        lib.mkOption ({ type = if lib.isOption schema then schema.type else aliasType schema; }
-          // lib.optionalAttrs (!lib.isOption schema) { default = { }; });
+        lib.mkOption ({ type =
+          if localSchema.options != { } || localSchema ? freeformType then
+            lib.types.submodule { imports = [ localSchema ]; freeformType = aliasType schema; }
+          else if lib.isOption schema then schema.type else aliasType schema;
+        } // lib.optionalAttrs (!lib.isOption schema || localSchema.options != { }) { default = { }; });
       selectorType = path: lib.types.mkOptionType {
         name = "zstr-package-selectors";
         description = "boolean selectors for public pkgs paths";
@@ -218,9 +310,12 @@ in rec {
       };
       nodeOption = node: path: env: user:
         if node.optionNix != null && moduleAliases node != [ ] then
-          throw "Unsupported ZMDL alias/local option collision at ${lib.showOption path}: precedence is unresolved"
-        else if node.mount != null && (node.mount.moduleLocal or false) && node.children == { } then
+          throw "duplicate mounted option zenos.${lib.showOption path}: ${ownerSource path (lib.concatStringsSep ", " node.definitions)} and structure.zstr (local option)"
+        else if node.mount != null && (node.mount.moduleLocal or false) && node.children == { }
+          && builtins.length node.definitions == 1
+          && (instantiate (builtins.head node.definitions) { } env user true).schema.options == { } then
           moduleAliasOption ([ "nixpkgs" ] ++ aliasTarget node.mount env)
+            (instantiate (builtins.head node.definitions) { } env user true).schema
         else if node.optionNix != null then
           import (builtins.toFile "zstr-option.nix" node.optionNix) {
             inherit pkgs config;
@@ -229,19 +324,11 @@ in rec {
           }
         else lib.mkOption { type = nodeType node path env user; default = { }; };
       nodeType = node: path: env: user:
-        if builtins.any (alias:
-          alias.path == [ ] && node.children != { }
-          || alias.path != [ ] && (builtins.isAttrs (builtins.head alias.path)
-            && node.children != { } || builtins.isString (builtins.head alias.path)
-            && builtins.hasAttr (builtins.head alias.path) node.children)
-        ) (moduleAliases node) then
-          throw "Unsupported ZMDL alias/local child collision at ${lib.showOption path}: precedence is unresolved"
-        else if node.mount != null && (node.mount.moduleLocal or false) then
-          aliasType (schemaAt options (aliasTarget node.mount env))
-        else if node.mount != null && node.mount.kind == "packages" then selectorType path
+        if node.mount != null && node.mount.kind == "packages" then selectorType path
         else let
           wildcards = builtins.filter wildcard (builtins.attrNames node.children);
           children = lib.filterAttrs (key: _: !wildcard key) node.children;
+          inheritedSchema = inheritedAliasSchema path env;
           systemPath = [ "system" ] ++ lib.drop 2 path;
           inheritsProgram = lib.take 1 path == [ "users" ]
             && lib.take 1 (lib.drop 2 path) == [ "programs" ]
@@ -265,10 +352,11 @@ in rec {
               ) (lib.concatMap (definition: schemaValues (selectDefinition systemPath definition.value))
                 options.zenos.definitionsWithLocations)))
               (lib.getAttrFromPath systemPath rootConfig.zenos);
-          } // lib.optionalAttrs ((node.mount != null && node.mount.kind == "alias") || wildcards != [ ]) {
+          } // lib.optionalAttrs ((node.mount != null && node.mount.kind == "alias") || inheritedSchema != null || wildcards != [ ]) {
             freeformType =
               if node.mount != null && node.mount.kind == "alias" then
                 aliasType (schemaAt options (aliasTarget node.mount env))
+              else if inheritedSchema != null then aliasType inheritedSchema
               else if wildcards != [ ] then
                 let key = builtins.head wildcards; in
                 assert builtins.length wildcards == 1;
@@ -299,7 +387,9 @@ in rec {
                   inherit (definition) file;
                   value = lib.setAttrByPath (aliasTarget alias aliasEnv)
                     (let selected = pruneInactive (schemaAt options (aliasTarget alias aliasEnv))
-                      (selectDefinition sourcePath definition.value); in
+                      (removeLocal (path ++ map (part:
+                        if builtins.isAttrs part then "{${part.freeform}}" else part
+                      ) alias.path) (selectDefinition sourcePath definition.value)); in
                     if emptyDefinition selected then selected else
                       builtins.seq (lib.getAttrFromPath sourcePath config.zenos) selected);
                 }) options.zenos.definitionsWithLocations
@@ -322,8 +412,7 @@ in rec {
               value = lib.setAttrByPath (aliasTarget node.mount env) (let
                 schema = schemaAt options (aliasTarget node.mount env);
                 selected = selectDefinition (resolve env path) definition.value;
-                pruned = pruneInactive schema (if lib.isOption schema then selected else
-                  removeDefinitionAttrs (builtins.attrNames node.children) selected);
+                pruned = pruneInactive schema (removeLocal path selected);
               in if emptyDefinition pruned then pruned else builtins.seq value pruned);
             }) options.zenos.definitionsWithLocations;
           nested = lib.concatLists (lib.mapAttrsToList (key: child:
@@ -356,12 +445,13 @@ in rec {
       ) (builtins.filter (source: builtins.elem source.path exposedSources) bundle.sources);
     in lib.optionalAttrs present {
       options.zenos = lib.mkOption {
-        type = nodeType tree [ ] { } null;
+        type = ownedType (nodeType tree [ ] { } null);
         default = { };
       };
       config = lib.genAttrs (lib.unique (staticRoots tree ++ lib.optional (metadataWarnings != [ ]) "warnings")) (root:
-        lib.mkMerge ((map (project root) (actionsFor root tree [ ] { } null config.zenos))
+        lib.mkIf (builtins.deepSeq ownershipChecks true) (lib.mkMerge ((map (project root) (actionsFor root tree [ ] { } null config.zenos))
           ++ lib.optional (root == "warnings") metadataWarnings)
+        )
       );
     };
 }

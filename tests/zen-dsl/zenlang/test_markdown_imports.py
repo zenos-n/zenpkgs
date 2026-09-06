@@ -78,7 +78,7 @@ class MarkdownImportTests(unittest.TestCase):
                 build = compile_zpkg(document, mode="build")
                 self.assertIn('description = ' + quote_nix_string(text) + ';', build)
                 self.assertIn("package = pkgs.zenos.legacy.demo;", build)
-                self.assertIn("(package.meta or { }) // suppliedMetadata", build)
+                self.assertIn("zpkgRuntime { provider = package; metadata = suppliedMetadata;", build)
 
     def test_unresolved_expression_is_explicit_and_not_emitted(self):
         value = parse('_meta.description = _import "./description.md";', "entry.zmdl").statements[0].value

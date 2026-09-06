@@ -8,11 +8,6 @@ _meta = {
   packageVersion = "";
   tags = [ "browser" "desktop" ];
   maintainers = [ $m.doromiert ];
-  dependencies = {
-    general = [ ];
-    build = [ ];
-    runtime = [ ];
-  };
 };
 
 import $pkgs.legacy.firefox;

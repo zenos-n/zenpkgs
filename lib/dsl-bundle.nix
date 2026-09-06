@@ -143,12 +143,30 @@ let
         )
     ) { } statements;
 
+  decodeDependencies = value:
+    if value.type == "group" then decodeDependencies value.value
+    else if value.type == "variable" && value.name == "pkgs" then {
+      namespace = "pkgs";
+      path = pathFromDescriptor value.path;
+    }
+    else if value.type == "list" then map decodeDependencies value.items
+    else if value.type == "attr-set" then lib.foldl' (result: statement:
+      require (statement.type == "assignment" && statement.operator == "=")
+        "dependencies require plain scope assignments"
+        (lib.recursiveUpdate result (lib.setAttrByPath (pathFromDescriptor statement.target)
+          (decodeDependencies statement.value)))
+    ) { } value.statements
+    else throw "ZenPkgs DSL adapter: dependencies require structured package references";
+
   decodeInterfaceAt =
     identity: location: descriptor:
     let
-      metadata = lib.mapAttrs (_: decodeValue) (descriptor.metadata or { });
-      packageImport = descriptor.packageImport;
-      importPath = pathFromDescriptor packageImport.path;
+      metadata = lib.mapAttrs (name: if name == "dependencies" then decodeDependencies else decodeValue)
+        (descriptor.metadata or { });
+      provider = descriptor.provider;
+      packageImport = provider.expression;
+      importPath = if provider.kind == "import" then pathFromDescriptor packageImport.path else [ ];
+      dependenciesDeclared = descriptor.dependenciesDeclared;
       dependencies = metadata.dependencies or { };
       defaults = {
         name = "";
@@ -201,6 +219,8 @@ let
             else
               metadata.packageVersion;
           maintainers = map normalizeMaintainer (metadata.maintainers or [ ]);
+        }
+        // lib.optionalAttrs dependenciesDeclared {
           dependencies = {
             general = dependencies.general or [ ];
             build = dependencies.build or [ ];
@@ -210,11 +230,12 @@ let
     in
     assert descriptor.descriptorVersion == "zenlang.semantic/2";
     assert descriptor.kind == "zpkg";
-    assert descriptor.imports == [ ];
-    assert packageImport.type == "variable";
-    assert packageImport.name == "pkgs";
-    assert builtins.length importPath >= 2;
-    assert builtins.head importPath == "legacy";
+    assert builtins.elem provider.kind [ "import" "build" ];
+    assert provider.kind != "import" || (
+      packageImport.type == "variable" && packageImport.name == "pkgs"
+      && builtins.length importPath >= 2 && builtins.head importPath == "legacy"
+    );
+    assert builtins.isBool dependenciesDeclared && dependenciesDeclared == (metadata ? dependencies);
     assert builtins.isAttrs (descriptor.metadata or { });
     assert lib.all (field: !(metadata ? ${field}) || builtins.isString metadata.${field}) [
       "name"
@@ -244,17 +265,17 @@ let
         "runtime"
       ]
       && builtins.isList dependencies.${scope}
-      && lib.all builtins.isString dependencies.${scope}
+      && lib.all (reference: reference.namespace == "pkgs" && reference.path != [ ]) dependencies.${scope}
     ) (builtins.attrNames dependencies);
     lib.foldr
       (
         warning: value:
         builtins.trace "ZenPkgs metadata warning: ${identity} (${location}): ${warning}" value
       )
-      {
-        inherit meta;
-        sourcePath = builtins.tail importPath;
-      }
+      ({
+        inherit meta provider dependenciesDeclared;
+        location = descriptor.location or location;
+      } // lib.optionalAttrs (provider.kind == "import") { sourcePath = builtins.tail importPath; })
       warnings;
 
   decodeInterface =
@@ -368,6 +389,7 @@ in
           entry = entry // {
             id = canonical.id;
             target = canonical.target;
+            buildFile = bundlePath + "/builds/${source.path}.nix";
           };
         }
       ) sources;

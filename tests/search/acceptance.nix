@@ -2,6 +2,7 @@
   nixpkgs,
   home-manager,
   bundle,
+  extraModules ? [ ],
 }:
 let
   pkgs = import nixpkgs { system = "x86_64-linux"; };
@@ -33,7 +34,6 @@ let
             type = lib.types.str;
             default = "new upstream option";
           };
-          options.homeManager.upstreamOnly = lib.mkEnableOption "shadowed upstream child";
           config.home-manager.sharedModules = [
             ({ lib, ... }: {
               options.zenos.private = lib.mkOption {
@@ -43,7 +43,7 @@ let
             })
           ];
         })
-      ];
+      ] ++ extraModules;
     };
   index = search.mkIndex {
     evaluated = evaluate bundle;
@@ -66,11 +66,13 @@ let
   syncthing = index.options.system.sub.syncthing;
   localMount = index.options.legacy.sub.homeManager;
   userLocalMount = user.sub.legacy.sub.homeManager.sub.local;
+  aliasPaths = map (mount: mount.path) (
+    builtins.filter (mount: mount.kind == "alias") bundle.structure.mounts
+  );
   mirrorType = lib.types.mkOptionType {
     name = "zstr-upstream-mirror";
     getSubOptions = _: {
       remote = lib.mkOption { type = lib.types.str; };
-      local = lib.mkOption { type = lib.types.str; };
     };
   };
   overlayType = lib.types.submodule {
@@ -174,6 +176,14 @@ let
     freeform = demo.sub.instances.sub."<name>".sub.label.meta.defaultStatus == "unavailable";
     noCompatibilityRoots = !(index.options ? programs) && !(index.options ? zenos);
     upstreamDiscovery = index.options.legacy.sub.future.sub.marker.meta.typeName == "str";
+    aliasMountPaths =
+      builtins.length aliasPaths == 4
+      && builtins.all (path: builtins.elem path aliasPaths) [
+        [ "legacy" ]
+        [ "system" "syncthing" ]
+        [ "users" "{user}" "legacy" ]
+        [ "users" "{user}" "legacy" "homeManager" ]
+      ];
     aliasRoots =
       index.options.legacy.meta.upstream
       && syncthing.meta.upstream
@@ -183,6 +193,8 @@ let
       index.options.legacy.sub.future.meta.upstream
       && index.options.legacy.sub.future.sub.marker.meta.upstream
       && syncthing.sub.guiAddress.meta.upstream
+      && syncthing.sub.enable.meta.upstream
+      && syncthing.sub.enable.meta.defaultStatus == "unavailable"
       && syncthing.sub.settings.meta.upstream
       && syncthing.sub.settings.sub.folders.sub."<name>".meta.upstream
       && user.sub.legacy.sub.isNormalUser.meta.upstream
@@ -190,9 +202,9 @@ let
     localAliasChildren =
       !syncthing.sub.local.meta.upstream
       && syncthing.sub.local.meta.defaultStatus == "absent"
-      && !syncthing.sub.enable.meta.upstream
-      && syncthing.sub.enable.meta.default == true;
-    localMountedOverride =
+      && !syncthing.sub.localEnabled.meta.upstream
+      && syncthing.sub.localEnabled.meta.default == true;
+    disjointLocalMount =
       !localMount.meta.upstream
       && !localMount.sub.message.meta.upstream
       && !localMount.sub.instances.sub."<name>".sub.label.meta.upstream
@@ -211,7 +223,7 @@ let
       && syncthing.sub.guiAddress.meta.license == null
       && syncthing.sub.local.meta.maintainers == [ ]
       && syncthing.sub.local.meta.license == null;
-    mountedOverrideMetadata =
+    mountedLocalMetadata =
       builtins.all
         (
           node:

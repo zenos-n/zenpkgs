@@ -166,8 +166,7 @@ sibling = enableOption {};
         for package_version, expected in ((None, "1.2.3"), ('""', "1.2.3"), ('"upstream-9"', "upstream-9")):
             with self.subTest(package_version=package_version):
                 fields = '''name = "Authored"; summary = "Summary"; description = ''Markdown'';
-                    zenosVersion = 1.2.3; tags = [ "test" ]; maintainers = [ $m.doromiert ]; license = $l.mit;
-                    dependencies = { general = []; build = []; runtime = []; };'''
+                    zenosVersion = 1.2.3; tags = [ "test" ]; maintainers = [ $m.doromiert ]; license = $l.mit;'''
                 if package_version is not None:
                     fields += "packageVersion = " + package_version + ";"
                 document = parse("_meta = { " + fields + " }; import $pkgs.legacy.demo;", "demo.zpkg")
@@ -176,7 +175,7 @@ sibling = enableOption {};
                 expression = '''let
                     original = (builtins.derivation {
                         name = "metadata-parity"; system = builtins.currentSystem; builder = "/bin/sh";
-                    }) // { meta = { upstreamOnly = true; summary = "Upstream"; }; passthru.keep = 42; };
+                    }) // { meta = { upstreamOnly = true; summary = "Upstream"; dependencies.runtime = [ "inherited" ]; }; passthru.keep = 42; };
                     maintainers.doromiert = { name = "Maintainer"; };
                     licenses.mit = { spdxId = "MIT"; };
                     decorated = (''' + build + ''') { pkgs.zenos.legacy.demo = original; inherit maintainers licenses; };
@@ -198,6 +197,8 @@ sibling = enableOption {};
                     packageVersion = decorated.meta.packageVersion;
                     interfacePackageVersion = decode descriptor.metadata.packageVersion;
                     dependencies = decorated.meta.dependencies;
+                    dependenciesDeclared = descriptor.dependenciesDeclared;
+                    interfaceHasDependencies = descriptor.metadata ? dependencies;
                 }'''
                 result = subprocess.run(
                     ["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--json", "--expr", expression],
@@ -209,7 +210,8 @@ sibling = enableOption {};
                     "name": "Authored", "summary": "Summary", "description": "Markdown", "tags": ["test"],
                     "maintainer": "Maintainer", "license": "MIT", "version": "1.2.3",
                     "packageVersion": expected, "interfacePackageVersion": expected,
-                    "dependencies": {"general": [], "build": [], "runtime": []},
+                    "dependencies": {"runtime": ["inherited"]},
+                    "dependenciesDeclared": False, "interfaceHasDependencies": False,
                 }, json.loads(result.stdout))
 
     def test_package_import_metadata_merges_before_normalizing_version(self):
@@ -242,7 +244,7 @@ sibling = enableOption {};
             capture_output=True, text=True,
         )
         self.assertNotEqual(0, result.returncode)
-        self.assertIn("assertion", result.stderr)
+        self.assertIn("ZPKG provider must produce a derivation", result.stderr)
 
     @unittest.skipUnless(shutil.which("nix-instantiate"), "Nix evaluation requires the VM")
     def test_real_imported_package_uses_explicit_repository_registry_context(self):

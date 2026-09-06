@@ -6,6 +6,7 @@ let
     sources = [ {
       path = "modules/demo.zmdl";
       compiledNix = code;
+      buildNix = code;
       mountNix = code;
       descriptor.kind = "zmdl";
     } ];
@@ -17,10 +18,12 @@ let
   retained = value: builtins.hasAttr (builtins.unsafeDiscardStringContext asset) (builtins.getContext value);
   checks = {
     compiledContext = retained source.compiledNix;
+    buildContext = retained source.buildNix;
     mountedContext = retained source.mountNix;
     optionContext = retained node.optionNix;
     dataHasNoContext = !(builtins.hasContext source.path) && !(builtins.hasContext source.descriptor.kind);
     compiledAsset = import (builtins.toFile "dsl-context-compiled.nix" source.compiledNix) == "retained asset";
+    buildAsset = import (builtins.toFile "dsl-context-build.nix" source.buildNix) == "retained asset";
     mountedAsset = import (builtins.toFile "dsl-context-mounted.nix" source.mountNix) == "retained asset";
     optionAsset = import (builtins.toFile "dsl-context-option.nix" node.optionNix) == "retained asset";
   };

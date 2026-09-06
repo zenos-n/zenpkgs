@@ -56,25 +56,27 @@ let
     type = "literal";
     inherit value;
   };
+  packageReference = path: {
+    type = "variable";
+    name = "pkgs";
+    path = map (value: {
+      kind = "identifier";
+      inherit value;
+    }) path;
+  };
   descriptor = {
     descriptorVersion = "zenlang.semantic/2";
     kind = "zpkg";
     name = "pkgs.apps.first.tool";
     imports = [ ];
-    packageImport = {
-      type = "variable";
-      name = "pkgs";
-      path =
-        map
-          (value: {
-            kind = "identifier";
-            inherit value;
-          })
-          [
-            "legacy"
-            "hello"
-          ];
+    provider = {
+      kind = "import";
+      expression = packageReference [
+        "legacy"
+        "hello"
+      ];
     };
+    dependenciesDeclared = false;
     metadata = {
       name = literal "Tool";
       summary = literal "Example package";
@@ -99,6 +101,7 @@ let
   scoped = adapter.decodeInterface (
     descriptor
     // {
+      dependenciesDeclared = true;
       metadata = descriptor.metadata // {
         dependencies = {
           type = "attr-set";
@@ -113,7 +116,16 @@ let
                     value = scope;
                   }
                 ];
-                value = literal [ "$pkgs.libs.${scope}.tool" ];
+                value = {
+                  type = "list";
+                  items = [
+                    (packageReference [
+                      "libs"
+                      scope
+                      "tool"
+                    ])
+                  ];
+                };
               })
               [
                 "general"
@@ -125,10 +137,20 @@ let
     }
   );
   fixtureInterface = builtins.toFile "registry-interface.nix" "{ ... }: builtins.fromJSON ${builtins.toJSON (builtins.toJSON descriptor)}";
+  fixtureBuild = builtins.toFile "registry-build.nix" ''
+    { pkgs, zpkgRuntime, ... }: zpkgRuntime {
+      provider = pkgs.zenos.legacy.hello;
+      metadata = builtins.fromJSON ${builtins.toJSON (builtins.toJSON decoded.meta)};
+      dependenciesDeclared = false;
+    }
+  '';
   fixtureBundle = pkgs.runCommand "zenpkgs-registry-adapter-fixture" { } ''
     mkdir -p "$out/interfaces/pkgs/apps/first" "$out/interfaces/pkgs/dev/second"
+    mkdir -p "$out/builds/pkgs/apps/first" "$out/builds/pkgs/dev/second"
     cp ${fixtureInterface} "$out/interfaces/pkgs/apps/first/tool.zpkg.nix"
     cp ${fixtureInterface} "$out/interfaces/pkgs/dev/second/tool.zpkg.nix"
+    cp ${fixtureBuild} "$out/builds/pkgs/apps/first/tool.zpkg.nix"
+    cp ${fixtureBuild} "$out/builds/pkgs/dev/second/tool.zpkg.nix"
   '';
   structure = {
     kind = "zstr";
@@ -211,8 +233,26 @@ in
       ];
     assert
       (interface.buildPackageTree { "upstream.tool+" = pkgs.hello; } (registryWith [
-        (firstEntry // { sourcePath = [ "upstream.tool+" ]; })
+        (
+          firstEntry
+          // {
+            sourcePath = [ "upstream.tool+" ];
+            provider = {
+              kind = "import";
+              expression = packageReference [
+                "legacy"
+                "upstream.tool+"
+              ];
+            };
+            buildFile = builtins.toFile "registry-quoted-build.nix" ''
+              { pkgs, zpkgRuntime, ... }: zpkgRuntime { provider = pkgs.zenos.legacy."upstream.tool+"; }
+            '';
+          }
+        )
       ])).apps.first.tool._zmeta.id == "pkgs.apps.first.tool";
+    assert firstEntry.buildFile == fixtureBundle + "/builds/pkgs/apps/first/tool.zpkg.nix";
+    assert firstEntry.provider == descriptor.provider;
+    assert !firstEntry.dependenciesDeclared;
     assert lib.all (entry: entry.id == "pkgs.${lib.concatStringsSep "." entry.target}") activeEntries;
     pass "zenpkgs-registry-path-identities";
 
@@ -338,12 +378,8 @@ in
         license = null;
         zenosVersion = "";
         packageVersion = "";
-        dependencies = {
-          general = [ ];
-          build = [ ];
-          runtime = [ ];
-        };
       };
+    assert !incomplete.dependenciesDeclared && !decoded.dependenciesDeclared;
     assert decoded.meta.packageVersion == "1.0.0";
     assert
       (adapter.decodeInterface (
@@ -379,9 +415,54 @@ in
       )).meta.description == "";
     assert
       scoped.meta.dependencies == {
-        general = [ "$pkgs.libs.general.tool" ];
-        build = [ "$pkgs.libs.build.tool" ];
-        runtime = [ "$pkgs.libs.runtime.tool" ];
+        general = [
+          {
+            namespace = "pkgs";
+            path = [
+              "libs"
+              "general"
+              "tool"
+            ];
+          }
+        ];
+        build = [
+          {
+            namespace = "pkgs";
+            path = [
+              "libs"
+              "build"
+              "tool"
+            ];
+          }
+        ];
+        runtime = [
+          {
+            namespace = "pkgs";
+            path = [
+              "libs"
+              "runtime"
+              "tool"
+            ];
+          }
+        ];
+      };
+    assert scoped.dependenciesDeclared;
+    assert
+      (adapter.decodeInterface (
+        descriptor
+        // {
+          dependenciesDeclared = true;
+          metadata = descriptor.metadata // {
+            dependencies = {
+              type = "attr-set";
+              statements = [ ];
+            };
+          };
+        }
+      )).meta.dependencies == {
+        general = [ ];
+        build = [ ];
+        runtime = [ ];
       };
     assert rejects (
       adapter.decodeInterface (
@@ -410,8 +491,27 @@ in
         descriptor
         // {
           metadata = descriptor.metadata // {
-            dependencies = literal { _general = [ ]; };
+            dependencies = {
+              type = "attr-set";
+              statements = [
+                {
+                  type = "assignment";
+                  operator = "=";
+                  target = [
+                    {
+                      kind = "identifier";
+                      value = "_general";
+                    }
+                  ];
+                  value = {
+                    type = "list";
+                    items = [ ];
+                  };
+                }
+              ];
+            };
           };
+          dependenciesDeclared = true;
         }
       )
     );
@@ -419,32 +519,62 @@ in
 
   registry-dependency-support =
     let
+      provider =
+        pkgs.runCommand "registry-native-provider" { }
+          "mkdir -p $out/bin; touch $out/bin/tool; chmod +x $out/bin/tool";
+      dependency = pkgs.writeShellScriptBin "registry-dependency" "exit 0";
       packageWith =
-        meta:
-        (interface.buildPackageTree { inherit (pkgs) hello; } (registryWith [
-          (firstEntry // { inherit meta; })
-        ])).apps.first.tool;
+        entry: selectedProvider:
+        (interface.buildPackageTreeWith {
+          inherit pkgs;
+          legacyPkgs = pkgs // {
+            hello = selectedProvider;
+          };
+          registry = registryWith [ entry ];
+          buildPackage =
+            record: context:
+            assert record.buildFile == firstEntry.buildFile;
+            context.zpkgRuntime {
+              provider = context.pkgs.zenos.legacy.hello;
+              metadata = record.meta;
+              inherit (record) dependenciesDeclared;
+            };
+        }).apps.first.tool;
       emptyScopes = {
         general = [ ];
         build = [ ];
         runtime = [ ];
       };
+      entryWith =
+        dependencies:
+        firstEntry
+        // {
+          dependenciesDeclared = true;
+          meta = firstEntry.meta // {
+            inherit dependencies;
+          };
+        };
     in
     assert lib.all
       (
         scope:
         let
-          meta = firstEntry.meta // {
-            dependencies = emptyScopes // {
-              ${scope} = [ "$pkgs.legacy.hello" ];
-            };
+          entry = entryWith (emptyScopes // { ${scope} = [ dependency ]; });
+          package = packageWith entry provider;
+          docsEntry = firstEntry // {
+            inherit (scoped) meta dependenciesDeclared;
           };
         in
-        !(builtins.tryEval (packageWith meta).drvPath).success
-        && !(builtins.tryEval (packageWith meta).outPath).success
+        package.drvPath != provider.drvPath
+        && package.outPath != provider.outPath
+        && package.meta.dependencies.${scope} == [ dependency ]
+        && (scope != "build" || package.nativeBuildInputs == [ dependency ])
         &&
-          (interface.registryDocs (registryWith [ (firstEntry // { inherit meta; }) ])).packages
-          == [ (firstEntry // { inherit meta; }) ]
+          (builtins.head (interface.registryDocs (registryWith [ docsEntry ])).packages)
+          == removeAttrs docsEntry [
+            "buildFile"
+            "location"
+          ]
       )
       [
         "general"
@@ -453,21 +583,61 @@ in
       ];
     assert lib.all
       (
-        meta:
+        dependencies:
         let
-          package = packageWith meta;
+          package = packageWith (entryWith dependencies) provider;
         in
-        package.drvPath == pkgs.hello.drvPath && package.outPath == pkgs.hello.outPath
+        package.meta.dependencies == emptyScopes
+        && package.buildInputs == [ ]
+        && package.nativeBuildInputs == [ ]
+        && package.drvPath != provider.drvPath
+        && package.outPath != provider.outPath
       )
-      (
-        [ (removeAttrs firstEntry.meta [ "dependencies" ]) ]
-        ++ map (dependencies: firstEntry.meta // { inherit dependencies; }) [
-          { }
-          { general = [ ]; }
-          { build = [ ]; }
-          { runtime = [ ]; }
-          emptyScopes
-        ]
-      );
+      [
+        { }
+        { general = [ ]; }
+        { build = [ ]; }
+        { runtime = [ ]; }
+        emptyScopes
+      ];
+    assert (packageWith firstEntry pkgs.hello).drvPath == pkgs.hello.drvPath;
+    assert (packageWith firstEntry pkgs.hello).outPath == pkgs.hello.outPath;
+    assert lib.all
+      (dependencies: !(builtins.tryEval (packageWith (entryWith dependencies) provider).drvPath).success)
+      [
+        { invalid = [ ]; }
+        { build = "not a list"; }
+        { runtime = [ "not a derivation" ]; }
+      ];
+    assert !(builtins.tryEval (packageWith firstEntry { }).drvPath).success;
+    assert
+      !(builtins.tryEval
+        (packageWith (entryWith { }) (
+          builtins.derivation {
+            name = "registry-opaque-provider";
+            system = pkgs.stdenv.hostPlatform.system;
+            builder = "/bin/sh";
+          }
+        )).drvPath
+      ).success;
+    assert
+      !(builtins.tryEval (packageWith (firstEntry // { dependenciesDeclared = true; }) provider).drvPath)
+      .success;
+    assert rejects (adapter.decodeInterface (descriptor // { dependenciesDeclared = true; }));
+    assert rejects (adapter.decodeInterface (descriptor // { provider.kind = "invalid"; }));
+    assert rejects (
+      adapter.decodeInterface (
+        descriptor
+        // {
+          provider = {
+            kind = "import";
+            expression = packageReference [
+              "apps"
+              "tool"
+            ];
+          };
+        }
+      )
+    );
     pass "zenpkgs-registry-dependency-support";
 }

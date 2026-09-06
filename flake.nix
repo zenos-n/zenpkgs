@@ -35,6 +35,7 @@
       forAllSystems = nixpkgs.lib.genAttrs systems;
       loader = import ./lib/loader.nix { inherit (nixpkgs) lib; };
       interface = import ./lib/interface.nix { inherit (nixpkgs) lib; };
+      packageOutputs = import ./lib/package-outputs.nix { inherit (nixpkgs) lib; };
       dslBundleAdapter = import ./lib/dsl-bundle.nix { inherit (nixpkgs) lib; };
       zstrRuntime = import ./lib/zstr-runtime.nix { inherit (nixpkgs) lib; };
       mkDslArtifacts =
@@ -62,7 +63,7 @@
                   [ "structure.zstr" "pkgs" "modules" "docs" ];
             };
           } ''
-            mkdir -p "$out/interfaces" "$out/modules"
+            mkdir -p "$out/interfaces" "$out/modules" "$out/builds"
             zen-dsl compile-tree \
               --root "$src" \
               --output "$out/bundle.json" \
@@ -108,13 +109,19 @@
                 compiled = source.get("compiledNix")
                 if not isinstance(compiled, str) or not compiled:
                     raise ValueError(f"missing compiled Nix for bundle source: {source['path']}")
-                subtree = "interfaces" if source["kind"] == "zpkg" else "modules"
-                destination = output_root / subtree / f"{source['path']}.nix"
-                if destination in destinations:
-                    raise ValueError(f"duplicate compiled module destination: {destination}")
-                destinations.add(destination)
-                destination.parent.mkdir(parents=True, exist_ok=True)
-                destination.write_text(compiled, encoding="utf-8")
+                artifacts = [("interfaces" if source["kind"] == "zpkg" else "modules", compiled)]
+                if source["kind"] == "zpkg":
+                    build = source.get("buildNix")
+                    if not isinstance(build, str) or not build:
+                        raise ValueError(f"missing executable package provider: {source['path']}")
+                    artifacts.append(("builds", build))
+                for subtree, code in artifacts:
+                    destination = output_root / subtree / f"{source['path']}.nix"
+                    if destination in destinations:
+                        raise ValueError(f"duplicate compiled module destination: {destination}")
+                    destinations.add(destination)
+                    destination.parent.mkdir(parents=True, exist_ok=True)
+                    destination.write_text(code, encoding="utf-8")
             PY
           '';
           bundleJSON =
@@ -311,7 +318,15 @@
               lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflate value f) tree);
 
           zenTree = loader.generateTree ./lib/compat/package-recipes;
-          mappedTree = interface.buildPackageTree prev registry;
+          mappedTree = interface.buildPackageTreeWith {
+            pkgs = final;
+            legacyPkgs = prev;
+            inherit registry;
+            packageArgs = {
+              maintainers = import ./lib/maintainers.nix { inherit lib; };
+              licenses = lib.licenses // utils.licenses;
+            };
+          };
           customTree = if zenTree == { } then { } else inflate zenTree final;
           patchedSeahorse = prev.seahorse.overrideAttrs (old: {
             postPatch = (old.postPatch or "") + ''
@@ -332,6 +347,7 @@
           seahorse = patchedSeahorse;
           zenos =
             if zstrRuntime.packageExposure (mkDslArtifacts prev.stdenv.hostPlatform.system).bundleJSON then
+              assert packageOutputs.checkLegacyOwnership { inherit registry; sourceTree = zenTree; };
               lib.recursiveUpdate (lib.recursiveUpdate { legacy = prev; } mappedTree) customTree
             else { };
         };
@@ -439,28 +455,19 @@
             config.allowUnfree = true;
           };
 
-          flatten =
-            prefix: value:
-            if nixpkgs.lib.isDerivation value then
-              {
-                "${nixpkgs.lib.concatStringsSep "-" prefix}" = value;
-              }
-            else if builtins.isAttrs value then
-              nixpkgs.lib.foldl' nixpkgs.lib.recursiveUpdate { } (
-                nixpkgs.lib.mapAttrsToList (name: child: flatten (prefix ++ [ name ]) child) value
-              )
-            else
-              { };
         in
-        if !zstrRuntime.packageExposure dsl.bundleJSON then { } else {
-          dsl-bundle = dsl.bundle;
-          registry-docs = pkgs.writeText "zenpkgs-registry.json" (
-            builtins.toJSON (interface.registryDocs registry)
-          );
-          zen-dsl = dsl.zenDsl;
-          zenos-rebuild = pkgs.zenos.programs.zenos-rebuild;
+        if !zstrRuntime.packageExposure dsl.bundleJSON then { } else packageOutputs.flatten {
+          inherit registry;
+          tree = pkgs.zenos;
+          reserved = {
+            dsl-bundle = dsl.bundle;
+            registry-docs = pkgs.writeText "zenpkgs-registry.json" (
+              builtins.toJSON (interface.registryDocs registry)
+            );
+            zen-dsl = dsl.zenDsl;
+            zenos-rebuild = pkgs.zenos.programs.zenos-rebuild;
+          };
         }
-        // (flatten [ "zenos" ] (interface.buildPackageTree pkgs registry))
       );
 
       legacyPackages = forAllSystems (
@@ -619,6 +626,9 @@
           dsl-bundle-context = import ./tests/zen-dsl/bundle-context.nix {
             inherit (dsl) bootstrapPkgs;
           };
+          package-output-collisions = dsl.bootstrapPkgs.writeText "package-output-collisions.json" (
+            builtins.toJSON (import ./tests/package-output-collisions.nix { inherit (nixpkgs) lib; })
+          );
           zstr-mounting = import ./tests/mounting/check.nix {
             inherit (dsl) bootstrapPkgs;
             inherit nixpkgs;

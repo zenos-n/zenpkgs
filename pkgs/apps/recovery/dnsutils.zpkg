@@ -8,11 +8,6 @@ _meta = {
   packageVersion = "";
   tags = [ "network" "recovery" ];
   maintainers = [ $m.doromiert ];
-  dependencies = {
-    general = [ ];
-    build = [ ];
-    runtime = [ ];
-  };
 };
 
 import $pkgs.legacy.bind.dnsutils;

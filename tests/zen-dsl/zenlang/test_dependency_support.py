@@ -8,7 +8,7 @@ import unittest
 
 from zenlang import parse, parse_file
 from zenlang.cli import main
-from zenlang.compiler import CompilationError, compile_zpkg
+from zenlang.compiler import compile_zpkg
 
 
 SCOPES = ("general", "build", "runtime")
@@ -22,7 +22,7 @@ IMPORT = "\nimport $pkgs.legacy.hello;"
 
 
 class DependencySupportTests(unittest.TestCase):
-    def test_nonempty_scopes_reject_build_with_path_and_span(self):
+    def test_all_scopes_compile_to_shared_backend(self):
         for scope in SCOPES:
             for declaration in (
                 f"_meta = {{ dependencies = {{ {scope} = [ $pkgs.legacy.hello ]; }}; }};",
@@ -32,118 +32,78 @@ class DependencySupportTests(unittest.TestCase):
                 f"_meta.dependencies.{scope} = ([ $pkgs.legacy.hello ]);",
             ):
                 with self.subTest(scope=scope, declaration=declaration):
-                    text = declaration + IMPORT
-                    document = parse(text, SOURCE)
-                    with self.assertRaises(CompilationError) as raised:
-                        compile_zpkg(document)
-                    error = raised.exception
-                    self.assertIn(SOURCE, str(error))
-                    self.assertIn(f"_meta.dependencies.{scope}", str(error))
-                    self.assertIn("unsupported", str(error))
-                    self.assertIn("D14", str(error))
-                    self.assertEqual(SOURCE, error.span.source)
-                    self.assertEqual(text.index("[") + 1, error.span.start.column)
-                    self.assertEqual(1, error.span.start.line)
+                    compiled = compile_zpkg(parse(declaration + IMPORT, SOURCE))
+                    self.assertIn("dependenciesDeclared = true;", compiled)
+                    self.assertIn("zpkgRuntime { provider = package;", compiled)
+                    self.assertIn(SOURCE, compiled)
 
     @unittest.skipUnless(shutil.which("nix-instantiate"), "Nix evaluation requires the VM")
     def test_data_only_interface_retains_structured_dependency_references(self):
         for scope in SCOPES:
-            with self.subTest(scope=scope):
-                document = parse(
-                    META + f'_meta.dependencies.{scope} = [ $pkgs.legacy."hello" ];' + IMPORT,
-                    SOURCE,
-                )
-                self.assertEqual((), document.diagnostics)
-                interface = compile_zpkg(document, mode="interface")
-                result = subprocess.run(
-                    ["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--json", "--expr",
-                     f"({interface}) {{ }}"],
-                    capture_output=True, text=True,
-                )
-                self.assertEqual(0, result.returncode, result.stderr)
-                dependencies = json.loads(result.stdout)["metadata"]["dependencies"]
-                assignment = dependencies["statements"][0]
-                self.assertEqual(scope, assignment["target"][0]["value"])
-                reference = assignment["value"]["items"][0]
-                self.assertEqual("variable", reference["type"])
-                self.assertEqual("pkgs", reference["name"])
-                self.assertEqual(["legacy", "hello"], [part["value"] for part in reference["path"]])
+            document = parse(META + f'_meta.dependencies.{scope} = [ $pkgs.legacy."hello.world" ];' + IMPORT, SOURCE)
+            self.assertEqual((), document.diagnostics)
+            interface = compile_zpkg(document, mode="interface")
+            result = subprocess.run(
+                ["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--json", "--expr", f"({interface}) {{ }}"],
+                capture_output=True, text=True,
+            )
+            self.assertEqual(0, result.returncode, result.stderr)
+            descriptor = json.loads(result.stdout)
+            self.assertTrue(descriptor["dependenciesDeclared"])
+            reference = descriptor["metadata"]["dependencies"]["statements"][0]["value"]["items"][0]
+            self.assertEqual(["legacy", "hello.world"], [part["value"] for part in reference["path"]])
 
     @unittest.skipUnless(shutil.which("nix-instantiate"), "Nix evaluation requires the VM")
-    def test_empty_and_omitted_scopes_preserve_imported_identity(self):
-        for declaration in (
-            "", "_meta.dependencies = {};",
-            *(f"_meta.dependencies.{scope} = [];" for scope in SCOPES),
-            "_meta.dependencies = { general = []; build = []; runtime = []; };",
-        ):
-            with self.subTest(declaration=declaration):
-                document = parse(META + declaration + IMPORT, SOURCE)
-                self.assertEqual((), document.diagnostics)
-                compiled = compile_zpkg(document)
-                result = subprocess.run(
-                    ["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--json", "--expr",
-                     'let upstream = { type = "derivation"; drvPath = "/test.drv"; outPath = "/test"; }; '
-                     f'package = ({compiled}) {{ pkgs.zenos.legacy.hello = upstream; '
-                     'licenses.mit = "MIT"; }; in '
-                     'package.drvPath == upstream.drvPath && package.outPath == upstream.outPath'],
-                    capture_output=True, text=True,
-                )
-                self.assertEqual(0, result.returncode, result.stderr)
-                self.assertTrue(json.loads(result.stdout))
+    def test_omitted_scopes_preserve_imported_identity(self):
+        compiled = compile_zpkg(parse(META + IMPORT, SOURCE))
+        result = subprocess.run(
+            ["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--json", "--expr",
+             'let upstream = { type = "derivation"; drvPath = "/test.drv"; outPath = "/test"; }; '
+             f'package = ({compiled}) {{ pkgs.zenos.legacy.hello = upstream; '
+             'licenses.mit = "MIT"; }; in '
+             'package.drvPath == upstream.drvPath && package.outPath == upstream.outPath'],
+            capture_output=True, text=True,
+        )
+        self.assertEqual(0, result.returncode, result.stderr)
+        self.assertTrue(json.loads(result.stdout))
+
+    def test_explicit_empty_scopes_are_replacement_not_inheritance(self):
+        for declaration in ("_meta.dependencies = {};", *(f"_meta.dependencies.{scope} = [];" for scope in SCOPES)):
+            compiled = compile_zpkg(parse(declaration + IMPORT, SOURCE))
+            self.assertIn("dependenciesDeclared = true;", compiled)
+        self.assertIn("dependenciesDeclared = false;", compile_zpkg(parse(IMPORT, SOURCE)))
 
     def test_coalesced_assignments_use_effective_scope_values(self):
         for scope in SCOPES:
             for first, last in (("[]", "[ $pkgs.legacy.hello ]"), ("[ $pkgs.legacy.hello ]", "[]")):
-                with self.subTest(scope=scope, last=last):
-                    document = parse(
-                        f"_meta = {{ dependencies = {{ {scope} = {first}; }}; }};\n"
-                        f"_meta.dependencies.{scope} = {last};" + IMPORT,
-                        SOURCE,
-                    )
-                    if last == "[]":
-                        compile_zpkg(document)
-                    else:
-                        with self.assertRaises(CompilationError) as raised:
-                            compile_zpkg(document)
-                        self.assertEqual(2, raised.exception.span.start.line)
+                document = parse(
+                    f"_meta = {{ dependencies = {{ {scope} = {first}; }}; }};\n"
+                    f"_meta.dependencies.{scope} = {last};" + IMPORT, SOURCE,
+                )
+                compiled = compile_zpkg(document)
+                self.assertIn("dependenciesDeclared = true;", compiled)
+                supplied = " ".join(compiled.split("suppliedMetadata = ", 1)[1].split())
+                self.assertIn(f"{scope} = " + ("[ ]" if last == "[]" else "[ pkgs.zenos.legacy.hello ]"), supplied)
 
-    def test_bare_imports_preserve_dependency_source_span(self):
+    def test_bare_imports_preserve_dependency_source_location(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             imported = root / "dependencies.zpkg"
             entry = root / "example.zpkg"
-            for scope in SCOPES:
-                with self.subTest(scope=scope):
-                    imported.write_text(f"_meta.dependencies.{scope} = [ $pkgs.legacy.hello ];\n")
-                    entry.write_text('_import "./dependencies.zpkg";' + IMPORT)
-                    document = parse_file(entry, import_root=root)
-                    with self.assertRaises(CompilationError) as raised:
-                        compile_zpkg(document)
-                    self.assertEqual(str(imported), raised.exception.span.source)
-                    self.assertEqual(1, raised.exception.span.start.line)
-                    entry.write_text(
-                        '_import "./dependencies.zpkg";\n'
-                        f"_meta.dependencies.{scope} = [];" + IMPORT
-                    )
-                    compile_zpkg(parse_file(entry, import_root=root))
+            imported.write_text("_meta.dependencies.build = [ $pkgs.legacy.hello ];\n")
+            entry.write_text('_import "./dependencies.zpkg";' + IMPORT)
+            compiled = compile_zpkg(parse_file(entry, import_root=root))
+            self.assertIn(str(imported) + ":1:", compiled)
 
-    def test_cli_build_reports_unsupported_scope_without_writing_output(self):
+    def test_cli_writes_executable_artifact_for_nonempty_scopes(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
-            entry = root / "example.zpkg"
-            output = root / "example.nix"
-            for scope in SCOPES:
-                with self.subTest(scope=scope):
-                    entry.write_text(META + f"_meta.dependencies.{scope} = [ $pkgs.legacy.hello ];" + IMPORT)
-                    stdout, stderr = StringIO(), StringIO()
-                    result = main(
-                        ["compile", str(entry), "-o", str(output), "--diagnostic-format", "json"],
-                        stdout=stdout, stderr=stderr,
-                    )
-                    self.assertNotEqual(0, result)
-                    self.assertIn(f"_meta.dependencies.{scope}", stderr.getvalue())
-                    self.assertIn("unsupported", stderr.getvalue())
-                    self.assertFalse(output.exists())
+            entry, output = root / "example.zpkg", root / "example.nix"
+            entry.write_text(META + "_meta.dependencies.build = [ $pkgs.legacy.hello ];" + IMPORT)
+            stdout, stderr = StringIO(), StringIO()
+            result = main(["compile", str(entry), "-o", str(output)], stdout=stdout, stderr=stderr)
+            self.assertEqual(0, result, stderr.getvalue())
+            self.assertIn("zpkgRuntime", output.read_text())
 
 
 if __name__ == "__main__":

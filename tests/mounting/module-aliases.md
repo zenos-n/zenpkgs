@@ -30,8 +30,10 @@ must reference lexical ZMDL freeform identifiers. Imported alias declarations
 remain local to the importing module; importing does not mount the imported
 module's independent filesystem identity.
 
-Alias/local-child, alias/local-default, alias/action, and overlapping mount
-declarations are rejected rather than assigning unresolved precedence. Named
+Overlapping alias/local-child and independently owned mount declarations are
+errors, with full paths and both source locations; disjoint local children remain
+valid. Alias-local defaults/actions and ancestor defaults currently have explicit
+unsupported-backend diagnostics rather than silently changing forwarding. Named
 aliases inside freeforms work; aliases directly on freeform items are currently
 rejected with a diagnostic. Root aliases retain their upstream value shape;
 they do not synthesize a conflicting `enable` child. The older record-form

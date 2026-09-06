@@ -257,11 +257,41 @@ their lexical scope, and supplied annotations are checked when evaluated.
 Function parameter labels do not constitute inferred argument/return signatures;
 `functionTo` checks a declared return type when the function is called.
 
-ZPKG parsing and data-only interface compilation can retain dependency metadata.
-Executable compilation and package evaluation reject nonempty `general`, `build`,
-or `runtime` scopes until D14's override/linkage mechanics are specified. Empty
-and omitted scopes preserve the imported derivation's identity. This is explicit
-unsupported-feature handling, not an implementation of dependency linkage.
+## Package providers
+
+A ZPKG contains exactly one implementation provider: `import $pkgs.legacy.<path>;`
+or `build = <derivation-producing expression>;`. New recipes call existing Nix
+builders using ordinary builder arguments, phases, fetchers and source hashes.
+Interface generation retains the provider as data without executing it. Bundles
+also contain `buildNix`, materialized under `builds/`; standalone compilation and
+package-tree execution use the same trusted `zpkg-runtime.nix` backend.
+
+An import inherits the provider's recipe, outputs and metadata. Supplied metadata
+overlays it. Omitting `dependencies` inherits the provider's dependency inputs and
+preserves its derivation identity. Any explicit declaration replaces all three
+scopes from scratch, including `{}` and partial declarations with omitted scopes.
+`dependenciesDeclared` preserves this distinction in interfaces. The generated
+empty dependency blocks on existing wrappers were removed to retain their original
+inheritance behavior; no package choices or dependency lists were redesigned.
+
+Provider expressions can use `$deps.general`, `$deps.build`, and `$deps.runtime`.
+These contain the explicit declaration's derivations, with omitted scopes empty;
+they do not introspect inherited recipe inputs or create basename aliases.
+
+Replacement currently supports compatible native, single-`out` stdenv recipes.
+It replaces native/build inputs and clears other explicit recipe dependency
+channels, while retaining implicit stdenv/compiler infrastructure. General and
+runtime command dependencies are supplied by executable wrappers; runtime-only
+commands are not put in the application's compilation environment. Closure checks
+reject build-only or removed dependencies in outputs, including indirect references,
+except where they are also legitimate runtime or infrastructure dependencies.
+
+Captured old dependency references, opaque builders/inputs, source captures,
+reference-discarding output modes, unsupported cross/multioutput combinations and
+library/plugin runtime provisioning fail explicitly. PATH wrapping does not provide
+library linkage. This is a supported native-command backend, not arbitrary recipe
+rewriting, a dependency solver, or Rust splitting. Run its real build, execution and
+rejection cases in the VM with `python3 tests/run-zpkg-backend.py`.
 
 Read compiled JSON bundles with `lib/read-dsl-bundle.nix`. It decodes data without
 Nix string context and restores asset references on generated code. Production
@@ -269,8 +299,20 @@ bundles compile from filtered immutable sources so emitted paths do not point to
 temporary builder directories. `checks.x86_64-linux.dsl-bundle-context` verifies
 that executable fragments retain and can read their referenced assets.
 
-Module-local aliases require ZSTR mounting; their current supported boundaries
-and VM acceptance commands are in `tests/mounting/module-aliases.md`. General
-alias/local precedence, custom builders, and dependency linkage remain undecided.
+## Declaration ownership
+
+Independent declarations owning the same mounted option path are compilation
+errors, with both sources reported. Disjoint children can share implicit namespace
+prefixes. Configuration assignments and their merge priorities are separate from
+schema ownership. Source-only checks reject known collisions; trusted schema
+construction checks upstream aliases before action values run. Module-local aliases
+require ZSTR mounting; boundaries and VM commands are in
+`tests/mounting/module-aliases.md` and `tests/mounting/run-ownership.py`.
+
+Package output names retain their existing spelling, but collisions are rejected
+instead of silently overwriting another full-path package. The package overlay
+also rejects overlapping ZPKG and compatibility-recipe ownership from their static
+source inventories, without evaluating package builders to discover tree shape.
+
 The foundation checks do not certify all existing library options' enabled
 behavior, activation, or boot. Run integration acceptance in a ZenOS VM.

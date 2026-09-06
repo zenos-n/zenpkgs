@@ -609,7 +609,9 @@ import $pkgs.legacy.demo;
         self.assertEqual((), document.diagnostics)
         output = compile_zpkg(document, mode="interface")
         self.assertIn('value = "Demo";', output)
-        self.assertIn('packageImport = {', output)
+        self.assertIn('provider = {', output)
+        self.assertIn('kind = "import";', output)
+        self.assertIn('dependenciesDeclared = true;', output)
         self.assertIn('value = "legacy";', output)
         self.assertIn('type = "variable";', output)
         for field in ("name", "summary", "description", "zenosVersion", "packageVersion",
@@ -629,9 +631,8 @@ import $pkgs.legacy.demo;
         self.assertIn("package = pkgs.zenos.legacy.bat;", output)
         self.assertIn('name = "demo";', output)
         self.assertIn('packageVersion = "0.24.0";', output)
-        self.assertIn("(package.meta or { }) // suppliedMetadata", output)
-        self.assertIn("builtins.deepSeq suppliedMetadata", output)
-        self.assertNotIn("overrideAttrs", output)
+        self.assertIn("zpkgRuntime { provider = package; metadata = suppliedMetadata;", output)
+        self.assertIn("dependenciesDeclared = true;", output)
 
     def test_invalid_mode_is_rejected(self) -> None:
         with self.assertRaises(CompilationError):
@@ -645,7 +646,7 @@ import $pkgs.legacy.demo;
             metadata + " import $pkgs.legacy.a; import $pkgs.legacy.b;",
         ):
             with self.subTest(source=source), self.assertRaisesRegex(
-                (ZenLangError, CompilationError), "(exactly one package import|\\$pkgs\\.legacy)"
+                (ZenLangError, CompilationError), "(exactly one provider|\\$pkgs\\.legacy)"
             ):
                 compile_zpkg(parse(source, "invalid.zpkg"))
 
@@ -662,7 +663,8 @@ import $pkgs.legacy.demo;
         output = compile_zpkg(document, mode="build")
         self.assertIn("package = pkgs.zenos.legacy.demo;", output)
         self.assertIn("suppliedMetadata = {  };", output)
-        self.assertIn("(package.meta or { }) // suppliedMetadata", output)
+        self.assertIn("zpkgRuntime { provider = package; metadata = suppliedMetadata;", output)
+        self.assertIn("dependenciesDeclared = false;", output)
 
 
 class ZstrCompilerTests(unittest.TestCase):

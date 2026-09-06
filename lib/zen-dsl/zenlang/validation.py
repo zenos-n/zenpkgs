@@ -284,6 +284,8 @@ def validate_metadata(
                 if not names:
                     continue
             path = (*prefix, *names)
+            if document.kind is FileKind.ZPKG and not prefix and names[:1] == ("build",):
+                continue
             if "_meta" in names:
                 index = names.index("_meta")
                 owner = (*prefix, *names[:index])
@@ -632,17 +634,18 @@ def validate_markdown_imports(document: Document) -> None:
 def _validate_zpkg_declaration(
     statements: tuple[Statement, ...], document_span: object
 ) -> None:
-    package_imports = [
+    providers = [
         statement
         for statement in statements
         if isinstance(statement, PackageImportStatement)
+        or isinstance(statement, Assignment) and _target_names(statement)[:1] == ("build",)
     ]
-    if len(package_imports) != 1:
+    if len(providers) != 1:
         span = statements[-1].span if statements else document_span
         raise ZenLangError(
             Diagnostic(
                 "ZEN222",
-                "a ZPKG requires exactly one import $pkgs.legacy.<path> statement",
+                "a ZPKG requires exactly one provider: import $pkgs.legacy.<path> or build = <expression>",
                 span,
             )
         )
@@ -651,11 +654,15 @@ def _validate_zpkg_declaration(
             continue
         if isinstance(statement, Assignment) and _target_names(statement)[:1] == ("_meta",):
             continue
+        if isinstance(statement, Assignment) and _target_names(statement) == ("build",) and statement.operator == "=":
+            continue
         raise ZenLangError(
-            Diagnostic("ZEN222", "ZPKG top-level assignments are limited to _meta", statement.span)
+            Diagnostic("ZEN222", "ZPKG top-level assignments are limited to _meta and build = <expression>; build.<child> is not a provider", statement.span)
         )
 
-    package = package_imports[0].package
+    if isinstance(providers[0], Assignment):
+        return
+    package = providers[0].package
     package_path = _variable_static_path(package)
     if package.name != "pkgs" or package_path is None or len(package_path) < 2 or package_path[0] != "legacy":
         raise ZenLangError(

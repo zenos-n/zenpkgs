@@ -36,6 +36,7 @@ from .model import (
     StringText,
     StructuralMarker,
     Variable,
+    ZenLangError,
 )
 
 
@@ -87,6 +88,7 @@ def document_descriptor(document: Document) -> dict[str, Any]:
 def check_tree(root: str | Path) -> dict[str, Document]:
     resolved_root = _tree_root(root)
     documents: dict[str, Document] = {}
+    merge_errors: list[ZenLangError] = []
     folded_paths: dict[str, str] = {}
     for relative, source in _discover_tree(resolved_root):
         folded = relative.casefold()
@@ -98,7 +100,20 @@ def check_tree(root: str | Path) -> dict[str, Document]:
                 message = f"case-colliding source paths: {previous} and {relative}"
             raise CompilationError(message)
         folded_paths[folded] = relative
-        documents[relative] = parse_file(source, import_root=resolved_root)
+        try:
+            documents[relative] = parse_file(source, import_root=resolved_root)
+        except ZenLangError as error:
+            if error.diagnostic.code != "ZEN218" or source.suffix not in (".zstr", ".zmdl"):
+                raise
+            # Recover the unmerged AST only to improve mounted collision
+            # diagnostics. Never accept a document whose validation failed.
+            merge_errors.append(error)
+            documents[relative] = parse_file(source, import_root=resolved_root, validate_semantics=False)
+    _mounted_ownership(documents, [_module_record(relative, document)
+                                 for relative, document in documents.items()
+                                 if document.kind is FileKind.ZMDL])
+    if merge_errors:
+        raise merge_errors[0]
     _tree_modules(documents)
     return documents
 
@@ -110,6 +125,7 @@ def compile_tree(root: str | Path, *, mode: str = "build") -> dict[str, Any]:
     documents = check_tree(resolved_root)
     modules = _tree_modules(documents)
     sources = []
+    ownership = _mounted_ownership(documents, modules)
     structure = _tree_structure(documents)
     for relative, document in documents.items():
         diagnostics = []
@@ -132,6 +148,8 @@ def compile_tree(root: str | Path, *, mode: str = "build") -> dict[str, Any]:
         sources.append(
             {
                 "compiledNix": compiled,
+                **({"buildNix": compile_zpkg(document, mode="build")}
+                   if document.kind is FileKind.ZPKG else {}),
                 **({"mountNix": compile_zmdl_mount(document, root=resolved_root)}
                    if document.kind is FileKind.ZMDL else {}),
                 "descriptor": document_descriptor(document),
@@ -146,6 +164,7 @@ def compile_tree(root: str | Path, *, mode: str = "build") -> dict[str, Any]:
         "irVersion": IR_VERSION,
         "modules": modules,
         "structure": structure,
+        "mountedOwnership": ownership,
         "sources": sources,
         "diagnostics": [diagnostic for source in sources for diagnostic in source["diagnostics"]],
     }
@@ -391,6 +410,30 @@ def compile_zpkg(document: Document, *, mode: str = "build") -> str:
     metadata: dict[str, Expression] = {}
     local_bindings: list[ResolvedImport | LetStatement] = []
     package_import: PackageImportStatement | None = None
+    provider_value: Expression | None = None
+
+    # Count authored providers before assignment coalescing can hide duplicates.
+    def providers(items: tuple[Any, ...]) -> list[Any]:
+        result = []
+        for item in items:
+            if isinstance(item, ResolvedImport) and item.binding is None:
+                result.extend(providers(item.document.statements))
+            elif isinstance(item, PackageImportStatement) or (
+                isinstance(item, Assignment) and _assignment_path(item)[:1] == ("build",)
+            ):
+                if isinstance(item, Assignment) and (
+                    _assignment_path(item) != ("build",) or item.operator != "="
+                ):
+                    raise CompilationError("ZPKG build.<child> is not a provider; use build = <expression>", item.span)
+                result.append(item)
+        return result
+
+    declared_providers = providers(document.statements)
+    if len(declared_providers) != 1:
+        raise CompilationError(
+            "a ZPKG requires exactly one provider: import $pkgs.legacy.<path> or build = <expression>",
+            declared_providers[-1].span if declared_providers else document.span,
+        )
 
     for statement in _coalesce_zmdl_scope_assignments(_resolved_statements(document)):
         if isinstance(statement, ResolvedImport):
@@ -417,29 +460,39 @@ def compile_zpkg(document: Document, *, mode: str = "build") -> str:
         path = _assignment_path(statement)
         if path and path[0] == "_meta":
             _collect_metadata(metadata, path[1:], statement.value)
+        elif path == ("build",):
+            provider_value = statement.value
         else:
             raise CompilationError(
-                "ZPKG top-level assignments are limited to one _meta block",
+                "ZPKG top-level assignments are limited to _meta and build = <expression>",
                 statement.span,
             )
-    if package_import is None:
-        raise CompilationError("a ZPKG requires exactly one package import", document.span)
-    imported_path = _static_path(package_import.package.path, package_import.package.span)
-    if (
-        package_import.package.name != "pkgs"
-        or len(imported_path) < 2
-        or imported_path[0] != "legacy"
-    ):
-        raise CompilationError(
-            "a ZPKG package import must use $pkgs.legacy.<path>",
-            package_import.package.span,
-        )
+    if package_import is not None:
+        imported_path = _static_path(package_import.package.path, package_import.package.span)
+        if (
+            package_import.package.name != "pkgs"
+            or len(imported_path) < 2
+            or imported_path[0] != "legacy"
+        ):
+            raise CompilationError(
+                "a ZPKG package import must use $pkgs.legacy.<path>",
+                package_import.package.span,
+            )
+        provider_value = package_import.package
+    assert provider_value is not None
     import_data = [
         semantic_descriptor(statement)
         for statement in local_bindings
         if isinstance(statement, ResolvedImport)
     ]
     metadata = _normalized_package_metadata(metadata)
+    dependencies_declared = "dependencies" in metadata
+    span = metadata.get("dependencies", provider_value).span
+    location = f"{span.source}:{span.start.line}:{span.start.column}"
+    provider_data = {
+        "kind": "import" if package_import is not None else "build",
+        "expression": semantic_descriptor(provider_value),
+    }
     if mode == "interface":
         descriptor = {
             "descriptorVersion": DESCRIPTOR_VERSION,
@@ -451,38 +504,33 @@ def compile_zpkg(document: Document, *, mode: str = "build") -> str:
                 key: semantic_descriptor(value)
                 for key, value in sorted(metadata.items())
             },
-            "packageImport": semantic_descriptor(package_import.package),
+            "provider": provider_data,
+            "dependenciesDeclared": dependencies_declared,
+            "location": location,
+            **({"packageImport": semantic_descriptor(package_import.package)}
+               if package_import is not None else {}),
             "imports": import_data,
             "statements": semantic_descriptor(_resolved_statements(document)),
         }
         return "{ ... }:\n" + emit_nix_data(descriptor) + "\n"
 
-    if "dependencies" in metadata:
-        scopes: dict[str, Expression] = {}
-        _collect_metadata(scopes, (), metadata["dependencies"])
-        for scope, value in scopes.items():
-            if not isinstance(value, ListExpr) or value.items:
-                raise CompilationError(
-                    f"{document.span.source}: _meta.dependencies.{scope}: "
-                    "ZPKG dependencies are unsupported until backend override "
-                    "and runtime-linkage mechanics are specified (D14); "
-                    "only empty dependency scopes can be compiled for execution",
-                    value.span,
-                )
-
-    package = emitter.expression(package_import.package)
+    package = emitter.expression(provider_value)
     bindings = "\n".join(f"  {emitter.statement(statement)}" for statement in local_bindings)
     supplied = "{ " + " ".join(
         f"{emit_attr_name(key)} = {emitter.expression(value)};"
         for key, value in sorted(metadata.items())
     ) + " }"
+    runtime = Path(__file__).with_name("zpkg-runtime.nix").read_text(encoding="utf-8")
     return (
-        "{ pkgs, lib ? pkgs.lib, maintainers ? lib.maintainers, licenses ? lib.licenses, ... }:\nlet\n"
+        "{ pkgs, lib ? pkgs.lib, maintainers ? lib.maintainers, licenses ? lib.licenses, "
+        + "zpkgRuntime ? (" + runtime + ") { inherit lib pkgs; }, ... }:\nlet\n"
         + f"  name = {emit_nix_data(_source_name(document))};\n"
         + (bindings + "\n" if bindings else "")
         + f"  package = {package};\n  suppliedMetadata = {supplied};\n"
-        + "in\nassert builtins.isAttrs package && (package.type or null) == \"derivation\";\n"
-        + "builtins.deepSeq suppliedMetadata (package // { meta = (package.meta or { }) // suppliedMetadata; })\n"
+        + "  deps = { general = [ ]; build = [ ]; runtime = [ ]; } // (suppliedMetadata.dependencies or { });\n"
+        + "in\nbuiltins.addErrorContext " + emit_nix_data(f"ZPKG {location}")
+        + " (zpkgRuntime { provider = package; metadata = suppliedMetadata; "
+        + f"dependenciesDeclared = {'true' if dependencies_declared else 'false'}; }} )\n"
     )
 
 
@@ -764,12 +812,9 @@ def _zmdl_aliases(
                     "aliases directly on freeform items are unsupported; declare a named alias child",
                     marker.span,
                 )
-            children = [item for item in items if isinstance(item, Assignment)
-                        and (isinstance(item.target, StructuralMarker)
-                             or _assignment_path(item)[0] != "_meta")]
-            if children or actions or "default" in metadata or enabled:
+            if actions or "default" in metadata or enabled:
                 raise CompilationError(
-                    "ZMDL alias collisions with local children, actions, or defaults are unsupported; precedence is unresolved",
+                    "ZMDL alias actions and defaults are unsupported by the forwarding backend",
                     marker.span,
                 )
             target: list[Any] = []
@@ -784,7 +829,6 @@ def _zmdl_aliases(
             if not target or target[0] != "nixpkgs" or len(target) > 1 and not isinstance(target[1], str):
                 raise CompilationError("ZMDL aliases must target nixpkgs options with a static root", marker.span)
             aliases.append({"path": path, "kind": "alias", "target": target})
-            return
         for item in items:
             if not isinstance(item, Assignment):
                 continue
@@ -814,7 +858,7 @@ def _zmdl_aliases(
                 visit(body.statements, child_path, isinstance(item.value, EnableOption))
         if "default" in metadata and len(aliases) != initial_count:
             raise CompilationError(
-                "ZMDL aliases below local defaults are unsupported; precedence is unresolved",
+                "ZMDL aliases below local defaults are unsupported by the forwarding backend",
                 metadata["default"].span,
             )
 
@@ -929,6 +973,146 @@ def _tree_structure(documents: dict[str, Document]) -> dict[str, Any]:
     aliases.sort(key=lambda item: item["path"])
     return {"mounts": mounts, "nodes": nodes,
             "present": document is not None}
+
+
+def _mounted_ownership(
+    documents: dict[str, Document], modules: list[dict[str, Any]],
+) -> dict[str, Any]:
+    """Keep declaration provenance separate from configuration/value merging."""
+    owners: dict[tuple[str, ...], dict[str, Any]] = {}
+    aliases: list[dict[str, Any]] = []
+
+    def location(span: Any) -> str:
+        return (f"{span.source}:{span.start.line}:{span.start.column}"
+                f"-{span.end.line}:{span.end.column}")
+
+    def duplicate(path: tuple[str, ...], first: Any, second: Any,
+                  first_source: str | None = None, second_source: str | None = None) -> None:
+        raise CompilationError(
+            f"duplicate mounted option zenos.{'.'.join(path)}: "
+            f"{first_source or location(first)} and {second_source or location(second)}", second,
+        )
+
+    def declarations(document: Document, prefix: tuple[str, ...]) -> dict:
+        fields: dict[tuple[str, ...], dict[tuple[str, ...], Any]] = {}
+        nodes: dict[tuple[str, ...], Any] = {}
+
+        def visit(items: tuple[Any, ...], path: tuple[str, ...]) -> None:
+            for item in items:
+                if isinstance(item, ResolvedImport) and item.binding is None:
+                    visit(item.document.statements, path)
+                elif isinstance(item, Assignment):
+                    if isinstance(item.target, StructuralMarker):
+                        if item.target.kind != "freeform":
+                            continue
+                        keys = ("{" + _freeform_id(item.target) + "}",)
+                    else:
+                        keys = _assignment_path(item)
+                    full = (*path, *keys)
+                    body = _option_body(item.value)
+                    if "_meta" in full:
+                        index = full.index("_meta")
+                        owner, field = full[:index], full[index + 1:]
+                        if field == ("weight",):
+                            continue
+                        if isinstance(item.value, AttrSet) and (not field or item.value.statements):
+                            visit(item.value.statements, full)
+                            continue
+                        previous = fields.setdefault(owner, {}).get(field)
+                        if previous is not None:
+                            duplicate((*prefix, *owner), previous.span, item.span)
+                        fields[owner][field] = item
+                    elif body is not None:
+                        nodes.setdefault(full, item)
+                        if isinstance(item.value, EnableOption):
+                            previous = fields.setdefault(full, {}).get(("enableOption",))
+                            if previous is not None:
+                                duplicate((*prefix, *full), previous.span, item.span)
+                            fields[full][("enableOption",)] = item
+                        visit(body.statements, full)
+                    else:
+                        previous = fields.setdefault(full, {}).get(("value",))
+                        if previous is not None:
+                            duplicate((*prefix, *full), previous.span, item.span)
+                        fields[full][("value",)] = item
+
+        visit(document.statements, ())
+        result = {}
+        for path in sorted(fields.keys() | nodes.keys()):
+            metadata = fields.get(path, {})
+            marker_item = metadata.get(("type",))
+            marker = marker_item.value if marker_item is not None else None
+            has_children = any(len(child) > len(path) and child[:len(path)] == path
+                               for child in fields.keys() | nodes.keys())
+            owns = any(key and key[0] in ("type", "default", "enableOption", "value") for key in metadata)
+            owns = owns or bool(path and not has_children and (metadata or path in nodes))
+            if isinstance(marker, StructuralMarker) and marker.kind == "zmdl":
+                owns = False
+            span = (marker_item or next(iter(metadata.values()), nodes.get(path))).span
+            result[path] = {"owns": owns, "span": span, "marker": marker,
+                            "terminal": not has_children and not isinstance(marker, StructuralMarker)}
+        return result
+
+    def add(path: tuple[str, ...], span: Any, *, terminal: bool = False,
+            mount_span: Any | None = None) -> None:
+        # Freeform binder names do not change the option path they own.
+        key = tuple("{}" if part.startswith("{") and part.endswith("}") else part for part in path)
+        source = location(span)
+        if mount_span is not None:
+            source += f" (mounted at {location(mount_span)})"
+        if key in owners:
+            duplicate(path, owners[key]["span"], span, owners[key]["source"], source)
+        for previous, owner in owners.items():
+            if (owner["terminal"] and key[:len(previous)] == previous
+                    or terminal and previous[:len(key)] == key):
+                duplicate(path, owner["span"], span, owner["source"], source)
+        owners[key] = {"path": list(path), "source": source, "span": span,
+                       "terminal": terminal}
+
+    def add_alias(path: tuple[str, ...], marker: StructuralMarker, span: Any) -> None:
+        target = [({"freeform": _static_path(part.value.path)[0]}
+                   if isinstance(part, DynamicSegment) else _static_path((part,))[0])
+                  for part in marker.argument or ()]
+        aliases.append({"path": list(path), "target": target, "source": location(span)})
+
+    document = documents.get("structure.zstr")
+    if document is None:
+        return {"ownership": [], "ownershipAliases": []}
+    structure = declarations(document, ())
+    for path, node in structure.items():
+        if node["owns"]:
+            add(path, node["span"], terminal=node["terminal"])
+        marker = node["marker"]
+        if isinstance(marker, StructuralMarker) and marker.kind == "alias":
+            add_alias(path, marker, node["span"])
+    for path, node in structure.items():
+        marker = node["marker"]
+        if not isinstance(marker, StructuralMarker) or marker.kind != "zmdl":
+            continue
+        target = _static_path(marker.argument, marker.span)
+        for module in modules:
+            identity = tuple(module["optionPath"][1:])
+            if identity[:len(target)] != target:
+                continue
+            mounted = (*path, *identity[len(target):])
+            source = documents[module["path"]]
+            declared = declarations(source, mounted)
+            if not declared.get((), {}).get("owns", False):
+                add(mounted, source.span, mount_span=node["span"])
+            for relative, definition in declared.items():
+                if definition["owns"]:
+                    add((*mounted, *relative), definition["span"], terminal=definition["terminal"],
+                        mount_span=node["span"])
+                alias = definition["marker"]
+                if isinstance(alias, StructuralMarker) and alias.kind == "alias":
+                    add_alias((*mounted, *relative), alias, definition["span"])
+            root_marker = declared.get((), {}).get("marker")
+            if ("enable",) not in declared and not (
+                isinstance(root_marker, StructuralMarker) and root_marker.kind == "alias"
+            ):
+                add((*mounted, "enable"), source.span, terminal=True, mount_span=node["span"])
+    return {"ownership": [{key: value for key, value in owner.items() if key not in ("span", "terminal")}
+                          for owner in owners.values()], "ownershipAliases": aliases}
 
 
 def _emit_static_path(path: tuple[str, ...]) -> str:
@@ -1179,6 +1363,7 @@ def _option_declaration(
     freeform_depth: int,
     inherited_defaults: tuple[str, ...] = (),
     type_bindings: dict[str, Expression] | None = None,
+    implicit_namespace: bool = False,
 ) -> str:
     metadata, _, enabled = _option_parts(value)
     body = _option_body(value)
@@ -1210,7 +1395,7 @@ def _option_declaration(
     if default is None and enabled:
         default_text = "false"
     elif has_scope:
-        default_text = "{ }"
+        default_text = None if implicit_namespace else "{ }"
     elif default is None and not isinstance(value, (AttrSet, EnableOption)):
         default_text = emitter.expression(value)
     else:
@@ -1313,6 +1498,7 @@ def _emit_zmdl_scope_module(
         )
 
     option_lines: list[tuple[tuple[str, ...], str]] = []
+    namespace_defaults: list[str] = []
     freeforms: list[Assignment] = []
     for statement in effective:
         if not isinstance(statement, Assignment):
@@ -1326,6 +1512,12 @@ def _emit_zmdl_scope_module(
             continue
         alias_metadata, _, _ = _option_parts(statement.value)
         alias_marker = alias_metadata.get("type")
+        body = _option_body(statement.value)
+        implicit_namespace = (isinstance(emitter, _MountEmitter) and body is not None
+                              and _zmdl_scope_has_declarations(body.statements)
+                              and "type" not in alias_metadata and "default" not in alias_metadata)
+        if implicit_namespace:
+            namespace_defaults.append(f"{_emit_static_path(path)} = {{ }};")
         if isinstance(alias_marker, StructuralMarker) and alias_marker.kind == "alias":
             if isinstance(emitter, _MountEmitter):
                 target = "[ " + " ".join(
@@ -1333,7 +1525,11 @@ def _emit_zmdl_scope_module(
                     else emit_nix_data(_static_path((segment,))[0])
                     for segment in alias_marker.argument
                 ) + " ]"
-                option_lines.append((path, f"moduleAliasOption {target}"))
+                local_schema = _emit_zmdl_scope_module(
+                    _option_body(statement.value).statements, emitter,
+                    freeform_depth=freeform_depth, type_bindings=type_bindings,
+                )
+                option_lines.append((path, f"moduleAliasOption {target} ({local_schema})"))
             continue
         option_lines.append(
             (
@@ -1344,6 +1540,7 @@ def _emit_zmdl_scope_module(
                     freeform_depth=freeform_depth,
                     inherited_defaults=child_defaults(emit_nix_data(path[0])),
                     type_bindings=type_bindings,
+                    implicit_namespace=implicit_namespace,
                 ),
             )
         )
@@ -1394,15 +1591,22 @@ def _emit_zmdl_scope_module(
             annotation = metadata.get("type")
             child_type = _option_type(annotation, metadata.get("default"), child_emitter, bindings=type_bindings, span=freeform.span)
         fields.append(f"freeformType = lib.types.attrsOf {child_type};")
+    config_fragments = []
+    if namespace_defaults:
+        # Namespace containers are mergeable configuration, not independently
+        # owned defaults on duplicate Nix option declarations.
+        config_fragments.append("{ " + " ".join(namespace_defaults) + " }")
     if default_records:
         records = "[ " + " ".join(f"({record})" for record in default_records) + " ]"
         names = emit_nix_data([path[0] for path, _ in option_lines])
         # Freeform defaults still instantiate their keys; unknown defaults must
         # remain definitions so the module system diagnoses them, not drops them.
-        fields.append(
-            "config = lib.mkOptionDefault (builtins.removeAttrs "
-            f"(lib.foldr (record: rest: lib.recursiveUpdate rest (record.default or {{ }})) {{ }} {records}) {names});"
+        config_fragments.append(
+            "lib.mkOptionDefault (builtins.removeAttrs "
+            f"(lib.foldr (record: rest: lib.recursiveUpdate rest (record.default or {{ }})) {{ }} {records}) {names})"
         )
+    if config_fragments:
+        fields.append("config = lib.mkMerge [ " + " ".join(f"({fragment})" for fragment in config_fragments) + " ];")
     bindings = tuple(item for item in effective if isinstance(item, (LetStatement, ResolvedImport)))
     return _with_action_bindings(bindings, emitter, "{ " + " ".join(fields) + " }")
 
