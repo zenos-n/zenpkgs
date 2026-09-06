@@ -62,6 +62,10 @@ serialize sibling metadata or recurse into their children.
 - Type wrappers: at most 8 unwrap/inline steps per expansion. Attr collections
   use `<name>` and lists use `*`. Submodule freeform schemas are expanded, with
   explicit mounted children taking precedence over upstream children.
+  Alias roots, including submodules with a mirror freeform type, are upstream.
+  Mirrored children inherit upstream provenance; declared local children and
+  mounts replace that provenance along with the schema. A local collection is
+  not upstream just because its element schema is an alias.
 - Packages: 16 levels locally, 2 beneath `pkgs.legacy`. Derivations at the
   boundary are still emitted, but deeper package sets are marked `depth-limit`.
 - Legacy package universes beginning with `pkgs`, plus `buildPackages`,
@@ -94,7 +98,12 @@ nix eval --json --file tests/search/no-structure.nix
 
 The synthetic bundle checks relocated mounts, inherited and overridden versions,
 node-local attribution, dynamically added upstream options,
-NixOS/user/Home Manager mirrors, freeforms, package hierarchy and universe
+NixOS/user/Home Manager and Syncthing alias roots and descendants, local children
+overlaid on mirrors, and a local `legacy.homeManager` mount replacing an upstream
+child. Mounted overrides retain compiler `nodeMetadata`, including inherited
+versions and node-local attribution. Serializer checks cover direct and wrapped
+mirrors, alias collection elements, and unavailable/depth-limited alias roots.
+The bundle also checks freeforms, package hierarchy and universe
 exclusions, diagnostics, defaults, type wrappers, recursion stops, and small
 fully serialized samples. Production checks select representative real paths and
 serialize only a program, package, and upstream option. The no-structure check

@@ -3,7 +3,7 @@ let
   nixpkgs = import nixpkgsPath { system = "x86_64-linux"; };
   lib = nixpkgs.lib;
   runtime = import runtimePath { inherit lib; };
-  bundle = builtins.fromJSON (builtins.readFile bundlePath);
+  bundle = import ../../lib/read-dsl-bundle.nix bundlePath;
   packages = { tools = { one = nixpkgs.hello; two = nixpkgs.cowsay; }; legacy = nixpkgs; };
   evaluate = extra: import (nixpkgsPath + "/nixos/lib/eval-config.nix") {
     system = "x86_64-linux";

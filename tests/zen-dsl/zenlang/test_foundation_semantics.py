@@ -1,5 +1,6 @@
 from io import StringIO
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -248,7 +249,7 @@ sibling = enableOption {};
         available = subprocess.run(["nix-instantiate", "--find-file", "nixpkgs"], capture_output=True, text=True)
         if available.returncode:
             self.skipTest("the VM must provide a Nixpkgs evaluation context")
-        registry = Path(__file__).parents[3] / "lib" / "maintainers.nix"
+        registry = Path(os.environ["ZEN_MAINTAINERS"]) if "ZEN_MAINTAINERS" in os.environ else Path(__file__).parents[3] / "lib" / "maintainers.nix"
         document = parse('''
 _meta = {
   name = "Authored Hello"; summary = "Imported package";

@@ -137,7 +137,7 @@ class SchemaValidationTests(unittest.TestCase):
         with patch("subprocess.run", side_effect=AssertionError("request generation executed a process")):
             requests = schema_requests(document)
         self.assertTrue(any(item["path"] == ["system", "programs", "demo", "port"] and item["value"]["value"] == -3 for item in requests))
-        self.assertFalse(any(item["path"][-1] == "tags" for item in requests))
+        self.assertFalse(any(item["path"][-1] == "tags" and "value" in item for item in requests))
 
     def test_schema_read_errors_are_diagnostics(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -242,6 +242,9 @@ class RuntimeSchemaExportTests(unittest.TestCase):
                 'legacy.positiveForSchemaTest = 3;',
                 'legacy.pathForSchemaTest = "/test";',
                 'legacy.customConstraint = "abc";',
+                'users.alex.programs.demo.theme = "dark";',
+                'system.programs.demo.instances.one.label = "one";',
+                'system.packages.legacy.hello = true;',
             )
             invalid = (
                 'system.programs.demo.port = "bad";',
@@ -259,11 +262,8 @@ class RuntimeSchemaExportTests(unittest.TestCase):
                 'legacy.customConstraint = "123";',
             )
             deferred = (
-                'users.alex.programs.demo.theme = "dark";',
-                'system.programs.demo.instances.one.label = "one";',
                 'legacy.pathForSchemaTest = ./relative;',
                 'legacy.brokenForSchemaTest = true;',
-                'system.packages.legacy.hello = true;',
             )
             requests_file = root / "requests.json"
             requests_file.write_text(json.dumps([
@@ -274,9 +274,9 @@ class RuntimeSchemaExportTests(unittest.TestCase):
                 let
                   pkgs = import {nixpkgs} {{ system = "x86_64-linux"; }};
                   inherit (pkgs) lib;
-                  bundle = builtins.fromJSON (builtins.readFile {bundle});
+                  bundle = import {ROOT}/lib/read-dsl-bundle.nix {bundle};
                   requests = builtins.fromJSON (builtins.readFile {requests_file});
-                  packageTree = {{ tools.demo = pkgs.hello; legacy = throw "recursive legacy universe was forced"; }};
+                  packageTree = {{ tools.demo = pkgs.hello; legacy = {{ hello = pkgs.hello; unrelated = builtins.abort "unqueried legacy package was forced"; }}; }};
                   runtime = import {ROOT}/lib/zstr-runtime.nix {{ inherit lib; }};
                   evaluate = mountedBundle: import ({nixpkgs} + "/nixos/lib/eval-config.nix") {{
                     system = "x86_64-linux";

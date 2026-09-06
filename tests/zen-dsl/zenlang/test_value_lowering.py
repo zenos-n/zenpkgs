@@ -55,6 +55,16 @@ class ValueLoweringTests(unittest.TestCase):
                         "path = builtins.toString value; }")
                     self.assertEqual({"kind": "path", "text": "path payload", "path": str(asset)}, result)
 
+    def test_existing_callable_parameter_labels_remain_supported(self):
+        for value in ("value: value", "42"):
+            statement = parse('_let identity: $type.function "value" = ' + value + ';',
+                              "value.zmdl", validate_semantics=False).statements[0]
+            emitted = NixEmitter().statement(statement)
+            result = self.evaluate("let lib = import <nixpkgs/lib>; " + emitted + " in identity 42",
+                                   failure="not of type" if value == "42" else None)
+            if value != "42":
+                self.assertEqual(42, result)
+
     def test_path_interpolation_copies_the_source_and_retains_store_context(self):
         with tempfile.TemporaryDirectory(prefix="zen-value-path-") as directory:
             root = Path(directory)

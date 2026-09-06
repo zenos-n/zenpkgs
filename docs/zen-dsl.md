@@ -1,4 +1,10 @@
-# zcfg MVP
+# ZenOS DSL
+
+The current implementation is documented under [Shared language front end](#shared-language-front-end)
+and [Foundation validation](#foundation-validation). The MVP notes below are
+historical documentation for `zcfg-legacy`, not the current language contract.
+
+## Historical zcfg MVP
 
 `zcfg` is a dependency-free Python compiler for a deliberately restricted,
 Nix-like ZenOS configuration language. It validates a source tree before
@@ -121,8 +127,9 @@ directory symlinks encountered before the logical final component are rejected.
 The CLI exposes the same boundary as
 `--import-root`. Cycles and excessive import depth are rejected with import
 traces; bare imported documents are merged in source order before local
-declarations. Bound imports remain isolated typed AST values and never become
-Nix `import` expressions. Legacy `import ./file.zcfg;` remains accepted with a
+declarations. Bound imports produce isolated record values with annotation
+checks, rather than exposing AST descriptors. They never become Nix `import`
+expressions. Legacy `import ./file.zcfg;` remains accepted with a
 deprecation warning; new sources use `_import`.
 
 Executable bare names must be declared lexical bindings. Evaluator and backend
@@ -130,8 +137,12 @@ roots are reserved, and package names are available bare only inside
 `with $pkgs.zenos;` or a static subtree such as
 `with $pkgs.zenos.legacy;`. Boolean guards use `_let` annotations and ZMDL
 option metadata; an unknown `$cfg` selection must use a boolean default such as
-`or false` as an explicit deferred-type marker. Calls are not valid guards. DSL
-path literals remain tagged path descriptors rather than being coerced to strings.
+`or false` as an explicit deferred-type marker in source-only checks. Schema-backed
+checks admit bare `$cfg` guards and check their boolean shape against mounted
+types. A fallback does not convert an existing nonboolean value to a boolean.
+Calls are not valid guards. DSL
+path literals lower to real Nix paths relative to the declaring source file.
+Typed interpolation handles scalar values and retains path/package string context.
 
 ```sh
 python3 -m zenlang check module.zmdl
@@ -183,9 +194,83 @@ versions. Semantic descriptors use `zenlang.semantic/2` and bundles use
 `zenlang.bundle/2`. Each sorted source entry contains its relative path, kind,
 span-free semantic descriptor, and compiled Nix text. The bundle's sorted `modules`
 records expose each source path, path-derived identity, and full option path.
-`structure.zstr` provides schema, freeforms, aliases, and package/program
-selectors; it does not attach or register ZMDL files. ZPKG interface mode emits
+`structure.zstr` controls schema, freeforms, aliases, package/program selectors,
+and explicit ZMDL subtree mounts. ZPKG interface mode emits
 static semantic descriptors and does not require or evaluate the package
 runtime. This frontend does not claim the future complete configuration schema
 or package runtime; unsupported backend semantics are reported as source
 diagnostics.
+
+## Foundation validation
+
+`check` without a schema validates syntax and local semantics. Mounted ZCFG
+validation uses the actual trusted NixOS/ZSTR context, not the browser index:
+
+```sh
+zen-dsl validate host.zcfg --trusted-context scripts/schema-context.nix
+zen-dsl compile host.zcfg --trusted-context scripts/schema-context.nix -o host.nix
+```
+
+The trusted context is a Nix function accepting `{ requests }` and returning the
+schema exporter result. The supplied script binds the production runtime and
+its package tree. This mode parses the source once, refreshes literal and path
+requests, and validates the same AST. It does not import the compiled ZCFG into
+the context. Evaluating the context is opt-in trusted execution, with a 120-second
+timeout (`--context-timeout`, at most 600), a 32 MiB response budget and a 1 MiB
+backend-log budget. Exceeding a live output budget or the timeout terminates the
+evaluation and cleans up its temporary files. Backend diagnostics remain visible.
+
+Offline validation can also consume a previously exported context without
+launching any process:
+
+```sh
+zen-dsl schema-requests host.zcfg > requests.json
+# Export the trusted context with lib/schema-validation.nix and these requests.
+zen-dsl validate host.zcfg --schema schema.json
+zen-dsl compile host.zcfg --schema schema.json -o host.nix
+```
+
+The exporter accepts `evaluated`, `bundle`, `packageTree`, and `requests`.
+The first three must describe the same runtime, without loading the ZCFG being
+checked. Exact path queries resolve concrete user/freeform keys and requested
+legacy package selectors without enumerating the upstream package universe.
+Only literal request data is checked using the upstream option types;
+source expressions are not executed for inspection. Exit status 1 reports an
+error, and 2 reports incomplete validation. Unsupported expressions, dynamic
+values, and bounded or unavailable schema areas are not silently accepted.
+Compiling with `--schema` preserves existing output on either result. Context
+generation must be repeated when the configuration literals or runtime change;
+`--trusted-context` performs that refresh automatically. Request/query count is
+limited to 4096 and path depth to 64. Unqueried areas remain unsupported, not
+implicitly absent. Typed runtime-dependent guards remain incomplete because
+static validation does not evaluate their truth value. Partial descent through
+value-typed collections also remains incomplete: checking only an element would
+bypass constraints on its enclosing record. Whole-record literal assignments
+retain the enclosing runtime checks.
+
+Run the real production-context acceptance in the VM with
+`PYTHONPATH=lib/zen-dsl python3 tests/schema-validation/production.py`.
+
+Developers have full `$lib` access. Backend evaluation of developer modules is
+trusted execution, not a sandbox. Bound record imports and `_let` values retain
+their lexical scope, and supplied annotations are checked when evaluated.
+Function parameter labels do not constitute inferred argument/return signatures;
+`functionTo` checks a declared return type when the function is called.
+
+ZPKG parsing and data-only interface compilation can retain dependency metadata.
+Executable compilation and package evaluation reject nonempty `general`, `build`,
+or `runtime` scopes until D14's override/linkage mechanics are specified. Empty
+and omitted scopes preserve the imported derivation's identity. This is explicit
+unsupported-feature handling, not an implementation of dependency linkage.
+
+Read compiled JSON bundles with `lib/read-dsl-bundle.nix`. It decodes data without
+Nix string context and restores asset references on generated code. Production
+bundles compile from filtered immutable sources so emitted paths do not point to
+temporary builder directories. `checks.x86_64-linux.dsl-bundle-context` verifies
+that executable fragments retain and can read their referenced assets.
+
+Module-local aliases require ZSTR mounting; their current supported boundaries
+and VM acceptance commands are in `tests/mounting/module-aliases.md`. General
+alias/local precedence, custom builders, and dependency linkage remain undecided.
+The foundation checks do not certify all existing library options' enabled
+behavior, activation, or boot. Run integration acceptance in a ZenOS VM.

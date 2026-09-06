@@ -3,7 +3,7 @@ let
   pkgs = import nixpkgsPath { system = "x86_64-linux"; };
   inherit (pkgs) lib;
   runtime = import runtimePath { inherit lib; };
-  bundle = builtins.fromJSON (builtins.readFile bundlePath);
+  bundle = import ../../lib/read-dsl-bundle.nix bundlePath;
   evaluateBundle = bundle: extra: import (nixpkgsPath + "/nixos/lib/eval-config.nix") {
     system = "x86_64-linux";
     modules = [

@@ -15,7 +15,7 @@ let
       '';
   result = import ./acceptance.nix {
     inherit nixpkgs home-manager;
-    bundle = builtins.fromJSON (builtins.readFile bundleFile);
+    bundle = import ../../lib/read-dsl-bundle.nix bundleFile;
   };
 in
 bootstrapPkgs.writeText "search-acceptance.json" (builtins.toJSON result)

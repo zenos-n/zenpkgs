@@ -46,24 +46,25 @@
           };
           zenDsl = bootstrapPkgs.callPackage ./lib/zen-dsl/package.nix {
             testSuite = ./tests/zen-dsl;
+            nixpkgsSrc = nixpkgs;
           };
           bundle = bootstrapPkgs.runCommand "zenpkgs-dsl-bundle" {
             nativeBuildInputs = [
               zenDsl
               bootstrapPkgs.python3
             ];
-            src = self;
+            src = builtins.path {
+              path = self;
+              name = "zenpkgs-dsl-source";
+              filter = path: _:
+                path == toString self || builtins.elem
+                  (builtins.head (nixpkgs.lib.splitString "/" (nixpkgs.lib.removePrefix "${self}/" path)))
+                  [ "structure.zstr" "pkgs" "modules" "docs" ];
+            };
           } ''
-            mkdir -p source
-            if [ -f "$src/structure.zstr" ]; then
-              cp "$src/structure.zstr" source/structure.zstr
-            fi
-            cp -R "$src/pkgs" source/pkgs
-            cp -R "$src/modules" source/modules
-            cp -R "$src/docs" source/docs
             mkdir -p "$out/interfaces" "$out/modules"
             zen-dsl compile-tree \
-              --root source \
+              --root "$src" \
               --output "$out/bundle.json" \
               --mode interface
 
@@ -118,7 +119,7 @@
           '';
           bundleJSON =
             if builtins.pathExists (self + "/structure.zstr") then
-              builtins.fromJSON (builtins.readFile "${bundle}/bundle.json")
+              import ./lib/read-dsl-bundle.nix "${bundle}/bundle.json"
             else {
               bundleVersion = "zenlang.bundle/2";
               sources = [ ];
@@ -615,6 +616,9 @@
           webapps = installedSystemChecks.webapps;
           dsl-module-contract = dslModuleContract;
           zen-dsl = dsl.zenDsl;
+          dsl-bundle-context = import ./tests/zen-dsl/bundle-context.nix {
+            inherit (dsl) bootstrapPkgs;
+          };
           zstr-mounting = import ./tests/mounting/check.nix {
             inherit (dsl) bootstrapPkgs;
             inherit nixpkgs;

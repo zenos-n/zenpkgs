@@ -178,18 +178,20 @@ let
     ) statements;
 
   # Collection placeholders are explicit nodes. Submodule freeform schemas are
-  # merged below their owning node; declared children take precedence over aliases.
+  # merged below their owning node; declared children take precedence in both
+  # schema and provenance. A freeform mirror marks its owner, not declared children.
   typeChildren =
-    fuel: path: type:
+    fuel: path: upstream: type:
     if fuel == 0 then
       throw "option wrapper depth limit"
     else
       let
         name = type.name or "unknown";
         nested = type.nestedTypes or { };
+        inherited = upstream || name == "zstr-upstream-mirror";
       in
       if nested ? finalType then
-        typeChildren (fuel - 1) path nested.finalType
+        typeChildren (fuel - 1) path inherited nested.finalType
       else if
         builtins.elem name [
           "nullOr"
@@ -197,7 +199,7 @@ let
         ]
         && nested ? elemType
       then
-        typeChildren (fuel - 1) path nested.elemType
+        typeChildren (fuel - 1) path inherited nested.elemType
       else if
         builtins.elem name [
           "attrsOf"
@@ -206,18 +208,35 @@ let
         ]
       then
         {
-          ${if name == "listOf" then "*" else "<name>"} = lib.mkOption { type = nested.elemType; };
+          upstream = inherited;
+          children.${if name == "listOf" then "*" else "<name>"} = {
+            tree = lib.mkOption { type = nested.elemType; };
+            upstream = inherited;
+          };
         }
       else
         let
           raw = type.getSubOptions path;
+          declared = lib.mapAttrs (_: tree: {
+            inherit tree;
+            upstream = inherited;
+          }) (clean raw);
           freeform =
             if nested ? freeformType then
-              typeChildren (fuel - 1) path nested.freeformType
+              typeChildren (fuel - 1) path inherited nested.freeformType
             else
-              raw._freeformOptions or { };
+              {
+                upstream = inherited;
+                children = lib.mapAttrs (_: tree: {
+                  inherit tree;
+                  upstream = inherited;
+                }) (raw._freeformOptions or { });
+              };
         in
-        freeform // clean raw;
+        {
+          upstream = freeform.upstream;
+          children = freeform.children // declared;
+        };
 in
 rec {
   defaultLimits = {
@@ -242,16 +261,18 @@ rec {
       value = evaluated.value;
       isOption = evaluated.success && lib.isOption value;
       authored = metadataAt path;
-      isUpstream = upstream || (isOption && (value.type.name or "") == "zstr-upstream-mirror");
+      schema = typeChildren 8 path upstream value.type;
+      provenance = attempt schema.upstream;
+      isUpstream = upstream || (isOption && provenance.success && provenance.value);
       depth = if builtins.elem path mountPaths then 0 else typeDepth;
       limited = builtins.length path >= limits.optionDepth || depth >= limits.typeDepth;
       children =
         if limited || !evaluated.success then
           { }
         else if isOption then
-          typeChildren 8 path value.type
+          schema.children
         else if builtins.isAttrs value then
-          clean value
+          lib.mapAttrs (_: tree: { inherit tree upstream; }) (clean value)
         else
           { };
       names = attempt (builtins.attrNames children);
@@ -322,13 +343,10 @@ rec {
       sub = lib.genAttrs (if names.success then names.value else [ ]) (
         name:
         serializeOptions {
-          tree = children.${name};
+          inherit (children.${name}) tree upstream;
           path = path ++ [ name ];
           inherit limits metadataAt mountPaths;
           typeDepth = depth + (if isOption then 1 else 0);
-          upstream =
-            isUpstream
-            || (isOption && (value.type.nestedTypes.freeformType.name or "") == "zstr-upstream-mirror");
         }
       );
     in

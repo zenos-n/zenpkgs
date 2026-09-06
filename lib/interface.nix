@@ -83,8 +83,16 @@ let
     pkgs: entry:
     let
       package = lib.attrByPath entry.sourcePath null pkgs;
+      dependencies = entry.meta.dependencies or { };
+      unsupportedScope = lib.findFirst (scope: (dependencies.${scope} or [ ]) != [ ]) null [
+        "general"
+        "build"
+        "runtime"
+      ];
     in
-    if package == null then
+    if unsupportedScope != null then
+      throw "ZenPkgs interface '${entry.id}': _meta.dependencies.${unsupportedScope}: ZPKG dependencies are unsupported until backend override and runtime-linkage mechanics are specified (D14); only empty dependency scopes can be evaluated as packages"
+    else if package == null then
       throw "ZenPkgs interface '${entry.id}' cannot resolve nixpkgs.${pathString entry.sourcePath}"
     else if !lib.isDerivation package then
       throw "ZenPkgs interface '${entry.id}' did not resolve to a derivation"

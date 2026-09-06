@@ -608,6 +608,9 @@ class NixEmitter:
             raise NixEmissionError("type expressions require a $type primitive", annotation.span)
         name = self.segment_value(root.path[0])
         if isinstance(annotation, CallExpr):
+            if name == "function" and annotation.arguments:
+                # Existing callable annotations carry parameter labels, not return types.
+                return "(lib.types.addCheck lib.types.unspecified builtins.isFunction)"
             if len(annotation.arguments) != 1 or not isinstance(annotation.arguments[0], ListExpr):
                 raise NixEmissionError("type parameters must be enclosed in brackets", annotation.span)
             items = annotation.arguments[0].items

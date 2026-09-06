@@ -416,4 +416,58 @@ in
       )
     );
     pass "zenpkgs-registry-metadata-defaults";
+
+  registry-dependency-support =
+    let
+      packageWith =
+        meta:
+        (interface.buildPackageTree { inherit (pkgs) hello; } (registryWith [
+          (firstEntry // { inherit meta; })
+        ])).apps.first.tool;
+      emptyScopes = {
+        general = [ ];
+        build = [ ];
+        runtime = [ ];
+      };
+    in
+    assert lib.all
+      (
+        scope:
+        let
+          meta = firstEntry.meta // {
+            dependencies = emptyScopes // {
+              ${scope} = [ "$pkgs.legacy.hello" ];
+            };
+          };
+        in
+        !(builtins.tryEval (packageWith meta).drvPath).success
+        && !(builtins.tryEval (packageWith meta).outPath).success
+        &&
+          (interface.registryDocs (registryWith [ (firstEntry // { inherit meta; }) ])).packages
+          == [ (firstEntry // { inherit meta; }) ]
+      )
+      [
+        "general"
+        "build"
+        "runtime"
+      ];
+    assert lib.all
+      (
+        meta:
+        let
+          package = packageWith meta;
+        in
+        package.drvPath == pkgs.hello.drvPath && package.outPath == pkgs.hello.outPath
+      )
+      (
+        [ (removeAttrs firstEntry.meta [ "dependencies" ]) ]
+        ++ map (dependencies: firstEntry.meta // { inherit dependencies; }) [
+          { }
+          { general = [ ]; }
+          { build = [ ]; }
+          { runtime = [ ]; }
+          emptyScopes
+        ]
+      );
+    pass "zenpkgs-registry-dependency-support";
 }

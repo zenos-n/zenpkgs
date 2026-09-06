@@ -1,7 +1,20 @@
-legacy._meta.type = (alias nixpkgs);
+legacy = {
+  _meta.type = (alias nixpkgs);
+  homeManager._meta.type = (zmdl programs.demo);
+};
 system = {
   programs._meta.type = (zmdl programs);
   packages._meta.type = (packages);
+  syncthing = {
+    _meta = {
+      type = (alias nixpkgs.services.syncthing);
+      name = "Syncthing";
+      maintainers = [ $m.doromiert ];
+      license = $l.mit;
+    };
+    enable = { _meta.type = $type.bool; _meta.default = true; };
+    local = { _meta.type = $type.string; };
+  };
 };
 relocated._meta.type = (zmdl programs);
 users = {
@@ -10,7 +23,10 @@ users = {
     packages._meta.type = (packages);
     legacy = {
       _meta.type = (alias nixpkgs.users.users.($f.user));
-      homeManager._meta.type = (alias nixpkgs.home-manager.users.($f.user));
+      homeManager = {
+        _meta.type = (alias nixpkgs.home-manager.users.($f.user));
+        local._meta.type = (zmdl programs.demo);
+      };
     };
   };
 };

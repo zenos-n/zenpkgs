@@ -457,6 +457,19 @@ def compile_zpkg(document: Document, *, mode: str = "build") -> str:
         }
         return "{ ... }:\n" + emit_nix_data(descriptor) + "\n"
 
+    if "dependencies" in metadata:
+        scopes: dict[str, Expression] = {}
+        _collect_metadata(scopes, (), metadata["dependencies"])
+        for scope, value in scopes.items():
+            if not isinstance(value, ListExpr) or value.items:
+                raise CompilationError(
+                    f"{document.span.source}: _meta.dependencies.{scope}: "
+                    "ZPKG dependencies are unsupported until backend override "
+                    "and runtime-linkage mechanics are specified (D14); "
+                    "only empty dependency scopes can be compiled for execution",
+                    value.span,
+                )
+
     package = emitter.expression(package_import.package)
     bindings = "\n".join(f"  {emitter.statement(statement)}" for statement in local_bindings)
     supplied = "{ " + " ".join(

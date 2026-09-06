@@ -62,7 +62,8 @@ class MountingCompilerTests(unittest.TestCase):
             system.retries._meta.default = 3;
         """)
         nodes = {tuple(node["path"]): node for node in bundle["structure"]["nodes"]}
-        self.assertIn("let port = 8080; in", nodes[("system", "port")]["optionNix"])
+        self.assertIn("let port = (builtins.addErrorContext", nodes[("system", "port")]["optionNix"])
+        self.assertIn("type = lib.types.int; }; config.value = 8080;", nodes[("system", "port")]["optionNix"])
         self.assertIn("lib.types.int", nodes[("system", "retries")]["optionNix"])
 
     def test_package_mounts_require_an_approved_selector_scope(self):

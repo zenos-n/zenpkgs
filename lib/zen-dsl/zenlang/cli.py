@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 from collections.abc import Sequence
+from io import StringIO
 import json
 from pathlib import Path
 import sys
@@ -12,7 +13,8 @@ from .compiler import CompilationError, check_tree, compile_document, compile_tr
 from .diagnostics import render_human, render_json
 from .emitter import NixEmissionError
 from .model import Diagnostic, FileKind, Span, ZenLangError, ast_to_dict
-from .schema_validation import load_schema, schema_requests, validate_zcfg
+from .schema_validation import SchemaValidationResult, load_schema, schema_requests, validate_zcfg
+from .trusted_schema import load_trusted_schema
 from zcfg.cli import write_output_atomic
 from zcfg.model import ZcfgError
 
@@ -43,10 +45,18 @@ def build_parser() -> argparse.ArgumentParser:
             help="error output format (default: human)",
         )
         if name in ("check", "validate", "compile"):
-            command.add_argument(
+            context = command.add_mutually_exclusive_group(required=name == "validate")
+            context.add_argument(
                 "--schema",
-                required=name == "validate",
                 help="mounted schema JSON for ZCFG (exit 2 when validation is incomplete)",
+            )
+            context.add_argument(
+                "--trusted-context",
+                help="explicitly trusted Nix context to evaluate with fresh data-only requests",
+            )
+            command.add_argument(
+                "--context-timeout", type=float, default=120,
+                help="trusted-context evaluation timeout in seconds (default: 120, maximum: 600)",
             )
         if name == "compile":
             command.add_argument(
@@ -107,14 +117,18 @@ def main(
         return _tree(arguments, stdout, stderr)
 
     try:
-        document = parse_file(arguments.file, import_root=arguments.import_root)
+        schema_backed = bool(getattr(arguments, "schema", None) or getattr(arguments, "trusted_context", None))
+        document = parse_file(
+            arguments.file, import_root=arguments.import_root,
+            defer_schema_guards=schema_backed or arguments.command == "schema-requests",
+        )
         if arguments.command == "schema-requests":
             json.dump(schema_requests(document), stdout, indent=2, sort_keys=True, ensure_ascii=False)
             stdout.write("\n")
             _write_warnings(document, stderr, arguments.diagnostic_format)
             return 0
-        if getattr(arguments, "schema", None):
-            result = validate_zcfg(document, load_schema(arguments.schema))
+        if schema_backed:
+            result = _validate_schema(arguments, document)
             if arguments.diagnostic_format == "json":
                 stdout.write(render_json(list(result.diagnostics)) + "\n")
             else:
@@ -173,9 +187,10 @@ def _compile(arguments: argparse.Namespace, stdout: TextIO, stderr: TextIO) -> i
 
     try:
         import_root = arguments.import_root or arguments.root
-        document = parse_file(arguments.file, import_root=import_root)
-        if arguments.schema:
-            result = validate_zcfg(document, load_schema(arguments.schema))
+        schema_backed = bool(arguments.schema or arguments.trusted_context)
+        document = parse_file(arguments.file, import_root=import_root, defer_schema_guards=schema_backed)
+        if schema_backed:
+            result = _validate_schema(arguments, document)
             if arguments.diagnostic_format == "json":
                 stderr.write(render_json(list(result.diagnostics)) + "\n")
             else:
@@ -188,7 +203,7 @@ def _compile(arguments: argparse.Namespace, stdout: TextIO, stderr: TextIO) -> i
             mode=arguments.mode or "build",
             root=arguments.root,
         )
-        if not arguments.schema:
+        if not schema_backed:
             _write_warnings(document, stderr, arguments.diagnostic_format)
     except ZenLangError as error:
         _write_zenlang_error(error, arguments.diagnostic_format, stderr)
@@ -212,6 +227,20 @@ def _compile(arguments: argparse.Namespace, stdout: TextIO, stderr: TextIO) -> i
         diagnostic = Diagnostic("ZEN402", str(error), Span.point(arguments.output))
         _write_zenlang_diagnostic(diagnostic, arguments.diagnostic_format, {}, stderr)
         return 1
+
+
+def _validate_schema(arguments: argparse.Namespace, document) -> SchemaValidationResult:
+    backend_log = StringIO()
+    if arguments.trusted_context:
+        context = load_trusted_schema(document, arguments.trusted_context, timeout=arguments.context_timeout, stderr=backend_log)
+    else:
+        context = load_schema(arguments.schema)
+    result = validate_zcfg(document, context)
+    if backend_log.getvalue():
+        diagnostic = Diagnostic("ZEN505", "trusted context reported diagnostics", Span.point(arguments.trusted_context),
+                                "warning", (backend_log.getvalue(),))
+        result = SchemaValidationResult((*result.diagnostics, diagnostic))
+    return result
 
 
 def _tree(arguments: argparse.Namespace, stdout: TextIO, stderr: TextIO) -> int:

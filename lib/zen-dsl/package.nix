@@ -1,6 +1,7 @@
 {
   lib,
   nix,
+  nixpkgsSrc,
   python3,
   stdenvNoCC,
   testSuite,
@@ -23,6 +24,10 @@ stdenvNoCC.mkDerivation {
   checkPhase = ''
     runHook preCheck
     export PYTHONPYCACHEPREFIX="$TMPDIR/pycache"
+    export NIX_REMOTE="local?root=$TMPDIR/test-store"
+    export NIX_PATH="nixpkgs=${nixpkgsSrc}"
+    export ZEN_MAINTAINERS=${../maintainers.nix}
+    nix-store --init
     test -f zenlang/compiler.py
     test -f zenlang/emitter.py
     test -f ${testSuite}/zenlang/test_compiler.py

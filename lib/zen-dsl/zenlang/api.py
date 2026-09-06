@@ -39,12 +39,17 @@ _MAX_SYMLINKS = 40
 _PhysicalIdentity = tuple[int, int]
 
 
-def parse(text: str, source: str, *, validate_semantics: bool = True) -> Document:
+def parse(
+    text: str, source: str, *, validate_semantics: bool = True,
+    defer_schema_guards: bool = False,
+) -> Document:
     """Parse a source fragment; parse_file also enforces the complete file contract."""
     kind = FileKind.from_source(source)
     document = parse_tokens(lex(text, source), kind)
     if validate_semantics:
-        document = replace(document, diagnostics=tuple(dict.fromkeys((*document.diagnostics, *validate(document)))))
+        document = replace(document, diagnostics=tuple(dict.fromkeys((
+            *document.diagnostics, *validate(document, defer_schema_guards=defer_schema_guards),
+        ))))
     else:
         validate_markdown_imports(document)
     return document
@@ -55,6 +60,7 @@ def parse_file(
     *,
     validate_semantics: bool = True,
     import_root: str | Path | None = None,
+    defer_schema_guards: bool = False,
 ) -> Document:
     entry = _logical_path(path)
     source = str(entry)
@@ -85,6 +91,7 @@ def parse_file(
             boundary,
             root_descriptor,
             validate_semantics=validate_semantics,
+            defer_schema_guards=defer_schema_guards,
             sources=sources,
         )
         try:
@@ -103,11 +110,13 @@ class _ImportResolver:
         root_descriptor: int,
         *,
         validate_semantics: bool,
+        defer_schema_guards: bool,
         sources: dict[str, str],
     ):
         self.root = root
         self.root_descriptor = root_descriptor
         self.validate_semantics = validate_semantics
+        self.defer_schema_guards = defer_schema_guards
         self.sources = sources
         self.cache: dict[tuple[Path, _PhysicalIdentity], Document] = {}
         self.expanded_import_counts: dict[int, int] = {}
@@ -231,7 +240,10 @@ class _ImportResolver:
                 tuple(dict.fromkeys(diagnostics)),
             )
             if self.validate_semantics:
-                warnings = validate(result, metadata_warnings=not imported)
+                warnings = validate(
+                    result, metadata_warnings=not imported,
+                    defer_schema_guards=self.defer_schema_guards,
+                )
                 if not imported:
                     validate_document_contract(result)
                 validate_import_merges(result)

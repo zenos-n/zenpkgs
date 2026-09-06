@@ -18,14 +18,17 @@ from .emitter import semantic_descriptor
 from .model import (
     Assignment, AttrSet, ConditionalStatement, Diagnostic, Document, FileKind,
     GRAMMAR_VERSION, IR_VERSION, GroupExpr, IdentifierSegment, ImportStatement, LetStatement, ListExpr,
-    Literal, ResolvedImport, Span, StringExpr, StringSegment,
+    Literal, ResolvedImport, SelectionExpr, Span, StringExpr, StringSegment,
     StringText, StructuralMarker, UnaryExpr, Variable, ZenLangError,
 )
-from .validation import _annotation_type
+from .validation import _annotation_type, _cfg_static_path, _validate_boolean_contexts
 
 
 SCHEMA_VERSION = "1.0.0Na"
 SCHEMA_ENCODING = "zenlang.schema-validation/1"
+MAX_SCHEMA_REQUESTS = 4096
+MAX_SCHEMA_BYTES = 32 * 1024 * 1024
+MAX_SCHEMA_PATH_DEPTH = 64
 
 
 def _names(segments: Any) -> tuple[str, ...] | None:
@@ -70,15 +73,43 @@ def _literal_data(value: Any) -> Any:
     return value
 
 
-def schema_requests(document: Document) -> list[dict[str, Any]]:
-    """Literal data requests for the trusted exporter, never executable source.
+def _cfg_reference(value: Any) -> bool:
+    while isinstance(value, (GroupExpr, SelectionExpr)):
+        value = value.value
+    return isinstance(value, Variable) and value.name == "cfg"
+
+
+def schema_requests(
+    document: Document, *, max_requests: int = MAX_SCHEMA_REQUESTS,
+) -> list[dict[str, Any]]:
+    """Bounded literal checks and exact static paths, never executable source.
 
     Request booleans both as assignments and possible generated enable leaves.
     Only nodes actually mounted by the runtime answer these requests.
     """
     if document.kind is not FileKind.ZCFG:
         raise ZenLangError(Diagnostic("ZEN500", "schema requests require ZCFG", document.span))
+    if type(max_requests) is not int or not 0 < max_requests <= MAX_SCHEMA_REQUESTS:
+        raise ZenLangError(Diagnostic("ZEN500", "schema request count limit must be between 1 and 4096", document.span))
     requests: list[dict[str, Any]] = []
+    paths: set[tuple[str, ...]] = set()
+    size = 2
+
+    def add(path: tuple[str, ...], span: Span, descriptor: Any = None) -> None:
+        nonlocal size
+        if len(path) > MAX_SCHEMA_PATH_DEPTH:
+            raise ZenLangError(Diagnostic("ZEN500", "schema request path exceeds maximum depth of 64", span))
+        if descriptor is None and path in paths:
+            return
+        request = {"path": list(path)}
+        if descriptor is not None:
+            request["value"] = descriptor
+        else:
+            paths.add(path)
+        size += len(json.dumps(request).encode("utf-8")) + (2 if requests else 0)
+        if len(requests) >= max_requests or size > MAX_SCHEMA_BYTES:
+            raise ZenLangError(Diagnostic("ZEN500", "schema requests exceed the count or 32 MiB JSON size limit", span))
+        requests.append(request)
 
     def visit(statements: Any, prefix: tuple[str, ...]) -> None:
         for statement in statements:
@@ -98,13 +129,29 @@ def schema_requests(document: Document) -> list[dict[str, Any]]:
                     value = value.value
                 if _known(value):
                     descriptor = semantic_descriptor(_literal_data(value))
-                    requests.append({"path": list(path), "value": descriptor})
-                    if isinstance(value, Literal) and value.kind in ("true", "false"):
-                        requests.append({"path": [*path, "enable"], "value": descriptor})
+                    add(path, statement.span, descriptor)
+                    if isinstance(value, Literal) and value.kind in ("true", "false") and len(path) < MAX_SCHEMA_PATH_DEPTH:
+                        add((*path, "enable"), statement.span, descriptor)
+                add(path, statement.span)
                 if isinstance(value, AttrSet) and not value.recursive:
                     visit(value.statements, path)
 
+    def references(value: Any) -> None:
+        if _cfg_reference(value):
+            path = _cfg_static_path(value)
+            if path is not None:
+                add(path, value.span)
+                return
+        if isinstance(value, tuple):
+            for item in value:
+                references(item)
+        elif is_dataclass(value):
+            for field in fields(value):
+                if field.name not in ("span", "diagnostics"):
+                    references(getattr(value, field.name))
+
     visit(document.statements, ())
+    references(document.statements)
     return requests
 
 
@@ -113,6 +160,7 @@ class SchemaContext:
     root: dict[str, Any]
     source: str
     bundle_digest: str
+    queries: dict[tuple[str, ...], dict[str, Any]] | None = None
 
     @classmethod
     def from_dict(cls, data: Any, *, source: str = "<schema>") -> SchemaContext:
@@ -121,6 +169,11 @@ class SchemaContext:
 
         if not isinstance(data, dict):
             invalid("schema context must be an object")
+        try:
+            if len(json.dumps(data).encode("utf-8")) > MAX_SCHEMA_BYTES:
+                invalid("mounted schema exceeds the 32 MiB JSON size limit")
+        except (TypeError, ValueError, RecursionError) as error:
+            invalid(f"invalid schema JSON data: {error}")
         if data.get("encoding") != SCHEMA_ENCODING or data.get("schemaVersion") != SCHEMA_VERSION:
             invalid("unsupported mounted schema encoding/version; regenerate the schema context")
         if data.get("zenosVersion") != SCHEMA_VERSION:
@@ -179,13 +232,41 @@ class SchemaContext:
                 "shorthand": value.get("shorthand", False),
             }
 
-        return cls(node(data.get("root")), source, digest)
+        queries = None
+        if "queries" in data:
+            records = data["queries"]
+            if not isinstance(records, list) or len(records) > MAX_SCHEMA_REQUESTS:
+                invalid("schema queries must be a bounded list of at most 4096 records")
+            queries = {}
+            for query in records:
+                if not isinstance(query, dict):
+                    invalid("schema query must be an object")
+                path = query.get("path")
+                status = query.get("status")
+                if not isinstance(path, list) or len(path) > MAX_SCHEMA_PATH_DEPTH or any(not isinstance(part, str) for part in path):
+                    invalid("schema query path must be a list of strings with depth at most 64")
+                if status not in ("found", "missing", "unsupported"):
+                    invalid("invalid schema query status")
+                if "reason" in query and not isinstance(query["reason"], str):
+                    invalid("schema query reason must be a string")
+                if tuple(path) in queries:
+                    invalid("duplicate exact schema query path")
+                if status == "found" and "node" not in query:
+                    invalid("found schema query requires a node")
+                parsed = {"status": status, "reason": query.get("reason", "exact schema query unavailable")}
+                if "node" in query:
+                    parsed["node"] = node(query["node"])
+                queries[tuple(path)] = parsed
+        return cls(node(data.get("root")), source, digest, queries)
 
 
 def load_schema(path: str | Path) -> SchemaContext:
     try:
-        with Path(path).open(encoding="utf-8") as stream:
-            data = json.load(stream)
+        with Path(path).open("rb") as stream:
+            raw = stream.read(MAX_SCHEMA_BYTES + 1)
+        if len(raw) > MAX_SCHEMA_BYTES:
+            raise ValueError("mounted schema exceeds the 32 MiB JSON size limit")
+        data = json.loads(raw)
         return SchemaContext.from_dict(data, source=str(path))
     except (OSError, ValueError, RecursionError) as error:
         raise ZenLangError(Diagnostic("ZEN500", f"cannot read mounted schema: {error}", Span.point(str(path)))) from error
@@ -211,7 +292,7 @@ class SchemaValidationResult:
 def validate_file(
     path: str | Path, schema: SchemaContext, *, import_root: str | Path | None = None,
 ) -> SchemaValidationResult:
-    return validate_zcfg(parse_file(path, import_root=import_root), schema)
+    return validate_zcfg(parse_file(path, import_root=import_root, defer_schema_guards=True), schema)
 
 
 def validate_zcfg(document: Document, schema: SchemaContext) -> SchemaValidationResult:
@@ -230,6 +311,19 @@ def validate_zcfg(document: Document, schema: SchemaContext) -> SchemaValidation
         diagnostics.append(Diagnostic(code, message, span, "warning" if code == "ZEN503" else "error"))
 
     def lookup(path: tuple[str, ...], span: Span) -> dict[str, Any] | None:
+        query = (schema.queries or {}).get(path)
+        if query is not None:
+            if query["status"] == "missing":
+                report("ZEN501", f"unknown mounted option or selector: {'.'.join(path)}", span)
+                return None
+            if query["status"] == "unsupported":
+                report("ZEN503", f"{'.'.join(path)}: schema unavailable: {query['reason']}", span)
+                return None
+            current = query["node"]
+            if current["kind"] == "unsupported":
+                report("ZEN503", f"{'.'.join(path)}: schema unavailable: {current['reason']}", span)
+                return None
+            return current
         current = schema.root
         for index, part in enumerate(path):
             if current["kind"] == "unsupported":
@@ -251,12 +345,13 @@ def validate_zcfg(document: Document, schema: SchemaContext) -> SchemaValidation
         return current
 
     def references(value: Any) -> None:
-        if isinstance(value, Variable) and value.name == "cfg":
-            path = _names(value.path)
+        if _cfg_reference(value):
+            path = _cfg_static_path(value)
             if path is None:
                 report("ZEN503", "dynamic $cfg path cannot be checked statically", value.span)
-            elif path:
+            else:
                 lookup(path, value.span)
+                return
         if isinstance(value, tuple):
             for item in value:
                 references(item)
@@ -319,5 +414,23 @@ def validate_zcfg(document: Document, schema: SchemaContext) -> SchemaValidation
                 report("ZEN503", "statement contents cannot be validated statically", statement.span)
 
     references(document.statements)
+    def cfg_type(value: Any) -> str:
+        current = lookup(_cfg_static_path(value), value.span)
+        if current is None:
+            return "pending"
+        if current["kind"] == "branch":
+            return "set"
+        annotation = _annotation_type(current["annotation"])
+        if annotation == "enum":
+            return "string"
+        if annotation in ("unknown", "either"):
+            report("ZEN503", "configuration guard type cannot be resolved statically", value.span)
+            return "pending"
+        return annotation
+
+    try:
+        _validate_boolean_contexts(document, cfg_type=cfg_type)
+    except ZenLangError as error:
+        report("ZEN502", f"configuration guard has an invalid boolean shape: {error.diagnostic.message}", error.diagnostic.span)
     visit(document.statements, ())
     return SchemaValidationResult(tuple(dict.fromkeys(diagnostics)))

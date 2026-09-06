@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Callable
 from dataclasses import fields, is_dataclass
 from difflib import get_close_matches
 from pathlib import PurePath
@@ -124,7 +125,10 @@ _RESERVED_BINDINGS = frozenset(
 )
 
 
-def validate(document: Document, *, metadata_warnings: bool = True) -> tuple[Diagnostic, ...]:
+def validate(
+    document: Document, *, metadata_warnings: bool = True,
+    defer_schema_guards: bool = False,
+) -> tuple[Diagnostic, ...]:
     """Validate supplied values and return metadata diagnostics without mutating the AST."""
     validate_markdown_imports(document)
     _validate_statements(
@@ -139,7 +143,7 @@ def validate(document: Document, *, metadata_warnings: bool = True) -> tuple[Dia
         in_deps=False,
     )
     _validate_executable_names(document.statements, lexical=frozenset(), package_scope=False)
-    _validate_boolean_contexts(document)
+    _validate_boolean_contexts(document, defer_schema_guards=defer_schema_guards)
     if document.kind is FileKind.ZMDL:
         _validate_zmdl_freeform_declarations(tuple(_effective_statements(document)))
     _validate_initializers(tuple(_effective_statements(document)))
@@ -1803,9 +1807,16 @@ def _reject_reserved_binding(name: str, span: object) -> None:
         )
 
 
-def _validate_boolean_contexts(document: Document) -> None:
+def _validate_boolean_contexts(
+    document: Document, *, defer_schema_guards: bool = False,
+    cfg_type: Callable[[Expression], str] | None = None,
+) -> None:
     statements = tuple(_effective_statements(document))
     option_types: dict[str, str] = {}
+    if document.kind is FileKind.ZCFG and defer_schema_guards and cfg_type is None:
+        cfg_type = lambda expression: "pending"
+    if document.kind is not FileKind.ZCFG:
+        cfg_type = None
     if document.kind is FileKind.ZMDL:
         for statement in statements:
             if not isinstance(statement, Assignment) or isinstance(statement.target, StructuralMarker):
@@ -1817,11 +1828,15 @@ def _validate_boolean_contexts(document: Document) -> None:
     def walk(statements: tuple[Statement, ...], environment: dict[str, str]) -> None:
         visible = dict(environment)
         for statement in statements:
+            if isinstance(statement, ResolvedImport) and statement.binding is not None:
+                if cfg_type is not None:
+                    _validate_boolean_contexts(statement.document, cfg_type=cfg_type)
+                continue
             if isinstance(statement, LetStatement):
                 visible[statement.name] = _annotation_type(statement.annotation)
                 continue
             if isinstance(statement, ConditionalStatement):
-                _require_typed_boolean(statement.condition, visible, option_types, "configuration condition")
+                _require_typed_boolean(statement.condition, visible, option_types, "configuration condition", cfg_type=cfg_type)
                 walk(statement.body.statements, visible)
                 continue
             if isinstance(statement, ActionStatement):
@@ -1830,14 +1845,12 @@ def _validate_boolean_contexts(document: Document) -> None:
                 walk(statement.body.statements, visible)
                 continue
             if isinstance(statement, Assignment):
-                body = (
-                    statement.value.body
-                    if isinstance(statement.value, EnableOption)
-                    else statement.value
-                    if isinstance(statement.value, AttrSet)
-                    else None
-                )
-                if body is not None:
+                body = statement.value
+                while cfg_type is not None and isinstance(body, GroupExpr):
+                    body = body.value
+                if isinstance(body, EnableOption):
+                    body = body.body
+                if isinstance(body, AttrSet):
                     walk(body.statements, visible)
 
     walk(statements, {})
@@ -1848,10 +1861,13 @@ def _require_typed_boolean(
     environment: dict[str, str],
     option_types: dict[str, str],
     label: str,
+    *,
+    cfg_type: Callable[[Expression], str] | None = None,
 ) -> None:
     if _contains_call(expression):
         raise ZenLangError(Diagnostic("ZEN220", f"{label} cannot contain function calls", expression.span))
-    if _boolean_type(expression, environment, option_types) != "bool":
+    actual = _boolean_type(expression, environment, option_types, cfg_type=cfg_type)
+    if actual != "bool" and not (cfg_type is not None and actual == "pending"):
         raise ZenLangError(
             Diagnostic(
                 "ZEN220",
@@ -1865,7 +1881,51 @@ def _boolean_type(
     expression: Expression,
     environment: dict[str, str],
     option_types: dict[str, str],
+    *,
+    cfg_type: Callable[[Expression], str] | None = None,
 ) -> str:
+    if cfg_type is not None:
+        def typed(value: Expression) -> str:
+            return _boolean_type(value, environment, option_types, cfg_type=cfg_type)
+
+        def booleans(*values: Expression) -> str:
+            types = {typed(value) for value in values}
+            if types <= {"bool", "pending"}:
+                return "pending" if "pending" in types else "bool"
+            return "invalid"
+
+        if _cfg_static_path(expression):
+            return cfg_type(expression)
+        if isinstance(expression, GroupExpr):
+            return typed(expression.value)
+        if isinstance(expression, (Literal, StringExpr, PathExpr, Variable)):
+            known = _static_kind(expression, {})
+            if known is not None:
+                return known
+        if isinstance(expression, DefaultExpr):
+            value_type, default_type = typed(expression.value), typed(expression.default)
+            if value_type == default_type:
+                return value_type
+            types = {value_type, default_type}
+            if "pending" in types and not types & {"unknown", "invalid"}:
+                known = next(item for item in types if item != "pending")
+                return "pending" if known == "bool" else known
+            return "invalid"
+        if isinstance(expression, UnaryExpr):
+            return booleans(expression.operand) if expression.operator == "!" else typed(expression.operand)
+        if isinstance(expression, BinaryExpr):
+            if expression.operator in ("&&", "||"):
+                return booleans(expression.left, expression.right)
+            if expression.operator in _BOOLEAN_BINARY:
+                # Comparisons produce bool, but cannot hide malformed boolean operands.
+                for operand in (expression.left, expression.right):
+                    while isinstance(operand, GroupExpr):
+                        operand = operand.value
+                    if isinstance(operand, (DefaultExpr, UnaryExpr, BinaryExpr, IfExpr)) and typed(operand) == "invalid":
+                        return "invalid"
+                return "bool"
+        if isinstance(expression, IfExpr):
+            return booleans(expression.condition, expression.then_value, expression.else_value)
     if isinstance(expression, GroupExpr):
         return _boolean_type(expression.value, environment, option_types)
     if isinstance(expression, Literal):
@@ -1902,6 +1962,22 @@ def _boolean_type(
             and _boolean_type(expression.else_value, environment, option_types) == "bool"
         ) else "unknown"
     return "unknown"
+
+
+def _cfg_static_path(expression: Expression) -> tuple[str, ...] | None:
+    """Return the complete cfg selection, including grouped postfix selections."""
+    if isinstance(expression, GroupExpr):
+        return _cfg_static_path(expression.value)
+    if isinstance(expression, Variable) and expression.name == "cfg":
+        return _variable_static_path(expression)
+    if isinstance(expression, SelectionExpr):
+        prefix = _cfg_static_path(expression.value)
+        if prefix is not None:
+            if isinstance(expression.segment, IdentifierSegment):
+                return (*prefix, expression.segment.name)
+            if isinstance(expression.segment, StringSegment):
+                return (*prefix, expression.segment.value)
+    return None
 
 
 def _contains_call(expression: Expression) -> bool:

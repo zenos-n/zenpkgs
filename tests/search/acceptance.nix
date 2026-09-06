@@ -33,6 +33,7 @@ let
             type = lib.types.str;
             default = "new upstream option";
           };
+          options.homeManager.upstreamOnly = lib.mkEnableOption "shadowed upstream child";
           config.home-manager.sharedModules = [
             ({ lib, ... }: {
               options.zenos.private = lib.mkOption {
@@ -62,11 +63,39 @@ let
   };
   demo = index.options.system.sub.programs.sub.demo;
   user = index.options.users.sub."<name>";
+  syncthing = index.options.system.sub.syncthing;
+  localMount = index.options.legacy.sub.homeManager;
+  userLocalMount = user.sub.legacy.sub.homeManager.sub.local;
+  mirrorType = lib.types.mkOptionType {
+    name = "zstr-upstream-mirror";
+    getSubOptions = _: {
+      remote = lib.mkOption { type = lib.types.str; };
+      local = lib.mkOption { type = lib.types.str; };
+    };
+  };
+  overlayType = lib.types.submodule {
+    freeformType = mirrorType;
+    options.local = lib.mkOption {
+      type = lib.types.bool;
+      default = false;
+    };
+  };
   unitTree =
     (lib.evalModules {
       modules = [
         ({ lib, ... }: {
           options = {
+            mirror = lib.mkOption { type = mirrorType; };
+            aliasOverlay = lib.mkOption { type = overlayType; };
+            wrappedAlias = lib.mkOption {
+              type = lib.types.nullOr (lib.types.uniq (lib.types.coercedTo lib.types.bool (_: { }) overlayType));
+            };
+            aliasCollection = lib.mkOption { type = lib.types.attrsOf overlayType; };
+            unavailableAlias = lib.mkOption {
+              type = mirrorType // {
+                getSubOptions = _: throw "alias schema unavailable";
+              };
+            };
             scalar = lib.mkOption {
               type = lib.types.bool;
               default = false;
@@ -145,6 +174,60 @@ let
     freeform = demo.sub.instances.sub."<name>".sub.label.meta.defaultStatus == "unavailable";
     noCompatibilityRoots = !(index.options ? programs) && !(index.options ? zenos);
     upstreamDiscovery = index.options.legacy.sub.future.sub.marker.meta.typeName == "str";
+    aliasRoots =
+      index.options.legacy.meta.upstream
+      && syncthing.meta.upstream
+      && user.sub.legacy.meta.upstream
+      && user.sub.legacy.sub.homeManager.meta.upstream;
+    aliasChildren =
+      index.options.legacy.sub.future.meta.upstream
+      && index.options.legacy.sub.future.sub.marker.meta.upstream
+      && syncthing.sub.guiAddress.meta.upstream
+      && syncthing.sub.settings.meta.upstream
+      && syncthing.sub.settings.sub.folders.sub."<name>".meta.upstream
+      && user.sub.legacy.sub.isNormalUser.meta.upstream
+      && user.sub.legacy.sub.homeManager.sub.home.sub.stateVersion.meta.upstream;
+    localAliasChildren =
+      !syncthing.sub.local.meta.upstream
+      && syncthing.sub.local.meta.defaultStatus == "absent"
+      && !syncthing.sub.enable.meta.upstream
+      && syncthing.sub.enable.meta.default == true;
+    localMountedOverride =
+      !localMount.meta.upstream
+      && !localMount.sub.message.meta.upstream
+      && !localMount.sub.instances.sub."<name>".sub.label.meta.upstream
+      && !(localMount.sub ? upstreamOnly)
+      && localMount.sub.message.meta.default == "hello";
+    localMountWithinAlias =
+      !userLocalMount.meta.upstream
+      && !userLocalMount.sub.message.meta.upstream
+      && !userLocalMount.sub.instances.sub."<name>".sub.label.meta.upstream;
+    localContainers = !index.options.system.meta.upstream && !user.meta.upstream;
+    aliasAttribution =
+      syncthing.meta.name == "Syncthing"
+      && syncthing.meta.maintainers == [ "doromiert" ]
+      && syncthing.meta.license == "$l.mit"
+      && syncthing.sub.guiAddress.meta.maintainers == [ ]
+      && syncthing.sub.guiAddress.meta.license == null
+      && syncthing.sub.local.meta.maintainers == [ ]
+      && syncthing.sub.local.meta.license == null;
+    mountedOverrideMetadata =
+      builtins.all
+        (
+          node:
+          node.meta.zenosVersion == "1.0.0"
+          && node.sub.message.meta.zenosVersion == "1.0.0"
+          && node.sub.instances.meta.zenosVersion == "2.0.0"
+          && node.sub.instances.sub."<name>".sub.label.meta.zenosVersion == "3.0.0"
+          && node.meta.maintainers == [ "doromiert" ]
+          && node.meta.license == "$l.mit"
+          && node.sub.message.meta.maintainers == [ ]
+          && node.sub.message.meta.license == null
+        )
+        [
+          localMount
+          userLocalMount
+        ];
     nixosLegacy = lib.hasPrefix "str" index.options.legacy.sub.networking.sub.hostName.meta.typeName;
     userLegacy = user.sub.legacy.sub.isNormalUser.meta.typeName == "bool";
     homeManager = user.sub.legacy.sub.homeManager.sub.home.sub.stateVersion.meta.typeName == "enum";
@@ -162,7 +245,8 @@ let
       && !(index.pkgs.legacy.sub.group.sub.deeper ? sub);
     moduleMetadata =
       demo.meta.description == "Mounted demo" && lib.hasInfix "**Markdown**" demo.meta.longDescription;
-    inheritedVersion = demo.meta.zenosVersion == "1.0.0" && demo.sub.message.meta.zenosVersion == "1.0.0";
+    inheritedVersion =
+      demo.meta.zenosVersion == "1.0.0" && demo.sub.message.meta.zenosVersion == "1.0.0";
     relocatedVersion = index.options.relocated.sub.demo.sub.message.meta.zenosVersion == "1.0.0";
     userVersion = user.sub.programs.sub.demo.sub.message.meta.zenosVersion == "1.0.0";
     overriddenVersion = demo.sub.instances.meta.zenosVersion == "2.0.0";
@@ -202,6 +286,33 @@ let
       && unit.sub.complex.meta.defaultStatus == "unavailable";
     unavailableDefaultText = unit.sub.brokenText.meta.defaultStatus == "unavailable";
     unavailableSchema = unit.sub.unavailableSchema.meta.traversal == "unavailable";
+    directMirror = unit.sub.mirror.meta.upstream && unit.sub.mirror.sub.remote.meta.upstream;
+    wrappedAliasProvenance =
+      builtins.all
+        (
+          node:
+          node.meta.upstream
+          && node.sub.remote.meta.upstream
+          && node.sub.remote.meta.defaultStatus == "unavailable"
+          && !node.sub.local.meta.upstream
+          && node.sub.local.meta.default == false
+        )
+        [
+          unit.sub.aliasOverlay
+          unit.sub.wrappedAlias
+        ];
+    collectionAliasProvenance =
+      !unit.sub.aliasCollection.meta.upstream && unit.sub.aliasCollection.sub."<name>".meta.upstream;
+    unavailableAliasProvenance =
+      unit.sub.unavailableAlias.meta.upstream
+      && unit.sub.unavailableAlias.meta.traversal == "unavailable";
+    limitedAliasProvenance =
+      (search.serializeOptions {
+        tree = unitTree.aliasOverlay;
+        limits = search.defaultLimits // {
+          typeDepth = 0;
+        };
+      }).meta.upstream;
     wrapperSchema = unit.sub.wrapped.sub."<name>".meta.typeName == "bool";
     enumValues =
       unit.sub.enumeration.meta.type.enum == [
