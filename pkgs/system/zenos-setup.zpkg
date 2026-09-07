@@ -1,0 +1,16 @@
+_meta = {
+  name = "ZenOS Setup";
+  summary = "ZenOS installer and first-boot setup";
+  description = ''Installs ZenOS and finishes user setup after the first boot.'';
+  zenosVersion = 1.0.0Nb;
+  packageVersion = "0.1.0";
+  tags = [ "installer" "oobe" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "zenos-n";
+  repo = "zenos-setup";
+  rev = "dbf1b1b25a14e3d590970a94ee2a80cba2b81bd8";
+  hash = "sha256-D0epV3YllTO5IoBYsccZU3wTnipuZnVMBUgpW61dpwE=";
+}) + "/package.nix") { };

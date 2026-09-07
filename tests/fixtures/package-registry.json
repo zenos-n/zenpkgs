@@ -5406,6 +5406,367 @@
         }
       },
       "dependenciesDeclared": false
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.system.zenos-oobe-mode",
+      "meta": {
+        "description": "Provides the GNOME shell extension and session mode used by ZenOS Setup.",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenOS OOBE session",
+        "packageVersion": "0.1.0",
+        "summary": "GNOME session mode for installation and first-boot setup",
+        "tags": [
+          "gnome",
+          "installer",
+          "oobe"
+        ],
+        "zenosVersion": "1.0.0Nb"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-oobe-mode-extension"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "228b597601273c0e0537913db4e2a04b24154c79"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-Efnagk9y9rHXXdGoH3f+v3JetDrGWo9zeQzejB2M/RU="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "system",
+        "zenos-oobe-mode"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.system.zenos-setup",
+      "meta": {
+        "description": "Installs ZenOS and finishes user setup after the first boot.",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenOS Setup",
+        "packageVersion": "0.1.0",
+        "summary": "ZenOS installer and first-boot setup",
+        "tags": [
+          "installer",
+          "oobe"
+        ],
+        "zenosVersion": "1.0.0Nb"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-setup"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "dbf1b1b25a14e3d590970a94ee2a80cba2b81bd8"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-D0epV3YllTO5IoBYsccZU3wTnipuZnVMBUgpW61dpwE="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "system",
+        "zenos-setup"
+      ]
     }
   ]
 }

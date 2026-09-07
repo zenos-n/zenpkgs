@@ -40,7 +40,7 @@ in
 
     majorVer = lib.mkOption {
       type = lib.types.str;
-      default = "1.0";
+      default = "1.0.0";
       description = ''
         Major version identifier
 

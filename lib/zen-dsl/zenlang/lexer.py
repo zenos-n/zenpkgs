@@ -218,14 +218,14 @@ class Lexer:
         if components == 3:
             if self._peek() and self._peek() in string.ascii_uppercase:
                 self._advance()
-            if self._peek() and self._peek() in "abl":
+            if self._peek() and self._peek() in "ab":
                 self._advance()
             if self._peek() and self._peek() in _IDENT_CONTINUE:
                 while not self._at_end() and self._peek() in _IDENT_CONTINUE:
                     self._advance()
                 self._raise(
                     "ZEN006",
-                    "versions must match X.Y.Z[VARIANT][a|b|l]",
+                    "versions must match X.Y.Z[VARIANT][a|b] (no lifecycle suffix for stable)",
                     start,
                 )
             kind = TokenKind.VERSION

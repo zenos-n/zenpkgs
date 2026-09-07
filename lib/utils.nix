@@ -66,20 +66,24 @@ let
   };
 in
 rec {
-  # [ CHANGED ] mkVersionString
-  # Removed dependency on 'inputs.self.version'. Now accepts arguments.
+  # `major` is the historical argument name for the full x.y.z numeric part.
   mkVersionString =
     {
-      major ? "1.0",
+      major ? "1.0.0",
       variant ? "N",
       type ? "beta",
     }:
-    "${major}${variant}${
-      if type != "stable" then
-        "b (${if (self ? shortRev) then self.shortRev else "${self.dirtyShortRev or "unknown"}"})"
-      else
-        ""
-    }";
+    let
+      lifecycle = { alpha = "a"; beta = "b"; stable = ""; };
+      revision = self.shortRev or self.dirtyShortRev or "unknown";
+    in
+    assert lib.assertMsg (builtins.match "[0-9]+\\.[0-9]+\\.[0-9]+" major != null)
+      "ZenOS versions require all three numeric components: x.y.z";
+    assert lib.assertMsg (builtins.match "[A-Z]?" variant != null)
+      "ZenOS variant must be one capital letter or empty";
+    assert lib.assertMsg (builtins.hasAttr type lifecycle)
+      "ZenOS lifecycle must be alpha, beta, or stable";
+    "${major}${variant}${lifecycle.${type}}" + lib.optionalString (type != "stable") " (${revision})";
 
   # [ STANDARD ] ZenOS Platform Definition
   platforms.zenos = [ "x86_64-linux" ];

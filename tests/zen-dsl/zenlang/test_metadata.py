@@ -133,7 +133,7 @@ users = { (freeform user) = { _meta.type = $type.bool; s! { target.($f.user) = t
         self.assertEqual((), document.diagnostics)
 
     def test_supplied_versions_remain_strict_and_overrides_are_checked(self):
-        for version in ("1.2.3", '"1.2.3Al"', '"1.2.3b"'):
+        for version in ("1.2.3", '"1.2.3Aa"', '"1.2.3b"'):
             parse("_meta.zenosVersion = " + version + ";", "entry.zmdl")
         for value in ('"wrong"', "true", "1"):
             self.assert_error(META + "child._meta.zenosVersion = " + value + ";", code="ZEN213")

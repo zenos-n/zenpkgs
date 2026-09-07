@@ -23,7 +23,7 @@ type = {
 majorVer = {
   _meta = {
     type = $type.string;
-    default = "1.0";
+    default = "1.0.0";
     summary = "Major version identifier";
     description = ''The primary version number assigned to the current ZenOS release cycle.'';
   };

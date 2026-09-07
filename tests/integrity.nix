@@ -37,7 +37,7 @@ let
   mockSelf = {
     outPath = ../.;
     version = {
-      majorVer = "1.0";
+      majorVer = "1.0.0";
       variant = "Test";
     };
     shortRev = "000000";

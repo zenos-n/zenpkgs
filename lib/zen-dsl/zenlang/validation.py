@@ -71,7 +71,7 @@ _BUILTIN_VARIABLES = {
     FileKind.ZSTR: _COMMON_VARIABLES | {"f"},
 }
 _PARAMETERIZED_TYPES = frozenset(("list", "set", "either", "function", "functionTo", "enum"))
-_ZENOS_VERSION = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:[A-Z](?:[abl])?|[abl])?$")
+_ZENOS_VERSION = re.compile(r"^[0-9]+\.[0-9]+\.[0-9]+(?:[A-Z](?:[ab])?|[ab])?$")
 _BOOLEAN_BINARY = frozenset(("||", "&&", "==", "!=", ">", ">=", "<", "<="))
 _ZCFG_BINARY = _BOOLEAN_BINARY
 _RESERVED_BINDINGS = frozenset(
@@ -1549,7 +1549,7 @@ def _validate_zenos_version(value: Expression) -> None:
         candidate = "".join(part.value for part in value.parts if isinstance(part, StringText))
     if candidate is None or not _ZENOS_VERSION.fullmatch(candidate):
         raise ZenLangError(
-            Diagnostic("ZEN213", "zenosVersion must match X.Y.Z[VARIANT][a|b|l]", value.span)
+            Diagnostic("ZEN213", "zenosVersion must match X.Y.Z[VARIANT][a|b] (no lifecycle suffix for stable)", value.span)
         )
 
 

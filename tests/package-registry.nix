@@ -16,24 +16,44 @@ let
   expected = normalize (sortPackages expectedRegistry);
   expectedSorted = sortPackages expectedRegistry;
   activeEntries = registry.packages;
+  importEntries = lib.filter (entry: entry.provider.kind == "import") activeEntries;
+  buildEntries = lib.filter (entry: entry.provider.kind == "build") activeEntries;
   expectedActiveEntries = expectedRegistry.packages;
   registryPaths =
     value:
-    map (entry: {
-      inherit (entry)
-        id
-        sourcePath
-        target
-        ;
-    }) (sortPackages value).packages;
+    map (
+      entry:
+      {
+        inherit (entry)
+          id
+          provider
+          target
+          ;
+      }
+      // lib.optionalAttrs (entry.provider.kind == "import") {
+        inherit (entry) sourcePath;
+      }
+    ) (sortPackages value).packages;
   packagePaths = value: map (entry: entry.target) value.packages;
   activePaths = map (entry: entry.target) activeEntries;
   registryPathKeys = map pathKey registry.packages;
   outputName = path: lib.concatStringsSep "-" ([ "zenos" ] ++ path);
+  outputNames = map (entry: outputName entry.target) activeEntries;
+  buildProvider =
+    entry:
+    import entry.buildFile {
+      inherit pkgs;
+      # Compare the undecorated builder result, before dependency handling.
+      zpkgRuntime = { provider, ... }: provider;
+    };
   outputIdentities = lib.concatMap (
     entry:
     let
-      upstream = lib.attrByPath entry.sourcePath null pkgs;
+      upstream =
+        if entry.provider.kind == "import" then
+          lib.attrByPath entry.sourcePath null pkgs
+        else
+          buildProvider entry;
       overlayPackage = lib.attrByPath ([ "zenos" ] ++ entry.target) null pkgs;
       publicPackage = publicPackages.${outputName entry.target} or null;
     in
@@ -192,25 +212,81 @@ in
     pass "zenpkgs-package-registry-contract";
 
   registry-counts =
-    assert builtins.length expectedRegistry.packages == 126;
-    assert builtins.length expectedActiveEntries == 126;
-    assert builtins.length registry.packages == 126;
-    assert builtins.length activeEntries == 126;
+    assert builtins.length expectedRegistry.packages == 128;
+    assert builtins.length expectedActiveEntries == 128;
+    assert builtins.length registry.packages == 128;
+    assert builtins.length activeEntries == 128;
+    assert builtins.length importEntries == 126;
+    assert builtins.length buildEntries == 2;
+    assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 
   package-paths =
-    assert builtins.length (registryPaths expectedRegistry) == 126;
-    assert builtins.length (packagePaths expectedRegistry) == 126;
-    assert builtins.length activePaths == 126;
+    assert builtins.length (registryPaths expectedRegistry) == 128;
+    assert builtins.length (packagePaths expectedRegistry) == 128;
+    assert builtins.length activePaths == 128;
     assert registryPathKeys == lib.sort builtins.lessThan registryPathKeys;
     assert registryPaths registry == registryPaths expectedRegistry;
     assert packagePaths registry == packagePaths expectedSorted;
     pass "zenpkgs-package-registry-paths";
 
   public-package-outputs =
-    assert builtins.length outputIdentities == 126;
+    assert builtins.length outputIdentities == 128;
     assert lib.all (identity: identity) outputIdentities;
     pass "zenpkgs-public-package-outputs";
+
+  registry-build-providers =
+    assert
+      map (entry: entry.id) buildEntries == [
+        "pkgs.system.zenos-oobe-mode"
+        "pkgs.system.zenos-setup"
+      ];
+    assert lib.all (
+      entry:
+      let
+        provider = buildProvider entry;
+        package = lib.getAttrFromPath ([ "zenos" ] ++ entry.target) pkgs;
+      in
+      !(entry ? sourcePath)
+      && !entry.dependenciesDeclared
+      && !(entry.meta ? dependencies)
+      && lib.hasInfix "/pkgs/${pathKey entry}.zpkg:" entry.location
+      && lib.hasSuffix "/builds/pkgs/${pathKey entry}.zpkg.nix" (toString entry.buildFile)
+      && builtins.pathExists entry.buildFile
+      && package._zmeta.id == entry.id
+      && package._zmeta.interface == entry.provider
+      && !package._zmeta.dependenciesDeclared
+      && !(package.meta.zenos ? sourcePath)
+      && !(package.meta.zenos ? legacyPath)
+      &&
+        lib.all
+          (channel: map toString (package.${channel} or [ ]) == map toString (provider.${channel} or [ ]))
+          [
+            "buildInputs"
+            "nativeBuildInputs"
+            "propagatedBuildInputs"
+            "propagatedNativeBuildInputs"
+          ]
+    ) buildEntries;
+    pass "zenpkgs-registry-build-providers";
+
+  registry-output-ownership =
+    assert builtins.length (lib.unique outputNames) == 128;
+    assert
+      builtins.attrNames publicPackages == lib.sort builtins.lessThan (
+        outputNames
+        ++ [
+          "dsl-bundle"
+          "registry-docs"
+          "zen-dsl"
+          "zenos-rebuild"
+        ]
+      );
+    assert (import ../lib/package-outputs.nix { inherit lib; }).checkLegacyOwnership {
+      inherit registry;
+      sourceTree = (import ../lib/loader.nix { inherit lib; }).generateTree ../lib/compat/package-recipes;
+    };
+    pass "zenpkgs-registry-output-ownership";
 
   registry-path-identities =
     assert

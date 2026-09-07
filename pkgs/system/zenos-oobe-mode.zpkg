@@ -1,0 +1,16 @@
+_meta = {
+  name = "ZenOS OOBE session";
+  summary = "GNOME session mode for installation and first-boot setup";
+  description = ''Provides the GNOME shell extension and session mode used by ZenOS Setup.'';
+  zenosVersion = 1.0.0Nb;
+  packageVersion = "0.1.0";
+  tags = [ "gnome" "installer" "oobe" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "zenos-n";
+  repo = "zenos-oobe-mode-extension";
+  rev = "228b597601273c0e0537913db4e2a04b24154c79";
+  hash = "sha256-Efnagk9y9rHXXdGoH3f+v3JetDrGWo9zeQzejB2M/RU=";
+}) + "/package.nix") { };

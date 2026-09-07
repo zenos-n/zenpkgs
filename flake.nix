@@ -626,6 +626,9 @@
           dsl-bundle-context = import ./tests/zen-dsl/bundle-context.nix {
             inherit (dsl) bootstrapPkgs;
           };
+          version-format = dsl.bootstrapPkgs.writeText "zenos-version-format.json" (
+            builtins.toJSON (import ./tests/version-format.nix { inherit (nixpkgs) lib; })
+          );
           package-output-collisions = dsl.bootstrapPkgs.writeText "package-output-collisions.json" (
             builtins.toJSON (import ./tests/package-output-collisions.nix { inherit (nixpkgs) lib; })
           );
