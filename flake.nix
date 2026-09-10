@@ -26,6 +26,42 @@
       url = "github:doromiert/masterful-gestures";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    source-plymouth = {
+      url = "github:zenos-n/plymouth-theme/b7040721520bc2c7bb3e9aba6de21cbe2bb5636f";
+      flake = false;
+    };
+    source-rebuild = {
+      url = "github:zenos-n/zenos-rebuild/6345106c44d99e6354944666e773a365e3ea8ed9";
+      flake = false;
+    };
+    source-recovery = {
+      url = "github:zenos-n/zenos-recovery-tools/cbde70da98e573dc42d325245370d99e37997017";
+      flake = false;
+    };
+    source-refind-installer = {
+      url = "github:zenos-n/zenos-refind-installer/0908c40f6743f9e8ddb132f47c894ada5ce5e7f3";
+      flake = false;
+    };
+    source-refind-theme = {
+      url = "github:zenos-n/zenos-refind-theme/159673a46343a66cc077876ba57ff4f28d3ba0a3";
+      flake = false;
+    };
+    source-setup = {
+      url = "github:zenos-n/zenos-setup/ec7ea64d982c8c9cda313a76a55bb4c6d46f0d6a";
+      flake = false;
+    };
+    source-shell-defaults = {
+      url = "github:zenos-n/zenos-shell-defaults/29d54418b0e7e966e33a0f5766b92d9c94b1345e";
+      flake = false;
+    };
+    source-oobe = {
+      url = "github:zenos-n/zenos-oobe-mode-extension/228b597601273c0e0537913db4e2a04b24154c79";
+      flake = false;
+    };
+    source-zenfs = {
+      url = "github:doromiert/ZenFS/f4ea423b1bd02704ebe385104d994358fa3c1e90";
+      flake = false;
+    };
   };
 
   outputs =
@@ -49,90 +85,106 @@
             testSuite = ./tests/zen-dsl;
             nixpkgsSrc = nixpkgs;
           };
-          bundle = bootstrapPkgs.runCommand "zenpkgs-dsl-bundle" {
-            nativeBuildInputs = [
-              zenDsl
-              bootstrapPkgs.python3
-            ];
-            src = builtins.path {
-              path = self;
-              name = "zenpkgs-dsl-source";
-              filter = path: _:
-                path == toString self || builtins.elem
-                  (builtins.head (nixpkgs.lib.splitString "/" (nixpkgs.lib.removePrefix "${self}/" path)))
-                  [ "structure.zstr" "pkgs" "modules" "docs" ];
-            };
-          } ''
-            mkdir -p "$out/interfaces" "$out/modules" "$out/builds"
-            zen-dsl compile-tree \
-              --root "$src" \
-              --output "$out/bundle.json" \
-              --mode interface
+          bundle =
+            bootstrapPkgs.runCommand "zenpkgs-dsl-bundle"
+              {
+                nativeBuildInputs = [
+                  zenDsl
+                  bootstrapPkgs.python3
+                ];
+                src = builtins.path {
+                  path = self;
+                  name = "zenpkgs-dsl-source";
+                  filter =
+                    path: _:
+                    path == toString self
+                    ||
+                      builtins.elem
+                        (builtins.head (nixpkgs.lib.splitString "/" (nixpkgs.lib.removePrefix "${self}/" path)))
+                        [
+                          "structure.zstr"
+                          "pkgs"
+                          "modules"
+                          "docs"
+                        ];
+                };
+              }
+              ''
+                mkdir -p "$out/interfaces" "$out/modules" "$out/builds"
+                zen-dsl compile-tree \
+                  --root "$src" \
+                  --output "$out/bundle.json" \
+                  --mode interface
 
-            python3 - "$out/bundle.json" "$out" <<'PY'
-            import json
-            from pathlib import Path
-            import sys
+                python3 - "$out/bundle.json" "$out" <<'PY'
+                import json
+                from pathlib import Path
+                import sys
 
-            bundle_path = Path(sys.argv[1])
-            output_root = Path(sys.argv[2])
-            with bundle_path.open(encoding="utf-8") as source_file:
-                compiled_bundle = json.load(source_file)
+                bundle_path = Path(sys.argv[1])
+                output_root = Path(sys.argv[2])
+                with bundle_path.open(encoding="utf-8") as source_file:
+                    compiled_bundle = json.load(source_file)
 
-            def canonical_source(source):
-                raw_path = source.get("path")
-                kind = source.get("kind")
-                if not isinstance(raw_path, str):
-                    raise ValueError("bundle source path must be a string")
-                relative = Path(raw_path)
-                if relative.is_absolute() or ".." in relative.parts or relative.as_posix() != raw_path:
-                    raise ValueError(f"unsafe bundle source path: {raw_path}")
-                if kind == "zstr":
-                    if raw_path != "structure.zstr":
-                        raise ValueError(f"structure must be repository-root structure.zstr: {raw_path}")
-                    return
-                roots = {"zpkg": ("pkgs", ".zpkg", "package"), "zmdl": ("modules", ".zmdl", "module")}
-                if kind not in roots:
-                    raise ValueError(f"unsupported repository DSL source: {raw_path}")
-                root, suffix, reserved_leaf = roots[kind]
-                if len(relative.parts) < 2 or relative.parts[0] != root or relative.suffix != suffix:
-                    raise ValueError(f"noncanonical {kind} source location: {raw_path}")
-                if relative.stem == reserved_leaf:
-                    raise ValueError(f"reserved {kind} leaf name: {raw_path}")
+                def canonical_source(source):
+                    raw_path = source.get("path")
+                    kind = source.get("kind")
+                    if not isinstance(raw_path, str):
+                        raise ValueError("bundle source path must be a string")
+                    relative = Path(raw_path)
+                    if relative.is_absolute() or ".." in relative.parts or relative.as_posix() != raw_path:
+                        raise ValueError(f"unsafe bundle source path: {raw_path}")
+                    if kind == "zstr":
+                        if raw_path != "structure.zstr":
+                            raise ValueError(f"structure must be repository-root structure.zstr: {raw_path}")
+                        return
+                    roots = {"zpkg": ("pkgs", ".zpkg", "package"), "zmdl": ("modules", ".zmdl", "module")}
+                    if kind not in roots:
+                        raise ValueError(f"unsupported repository DSL source: {raw_path}")
+                    root, suffix, reserved_leaf = roots[kind]
+                    if len(relative.parts) < 2 or relative.parts[0] != root or relative.suffix != suffix:
+                        raise ValueError(f"noncanonical {kind} source location: {raw_path}")
+                    if relative.stem == reserved_leaf:
+                        raise ValueError(f"reserved {kind} leaf name: {raw_path}")
 
-            destinations = set()
-            for source in compiled_bundle["sources"]:
-                canonical_source(source)
-                if source["kind"] not in {"zpkg", "zmdl"}:
-                    continue
-                relative = Path(source["path"])
-                compiled = source.get("compiledNix")
-                if not isinstance(compiled, str) or not compiled:
-                    raise ValueError(f"missing compiled Nix for bundle source: {source['path']}")
-                artifacts = [("interfaces" if source["kind"] == "zpkg" else "modules", compiled)]
-                if source["kind"] == "zpkg":
-                    build = source.get("buildNix")
-                    if not isinstance(build, str) or not build:
-                        raise ValueError(f"missing executable package provider: {source['path']}")
-                    artifacts.append(("builds", build))
-                for subtree, code in artifacts:
-                    destination = output_root / subtree / f"{source['path']}.nix"
-                    if destination in destinations:
-                        raise ValueError(f"duplicate compiled module destination: {destination}")
-                    destinations.add(destination)
-                    destination.parent.mkdir(parents=True, exist_ok=True)
-                    destination.write_text(code, encoding="utf-8")
-            PY
-          '';
+                destinations = set()
+                for source in compiled_bundle["sources"]:
+                    canonical_source(source)
+                    if source["kind"] not in {"zpkg", "zmdl"}:
+                        continue
+                    relative = Path(source["path"])
+                    compiled = source.get("compiledNix")
+                    if not isinstance(compiled, str) or not compiled:
+                        raise ValueError(f"missing compiled Nix for bundle source: {source['path']}")
+                    artifacts = [("interfaces" if source["kind"] == "zpkg" else "modules", compiled)]
+                    if source["kind"] == "zpkg":
+                        build = source.get("buildNix")
+                        if not isinstance(build, str) or not build:
+                            raise ValueError(f"missing executable package provider: {source['path']}")
+                        artifacts.append(("builds", build))
+                    for subtree, code in artifacts:
+                        destination = output_root / subtree / f"{source['path']}.nix"
+                        if destination in destinations:
+                            raise ValueError(f"duplicate compiled module destination: {destination}")
+                        destinations.add(destination)
+                        destination.parent.mkdir(parents=True, exist_ok=True)
+                        destination.write_text(code, encoding="utf-8")
+                PY
+              '';
           bundleJSON =
             if builtins.pathExists (self + "/structure.zstr") then
               import ./lib/read-dsl-bundle.nix "${bundle}/bundle.json"
-            else {
-              bundleVersion = "zenlang.bundle/2";
-              sources = [ ];
-              modules = [ ];
-              structure = { present = false; mounts = [ ]; nodes = [ ]; };
-            };
+            else
+              {
+                bundleVersion = "zenlang.bundle/2";
+                sources = [ ];
+                modules = [ ];
+                structure = {
+                  present = false;
+                  mounts = [ ];
+                  nodes = [ ];
+                };
+              };
           registry = dslBundleAdapter.registryFromBundle {
             bundle = bundleJSON;
             bundlePath = bundle;
@@ -347,9 +399,13 @@
           seahorse = patchedSeahorse;
           zenos =
             if zstrRuntime.packageExposure (mkDslArtifacts prev.stdenv.hostPlatform.system).bundleJSON then
-              assert packageOutputs.checkLegacyOwnership { inherit registry; sourceTree = zenTree; };
+              assert packageOutputs.checkLegacyOwnership {
+                inherit registry;
+                sourceTree = zenTree;
+              };
               lib.recursiveUpdate (lib.recursiveUpdate { legacy = prev; } mappedTree) customTree
-            else { };
+            else
+              { };
         };
 
     in
@@ -456,18 +512,21 @@
           };
 
         in
-        if !zstrRuntime.packageExposure dsl.bundleJSON then { } else packageOutputs.flatten {
-          inherit registry;
-          tree = pkgs.zenos;
-          reserved = {
-            dsl-bundle = dsl.bundle;
-            registry-docs = pkgs.writeText "zenpkgs-registry.json" (
-              builtins.toJSON (interface.registryDocs registry)
-            );
-            zen-dsl = dsl.zenDsl;
-            zenos-rebuild = pkgs.zenos.programs.zenos-rebuild;
-          };
-        }
+        if !zstrRuntime.packageExposure dsl.bundleJSON then
+          { }
+        else
+          packageOutputs.flatten {
+            inherit registry;
+            tree = pkgs.zenos;
+            reserved = {
+              dsl-bundle = dsl.bundle;
+              registry-docs = pkgs.writeText "zenpkgs-registry.json" (
+                builtins.toJSON (interface.registryDocs registry)
+              );
+              zen-dsl = dsl.zenDsl;
+              zenos-rebuild = pkgs.zenos.programs.zenos-rebuild;
+            };
+          }
       );
 
       legacyPackages = forAllSystems (
@@ -479,11 +538,14 @@
             config.allowUnfree = true;
           };
         in
-        if !zstrRuntime.packageExposure (mkDslArtifacts system).bundleJSON then { } else {
-          legacy = pkgs.zenos.legacy // {
-            nvim = pkgs.zenos.legacy.neovim;
-          };
-        }
+        if !zstrRuntime.packageExposure (mkDslArtifacts system).bundleJSON then
+          { }
+        else
+          {
+            legacy = pkgs.zenos.legacy // {
+              nvim = pkgs.zenos.legacy.neovim;
+            };
+          }
       );
 
       checks = forAllSystems (
@@ -645,9 +707,13 @@
           zstr-production = dsl.bootstrapPkgs.writeText "zstr-production-acceptance.json" (
             # Evaluate the complete derivations, without building their closures
             # merely because their store paths occur in the acceptance report.
-            builtins.unsafeDiscardStringContext (builtins.toJSON (import ./tests/mounting/production.nix {
-              inherit self nixpkgs system;
-            }))
+            builtins.unsafeDiscardStringContext (
+              builtins.toJSON (
+                import ./tests/mounting/production.nix {
+                  inherit self nixpkgs system;
+                }
+              )
+            )
           );
           dsl-vm = import ./tests/zen-dsl/vm.nix {
             inherit pkgs;

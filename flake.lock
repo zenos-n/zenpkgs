@@ -500,7 +500,169 @@
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
         "nur": "nur",
+        "source-oobe": "source-oobe",
+        "source-plymouth": "source-plymouth",
+        "source-rebuild": "source-rebuild",
+        "source-recovery": "source-recovery",
+        "source-refind-installer": "source-refind-installer",
+        "source-refind-theme": "source-refind-theme",
+        "source-setup": "source-setup",
+        "source-shell-defaults": "source-shell-defaults",
+        "source-zenfs": "source-zenfs",
         "vsc-extensions": "vsc-extensions"
+      }
+    },
+    "source-oobe": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1788774639,
+        "narHash": "sha256-Efnagk9y9rHXXdGoH3f+v3JetDrGWo9zeQzejB2M/RU=",
+        "owner": "zenos-n",
+        "repo": "zenos-oobe-mode-extension",
+        "rev": "228b597601273c0e0537913db4e2a04b24154c79",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "zenos-oobe-mode-extension",
+        "rev": "228b597601273c0e0537913db4e2a04b24154c79",
+        "type": "github"
+      }
+    },
+    "source-plymouth": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789023675,
+        "narHash": "sha256-XCpwnJPmiHyQAat24d2gp1Q6WWMJqGv5M21QCgFl+1I=",
+        "owner": "zenos-n",
+        "repo": "plymouth-theme",
+        "rev": "b7040721520bc2c7bb3e9aba6de21cbe2bb5636f",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "plymouth-theme",
+        "rev": "b7040721520bc2c7bb3e9aba6de21cbe2bb5636f",
+        "type": "github"
+      }
+    },
+    "source-rebuild": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789023675,
+        "narHash": "sha256-jvc5Jf0eZ2m9fHeHMhRJQfRlLdsg0lh4ZjtF9HG/4rs=",
+        "owner": "zenos-n",
+        "repo": "zenos-rebuild",
+        "rev": "6345106c44d99e6354944666e773a365e3ea8ed9",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "zenos-rebuild",
+        "rev": "6345106c44d99e6354944666e773a365e3ea8ed9",
+        "type": "github"
+      }
+    },
+    "source-recovery": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789023675,
+        "narHash": "sha256-+Y/JW7Id7NHgNLFPh4DT0ceojF+bhsHzP274Q1pDlC8=",
+        "owner": "zenos-n",
+        "repo": "zenos-recovery-tools",
+        "rev": "cbde70da98e573dc42d325245370d99e37997017",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "zenos-recovery-tools",
+        "rev": "cbde70da98e573dc42d325245370d99e37997017",
+        "type": "github"
+      }
+    },
+    "source-refind-installer": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789023479,
+        "narHash": "sha256-SseDKAqLiT6gjQLIfdeu8/60Ez3AIZadjJ6PFUelRAA=",
+        "owner": "zenos-n",
+        "repo": "zenos-refind-installer",
+        "rev": "0908c40f6743f9e8ddb132f47c894ada5ce5e7f3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "zenos-refind-installer",
+        "rev": "0908c40f6743f9e8ddb132f47c894ada5ce5e7f3",
+        "type": "github"
+      }
+    },
+    "source-refind-theme": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789023479,
+        "narHash": "sha256-mlDwnHPc/XV7sLXXu5do5vWmLLTxGZGw2e7tJikfWno=",
+        "owner": "zenos-n",
+        "repo": "zenos-refind-theme",
+        "rev": "159673a46343a66cc077876ba57ff4f28d3ba0a3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "zenos-refind-theme",
+        "rev": "159673a46343a66cc077876ba57ff4f28d3ba0a3",
+        "type": "github"
+      }
+    },
+    "source-setup": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789025478,
+        "narHash": "sha256-6sk8Sb1nJNfWjEMNG5nzbTtfntWiZf8Ovh76z01AHaU=",
+        "owner": "zenos-n",
+        "repo": "zenos-setup",
+        "rev": "ec7ea64d982c8c9cda313a76a55bb4c6d46f0d6a",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "zenos-setup",
+        "rev": "ec7ea64d982c8c9cda313a76a55bb4c6d46f0d6a",
+        "type": "github"
+      }
+    },
+    "source-shell-defaults": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789023480,
+        "narHash": "sha256-LKd4jdhyVxqjVCx59IM4+Dh3WzfVT/AGSlX7ygNYeik=",
+        "owner": "zenos-n",
+        "repo": "zenos-shell-defaults",
+        "rev": "29d54418b0e7e966e33a0f5766b92d9c94b1345e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "zenos-shell-defaults",
+        "rev": "29d54418b0e7e966e33a0f5766b92d9c94b1345e",
+        "type": "github"
+      }
+    },
+    "source-zenfs": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1789023675,
+        "narHash": "sha256-hvgFhrzDDwE6c9WgAPJ3TwoU0lPjNkzea+Pwo0qLyHE=",
+        "owner": "doromiert",
+        "repo": "ZenFS",
+        "rev": "f4ea423b1bd02704ebe385104d994358fa3c1e90",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doromiert",
+        "repo": "ZenFS",
+        "rev": "f4ea423b1bd02704ebe385104d994358fa3c1e90",
+        "type": "github"
       }
     },
     "systems": {
