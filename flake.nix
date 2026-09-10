@@ -380,14 +380,6 @@
             };
           };
           customTree = if zenTree == { } then { } else inflate zenTree final;
-          patchedSeahorse = prev.seahorse.overrideAttrs (old: {
-            postPatch = (old.postPatch or "") + ''
-              substituteInPlace ssh/source.vala \
-                --replace-fail \
-                  'this.ssh_homedir = "%s/.ssh".printf(Environment.get_home_dir());' \
-                  'this.ssh_homedir = Path.build_filename(Environment.get_user_config_dir(), "ssh");'
-            '';
-          });
         in
         # ZenPkgs owns one internal package namespace. User-facing package
         # references are prefixed by the zcfg compiler.
@@ -396,7 +388,6 @@
             licenses = prev.lib.licenses // utils.licenses;
             platforms = prev.lib.platforms // utils.platforms;
           };
-          seahorse = patchedSeahorse;
           zenos =
             if zstrRuntime.packageExposure (mkDslArtifacts prev.stdenv.hostPlatform.system).bundleJSON then
               assert packageOutputs.checkLegacyOwnership {
