@@ -1,0 +1,13 @@
+_meta = {
+  name = "gnu-config";
+  summary = "Reliable GNU system name configuration scripts for ZenOS";
+  description = ''
+    Provides the GNU config.guess and config.sub scripts used by autotools.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2024-01-01";
+  tags = [ "system" "build" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.gnu-config;

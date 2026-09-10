@@ -380,6 +380,16 @@
             };
           };
           customTree = if zenTree == { } then { } else inflate zenTree final;
+          ownedGnuConfig = prev.stdenvNoCC.mkDerivation {
+            pname = "gnu-config";
+            version = "2024-01-01";
+            dontUnpack = true;
+            installPhase = ''
+              install -Dm755 ${prev.automake}/share/automake-1.18/config.guess $out/config.guess
+              install -Dm755 ${prev.automake}/share/automake-1.18/config.sub $out/config.sub
+            '';
+            meta = prev.gnu-config.meta;
+          };
           patchedSeahorse = prev.seahorse.overrideAttrs (old: {
             postPatch = (old.postPatch or "") + ''
               substituteInPlace ssh/source.vala \
@@ -396,6 +406,7 @@
             licenses = prev.lib.licenses // utils.licenses;
             platforms = prev.lib.platforms // utils.platforms;
           };
+          gnu-config = ownedGnuConfig;
           seahorse = patchedSeahorse;
           zenos =
             if zstrRuntime.packageExposure (mkDslArtifacts prev.stdenv.hostPlatform.system).bundleJSON then
