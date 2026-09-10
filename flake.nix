@@ -380,13 +380,16 @@
             };
           };
           customTree = if zenTree == { } then { } else inflate zenTree final;
-          ownedGnuConfig = prev.gnu-config.overrideAttrs (_: {
-            unpackPhase = ''
-              cp ${prev.automake}/share/automake-1.18/config.guess ./config.guess
-              cp ${prev.automake}/share/automake-1.18/config.sub ./config.sub
-              chmod +w ./config.sub ./config.guess
+          ownedGnuConfig = prev.stdenvNoCC.mkDerivation {
+            pname = "gnu-config";
+            version = "2024-01-01";
+            dontUnpack = true;
+            installPhase = ''
+              install -Dm755 ${prev.automake}/share/automake-1.18/config.guess $out/config.guess
+              install -Dm755 ${prev.automake}/share/automake-1.18/config.sub $out/config.sub
             '';
-          });
+            meta = prev.gnu-config.meta;
+          };
           patchedSeahorse = prev.seahorse.overrideAttrs (old: {
             postPatch = (old.postPatch or "") + ''
               if grep -q 'this.ssh_homedir = "%s/.ssh".printf(Environment.get_home_dir());' ssh/source.vala; then
