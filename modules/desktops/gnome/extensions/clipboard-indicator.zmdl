@@ -25,23 +25,32 @@ enable = enableOption {
   _meta.description = ''Whether to enable Clipboard Indicator GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.clipboard-indicator ];
-    programs.dconf.profiles.user.databases = [ {
-      settings."org/gnome/shell/extensions/clipboard-indicator" = {
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.clipboard-indicator.extensionUuid ];
+  };
+};
+
+configure = enableOption {
+  _meta.default = $path.enable;
+  _meta.description = ''Write settings without requiring extension activation.'';
+  u! {
+    dconf.settings."org/gnome/shell/extensions/clipboard-indicator" = {
           paste-button = $path.paste-button;
           pinned-on-bottom = $path.pinned-on-bottom;
           enable-deletion = $path.enable-deletion;
-          display-mode = $lib.getAttr $path.topbar.display-mode $v.modes;
+          display-mode = $lib.gvariant.mkInt32 ($lib.getAttr $path.topbar.display-mode $v.modes);
           disable-down-arrow = !$path.topbar.enable-down-arrow;
-          preview-size = $path.preview.menu-length;
-          topbar-preview-size = $path.preview.topbar-length;
-          history-size = $path.history.size;
+          preview-size = $lib.gvariant.mkInt32 $path.preview.menu-length;
+          topbar-preview-size = $lib.gvariant.mkInt32 $path.preview.topbar-length;
+          history-size = $lib.gvariant.mkInt32 $path.history.size;
           clear-on-boot = $path.history.clear-on-boot;
           confirm-clear = $path.history.confirm-clear;
           keep-selected-on-clear = $path.history.keep-selected-on-clear;
           excluded-apps = $path.history.excluded-apps;
           clear-history-on-interval = $path.history.autoclear.enable;
-          clear-history-interval = $path.history.autoclear.interval;
-          next-history-clear = $path.history.autoclear.next-run;
+          clear-history-interval = $lib.gvariant.mkInt32 $path.history.autoclear.interval;
+          next-history-clear = $lib.gvariant.mkInt32 $path.history.autoclear.next-run;
           paste-on-select = $path.behavior.paste-on-select;
           move-item-first = $path.behavior.move-item-first;
           strip-text = $path.behavior.strip-text;
@@ -49,7 +58,7 @@ enable = enableOption {
           regex-search = $path.search.regex;
           notify-on-copy = $path.notify.on-copy;
           notify-on-cycle = $path.notify.on-cycle;
-          cache-size = $path.cache.size;
+          cache-size = $lib.gvariant.mkInt32 $path.cache.size;
           cache-only-favorites = $path.cache.only-favorites;
           cache-images = $path.cache.images;
           enable-keybindings = $path.keybindings.enable;
@@ -59,7 +68,6 @@ enable = enableOption {
           toggle-menu = $path.keybindings.toggle-menu;
           private-mode-binding = $path.keybindings.private-mode;
       };
-    } ];
   };
 };
 

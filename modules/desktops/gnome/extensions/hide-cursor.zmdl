@@ -20,9 +20,10 @@ enable = enableOption {
   _meta.description = ''Whether to enable Hide Cursor GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.hide-cursor ];
-    programs.dconf.profiles.user.databases = [ {
-      settings."org/gnome/shell/extensions/hide-cursor-elcste-com".timeout = $path.timeout;
-    } ];
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.hide-cursor.extensionUuid ];
+    dconf.settings."org/gnome/shell/extensions/hide-cursor-elcste-com".timeout = $lib.gvariant.mkInt32 $path.timeout;
   };
 };
 

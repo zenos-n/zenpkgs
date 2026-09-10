@@ -33,6 +33,9 @@ _let toRgbaString: $type.function "color" = val:
   else val;
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.customize-clock-on-lock-screen.extensionUuid ];
+  };
   _meta.description = ''Whether to enable Customize Clock on Lockscreen GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.customize-clock-on-lock-screen ];

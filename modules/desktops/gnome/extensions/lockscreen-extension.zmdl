@@ -19,6 +19,9 @@ _meta = {
 };
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.lockscreen-extension.extensionUuid ];
+  };
   _meta.description = ''Lockscreen Extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.lockscreen-extension ];

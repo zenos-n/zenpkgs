@@ -1,0 +1,16 @@
+_meta = {
+  name = "ZenOS rEFInd installer";
+  summary = "Synchronizes ZenOS generations into rEFInd";
+  description = ''Packages the original ZenOS generation synchronizer used after systemd-boot writes EFI kernels.'';
+  zenosVersion = 1.0.0Nb;
+  packageVersion = "1.0.0";
+  tags = [ "boot" "efi" "refind" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "zenos-n";
+  repo = "zenos-refind-installer";
+  rev = "0908c40f6743f9e8ddb132f47c894ada5ce5e7f3";
+  hash = "sha256-SseDKAqLiT6gjQLIfdeu8/60Ez3AIZadjJ6PFUelRAA=";
+}) + "/package.nix") { };

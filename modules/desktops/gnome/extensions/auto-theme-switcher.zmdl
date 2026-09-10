@@ -18,6 +18,9 @@ _meta = {
 };
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.auto-theme-switcher.extensionUuid ];
+  };
   _meta.description = ''Whether to enable Auto Theme Switcher GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.auto-theme-switcher ];

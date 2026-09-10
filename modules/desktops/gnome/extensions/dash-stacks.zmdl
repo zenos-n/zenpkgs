@@ -1,0 +1,39 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  summary = "Folder stacks in the GNOME dash";
+  description = ''Installs Dash Stacks and declaratively configures folder popups.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  s! {
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.dash-stacks ];
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.dash-stacks.extensionUuid ];
+  };
+};
+
+configure = enableOption {
+  _meta.default = $path.enable;
+  _meta.description = ''Write settings without requiring extension activation.'';
+  u! {
+    dconf.settings."org/gnome/shell/extensions/dash-stacks" = {
+      popup-height = $lib.gvariant.mkInt32 $path.popup-height;
+      popup-width = $lib.gvariant.mkInt32 $path.popup-width;
+      stacks = $lib.toJSON $path.stacks;
+    };
+  };
+};
+
+popup-height = { _meta = { type = $type.int; default = 400; description = ''Popup height in pixels''; }; };
+popup-width = { _meta = { type = $type.int; default = 400; description = ''Popup width in pixels''; }; };
+stacks = {
+  _meta = {
+    type = $type.list [ ($type.set [ ($type.either [ $type.string $type.bool ]) ]) ];
+    default = [ ];
+    description = ''Folder entries with name, path, icon and autoIcon fields.'';
+  };
+};

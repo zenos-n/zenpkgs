@@ -22,8 +22,17 @@ enable = enableOption {
   _meta.description = ''Whether to enable Hide Top Bar GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.hide-top-bar ];
-    programs.dconf.profiles.user.databases = [ {
-      settings."org/gnome/shell/extensions/hidetopbar" = {
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.hide-top-bar.extensionUuid ];
+  };
+};
+
+configure = enableOption {
+  _meta.default = $path.enable;
+  _meta.description = ''Write settings without requiring extension activation.'';
+  u! {
+    dconf.settings."org/gnome/shell/extensions/hidetopbar" = {
         hot-corner = $path.hot-corner;
         mouse-sensitive = $path.mouse-sensitive;
         mouse-sensitive-fullscreen-window = $path.mouse-sensitive-fullscreen-window;
@@ -31,8 +40,8 @@ enable = enableOption {
         keep-round-corners = $path.keep-round-corners;
         animation-time-overview = $path.animation-time-overview;
         animation-time-autohide = $path.animation-time-autohide;
-        pressure-threshold = $path.pressure-threshold;
-        pressure-timeout = $path.pressure-timeout;
+        pressure-threshold = $lib.gvariant.mkInt32 $path.pressure-threshold;
+        pressure-timeout = $lib.gvariant.mkInt32 $path.pressure-timeout;
         shortcut-keybind = $path.shortcut-keybind;
         shortcut-delay = $path.shortcut-delay;
         shortcut-toggles = $path.shortcut-toggles;
@@ -40,7 +49,6 @@ enable = enableOption {
         enable-active-window = $path.enable-active-window;
         show-in-overview = $path.show-in-overview;
       };
-    } ];
   };
 };
 

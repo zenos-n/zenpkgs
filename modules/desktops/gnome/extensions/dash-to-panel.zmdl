@@ -29,6 +29,9 @@ _let serializeMapStrUint: $type.function "map" = $v.serializeMap (v: "uint32 ${$
 _let serializeMapStrInt: $type.function "map" = $v.serializeMap $lib.toString;
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.dash-to-panel.extensionUuid ];
+  };
   _meta.description = ''Whether to enable Dash to Panel GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.dash-to-panel ];

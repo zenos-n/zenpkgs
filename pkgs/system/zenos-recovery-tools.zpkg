@@ -1,0 +1,16 @@
+_meta = {
+  name = "ZenOS recovery tools";
+  summary = "Provides safe live recovery workflows";
+  description = ''Packages diagnostics, read-only mounting, Linux recovery entry points, Windows guidance, and desktop launchers.'';
+  zenosVersion = 1.0.0Nb;
+  packageVersion = "0.2.0";
+  tags = [ "recovery" "installer" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "zenos-n";
+  repo = "zenos-recovery-tools";
+  rev = "cbde70da98e573dc42d325245370d99e37997017";
+  hash = "sha256-+Y/JW7Id7NHgNLFPh4DT0ceojF+bhsHzP274Q1pDlC8=";
+}) + "/package.nix") { };

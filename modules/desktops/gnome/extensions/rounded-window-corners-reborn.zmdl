@@ -34,60 +34,49 @@ _let toRgbaList: $type.function [ $type.string ] = value:
         else 1.0;
     in [ red green blue alpha ]
   else value;
-_let mkVariant: $type.function [ $type.string ] = value: "<${value}>";
-_let mkString: $type.function [ $type.string ] = value: "'${value}'";
-_let mkFloat: $type.function [ $type.float ] = value:
+_let toVariant: $type.function "value" =
   let
-    rendered = $lib.toString value;
-  in if $lib.hasInfix "." rendered then rendered else "${rendered}.0";
-_let serializeValue: $type.function [ $type.set ] =
-  let
-    serialize = value:
-      if $lib.isBool value then (if value then "true" else "false")
-      else if $lib.isInt value then $lib.toString value
-      else if $lib.isFloat value then $v.mkFloat value
-      else if $lib.isString value then $v.mkString value
-      else if $lib.isList value then "[${$lib.concatStringsSep ", " ($lib.map serialize value)}]"
-      else $lib.throwIfNot false "Unsupported type in Rounded Window Corners settings" "";
-  in serialize;
-_let serializeGlobalSettings: $type.function [ $type.set ] = settings:
-  let
-    pairs = $lib.mapAttrsToList
-      (key: value: "${$v.mkString key}: ${$v.mkVariant ($v.serializeValue value)}")
-      settings;
-  in "{${$lib.concatStringsSep ", " pairs}}";
+    convert = value:
+      if $lib.isAttrs value && !($lib.gvariant.isGVariant value) then
+        if value == { } then $lib.gvariant.mkEmptyArray "{sv}"
+        else $lib.gvariant.mkArray ($lib.mapAttrsToList
+          (key: item: $lib.gvariant.mkDictionaryEntry key ($lib.gvariant.mkVariant (convert item))) value)
+      else if $lib.isInt value then $lib.gvariant.mkInt32 value
+      else $lib.gvariant.mkValue value;
+  in convert;
+_let shadow: $type.function "json" = json:
+  $lib.gvariant.mkArray ($lib.mapAttrsToList
+    (key: value: $lib.gvariant.mkDictionaryEntry key ($lib.gvariant.mkInt32 value))
+    ($lib.fromJSON json));
 
 enable = enableOption {
   _meta.description = ''Rounded Window Corners Reborn configuration'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.rounded-window-corners-reborn ];
-    programs.dconf.profiles.user.databases = [ {
-      settings."org/gnome/shell/extensions/rounded-window-corners-reborn" = {
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.rounded-window-corners-reborn.extensionUuid ];
+    dconf.settings."org/gnome/shell/extensions/rounded-window-corners-reborn" = {
+        border-width = $lib.gvariant.mkInt32 $path.settings.border-size;
+        settings-version = $lib.gvariant.mkUint32 $path.general.settings-version;
         skip-libadwaita-app = $path.skip-libadwaita-app;
-        focused-shadow = $path.focused-shadow;
-        unfocused-shadow = $path.unfocused-shadow;
         debug-mode = $path.general.debug;
         tweak-kitty-terminal = $path.general.tweak-kitty;
-        enable-preferences-entry = $path.general.preferences-entry;
-      };
-    } ];
-    systemd.user.services.rounded-window-corners-settings = {
-      description = "Apply Rounded Window Corners complex configuration";
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
-      serviceConfig = { Type = "oneshot"; RemainAfterExit = true; };
-      script = ''
-        set_val() { ${$pkgs.zenos.legacy.dconf}/bin/dconf write "$1" "$2"; }
-
-        PROC_SETTINGS() {
-          local IN_RADIUS=$1
-          local IN_COLOR=$(${$pkgs.zenos.legacy.coreutils}/bin/echo $2 | ${$pkgs.zenos.legacy.gnused}/bin/sed "s/[#]//g")
-          # This is simplified - the module would actually transform the Nix set to the GVariant dict
-        }
-
-        set_val "/org/gnome/shell/extensions/rounded-window-corners-reborn/global-rounded-corner-settings" "${$lib.escapeShellArg ($v.serializeGlobalSettings ($path.settings // { border-color = $v.toRgbaList $path.settings.border-color; }))}"
-      '';
-    };
+        global-rounded-corner-settings = $v.toVariant {
+          padding = $lib.mapAttrs (_: value: $lib.gvariant.mkUint32 value) $path.settings.padding;
+          keepRoundedCorners = {
+            maximized = $path.settings.keep-rounded-corners;
+            fullscreen = $path.settings.keep-rounded-corners;
+          };
+          borderRadius = $lib.gvariant.mkUint32 $path.settings.border-radius;
+          smoothing = $path.settings.smoothing;
+          borderColor = $v.toRgbaList $path.settings.border-color;
+          enabled = true;
+        };
+        custom-rounded-corner-settings = $v.toVariant $path.custom-settings;
+      }
+      // ($lib.optionalAttrs ($path.focused-shadow != "{}") { focused-shadow = $v.shadow $path.focused-shadow; })
+      // ($lib.optionalAttrs ($path.unfocused-shadow != "{}") { unfocused-shadow = $v.shadow $path.unfocused-shadow; });
   };
 };
 
@@ -100,6 +89,7 @@ skip-libadwaita-app = { _meta = { type = $type.bool; default = false; descriptio
 focused-shadow = { _meta = { type = $type.string; default = "{}"; description = ''JSON configuration for active window drop shadows''; }; };
 unfocused-shadow = { _meta = { type = $type.string; default = "{}"; description = ''JSON configuration for inactive window drop shadows''; }; };
 general.debug = { _meta = { type = $type.bool; default = false; description = ''Enable verbose console debugging''; }; };
+general.settings-version = { _meta = { type = $type.int; default = 7; description = ''Version of the rounded-corner settings schema''; }; };
 general.tweak-kitty = { _meta = { type = $type.bool; default = false; description = ''Enable specialized rendering hacks for Kitty terminal''; }; };
 general.preferences-entry = { _meta = { type = $type.bool; default = true; description = ''Display extension settings in the app grid''; }; };
 

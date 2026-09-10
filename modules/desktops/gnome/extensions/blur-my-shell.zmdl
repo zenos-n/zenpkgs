@@ -64,6 +64,9 @@ _let serializePipeline: $type.function "pipeline" = pipeline:
 _let pipelinesGVariant: $type.string = "{${$lib.concatStringsSep ", " ($lib.mapAttrsToList (id: pipeline: "${$v.mkString id}: ${$v.serializePipeline pipeline}") $path.general.pipelines)}}";
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.blur-my-shell.extensionUuid ];
+  };
   _meta.description = ''Whether to enable Blur My Shell GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.blur-my-shell ];

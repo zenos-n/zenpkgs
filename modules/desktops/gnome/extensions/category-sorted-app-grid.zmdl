@@ -18,6 +18,9 @@ _meta = {
 };
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.category-sorted-app-grid.extensionUuid ];
+  };
   _meta.description = ''Whether to enable Category Sorted App Grid GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.category-sorted-app-grid ];

@@ -29,6 +29,9 @@ _let serializeLaunchArgs: $type.function [ $type.set ] = args:
     in "{${$lib.concatStringsSep ", " pairs}}";
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.quake-terminal.extensionUuid ];
+  };
   _meta.description = ''Quake Terminal GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.quake-terminal ];

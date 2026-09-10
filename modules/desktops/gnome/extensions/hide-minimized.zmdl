@@ -21,4 +21,7 @@ enable = enableOption {
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.hide-minimized ];
   };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.hide-minimized.extensionUuid ];
+  };
 };

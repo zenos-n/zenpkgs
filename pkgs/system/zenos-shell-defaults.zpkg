@@ -1,0 +1,16 @@
+_meta = {
+  name = "ZenOS shell defaults";
+  summary = "Provides the default Powerlevel10k configuration";
+  description = ''Packages the ZenOS default Powerlevel10k configuration for private per-user Zsh setup.'';
+  zenosVersion = 1.0.0Nb;
+  packageVersion = "1.0.0";
+  tags = [ "shell" "zsh" "theme" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "zenos-n";
+  repo = "zenos-shell-defaults";
+  rev = "29d54418b0e7e966e33a0f5766b92d9c94b1345e";
+  hash = "sha256-LKd4jdhyVxqjVCx59IM4+Dh3WzfVT/AGSlX7ygNYeik=";
+}) + "/package.nix") { };

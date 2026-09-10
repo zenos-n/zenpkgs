@@ -1,0 +1,16 @@
+_meta = {
+  name = "ZenOS rebuild";
+  summary = "Rebuilds ZenOS from canonical ZCFG sources";
+  description = ''Packages the secure configuration snapshot and rebuild workflow used by live and installed systems.'';
+  zenosVersion = 1.0.0Nb;
+  packageVersion = "1.1.0";
+  tags = [ "configuration" "system" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "zenos-n";
+  repo = "zenos-rebuild";
+  rev = "6345106c44d99e6354944666e773a365e3ea8ed9";
+  hash = "sha256-jvc5Jf0eZ2m9fHeHMhRJQfRlLdsg0lh4ZjtF9HG/4rs=";
+}) + "/package.nix") { };

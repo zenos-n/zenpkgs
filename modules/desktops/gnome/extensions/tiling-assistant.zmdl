@@ -43,6 +43,9 @@ _let serializeSettings: $type.function [ $type.string ] = settings:
     in "{${$lib.concatStringsSep ", " pairs}}";
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.tiling-assistant.extensionUuid ];
+  };
   _meta.description = ''Tiling Assistant GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.tiling-assistant ];

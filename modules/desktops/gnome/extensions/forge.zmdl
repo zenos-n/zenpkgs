@@ -44,8 +44,18 @@ _let toRgbaString: $type.function "color" = value:
 enable = enableOption {
   _meta.description = ''Whether to enable Forge GNOME extension configuration.'';
   s! {
-    environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.forge ];
-      programs.dconf.profiles.user.databases = [ {
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.forge ];
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.forge.extensionUuid ];
+  };
+};
+
+configure = enableOption {
+  _meta.default = $path.enable;
+  _meta.description = ''Write settings without requiring extension activation.'';
+  u! {
+      dconf = {
         settings = {
           "org/gnome/shell/extensions/forge" = {
             focus-border-toggle = $path.appearance.borders.focus.toggle;
@@ -120,7 +130,7 @@ enable = enableOption {
             window-resize-right-decrease = $v.serializeKeybind $path.keybindings.window-resize-right-decrease;
           };
         };
-    } ];
+    };
   };
 };
 
@@ -143,7 +153,7 @@ tiling.auto-split = { _meta = { type = $type.bool; default = true; description =
 tiling.workspace-skip = { _meta = { type = $type.string; default = ""; description = ''Indices of workspaces to exclude from tiling''; }; };
 interaction.mouse.move-pointer-focus = { _meta = { type = $type.bool; default = false; description = ''Sync pointer location with keyboard focus changes''; }; };
 interaction.mouse.focus-on-hover = { _meta = { type = $type.bool; default = false; description = ''Follow-mouse focus policy''; }; };
-interaction.dnd-center-layout = { _meta = { type = $type.enum [ "tabbed" "stacked" ]; default = "tabbed"; description = ''Layout used for drops into window center''; }; };
+interaction.dnd-center-layout = { _meta = { type = $type.enum [ "tabbed" "stacked" "swap" ]; default = "tabbed"; description = ''Layout used for drops into window center''; }; };
 interaction.float-always-on-top = { _meta = { type = $type.bool; default = true; description = ''Keep floating windows above tiled ones''; }; };
 interaction.resize-amount = { _meta = { type = $type.int; default = 15; description = ''Pixel increment for window resizing operations''; }; };
 general.quick-settings = { _meta = { type = $type.bool; default = true; description = ''Add Forge toggle to system quick settings''; }; };

@@ -30,25 +30,34 @@ _let parseHexColor: $type.function "color" = s:
     "Invalid hex color: '${s}'. Must be 6 (RRGGBB) or 8 (RRGGBBAA) characters"
     (if len == 6 then [ (norm ($v.parseHexByte ($lib.substring 0 2 hex))) (norm ($v.parseHexByte ($lib.substring 2 2 hex))) (norm ($v.parseHexByte ($lib.substring 4 2 hex))) 1.0 ]
      else [ (norm ($v.parseHexByte ($lib.substring 0 2 hex))) (norm ($v.parseHexByte ($lib.substring 2 2 hex))) (norm ($v.parseHexByte ($lib.substring 4 2 hex))) (norm ($v.parseHexByte ($lib.substring 6 2 hex))) ]);
-_let serializeFloat: $type.function "float" = v: let str = $lib.toString v; in if $lib.hasInfix "." str then str else "${str}.0";
-_let listToTupleStr: $type.function "list" = values: "(${$v.serializeFloat ($lib.elemAt values 0)},${$v.serializeFloat ($lib.elemAt values 1)},${$v.serializeFloat ($lib.elemAt values 2)})";
 _let normalizeColor: $type.function "color" = value:
-  if $lib.isList value then $v.listToTupleStr value
-  else if $lib.isString value && $lib.hasPrefix "#" value then $v.listToTupleStr ($v.parseHexColor value)
-  else value;
+  let
+    tuple = if $lib.isString value then $lib.match "[[:space:]]*\\(([^()]*)\\)[[:space:]]*" value else null;
+    values = if $lib.isList value then value
+      else if $lib.isString value && $lib.hasPrefix "#" value then $v.parseHexColor value
+      else $lib.throwIfNot (tuple != null) "Coverflow color must be a hex color, RGB list, or RGB tuple string"
+        ($lib.fromJSON "[${$lib.elemAt tuple 0}]");
+    valid = $lib.isList values && $lib.length values >= 3
+      && (tuple == null || $lib.length values == 3)
+      && $lib.all (channel: ($lib.isInt channel || $lib.isFloat channel) && channel >= 0 && channel <= 1) values;
+  # Extra list channels (including hex alpha) were historically ignored by the RGB schema.
+  in $lib.throwIfNot valid "Coverflow color requires RGB channels in [0, 1] (exactly three in tuple strings)"
+    ($lib.gvariant.mkTuple ($lib.map (channel: $lib.gvariant.mkDouble (channel + 0.0)) ($lib.take 3 values)));
 
 enable = enableOption {
   _meta.description = ''Whether to enable Coverflow Alt-Tab GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.coverflow-alt-tab ];
-      programs.dconf.profiles.user.databases = [ {
-        settings."org/gnome/shell/extensions/coverflowalttab" = {
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.coverflow-alt-tab.extensionUuid ];
+    dconf.settings."org/gnome/shell/extensions/coverflowalttab" = {
           hide-panel = $path.hide-panel;
           enforce-primary-monitor = $path.enforce-primary-monitor;
           animation-time = $path.animation-time;
           dim-factor = $path.dim-factor;
           position = $path.position;
-          offset = $path.offset;
+          offset = $lib.gvariant.mkInt32 $path.offset;
           icon-style = $path.icon-style;
           overlay-icon-opacity = $path.overlay-icon-opacity;
           overlay-icon-size = $path.overlay-icon-size;
@@ -59,7 +68,7 @@ enable = enableOption {
           icon-has-shadow = $path.icon-has-shadow;
           randomize-animation-times = $path.randomize-animation-times;
           preview-to-monitor-ratio = $path.preview-to-monitor-ratio;
-          preview-scaling-factor = $path.preview-scaling-factor;
+          coverflow-preview-scaling-factor = $path.preview-scaling-factor;
           coverflow-window-angle = $path.coverflow-window-angle;
           coverflow-window-offset-width = $path.coverflow-window-offset-width;
           bind-to-switch-applications = $path.bind-to-switch-applications;
@@ -89,7 +98,6 @@ enable = enableOption {
           verbose-logging = $path.verbose-logging;
           icon-add-remove-effects = $path.icon-add-remove-effects;
         };
-    } ];
   };
 };
 
@@ -109,7 +117,7 @@ switch-per-monitor = { _meta = { type = $type.bool; default = false; description
 icon-has-shadow = { _meta = { type = $type.bool; default = false; description = ''Icon has shadow switch''; }; };
 randomize-animation-times = { _meta = { type = $type.bool; default = false; description = ''Randomize animation times switch''; }; };
 preview-to-monitor-ratio = { _meta = { type = $type.float; default = 0.5; description = ''The maximum ratio of the preview dimensions with the monitor dimensions''; }; };
-preview-scaling-factor = { _meta = { type = $type.float; default = 0.8; description = ''Scales the previews as they spread out to the sides''; }; };
+preview-scaling-factor = { _meta = { type = $type.float; default = 0.8; description = ''Scales Coverflow previews as they spread out to the sides. Sets the extension's coverflow-preview-scaling-factor key; Timeline scaling is independent.''; }; };
 coverflow-window-angle = { _meta = { type = $type.float; default = 90.0; description = ''In Coverflow switcher, angle of off-center windows''; }; };
 coverflow-window-offset-width = { _meta = { type = $type.float; default = 50.0; description = ''In Coverflow switcher, distance from center of off-center windows''; }; };
 bind-to-switch-applications = { _meta = { type = $type.bool; default = true; description = ''Bind to 'switch-applications' keybinding''; }; };
@@ -123,13 +131,13 @@ blur-radius = { _meta = { type = $type.float; default = 0.0; description = ''Rad
 switcher-looping-method = { _meta = { type = $type.enum [ "Flip Stack" "Carousel" ]; default = "Flip Stack"; description = ''How the windows cycle through the coverflow''; }; };
 switch-application-behaves-like-switch-windows = { _meta = { type = $type.bool; default = false; description = ''The application-switcher keybinding action behaves the same as the window-switcher''; }; };
 use-tint = { _meta = { type = $type.bool; default = true; description = ''Whether to Use a Tint Color on the Background Application Switcher''; }; };
-tint-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(0.0,0.0,0.0)"; description = ''Tint Color Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)')''; }; };
-switcher-background-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(0.0,0.0,0.0)"; description = ''Switcher Background Color Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)')''; }; };
+tint-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(0.0,0.0,0.0)"; description = ''Tint Color accepts hex ('#RRGGBB' or '#RRGGBBAA'), a list of at least three channels ([0.0 0.0 0.0]), or an RGB tuple string ('(0.0,0.0,0.0)'). Channels must be in [0, 1]; alpha and extra list channels are validated but ignored.''; }; };
+switcher-background-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(0.0,0.0,0.0)"; description = ''Switcher Background Color accepts hex ('#RRGGBB' or '#RRGGBBAA'), a list of at least three channels ([0.0 0.0 0.0]), or an RGB tuple string ('(0.0,0.0,0.0)'). Channels must be in [0, 1]; alpha and extra list channels are validated but ignored.''; }; };
 tint-blend = { _meta = { type = $type.float; default = 0.0; description = ''Amount to Blend Tint Color''; }; };
 tint-use-theme-color = { _meta = { type = $type.bool; default = true; description = ''Use theme color for tint''; }; };
 use-glitch-effect = { _meta = { type = $type.bool; default = false; description = ''Use a 'glitch effect' on the background application switcher''; }; };
 invert-swipes = { _meta = { type = $type.bool; default = false; description = ''Invert System Scroll Direction Setting''; }; };
-highlight-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(1.0,1.0,1.0)"; description = ''Highlight Color Accepts Hex ('#RRGGBB'), List of Floats ([0.0 0.0 0.0]), or GVariant Tuple String ('(0.0,0.0,0.0)')''; }; };
+highlight-color = { _meta = { type = $type.either [ $type.string ($type.list [ $type.float ]) ]; default = "(1.0,1.0,1.0)"; description = ''Highlight Color accepts hex ('#RRGGBB' or '#RRGGBBAA'), a list of at least three channels ([0.0 0.0 0.0]), or an RGB tuple string ('(0.0,0.0,0.0)'). Channels must be in [0, 1]; alpha and extra list channels are validated but ignored.''; }; };
 coverflow-switch-windows = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = ''Switch Windows Keyboard Shortcut''; }; };
 coverflow-switch-windows-backward = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = ''Switch Windows Backward Keyboard Shortcut''; }; };
 coverflow-switch-applications = { _meta = { type = $type.list [ $type.string ]; default = [ "" ]; description = ''Switch Applications Keyboard Shortcut''; }; };

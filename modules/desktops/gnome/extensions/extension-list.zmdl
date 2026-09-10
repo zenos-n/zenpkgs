@@ -19,6 +19,9 @@ _meta = {
 };
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.extension-list.extensionUuid ];
+  };
   _meta.description = ''Whether to enable Extension List GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.extension-list ];

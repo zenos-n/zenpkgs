@@ -33,15 +33,16 @@ enable = enableOption {
   _meta.description = ''Mouse Tail GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.mouse-tail ];
-    programs.dconf.profiles.user.databases = [ {
-      settings."org/gnome/shell/extensions/mouse-tail" = {
-        fade-duration = $path.fade-duration;
-        line-width = $path.line-width;
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.mouse-tail.extensionUuid ];
+    dconf.settings."org/gnome/shell/extensions/mouse-tail" = {
+        fade-duration = $lib.gvariant.mkInt32 $path.fade-duration;
+        line-width = $lib.gvariant.mkInt32 $path.line-width;
         color = $v.hexToRgbList $path.color;
         alpha = $path.alpha;
         render-mode = $path.render-mode;
       };
-    } ];
   };
 };
 

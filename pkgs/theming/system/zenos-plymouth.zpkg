@@ -1,0 +1,16 @@
+_meta = {
+  name = "ZenOS boot visuals";
+  summary = "Provides ZenOS Plymouth and installer boot resources";
+  description = ''Packages the ZenOS Plymouth animation plus GRUB, Syslinux, and boot picker resources.'';
+  zenosVersion = 1.0.0Nb;
+  packageVersion = "1.0.0Nb";
+  tags = [ "boot" "theme" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "zenos-n";
+  repo = "plymouth-theme";
+  rev = "b7040721520bc2c7bb3e9aba6de21cbe2bb5636f";
+  hash = "sha256-XCpwnJPmiHyQAat24d2gp1Q6WWMJqGv5M21QCgFl+1I=";
+}) + "/package.nix") { };

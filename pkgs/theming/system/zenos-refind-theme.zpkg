@@ -1,0 +1,16 @@
+_meta = {
+  name = "ZenOS rEFInd theme";
+  summary = "Provides the original ZenOS boot picker theme";
+  description = ''Packages the unchanged rEFInd configuration, icons, selections, and background from zenos-old.'';
+  zenosVersion = 1.0.0Nb;
+  packageVersion = "1.0.0";
+  tags = [ "boot" "efi" "theme" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "zenos-n";
+  repo = "zenos-refind-theme";
+  rev = "159673a46343a66cc077876ba57ff4f28d3ba0a3";
+  hash = "sha256-mlDwnHPc/XV7sLXXu5do5vWmLLTxGZGw2e7tJikfWno=";
+}) + "/package.nix") { };

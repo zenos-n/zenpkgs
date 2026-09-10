@@ -1,64 +1,58 @@
-# Transitional parity source: lib/compat/modules/zenfs/module.nix
-# Unsupported: builtins.toJSON/writeText generation for offload_config.json is not in production ZMDL.
-# Unsupported: the source references undeclared fhs.configMap, drives.mainDrive, and database values.
-# Unsupported: the offload service and timer are omitted together to avoid scheduling a missing unit.
 _meta = {
   zenosVersion = 1.0.0Na;
-  summary = "ZenOS filesystem hierarchy and roaming manager";
-  description = ''
-    Manages the ZenFS file watcher and declares roaming and indexing controls.
-    JSON-backed offloading remains blocked on generated-file support in ZMDL.
-  '';
+  name = "ZenFS";
+  summary = "ZenOS filesystem hierarchy and application integration";
+  description = ''Declares the public ZenFS policy. The composition supplies managed users to the configuration-only runtime backend. Enabling this module does not schedule watchers, offloading, or Janitor.'';
   maintainers = [ $m.doromiert ];
   license = $l.napl;
-  platforms = $lib.platforms.zenos;
+  tags = [ "filesystem" "applications" ];
 };
 
-enable = enableOption {
-  _meta.summary = "Enable system-wide ZenFS integration";
-
-  s! {
-    systemd.services.zenfs-watcher = {
-      description = "ZenFS File Change Watcher";
-      wantedBy = [ "multi-user.target" ];
-      serviceConfig = {
-        Type = "simple";
-        ExecStart = "${$pkgs.system.zenfs}/bin/zenfs watcher";
-        Restart = "always";
+enable = enableOption { _meta.summary = "Enable ZenFS integration"; };
+filesystemHierarchy.enable = {
+  _meta = { type = $type.boolean; default = true; summary = "Activate the readable root hierarchy"; };
+};
+strict = {
+  _meta = { type = $type.boolean; default = true; summary = "Keep managed home dotfiles under .private";
+    description = ''Flatpak's .var app-data directory remains untouched until a complete CLI and libflatpak redirect is integrated.''; };
+};
+apps = {
+  enable = { _meta = { type = $type.boolean; default = true; summary = "Build separate system and private application views"; }; };
+  appimage = {
+    enable = { _meta = { type = $type.boolean; default = true; summary = "Integrate AppImage installation and execution"; }; };
+    runPackage = {
+      _meta = { type = $type.package; default = $pkgs.zenos.legacy.appimage-run; summary = "AppImage execution package"; };
+    };
+  };
+  flatpak = {
+    enable = { _meta = { type = $type.boolean; default = true; summary = "Integrate Flatpak and private exports"; }; };
+    remote = {
+      name = { _meta = { type = $type.string; default = "zenos-flathub"; summary = "Owned Flatpak remote"; }; };
+      descriptor = {
+        _meta = { type = $type.either [ $type.null $type.path ]; default = null; summary = "Repository descriptor, or the pinned Flathub descriptor"; };
       };
     };
   };
 };
-
-roaming.enable = {
-  _meta = {
-    type = $type.boolean;
-    default = false;
-    summary = "Enable roaming user profile support";
-  };
-};
-
-roaming.offloadThreshold = {
-  _meta = {
-    type = $type.int;
-    default = 90;
-    summary = "Disk usage percentage that triggers offloading";
-  };
-};
-
-roaming.roamingSafeLimit = {
-  _meta = {
-    type = $type.int;
-    default = 50;
-    summary = "Target disk usage after offloading";
-  };
-};
-
-database.ignoredFiles = {
-  _meta = {
-    type = $type.list [ $type.string ];
-    default = [ ];
-    summary = "Files ignored by ZenFS indexing";
-    description = ''Patterns or file names skipped by roaming and categorization services.'';
+roaming = {
+  enable = { _meta = { type = $type.boolean; default = false; summary = "Enable explicitly configured, marker-verified roaming mounts"; }; };
+  drives = {
+    (freeform drive) = {
+      enable = { _meta = { type = $type.boolean; default = true; summary = "Enable this drive"; }; };
+      device = { _meta = { type = $type.string; summary = "Stable block device path"; }; };
+      fsType = { _meta = { type = $type.string; default = "auto"; summary = "Filesystem type"; }; };
+      mountPoint = { _meta = { type = $type.string; default = "/Mount/${$f.drive}"; summary = "Drive mountpoint"; }; };
+      options = { _meta = { type = $type.list [ $type.string ]; default = [ "nofail" "x-systemd.automount" "x-systemd.device-timeout=10s" "nodev" "nosuid" "noexec" ]; summary = "Restrictive mount options"; }; };
+      markerFile = { _meta = { type = $type.string; default = ".zenfs-roaming.json"; summary = "Relative marker filename"; }; };
+      markerId = { _meta = { type = $type.string; default = $f.drive; summary = "Required marker identity"; }; };
+      privateMounts = {
+        (freeform mount) = {
+          user = { _meta = { type = $type.string; summary = "Composition-managed user"; }; };
+          source = { _meta = { type = $type.string; default = $f.mount; summary = "Relative directory on the drive"; }; };
+          target = { _meta = { type = $type.either [ $type.null $type.string ]; default = null; summary = "Private home-relative target, default .private/Mount/name"; }; };
+          readOnly = { _meta = { type = $type.boolean; default = true; summary = "Read-only private bind mount"; }; };
+        };
+      };
+    };
   };
 };

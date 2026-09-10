@@ -20,6 +20,9 @@ _meta = {
 };
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.dash-to-dock.extensionUuid ];
+  };
   _meta.description = ''Whether to enable Dash to Dock GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.dash-to-dock ];

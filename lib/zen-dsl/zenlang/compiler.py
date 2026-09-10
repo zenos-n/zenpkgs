@@ -233,7 +233,7 @@ def compile_zcfg(document: Document) -> str:
 
     fragments = [_emit_tree(root, emitter, 2)]
     for conditions, tree in conditional_groups:
-        condition = " && ".join(f"({emitter.expression(item)})" for item in conditions)
+        condition = "(" + " && ".join(f"({emitter.expression(item)})" for item in conditions) + ")"
         if len(conditions) == 1:
             condition = emitter.expression(conditions[0])
         fragments.append(f"(lib.mkIf {condition} {_emit_tree(tree, emitter, 4)})")

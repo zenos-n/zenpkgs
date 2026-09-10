@@ -20,14 +20,17 @@ enable = enableOption {
   _meta.description = ''Whether to enable Compiz Alike Magic Lamp Effect GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.compiz-alike-magic-lamp-effect ];
-    programs.dconf.profiles.user.databases = [ {
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.compiz-alike-magic-lamp-effect.extensionUuid ];
+    dconf = {
       settings."org/gnome/shell/extensions/com/github/hermes83/compiz-alike-magic-lamp-effect" = {
         effect = $path.effect;
         duration = $path.duration;
         x-tiles = $path.x-tiles;
         y-tiles = $path.y-tiles;
       };
-    } ];
+    };
   };
 };
 

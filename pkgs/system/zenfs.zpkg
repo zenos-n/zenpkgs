@@ -1,0 +1,16 @@
+_meta = {
+  name = "ZenFS";
+  summary = "Provides the ZenOS filesystem and application integration runtime";
+  description = ''Packages ZenFS hierarchy initialization, application views, launchers, compatibility helpers, and roaming-drive support.'';
+  zenosVersion = 1.0.0Nb;
+  packageVersion = "2.1.0";
+  tags = [ "filesystem" "applications" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "doromiert";
+  repo = "ZenFS";
+  rev = "f4ea423b1bd02704ebe385104d994358fa3c1e90";
+  hash = "sha256-hvgFhrzDDwE6c9WgAPJ3TwoU0lPjNkzea+Pwo0qLyHE=";
+}) + "/package.nix") { };

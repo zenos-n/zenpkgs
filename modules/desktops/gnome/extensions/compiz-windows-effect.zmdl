@@ -20,8 +20,10 @@ enable = enableOption {
   _meta.description = ''Whether to enable Compiz Windows Effect GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.compiz-windows-effect ];
-    programs.dconf.profiles.user.databases = [ {
-      settings."org/gnome/shell/extensions/com/github/hermes83/compiz-windows-effect" = {
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.compiz-windows-effect.extensionUuid ];
+    dconf.settings."org/gnome/shell/extensions/com/github/hermes83/compiz-windows-effect" = {
         friction = $path.friction;
         spring-k = $path.spring-k;
         speedup-factor-divider = $path.speedup-factor-divider;
@@ -31,7 +33,6 @@ enable = enableOption {
         maximize-effect = $path.maximize-effect;
         resize-effect = $path.resize-effect;
       };
-    } ];
   };
 };
 

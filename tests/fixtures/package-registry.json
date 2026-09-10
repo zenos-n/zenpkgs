@@ -5681,7 +5681,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "dbf1b1b25a14e3d590970a94ee2a80cba2b81bd8"
+                                    "value": "74889089d21b8147d68b631c3263599fb01a3e84"
                                   }
                                 ],
                                 "type": "string"
@@ -5701,7 +5701,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "sha256-D0epV3YllTO5IoBYsccZU3wTnipuZnVMBUgpW61dpwE="
+                                    "value": "sha256-RSr/7cNC/I3u+KeX2iTLr/GZsRxhkGam9WD/NeNYOIg="
                                   }
                                 ],
                                 "type": "string"
@@ -5766,6 +5766,1271 @@
       "target": [
         "system",
         "zenos-setup"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.programs.zenos-rebuild",
+      "meta": {
+        "description": "Packages the secure configuration snapshot and rebuild workflow used by live and installed systems.",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenOS rebuild",
+        "packageVersion": "1.1.0",
+        "summary": "Rebuilds ZenOS from canonical ZCFG sources",
+        "tags": [
+          "configuration",
+          "system"
+        ],
+        "zenosVersion": "1.0.0Nb"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-rebuild"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "6345106c44d99e6354944666e773a365e3ea8ed9"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-jvc5Jf0eZ2m9fHeHMhRJQfRlLdsg0lh4ZjtF9HG/4rs="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "programs",
+        "zenos-rebuild"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.system.zenfs",
+      "meta": {
+        "description": "Packages ZenFS hierarchy initialization, application views, launchers, compatibility helpers, and roaming-drive support.",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenFS",
+        "packageVersion": "2.1.0",
+        "summary": "Provides the ZenOS filesystem and application integration runtime",
+        "tags": [
+          "filesystem",
+          "applications"
+        ],
+        "zenosVersion": "1.0.0Nb"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "doromiert"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "ZenFS"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "f4ea423b1bd02704ebe385104d994358fa3c1e90"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-hvgFhrzDDwE6c9WgAPJ3TwoU0lPjNkzea+Pwo0qLyHE="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "system",
+        "zenfs"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.system.zenos-recovery-tools",
+      "meta": {
+        "description": "Packages diagnostics, read-only mounting, Linux recovery entry points, Windows guidance, and desktop launchers.",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenOS recovery tools",
+        "packageVersion": "0.2.0",
+        "summary": "Provides safe live recovery workflows",
+        "tags": [
+          "recovery",
+          "installer"
+        ],
+        "zenosVersion": "1.0.0Nb"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-recovery-tools"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "cbde70da98e573dc42d325245370d99e37997017"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-+Y/JW7Id7NHgNLFPh4DT0ceojF+bhsHzP274Q1pDlC8="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "system",
+        "zenos-recovery-tools"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.system.zenos-refind-installer",
+      "meta": {
+        "description": "Packages the original ZenOS generation synchronizer used after systemd-boot writes EFI kernels.",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenOS rEFInd installer",
+        "packageVersion": "1.0.0",
+        "summary": "Synchronizes ZenOS generations into rEFInd",
+        "tags": [
+          "boot",
+          "efi",
+          "refind"
+        ],
+        "zenosVersion": "1.0.0Nb"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-refind-installer"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "0908c40f6743f9e8ddb132f47c894ada5ce5e7f3"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-SseDKAqLiT6gjQLIfdeu8/60Ez3AIZadjJ6PFUelRAA="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "system",
+        "zenos-refind-installer"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.system.zenos-shell-defaults",
+      "meta": {
+        "description": "Packages the ZenOS default Powerlevel10k configuration for private per-user Zsh setup.",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenOS shell defaults",
+        "packageVersion": "1.0.0",
+        "summary": "Provides the default Powerlevel10k configuration",
+        "tags": [
+          "shell",
+          "zsh",
+          "theme"
+        ],
+        "zenosVersion": "1.0.0Nb"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-shell-defaults"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "29d54418b0e7e966e33a0f5766b92d9c94b1345e"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-LKd4jdhyVxqjVCx59IM4+Dh3WzfVT/AGSlX7ygNYeik="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "system",
+        "zenos-shell-defaults"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.theming.system.zenos-plymouth",
+      "meta": {
+        "description": "Packages the ZenOS Plymouth animation plus GRUB, Syslinux, and boot picker resources.",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenOS boot visuals",
+        "packageVersion": "1.0.0Nb",
+        "summary": "Provides ZenOS Plymouth and installer boot resources",
+        "tags": [
+          "boot",
+          "theme"
+        ],
+        "zenosVersion": "1.0.0Nb"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "plymouth-theme"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "b7040721520bc2c7bb3e9aba6de21cbe2bb5636f"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-XCpwnJPmiHyQAat24d2gp1Q6WWMJqGv5M21QCgFl+1I="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "theming",
+        "system",
+        "zenos-plymouth"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.theming.system.zenos-refind-theme",
+      "meta": {
+        "description": "Packages the unchanged rEFInd configuration, icons, selections, and background from zenos-old.",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenOS rEFInd theme",
+        "packageVersion": "1.0.0",
+        "summary": "Provides the original ZenOS boot picker theme",
+        "tags": [
+          "boot",
+          "efi",
+          "theme"
+        ],
+        "zenosVersion": "1.0.0Nb"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-refind-theme"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "159673a46343a66cc077876ba57ff4f28d3ba0a3"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-mlDwnHPc/XV7sLXXu5do5vWmLLTxGZGw2e7tJikfWno="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "theming",
+        "system",
+        "zenos-refind-theme"
       ]
     }
   ]

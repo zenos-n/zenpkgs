@@ -19,6 +19,9 @@ _meta = {
 };
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.zenlink-indicator.extensionUuid ];
+  };
   _meta.description = ''ZenLink indicator GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.desktops.gnome.extensions.zenlink-indicator ];

@@ -27,33 +27,34 @@ _let generateProfileContent: $type.function "settings" = settings: ''
   [burn-my-windows-profile]
   ${$lib.concatStringsSep "\n" ($lib.mapAttrsToList (k: v: "${k}=${$v.serializeIniValue v}") settings)}
 '';
+_let managedProfile: $type.package = $pkgs.legacy.writeText "burn-my-windows.conf" ($v.generateProfileContent $path.settings);
 
 enable = enableOption {
   _meta.description = ''Whether to enable Burn My Windows GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.burn-my-windows ];
-      programs.dconf.profiles.user.databases = [ {
-        settings."org/gnome/shell/extensions/burn-my-windows" = {
-          active-profile = if $path.settings != { } then "nix-managed.conf" else $path.active-profile;
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.burn-my-windows.extensionUuid ];
+  };
+};
+
+configure = enableOption {
+  _meta.default = $path.enable;
+  _meta.description = ''Write settings and the managed profile without activating the extension.'';
+  u! {
+    dconf.settings."org/gnome/shell/extensions/burn-my-windows" = {
+          active-profile = if $path.active-profile != "" || $path.settings == { }
+            then $path.active-profile else "${$v.managedProfile}";
           preview-effect = $path.preview-effect;
           test-mode = $path.test-mode;
           show-support-dialog = $path.show-support-dialog;
-          last-prefs-version = $path.last-prefs-version;
-          last-extension-version = $path.last-extension-version;
-          prefs-open-count = $path.prefs-open-count;
+          last-prefs-version = $lib.gvariant.mkInt32 $path.last-prefs-version;
+          last-extension-version = $lib.gvariant.mkInt32 $path.last-extension-version;
+          prefs-open-count = $lib.gvariant.mkInt32 $path.prefs-open-count;
         };
-      } ];
-      systemd.user.services.burn-my-windows-profile = $lib.mkIf ($path.settings != { }) {
-        description = "Generate Burn My Windows Nix-managed profile";
-        wantedBy = [ "graphical-session.target" ];
-        partOf = [ "graphical-session.target" ];
-        serviceConfig = { Type = "oneshot"; RemainAfterExit = true; };
-        script = ''
-          mkdir -p %h/.private/Config/burn-my-windows/profiles
-          cat > %h/.private/Config/burn-my-windows/profiles/nix-managed.conf <<EOF
-          ${$v.generateProfileContent $path.settings}
-          EOF
-        '';
+    xdg.configFile."burn-my-windows/profiles/nix-managed.conf" = $lib.mkIf ($path.settings != { }) {
+      text = $v.generateProfileContent $path.settings;
     };
   };
 };
@@ -61,8 +62,9 @@ enable = enableOption {
 active-profile = { _meta = { type = $type.string; default = ""; description = ''
   Currently selected animation profile
 
-  The filename of the active effect profile (e.g., 'fire.conf').
-  Overridden if 'settings' attribute is defined.
+  Absolute path to the active effect profile. When settings are supplied, point
+   this at burn-my-windows/profiles/nix-managed.conf under the user's XDG config directory.
+   With settings but no explicit path, the generated store profile is used.
 ''; }; };
 preview-effect = { _meta = { type = $type.string; default = ""; description = ''
   Nickname of the effect for preview

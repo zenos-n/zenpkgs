@@ -18,6 +18,9 @@ _meta = {
 };
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.places-status-indicator.extensionUuid ];
+  };
   _meta.description = ''Places Status Indicator GNOME extension configuration'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.places-status-indicator ];

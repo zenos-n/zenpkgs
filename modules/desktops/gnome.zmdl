@@ -73,13 +73,12 @@ enable = enableOption {
           "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
           "org/gnome/shell" = {
             disable-user-extensions = false;
-            enabled-extensions = $path.extensionUuids;
             favorite-apps = $path.dockItems;
           };
           "org/gnome/desktop/wm/preferences" = {
             edge-tiling = false;
             action-double-click-titlebar = "toggle-maximize";
-            button-layout = "appmenu:minimize,maximize,close";
+            button-layout = ":close";
           };
           "org/gnome/mutter" = {
             edge-tiling = false;
@@ -94,6 +93,9 @@ enable = enableOption {
       }
     ];
     services.udev.packages = [ $pkgs.zenos.legacy.gnome-settings-daemon ];
+  };
+  u! [ ($path.extensionUuids != [ ]) ] {
+    dconf.settings."org/gnome/shell".enabled-extensions = $path.extensionUuids;
   };
 };
 

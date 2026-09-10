@@ -22,8 +22,10 @@ enable = enableOption {
   _meta.description = ''Whether to enable Date Menu Formatter GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.date-menu-formatter ];
-    programs.dconf.profiles.user.databases = [ {
-      settings."org/gnome/shell/extensions/date-menu-formatter" = {
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.date-menu-formatter.extensionUuid ];
+    dconf.settings."org/gnome/shell/extensions/date-menu-formatter" = {
         formatter = $path.formatter;
         pattern = $path.pattern;
         custom-locale = $path.custom-locale;
@@ -34,11 +36,10 @@ enable = enableOption {
         use-default-timezone = $path.use-default-timezone;
         remove-messages-indicator = $path.remove-messages-indicator;
         apply-all-panels = $path.apply-all-panels;
-        font-size = $path.font-size;
-        update-level = $path.update-level;
+        font-size = $lib.gvariant.mkInt32 $path.font-size;
+        update-level = $lib.gvariant.mkInt32 $path.update-level;
         text-align = $path.text-align;
       };
-    } ];
   };
 };
 

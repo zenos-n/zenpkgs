@@ -236,6 +236,25 @@ enable = enableOption { s!! { observed = "${$path.accent}/${$path.overlay}/${fal
                 "overlay": "ff000080", "pathType": "path", "text": "import-relative asset",
                 "observed": "aabbcc/ff000080/false/12"}, result)
 
+    def test_nested_zcfg_conditions_evaluate_in_root_namespace_and_lexical_scopes(self):
+        templates = (
+            'if %s { if %s { legacy.time.timeZone = "Europe/Warsaw"; }; };',
+            'legacy = { if %s { if %s { time.timeZone = "Europe/Warsaw"; }; }; };',
+            'if %s { legacy = { if %s { time.timeZone = "Europe/Warsaw"; }; }; };',
+            'legacy = { _let outer: $type.bool = %s; if $v.outer { '
+            '_let inner: $type.bool = %s; if $v.inner { time.timeZone = "Europe/Warsaw"; }; }; };',
+        )
+        for outer, inner in (("true", "true"), ("true", "false"), ("false", "true"), ("false", "false")):
+            for template in templates:
+                source = template % (outer, inner)
+                with self.subTest(source=source):
+                    output = compile_zcfg(parse(source, "nested.zcfg"))
+                    result = self.evaluate("let lib = import <nixpkgs/lib>; in (lib.evalModules { "
+                        "specialArgs.pkgs = {}; modules = [ (" + output + ") { "
+                        "options.zenos.legacy.time.timeZone = lib.mkOption { "
+                        'type = lib.types.str; default = "UTC"; }; } ]; }).config.zenos.legacy.time.timeZone')
+                    self.assertEqual("Europe/Warsaw" if outer == inner == "true" else "UTC", result)
+
     def test_bound_color_records_use_the_same_type_mapping(self):
         with tempfile.TemporaryDirectory(prefix="zen-value-import-") as directory:
             root = Path(directory)

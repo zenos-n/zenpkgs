@@ -22,14 +22,22 @@ enable = enableOption {
   _meta.description = ''Whether to enable Alphabetical App Grid GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.alphabetical-app-grid ];
-    programs.dconf.profiles.user.databases = [ {
-      settings."org/gnome/shell/extensions/alphabetical-app-grid" = {
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.alphabetical-app-grid.extensionUuid ];
+  };
+};
+
+configure = enableOption {
+  _meta.default = $path.enable;
+  _meta.description = ''Write settings without requiring extension activation.'';
+  u! {
+    dconf.settings."org/gnome/shell/extensions/alphabetical-app-grid" = {
         sort-folder-contents = $path.sort-folder-contents;
         folder-order-position = $path.folder-order-position;
         show-favourite-apps = $path.show-favourite-apps;
         logging-enabled = $path.logging-enabled;
       };
-    } ];
   };
 };
 

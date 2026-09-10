@@ -300,9 +300,23 @@ if $cfg.feature.enable or false { legacy.services.demo.enable = true; };
             "nested.zcfg",
         )
         output = compile_zcfg(document)
-        self.assertIn("config.zenos.first or false", output)
-        self.assertIn("config.zenos.second or false", output)
+        self.assertIn(
+            "lib.mkIf (((config.zenos.first or false)) && ((config.zenos.second or false))) {",
+            output,
+        )
         self.assertIn("outer = {", output)
+
+    def test_nested_literal_conditions_are_one_mkif_argument(self) -> None:
+        templates = (
+            'if %s { if %s { legacy.time.timeZone = "Europe/Warsaw"; }; };',
+            'legacy = { if %s { if %s { time.timeZone = "Europe/Warsaw"; }; }; };',
+        )
+        for outer, inner in (("true", "true"), ("true", "false"), ("false", "true"), ("false", "false")):
+            for template in templates:
+                source = template % (outer, inner)
+                with self.subTest(source=source):
+                    output = compile_zcfg(parse(source, "nested.zcfg"))
+                    self.assertIn(f"lib.mkIf (({outer}) && ({inner})) {{", output)
 
 
 class ZmdlCompilerTests(unittest.TestCase):

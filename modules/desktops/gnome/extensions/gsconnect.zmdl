@@ -32,8 +32,17 @@ enable = enableOption {
   _meta.description = ''Whether to enable GSConnect GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.gsconnect ];
-      programs.dconf.profiles.user.databases = [ {
-        settings."org/gnome/shell/extensions/gsconnect" = {
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.gsconnect.extensionUuid ];
+    dconf.settings."org/gnome/shell/extensions/gsconnect/preferences" = {
+      window-maximized = $path.preferences.window-maximized;
+      window-size = $lib.gvariant.mkTuple [
+        ($lib.gvariant.mkInt32 $path.preferences.width)
+        ($lib.gvariant.mkInt32 $path.preferences.height)
+      ];
+    };
+    dconf.settings."org/gnome/shell/extensions/gsconnect" = {
           enabled = $path.enabled;
           show-indicators = $path.show-indicators;
           keep-alive-when-locked = $path.keep-alive-when-locked;
@@ -43,7 +52,8 @@ enable = enableOption {
           debug = $path.debug;
           discoverable = $path.discoverable;
         };
-      } ];
+  };
+  s! {
       systemd.user.services.gsconnect-device-config = {
         description = "Apply GSConnect device defaults";
         wantedBy = [ "graphical-session.target" ];
@@ -87,6 +97,10 @@ enable = enableOption {
     };
   };
 };
+
+preferences.window-maximized = { _meta = { type = $type.bool; default = false; description = ''Maximize the preferences window''; }; };
+preferences.width = { _meta = { type = $type.int; default = 945; description = ''Preferences window width''; }; };
+preferences.height = { _meta = { type = $type.int; default = 478; description = ''Preferences window height''; }; };
 
 enabled = { _meta = { type = $type.bool; default = true; description = ''
   Master switch for extension functionality

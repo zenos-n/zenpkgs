@@ -23,4 +23,7 @@ enable = enableOption {
   s! {
     environment.systemPackages = [ $pkgs.apps.gnome-extensions.window-is-ready-remover ];
   };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.window-is-ready-remover.extensionUuid ];
+  };
 };

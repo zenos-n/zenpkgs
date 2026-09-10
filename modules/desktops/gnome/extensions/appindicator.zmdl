@@ -27,6 +27,9 @@ _let serializeCustomIcons: $type.function "icons" = icons:
   else "[${$lib.concatStringsSep ", " ($lib.map $v.serializeTuple icons)}]";
 
 enable = enableOption {
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.zenos.legacy.gnomeExtensions.appindicator.extensionUuid ];
+  };
   _meta.description = ''Whether to enable AppIndicator GNOME extension configuration.'';
   s! {
     environment.systemPackages = [ $pkgs.zenos.legacy.gnomeExtensions.appindicator ];
