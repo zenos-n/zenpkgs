@@ -392,12 +392,10 @@
           };
           patchedSeahorse = prev.seahorse.overrideAttrs (old: {
             postPatch = (old.postPatch or "") + ''
-              if grep -q 'this.ssh_homedir = "%s/.ssh".printf(Environment.get_home_dir());' ssh/source.vala; then
-                substituteInPlace ssh/source.vala \
-                  --replace-fail \
-                    'this.ssh_homedir = "%s/.ssh".printf(Environment.get_home_dir());' \
-                    'this.ssh_homedir = Path.build_filename(Environment.get_user_config_dir(), "ssh");'
-              fi
+              substituteInPlace ssh/source.vala \
+                --replace-fail \
+                  'this.ssh_homedir = "%s/.ssh".printf(Environment.get_home_dir());' \
+                  'this.ssh_homedir = Path.build_filename(Environment.get_user_config_dir(), "ssh");'
             '';
           });
         in
