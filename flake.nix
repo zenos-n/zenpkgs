@@ -380,13 +380,13 @@
             };
           };
           customTree = if zenTree == { } then { } else inflate zenTree final;
-          configGuess = builtins.fetchurl {
+          configGuess = prev.fetchurl {
             url = "https://raw.githubusercontent.com/videolan/vlc/master/extras/tools/config.guess-428664896cf9e92d264976a960c76660938dffce";
-            sha256 = "rBi719w3aeFkavSeu6Mxo5GCn0pzV5tzXcjUOb0cfwc=";
+            hash = "sha256-rBi719w3aeFkavSeu6Mxo5GCn0pzV5tzXcjUOb0cfwc=";
           };
-          configSub = builtins.fetchurl {
+          configSub = prev.fetchurl {
             url = "https://raw.githubusercontent.com/videolan/vlc/master/extras/tools/config.sub-428664896cf9e92d264976a960c76660938dffce";
-            sha256 = "+aMemj9bfL642MPyAViVpR5yIhMBFMnDY/y8zXjkv2s=";
+            hash = "sha256-+aMemj9bfL642MPyAViVpR5yIhMBFMnDY/y8zXjkv2s=";
           };
           ownedGnuConfig = prev.gnu-config.overrideAttrs (_: {
             unpackPhase = ''
