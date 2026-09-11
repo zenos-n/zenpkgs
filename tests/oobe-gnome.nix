@@ -58,7 +58,7 @@ assert lib.all valid [
   alternate
 ];
 assert desktop.services.displayManager.gdm.enable;
-assert desktop.services.displayManager.gdm.settings.daemon.GreeterSession == "zenos-greeter";
+assert !(desktop.services.displayManager.gdm.settings.daemon ? GreeterSession);
 assert
   !headless.services.desktopManager.gnome.enable && !headless.services.displayManager.gdm.enable;
 assert lib.all

@@ -17,9 +17,18 @@ enable = enableOption {
 
   s! {
     services.displayManager.gdm.enable = true;
-    services.displayManager.gdm.settings.daemon.GreeterSession = "zenos-greeter";
     services.desktopManager.gnome.enable = true;
     services.gnome.gnome-initial-setup.enable = false;
+    nixpkgs.overlays = [
+      (final: prev: {
+        gdm = prev.gdm.overrideAttrs (old: {
+          postInstall = (old.postInstall or "") + ''
+            substituteInPlace "$out/share/gdm/greeter/wayland-sessions/gnome-greeter.desktop" \
+              --replace-fail "Exec=gnome-session" "Exec=gnome-session --session=gnome-login"
+          '';
+        });
+      })
+    ];
 
     environment.systemPackages =
       ($lib.subtractLists
@@ -37,19 +46,6 @@ enable = enableOption {
           legacy.gst_all_1.gst-libav
           legacy.gst_all_1.gst-vaapi
         ]))
-      ++ [
-        ($pkgs.zenos.legacy.writeTextDir "share/gdm/greeter/wayland-sessions/zenos-greeter.desktop" ''
-          [Desktop Entry]
-          Name=ZenOS Greeter
-          Exec=gnome-session --session=gnome-login
-          TryExec=gnome-session
-          Type=Application
-          DesktopNames=GNOME-Greeter:GNOME
-          NoDisplay=true
-          X-GDM-SessionRegisters=true
-          X-GDM-CanRunHeadless=true
-        '')
-      ]
       ++ $path.extensionPackages
       ++ ($lib.optionals ($cfg.legacy.services.flatpak.enable or false) [ $pkgs.zenos.legacy.warehouse ])
       ++ ($lib.optionals $path.extraPackages.enable (with $pkgs.zenos; [
