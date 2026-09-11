@@ -24,7 +24,7 @@ enable = enableOption {
         gdm = prev.gdm.overrideAttrs (old: {
           postInstall = (old.postInstall or "") + ''
             substituteInPlace "$out/share/gdm/greeter/wayland-sessions/gnome-greeter.desktop" \
-              --replace-fail "Exec=gnome-session" "Exec=gnome-session --session=gnome-login"
+              --replace-fail $'Exec=gnome-session\n' $'Exec=gnome-session --session=gnome-login\n'
           '';
         });
       })
