@@ -131,7 +131,15 @@ enable = enableOption {
     };
     environment = {
       systemPackages = [ $path.extensionPackage $path.setupPackage ] ++ $path.extraExtensionPackages;
-      pathsToLink = [ "/share/gnome-shell/extensions" "/share/gnome-shell/modes" ];
+       pathsToLink = [
+         "/bin"
+         "/sbin"
+         "/lib"
+         "/libexec"
+         "/share"
+         "/share/gnome-shell/extensions"
+         "/share/gnome-shell/modes"
+       ];
       gnome.excludePackages = [ $pkgs.zenos.legacy.gnome-tour ];
     };
     hardware.graphics.enable = true;
