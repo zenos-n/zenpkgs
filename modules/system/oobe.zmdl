@@ -130,7 +130,8 @@ enable = enableOption {
       extraGroups = [ "input" "networkmanager" "video" "wheel" ];
     };
     environment = {
-      systemPackages = [ $path.extensionPackage $path.setupPackage ] ++ $path.extraExtensionPackages;
+       systemPackages = $cfg.environment.corePackages ++ $cfg.environment.defaultPackages
+         ++ [ $path.extensionPackage $path.setupPackage ] ++ $path.extraExtensionPackages;
        pathsToLink = [
          "/bin"
          "/sbin"
