@@ -25,18 +25,17 @@ _let blackWallpaper: $type.package = $pkgs.zenos.legacy.writeText "zenos-oobe-bl
 
 enable = enableOption {
   _meta.summary = "Enable the temporary ZenOS out-of-box experience";
-  _meta.weight = 50;
 
   s! {
     services.desktopManager.gnome.enable = true;
     services.displayManager = {
-      gdm.enable = false;
-      sddm.enable = false;
-      plasma-login-manager.enable = false;
-      autoLogin.enable = false;
-      autoLogin.user = null;
+      gdm.enable = $lib.mkForce false;
+      sddm.enable = $lib.mkForce false;
+      plasma-login-manager.enable = $lib.mkForce false;
+      autoLogin.enable = $lib.mkForce false;
+      autoLogin.user = $lib.mkForce null;
     };
-    services.xserver.displayManager.lightdm.enable = false;
+    services.xserver.displayManager.lightdm.enable = $lib.mkForce false;
     services.openssh = {
       enable = true;
       openFirewall = true;
@@ -78,7 +77,7 @@ enable = enableOption {
     };
     systemd.user.services."org.gnome.Shell@zenos-oobe" = {
       overrideStrategy = "asDropin";
-      environment = { PATH = $v.servicePath; ZENOS_OOBE = "1"; GNOME_SHELL_SESSION_MODE = "zenos-oobe"; };
+      environment = { PATH = $lib.mkForce $v.servicePath; ZENOS_OOBE = "1"; GNOME_SHELL_SESSION_MODE = "zenos-oobe"; };
     };
     systemd.user.services.zenos-oobe = {
       description = "ZenOS out-of-box experience";
@@ -87,7 +86,7 @@ enable = enableOption {
       partOf = [ "graphical-session.target" ];
       path = [ ];
       environment = {
-        PATH = $v.servicePath;
+        PATH = $lib.mkForce $v.servicePath;
         ZENOS_OOBE = "1";
         ZENOS_SETUP_DRY_RUN = "0";
         GI_TYPELIB_PATH = $lib.makeSearchPath "lib/girepository-1.0" [
