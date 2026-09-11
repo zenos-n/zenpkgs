@@ -17,28 +17,6 @@ _meta = {
 _let extensionUuid: $type.string = "zenos-oobe-mode@neg-zero.com";
 _let servicePath: $type.string = "/run/wrappers/bin:/run/current-system/sw/bin";
 _let oobeHome: $type.string = "/run/zenos-oobe";
-_let clockSettings: $type.set = {
-  "org/gnome/shell" = {
-    disable-user-extensions = false;
-    enabled-extensions = $path.extraExtensionUuids ++ [ $v.extensionUuid ];
-  };
-  "org/gnome/shell/extensions/user-theme".name = "ClockOverride";
-  "org/gnome/shell/extensions/date-menu-formatter" = {
-    formatter = "01_luxon";
-    pattern = "dd.MM  HH:mm";
-    font-size = 12;
-    update-level = 1;
-    text-align = "center";
-  };
-  "org/gnome/desktop/background" = {
-    color-shading-type = "solid";
-    picture-options = "none";
-    picture-uri = "";
-    picture-uri-dark = "";
-    primary-color = "#000000";
-    secondary-color = "#000000";
-  };
-};
 _let blackWallpaper: $type.package = $pkgs.zenos.legacy.writeText "zenos-oobe-black.svg" ''
   <svg xmlns="http://www.w3.org/2000/svg" width="1" height="1">
     <rect width="1" height="1" fill="#000000"/>
@@ -172,7 +150,6 @@ enable = enableOption {
         cacheHome = "${$v.oobeHome}/.private/Live";
         stateHome = "${$v.oobeHome}/.private/State";
       };
-      dconf.settings = $v.clockSettings;
       xdg.dataFile."themes/ClockOverride/gnome-shell/gnome-shell.css".text = ''
         @import url("resource:///org/gnome/shell/theme/default.css");
         .clock-display {

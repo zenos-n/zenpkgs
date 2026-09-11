@@ -99,6 +99,7 @@ assert lib.all
     alternate
   ];
 assert temporary.systemd.user.services.zenos-oobe.environment.ZENOS_SETUP_DRY_RUN == "0";
+assert temporary.home-manager.users.zenos.dconf.settings == { };
 assert lib.hasInfix (builtins.unsafeDiscardStringContext (
   toString temporary.services.displayManager.sessionData.wrapper
 )) temporary.services.greetd.settings.initial_session.command;
