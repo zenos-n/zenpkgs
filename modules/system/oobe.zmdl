@@ -73,7 +73,7 @@ enable = enableOption {
     };
     systemd.user.services."org.gnome.Shell@zenos-oobe" = {
       overrideStrategy = "asDropin";
-      environment = { PATH = $v.servicePath; ZENOS_OOBE = "1"; };
+      environment = { PATH = $v.servicePath; ZENOS_OOBE = "1"; ZENOS_SETUP_DRY_RUN = "0"; };
     };
     systemd.user.services.zenos-oobe = {
       description = "ZenOS out-of-box experience";
