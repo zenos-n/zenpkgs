@@ -47,7 +47,7 @@
       flake = false;
     };
     source-setup = {
-      url = "github:zenos-n/zenos-setup/74eebbe7bb82d71602db8831275a4f9ffe08ef92";
+      url = "github:zenos-n/zenos-setup/17050a6e802f7caac55078289eb1f81a5556845d";
       flake = false;
     };
     source-shell-defaults = {
@@ -478,6 +478,8 @@
           interface = self.nixosModules.default;
           default = {
             imports = [
+              ./lib/compat/system-modules/installed-runtime.nix
+              ./lib/compat/system-modules/oobe-runtime.nix
               inputs.home-manager.nixosModules.home-manager
               inputs.disko.nixosModules.disko
               (zstrRuntime.moduleFromBundle {
@@ -673,6 +675,10 @@
           '';
           installed-base = installedSystemChecks.installed-base;
           oobe = installedSystemChecks.oobe;
+          oobe-gnome = import ./tests/oobe-gnome.nix {
+            inherit nixpkgs pkgs;
+            module = self.nixosModules.default;
+          };
           webapps = installedSystemChecks.webapps;
           dsl-module-contract = dslModuleContract;
           zen-dsl = dsl.zenDsl;

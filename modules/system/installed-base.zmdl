@@ -27,7 +27,7 @@ enable = enableOption {
     networking.networkmanager.enable = true;
     security = {
       rtkit.enable = true;
-      sudo.wheelNeedsPassword = false;
+      sudo.wheelNeedsPassword = !($cfg.system.oobe.enable or false);
     };
     services.pipewire = {
       enable = true;
@@ -36,7 +36,6 @@ enable = enableOption {
     };
     programs.dconf.enable = true;
     hardware.enableRedistributableFirmware = true;
-    boot.loader.efi.canTouchEfiVariables = true;
 
     systemd.tmpfiles.rules = if ($cfg.desktops.gnome.enable or false) then
       [ "d /var/lib/AccountsService/users 0755 root root -" ]

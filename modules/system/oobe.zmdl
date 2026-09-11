@@ -1,14 +1,13 @@
 # Transitional parity source: lib/compat/system-modules/oobe.nix
 # Unsupported: the setupPackage.meta ? mainProgram assertion uses attribute-existence syntax
 # that production ZMDL does not support; the runtime launch command still uses getExe.
-# Unsupported: mkDefault/mkForce priorities are flattened to ordinary assignments.
 # Unsupported: fallback license construction uses the canonical registry.
 _meta = {
   zenosVersion = 1.0.0Na;
   summary = "Temporary ZenOS out-of-box experience";
   description = ''
     Creates a disposable GNOME setup account and session, starts the Setup app,
-    enables remote access, locks down the shell, and prepares runtime directories.
+    locks down the shell, and prepares runtime directories.
   '';
   maintainers = [ $m.doromiert ];
   license = $l.napl;
@@ -18,6 +17,28 @@ _meta = {
 _let extensionUuid: $type.string = "zenos-oobe-mode@neg-zero.com";
 _let servicePath: $type.string = "/run/wrappers/bin:/run/current-system/sw/bin";
 _let oobeHome: $type.string = "/run/zenos-oobe";
+_let clockSettings: $type.set = {
+  "org/gnome/shell" = {
+    disable-user-extensions = false;
+    enabled-extensions = $path.extraExtensionUuids ++ [ $v.extensionUuid ];
+  };
+  "org/gnome/shell/extensions/user-theme".name = "ClockOverride";
+  "org/gnome/shell/extensions/date-menu-formatter" = {
+    formatter = "01_luxon";
+    pattern = "dd.MM  HH:mm";
+    font-size = 12;
+    update-level = 1;
+    text-align = "center";
+  };
+  "org/gnome/desktop/background" = {
+    color-shading-type = "solid";
+    picture-options = "none";
+    picture-uri = "";
+    picture-uri-dark = "";
+    primary-color = "#000000";
+    secondary-color = "#000000";
+  };
+};
 _let blackWallpaper: $type.package = $pkgs.zenos.legacy.writeText "zenos-oobe-black.svg" ''
   <svg xmlns="http://www.w3.org/2000/svg" width="1" height="1">
     <rect width="1" height="1" fill="#000000"/>
@@ -26,31 +47,28 @@ _let blackWallpaper: $type.package = $pkgs.zenos.legacy.writeText "zenos-oobe-bl
 
 enable = enableOption {
   _meta.summary = "Enable the temporary ZenOS out-of-box experience";
+  _meta.weight = 50;
 
   s! {
     services.desktopManager.gnome.enable = true;
-    services.displayManager.gdm.enable = false;
-    services.gnome.gnome-initial-setup.enable = false;
-    services.openssh = {
-      enable = true;
-      openFirewall = true;
-      settings = {
-        KbdInteractiveAuthentication = false;
-        PasswordAuthentication = true;
-        PermitEmptyPasswords = true;
-        PermitRootLogin = "no";
-      };
+    services.displayManager = {
+      gdm.enable = false;
+      sddm.enable = false;
+      plasma-login-manager.enable = false;
+      autoLogin.enable = false;
+      autoLogin.user = null;
     };
+    services.xserver.displayManager.lightdm.enable = false;
+    services.openssh.enable = false;
+    services.gnome.gnome-initial-setup.enable = false;
     services.greetd = {
       enable = true;
       restart = false;
       settings = {
         initial_session = {
-          command = "${$pkgs.zenos.legacy.coreutils}/bin/env XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SESSION_DESKTOP=GNOME XDG_CURRENT_DESKTOP=GNOME ZENOS_OOBE=1 ${$cfg.legacy.services.displayManager.sessionData.wrapper} ${$pkgs.zenos.legacy.gnome-session}/bin/gnome-session --session=zenos-oobe";
           user = $path.userName;
         };
         default_session = {
-          command = "${$pkgs.zenos.legacy.coreutils}/bin/env XDG_SESSION_TYPE=wayland XDG_SESSION_CLASS=user XDG_SESSION_DESKTOP=GNOME XDG_CURRENT_DESKTOP=GNOME ZENOS_OOBE=1 ${$cfg.legacy.services.displayManager.sessionData.wrapper} ${$pkgs.zenos.legacy.gnome-session}/bin/gnome-session --session=zenos-oobe";
           user = $path.userName;
         };
       };
@@ -73,7 +91,7 @@ enable = enableOption {
     };
     systemd.user.services."org.gnome.Shell@zenos-oobe" = {
       overrideStrategy = "asDropin";
-      environment = { PATH = $v.servicePath; ZENOS_OOBE = "1"; ZENOS_SETUP_DRY_RUN = "0"; };
+      environment = { PATH = $v.servicePath; ZENOS_OOBE = "1"; GNOME_SHELL_SESSION_MODE = "zenos-oobe"; };
     };
     systemd.user.services.zenos-oobe = {
       description = "ZenOS out-of-box experience";
@@ -81,7 +99,16 @@ enable = enableOption {
       after = [ "gnome-session.target" ];
       partOf = [ "graphical-session.target" ];
       path = [ ];
-      environment = { PATH = $v.servicePath; ZENOS_OOBE = "1"; };
+      environment = {
+        PATH = $v.servicePath;
+        ZENOS_OOBE = "1";
+        ZENOS_SETUP_DRY_RUN = "0";
+        GI_TYPELIB_PATH = $lib.makeSearchPath "lib/girepository-1.0" [
+          $pkgs.zenos.legacy.gnome-desktop
+          $pkgs.zenos.legacy.libgweather
+          $pkgs.zenos.legacy.networkmanager
+        ];
+      };
       unitConfig.ConditionUser = $path.userName;
       serviceConfig = {
         Type = "exec";
@@ -98,21 +125,50 @@ enable = enableOption {
       home = $v.oobeHome;
       createHome = true;
       homeMode = "0700";
-      initialHashedPassword = "";
+      hashedPassword = "";
       openssh.authorizedKeys.keys = $path.authorizedKeys;
       extraGroups = [ "input" "networkmanager" "video" "wheel" ];
     };
     environment = {
       systemPackages = [ $path.extensionPackage $path.setupPackage ] ++ $path.extraExtensionPackages;
+      pathsToLink = [ "/share/gnome-shell/extensions" "/share/gnome-shell/modes" ];
       gnome.excludePackages = [ $pkgs.zenos.legacy.gnome-tour ];
     };
     hardware.graphics.enable = true;
+    security.sudo.wheelNeedsPassword = false;
+    system.extraDependencies = [ $path.setupPackage.src $path.extensionPackage.src ];
+    programs.dconf.enable = true;
+    home-manager.users.($path.userName) = {
+      home = {
+        stateVersion = "26.05";
+        username = $path.userName;
+        homeDirectory = $v.oobeHome;
+      };
+      xdg = {
+        enable = true;
+        configHome = "${$v.oobeHome}/.private/Config";
+        dataHome = "${$v.oobeHome}/.private/Packages";
+        cacheHome = "${$v.oobeHome}/.private/Live";
+        stateHome = "${$v.oobeHome}/.private/State";
+      };
+      dconf.settings = $v.clockSettings;
+      xdg.dataFile."themes/ClockOverride/gnome-shell/gnome-shell.css".text = ''
+        @import url("resource:///org/gnome/shell/theme/default.css");
+        .clock-display {
+          font-family: "Zero", sans-serif !important;
+          font-size: 12px;
+          font-style: normal !important;
+          font-weight: normal !important;
+          letter-spacing: 0 !important;
+        }
+      '';
+    };
     programs.dconf.profiles.user.databases = [
       {
         settings = {
           "org/gnome/shell" = {
             disable-user-extensions = false;
-            enabled-extensions = [ $v.extensionUuid ] ++ $path.extraExtensionUuids;
+            enabled-extensions = $path.extraExtensionUuids ++ [ $v.extensionUuid ];
             favorite-apps = $lib.gvariant.mkEmptyArray $lib.gvariant.type.string;
           };
           "org/gnome/desktop/interface" = {
@@ -133,6 +189,15 @@ enable = enableOption {
             disable-user-switching = true;
           };
           "org/gnome/desktop/session".idle-delay = $lib.gvariant.mkUint32 0;
+          "org/gnome/desktop/screensaver".lock-enabled = false;
+          "org/gnome/shell/extensions/user-theme".name = "ClockOverride";
+          "org/gnome/shell/extensions/date-menu-formatter" = {
+            formatter = "01_luxon";
+            pattern = "dd.MM  HH:mm";
+            font-size = $lib.gvariant.mkInt32 12;
+            update-level = $lib.gvariant.mkInt32 1;
+            text-align = "center";
+          };
           "org/gnome/settings-daemon/plugins/power" = {
             sleep-inactive-ac-type = "nothing";
             sleep-inactive-battery-type = "nothing";
@@ -145,14 +210,12 @@ enable = enableOption {
       }
     ];
     systemd.tmpfiles.rules = [
-      "d /Config 0755 root root -"
-      "d /Config/ZenOS 0755 root root -"
       "d ${$v.oobeHome}/.private 0700 ${$path.userName} users -"
       "d ${$v.oobeHome}/.private/Packages 0700 ${$path.userName} users -"
       "d ${$v.oobeHome}/.private/Packages/gnome-shell 0700 ${$path.userName} users -"
       "f ${$v.oobeHome}/.private/Packages/gnome-shell/lock-warning-shown 0600 ${$path.userName} users -"
-      "z /Config/ZenOS 0775 ${$path.userName} users -"
-      "Z /Config/ZenOS - ${$path.userName} users -"
+      "z /etc/ZenOS 0755 ${$path.userName} users -"
+      "Z /etc/ZenOS - ${$path.userName} users -"
     ];
   };
 };
@@ -160,6 +223,7 @@ enable = enableOption {
 setupPackage = {
   _meta = {
     type = $type.package;
+    default = $pkgs.zenos.system.zenos-setup;
     summary = "Setup application package launched by OOBE";
     example = "pkgs.zenos.setup";
   };
@@ -168,6 +232,7 @@ setupPackage = {
 extensionPackage = {
   _meta = {
     type = $type.package;
+    default = $pkgs.zenos.system.zenos-oobe-mode;
     summary = "GNOME Shell extension and mode package for OOBE";
     example = "pkgs.zenos.oobe-extension";
   };
@@ -176,7 +241,10 @@ extensionPackage = {
 extraExtensionPackages = {
   _meta = {
     type = $type.list [ $type.package ];
-    default = [ ];
+    default = [
+      $pkgs.zenos.apps.gnome-extensions.date-menu-formatter
+      $pkgs.zenos.apps.gnome-extensions.user-themes
+    ];
     summary = "Additional OOBE GNOME extension packages";
   };
 };
@@ -184,7 +252,7 @@ extraExtensionPackages = {
 extraExtensionUuids = {
   _meta = {
     type = $type.list [ $type.string ];
-    default = [ ];
+    default = [ "date-menu-formatter@marcinjakubowski.github.com" "user-theme@gnome-shell-extensions.gcampax.github.com" ];
     summary = "Additional OOBE GNOME extension UUIDs";
   };
 };

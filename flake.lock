@@ -617,17 +617,17 @@
     "source-setup": {
       "flake": false,
       "locked": {
-        "lastModified": 1789122344,
-        "narHash": "sha256-33XNKtj3Uhu/DVa/kuUTZh4LanzpiqfbvDhRxCigEEk=",
+        "lastModified": 1789124858,
+        "narHash": "sha256-o0FX6vZ6RWyjGN4k2xr9lNLaAzAtOnTBAQKIchFQ4+o=",
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "74eebbe7bb82d71602db8831275a4f9ffe08ef92",
+        "rev": "17050a6e802f7caac55078289eb1f81a5556845d",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "74eebbe7bb82d71602db8831275a4f9ffe08ef92",
+        "rev": "17050a6e802f7caac55078289eb1f81a5556845d",
         "type": "github"
       }
     },
