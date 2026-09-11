@@ -59,7 +59,16 @@ enable = enableOption {
       autoLogin.user = null;
     };
     services.xserver.displayManager.lightdm.enable = false;
-    services.openssh.enable = false;
+    services.openssh = {
+      enable = true;
+      openFirewall = true;
+      settings = {
+        KbdInteractiveAuthentication = false;
+        PasswordAuthentication = true;
+        PermitEmptyPasswords = true;
+        PermitRootLogin = "no";
+      };
+    };
     services.gnome.gnome-initial-setup.enable = false;
     services.greetd = {
       enable = true;

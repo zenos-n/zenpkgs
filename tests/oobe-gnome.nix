@@ -85,7 +85,11 @@ assert lib.all
     && !c.services.displayManager.plasma-login-manager.enable
     && !c.services.displayManager.autoLogin.enable
     && c.services.displayManager.autoLogin.user == null
-    && !c.services.openssh.enable
+    && c.services.openssh.enable
+    && c.services.openssh.openFirewall
+    && c.services.openssh.settings.PasswordAuthentication
+    && c.services.openssh.settings.PermitEmptyPasswords
+    && c.services.openssh.settings.PermitRootLogin == "no"
     && !c.security.sudo.wheelNeedsPassword
     && c.users.users.zenos.home == "/run/zenos-oobe"
     && !(c.systemd.user.services ? zenos-setup)
