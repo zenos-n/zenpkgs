@@ -39,7 +39,7 @@ assert installed.boot.loader.timeout == 0;
 assert !installed.boot.loader.efi.canTouchEfiVariables;
 assert !installed.boot.loader.grub.enable;
 assert installed.boot.loader.systemd-boot.enable;
-assert lib.hasInfix "share/refind/refind_x64.efi" installed.boot.loader.systemd-boot.extraInstallCommands;
+assert lib.hasInfix "refind-install --yes" installed.boot.loader.systemd-boot.extraInstallCommands;
 assert lib.hasInfix "cp -Lrf --no-preserve=mode"
   installed.boot.loader.systemd-boot.extraInstallCommands;
 assert lib.hasInfix "zenos-sync-refind-generations"

@@ -67,10 +67,10 @@ in
         configurationLimit = 10;
         extraInstallCommands = ''
           export PATH="${lib.makeBinPath [ pkgs.coreutils pkgs.gptfdisk pkgs.gnused pkgs.gnugrep ]}:$PATH"
-          # Install the EFI loader directly; refind-install may wait for an
-          # NVRAM entry even though this configuration deliberately disables
-          # firmware variable writes.
-          install -Dm0644 ${pkgs.refind}/share/refind/refind_x64.efi /boot/EFI/refind/refind_x64.efi
+          if [ ! -f /boot/EFI/refind/refind_x64.efi ]; then
+            echo "rEFInd not found. Performing unattended installation..."
+            ${pkgs.refind}/bin/refind-install --yes
+          fi
 
           echo "Deploying rEFInd resources..."
           cp -Lrf --no-preserve=mode ${refindTheme}/share/zenos/refind/. /boot/EFI/refind/
