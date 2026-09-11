@@ -47,7 +47,7 @@
       flake = false;
     };
     source-setup = {
-      url = "github:zenos-n/zenos-setup/142e94764b17bf9766f0cff5e279df5515035f26";
+      url = "github:zenos-n/zenos-setup/c5831500c8cbc506c721e0fe621fd4bf763c6e04";
       flake = false;
     };
     source-shell-defaults = {
