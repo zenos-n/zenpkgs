@@ -7,7 +7,7 @@
 }:
 let
   enabled = config.zenos.system.installed-base.enable;
-  oobe = config.zenos.system.oobe.enable;
+  oobe = config.zenos.system.oobeMode;
   users = lib.filterAttrs (_: user: user.enable && user.isNormalUser) config.users.users;
   hooks = import ../../installer-boot.nix {
     inherit pkgs lib;

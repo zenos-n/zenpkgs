@@ -17,8 +17,8 @@ enable = enableOption {
 
   s! {
     services.displayManager.gdm.enable = true;
-    services.displayManager.gdm.settings.daemon.GreeterSession = "gnome-login";
     services.desktopManager.gnome.enable = true;
+    services.gnome.gnome-initial-setup.enable = false;
 
     environment.systemPackages =
       ($lib.subtractLists

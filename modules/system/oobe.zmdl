@@ -24,6 +24,7 @@ _let blackWallpaper: $type.package = $pkgs.zenos.legacy.writeText "zenos-oobe-bl
 '';
 
 enable = enableOption {
+  _meta.default = $cfg.system.oobeMode;
   _meta.summary = "Enable the temporary ZenOS out-of-box experience";
 
   s! {

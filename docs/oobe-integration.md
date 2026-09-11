@@ -1,7 +1,7 @@
 # Installed OOBE integration
 
 The canonical `system.oobe` module is declared in `modules/system/oobe.zmdl`.
-`system.oobe.enable` defaults to false. Setup enables it only in the temporary
+`system.oobeMode` defaults to false. Setup enables it only in the temporary
 host's imported ZCFG and omits it from the final host. No marker file or source
 text inspection participates in evaluation.
 

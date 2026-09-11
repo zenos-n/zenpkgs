@@ -27,7 +27,7 @@ enable = enableOption {
     networking.networkmanager.enable = true;
     security = {
       rtkit.enable = true;
-      sudo.wheelNeedsPassword = !($cfg.system.oobe.enable or false);
+      sudo.wheelNeedsPassword = !$cfg.system.oobeMode;
     };
     services.pipewire = {
       enable = true;

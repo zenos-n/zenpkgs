@@ -35,10 +35,10 @@ let
   headless = evaluate { };
   temporary = evaluate {
     zenos.desktops.gnome.enable = true;
-    zenos.system.oobe.enable = true;
+    zenos.system.oobeMode = true;
   };
   alternate = evaluate {
-    zenos.system.oobe.enable = true;
+    zenos.system.oobeMode = true;
     services.displayManager.plasma-login-manager.enable = true;
     services.displayManager.autoLogin = {
       enable = true;
@@ -58,13 +58,13 @@ assert lib.all valid [
   alternate
 ];
 assert desktop.services.displayManager.gdm.enable;
-assert desktop.services.displayManager.gdm.settings.daemon.GreeterSession == "gnome-login";
+assert !(desktop.services.displayManager.gdm.settings.daemon ? GreeterSession);
 assert
   !headless.services.desktopManager.gnome.enable && !headless.services.displayManager.gdm.enable;
 assert lib.all
   (
     c:
-    !c.zenos.system.oobe.enable
+    !c.zenos.system.oobeMode
     && !c.services.greetd.enable
     && !(c.users.users ? zenos)
     && !(c.systemd.user.services ? zenos-oobe)

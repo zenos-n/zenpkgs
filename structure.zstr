@@ -28,6 +28,16 @@ system = {
     maintainers = [ $m.doromiert ];
     license = $l.napalm;
   };
+  oobeMode._meta = {
+    type = $type.bool;
+    default = false;
+    name = "OOBE mode";
+    summary = "Run the temporary out-of-box experience";
+    description = ''Selects the temporary OOBE system composition when true.'';
+    tags = [ "system" "oobe" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napalm;
+  };
   packages._meta = {
     type = (packages);
     name = "System packages";
