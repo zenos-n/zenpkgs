@@ -130,8 +130,11 @@ enable = enableOption {
       extraGroups = [ "input" "networkmanager" "video" "wheel" ];
     };
     environment = {
-       systemPackages = $cfg.environment.corePackages ++ $cfg.environment.defaultPackages
-         ++ [ $path.extensionPackage $path.setupPackage ] ++ $path.extraExtensionPackages;
+       systemPackages = with $pkgs.zenos.legacy; [
+         acl attr bashInteractive bzip2 coreutils-full cpio curl diffutils findutils
+         gawk getent getconf gnugrep gnupatch gnused gnutar gzip xz less libcap ncurses
+         netcat mkpasswd procps su time util-linux which zstd perl rsync strace
+       ] ++ [ $path.extensionPackage $path.setupPackage ] ++ $path.extraExtensionPackages;
        pathsToLink = [
          "/bin"
          "/sbin"
