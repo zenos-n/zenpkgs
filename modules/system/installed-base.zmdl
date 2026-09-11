@@ -38,18 +38,7 @@ enable = enableOption {
     hardware.enableRedistributableFirmware = true;
     boot.loader.efi.canTouchEfiVariables = true;
 
-    services.displayManager = if ($cfg.desktops.gnome.enable or false) then {
-      autoLogin = { enable = false; user = null; };
-      gdm = {
-        enable = true;
-        settings.daemon = {
-          AutomaticLoginEnable = false;
-          TimedLoginEnable = false;
-        };
-      };
-    } else { };
-
-    systemd.tmpfiles.rules = if ($cfg.legacy.services.displayManager.gdm.enable or false) then
+    systemd.tmpfiles.rules = if ($cfg.desktops.gnome.enable or false) then
       [ "d /var/lib/AccountsService/users 0755 root root -" ]
       ++ ($lib.map (user:
         "f+ /var/lib/AccountsService/users/${user} 0644 root root - [User]\\nSystemAccount=true\\n"

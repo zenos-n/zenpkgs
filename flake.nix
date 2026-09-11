@@ -59,7 +59,7 @@
       flake = false;
     };
     source-zenfs = {
-      url = "github:doromiert/ZenFS/f4ea423b1bd02704ebe385104d994358fa3c1e90";
+      url = "github:zenos-n/zenfs/f4ea423b1bd02704ebe385104d994358fa3c1e90";
       flake = false;
     };
   };

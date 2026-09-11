@@ -653,14 +653,14 @@
       "locked": {
         "lastModified": 1789023675,
         "narHash": "sha256-hvgFhrzDDwE6c9WgAPJ3TwoU0lPjNkzea+Pwo0qLyHE=",
-        "owner": "doromiert",
-        "repo": "ZenFS",
+        "owner": "zenos-n",
+        "repo": "zenfs",
         "rev": "f4ea423b1bd02704ebe385104d994358fa3c1e90",
         "type": "github"
       },
       "original": {
-        "owner": "doromiert",
-        "repo": "ZenFS",
+        "owner": "zenos-n",
+        "repo": "zenfs",
         "rev": "f4ea423b1bd02704ebe385104d994358fa3c1e90",
         "type": "github"
       }
