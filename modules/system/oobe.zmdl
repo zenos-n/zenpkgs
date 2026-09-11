@@ -118,10 +118,11 @@ enable = enableOption {
     };
     environment = {
        systemPackages = with $pkgs.zenos.legacy; [
-         acl attr bashInteractive bzip2 coreutils-full cpio curl diffutils findutils
-         gawk getent getconf gnugrep gnupatch gnused gnutar gzip xz less libcap ncurses
-         netcat mkpasswd procps su time util-linux which zstd perl rsync strace
-       ] ++ [ $path.extensionPackage $path.setupPackage ] ++ $path.extraExtensionPackages;
+          acl attr bashInteractive bzip2 coreutils-full cpio curl diffutils findutils
+          gawk getent getconf gnugrep gnupatch gnused gnutar gzip xz less libcap ncurses
+          netcat mkpasswd procps su time util-linux which zstd perl rsync strace
+          atkinson-hyperlegible-next google-cursor nerd-fonts.atkynson-mono
+        ] ++ [ $path.extensionPackage $path.setupPackage ] ++ $path.extraExtensionPackages;
        pathsToLink = [
          "/bin"
          "/sbin"
@@ -131,7 +132,17 @@ enable = enableOption {
          "/share/gnome-shell/extensions"
          "/share/gnome-shell/modes"
        ];
-      gnome.excludePackages = [ $pkgs.zenos.legacy.gnome-tour ];
+       gnome.excludePackages = [ $pkgs.zenos.legacy.gnome-tour ];
+    };
+    fonts = {
+      packages = with $pkgs.zenos.legacy; [
+        atkinson-hyperlegible-next
+        nerd-fonts.atkynson-mono
+      ];
+      fontconfig.defaultFonts = {
+        sansSerif = [ "Atkinson Hyperlegible Next" ];
+        monospace = [ "AtkynsonMono NF" ];
+      };
     };
     hardware.graphics.enable = true;
     security.sudo.wheelNeedsPassword = false;
@@ -172,6 +183,11 @@ enable = enableOption {
           "org/gnome/desktop/interface" = {
             color-scheme = "prefer-dark";
             enable-animations = true;
+            cursor-theme = "GoogleDot-Black";
+            cursor-size = 24;
+            font-name = "Atkinson Hyperlegible Next 11";
+            document-font-name = "Atkinson Hyperlegible Next 11";
+            monospace-font-name = "AtkynsonMono NF 11";
           };
           "org/gnome/desktop/background" = {
             color-shading-type = "solid";

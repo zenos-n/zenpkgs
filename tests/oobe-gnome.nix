@@ -103,6 +103,8 @@ assert temporary.home-manager.users.zenos.dconf.settings == { };
 assert lib.elem temporary.systemd.package temporary.environment.systemPackages;
 assert lib.elem "/etc/dbus-1" temporary.environment.pathsToLink;
 assert lib.any (lib.hasPrefix "D /var/empty ") temporary.systemd.tmpfiles.rules;
+assert temporary.fonts.fontconfig.defaultFonts.sansSerif == [ "Atkinson Hyperlegible Next" ];
+assert temporary.fonts.fontconfig.defaultFonts.monospace == [ "AtkynsonMono NF" ];
 assert lib.hasInfix (builtins.unsafeDiscardStringContext (
   toString temporary.services.displayManager.sessionData.wrapper
 )) temporary.services.greetd.settings.initial_session.command;
