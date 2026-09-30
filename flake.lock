@@ -617,17 +617,17 @@
     "source-setup": {
       "flake": false,
       "locked": {
-        "lastModified": 1790800222,
-        "narHash": "sha256-+5mlKyhDnHXfQAuSv93xFdtokS1Y1bsBqUyyRfY00p8=",
+        "lastModified": 1790808410,
+        "narHash": "sha256-2fQHpIFWOL7hix1d62P/91YxrVhew/C5sNlXoD71kLc=",
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "7d92fc054fdb17ce80e69c5e5fef837db7ac330b",
+        "rev": "7db550cd70f159041f7162acd3a9f69f57ff7ca8",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "7d92fc054fdb17ce80e69c5e5fef837db7ac330b",
+        "rev": "7db550cd70f159041f7162acd3a9f69f57ff7ca8",
         "type": "github"
       }
     },
@@ -651,17 +651,17 @@
     "source-zenfs": {
       "flake": false,
       "locked": {
-        "lastModified": 1789023675,
-        "narHash": "sha256-hvgFhrzDDwE6c9WgAPJ3TwoU0lPjNkzea+Pwo0qLyHE=",
+        "lastModified": 1790808733,
+        "narHash": "sha256-y3qXWePf8zdpsgw51NOJXerPo7v+tdrNoKg4wRYIlv8=",
         "owner": "zenos-n",
         "repo": "zenfs",
-        "rev": "f4ea423b1bd02704ebe385104d994358fa3c1e90",
+        "rev": "6a6ac505bd153b5235170e3e021138166c9c4bda",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenfs",
-        "rev": "f4ea423b1bd02704ebe385104d994358fa3c1e90",
+        "rev": "6a6ac505bd153b5235170e3e021138166c9c4bda",
         "type": "github"
       }
     },

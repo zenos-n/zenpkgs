@@ -74,6 +74,7 @@ in
           environment.systemPackages = [
             pkgs.nixos-rebuild
             pkgs.zenos.apps.system.zenos.zenos-rebuild
+            pkgs.zenos.theming.system.zenos-branding
           ];
           environment.sessionVariables = {
             XDG_CONFIG_HOME = "$HOME/.private/Config";

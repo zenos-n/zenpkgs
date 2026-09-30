@@ -47,6 +47,9 @@ enable = enableOption {
     environment.systemPackages = [ $pkgs.desktops.gnome.extensions.forge ];
   };
   u! {
+    # Forge owns initial window sizing. Mutter's competing auto-maximize
+    # snapshot can abort the compositor while a new actor is being mapped.
+    dconf.settings."org/gnome/mutter".auto-maximize = $lib.mkDefault false;
     dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.forge.extensionUuid ];
   };
 };

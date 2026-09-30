@@ -1,0 +1,31 @@
+_meta = {
+  name = "ZenOS branding";
+  summary = "ZenOS logos for installed desktops";
+  description = ''Provides the ZenOS desktop logo and symbolic icon independently of the installer application.'';
+  zenosVersion = 1.0.0Nb;
+  packageVersion = "1.0.0";
+  tags = [ "theme" "branding" "icons" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+build = $pkgs.legacy.stdenvNoCC.mkDerivation {
+  pname = "zenos-branding";
+  version = "1.0.0";
+  src = $pkgs.system.zenos-setup.src;
+  dontBuild = true;
+  installPhase = ''
+    runHook preInstall
+    install -Dm644 data/icons/hicolor/scalable/apps/zenos.svg \
+      "$out/share/icons/hicolor/scalable/apps/zenos.svg"
+    install -Dm644 data/icons/hicolor/symbolic/apps/zenos-symbolic.svg \
+      "$out/share/icons/hicolor/symbolic/apps/zenos-symbolic.svg"
+    ln -s zenos.svg "$out/share/icons/hicolor/scalable/apps/distributor-logo.svg"
+    ln -s zenos-symbolic.svg "$out/share/icons/hicolor/symbolic/apps/distributor-logo-symbolic.svg"
+    runHook postInstall
+  '';
+  meta = {
+    description = "ZenOS desktop branding icons";
+    platforms = $lib.platforms.linux;
+  };
+};

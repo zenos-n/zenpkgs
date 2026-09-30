@@ -11,6 +11,6 @@ _meta = {
 build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
   owner = "zenos-n";
   repo = "zenfs";
-  rev = "f4ea423b1bd02704ebe385104d994358fa3c1e90";
-  hash = "sha256-hvgFhrzDDwE6c9WgAPJ3TwoU0lPjNkzea+Pwo0qLyHE=";
+  rev = "6a6ac505bd153b5235170e3e021138166c9c4bda";
+  hash = "sha256-y3qXWePf8zdpsgw51NOJXerPo7v+tdrNoKg4wRYIlv8=";
 }) + "/package.nix") { };
