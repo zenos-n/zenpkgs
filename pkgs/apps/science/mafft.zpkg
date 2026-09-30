@@ -1,0 +1,14 @@
+_meta = {
+  name = "MAFFT";
+  summary = "Multiple alignment program for amino acid or nucleotide sequences";
+  description = ''
+    Multiple alignment program for amino acid or nucleotide sequences.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.526";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.mafft;

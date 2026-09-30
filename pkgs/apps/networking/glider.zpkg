@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glider";
+  summary = "Forward proxy with multiple protocols support";
+  description = ''
+    Forward proxy with multiple protocols support.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.16.4";
+  tags = [ "networking" "proxy" "forwarding" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.glider;

@@ -19,9 +19,9 @@ _meta = {
 enable = enableOption {
   _meta.description = ''Whether to enable Hide Minimized GNOME extension configuration.'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.hide-minimized ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.hide-minimized ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.hide-minimized.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.hide-minimized.extensionUuid ];
   };
 };

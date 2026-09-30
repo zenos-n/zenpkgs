@@ -1,0 +1,14 @@
+_meta = {
+  name = "PathPicker";
+  summary = "CLI program that accepts piped input and presents files for selection";
+  description = ''
+    CLI program that accepts piped input and presents files for selection.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.5";
+  tags = [ "files" "selection" "terminal" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.fpp;

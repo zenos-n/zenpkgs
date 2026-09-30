@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mousepad";
+  summary = "Simple text editor for Xfce";
+  description = ''
+    Simple text editor for Xfce.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.0";
+  tags = [ "editors" "text" "graphical" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.mousepad;

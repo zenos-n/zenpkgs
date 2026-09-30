@@ -1,0 +1,14 @@
+_meta = {
+  name = "castty";
+  summary = "CLI tool to record audio-enabled screencasts of your terminal, for the web";
+  description = ''
+    CLI tool to record audio-enabled screencasts of your terminal, for the web.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2020-11-10";
+  tags = [ "video" "terminal" "recording" "audio" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.castty;

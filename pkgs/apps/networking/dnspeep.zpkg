@@ -1,0 +1,14 @@
+_meta = {
+  name = "dnspeep";
+  summary = "Spy on the DNS queries your computer is making";
+  description = ''
+    Spy on the DNS queries your computer is making.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.3";
+  tags = [ "networking" "dns" "monitoring" "queries" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dnspeep;

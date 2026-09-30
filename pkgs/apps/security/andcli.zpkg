@@ -1,0 +1,14 @@
+_meta = {
+  name = "andcli";
+  summary = "2FA TUI for your shell";
+  description = ''
+    2FA TUI for your shell.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.1";
+  tags = [ "security" "authentication" "2fa" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.andcli;

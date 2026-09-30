@@ -1,0 +1,14 @@
+_meta = {
+  name = "Rclone";
+  summary = "Command line program to sync files and directories to and from major cloud storage";
+  description = ''
+    Command line program to sync files and directories to and from major cloud storage.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.75.0";
+  tags = [ "backup" "storage" "networking" "files" "cloud" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.rclone;

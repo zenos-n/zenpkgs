@@ -1,0 +1,20 @@
+_meta = {
+  name = "NetHogs";
+  summary = "Small 'net top' tool, grouping bandwidth by process";
+  description = ''
+    NetHogs is a small 'net top' tool. Instead of breaking the traffic down
+    per protocol or per subnet, like most tools do, it groups bandwidth by
+    process. NetHogs does not rely on a special kernel module to be loaded.
+    If there's suddenly a lot of network traffic, you can fire up NetHogs
+    and immediately see which PID is causing this. This makes it easy to
+    identify programs that have gone wild and are suddenly taking up your
+    bandwidth.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.8";
+  tags = [ "networking" "monitoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.nethogs;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "BiglyBT";
+  summary = "BitTorrent client based on the Azureus that supports I2P darknet for privacy";
+  description = ''
+    BitTorrent client based on the Azureus that supports I2P darknet for privacy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.9.0.0";
+  tags = [ "downloads" "bittorrent" "networking" "i2p" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.biglybt;

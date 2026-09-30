@@ -14,6 +14,7 @@ in
 search.mkIndex {
   inherit evaluated;
   bundle = flake.lib.dslBundleFor system;
+  limits = search.defaultLimits // { legacyPackageDepth = 0; };
   maintainers = import ../lib/maintainers.nix { };
   versionInfo = {
     inherit system;

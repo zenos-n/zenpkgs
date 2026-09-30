@@ -1,0 +1,14 @@
+_meta = {
+  name = "AhoViewer";
+  summary = "GTK2 image viewer, manga reader, and booru browser";
+  description = ''
+    GTK2 image viewer, manga reader, and booru browser.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.5";
+  tags = [ "graphics" "images" "viewer" "manga" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ahoviewer;

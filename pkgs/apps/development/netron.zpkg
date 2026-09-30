@@ -1,0 +1,14 @@
+_meta = {
+  name = "Netron";
+  summary = "Visualizer for neural network, deep learning and machine learning models";
+  description = ''
+    Visualizer for neural network, deep learning and machine learning models.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.0.8";
+  tags = [ "development" "ai" "visualization" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.netron;

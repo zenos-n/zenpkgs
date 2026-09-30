@@ -1,0 +1,14 @@
+_meta = {
+  name = "adbfs-rootless";
+  summary = "Mount Android phones on Linux with adb, no root required";
+  description = ''
+    Mount Android phones on Linux with adb, no root required.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2023-03-21";
+  tags = [ "files" "android" "adb" "mounting" "fuse" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.adbfs-rootless;

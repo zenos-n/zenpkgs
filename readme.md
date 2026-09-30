@@ -2,6 +2,12 @@
 
 The Nix packages repository for ZenOS.
 
+See [catalog coverage and verification](docs/package-catalog-expansion.md) and
+the [package path migration](docs/package-layout-migration.md).
+Shell and terminal configuration is covered in the [shell options guide](docs/shell-terminal-options.md).
+Native per-user configuration is covered in the [user options guide](docs/user-options.md).
+Desktop configuration is covered in the [system, GNOME, and program options guide](docs/desktop-options.md).
+
 Curated nixpkgs interfaces are named leaves under `pkgs/`. A source such as
 `pkgs/apps/browsers/firefox.zpkg` mechanically defines
 public identity and registry ID `pkgs.apps.browsers.firefox`, internally
@@ -10,7 +16,7 @@ are legal; targets are exact and unique, with no alternate alias catalog.
 The flake compiles the
 repository root in interface mode and uses the path-sorted result for the
 overlay, registry documentation, and flattened public package outputs.
-The 126-entry normalized contract in `tests/fixtures/package-registry.json`
+The 4057-entry normalized contract in `tests/fixtures/package-registry.json`
 protects every full public ID, derived target, metadata record, and imported
 nixpkgs source path.
 

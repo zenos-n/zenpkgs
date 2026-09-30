@@ -1,0 +1,14 @@
+_meta = {
+  name = "Deadlock Mod Manager";
+  summary = "Mod manager for the Valve game Deadlock";
+  description = ''
+    Mod manager for the Valve game Deadlock.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "gaming" "mods" "manager" "deadlock" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.deadlock-mod-manager;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Charles";
+  summary = "Web Debugging Proxy";
+  description = ''
+    Web Debugging Proxy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.1";
+  tags = [ "networking" "http" "debugging" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.charles;

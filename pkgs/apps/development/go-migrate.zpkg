@@ -1,0 +1,14 @@
+_meta = {
+  name = "golang-migrate";
+  summary = "Database migrations. CLI and Golang library";
+  description = ''
+    Database migrations. CLI and Golang library.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.19.1";
+  tags = [ "development" "database" "migrations" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.go-migrate;

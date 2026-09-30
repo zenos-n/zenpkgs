@@ -1,0 +1,15 @@
+_meta = {
+  name = "wlsunset";
+  summary = "Day/night gamma adjustments for Wayland";
+  description = ''
+    Day/night gamma adjustments for Wayland compositors supporting
+    wlr-gamma-control-unstable-v1.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "system" "administration" "display" "brightness" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wlsunset;

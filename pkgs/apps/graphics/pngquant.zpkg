@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "pngquant";
+  summary = "Tool to convert 24/32-bit RGBA PNGs to 8-bit palette with alpha channel preserved";
+  description = ''
+    Tool to convert 24/32-bit RGBA PNGs to 8-bit palette with alpha channel preserved.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.3";
+  tags = [ "graphics" "png" "compression" "creativity" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.pngquant;

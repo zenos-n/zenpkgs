@@ -21,9 +21,9 @@ _meta = {
 enable = enableOption {
   _meta.description = ''Window Is Ready Remover GNOME extension configuration'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.window-is-ready-remover ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.window-is-ready-remover ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.window-is-ready-remover.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.window-is-ready-remover.extensionUuid ];
   };
 };

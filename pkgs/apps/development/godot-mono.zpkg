@@ -1,0 +1,14 @@
+_meta = {
+  name = "Godot .NET";
+  summary = "Free and Open Source 2D and 3D game engine";
+  description = ''
+    Free and Open Source 2D and 3D game engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.6.3-stable";
+  tags = [ "development" "gaming" "game-development" "dotnet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.godot-mono;

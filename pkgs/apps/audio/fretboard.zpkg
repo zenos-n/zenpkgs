@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fretboard";
+  summary = "Look up guitar chords";
+  description = ''
+    Look up guitar chords.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.1";
+  tags = [ "audio" "guitar" "education" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.fretboard;

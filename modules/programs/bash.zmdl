@@ -1,0 +1,195 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Bash configuration";
+  summary = "Bash configuration";
+  description = ''Configure Bash with typed preferences. Unset values preserve existing behavior.'';
+  tags = [ "shell" "bash" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+completion = {
+  _meta = {
+    name = "Complete commands and arguments";
+    summary = "Complete commands and arguments";
+    description = ''Complete commands and arguments. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+historyLines = {
+  _meta = {
+    name = "History lines kept in memory";
+    summary = "History lines kept in memory";
+    description = ''History lines kept in memory. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+savedHistoryLines = {
+  _meta = {
+    name = "History lines saved on disk";
+    summary = "History lines saved on disk";
+    description = ''History lines saved on disk. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+historyFile = {
+  _meta = {
+    name = "History file location";
+    summary = "History file location";
+    description = ''History file location. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+ignoredHistoryPatterns = {
+  _meta = {
+    name = "Commands excluded from history";
+    summary = "Commands excluded from history";
+    description = ''Commands excluded from history. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+historyControl = {
+  _meta = {
+    name = "History filtering rules";
+    summary = "History filtering rules";
+    description = ''History filtering rules. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ ($type.enum [ "erasedups" "ignoredups" "ignorespace" "ignoreboth" ]) ]) $type.null ];
+    default = null;
+  };
+};
+
+shellOptions = {
+  _meta = {
+    name = "Bash shopt settings";
+    summary = "Bash shopt settings";
+    description = ''Bash shopt settings. Shell option lists merge with existing defaults. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+aliases = {
+  _meta = {
+    name = "Bash command aliases";
+    summary = "Bash command aliases";
+    description = ''Bash command aliases. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+variables = {
+  _meta = {
+    name = "Bash session variables";
+    summary = "Bash session variables";
+    description = ''Bash session variables. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+loginCommands = {
+  _meta = {
+    name = "Commands run when logging in";
+    summary = "Commands run when logging in";
+    description = ''Commands run when logging in. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+interactiveCommands = {
+  _meta = {
+    name = "Commands run in interactive Bash";
+    summary = "Commands run in interactive Bash";
+    description = ''Commands run in interactive Bash. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+logoutCommands = {
+  _meta = {
+    name = "Commands run when logging out";
+    summary = "Commands run when logging out";
+    description = ''Commands run when logging out. Null preserves existing behavior.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Bash";
+    summary = "Install and configure Bash";
+    description = ''Enable Bash for the selected user scope. Preferences apply while enabled.'';
+    tags = [ "shell" "bash" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    programs.bash.enable = true;
+    programs.bash.enableCompletion = $lib.mkIf ($path.completion != null) ($path.completion);
+    programs.bash.historySize = $lib.mkIf ($path.historyLines != null) ($path.historyLines);
+    programs.bash.historyFileSize = $lib.mkIf ($path.savedHistoryLines != null) ($path.savedHistoryLines);
+    programs.bash.historyFile = $lib.mkIf ($path.historyFile != null) ($path.historyFile);
+    programs.bash.historyIgnore = $lib.mkIf ($path.ignoredHistoryPatterns != null) ($path.ignoredHistoryPatterns);
+    programs.bash.historyControl = $lib.mkIf ($path.historyControl != null) ($path.historyControl);
+    programs.bash.shellOptions = $lib.mkIf ($path.shellOptions != null) ($path.shellOptions);
+    programs.bash.shellAliases = $lib.mkIf ($path.aliases != null) ($path.aliases);
+    programs.bash.sessionVariables = $lib.mkIf ($path.variables != null) ($path.variables);
+    programs.bash.profileExtra = $lib.mkIf ($path.loginCommands != null) ($path.loginCommands);
+    programs.bash.initExtra = $lib.mkIf ($path.interactiveCommands != null) ($path.interactiveCommands);
+    programs.bash.logoutExtra = $lib.mkIf ($path.logoutCommands != null) ($path.logoutCommands);
+    assertions = [
+      { assertion = $path.historyLines == null || $path.historyLines >= 0; message = "programs.bash.historyLines must be at least 0."; }
+      { assertion = $path.savedHistoryLines == null || $path.savedHistoryLines >= 0; message = "programs.bash.savedHistoryLines must be at least 0."; }
+    ];
+  };
+};

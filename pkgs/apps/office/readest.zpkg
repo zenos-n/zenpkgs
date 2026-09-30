@@ -1,0 +1,14 @@
+_meta = {
+  name = "Readest";
+  summary = "Modern, feature-rich ebook reader";
+  description = ''
+    Modern, feature-rich ebook reader.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.1";
+  tags = [ "office" "ebooks" "reading" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.readest;

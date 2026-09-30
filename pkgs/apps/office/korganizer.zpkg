@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "KOrganizer";
+  summary = "Organizational assistant, providing calendars and other similar functionality";
+  description = ''
+    Organizational assistant, providing calendars and other similar functionality.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.04.3";
+  tags = [ "office" "calendar" "organization" "productivity" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.kdePackages.korganizer;

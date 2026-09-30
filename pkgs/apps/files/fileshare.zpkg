@@ -1,0 +1,14 @@
+_meta = {
+  name = "fileshare";
+  summary = "Small HTTP Server for quickly sharing files over the network";
+  description = ''
+    Fileshare is a simple tool for sharing the contents of a directory via a webserver and optionally allowing uploads.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.4";
+  tags = [ "files" "networking" "http" "file-transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fileshare;

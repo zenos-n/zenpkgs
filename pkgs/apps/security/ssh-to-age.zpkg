@@ -1,0 +1,14 @@
+_meta = {
+  name = "ssh-to-age";
+  summary = "Convert ssh private keys in ed25519 format to age keys";
+  description = ''
+    Convert ssh private keys in ed25519 format to age keys.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "security" "ssh" "cryptography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ssh-to-age;

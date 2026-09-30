@@ -1,0 +1,16 @@
+_meta = {
+  name = "GitLab Timelogs";
+  summary = "CLI utility to support you with your time logs in GitLab";
+  description = ''
+    CLI utility to support you with your time logs in GitLab.
+
+    gitlab-timelogs is not associated with the official GitLab project!
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.1";
+  tags = [ "office" "gitlab" "time-tracking" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitlab-timelogs;

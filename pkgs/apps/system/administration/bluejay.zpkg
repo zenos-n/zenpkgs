@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bluejay";
+  summary = "Bluetooth manager written in Qt";
+  description = ''
+    Bluetooth manager written in Qt.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.3";
+  tags = [ "system" "administration" "bluetooth" "devices" "configuration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.bluejay;

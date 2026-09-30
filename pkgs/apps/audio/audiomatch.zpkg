@@ -1,0 +1,14 @@
+_meta = {
+  name = "audiomatch";
+  summary = "A small command-line tool to find similar audio files";
+  description = ''
+    A small command-line tool to find similar audio files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.2";
+  tags = [ "audio" "analysis" "similarity" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.audiomatch;

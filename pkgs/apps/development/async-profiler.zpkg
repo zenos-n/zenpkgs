@@ -1,0 +1,14 @@
+_meta = {
+  name = "async-profiler";
+  summary = "Low overhead sampling profiler for Java that does not suffer from Safepoint bias problem";
+  description = ''
+    Low overhead sampling profiler for Java that does not suffer from Safepoint bias problem.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.3";
+  tags = [ "development" "java" "profiling" "performance" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.async-profiler;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gersemi";
+  summary = "Formatter to make your CMake code the real treasure";
+  description = ''
+    Formatter to make your CMake code the real treasure.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.23.2";
+  tags = [ "development" "cmake" "formatting" "build-tools" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.gersemi;

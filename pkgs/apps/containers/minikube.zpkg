@@ -1,0 +1,14 @@
+_meta = {
+  name = "Minikube";
+  summary = "Tool that makes it easy to run Kubernetes locally";
+  description = ''
+    Tool that makes it easy to run Kubernetes locally.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.38.1";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.minikube;

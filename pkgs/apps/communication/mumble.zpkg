@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mumble";
+  summary = "Low-latency, high quality voice chat software";
+  description = ''
+    Low-latency, high quality voice chat software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.915";
+  tags = [ "communication" "networking" "voice" "gaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.mumble;

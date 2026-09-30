@@ -1,0 +1,14 @@
+_meta = {
+  name = "JupyterLab";
+  summary = "Jupyter lab environment notebook server extension";
+  description = ''
+    Jupyter lab environment notebook server extension.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.5.7";
+  tags = [ "science" "notebooks" "development" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.python3Packages.jupyterlab;

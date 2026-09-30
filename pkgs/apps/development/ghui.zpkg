@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghui";
+  summary = "Terminal UI for GitHub pull requests";
+  description = ''
+    Terminal UI for GitHub pull requests.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.6";
+  tags = [ "development" "github" "pull-requests" "tui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghui;

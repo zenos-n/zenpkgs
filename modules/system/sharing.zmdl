@@ -1,0 +1,90 @@
+_meta = {
+  name = "Desktop sharing services";
+  summary = "Choose available desktop sharing integrations";
+  description = ''Control service availability for accounts, files, media and remote desktops.'';
+  tags = [ "desktop" "sharing" ];
+  zenosVersion = 1.0.0Na;
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+onlineAccounts = {
+  _meta = {
+    name = "Connect desktop applications to online accounts";
+    summary = "Connect desktop applications to online accounts";
+    description = ''Installs account integration; accounts and credentials are configured by each user. Null keeps the existing system policy.'';
+    tags = [ "desktop" "sharing" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.gnome.gnome-online-accounts.enable = $lib.mkIf ($path.onlineAccounts != null) $path.onlineAccounts;
+  };
+};
+
+personalFiles = {
+  _meta = {
+    name = "Make personal file sharing available in desktop settings";
+    summary = "Make personal file sharing available in desktop settings";
+    description = ''Installs sharing support; users choose whether and what to share. Null keeps the existing system policy.'';
+    tags = [ "desktop" "sharing" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.gnome.gnome-user-share.enable = $lib.mkIf ($path.personalFiles != null) $path.personalFiles;
+  };
+};
+
+mediaLibrary = {
+  _meta = {
+    name = "Make media-library sharing available to compatible network devices";
+    summary = "Make media-library sharing available to compatible network devices";
+    description = ''Installs the media server; users choose shared content. Firewall access is configured separately. Null keeps the existing system policy.'';
+    tags = [ "desktop" "sharing" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.gnome.rygel.enable = $lib.mkIf ($path.mediaLibrary != null) $path.mediaLibrary;
+  };
+};
+
+remoteDesktop = {
+  _meta = {
+    name = "Make remote desktop access available in desktop settings";
+    summary = "Make remote desktop access available in desktop settings";
+    description = ''Installs remote desktop support. Credentials, access and firewall rules are configured separately. Requires PipeWire audio/video routing. Null keeps the existing system policy.'';
+    tags = [ "desktop" "sharing" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.gnome.gnome-remote-desktop.enable = $lib.mkIf ($path.remoteDesktop != null) $path.remoteDesktop;
+  };
+};
+
+networkMediaPlayers = {
+  _meta = {
+    name = "Find compatible media servers and players on the local network";
+    summary = "Find compatible media servers and players on the local network";
+    description = ''Provides desktop integration with DLNA servers and renderers. Null keeps the existing system policy.'';
+    tags = [ "desktop" "sharing" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.dleyna.enable = $lib.mkIf ($path.networkMediaPlayers != null) $path.networkMediaPlayers;
+  };
+};
+

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-fame";
+  summary = "Command-line tool that helps you summarize and pretty-print collaborators based on contributions";
+  description = ''
+    Command-line tool that helps you summarize and pretty-print collaborators based on contributions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.19";
+  tags = [ "development" "git" "statistics" "contributors" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-fame;

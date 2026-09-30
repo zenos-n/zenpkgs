@@ -1,0 +1,14 @@
+_meta = {
+  name = "vkmark";
+  summary = "Extensible Vulkan benchmarking suite";
+  description = ''
+    Extensible Vulkan benchmarking suite.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2025.01";
+  tags = [ "system" "monitoring" "graphics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Plus;
+};
+
+import $pkgs.legacy.vkmark;

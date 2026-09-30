@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ansible Lint";
+  summary = "Best practices checker for Ansible";
+  description = ''
+    Best practices checker for Ansible.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "25.8.2";
+  tags = [ "infrastructure" "development" "linting" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ansible-lint;

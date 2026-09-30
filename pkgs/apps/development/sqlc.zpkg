@@ -1,0 +1,14 @@
+_meta = {
+  name = "sqlc";
+  summary = "Generate type-safe code from SQL";
+  description = ''
+    Generate type-safe code from SQL.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.31.1";
+  tags = [ "development" "database" "code-generation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sqlc;

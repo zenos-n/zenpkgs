@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mistral Vibe";
+  summary = "Minimal CLI coding agent by Mistral";
+  description = ''
+    Minimal CLI coding agent by Mistral.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.10.1";
+  tags = [ "ai" "development" "coding" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.mistral-vibe;

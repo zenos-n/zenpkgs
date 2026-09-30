@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNOME Fonts";
+  summary = "Program that can preview fonts and create thumbnails for fonts";
+  description = ''
+    Program that can preview fonts and create thumbnails for fonts.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "50.0";
+  tags = [ "system" "administration" "fonts" "theming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gnome-font-viewer;

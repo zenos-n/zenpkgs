@@ -1,0 +1,14 @@
+_meta = {
+  name = "dnstop";
+  summary = "libpcap application that displays DNS traffic on your network";
+  description = ''
+    libpcap application that displays DNS traffic on your network.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2014-09-15";
+  tags = [ "networking" "dns" "traffic" "monitoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.dnstop;

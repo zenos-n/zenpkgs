@@ -1,0 +1,16 @@
+_meta = {
+  name = "dash-mpd-cli";
+  summary = "Download media content from a DASH-MPEG or DASH-WebM MPD manifest";
+  description = ''
+    A commandline application for downloading media content from a DASH MPD
+    file, as used for on-demand replay of TV content and video streaming
+    services.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.33";
+  tags = [ "downloads" "video" "dash" "streaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dash-mpd-cli;

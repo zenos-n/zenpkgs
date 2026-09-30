@@ -1,0 +1,14 @@
+_meta = {
+  name = "CoMaps";
+  summary = "Community-led fork of Organic Maps";
+  description = ''
+    Community-led fork of Organic Maps.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.06.05-11";
+  tags = [ "maps" "navigation" "offline" "geography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.comaps;

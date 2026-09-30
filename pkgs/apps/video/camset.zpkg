@@ -1,0 +1,14 @@
+_meta = {
+  name = "camset";
+  summary = "GUI for Video4Linux adjustments of webcams";
+  description = ''
+    GUI for Video4Linux adjustments of webcams.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2023-05-20";
+  tags = [ "video" "webcam" "hardware" "settings" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.camset;

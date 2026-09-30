@@ -1,0 +1,19 @@
+_meta = {
+  name = "clock-rs";
+  summary = "Modern, digital clock that effortlessly runs in your terminal";
+  description = ''
+    clock-rs is a terminal-based clock written in Rust, designed to be a new alternative to tty-clock.
+    It supports all major platforms and offers several improvements, which include:
+
+    - The use of a single configuration file to manage its settings, with the ability to override them through the command line,
+    - Many additional features such as a timer and a stopwatch,
+    - And greater flexibility as well as better user experience!
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0";
+  tags = [ "office" "clock" "time" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.clock-rs;

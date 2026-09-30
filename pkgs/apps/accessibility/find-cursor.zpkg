@@ -1,0 +1,14 @@
+_meta = {
+  name = "Find Cursor";
+  summary = "Simple XLib program to highlight the cursor position";
+  description = ''
+    Simple XLib program to highlight the cursor position.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8";
+  tags = [ "accessibility" "desktop" "cursor" "x11" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.find-cursor;

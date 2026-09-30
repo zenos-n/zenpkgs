@@ -1,0 +1,20 @@
+_meta = {
+  name = "ghorg";
+  summary = "Quickly clone an entire org/users repositories into one directory";
+  description = ''
+    ghorg allows you to quickly clone all of an orgs, or users repos into a
+    single directory. This can be useful in many situations including
+    - Searching an orgs/users codebase with ack, silver searcher, grep etc..
+    - Bash scripting
+    - Creating backups
+    - Onboarding
+    - Performing Audits
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.11.10";
+  tags = [ "development" "git" "repositories" "cloning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ghorg;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "flashrom";
+  summary = "Utility for reading, writing, erasing and verifying flash ROM chips";
+  description = ''
+    Utility for reading, writing, erasing and verifying flash ROM chips.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.0";
+  tags = [ "development" "embedded" "hardware" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.flashrom;

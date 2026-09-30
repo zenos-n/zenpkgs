@@ -1,0 +1,14 @@
+_meta = {
+  name = "Onboard";
+  summary = "Onscreen keyboard useful for tablet PC users and for mobility impaired users";
+  description = ''
+    Onscreen keyboard useful for tablet PC users and for mobility impaired users.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.1";
+  tags = [ "accessibility" "assistive-technology" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.onboard;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "amqpcat";
+  summary = "CLI tool for publishing to and consuming from AMQP servers";
+  description = ''
+    CLI tool for publishing to and consuming from AMQP servers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "networking" "amqp" "messaging" "development" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.amqpcat;

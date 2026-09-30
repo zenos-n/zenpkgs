@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tangram";
+  summary = "Run web apps on your desktop";
+  description = ''
+    Run web apps on your desktop.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5";
+  tags = [ "browsers" "web-apps" "productivity" "internet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.tangram;

@@ -31,10 +31,10 @@ _let bool: $type.function "boolean" = value: if value then "true" else "false";
 enable = enableOption {
   _meta.description = ''Whether to enable GSConnect GNOME extension configuration.'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.gsconnect ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.gsconnect ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.gsconnect.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.gsconnect.extensionUuid ];
     dconf.settings."org/gnome/shell/extensions/gsconnect/preferences" = {
       window-maximized = $path.preferences.window-maximized;
       window-size = $lib.gvariant.mkTuple [

@@ -1,0 +1,14 @@
+_meta = {
+  name = "MQTT Multimeter";
+  summary = "MQTT traffic monitor";
+  description = ''
+    MQTT traffic monitor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.2.272";
+  tags = [ "networking" "development" "mqtt" "monitoring" "iot" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.free;
+};
+
+import $pkgs.legacy.mqttmultimeter;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "rbw";
+  summary = "Unofficial command line client for Bitwarden";
+  description = ''
+    Unofficial command line client for Bitwarden.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.0";
+  tags = [ "security" "privacy" "passwords" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.rbw;

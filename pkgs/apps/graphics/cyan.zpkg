@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cyan";
+  summary = "Image viewer and converter, designed for prepress (print) work";
+  description = ''
+    Image viewer and converter, designed for prepress (print) work.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.4";
+  tags = [ "graphics" "images" "conversion" "printing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cecill21;
+};
+
+import $pkgs.legacy.cyan;

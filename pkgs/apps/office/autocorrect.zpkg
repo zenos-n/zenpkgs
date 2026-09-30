@@ -1,0 +1,14 @@
+_meta = {
+  name = "AutoCorrect";
+  summary = "Linter and formatter for help you improve copywriting, to correct spaces, punctuations between CJK (Chinese, Japanese, Korean)";
+  description = ''
+    Linter and formatter for help you improve copywriting, to correct spaces, punctuations between CJK (Chinese, Japanese, Korean).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.16.3";
+  tags = [ "office" "writing" "formatting" "cjk" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.autocorrect;

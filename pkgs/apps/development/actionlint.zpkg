@@ -1,0 +1,14 @@
+_meta = {
+  name = "actionlint";
+  summary = "Static checker for GitHub Actions workflow files";
+  description = ''
+    Static checker for GitHub Actions workflow files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.12";
+  tags = [ "development" "ci" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.actionlint;

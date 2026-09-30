@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-public-api";
+  summary = "List and diff the public API of Rust library crates between releases and commits. Detect breaking API changes and semver violations";
+  description = ''
+    List and diff the public API of Rust library crates between releases and commits. Detect breaking API changes and semver violations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.51.0";
+  tags = [ "development" "rust" "cargo" "compatibility" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-public-api;

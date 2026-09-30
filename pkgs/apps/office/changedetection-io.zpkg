@@ -1,0 +1,14 @@
+_meta = {
+  name = "changedetection.io";
+  summary = "Self-hosted free open source website change detection tracking, monitoring and notification service";
+  description = ''
+    Self-hosted free open source website change detection tracking, monitoring and notification service.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.53.6";
+  tags = [ "office" "websites" "monitoring" "notifications" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.changedetection-io;

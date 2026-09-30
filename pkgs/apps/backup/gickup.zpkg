@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gickup";
+  summary = "Tool to backup repositories";
+  description = ''
+    Tool to backup repositories.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.44";
+  tags = [ "backup" "git" "repositories" "forges" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gickup;

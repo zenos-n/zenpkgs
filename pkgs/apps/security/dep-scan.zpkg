@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dependency Scan";
+  summary = "Security and risk audit tool based on known vulnerabilities, advisories, and license limitations for project dependencies";
+  description = ''
+    Security and risk audit tool based on known vulnerabilities, advisories, and license limitations for project dependencies.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.2.0";
+  tags = [ "security" "dependencies" "vulnerabilities" "auditing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dep-scan;

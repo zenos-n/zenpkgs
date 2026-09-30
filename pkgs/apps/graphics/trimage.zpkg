@@ -1,0 +1,14 @@
+_meta = {
+  name = "Trimage";
+  summary = "Cross-platform tool for optimizing PNG and JPG files";
+  description = ''
+    Cross-platform tool for optimizing PNG and JPG files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.7-dev";
+  tags = [ "graphics" "images" "compression" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.trimage;

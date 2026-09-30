@@ -1,0 +1,14 @@
+_meta = {
+  name = "Element";
+  summary = "Periodic table on the command line";
+  description = ''
+    Periodic table on the command line.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.1";
+  tags = [ "science" "chemistry" "periodic-table" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.element;

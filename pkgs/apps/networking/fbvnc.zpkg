@@ -1,0 +1,14 @@
+_meta = {
+  name = "fbvnc";
+  summary = "Framebuffer VNC client";
+  description = ''
+    Framebuffer VNC client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.2";
+  tags = [ "networking" "vnc" "remote-desktop" "framebuffer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.fbvnc;

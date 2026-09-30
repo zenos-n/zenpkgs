@@ -1,0 +1,14 @@
+_meta = {
+  name = "Apktool";
+  summary = "Tool for reverse engineering Android apk files";
+  description = ''
+    Tool for reverse engineering Android apk files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.12.1";
+  tags = [ "development" "android" "apk" "reverse-engineering" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.apktool;

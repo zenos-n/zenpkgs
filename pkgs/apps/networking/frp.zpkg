@@ -1,0 +1,17 @@
+_meta = {
+  name = "frp";
+  summary = "Fast reverse proxy";
+  description = ''
+    frp is a fast reverse proxy to help you expose a local server behind a
+    NAT or firewall to the Internet. As of now, it supports TCP and UDP, as
+    well as HTTP and HTTPS protocols, where requests can be forwarded to
+    internal services by domain name. frp also has a P2P connect mode.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.66.0";
+  tags = [ "networking" "proxy" "tunneling" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.frp;

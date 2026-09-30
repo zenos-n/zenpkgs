@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-cal";
+  summary = "GitHub contributions calender terminal viewer";
+  description = ''
+    GitHub contributions calender terminal viewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.3";
+  tags = [ "development" "github" "github-cli" "contributions" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-cal;

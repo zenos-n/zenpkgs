@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Interlude";
+  summary = "Keyboard rhythm game built for fun, part of the YAVSRG project";
+  description = ''
+    Keyboard rhythm game built for fun, part of the YAVSRG project.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.28.2";
+  tags = [ "gaming" "rhythm" "music" "keyboard" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.interlude;

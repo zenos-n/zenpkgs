@@ -1,0 +1,14 @@
+_meta = {
+  name = "cliflux";
+  summary = "Terminal client for Miniflux RSS reader";
+  description = ''
+    Terminal client for Miniflux RSS reader.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.1";
+  tags = [ "office" "rss" "miniflux" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cliflux;

@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "git-filter-repo";
+  summary = "Quickly rewrite git repository history";
+  description = ''
+    Quickly rewrite git repository history.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.47.0";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.git-filter-repo;

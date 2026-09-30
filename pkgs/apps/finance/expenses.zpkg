@@ -1,0 +1,14 @@
+_meta = {
+  name = "Expenses";
+  summary = "Interactive command line expense logger";
+  description = ''
+    Interactive command line expense logger.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.3";
+  tags = [ "finance" "expenses" "tracking" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.expenses;

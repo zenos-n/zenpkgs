@@ -1,0 +1,14 @@
+_meta = {
+  name = "Timewarrior";
+  summary = "Command-line time tracker";
+  description = ''
+    Command-line time tracker.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.1";
+  tags = [ "office" "productivity" "time-tracking" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.timewarrior;

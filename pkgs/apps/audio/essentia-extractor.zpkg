@@ -1,0 +1,14 @@
+_meta = {
+  name = "Essentia Extractor";
+  summary = "AcousticBrainz audio feature extractor";
+  description = ''
+    AcousticBrainz audio feature extractor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1_beta2";
+  tags = [ "audio" "features" "analysis" "acousticbrainz" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.essentia-extractor;

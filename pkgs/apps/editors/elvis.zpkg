@@ -1,0 +1,14 @@
+_meta = {
+  name = "Elvis";
+  summary = "Vi clone for Unix and other operating systems";
+  description = ''
+    Vi clone for Unix and other operating systems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2_0";
+  tags = [ "editors" "vi" "text" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.free;
+};
+
+import $pkgs.legacy.elvis;

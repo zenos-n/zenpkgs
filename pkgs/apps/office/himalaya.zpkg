@@ -1,0 +1,14 @@
+_meta = {
+  name = "Himalaya";
+  summary = "CLI to manage emails";
+  description = ''
+    CLI to manage emails.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "office" "email" "terminal" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.himalaya;

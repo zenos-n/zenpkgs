@@ -1,0 +1,14 @@
+_meta = {
+  name = "clj-kondo";
+  summary = "Linter for Clojure code that sparks joy";
+  description = ''
+    Linter for Clojure code that sparks joy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.01.19";
+  tags = [ "development" "clojure" "linting" "static-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.epl10;
+};
+
+import $pkgs.legacy.clj-kondo;

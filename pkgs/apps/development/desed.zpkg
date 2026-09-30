@@ -1,0 +1,14 @@
+_meta = {
+  name = "Desed";
+  summary = "Debugger for Sed: demystify and debug your sed scripts, from comfort of your terminal";
+  description = ''
+    Debugger for Sed: demystify and debug your sed scripts, from comfort of your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.2";
+  tags = [ "development" "sed" "debugging" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.desed;

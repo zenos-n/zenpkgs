@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fortitude";
+  summary = "Fortran linter written in Rust inspired by Ruff";
+  description = ''
+    Fortran linter written in Rust inspired by Ruff.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.5-unstable-2025-10-14";
+  tags = [ "development" "fortran" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fortitude;

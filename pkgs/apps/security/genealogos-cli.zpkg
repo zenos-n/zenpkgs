@@ -1,0 +1,14 @@
+_meta = {
+  name = "Genealogos";
+  summary = "Nix sbom generator";
+  description = ''
+    Nix sbom generator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "security" "nix" "sbom" "supply-chain" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.genealogos-cli;

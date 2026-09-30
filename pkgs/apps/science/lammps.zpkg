@@ -1,0 +1,18 @@
+_meta = {
+  name = "LAMMPS";
+  summary = "Classical Molecular Dynamics simulation code";
+  description = ''
+    LAMMPS is a classical molecular dynamics simulation code designed to
+    run efficiently on parallel computers. It was developed at Sandia
+    National Laboratories, a US Department of Energy facility, with
+    funding from the DOE. It is an open-source code, distributed freely
+    under the terms of the GNU Public License (GPL).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "22Jul2025_update4";
+  tags = [ "science" "chemistry" "molecular-modeling" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.lammps;

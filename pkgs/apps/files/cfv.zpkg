@@ -1,0 +1,14 @@
+_meta = {
+  name = "cfv";
+  summary = "Utility to verify and create a wide range of checksums";
+  description = ''
+    Utility to verify and create a wide range of checksums.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.0";
+  tags = [ "files" "checksums" "verification" "integrity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.cfv;

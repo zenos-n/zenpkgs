@@ -1,0 +1,14 @@
+_meta = {
+  name = "Caneda";
+  summary = "Open source EDA software focused on easy of use and portability";
+  description = ''
+    Open source EDA software focused on easy of use and portability.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "cad" "electronics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.caneda;

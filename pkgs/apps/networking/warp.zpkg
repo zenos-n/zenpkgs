@@ -1,0 +1,14 @@
+_meta = {
+  name = "Warp";
+  summary = "Fast and secure file transfer";
+  description = ''
+    Fast and secure file transfer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "networking" "files" "transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.warp;

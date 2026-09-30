@@ -1,0 +1,14 @@
+_meta = {
+  name = "FreeTube";
+  summary = "Open Source YouTube app for privacy";
+  description = ''
+    Open Source YouTube app for privacy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.25.2";
+  tags = [ "video" "youtube" "streaming" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.freetube;

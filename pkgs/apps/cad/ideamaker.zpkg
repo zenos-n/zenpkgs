@@ -1,0 +1,14 @@
+_meta = {
+  name = "ideaMaker";
+  summary = "Raise3D's 3D slicer software";
+  description = ''
+    Raise3D's 3D slicer software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.2.2.8570";
+  tags = [ "cad" "3d-printing" "slicer" "manufacturing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.ideamaker;

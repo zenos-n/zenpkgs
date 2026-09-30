@@ -1,0 +1,15 @@
+_meta = {
+  name = "mycli";
+  summary = "Command-line interface for MySQL";
+  description = ''
+    Rich command-line interface for MySQL with auto-completion and
+    syntax highlighting.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.44.2";
+  tags = [ "development" "database" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.mycli;

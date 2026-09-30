@@ -1,0 +1,14 @@
+_meta = {
+  name = "RustDesk";
+  summary = "Virtual / remote desktop infrastructure for everyone! Open source TeamViewer / Citrix alternative";
+  description = ''
+    Virtual / remote desktop infrastructure for everyone! Open source TeamViewer / Citrix alternative.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.7";
+  tags = [ "networking" "remote-desktop" "system" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.rustdesk;

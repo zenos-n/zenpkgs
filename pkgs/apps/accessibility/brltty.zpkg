@@ -1,0 +1,17 @@
+_meta = {
+  name = "BRLTTY";
+  summary = "Access software for a blind person using a braille display";
+  description = ''
+    BRLTTY is a background process (daemon) which provides access to the Linux/Unix
+    console (when in text mode) for a blind person using a refreshable braille display.
+    It drives the braille display, and provides complete screen review functionality.
+    Some speech capability has also been incorporated.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.9.1";
+  tags = [ "accessibility" "braille" "vision" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.brltty;

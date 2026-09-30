@@ -1,0 +1,14 @@
+_meta = {
+  name = "xsel";
+  summary = "Command-line program for getting and setting the contents of the X selection";
+  description = ''
+    Command-line program for getting and setting the contents of the X selection.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.1";
+  tags = [ "office" "productivity" "clipboard" "x11" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.xsel;

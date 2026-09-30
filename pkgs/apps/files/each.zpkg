@@ -1,0 +1,14 @@
+_meta = {
+  name = "each";
+  summary = "Command-line tool for processing CSV, JSON and other structured data";
+  description = ''
+    Command-line tool for processing CSV, JSON and other structured data.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0";
+  tags = [ "files" "csv" "json" "data-processing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.each;

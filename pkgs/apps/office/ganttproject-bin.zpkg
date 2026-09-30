@@ -1,0 +1,14 @@
+_meta = {
+  name = "GanttProject";
+  summary = "Project scheduling and management";
+  description = ''
+    Project scheduling and management.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.3316";
+  tags = [ "office" "projects" "planning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.ganttproject-bin;

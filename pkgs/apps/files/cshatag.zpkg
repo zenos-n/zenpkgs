@@ -1,0 +1,14 @@
+_meta = {
+  name = "cshatag";
+  summary = "Tool to detect silent data corruption";
+  description = ''
+    Tool to detect silent data corruption.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.1";
+  tags = [ "files" "integrity" "corruption" "verification" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cshatag;

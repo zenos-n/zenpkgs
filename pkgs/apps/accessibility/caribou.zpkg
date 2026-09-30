@@ -1,0 +1,14 @@
+_meta = {
+  name = "Caribou";
+  summary = "Input assistive technology intended for switch and pointer users";
+  description = ''
+    Input assistive technology intended for switch and pointer users.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.21";
+  tags = [ "accessibility" "input" "keyboard" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.caribou;

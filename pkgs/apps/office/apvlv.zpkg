@@ -1,0 +1,15 @@
+_meta = {
+  name = "apvlv";
+  summary = "PDF viewer with Vim-like behaviour";
+  description = ''
+    apvlv is a PDF/DJVU/UMD/TXT Viewer Under Linux/WIN32
+    with Vim-like behaviour.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.0";
+  tags = [ "office" "pdf" "documents" "viewer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl2;
+};
+
+import $pkgs.legacy.apvlv;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "chkbit";
+  summary = "Check your files for data corruption and run quick file deduplication";
+  description = ''
+    Check your files for data corruption and run quick file deduplication.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.6.0";
+  tags = [ "files" "integrity" "corruption" "deduplication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.chkbit;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glucose";
+  summary = "SAT solver for Boolean satisfiability problems";
+  description = ''
+    SAT solver for Boolean satisfiability problems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.2.1";
+  tags = [ "science" "sat" "solvers" "logic" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.glucose;

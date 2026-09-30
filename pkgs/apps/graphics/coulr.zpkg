@@ -1,0 +1,14 @@
+_meta = {
+  name = "Coulr";
+  summary = "Color box to help developers and designers";
+  description = ''
+    Color box to help developers and designers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.0";
+  tags = [ "graphics" "colors" "design" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.coulr;

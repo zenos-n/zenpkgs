@@ -1,0 +1,16 @@
+_meta = {
+  name = "RamaLama";
+  summary = "Serving AI models locally using familiar container workflows";
+  description = ''
+    Ramalama is an open-source developer tool that simplifies the local
+    serving of AI models from any source and facilitates their use for
+    inference in production, all through the familiar language of containers
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.19.0";
+  tags = [ "ai" "language-models" "local-inference" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ramalama;

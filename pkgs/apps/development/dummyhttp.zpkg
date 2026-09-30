@@ -1,0 +1,14 @@
+_meta = {
+  name = "dummyhttp";
+  summary = "Super simple HTTP server that replies a fixed body with a fixed response code";
+  description = ''
+    Super simple HTTP server that replies a fixed body with a fixed response code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.2";
+  tags = [ "development" "http" "testing" "mocking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dummyhttp;

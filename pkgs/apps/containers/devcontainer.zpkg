@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dev Container CLI";
+  summary = "Dev container CLI, run and manage your dev environments via a devcontainer.json";
+  description = ''
+    Dev container CLI, run and manage your dev environments via a devcontainer.json.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.87.0";
+  tags = [ "containers" "development" "environments" "devcontainers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.devcontainer;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "htmlq";
+  summary = "Like jq, but for HTML";
+  description = ''
+    Like jq, but for HTML.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "files" "html" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.htmlq;

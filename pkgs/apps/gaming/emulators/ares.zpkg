@@ -1,0 +1,14 @@
+_meta = {
+  name = "ares";
+  summary = "Open-source multi-system emulator with a focus on accuracy and preservation";
+  description = ''
+    Open-source multi-system emulator with a focus on accuracy and preservation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "147";
+  tags = [ "gaming" "emulators" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.ares;

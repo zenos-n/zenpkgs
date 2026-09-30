@@ -1,0 +1,16 @@
+_meta = {
+  name = "Waypaper";
+  summary = "GUI wallpaper setter for Wayland-based window managers";
+  description = ''
+    GUI wallpaper setter for Wayland-based window managers that works as a frontend for popular backends like swaybg and swww.
+
+    If wallpaper does not change, make sure that swaybg or swww is installed.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.7-unstable-2026-01-13";
+  tags = [ "system" "administration" "wallpaper" "theming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.waypaper;

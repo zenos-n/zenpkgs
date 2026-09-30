@@ -1,0 +1,14 @@
+_meta = {
+  name = "dtop";
+  summary = "Terminal dashboard for Docker monitoring across multiple hosts with Dozzle integration";
+  description = ''
+    Terminal dashboard for Docker monitoring across multiple hosts with Dozzle integration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.6";
+  tags = [ "containers" "docker" "monitoring" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dtop;

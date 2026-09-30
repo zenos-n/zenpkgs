@@ -1,0 +1,14 @@
+_meta = {
+  name = "can-utils";
+  summary = "CAN userspace utilities and tools (for use with Linux SocketCAN)";
+  description = ''
+    CAN userspace utilities and tools (for use with Linux SocketCAN).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2025.01";
+  tags = [ "development" "hardware" "embedded" "electronics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.can-utils;

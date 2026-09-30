@@ -1,0 +1,14 @@
+_meta = {
+  name = "Field Monitor";
+  summary = "Viewer for virtual machines and other external screens";
+  description = ''
+    Viewer for virtual machines and other external screens.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "50.1";
+  tags = [ "virtualization" "remote-desktop" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.field-monitor;

@@ -14,7 +14,7 @@ forms own configuration routing; module source directories do not.
 
 The `dsl-module-contract` check is structural and non-activating. It requires:
 
-1. Exactly 70 ZMDL sources are discovered and compiled.
+1. Every ZMDL source is discovered and compiled; the expected count is maintained in `tests/dsl-module-parity.nix`.
 2. Every source path, module path, option path, and canonical identity is unique.
 3. Every compiler record maps `modules/<path>.zmdl` to identity and option path
    `zenos.<path>`.

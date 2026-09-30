@@ -1,0 +1,14 @@
+_meta = {
+  name = "ARDOPC";
+  summary = "ARDOP (Amateur Radio Digital Open Protocol) TNC implementation by John Wiseman (GM8BPQ)";
+  description = ''
+    ARDOP (Amateur Radio Digital Open Protocol) TNC implementation by John Wiseman (GM8BPQ).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2021-08-28";
+  tags = [ "radio" "amateur-radio" "digital-modes" "tnc" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.ardopc;

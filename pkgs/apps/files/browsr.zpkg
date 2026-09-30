@@ -1,0 +1,14 @@
+_meta = {
+  name = "browsr";
+  summary = "File explorer in your terminal";
+  description = ''
+    File explorer in your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.22.1";
+  tags = [ "files" "explorer" "terminal" "navigation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.browsr;

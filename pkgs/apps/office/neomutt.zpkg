@@ -1,0 +1,14 @@
+_meta = {
+  name = "NeoMutt";
+  summary = "Small but very powerful text-based mail client";
+  description = ''
+    Small but very powerful text-based mail client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20260105";
+  tags = [ "office" "productivity" "communication" "email" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.neomutt;

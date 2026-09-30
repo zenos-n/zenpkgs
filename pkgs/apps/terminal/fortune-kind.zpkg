@@ -1,0 +1,19 @@
+_meta = {
+  name = "fortune-kind";
+  summary = "Kinder, curated fortune, written in rust";
+  description = ''
+    Historically, contributions to fortune-mod have had a less-than ideal
+    quality control process, and as such, many of the fortunes that a user may
+    receive from the program read more like cryptic inside jokes, or at the
+    very worst, locker-room banter. One of the major goals of fortune-kind is
+    defining and applying a somewhat more rigorous moderation and editing
+    process to the fortune adoption workflow.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.13";
+  tags = [ "terminal" "quotes" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.fortune-kind;

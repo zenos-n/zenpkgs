@@ -1,0 +1,14 @@
+_meta = {
+  name = "ntfy";
+  summary = "Send push notifications to your phone or desktop via PUT/POST";
+  description = ''
+    Send push notifications to your phone or desktop via PUT/POST.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.26.0";
+  tags = [ "networking" "notifications" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ntfy-sh;

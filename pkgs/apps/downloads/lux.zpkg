@@ -1,0 +1,14 @@
+_meta = {
+  name = "Lux";
+  summary = "Fast and simple video download library and CLI tool written in Go";
+  description = ''
+    Fast and simple video download library and CLI tool written in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.24.1";
+  tags = [ "downloads" "video" "multimedia" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.lux;

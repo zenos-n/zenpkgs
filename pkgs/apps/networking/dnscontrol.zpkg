@@ -1,0 +1,14 @@
+_meta = {
+  name = "DNSControl";
+  summary = "Synchronize your DNS to multiple providers from a simple DSL";
+  description = ''
+    Synchronize your DNS to multiple providers from a simple DSL.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.39.0";
+  tags = [ "networking" "dns" "automation" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dnscontrol;

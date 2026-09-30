@@ -1,0 +1,18 @@
+_meta = {
+  name = "Lockbook";
+  summary = "Private, polished note-taking platform";
+  description = ''
+    Write notes, sketch ideas, and store files in one secure place.
+    Share seamlessly, keep data synced, and access it on any
+    platform—even offline. Lockbook encrypts files so even we
+    can’t see them, but don’t take our word for it:
+    Lockbook is 100% open-source.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.8.4";
+  tags = [ "office" "notes" "privacy" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.lockbook-desktop;

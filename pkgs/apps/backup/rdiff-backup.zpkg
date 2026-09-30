@@ -1,0 +1,14 @@
+_meta = {
+  name = "rdiff-backup";
+  summary = "Backup system trying to combine best a mirror and an incremental backup system";
+  description = ''
+    Backup system trying to combine best a mirror and an incremental backup system.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.6";
+  tags = [ "backup" "recovery" "files" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.rdiff-backup;

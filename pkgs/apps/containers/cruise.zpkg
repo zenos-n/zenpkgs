@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cruise";
+  summary = "TUI for managing Docker containers, images, volumes, networks, and more";
+  description = ''
+    TUI for managing Docker containers, images, volumes, networks, and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "containers" "docker" "management" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cruise;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "BibTool";
+  summary = "Tool for manipulating BibTeX bibliographies";
+  description = ''
+    Tool for manipulating BibTeX bibliographies.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.68";
+  tags = [ "office" "bibliography" "science" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.bibtool;

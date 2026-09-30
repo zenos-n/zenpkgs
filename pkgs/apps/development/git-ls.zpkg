@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-ls";
+  summary = "List files and git status in a repository";
+  description = ''
+    List files and git status in a repository.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.1.0";
+  tags = [ "development" "git" "files" "status" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.git-ls;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "ctmg";
+  summary = "Encrypted container manager for Linux using cryptsetup";
+  description = ''
+    Encrypted container manager for Linux using cryptsetup.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2";
+  tags = [ "security" "encryption" "cryptsetup" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.ctmg;

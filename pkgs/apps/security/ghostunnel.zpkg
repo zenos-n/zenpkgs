@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ghostunnel";
+  summary = "TLS proxy with mutual authentication support for securing non-TLS backend applications";
+  description = ''
+    TLS proxy with mutual authentication support for securing non-TLS backend applications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.4";
+  tags = [ "security" "tls" "proxy" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ghostunnel;

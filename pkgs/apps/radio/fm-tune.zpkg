@@ -1,0 +1,17 @@
+_meta = {
+  name = "fm-tune";
+  summary = "Find initial calibration offset for SDR devices";
+  description = ''
+    fm_tune finds the initial offset for calibrating an SDR device. This is
+    based a given FM radio station frequency. The offset given by this tool is
+    not precise, but can be useful as a starting point for other tools which
+    cannot correct for very large errors.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1";
+  tags = [ "radio" "sdr" "calibration" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fm-tune;

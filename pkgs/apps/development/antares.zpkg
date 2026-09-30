@@ -1,0 +1,14 @@
+_meta = {
+  name = "Antares SQL";
+  summary = "Modern, fast and productivity driven SQL client with a focus in UX";
+  description = ''
+    Modern, fast and productivity driven SQL client with a focus in UX.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.35";
+  tags = [ "development" "databases" "sql" "graphical" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.antares;

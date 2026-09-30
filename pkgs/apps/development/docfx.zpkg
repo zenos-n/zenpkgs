@@ -1,0 +1,14 @@
+_meta = {
+  name = "DocFX";
+  summary = "Build your technical documentation site with docfx, with landing pages, markdown, API reference docs for .NET, REST API and more";
+  description = ''
+    Build your technical documentation site with docfx, with landing pages, markdown, API reference docs for .NET, REST API and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.78.5";
+  tags = [ "development" "documentation" "dotnet" "static-sites" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.docfx;

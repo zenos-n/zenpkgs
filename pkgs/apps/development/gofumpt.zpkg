@@ -1,0 +1,14 @@
+_meta = {
+  name = "gofumpt";
+  summary = "Stricter gofmt";
+  description = ''
+    Stricter gofmt.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.0";
+  tags = [ "development" "go" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.gofumpt;

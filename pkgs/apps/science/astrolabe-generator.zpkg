@@ -1,0 +1,14 @@
+_meta = {
+  name = "Astrolabe Generator";
+  summary = "Java-based tool for generating EPS files for constructing astrolabes and related tools";
+  description = ''
+    Java-based tool for generating EPS files for constructing astrolabes and related tools.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3";
+  tags = [ "science" "astronomy" "instruments" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.astrolabe-generator;

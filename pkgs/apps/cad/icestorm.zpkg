@@ -1,0 +1,17 @@
+_meta = {
+  name = "Project IceStorm";
+  summary = "Documentation and tools for Lattice iCE40 FPGAs";
+  description = ''
+    Project IceStorm aims at reverse engineering and
+    documenting the bitstream format of Lattice iCE40
+    FPGAs and providing simple tools for analyzing and
+    creating bitstream files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-06-03";
+  tags = [ "cad" "electronics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.icestorm;

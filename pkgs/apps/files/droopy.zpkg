@@ -1,0 +1,14 @@
+_meta = {
+  name = "Droopy";
+  summary = "Mini Web server that let others upload files to your computer";
+  description = ''
+    Mini Web server that let others upload files to your computer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20160830";
+  tags = [ "files" "sharing" "upload" "web" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.droopy;

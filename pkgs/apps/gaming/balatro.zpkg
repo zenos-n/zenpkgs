@@ -1,0 +1,15 @@
+_meta = {
+  name = "Balatro";
+  summary = "Poker roguelike";
+  description = ''
+    Balatro is a hypnotically satisfying deckbuilder where you play illegal poker hands,
+    discover game-changing jokers, and trigger adrenaline-pumping, outrageous combos.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.1o";
+  tags = [ "gaming" "cards" "roguelike" "deck-building" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.balatro;

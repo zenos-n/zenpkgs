@@ -1,0 +1,17 @@
+_meta = {
+  name = "paperkey";
+  summary = "Store OpenPGP or GnuPG on paper";
+  description = ''
+    A reasonable way to achieve a long term backup of OpenPGP (GnuPG, PGP, etc)
+    keys is to print them out on paper. Paper and ink have amazingly long
+    retention qualities - far longer than the magnetic or optical means that
+    are generally used to back up computer data.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6";
+  tags = [ "security" "cryptography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.paperkey;

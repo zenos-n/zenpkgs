@@ -1,0 +1,14 @@
+_meta = {
+  name = "nnn";
+  summary = "Small ncurses-based file browser forked from noice";
+  description = ''
+    Small ncurses-based file browser forked from noice.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.2";
+  tags = [ "files" "file-manager" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.nnn;

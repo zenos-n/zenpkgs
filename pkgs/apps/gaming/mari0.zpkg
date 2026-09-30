@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mari0";
+  summary = "Crossover between Super Mario Bros. and Portal";
+  description = ''
+    Crossover between Super Mario Bros. and Portal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.2-unstable-2023-08-08";
+  tags = [ "gaming" "platformer" "puzzle" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.mari0;

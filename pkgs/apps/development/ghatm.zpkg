@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghatm";
+  summary = "Set timeout-minutes to all GitHub Actions jobs";
+  description = ''
+    Set timeout-minutes to all GitHub Actions jobs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "development" "github-actions" "ci" "timeouts" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghatm;

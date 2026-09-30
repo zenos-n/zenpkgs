@@ -1,0 +1,14 @@
+_meta = {
+  name = "Yarn";
+  summary = "Fast, reliable, and secure dependency management for javascript";
+  description = ''
+    Fast, reliable, and secure dependency management for javascript.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.22.22";
+  tags = [ "development" "javascript" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.yarn;

@@ -1,0 +1,27 @@
+_meta = {
+  name = "Ricochet Refresh";
+  summary = "Secure chat without DNS or WebPKI";
+  description = ''
+    Ricochet Refresh is a peer-to-peer messenger app that uses Tor
+    to connect clients.
+
+    When you start Ricochet Refresh it creates a Tor hidden
+    service on your computer.  The address of this hidden service
+    is your anonymous identity on the Tor network and how others
+    will be able to communicate with you.  When you start a chat
+    with one of your contacts a Tor circuit is created between
+    your machine and the your contact's machine.
+
+    The original Ricochet uses onion "v2" hashed-RSA addresses,
+    which are no longer supported by the Tor network.  Ricochet
+    Refresh upgrades the original Ricochet protocol to use the
+    current onion "v3" ed25519 addresses.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.39";
+  tags = [ "communication" "chat" "privacy" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.ricochet-refresh;

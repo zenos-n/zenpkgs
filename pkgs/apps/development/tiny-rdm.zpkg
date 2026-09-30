@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tiny RDM";
+  summary = "Modern, colorful, super lightweight Redis GUI client";
+  description = ''
+    Modern, colorful, super lightweight Redis GUI client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.7";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.tiny-rdm;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "csv2svg";
+  summary = "Take a csv as input and outputs svg";
+  description = ''
+    Take a csv as input and outputs svg.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.3";
+  tags = [ "graphics" "csv" "svg" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.csv2svg;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Engauge Digitizer";
+  summary = "Engauge Digitizer is a tool for recovering graph data from an image file";
+  description = ''
+    Engauge Digitizer is a tool for recovering graph data from an image file.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "12.2.2";
+  tags = [ "graphics" "graphs" "data-extraction" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.engauge-digitizer;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "DRM Info";
+  summary = "Small utility to dump info about DRM devices";
+  description = ''
+    Small utility to dump info about DRM devices.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.0";
+  tags = [ "system" "monitoring" "drm" "graphics" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.drm_info;

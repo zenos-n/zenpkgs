@@ -1,0 +1,14 @@
+_meta = {
+  name = "Oxlint";
+  summary = "Collection of JavaScript tools written in Rust";
+  description = ''
+    Collection of JavaScript tools written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.65.0";
+  tags = [ "development" "javascript" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.oxlint;

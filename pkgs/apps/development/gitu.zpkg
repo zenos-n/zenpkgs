@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gitu";
+  summary = "TUI Git client inspired by Magit";
+  description = ''
+    TUI Git client inspired by Magit.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.42.0";
+  tags = [ "development" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitu;

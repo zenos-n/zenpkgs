@@ -1,0 +1,17 @@
+_meta = {
+  name = "Gitflow";
+  summary = "Extend git with the Gitflow branching model";
+  description = ''
+    A set of scripts that provide high-level repository operations
+    for managing feature/release/hotfix branches in a Git repository,
+    particularly suited to be utilised to follow Vincent Driessen's
+    branching model.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.12.3";
+  tags = [ "development" "git" "branches" "workflow" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.gitflow;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "peco";
+  summary = "Simplistic interactive filtering tool";
+  description = ''
+    Simplistic interactive filtering tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0";
+  tags = [ "files" "search" "fuzzy" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.peco;

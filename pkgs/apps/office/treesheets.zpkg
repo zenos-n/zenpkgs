@@ -1,0 +1,19 @@
+_meta = {
+  name = "TreeSheets";
+  summary = "Free Form Data Organizer";
+  description = ''
+    The ultimate replacement for spreadsheets, mind mappers, outliners,
+    PIMs, text editors and small databases.
+
+    Suitable for any kind of data organization, such as Todo lists,
+    calendars, project management, brainstorming, organizing ideas,
+    planning, requirements gathering, presentation of information, etc.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-07-01";
+  tags = [ "office" "notes" "planning" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.treesheets;

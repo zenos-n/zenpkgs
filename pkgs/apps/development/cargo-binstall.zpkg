@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-binstall";
+  summary = "Tool for installing rust binaries as an alternative to building from source";
+  description = ''
+    Tool for installing rust binaries as an alternative to building from source.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.19.1";
+  tags = [ "development" "rust" "cargo" "installation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.cargo-binstall;

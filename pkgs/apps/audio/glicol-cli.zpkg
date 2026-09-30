@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glicol CLI";
+  summary = "Cross-platform music live coding in terminal";
+  description = ''
+    Cross-platform music live coding in terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0";
+  tags = [ "audio" "live-coding" "music-production" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.glicol-cli;

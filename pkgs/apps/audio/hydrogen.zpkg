@@ -1,0 +1,14 @@
+_meta = {
+  name = "Hydrogen";
+  summary = "Advanced drum machine";
+  description = ''
+    Advanced drum machine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.6";
+  tags = [ "audio" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.hydrogen;

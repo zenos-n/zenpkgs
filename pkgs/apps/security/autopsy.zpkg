@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Autopsy";
+  summary = "Graphical interface to The Sleuth Kit and other open source digital forensics tools";
+  description = ''
+    Graphical interface to The Sleuth Kit and other open source digital forensics tools.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.22.1";
+  tags = [ "security" "forensics" "disk-analysis" "investigation" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.autopsy;

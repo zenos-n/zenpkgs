@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ahoy";
+  summary = "Create self-documenting cli programs from YAML files";
+  description = ''
+    Create self-documenting cli programs from YAML files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.0";
+  tags = [ "development" "automation" "tasks" "yaml" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ahoy;

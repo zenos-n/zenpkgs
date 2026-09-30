@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gephi";
+  summary = "Platform for visualizing and manipulating large graphs";
+  description = ''
+    Platform for visualizing and manipulating large graphs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.1";
+  tags = [ "science" "graphs" "visualization" "data-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.gephi;

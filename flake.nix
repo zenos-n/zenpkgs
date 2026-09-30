@@ -517,7 +517,7 @@
                 builtins.toJSON (interface.registryDocs registry)
               );
               zen-dsl = dsl.zenDsl;
-              zenos-rebuild = pkgs.zenos.programs.zenos-rebuild;
+              zenos-rebuild = pkgs.zenos.apps.system.zenos.zenos-rebuild;
             };
           }
       );
@@ -598,6 +598,30 @@
           };
         in
         {
+          user-options-vm = import ./tests/user-options-vm.nix {
+            pkgs = dsl.bootstrapPkgs;
+            zenosModule = self.nixosModules.default;
+            inherit (dsl) zenDsl;
+            homeManagerPath = inputs.home-manager.outPath;
+          };
+          desktop-options-vm = import ./tests/desktop-options-vm.nix {
+            pkgs = dsl.bootstrapPkgs;
+            zenosModule = self.nixosModules.default;
+            inherit (dsl) zenDsl;
+          };
+          package-catalog-vm = import ./tests/package-catalog-vm.nix {
+            pkgs = dsl.bootstrapPkgs;
+            zenosModule = self.nixosModules.default;
+            inherit (dsl) zenDsl;
+            sourceRoot = builtins.path {
+              path = self;
+              name = "zenpkgs-catalog-source";
+              filter = path: _:
+                path == toString self || builtins.elem
+                  (builtins.head (nixpkgs.lib.splitString "/" (nixpkgs.lib.removePrefix "${self}/" path)))
+                  [ "structure.zstr" "pkgs" "modules" "docs" ];
+            };
+          };
           interface = interface.mkCheck {
             inherit pkgs registry;
             name = "zenpkgs-interface-check";

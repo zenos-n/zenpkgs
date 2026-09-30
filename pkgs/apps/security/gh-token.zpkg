@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-token";
+  summary = "Manage installation access tokens for GitHub apps from your terminal";
+  description = ''
+    Manage installation access tokens for GitHub apps from your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.10";
+  tags = [ "security" "github" "authentication" "tokens" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-token;

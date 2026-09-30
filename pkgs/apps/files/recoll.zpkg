@@ -1,0 +1,15 @@
+_meta = {
+  name = "Recoll";
+  summary = "Full-text search tool";
+  description = ''
+    Recoll is an Xapian frontend that can search through files, archive
+    members, email attachments.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.43.9";
+  tags = [ "files" "search" "documents" "office" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.recoll;

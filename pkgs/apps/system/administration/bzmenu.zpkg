@@ -1,0 +1,16 @@
+_meta = {
+  name = "bzmenu";
+  summary = "Launcher-driven Bluetooth manager for Linux";
+  description = ''
+    Use `bzmenu --launcher <launcher command>`
+    Supported launchers are: `dmenu`, `fuzzel`, `rofi`, `walker` and `custom` with `stdin`
+    for details refer to https://github.com/e-tho/bzmenu/blob/main/README.md#usage
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "system" "administration" "bluetooth" "devices" "launcher" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.bzmenu;

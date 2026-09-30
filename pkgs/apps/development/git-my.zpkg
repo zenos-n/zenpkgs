@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-my";
+  summary = "List remote branches if they're merged and/or available locally";
+  description = ''
+    List remote branches if they're merged and/or available locally.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.2";
+  tags = [ "development" "git" "branches" "status" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.free;
+};
+
+import $pkgs.legacy.git-my;

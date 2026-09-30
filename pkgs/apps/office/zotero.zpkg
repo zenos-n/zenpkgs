@@ -1,0 +1,14 @@
+_meta = {
+  name = "Zotero";
+  summary = "Collect, organize, cite, and share your research sources";
+  description = ''
+    Collect, organize, cite, and share your research sources.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.0.6";
+  tags = [ "office" "productivity" "research" "bibliography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.zotero;

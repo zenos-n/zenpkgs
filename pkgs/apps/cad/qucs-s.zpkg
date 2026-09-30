@@ -1,0 +1,15 @@
+_meta = {
+  name = "Qucs-S";
+  summary = "Spin-off of Qucs that allows custom simulation kernels";
+  description = ''
+    Spin-off of Qucs that allows custom simulation kernels.
+    Default version is installed with ngspice.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "25.2.0";
+  tags = [ "cad" "electronics" "simulation" "graphics" "engineering" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.qucs-s;

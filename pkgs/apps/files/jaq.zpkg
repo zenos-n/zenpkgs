@@ -1,0 +1,14 @@
+_meta = {
+  name = "jaq";
+  summary = "Jq clone focused on correctness, speed and simplicity";
+  description = ''
+    Jq clone focused on correctness, speed and simplicity.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.0";
+  tags = [ "files" "json" "data" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.jaq;

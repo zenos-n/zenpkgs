@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gmsh";
+  summary = "Three-dimensional finite element mesh generator";
+  description = ''
+    Three-dimensional finite element mesh generator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.15.0";
+  tags = [ "science" "engineering" "simulation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gmsh;

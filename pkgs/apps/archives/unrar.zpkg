@@ -1,0 +1,14 @@
+_meta = {
+  name = "UnRAR";
+  summary = "Utility for RAR archives";
+  description = ''
+    Utility for RAR archives.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.2.6";
+  tags = [ "archives" "files" "compression" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.unrar;

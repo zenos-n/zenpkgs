@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bacon";
+  summary = "Background rust code checker";
+  description = ''
+    Background rust code checker.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.23.0";
+  tags = [ "development" "rust" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.bacon;

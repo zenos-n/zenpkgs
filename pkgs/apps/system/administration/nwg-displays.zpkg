@@ -1,0 +1,14 @@
+_meta = {
+  name = "nwg-displays";
+  summary = "Output management utility for Sway, Hyprland and Niri";
+  description = ''
+    Output management utility for Sway, Hyprland and Niri.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.3";
+  tags = [ "system" "administration" "display" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.nwg-displays;

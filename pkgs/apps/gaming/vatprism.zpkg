@@ -1,0 +1,17 @@
+_meta = {
+  name = "VATprism";
+  summary = "VATSIM map and data explorer";
+  description = ''
+    VATprism is a VATSIM Map and VATSIM Data Explorer, VATSIM being the
+    Virtual Air Traffic Simulation Network. VATprism allows users to explore
+    available ATC services, connected pilots, Airports, Flight and Upper
+    Information Regions and more!
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.6";
+  tags = [ "gaming" "maps" "aviation" "flight-simulation" "vatsim" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.vatprism;

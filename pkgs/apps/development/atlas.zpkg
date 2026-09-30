@@ -1,0 +1,14 @@
+_meta = {
+  name = "Atlas";
+  summary = "Manage your database schema as code";
+  description = ''
+    Manage your database schema as code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "development" "database" "migrations" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.atlas;

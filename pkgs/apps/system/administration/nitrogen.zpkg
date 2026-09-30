@@ -1,0 +1,17 @@
+_meta = {
+  name = "Nitrogen";
+  summary = "Wallpaper browser and setter for X11";
+  description = ''
+    nitrogen is a lightweight utility that can set the root background on X11.
+    It operates independently of any desktop environment, and supports
+    multi-head with Xinerama. Wallpapers are browsable with a convenient GUI,
+    and settings are stored in a human-readable config file.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.1";
+  tags = [ "system" "administration" "wallpaper" "theming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.nitrogen;

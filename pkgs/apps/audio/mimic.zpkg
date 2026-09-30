@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mimic";
+  summary = "Mycroft's TTS engine, based on CMU's Flite (Festival Lite)";
+  description = ''
+    Mycroft's TTS engine, based on CMU's Flite (Festival Lite).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0.1";
+  tags = [ "audio" "speech" "accessibility" "text-to-speech" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.free;
+};
+
+import $pkgs.legacy.mimic;

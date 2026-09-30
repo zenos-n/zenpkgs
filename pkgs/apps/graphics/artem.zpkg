@@ -1,0 +1,14 @@
+_meta = {
+  name = "artem";
+  summary = "Small CLI program to convert images to ASCII art";
+  description = ''
+    Small CLI program to convert images to ASCII art.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.0";
+  tags = [ "graphics" "ascii" "images" "conversion" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.artem;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Detekt";
+  summary = "Static code analysis for Kotlin";
+  description = ''
+    Static code analysis for Kotlin.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.23.8";
+  tags = [ "development" "kotlin" "static-analysis" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.detekt;

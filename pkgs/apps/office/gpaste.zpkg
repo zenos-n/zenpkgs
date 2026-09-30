@@ -1,0 +1,14 @@
+_meta = {
+  name = "GPaste";
+  summary = "Clipboard management system with GNOME integration";
+  description = ''
+    Clipboard management system with GNOME integration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "45.5";
+  tags = [ "office" "productivity" "clipboard" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.gpaste;

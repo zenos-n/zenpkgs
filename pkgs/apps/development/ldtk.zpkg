@@ -1,0 +1,14 @@
+_meta = {
+  name = "LDtk";
+  summary = "Modern, lightweight and efficient 2D level editor";
+  description = ''
+    Modern, lightweight and efficient 2D level editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.3";
+  tags = [ "development" "gaming" "game-development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ldtk;

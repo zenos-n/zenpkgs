@@ -1,0 +1,16 @@
+_meta = {
+  name = "GitLab CI Local";
+  summary = "Run gitlab pipelines locally as shell executor or docker executor";
+  description = ''
+    Tired of pushing to test your .gitlab-ci.yml?
+    Run gitlab pipelines locally as shell executor or docker executor.
+    Get rid of all those dev specific shell scripts and make files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.64.1";
+  tags = [ "development" "gitlab" "ci" "local-testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitlab-ci-local;

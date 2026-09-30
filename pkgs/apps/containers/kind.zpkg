@@ -1,0 +1,14 @@
+_meta = {
+  name = "kind";
+  summary = "Kubernetes IN Docker - local clusters for testing Kubernetes";
+  description = ''
+    Kubernetes IN Docker - local clusters for testing Kubernetes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.31.0";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kind;

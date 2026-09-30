@@ -1,0 +1,14 @@
+_meta = {
+  name = "Galen";
+  summary = "Automated layout testing for websites";
+  description = ''
+    Automated layout testing for websites.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.4";
+  tags = [ "development" "web" "testing" "layout" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.galen;

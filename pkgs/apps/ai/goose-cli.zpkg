@@ -1,0 +1,14 @@
+_meta = {
+  name = "Goose";
+  summary = "Open-source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM";
+  description = ''
+    Open-source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.28.0";
+  tags = [ "ai" "development" "coding" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.goose-cli;

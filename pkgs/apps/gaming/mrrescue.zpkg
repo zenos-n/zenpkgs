@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mr. Rescue";
+  summary = "Arcade-style fire fighting game";
+  description = ''
+    Arcade-style fire fighting game.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.02d-unstable-2018-08-18";
+  tags = [ "gaming" "arcade" "action" "firefighting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.mrrescue;

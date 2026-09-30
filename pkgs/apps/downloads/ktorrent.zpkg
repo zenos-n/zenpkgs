@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "KTorrent";
+  summary = "Powerful BitTorrent client";
+  description = ''
+    Powerful BitTorrent client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.04.3";
+  tags = [ "downloads" "bittorrent" "networking" "kde" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.kdePackages.ktorrent;

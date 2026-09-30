@@ -1,0 +1,14 @@
+_meta = {
+  name = "Unciv";
+  summary = "Open-source Android/Desktop remake of Civ V";
+  description = ''
+    Open-source Android/Desktop remake of Civ V.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.19.15";
+  tags = [ "gaming" "strategy" "turn-based" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.unciv;

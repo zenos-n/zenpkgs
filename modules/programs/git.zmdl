@@ -1,0 +1,303 @@
+_meta = {
+  name = "Git version control";
+  summary = "Configure everyday version-control workflows";
+  description = ''Choose commit identity, history integration, signing and review preferences.'';
+  tags = [ "development" "git" ];
+  zenosVersion = 1.0.0Na;
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Git";
+    summary = "Install and configure Git";
+    description = ''Install Git and configure preferences for this user.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    programs.git.enable = true;
+    programs.git.settings.user.name = $lib.mkIf ($path.authorName != null) ($path.authorName);
+    programs.git.settings.user.email = $lib.mkIf ($path.authorEmail != null) ($path.authorEmail);
+    programs.git.settings.init.defaultBranch = $lib.mkIf ($path.initialBranch != null) ($path.initialBranch);
+    programs.git.settings.core.editor = $lib.mkIf ($path.commitEditor != null) ($path.commitEditor);
+    programs.git.settings.user.signingKey = $lib.mkIf ($path.signingKey != null) ($path.signingKey);
+    programs.git.settings.user.useConfigOnly = $lib.mkIf ($path.requireExplicitIdentity != null) ($path.requireExplicitIdentity);
+    programs.git.settings.commit.gpgSign = $lib.mkIf ($path.signCommits != null) ($path.signCommits);
+    programs.git.settings.tag.gpgSign = $lib.mkIf ($path.signTags != null) ($path.signTags);
+    programs.git.settings.push.autoSetupRemote = $lib.mkIf ($path.trackNewRemoteBranches != null) ($path.trackNewRemoteBranches);
+    programs.git.settings.fetch.prune = $lib.mkIf ($path.pruneDeletedRemoteBranches != null) ($path.pruneDeletedRemoteBranches);
+    programs.git.settings.rerere.enabled = $lib.mkIf ($path.rememberConflictResolutions != null) ($path.rememberConflictResolutions);
+    programs.git.settings.rerere.autoUpdate = $lib.mkIf ($path.stageReusedConflictResolutions != null) ($path.stageReusedConflictResolutions);
+    programs.git.settings.diff.colorMoved = $lib.mkIf ($path.highlightMovedLines != null) ($path.highlightMovedLines);
+    programs.git.settings.rebase.autoStash = $lib.mkIf ($path.stashBeforeRebase != null) ($path.stashBeforeRebase);
+    programs.git.settings.tag.sort = $lib.mkIf ($path.sortTagsByVersion != null) (if $path.sortTagsByVersion then "version:refname" else "refname");
+    programs.git.settings.gpg.format = $lib.mkIf ($path.signingMethod != null) ($path.signingMethod);
+    programs.git.settings.pull = $lib.mkIf ($path.pullStrategy != null) ({ rebase = $path.pullStrategy == "rebase"; ff = if $path.pullStrategy == "fast-forward-only" then "only" else true; });
+    programs.git.settings.core.autocrlf = $lib.mkIf ($path.lineEndings != null) (if $path.lineEndings == "preserve" then false else if $path.lineEndings == "normalize" then "input" else true);
+    programs.git.lfs.enable = $lib.mkIf ($path.largeFileSupport != null) ($path.largeFileSupport);
+    programs.git.ignores = $lib.mkIf ($path.ignoredFiles != null) ($path.ignoredFiles);
+  };
+};
+
+authorName = {
+  _meta = {
+    name = "Name recorded on new commits";
+    summary = "Name recorded on new commits";
+    description = ''Name recorded on new commits.  Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+authorEmail = {
+  _meta = {
+    name = "Email address recorded on new commits";
+    summary = "Email address recorded on new commits";
+    description = ''Email address recorded on new commits.  Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+initialBranch = {
+  _meta = {
+    name = "Initial branch name for new repositories";
+    summary = "Initial branch name for new repositories";
+    description = ''Initial branch name for new repositories.  Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+commitEditor = {
+  _meta = {
+    name = "Editor command used for commit messages";
+    summary = "Editor command used for commit messages";
+    description = ''Editor command used for commit messages.  Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+signingKey = {
+  _meta = {
+    name = "Key identifier used to sign commits and tags";
+    summary = "Key identifier used to sign commits and tags";
+    description = ''Key identifier used to sign commits and tags.  Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+requireExplicitIdentity = {
+  _meta = {
+    name = "Require a configured identity before creating commits";
+    summary = "Require a configured identity before creating commits";
+    description = ''Require a configured identity before creating commits. Prevents Git from guessing an identity from the machine account. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+signCommits = {
+  _meta = {
+    name = "Sign new commits by default";
+    summary = "Sign new commits by default";
+    description = ''Sign new commits by default. Requires a suitable signing key and signing tool. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+signTags = {
+  _meta = {
+    name = "Sign new annotated tags by default";
+    summary = "Sign new annotated tags by default";
+    description = ''Sign new annotated tags by default. Requires a suitable signing key and signing tool. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+trackNewRemoteBranches = {
+  _meta = {
+    name = "Set upstream tracking when first pushing a new branch";
+    summary = "Set upstream tracking when first pushing a new branch";
+    description = ''Set upstream tracking when first pushing a new branch. Applies to simple, upstream and current push modes. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+pruneDeletedRemoteBranches = {
+  _meta = {
+    name = "Remove remote-tracking branches deleted on the remote";
+    summary = "Remove remote-tracking branches deleted on the remote";
+    description = ''Remove remote-tracking branches deleted on the remote. Runs during fetch; does not delete local branches. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+rememberConflictResolutions = {
+  _meta = {
+    name = "Record and reuse resolutions of repeated merge conflicts";
+    summary = "Record and reuse resolutions of repeated merge conflicts";
+    description = ''Record and reuse resolutions of repeated merge conflicts. Reuses previously recorded solutions to matching conflicts. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+stageReusedConflictResolutions = {
+  _meta = {
+    name = "Stage conflict resolutions that Git successfully reuses";
+    summary = "Stage conflict resolutions that Git successfully reuses";
+    description = ''Stage conflict resolutions that Git successfully reuses. Requires remembered conflict resolutions. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+highlightMovedLines = {
+  _meta = {
+    name = "Highlight moved lines in diffs";
+    summary = "Highlight moved lines in diffs";
+    description = ''Highlight moved lines in diffs. Uses the Git default moved-line coloring mode. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+stashBeforeRebase = {
+  _meta = {
+    name = "Temporarily stash local changes before rebasing";
+    summary = "Temporarily stash local changes before rebasing";
+    description = ''Temporarily stash local changes before rebasing. Restores the changes after the rebase; restoration can require conflict resolution. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+sortTagsByVersion = {
+  _meta = {
+    name = "Sort tag names by version rather than alphabetically";
+    summary = "Sort tag names by version rather than alphabetically";
+    description = ''Sort tag names by version rather than alphabetically.  Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+signingMethod = {
+  _meta = {
+    name = "Method used to sign commits and tags";
+    summary = "Method used to sign commits and tags";
+    description = ''Method used to sign commits and tags. The appropriate signing tool and credentials must be available. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "openpgp" "ssh" "x509" ]) $type.null ];
+    default = null;
+  };
+};
+
+pullStrategy = {
+  _meta = {
+    name = "How pulling integrates remote changes";
+    summary = "How pulling integrates remote changes";
+    description = ''How pulling integrates remote changes. Merge preserves local commits with a merge when needed; rebase replays them; fast-forward-only refuses divergent history. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "merge" "rebase" "fast-forward-only" ]) $type.null ];
+    default = null;
+  };
+};
+
+lineEndings = {
+  _meta = {
+    name = "Line-ending conversion for text files";
+    summary = "Line-ending conversion for text files";
+    description = ''Line-ending conversion for text files. Preserve disables automatic conversion; normalize converts committed CRLF to LF; windows also checks text out as CRLF. Repository attributes can override this policy. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "preserve" "normalize" "windows" ]) $type.null ];
+    default = null;
+  };
+};
+
+largeFileSupport = {
+  _meta = {
+    name = "Track large files with Git LFS";
+    summary = "Track large files with Git LFS";
+    description = ''Track large files with Git LFS. Installs and configures Git LFS; repositories must still select which files use LFS. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+ignoredFiles = {
+  _meta = {
+    name = "File patterns ignored across repositories";
+    summary = "File patterns ignored across repositories";
+    description = ''File patterns ignored across repositories. Patterns use gitignore syntax; already tracked files remain tracked. Null keeps the existing program policy.'';
+    tags = [ "development" "git" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};

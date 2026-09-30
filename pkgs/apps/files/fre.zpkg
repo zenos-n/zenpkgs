@@ -1,0 +1,14 @@
+_meta = {
+  name = "fre";
+  summary = "CLI tool for tracking your most-used directories and files";
+  description = ''
+    CLI tool for tracking your most-used directories and files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.1";
+  tags = [ "files" "navigation" "terminal" "frecency" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fre;

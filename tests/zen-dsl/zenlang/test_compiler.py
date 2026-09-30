@@ -975,7 +975,7 @@ class TreeCompilerTests(unittest.TestCase):
                 documents["modules/demo.zmdl"].span.source,
             )
 
-    def test_tree_rejects_case_collisions_and_file_count_overflow(self) -> None:
+    def test_tree_rejects_case_collisions(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             modules = root / "modules"
@@ -985,11 +985,21 @@ class TreeCompilerTests(unittest.TestCase):
             with self.assertRaisesRegex(CompilationError, "case-colliding"):
                 check_tree(root)
 
-            (modules / "name.ZMDL").unlink()
-            (root / "other.zpkg").write_text("value = true;", encoding="utf-8")
-            with patch("zenlang.compiler.MAX_TREE_FILES", 1):
-                with self.assertRaisesRegex(CompilationError, "maximum of 1"):
-                    check_tree(root)
+    def test_tree_compiles_more_than_4096_sources(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            packages = root / "pkgs"
+            packages.mkdir()
+            for index in reversed(range(4097)):
+                (packages / f"package-{index:04d}.zpkg").write_text(
+                    "import $pkgs.legacy.hello;", encoding="utf-8"
+                )
+            bundle = compile_tree(root, mode="interface")
+            paths = [source["path"] for source in bundle["sources"]]
+            self.assertEqual(len(paths), 4097)
+            self.assertEqual(paths, sorted(paths))
+            self.assertEqual(paths[0], "pkgs/package-0000.zpkg")
+            self.assertEqual(paths[-1], "pkgs/package-4096.zpkg")
 
     def test_tree_rejects_noncanonical_module_paths_and_id_mismatches(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

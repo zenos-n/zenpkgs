@@ -1,0 +1,14 @@
+_meta = {
+  name = "DuckDB";
+  summary = "Embeddable SQL OLAP Database Management System";
+  description = ''
+    Embeddable SQL OLAP Database Management System.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.2";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.duckdb;

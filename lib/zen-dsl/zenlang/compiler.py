@@ -42,7 +42,6 @@ from .model import (
 
 DESCRIPTOR_VERSION = "zenlang.semantic/2"
 BUNDLE_VERSION = "zenlang.bundle/2"
-MAX_TREE_FILES = 4096
 _RESERVED_MODULE_LEAF_NAMES = frozenset(("default", "index", "module"))
 
 
@@ -200,10 +199,6 @@ def _discover_tree(root: Path) -> list[tuple[str, Path]]:
                         continue
                     relative = Path(entry.path).relative_to(root).as_posix()
                     discovered.append((relative, Path(entry.path)))
-                    if len(discovered) > MAX_TREE_FILES:
-                        raise CompilationError(
-                            f"source file count exceeds the maximum of {MAX_TREE_FILES}"
-                        )
     except CompilationError:
         raise
     except OSError as error:
@@ -1762,7 +1757,14 @@ def _zmdl_scope_actions(
             and _assignment_path(statement)[0] != "_meta"
         }
     )
-    if isinstance(emitter, _MountEmitter) and scope_value == "cfg" and "enable" not in declared_names:
+    # Collection keys are user data, including a key literally named "enable".
+    # Only ordinary module records receive the runtime's implicit switch.
+    has_freeform = any(
+        isinstance(item, Assignment) and isinstance(item.target, StructuralMarker)
+        and item.target.kind == "freeform" for item in effective
+    )
+    if (isinstance(emitter, _MountEmitter) and scope_value == "cfg"
+            and "enable" not in declared_names and not has_freeform):
         declared_names.append("enable")
     actions: list[str] = []
     for statement in effective:

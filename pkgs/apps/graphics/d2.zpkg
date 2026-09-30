@@ -1,0 +1,14 @@
+_meta = {
+  name = "D2";
+  summary = "Modern diagram scripting language that turns text to diagrams";
+  description = ''
+    Modern diagram scripting language that turns text to diagrams.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.1";
+  tags = [ "graphics" "diagrams" "development" "documentation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.d2;

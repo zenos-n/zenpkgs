@@ -1,0 +1,14 @@
+_meta = {
+  name = "dblatex";
+  summary = "Program to convert DocBook to DVI, PostScript or PDF via LaTeX or ConTeXt";
+  description = ''
+    Program to convert DocBook to DVI, PostScript or PDF via LaTeX or ConTeXt.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.12";
+  tags = [ "office" "docbook" "latex" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.dblatex;

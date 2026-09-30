@@ -1,0 +1,14 @@
+_meta = {
+  name = "GPL Arcade Volleyball";
+  summary = "Remake of AV Arcade Volleyball";
+  description = ''
+    Remake of AV Arcade Volleyball.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "gaming" "sports" "volleyball" "arcade" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gav;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Go";
+  summary = "Go Programming language";
+  description = ''
+    Go Programming language.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.26.6";
+  tags = [ "development" "go" "toolchain" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.go;

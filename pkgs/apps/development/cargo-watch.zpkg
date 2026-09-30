@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-watch";
+  summary = "Cargo subcommand for watching over Cargo project's source";
+  description = ''
+    Cargo subcommand for watching over Cargo project's source.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.5.3";
+  tags = [ "development" "rust" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc0;
+};
+
+import $pkgs.legacy.cargo-watch;

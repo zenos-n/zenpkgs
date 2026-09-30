@@ -1,0 +1,15 @@
+_meta = {
+  name = "Clapper";
+  summary = "GNOME media player built using GTK4 toolkit and powered by GStreamer with OpenGL rendering";
+  description = ''
+    Clapper is a GNOME media player built using the GTK4 toolkit.
+    The media player is using GStreamer as a media backend.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.0";
+  tags = [ "video" "player" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.clapper;

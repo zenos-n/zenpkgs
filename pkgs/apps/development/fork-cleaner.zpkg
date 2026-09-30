@@ -1,0 +1,14 @@
+_meta = {
+  name = "fork-cleaner";
+  summary = "Quickly clean up unused forks on your GitHub account";
+  description = ''
+    Quickly clean up unused forks on your GitHub account.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.0";
+  tags = [ "development" "git" "github" "repository-management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fork-cleaner;

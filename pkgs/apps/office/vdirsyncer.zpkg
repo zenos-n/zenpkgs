@@ -1,0 +1,14 @@
+_meta = {
+  name = "vdirsyncer";
+  summary = "Synchronize calendars and contacts";
+  description = ''
+    Synchronize calendars and contacts.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.20.0";
+  tags = [ "office" "calendar" "contacts" "synchronization" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.vdirsyncer;

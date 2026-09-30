@@ -1,0 +1,19 @@
+_meta = {
+  name = "yt-dlp";
+  summary = "Feature-rich command-line audio/video downloader";
+  description = ''
+    yt-dlp is a youtube-dl fork based on the now inactive youtube-dlc.
+
+    youtube-dl is a small, Python-based command-line program
+    to download videos from YouTube.com and a few more sites.
+    youtube-dl is released to the public domain, which means
+    you can modify it, redistribute it or use it however you like.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.08.19";
+  tags = [ "downloads" "networking" "video" "audio" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.yt-dlp;

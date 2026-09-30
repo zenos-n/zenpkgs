@@ -1,0 +1,14 @@
+_meta = {
+  name = "SuperSlicer";
+  summary = "PrusaSlicer fork with more features and faster development cycle";
+  description = ''
+    PrusaSlicer fork with more features and faster development cycle.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.59.13";
+  tags = [ "cad" "3d-printing" "manufacturing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.super-slicer;

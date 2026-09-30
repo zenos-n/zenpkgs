@@ -1,0 +1,14 @@
+_meta = {
+  name = "SmoothVideo Project";
+  summary = "SmoothVideo Project 4 (SVP4) converts any video to 60 fps (and even higher) and performs this in real time right in your favorite video player";
+  description = ''
+    SmoothVideo Project 4 (SVP4) converts any video to 60 fps (and even higher) and performs this in real time right in your favorite video player.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.7.305";
+  tags = [ "video" "interpolation" "playback" "processing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.svp;

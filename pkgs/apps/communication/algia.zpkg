@@ -1,0 +1,14 @@
+_meta = {
+  name = "algia";
+  summary = "CLI application for nostr";
+  description = ''
+    CLI application for nostr.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.120";
+  tags = [ "communication" "social" "nostr" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.algia;

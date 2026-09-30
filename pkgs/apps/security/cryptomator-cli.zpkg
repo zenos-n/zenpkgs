@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cryptomator CLI";
+  summary = "Command line program to access encrypted Cryptomator vaults";
+  description = ''
+    Command line program to access encrypted Cryptomator vaults.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.2";
+  tags = [ "security" "encryption" "vaults" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.cryptomator-cli;

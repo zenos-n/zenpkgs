@@ -1,0 +1,15 @@
+_meta = {
+  name = "GZDoom";
+  summary = "Modder-friendly OpenGL and Vulkan source port based on the DOOM engine";
+  description = ''
+    GZDoom is a feature centric port for all DOOM engine games, based on
+    ZDoom, adding an OpenGL renderer and powerful scripting capabilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.14.2";
+  tags = [ "gaming" "engine" "shooter" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gzdoom;

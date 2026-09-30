@@ -1,0 +1,14 @@
+_meta = {
+  name = "e1s";
+  summary = "Easily Manage AWS ECS Resources in Terminal";
+  description = ''
+    Easily Manage AWS ECS Resources in Terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.53";
+  tags = [ "containers" "aws" "ecs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.e1s;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "stressapptest";
+  summary = "Userspace memory and IO stress test tool";
+  description = ''
+    Userspace memory and IO stress test tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.11";
+  tags = [ "system" "monitoring" "hardware" "testing" "benchmarking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.stressapptest;

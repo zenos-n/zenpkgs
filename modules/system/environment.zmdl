@@ -1,0 +1,105 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "System environment configuration";
+  summary = "System environment configuration";
+  description = ''Configure System environment with typed preferences. Unset values preserve existing behavior.'';
+  tags = [ "shell" "environment" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+variables = {
+  _meta = {
+    name = "Environment variables for system shells";
+    summary = "Environment variables for system shells";
+    description = ''Environment variables for system shells. No credentials. Values apply to shell sessions; sessionVariables also applies during PAM login. Null preserves existing behavior.'';
+    tags = [ "shell" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+  s!! {
+    environment.variables = $lib.mkIf ($path.variables != null) ($path.variables);
+  };
+};
+
+sessionVariables = {
+  _meta = {
+    name = "Environment variables for login sessions";
+    summary = "Environment variables for login sessions";
+    description = ''Environment variables for login sessions. No credentials. New login sessions receive the values. Null preserves existing behavior.'';
+    tags = [ "shell" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+  s!! {
+    environment.sessionVariables = $lib.mkIf ($path.sessionVariables != null) ($path.sessionVariables);
+  };
+};
+
+homeBinInPath = {
+  _meta = {
+    name = "Add each user bin directory to PATH";
+    summary = "Add each user bin directory to PATH";
+    description = ''Add each user bin directory to PATH. Null preserves existing behavior.'';
+    tags = [ "shell" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    environment.homeBinInPath = $lib.mkIf ($path.homeBinInPath != null) ($path.homeBinInPath);
+  };
+};
+
+localBinInPath = {
+  _meta = {
+    name = "Add each user local bin directory to PATH";
+    summary = "Add each user local bin directory to PATH";
+    description = ''Add each user local bin directory to PATH. Null preserves existing behavior.'';
+    tags = [ "shell" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    environment.localBinInPath = $lib.mkIf ($path.localBinInPath != null) ($path.localBinInPath);
+  };
+};
+
+linkedDirectories = {
+  _meta = {
+    name = "Package directories linked into the system profile";
+    summary = "Package directories linked into the system profile";
+    description = ''Package directories linked into the system profile. Additive list; existing profile links remain. Null preserves existing behavior.'';
+    tags = [ "shell" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  s!! {
+    environment.pathsToLink = $lib.mkIf ($path.linkedDirectories != null) ($path.linkedDirectories);
+  };
+};
+
+extraPackageOutputs = {
+  _meta = {
+    name = "Additional outputs installed with system packages";
+    summary = "Additional outputs installed with system packages";
+    description = ''Additional outputs installed with system packages. Additive output names such as dev or info; does not select additional packages. Null preserves existing behavior.'';
+    tags = [ "shell" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  s!! {
+    environment.extraOutputsToInstall = $lib.mkIf ($path.extraPackageOutputs != null) ($path.extraPackageOutputs);
+  };
+};

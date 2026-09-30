@@ -1,0 +1,16 @@
+_meta = {
+  name = "webOS CLI";
+  summary = "Collection of commands used for creating, packaging, installing, and launching web apps for LG webOS TV";
+  description = ''
+    webOS CLI (Command Line Interface) provides a collection of commands used for creating, packaging, installing,
+    and launching web apps in the command line environment. The CLI allows you to develop and test your app without using
+    a specific IDE.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.3";
+  tags = [ "development" "webos" "television" "applications" "deployment" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ares-cli;

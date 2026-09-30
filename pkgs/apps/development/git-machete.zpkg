@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-machete";
+  summary = "Git repository organizer and rebase/merge workflow automation tool";
+  description = ''
+    Git repository organizer and rebase/merge workflow automation tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.40.1";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-machete;

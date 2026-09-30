@@ -1,0 +1,14 @@
+_meta = {
+  name = "Helm";
+  summary = "Package manager for kubernetes";
+  description = ''
+    Package manager for kubernetes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.20.2";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kubernetes-helm;

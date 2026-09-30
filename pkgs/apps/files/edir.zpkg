@@ -1,0 +1,14 @@
+_meta = {
+  name = "edir";
+  summary = "Program to rename and remove files and directories using your editor";
+  description = ''
+    Program to rename and remove files and directories using your editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.32";
+  tags = [ "files" "renaming" "editor" "management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.edir;

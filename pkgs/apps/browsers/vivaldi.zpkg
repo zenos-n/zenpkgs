@@ -1,0 +1,14 @@
+_meta = {
+  name = "Vivaldi";
+  summary = "Browser for our Friends, powerful and personal";
+  description = ''
+    Browser for our Friends, powerful and personal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.1.4087.70";
+  tags = [ "browsers" "internet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.vivaldi;

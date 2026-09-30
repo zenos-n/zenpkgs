@@ -1,0 +1,14 @@
+_meta = {
+  name = "reMarkable Connection Utility";
+  summary = "All-in-one offline/local management software for reMarkable e-paper tablets";
+  description = ''
+    All-in-one offline/local management software for reMarkable e-paper tablets.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.34";
+  tags = [ "office" "tablets" "ebooks" "remarkable" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.rcu;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Partimage";
+  summary = "Opensource disk backup software";
+  description = ''
+    Opensource disk backup software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.9";
+  tags = [ "storage" "backup" "recovery" "disk-images" "disks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.partimage;

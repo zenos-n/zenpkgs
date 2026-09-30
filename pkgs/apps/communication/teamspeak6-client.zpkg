@@ -1,0 +1,14 @@
+_meta = {
+  name = "TeamSpeak 6 Beta";
+  summary = "TeamSpeak voice communication tool (beta version)";
+  description = ''
+    TeamSpeak voice communication tool (beta version).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.0.0-beta4";
+  tags = [ "communication" "voice" "gaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.teamspeak;
+};
+
+import $pkgs.legacy.teamspeak6-client;

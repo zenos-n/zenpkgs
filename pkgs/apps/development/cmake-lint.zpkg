@@ -1,0 +1,14 @@
+_meta = {
+  name = "cmake-lint";
+  summary = "Static code checker for CMake files";
+  description = ''
+    Static code checker for CMake files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.3";
+  tags = [ "development" "cmake" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cmake-lint;

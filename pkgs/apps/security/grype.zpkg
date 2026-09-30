@@ -1,0 +1,15 @@
+_meta = {
+  name = "grype";
+  summary = "Vulnerability scanner for container images and filesystems";
+  description = ''
+    As a vulnerability scanner grype is able to scan the contents of a
+    container image or filesystem to find known vulnerabilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.112.0";
+  tags = [ "security" "development" "auditing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.grype;

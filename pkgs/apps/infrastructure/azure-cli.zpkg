@@ -1,0 +1,29 @@
+_meta = {
+  name = "Azure CLI";
+  summary = "Next generation multi-platform command line experience for Azure";
+  description = ''
+    The Azure Command-Line Interface (CLI) is a cross-platform
+    command-line tool to connect to Azure and execute administrative
+    commands on Azure resources. It allows the execution of commands
+    through a terminal using interactive command-line prompts or a script.
+
+    `azure-cli` has extension support. For example, to install the `aks-preview` extension, use
+
+    ```nix
+    environment.systemPackages = [
+      (azure-cli.withExtensions [ azure-cli.extensions.aks-preview ])
+    ];
+    ```
+
+    To make the `azure-cli` immutable and prevent clashes in case `azure-cli` is also installed via other package managers,
+    some configuration files were moved into the derivation. This can be disabled by overriding `withImmutableConfig = false`
+    when building `azure-cli`.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.86.0";
+  tags = [ "infrastructure" "cloud" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.azure-cli;

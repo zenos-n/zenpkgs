@@ -1,0 +1,17 @@
+_meta = {
+  name = "NetSurf";
+  summary = "Free, open source, small web browser";
+  description = ''
+    NetSurf is a free, open source web browser. It is written in C and
+    released under the GNU Public Licence version 2. NetSurf has its own
+    layout and rendering engine entirely written from scratch. It is small and
+    capable of handling many of the web standards in use today.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.11";
+  tags = [ "browsers" "web" "internet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.netsurf-browser;

@@ -1,0 +1,153 @@
+_meta = {
+  name = "Terminal sessions";
+  tags = [ "desktop" "gnome-console" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Terminal sessions";
+  description = ''Terminal sessions. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = enableOption {
+  _meta.summary = "Install and configure terminal sessions";
+  _meta.name = "Enable";
+  _meta.description = ''Install and configure terminal sessions.'';
+  _meta.tags = [ "desktop" "gnome-console" ];
+  _meta.maintainers = [ $m.doromiert ];
+  _meta.license = $l.napl;
+  u! {
+    home.packages = [ $pkgs.legacy.gnome-console ];
+    assertions = [
+      { assertion = $path.fontScale >= 0.5 && $path.fontScale <= 4.0; message = "programs.gnome-console.fontScale must be between 0.5 and 4.0."; }
+    ];
+    dconf.settings = {
+          "org/gnome/Console"."scrollback-lines" = $lib.gvariant.mkInt64 ($path.scrollbackLines);
+          "org/gnome/Console"."audible-bell" = $path.audibleBell;
+          "org/gnome/Console"."visual-bell" = $path.visualBell;
+          "org/gnome/Console"."font-scale" = $lib.gvariant.mkDouble ($path.fontScale);
+          "org/gnome/Console"."theme" = $path.theme;
+          "org/gnome/Console"."ignore-scrollback-limit" = $path.unlimitedScrollback;
+          "org/gnome/Console"."restore-window-size" = $path.restoreWindowSize;
+          "org/gnome/Console"."use-system-font" = $path.useSystemFont;
+          "org/gnome/Console"."custom-font" = $path.customFont;
+    };
+  };
+};
+
+scrollbackLines = {
+  _meta = {
+    name = "Scrollback lines";
+    tags = [ "desktop" "gnome-console" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 10000;
+    summary = "Scrollback lines";
+    description = ''Scrollback lines'';
+  };
+};
+
+audibleBell = {
+  _meta = {
+    name = "Audible bell";
+    tags = [ "desktop" "gnome-console" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Audible bell";
+    description = ''Audible bell'';
+  };
+};
+
+visualBell = {
+  _meta = {
+    name = "Visual bell";
+    tags = [ "desktop" "gnome-console" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Visual bell";
+    description = ''Visual bell'';
+  };
+};
+
+fontScale = {
+  _meta = {
+    name = "Font scale";
+    tags = [ "desktop" "gnome-console" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 1.0;
+    summary = "Font scale";
+    description = ''Font scale'';
+  };
+};
+
+theme = {
+  _meta = {
+    name = "Theme";
+    tags = [ "desktop" "gnome-console" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "auto" "night" "day" "hacker" ];
+    default = "night";
+    summary = "Theme";
+    description = ''Theme'';
+  };
+};
+
+unlimitedScrollback = {
+  _meta = {
+    name = "Unlimited scrollback";
+    tags = [ "desktop" "gnome-console" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Unlimited scrollback";
+    description = ''Unlimited scrollback'';
+  };
+};
+
+restoreWindowSize = {
+  _meta = {
+    name = "Restore window size";
+    tags = [ "desktop" "gnome-console" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Restore window size";
+    description = ''Restore window size'';
+  };
+};
+
+useSystemFont = {
+  _meta = {
+    name = "Use system font";
+    tags = [ "desktop" "gnome-console" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Use system font";
+    description = ''Use system font'';
+  };
+};
+
+customFont = {
+  _meta = {
+    name = "Custom font";
+    tags = [ "desktop" "gnome-console" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "";
+    summary = "Custom font";
+    description = ''Custom font'';
+  };
+};
+

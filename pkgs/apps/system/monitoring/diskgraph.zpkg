@@ -1,0 +1,14 @@
+_meta = {
+  name = "Diskgraph";
+  summary = "Terminal-based monitor for disk I/O";
+  description = ''
+    Terminal-based monitor for disk I/O.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-11-13";
+  tags = [ "system" "monitoring" "disk-io" "performance" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.diskgraph;

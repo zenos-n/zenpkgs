@@ -1,0 +1,14 @@
+_meta = {
+  name = "Briar";
+  summary = "Decentralized and secure messenger";
+  description = ''
+    Decentralized and secure messenger.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.5-beta";
+  tags = [ "communication" "chat" "privacy" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.briar-desktop;

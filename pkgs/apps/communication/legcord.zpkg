@@ -1,0 +1,14 @@
+_meta = {
+  name = "Legcord";
+  summary = "Lightweight, alternative desktop client for Discord";
+  description = ''
+    Lightweight, alternative desktop client for Discord.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.4";
+  tags = [ "communication" "discord" "messaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.osl3;
+};
+
+import $pkgs.legacy.legcord;

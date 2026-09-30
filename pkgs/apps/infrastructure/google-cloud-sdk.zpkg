@@ -1,0 +1,14 @@
+_meta = {
+  name = "Google Cloud CLI";
+  summary = "Tools for the google cloud platform";
+  description = ''
+    The Google Cloud SDK for GCE hosts. Used by `google-cloud-sdk` only on GCE guests.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "565.0.0";
+  tags = [ "infrastructure" "cloud" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.free;
+};
+
+import $pkgs.legacy.google-cloud-sdk;

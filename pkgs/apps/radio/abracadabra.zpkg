@@ -1,0 +1,14 @@
+_meta = {
+  name = "Abraca DAB Radio";
+  summary = "DAB/DAB+ radio application";
+  description = ''
+    DAB/DAB+ radio application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.1.1";
+  tags = [ "radio" "audio" "dab" "broadcast" "sdr" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.abracadabra;

@@ -1,0 +1,15 @@
+_meta = {
+  name = "certstrap";
+  summary = "Tools to bootstrap CAs, certificate requests, and signed certificates";
+  description = ''
+    A simple certificate manager written in Go, to bootstrap your own
+    certificate authority and public key infrastructure. Adapted from etcd-ca.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0";
+  tags = [ "security" "cryptography" "certificates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.certstrap;

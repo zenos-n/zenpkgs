@@ -1,0 +1,16 @@
+_meta = {
+  name = "Bear";
+  summary = "Tool that generates a compilation database for clang tooling";
+  description = ''
+    Note: the bear command is very useful to generate compilation commands
+    e.g. for YouCompleteMe.  You just enter your development nix-shell
+    and run `bear make`.  It's not perfect, but it gets a long way.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.4";
+  tags = [ "development" "build" "compilation-database" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.bear;

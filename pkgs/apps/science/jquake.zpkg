@@ -1,0 +1,14 @@
+_meta = {
+  name = "JQuake";
+  summary = "Real-time earthquake map of Japan";
+  description = ''
+    Real-time earthquake map of Japan.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.5";
+  tags = [ "science" "earthquakes" "maps" "japan" "monitoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.jquake;

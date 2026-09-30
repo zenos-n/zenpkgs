@@ -1,0 +1,186 @@
+_meta = {
+  name = "Desktop font rendering";
+  tags = [ "desktop" "fonts" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Choose readable text and fallback fonts";
+  description = ''Configure font rendering and preferred font families for applications.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+smoothEdges = {
+  _meta = {
+    name = "Smooth the edges of text";
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Smooth the edges of text";
+    description = ''Smooth the edges of text.  Null keeps the existing system policy.'';
+  };
+  s!! {
+    fonts.fontconfig.antialias = $lib.mkIf ($path.smoothEdges != null) $path.smoothEdges;
+  };
+};
+
+alignToPixels = {
+  _meta = {
+    name = "Align text outlines to screen pixels";
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Align text outlines to screen pixels";
+    description = ''Align text outlines to screen pixels.  Null keeps the existing system policy.'';
+  };
+  s!! {
+    fonts.fontconfig.hinting.enable = $lib.mkIf ($path.alignToPixels != null) $path.alignToPixels;
+  };
+};
+
+allowBitmapFonts = {
+  _meta = {
+    name = "Allow bitmap fonts in applications";
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow bitmap fonts in applications";
+    description = ''Allow bitmap fonts in applications.  Null keeps the existing system policy.'';
+  };
+  s!! {
+    fonts.fontconfig.allowBitmaps = $lib.mkIf ($path.allowBitmapFonts != null) $path.allowBitmapFonts;
+  };
+};
+
+userPreferences = {
+  _meta = {
+    name = "Allow personal font rendering preferences";
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow personal font rendering preferences";
+    description = ''Allow personal font rendering preferences.  Null keeps the existing system policy.'';
+  };
+  s!! {
+    fonts.fontconfig.includeUserConf = $lib.mkIf ($path.userPreferences != null) $path.userPreferences;
+  };
+};
+
+sansSerifFamilies = {
+  _meta = {
+    name = "Preferred sans-serif font families";
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+    summary = "Preferred sans-serif font families";
+    description = ''Preferred sans-serif font families. Families are tried in order; fonts must be installed separately. Null keeps the existing system policy.'';
+  };
+  s!! {
+    fonts.fontconfig.defaultFonts.sansSerif = $lib.mkIf ($path.sansSerifFamilies != null) $path.sansSerifFamilies;
+  };
+};
+
+serifFamilies = {
+  _meta = {
+    name = "Preferred serif font families";
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+    summary = "Preferred serif font families";
+    description = ''Preferred serif font families. Families are tried in order; fonts must be installed separately. Null keeps the existing system policy.'';
+  };
+  s!! {
+    fonts.fontconfig.defaultFonts.serif = $lib.mkIf ($path.serifFamilies != null) $path.serifFamilies;
+  };
+};
+
+monospaceFamilies = {
+  _meta = {
+    name = "Preferred fixed-width font families";
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+    summary = "Preferred fixed-width font families";
+    description = ''Preferred fixed-width font families. Families are tried in order; fonts must be installed separately. Null keeps the existing system policy.'';
+  };
+  s!! {
+    fonts.fontconfig.defaultFonts.monospace = $lib.mkIf ($path.monospaceFamilies != null) $path.monospaceFamilies;
+  };
+};
+
+emojiFamilies = {
+  _meta = {
+    name = "Preferred emoji font families";
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+    summary = "Preferred emoji font families";
+    description = ''Preferred emoji font families. Families are tried in order; fonts must be installed separately. Null keeps the existing system policy.'';
+  };
+  s!! {
+    fonts.fontconfig.defaultFonts.emoji = $lib.mkIf ($path.emojiFamilies != null) $path.emojiFamilies;
+  };
+};
+
+pixelAlignmentStrength = {
+  _meta = {
+    name = "Strength of text alignment to screen pixels";
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "none" "slight" "medium" "full" ]) $type.null ];
+    default = null;
+    summary = "Strength of text alignment to screen pixels";
+    description = ''Strength of text alignment to screen pixels.  Null keeps the existing system policy.'';
+  };
+  s!! {
+    fonts.fontconfig.hinting.style = $lib.mkIf ($path.pixelAlignmentStrength != null) $path.pixelAlignmentStrength;
+  };
+};
+
+screenSubpixelLayout = {
+  _meta = {
+    name = "Physical subpixel layout used to render text";
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "none" "rgb" "bgr" "vrgb" "vbgr" ]) $type.null ];
+    default = null;
+    summary = "Physical subpixel layout used to render text";
+    description = ''Physical subpixel layout used to render text. Use none when the display layout is unknown; vrgb and vbgr describe vertical stripes. Null keeps the existing system policy.'';
+  };
+  s!! {
+    fonts.fontconfig.subpixel.rgba = $lib.mkIf ($path.screenSubpixelLayout != null) $path.screenSubpixelLayout;
+  };
+};
+
+packages = {
+  _meta = {
+    name = "Install font packages for all users";
+    summary = "Install font packages for all users";
+    description = ''Font family preferences choose among installed fonts. Null keeps the existing system policy.'';
+    tags = [ "desktop" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.package ]) $type.null ];
+    default = null;
+  };
+  s!! {
+    fonts.packages = $lib.mkIf ($path.packages != null) $path.packages;
+  };
+};
+

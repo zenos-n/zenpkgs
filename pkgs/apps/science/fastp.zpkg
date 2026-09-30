@@ -1,0 +1,14 @@
+_meta = {
+  name = "fastp";
+  summary = "Ultra-fast all-in-one FASTQ preprocessor";
+  description = ''
+    Ultra-fast all-in-one FASTQ preprocessor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fastp;

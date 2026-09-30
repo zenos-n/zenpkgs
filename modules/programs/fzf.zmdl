@@ -1,0 +1,205 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Fzf configuration";
+  summary = "Fzf configuration";
+  description = ''Configure Fzf with typed preferences. Unset values preserve existing behavior.'';
+  tags = [ "shell" "fzf" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+bashIntegration = {
+  _meta = {
+    name = "Enable Bash integration";
+    summary = "Enable Bash integration";
+    description = ''Enable Bash integration. Requires that shell to be managed; does not select a login shell. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+zshIntegration = {
+  _meta = {
+    name = "Enable Zsh integration";
+    summary = "Enable Zsh integration";
+    description = ''Enable Zsh integration. Requires that shell to be managed; does not select a login shell. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+fishIntegration = {
+  _meta = {
+    name = "Enable Fish integration";
+    summary = "Enable Fish integration";
+    description = ''Enable Fish integration. Requires that shell to be managed; does not select a login shell. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+fileSourceCommand = {
+  _meta = {
+    name = "Command supplying the default file list";
+    summary = "Command supplying the default file list";
+    description = ''Command supplying the default file list. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+options = {
+  _meta = {
+    name = "Default fuzzy-finder arguments";
+    summary = "Default fuzzy-finder arguments";
+    description = ''Default fuzzy-finder arguments. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+fileWidgetCommand = {
+  _meta = {
+    name = "Command supplying the Control-T picker";
+    summary = "Command supplying the Control-T picker";
+    description = ''Command supplying the Control-T picker. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+fileWidgetOptions = {
+  _meta = {
+    name = "Arguments for the Control-T picker";
+    summary = "Arguments for the Control-T picker";
+    description = ''Arguments for the Control-T picker. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+directoryWidgetCommand = {
+  _meta = {
+    name = "Command supplying the Alt-C picker";
+    summary = "Command supplying the Alt-C picker";
+    description = ''Command supplying the Alt-C picker. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+directoryWidgetOptions = {
+  _meta = {
+    name = "Arguments for the Alt-C picker";
+    summary = "Arguments for the Alt-C picker";
+    description = ''Arguments for the Alt-C picker. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+historyWidgetOptions = {
+  _meta = {
+    name = "Arguments for the history picker";
+    summary = "Arguments for the history picker";
+    description = ''Arguments for the history picker. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+colors = {
+  _meta = {
+    name = "Fuzzy-finder color settings";
+    summary = "Fuzzy-finder color settings";
+    description = ''Fuzzy-finder color settings. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+tmuxPopup = {
+  _meta = {
+    name = "Use the Tmux wrapper for shell pickers";
+    summary = "Use the Tmux wrapper for shell pickers";
+    description = ''Use the Tmux wrapper for shell pickers. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+tmuxOptions = {
+  _meta = {
+    name = "Tmux wrapper arguments";
+    summary = "Tmux wrapper arguments";
+    description = ''Tmux wrapper arguments. Null preserves existing behavior.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Fzf";
+    summary = "Install and configure Fzf";
+    description = ''Enable Fzf for the selected user scope. Preferences apply while enabled.'';
+    tags = [ "shell" "fzf" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    programs.fzf.enable = true;
+    programs.fzf.enableBashIntegration = $lib.mkIf ($path.bashIntegration != null) ($path.bashIntegration);
+    programs.fzf.enableZshIntegration = $lib.mkIf ($path.zshIntegration != null) ($path.zshIntegration);
+    programs.fzf.enableFishIntegration = $lib.mkIf ($path.fishIntegration != null) ($path.fishIntegration);
+    programs.fzf.defaultCommand = $lib.mkIf ($path.fileSourceCommand != null) ($path.fileSourceCommand);
+    programs.fzf.defaultOptions = $lib.mkIf ($path.options != null) ($path.options);
+    programs.fzf.fileWidgetCommand = $lib.mkIf ($path.fileWidgetCommand != null) ($path.fileWidgetCommand);
+    programs.fzf.fileWidgetOptions = $lib.mkIf ($path.fileWidgetOptions != null) ($path.fileWidgetOptions);
+    programs.fzf.changeDirWidgetCommand = $lib.mkIf ($path.directoryWidgetCommand != null) ($path.directoryWidgetCommand);
+    programs.fzf.changeDirWidgetOptions = $lib.mkIf ($path.directoryWidgetOptions != null) ($path.directoryWidgetOptions);
+    programs.fzf.historyWidgetOptions = $lib.mkIf ($path.historyWidgetOptions != null) ($path.historyWidgetOptions);
+    programs.fzf.colors = $lib.mkIf ($path.colors != null) ($path.colors);
+    programs.fzf.tmux.enableShellIntegration = $lib.mkIf ($path.tmuxPopup != null) ($path.tmuxPopup);
+    programs.fzf.tmux.shellIntegrationOptions = $lib.mkIf ($path.tmuxOptions != null) ($path.tmuxOptions);
+  };
+};

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Sealed Secrets";
+  summary = "Kubernetes controller and tool for one-way encrypted Secrets";
+  description = ''
+    Kubernetes controller and tool for one-way encrypted Secrets.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.36.0";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kubeseal;

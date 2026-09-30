@@ -1,0 +1,14 @@
+_meta = {
+  name = "Geph";
+  summary = "Modular Internet censorship circumvention system designed specifically to deal with national filtering";
+  description = ''
+    Modular Internet censorship circumvention system designed specifically to deal with national filtering.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.7.1";
+  tags = [ "networking" "vpn" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.gephgui-wry;

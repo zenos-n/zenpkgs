@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghr";
+  summary = "Upload multiple artifacts to GitHub Release in parallel";
+  description = ''
+    Upload multiple artifacts to GitHub Release in parallel.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.18.3";
+  tags = [ "development" "github" "releases" "artifacts" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghr;

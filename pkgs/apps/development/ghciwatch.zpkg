@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghciwatch";
+  summary = "Ghci-based file watching recompiler for Haskell development";
+  description = ''
+    Ghci-based file watching recompiler for Haskell development.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.5";
+  tags = [ "development" "haskell" "ghci" "file-watching" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghciwatch;

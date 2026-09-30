@@ -1,0 +1,14 @@
+_meta = {
+  name = "Centerpiece";
+  summary = "Your trusty omnibox search";
+  description = ''
+    Your trusty omnibox search.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "launchers" "search" "desktop" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.centerpiece;

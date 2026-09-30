@@ -1,0 +1,17 @@
+_meta = {
+  name = "Chromium";
+  summary = "Open source web browser from Google";
+  description = ''
+    Chromium is an open source web browser from Google that aims to build a
+    safer, faster, and more stable way for all Internet users to experience
+    the web. It has a minimalist user interface and provides the vast majority
+    of source code for Google Chrome (which has some additional features).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "152.0.7977.64";
+  tags = [ "browsers" "internet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.chromium;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "jEdit";
+  summary = "Programmer's text editor written in Java";
+  description = ''
+    Programmer's text editor written in Java.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.7.0";
+  tags = [ "editors" "text" "graphical" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.jedit;

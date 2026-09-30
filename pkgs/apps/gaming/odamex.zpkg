@@ -1,0 +1,14 @@
+_meta = {
+  name = "Odamex";
+  summary = "Client/server port for playing old-school Doom online";
+  description = ''
+    Client/server port for playing old-school Doom online.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "12.2.0";
+  tags = [ "gaming" "shooter" "multiplayer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.odamex;

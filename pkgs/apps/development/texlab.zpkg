@@ -1,0 +1,14 @@
+_meta = {
+  name = "texlab";
+  summary = "Implementation of the Language Server Protocol for LaTeX";
+  description = ''
+    Implementation of the Language Server Protocol for LaTeX.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.25.1";
+  tags = [ "development" "latex" "language-server" "writing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.texlab;

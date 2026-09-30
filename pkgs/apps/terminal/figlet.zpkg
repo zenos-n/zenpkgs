@@ -1,0 +1,14 @@
+_meta = {
+  name = "figlet";
+  summary = "Program for making large letters out of ordinary text";
+  description = ''
+    Program for making large letters out of ordinary text.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.5";
+  tags = [ "terminal" "text" "entertainment" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.afl21;
+};
+
+import $pkgs.legacy.figlet;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-graph";
+  summary = "Command line tool to show clear git graphs arranged for your branching model";
+  description = ''
+    Command line tool to show clear git graphs arranged for your branching model.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.0";
+  tags = [ "development" "git" "graphs" "visualization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-graph;

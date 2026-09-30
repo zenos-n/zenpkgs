@@ -1,0 +1,14 @@
+_meta = {
+  name = "GN";
+  summary = "Meta-build system that generates build files for Ninja";
+  description = ''
+    Meta-build system that generates build files for Ninja.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-03-05";
+  tags = [ "development" "build-tools" "ninja" "generators" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.gn;

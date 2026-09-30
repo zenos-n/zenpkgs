@@ -1,0 +1,14 @@
+_meta = {
+  name = "Aurea";
+  summary = "Flatpak metainfo banner previewer";
+  description = ''
+    Flatpak metainfo banner previewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.1";
+  tags = [ "graphics" "development" "flatpak" "preview" "banners" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.aurea;

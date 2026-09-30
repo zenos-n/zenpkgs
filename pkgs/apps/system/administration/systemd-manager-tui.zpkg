@@ -1,0 +1,14 @@
+_meta = {
+  name = "systemd-manager-tui";
+  summary = "Program for managing systemd services through a TUI";
+  description = ''
+    Program for managing systemd services through a TUI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.4";
+  tags = [ "system" "administration" "services" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.systemd-manager-tui;

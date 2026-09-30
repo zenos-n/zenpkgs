@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glide";
+  summary = "Linux/macOS media player based on GStreamer and GTK";
+  description = ''
+    Linux/macOS media player based on GStreamer and GTK.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.5";
+  tags = [ "video" "players" "multimedia" "gstreamer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.glide-media-player;

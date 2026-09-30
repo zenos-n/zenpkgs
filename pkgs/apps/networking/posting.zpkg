@@ -1,0 +1,14 @@
+_meta = {
+  name = "Posting";
+  summary = "Modern API client that lives in your terminal";
+  description = ''
+    Modern API client that lives in your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.10.0";
+  tags = [ "networking" "api" "development" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.posting;

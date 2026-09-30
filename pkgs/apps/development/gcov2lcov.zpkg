@@ -1,0 +1,14 @@
+_meta = {
+  name = "gcov2lcov";
+  summary = "Convert go coverage files to lcov format";
+  description = ''
+    Convert go coverage files to lcov format.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "development" "go" "code-coverage" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gcov2lcov;

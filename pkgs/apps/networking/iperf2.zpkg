@@ -1,0 +1,14 @@
+_meta = {
+  name = "iperf 2";
+  summary = "Tool to measure IP bandwidth using UDP or TCP";
+  description = ''
+    Tool to measure IP bandwidth using UDP or TCP.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.1";
+  tags = [ "networking" "benchmarking" "bandwidth" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.iperf2;

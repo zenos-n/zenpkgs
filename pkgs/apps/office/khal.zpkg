@@ -1,0 +1,14 @@
+_meta = {
+  name = "khal";
+  summary = "CLI calendar application";
+  description = ''
+    CLI calendar application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14.0";
+  tags = [ "office" "calendar" "terminal" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.khal;

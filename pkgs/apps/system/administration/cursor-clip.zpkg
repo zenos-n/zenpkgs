@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cursor Clip";
+  summary = "Cursor Clip - GTK4 Clipboard Manager with dynamic positioning. Features a Windows 11–style clipboard history, adapted to native GNOME design";
+  description = ''
+    Cursor Clip - GTK4 Clipboard Manager with dynamic positioning. Features a Windows 11–style clipboard history, adapted to native GNOME design.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-02-10";
+  tags = [ "system" "administration" "clipboard" "gnome" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.cursor-clip;

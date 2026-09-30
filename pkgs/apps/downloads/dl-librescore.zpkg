@@ -1,0 +1,14 @@
+_meta = {
+  name = "Librescore Downloader";
+  summary = "Download sheet music";
+  description = ''
+    Download sheet music.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.35.40";
+  tags = [ "downloads" "sheet-music" "music" "scores" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dl-librescore;

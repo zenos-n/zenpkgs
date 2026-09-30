@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ocelot Desktop";
+  summary = "Advanced OpenComputers emulator";
+  description = ''
+    Advanced OpenComputers emulator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.14.2";
+  tags = [ "gaming" "emulators" "minecraft" "opencomputers" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ocelot-desktop;

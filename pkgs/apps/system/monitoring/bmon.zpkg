@@ -1,0 +1,14 @@
+_meta = {
+  name = "bmon";
+  summary = "Network bandwidth monitor";
+  description = ''
+    Network bandwidth monitor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0";
+  tags = [ "system" "monitoring" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.bmon;

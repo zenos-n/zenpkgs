@@ -1,0 +1,20 @@
+_meta = {
+  name = "Ardour";
+  summary = "Multi-track hard disk recording software";
+  description = ''
+    Ardour is a digital audio workstation (DAW), You can use it to
+    record, edit and mix multi-track audio and midi. Produce your
+    own CDs. Mix video soundtracks. Experiment with new ideas about
+    music and sound.
+
+    Please consider supporting the ardour project financially:
+    https://community.ardour.org/donate
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.7";
+  tags = [ "audio" "multimedia" "recording" "music-production" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.ardour;

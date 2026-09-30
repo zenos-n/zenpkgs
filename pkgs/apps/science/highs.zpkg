@@ -1,0 +1,14 @@
+_meta = {
+  name = "HiGHS";
+  summary = "Linear optimization software";
+  description = ''
+    Linear optimization software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.14.0";
+  tags = [ "science" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.highs;

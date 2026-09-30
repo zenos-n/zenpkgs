@@ -1,0 +1,17 @@
+_meta = {
+  name = "Aegisub";
+  summary = "Advanced subtitle editor";
+  description = ''
+    Aegisub is a free, cross-platform open source tool for creating and
+    modifying subtitles. Aegisub makes it quick and easy to time subtitles to
+    audio, and features many powerful tools for styling them, including a
+    built-in real-time video preview.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.4.2";
+  tags = [ "video" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.aegisub;

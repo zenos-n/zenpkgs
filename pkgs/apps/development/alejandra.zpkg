@@ -1,0 +1,14 @@
+_meta = {
+  name = "Alejandra";
+  summary = "Uncompromising Nix Code Formatter";
+  description = ''
+    Uncompromising Nix Code Formatter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.0";
+  tags = [ "development" "nix" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.alejandra;

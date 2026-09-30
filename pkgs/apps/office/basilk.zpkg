@@ -1,0 +1,14 @@
+_meta = {
+  name = "Basilk";
+  summary = "Terminal User Interface (TUI) to manage your tasks with minimal kanban logic";
+  description = ''
+    Terminal User Interface (TUI) to manage your tasks with minimal kanban logic.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.1";
+  tags = [ "office" "tasks" "kanban" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.basilk;

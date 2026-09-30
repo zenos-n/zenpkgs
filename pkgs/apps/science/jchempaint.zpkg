@@ -1,0 +1,14 @@
+_meta = {
+  name = "JChemPaint";
+  summary = "Chemical 2D structure editor application/applet based on the Chemistry Development Kit";
+  description = ''
+    Chemical 2D structure editor application/applet based on the Chemistry Development Kit.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.4-SNAPSHOT-2025-10-15";
+  tags = [ "science" "chemistry" "visualization" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Plus;
+};
+
+import $pkgs.legacy.jchempaint;

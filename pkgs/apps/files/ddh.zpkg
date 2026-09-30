@@ -1,0 +1,15 @@
+_meta = {
+  name = "ddh";
+  summary = "Fast duplicate file finder";
+  description = ''
+    DDH traverses input directories and their subdirectories.
+    It also hashes files as needed and reports findings.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.0";
+  tags = [ "files" "duplicates" "search" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Only;
+};
+
+import $pkgs.legacy.ddh;

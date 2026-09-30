@@ -1,0 +1,14 @@
+_meta = {
+  name = "Audio Source";
+  summary = "Use an Android device as a USB microphone";
+  description = ''
+    Use an Android device as a USB microphone.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5";
+  tags = [ "audio" "android" "microphone" "usb" "recording" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.audiosource;

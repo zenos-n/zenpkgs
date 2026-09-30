@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gash";
+  summary = "POSIX-compatible shell written in Guile Scheme";
+  description = ''
+    POSIX-compatible shell written in Guile Scheme.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.2";
+  tags = [ "terminal" "shell" "scheme" "posix" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gash;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "nix-prefetch";
+  summary = "Prefetch any fetcher function call, e.g. package sources";
+  description = ''
+    Prefetch any fetcher function call, e.g. package sources.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.1";
+  tags = [ "development" "nix" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.nix-prefetch;

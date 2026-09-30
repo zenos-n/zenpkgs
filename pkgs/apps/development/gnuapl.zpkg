@@ -1,0 +1,17 @@
+_meta = {
+  name = "GNU APL";
+  summary = "Free interpreter for the APL programming language";
+  description = ''
+    GNU APL is a free interpreter for the programming language APL, with an
+    (almost) complete implementation of ISO standard 13751 aka.  Programming
+    Language APL, Extended.  GNU APL was written and is being maintained by
+    Jürgen Sauermann.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9";
+  tags = [ "development" "apl" "languages" "interpreters" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gnuapl;

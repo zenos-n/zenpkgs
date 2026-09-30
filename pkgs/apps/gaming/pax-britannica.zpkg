@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pax Britannica";
+  summary = "One-button multi-player real-time strategy game";
+  description = ''
+    One-button multi-player real-time strategy game.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0-5";
+  tags = [ "gaming" "real-time-strategy" "multiplayer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pax-britannica;

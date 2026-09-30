@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cadabra";
+  summary = "Field-theory motivated approach to computer algebra";
+  description = ''
+    Field-theory motivated approach to computer algebra.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.14-p1";
+  tags = [ "science" "mathematics" "computer-algebra" "physics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.cadabra2;

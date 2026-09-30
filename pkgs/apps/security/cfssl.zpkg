@@ -1,0 +1,14 @@
+_meta = {
+  name = "cfssl";
+  summary = "Cloudflare's PKI and TLS toolkit";
+  description = ''
+    Cloudflare's PKI and TLS toolkit.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.5";
+  tags = [ "security" "cryptography" "certificates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.cfssl;

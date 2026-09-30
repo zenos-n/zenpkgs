@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ansible";
+  summary = "Radically simple IT automation";
+  description = ''
+    Radically simple IT automation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.21.1";
+  tags = [ "infrastructure" "automation" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.ansible;

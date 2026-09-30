@@ -1,0 +1,14 @@
+_meta = {
+  name = "Smallstep CA";
+  summary = "Private certificate authority (X.509 & SSH) & ACME server for secure automated certificate management, so you can use TLS everywhere & SSO for SSH";
+  description = ''
+    Private certificate authority (X.509 & SSH) & ACME server for secure automated certificate management, so you can use TLS everywhere & SSO for SSH.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.29.0";
+  tags = [ "security" "certificates" "cryptography" "server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.step-ca;

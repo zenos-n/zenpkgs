@@ -1,0 +1,14 @@
+_meta = {
+  name = "Four in a Row";
+  summary = "Make lines of the same color to win";
+  description = ''
+    Make lines of the same color to win.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.38.1";
+  tags = [ "gaming" "board" "puzzle" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.four-in-a-row;

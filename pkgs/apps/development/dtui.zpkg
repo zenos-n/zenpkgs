@@ -1,0 +1,14 @@
+_meta = {
+  name = "dtui";
+  summary = "dBus TUI for introspecting your current dbus session/system";
+  description = ''
+    dBus TUI for introspecting your current dbus session/system.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.1";
+  tags = [ "development" "dbus" "inspection" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dtui;

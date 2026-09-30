@@ -1,0 +1,14 @@
+_meta = {
+  name = "GlslViewer";
+  summary = "Live GLSL coding renderer";
+  description = ''
+    Live GLSL coding renderer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5.2";
+  tags = [ "development" "graphics" "shaders" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.glslviewer;

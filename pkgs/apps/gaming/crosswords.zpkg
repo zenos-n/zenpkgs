@@ -1,0 +1,14 @@
+_meta = {
+  name = "Crosswords";
+  summary = "Crossword player and editor for GNOME";
+  description = ''
+    Crossword player and editor for GNOME.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.15";
+  tags = [ "gaming" "crossword" "puzzle" "editor" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.crosswords;

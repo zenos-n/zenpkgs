@@ -1,0 +1,23 @@
+_meta = {
+  name = "Frescobaldi";
+  summary = "LilyPond sheet music text editor";
+  description = ''
+    Powerful text editor with syntax highlighting and automatic completion,
+    Music view with advanced Point & Click, Midi player to proof-listen
+    LilyPond-generated MIDI files, Midi capturing to enter music,
+    Powerful Score Wizard to quickly setup a music score, Snippet Manager
+    to store and apply text snippets, templates or scripts, Use multiple
+    versions of LilyPond, automatically selects the correct version, Built-in
+    LilyPond documentation browser and built-in User Guide, Smart
+    layout-control functions like coloring specific objects in the PDF,
+    MusicXML import, Modern user iterface with configurable colors,
+    fonts and keyboard shortcuts
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.6";
+  tags = [ "audio" "notation" "composition" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.frescobaldi;

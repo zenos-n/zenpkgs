@@ -1,0 +1,22 @@
+_meta = {
+  name = "agedu";
+  summary = "Unix utility for tracking down wasted disk space";
+  description = ''
+    Most Unix file systems, in their default mode, helpfully record when a
+    file was last accessed. So if you generated a large amount of data years
+    ago, forgot to clean it up, and have never used it since, then it ought
+    in principle to be possible to use those last-access time stamps to tell
+    the difference between that and a large amount of data you're still
+    using regularly.
+
+    agedu uses this information to tell you which files waste disk space when
+    you haven't used them since a long time.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20241013.3622eda";
+  tags = [ "storage" "disk-usage" "analysis" "cleanup" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.agedu;

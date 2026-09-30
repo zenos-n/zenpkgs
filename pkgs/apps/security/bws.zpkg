@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bitwarden Secrets Manager CLI";
+  summary = "Bitwarden Secrets Manager CLI";
+  description = ''
+    Bitwarden Secrets Manager CLI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0";
+  tags = [ "security" "bitwarden" "secrets" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.bws;

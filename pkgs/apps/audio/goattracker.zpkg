@@ -1,0 +1,14 @@
+_meta = {
+  name = "GoatTracker";
+  summary = "Crossplatform music editor for creating Commodore 64 music. Uses reSID library by Dag Lem and supports alternatively HardSID & CatWeasel devices";
+  description = ''
+    Crossplatform music editor for creating Commodore 64 music. Uses reSID library by Dag Lem and supports alternatively HardSID & CatWeasel devices.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.77";
+  tags = [ "audio" "tracker" "chiptune" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.goattracker;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "wthrr";
+  summary = "Weather companion for the terminal";
+  description = ''
+    Weather companion for the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.1";
+  tags = [ "weather" "terminal" "forecast" "information" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wthrr;

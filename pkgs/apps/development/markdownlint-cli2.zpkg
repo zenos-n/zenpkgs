@@ -1,0 +1,14 @@
+_meta = {
+  name = "markdownlint-cli2";
+  summary = "Fast, flexible, configuration-based command-line interface for linting Markdown/CommonMark files with the markdownlint library";
+  description = ''
+    Fast, flexible, configuration-based command-line interface for linting Markdown/CommonMark files with the markdownlint library.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.21.0";
+  tags = [ "development" "markdown" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.markdownlint-cli2;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Z3";
+  summary = "High-performance theorem prover and SMT solver";
+  description = ''
+    High-performance theorem prover and SMT solver.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.16.0";
+  tags = [ "science" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.z3;

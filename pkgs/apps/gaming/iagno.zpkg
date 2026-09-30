@@ -1,0 +1,14 @@
+_meta = {
+  name = "Iagno";
+  summary = "Computer version of the game Reversi, more popularly called Othello";
+  description = ''
+    Computer version of the game Reversi, more popularly called Othello.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.38.1";
+  tags = [ "gaming" "board" "reversi" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.iagno;

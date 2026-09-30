@@ -1,0 +1,14 @@
+_meta = {
+  name = "AnyDesk";
+  summary = "Desktop sharing application, providing remote support and online meetings";
+  description = ''
+    Desktop sharing application, providing remote support and online meetings.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.0.4";
+  tags = [ "networking" "remote-desktop" "communication" "support" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.anydesk;

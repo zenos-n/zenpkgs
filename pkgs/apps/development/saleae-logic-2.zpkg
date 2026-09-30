@@ -1,0 +1,14 @@
+_meta = {
+  name = "Saleae Logic 2";
+  summary = "Software for Saleae logic analyzers";
+  description = ''
+    Software for Saleae logic analyzers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.44";
+  tags = [ "development" "hardware" "embedded" "electronics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.saleae-logic-2;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "CBconvert";
+  summary = "Comic Book converter";
+  description = ''
+    Comic Book converter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "office" "comics" "ebooks" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.cbconvert;

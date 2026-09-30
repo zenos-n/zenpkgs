@@ -1,0 +1,14 @@
+_meta = {
+  name = "SkEditor";
+  summary = "App for editing Skript files";
+  description = ''
+    App for editing Skript files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.9.3";
+  tags = [ "editors" "development" "minecraft" "skript" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.skeditor;

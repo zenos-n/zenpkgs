@@ -1,0 +1,14 @@
+_meta = {
+  name = "enry";
+  summary = "Programming language detector based on go-enry/go-enry/v2 library";
+  description = ''
+    Programming language detector based on go-enry/go-enry/v2 library.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0";
+  tags = [ "development" "languages" "detection" "source-code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.enry;

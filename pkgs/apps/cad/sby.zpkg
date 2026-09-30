@@ -1,0 +1,14 @@
+_meta = {
+  name = "SymbiYosys";
+  summary = "SymbiYosys, a front-end for Yosys-based formal verification flows";
+  description = ''
+    SymbiYosys, a front-end for Yosys-based formal verification flows.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.61";
+  tags = [ "cad" "electronics" "verification" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.sby;

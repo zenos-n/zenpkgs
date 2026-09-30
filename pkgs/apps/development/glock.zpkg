@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glock";
+  summary = "Command-line tool to lock Go dependencies to specific revisions";
+  description = ''
+    Command-line tool to lock Go dependencies to specific revisions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2021-03-19";
+  tags = [ "development" "go" "dependencies" "version-pinning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.glock;

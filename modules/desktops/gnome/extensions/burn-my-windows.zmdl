@@ -32,10 +32,10 @@ _let managedProfile: $type.package = $pkgs.legacy.writeText "burn-my-windows.con
 enable = enableOption {
   _meta.description = ''Whether to enable Burn My Windows GNOME extension configuration.'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.burn-my-windows ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.burn-my-windows ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.burn-my-windows.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.burn-my-windows.extensionUuid ];
   };
 };
 

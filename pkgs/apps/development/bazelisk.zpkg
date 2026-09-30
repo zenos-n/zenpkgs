@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bazelisk";
+  summary = "User-friendly launcher for Bazel";
+  description = ''
+    BEWARE: This package does not work on NixOS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.28.1";
+  tags = [ "development" "bazel" "build" "version-management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bazelisk;

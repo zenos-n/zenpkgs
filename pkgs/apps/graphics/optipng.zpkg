@@ -1,0 +1,14 @@
+_meta = {
+  name = "OptiPNG";
+  summary = "PNG optimizer";
+  description = ''
+    PNG optimizer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.9.1";
+  tags = [ "graphics" "png" "optimization" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.optipng;

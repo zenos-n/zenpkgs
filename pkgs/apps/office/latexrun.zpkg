@@ -1,0 +1,14 @@
+_meta = {
+  name = "latexrun";
+  summary = "21st century LaTeX wrapper";
+  description = ''
+    21st century LaTeX wrapper.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2015-11-18";
+  tags = [ "office" "latex" "writing" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.latexrun;

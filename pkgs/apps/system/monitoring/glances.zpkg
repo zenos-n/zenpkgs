@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glances";
+  summary = "Cross-platform curses-based monitoring tool";
+  description = ''
+    Cross-platform curses-based monitoring tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.5.5";
+  tags = [ "system" "monitoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Only;
+};
+
+import $pkgs.legacy.glances;

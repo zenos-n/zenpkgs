@@ -1,0 +1,14 @@
+_meta = {
+  name = "Kubeconform";
+  summary = "FAST Kubernetes manifests validator, with support for Custom Resources";
+  description = ''
+    FAST Kubernetes manifests validator, with support for Custom Resources.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.0";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kubeconform;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Big Data Tools";
+  summary = "CLI tool to query parquet, json and avro files";
+  description = ''
+    CLI tool to query parquet, json and avro files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.18.0";
+  tags = [ "development" "data" "parquet" "json" "avro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bdt;

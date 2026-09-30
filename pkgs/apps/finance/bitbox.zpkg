@@ -1,0 +1,14 @@
+_meta = {
+  name = "BitBoxApp";
+  summary = "Companion app for the BitBox02 hardware wallet";
+  description = ''
+    Companion app for the BitBox02 hardware wallet.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.50.1";
+  tags = [ "finance" "cryptocurrency" "wallet" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bitbox;

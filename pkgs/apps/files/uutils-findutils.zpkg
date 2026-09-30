@@ -1,0 +1,14 @@
+_meta = {
+  name = "uutils-findutils";
+  summary = "Rust implementation of findutils";
+  description = ''
+    Rust implementation of findutils.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0";
+  tags = [ "files" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.uutils-findutils;

@@ -1,0 +1,15 @@
+_meta = {
+  name = "KiCad";
+  summary = "Open Source Electronics Design Automation suite";
+  description = ''
+    KiCad is an open source software suite for Electronic Design Automation.
+    The Programs handle Schematic Capture, and PCB Layout with Gerber output.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10.0.4";
+  tags = [ "cad" "graphics" "engineering" "creativity" "electronics" "pcb" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.kicad;

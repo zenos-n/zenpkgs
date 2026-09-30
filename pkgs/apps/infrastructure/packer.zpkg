@@ -1,0 +1,14 @@
+_meta = {
+  name = "Packer";
+  summary = "Tool for creating identical machine images for multiple platforms from a single source configuration";
+  description = ''
+    Tool for creating identical machine images for multiple platforms from a single source configuration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.3";
+  tags = [ "infrastructure" "automation" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsl11;
+};
+
+import $pkgs.legacy.packer;

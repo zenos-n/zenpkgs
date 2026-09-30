@@ -1,0 +1,14 @@
+_meta = {
+  name = "Equibop";
+  summary = "Custom Discord App aiming to give you better performance and improve linux support";
+  description = ''
+    Custom Discord App aiming to give you better performance and improve linux support.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.2";
+  tags = [ "communication" "discord" "messaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.equibop;

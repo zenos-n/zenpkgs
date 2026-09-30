@@ -1,0 +1,14 @@
+_meta = {
+  name = "Baresip";
+  summary = "Modular SIP User-Agent with audio and video support";
+  description = ''
+    Modular SIP User-Agent with audio and video support.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.7.0";
+  tags = [ "communication" "calls" "sip" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.baresip;

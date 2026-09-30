@@ -1,0 +1,14 @@
+_meta = {
+  name = "Apache Subversion";
+  summary = "Version control system intended to be a compelling replacement for CVS in the open source community";
+  description = ''
+    Version control system intended to be a compelling replacement for CVS in the open source community.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.14.5";
+  tags = [ "development" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.subversion;

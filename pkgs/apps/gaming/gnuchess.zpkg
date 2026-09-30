@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNU Chess";
+  summary = "GNU Chess engine";
+  description = ''
+    GNU Chess engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.3.0";
+  tags = [ "gaming" "chess" "board" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gnuchess;

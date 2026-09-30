@@ -1,0 +1,14 @@
+_meta = {
+  name = "iamb";
+  summary = "Matrix client for Vim addicts";
+  description = ''
+    Matrix client for Vim addicts.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.11";
+  tags = [ "communication" "chat" "matrix" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.iamb;

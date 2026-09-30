@@ -1,0 +1,14 @@
+_meta = {
+  name = "Browsh";
+  summary = "Fully-modern text-based browser, rendering to TTY and browsers";
+  description = ''
+    Fully-modern text-based browser, rendering to TTY and browsers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.3";
+  tags = [ "browsers" "internet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.browsh;

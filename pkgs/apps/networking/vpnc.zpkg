@@ -1,0 +1,14 @@
+_meta = {
+  name = "vpnc";
+  summary = "Virtual private network (VPN) client for Cisco's VPN concentrators";
+  description = ''
+    Virtual private network (VPN) client for Cisco's VPN concentrators.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-06-16";
+  tags = [ "networking" "vpn" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.vpnc;

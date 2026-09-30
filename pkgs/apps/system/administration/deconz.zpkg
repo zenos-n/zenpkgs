@@ -1,0 +1,14 @@
+_meta = {
+  name = "deCONZ";
+  summary = "Manage Zigbee network with ConBee, ConBee II or RaspBee hardware";
+  description = ''
+    Manage Zigbee network with ConBee, ConBee II or RaspBee hardware.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.32.5";
+  tags = [ "system" "administration" "zigbee" "home-automation" "devices" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.deconz;

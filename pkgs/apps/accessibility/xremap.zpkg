@@ -1,0 +1,14 @@
+_meta = {
+  name = "xremap";
+  summary = "Key remapper for X11 and Wayland (wlroots support)";
+  description = ''
+    Key remapper for X11 and Wayland (wlroots support).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.7";
+  tags = [ "accessibility" "input" "keyboard" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.xremap;

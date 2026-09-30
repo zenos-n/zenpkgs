@@ -1,0 +1,14 @@
+_meta = {
+  name = "inspectrum";
+  summary = "Tool for analysing captured signals from sdr receivers";
+  description = ''
+    Tool for analysing captured signals from sdr receivers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.1";
+  tags = [ "radio" "sdr" "signal-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.inspectrum;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "CSS Checker";
+  summary = "Command-line tool for identifying similar or duplicated CSS code";
+  description = ''
+    Command-line tool for identifying similar or duplicated CSS code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.1";
+  tags = [ "development" "css" "duplication" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.css-checker;

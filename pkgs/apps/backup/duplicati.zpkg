@@ -1,0 +1,14 @@
+_meta = {
+  name = "Duplicati";
+  summary = "Free backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers";
+  description = ''
+    Free backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.0.4";
+  tags = [ "backup" "recovery" "files" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.duplicati;

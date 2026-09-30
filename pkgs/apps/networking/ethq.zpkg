@@ -1,0 +1,14 @@
+_meta = {
+  name = "ethq";
+  summary = "Ethernet NIC Queue stats viewer";
+  description = ''
+    Ethernet NIC Queue stats viewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.0";
+  tags = [ "networking" "ethernet" "queues" "statistics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.ethq;

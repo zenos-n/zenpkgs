@@ -1,0 +1,14 @@
+_meta = {
+  name = "viddy";
+  summary = "Modern `watch` command";
+  description = ''
+    Modern `watch` command.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.1";
+  tags = [ "files" "monitoring" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.viddy;

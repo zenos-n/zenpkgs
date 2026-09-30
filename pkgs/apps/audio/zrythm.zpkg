@@ -1,0 +1,14 @@
+_meta = {
+  name = "Zrythm";
+  summary = "Automated and intuitive digital audio workstation";
+  description = ''
+    Automated and intuitive digital audio workstation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "audio" "production" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.zrythm;

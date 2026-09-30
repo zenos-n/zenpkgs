@@ -1,0 +1,14 @@
+_meta = {
+  name = "agg";
+  summary = "Command-line tool for generating animated GIF files from asciicast files produced by asciinema terminal recorder";
+  description = ''
+    Command-line tool for generating animated GIF files from asciicast files produced by asciinema terminal recorder.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.0";
+  tags = [ "video" "terminal" "asciinema" "gif" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.asciinema-agg;

@@ -1,0 +1,16 @@
+_meta = {
+  name = "carl";
+  summary = "cal(1) with more features and written in rust";
+  description = ''
+    Carl is a calendar for the commandline. It tries to mimic the various cal(1)
+    implementations out there, but also adds enhanced features like colors and ical
+    support
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0";
+  tags = [ "office" "calendar" "time" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.carl;

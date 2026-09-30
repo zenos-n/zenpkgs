@@ -1,0 +1,17 @@
+_meta = {
+  name = "Allure";
+  summary = "Flexible, lightweight multi-language test reporting tool";
+  description = ''
+    Allure Report is a flexible, lightweight multi-language test reporting
+    tool providing clear graphical reports and allowing everyone involved
+    in the development process to extract the maximum of information from
+    the everyday testing process.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.42.0";
+  tags = [ "development" "testing" "reports" "ci" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.allure;

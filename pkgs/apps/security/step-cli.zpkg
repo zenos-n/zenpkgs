@@ -1,0 +1,14 @@
+_meta = {
+  name = "step-cli";
+  summary = "Zero trust swiss army knife for working with X509, OAuth, JWT, OATH OTP, etc";
+  description = ''
+    Zero trust swiss army knife for working with X509, OAuth, JWT, OATH OTP, etc.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.30.2";
+  tags = [ "security" "cryptography" "certificates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.step-cli;

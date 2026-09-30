@@ -1,0 +1,14 @@
+_meta = {
+  name = "Advanced SSH Config";
+  summary = "Advanced SSH config - Regex, aliases, gateways, includes and dynamic hosts";
+  description = ''
+    Advanced SSH config - Regex, aliases, gateways, includes and dynamic hosts.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.17.2";
+  tags = [ "networking" "remote-access" "ssh" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.assh;

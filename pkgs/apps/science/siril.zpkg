@@ -1,0 +1,14 @@
+_meta = {
+  name = "Siril";
+  summary = "Astrophotographic image processing tool";
+  description = ''
+    Astrophotographic image processing tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.2";
+  tags = [ "science" "astronomy" "photography" "graphics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.siril;

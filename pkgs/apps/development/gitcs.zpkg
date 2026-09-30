@@ -1,0 +1,14 @@
+_meta = {
+  name = "gitcs";
+  summary = "Scan local git repositories and generate a visual contributions graph";
+  description = ''
+    Scan local git repositories and generate a visual contributions graph.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.2";
+  tags = [ "development" "git" "contributions" "visualization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitcs;

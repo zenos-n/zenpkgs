@@ -1,0 +1,23 @@
+_meta = {
+  name = "GNU cflow";
+  summary = "Tool to analyze the control flow of C programs";
+  description = ''
+    GNU cflow analyzes a collection of C source files and prints a
+    graph, charting control flow within the program.
+
+    GNU cflow is able to produce both direct and inverted flowgraphs
+    for C sources.  Optionally a cross-reference listing can be
+    generated.  Two output formats are implemented: POSIX and GNU
+    (extended).
+
+    The package also provides Emacs major mode for examining the
+    produced flowcharts in Emacs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8";
+  tags = [ "development" "c" "static-analysis" "control-flow" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.cflow;

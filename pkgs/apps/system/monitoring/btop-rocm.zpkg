@@ -1,0 +1,14 @@
+_meta = {
+  name = "btop ROCm";
+  summary = "Monitor of resources";
+  description = ''
+    Monitor of resources.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.7";
+  tags = [ "system" "monitoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.btop-rocm;

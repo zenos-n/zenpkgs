@@ -44,11 +44,11 @@ enable = enableOption {
   _meta.description = ''User Theme GNOME extension configuration'';
   s! {
     environment.systemPackages =
-      [ $pkgs.apps.gnome-extensions.user-themes ]
+      [ $pkgs.desktops.gnome.extensions.user-themes ]
       ++ ($lib.optional ($path.theme.cssOverride != "") $v.generatedTheme);
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.user-themes.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.user-themes.extensionUuid ];
     dconf.settings."org/gnome/shell/extensions/user-theme".name = $v.effectiveName;
   };
 };

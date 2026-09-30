@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "csview";
+  summary = "High performance csv viewer with cjk/emoji support";
+  description = ''
+    High performance csv viewer with cjk/emoji support.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.4";
+  tags = [ "files" "data" "csv" "terminal" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.csview;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "EasyLPAC";
+  summary = "GUI frontend for lpac, a C-based eUICC LPA";
+  description = ''
+    GUI frontend for lpac, a C-based eUICC LPA.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0.3";
+  tags = [ "system" "administration" "esim" "hardware" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.easylpac;

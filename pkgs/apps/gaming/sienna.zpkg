@@ -1,0 +1,14 @@
+_meta = {
+  name = "Sienna";
+  summary = "Fast-paced one button platformer";
+  description = ''
+    Fast-paced one button platformer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0d";
+  tags = [ "gaming" "platformer" "arcade" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.sienna;

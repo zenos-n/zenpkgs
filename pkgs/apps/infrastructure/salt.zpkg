@@ -1,0 +1,14 @@
+_meta = {
+  name = "Salt";
+  summary = "Portable, distributed, remote execution and configuration management system";
+  description = ''
+    Portable, distributed, remote execution and configuration management system.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3007.13";
+  tags = [ "infrastructure" "automation" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.salt;

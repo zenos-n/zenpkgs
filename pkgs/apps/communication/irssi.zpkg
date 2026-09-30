@@ -1,0 +1,14 @@
+_meta = {
+  name = "Irssi";
+  summary = "Terminal based IRC client";
+  description = ''
+    Terminal based IRC client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.5";
+  tags = [ "communication" "networking" "irc" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.irssi;

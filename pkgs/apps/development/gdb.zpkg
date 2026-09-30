@@ -1,0 +1,16 @@
+_meta = {
+  name = "GDB";
+  summary = "GNU Project debugger";
+  description = ''
+    GDB, the GNU Project debugger, allows you to see what is going
+    on `inside' another program while it executes -- or what another
+    program was doing at the moment it crashed.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "17.2";
+  tags = [ "development" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gdb;

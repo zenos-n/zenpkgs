@@ -1,0 +1,121 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Eza configuration";
+  summary = "Eza configuration";
+  description = ''Configure Eza with typed preferences. Unset values preserve existing behavior.'';
+  tags = [ "shell" "eza" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+bashIntegration = {
+  _meta = {
+    name = "Enable Bash integration";
+    summary = "Enable Bash integration";
+    description = ''Enable Bash integration. Requires that shell to be managed; does not select a login shell. Null preserves existing behavior.'';
+    tags = [ "shell" "eza" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+zshIntegration = {
+  _meta = {
+    name = "Enable Zsh integration";
+    summary = "Enable Zsh integration";
+    description = ''Enable Zsh integration. Requires that shell to be managed; does not select a login shell. Null preserves existing behavior.'';
+    tags = [ "shell" "eza" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+fishIntegration = {
+  _meta = {
+    name = "Enable Fish integration";
+    summary = "Enable Fish integration";
+    description = ''Enable Fish integration. Requires that shell to be managed; does not select a login shell. Null preserves existing behavior.'';
+    tags = [ "shell" "eza" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+icons = {
+  _meta = {
+    name = "Show icons beside files";
+    summary = "Show icons beside files";
+    description = ''Show icons beside files. Null preserves existing behavior.'';
+    tags = [ "shell" "eza" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "auto" "always" "never" ]) $type.null ];
+    default = null;
+  };
+};
+
+colors = {
+  _meta = {
+    name = "Use colors in directory listings";
+    summary = "Use colors in directory listings";
+    description = ''Use colors in directory listings. Null preserves existing behavior.'';
+    tags = [ "shell" "eza" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "auto" "always" "never" ]) $type.null ];
+    default = null;
+  };
+};
+
+showGitStatus = {
+  _meta = {
+    name = "Show version-control status beside files";
+    summary = "Show version-control status beside files";
+    description = ''Show version-control status beside files. Null preserves existing behavior.'';
+    tags = [ "shell" "eza" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+extraArguments = {
+  _meta = {
+    name = "Additional directory-listing arguments";
+    summary = "Additional directory-listing arguments";
+    description = ''Additional directory-listing arguments. Null preserves existing behavior.'';
+    tags = [ "shell" "eza" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Eza";
+    summary = "Install and configure Eza";
+    description = ''Enable Eza for the selected user scope. Preferences apply while enabled.'';
+    tags = [ "shell" "eza" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    programs.eza.enable = true;
+    programs.eza.enableBashIntegration = $lib.mkIf ($path.bashIntegration != null) ($path.bashIntegration);
+    programs.eza.enableZshIntegration = $lib.mkIf ($path.zshIntegration != null) ($path.zshIntegration);
+    programs.eza.enableFishIntegration = $lib.mkIf ($path.fishIntegration != null) ($path.fishIntegration);
+    programs.eza.icons = $lib.mkIf ($path.icons != null) ($path.icons);
+    programs.eza.colors = $lib.mkIf ($path.colors != null) ($path.colors);
+    programs.eza.git = $lib.mkIf ($path.showGitStatus != null) ($path.showGitStatus);
+    programs.eza.extraOptions = $lib.mkIf ($path.extraArguments != null) ($path.extraArguments);
+  };
+};

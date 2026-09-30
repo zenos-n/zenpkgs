@@ -1,0 +1,14 @@
+_meta = {
+  name = "glooctl";
+  summary = "Unified CLI for Gloo, the feature-rich, Kubernetes-native, next-generation API gateway built on Envoy";
+  description = ''
+    Unified CLI for Gloo, the feature-rich, Kubernetes-native, next-generation API gateway built on Envoy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.21.4";
+  tags = [ "containers" "kubernetes" "api-gateway" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.glooctl;

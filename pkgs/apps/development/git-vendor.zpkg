@@ -1,0 +1,19 @@
+_meta = {
+  name = "git-vendor";
+  summary = "Git command for managing vendored dependencies";
+  description = ''
+    git-vendor is a wrapper around git-subtree commands for checking out and updating vendored dependencies.
+
+    By default git-vendor conforms to the pattern used for vendoring golang dependencies:
+      * Dependencies are stored under vendor/ directory in the repo.
+      * Dependencies are stored under the fully qualified project path.
+          e.g. https://github.com/brettlangdon/forge will be stored under vendor/github.com/brettlangdon/forge.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0";
+  tags = [ "development" "git" "dependencies" "vendoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-vendor;

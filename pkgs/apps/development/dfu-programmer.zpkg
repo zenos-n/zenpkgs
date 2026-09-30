@@ -1,0 +1,14 @@
+_meta = {
+  name = "dfu-programmer";
+  summary = "Device Firmware Update based USB programmer for Atmel chips with a USB bootloader";
+  description = ''
+    Device Firmware Update based USB programmer for Atmel chips with a USB bootloader.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "development" "embedded" "hardware" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.dfu-programmer;

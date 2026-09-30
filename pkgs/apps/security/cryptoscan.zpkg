@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cryptoscan";
+  summary = "Cryptographic Discovery Scanner";
+  description = ''
+    Cryptographic Discovery Scanner.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0";
+  tags = [ "security" "cryptography" "discovery" "scanning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cryptoscan;

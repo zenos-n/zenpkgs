@@ -1,0 +1,14 @@
+_meta = {
+  name = "duf";
+  summary = "Disk Usage/Free Utility";
+  description = ''
+    Disk Usage/Free Utility.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.1";
+  tags = [ "system" "monitoring" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.duf;

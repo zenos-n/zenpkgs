@@ -1,0 +1,14 @@
+_meta = {
+  name = "dpic";
+  summary = "Implementation of the pic little language for creating drawings";
+  description = ''
+    Implementation of the pic little language for creating drawings.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2025.08.01";
+  tags = [ "graphics" "diagrams" "drawing" "programming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.dpic;

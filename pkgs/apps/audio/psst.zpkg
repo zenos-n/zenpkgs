@@ -1,0 +1,14 @@
+_meta = {
+  name = "Psst";
+  summary = "Spotify client with native GUI written in Rust, without Electron";
+  description = ''
+    Spotify client with native GUI written in Rust, without Electron.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-11-16";
+  tags = [ "audio" "music" "spotify" "streaming" "player" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.psst;

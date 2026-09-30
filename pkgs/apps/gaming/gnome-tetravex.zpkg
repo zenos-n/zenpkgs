@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNOME Tetravex";
+  summary = "Complete the puzzle by matching numbered tiles";
+  description = ''
+    Complete the puzzle by matching numbered tiles.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.38.3";
+  tags = [ "gaming" "tiles" "puzzle" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gnome-tetravex;

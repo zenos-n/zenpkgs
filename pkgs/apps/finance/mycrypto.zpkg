@@ -1,0 +1,15 @@
+_meta = {
+  name = "MyCrypto";
+  summary = "Free, open-source interface for interacting with the blockchain";
+  description = ''
+    MyCrypto is an open-source, client-side tool for generating ether wallets,
+    handling ERC-20 tokens, and interacting with the blockchain more easily.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.17";
+  tags = [ "finance" "wallet" "cryptocurrency" "ethereum" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.mycrypto;

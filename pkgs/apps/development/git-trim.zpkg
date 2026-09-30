@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-trim";
+  summary = "Automatically trims your branches whose tracking remote refs are merged or gone";
+  description = ''
+    Automatically trims your branches whose tracking remote refs are merged or gone.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.4";
+  tags = [ "development" "git" "branches" "cleanup" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-trim;

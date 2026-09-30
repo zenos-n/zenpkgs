@@ -1,0 +1,17 @@
+_meta = {
+  name = "docfd";
+  summary = "TUI multiline fuzzy document finder";
+  description = ''
+    Think interactive grep for text and other document files.
+    Word/token based instead of regex and line based, so you
+    can search across lines easily. Aims to provide good UX via
+    integration with common text editors and other file viewers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "12.3.2";
+  tags = [ "office" "documents" "search" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.docfd;

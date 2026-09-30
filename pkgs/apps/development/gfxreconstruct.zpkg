@@ -1,0 +1,14 @@
+_meta = {
+  name = "GFXReconstruct";
+  summary = "Graphics API Capture and Replay Tools";
+  description = ''
+    Graphics API Capture and Replay Tools.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.4-unstable-2026-04-29";
+  tags = [ "development" "graphics" "shaders" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gfxreconstruct;

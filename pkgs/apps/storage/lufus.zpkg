@@ -1,0 +1,14 @@
+_meta = {
+  name = "Lufus";
+  summary = "A rufus clone written in py and designed to work with linux";
+  description = ''
+    A rufus clone written in py and designed to work with linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0b1.1";
+  tags = [ "storage" "usb" "disk-images" "flashing" "graphical" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.lufus;

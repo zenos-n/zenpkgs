@@ -1,0 +1,14 @@
+_meta = {
+  name = "glslang";
+  summary = "Khronos reference front-end for GLSL and ESSL";
+  description = ''
+    Khronos reference front-end for GLSL and ESSL.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "16.2.0";
+  tags = [ "development" "graphics" "shaders" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.glslang;

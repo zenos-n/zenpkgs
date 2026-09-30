@@ -1,0 +1,14 @@
+_meta = {
+  name = "FTB App";
+  summary = "Feed the Beast desktop app";
+  description = ''
+    Feed the Beast desktop app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.27.2";
+  tags = [ "gaming" "minecraft" "modpacks" "launchers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Only;
+};
+
+import $pkgs.legacy.ftb-app;

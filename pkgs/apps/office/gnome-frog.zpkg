@@ -1,0 +1,14 @@
+_meta = {
+  name = "Frog OCR";
+  summary = "Intuitive text extraction tool (OCR) for GNOME desktop";
+  description = ''
+    Intuitive text extraction tool (OCR) for GNOME desktop.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.0";
+  tags = [ "office" "ocr" "documents" "graphics" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gnome-frog;

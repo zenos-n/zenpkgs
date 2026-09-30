@@ -1,0 +1,14 @@
+_meta = {
+  name = "MCP Proxy";
+  summary = "MCP server which proxies other MCP servers from stdio to SSE or from SSE to stdio";
+  description = ''
+    MCP server which proxies other MCP servers from stdio to SSE or from SSE to stdio.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.0";
+  tags = [ "ai" "development" "mcp" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.mcp-proxy;

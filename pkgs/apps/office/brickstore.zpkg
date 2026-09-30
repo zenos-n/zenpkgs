@@ -1,0 +1,16 @@
+_meta = {
+  name = "BrickStore";
+  summary = "BrickLink offline management tool";
+  description = ''
+    BrickStore is a BrickLink offline management tool.
+    It is multi-platform (Windows, macOS and Linux as well as iOS and Android),
+    multilingual (currently English, German, Spanish, Swedish and French), fast and stable.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.3.2";
+  tags = [ "office" "inventory" "lego" "bricklink" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.brickstore;

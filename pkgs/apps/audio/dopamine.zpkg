@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dopamine";
+  summary = "Audio player that keeps it simple";
+  description = ''
+    Audio player that keeps it simple.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.4";
+  tags = [ "audio" "music" "player" "library" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.dopamine;

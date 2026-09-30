@@ -1,0 +1,14 @@
+_meta = {
+  name = "Blender";
+  summary = "3D Creation/Animation/Publishing System";
+  description = ''
+    3D Creation/Animation/Publishing System.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.1.1";
+  tags = [ "graphics" "creativity" "3d" "animation" "video" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.blender;

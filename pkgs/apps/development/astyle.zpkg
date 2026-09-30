@@ -1,0 +1,14 @@
+_meta = {
+  name = "Artistic Style";
+  summary = "Source code indenter, formatter, and beautifier for C, C++, C# and Java";
+  description = ''
+    Source code indenter, formatter, and beautifier for C, C++, C# and Java.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.6.16";
+  tags = [ "development" "formatting" "c" "cpp" "java" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3;
+};
+
+import $pkgs.legacy.astyle;

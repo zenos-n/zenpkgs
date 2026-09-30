@@ -1,0 +1,14 @@
+_meta = {
+  name = "cavif";
+  summary = "Encoder/converter CLI for AVIF images";
+  description = ''
+    Encoder/converter CLI for AVIF images.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.0";
+  tags = [ "graphics" "avif" "encoding" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.cavif;

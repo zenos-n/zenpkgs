@@ -1,0 +1,14 @@
+_meta = {
+  name = "broom";
+  summary = "Interactive CLI tool for managing local git branches";
+  description = ''
+    Interactive CLI tool for managing local git branches.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.0";
+  tags = [ "development" "git" "branches" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.broom;

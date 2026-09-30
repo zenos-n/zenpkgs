@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitHub Markdown Preview";
+  summary = "gh extension to preview Markdown looking like on GitHub";
+  description = ''
+    gh extension to preview Markdown looking like on GitHub.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.11.1";
+  tags = [ "development" "github-cli" "markdown" "preview" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-markdown-preview;

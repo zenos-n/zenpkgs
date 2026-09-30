@@ -1,0 +1,14 @@
+_meta = {
+  name = "sish";
+  summary = "HTTP(S)/WS(S)/TCP Tunnels to localhost";
+  description = ''
+    HTTP(S)/WS(S)/TCP Tunnels to localhost.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.22.1";
+  tags = [ "networking" "tunneling" "remote-access" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sish;

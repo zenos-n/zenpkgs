@@ -1,0 +1,16 @@
+_meta = {
+  name = "Beancount";
+  summary = "Double-entry bookkeeping computer language";
+  description = ''
+    A double-entry bookkeeping computer language that lets you define
+    financial transaction records in a text file, read them in memory,
+    generate a variety of reports from them, and provides a web interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.0";
+  tags = [ "finance" "accounting" "office" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.beancount;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Flite";
+  summary = "Small, fast run-time speech synthesis engine";
+  description = ''
+    Small, fast run-time speech synthesis engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2";
+  tags = [ "accessibility" "speech" "audio" "text-to-speech" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsdOriginal;
+};
+
+import $pkgs.legacy.flite;

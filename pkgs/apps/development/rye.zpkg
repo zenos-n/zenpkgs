@@ -1,0 +1,14 @@
+_meta = {
+  name = "Rye";
+  summary = "Tool to easily manage python dependencies and environments";
+  description = ''
+    Tool to easily manage python dependencies and environments.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.44.0";
+  tags = [ "development" "python" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.rye;

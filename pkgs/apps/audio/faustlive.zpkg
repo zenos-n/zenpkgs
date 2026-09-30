@@ -1,0 +1,16 @@
+_meta = {
+  name = "FaustLive";
+  summary = "Standalone just-in-time Faust compiler";
+  description = ''
+    FaustLive is a standalone just-in-time Faust compiler. It tries to bring
+    together the convenience of a standalone interpreted language with the
+    efficiency of a compiled language. It's ideal for fast prototyping.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.19";
+  tags = [ "audio" "faust" "synthesis" "programming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.faustlive;

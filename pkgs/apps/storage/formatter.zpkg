@@ -1,0 +1,14 @@
+_meta = {
+  name = "Formatter";
+  summary = "Graphical storage-device formatter for elementary OS";
+  description = ''
+    Graphical storage-device formatter for elementary OS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "storage" "filesystems" "formatting" "gui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl2Plus;
+};
+
+import $pkgs.legacy.formatter;

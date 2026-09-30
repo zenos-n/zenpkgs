@@ -1,0 +1,14 @@
+_meta = {
+  name = "Portfolio";
+  summary = "Simple tool to calculate the overall performance of an investment portfolio";
+  description = ''
+    Simple tool to calculate the overall performance of an investment portfolio.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.83.2";
+  tags = [ "finance" "investing" "analysis" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.epl10;
+};
+
+import $pkgs.legacy.portfolio;

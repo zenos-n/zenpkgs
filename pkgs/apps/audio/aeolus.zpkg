@@ -1,0 +1,14 @@
+_meta = {
+  name = "Aeolus";
+  summary = "Synthetized (not sampled) pipe organ emulator";
+  description = ''
+    Synthetized (not sampled) pipe organ emulator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.4";
+  tags = [ "audio" "music" "synthesizer" "organ" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3;
+};
+
+import $pkgs.legacy.aeolus;

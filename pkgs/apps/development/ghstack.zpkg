@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghstack";
+  summary = "Submit stacked diffs to GitHub on the command line";
+  description = ''
+    Submit stacked diffs to GitHub on the command line.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.0";
+  tags = [ "development" "github" "git" "stacked-diffs" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghstack;

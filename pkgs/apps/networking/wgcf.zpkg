@@ -1,0 +1,14 @@
+_meta = {
+  name = "wgcf";
+  summary = "Cross-platform, unofficial CLI for Cloudflare Warp";
+  description = ''
+    Cross-platform, unofficial CLI for Cloudflare Warp.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.30";
+  tags = [ "networking" "vpn" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wgcf;

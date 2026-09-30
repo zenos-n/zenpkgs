@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bagels";
+  summary = "Powerful expense tracker that lives in your terminal";
+  description = ''
+    Bagels expense tracker is a TUI application where you can track and analyse your money flow, with convenience oriented features and a complete interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.12";
+  tags = [ "finance" "expenses" "budgeting" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.bagels;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Commet";
+  summary = "Client for Matrix focused on providing a feature rich experience while maintaining a simple interface";
+  description = ''
+    Client for Matrix focused on providing a feature rich experience while maintaining a simple interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.2+hotfix.2";
+  tags = [ "communication" "matrix" "chat" "messaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.commet-chat;

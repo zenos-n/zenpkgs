@@ -1,0 +1,14 @@
+_meta = {
+  name = "asciinema-scenario";
+  summary = "Create asciinema videos from a text file";
+  description = ''
+    Create asciinema videos from a text file.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.0";
+  tags = [ "video" "terminal" "asciinema" "automation" "recording" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.asciinema-scenario;

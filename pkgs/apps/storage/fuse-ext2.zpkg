@@ -1,0 +1,14 @@
+_meta = {
+  name = "fuse-ext2";
+  summary = "FUSE module to mount ext2, ext3 and ext4 with read write support";
+  description = ''
+    FUSE module to mount ext2, ext3 and ext4 with read write support.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.11";
+  tags = [ "storage" "fuse" "filesystems" "ext2" "ext4" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.fuse-ext2;

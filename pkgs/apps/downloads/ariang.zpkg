@@ -1,0 +1,14 @@
+_meta = {
+  name = "AriaNg";
+  summary = "Modern web frontend making aria2 easier to use";
+  description = ''
+    Modern web frontend making aria2 easier to use.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.13";
+  tags = [ "downloads" "networking" "aria2" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ariang;

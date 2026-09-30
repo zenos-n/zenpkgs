@@ -1,0 +1,18 @@
+_meta = {
+  name = "Joplin";
+  summary = "Open source note taking and to-do application with synchronisation capabilities";
+  description = ''
+    Joplin is a free, open source note taking and to-do application, which can
+    handle a large number of notes organised into notebooks. The notes are
+    searchable, can be copied, tagged and modified either from the
+    applications directly or from your own text editor. The notes are in
+    Markdown format.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5.13";
+  tags = [ "office" "productivity" "notes" "organization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.joplin-desktop;

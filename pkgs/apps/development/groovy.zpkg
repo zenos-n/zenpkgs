@@ -1,0 +1,14 @@
+_meta = {
+  name = "Apache Groovy";
+  summary = "Agile dynamic language for the Java Platform";
+  description = ''
+    Agile dynamic language for the Java Platform.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.0.4";
+  tags = [ "development" "programming" "languages" "java" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.groovy;

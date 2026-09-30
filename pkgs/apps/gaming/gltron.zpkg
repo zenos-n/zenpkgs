@@ -1,0 +1,14 @@
+_meta = {
+  name = "GLtron";
+  summary = "Game based on the movie Tron";
+  description = ''
+    Game based on the movie Tron.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.70";
+  tags = [ "gaming" "arcade" "tron" "3d" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gltron;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "pdftoipe";
+  summary = "Program that tries to convert arbitrary PDF documents to Ipe files";
+  description = ''
+    Program that tries to convert arbitrary PDF documents to Ipe files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.2.29.2";
+  tags = [ "office" "pdf" "conversion" "command-line" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.pdftoipe;

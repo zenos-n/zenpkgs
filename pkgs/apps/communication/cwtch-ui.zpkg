@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cwtch";
+  summary = "Messaging app built on the cwtch decentralized, privacy-preserving, multi-party messaging protocol";
+  description = ''
+    Messaging app built on the cwtch decentralized, privacy-preserving, multi-party messaging protocol.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.16.3";
+  tags = [ "communication" "chat" "decentralized" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cwtch-ui;

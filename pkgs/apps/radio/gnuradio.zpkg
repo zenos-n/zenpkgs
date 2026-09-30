@@ -1,0 +1,20 @@
+_meta = {
+  name = "GNU Radio";
+  summary = "Software Defined Radio (SDR) software";
+  description = ''
+    GNU Radio is a free & open-source software development toolkit that
+    provides signal processing blocks to implement software radios. It can be
+    used with readily-available low-cost external RF hardware to create
+    software-defined radios, or without hardware in a simulation-like
+    environment. It is widely used in hobbyist, academic and commercial
+    environments to support both wireless communications research and
+    real-world radio systems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.10.12.0";
+  tags = [ "radio" "sdr" "development" "signal-processing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.gnuradio;

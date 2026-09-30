@@ -1,0 +1,14 @@
+_meta = {
+  name = "Design";
+  summary = "2D CAD For GNOME";
+  description = ''
+    2D CAD For GNOME.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "48-alpha1";
+  tags = [ "cad" "2d" "drafting" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.design;

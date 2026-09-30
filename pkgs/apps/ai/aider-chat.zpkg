@@ -1,0 +1,14 @@
+_meta = {
+  name = "Aider";
+  summary = "AI pair programming in your terminal";
+  description = ''
+    AI pair programming in your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.86.1";
+  tags = [ "ai" "development" "coding" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.aider-chat;

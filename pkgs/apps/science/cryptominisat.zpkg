@@ -1,0 +1,14 @@
+_meta = {
+  name = "CryptoMiniSat";
+  summary = "Advanced SAT Solver";
+  description = ''
+    Advanced SAT Solver.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.11.21";
+  tags = [ "science" "sat" "logic" "solver" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cryptominisat;

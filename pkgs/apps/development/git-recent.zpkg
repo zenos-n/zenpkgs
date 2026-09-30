@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-recent";
+  summary = "See your latest local git branches, formatted real fancy";
+  description = ''
+    See your latest local git branches, formatted real fancy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.4";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-recent;

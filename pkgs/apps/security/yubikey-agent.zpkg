@@ -1,0 +1,14 @@
+_meta = {
+  name = "yubikey-agent";
+  summary = "Seamless ssh-agent for YubiKeys";
+  description = ''
+    Seamless ssh-agent for YubiKeys.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.6";
+  tags = [ "security" "ssh" "authentication" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.yubikey-agent;

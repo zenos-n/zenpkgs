@@ -1,0 +1,14 @@
+_meta = {
+  name = "Garden of Coloured Lights";
+  summary = "Old-school vertical shoot-em-up / bullet hell";
+  description = ''
+    Old-school vertical shoot-em-up / bullet hell.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.9";
+  tags = [ "gaming" "arcade" "shoot-em-up" "bullet-hell" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.garden-of-coloured-lights;

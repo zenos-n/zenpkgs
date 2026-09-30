@@ -1,0 +1,15 @@
+_meta = {
+  name = "FDK AAC Encoder";
+  summary = "Command line encoder frontend for libfdk-aac encoder";
+  description = ''
+    fdkaac reads linear PCM audio in either WAV, raw PCM, or CAF format,
+    and encodes it into either M4A / AAC file.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.7";
+  tags = [ "audio" "aac" "encoding" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.fdk-aac-encoder;

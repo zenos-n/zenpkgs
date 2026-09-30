@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenRGB";
+  summary = "Open source RGB lighting control";
+  description = ''
+    Open source RGB lighting control.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0rc3";
+  tags = [ "system" "administration" "hardware" "input" "devices" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.openrgb;

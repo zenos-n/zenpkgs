@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gapless";
+  summary = "Beautiful, fast, fluent, light weight music player written in GTK4";
+  description = ''
+    Beautiful, fast, fluent, light weight music player written in GTK4.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.6";
+  tags = [ "audio" "multimedia" "music" "player" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.gapless;

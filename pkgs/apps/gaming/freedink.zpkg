@@ -1,0 +1,16 @@
+_meta = {
+  name = "GNU FreeDink";
+  summary = "Free, portable and enhanced version of the Dink Smallwood game engine";
+  description = ''
+    GNU FreeDink is a new and portable version of the Dink Smallwood
+    game engine, which runs the original game as well as its D-Mods,
+    with close compatibility, under multiple platforms.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "109.6";
+  tags = [ "gaming" "rpg" "adventure" "game-engines" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.freedink;

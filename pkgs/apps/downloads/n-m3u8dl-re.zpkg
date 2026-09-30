@@ -1,0 +1,14 @@
+_meta = {
+  name = "N_m3u8DL-RE";
+  summary = "Cross-Platform, modern and powerful stream downloader for MPD/M3U8/ISM";
+  description = ''
+    Cross-Platform, modern and powerful stream downloader for MPD/M3U8/ISM.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.1-beta";
+  tags = [ "downloads" "video" "streaming" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.n-m3u8dl-re;

@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "KColorChooser";
+  summary = "A small utility to select a color";
+  description = ''
+    A small utility to select a color.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.04.3";
+  tags = [ "graphics" "colors" "design" "creativity" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.kdePackages.kcolorchooser;

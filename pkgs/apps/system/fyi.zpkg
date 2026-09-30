@@ -1,0 +1,14 @@
+_meta = {
+  name = "fyi";
+  summary = "Command line utility to create desktop notifications";
+  description = ''
+    Command line utility to create desktop notifications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.4";
+  tags = [ "system" "notifications" "desktop" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fyi;

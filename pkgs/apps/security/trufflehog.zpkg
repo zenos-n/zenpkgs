@@ -1,0 +1,14 @@
+_meta = {
+  name = "trufflehog";
+  summary = "Find credentials all over the place";
+  description = ''
+    Find credentials all over the place.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.95.3";
+  tags = [ "security" "development" "auditing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.trufflehog;

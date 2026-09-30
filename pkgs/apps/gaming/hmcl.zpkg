@@ -1,0 +1,25 @@
+_meta = {
+  name = "Hello Minecraft! Launcher";
+  summary = "Minecraft Launcher which is multi-functional, cross-platform and popular";
+  description = ''
+    Hello Minecraft! Launcher (HMCL) is a free, open-source, and cross-platform Minecraft launcher.
+    It provides comprehensive support for managing multiple game versions and mod loaders,
+    including Forge, NeoForge, Fabric, Quilt, LiteLoader, and OptiFine.
+
+    Starting with Minecraft 26.1, Wayland support can be enabled
+    by adding the JDK arguments -DMC_DEBUG_ENABLED and
+    -DMC_DEBUG_PREFER_WAYLAND. If needed, configure them in
+    HMCL -> Advanced Settings -> JVM Options -> JVM Arguments.
+
+    Users who are still on an older version and want to use Wayland should
+    enable HMCL -> Advanced Settings -> Workaround -> Use System GLFW.
+    Otherwise, keep it disabled.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.16.3";
+  tags = [ "gaming" "launcher" "minecraft" "mods" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.hmcl;

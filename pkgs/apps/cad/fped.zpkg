@@ -1,0 +1,14 @@
+_meta = {
+  name = "fped";
+  summary = "Editor that allows the interactive creation of footprints electronic components";
+  description = ''
+    Editor that allows the interactive creation of footprints electronic components.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2017-05-11";
+  tags = [ "cad" "electronics" "pcb" "footprints" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.fped;

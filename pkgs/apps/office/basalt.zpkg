@@ -1,0 +1,14 @@
+_meta = {
+  name = "Basalt";
+  summary = "TUI Application to manage Obsidian notes directly from the terminal";
+  description = ''
+    TUI Application to manage Obsidian notes directly from the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.12.4";
+  tags = [ "office" "notes" "obsidian" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.basalt;

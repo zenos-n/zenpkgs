@@ -1,0 +1,14 @@
+_meta = {
+  name = "LazyGit";
+  summary = "Simple terminal UI for git commands";
+  description = ''
+    Simple terminal UI for git commands.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.61.1";
+  tags = [ "development" "git" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.lazygit;

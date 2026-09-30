@@ -1,0 +1,14 @@
+_meta = {
+  name = "ncspot";
+  summary = "Cross-platform ncurses Spotify client written in Rust, inspired by ncmpc and the likes";
+  description = ''
+    Cross-platform ncurses Spotify client written in Rust, inspired by ncmpc and the likes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.3";
+  tags = [ "audio" "multimedia" "music" "streaming" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.ncspot;

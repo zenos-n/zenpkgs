@@ -1,0 +1,14 @@
+_meta = {
+  name = "binsort";
+  summary = "Sort files by binary similarity";
+  description = ''
+    Sort files by binary similarity.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4-1";
+  tags = [ "files" "binary" "similarity" "sorting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.binsort;

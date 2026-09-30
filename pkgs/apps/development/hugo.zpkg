@@ -1,0 +1,14 @@
+_meta = {
+  name = "Hugo";
+  summary = "Fast and modern static website engine";
+  description = ''
+    Fast and modern static website engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.163.3";
+  tags = [ "development" "documentation" "static-site" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.hugo;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "SQLFluff";
+  summary = "SQL linter and auto-formatter";
+  description = ''
+    SQL linter and auto-formatter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.2.1";
+  tags = [ "development" "database" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sqlfluff;

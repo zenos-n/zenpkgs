@@ -1,0 +1,14 @@
+_meta = {
+  name = "LAN Mouse";
+  summary = "Software KVM switch for sharing a mouse and keyboard with multiple hosts through the network";
+  description = ''
+    Software KVM switch for sharing a mouse and keyboard with multiple hosts through the network.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.0";
+  tags = [ "networking" "input" "keyboard" "mouse" "accessibility" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.lan-mouse;

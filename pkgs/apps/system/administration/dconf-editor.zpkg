@@ -1,0 +1,14 @@
+_meta = {
+  name = "dconf Editor";
+  summary = "GSettings editor for GNOME";
+  description = ''
+    GSettings editor for GNOME.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "49.0";
+  tags = [ "system" "administration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.dconf-editor;

@@ -1,0 +1,23 @@
+_meta = {
+  name = "Riseup VPN";
+  summary = "Generic VPN client by LEAP";
+  description = ''
+    Bitmask, by LEAP (LEAP Encryption Access Project),
+    is an application to provide easy and secure encrypted communication
+    with a VPN (Virtual Private Network). It allows you to select from
+    a variety of trusted service provider all from one app.
+    Current providers include Riseup Networks
+    and The Calyx Institute, where the former is default.
+    The <literal>riseup-vpn</literal> executable should appear
+    in your desktop manager's XDG menu or could be launch in a terminal
+    to get an execution log. A new icon should then appear in your systray
+    to control the VPN and configure some options.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.24.8";
+  tags = [ "networking" "vpn" "security" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.riseup-vpn;

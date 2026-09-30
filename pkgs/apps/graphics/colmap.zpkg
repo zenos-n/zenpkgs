@@ -1,0 +1,15 @@
+_meta = {
+  name = "COLMAP";
+  summary = "Structure-From-Motion and Multi-View Stereo pipeline";
+  description = ''
+    COLMAP is a general-purpose Structure-from-Motion (SfM) and Multi-View Stereo (MVS) pipeline
+    with a graphical and command-line interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.4";
+  tags = [ "graphics" "photogrammetry" "3d" "reconstruction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.colmap;

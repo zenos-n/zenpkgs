@@ -1,0 +1,18 @@
+_meta = {
+  name = "GetDP";
+  summary = "General Environment for the Treatment of Discrete Problems";
+  description = ''
+    GetDP is a free finite element solver using mixed elements to discretize
+    de Rham-type complexes in one, two and three dimensions.  The main
+    feature of GetDP is the closeness between the input data defining
+    discrete problems (written by the user in ASCII data files) and the
+    symbolic mathematical expressions of these problems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.6.0-unstable-2025-10-25";
+  tags = [ "science" "engineering" "simulation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.getdp;

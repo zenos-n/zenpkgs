@@ -1,0 +1,20 @@
+_meta = {
+  name = "passage";
+  summary = "Stores, retrieves, generates, and synchronizes passwords securely";
+  description = ''
+    passage is a fork of password-store (https://www.passwordstore.org) that uses
+    age (https://age-encryption.org) as a backend instead of GnuPG.
+
+    It keeps passwords inside age(1) encrypted files inside a simple
+    directory tree and provides a series of commands for manipulating the
+    password store, allowing the user to add, remove, edit and synchronize
+    passwords.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.4a2";
+  tags = [ "security" "passwords" "authentication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.passage;

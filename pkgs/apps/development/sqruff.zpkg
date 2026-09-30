@@ -1,0 +1,14 @@
+_meta = {
+  name = "sqruff";
+  summary = "Fast SQL formatter/linter";
+  description = ''
+    Fast SQL formatter/linter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.38.0";
+  tags = [ "development" "database" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.sqruff;

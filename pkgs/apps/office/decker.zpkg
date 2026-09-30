@@ -1,0 +1,14 @@
+_meta = {
+  name = "Decker";
+  summary = "Multimedia platform for creating and sharing interactive documents";
+  description = ''
+    Multimedia platform for creating and sharing interactive documents.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.66";
+  tags = [ "office" "interactive" "documents" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.decker;

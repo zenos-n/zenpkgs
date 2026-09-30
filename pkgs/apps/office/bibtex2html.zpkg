@@ -1,0 +1,14 @@
+_meta = {
+  name = "bibtex2html";
+  summary = "Collection of tools for translating from BibTeX to HTML";
+  description = ''
+    Collection of tools for translating from BibTeX to HTML.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.99";
+  tags = [ "office" "bibliography" "research" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.bibtex2html;

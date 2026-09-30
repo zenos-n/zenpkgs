@@ -1,0 +1,14 @@
+_meta = {
+  name = "curseradio";
+  summary = "Command line radio player";
+  description = ''
+    Command line radio player.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2";
+  tags = [ "radio" "internet-radio" "player" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.curseradio;

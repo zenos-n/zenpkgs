@@ -1,0 +1,14 @@
+_meta = {
+  name = "DirBuster";
+  summary = "Brute force directories and files names on web/application servers";
+  description = ''
+    Brute force directories and files names on web/application servers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0-RC1";
+  tags = [ "security" "web" "testing" "discovery" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Only;
+};
+
+import $pkgs.legacy.dirbuster;

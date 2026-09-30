@@ -1,0 +1,14 @@
+_meta = {
+  name = "Collabora Office";
+  summary = "Collaborative Office for desktop, based on LibreOffice technology";
+  description = ''
+    Collaborative Office for desktop, based on LibreOffice technology.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "25.04.9.2-2";
+  tags = [ "office" "documents" "spreadsheets" "presentations" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.collabora-desktop;

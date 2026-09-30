@@ -1,0 +1,198 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Standard personal folders";
+  summary = "Standard personal folders";
+  description = ''Settings for one user. Unset values preserve existing policy and preferences.'';
+  tags = [ "users" "userDirs" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = {
+  _meta = {
+    name = "Manage standard personal folders";
+    summary = "Manage standard personal folders";
+    description = ''Manage standard personal folders. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.enable = $lib.mkIf ($path.enable != null) ($path.enable);
+  };
+  u!! {
+    assertions = [
+      { assertion = $path.desktop == null || ($lib.hasPrefix "/" $path.desktop); message = "desktop must be an absolute path."; }
+      { assertion = $path.documents == null || ($lib.hasPrefix "/" $path.documents); message = "documents must be an absolute path."; }
+      { assertion = $path.downloads == null || ($lib.hasPrefix "/" $path.downloads); message = "downloads must be an absolute path."; }
+      { assertion = $path.music == null || ($lib.hasPrefix "/" $path.music); message = "music must be an absolute path."; }
+      { assertion = $path.pictures == null || ($lib.hasPrefix "/" $path.pictures); message = "pictures must be an absolute path."; }
+      { assertion = $path.videos == null || ($lib.hasPrefix "/" $path.videos); message = "videos must be an absolute path."; }
+      { assertion = $path.templates == null || ($lib.hasPrefix "/" $path.templates); message = "templates must be an absolute path."; }
+      { assertion = $path.publicShare == null || ($lib.hasPrefix "/" $path.publicShare); message = "publicShare must be an absolute path."; }
+      { assertion = $path.projects == null || ($lib.hasPrefix "/" $path.projects); message = "projects must be an absolute path."; }
+    ];
+  };
+};
+
+createDirectories = {
+  _meta = {
+    name = "Create configured personal folders";
+    summary = "Create configured personal folders";
+    description = ''Create configured personal folders. Requires userDirs.enable = true. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.createDirectories = $lib.mkIf ($path.createDirectories != null) ($path.createDirectories);
+  };
+};
+
+desktop = {
+  _meta = {
+    name = "Location of the desktop folder";
+    summary = "Location of the desktop folder";
+    description = ''Location of the desktop folder. Absolute path. Requires userDirs.enable = true. Does not move existing files. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.desktop = $lib.mkIf ($path.desktop != null) ($path.desktop);
+  };
+};
+
+documents = {
+  _meta = {
+    name = "Location of the documents folder";
+    summary = "Location of the documents folder";
+    description = ''Location of the documents folder. Absolute path. Requires userDirs.enable = true. Does not move existing files. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.documents = $lib.mkIf ($path.documents != null) ($path.documents);
+  };
+};
+
+downloads = {
+  _meta = {
+    name = "Location of the downloads folder";
+    summary = "Location of the downloads folder";
+    description = ''Location of the downloads folder. Absolute path. Requires userDirs.enable = true. Does not move existing files. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.download = $lib.mkIf ($path.downloads != null) ($path.downloads);
+  };
+};
+
+music = {
+  _meta = {
+    name = "Location of the music folder";
+    summary = "Location of the music folder";
+    description = ''Location of the music folder. Absolute path. Requires userDirs.enable = true. Does not move existing files. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.music = $lib.mkIf ($path.music != null) ($path.music);
+  };
+};
+
+pictures = {
+  _meta = {
+    name = "Location of the pictures folder";
+    summary = "Location of the pictures folder";
+    description = ''Location of the pictures folder. Absolute path. Requires userDirs.enable = true. Does not move existing files. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.pictures = $lib.mkIf ($path.pictures != null) ($path.pictures);
+  };
+};
+
+videos = {
+  _meta = {
+    name = "Location of the videos folder";
+    summary = "Location of the videos folder";
+    description = ''Location of the videos folder. Absolute path. Requires userDirs.enable = true. Does not move existing files. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.videos = $lib.mkIf ($path.videos != null) ($path.videos);
+  };
+};
+
+templates = {
+  _meta = {
+    name = "Location of the templates folder";
+    summary = "Location of the templates folder";
+    description = ''Location of the templates folder. Absolute path. Requires userDirs.enable = true. Does not move existing files. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.templates = $lib.mkIf ($path.templates != null) ($path.templates);
+  };
+};
+
+publicShare = {
+  _meta = {
+    name = "Location of the publicShare folder";
+    summary = "Location of the publicShare folder";
+    description = ''Location of the publicShare folder. Absolute path. Requires userDirs.enable = true. Does not move existing files. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.publicShare = $lib.mkIf ($path.publicShare != null) ($path.publicShare);
+  };
+};
+
+projects = {
+  _meta = {
+    name = "Location of the projects folder";
+    summary = "Location of the projects folder";
+    description = ''Location of the projects folder. Absolute path. Requires userDirs.enable = true. Does not move existing files. Null leaves this preference unchanged.'';
+    tags = [ "users" "userDirs" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.userDirs.projects = $lib.mkIf ($path.projects != null) ($path.projects);
+  };
+};

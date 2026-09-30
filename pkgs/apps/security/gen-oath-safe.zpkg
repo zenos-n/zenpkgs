@@ -1,0 +1,14 @@
+_meta = {
+  name = "gen-oath-safe";
+  summary = "Script for generating HOTP/TOTP keys (and QR code)";
+  description = ''
+    Script for generating HOTP/TOTP keys (and QR code).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.0";
+  tags = [ "security" "otp" "authentication" "qr-codes" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gen-oath-safe;

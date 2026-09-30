@@ -1,0 +1,14 @@
+_meta = {
+  name = "nauty";
+  summary = "Programs for computing automorphism groups of graphs and digraphs";
+  description = ''
+    Programs for computing automorphism groups of graphs and digraphs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.9.3";
+  tags = [ "science" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.nauty;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Argonaut";
+  summary = "Keyboard-first terminal UI for Argo CD";
+  description = ''
+    Keyboard-first terminal UI for Argo CD.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.16.0";
+  tags = [ "development" "argocd" "kubernetes" "gitops" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.argonaut;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "clinfo";
+  summary = "Print all known information about all available OpenCL platforms and devices in the system";
+  description = ''
+    Print all known information about all available OpenCL platforms and devices in the system.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.25.02.14";
+  tags = [ "system" "monitoring" "opencl" "hardware" "inspection" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc0;
+};
+
+import $pkgs.legacy.clinfo;

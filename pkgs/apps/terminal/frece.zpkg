@@ -1,0 +1,14 @@
+_meta = {
+  name = "frece";
+  summary = "Maintain a database sorted by frecency (frequency + recency)";
+  description = ''
+    Maintain a database sorted by frecency (frequency + recency).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.6";
+  tags = [ "terminal" "frecency" "data" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.frece;

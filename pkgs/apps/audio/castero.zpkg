@@ -1,0 +1,14 @@
+_meta = {
+  name = "Castero";
+  summary = "TUI podcast client for the terminal";
+  description = ''
+    TUI podcast client for the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.5";
+  tags = [ "audio" "podcasts" "player" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.castero;

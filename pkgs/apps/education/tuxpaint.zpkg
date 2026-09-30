@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tux Paint";
+  summary = "Open Source Drawing Software for Children";
+  description = ''
+    Open Source Drawing Software for Children.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.35";
+  tags = [ "education" "learning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.tuxpaint;

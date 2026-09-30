@@ -1,0 +1,16 @@
+_meta = {
+  name = "cargo-workspaces";
+  summary = "Tool for managing cargo workspaces and their crates, inspired by lerna";
+  description = ''
+    A tool that optimizes the workflow around cargo workspaces with
+    git and cargo by providing utilities to version, publish, execute
+    commands and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.2";
+  tags = [ "development" "rust" "cargo" "workspaces" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-workspaces;

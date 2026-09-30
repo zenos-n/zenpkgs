@@ -1,0 +1,14 @@
+_meta = {
+  name = "Advent of Code CLI";
+  summary = "Advent of code command line tool";
+  description = ''
+    Advent of code command line tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.12.0";
+  tags = [ "development" "education" "programming" "advent-of-code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.aoc-cli;

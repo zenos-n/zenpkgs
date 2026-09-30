@@ -1,0 +1,14 @@
+_meta = {
+  name = "colorz";
+  summary = "Color scheme generator";
+  description = ''
+    Color scheme generator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.3";
+  tags = [ "graphics" "colors" "palettes" "generation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.colorz;

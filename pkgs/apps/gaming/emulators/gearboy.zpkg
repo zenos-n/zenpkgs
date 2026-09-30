@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gearboy";
+  summary = "Game Boy/Game Boy Color/Super Game Boy emulator, debugger and embedded MCP server for macOS, Windows, Linux, BSD and RetroArch";
+  description = ''
+    Game Boy/Game Boy Color/Super Game Boy emulator, debugger and embedded MCP server for macOS, Windows, Linux, BSD and RetroArch.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.8.6";
+  tags = [ "gaming" "emulators" "game-boy" "debugging" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.gearboy;

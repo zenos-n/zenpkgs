@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-open";
+  summary = "Open the GitHub page or website for a repository in your browser";
+  description = ''
+    Open the GitHub page or website for a repository in your browser.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.0";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-open;

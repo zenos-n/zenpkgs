@@ -1,0 +1,14 @@
+_meta = {
+  name = "DownKyi";
+  summary = "Cross-platform Bilibili downloader built with Avalonia";
+  description = ''
+    Cross-platform Bilibili downloader built with Avalonia.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.24";
+  tags = [ "downloads" "video" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.downkyicore;

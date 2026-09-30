@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gossip";
+  summary = "Desktop client for nostr, an open social media protocol";
+  description = ''
+    Desktop client for nostr, an open social media protocol.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14.0";
+  tags = [ "communication" "nostr" "social" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gossip;

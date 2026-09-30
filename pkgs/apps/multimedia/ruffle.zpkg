@@ -1,0 +1,21 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Ruffle";
+  summary = "Cross platform Adobe Flash Player emulator";
+  description = ''
+    Ruffle is a cross platform emulator for running and preserving
+    Adobe Flash content. It is capable of running ActionScript 1, 2
+    and 3 programs with machine-native performance thanks to being
+    written in the Rust programming language.
+
+    Additionally, overriding the `withRuffleTools` input to
+    `true` will build all the available packages in the ruffle
+    project, including the `exporter` and `scanner` utilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0-nightly-2026-04-23";
+  tags = [ "multimedia" "gaming" "flash" "emulation" "audio" "video" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.ruffle;

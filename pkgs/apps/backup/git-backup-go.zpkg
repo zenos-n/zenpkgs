@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-backup";
+  summary = "Backup all your GitHub & GitLab repositories";
+  description = ''
+    Backup all your GitHub & GitLab repositories.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.1";
+  tags = [ "backup" "git" "github" "gitlab" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-backup-go;

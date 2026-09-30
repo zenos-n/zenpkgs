@@ -1,0 +1,15 @@
+_meta = {
+  name = "Helmfile";
+  summary = "Declarative spec for deploying Helm charts";
+  description = ''
+    Declaratively deploy your Kubernetes manifests, Kustomize configs,
+    and charts as Helm releases in one shot.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.0";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.helmfile;

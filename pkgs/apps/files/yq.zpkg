@@ -1,0 +1,14 @@
+_meta = {
+  name = "yq";
+  summary = "Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents";
+  description = ''
+    Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.4.3";
+  tags = [ "files" "yaml" "xml" "toml" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.yq;

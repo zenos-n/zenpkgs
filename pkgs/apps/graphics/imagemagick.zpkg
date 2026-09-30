@@ -1,0 +1,14 @@
+_meta = {
+  name = "ImageMagick";
+  summary = "Software suite to create, edit, compose, or convert bitmap images";
+  description = ''
+    Software suite to create, edit, compose, or convert bitmap images.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.1.2-29";
+  tags = [ "graphics" "creativity" "images" "conversion" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.imagemagick;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ansible Language Server";
+  summary = "Ansible Language Server";
+  description = ''
+    Ansible Language Server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.4";
+  tags = [ "infrastructure" "development" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ansible-language-server;

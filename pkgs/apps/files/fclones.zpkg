@@ -1,0 +1,14 @@
+_meta = {
+  name = "fclones";
+  summary = "Efficient Duplicate File Finder and Remover";
+  description = ''
+    Efficient Duplicate File Finder and Remover.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.35.0";
+  tags = [ "files" "duplicates" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fclones;

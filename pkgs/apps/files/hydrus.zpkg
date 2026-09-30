@@ -1,0 +1,14 @@
+_meta = {
+  name = "Hydrus Network";
+  summary = "Danbooru-like image tagging and searching system for the desktop";
+  description = ''
+    Danbooru-like image tagging and searching system for the desktop.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "668";
+  tags = [ "files" "graphics" "images" "tagging" "organizing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.wtfpl;
+};
+
+import $pkgs.legacy.hydrus;

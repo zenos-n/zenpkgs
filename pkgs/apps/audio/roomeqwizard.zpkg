@@ -1,0 +1,15 @@
+_meta = {
+  name = "Room EQ Wizard";
+  summary = "Room Acoustics Software";
+  description = ''
+    REW is free software for room acoustic measurement, loudspeaker
+    measurement and audio device measurement.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.31.3";
+  tags = [ "audio" "acoustics" "measurement" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.roomeqwizard;

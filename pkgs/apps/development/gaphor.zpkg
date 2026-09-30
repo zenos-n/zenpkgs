@@ -1,0 +1,22 @@
+_meta = {
+  name = "Gaphor";
+  summary = "UML and SysML modeling tool";
+  description = ''
+    Gaphor is a UML, SysML, RAAML, and C4 modeling application. It
+    is designed to be easy to use, while still being powerful.
+    Gaphor implements a fully-compliant UML 2 data model, so it is
+    much more than a picture drawing tool. You can use Gaphor to
+    quickly visualize different aspects of a system as well as
+    create complete, highly complex models.
+
+    Gaphor provides four modeling languages: UML, SysML, RAAML and C4 and
+    makes them accessible to beginners.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.2";
+  tags = [ "development" "uml" "sysml" "modeling" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gaphor;

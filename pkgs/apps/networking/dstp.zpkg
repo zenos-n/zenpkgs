@@ -1,0 +1,14 @@
+_meta = {
+  name = "dstp";
+  summary = "Run common networking tests against your site";
+  description = ''
+    Run common networking tests against your site.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.23";
+  tags = [ "networking" "diagnostics" "testing" "web" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dstp;

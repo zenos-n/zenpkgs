@@ -1,0 +1,23 @@
+_meta = {
+  name = "croc";
+  summary = "Easily and securely send things from one computer to another";
+  description = ''
+    Croc is a command line tool written in Go that allows any two computers to
+    simply and securely transfer files and folders.
+
+    Croc does all of the following:
+    - Allows any two computers to transfer data (using a relay)
+    - Provides end-to-end encryption (using PAKE)
+    - Enables easy cross-platform transfers (Windows, Linux, Mac)
+    - Allows multiple file transfers
+    - Allows resuming transfers that are interrupted
+    - Does not require a server or port-forwarding
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10.4.3";
+  tags = [ "networking" "files" "transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.croc;

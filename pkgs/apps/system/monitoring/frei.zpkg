@@ -1,0 +1,14 @@
+_meta = {
+  name = "frei";
+  summary = "Modern replacement for free";
+  description = ''
+    Modern replacement for free.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "system" "monitoring" "memory" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.frei;

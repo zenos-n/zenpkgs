@@ -1,0 +1,14 @@
+_meta = {
+  name = "ugrep";
+  summary = "Ultra fast grep with interactive query UI";
+  description = ''
+    Ultra fast grep with interactive query UI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.5.0";
+  tags = [ "files" "search" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.ugrep;

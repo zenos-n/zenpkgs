@@ -1,0 +1,14 @@
+_meta = {
+  name = "fend";
+  summary = "Arbitrary-precision unit-aware calculator";
+  description = ''
+    Arbitrary-precision unit-aware calculator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.8";
+  tags = [ "science" "calculator" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fend;

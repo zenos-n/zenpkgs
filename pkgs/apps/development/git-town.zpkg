@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-town";
+  summary = "Generic, high-level git support for git-flow workflows";
+  description = ''
+    Generic, high-level git support for git-flow workflows.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "23.0.1";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-town;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "cidrgrep";
+  summary = "Like grep but for IPv4 CIDRs";
+  description = ''
+    Like grep but for IPv4 CIDRs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2020-11-17";
+  tags = [ "networking" "cidr" "ipv4" "search" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cidrgrep;

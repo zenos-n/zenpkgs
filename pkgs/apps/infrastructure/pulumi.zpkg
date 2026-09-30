@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pulumi";
+  summary = "Cloud development platform that makes creating cloud programs easy and productive";
+  description = ''
+    Cloud development platform that makes creating cloud programs easy and productive.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.192.0";
+  tags = [ "infrastructure" "automation" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.pulumi;

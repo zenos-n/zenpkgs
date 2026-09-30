@@ -1,0 +1,14 @@
+_meta = {
+  name = "Stream Deck UI";
+  summary = "Linux compatible UI for the Elgato Stream Deck";
+  description = ''
+    Linux compatible UI for the Elgato Stream Deck.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.1.4";
+  tags = [ "system" "administration" "hardware" "automation" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.streamdeck-ui;

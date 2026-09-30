@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gitless";
+  summary = "Version control system built on top of Git";
+  description = ''
+    Version control system built on top of Git.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.17";
+  tags = [ "development" "git" "version-control" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitless;

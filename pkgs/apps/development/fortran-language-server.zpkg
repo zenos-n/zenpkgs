@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fortran Language Server";
+  summary = "FORTRAN Language Server for the Language Server Protocol";
+  description = ''
+    FORTRAN Language Server for the Language Server Protocol.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.12.0";
+  tags = [ "development" "fortran" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fortran-language-server;

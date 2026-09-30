@@ -1,0 +1,14 @@
+_meta = {
+  name = "xh";
+  summary = "Friendly and fast tool for sending HTTP requests";
+  description = ''
+    Friendly and fast tool for sending HTTP requests.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.25.3";
+  tags = [ "networking" "development" "http" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.xh;

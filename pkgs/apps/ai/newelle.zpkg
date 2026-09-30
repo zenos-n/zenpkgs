@@ -1,0 +1,14 @@
+_meta = {
+  name = "Newelle";
+  summary = "Ultimate Virtual Assistant";
+  description = ''
+    Ultimate Virtual Assistant.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.7";
+  tags = [ "ai" "language-models" "local-inference" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.newelle;

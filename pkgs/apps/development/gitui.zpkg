@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitUI";
+  summary = "Blazing fast terminal-ui for Git written in Rust";
+  description = ''
+    Blazing fast terminal-ui for Git written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.28.1";
+  tags = [ "development" "git" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitui;

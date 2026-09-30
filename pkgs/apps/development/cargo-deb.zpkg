@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-deb";
+  summary = "Cargo subcommand that generates Debian packages from information in Cargo.toml";
+  description = ''
+    Cargo subcommand that generates Debian packages from information in Cargo.toml.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.7.0";
+  tags = [ "development" "rust" "cargo" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-deb;

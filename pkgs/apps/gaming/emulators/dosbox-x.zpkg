@@ -1,0 +1,18 @@
+_meta = {
+  name = "DOSBox-X";
+  summary = "Cross-platform DOS emulator based on the DOSBox project";
+  description = ''
+    DOSBox-X is an expanded fork of DOSBox with specific focus on running
+    Windows 3.x/9x/Me, PC-98 and 3D support via 3dfx.
+
+    The full expanded feature list is available here:
+    https://dosbox-x.com/wiki/DOSBox%E2%80%90X%E2%80%99s-Feature-Highlights
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.05.02";
+  tags = [ "gaming" "emulators" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.dosbox-x;

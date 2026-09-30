@@ -1,0 +1,14 @@
+_meta = {
+  name = "gocryptfs";
+  summary = "Encrypted overlay filesystem written in Go";
+  description = ''
+    Encrypted overlay filesystem written in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.1";
+  tags = [ "security" "storage" "encryption" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gocryptfs;

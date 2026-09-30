@@ -1,0 +1,14 @@
+_meta = {
+  name = "Antimony";
+  summary = "Computer-aided design (CAD) tool from a parallel universe";
+  description = ''
+    Computer-aided design (CAD) tool from a parallel universe.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.3-unstable-2025-10-12";
+  tags = [ "cad" "3d" "modeling" "engineering" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.antimony;

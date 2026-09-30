@@ -1,0 +1,14 @@
+_meta = {
+  name = "bingrep";
+  summary = "Greps through binaries from various OSs and architectures, and colors them";
+  description = ''
+    Greps through binaries from various OSs and architectures, and colors them.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.12.1";
+  tags = [ "development" "binary" "search" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bingrep;

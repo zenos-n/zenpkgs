@@ -1,0 +1,14 @@
+_meta = {
+  name = "SiYuan";
+  summary = "Privacy-first personal knowledge management system that supports complete offline usage, as well as end-to-end encrypted data sync";
+  description = ''
+    Privacy-first personal knowledge management system that supports complete offline usage, as well as end-to-end encrypted data sync.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.7.3";
+  tags = [ "office" "notes" "knowledge-management" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.siyuan;

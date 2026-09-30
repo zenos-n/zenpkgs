@@ -1,67 +1,180 @@
 _meta = {
   zenosVersion = 1.0.0Na;
-  summary = "Enhanced user management for ZenOS";
-  description = ''
-    Provides a unified system-side bridge for user and Home Manager configuration.
-
-    User package selectors are resolved against filesystem-derived pkgs.zenos paths
-    by the structure runtime rather than by this module.
-  '';
+  name = "User accounts";
+  summary = "Account profiles for managed users";
+  description = ''Declares account settings alongside session preferences in the unified user tree.'';
+  tags = [ "users" ];
   maintainers = [ $m.doromiert ];
   license = $l.napl;
-  platforms = $lib.platforms.zenos;
 };
 
 (freeform user) = {
-  _meta.summary = "Configuration for user ${$f.user}";
-
-  groups = {
-    _meta = {
-      type = $type.list [ $type.string ];
-      default = [ ];
-      summary = "Additional groups for this user";
-    };
+  _meta = {
+    name = "User ${$f.user}";
+    summary = "Account and personal settings";
+    description = ''Settings belonging to user ${$f.user}.'';
+    tags = [ "users" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  profile._meta = {
+    name = "Account profile";
+    summary = "Login account and identity";
+    description = ''Account choices apply only to this user. Unset choices preserve the existing account policy.'';
+    tags = [ "users" "profile" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
   };
 
-  keys = {
+  profile.normalUser = {
     _meta = {
-      type = $type.list [ $type.string ];
-      default = [ ];
-      summary = "Authorized SSH public keys for this user";
-    };
-  };
-
-  shell = {
-    _meta = {
-      type = $type.either [ $type.null $type.package ];
+      name = "Create a regular login account";
+      summary = "Create a regular login account";
+      description = ''Create a regular login account. True creates a normal user; false does not implicitly select a system account. Existing accounts may leave this unset. Null leaves this preference unchanged.'';
+      tags = [ "users" "profile" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+      type = $type.either [ ($type.boolean) $type.null ];
       default = null;
-      summary = "Login shell for this user";
+    };
+    s!! {
+      users.users.($f.user).isNormalUser = $lib.mkIf ($path.($f.user).profile.normalUser != null) ($path.($f.user).profile.normalUser);
+    };
+  };
+
+  profile.displayName = {
+    _meta = {
+      name = "Name shown on the login screen";
+      summary = "Name shown on the login screen";
+      description = ''Name shown on the login screen. Null leaves this preference unchanged.'';
+      tags = [ "users" "profile" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+      type = $type.either [ ($type.string) $type.null ];
+      default = null;
+    };
+    s!! {
+      users.users.($f.user).description = $lib.mkIf ($path.($f.user).profile.displayName != null) ($path.($f.user).profile.displayName);
+    };
+  };
+
+  profile.homeDirectory = {
+    _meta = {
+      name = "Absolute path to the home directory";
+      summary = "Absolute path to the home directory";
+      description = ''Absolute path to the home directory. Must be absolute. Changing this path does not migrate existing files. Null leaves this preference unchanged.'';
+      tags = [ "users" "profile" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+      type = $type.either [ ($type.string) $type.null ];
+      default = null;
+    };
+    s!! {
+      users.users.($f.user).home = $lib.mkIf ($path.($f.user).profile.homeDirectory != null) ($path.($f.user).profile.homeDirectory);
+    };
+  };
+
+  profile.uid = {
+    _meta = {
+      name = "Stable numeric user identifier";
+      summary = "Stable numeric user identifier";
+      description = ''Stable numeric user identifier. Must be between 0 and 4294967294. Null leaves this preference unchanged.'';
+      tags = [ "users" "profile" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+      type = $type.either [ ($type.int) $type.null ];
+      default = null;
+    };
+    s!! {
+      users.users.($f.user).uid = $lib.mkIf ($path.($f.user).profile.uid != null) ($path.($f.user).profile.uid);
+    };
+  };
+
+  profile.groups = {
+    _meta = {
+      name = "Additional group memberships";
+      summary = "Additional group memberships";
+      description = ''Additional group memberships. Uses normal additive group-list merging; an empty list adds no groups. Null leaves this preference unchanged.'';
+      tags = [ "users" "profile" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+      type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+      default = null;
+    };
+    s!! {
+      users.users.($f.user).extraGroups = $lib.mkIf ($path.($f.user).profile.groups != null) ($path.($f.user).profile.groups);
+    };
+  };
+
+  profile.sshKeys = {
+    _meta = {
+      name = "Authorized SSH public keys";
+      summary = "Authorized SSH public keys";
+      description = ''Authorized SSH public keys. Public keys only; uses normal additive list merging. Null leaves this preference unchanged.'';
+      tags = [ "users" "profile" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+      type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+      default = null;
+    };
+    s!! {
+      users.users.($f.user).openssh.authorizedKeys.keys = $lib.mkIf ($path.($f.user).profile.sshKeys != null) ($path.($f.user).profile.sshKeys);
+    };
+  };
+
+  profile.passwordHashFile = {
+    _meta = {
+      name = "Runtime file containing the password hash";
+      summary = "Runtime file containing the password hash";
+      description = ''Runtime file containing the password hash. An absolute runtime path, never a plaintext password or store-imported secret. Null leaves this preference unchanged.'';
+      tags = [ "users" "profile" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+      type = $type.either [ ($type.string) $type.null ];
+      default = null;
+    };
+    s!! {
+      users.users.($f.user).hashedPasswordFile = $lib.mkIf ($path.($f.user).profile.passwordHashFile != null) ($path.($f.user).profile.passwordHashFile);
+    };
+  };
+
+  profile.linger = {
+    _meta = {
+      name = "Keep user services running after logout";
+      summary = "Keep user services running after logout";
+      description = ''Keep user services running after logout. Null leaves this preference unchanged.'';
+      tags = [ "users" "profile" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+      type = $type.either [ ($type.boolean) $type.null ];
+      default = null;
+    };
+    s!! {
+      users.users.($f.user).linger = $lib.mkIf ($path.($f.user).profile.linger != null) ($path.($f.user).profile.linger);
     };
   };
 
   s!! {
-    users.users.($f.user) =
-      ($path.($f.user).legacy or { })
-      // {
-        extraGroups = ($path.($f.user).legacy.extraGroups or [ ])
-          ++ $path.($f.user).groups;
-        openssh.authorizedKeys.keys =
-          ($path.($f.user).legacy.openssh.authorizedKeys.keys or [ ])
-          ++ $path.($f.user).keys;
-      }
-      // (if $path.($f.user).shell != null then {
-        shell = $path.($f.user).shell;
-      } else { });
-    home-manager.users.($f.user) = {
-      home = $path.($f.user).home or { };
-      xdg = $path.($f.user).xdg or { };
-      programs = $path.($f.user).programs or { };
-      services = $path.($f.user).services or { };
-      dconf = $path.($f.user).dconf or { };
-      gtk = $path.($f.user).gtk or { };
-      qt = $path.($f.user).qt or { };
-      systemd = $path.($f.user).systemd or { };
-      wayland = $path.($f.user).wayland or { };
+    assertions = [
+      { assertion = $path.($f.user).profile.uid == null || ($path.($f.user).profile.uid >= 0 && $path.($f.user).profile.uid <= 4294967294); message = "UID must be between 0 and 4294967294."; }
+      { assertion = $path.($f.user).profile.homeDirectory == null || ($lib.hasPrefix "/" $path.($f.user).profile.homeDirectory); message = "homeDirectory must be an absolute path."; }
+      { assertion = $path.($f.user).profile.passwordHashFile == null || ($lib.hasPrefix "/" $path.($f.user).profile.passwordHashFile); message = "passwordHashFile must be an absolute path."; }
+    ];
+  };
+
+  profile.loginShell = {
+    _meta = {
+      name = "Login shell package";
+      summary = "Login shell package";
+      description = ''Login shell package. The selected shell must be supported and enabled by the system. This does not enable a system-wide shell service. Null leaves this preference unchanged.'';
+      tags = [ "users" "shell" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+      type = $type.either [ ($type.package) $type.null ];
+      default = null;
+    };
+    s!! {
+      users.users.($f.user).shell = $lib.mkIf ($path.($f.user).profile.loginShell != null) ($path.($f.user).profile.loginShell);
     };
   };
 };

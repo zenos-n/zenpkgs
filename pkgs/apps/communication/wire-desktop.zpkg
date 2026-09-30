@@ -1,0 +1,22 @@
+_meta = {
+  name = "Wire";
+  summary = "Modern, secure messenger for everyone";
+  description = ''
+    Wire Personal is a secure, privacy-friendly messenger. It combines useful
+    and fun features, audited security, and a beautiful, distinct user
+    interface.  It does not require a phone number to register and chat.
+
+      * End-to-end encrypted chats, calls, and files
+      * Crystal clear voice and video calling
+      * File and screen sharing
+      * Timed messages and chats
+      * Synced across your phone, desktop and tablet
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.40.3882";
+  tags = [ "communication" "messaging" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.wire-desktop;

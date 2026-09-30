@@ -1,0 +1,3142 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Personal GNOME preferences";
+  summary = "Personal GNOME preferences";
+  description = ''Settings for one user. Unset values preserve existing policy and preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+accessibility._meta = {
+  name = "Accessibility";
+  summary = "Personal accessibility preferences";
+  description = ''GNOME accessibility settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+appearance._meta = {
+  name = "Appearance and text";
+  summary = "Personal appearance and text preferences";
+  description = ''GNOME appearance and text settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+clock._meta = {
+  name = "Clock and calendar";
+  summary = "Personal clock and calendar preferences";
+  description = ''GNOME clock and calendar settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+keyboard._meta = {
+  name = "Keyboard";
+  summary = "Personal keyboard preferences";
+  description = ''GNOME keyboard settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+magnification._meta = {
+  name = "Screen magnifier";
+  summary = "Personal screen magnifier preferences";
+  description = ''GNOME screen magnifier settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+mouse._meta = {
+  name = "Mouse";
+  summary = "Personal mouse preferences";
+  description = ''GNOME mouse settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+nightLight._meta = {
+  name = "Night Light";
+  summary = "Personal night light preferences";
+  description = ''GNOME night light settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+notifications._meta = {
+  name = "Notifications";
+  summary = "Personal notifications preferences";
+  description = ''GNOME notifications settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+power._meta = {
+  name = "Idle and power behavior";
+  summary = "Personal idle and power behavior preferences";
+  description = ''GNOME idle and power behavior settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+privacy._meta = {
+  name = "Privacy and history";
+  summary = "Personal privacy and history preferences";
+  description = ''GNOME privacy and history settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+removableMedia._meta = {
+  name = "Removable media";
+  summary = "Personal removable media preferences";
+  description = ''GNOME removable media settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+security._meta = {
+  name = "Screen locking";
+  summary = "Personal screen locking preferences";
+  description = ''GNOME screen locking settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+shortcuts._meta = {
+  name = "Keyboard shortcuts";
+  summary = "Personal keyboard shortcuts preferences";
+  description = ''GNOME keyboard shortcuts settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+sound._meta = {
+  name = "Sounds";
+  summary = "Personal sounds preferences";
+  description = ''GNOME sounds settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+touchpad._meta = {
+  name = "Touchpad";
+  summary = "Personal touchpad preferences";
+  description = ''GNOME touchpad settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+wallpaper._meta = {
+  name = "Wallpaper";
+  summary = "Personal wallpaper preferences";
+  description = ''GNOME wallpaper settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+windows._meta = {
+  name = "Window behavior";
+  summary = "Personal window behavior preferences";
+  description = ''GNOME window behavior settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+workspaces._meta = {
+  name = "Workspaces";
+  summary = "Personal workspaces preferences";
+  description = ''GNOME workspaces settings for this user. Unset choices preserve existing preferences.'';
+  tags = [ "users" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+appearance.animations = {
+  _meta = {
+    name = "Animations";
+    summary = "Animations";
+    description = ''Animations. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."enable-animations" = $lib.mkIf ($path.appearance.animations != null) ($path.appearance.animations);
+  };
+  u!! {
+    assertions = [
+      { assertion = $path.accessibility.inactivityTimeoutSeconds == null || ($path.accessibility.inactivityTimeoutSeconds >= 0 && $path.accessibility.inactivityTimeoutSeconds <= 2147483647); message = "users.<name>.theming.gnome.accessibility.inactivityTimeoutSeconds must be between 0 and 2147483647."; }
+      { assertion = $path.accessibility.keyboardMouseSpeed == null || ($path.accessibility.keyboardMouseSpeed >= 0 && $path.accessibility.keyboardMouseSpeed <= 2147483647); message = "users.<name>.theming.gnome.accessibility.keyboardMouseSpeed must be between 0 and 2147483647."; }
+      { assertion = $path.accessibility.keyboardMouseAccelerationMilliseconds == null || ($path.accessibility.keyboardMouseAccelerationMilliseconds >= 0 && $path.accessibility.keyboardMouseAccelerationMilliseconds <= 2147483647); message = "users.<name>.theming.gnome.accessibility.keyboardMouseAccelerationMilliseconds must be between 0 and 2147483647."; }
+      { assertion = $path.accessibility.keyboardMouseDelayMilliseconds == null || ($path.accessibility.keyboardMouseDelayMilliseconds >= 0 && $path.accessibility.keyboardMouseDelayMilliseconds <= 2147483647); message = "users.<name>.theming.gnome.accessibility.keyboardMouseDelayMilliseconds must be between 0 and 2147483647."; }
+      { assertion = $path.magnification.zoom == null || ($path.magnification.zoom >= 0.1 && $path.magnification.zoom <= 32.0); message = "users.<name>.theming.gnome.magnification.zoom must be between 0.1 and 32.0."; }
+      { assertion = $path.magnification.crosshairThicknessPixels == null || ($path.magnification.crosshairThicknessPixels >= 0 && $path.magnification.crosshairThicknessPixels <= 2147483647); message = "users.<name>.theming.gnome.magnification.crosshairThicknessPixels must be between 0 and 2147483647."; }
+      { assertion = $path.magnification.crosshairOpacity == null || ($path.magnification.crosshairOpacity >= 0.0 && $path.magnification.crosshairOpacity <= 1.0); message = "users.<name>.theming.gnome.magnification.crosshairOpacity must be between 0.0 and 1.0."; }
+      { assertion = $path.magnification.crosshairLengthPixels == null || ($path.magnification.crosshairLengthPixels >= 20 && $path.magnification.crosshairLengthPixels <= 4096); message = "users.<name>.theming.gnome.magnification.crosshairLengthPixels must be between 20 and 4096."; }
+      { assertion = $path.magnification.colorSaturation == null || ($path.magnification.colorSaturation >= 0.0 && $path.magnification.colorSaturation <= 1.0); message = "users.<name>.theming.gnome.magnification.colorSaturation must be between 0.0 and 1.0."; }
+      { assertion = $path.accessibility.hoverClickDelaySeconds == null || ($path.accessibility.hoverClickDelaySeconds >= 0.0); message = "users.<name>.theming.gnome.accessibility.hoverClickDelaySeconds must be at least 0.0."; }
+      { assertion = $path.accessibility.hoverClickMovementPixels == null || ($path.accessibility.hoverClickMovementPixels >= 0 && $path.accessibility.hoverClickMovementPixels <= 2147483647); message = "users.<name>.theming.gnome.accessibility.hoverClickMovementPixels must be between 0 and 2147483647."; }
+      { assertion = $path.accessibility.rightClickHoldSeconds == null || ($path.accessibility.rightClickHoldSeconds >= 0.0); message = "users.<name>.theming.gnome.accessibility.rightClickHoldSeconds must be at least 0.0."; }
+      { assertion = $path.appearance.textScale == null || ($path.appearance.textScale >= 0.5 && $path.appearance.textScale <= 3.0); message = "users.<name>.theming.gnome.appearance.textScale must be between 0.5 and 3.0."; }
+      { assertion = $path.privacy.cleanupAgeDays == null || ($path.privacy.cleanupAgeDays >= 0 && $path.privacy.cleanupAgeDays <= 4294967295); message = "users.<name>.theming.gnome.privacy.cleanupAgeDays must be between 0 and 4294967295."; }
+      { assertion = $path.power.screenBlankSeconds == null || ($path.power.screenBlankSeconds >= 0 && $path.power.screenBlankSeconds <= 4294967295); message = "users.<name>.theming.gnome.power.screenBlankSeconds must be between 0 and 4294967295."; }
+      { assertion = $path.security.lockDelaySeconds == null || ($path.security.lockDelaySeconds >= 0 && $path.security.lockDelaySeconds <= 4294967295); message = "users.<name>.theming.gnome.security.lockDelaySeconds must be between 0 and 4294967295."; }
+      { assertion = $path.mouse.speed == null || ($path.mouse.speed >= -1 && $path.mouse.speed <= 1); message = "users.<name>.theming.gnome.mouse.speed must be between -1 and 1."; }
+      { assertion = $path.touchpad.speed == null || ($path.touchpad.speed >= -1 && $path.touchpad.speed <= 1); message = "users.<name>.theming.gnome.touchpad.speed must be between -1 and 1."; }
+      { assertion = $path.keyboard.repeatDelayMilliseconds == null || ($path.keyboard.repeatDelayMilliseconds >= 0 && $path.keyboard.repeatDelayMilliseconds <= 4294967295); message = "users.<name>.theming.gnome.keyboard.repeatDelayMilliseconds must be between 0 and 4294967295."; }
+      { assertion = $path.keyboard.repeatIntervalMilliseconds == null || ($path.keyboard.repeatIntervalMilliseconds >= 0 && $path.keyboard.repeatIntervalMilliseconds <= 4294967295); message = "users.<name>.theming.gnome.keyboard.repeatIntervalMilliseconds must be between 0 and 4294967295."; }
+      { assertion = $path.windows.raiseDelayMilliseconds == null || ($path.windows.raiseDelayMilliseconds >= 0 && $path.windows.raiseDelayMilliseconds <= 10000); message = "users.<name>.theming.gnome.windows.raiseDelayMilliseconds must be between 0 and 10000."; }
+      { assertion = $path.workspaces.count == null || ($path.workspaces.count >= 1 && $path.workspaces.count <= 36); message = "users.<name>.theming.gnome.workspaces.count must be between 1 and 36."; }
+      { assertion = $path.nightLight.temperature == null || ($path.nightLight.temperature >= 0 && $path.nightLight.temperature <= 4294967295); message = "users.<name>.theming.gnome.nightLight.temperature must be between 0 and 4294967295."; }
+    ];
+  };
+};
+
+appearance.textScale = {
+  _meta = {
+    name = "Text scale";
+    summary = "Text scale";
+    description = ''Text scale. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."text-scaling-factor" = $lib.mkIf ($path.appearance.textScale != null) ($lib.gvariant.mkDouble ($path.appearance.textScale));
+  };
+};
+
+appearance.interfaceFont = {
+  _meta = {
+    name = "Interface font";
+    summary = "Interface font";
+    description = ''Interface font. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."font-name" = $lib.mkIf ($path.appearance.interfaceFont != null) ($path.appearance.interfaceFont);
+  };
+};
+
+appearance.documentFont = {
+  _meta = {
+    name = "Document font";
+    summary = "Document font";
+    description = ''Document font. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."document-font-name" = $lib.mkIf ($path.appearance.documentFont != null) ($path.appearance.documentFont);
+  };
+};
+
+appearance.monospaceFont = {
+  _meta = {
+    name = "Monospace font";
+    summary = "Monospace font";
+    description = ''Monospace font. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."monospace-font-name" = $lib.mkIf ($path.appearance.monospaceFont != null) ($path.appearance.monospaceFont);
+  };
+};
+
+appearance.cursorSize = {
+  _meta = {
+    name = "Cursor size";
+    summary = "Cursor size";
+    description = ''Cursor size. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."cursor-size" = $lib.mkIf ($path.appearance.cursorSize != null) ($lib.gvariant.mkInt32 ($path.appearance.cursorSize));
+  };
+};
+
+appearance.cursorTheme = {
+  _meta = {
+    name = "Cursor theme";
+    summary = "Cursor theme";
+    description = ''Cursor theme. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."cursor-theme" = $lib.mkIf ($path.appearance.cursorTheme != null) ($path.appearance.cursorTheme);
+  };
+};
+
+appearance.iconTheme = {
+  _meta = {
+    name = "Icon theme";
+    summary = "Icon theme";
+    description = ''Icon theme. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."icon-theme" = $lib.mkIf ($path.appearance.iconTheme != null) ($path.appearance.iconTheme);
+  };
+};
+
+showBatteryPercentage = {
+  _meta = {
+    name = "Show battery percentage";
+    summary = "Show battery percentage";
+    description = ''Show battery percentage. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."show-battery-percentage" = $lib.mkIf ($path.showBatteryPercentage != null) ($path.showBatteryPercentage);
+  };
+};
+
+clock.format = {
+  _meta = {
+    name = "Format";
+    summary = "Format";
+    description = ''Format. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "24h" "12h" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."clock-format" = $lib.mkIf ($path.clock.format != null) ($path.clock.format);
+  };
+};
+
+clock.showWeekday = {
+  _meta = {
+    name = "Show weekday";
+    summary = "Show weekday";
+    description = ''Show weekday. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."clock-show-weekday" = $lib.mkIf ($path.clock.showWeekday != null) ($path.clock.showWeekday);
+  };
+};
+
+clock.showDate = {
+  _meta = {
+    name = "Show date";
+    summary = "Show date";
+    description = ''Show date. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."clock-show-date" = $lib.mkIf ($path.clock.showDate != null) ($path.clock.showDate);
+  };
+};
+
+clock.showSeconds = {
+  _meta = {
+    name = "Show seconds";
+    summary = "Show seconds";
+    description = ''Show seconds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."clock-show-seconds" = $lib.mkIf ($path.clock.showSeconds != null) ($path.clock.showSeconds);
+  };
+};
+
+hotCorners = {
+  _meta = {
+    name = "Hot corners";
+    summary = "Hot corners";
+    description = ''Hot corners. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."enable-hot-corners" = $lib.mkIf ($path.hotCorners != null) ($path.hotCorners);
+  };
+};
+
+middleClickPaste = {
+  _meta = {
+    name = "Middle click paste";
+    summary = "Middle click paste";
+    description = ''Middle click paste. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."gtk-enable-primary-paste" = $lib.mkIf ($path.middleClickPaste != null) ($path.middleClickPaste);
+  };
+};
+
+clock.showWeekNumbers = {
+  _meta = {
+    name = "Show week numbers";
+    summary = "Show week numbers";
+    description = ''Show week numbers. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/calendar"."show-weekdate" = $lib.mkIf ($path.clock.showWeekNumbers != null) ($path.clock.showWeekNumbers);
+  };
+};
+
+notifications.banners = {
+  _meta = {
+    name = "Banners";
+    summary = "Banners";
+    description = ''Banners. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/notifications"."show-banners" = $lib.mkIf ($path.notifications.banners != null) ($path.notifications.banners);
+  };
+};
+
+notifications.onLockScreen = {
+  _meta = {
+    name = "On lock screen";
+    summary = "On lock screen";
+    description = ''On lock screen. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/notifications"."show-in-lock-screen" = $lib.mkIf ($path.notifications.onLockScreen != null) ($path.notifications.onLockScreen);
+  };
+};
+
+privacy.rememberRecentFiles = {
+  _meta = {
+    name = "Remember recent files";
+    summary = "Remember recent files";
+    description = ''Remember recent files. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/privacy"."remember-recent-files" = $lib.mkIf ($path.privacy.rememberRecentFiles != null) ($path.privacy.rememberRecentFiles);
+  };
+};
+
+privacy.recentFilesDays = {
+  _meta = {
+    name = "Recent files days";
+    summary = "Recent files days";
+    description = ''Recent files days. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/privacy"."recent-files-max-age" = $lib.mkIf ($path.privacy.recentFilesDays != null) ($lib.gvariant.mkInt32 ($path.privacy.recentFilesDays));
+  };
+};
+
+privacy.removeOldTrash = {
+  _meta = {
+    name = "Remove old trash";
+    summary = "Remove old trash";
+    description = ''Remove old trash. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/privacy"."remove-old-trash-files" = $lib.mkIf ($path.privacy.removeOldTrash != null) ($path.privacy.removeOldTrash);
+  };
+};
+
+privacy.removeOldTemporaryFiles = {
+  _meta = {
+    name = "Remove old temporary files";
+    summary = "Remove old temporary files";
+    description = ''Remove old temporary files. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/privacy"."remove-old-temp-files" = $lib.mkIf ($path.privacy.removeOldTemporaryFiles != null) ($path.privacy.removeOldTemporaryFiles);
+  };
+};
+
+privacy.cleanupAgeDays = {
+  _meta = {
+    name = "Cleanup age days";
+    summary = "Cleanup age days";
+    description = ''Cleanup age days. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/privacy"."old-files-age" = $lib.mkIf ($path.privacy.cleanupAgeDays != null) ($lib.gvariant.mkUint32 ($path.privacy.cleanupAgeDays));
+  };
+};
+
+privacy.reportTechnicalProblems = {
+  _meta = {
+    name = "Report technical problems";
+    summary = "Report technical problems";
+    description = ''Report technical problems. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/privacy"."report-technical-problems" = $lib.mkIf ($path.privacy.reportTechnicalProblems != null) ($path.privacy.reportTechnicalProblems);
+  };
+};
+
+power.screenBlankSeconds = {
+  _meta = {
+    name = "Screen blank seconds";
+    summary = "Screen blank seconds";
+    description = ''Screen blank seconds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/session"."idle-delay" = $lib.mkIf ($path.power.screenBlankSeconds != null) ($lib.gvariant.mkUint32 ($path.power.screenBlankSeconds));
+  };
+};
+
+security.lockScreen = {
+  _meta = {
+    name = "Lock screen";
+    summary = "Lock screen";
+    description = ''Lock screen. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/screensaver"."lock-enabled" = $lib.mkIf ($path.security.lockScreen != null) ($path.security.lockScreen);
+  };
+};
+
+security.lockDelaySeconds = {
+  _meta = {
+    name = "Lock delay seconds";
+    summary = "Lock delay seconds";
+    description = ''Lock delay seconds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/screensaver"."lock-delay" = $lib.mkIf ($path.security.lockDelaySeconds != null) ($lib.gvariant.mkUint32 ($path.security.lockDelaySeconds));
+  };
+};
+
+mouse.speed = {
+  _meta = {
+    name = "Speed";
+    summary = "Speed";
+    description = ''Speed. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/mouse"."speed" = $lib.mkIf ($path.mouse.speed != null) ($lib.gvariant.mkDouble ($path.mouse.speed));
+  };
+};
+
+mouse.acceleration = {
+  _meta = {
+    name = "Acceleration";
+    summary = "Acceleration";
+    description = ''Acceleration. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "default" "flat" "adaptive" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/mouse"."accel-profile" = $lib.mkIf ($path.mouse.acceleration != null) ($path.mouse.acceleration);
+  };
+};
+
+mouse.leftHanded = {
+  _meta = {
+    name = "Left handed";
+    summary = "Left handed";
+    description = ''Left handed. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/mouse"."left-handed" = $lib.mkIf ($path.mouse.leftHanded != null) ($path.mouse.leftHanded);
+  };
+};
+
+mouse.naturalScrolling = {
+  _meta = {
+    name = "Natural scrolling";
+    summary = "Natural scrolling";
+    description = ''Natural scrolling. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/mouse"."natural-scroll" = $lib.mkIf ($path.mouse.naturalScrolling != null) ($path.mouse.naturalScrolling);
+  };
+};
+
+touchpad.tapToClick = {
+  _meta = {
+    name = "Tap to click";
+    summary = "Tap to click";
+    description = ''Tap to click. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."tap-to-click" = $lib.mkIf ($path.touchpad.tapToClick != null) ($path.touchpad.tapToClick);
+  };
+};
+
+touchpad.naturalScrolling = {
+  _meta = {
+    name = "Natural scrolling";
+    summary = "Natural scrolling";
+    description = ''Natural scrolling. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."natural-scroll" = $lib.mkIf ($path.touchpad.naturalScrolling != null) ($path.touchpad.naturalScrolling);
+  };
+};
+
+touchpad.speed = {
+  _meta = {
+    name = "Speed";
+    summary = "Speed";
+    description = ''Speed. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."speed" = $lib.mkIf ($path.touchpad.speed != null) ($lib.gvariant.mkDouble ($path.touchpad.speed));
+  };
+};
+
+touchpad.acceleration = {
+  _meta = {
+    name = "Acceleration";
+    summary = "Acceleration";
+    description = ''Acceleration. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "default" "flat" "adaptive" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."accel-profile" = $lib.mkIf ($path.touchpad.acceleration != null) ($path.touchpad.acceleration);
+  };
+};
+
+touchpad.disableWhileTyping = {
+  _meta = {
+    name = "Disable while typing";
+    summary = "Disable while typing";
+    description = ''Disable while typing. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."disable-while-typing" = $lib.mkIf ($path.touchpad.disableWhileTyping != null) ($path.touchpad.disableWhileTyping);
+  };
+};
+
+touchpad.twoFingerScrolling = {
+  _meta = {
+    name = "Two finger scrolling";
+    summary = "Two finger scrolling";
+    description = ''Two finger scrolling. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."two-finger-scrolling-enabled" = $lib.mkIf ($path.touchpad.twoFingerScrolling != null) ($path.touchpad.twoFingerScrolling);
+  };
+};
+
+touchpad.edgeScrolling = {
+  _meta = {
+    name = "Edge scrolling";
+    summary = "Edge scrolling";
+    description = ''Edge scrolling. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."edge-scrolling-enabled" = $lib.mkIf ($path.touchpad.edgeScrolling != null) ($path.touchpad.edgeScrolling);
+  };
+};
+
+touchpad.tapAndDrag = {
+  _meta = {
+    name = "Tap and drag";
+    summary = "Tap and drag";
+    description = ''Tap and drag. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."tap-and-drag" = $lib.mkIf ($path.touchpad.tapAndDrag != null) ($path.touchpad.tapAndDrag);
+  };
+};
+
+touchpad.dragLock = {
+  _meta = {
+    name = "Drag lock";
+    summary = "Drag lock";
+    description = ''Drag lock. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."tap-and-drag-lock" = $lib.mkIf ($path.touchpad.dragLock != null) ($path.touchpad.dragLock);
+  };
+};
+
+touchpad.clickMethod = {
+  _meta = {
+    name = "Click method";
+    summary = "Click method";
+    description = ''Click method. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "default" "none" "areas" "fingers" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."click-method" = $lib.mkIf ($path.touchpad.clickMethod != null) ($path.touchpad.clickMethod);
+  };
+};
+
+touchpad.whenToUse = {
+  _meta = {
+    name = "When to use";
+    summary = "When to use";
+    description = ''When to use. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "enabled" "disabled" "disabled-on-external-mouse" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."send-events" = $lib.mkIf ($path.touchpad.whenToUse != null) ($path.touchpad.whenToUse);
+  };
+};
+
+touchpad.leftHanded = {
+  _meta = {
+    name = "Left handed";
+    summary = "Left handed";
+    description = ''Left handed. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "right" "left" "mouse" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/touchpad"."left-handed" = $lib.mkIf ($path.touchpad.leftHanded != null) ($path.touchpad.leftHanded);
+  };
+};
+
+keyboard.repeatKeys = {
+  _meta = {
+    name = "Repeat keys";
+    summary = "Repeat keys";
+    description = ''Repeat keys. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/keyboard"."repeat" = $lib.mkIf ($path.keyboard.repeatKeys != null) ($path.keyboard.repeatKeys);
+  };
+};
+
+keyboard.repeatDelayMilliseconds = {
+  _meta = {
+    name = "Repeat delay milliseconds";
+    summary = "Repeat delay milliseconds";
+    description = ''Repeat delay milliseconds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/keyboard"."delay" = $lib.mkIf ($path.keyboard.repeatDelayMilliseconds != null) ($lib.gvariant.mkUint32 ($path.keyboard.repeatDelayMilliseconds));
+  };
+};
+
+keyboard.repeatIntervalMilliseconds = {
+  _meta = {
+    name = "Repeat interval milliseconds";
+    summary = "Repeat interval milliseconds";
+    description = ''Repeat interval milliseconds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/keyboard"."repeat-interval" = $lib.mkIf ($path.keyboard.repeatIntervalMilliseconds != null) ($lib.gvariant.mkUint32 ($path.keyboard.repeatIntervalMilliseconds));
+  };
+};
+
+windows.focus = {
+  _meta = {
+    name = "Focus";
+    summary = "Focus";
+    description = ''Focus. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "click" "sloppy" "mouse" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."focus-mode" = $lib.mkIf ($path.windows.focus != null) ($path.windows.focus);
+  };
+};
+
+windows.raiseOnFocus = {
+  _meta = {
+    name = "Raise on focus";
+    summary = "Raise on focus";
+    description = ''Raise on focus. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."auto-raise" = $lib.mkIf ($path.windows.raiseOnFocus != null) ($path.windows.raiseOnFocus);
+  };
+};
+
+windows.raiseDelayMilliseconds = {
+  _meta = {
+    name = "Raise delay milliseconds";
+    summary = "Raise delay milliseconds";
+    description = ''Raise delay milliseconds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."auto-raise-delay" = $lib.mkIf ($path.windows.raiseDelayMilliseconds != null) ($lib.gvariant.mkInt32 ($path.windows.raiseDelayMilliseconds));
+  };
+};
+
+windows.titlebarButtons = {
+  _meta = {
+    name = "Titlebar buttons";
+    summary = "Titlebar buttons";
+    description = ''Titlebar buttons. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."button-layout" = $lib.mkIf ($path.windows.titlebarButtons != null) ($path.windows.titlebarButtons);
+  };
+};
+
+windows.doubleClickTitlebar = {
+  _meta = {
+    name = "Double click titlebar";
+    summary = "Double click titlebar";
+    description = ''Double click titlebar. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "toggle-shade" "toggle-maximize" "toggle-maximize-horizontally" "toggle-maximize-vertically" "minimize" "none" "lower" "menu" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."action-double-click-titlebar" = $lib.mkIf ($path.windows.doubleClickTitlebar != null) ($path.windows.doubleClickTitlebar);
+  };
+};
+
+workspaces.count = {
+  _meta = {
+    name = "Count";
+    summary = "Count";
+    description = ''Count. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."num-workspaces" = $lib.mkIf ($path.workspaces.count != null) ($lib.gvariant.mkInt32 ($path.workspaces.count));
+  };
+};
+
+workspaces.names = {
+  _meta = {
+    name = "Names";
+    summary = "Names";
+    description = ''Names. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."workspace-names" = $lib.mkIf ($path.workspaces.names != null) (if $path.workspaces.names == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.workspaces.names);
+  };
+};
+
+accessibility.showMenu = {
+  _meta = {
+    name = "Always show the accessibility menu";
+    summary = "Always show the accessibility menu";
+    description = ''Always show the accessibility menu. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y"."always-show-universal-access-status" = $lib.mkIf ($path.accessibility.showMenu != null) ($path.accessibility.showMenu);
+  };
+};
+
+accessibility.showTextCursor = {
+  _meta = {
+    name = "Show the text cursor even when navigation is inactive";
+    summary = "Show the text cursor even when navigation is inactive";
+    description = ''Show the text cursor even when navigation is inactive. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y"."always-show-text-caret" = $lib.mkIf ($path.accessibility.showTextCursor != null) ($path.accessibility.showTextCursor);
+  };
+};
+
+accessibility.statusShapes = {
+  _meta = {
+    name = "Use shapes as well as color to indicate status";
+    summary = "Use shapes as well as color to indicate status";
+    description = ''Use shapes as well as color to indicate status. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/interface"."show-status-shapes" = $lib.mkIf ($path.accessibility.statusShapes != null) ($path.accessibility.statusShapes);
+  };
+};
+
+accessibility.motionPreference = {
+  _meta = {
+    name = "Preferred amount of interface motion";
+    summary = "Preferred amount of interface motion";
+    description = ''Preferred amount of interface motion. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "no-preference" "reduce" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/interface"."reduced-motion" = $lib.mkIf ($path.accessibility.motionPreference != null) ($path.accessibility.motionPreference);
+  };
+};
+
+accessibility.keyboardShortcuts = {
+  _meta = {
+    name = "Allow keyboard shortcuts to toggle accessibility features";
+    summary = "Allow keyboard shortcuts to toggle accessibility features";
+    description = ''Allow keyboard shortcuts to toggle accessibility features. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."enable" = $lib.mkIf ($path.accessibility.keyboardShortcuts != null) ($path.accessibility.keyboardShortcuts);
+  };
+};
+
+accessibility.announceFeatureChanges = {
+  _meta = {
+    name = "Beep when keyboard accessibility changes";
+    summary = "Beep when keyboard accessibility changes";
+    description = ''Beep when keyboard accessibility changes. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."feature-state-change-beep" = $lib.mkIf ($path.accessibility.announceFeatureChanges != null) ($path.accessibility.announceFeatureChanges);
+  };
+};
+
+accessibility.disableAfterInactivity = {
+  _meta = {
+    name = "Disable keyboard accessibility after inactivity";
+    summary = "Disable keyboard accessibility after inactivity";
+    description = ''Disable keyboard accessibility after inactivity. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."timeout-enable" = $lib.mkIf ($path.accessibility.disableAfterInactivity != null) ($path.accessibility.disableAfterInactivity);
+  };
+};
+
+accessibility.inactivityTimeoutSeconds = {
+  _meta = {
+    name = "Seconds of inactivity before disabling keyboard accessibility";
+    summary = "Seconds of inactivity before disabling keyboard accessibility";
+    description = ''Seconds of inactivity before disabling keyboard accessibility. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."disable-timeout" = $lib.mkIf ($path.accessibility.inactivityTimeoutSeconds != null) ($lib.gvariant.mkInt32 ($path.accessibility.inactivityTimeoutSeconds));
+  };
+};
+
+accessibility.announceRejectedRepeats = {
+  _meta = {
+    name = "Beep when an accidental repeated key is ignored";
+    summary = "Beep when an accidental repeated key is ignored";
+    description = ''Beep when an accidental repeated key is ignored. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."bouncekeys-beep-reject" = $lib.mkIf ($path.accessibility.announceRejectedRepeats != null) ($path.accessibility.announceRejectedRepeats);
+  };
+};
+
+accessibility.keyboardMouseSpeed = {
+  _meta = {
+    name = "Maximum keyboard-controlled pointer speed in pixels per second";
+    summary = "Maximum keyboard-controlled pointer speed in pixels per second";
+    description = ''Maximum keyboard-controlled pointer speed in pixels per second. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."mousekeys-max-speed" = $lib.mkIf ($path.accessibility.keyboardMouseSpeed != null) ($lib.gvariant.mkInt32 ($path.accessibility.keyboardMouseSpeed));
+  };
+};
+
+accessibility.keyboardMouseAccelerationMilliseconds = {
+  _meta = {
+    name = "Time for the keyboard-controlled pointer to reach full speed";
+    summary = "Time for the keyboard-controlled pointer to reach full speed";
+    description = ''Time for the keyboard-controlled pointer to reach full speed. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."mousekeys-accel-time" = $lib.mkIf ($path.accessibility.keyboardMouseAccelerationMilliseconds != null) ($lib.gvariant.mkInt32 ($path.accessibility.keyboardMouseAccelerationMilliseconds));
+  };
+};
+
+accessibility.keyboardMouseDelayMilliseconds = {
+  _meta = {
+    name = "Delay before moving the pointer with the keyboard";
+    summary = "Delay before moving the pointer with the keyboard";
+    description = ''Delay before moving the pointer with the keyboard. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."mousekeys-init-delay" = $lib.mkIf ($path.accessibility.keyboardMouseDelayMilliseconds != null) ($lib.gvariant.mkInt32 ($path.accessibility.keyboardMouseDelayMilliseconds));
+  };
+};
+
+accessibility.announceSlowKeyPress = {
+  _meta = {
+    name = "Beep when a slow key is first pressed";
+    summary = "Beep when a slow key is first pressed";
+    description = ''Beep when a slow key is first pressed. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."slowkeys-beep-press" = $lib.mkIf ($path.accessibility.announceSlowKeyPress != null) ($path.accessibility.announceSlowKeyPress);
+  };
+};
+
+accessibility.announceSlowKeyAcceptance = {
+  _meta = {
+    name = "Beep when a slow key is accepted";
+    summary = "Beep when a slow key is accepted";
+    description = ''Beep when a slow key is accepted. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."slowkeys-beep-accept" = $lib.mkIf ($path.accessibility.announceSlowKeyAcceptance != null) ($path.accessibility.announceSlowKeyAcceptance);
+  };
+};
+
+accessibility.announceSlowKeyRejection = {
+  _meta = {
+    name = "Beep when a slow key is rejected";
+    summary = "Beep when a slow key is rejected";
+    description = ''Beep when a slow key is rejected. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."slowkeys-beep-reject" = $lib.mkIf ($path.accessibility.announceSlowKeyRejection != null) ($path.accessibility.announceSlowKeyRejection);
+  };
+};
+
+accessibility.releaseStickyKeysWithTwoKeys = {
+  _meta = {
+    name = "Disable sticky keys when two keys are pressed together";
+    summary = "Disable sticky keys when two keys are pressed together";
+    description = ''Disable sticky keys when two keys are pressed together. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."stickykeys-two-key-off" = $lib.mkIf ($path.accessibility.releaseStickyKeysWithTwoKeys != null) ($path.accessibility.releaseStickyKeysWithTwoKeys);
+  };
+};
+
+accessibility.announceStickyModifiers = {
+  _meta = {
+    name = "Beep when a sticky modifier key is pressed";
+    summary = "Beep when a sticky modifier key is pressed";
+    description = ''Beep when a sticky modifier key is pressed. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."stickykeys-modifier-beep" = $lib.mkIf ($path.accessibility.announceStickyModifiers != null) ($path.accessibility.announceStickyModifiers);
+  };
+};
+
+accessibility.announceLockKeys = {
+  _meta = {
+    name = "Beep when Caps Lock or Num Lock changes";
+    summary = "Beep when Caps Lock or Num Lock changes";
+    description = ''Beep when Caps Lock or Num Lock changes. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."togglekeys-enable" = $lib.mkIf ($path.accessibility.announceLockKeys != null) ($path.accessibility.announceLockKeys);
+  };
+};
+
+magnification.pointerTracking = {
+  _meta = {
+    name = "How the magnified view follows the pointer";
+    summary = "How the magnified view follows the pointer";
+    description = ''How the magnified view follows the pointer. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "none" "centered" "proportional" "push" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."mouse-tracking" = $lib.mkIf ($path.magnification.pointerTracking != null) ($path.magnification.pointerTracking);
+  };
+};
+
+magnification.focusTracking = {
+  _meta = {
+    name = "How the magnified view follows keyboard focus";
+    summary = "How the magnified view follows keyboard focus";
+    description = ''How the magnified view follows keyboard focus. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "none" "centered" "proportional" "push" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."focus-tracking" = $lib.mkIf ($path.magnification.focusTracking != null) ($path.magnification.focusTracking);
+  };
+};
+
+magnification.textCursorTracking = {
+  _meta = {
+    name = "How the magnified view follows the text cursor";
+    summary = "How the magnified view follows the text cursor";
+    description = ''How the magnified view follows the text cursor. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "none" "centered" "proportional" "push" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."caret-tracking" = $lib.mkIf ($path.magnification.textCursorTracking != null) ($path.magnification.textCursorTracking);
+  };
+};
+
+magnification.screenPosition = {
+  _meta = {
+    name = "Area of the screen used for magnification";
+    summary = "Area of the screen used for magnification";
+    description = ''Area of the screen used for magnification. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "none" "full-screen" "top-half" "bottom-half" "left-half" "right-half" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."screen-position" = $lib.mkIf ($path.magnification.screenPosition != null) ($path.magnification.screenPosition);
+  };
+};
+
+magnification.zoom = {
+  _meta = {
+    name = "Magnification factor";
+    summary = "Magnification factor";
+    description = ''Magnification factor. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."mag-factor" = $lib.mkIf ($path.magnification.zoom != null) ($lib.gvariant.mkDouble ($path.magnification.zoom));
+  };
+};
+
+magnification.followPointerLens = {
+  _meta = {
+    name = "Move the magnifier lens with the pointer";
+    summary = "Move the magnifier lens with the pointer";
+    description = ''Move the magnifier lens with the pointer. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."lens-mode" = $lib.mkIf ($path.magnification.followPointerLens != null) ($path.magnification.followPointerLens);
+  };
+};
+
+magnification.scrollBeyondEdges = {
+  _meta = {
+    name = "Allow magnified content to scroll beyond screen edges";
+    summary = "Allow magnified content to scroll beyond screen edges";
+    description = ''Allow magnified content to scroll beyond screen edges. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."scroll-at-edges" = $lib.mkIf ($path.magnification.scrollBeyondEdges != null) ($path.magnification.scrollBeyondEdges);
+  };
+};
+
+magnification.showCrosshairs = {
+  _meta = {
+    name = "Show crosshairs around the pointer";
+    summary = "Show crosshairs around the pointer";
+    description = ''Show crosshairs around the pointer. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."show-cross-hairs" = $lib.mkIf ($path.magnification.showCrosshairs != null) ($path.magnification.showCrosshairs);
+  };
+};
+
+magnification.crosshairThicknessPixels = {
+  _meta = {
+    name = "Crosshair line thickness in pixels";
+    summary = "Crosshair line thickness in pixels";
+    description = ''Crosshair line thickness in pixels. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."cross-hairs-thickness" = $lib.mkIf ($path.magnification.crosshairThicknessPixels != null) ($lib.gvariant.mkInt32 ($path.magnification.crosshairThicknessPixels));
+  };
+};
+
+magnification.crosshairColor = {
+  _meta = {
+    name = "Crosshair color";
+    summary = "Crosshair color";
+    description = ''Crosshair color. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."cross-hairs-color" = $lib.mkIf ($path.magnification.crosshairColor != null) ($path.magnification.crosshairColor);
+  };
+};
+
+magnification.crosshairOpacity = {
+  _meta = {
+    name = "Crosshair opacity from transparent to opaque";
+    summary = "Crosshair opacity from transparent to opaque";
+    description = ''Crosshair opacity from transparent to opaque. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."cross-hairs-opacity" = $lib.mkIf ($path.magnification.crosshairOpacity != null) ($lib.gvariant.mkDouble ($path.magnification.crosshairOpacity));
+  };
+};
+
+magnification.crosshairLengthPixels = {
+  _meta = {
+    name = "Crosshair line length in pixels";
+    summary = "Crosshair line length in pixels";
+    description = ''Crosshair line length in pixels. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."cross-hairs-length" = $lib.mkIf ($path.magnification.crosshairLengthPixels != null) ($lib.gvariant.mkInt32 ($path.magnification.crosshairLengthPixels));
+  };
+};
+
+magnification.crosshairCenterGap = {
+  _meta = {
+    name = "Leave a gap around the pointer at the crosshair center";
+    summary = "Leave a gap around the pointer at the crosshair center";
+    description = ''Leave a gap around the pointer at the crosshair center. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."cross-hairs-clip" = $lib.mkIf ($path.magnification.crosshairCenterGap != null) ($path.magnification.crosshairCenterGap);
+  };
+};
+
+magnification.invertBrightness = {
+  _meta = {
+    name = "Invert brightness in the magnified view";
+    summary = "Invert brightness in the magnified view";
+    description = ''Invert brightness in the magnified view. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."invert-lightness" = $lib.mkIf ($path.magnification.invertBrightness != null) ($path.magnification.invertBrightness);
+  };
+};
+
+magnification.colorSaturation = {
+  _meta = {
+    name = "Color saturation of the magnified view";
+    summary = "Color saturation of the magnified view";
+    description = ''Color saturation of the magnified view. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/magnifier"."color-saturation" = $lib.mkIf ($path.magnification.colorSaturation != null) ($lib.gvariant.mkDouble ($path.magnification.colorSaturation));
+  };
+};
+
+accessibility.hoverClick = {
+  _meta = {
+    name = "Click automatically when the pointer stops moving";
+    summary = "Click automatically when the pointer stops moving";
+    description = ''Click automatically when the pointer stops moving. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/mouse"."dwell-click-enabled" = $lib.mkIf ($path.accessibility.hoverClick != null) ($path.accessibility.hoverClick);
+  };
+};
+
+accessibility.hoverClickDelaySeconds = {
+  _meta = {
+    name = "Seconds to wait before clicking a stationary pointer";
+    summary = "Seconds to wait before clicking a stationary pointer";
+    description = ''Seconds to wait before clicking a stationary pointer. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/mouse"."dwell-time" = $lib.mkIf ($path.accessibility.hoverClickDelaySeconds != null) ($lib.gvariant.mkDouble ($path.accessibility.hoverClickDelaySeconds));
+  };
+};
+
+accessibility.hoverClickMovementPixels = {
+  _meta = {
+    name = "Pointer movement allowed before restarting the hover-click timer";
+    summary = "Pointer movement allowed before restarting the hover-click timer";
+    description = ''Pointer movement allowed before restarting the hover-click timer. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/mouse"."dwell-threshold" = $lib.mkIf ($path.accessibility.hoverClickMovementPixels != null) ($lib.gvariant.mkInt32 ($path.accessibility.hoverClickMovementPixels));
+  };
+};
+
+accessibility.showHoverClickSelector = {
+  _meta = {
+    name = "Show the selector for hover-click actions";
+    summary = "Show the selector for hover-click actions";
+    description = ''Show the selector for hover-click actions. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/mouse"."click-type-window-visible" = $lib.mkIf ($path.accessibility.showHoverClickSelector != null) ($path.accessibility.showHoverClickSelector);
+  };
+};
+
+accessibility.holdForRightClick = {
+  _meta = {
+    name = "Perform a right-click by holding the primary button";
+    summary = "Perform a right-click by holding the primary button";
+    description = ''Perform a right-click by holding the primary button. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/mouse"."secondary-click-enabled" = $lib.mkIf ($path.accessibility.holdForRightClick != null) ($path.accessibility.holdForRightClick);
+  };
+};
+
+accessibility.rightClickHoldSeconds = {
+  _meta = {
+    name = "Seconds to hold the primary button for a right-click";
+    summary = "Seconds to hold the primary button for a right-click";
+    description = ''Seconds to hold the primary button for a right-click. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/mouse"."secondary-click-time" = $lib.mkIf ($path.accessibility.rightClickHoldSeconds != null) ($lib.gvariant.mkDouble ($path.accessibility.rightClickHoldSeconds));
+  };
+};
+
+keyboard.rememberNumberLock = {
+  _meta = {
+    name = "Restore the previous Num Lock state";
+    summary = "Restore the previous Num Lock state";
+    description = ''Restore the previous Num Lock state. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/keyboard"."remember-numlock-state" = $lib.mkIf ($path.keyboard.rememberNumberLock != null) ($path.keyboard.rememberNumberLock);
+  };
+};
+
+keyboard.numberLock = {
+  _meta = {
+    name = "Default Num Lock state";
+    summary = "Default Num Lock state";
+    description = ''Default Num Lock state. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/peripherals/keyboard"."numlock-state" = $lib.mkIf ($path.keyboard.numberLock != null) ($path.keyboard.numberLock);
+  };
+};
+
+windows.raiseOnClick = {
+  _meta = {
+    name = "Bring windows to the front when clicked";
+    summary = "Bring windows to the front when clicked";
+    description = ''Bring windows to the front when clicked. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."raise-on-click" = $lib.mkIf ($path.windows.raiseOnClick != null) ($path.windows.raiseOnClick);
+  };
+};
+
+sound.systemBell = {
+  _meta = {
+    name = "Play a sound for the system bell";
+    summary = "Play a sound for the system bell";
+    description = ''Play a sound for the system bell. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."audible-bell" = $lib.mkIf ($path.sound.systemBell != null) ($path.sound.systemBell);
+  };
+};
+
+accessibility.flashForBell = {
+  _meta = {
+    name = "Flash the screen or window for the system bell";
+    summary = "Flash the screen or window for the system bell";
+    description = ''Flash the screen or window for the system bell. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."visual-bell" = $lib.mkIf ($path.accessibility.flashForBell != null) ($path.accessibility.flashForBell);
+  };
+};
+
+accessibility.bellFlashArea = {
+  _meta = {
+    name = "Area that flashes for the system bell";
+    summary = "Area that flashes for the system bell";
+    description = ''Area that flashes for the system bell. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "fullscreen-flash" "frame-flash" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/wm/preferences"."visual-bell-type" = $lib.mkIf ($path.accessibility.bellFlashArea != null) ($path.accessibility.bellFlashArea);
+  };
+};
+
+shortcuts.openCalculator = {
+  _meta = {
+    name = "Open the calculator";
+    summary = "Open the calculator";
+    description = ''Open the calculator. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."calculator" = $lib.mkIf ($path.shortcuts.openCalculator != null) (if $path.shortcuts.openCalculator == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openCalculator);
+  };
+};
+
+shortcuts.openSettings = {
+  _meta = {
+    name = "Open desktop settings";
+    summary = "Open desktop settings";
+    description = ''Open desktop settings. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."control-center" = $lib.mkIf ($path.shortcuts.openSettings != null) (if $path.shortcuts.openSettings == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openSettings);
+  };
+};
+
+shortcuts.openEmail = {
+  _meta = {
+    name = "Open the default email application";
+    summary = "Open the default email application";
+    description = ''Open the default email application. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."email" = $lib.mkIf ($path.shortcuts.openEmail != null) (if $path.shortcuts.openEmail == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openEmail);
+  };
+};
+
+shortcuts.ejectMedia = {
+  _meta = {
+    name = "Eject removable media";
+    summary = "Eject removable media";
+    description = ''Eject removable media. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."eject" = $lib.mkIf ($path.shortcuts.ejectMedia != null) (if $path.shortcuts.ejectMedia == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.ejectMedia);
+  };
+};
+
+shortcuts.openHelp = {
+  _meta = {
+    name = "Open desktop help";
+    summary = "Open desktop help";
+    description = ''Open desktop help. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."help" = $lib.mkIf ($path.shortcuts.openHelp != null) (if $path.shortcuts.openHelp == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openHelp);
+  };
+};
+
+shortcuts.openHomeFolder = {
+  _meta = {
+    name = "Open the home folder";
+    summary = "Open the home folder";
+    description = ''Open the home folder. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."home" = $lib.mkIf ($path.shortcuts.openHomeFolder != null) (if $path.shortcuts.openHomeFolder == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openHomeFolder);
+  };
+};
+
+shortcuts.openMediaPlayer = {
+  _meta = {
+    name = "Open the default media player";
+    summary = "Open the default media player";
+    description = ''Open the default media player. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."media" = $lib.mkIf ($path.shortcuts.openMediaPlayer != null) (if $path.shortcuts.openMediaPlayer == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openMediaPlayer);
+  };
+};
+
+shortcuts.nextTrack = {
+  _meta = {
+    name = "Skip to the next track";
+    summary = "Skip to the next track";
+    description = ''Skip to the next track. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."next" = $lib.mkIf ($path.shortcuts.nextTrack != null) (if $path.shortcuts.nextTrack == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.nextTrack);
+  };
+};
+
+shortcuts.pausePlayback = {
+  _meta = {
+    name = "Pause media playback";
+    summary = "Pause media playback";
+    description = ''Pause media playback. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."pause" = $lib.mkIf ($path.shortcuts.pausePlayback != null) (if $path.shortcuts.pausePlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.pausePlayback);
+  };
+};
+
+shortcuts.togglePlayback = {
+  _meta = {
+    name = "Start or pause media playback";
+    summary = "Start or pause media playback";
+    description = ''Start or pause media playback. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."play" = $lib.mkIf ($path.shortcuts.togglePlayback != null) (if $path.shortcuts.togglePlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.togglePlayback);
+  };
+};
+
+shortcuts.logOut = {
+  _meta = {
+    name = "Show the logout dialog";
+    summary = "Show the logout dialog";
+    description = ''Show the logout dialog. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."logout" = $lib.mkIf ($path.shortcuts.logOut != null) (if $path.shortcuts.logOut == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.logOut);
+  };
+};
+
+shortcuts.restart = {
+  _meta = {
+    name = "Show the restart dialog";
+    summary = "Show the restart dialog";
+    description = ''Show the restart dialog. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."reboot" = $lib.mkIf ($path.shortcuts.restart != null) (if $path.shortcuts.restart == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.restart);
+  };
+};
+
+shortcuts.shutDown = {
+  _meta = {
+    name = "Show the shutdown dialog";
+    summary = "Show the shutdown dialog";
+    description = ''Show the shutdown dialog. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."shutdown" = $lib.mkIf ($path.shortcuts.shutDown != null) (if $path.shortcuts.shutDown == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.shutDown);
+  };
+};
+
+shortcuts.previousTrack = {
+  _meta = {
+    name = "Skip to the previous track";
+    summary = "Skip to the previous track";
+    description = ''Skip to the previous track. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."previous" = $lib.mkIf ($path.shortcuts.previousTrack != null) (if $path.shortcuts.previousTrack == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.previousTrack);
+  };
+};
+
+shortcuts.lockScreen = {
+  _meta = {
+    name = "Lock the session";
+    summary = "Lock the session";
+    description = ''Lock the session. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."screensaver" = $lib.mkIf ($path.shortcuts.lockScreen != null) (if $path.shortcuts.lockScreen == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lockScreen);
+  };
+};
+
+shortcuts.search = {
+  _meta = {
+    name = "Open desktop search";
+    summary = "Open desktop search";
+    description = ''Open desktop search. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."search" = $lib.mkIf ($path.shortcuts.search != null) (if $path.shortcuts.search == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.search);
+  };
+};
+
+shortcuts.stopPlayback = {
+  _meta = {
+    name = "Stop media playback";
+    summary = "Stop media playback";
+    description = ''Stop media playback. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."stop" = $lib.mkIf ($path.shortcuts.stopPlayback != null) (if $path.shortcuts.stopPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.stopPlayback);
+  };
+};
+
+shortcuts.lowerVolume = {
+  _meta = {
+    name = "Lower the playback volume";
+    summary = "Lower the playback volume";
+    description = ''Lower the playback volume. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."volume-down" = $lib.mkIf ($path.shortcuts.lowerVolume != null) (if $path.shortcuts.lowerVolume == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerVolume);
+  };
+};
+
+shortcuts.muteAudio = {
+  _meta = {
+    name = "Mute or unmute playback";
+    summary = "Mute or unmute playback";
+    description = ''Mute or unmute playback. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."volume-mute" = $lib.mkIf ($path.shortcuts.muteAudio != null) (if $path.shortcuts.muteAudio == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.muteAudio);
+  };
+};
+
+shortcuts.raiseVolume = {
+  _meta = {
+    name = "Raise the playback volume";
+    summary = "Raise the playback volume";
+    description = ''Raise the playback volume. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."volume-up" = $lib.mkIf ($path.shortcuts.raiseVolume != null) (if $path.shortcuts.raiseVolume == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseVolume);
+  };
+};
+
+shortcuts.lowerVolumeQuietly = {
+  _meta = {
+    name = "Lower volume without feedback sounds";
+    summary = "Lower volume without feedback sounds";
+    description = ''Lower volume without feedback sounds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."volume-down-quiet" = $lib.mkIf ($path.shortcuts.lowerVolumeQuietly != null) (if $path.shortcuts.lowerVolumeQuietly == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerVolumeQuietly);
+  };
+};
+
+shortcuts.muteAudioQuietly = {
+  _meta = {
+    name = "Toggle audio mute without feedback sounds";
+    summary = "Toggle audio mute without feedback sounds";
+    description = ''Toggle audio mute without feedback sounds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."volume-mute-quiet" = $lib.mkIf ($path.shortcuts.muteAudioQuietly != null) (if $path.shortcuts.muteAudioQuietly == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.muteAudioQuietly);
+  };
+};
+
+shortcuts.raiseVolumeQuietly = {
+  _meta = {
+    name = "Raise volume without feedback sounds";
+    summary = "Raise volume without feedback sounds";
+    description = ''Raise volume without feedback sounds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."volume-up-quiet" = $lib.mkIf ($path.shortcuts.raiseVolumeQuietly != null) (if $path.shortcuts.raiseVolumeQuietly == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseVolumeQuietly);
+  };
+};
+
+shortcuts.lowerVolumePrecisely = {
+  _meta = {
+    name = "Lower volume in smaller steps";
+    summary = "Lower volume in smaller steps";
+    description = ''Lower volume in smaller steps. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."volume-down-precise" = $lib.mkIf ($path.shortcuts.lowerVolumePrecisely != null) (if $path.shortcuts.lowerVolumePrecisely == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerVolumePrecisely);
+  };
+};
+
+shortcuts.raiseVolumePrecisely = {
+  _meta = {
+    name = "Raise volume in smaller steps";
+    summary = "Raise volume in smaller steps";
+    description = ''Raise volume in smaller steps. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."volume-up-precise" = $lib.mkIf ($path.shortcuts.raiseVolumePrecisely != null) (if $path.shortcuts.raiseVolumePrecisely == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseVolumePrecisely);
+  };
+};
+
+shortcuts.muteMicrophone = {
+  _meta = {
+    name = "Mute or unmute the microphone";
+    summary = "Mute or unmute the microphone";
+    description = ''Mute or unmute the microphone. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."mic-mute" = $lib.mkIf ($path.shortcuts.muteMicrophone != null) (if $path.shortcuts.muteMicrophone == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.muteMicrophone);
+  };
+};
+
+shortcuts.openBrowser = {
+  _meta = {
+    name = "Open the default web browser";
+    summary = "Open the default web browser";
+    description = ''Open the default web browser. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."www" = $lib.mkIf ($path.shortcuts.openBrowser != null) (if $path.shortcuts.openBrowser == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openBrowser);
+  };
+};
+
+shortcuts.toggleScreenReader = {
+  _meta = {
+    name = "Turn the screen reader on or off";
+    summary = "Turn the screen reader on or off";
+    description = ''Turn the screen reader on or off. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."screenreader" = $lib.mkIf ($path.shortcuts.toggleScreenReader != null) (if $path.shortcuts.toggleScreenReader == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleScreenReader);
+  };
+};
+
+shortcuts.toggleScreenKeyboard = {
+  _meta = {
+    name = "Turn the on-screen keyboard on or off";
+    summary = "Turn the on-screen keyboard on or off";
+    description = ''Turn the on-screen keyboard on or off. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."on-screen-keyboard" = $lib.mkIf ($path.shortcuts.toggleScreenKeyboard != null) (if $path.shortcuts.toggleScreenKeyboard == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleScreenKeyboard);
+  };
+};
+
+shortcuts.increaseTextSize = {
+  _meta = {
+    name = "Increase desktop text size";
+    summary = "Increase desktop text size";
+    description = ''Increase desktop text size. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."increase-text-size" = $lib.mkIf ($path.shortcuts.increaseTextSize != null) (if $path.shortcuts.increaseTextSize == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.increaseTextSize);
+  };
+};
+
+shortcuts.decreaseTextSize = {
+  _meta = {
+    name = "Decrease desktop text size";
+    summary = "Decrease desktop text size";
+    description = ''Decrease desktop text size. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."decrease-text-size" = $lib.mkIf ($path.shortcuts.decreaseTextSize != null) (if $path.shortcuts.decreaseTextSize == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.decreaseTextSize);
+  };
+};
+
+shortcuts.toggleHighContrast = {
+  _meta = {
+    name = "Turn high contrast on or off";
+    summary = "Turn high contrast on or off";
+    description = ''Turn high contrast on or off. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."toggle-contrast" = $lib.mkIf ($path.shortcuts.toggleHighContrast != null) (if $path.shortcuts.toggleHighContrast == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleHighContrast);
+  };
+};
+
+shortcuts.toggleMagnifier = {
+  _meta = {
+    name = "Turn screen magnification on or off";
+    summary = "Turn screen magnification on or off";
+    description = ''Turn screen magnification on or off. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."magnifier" = $lib.mkIf ($path.shortcuts.toggleMagnifier != null) (if $path.shortcuts.toggleMagnifier == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleMagnifier);
+  };
+};
+
+shortcuts.zoomIn = {
+  _meta = {
+    name = "Increase screen magnification";
+    summary = "Increase screen magnification";
+    description = ''Increase screen magnification. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."magnifier-zoom-in" = $lib.mkIf ($path.shortcuts.zoomIn != null) (if $path.shortcuts.zoomIn == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.zoomIn);
+  };
+};
+
+shortcuts.zoomOut = {
+  _meta = {
+    name = "Decrease screen magnification";
+    summary = "Decrease screen magnification";
+    description = ''Decrease screen magnification. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."magnifier-zoom-out" = $lib.mkIf ($path.shortcuts.zoomOut != null) (if $path.shortcuts.zoomOut == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.zoomOut);
+  };
+};
+
+shortcuts.toggleTouchpad = {
+  _meta = {
+    name = "Turn the touchpad on or off";
+    summary = "Turn the touchpad on or off";
+    description = ''Turn the touchpad on or off. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."touchpad-toggle" = $lib.mkIf ($path.shortcuts.toggleTouchpad != null) (if $path.shortcuts.toggleTouchpad == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleTouchpad);
+  };
+};
+
+shortcuts.rewindPlayback = {
+  _meta = {
+    name = "Skip backward within the current track";
+    summary = "Skip backward within the current track";
+    description = ''Skip backward within the current track. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."playback-rewind" = $lib.mkIf ($path.shortcuts.rewindPlayback != null) (if $path.shortcuts.rewindPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.rewindPlayback);
+  };
+};
+
+shortcuts.fastForwardPlayback = {
+  _meta = {
+    name = "Skip forward within the current track";
+    summary = "Skip forward within the current track";
+    description = ''Skip forward within the current track. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."playback-forward" = $lib.mkIf ($path.shortcuts.fastForwardPlayback != null) (if $path.shortcuts.fastForwardPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.fastForwardPlayback);
+  };
+};
+
+shortcuts.toggleRepeatPlayback = {
+  _meta = {
+    name = "Turn playback repeat on or off";
+    summary = "Turn playback repeat on or off";
+    description = ''Turn playback repeat on or off. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."playback-repeat" = $lib.mkIf ($path.shortcuts.toggleRepeatPlayback != null) (if $path.shortcuts.toggleRepeatPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleRepeatPlayback);
+  };
+};
+
+shortcuts.toggleShufflePlayback = {
+  _meta = {
+    name = "Turn shuffled playback on or off";
+    summary = "Turn shuffled playback on or off";
+    description = ''Turn shuffled playback on or off. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."playback-random" = $lib.mkIf ($path.shortcuts.toggleShufflePlayback != null) (if $path.shortcuts.toggleShufflePlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleShufflePlayback);
+  };
+};
+
+shortcuts.toggleScreenRotation = {
+  _meta = {
+    name = "Lock or unlock automatic screen rotation";
+    summary = "Lock or unlock automatic screen rotation";
+    description = ''Lock or unlock automatic screen rotation. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."rotate-video-lock" = $lib.mkIf ($path.shortcuts.toggleScreenRotation != null) (if $path.shortcuts.toggleScreenRotation == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleScreenRotation);
+  };
+};
+
+shortcuts.raiseKeyboardBrightness = {
+  _meta = {
+    name = "Brighten the keyboard backlight";
+    summary = "Brighten the keyboard backlight";
+    description = ''Brighten the keyboard backlight. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."keyboard-brightness-up" = $lib.mkIf ($path.shortcuts.raiseKeyboardBrightness != null) (if $path.shortcuts.raiseKeyboardBrightness == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseKeyboardBrightness);
+  };
+};
+
+shortcuts.lowerKeyboardBrightness = {
+  _meta = {
+    name = "Dim the keyboard backlight";
+    summary = "Dim the keyboard backlight";
+    description = ''Dim the keyboard backlight. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."keyboard-brightness-down" = $lib.mkIf ($path.shortcuts.lowerKeyboardBrightness != null) (if $path.shortcuts.lowerKeyboardBrightness == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerKeyboardBrightness);
+  };
+};
+
+shortcuts.toggleKeyboardBacklight = {
+  _meta = {
+    name = "Turn the keyboard backlight on or off";
+    summary = "Turn the keyboard backlight on or off";
+    description = ''Turn the keyboard backlight on or off. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."keyboard-brightness-toggle" = $lib.mkIf ($path.shortcuts.toggleKeyboardBacklight != null) (if $path.shortcuts.toggleKeyboardBacklight == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleKeyboardBacklight);
+  };
+};
+
+shortcuts.showBatteryStatus = {
+  _meta = {
+    name = "Show the battery status";
+    summary = "Show the battery status";
+    description = ''Show the battery status. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."battery-status" = $lib.mkIf ($path.shortcuts.showBatteryStatus != null) (if $path.shortcuts.showBatteryStatus == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.showBatteryStatus);
+  };
+};
+
+shortcuts.toggleAirplaneMode = {
+  _meta = {
+    name = "Turn airplane mode on or off";
+    summary = "Turn airplane mode on or off";
+    description = ''Turn airplane mode on or off. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."rfkill" = $lib.mkIf ($path.shortcuts.toggleAirplaneMode != null) (if $path.shortcuts.toggleAirplaneMode == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleAirplaneMode);
+  };
+};
+
+shortcuts.toggleBluetooth = {
+  _meta = {
+    name = "Turn Bluetooth radio transmission on or off";
+    summary = "Turn Bluetooth radio transmission on or off";
+    description = ''Turn Bluetooth radio transmission on or off. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/media-keys"."rfkill-bluetooth" = $lib.mkIf ($path.shortcuts.toggleBluetooth != null) (if $path.shortcuts.toggleBluetooth == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleBluetooth);
+  };
+};
+
+accessibility.screenReader = {
+  _meta = {
+    name = "Screen reader";
+    summary = "Screen reader";
+    description = ''Screen reader. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/applications"."screen-reader-enabled" = $lib.mkIf ($path.accessibility.screenReader != null) ($path.accessibility.screenReader);
+  };
+};
+
+accessibility.screenKeyboard = {
+  _meta = {
+    name = "Screen keyboard";
+    summary = "Screen keyboard";
+    description = ''Screen keyboard. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/applications"."screen-keyboard-enabled" = $lib.mkIf ($path.accessibility.screenKeyboard != null) ($path.accessibility.screenKeyboard);
+  };
+};
+
+accessibility.magnifier = {
+  _meta = {
+    name = "Magnifier";
+    summary = "Magnifier";
+    description = ''Magnifier. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/applications"."screen-magnifier-enabled" = $lib.mkIf ($path.accessibility.magnifier != null) ($path.accessibility.magnifier);
+  };
+};
+
+accessibility.stickyKeys = {
+  _meta = {
+    name = "Sticky keys";
+    summary = "Sticky keys";
+    description = ''Sticky keys. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."stickykeys-enable" = $lib.mkIf ($path.accessibility.stickyKeys != null) ($path.accessibility.stickyKeys);
+  };
+};
+
+accessibility.slowKeys = {
+  _meta = {
+    name = "Slow keys";
+    summary = "Slow keys";
+    description = ''Slow keys. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."slowkeys-enable" = $lib.mkIf ($path.accessibility.slowKeys != null) ($path.accessibility.slowKeys);
+  };
+};
+
+accessibility.slowKeyDelayMilliseconds = {
+  _meta = {
+    name = "Slow key delay milliseconds";
+    summary = "Slow key delay milliseconds";
+    description = ''Slow key delay milliseconds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."slowkeys-delay" = $lib.mkIf ($path.accessibility.slowKeyDelayMilliseconds != null) ($lib.gvariant.mkInt32 ($path.accessibility.slowKeyDelayMilliseconds));
+  };
+};
+
+accessibility.ignoreRepeatedKeys = {
+  _meta = {
+    name = "Ignore repeated keys";
+    summary = "Ignore repeated keys";
+    description = ''Ignore repeated keys. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."bouncekeys-enable" = $lib.mkIf ($path.accessibility.ignoreRepeatedKeys != null) ($path.accessibility.ignoreRepeatedKeys);
+  };
+};
+
+accessibility.repeatKeyDelayMilliseconds = {
+  _meta = {
+    name = "Repeat key delay milliseconds";
+    summary = "Repeat key delay milliseconds";
+    description = ''Repeat key delay milliseconds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."bouncekeys-delay" = $lib.mkIf ($path.accessibility.repeatKeyDelayMilliseconds != null) ($lib.gvariant.mkInt32 ($path.accessibility.repeatKeyDelayMilliseconds));
+  };
+};
+
+accessibility.keyboardMouse = {
+  _meta = {
+    name = "Keyboard mouse";
+    summary = "Keyboard mouse";
+    description = ''Keyboard mouse. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/keyboard"."mousekeys-enable" = $lib.mkIf ($path.accessibility.keyboardMouse != null) ($path.accessibility.keyboardMouse);
+  };
+};
+
+accessibility.highContrast = {
+  _meta = {
+    name = "High contrast";
+    summary = "High contrast";
+    description = ''High contrast. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/a11y/interface"."high-contrast" = $lib.mkIf ($path.accessibility.highContrast != null) ($path.accessibility.highContrast);
+  };
+};
+
+sound.eventSounds = {
+  _meta = {
+    name = "Event sounds";
+    summary = "Event sounds";
+    description = ''Event sounds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/sound"."event-sounds" = $lib.mkIf ($path.sound.eventSounds != null) ($path.sound.eventSounds);
+  };
+};
+
+sound.inputFeedback = {
+  _meta = {
+    name = "Input feedback";
+    summary = "Input feedback";
+    description = ''Input feedback. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/sound"."input-feedback-sounds" = $lib.mkIf ($path.sound.inputFeedback != null) ($path.sound.inputFeedback);
+  };
+};
+
+sound.theme = {
+  _meta = {
+    name = "Theme";
+    summary = "Theme";
+    description = ''Theme. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/sound"."theme-name" = $lib.mkIf ($path.sound.theme != null) ($path.sound.theme);
+  };
+};
+
+removableMedia.automount = {
+  _meta = {
+    name = "Automount";
+    summary = "Automount";
+    description = ''Automount. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/media-handling"."automount" = $lib.mkIf ($path.removableMedia.automount != null) ($path.removableMedia.automount);
+  };
+};
+
+removableMedia.openFolder = {
+  _meta = {
+    name = "Open folder";
+    summary = "Open folder";
+    description = ''Open folder. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/media-handling"."automount-open" = $lib.mkIf ($path.removableMedia.openFolder != null) ($path.removableMedia.openFolder);
+  };
+};
+
+removableMedia.neverAutorun = {
+  _meta = {
+    name = "Never autorun";
+    summary = "Never autorun";
+    description = ''Never autorun. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/media-handling"."autorun-never" = $lib.mkIf ($path.removableMedia.neverAutorun != null) ($path.removableMedia.neverAutorun);
+  };
+};
+
+nightLight.enable = {
+  _meta = {
+    name = "Enable";
+    summary = "Enable";
+    description = ''Enable. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/color"."night-light-enabled" = $lib.mkIf ($path.nightLight.enable != null) ($path.nightLight.enable);
+  };
+};
+
+nightLight.temperature = {
+  _meta = {
+    name = "Temperature";
+    summary = "Temperature";
+    description = ''Temperature. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/color"."night-light-temperature" = $lib.mkIf ($path.nightLight.temperature != null) ($lib.gvariant.mkUint32 ($path.nightLight.temperature));
+  };
+};
+
+nightLight.automaticSchedule = {
+  _meta = {
+    name = "Automatic schedule";
+    summary = "Automatic schedule";
+    description = ''Automatic schedule. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/color"."night-light-schedule-automatic" = $lib.mkIf ($path.nightLight.automaticSchedule != null) ($path.nightLight.automaticSchedule);
+  };
+};
+
+nightLight.startHour = {
+  _meta = {
+    name = "Start hour";
+    summary = "Start hour";
+    description = ''Start hour. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/color"."night-light-schedule-from" = $lib.mkIf ($path.nightLight.startHour != null) ($lib.gvariant.mkDouble ($path.nightLight.startHour));
+  };
+};
+
+nightLight.endHour = {
+  _meta = {
+    name = "End hour";
+    summary = "End hour";
+    description = ''End hour. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/color"."night-light-schedule-to" = $lib.mkIf ($path.nightLight.endHour != null) ($lib.gvariant.mkDouble ($path.nightLight.endHour));
+  };
+};
+
+power.dimWhenIdle = {
+  _meta = {
+    name = "Dim when idle";
+    summary = "Dim when idle";
+    description = ''Dim when idle. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/power"."idle-dim" = $lib.mkIf ($path.power.dimWhenIdle != null) ($path.power.dimWhenIdle);
+  };
+};
+
+power.batteryIdleAction = {
+  _meta = {
+    name = "Battery idle action";
+    summary = "Battery idle action";
+    description = ''Battery idle action. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "blank" "suspend" "shutdown" "hibernate" "interactive" "nothing" "logout" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/power"."sleep-inactive-battery-type" = $lib.mkIf ($path.power.batteryIdleAction != null) ($path.power.batteryIdleAction);
+  };
+};
+
+power.batteryIdleSeconds = {
+  _meta = {
+    name = "Battery idle seconds";
+    summary = "Battery idle seconds";
+    description = ''Battery idle seconds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/power"."sleep-inactive-battery-timeout" = $lib.mkIf ($path.power.batteryIdleSeconds != null) ($lib.gvariant.mkInt32 ($path.power.batteryIdleSeconds));
+  };
+};
+
+power.pluggedInIdleAction = {
+  _meta = {
+    name = "Plugged in idle action";
+    summary = "Plugged in idle action";
+    description = ''Plugged in idle action. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "blank" "suspend" "shutdown" "hibernate" "interactive" "nothing" "logout" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/power"."sleep-inactive-ac-type" = $lib.mkIf ($path.power.pluggedInIdleAction != null) ($path.power.pluggedInIdleAction);
+  };
+};
+
+power.pluggedInIdleSeconds = {
+  _meta = {
+    name = "Plugged in idle seconds";
+    summary = "Plugged in idle seconds";
+    description = ''Plugged in idle seconds. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/power"."sleep-inactive-ac-timeout" = $lib.mkIf ($path.power.pluggedInIdleSeconds != null) ($lib.gvariant.mkInt32 ($path.power.pluggedInIdleSeconds));
+  };
+};
+
+power.ambientBrightness = {
+  _meta = {
+    name = "Ambient brightness";
+    summary = "Ambient brightness";
+    description = ''Ambient brightness. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/settings-daemon/plugins/power"."ambient-enabled" = $lib.mkIf ($path.power.ambientBrightness != null) ($path.power.ambientBrightness);
+  };
+};
+
+defaultAccentColor = {
+  _meta = {
+    name = "Primary accent color for the interface";
+    summary = "Primary accent color for the interface";
+    description = ''Primary accent color for the interface. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "blue" "teal" "purple" "red" "orange" "yellow" "green" "pink" "grey" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."accent-color" = $lib.mkIf ($path.defaultAccentColor != null) ($path.defaultAccentColor);
+  };
+};
+
+defaultDarkMode = {
+  _meta = {
+    name = "Enable personal dark mode";
+    summary = "Enable personal dark mode";
+    description = ''Enable personal dark mode. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/interface"."color-scheme" = $lib.mkIf ($path.defaultDarkMode != null) (if $path.defaultDarkMode then "prefer-dark" else "prefer-light");
+  };
+};
+
+dockItems = {
+  _meta = {
+    name = "Favorite applications in the dock";
+    summary = "Favorite applications in the dock";
+    description = ''Favorite applications in the dock. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/shell"."favorite-apps" = $lib.mkIf ($path.dockItems != null) (if $path.dockItems == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.dockItems);
+  };
+};
+
+windows.edgeTiling = {
+  _meta = {
+    name = "Tile windows when dragged to the screen edge";
+    summary = "Tile windows when dragged to the screen edge";
+    description = ''Tile windows when dragged to the screen edge. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/mutter"."edge-tiling" = $lib.mkIf ($path.windows.edgeTiling != null) ($path.windows.edgeTiling);
+  };
+};
+
+windows.centerNewWindows = {
+  _meta = {
+    name = "Place new windows in the center of the display";
+    summary = "Place new windows in the center of the display";
+    description = ''Place new windows in the center of the display. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/mutter"."center-new-windows" = $lib.mkIf ($path.windows.centerNewWindows != null) ($path.windows.centerNewWindows);
+  };
+};
+
+workspaces.dynamic = {
+  _meta = {
+    name = "Create workspaces automatically as windows are opened";
+    summary = "Create workspaces automatically as windows are opened";
+    description = ''Create workspaces automatically as windows are opened. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/mutter"."dynamic-workspaces" = $lib.mkIf ($path.workspaces.dynamic != null) ($path.workspaces.dynamic);
+  };
+};
+
+wallpaper.layout = {
+  _meta = {
+    name = "Layout";
+    summary = "Layout";
+    description = ''Layout. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "none" "wallpaper" "centered" "scaled" "stretched" "zoom" "spanned" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/background"."picture-options" = $lib.mkIf ($path.wallpaper.layout != null) ($path.wallpaper.layout);
+  };
+};
+
+wallpaper.primaryColor = {
+  _meta = {
+    name = "Primary color";
+    summary = "Primary color";
+    description = ''Primary color. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/background"."primary-color" = $lib.mkIf ($path.wallpaper.primaryColor != null) ($path.wallpaper.primaryColor);
+  };
+};
+
+wallpaper.secondaryColor = {
+  _meta = {
+    name = "Secondary color";
+    summary = "Secondary color";
+    description = ''Secondary color. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/background"."secondary-color" = $lib.mkIf ($path.wallpaper.secondaryColor != null) ($path.wallpaper.secondaryColor);
+  };
+};
+
+wallpaper.shading = {
+  _meta = {
+    name = "Shading";
+    summary = "Shading";
+    description = ''Shading. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "solid" "vertical" "horizontal" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/background"."color-shading-type" = $lib.mkIf ($path.wallpaper.shading != null) ($path.wallpaper.shading);
+  };
+};
+
+wallpaper.lightImage = {
+  _meta = {
+    name = "Light image";
+    summary = "Light image";
+    description = ''Light image. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ $type.string $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/background"."picture-uri" = $lib.mkIf ($path.wallpaper.lightImage != null) ($path.wallpaper.lightImage);
+  };
+};
+
+wallpaper.darkImage = {
+  _meta = {
+    name = "Dark image";
+    summary = "Dark image";
+    description = ''Dark image. Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop. Null leaves this preference unchanged.'';
+    tags = [ "users" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ $type.string $type.null ];
+    default = null;
+  };
+  u!! {
+    dconf.settings."org/gnome/desktop/background"."picture-uri-dark" = $lib.mkIf ($path.wallpaper.darkImage != null) ($path.wallpaper.darkImage);
+  };
+};

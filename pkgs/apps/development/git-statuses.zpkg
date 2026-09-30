@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-statuses";
+  summary = "Command-line tool to display the status of multiple Git repositories in a clear, tabular format";
+  description = ''
+    Command-line tool to display the status of multiple Git repositories in a clear, tabular format.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.1";
+  tags = [ "development" "git" "repositories" "status" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-statuses;

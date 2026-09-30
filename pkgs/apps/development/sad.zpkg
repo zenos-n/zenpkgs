@@ -1,0 +1,14 @@
+_meta = {
+  name = "sad";
+  summary = "CLI tool to search and replace";
+  description = ''
+    CLI tool to search and replace.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.32";
+  tags = [ "development" "text" "refactoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sad;

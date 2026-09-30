@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bark";
+  summary = "Live sync audio streaming for local networks";
+  description = ''
+    Live sync audio streaming for local networks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0";
+  tags = [ "audio" "streaming" "networking" "synchronization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.bark;

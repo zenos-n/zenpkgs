@@ -1,0 +1,18 @@
+_meta = {
+  name = "Entangle";
+  summary = "Tethered camera control and capture";
+  description = ''
+    Entangle uses GTK and libgphoto2 to provide a graphical interface
+    for tethered photography with digital cameras.
+    It includes control over camera shooting and configuration settings
+    and 'hands off' shooting directly from the controlling computer.
+    This app can also serve as a camera app for mobile devices.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0";
+  tags = [ "graphics" "camera" "tethering" "photography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.entangle;

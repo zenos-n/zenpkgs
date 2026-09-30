@@ -1,0 +1,14 @@
+_meta = {
+  name = "erdtree";
+  summary = "File-tree visualizer and disk usage analyzer";
+  description = ''
+    File-tree visualizer and disk usage analyzer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.2";
+  tags = [ "files" "listing" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.erdtree;

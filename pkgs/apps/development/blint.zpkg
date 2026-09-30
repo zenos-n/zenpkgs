@@ -1,0 +1,14 @@
+_meta = {
+  name = "BLint";
+  summary = "Binary Linter to check the security properties, and capabilities in executables";
+  description = ''
+    Binary Linter to check the security properties, and capabilities in executables.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.5";
+  tags = [ "development" "binary" "security" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.blint;

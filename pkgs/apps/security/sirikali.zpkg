@@ -1,0 +1,14 @@
+_meta = {
+  name = "SiriKali";
+  summary = "Qt/C++ GUI front end to sshfs, ecryptfs-simple, cryfs, gocryptfs, securefs, fscrypt and encfs";
+  description = ''
+    Qt/C++ GUI front end to sshfs, ecryptfs-simple, cryfs, gocryptfs, securefs, fscrypt and encfs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.6";
+  tags = [ "security" "storage" "encryption" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.sirikali;

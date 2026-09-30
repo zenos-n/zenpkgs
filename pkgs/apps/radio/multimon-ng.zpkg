@@ -1,0 +1,21 @@
+_meta = {
+  name = "multimon-ng";
+  summary = "Digital baseband audio protocol decoder";
+  description = ''
+    multimon-ng a fork of multimon, a digital baseband audio
+    protocol decoder for common signaling modes in commercial and
+    amateur radio data services. It decodes the following digital
+    transmission modes:
+
+    POCSAG512 POCSAG1200 POCSAG2400 EAS UFSK1200 CLIPFSK AFSK1200
+    AFSK2400 AFSK2400_2 AFSK2400_3 HAPN4800 FSK9600 DTMF ZVEI1 ZVEI2
+    ZVEI3 DZVEI PZVEI EEA EIA CCIR MORSE CW
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.1";
+  tags = [ "radio" "amateur-radio" "digital-modes" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.multimon-ng;

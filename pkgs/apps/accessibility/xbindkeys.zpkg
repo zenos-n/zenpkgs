@@ -1,0 +1,14 @@
+_meta = {
+  name = "xbindkeys";
+  summary = "Launch shell commands with your keyboard or your mouse under X Window";
+  description = ''
+    Launch shell commands with your keyboard or your mouse under X Window.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.7";
+  tags = [ "accessibility" "input" "keyboard" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.xbindkeys;

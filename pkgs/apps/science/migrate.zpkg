@@ -1,0 +1,14 @@
+_meta = {
+  name = "Migrate-N";
+  summary = "Estimates population size, migration, population splitting parameters using genetic/genomic data";
+  description = ''
+    Estimates population size, migration, population splitting parameters using genetic/genomic data.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.0.6";
+  tags = [ "science" "biology" "genetics" "statistics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.migrate;

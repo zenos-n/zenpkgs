@@ -1,0 +1,14 @@
+_meta = {
+  name = "GridTracker 2";
+  summary = "Warehouse of amateur radio information";
+  description = ''
+    Warehouse of amateur radio information.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.260323.0";
+  tags = [ "radio" "amateur-radio" "communication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.gridtracker2;

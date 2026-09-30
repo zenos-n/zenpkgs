@@ -1,0 +1,14 @@
+_meta = {
+  name = "wtype";
+  summary = "xdotool type for wayland";
+  description = ''
+    xdotool type for wayland.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4";
+  tags = [ "accessibility" "keyboard" "automation" "assistive-technology" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wtype;

@@ -1,0 +1,239 @@
+_meta = {
+  name = "Text search with Ripgrep";
+  summary = "Configure file selection and text matching";
+  description = ''Choose how Ripgrep searches files and presents matching text.'';
+  tags = [ "terminal" "search" ];
+  zenosVersion = 1.0.0Na;
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Ripgrep";
+    summary = "Install and configure Ripgrep";
+    description = ''Install Ripgrep and configure typed search preferences for this user.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    programs.ripgrep.enable = true;
+    assertions = [
+      { assertion = $path.contextLines == null || $path.contextLines >= 0; message = "programs.ripgrep.contextLines must be nonnegative."; }
+      { assertion = $path.maximumLineBytes == null || $path.maximumLineBytes >= 0; message = "programs.ripgrep.maximumLineBytes must be nonnegative."; }
+      { assertion = $path.maximumDirectoryDepth == null || $path.maximumDirectoryDepth >= 0; message = "programs.ripgrep.maximumDirectoryDepth must be nonnegative."; }
+    ];
+    programs.ripgrep.arguments =
+      ($lib.optional ($path.searchHiddenFiles != null) (if $path.searchHiddenFiles then "--hidden" else "--no-hidden")) ++
+      ($lib.optional ($path.followSymbolicLinks != null) (if $path.followSymbolicLinks then "--follow" else "--no-follow")) ++
+      ($lib.optional ($path.literalPatterns != null) (if $path.literalPatterns then "--fixed-strings" else "--no-fixed-strings")) ++
+      ($lib.optional ($path.lineNumbers != null) (if $path.lineNumbers then "--line-number" else "--no-line-number")) ++
+      ($lib.optional ($path.columnNumbers != null) (if $path.columnNumbers then "--column" else "--no-column")) ++
+      ($lib.optional ($path.multilineMatches != null) (if $path.multilineMatches then "--multiline" else "--no-multiline")) ++
+      ($lib.optional ($path.previewLongLines != null) (if $path.previewLongLines then "--max-columns-preview" else "--no-max-columns-preview")) ++
+      ($lib.optional ($path.searchCompressedFiles != null) (if $path.searchCompressedFiles then "--search-zip" else "--no-search-zip")) ++
+      ($lib.optional ($path.respectIgnoreFiles != null) (if $path.respectIgnoreFiles then "--ignore" else "--no-ignore")) ++
+      ($lib.optional ($path.caseSensitivity != null) (if $path.caseSensitivity == "sensitive" then "--case-sensitive" else if $path.caseSensitivity == "insensitive" then "--ignore-case" else "--smart-case")) ++
+      ($lib.optional ($path.color != null) ($lib.concatStrings [ "--color=" $path.color ])) ++
+      ($lib.optional ($path.contextLines != null) ($lib.concatStrings [ "--context=" ($lib.toString $path.contextLines) ])) ++
+      ($lib.optional ($path.maximumLineBytes != null) ($lib.concatStrings [ "--max-columns=" ($lib.toString $path.maximumLineBytes) ])) ++
+      ($lib.optional ($path.maximumDirectoryDepth != null) ($lib.concatStrings [ "--max-depth=" ($lib.toString $path.maximumDirectoryDepth) ])) ++
+      ($lib.optional ($path.sortFilesByPath != null) (if $path.sortFilesByPath then "--sort=path" else "--sort=none"));
+  };
+};
+
+searchHiddenFiles = {
+  _meta = {
+    name = "Include hidden files and folders in searches";
+    summary = "Include hidden files and folders in searches";
+    description = ''Include hidden files and folders in searches. Ignore rules still apply. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+followSymbolicLinks = {
+  _meta = {
+    name = "Follow symbolic links when searching directories";
+    summary = "Follow symbolic links when searching directories";
+    description = ''Follow symbolic links when searching directories.  Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+literalPatterns = {
+  _meta = {
+    name = "Treat search patterns as literal text";
+    summary = "Treat search patterns as literal text";
+    description = ''Treat search patterns as literal text. Disables regular-expression interpretation of the pattern. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+lineNumbers = {
+  _meta = {
+    name = "Show line numbers beside matches";
+    summary = "Show line numbers beside matches";
+    description = ''Show line numbers beside matches.  Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+columnNumbers = {
+  _meta = {
+    name = "Show column numbers beside matches";
+    summary = "Show column numbers beside matches";
+    description = ''Show column numbers beside matches.  Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+multilineMatches = {
+  _meta = {
+    name = "Allow matches to span multiple lines";
+    summary = "Allow matches to span multiple lines";
+    description = ''Allow matches to span multiple lines. May require more memory for large files. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+previewLongLines = {
+  _meta = {
+    name = "Show a preview when a matching line exceeds the width limit";
+    summary = "Show a preview when a matching line exceeds the width limit";
+    description = ''Show a preview when a matching line exceeds the width limit. Applies when a maximum line width is configured. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+searchCompressedFiles = {
+  _meta = {
+    name = "Search supported compressed files";
+    summary = "Search supported compressed files";
+    description = ''Search supported compressed files. Requires the corresponding decompression tools to be installed. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+respectIgnoreFiles = {
+  _meta = {
+    name = "Respect ignore files when selecting files to search";
+    summary = "Respect ignore files when selecting files to search";
+    description = ''Respect ignore files when selecting files to search. Includes repository and application ignore files; hidden-file handling is separate. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+caseSensitivity = {
+  _meta = {
+    name = "How letter case affects search matches";
+    summary = "How letter case affects search matches";
+    description = ''How letter case affects search matches. Smart mode ignores case unless the pattern contains an uppercase letter. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "sensitive" "insensitive" "smart" ]) $type.null ];
+    default = null;
+  };
+};
+
+color = {
+  _meta = {
+    name = "When search results use color";
+    summary = "When search results use color";
+    description = ''When search results use color.  Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "auto" "always" "never" ]) $type.null ];
+    default = null;
+  };
+};
+
+contextLines = {
+  _meta = {
+    name = "Number of surrounding lines shown with each match";
+    summary = "Number of surrounding lines shown with each match";
+    description = ''Number of surrounding lines shown with each match. Zero shows matching lines only. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+maximumLineBytes = {
+  _meta = {
+    name = "Maximum displayed line width in bytes";
+    summary = "Maximum displayed line width in bytes";
+    description = ''Maximum displayed line width in bytes. Zero disables the limit. Long lines are omitted or previewed according to previewLongLines. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+maximumDirectoryDepth = {
+  _meta = {
+    name = "Maximum directory depth searched";
+    summary = "Maximum directory depth searched";
+    description = ''Maximum directory depth searched. Zero restricts searching to explicitly named files. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+sortFilesByPath = {
+  _meta = {
+    name = "Search files in path order for predictable output";
+    summary = "Search files in path order for predictable output";
+    description = ''Search files in path order for predictable output. Sorting disables parallel file searching. Null keeps the existing program policy.'';
+    tags = [ "terminal" "search" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};

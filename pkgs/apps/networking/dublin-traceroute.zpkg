@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dublin Traceroute";
+  summary = "NAT-aware multipath traceroute tool";
+  description = ''
+    NAT-aware multipath traceroute tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.2-unstable-2024-04-11";
+  tags = [ "networking" "traceroute" "nat" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.dublin-traceroute;

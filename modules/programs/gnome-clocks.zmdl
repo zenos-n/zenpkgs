@@ -1,0 +1,55 @@
+_meta = {
+    name = "World clocks, alarms and timers";
+    summary = "World clocks, alarms and timers";
+    description = ''World clocks, alarms and timers.'';
+    tags = [ "desktop" "gnome-clocks" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    zenosVersion = 1.0.0Na;
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure world clocks, alarms and timers";
+    summary = "Install and configure world clocks, alarms and timers";
+    description = ''Install and configure world clocks, alarms and timers.'';
+    tags = [ "desktop" "gnome-clocks" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.legacy.gnome-clocks ];
+    assertions = [
+    ];
+    dconf.settings = {
+      "org/gnome/clocks"."geolocation" = $path.automaticLocation;
+      "org/gnome/clocks/state/window"."panel-id" = $path.view;
+    };
+  };
+};
+
+automaticLocation = {
+  _meta = {
+    name = "Use location services for local clock information";
+    summary = "Use location services for local clock information";
+    description = ''Use location services for local clock information. '';
+    tags = [ "desktop" "gnome-clocks" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
+};
+
+view = {
+  _meta = {
+    name = "Clock view shown when opened";
+    summary = "Clock view shown when opened";
+    description = ''Clock view shown when opened. '';
+    tags = [ "desktop" "gnome-clocks" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "world" "alarm" "stopwatch" "timer" ];
+    default = "world";
+  };
+};

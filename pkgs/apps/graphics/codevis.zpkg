@@ -1,0 +1,14 @@
+_meta = {
+  name = "Codevis";
+  summary = "Tool to take all source code in a folder and render them to one image";
+  description = ''
+    Tool to take all source code in a folder and render them to one image.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.4";
+  tags = [ "graphics" "code" "visualization" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.codevis;

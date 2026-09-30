@@ -1,0 +1,14 @@
+_meta = {
+  name = "fs-verity Utilities";
+  summary = "Set of userspace utilities for fs-verity";
+  description = ''
+    Set of userspace utilities for fs-verity.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6";
+  tags = [ "security" "integrity" "filesystems" "verification" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fsverity-utils;

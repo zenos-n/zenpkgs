@@ -1,0 +1,17 @@
+_meta = {
+  name = "Ledger";
+  summary = "Double-entry accounting system with a command-line reporting interface";
+  description = ''
+    Ledger is a powerful, double-entry accounting system that is accessed
+    from the UNIX command-line. This may put off some users, as there is
+    no flashy UI, but for those who want unparalleled reporting access to
+    their data, there really is no alternative.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.4.1";
+  tags = [ "finance" "office" "productivity" "accounting" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.ledger;

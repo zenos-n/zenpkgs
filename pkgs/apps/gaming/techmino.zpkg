@@ -1,0 +1,14 @@
+_meta = {
+  name = "Techmino";
+  summary = "Modern Tetris clone with many features";
+  description = ''
+    Modern Tetris clone with many features.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.17.21";
+  tags = [ "gaming" "puzzle" "blocks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3;
+};
+
+import $pkgs.legacy.techmino;

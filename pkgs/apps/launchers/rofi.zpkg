@@ -1,0 +1,14 @@
+_meta = {
+  name = "Rofi";
+  summary = "Window switcher, run dialog and dmenu replacement";
+  description = ''
+    Window switcher, run dialog and dmenu replacement.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0";
+  tags = [ "launchers" "productivity" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.rofi;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "F*";
+  summary = "ML-like functional programming language aimed at program verification";
+  description = ''
+    ML-like functional programming language aimed at program verification.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.03.24";
+  tags = [ "development" "languages" "formal-methods" "verification" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fstar;

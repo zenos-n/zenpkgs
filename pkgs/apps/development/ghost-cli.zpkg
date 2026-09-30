@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ghost CLI";
+  summary = "CLI Tool for installing & updating Ghost";
+  description = ''
+    CLI Tool for installing & updating Ghost.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.28.6";
+  tags = [ "development" "ghost" "blogging" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghost-cli;

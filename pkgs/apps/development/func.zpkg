@@ -1,0 +1,14 @@
+_meta = {
+  name = "Knative func";
+  summary = "Knative client library and CLI for creating, building, and deploying Knative Functions";
+  description = ''
+    Knative client library and CLI for creating, building, and deploying Knative Functions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.20.1";
+  tags = [ "development" "knative" "serverless" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.func;

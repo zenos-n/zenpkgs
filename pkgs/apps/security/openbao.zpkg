@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenBao";
+  summary = "Open source, community-driven fork of Vault managed by the Linux Foundation";
+  description = ''
+    Open source, community-driven fork of Vault managed by the Linux Foundation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.2";
+  tags = [ "security" "secrets" "authentication" "server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.openbao;

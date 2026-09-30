@@ -1,0 +1,14 @@
+_meta = {
+  name = "geteduroam";
+  summary = "GUI client to configure eduroam";
+  description = ''
+    GUI client to configure eduroam.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14";
+  tags = [ "networking" "wifi" "eduroam" "gui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.geteduroam;

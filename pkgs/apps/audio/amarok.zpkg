@@ -1,0 +1,14 @@
+_meta = {
+  name = "Amarok";
+  summary = "Powerful music player with an intuitive interface";
+  description = ''
+    Powerful music player with an intuitive interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.1";
+  tags = [ "audio" "music" "player" "organizing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.amarok;

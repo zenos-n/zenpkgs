@@ -1,0 +1,14 @@
+_meta = {
+  name = "ggh";
+  summary = "Recall your SSH sessions (also search your SSH config file)";
+  description = ''
+    Recall your SSH sessions (also search your SSH config file).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.4";
+  tags = [ "networking" "ssh" "sessions" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ggh;

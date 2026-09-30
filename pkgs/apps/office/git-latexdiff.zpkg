@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-latexdiff";
+  summary = "View diff on LaTeX source files on the generated PDF files";
+  description = ''
+    View diff on LaTeX source files on the generated PDF files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.1";
+  tags = [ "office" "git" "latex" "pdf" "comparison" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.git-latexdiff;

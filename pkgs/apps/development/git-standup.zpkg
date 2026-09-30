@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-standup";
+  summary = "Recall what you did on the last working day";
+  description = ''
+    Recall what you did on the last working day.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.2";
+  tags = [ "development" "git" "activity" "reports" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-standup;

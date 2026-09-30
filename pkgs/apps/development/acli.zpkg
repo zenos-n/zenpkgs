@@ -1,0 +1,14 @@
+_meta = {
+  name = "Atlassian CLI";
+  summary = "Atlassian Command Line Interface";
+  description = ''
+    Atlassian Command Line Interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.29-stable";
+  tags = [ "development" "atlassian" "jira" "collaboration" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.acli;

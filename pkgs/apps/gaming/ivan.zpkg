@@ -1,0 +1,18 @@
+_meta = {
+  name = "IVAN";
+  summary = "Graphical roguelike game";
+  description = ''
+    Iter Vehemens ad Necem (IVAN) is a graphical roguelike game, which currently
+    runs in Windows, DOS, Linux, and OS X. It features advanced bodypart and
+    material handling, multi-colored lighting and, above all, deep gameplay.
+
+    This is a fan continuation of IVAN by members of Attnam.com
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "059-unstable-2025-02-20";
+  tags = [ "gaming" "roguelike" "rpg" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.ivan;

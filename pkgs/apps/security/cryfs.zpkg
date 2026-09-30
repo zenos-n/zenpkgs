@@ -1,0 +1,14 @@
+_meta = {
+  name = "cryfs";
+  summary = "Cryptographic filesystem for the cloud";
+  description = ''
+    Cryptographic filesystem for the cloud.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.3";
+  tags = [ "security" "storage" "encryption" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Only;
+};
+
+import $pkgs.legacy.cryfs;

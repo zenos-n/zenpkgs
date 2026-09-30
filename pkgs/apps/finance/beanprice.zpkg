@@ -1,0 +1,15 @@
+_meta = {
+  name = "beanprice";
+  summary = "Price quotes fetcher for Beancount";
+  description = ''
+    A script to fetch market data prices from various sources on the internet
+    and render them for plain text accounting price syntax (and Beancount).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.0";
+  tags = [ "finance" "beancount" "prices" "accounting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.beanprice;

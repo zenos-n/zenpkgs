@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenUtau";
+  summary = "Open source singing synthesis platform and UTAU successor";
+  description = ''
+    Open source singing synthesis platform and UTAU successor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.565";
+  tags = [ "audio" "synthesis" "music" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.openutau;

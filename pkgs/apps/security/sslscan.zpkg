@@ -1,0 +1,14 @@
+_meta = {
+  name = "sslscan";
+  summary = "Tests SSL/TLS services and discover supported cipher suites";
+  description = ''
+    Tests SSL/TLS services and discover supported cipher suites.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.2";
+  tags = [ "security" "tls" "auditing" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.sslscan;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "GCI";
+  summary = "Controls golang package import order and makes it always deterministic";
+  description = ''
+    Controls golang package import order and makes it always deterministic.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14.0";
+  tags = [ "development" "go" "formatting" "imports" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.gci;

@@ -1,0 +1,20 @@
+_meta = {
+  name = "Python 3";
+  summary = "High-level dynamically-typed programming language";
+  description = ''
+    Python is a remarkably powerful dynamic programming language that
+    is used in a wide variety of application domains. Some of its key
+    distinguishing features include: clear, readable syntax; strong
+    introspection capabilities; intuitive object orientation; natural
+    expression of procedural code; full modularity, supporting
+    hierarchical packages; exception-based error handling; and very
+    high level dynamic data types.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.13.15";
+  tags = [ "development" "python" "interpreter" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.psfl;
+};
+
+import $pkgs.legacy.python3;

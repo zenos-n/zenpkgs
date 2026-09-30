@@ -1,0 +1,14 @@
+_meta = {
+  name = "Knot DNS";
+  summary = "Authoritative-only DNS server from .cz domain registry";
+  description = ''
+    Authoritative-only DNS server from .cz domain registry.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5.7";
+  tags = [ "networking" "dns" "server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.knot-dns;

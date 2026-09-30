@@ -1,0 +1,14 @@
+_meta = {
+  name = "jqp";
+  summary = "TUI playground to experiment with jq";
+  description = ''
+    TUI playground to experiment with jq.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0";
+  tags = [ "files" "json" "data" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.jqp;

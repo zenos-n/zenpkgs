@@ -1,0 +1,14 @@
+_meta = {
+  name = "ALVR";
+  summary = "Stream VR games from your PC to your headset via Wi-Fi";
+  description = ''
+    Stream VR games from your PC to your headset via Wi-Fi.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20.14.1";
+  tags = [ "gaming" "virtual-reality" "streaming" "wireless" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.alvr;

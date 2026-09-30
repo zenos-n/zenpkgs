@@ -1,0 +1,20 @@
+_meta = {
+  name = "SpeedCrunch";
+  summary = "High-precision scientific calculator";
+  description = ''
+    SpeedCrunch is a high-precision scientific calculator.
+    Among its distinctive features are a syntax-highlighted scrollable display,
+    up to 50 decimal places of precision, complex number support, various
+    numeric bases, unit conversions, intelligent automatic completion of functions
+    and variables, integrated formula book, over 150 built-in scientific constants,
+    fully keyboard-driven interface, over 80 built-in mathematical functions and
+    support for user-defined functions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.12-unstable-2024-12-02";
+  tags = [ "science" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.speedcrunch;

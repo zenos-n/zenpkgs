@@ -1,0 +1,14 @@
+_meta = {
+  name = "Czkawka";
+  summary = "Simple, fast and easy to use app to remove unnecessary files from your computer";
+  description = ''
+    Simple, fast and easy to use app to remove unnecessary files from your computer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "11.0.1";
+  tags = [ "files" "duplicates" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.czkawka;

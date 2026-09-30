@@ -1,0 +1,14 @@
+_meta = {
+  name = "bagr";
+  summary = "Command line utility for interacting with BagIt bags (RFC 8493)";
+  description = ''
+    Command line utility for interacting with BagIt bags (RFC 8493).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.0";
+  tags = [ "files" "bagit" "archiving" "preservation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bagr;

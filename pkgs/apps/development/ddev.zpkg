@@ -1,0 +1,14 @@
+_meta = {
+  name = "DDEV";
+  summary = "Docker-based local PHP+Node.js web development environments";
+  description = ''
+    Docker-based local PHP+Node.js web development environments.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.25.3";
+  tags = [ "development" "web" "php" "containers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ddev;

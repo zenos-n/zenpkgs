@@ -1,0 +1,16 @@
+_meta = {
+  name = "ImageJ";
+  summary = "Image processing and analysis in Java";
+  description = ''
+    ImageJ is a public domain Java image processing program
+    inspired by NIH Image for the Macintosh.
+    It runs on any computer with a Java 1.4 or later virtual machine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "153";
+  tags = [ "science" "visualization" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.publicDomain;
+};
+
+import $pkgs.legacy.imagej;

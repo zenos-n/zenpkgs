@@ -1,0 +1,14 @@
+_meta = {
+  name = "Simon Tatham's Puzzles";
+  summary = "Simon Tatham's portable puzzle collection";
+  description = ''
+    Simon Tatham's portable puzzle collection.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20260410.06e37f1";
+  tags = [ "gaming" "puzzle" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sgt-puzzles;

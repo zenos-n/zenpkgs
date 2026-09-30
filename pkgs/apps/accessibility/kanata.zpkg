@@ -1,0 +1,14 @@
+_meta = {
+  name = "kanata";
+  summary = "Tool to improve keyboard comfort and usability with advanced customization";
+  description = ''
+    Tool to improve keyboard comfort and usability with advanced customization.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.11.0";
+  tags = [ "accessibility" "input" "keyboard" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Only;
+};
+
+import $pkgs.legacy.kanata;

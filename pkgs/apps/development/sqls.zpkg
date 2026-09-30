@@ -1,0 +1,14 @@
+_meta = {
+  name = "sqls";
+  summary = "SQL language server written in Go";
+  description = ''
+    SQL language server written in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.45";
+  tags = [ "development" "database" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sqls;

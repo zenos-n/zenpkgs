@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bloaty";
+  summary = "Size profiler for binaries";
+  description = ''
+    Size profiler for binaries.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1-unstable-2024-09-23";
+  tags = [ "development" "binary" "size" "profiling" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bloaty;

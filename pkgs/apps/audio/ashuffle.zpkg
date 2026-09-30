@@ -1,0 +1,14 @@
+_meta = {
+  name = "ashuffle";
+  summary = "Automatic library-wide shuffle for mpd";
+  description = ''
+    Automatic library-wide shuffle for mpd.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.14.10";
+  tags = [ "audio" "mpd" "music" "playlists" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ashuffle;

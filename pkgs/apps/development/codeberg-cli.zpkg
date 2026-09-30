@@ -1,0 +1,14 @@
+_meta = {
+  name = "Codeberg CLI";
+  summary = "CLI Tool for Codeberg similar to gh and glab";
+  description = ''
+    CLI Tool for Codeberg similar to gh and glab.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.5";
+  tags = [ "development" "codeberg" "version-control" "collaboration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.codeberg-cli;

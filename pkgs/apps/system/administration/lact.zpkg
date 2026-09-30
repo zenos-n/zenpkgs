@@ -1,0 +1,14 @@
+_meta = {
+  name = "LACT";
+  summary = "Linux GPU Configuration Tool for AMD and NVIDIA";
+  description = ''
+    Linux GPU Configuration Tool for AMD and NVIDIA.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "system" "administration" "hardware" "performance" "cooling" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.lact;

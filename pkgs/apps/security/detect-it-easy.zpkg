@@ -1,0 +1,14 @@
+_meta = {
+  name = "Detect It Easy";
+  summary = "Program for determining types of files for Windows, Linux and MacOS";
+  description = ''
+    Program for determining types of files for Windows, Linux and MacOS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.10";
+  tags = [ "security" "binary" "file-types" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.detect-it-easy;

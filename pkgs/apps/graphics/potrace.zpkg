@@ -1,0 +1,14 @@
+_meta = {
+  name = "Potrace";
+  summary = "Tool for tracing a bitmap, which means, transforming a bitmap into a smooth, scalable image";
+  description = ''
+    Tool for tracing a bitmap, which means, transforming a bitmap into a smooth, scalable image.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.16";
+  tags = [ "graphics" "vector" "conversion" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.potrace;

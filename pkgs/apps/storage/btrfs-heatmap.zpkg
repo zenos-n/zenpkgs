@@ -1,0 +1,14 @@
+_meta = {
+  name = "btrfs-heatmap";
+  summary = "Visualize the layout of a mounted btrfs";
+  description = ''
+    Visualize the layout of a mounted btrfs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9";
+  tags = [ "storage" "btrfs" "analysis" "disks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.btrfs-heatmap;

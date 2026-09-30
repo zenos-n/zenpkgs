@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenBoardView";
+  summary = "Linux SDL/ImGui edition software for viewing .brd files";
+  description = ''
+    Linux SDL/ImGui edition software for viewing .brd files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.95.2";
+  tags = [ "cad" "electronics" "pcb" "graphics" "engineering" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.openboardview;

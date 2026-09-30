@@ -1,0 +1,14 @@
+_meta = {
+  name = "ToME 2";
+  summary = "Dungeon crawler similar to Angband, based on the works of Tolkien";
+  description = ''
+    Dungeon crawler similar to Angband, based on the works of Tolkien.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4-unstable-2025-02-17";
+  tags = [ "gaming" "roguelike" "rpg" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.tome2;

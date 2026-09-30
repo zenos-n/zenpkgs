@@ -1,0 +1,14 @@
+_meta = {
+  name = "Swappy";
+  summary = "Wayland native snapshot editing tool, inspired by Snappy on macOS";
+  description = ''
+    Wayland native snapshot editing tool, inspired by Snappy on macOS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.0";
+  tags = [ "graphics" "creativity" "screenshots" "annotation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.swappy;

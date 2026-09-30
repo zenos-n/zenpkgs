@@ -1,0 +1,14 @@
+_meta = {
+  name = "apitrace";
+  summary = "Tools to trace OpenGL, OpenGL ES, Direct3D, and DirectDraw APIs";
+  description = ''
+    Tools to trace OpenGL, OpenGL ES, Direct3D, and DirectDraw APIs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "14.0";
+  tags = [ "development" "graphics" "shaders" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.apitrace;

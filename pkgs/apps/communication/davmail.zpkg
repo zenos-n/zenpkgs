@@ -1,0 +1,14 @@
+_meta = {
+  name = "DavMail";
+  summary = "Java application which presents a Microsoft Exchange server as local CALDAV, IMAP and SMTP servers";
+  description = ''
+    Java application which presents a Microsoft Exchange server as local CALDAV, IMAP and SMTP servers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.8.0";
+  tags = [ "communication" "exchange" "email" "calendar" "gateway" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.davmail;

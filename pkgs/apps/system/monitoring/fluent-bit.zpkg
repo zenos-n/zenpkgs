@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fluent Bit";
+  summary = "Fast and lightweight logs and metrics processor for Linux, BSD, OSX and Windows";
+  description = ''
+    Fast and lightweight logs and metrics processor for Linux, BSD, OSX and Windows.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.0.7";
+  tags = [ "system" "monitoring" "logs" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fluent-bit;

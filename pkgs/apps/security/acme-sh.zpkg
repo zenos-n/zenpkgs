@@ -1,0 +1,27 @@
+_meta = {
+  name = "acme-sh";
+  summary = "Pure Unix shell script implementing ACME client protocol";
+  description = ''
+    An ACME Shell script: acme.sh
+
+    - An ACME protocol client written purely in Shell (Unix shell) language.
+    - Full ACME protocol implementation.
+    - Support ECDSA certs
+    - Support SAN and wildcard certs
+    - Simple, powerful and very easy to use. You only need 3 minutes to learn it.
+    - Bash, dash and sh compatible.
+    - Purely written in Shell with no dependencies on python.
+    - Just one script to issue, renew and install your certificates automatically.
+    - DOES NOT require root/sudoer access.
+    - Docker ready
+    - IPv6 ready
+    - Cron job notifications for renewal or error etc.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.2";
+  tags = [ "security" "cryptography" "certificates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.acme-sh;

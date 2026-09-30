@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bolt Launcher";
+  summary = "Alternative launcher for RuneScape";
+  description = ''
+    Bolt Launcher supports HDOS/RuneLite by default with an optional feature flag for RS3 (enableRS3).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.21.1";
+  tags = [ "gaming" "launcher" "runescape" "mmorpg" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.bolt-launcher;

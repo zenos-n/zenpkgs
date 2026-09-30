@@ -1,0 +1,21 @@
+_meta = {
+  name = "Orca";
+  summary = "Screen reader";
+  description = ''
+    A free, open source, flexible and extensible screen reader that provides
+    access to the graphical desktop via speech and refreshable braille.
+    It works with applications and toolkits that support the Assistive
+    Technology Service Provider Interface (AT-SPI). That includes the GNOME
+    GTK toolkit, the Java platform's Swing toolkit, LibreOffice, Gecko, and
+    WebKitGtk. AT-SPI support for the KDE Qt toolkit is being pursued.
+
+    Needs `services.gnome.at-spi2-core.enable = true;` in `configuration.nix`.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "50.2";
+  tags = [ "accessibility" "assistive-technology" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.orca;

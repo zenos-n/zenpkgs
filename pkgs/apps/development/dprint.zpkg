@@ -1,0 +1,16 @@
+_meta = {
+  name = "dprint";
+  summary = "Code formatting platform written in Rust";
+  description = ''
+    dprint is a pluggable and configurable code formatting platform written in Rust.
+    It offers multiple WASM plugins to support various languages. It's written in
+    Rust, so it’s small, fast, and portable.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.54.0";
+  tags = [ "development" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dprint;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "KernelShark";
+  summary = "GUI for trace-cmd which is an interface for the Linux kernel ftrace subsystem";
+  description = ''
+    GUI for trace-cmd which is an interface for the Linux kernel ftrace subsystem.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.0";
+  tags = [ "system" "monitoring" "diagnostics" "development" "tracing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.kernelshark;

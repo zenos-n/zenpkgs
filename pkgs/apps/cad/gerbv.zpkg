@@ -1,0 +1,14 @@
+_meta = {
+  name = "gerbv";
+  summary = "Gerber (RS-274X) viewer";
+  description = ''
+    Gerber (RS-274X) viewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.10.0";
+  tags = [ "cad" "electronics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gerbv;

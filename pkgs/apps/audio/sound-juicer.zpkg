@@ -1,0 +1,14 @@
+_meta = {
+  name = "Sound Juicer";
+  summary = "Gnome CD Ripper";
+  description = ''
+    Gnome CD Ripper.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.40.0";
+  tags = [ "audio" "cd" "ripping" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.sound-juicer;

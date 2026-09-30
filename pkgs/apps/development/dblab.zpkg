@@ -1,0 +1,15 @@
+_meta = {
+  name = "dblab";
+  summary = "Database client every command line junkie deserves";
+  description = ''
+    Fast and lightweight interactive terminal-based UI application
+    for PostgreSQL, MySQL, SQLite, Oracle, and SQL Server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.39.0";
+  tags = [ "development" "databases" "sql" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dblab;

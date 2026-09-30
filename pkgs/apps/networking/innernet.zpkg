@@ -1,0 +1,14 @@
+_meta = {
+  name = "innernet";
+  summary = "Private network system that uses WireGuard under the hood";
+  description = ''
+    Private network system that uses WireGuard under the hood.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.1";
+  tags = [ "networking" "vpn" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.innernet;

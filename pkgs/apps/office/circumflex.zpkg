@@ -1,0 +1,14 @@
+_meta = {
+  name = "Circumflex";
+  summary = "Command line tool for browsing Hacker News in your terminal";
+  description = ''
+    Command line tool for browsing Hacker News in your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.1";
+  tags = [ "office" "hacker-news" "news" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.circumflex;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "feh";
+  summary = "Light-weight image viewer";
+  description = ''
+    Light-weight image viewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.12.2";
+  tags = [ "graphics" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit-feh;
+};
+
+import $pkgs.legacy.feh;

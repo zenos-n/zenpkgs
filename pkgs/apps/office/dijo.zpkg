@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dijo";
+  summary = "Scriptable, curses-based, digital habit tracker";
+  description = ''
+    Scriptable, curses-based, digital habit tracker.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.7";
+  tags = [ "office" "habits" "tracking" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dijo;

@@ -329,6 +329,12 @@ in rec {
           wildcards = builtins.filter wildcard (builtins.attrNames node.children);
           children = lib.filterAttrs (key: _: !wildcard key) node.children;
           inheritedSchema = inheritedAliasSchema path env;
+          hasDeclaredEnable = builtins.any
+            (source: (instantiate source { } env user true).schema.options ? enable)
+            node.definitions;
+          isCollection = wildcards != [ ] || builtins.any
+            (source: (instantiate source { } env user true).schema ? freeformType)
+            node.definitions;
           systemPath = [ "system" ] ++ lib.drop 2 path;
           inheritsProgram = lib.take 1 path == [ "users" ]
             && lib.take 1 (lib.drop 2 path) == [ "programs" ]
@@ -337,9 +343,7 @@ in rec {
             imports = map (source: (instantiate source localConfig env user true).schema) node.definitions;
             options = lib.mapAttrs (key: child: nodeOption child (path ++ [ key ]) env user)
               children // lib.optionalAttrs (node.definitions != [ ]
-              && !(node.mount != null && node.mount.kind == "alias") && !builtins.any
-              (source: (instantiate source localConfig env user true).schema.options ? enable)
-              node.definitions) {
+              && !isCollection && !(node.mount != null && node.mount.kind == "alias") && !hasDeclaredEnable) {
               enable = lib.mkOption { type = lib.types.bool; default = false; };
             };
           } // lib.optionalAttrs inheritsProgram {
@@ -367,7 +371,7 @@ in rec {
                 }))
               else null;
           });
-        in if node.definitions == [ ] || node.mount != null && node.mount.kind == "alias" then baseType
+        in if node.definitions == [ ] || (isCollection && !hasDeclaredEnable) || node.mount != null && node.mount.kind == "alias" then baseType
         else lib.types.coercedTo lib.types.bool (enable: { inherit enable; }) baseType;
       selectedPackages = prefix: values: lib.concatLists (lib.mapAttrsToList (key: value:
         if builtins.isAttrs value then selectedPackages (prefix ++ [ key ]) value
@@ -419,7 +423,11 @@ in rec {
             if wildcard key then lib.concatLists (lib.mapAttrsToList (name: childValue:
               actionsFor root child (path ++ [ key ]) (env // { ${identifier key} = name; })
                 (if path == [ "users" ] then name else user) childValue
-            ) (builtins.removeAttrs value (builtins.attrNames node.children)))
+            ) (builtins.removeAttrs value (
+            builtins.attrNames node.children ++ lib.concatMap
+              (source: builtins.attrNames (instantiate source { } env user true).schema.options)
+              node.definitions
+          )))
             else actionsFor root child (path ++ [ key ]) env user (value.${key} or { })
           ) node.children);
         in own ++ aliasActions ++ mountActions ++ nested;

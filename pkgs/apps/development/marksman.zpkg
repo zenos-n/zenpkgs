@@ -1,0 +1,19 @@
+_meta = {
+  name = "Marksman";
+  summary = "Language Server for Markdown";
+  description = ''
+    Marksman is a program that integrates with your editor
+    to assist you in writing and maintaining your Markdown documents.
+    Using LSP protocol it provides completion, goto definition,
+    find references, rename refactoring, diagnostics, and more.
+    In addition to regular Markdown, it also supports wiki-link-style
+    references that enable Zettelkasten-like note taking.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026-02-08";
+  tags = [ "development" "markdown" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.marksman;

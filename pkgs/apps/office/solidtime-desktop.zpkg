@@ -1,0 +1,14 @@
+_meta = {
+  name = "Solidtime";
+  summary = "Modern open-source time-tracking app";
+  description = ''
+    Modern open-source time-tracking app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.7";
+  tags = [ "office" "time-tracking" "projects" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.solidtime-desktop;

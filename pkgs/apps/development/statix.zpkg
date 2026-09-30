@@ -1,0 +1,14 @@
+_meta = {
+  name = "statix";
+  summary = "Lints and suggestions for the nix programming language";
+  description = ''
+    Lints and suggestions for the nix programming language.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-05-14";
+  tags = [ "development" "nix" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.statix;

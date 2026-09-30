@@ -1,0 +1,14 @@
+_meta = {
+  name = "QuestDB";
+  summary = "High-performance, open-source SQL database for applications in financial services, IoT, machine learning, DevOps and observability";
+  description = ''
+    High-performance, open-source SQL database for applications in financial services, IoT, machine learning, DevOps and observability.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.3.5";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.questdb;

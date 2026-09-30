@@ -1,0 +1,14 @@
+_meta = {
+  name = "Poetry";
+  summary = "Python dependency management and packaging made easy";
+  description = ''
+    Python dependency management and packaging made easy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.1";
+  tags = [ "development" "python" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.poetry;

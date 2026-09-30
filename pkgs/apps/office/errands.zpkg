@@ -1,0 +1,14 @@
+_meta = {
+  name = "Errands";
+  summary = "Manage your tasks";
+  description = ''
+    Manage your tasks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "46.2.10";
+  tags = [ "office" "productivity" "tasks" "organization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.errands;

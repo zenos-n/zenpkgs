@@ -1,0 +1,14 @@
+_meta = {
+  name = "Vault";
+  summary = "Tool for managing secrets";
+  description = ''
+    Tool for managing secrets.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.21.4";
+  tags = [ "infrastructure" "security" "authentication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsl11;
+};
+
+import $pkgs.legacy.vault;

@@ -21,10 +21,10 @@ _meta = {
 enable = enableOption {
   _meta.description = ''Whether to enable Alphabetical App Grid GNOME extension configuration.'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.alphabetical-app-grid ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.alphabetical-app-grid ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.alphabetical-app-grid.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.alphabetical-app-grid.extensionUuid ];
   };
 };
 

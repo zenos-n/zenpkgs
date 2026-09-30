@@ -1,0 +1,14 @@
+_meta = {
+  name = "fio";
+  summary = "Flexible IO Tester - an IO benchmark tool";
+  description = ''
+    Flexible IO Tester - an IO benchmark tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.41";
+  tags = [ "storage" "disks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.fio;

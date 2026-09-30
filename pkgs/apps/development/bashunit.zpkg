@@ -1,0 +1,14 @@
+_meta = {
+  name = "bashunit";
+  summary = "Simple testing framework for bash scripts";
+  description = ''
+    Simple testing framework for bash scripts.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.26.0";
+  tags = [ "development" "bash" "shell" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bashunit;

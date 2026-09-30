@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fava";
+  summary = "Web interface for beancount";
+  description = ''
+    Web interface for beancount.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.30.12";
+  tags = [ "finance" "accounting" "office" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fava;

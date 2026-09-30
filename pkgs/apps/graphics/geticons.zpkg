@@ -1,0 +1,14 @@
+_meta = {
+  name = "geticons";
+  summary = "CLI utility to get icons for apps on your system or other generic icons by name";
+  description = ''
+    CLI utility to get icons for apps on your system or other generic icons by name.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.2";
+  tags = [ "graphics" "icons" "desktop" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.geticons;

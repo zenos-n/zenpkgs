@@ -1,0 +1,14 @@
+_meta = {
+  name = "MControlCenter";
+  summary = "Tool to change the settings of MSI laptops running Linux";
+  description = ''
+    Tool to change the settings of MSI laptops running Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.1";
+  tags = [ "system" "administration" "hardware" "laptop" "settings" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.mcontrolcenter;

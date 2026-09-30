@@ -1,0 +1,16 @@
+_meta = {
+  name = "lsof";
+  summary = "Tool to list open files";
+  description = ''
+    List open files. Can show what process has opened some file,
+    socket (IPv6/IPv4/UNIX local), or partition (by opening a file
+    from it).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.99.6";
+  tags = [ "system" "monitoring" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lsof;
+};
+
+import $pkgs.legacy.lsof;

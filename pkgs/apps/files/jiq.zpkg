@@ -1,0 +1,14 @@
+_meta = {
+  name = "jiq";
+  summary = "Interactive JSON query tool using jq expressions";
+  description = ''
+    Interactive JSON query tool using jq expressions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.2";
+  tags = [ "files" "json" "data" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.jiq;

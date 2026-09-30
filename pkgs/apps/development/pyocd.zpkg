@@ -1,0 +1,14 @@
+_meta = {
+  name = "pyOCD";
+  summary = "Python library for programming and debugging Arm Cortex-M microcontrollers";
+  description = ''
+    Python library for programming and debugging Arm Cortex-M microcontrollers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.42.0";
+  tags = [ "development" "embedded" "hardware" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.pyocd;

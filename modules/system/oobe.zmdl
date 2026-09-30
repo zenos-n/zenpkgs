@@ -256,8 +256,8 @@ extraExtensionPackages = {
   _meta = {
     type = $type.list [ $type.package ];
     default = [
-      $pkgs.zenos.apps.gnome-extensions.date-menu-formatter
-      $pkgs.zenos.apps.gnome-extensions.user-themes
+      $pkgs.zenos.desktops.gnome.extensions.date-menu-formatter
+      $pkgs.zenos.desktops.gnome.extensions.user-themes
     ];
     summary = "Additional OOBE GNOME extension packages";
   };

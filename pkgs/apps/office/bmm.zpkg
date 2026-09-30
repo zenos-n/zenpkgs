@@ -1,0 +1,14 @@
+_meta = {
+  name = "bmm";
+  summary = "Get to your bookmarks in a flash";
+  description = ''
+    Get to your bookmarks in a flash.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.0";
+  tags = [ "office" "bookmarks" "organization" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bmm;

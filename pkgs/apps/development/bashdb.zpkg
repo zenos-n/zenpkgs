@@ -1,0 +1,15 @@
+_meta = {
+  name = "Bash Debugger";
+  summary = "A gdb-like debugger for bash";
+  description = ''
+    The Bash Debugger Project is a source-code debugger for bash that follows
+    the gdb command syntax.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.2-1.2.0";
+  tags = [ "development" "bash" "shell" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.bashdb;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "angle-grinder";
+  summary = "Slice and dice logs on the command line";
+  description = ''
+    Slice and dice logs on the command line.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.19.4";
+  tags = [ "system" "monitoring" "logs" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.angle-grinder;

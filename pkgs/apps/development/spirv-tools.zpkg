@@ -1,0 +1,14 @@
+_meta = {
+  name = "SPIR-V Tools";
+  summary = "SPIR-V Tools project provides an API and commands for processing SPIR-V modules";
+  description = ''
+    SPIR-V Tools project provides an API and commands for processing SPIR-V modules.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.341.0";
+  tags = [ "development" "graphics" "shaders" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.spirv-tools;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "buku";
+  summary = "Private cmdline bookmark manager";
+  description = ''
+    Private cmdline bookmark manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.1.1";
+  tags = [ "office" "bookmarks" "web" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.buku;

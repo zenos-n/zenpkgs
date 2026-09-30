@@ -1,0 +1,14 @@
+_meta = {
+  name = "Hottext";
+  summary = "Simple RSVP speed-reading utility";
+  description = ''
+    Simple RSVP speed-reading utility.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20231003";
+  tags = [ "office" "reading" "information" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.hottext;

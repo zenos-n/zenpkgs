@@ -1,0 +1,20 @@
+_meta = {
+  name = "Shotcut";
+  summary = "Free, open source, cross-platform video editor";
+  description = ''
+    An official binary for Shotcut, which includes all the
+    dependencies pinned to specific versions, is provided on
+    http://shotcut.org.
+
+    If you encounter problems with this version, please contact the
+    nixpkgs maintainer(s). If you wish to report any bugs upstream,
+    please use the official build from shotcut.org instead.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.2.26";
+  tags = [ "video" "multimedia" "creativity" "editing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.shotcut;

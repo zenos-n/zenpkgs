@@ -1,0 +1,14 @@
+_meta = {
+  name = "FLIP";
+  summary = "Tool for visualizing and communicating the errors in rendered images";
+  description = ''
+    Tool for visualizing and communicating the errors in rendered images.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2";
+  tags = [ "graphics" "images" "comparison" "rendering" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.flip;

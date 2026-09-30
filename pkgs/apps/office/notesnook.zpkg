@@ -1,0 +1,17 @@
+_meta = {
+  name = "Notesnook";
+  summary = "Fully open source & end-to-end encrypted note taking alternative to Evernote";
+  description = ''
+    Notesnook is a free (as in speech) & open source note taking app
+    focused on user privacy & ease of use. To ensure zero knowledge
+    principles, Notesnook encrypts everything on your device using
+    XChaCha20-Poly1305 & Argon2.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.19";
+  tags = [ "office" "notes" "privacy" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.notesnook;

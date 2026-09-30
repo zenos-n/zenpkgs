@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNOME Robots";
+  summary = "Avoid the robots and make them crash into each other";
+  description = ''
+    Avoid the robots and make them crash into each other.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "50.0";
+  tags = [ "gaming" "arcade" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gnome-robots;

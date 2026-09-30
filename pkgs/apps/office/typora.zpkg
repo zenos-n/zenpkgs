@@ -1,0 +1,14 @@
+_meta = {
+  name = "Typora";
+  summary = "A minimal Markdown editor and reader.";
+  description = ''
+    A minimal Markdown editor and reader.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.13.6";
+  tags = [ "office" "productivity" "writing" "markdown" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.typora;

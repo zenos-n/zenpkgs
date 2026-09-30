@@ -1,0 +1,14 @@
+_meta = {
+  name = "DigitalOcean CLI";
+  summary = "Command line tool for DigitalOcean services";
+  description = ''
+    Command line tool for DigitalOcean services.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.159.0";
+  tags = [ "infrastructure" "cloud" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.doctl;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Android OTA Payload Extractor";
+  summary = "A fast & natively cross-platform Android OTA payload extractor written in Go";
+  description = ''
+    A fast & natively cross-platform Android OTA payload extractor written in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1";
+  tags = [ "files" "android" "firmware" "extraction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.android-ota-payload-extractor;

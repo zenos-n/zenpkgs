@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Firmware Manager";
+  summary = "Graphical frontend for firmware management";
+  description = ''
+    Graphical frontend for firmware management.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.5";
+  tags = [ "system" "administration" "firmware" "hardware" "updates" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.firmware-manager;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "faq";
+  summary = "Intended to be a more flexible jq, supporting additional formats";
+  description = ''
+    Intended to be a more flexible jq, supporting additional formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2022-01-09";
+  tags = [ "development" "json" "yaml" "queries" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.faq;

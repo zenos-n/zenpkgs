@@ -1,0 +1,14 @@
+_meta = {
+  name = "FreeDV";
+  summary = "Digital voice for HF radio";
+  description = ''
+    Digital voice for HF radio.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.1";
+  tags = [ "radio" "amateur-radio" "digital-voice" "audio" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Only;
+};
+
+import $pkgs.legacy.freedv;

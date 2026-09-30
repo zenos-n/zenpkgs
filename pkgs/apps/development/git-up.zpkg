@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-up";
+  summary = "Git pull replacement that rebases all local branches when pulling";
+  description = ''
+    Git pull replacement that rebases all local branches when pulling.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.0";
+  tags = [ "development" "git" "rebase" "branches" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-up;

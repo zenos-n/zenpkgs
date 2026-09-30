@@ -1,0 +1,14 @@
+_meta = {
+  name = "Efficient Compression Tool";
+  summary = "Fast and effective C++ file optimizer";
+  description = ''
+    Fast and effective C++ file optimizer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.5";
+  tags = [ "archives" "optimization" "compression" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.efficient-compression-tool;

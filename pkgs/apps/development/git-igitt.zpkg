@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-igitt";
+  summary = "Interactive, cross-platform Git terminal application with clear git graphs arranged for your branching model";
+  description = ''
+    Interactive, cross-platform Git terminal application with clear git graphs arranged for your branching model.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.21";
+  tags = [ "development" "git" "graphs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-igitt;

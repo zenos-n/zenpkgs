@@ -1,0 +1,14 @@
+_meta = {
+  name = "vector";
+  summary = "High-performance observability data pipeline";
+  description = ''
+    High-performance observability data pipeline.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.55.0";
+  tags = [ "system" "monitoring" "logs" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.vector;

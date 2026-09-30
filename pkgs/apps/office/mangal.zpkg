@@ -1,0 +1,14 @@
+_meta = {
+  name = "mangal";
+  summary = "CLI app written in Go which scrapes, downloads and packs manga into different formats";
+  description = ''
+    CLI app written in Go which scrapes, downloads and packs manga into different formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.6";
+  tags = [ "office" "comics" "reading" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.mangal;

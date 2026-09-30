@@ -1,0 +1,18 @@
+_meta = {
+  name = "Viewnior";
+  summary = "Fast and simple image viewer";
+  description = ''
+    Viewnior is insipred by big projects like Eye of Gnome, because of it's
+    usability and richness,and by GPicView, because of it's lightweight design and
+    minimal interface. So here comes Viewnior - small and light, with no compromise
+    with the quality of it's functions. The program is made with better integration
+    in mind (follows Gnome HIG2).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8-unstable-2023-11-23";
+  tags = [ "graphics" "images" "viewer" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.viewnior;

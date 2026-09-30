@@ -1,0 +1,14 @@
+_meta = {
+  name = "EarlyBird";
+  summary = "Sensitive data detection tool capable of scanning source code repositories for passwords, key files, and more";
+  description = ''
+    Sensitive data detection tool capable of scanning source code repositories for passwords, key files, and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.0";
+  tags = [ "security" "secrets" "scanning" "source-code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.earlybird;

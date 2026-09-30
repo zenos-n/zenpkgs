@@ -1,0 +1,14 @@
+_meta = {
+  name = "fastcov";
+  summary = "Massively parallelized gcov wrapper";
+  description = ''
+    Massively parallelized gcov wrapper.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.16";
+  tags = [ "development" "coverage" "gcov" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fastcov;

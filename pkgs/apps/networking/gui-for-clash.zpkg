@@ -1,0 +1,14 @@
+_meta = {
+  name = "GUI for Clash";
+  summary = "Clash GUI program developed by vue3 + wails";
+  description = ''
+    Clash GUI program developed by vue3 + wails.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.21.1";
+  tags = [ "networking" "proxy" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gui-for-clash;

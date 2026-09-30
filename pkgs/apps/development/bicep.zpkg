@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bicep";
+  summary = "Domain Specific Language (DSL) for deploying Azure resources declaratively";
+  description = ''
+    Domain Specific Language (DSL) for deploying Azure resources declaratively.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.36.177";
+  tags = [ "development" "azure" "infrastructure-as-code" "cloud" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bicep;

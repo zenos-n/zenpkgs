@@ -1,0 +1,14 @@
+_meta = {
+  name = "AWS SAM CLI";
+  summary = "CLI tool for local development and testing of Serverless applications";
+  description = ''
+    CLI tool for local development and testing of Serverless applications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.160.0";
+  tags = [ "development" "aws" "serverless" "testing" "cloud" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.aws-sam-cli;

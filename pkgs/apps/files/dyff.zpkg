@@ -1,0 +1,19 @@
+_meta = {
+  name = "dyff";
+  summary = "Diff tool for YAML files, and sometimes JSON";
+  description = ''
+    dyff is inspired by the way the old BOSH v1 deployment output reported
+    changes from one version to another by only showing the parts of a YAML
+    file that change.
+
+    Each difference is referenced by its location in the YAML document by
+    using either the Spruce or go-patch path syntax.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.12.0";
+  tags = [ "files" "yaml" "json" "diff" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dyff;

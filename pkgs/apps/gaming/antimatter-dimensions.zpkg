@@ -1,0 +1,14 @@
+_meta = {
+  name = "Antimatter Dimensions";
+  summary = "Idle incremental game with multiple prestige layers";
+  description = ''
+    Idle incremental game with multiple prestige layers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-11-20";
+  tags = [ "gaming" "idle" "incremental" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.antimatter-dimensions;

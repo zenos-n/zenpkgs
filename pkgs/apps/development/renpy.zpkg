@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ren'Py";
+  summary = "Visual Novel Engine";
+  description = ''
+    Visual Novel Engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.5.2.26010301-unstable-2026-03-27";
+  tags = [ "development" "gaming" "game-development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.renpy;

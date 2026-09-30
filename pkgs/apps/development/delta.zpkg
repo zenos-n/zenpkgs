@@ -1,0 +1,14 @@
+_meta = {
+  name = "delta";
+  summary = "Syntax-highlighting pager for git";
+  description = ''
+    Syntax-highlighting pager for git.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.19.2";
+  tags = [ "development" "git" "diff" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.delta;

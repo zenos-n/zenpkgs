@@ -1,0 +1,19 @@
+_meta = {
+  name = "QRencode";
+  summary = "C library and command line tool for encoding data in a QR Code symbol";
+  description = ''
+    Libqrencode is a C library for encoding data in a QR Code symbol,
+    a kind of 2D symbology that can be scanned by handy terminals
+    such as a smartphone.
+
+    The library also contains qrencode, a command-line utility to output
+    QR Code images in various formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.1.1";
+  tags = [ "files" "barcode" "graphics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Plus;
+};
+
+import $pkgs.legacy.qrencode;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "giph";
+  summary = "Simple gif recorder";
+  description = ''
+    Simple gif recorder.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "video" "gif" "screen-recording" "capture" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.giph;

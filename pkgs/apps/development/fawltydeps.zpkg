@@ -1,0 +1,14 @@
+_meta = {
+  name = "FawltyDeps";
+  summary = "Find undeclared and/or unused 3rd-party dependencies in your Python project";
+  description = ''
+    Find undeclared and/or unused 3rd-party dependencies in your Python project.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.20.0";
+  tags = [ "development" "python" "dependencies" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fawltydeps;

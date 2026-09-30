@@ -1,0 +1,14 @@
+_meta = {
+  name = "ast-grep";
+  summary = "Fast and polyglot tool for code searching, linting, rewriting at large scale";
+  description = ''
+    Fast and polyglot tool for code searching, linting, rewriting at large scale.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.42.1";
+  tags = [ "development" "search" "refactoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ast-grep;

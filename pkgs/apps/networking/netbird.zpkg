@@ -1,0 +1,14 @@
+_meta = {
+  name = "NetBird";
+  summary = "Connect your devices into a single secure private WireGuard®-based mesh network with SSO/MFA and simple access controls";
+  description = ''
+    Connect your devices into a single secure private WireGuard®-based mesh network with SSO/MFA and simple access controls.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.71.4";
+  tags = [ "networking" "vpn" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.netbird;

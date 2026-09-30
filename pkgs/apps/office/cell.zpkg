@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cell";
+  summary = "Fast terminal spreadsheet editor with Vim keybindings";
+  description = ''
+    Fast terminal spreadsheet editor with Vim keybindings.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.0";
+  tags = [ "office" "spreadsheet" "data" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cell;

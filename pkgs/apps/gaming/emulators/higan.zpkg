@@ -1,0 +1,22 @@
+_meta = {
+  name = "higan";
+  summary = "Open-source, cycle-accurate multi-system emulator";
+  description = ''
+    higan is a multi-system emulator, originally developed by Near, with an
+    uncompromising focus on accuracy and code readability.
+
+    It currently emulates the following systems: Famicom, Famicom Disk System,
+    Super Famicom, Super Game Boy, Game Boy, Game Boy Color, Game Boy Advance,
+    Game Boy Player, SG-1000, SC-3000, Master System, Game Gear, Mega Drive,
+    Mega CD, PC Engine, SuperGrafx, MSX, MSX2, ColecoVision, Neo Geo Pocket,
+    Neo Geo Pocket Color, WonderSwan, WonderSwan Color, SwanCrystal, Pocket
+    Challenge V2.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "115-unstable-2024-09-04";
+  tags = [ "gaming" "emulators" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.higan;

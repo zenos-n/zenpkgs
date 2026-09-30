@@ -1,0 +1,14 @@
+_meta = {
+  name = "picotool";
+  summary = "Tool for interacting with RP2040/RP2350 device(s) in BOOTSEL mode, or with an RP2040/RP2350 binary";
+  description = ''
+    Tool for interacting with RP2040/RP2350 device(s) in BOOTSEL mode, or with an RP2040/RP2350 binary.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.0-a4";
+  tags = [ "development" "hardware" "embedded" "electronics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.picotool;

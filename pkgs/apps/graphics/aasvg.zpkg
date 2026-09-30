@@ -1,0 +1,14 @@
+_meta = {
+  name = "aasvg";
+  summary = "Convert ASCII art diagrams into SVG";
+  description = ''
+    Convert ASCII art diagrams into SVG.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.2";
+  tags = [ "graphics" "diagrams" "svg" "conversion" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.aasvg;

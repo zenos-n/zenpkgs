@@ -1,0 +1,14 @@
+_meta = {
+  name = "ffizer";
+  summary = "Files and folders initializer / generator based on templates";
+  description = ''
+    Files and folders initializer / generator based on templates.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.13.10";
+  tags = [ "development" "templates" "scaffolding" "generation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc0;
+};
+
+import $pkgs.legacy.ffizer;

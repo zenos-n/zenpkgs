@@ -1,0 +1,14 @@
+_meta = {
+  name = "LibreCAD";
+  summary = "2D CAD package based on Qt";
+  description = ''
+    2D CAD package based on Qt.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.1.5";
+  tags = [ "cad" "graphics" "engineering" "creativity" "2d" "drafting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.librecad;

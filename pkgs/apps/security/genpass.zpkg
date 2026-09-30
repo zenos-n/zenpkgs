@@ -1,0 +1,14 @@
+_meta = {
+  name = "genpass";
+  summary = "Simple yet robust commandline random password generator";
+  description = ''
+    Simple yet robust commandline random password generator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.1";
+  tags = [ "security" "passwords" "generators" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.genpass;

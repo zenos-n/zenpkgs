@@ -1,0 +1,14 @@
+_meta = {
+  name = "deckmaster";
+  summary = "Application to control your Elgato Stream Deck on Linux";
+  description = ''
+    Application to control your Elgato Stream Deck on Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "system" "administration" "stream-deck" "hardware" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.deckmaster;

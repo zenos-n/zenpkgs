@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pijul";
+  summary = "Distributed version control system";
+  description = ''
+    Distributed version control system.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0-beta.18";
+  tags = [ "development" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.pijul;

@@ -1,0 +1,41 @@
+_meta = {
+    name = "Image viewing";
+    summary = "Image viewing";
+    description = ''Image viewing. '';
+    tags = [ "desktop" "loupe" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    zenosVersion = 1.0.0Na;
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure image viewing";
+    summary = "Install and configure image viewing";
+    description = ''Install and configure image viewing. '';
+    tags = [ "desktop" "loupe" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.legacy.loupe ];
+    assertions = [
+    ];
+    dconf.settings = {
+      "org/gnome/Loupe"."show-properties" = $path.showImageProperties;
+    };
+  };
+};
+
+showImageProperties = {
+  _meta = {
+    name = "Show image information beside the picture";
+    summary = "Show image information beside the picture";
+    description = ''Show image information beside the picture. '';
+    tags = [ "desktop" "loupe" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};

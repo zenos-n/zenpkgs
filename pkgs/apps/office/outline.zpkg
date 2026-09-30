@@ -1,0 +1,14 @@
+_meta = {
+  name = "Outline";
+  summary = "Fastest wiki and knowledge base for growing teams. Beautiful, feature rich, and markdown compatible";
+  description = ''
+    Fastest wiki and knowledge base for growing teams. Beautiful, feature rich, and markdown compatible.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.2";
+  tags = [ "office" "notes" "knowledge-management" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsl11;
+};
+
+import $pkgs.legacy.outline;

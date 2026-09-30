@@ -1,0 +1,14 @@
+_meta = {
+  name = "NVFanControl";
+  summary = "Nvidia dynamic fan control for Linux";
+  description = ''
+    Nvidia dynamic fan control for Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.1";
+  tags = [ "system" "administration" "hardware" "performance" "cooling" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.nvfancontrol;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Audible CLI";
+  summary = "Command line interface for audible package. With the cli you can download your Audible books, cover, chapter files";
+  description = ''
+    Command line interface for audible package. With the cli you can download your Audible books, cover, chapter files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.3";
+  tags = [ "audio" "audiobooks" "downloads" "audible" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.audible-cli;

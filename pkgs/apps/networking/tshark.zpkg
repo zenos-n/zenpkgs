@@ -1,0 +1,16 @@
+_meta = {
+  name = "TShark";
+  summary = "Powerful network protocol analyzer";
+  description = ''
+    Wireshark (formerly known as "Ethereal") is a powerful network
+    protocol analyzer developed by an international team of networking
+    experts. It runs on UNIX, macOS and Windows.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.6.8";
+  tags = [ "networking" "diagnostics" "security" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.tshark;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "MARS MIPS";
+  summary = "IDE for programming in MIPS assembly language intended for educational-level use";
+  description = ''
+    IDE for programming in MIPS assembly language intended for educational-level use.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.5";
+  tags = [ "education" "development" "assembly" "simulation" "learning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.mars-mips;

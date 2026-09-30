@@ -1,0 +1,14 @@
+_meta = {
+  name = "Azure Functions Core Tools";
+  summary = "Command line tools for Azure Functions";
+  description = ''
+    Command line tools for Azure Functions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.8.0";
+  tags = [ "development" "azure" "serverless" "cloud" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.azure-functions-core-tools;

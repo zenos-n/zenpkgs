@@ -1,0 +1,15 @@
+_meta = {
+  name = "SmartGit";
+  summary = "Git GUI client";
+  description = ''
+    SmartGit is a multi-platform Git GUI client, free to use for active Open Source developers and users from academic institutions.
+    Command line Git is required.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.1.038";
+  tags = [ "development" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.smartgit;

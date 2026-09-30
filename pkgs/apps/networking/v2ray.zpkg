@@ -1,0 +1,14 @@
+_meta = {
+  name = "V2Ray";
+  summary = "Platform for building proxies to bypass network restrictions";
+  description = ''
+    Platform for building proxies to bypass network restrictions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.49.0";
+  tags = [ "networking" "proxy" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.v2ray;

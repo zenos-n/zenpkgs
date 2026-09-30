@@ -1,0 +1,14 @@
+_meta = {
+  name = "pngcheck";
+  summary = "Verifies the integrity of PNG, JNG and MNG files";
+  description = ''
+    Verifies the integrity of PNG, JNG and MNG files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.2";
+  tags = [ "graphics" "png" "verification" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.free;
+};
+
+import $pkgs.legacy.pngcheck;

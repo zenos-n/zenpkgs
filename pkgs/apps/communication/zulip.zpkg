@@ -1,0 +1,14 @@
+_meta = {
+  name = "Zulip";
+  summary = "Desktop client for Zulip Chat";
+  description = ''
+    Desktop client for Zulip Chat.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.12.4";
+  tags = [ "communication" "chat" "collaboration" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.zulip;

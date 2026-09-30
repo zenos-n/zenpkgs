@@ -1,0 +1,15 @@
+_meta = {
+  name = "GNOME Pomodoro";
+  summary = "Time management utility for GNOME based on the pomodoro technique";
+  description = ''
+    This GNOME utility helps to manage time according to Pomodoro Technique.
+    It intends to improve productivity and focus by taking short breaks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.28.1";
+  tags = [ "office" "time-management" "focus" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gnome-pomodoro;

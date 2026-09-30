@@ -1,0 +1,14 @@
+_meta = {
+  name = "Caprine";
+  summary = "Elegant Facebook Messenger desktop app";
+  description = ''
+    Elegant Facebook Messenger desktop app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.61.0";
+  tags = [ "communication" "messaging" "social" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.caprine;

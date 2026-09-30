@@ -1,0 +1,14 @@
+_meta = {
+  name = "jpeginfo";
+  summary = "Prints information and tests integrity of JPEG/JFIF files";
+  description = ''
+    Prints information and tests integrity of JPEG/JFIF files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.1";
+  tags = [ "graphics" "jpeg" "diagnostics" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.jpeginfo;

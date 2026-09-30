@@ -1,0 +1,14 @@
+_meta = {
+  name = "seqtk";
+  summary = "Toolkit for processing sequences in FASTA/Q formats";
+  description = ''
+    Toolkit for processing sequences in FASTA/Q formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.seqtk;

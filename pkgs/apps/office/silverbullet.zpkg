@@ -1,0 +1,14 @@
+_meta = {
+  name = "SilverBullet";
+  summary = "Open-source, self-hosted, offline-capable Personal Knowledge Management (PKM) web application";
+  description = ''
+    Open-source, self-hosted, offline-capable Personal Knowledge Management (PKM) web application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.1";
+  tags = [ "office" "notes" "knowledge-management" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.silverbullet;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "OWASP ZAP";
+  summary = "Java application for web penetration testing";
+  description = ''
+    Java application for web penetration testing.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.17.0";
+  tags = [ "security" "testing" "web" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.zap;

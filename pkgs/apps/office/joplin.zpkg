@@ -1,0 +1,14 @@
+_meta = {
+  name = "Joplin CLI";
+  summary = "CLI client for Joplin";
+  description = ''
+    CLI client for Joplin.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5.1";
+  tags = [ "office" "notes" "knowledge-management" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.joplin;

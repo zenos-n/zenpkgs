@@ -1,0 +1,14 @@
+_meta = {
+  name = "emv";
+  summary = "Editor Move: Rename files with your favourite text editor";
+  description = ''
+    Editor Move: Rename files with your favourite text editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.95";
+  tags = [ "files" "renaming" "editor" "batch" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.publicDomain;
+};
+
+import $pkgs.legacy.emv;

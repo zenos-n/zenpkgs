@@ -1,0 +1,14 @@
+_meta = {
+  name = "pg_activity";
+  summary = "Top like application for PostgreSQL server activity monitoring";
+  description = ''
+    Top like application for PostgreSQL server activity monitoring.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.6.1";
+  tags = [ "development" "monitoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.postgresql;
+};
+
+import $pkgs.legacy.pg_activity;

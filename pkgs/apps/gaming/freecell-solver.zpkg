@@ -1,0 +1,16 @@
+_meta = {
+  name = "FreeCell Solver";
+  summary = "FreeCell automatic solver";
+  description = ''
+    FreeCell Solver is a program that automatically solves layouts of Freecell
+    and similar variants of Card Solitaire such as Eight Off, Forecell, and
+    Seahaven Towers, as well as Simple Simon boards.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.16.0";
+  tags = [ "gaming" "cards" "solvers" "freecell" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.freecell-solver;

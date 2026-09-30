@@ -1,0 +1,18 @@
+_meta = {
+  name = "dvgrab";
+  summary = "Receive and store audio & video over IEEE1394";
+  description = ''
+    dvgrab receives audio and video data from a digital camcorder via an
+    IEEE1394 (widely known as FireWire) or USB link and stores them into
+    one of several file formats. It features autosplit of long video
+    sequences, and supports saving the data as raw frames, AVI type 1,
+    AVI type 2, Quicktime DV, a series of JPEG stills or MPEG2-TS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2016-05-16";
+  tags = [ "video" "capture" "ieee1394" "audio" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.dvgrab;

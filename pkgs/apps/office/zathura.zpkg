@@ -1,0 +1,17 @@
+_meta = {
+  name = "Zathura";
+  summary = "Highly customizable and functional PDF viewer";
+  description = ''
+    Zathura is a highly customizable and functional PDF viewer based on the
+    poppler rendering library and the GTK toolkit. The idea behind zathura
+    is an application that provides a minimalistic and space saving interface
+    as well as an easy usage that mainly focuses on keyboard interaction.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.05.20";
+  tags = [ "office" "productivity" "pdf" "reading" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.zathura;

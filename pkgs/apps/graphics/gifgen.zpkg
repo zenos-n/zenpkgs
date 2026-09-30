@@ -1,0 +1,14 @@
+_meta = {
+  name = "gifgen";
+  summary = "Simple high quality GIF encoding";
+  description = ''
+    Simple high quality GIF encoding.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "graphics" "gif" "encoding" "animation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gifgen;

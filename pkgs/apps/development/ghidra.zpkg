@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ghidra";
+  summary = "Software reverse engineering (SRE) suite of tools";
+  description = ''
+    Software reverse engineering (SRE) suite of tools.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "12.0.4";
+  tags = [ "development" "reverse-engineering" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ghidra;

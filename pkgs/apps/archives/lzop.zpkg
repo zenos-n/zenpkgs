@@ -1,0 +1,14 @@
+_meta = {
+  name = "lzop";
+  summary = "Fast file compressor";
+  description = ''
+    Fast file compressor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.04";
+  tags = [ "archives" "command-line" "files" "compression" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.lzop;

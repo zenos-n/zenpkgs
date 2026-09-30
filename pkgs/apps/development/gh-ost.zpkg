@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-ost";
+  summary = "Triggerless online schema migration solution for MySQL";
+  description = ''
+    Triggerless online schema migration solution for MySQL.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.9";
+  tags = [ "development" "databases" "mysql" "schema-migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-ost;

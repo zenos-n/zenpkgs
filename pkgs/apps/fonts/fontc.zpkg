@@ -1,0 +1,14 @@
+_meta = {
+  name = "fontc";
+  summary = "Compile fonts with a Rust implementation of the fontmake pipeline";
+  description = ''
+    Compile fonts with a Rust implementation of the fontmake pipeline.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0";
+  tags = [ "fonts" "development" "compilers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fontc;

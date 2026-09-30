@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gnome Encfs Manager";
+  summary = "EncFS manager and mounter with GNOME3 integration";
+  description = ''
+    EncFS manager and mounter with GNOME3 integration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9";
+  tags = [ "security" "encryption" "encfs" "filesystems" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gencfsm;

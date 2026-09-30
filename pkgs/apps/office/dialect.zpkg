@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dialect";
+  summary = "Translation app for GNOME";
+  description = ''
+    Translation app for GNOME.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.1";
+  tags = [ "office" "productivity" "translation" "languages" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.dialect;

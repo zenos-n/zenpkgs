@@ -1,0 +1,27 @@
+_meta = {
+  name = "Bats";
+  summary = "Bash Automated Testing System";
+  description = ''
+    Bats can be extended with libraries. The available libraries are:
+
+    - `bats-assert`
+    - `bats-file`
+    - `bats-detik`
+    - `bats-support`
+
+    An example of building this package with a few libraries:
+    ```nix
+    bats.withLibraries (p: [
+      p.bats-assert
+      p.bats-support
+    ])
+    ```
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.12.0";
+  tags = [ "development" "bash" "shell" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bats;

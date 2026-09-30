@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dragonfly";
+  summary = "Modern replacement for Redis and Memcached";
+  description = ''
+    Modern replacement for Redis and Memcached.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.39.0";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsl11;
+};
+
+import $pkgs.legacy.dragonflydb;

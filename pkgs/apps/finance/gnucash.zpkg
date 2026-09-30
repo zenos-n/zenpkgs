@@ -1,0 +1,31 @@
+_meta = {
+  name = "GnuCash";
+  summary = "Free software for double entry accounting";
+  description = ''
+    GnuCash is personal and small-business financial-accounting software,
+    freely licensed under the GNU GPL and available for GNU/Linux, BSD,
+    Solaris, Mac OS X and Microsoft Windows.
+
+    Designed to be easy to use, yet powerful and flexible, GnuCash allows you
+    to track bank accounts, stocks, income and expenses. As quick and
+    intuitive to use as a checkbook register, it is based on professional
+    accounting principles to ensure balanced books and accurate reports.
+
+    Some interesting features:
+
+    - Double-Entry Accounting
+    - Stock/Bond/Mutual Fund Accounts
+    - Small-Business Accounting
+    - Reports, Graphs
+    - QIF/OFX/HBCI Import, Transaction Matching
+    - Scheduled Transactions
+    - Financial Calculations
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.16";
+  tags = [ "finance" "office" "productivity" "accounting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gnucash;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "ggshield";
+  summary = "Tool to find and fix various types of hardcoded secrets and infrastructure-as-code misconfigurations";
+  description = ''
+    Tool to find and fix various types of hardcoded secrets and infrastructure-as-code misconfigurations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.50.4";
+  tags = [ "security" "secrets" "development" "static-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ggshield;

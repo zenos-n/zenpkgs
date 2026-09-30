@@ -1,0 +1,14 @@
+_meta = {
+  name = "File Browser Quantum";
+  summary = "Access and manage your files from the web";
+  description = ''
+    Access and manage your files from the web.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.0-stable";
+  tags = [ "files" "networking" "sharing" "transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.filebrowser-quantum;

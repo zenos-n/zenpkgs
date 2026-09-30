@@ -1,0 +1,14 @@
+_meta = {
+  name = "csv-tui";
+  summary = "Terminal based csv editor which is designed to be memory efficient but still useful";
+  description = ''
+    Terminal based csv editor which is designed to be memory efficient but still useful.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2";
+  tags = [ "editors" "csv" "data" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.csv-tui;

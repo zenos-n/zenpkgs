@@ -1,0 +1,14 @@
+_meta = {
+  name = "Railway";
+  summary = "Travel with all your train information in one place. Also known as Railway";
+  description = ''
+    Travel with all your train information in one place. Also known as Railway.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.10.1";
+  tags = [ "maps" "trains" "travel" "timetables" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.diebahn;

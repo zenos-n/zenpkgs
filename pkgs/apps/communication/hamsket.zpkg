@@ -1,0 +1,14 @@
+_meta = {
+  name = "Hamsket";
+  summary = "Free and open source messaging and emailing app that combines common web applications into one";
+  description = ''
+    Free and open source messaging and emailing app that combines common web applications into one.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.5";
+  tags = [ "communication" "messaging" "email" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.hamsket;

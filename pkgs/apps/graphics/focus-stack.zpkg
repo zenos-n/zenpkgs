@@ -1,0 +1,14 @@
+_meta = {
+  name = "Focus Stack";
+  summary = "Fast and easy focus stacking";
+  description = ''
+    Fast and easy focus stacking.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5";
+  tags = [ "graphics" "photography" "image-processing" "focus-stacking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.focus-stack;

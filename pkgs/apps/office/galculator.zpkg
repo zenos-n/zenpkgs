@@ -1,0 +1,23 @@
+_meta = {
+  name = "Galculator";
+  summary = "GTK algebraic and RPN calculator";
+  description = ''
+    galculator is a GTK-based calculator. Its main features include:
+
+    - Algebraic, RPN (Reverse Polish Notation), Formula Entry and Paper modes;
+    - Basic and Scientific Modes
+    - Decimal, hexadecimal, octal and binary number base
+    - Radiant, degree and grad support
+    - User defined constants and functions
+    - A bunch of common functions
+    - Binary arithmetic of configurable bit length and signedness
+    - Quad-precision floating point arithmetic, and 112-bit binary arithmetic
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.4";
+  tags = [ "office" "calculator" "mathematics" "rpn" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.galculator;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-quick-stats";
+  summary = "Simple and efficient way to access various statistics in git repository";
+  description = ''
+    Simple and efficient way to access various statistics in git repository.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.0";
+  tags = [ "development" "git" "version-control" "statistics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-quick-stats;

@@ -1,0 +1,16 @@
+_meta = {
+  name = "World of Goo";
+  summary = "Physics based puzzle game";
+  description = ''
+    World of Goo is a physics based puzzle / construction game. The millions of Goo
+    Balls who live in the beautiful World of Goo don't know that they are in a
+    game, or that they are extremely delicious.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.53";
+  tags = [ "gaming" "puzzle" "physics" "construction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.worldofgoo;

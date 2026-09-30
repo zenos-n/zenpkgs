@@ -1,0 +1,14 @@
+_meta = {
+  name = "Shopify Function Runner";
+  summary = "CLI tool which allows you to run Wasm Functions intended for the Shopify Functions infrastructure";
+  description = ''
+    CLI tool which allows you to run Wasm Functions intended for the Shopify Functions infrastructure.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.0.0";
+  tags = [ "development" "webassembly" "shopify" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.function-runner;

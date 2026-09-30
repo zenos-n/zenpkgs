@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitButler";
+  summary = "Git client for simultaneous branches on top of your existing workflow";
+  description = ''
+    Git client for simultaneous branches on top of your existing workflow.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.19.7";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.fsl11Mit;
+};
+
+import $pkgs.legacy.gitbutler;

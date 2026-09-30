@@ -1,0 +1,14 @@
+_meta = {
+  name = "Devhelp";
+  summary = "API documentation browser for GNOME";
+  description = ''
+    API documentation browser for GNOME.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "43.0";
+  tags = [ "development" "documentation" "reference" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.devhelp;

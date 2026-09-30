@@ -1,0 +1,16 @@
+_meta = {
+  name = "Kubetail";
+  summary = "Bash script to tail Kubernetes logs from multiple pods at the same time";
+  description = ''
+    Bash script that enables you to aggregate (tail/follow) logs from
+    multiple pods into one stream. This is the same as running "kubectl logs
+    -f " but for multiple pods.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.22";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kubetail;

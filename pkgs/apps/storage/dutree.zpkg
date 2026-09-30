@@ -1,0 +1,14 @@
+_meta = {
+  name = "dutree";
+  summary = "Tool to analyze file system usage written in Rust";
+  description = ''
+    Tool to analyze file system usage written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.18";
+  tags = [ "storage" "disk-usage" "tree" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.dutree;

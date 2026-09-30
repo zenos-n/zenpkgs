@@ -1,0 +1,14 @@
+_meta = {
+  name = "MVoice";
+  summary = "M17 digital voice gateway and module for voice and data modes";
+  description = ''
+    M17 digital voice gateway and module for voice and data modes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-09-19";
+  tags = [ "radio" "amateur-radio" "communication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.mvoice;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-wt";
+  summary = "Git subcommand that makes git worktree simple";
+  description = ''
+    Git subcommand that makes git worktree simple.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.28.0";
+  tags = [ "development" "git" "worktrees" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-wt;

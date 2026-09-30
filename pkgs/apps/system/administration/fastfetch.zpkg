@@ -1,0 +1,33 @@
+_meta = {
+  name = "Fastfetch";
+  summary = "Actively maintained, feature-rich and performance oriented, neofetch like system information tool";
+  description = ''
+    Fast and highly customizable system info script.
+
+    Feature flags (all default to 'true' except rpmSupport, flashfetchSupport and zfsSupport):
+    * audioSupport: PulseAudio functionality
+    * brightnessSupport: External display brightness detection via DDCUtil
+    * dbusSupport: DBus functionality for Bluetooth, WiFi, player & media detection
+    * enlightenmentSupport: Enlightenment configuration detection via EFL's Eet
+    * flashfetchSupport: Build the flashfetch utility (default: false)
+    * gnomeSupport: GNOME integration (dconf, dbus, gio)
+    * imageSupport: Image rendering (chafa and imagemagick)
+    * openclSupport: OpenCL features
+    * openglSupport: OpenGL features
+    * rpmSupport: RPM package detection (default: false)
+    * sqliteSupport: Package counting via SQLite
+    * terminalSupport: Terminal font detection
+    * vulkanSupport: Vulkan GPU information and DRM features
+    * waylandSupport: Wayland display detection
+    * x11Support: X11 display information
+    * xfceSupport: XFCE integration for theme and terminal font detection
+    * zfsSupport: zpool information
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.63.1";
+  tags = [ "system" "administration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fastfetch;

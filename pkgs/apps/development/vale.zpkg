@@ -1,0 +1,19 @@
+_meta = {
+  name = "Vale";
+  summary = "Syntax-aware linter for prose built with speed and extensibility in mind";
+  description = ''
+    Vale in Nixpkgs offers the helper `.withStyles` allow you to install it
+    predefined styles:
+
+    ```nix
+    vale.withStyles (s: [ s.alex s.google ])
+    ```
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.14.2";
+  tags = [ "development" "text" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.vale;

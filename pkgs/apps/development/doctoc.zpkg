@@ -1,0 +1,14 @@
+_meta = {
+  name = "DocToc";
+  summary = "Generate table of contents for Markdown files";
+  description = ''
+    Generate table of contents for Markdown files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.0";
+  tags = [ "development" "markdown" "documentation" "table-of-contents" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.doctoc;

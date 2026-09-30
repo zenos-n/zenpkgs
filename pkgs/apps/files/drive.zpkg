@@ -1,0 +1,14 @@
+_meta = {
+  name = "Drive";
+  summary = "Google Drive client for the commandline";
+  description = ''
+    Google Drive client for the commandline.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "files" "google-drive" "cloud" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.drive;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "ORAS";
+  summary = "Distribute artifacts across OCI registries with ease";
+  description = ''
+    Distribute artifacts across OCI registries with ease.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.3";
+  tags = [ "containers" "images" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.oras;

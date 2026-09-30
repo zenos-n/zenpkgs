@@ -1,0 +1,16 @@
+_meta = {
+  name = "fnc";
+  summary = "Interactive ncurses browser for Fossil repositories";
+  description = ''
+    An interactive ncurses browser for Fossil repositories.
+
+    fnc uses libfossil to create a fossil ui experience in the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.18";
+  tags = [ "development" "version-control" "fossil" "tui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.fnc;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Nyxt";
+  summary = "Infinitely extensible web-browser (with Lisp development files using WebKitGTK platform port)";
+  description = ''
+    Infinitely extensible web-browser (with Lisp development files using WebKitGTK platform port).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.12.0";
+  tags = [ "browsers" "internet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.nyxt;

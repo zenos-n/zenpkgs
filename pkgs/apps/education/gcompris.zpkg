@@ -1,0 +1,14 @@
+_meta = {
+  name = "GCompris";
+  summary = "High quality educational software suite, including a large number of activities for children aged 2 to 10";
+  description = ''
+    High quality educational software suite, including a large number of activities for children aged 2 to 10.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "25.1.1";
+  tags = [ "education" "learning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gcompris;

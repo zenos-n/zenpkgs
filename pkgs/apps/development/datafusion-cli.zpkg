@@ -1,0 +1,14 @@
+_meta = {
+  name = "DataFusion CLI";
+  summary = "CLI for Apache Arrow DataFusion";
+  description = ''
+    CLI for Apache Arrow DataFusion.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "53.1.0";
+  tags = [ "development" "datafusion" "sql" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.datafusion-cli;

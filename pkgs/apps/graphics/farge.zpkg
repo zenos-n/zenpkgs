@@ -1,0 +1,14 @@
+_meta = {
+  name = "farge";
+  summary = "View the color value of a specific pixel on your screen";
+  description = ''
+    View the color value of a specific pixel on your screen.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.9";
+  tags = [ "graphics" "colors" "picker" "screen" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.farge;

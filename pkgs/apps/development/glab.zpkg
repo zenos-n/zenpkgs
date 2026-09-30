@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitLab CLI";
+  summary = "GitLab CLI tool bringing GitLab to your command line";
+  description = ''
+    GitLab CLI tool bringing GitLab to your command line.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.99.0";
+  tags = [ "development" "git" "version-control" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.glab;

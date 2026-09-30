@@ -1,0 +1,16 @@
+_meta = {
+  name = "CCExtractor";
+  summary = "Tool that produces subtitles from closed caption data in videos";
+  description = ''
+    A tool that analyzes video files and produces independent subtitle files from
+    closed captions data. CCExtractor is portable, small, and very fast.
+    It works on Linux, Windows, and OSX.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.94-unstable-2025-05-20";
+  tags = [ "video" "subtitles" "captions" "extraction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.ccextractor;

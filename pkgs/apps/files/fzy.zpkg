@@ -1,0 +1,14 @@
+_meta = {
+  name = "fzy";
+  summary = "Better fuzzy finder";
+  description = ''
+    Better fuzzy finder.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1";
+  tags = [ "files" "search" "fuzzy" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fzy;

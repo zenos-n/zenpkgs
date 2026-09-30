@@ -1,0 +1,14 @@
+_meta = {
+  name = "SAMtools";
+  summary = "Tools for manipulating SAM/BAM/CRAM format";
+  description = ''
+    Tools for manipulating SAM/BAM/CRAM format.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.22.1";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.samtools;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "cli53";
+  summary = "CLI tool for the Amazon Route 53 DNS service";
+  description = ''
+    CLI tool for the Amazon Route 53 DNS service.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "networking" "dns" "cloud" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cli53;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Typstyle";
+  summary = "Format your typst source code";
+  description = ''
+    Format your typst source code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14.4";
+  tags = [ "development" "typst" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.typstyle;

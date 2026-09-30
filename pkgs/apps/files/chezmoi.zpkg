@@ -1,0 +1,14 @@
+_meta = {
+  name = "chezmoi";
+  summary = "Manage your dotfiles across multiple machines, securely";
+  description = ''
+    Manage your dotfiles across multiple machines, securely.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.70.3";
+  tags = [ "files" "dotfiles" "configuration" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.chezmoi;

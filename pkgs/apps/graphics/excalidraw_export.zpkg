@@ -1,0 +1,14 @@
+_meta = {
+  name = "Excalidraw Export";
+  summary = "CLI to export Excalidraw drawings to SVG and PDF";
+  description = ''
+    CLI to export Excalidraw drawings to SVG and PDF.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "graphics" "excalidraw" "svg" "pdf" "export" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.excalidraw_export;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Darklua";
+  summary = "Command line tool that transforms Lua code";
+  description = ''
+    Command line tool that transforms Lua code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.17.3";
+  tags = [ "development" "lua" "transformation" "source-code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.darklua;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cup";
+  summary = "Lightweight way to check for container image updates. written in Rust";
+  description = ''
+    Lightweight way to check for container image updates. written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5.1";
+  tags = [ "containers" "docker" "images" "updates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.cup-docker;

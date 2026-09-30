@@ -1,0 +1,14 @@
+_meta = {
+  name = "LocalSend";
+  summary = "Open source cross-platform alternative to AirDrop";
+  description = ''
+    Open source cross-platform alternative to AirDrop.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.17.0";
+  tags = [ "networking" "files" "transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.localsend;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-bolero";
+  summary = "Fuzzing and property testing front-end framework for Rust";
+  description = ''
+    Fuzzing and property testing front-end framework for Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.4";
+  tags = [ "development" "rust" "cargo" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-bolero;

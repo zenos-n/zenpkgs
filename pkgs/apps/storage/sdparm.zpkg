@@ -1,0 +1,14 @@
+_meta = {
+  name = "sdparm";
+  summary = "Utility to access SCSI device parameters";
+  description = ''
+    Utility to access SCSI device parameters.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.12";
+  tags = [ "storage" "hardware" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.sdparm;

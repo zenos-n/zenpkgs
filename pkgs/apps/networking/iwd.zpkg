@@ -1,0 +1,14 @@
+_meta = {
+  name = "iwd";
+  summary = "Wireless daemon for Linux";
+  description = ''
+    Wireless daemon for Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.12";
+  tags = [ "networking" "wifi" "management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Plus;
+};
+
+import $pkgs.legacy.iwd;

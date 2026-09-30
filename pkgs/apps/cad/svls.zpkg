@@ -1,0 +1,14 @@
+_meta = {
+  name = "svls";
+  summary = "SystemVerilog language server";
+  description = ''
+    SystemVerilog language server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.14";
+  tags = [ "cad" "electronics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.svls;

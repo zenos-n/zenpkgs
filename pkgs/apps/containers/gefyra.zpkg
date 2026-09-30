@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gefyra";
+  summary = "Tool to connect local containers to kubernetes clusters";
+  description = ''
+    Tool to connect local containers to kubernetes clusters.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.3";
+  tags = [ "containers" "kubernetes" "development" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gefyra;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-i";
+  summary = "Search github issues interactively";
+  description = ''
+    Search github issues interactively.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.10";
+  tags = [ "development" "github" "github-cli" "issues" "search" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gh-i;

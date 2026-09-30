@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tabby Agent";
+  summary = "Language server used to communicate with Tabby server";
+  description = ''
+    Language server used to communicate with Tabby server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.32.0";
+  tags = [ "ai" "development" "coding" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.tabby-agent;

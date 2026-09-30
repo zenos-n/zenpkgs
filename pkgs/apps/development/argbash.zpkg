@@ -1,0 +1,14 @@
+_meta = {
+  name = "Argbash";
+  summary = "Bash argument parsing code generator";
+  description = ''
+    Bash argument parsing code generator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.11.0";
+  tags = [ "development" "bash" "shell" "code-generation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.argbash;

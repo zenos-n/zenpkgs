@@ -1,0 +1,16 @@
+_meta = {
+  name = "PuTTY";
+  summary = "Free Telnet/SSH Client";
+  description = ''
+    PuTTY is a free implementation of Telnet and SSH for Windows and Unix
+    platforms, along with an xterm terminal emulator.
+    It is written and maintained primarily by Simon Tatham.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.84";
+  tags = [ "networking" "ssh" "terminal" "remote-access" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.putty;

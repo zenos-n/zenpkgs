@@ -1,0 +1,170 @@
+_meta = {
+  name = "Configure hardware for desktop use";
+  tags = [ "desktop" "hardware" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Configure hardware for desktop use";
+  description = ''Configure hardware for desktop use. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+firmwareUpdates = {
+  _meta = {
+    name = "Install device firmware updates through supported desktop applications";
+    tags = [ "desktop" "hardware" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Install device firmware updates through supported desktop applications";
+    description = ''Install device firmware updates through supported desktop applications. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.fwupd.enable = $lib.mkIf ($path.firmwareUpdates != null) $path.firmwareUpdates;
+  };
+};
+
+deviceFirmware = {
+  _meta = {
+    name = "Load redistributable firmware required by hardware";
+    tags = [ "desktop" "hardware" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Load redistributable firmware required by hardware";
+    description = ''Load redistributable firmware required by hardware. Null keeps the existing system policy.'';
+  };
+  s!! {
+    hardware.enableRedistributableFirmware = $lib.mkIf ($path.deviceFirmware != null) $path.deviceFirmware;
+  };
+};
+
+graphicsAcceleration = {
+  _meta = {
+    name = "Enable hardware-accelerated graphics";
+    tags = [ "desktop" "hardware" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Enable hardware-accelerated graphics";
+    description = ''Enable hardware-accelerated graphics. Null keeps the existing system policy.'';
+  };
+  s!! {
+    hardware.graphics.enable = $lib.mkIf ($path.graphicsAcceleration != null) $path.graphicsAcceleration;
+  };
+};
+
+graphics32Bit = {
+  _meta = {
+    name = "Enable hardware graphics acceleration for 32-bit applications";
+    tags = [ "desktop" "hardware" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Enable hardware graphics acceleration for 32-bit applications";
+    description = ''Enable hardware graphics acceleration for 32-bit applications. Null keeps the existing system policy.'';
+  };
+  s!! {
+    hardware.graphics.enable32Bit = $lib.mkIf ($path.graphics32Bit != null) $path.graphics32Bit;
+  };
+};
+
+scanning = {
+  _meta = {
+    name = "Scan documents from supported scanners";
+    tags = [ "desktop" "hardware" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Scan documents from supported scanners";
+    description = ''Scan documents from supported scanners. Null keeps the existing system policy.'';
+  };
+  s!! {
+    hardware.sane.enable = $lib.mkIf ($path.scanning != null) $path.scanning;
+  };
+};
+
+fingerprintLogin = {
+  _meta = {
+    name = "Allow fingerprint authentication on supported readers";
+    tags = [ "desktop" "hardware" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow fingerprint authentication on supported readers";
+    description = ''Allow fingerprint authentication on supported readers. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.fprintd.enable = $lib.mkIf ($path.fingerprintLogin != null) $path.fingerprintLogin;
+  };
+};
+
+mobileBroadband = {
+  _meta = {
+    name = "Use mobile broadband modems";
+    tags = [ "desktop" "hardware" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Use mobile broadband modems";
+    description = ''Use mobile broadband modems. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.modemmanager.enable = $lib.mkIf ($path.mobileBroadband != null) $path.mobileBroadband;
+  };
+};
+
+thunderboltAuthorization = {
+  _meta = {
+    name = "Authorize Thunderbolt docks and peripherals";
+    tags = [ "desktop" "hardware" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Authorize Thunderbolt docks and peripherals";
+    description = ''Authorize Thunderbolt docks and peripherals. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.hardware.bolt.enable = $lib.mkIf ($path.thunderboltAuthorization != null) $path.thunderboltAuthorization;
+  };
+};
+
+colorCalibration = {
+  _meta = {
+    name = "Manage display and printer color profiles";
+    tags = [ "desktop" "hardware" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Manage display and printer color profiles";
+    description = ''Manage display and printer color profiles. Applications still require permission from the desktop where applicable. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.colord.enable = $lib.mkIf ($path.colorCalibration != null) $path.colorCalibration;
+  };
+};
+
+locationServices = {
+  _meta = {
+    name = "Allow applications to request geographical location";
+    tags = [ "desktop" "hardware" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow applications to request geographical location";
+    description = ''Allow applications to request geographical location. Applications still require permission from the desktop where applicable. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.geoclue2.enable = $lib.mkIf ($path.locationServices != null) $path.locationServices;
+  };
+};
+

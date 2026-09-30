@@ -1,0 +1,16 @@
+_meta = {
+  name = "SuperTuxKart";
+  summary = "3D open-source arcade racer";
+  description = ''
+    Karts. Nitro. Action! SuperTuxKart is a 3D open-source arcade racer
+    with a variety of characters, tracks, and modes to play.
+    It aims to be more fun than realistic, and provides an enjoyable experience for all ages.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5";
+  tags = [ "gaming" "racing" "multiplayer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.supertuxkart;

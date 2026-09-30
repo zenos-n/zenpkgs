@@ -1,0 +1,14 @@
+_meta = {
+  name = "ab-av1";
+  summary = "AV1 re-encoding using ffmpeg, svt-av1 & vmaf";
+  description = ''
+    AV1 re-encoding using ffmpeg, svt-av1 & vmaf.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.2";
+  tags = [ "video" "encoding" "av1" "compression" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ab-av1;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Discord";
+  summary = "All-in-one cross-platform voice and text chat for gamers";
+  description = ''
+    All-in-one cross-platform voice and text chat for gamers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.138";
+  tags = [ "communication" "networking" "voice" "gaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.discord;

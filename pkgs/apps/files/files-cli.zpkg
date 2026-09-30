@@ -1,0 +1,14 @@
+_meta = {
+  name = "Files.com CLI";
+  summary = "Files.com Command Line App for Windows, Linux, and macOS";
+  description = ''
+    Files.com Command Line App for Windows, Linux, and macOS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.15.297";
+  tags = [ "files" "cloud-storage" "file-transfer" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.files-cli;

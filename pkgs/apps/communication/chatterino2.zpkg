@@ -1,0 +1,17 @@
+_meta = {
+  name = "Chatterino";
+  summary = "Chat client for Twitch chat";
+  description = ''
+    Chatterino is a chat client for Twitch chat. It aims to be an
+    improved/extended version of the Twitch web chat. Chatterino 2 is
+    the second installment of the Twitch chat client series
+    "Chatterino".
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.5";
+  tags = [ "communication" "chat" "twitch" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.chatterino2;

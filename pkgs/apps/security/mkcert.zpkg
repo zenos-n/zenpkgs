@@ -1,0 +1,14 @@
+_meta = {
+  name = "mkcert";
+  summary = "Simple tool for making locally-trusted development certificates";
+  description = ''
+    Simple tool for making locally-trusted development certificates.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.4";
+  tags = [ "security" "cryptography" "certificates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.mkcert;

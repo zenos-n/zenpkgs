@@ -1,0 +1,14 @@
+_meta = {
+  name = "ReText";
+  summary = "Editor for Markdown and reStructuredText";
+  description = ''
+    Editor for Markdown and reStructuredText.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.1.0";
+  tags = [ "office" "markdown" "text" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.retext;

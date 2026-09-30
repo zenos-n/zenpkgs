@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glamorous Toolkit";
+  summary = "GlamorousToolkit Development Environment";
+  description = ''
+    GlamorousToolkit Development Environment.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.58";
+  tags = [ "development" "ide" "programming" "smalltalk" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.glamoroustoolkit;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Freeze";
+  summary = "Tool to generate images of code and terminal output";
+  description = ''
+    Tool to generate images of code and terminal output.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.2";
+  tags = [ "graphics" "code" "screenshots" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.charm-freeze;

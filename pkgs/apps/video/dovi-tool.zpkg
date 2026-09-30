@@ -1,0 +1,14 @@
+_meta = {
+  name = "DOVI Tool";
+  summary = "CLI tool combining multiple utilities for working with Dolby Vision";
+  description = ''
+    CLI tool combining multiple utilities for working with Dolby Vision.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.2";
+  tags = [ "video" "dolby-vision" "hdr" "processing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dovi-tool;

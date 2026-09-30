@@ -7,8 +7,8 @@ The sibling `zenos-n-next/design/node-metadata.md`, `zpkg-format.md`,
 
 Package declarations are named leaves at `pkgs/<path>.zpkg`. The full filesystem
 path defines the public identity `pkgs.<path>` and internal view
-`pkgs.zenos.<path>`. For example, `pkgs/apps/utilities/example.zpkg` has registry
-ID `pkgs.apps.utilities.example` and target `[ "apps" "utilities" "example" ]`.
+`pkgs.zenos.<path>`. For example, `pkgs/apps/graphics/example.zpkg` has registry
+ID `pkgs.apps.graphics.example` and target `[ "apps" "graphics" "example" ]`.
 Different directories may contain the same basename. Targets and full identities
 must be unique; there is no basename lookup or alias catalog. Moving a file
 changes its identity.
@@ -22,7 +22,7 @@ Filesystem discovery establishes identity; ZSTR controls exposure. Without a
 root `structure.zstr`, the adapter returns no packages or module candidates.
 Multiple structures are an error. The compiled registry feeds the package
 overlay and flake outputs. `tests/fixtures/package-registry.json` records the
-126-entry normalized contract, not a second declaration source.
+4057-entry normalized contract, not a second declaration source.
 
 ## Package Declarations
 
@@ -113,7 +113,7 @@ and dependency scopes are not option nodes.
 
 Update `tests/fixtures/package-registry.json` alongside declaration changes and
 review exact public IDs, targets, imported paths, and metadata. Package checks
-cover all 126 mappings, repeated basenames without aliases, invalid/conflicting
+cover all 4057 mappings, repeated basenames without aliases, invalid/conflicting
 targets, absent/multiple structures, and metadata defaults and scope decoding.
 
 Run acceptance checks inside a ZenOS VM, not on the host:

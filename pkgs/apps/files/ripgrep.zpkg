@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "ripgrep";
+  summary = "Utility that combines the usability of The Silver Searcher with the raw speed of grep";
+  description = ''
+    Utility that combines the usability of The Silver Searcher with the raw speed of grep.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "15.1.0";
+  tags = [ "files" "search" "text" "development" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.ripgrep;

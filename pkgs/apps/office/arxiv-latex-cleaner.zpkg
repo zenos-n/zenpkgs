@@ -1,0 +1,14 @@
+_meta = {
+  name = "arxiv-latex-cleaner";
+  summary = "Easily clean the LaTeX code of your paper to submit to arXiv";
+  description = ''
+    Easily clean the LaTeX code of your paper to submit to arXiv.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.11";
+  tags = [ "office" "latex" "writing" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.arxiv-latex-cleaner;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "MelonLoader Installer";
+  summary = "Automated installer for MelonLoader, the universal mod-loader for games built in the Unity Engine";
+  description = ''
+    Automated installer for MelonLoader, the universal mod-loader for games built in the Unity Engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.3.0";
+  tags = [ "gaming" "mods" "installer" "unity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.melonloader-installer;

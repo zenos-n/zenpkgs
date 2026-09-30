@@ -1,0 +1,25 @@
+_meta = {
+  name = "udiskie";
+  summary = "Removable disk automounter for udisks";
+  description = ''
+    udiskie is a udisks2 front-end that allows to manage removeable media such
+    as CDs or flash drives from userspace.
+
+    Its features include:
+    - automount removable media
+    - notifications
+    - tray icon
+    - command line tools for manual un-/mounting
+    - LUKS encrypted devices
+    - unlocking with keyfiles (requires udisks 2.6.4)
+    - loop devices (mounting iso archives)
+    - password caching (requires python keyutils 0.3)
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.2";
+  tags = [ "storage" "mounting" "desktop" "disks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.udiskie;

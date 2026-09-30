@@ -1,0 +1,14 @@
+_meta = {
+  name = "DVR-Scan";
+  summary = "Find and extract motion events in videos";
+  description = ''
+    Command-line application that automatically detects motion events in video files (e.g. security camera footage). DVR-Scan looks for areas in footage containing motion, and saves each event to a separate video clip. DVR-Scan is free and open-source software, and works on Windows, Linux, and Mac.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.2";
+  tags = [ "video" "motion-detection" "extraction" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.dvr-scan;

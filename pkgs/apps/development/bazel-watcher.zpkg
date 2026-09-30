@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bazel Watcher";
+  summary = "Tools for building Bazel targets when source files change";
+  description = ''
+    Tools for building Bazel targets when source files change.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.29.0";
+  tags = [ "development" "bazel" "build" "watching" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bazel-watcher;

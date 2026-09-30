@@ -1,0 +1,14 @@
+_meta = {
+  name = "Keybase CLI";
+  summary = "Keybase official command-line utility and service";
+  description = ''
+    Keybase official command-line utility and service.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.5.1";
+  tags = [ "communication" "chat" "privacy" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.keybase;

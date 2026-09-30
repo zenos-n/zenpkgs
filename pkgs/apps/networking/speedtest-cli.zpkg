@@ -1,0 +1,14 @@
+_meta = {
+  name = "speedtest-cli";
+  summary = "Command line interface for testing internet bandwidth using speedtest.net";
+  description = ''
+    Command line interface for testing internet bandwidth using speedtest.net.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.3";
+  tags = [ "networking" "diagnostics" "bandwidth" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.speedtest-cli;

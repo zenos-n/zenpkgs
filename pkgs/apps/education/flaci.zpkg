@@ -1,0 +1,14 @@
+_meta = {
+  name = "FLACI";
+  summary = "Create and test formal languages with automaton and create diagrams for them";
+  description = ''
+    Create and test formal languages with automaton and create diagrams for them.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2024-12-10";
+  tags = [ "education" "computer-science" "automata" "visualization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.flaci;

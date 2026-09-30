@@ -1,0 +1,14 @@
+_meta = {
+  name = "Globalping CLI";
+  summary = "Simple CLI tool to run networking commands remotely from hundreds of globally distributed servers";
+  description = ''
+    Simple CLI tool to run networking commands remotely from hundreds of globally distributed servers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.1";
+  tags = [ "networking" "diagnostics" "distributed-testing" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.globalping-cli;

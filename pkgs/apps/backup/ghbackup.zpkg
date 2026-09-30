@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghbackup";
+  summary = "Backup your GitHub repositories with a simple command-line application written in Go";
+  description = ''
+    Backup your GitHub repositories with a simple command-line application written in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.13.0";
+  tags = [ "backup" "git" "github" "repositories" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghbackup;

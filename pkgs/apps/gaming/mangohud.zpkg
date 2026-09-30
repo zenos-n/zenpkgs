@@ -1,0 +1,14 @@
+_meta = {
+  name = "MangoHud";
+  summary = "Vulkan and OpenGL overlay for monitoring FPS, temperatures, CPU/GPU load and more";
+  description = ''
+    Vulkan and OpenGL overlay for monitoring FPS, temperatures, CPU/GPU load and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.3";
+  tags = [ "gaming" "monitoring" "performance" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.mangohud;

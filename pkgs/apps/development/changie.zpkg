@@ -1,0 +1,14 @@
+_meta = {
+  name = "Changie";
+  summary = "Automated changelog tool for preparing releases with lots of customization options";
+  description = ''
+    Automated changelog tool for preparing releases with lots of customization options.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.24.0";
+  tags = [ "development" "changelog" "releases" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.changie;

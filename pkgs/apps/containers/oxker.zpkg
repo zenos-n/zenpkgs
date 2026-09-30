@@ -1,0 +1,14 @@
+_meta = {
+  name = "oxker";
+  summary = "Simple TUI to view & control docker containers";
+  description = ''
+    Simple TUI to view & control docker containers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.2";
+  tags = [ "containers" "docker" "terminal" "monitoring" "administration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.oxker;

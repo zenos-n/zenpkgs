@@ -1,0 +1,14 @@
+_meta = {
+  name = "Zandronum";
+  summary = "Multiplayer oriented port, based off Skulltag, for Doom and Doom II by id Software";
+  description = ''
+    Multiplayer oriented port, based off Skulltag, for Doom and Doom II by id Software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.1";
+  tags = [ "gaming" "source-port" "doom" "shooter" "multiplayer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.sleepycat;
+};
+
+import $pkgs.legacy.zandronum;

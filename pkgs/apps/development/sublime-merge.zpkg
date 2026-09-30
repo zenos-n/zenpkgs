@@ -1,0 +1,14 @@
+_meta = {
+  name = "Sublime Merge";
+  summary = "Git client from the makers of Sublime Text";
+  description = ''
+    Git client from the makers of Sublime Text.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2125";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.sublime-merge;

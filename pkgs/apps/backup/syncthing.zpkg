@@ -1,0 +1,14 @@
+_meta = {
+  name = "Syncthing";
+  summary = "Open Source Continuous File Synchronization";
+  description = ''
+    Open Source Continuous File Synchronization.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.2";
+  tags = [ "backup" "networking" "synchronization" "files" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.syncthing;

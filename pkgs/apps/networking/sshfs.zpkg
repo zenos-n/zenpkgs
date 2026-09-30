@@ -1,0 +1,16 @@
+_meta = {
+  name = "SSHFS";
+  summary = "FUSE-based filesystem that allows remote filesystems to be mounted over SSH";
+  description = ''
+    macFUSE is required for this package to work on macOS. To install macFUSE,
+    use the installer from the <link xlink:href="https://osxfuse.github.io/">
+    project website</link>.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.7.6";
+  tags = [ "networking" "files" "storage" "remote-access" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.sshfs;

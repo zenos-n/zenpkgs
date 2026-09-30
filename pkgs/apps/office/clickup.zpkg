@@ -1,0 +1,14 @@
+_meta = {
+  name = "ClickUp";
+  summary = "All in one project management solution";
+  description = ''
+    All in one project management solution.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5.185";
+  tags = [ "office" "projects" "tasks" "collaboration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.clickup;

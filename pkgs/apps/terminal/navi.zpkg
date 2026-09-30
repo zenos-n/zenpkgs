@@ -1,0 +1,14 @@
+_meta = {
+  name = "navi";
+  summary = "Interactive cheatsheet tool for the command-line and application launchers";
+  description = ''
+    Interactive cheatsheet tool for the command-line and application launchers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.24.0";
+  tags = [ "terminal" "command-line" "documentation" "reference" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.navi;

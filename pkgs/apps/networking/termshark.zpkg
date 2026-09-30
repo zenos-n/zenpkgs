@@ -1,0 +1,14 @@
+_meta = {
+  name = "Termshark";
+  summary = "Terminal UI for wireshark-cli, inspired by Wireshark";
+  description = ''
+    Terminal UI for wireshark-cli, inspired by Wireshark.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.0";
+  tags = [ "networking" "diagnostics" "security" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.termshark;

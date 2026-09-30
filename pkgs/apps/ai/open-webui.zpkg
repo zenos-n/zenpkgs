@@ -1,0 +1,18 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Open WebUI";
+  summary = "Comprehensive suite for LLMs with a user-friendly WebUI";
+  description = ''
+    User-friendly WebUI for LLMs. Note on licensing: Code in Open WebUI prior
+    to version 0.5.5 was MIT licensed. Since version 0.6.6, the project has
+    adopted a modified BSD-3-Clause license that includes branding requirements
+    and whose relicensing process from MIT has raised concerns within the community.
+    Nixpkgs treats this custom license as non-free due to these factors.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.1";
+  tags = [ "ai" "language-models" "local-inference" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.open-webui;

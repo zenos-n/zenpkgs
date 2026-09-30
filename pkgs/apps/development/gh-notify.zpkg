@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-notify";
+  summary = "GitHub CLI extension to display GitHub notifications";
+  description = ''
+    GitHub CLI extension to display GitHub notifications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2024-08-01";
+  tags = [ "development" "github" "github-cli" "notifications" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.gh-notify;

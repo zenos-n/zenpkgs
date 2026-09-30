@@ -1,0 +1,14 @@
+_meta = {
+  name = "NSS Tools";
+  summary = "Set of libraries for development of security-enabled client and server applications";
+  description = ''
+    Set of libraries for development of security-enabled client and server applications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.112.5";
+  tags = [ "security" "cryptography" "certificates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.nssTools;

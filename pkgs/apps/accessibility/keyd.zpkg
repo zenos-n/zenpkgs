@@ -1,0 +1,14 @@
+_meta = {
+  name = "keyd";
+  summary = "Key remapping daemon for Linux";
+  description = ''
+    Key remapping daemon for Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.0";
+  tags = [ "accessibility" "keyboard" "remapping" "assistive-technology" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.keyd;

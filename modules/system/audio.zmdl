@@ -1,0 +1,90 @@
+_meta = {
+  name = "Configure audio for desktop use";
+  tags = [ "desktop" "audio" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Configure audio for desktop use";
+  description = ''Configure audio for desktop use. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = {
+  _meta = {
+    name = "Provide desktop audio and video routing";
+    tags = [ "desktop" "audio" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Provide desktop audio and video routing";
+    description = ''Provide desktop audio and video routing. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.pipewire.enable = $lib.mkIf ($path.enable != null) ($lib.mkForce $path.enable);
+  };
+};
+
+legacyApplications = {
+  _meta = {
+    name = "Play audio from applications using the PulseAudio protocol";
+    tags = [ "desktop" "audio" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Play audio from applications using the PulseAudio protocol";
+    description = ''Play audio from applications using the PulseAudio protocol. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.pipewire.pulse.enable = $lib.mkIf ($path.legacyApplications != null) $path.legacyApplications;
+  };
+};
+
+alsaApplications = {
+  _meta = {
+    name = "Play audio from applications using ALSA";
+    tags = [ "desktop" "audio" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Play audio from applications using ALSA";
+    description = ''Play audio from applications using ALSA. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.pipewire.alsa.enable = $lib.mkIf ($path.alsaApplications != null) $path.alsaApplications;
+  };
+};
+
+applications32Bit = {
+  _meta = {
+    name = "Play audio from 32-bit ALSA applications";
+    tags = [ "desktop" "audio" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Play audio from 32-bit ALSA applications";
+    description = ''Play audio from 32-bit ALSA applications. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.pipewire.alsa.support32Bit = $lib.mkIf ($path.applications32Bit != null) $path.applications32Bit;
+  };
+};
+
+realtimeScheduling = {
+  _meta = {
+    name = "Allow low-latency scheduling for desktop audio";
+    tags = [ "desktop" "audio" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow low-latency scheduling for desktop audio";
+    description = ''Allow low-latency scheduling for desktop audio. Null keeps the existing system policy.'';
+  };
+  s!! {
+    security.rtkit.enable = $lib.mkIf ($path.realtimeScheduling != null) $path.realtimeScheduling;
+  };
+};
+

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Git Appraise";
+  summary = "Distributed code review system for Git repos";
+  description = ''
+    Distributed code review system for Git repos.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2022-04-13";
+  tags = [ "development" "git" "code-review" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-appraise;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "TypeScript";
+  summary = "Superset of JavaScript that compiles to clean JavaScript output";
+  description = ''
+    Superset of JavaScript that compiles to clean JavaScript output.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.9.3";
+  tags = [ "development" "typescript" "compiler" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.typescript;

@@ -1,0 +1,21 @@
+_meta = {
+  name = "Conftest";
+  summary = "Write tests against structured configuration data";
+  description = ''
+    Conftest helps you write tests against structured configuration data.
+    Using Conftest you can write tests for your Kubernetes configuration,
+    Tekton pipeline definitions, Terraform code, Serverless configs or any
+    other config files.
+
+    Conftest uses the Rego language from Open Policy Agent for writing the
+    assertions. You can read more about Rego in 'How do I write policies' in
+    the Open Policy Agent documentation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.63.0";
+  tags = [ "development" "configuration" "testing" "policy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.conftest;

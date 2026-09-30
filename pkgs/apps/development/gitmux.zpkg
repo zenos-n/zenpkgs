@@ -1,0 +1,14 @@
+_meta = {
+  name = "gitmux";
+  summary = "Git in your tmux status bar";
+  description = ''
+    Git in your tmux status bar.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.5";
+  tags = [ "development" "git" "tmux" "status" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitmux;

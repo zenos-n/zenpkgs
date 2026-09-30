@@ -1,0 +1,15 @@
+_meta = {
+  name = "driftctl";
+  summary = "Detect, track and alert on infrastructure drift";
+  description = ''
+    driftctl is a free and open-source CLI that warns of infrastructure drift
+    and fills in the missing piece in your DevSecOps toolbox.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.40.0";
+  tags = [ "development" "infrastructure" "drift" "auditing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.driftctl;

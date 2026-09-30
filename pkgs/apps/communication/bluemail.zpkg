@@ -1,0 +1,14 @@
+_meta = {
+  name = "BlueMail";
+  summary = "Cross platform email and calendar app, with AI features and a modern design";
+  description = ''
+    Cross platform email and calendar app, with AI features and a modern design.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.140.93";
+  tags = [ "communication" "email" "calendar" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.bluemail;

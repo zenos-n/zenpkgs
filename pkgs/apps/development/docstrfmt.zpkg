@@ -1,0 +1,14 @@
+_meta = {
+  name = "docstrfmt";
+  summary = "Formatter for reStructuredText";
+  description = ''
+    Formatter for reStructuredText.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.2";
+  tags = [ "development" "restructuredtext" "documentation" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.docstrfmt;

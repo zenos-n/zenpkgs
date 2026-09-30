@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-component";
+  summary = "Cargo subcommand for creating WebAssembly components based on the component model proposal";
+  description = ''
+    Cargo subcommand for creating WebAssembly components based on the component model proposal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.21.1";
+  tags = [ "development" "rust" "cargo" "webassembly" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cargo-component;

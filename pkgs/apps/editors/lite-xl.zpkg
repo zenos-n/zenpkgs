@@ -1,0 +1,14 @@
+_meta = {
+  name = "Lite XL";
+  summary = "Lightweight text editor written in Lua";
+  description = ''
+    Lightweight text editor written in Lua.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.8";
+  tags = [ "editors" "text" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.lite-xl;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "gcovr";
+  summary = "Python script for summarizing gcov data";
+  description = ''
+    Python script for summarizing gcov data.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.4";
+  tags = [ "development" "code-coverage" "testing" "gcov" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd0;
+};
+
+import $pkgs.legacy.gcovr;

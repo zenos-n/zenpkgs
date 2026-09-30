@@ -1,0 +1,14 @@
+_meta = {
+  name = "Postman";
+  summary = "API Development Environment";
+  description = ''
+    API Development Environment.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "11.94.0";
+  tags = [ "development" "networking" "api" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.postman;
+};
+
+import $pkgs.legacy.postman;

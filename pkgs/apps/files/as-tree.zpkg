@@ -1,0 +1,14 @@
+_meta = {
+  name = "as-tree";
+  summary = "Print a list of paths as a tree of paths";
+  description = ''
+    Print a list of paths as a tree of paths.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2021-03-09";
+  tags = [ "files" "paths" "tree" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.blueOak100;
+};
+
+import $pkgs.legacy.as-tree;

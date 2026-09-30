@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-releaser";
+  summary = "Tool for creating Git releases based on Semantic Versioning";
+  description = ''
+    Tool for creating Git releases based on Semantic Versioning.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.7";
+  tags = [ "development" "git" "releases" "semantic-versioning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-releaser;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "talosctl";
+  summary = "CLI for out-of-band management of Kubernetes nodes created by Talos";
+  description = ''
+    CLI for out-of-band management of Kubernetes nodes created by Talos.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.13.7";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.talosctl;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Biber";
+  summary = "Backend for BibLaTeX";
+  description = ''
+    Backend for BibLaTeX.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.21";
+  tags = [ "office" "bibliography" "science" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.artistic2;
+};
+
+import $pkgs.legacy.biber;

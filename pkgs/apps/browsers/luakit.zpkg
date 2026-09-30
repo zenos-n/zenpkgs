@@ -1,0 +1,18 @@
+_meta = {
+  name = "Luakit";
+  summary = "Fast, small, webkit-based browser framework extensible in Lua";
+  description = ''
+    Luakit is a highly configurable browser framework based on the WebKit web
+    content engine and the GTK+ toolkit. It is very fast, extensible with Lua,
+    and licensed under the GNU GPLv3 license. It is primarily targeted at
+    power users, developers and anyone who wants to have fine-grained control
+    over their web browser’s behaviour and interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.0";
+  tags = [ "browsers" "web" "internet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.luakit;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-spice";
+  summary = "Manage stacked Git branches";
+  description = ''
+    Manage stacked Git branches.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.28.0";
+  tags = [ "development" "git" "branches" "stacks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.git-spice;

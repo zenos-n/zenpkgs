@@ -1,0 +1,35 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "EDHM UI";
+  summary = "HUD modification manager for Elite Dangerous";
+  description = ''
+    EDHM UI is a GPL v3 licensed user interface for managing Elite Dangerous HUD modifications.
+    It includes EDHM (Elite Dangerous HUD Mod) which has a custom restrictive license.
+
+    Redistribution Permission: The copyright holder Fred89210 has granted explicit
+    permission for EDHM to be redistributed as part of the EDHM-UI package in Nixpkgs
+    (see REDISTRIBUTION_EXCEPTION.md in the EDHM repository).
+
+    DLL Components: The package includes DLLs from the GPLv3-licensed 3Dmigoto project and an unmodified Microsoft DirectX library
+    - d3dcompiler_46.dll (Microsoft DirectX Runtime v9.30.9200.20789, distributed as part of 3Dmigoto v1.3.16)
+      - "You can redistribute this DLL to other computers with your application as a side-by-side DLL."
+      - https://learn.microsoft.com/en-us/windows/win32/directx-sdk--august-2009-
+    - d3d11.dll (from 3Dmigoto v1.3.16)
+    - nvapi64.dll (from 3Dmigoto v1.3.16)
+    The 3Dmigoto project can be found at https://github.com/bo3b/3Dmigoto
+
+    Note: The underlying EDHM tool normally has a custom license with significant restrictions:
+    - Personal and non-commercial use only unless otherwise agreed
+    - No modification, redistribution, or reuse without explicit permission
+    - All rights reserved by original authors (Fred89210 and psychicEgg)
+
+    This is a fan-made modification for Elite Dangerous and is not affiliated with
+    Frontier Developments plc.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.70";
+  tags = [ "gaming" "elite-dangerous" "mods" "interface" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.edhm-ui;

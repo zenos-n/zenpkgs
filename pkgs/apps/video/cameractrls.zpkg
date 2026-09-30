@@ -1,0 +1,22 @@
+_meta = {
+  name = "Camera Controls";
+  summary = "Camera controls for Linux";
+  description = ''
+    It's a standalone Python CLI and GUI (GTK3, GTK4) and
+    camera Viewer (SDL) to set the camera controls in Linux.
+    It can set the V4L2 controls and it is extendable with
+    the non standard controls. Currently it has a Logitech
+    extension (LED mode, LED frequency, BRIO FoV, Relative
+    Pan/Tilt, PTZ presets), Kiyo Pro extension (HDR, HDR
+    mode, FoV, AF mode, Save), Preset extension (Save and
+    restore controls), Control Restore Daemon (to restore
+    presets at device connection).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.10";
+  tags = [ "video" "camera" "webcam" "configuration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Plus;
+};
+
+import $pkgs.legacy.cameractrls;

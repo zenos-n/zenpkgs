@@ -1,0 +1,17 @@
+_meta = {
+  name = "Quark";
+  summary = "GUI tool for transfering files between a computer and a Nintendo Switch running Goldleaf";
+  description = ''
+    Graphical file-transfer tool for a Nintendo Switch running Goldleaf.
+
+    The host requires suitable Nintendo Switch udev rules for device access.
+    Installing this package alone does not configure those rules.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "gaming" "nintendo-switch" "homebrew" "usb" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.quark-goldleaf;

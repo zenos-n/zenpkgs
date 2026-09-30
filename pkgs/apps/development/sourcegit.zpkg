@@ -1,0 +1,14 @@
+_meta = {
+  name = "SourceGit";
+  summary = "Free & OpenSource GUI client for GIT users";
+  description = ''
+    Free & OpenSource GUI client for GIT users.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.10";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sourcegit;

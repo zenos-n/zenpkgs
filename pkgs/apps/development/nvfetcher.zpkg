@@ -1,0 +1,14 @@
+_meta = {
+  name = "nvfetcher";
+  summary = "Generate nix sources expr for the latest version of packages";
+  description = ''
+    Generate nix sources expr for the latest version of packages.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0.0";
+  tags = [ "development" "nix" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.nvfetcher;

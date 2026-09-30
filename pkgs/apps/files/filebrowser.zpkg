@@ -1,0 +1,14 @@
+_meta = {
+  name = "File Browser";
+  summary = "Web application for managing files and directories";
+  description = ''
+    Web application for managing files and directories.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.63.18";
+  tags = [ "files" "networking" "sharing" "transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.filebrowser;

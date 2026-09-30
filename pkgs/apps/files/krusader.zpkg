@@ -1,0 +1,14 @@
+_meta = {
+  name = "Krusader";
+  summary = "Norton/Total Commander clone for KDE";
+  description = ''
+    Norton/Total Commander clone for KDE.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.9.0";
+  tags = [ "files" "file-manager" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.krusader;

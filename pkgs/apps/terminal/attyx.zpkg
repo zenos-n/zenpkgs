@@ -1,0 +1,14 @@
+_meta = {
+  name = "Attyx";
+  summary = "Fast GPU-accelerated terminal emulator built with Zig";
+  description = ''
+    Fast GPU-accelerated terminal emulator built with Zig.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "terminal" "command-line" "gpu" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.attyx;

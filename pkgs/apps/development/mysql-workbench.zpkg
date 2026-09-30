@@ -1,0 +1,17 @@
+_meta = {
+  name = "MySQL Workbench";
+  summary = "Visual MySQL database modeling, administration and querying tool";
+  description = ''
+    MySQL Workbench is a modeling tool that allows you to design
+    and generate MySQL databases graphically. It also has administration
+    and query development modules where you can manage MySQL server instances
+    and execute SQL queries.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.0.46";
+  tags = [ "development" "database" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.mysql-workbench;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "cyme";
+  summary = "Modern cross-platform lsusb";
+  description = ''
+    Modern cross-platform lsusb.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.0";
+  tags = [ "system" "administration" "usb" "hardware" "inspection" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.cyme;

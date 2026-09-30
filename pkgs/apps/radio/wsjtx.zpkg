@@ -1,0 +1,18 @@
+_meta = {
+  name = "WSJT-X";
+  summary = "Weak-signal digital communication modes for amateur radio";
+  description = ''
+    WSJT-X implements communication protocols or "modes" called FT4, FT8, JT4,
+    JT9, JT65, QRA64, ISCAT, MSK144, and WSPR, as well as one called Echo for
+    detecting and measuring your own radio signals reflected from the Moon.
+    These modes were all designed for making reliable, confirmed ham radio
+    contacts under extreme weak-signal conditions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.1";
+  tags = [ "radio" "amateur-radio" "digital-modes" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.wsjtx;

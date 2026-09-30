@@ -1,0 +1,14 @@
+_meta = {
+  name = "AirScan";
+  summary = "Package to scan paper documents using the Apple AirScan (eSCL) protocol";
+  description = ''
+    Package to scan paper documents using the Apple AirScan (eSCL) protocol.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3";
+  tags = [ "office" "scanning" "documents" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.airscan;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "dict.cc CLI";
+  summary = "Unofficial command line client for dict.cc";
+  description = ''
+    Unofficial command line client for dict.cc.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.0";
+  tags = [ "office" "dictionary" "translation" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc0;
+};
+
+import $pkgs.legacy.dict-cc-py;

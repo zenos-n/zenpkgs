@@ -1,0 +1,14 @@
+_meta = {
+  name = "crane";
+  summary = "Tools for interacting with remote images and registries including crane and gcrane";
+  description = ''
+    Tools for interacting with remote images and registries including crane and gcrane.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.21.6";
+  tags = [ "containers" "images" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.crane;

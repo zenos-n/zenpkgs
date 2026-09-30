@@ -1,0 +1,14 @@
+_meta = {
+  name = "csvkit";
+  summary = "Suite of command-line tools for converting to and working with CSV";
+  description = ''
+    Suite of command-line tools for converting to and working with CSV.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.0";
+  tags = [ "files" "data" "csv" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.csvkit;

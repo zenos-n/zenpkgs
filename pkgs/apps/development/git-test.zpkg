@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-test";
+  summary = "Test your commits";
+  description = ''
+    Test your commits.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.4";
+  tags = [ "development" "git" "testing" "commits" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-test;

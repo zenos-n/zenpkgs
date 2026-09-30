@@ -1,0 +1,16 @@
+_meta = {
+  name = "ee";
+  summary = "classic curses text editor";
+  description = ''
+    An easy to use text editor. Intended to be usable with little or no
+    instruction. Provides a terminal (curses based) interface. Features
+    pop-up menus. Born in HP-UX, included in FreeBSD.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.2-unstable-2024-06-20";
+  tags = [ "editors" "text" "terminal" "ncurses" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.ee;

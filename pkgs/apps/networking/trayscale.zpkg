@@ -1,0 +1,14 @@
+_meta = {
+  name = "Trayscale";
+  summary = "Unofficial GUI wrapper around the Tailscale CLI client";
+  description = ''
+    Unofficial GUI wrapper around the Tailscale CLI client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.18.9";
+  tags = [ "networking" "vpn" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.trayscale;

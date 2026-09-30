@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitLab Release CLI";
+  summary = "Toolset to create, retrieve and update releases on GitLab";
+  description = ''
+    Toolset to create, retrieve and update releases on GitLab.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.24.0";
+  tags = [ "development" "gitlab" "releases" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitlab-release-cli;

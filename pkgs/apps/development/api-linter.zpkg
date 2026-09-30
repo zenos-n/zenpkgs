@@ -1,0 +1,14 @@
+_meta = {
+  name = "API Linter";
+  summary = "Linter for APIs defined in protocol buffers";
+  description = ''
+    Linter for APIs defined in protocol buffers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.1";
+  tags = [ "development" "protobuf" "api" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.api-linter;

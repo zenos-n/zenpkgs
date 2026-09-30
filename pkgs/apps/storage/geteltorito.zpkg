@@ -1,0 +1,14 @@
+_meta = {
+  name = "geteltorito";
+  summary = "Extract the initial/default boot image from a CD image if existent";
+  description = ''
+    Extract the initial/default boot image from a CD image if existent.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6";
+  tags = [ "storage" "iso" "boot-images" "extraction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.geteltorito;

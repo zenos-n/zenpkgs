@@ -1,0 +1,14 @@
+_meta = {
+  name = "Kindle Comic Converter";
+  summary = "Python app to convert comic/manga files or folders to EPUB, Panel View MOBI or E-Ink optimized CBZ";
+  description = ''
+    Python app to convert comic/manga files or folders to EPUB, Panel View MOBI or E-Ink optimized CBZ.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.6.2";
+  tags = [ "files" "comics" "ebooks" "conversion" "kindle" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.kcc;

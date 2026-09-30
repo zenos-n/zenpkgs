@@ -1,0 +1,18 @@
+_meta = {
+  name = "pgAdmin";
+  summary = "Administration and development platform for PostgreSQL";
+  description = ''
+    pgAdmin 4 is designed to meet the needs of both novice and experienced Postgres users alike,
+    providing a powerful graphical interface that simplifies the creation, maintenance and use of database objects.
+    This version is build with SERVER_MODE set to True (the default). It will require access to `/var/lib/pgadmin`
+    and `/var/log/pgadmin`. This is the default version for the NixOS module `services.pgadmin`.
+    This should NOT be used in combination with the `pgadmin4-desktopmode` package as they will interfere.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.14";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pgadmin4;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ring Racers";
+  summary = "Kart racing video game based on Sonic Robo Blast 2 (SRB2), itself based on a modified version of Doom Legacy";
+  description = ''
+    Kart racing video game based on Sonic Robo Blast 2 (SRB2), itself based on a modified version of Doom Legacy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4";
+  tags = [ "gaming" "racing" "multiplayer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.ringracers;

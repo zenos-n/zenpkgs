@@ -1,0 +1,20 @@
+_meta = {
+  name = "CherryTree";
+  summary = "Hierarchical note taking application";
+  description = ''
+    Cherrytree is an hierarchical note taking application, featuring rich
+    text, syntax highlighting and powerful search capabilities. It organizes
+    all information in units called "nodes", as in a tree, and can be very
+    useful to store any piece of information, from tables and links to
+    pictures and even entire documents. All those little bits of information
+    you have scattered around your hard drive can be conveniently placed into
+    a Cherrytree document where you can easily find it.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.3";
+  tags = [ "office" "productivity" "notes" "organization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.cherrytree;

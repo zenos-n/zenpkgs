@@ -1,0 +1,14 @@
+_meta = {
+  name = "GLSL Language Server";
+  summary = "Language server implementation for GLSL";
+  description = ''
+    Language server implementation for GLSL.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.0";
+  tags = [ "development" "glsl" "shaders" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.glslls;

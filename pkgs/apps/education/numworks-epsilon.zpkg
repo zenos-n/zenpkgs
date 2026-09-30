@@ -1,0 +1,14 @@
+_meta = {
+  name = "NumWorks Epsilon";
+  summary = "Simulator for Epsilon, a High-performance graphing calculator operating system";
+  description = ''
+    Simulator for Epsilon, a High-performance graphing calculator operating system.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "23.2.3";
+  tags = [ "education" "calculator" "mathematics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc-by-nc-sa-40;
+};
+
+import $pkgs.legacy.numworks-epsilon;

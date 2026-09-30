@@ -1,0 +1,14 @@
+_meta = {
+  name = "AnyStyle CLI";
+  summary = "Command line interface to the AnyStyle Parser and Finder";
+  description = ''
+    Command line interface to the AnyStyle Parser and Finder.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.0";
+  tags = [ "office" "bibliography" "citations" "parsing" "research" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.anystyle-cli;

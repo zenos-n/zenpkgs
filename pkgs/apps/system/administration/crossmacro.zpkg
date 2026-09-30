@@ -1,0 +1,14 @@
+_meta = {
+  name = "CrossMacro";
+  summary = "Cross-platform mouse and keyboard macro recorder and player";
+  description = ''
+    Cross-platform mouse and keyboard macro recorder and player.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "system" "administration" "macros" "input" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.crossmacro;

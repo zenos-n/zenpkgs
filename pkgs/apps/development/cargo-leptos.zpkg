@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-leptos";
+  summary = "Build tool for the Leptos web framework";
+  description = ''
+    Build tool for the Leptos web framework.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.6";
+  tags = [ "development" "rust" "cargo" "web" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-leptos;

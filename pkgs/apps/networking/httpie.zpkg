@@ -1,0 +1,14 @@
+_meta = {
+  name = "HTTPie";
+  summary = "Command line HTTP client whose goal is to make CLI human-friendly";
+  description = ''
+    Command line HTTP client whose goal is to make CLI human-friendly.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.4";
+  tags = [ "networking" "development" "http" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.httpie;

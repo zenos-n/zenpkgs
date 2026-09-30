@@ -1,0 +1,14 @@
+_meta = {
+  name = "clpeak";
+  summary = "Tool which profiles OpenCL devices to find their peak capacities";
+  description = ''
+    Tool which profiles OpenCL devices to find their peak capacities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0";
+  tags = [ "system" "monitoring" "opencl" "benchmarking" "performance" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.clpeak;

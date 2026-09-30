@@ -1,0 +1,14 @@
+_meta = {
+  name = "BeatPrints";
+  summary = "Create eye-catching, Pinterest-style music posters effortlessly";
+  description = ''
+    Create eye-catching, Pinterest-style music posters effortlessly. BeatPrints integrates with Spotify and LRClib API to help you design custom posters for your favorite tracks or albums. 🍀
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.6";
+  tags = [ "graphics" "posters" "music" "design" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc-by-nc-sa-40;
+};
+
+import $pkgs.legacy.beatprints;

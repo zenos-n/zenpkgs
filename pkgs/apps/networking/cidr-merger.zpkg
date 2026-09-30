@@ -1,0 +1,14 @@
+_meta = {
+  name = "cidr-merger";
+  summary = "Simple command line tool to merge ip/ip cidr/ip range, supports IPv4/IPv6";
+  description = ''
+    Simple command line tool to merge ip/ip cidr/ip range, supports IPv4/IPv6.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.3";
+  tags = [ "networking" "cidr" "ip" "aggregation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cidr-merger;

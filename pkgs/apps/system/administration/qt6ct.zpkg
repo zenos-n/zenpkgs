@@ -1,0 +1,14 @@
+_meta = {
+  name = "Qt6 Configuration Tool";
+  summary = "Qt6 Configuration Tool";
+  description = ''
+    Qt6 Configuration Tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11";
+  tags = [ "system" "administration" "qt" "theming" "settings" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.qt6Packages.qt6ct;

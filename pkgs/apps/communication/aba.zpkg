@@ -1,0 +1,14 @@
+_meta = {
+  name = "aba";
+  summary = "Address book for aerc";
+  description = ''
+    Address book for aerc.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0";
+  tags = [ "communication" "contacts" "email" "aerc" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.aba;

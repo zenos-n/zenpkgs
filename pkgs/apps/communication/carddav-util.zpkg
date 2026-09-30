@@ -1,0 +1,14 @@
+_meta = {
+  name = "CardDAV Utility";
+  summary = "CardDAV import/export utility";
+  description = ''
+    CardDAV import/export utility.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1-2014-02-26";
+  tags = [ "communication" "contacts" "carddav" "import" "export" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.carddav-util;

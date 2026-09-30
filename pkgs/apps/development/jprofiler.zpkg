@@ -1,0 +1,17 @@
+_meta = {
+  name = "JProfiler";
+  summary = "Java profiler for deep JVM analysis";
+  description = ''
+    JProfiler bridges high-level analytics and low-level JVM data,
+    delivering unmatched insights to solve your toughest performance
+    problems, memory leaks, threading issues, and higher-level problems in
+    technologies like JDBC, JPA, and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "14.0.5";
+  tags = [ "development" "java" "profiling" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.jprofiler;

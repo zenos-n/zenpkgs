@@ -1,0 +1,14 @@
+_meta = {
+  name = "AMDGPU Top";
+  summary = "Tool to display AMDGPU usage";
+  description = ''
+    Tool to display AMDGPU usage.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.4";
+  tags = [ "system" "monitoring" "graphics" "gpu" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.amdgpu_top;

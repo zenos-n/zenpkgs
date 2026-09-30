@@ -1,0 +1,14 @@
+_meta = {
+  name = "Aisleriot";
+  summary = "Collection of patience games written in guile scheme";
+  description = ''
+    Collection of patience games written in guile scheme.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.22.35";
+  tags = [ "gaming" "cards" "solitaire" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.aisleriot;

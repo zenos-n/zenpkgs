@@ -1,0 +1,14 @@
+_meta = {
+  name = "coinlive";
+  summary = "Live cryptocurrency prices CLI";
+  description = ''
+    Live cryptocurrency prices CLI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.5";
+  tags = [ "finance" "cryptocurrency" "prices" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.coinlive;

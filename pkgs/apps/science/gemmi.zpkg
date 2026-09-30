@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gemmi";
+  summary = "Macromolecular crystallography library and utilities";
+  description = ''
+    Macromolecular crystallography library and utilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.5";
+  tags = [ "science" "crystallography" "molecular-analysis" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.gemmi;

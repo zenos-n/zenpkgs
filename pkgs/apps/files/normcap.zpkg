@@ -1,0 +1,14 @@
+_meta = {
+  name = "NormCap";
+  summary = "OCR powered screen-capture tool to capture information instead of images";
+  description = ''
+    OCR powered screen-capture tool to capture information instead of images.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0";
+  tags = [ "files" "ocr" "graphics" "office" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.normcap;

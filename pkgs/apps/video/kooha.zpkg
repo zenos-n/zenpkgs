@@ -1,0 +1,14 @@
+_meta = {
+  name = "Kooha";
+  summary = "Elegantly record your screen";
+  description = ''
+    Elegantly record your screen.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.0";
+  tags = [ "video" "recording" "screens" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.kooha;

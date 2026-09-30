@@ -1,0 +1,14 @@
+_meta = {
+  name = "DeckTape";
+  summary = "High-quality PDF exporter for HTML presentation frameworks";
+  description = ''
+    High-quality PDF exporter for HTML presentation frameworks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.16.1";
+  tags = [ "office" "presentations" "pdf" "export" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.decktape;

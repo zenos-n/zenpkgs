@@ -1,0 +1,253 @@
+_meta = {
+  name = "Text editing";
+  tags = [ "desktop" "gnome-text-editor" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Text editing";
+  description = ''Text editing. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = enableOption {
+  _meta.summary = "Install and configure text editing";
+  _meta.name = "Enable";
+  _meta.description = ''Install and configure text editing.'';
+  _meta.tags = [ "desktop" "gnome-text-editor" ];
+  _meta.maintainers = [ $m.doromiert ];
+  _meta.license = $l.napl;
+  u! {
+    home.packages = [ $pkgs.legacy.gnome-text-editor ];
+    assertions = [
+      { assertion = $path.rightMarginColumn >= 1 && $path.rightMarginColumn <= 1000; message = "programs.gnome-text-editor.rightMarginColumn must be between 1 and 1000."; }
+      { assertion = $path.tabWidth >= 1 && $path.tabWidth <= 32; message = "programs.gnome-text-editor.tabWidth must be between 1 and 32."; }
+      { assertion = $path.lineHeight >= 0.5 && $path.lineHeight <= 10; message = "programs.gnome-text-editor.lineHeight must be between 0.5 and 10."; }
+    ];
+    dconf.settings = {
+          "org/gnome/TextEditor"."show-line-numbers" = $path.showLineNumbers;
+          "org/gnome/TextEditor"."highlight-current-line" = $path.highlightCurrentLine;
+          "org/gnome/TextEditor"."show-right-margin" = $path.showRightMargin;
+          "org/gnome/TextEditor"."right-margin-position" = $lib.gvariant.mkUint32 ($path.rightMarginColumn);
+          "org/gnome/TextEditor"."tab-width" = $lib.gvariant.mkUint32 ($path.tabWidth);
+          "org/gnome/TextEditor"."indent-style" = if $path.indentWithSpaces then "space" else "tab";
+          "org/gnome/TextEditor"."auto-indent" = $path.automaticIndentation;
+          "org/gnome/TextEditor"."wrap-text" = $path.wrapLines;
+          "org/gnome/TextEditor"."spellcheck" = $path.spellChecking;
+          "org/gnome/TextEditor"."restore-session" = $path.restoreSession;
+          "org/gnome/TextEditor"."style-scheme" = $path.colorTheme;
+          "org/gnome/TextEditor"."show-map" = $path.showDocumentMap;
+          "org/gnome/TextEditor"."highlight-matching-brackets" = $path.highlightMatchingBrackets;
+          "org/gnome/TextEditor"."enable-snippets" = $path.codeSnippets;
+          "org/gnome/TextEditor"."discover-settings" = $path.followProjectSettings;
+          "org/gnome/TextEditor"."line-height" = $lib.gvariant.mkDouble ($path.lineHeight);
+    };
+  };
+};
+
+showLineNumbers = {
+  _meta = {
+    name = "Show line numbers";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Show line numbers";
+    description = ''Whether line numbers should be displayed next to each line.'';
+  };
+};
+
+highlightCurrentLine = {
+  _meta = {
+    name = "Highlight current line";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Highlight current line";
+    description = ''If enabled, the current line will be highlighted.'';
+  };
+};
+
+showRightMargin = {
+  _meta = {
+    name = "Show right margin";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Show right margin";
+    description = ''Whether a margin line should be displayed on the right of the editor.'';
+  };
+};
+
+rightMarginColumn = {
+  _meta = {
+    name = "Right margin column";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 80;
+    summary = "Right margin column";
+    description = ''The position in characters at which the right margin should be displayed.'';
+  };
+};
+
+tabWidth = {
+  _meta = {
+    name = "Tab width";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 8;
+    summary = "Tab width";
+    description = ''The number of spaces represented by a tab.'';
+  };
+};
+
+indentWithSpaces = {
+  _meta = {
+    name = "Indent with spaces";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Indent with spaces";
+    description = ''Whether the editor should insert multiple spaces characters instead of tabs.'';
+  };
+};
+
+automaticIndentation = {
+  _meta = {
+    name = "Automatic indentation";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Automatic indentation";
+    description = ''Automatically indent new lines copying the previous line's indentation.'';
+  };
+};
+
+wrapLines = {
+  _meta = {
+    name = "Wrap lines";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Wrap lines";
+    description = ''Whether text should be wrapped.'';
+  };
+};
+
+spellChecking = {
+  _meta = {
+    name = "Spell checking";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Spell checking";
+    description = ''If enabled, then Text Editor will check spelling as you type.'';
+  };
+};
+
+restoreSession = {
+  _meta = {
+    name = "Restore session";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Restore session";
+    description = ''When Text Editor is running, restore the previous session.'';
+  };
+};
+
+colorTheme = {
+  _meta = {
+    name = "Editor color theme";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "Adwaita";
+    summary = "Editor color theme";
+    description = ''The style scheme to use by the editor. It may translate this into a dark format when available.'';
+  };
+};
+
+showDocumentMap = {
+  _meta = {
+    name = "Show document map";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Show document map";
+    description = ''If enabled, an overview map of the file will be displayed to the side of the editor.'';
+  };
+};
+
+highlightMatchingBrackets = {
+  _meta = {
+    name = "Highlight matching brackets";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Highlight matching brackets";
+    description = ''Highlight matching brackets and braces.'';
+  };
+};
+
+codeSnippets = {
+  _meta = {
+    name = "Code snippets";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Code snippets";
+    description = ''Enable the use of snippets registered with GtkSourceView from within the editor.'';
+  };
+};
+
+followProjectSettings = {
+  _meta = {
+    name = "Follow project settings";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Follow project settings";
+    description = ''If enabled, then Text Editor will try to discover file settings from modelines, editorconfig, or per-language defaults.'';
+  };
+};
+
+lineHeight = {
+  _meta = {
+    name = "Line height";
+    tags = [ "desktop" "gnome-text-editor" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 1.2;
+    summary = "Line height";
+    description = ''The line height to use for the selected font.'';
+  };
+};
+

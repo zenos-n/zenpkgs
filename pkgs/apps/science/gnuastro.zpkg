@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNU Astronomy Utilities";
+  summary = "GNU astronomy utilities and library";
+  description = ''
+    GNU astronomy utilities and library.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.24";
+  tags = [ "science" "astronomy" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gnuastro;

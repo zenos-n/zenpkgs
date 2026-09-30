@@ -1,0 +1,18 @@
+_meta = {
+  name = "Corrscope";
+  summary = "Render wave files into oscilloscope views, featuring advanced correlation-based triggering algorithm";
+  description = ''
+    Corrscope renders oscilloscope views of WAV files recorded from chiptune (game music from
+    retro sound chips).
+
+    Corrscope uses "waveform correlation" to track complex waves (including SNES and Sega
+    Genesis/FM synthesis) which jump around on other oscilloscope programs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.0";
+  tags = [ "video" "audio" "waveforms" "visualization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.corrscope;

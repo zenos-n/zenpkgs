@@ -1,0 +1,14 @@
+_meta = {
+  name = "ZSNES";
+  summary = "Super Nintendo Entertainment System Emulator";
+  description = ''
+    Super Nintendo Entertainment System Emulator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.51";
+  tags = [ "gaming" "emulators" "snes" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.zsnes;

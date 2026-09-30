@@ -1,0 +1,18 @@
+_meta = {
+  name = "FCast Client";
+  summary = "FCast Client Terminal, a terminal open-source media streaming client";
+  description = ''
+    FCast is a protocol designed for wireless streaming of audio and video
+    content between devices. Unlike alternative protocols like Chromecast and
+    AirPlay, FCast is an open source protocol that allows for custom receiver
+    implementations, enabling third-party developers to create their own
+    receiver devices or integrate the FCast protocol into their own apps.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.0-unstable-2024-05-23";
+  tags = [ "video" "streaming" "casting" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.fcast-client;

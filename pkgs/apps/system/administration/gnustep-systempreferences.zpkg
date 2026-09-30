@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNUstep System Preferences";
+  summary = "Settings manager for the GNUstep environment and its applications";
+  description = ''
+    Settings manager for the GNUstep environment and its applications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "system" "administration" "gnustep" "settings" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl2Plus;
+};
+
+import $pkgs.legacy.gnustep-systempreferences;

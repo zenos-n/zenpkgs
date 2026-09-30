@@ -1,0 +1,14 @@
+_meta = {
+  name = "FluffyChat";
+  summary = "Chat with your friends (matrix client)";
+  description = ''
+    Chat with your friends (matrix client).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.0";
+  tags = [ "communication" "chat" "matrix" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.fluffychat;

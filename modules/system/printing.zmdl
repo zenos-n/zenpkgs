@@ -1,0 +1,93 @@
+_meta = {
+  name = "Configure printing for desktop use";
+  tags = [ "desktop" "printing" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Configure printing for desktop use";
+  description = ''Configure printing for desktop use. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = {
+  _meta = {
+    name = "Print documents using local and network printers";
+    tags = [ "desktop" "printing" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Print documents using local and network printers";
+    description = ''Print documents using local and network printers. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.printing.enable = $lib.mkIf ($path.enable != null) $path.enable;
+  };
+};
+
+discoverNetworkPrinters = {
+  _meta = {
+    name = "Automatically discover shared network printers";
+    tags = [ "desktop" "printing" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Automatically discover shared network printers";
+    description = ''Automatically discover shared network printers. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.printing.browsed.enable = $lib.mkIf ($path.discoverNetworkPrinters != null) $path.discoverNetworkPrinters;
+  };
+};
+
+sharePrinters = {
+  _meta = {
+    name = "Share this computer's printers on the network";
+    tags = [ "desktop" "printing" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Share this computer's printers on the network";
+    description = ''Share this computer's printers on the network. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.printing.defaultShared = $lib.mkIf ($path.sharePrinters != null) $path.sharePrinters;
+    services.printing.browsing = $lib.mkIf ($path.sharePrinters != null) $path.sharePrinters;
+    services.printing.listenAddresses = $lib.mkIf ($path.sharePrinters != null) (if $path.sharePrinters then [ "*:631" ] else [ "localhost:631" ]);
+    services.printing.allowFrom = $lib.mkIf ($path.sharePrinters != null) (if $path.sharePrinters then [ "localhost" "@LOCAL" ] else [ "localhost" ]);
+  };
+};
+
+allowNetworkAccess = {
+  _meta = {
+    name = "Allow incoming network access to the printing service";
+    tags = [ "desktop" "printing" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow incoming network access to the printing service";
+    description = ''Allow incoming network access to the printing service. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.printing.openFirewall = $lib.mkIf ($path.allowNetworkAccess != null) $path.allowNetworkAccess;
+  };
+};
+
+drivers = {
+  _meta = {
+    name = "Printer driver packages for this computer";
+    tags = [ "desktop" "printing" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.package ]) $type.null ];
+    default = null;
+    summary = "Printer driver packages for this computer";
+    description = ''Printer driver packages for this computer. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.printing.drivers = $lib.mkIf ($path.drivers != null) $path.drivers;
+  };
+};
+

@@ -1,0 +1,16 @@
+_meta = {
+  name = "GKrellM";
+  summary = "Themeable process stack of system monitors";
+  description = ''
+    GKrellM is a single process stack of system monitors which
+    supports applying themes to match its appearance to your window
+    manager, Gtk, or any other theme.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.1";
+  tags = [ "system" "monitoring" "hardware" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gkrellm;

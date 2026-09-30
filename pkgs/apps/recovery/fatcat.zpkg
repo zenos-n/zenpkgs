@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fatcat";
+  summary = "FAT filesystems explore, extract, repair, and forensic tool";
+  description = ''
+    FAT filesystems explore, extract, repair, and forensic tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "recovery" "fat" "filesystems" "repair" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fatcat;

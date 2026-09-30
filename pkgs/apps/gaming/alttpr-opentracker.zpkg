@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenTracker";
+  summary = "Tracking application for A Link to the Past Randomizer";
+  description = ''
+    Tracking application for A Link to the Past Randomizer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.6";
+  tags = [ "gaming" "zelda" "randomizers" "tracking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.alttpr-opentracker;

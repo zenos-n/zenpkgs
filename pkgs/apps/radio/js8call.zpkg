@@ -1,0 +1,21 @@
+_meta = {
+  name = "JS8Call";
+  summary = "Weak-signal keyboard messaging for amateur radio";
+  description = ''
+    JS8Call is software using the JS8 Digital Mode providing weak signal
+    keyboard to keyboard messaging to Amateur Radio Operators.
+
+    JS8Call-Improved is a community-driven evolution of JS8Call,
+    bringing modern features, active development, and long-term
+    support to HF digital communication. It’s fully compatible with
+    existing JS8Call versions while adding new capabilities and
+    refinements.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.2";
+  tags = [ "radio" "amateur-radio" "digital-modes" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.js8call;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gifsicle";
+  summary = "Command-line tool for creating, editing, and getting information about GIF images and animations";
+  description = ''
+    Command-line tool for creating, editing, and getting information about GIF images and animations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.96";
+  tags = [ "graphics" "animation" "optimization" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.gifsicle;

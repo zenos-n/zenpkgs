@@ -1,0 +1,14 @@
+_meta = {
+  name = "KOHighlights";
+  summary = "Utility for viewing and/or exporting KOReader's highlights";
+  description = ''
+    Utility for viewing and/or exporting KOReader's highlights.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.1.0";
+  tags = [ "office" "ebooks" "annotations" "koreader" "export" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.kohighlights;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cinny";
+  summary = "Yet another matrix client for desktop";
+  description = ''
+    Yet another matrix client for desktop.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.12.6";
+  tags = [ "communication" "chat" "matrix" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.cinny-desktop;

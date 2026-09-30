@@ -1,0 +1,14 @@
+_meta = {
+  name = "StyLua";
+  summary = "Opinionated Lua code formatter";
+  description = ''
+    Opinionated Lua code formatter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.2";
+  tags = [ "development" "lua" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.stylua;

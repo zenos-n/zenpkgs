@@ -1,0 +1,14 @@
+_meta = {
+  name = "Docker Compose";
+  summary = "Docker CLI plugin to define and run multi-container applications with Docker";
+  description = ''
+    Docker CLI plugin to define and run multi-container applications with Docker.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.4.0";
+  tags = [ "containers" "images" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.docker-compose;

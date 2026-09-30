@@ -1,0 +1,14 @@
+_meta = {
+  name = "Swell Foop";
+  summary = "Puzzle game, previously known as Same GNOME";
+  description = ''
+    Puzzle game, previously known as Same GNOME.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "50.0";
+  tags = [ "gaming" "puzzle" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.swell-foop;

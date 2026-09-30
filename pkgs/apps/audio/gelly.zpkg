@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gelly";
+  summary = "A Jellyfin GTK client for Linux focused on music";
+  description = ''
+    A Jellyfin GTK client for Linux focused on music.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.10.0";
+  tags = [ "audio" "jellyfin" "music" "players" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.gelly;

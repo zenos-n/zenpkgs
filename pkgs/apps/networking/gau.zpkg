@@ -1,0 +1,15 @@
+_meta = {
+  name = "GetAllUrls";
+  summary = "Tool to fetch known URLs";
+  description = ''
+    getallurls (gau) fetches known URLs from various sources for any
+    given domain.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.4";
+  tags = [ "networking" "urls" "web" "discovery" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gau;

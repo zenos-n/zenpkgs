@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fortran Package Manager";
+  summary = "Fortran Package Manager (fpm)";
+  description = ''
+    Fortran Package Manager (fpm).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.0";
+  tags = [ "development" "fortran" "package-management" "build-tools" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fortran-fpm;

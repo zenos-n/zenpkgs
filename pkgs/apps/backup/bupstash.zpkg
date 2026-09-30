@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bupstash";
+  summary = "Easy and efficient encrypted backups";
+  description = ''
+    Easy and efficient encrypted backups.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.12.0";
+  tags = [ "backup" "encryption" "deduplication" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bupstash;

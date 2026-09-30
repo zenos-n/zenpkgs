@@ -1,0 +1,14 @@
+_meta = {
+  name = "sqlcheck";
+  summary = "Automatically identify anti-patterns in SQL queries";
+  description = ''
+    Automatically identify anti-patterns in SQL queries.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.sqlcheck;

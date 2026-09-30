@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-publish";
+  summary = "Prepare and store patch revisions as git tags";
+  description = ''
+    Prepare and store patch revisions as git tags.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.2";
+  tags = [ "development" "git" "patches" "tags" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-publish;

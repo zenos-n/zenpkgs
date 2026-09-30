@@ -1,0 +1,14 @@
+_meta = {
+  name = "Stegsolve";
+  summary = "Steganographic image analyzer, solver and data extractor for challanges";
+  description = ''
+    Steganographic image analyzer, solver and data extractor for challanges.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.1";
+  tags = [ "security" "forensics" "images" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.stegsolve;

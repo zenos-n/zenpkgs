@@ -1,0 +1,16 @@
+_meta = {
+  name = "jdupes";
+  summary = "Powerful duplicate file finder and an enhanced fork of 'fdupes'";
+  description = ''
+    jdupes is a program for identifying and taking actions upon
+    duplicate files. This fork known as 'jdupes' is heavily modified
+    from and improved over the original.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.31.1";
+  tags = [ "files" "duplicates" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.jdupes;

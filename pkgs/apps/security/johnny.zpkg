@@ -1,0 +1,14 @@
+_meta = {
+  name = "Johnny";
+  summary = "Open Source GUI frontend for John the Ripper";
+  description = ''
+    Open Source GUI frontend for John the Ripper.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2";
+  tags = [ "security" "passwords" "auditing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.johnny;

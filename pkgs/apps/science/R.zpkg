@@ -1,0 +1,29 @@
+_meta = {
+  name = "R";
+  summary = "Free software environment for statistical computing and graphics";
+  description = ''
+    GNU R is a language and environment for statistical computing and
+    graphics that provides a wide variety of statistical (linear and
+    nonlinear modelling, classical statistical tests, time-series
+    analysis, classification, clustering, ...) and graphical
+    techniques, and is highly extensible. One of R's strengths is the
+    ease with which well-designed publication-quality plots can be
+    produced, including mathematical symbols and formulae where
+    needed. R is an integrated suite of software facilities for data
+    manipulation, calculation and graphical display. It includes an
+    effective data handling and storage facility, a suite of operators
+    for calculations on arrays, in particular matrices, a large,
+    coherent, integrated collection of intermediate tools for data
+    analysis, graphical facilities for data analysis and display
+    either on-screen or on hardcopy, and a well-developed, simple and
+    effective programming language which includes conditionals, loops,
+    user-defined recursive functions and input and output facilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.5.3";
+  tags = [ "science" "statistics" "development" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.R;

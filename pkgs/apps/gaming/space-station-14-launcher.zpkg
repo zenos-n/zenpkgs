@@ -1,0 +1,14 @@
+_meta = {
+  name = "Space Station 14 Launcher";
+  summary = "Launcher for Space Station 14, a multiplayer game about paranoia and disaster";
+  description = ''
+    Launcher for Space Station 14, a multiplayer game about paranoia and disaster.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.39.1";
+  tags = [ "gaming" "launcher" "multiplayer" "role-playing" "space" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.space-station-14-launcher;

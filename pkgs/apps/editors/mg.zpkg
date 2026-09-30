@@ -1,0 +1,14 @@
+_meta = {
+  name = "Micro GNU Emacs";
+  summary = "Micro GNU/emacs, a portable version of the mg maintained by the OpenBSD team";
+  description = ''
+    Micro GNU/emacs, a portable version of the mg maintained by the OpenBSD team.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.3-unstable-2024-06-04";
+  tags = [ "editors" "terminal" "text" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.publicDomain;
+};
+
+import $pkgs.legacy.mg;

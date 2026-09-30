@@ -1,0 +1,14 @@
+_meta = {
+  name = "Oxipng";
+  summary = "Multithreaded lossless PNG compression optimizer";
+  description = ''
+    Multithreaded lossless PNG compression optimizer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10.1.1";
+  tags = [ "graphics" "png" "optimization" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.oxipng;

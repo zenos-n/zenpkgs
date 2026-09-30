@@ -1,0 +1,14 @@
+_meta = {
+  name = "Git Remote CodeCommit";
+  summary = "Git remote prefix to simplify pushing to and pulling from CodeCommit";
+  description = ''
+    Git remote prefix to simplify pushing to and pulling from CodeCommit.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.17";
+  tags = [ "development" "git" "aws" "codecommit" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-remote-codecommit;

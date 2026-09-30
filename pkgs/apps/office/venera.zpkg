@@ -1,0 +1,14 @@
+_meta = {
+  name = "Venera";
+  summary = "Comic reader that support reading local and network comics";
+  description = ''
+    Comic reader that support reading local and network comics.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.3";
+  tags = [ "office" "comics" "manga" "reader" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.venera;

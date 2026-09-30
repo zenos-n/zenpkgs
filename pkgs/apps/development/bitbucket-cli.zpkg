@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bitbucket CLI";
+  summary = "Bitbucket Enterprise CLI";
+  description = ''
+    Bitbucket Enterprise CLI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "development" "bitbucket" "version-control" "collaboration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bitbucket-cli;

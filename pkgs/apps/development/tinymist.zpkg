@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tinymist";
+  summary = "Integrated language service for Typst";
+  description = ''
+    Integrated language service for Typst.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14.18";
+  tags = [ "development" "typst" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.tinymist;

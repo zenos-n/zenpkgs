@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-nomad";
+  summary = "Synchronize work-in-progress git branches in a light weight fashion";
+  description = ''
+    Synchronize work-in-progress git branches in a light weight fashion.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "development" "git" "branches" "synchronization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-nomad;

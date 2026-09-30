@@ -1,0 +1,14 @@
+_meta = {
+  name = "Exercise Timer";
+  summary = "Timer app for high intensity interval training";
+  description = ''
+    Timer app for high intensity interval training.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.1";
+  tags = [ "office" "exercise" "intervals" "timer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.exercise-timer;

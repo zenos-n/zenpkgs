@@ -1,0 +1,14 @@
+_meta = {
+  name = "asnmap";
+  summary = "Tool to gather network ranges using ASN information";
+  description = ''
+    Tool to gather network ranges using ASN information.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "networking" "asn" "discovery" "osint" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.asnmap;

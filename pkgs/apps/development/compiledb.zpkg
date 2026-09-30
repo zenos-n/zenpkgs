@@ -1,0 +1,14 @@
+_meta = {
+  name = "compiledb";
+  summary = "Tool for generating Clang's JSON Compilation Database files";
+  description = ''
+    Tool for generating Clang's JSON Compilation Database files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.7";
+  tags = [ "development" "build" "compilation-database" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.compiledb;

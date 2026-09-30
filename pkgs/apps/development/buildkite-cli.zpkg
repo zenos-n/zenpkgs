@@ -1,0 +1,14 @@
+_meta = {
+  name = "Buildkite CLI";
+  summary = "Command line interface for Buildkite";
+  description = ''
+    Command line interface for Buildkite.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.42.0";
+  tags = [ "development" "ci" "buildkite" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.buildkite-cli;

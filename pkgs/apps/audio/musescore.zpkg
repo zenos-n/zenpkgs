@@ -1,0 +1,14 @@
+_meta = {
+  name = "MuseScore";
+  summary = "Music notation and composition software";
+  description = ''
+    Music notation and composition software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.7.0";
+  tags = [ "audio" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.musescore;

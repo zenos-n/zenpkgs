@@ -1,0 +1,14 @@
+_meta = {
+  name = "pwgen";
+  summary = "Password generator which creates passwords which can be easily memorized by a human";
+  description = ''
+    Password generator which creates passwords which can be easily memorized by a human.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.08";
+  tags = [ "security" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.pwgen;

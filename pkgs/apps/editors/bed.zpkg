@@ -1,0 +1,14 @@
+_meta = {
+  name = "bed";
+  summary = "Binary editor written in Go";
+  description = ''
+    Binary editor written in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.8";
+  tags = [ "editors" "binary" "hex" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bed;

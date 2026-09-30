@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gemini CLI";
+  summary = "AI agent that brings the power of Gemini directly into your terminal";
+  description = ''
+    AI agent that brings the power of Gemini directly into your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.42.0";
+  tags = [ "ai" "development" "coding" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gemini-cli;

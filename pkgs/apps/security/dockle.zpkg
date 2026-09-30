@@ -1,0 +1,16 @@
+_meta = {
+  name = "dockle";
+  summary = "Container Image Linter for Security";
+  description = ''
+    Container Image Linter for Security.
+    Helping build the Best-Practice Docker Image.
+    Easy to start.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.15";
+  tags = [ "security" "development" "auditing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.dockle;

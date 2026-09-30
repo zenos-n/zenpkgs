@@ -1,0 +1,14 @@
+_meta = {
+  name = "usql";
+  summary = "Universal command-line interface for SQL databases";
+  description = ''
+    Universal command-line interface for SQL databases.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.21.4";
+  tags = [ "development" "database" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.usql;

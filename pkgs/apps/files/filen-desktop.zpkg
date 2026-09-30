@@ -1,0 +1,15 @@
+_meta = {
+  name = "Filen";
+  summary = "Filen Desktop Client";
+  description = ''
+    Encrypted Cloud Storage built for your Desktop.
+    Sync your data, mount network drives, collaborate with others and access files natively powered by robust encryption and seamless integration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.47";
+  tags = [ "files" "networking" "sharing" "transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.filen-desktop;

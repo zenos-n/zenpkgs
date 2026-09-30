@@ -1,0 +1,14 @@
+_meta = {
+  name = "Enchive";
+  summary = "Encrypted personal archives";
+  description = ''
+    Encrypted personal archives.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5";
+  tags = [ "security" "encryption" "archives" "personal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.enchive;

@@ -1,0 +1,18 @@
+_meta = {
+  name = "ftop";
+  summary = "Show progress of open files and file systems";
+  description = ''
+    ftop is to files what top is to processes. The progress of all open files
+    and file systems can be monitored. If run as a regular user, the set of
+    open files will be limited to those in that user's processes (which is
+    generally all that is of interest to the user).
+    As with top, the items are displayed in order from most to least active.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0";
+  tags = [ "system" "monitoring" "files" "filesystems" "progress" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.ftop;

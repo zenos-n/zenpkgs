@@ -1,0 +1,14 @@
+_meta = {
+  name = "get-graphql-schema";
+  summary = "Fetch and print the GraphQL schema from a GraphQL HTTP endpoint";
+  description = ''
+    Fetch and print the GraphQL schema from a GraphQL HTTP endpoint.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.1";
+  tags = [ "development" "graphql" "schemas" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.get-graphql-schema;

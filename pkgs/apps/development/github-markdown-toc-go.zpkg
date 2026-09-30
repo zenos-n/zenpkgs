@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitHub Markdown TOC";
+  summary = "Easy TOC creation for GitHub README.md (in go)";
+  description = ''
+    Easy TOC creation for GitHub README.md (in go).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.1";
+  tags = [ "development" "github" "markdown" "table-of-contents" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.github-markdown-toc-go;

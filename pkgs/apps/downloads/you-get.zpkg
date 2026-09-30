@@ -1,0 +1,14 @@
+_meta = {
+  name = "You-Get";
+  summary = "Tiny command line utility to download media contents from the web";
+  description = ''
+    Tiny command line utility to download media contents from the web.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.1700";
+  tags = [ "downloads" "video" "multimedia" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.you-get;

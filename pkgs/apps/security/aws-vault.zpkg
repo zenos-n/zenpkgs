@@ -1,0 +1,14 @@
+_meta = {
+  name = "AWS Vault";
+  summary = "Vault for securely storing and accessing AWS credentials in development environments";
+  description = ''
+    Vault for securely storing and accessing AWS credentials in development environments.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.10.7";
+  tags = [ "security" "aws" "credentials" "secrets" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.aws-vault;

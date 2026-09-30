@@ -1,0 +1,14 @@
+_meta = {
+  name = "Railway CLI";
+  summary = "Railway.app CLI";
+  description = ''
+    Railway.app CLI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.36.1";
+  tags = [ "infrastructure" "cloud" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.railway;

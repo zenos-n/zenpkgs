@@ -1,0 +1,14 @@
+_meta = {
+  name = "grex";
+  summary = "Command-line tool for generating regular expressions from user-provided test cases";
+  description = ''
+    Command-line tool for generating regular expressions from user-provided test cases.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.6";
+  tags = [ "development" "regex" "code-generation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.grex;

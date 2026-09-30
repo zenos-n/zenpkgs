@@ -1,0 +1,14 @@
+_meta = {
+  name = "Feishu";
+  summary = "All-in-one collaboration suite";
+  description = ''
+    All-in-one collaboration suite.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.62.9";
+  tags = [ "communication" "collaboration" "chat" "office" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.feishu;

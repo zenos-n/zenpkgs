@@ -1,0 +1,14 @@
+_meta = {
+  name = "systemctl-tui";
+  summary = "Simple TUI for interacting with systemd services and their logs";
+  description = ''
+    Simple TUI for interacting with systemd services and their logs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.2";
+  tags = [ "system" "administration" "services" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.systemctl-tui;

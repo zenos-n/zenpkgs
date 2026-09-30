@@ -1,0 +1,17 @@
+_meta = {
+  name = "Chisel";
+  summary = "TCP/UDP tunnel over HTTP";
+  description = ''
+    Chisel is a fast TCP/UDP tunnel, transported over HTTP, secured via
+    SSH. Single executable including both client and server. Chisel is
+    mainly useful for passing through firewalls, though it can also be
+    used to provide a secure endpoint into your network.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.11.6";
+  tags = [ "networking" "tunneling" "remote-access" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.chisel;

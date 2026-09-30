@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tyrolienne";
+  summary = "Simple tool to convert, upload, and embed videos to Zipline";
+  description = ''
+    Simple tool to convert, upload, and embed videos to Zipline.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.2";
+  tags = [ "video" "conversion" "upload" "sharing" "zipline" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.tyrolienne;

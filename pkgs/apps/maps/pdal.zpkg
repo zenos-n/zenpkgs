@@ -1,0 +1,14 @@
+_meta = {
+  name = "PDAL";
+  summary = "Point Data Abstraction Library. GDAL for point cloud data";
+  description = ''
+    Point Data Abstraction Library. GDAL for point cloud data.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.9.3";
+  tags = [ "maps" "science" "geography" "geospatial" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.pdal;

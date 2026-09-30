@@ -1,0 +1,14 @@
+_meta = {
+  name = "mydumper";
+  summary = "High-performance MySQL backup tool";
+  description = ''
+    High-performance MySQL backup tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.21.1-1";
+  tags = [ "development" "backup" "replication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.mydumper;

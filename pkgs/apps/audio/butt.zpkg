@@ -1,0 +1,14 @@
+_meta = {
+  name = "butt";
+  summary = "Easy to use, multi OS streaming tool";
+  description = ''
+    Easy to use, multi OS streaming tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.46.0";
+  tags = [ "audio" "broadcasting" "streaming" "radio" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.butt;

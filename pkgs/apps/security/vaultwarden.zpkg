@@ -1,0 +1,14 @@
+_meta = {
+  name = "vaultwarden";
+  summary = "Unofficial Bitwarden compatible server written in Rust";
+  description = ''
+    Unofficial Bitwarden compatible server written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.37.2";
+  tags = [ "security" "passwords" "authentication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.vaultwarden;

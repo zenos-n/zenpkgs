@@ -1,0 +1,14 @@
+_meta = {
+  name = "Geekbench";
+  summary = "Cross-platform benchmark";
+  description = ''
+    Cross-platform benchmark.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.7.1";
+  tags = [ "system" "monitoring" "benchmarks" "performance" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.geekbench;

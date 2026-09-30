@@ -1,0 +1,14 @@
+_meta = {
+  name = "Denemo";
+  summary = "Music notation and composition software used with lilypond";
+  description = ''
+    Music notation and composition software used with lilypond.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.49";
+  tags = [ "audio" "notation" "composition" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.denemo;

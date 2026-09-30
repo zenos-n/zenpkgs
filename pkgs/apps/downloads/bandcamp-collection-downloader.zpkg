@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bandcamp Collection Downloader";
+  summary = "Tool to automatically download purchased music from bandcamp";
+  description = ''
+    Tool to automatically download purchased music from bandcamp.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2024-10-29";
+  tags = [ "downloads" "audio" "music" "bandcamp" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.bandcamp-collection-downloader;

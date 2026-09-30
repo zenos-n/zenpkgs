@@ -1,0 +1,14 @@
+_meta = {
+  name = "MRIcron";
+  summary = "Application to display NIfTI medical imaging data";
+  description = ''
+    Application to display NIfTI medical imaging data.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.20190902";
+  tags = [ "science" "medical-imaging" "visualization" "research" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd1;
+};
+
+import $pkgs.legacy.mricron;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dynein";
+  summary = "DynamoDB CLI written in Rust";
+  description = ''
+    DynamoDB CLI written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.0";
+  tags = [ "development" "dynamodb" "aws" "databases" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.dynein;

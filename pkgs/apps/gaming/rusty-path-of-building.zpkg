@@ -1,0 +1,14 @@
+_meta = {
+  name = "Rusty Path of Building";
+  summary = "A cross-platform runtime for Path of Building and Path of Building 2.";
+  description = ''
+    A cross-platform runtime for Path of Building and Path of Building 2.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.18";
+  tags = [ "gaming" "path-of-exile" "planning" "companion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.rusty-path-of-building;

@@ -1,0 +1,16 @@
+_meta = {
+  name = "Protégé";
+  summary = "Free and open-source OWL 2 ontology editor";
+  description = ''
+    Protégé Desktop is a feature rich ontology editing environment with full
+    support for the OWL 2 Web Ontology Language, and direct in-memory
+    connections to description logic reasoners.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.6.8";
+  tags = [ "science" "knowledge" "ontologies" "semantic-web" "editor" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.protege;

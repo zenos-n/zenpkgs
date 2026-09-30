@@ -1,0 +1,14 @@
+_meta = {
+  name = "Changelogen";
+  summary = "Beautiful Changelogs using Conventional Commits";
+  description = ''
+    Beautiful Changelogs using Conventional Commits.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.2";
+  tags = [ "development" "changelog" "releases" "conventional-commits" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.changelogen;

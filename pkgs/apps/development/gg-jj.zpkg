@@ -1,0 +1,14 @@
+_meta = {
+  name = "GG";
+  summary = "GUI for the version control system Jujutsu";
+  description = ''
+    GUI for the version control system Jujutsu.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.37.2";
+  tags = [ "development" "jujutsu" "version-control" "gui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gg-jj;

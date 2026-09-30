@@ -1,0 +1,14 @@
+_meta = {
+  name = "Newsboat";
+  summary = "Fork of Newsbeuter, an RSS/Atom feed reader for the text console";
+  description = ''
+    Fork of Newsbeuter, an RSS/Atom feed reader for the text console.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.43";
+  tags = [ "office" "productivity" "rss" "news" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.newsboat;

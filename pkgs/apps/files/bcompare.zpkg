@@ -1,0 +1,16 @@
+_meta = {
+  name = "Beyond Compare";
+  summary = "GUI application that allows to quickly and easily compare files and folders";
+  description = ''
+    Beyond Compare is focused. Beyond Compare allows you to quickly and easily compare your files and folders.
+    By using simple, powerful commands you can focus on the differences you're interested in and ignore those you're not.
+    You can then merge the changes, synchronize your files, and generate reports for your records.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.2.0.31950";
+  tags = [ "files" "diff" "comparison" "development" "graphical" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.bcompare;

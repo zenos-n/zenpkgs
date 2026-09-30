@@ -1,0 +1,14 @@
+_meta = {
+  name = "CSharpier";
+  summary = "Opinionated code formatter for C#";
+  description = ''
+    Opinionated code formatter for C#.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.6";
+  tags = [ "development" "csharp" "formatting" "source-code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.csharpier;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "arcdps Log Manager";
+  summary = "Manager for Guild Wars 2 log files";
+  description = ''
+    Manager for all your recorded logs. Filter logs, upload them with one click, find interesting statistics.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.1";
+  tags = [ "gaming" "guild-wars-2" "logs" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.arcdps-log-manager;

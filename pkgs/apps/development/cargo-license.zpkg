@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-license";
+  summary = "Cargo subcommand to see license of dependencies";
+  description = ''
+    Cargo subcommand to see license of dependencies.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.0";
+  tags = [ "development" "rust" "cargo" "licensing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-license;

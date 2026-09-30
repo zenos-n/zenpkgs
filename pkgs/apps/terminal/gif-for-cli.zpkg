@@ -1,0 +1,14 @@
+_meta = {
+  name = "gif-for-cli";
+  summary = "Render gifs as ASCII art in your cli";
+  description = ''
+    Takes in a GIF, short video, or a query to the Tenor GIF API and converts it to animated ASCII art.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.2";
+  tags = [ "terminal" "gif" "ascii-art" "animation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gif-for-cli;

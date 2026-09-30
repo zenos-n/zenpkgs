@@ -1,0 +1,15 @@
+_meta = {
+  name = "VVVVVV";
+  summary = "A retro-styled platform game";
+  description = ''
+    VVVVVV is a platform game all about exploring one simple mechanical
+    idea - what if you reversed gravity instead of jumping?
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.3";
+  tags = [ "gaming" "platformer" "retro" "puzzle" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.vvvvvv;

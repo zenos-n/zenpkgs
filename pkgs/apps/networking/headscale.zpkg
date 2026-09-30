@@ -1,0 +1,27 @@
+_meta = {
+  name = "Headscale";
+  summary = "Open source, self-hosted implementation of the Tailscale control server";
+  description = ''
+    Tailscale is a modern VPN built on top of Wireguard. It works like an
+    overlay network between the computers of your networks - using all kinds
+    of NAT traversal sorcery.
+
+    Everything in Tailscale is Open Source, except the GUI clients for
+    proprietary OS (Windows and macOS/iOS), and the
+    'coordination/control server'.
+
+    The control server works as an exchange point of Wireguard public keys for
+    the nodes in the Tailscale network. It also assigns the IP addresses of
+    the clients, creates the boundaries between each user, enables sharing
+    machines between users, and exposes the advertised routes of your nodes.
+
+    Headscale implements this coordination server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.28.0";
+  tags = [ "networking" "vpn" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.headscale;

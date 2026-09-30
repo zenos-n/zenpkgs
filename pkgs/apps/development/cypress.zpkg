@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cypress";
+  summary = "Fast, easy and reliable testing for anything that runs in a browser";
+  description = ''
+    Fast, easy and reliable testing for anything that runs in a browser.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "14.5.4";
+  tags = [ "development" "web" "browser" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cypress;

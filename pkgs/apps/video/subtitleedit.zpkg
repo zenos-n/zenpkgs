@@ -1,0 +1,17 @@
+_meta = {
+  name = "Subtitle Edit";
+  summary = "Subtitle editor";
+  description = ''
+    With Subtitle Edit you can easily adjust a subtitle if it is out of sync with
+    the video in several different ways. You can also use it for making
+    new subtitles from scratch (using the time-line /waveform/spectrogram)
+    or for translating subtitles.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.15";
+  tags = [ "video" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.subtitleedit;

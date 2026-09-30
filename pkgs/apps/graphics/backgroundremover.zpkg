@@ -1,0 +1,14 @@
+_meta = {
+  name = "BackgroundRemover";
+  summary = "Remove backgrounds from images and video";
+  description = ''
+    Remove backgrounds from images and video.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.4";
+  tags = [ "graphics" "images" "video" "background-removal" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.backgroundremover;

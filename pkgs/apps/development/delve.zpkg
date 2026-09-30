@@ -1,0 +1,14 @@
+_meta = {
+  name = "Delve";
+  summary = "Debugger for the Go programming language";
+  description = ''
+    Debugger for the Go programming language.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.26.3";
+  tags = [ "development" "go" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.delve;

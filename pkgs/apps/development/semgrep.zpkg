@@ -1,0 +1,18 @@
+_meta = {
+  name = "semgrep";
+  summary = "Lightweight static analysis for many languages - cli";
+  description = ''
+    Semgrep is a fast, open-source, static analysis tool for finding bugs and
+    enforcing code standards at editor, commit, and CI time. Semgrep analyzes
+    code locally on your computer or in your build environment: code is never
+    uploaded. Its rules look like the code you already write; no abstract
+    syntax trees, regex wrestling, or painful DSLs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.161.0";
+  tags = [ "development" "security" "static-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Plus;
+};
+
+import $pkgs.legacy.semgrep;

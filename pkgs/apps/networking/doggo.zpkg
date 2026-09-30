@@ -1,0 +1,15 @@
+_meta = {
+  name = "doggo";
+  summary = "Command-line DNS Client for Humans. Written in Golang";
+  description = ''
+    doggo is a modern command-line DNS client (like dig) written in Golang.
+    It outputs information in a neat concise manner and supports protocols like DoH, DoT, DoQ, and DNSCrypt as well
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.6";
+  tags = [ "networking" "dns" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.doggo;

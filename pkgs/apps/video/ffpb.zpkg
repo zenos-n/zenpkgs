@@ -1,0 +1,14 @@
+_meta = {
+  name = "ffpb";
+  summary = "FFmpeg progress formatter to display a nice progress bar and an adaptative ETA timer";
+  description = ''
+    FFmpeg progress formatter to display a nice progress bar and an adaptative ETA timer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.1";
+  tags = [ "video" "ffmpeg" "progress" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ffpb;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "EVERSPACE";
+  summary = "Action-focused single-player space shooter with roguelike elements";
+  description = ''
+    Action-focused single-player space shooter with roguelike elements.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.5.3655";
+  tags = [ "gaming" "space" "shooter" "roguelike" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.everspace;

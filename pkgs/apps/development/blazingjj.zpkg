@@ -1,0 +1,14 @@
+_meta = {
+  name = "blazingjj";
+  summary = "TUI for Jujutsu/jj";
+  description = ''
+    TUI for Jujutsu/jj.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0";
+  tags = [ "development" "jujutsu" "version-control" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.blazingjj;

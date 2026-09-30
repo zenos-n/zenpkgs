@@ -1,0 +1,19 @@
+_meta = {
+  name = "MusE";
+  summary = "MIDI/Audio sequencer with recording and editing capabilities";
+  description = ''
+    MusE is a MIDI/Audio sequencer with recording and editing capabilities
+    written originally by Werner Schweer now developed and maintained
+    by the MusE development team.
+
+    MusE aims to be a complete multitrack virtual studio for Linux,
+    it is published under the GNU General Public License.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.2.1";
+  tags = [ "audio" "midi" "composition" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.muse;

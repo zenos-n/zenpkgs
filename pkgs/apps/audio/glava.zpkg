@@ -1,0 +1,14 @@
+_meta = {
+  name = "GLava";
+  summary = "OpenGL audio spectrum visualizer";
+  description = ''
+    OpenGL audio spectrum visualizer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.3";
+  tags = [ "audio" "visualization" "opengl" "spectrum" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.glava;

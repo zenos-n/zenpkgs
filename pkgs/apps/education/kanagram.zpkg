@@ -1,0 +1,14 @@
+_meta = {
+  name = "Kanagram";
+  summary = "Letter Order Game";
+  description = ''
+    Letter Order Game.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.04.3";
+  tags = [ "education" "languages" "gaming" "learning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc0;
+};
+
+import $pkgs.legacy.kdePackages.kanagram;

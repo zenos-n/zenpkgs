@@ -51,7 +51,9 @@ let
     let
       upstream =
         if entry.provider.kind == "import" then
-          lib.attrByPath entry.sourcePath null pkgs
+          # ZPKG imports name the pinned legacy provider, not final top-level
+          # attributes, which can differ for Nixpkgs bootstrap packages.
+          lib.attrByPath entry.sourcePath null (pkgs.zenos.legacy or pkgs)
         else
           buildProvider entry;
       overlayPackage = lib.attrByPath ([ "zenos" ] ++ entry.target) null pkgs;
@@ -211,34 +213,41 @@ in
     assert builtins.toJSON actual == builtins.toJSON expected;
     pass "zenpkgs-package-registry-contract";
 
+  registry-no-retired-package-roots =
+    assert !(pkgs.zenos ? programs);
+    assert !(pkgs.zenos.apps ? advanced);
+    assert !(pkgs.zenos.apps ? utilities);
+    assert pkgs.zenos.apps.audio.swisstag.pname == "swisstag";
+    pass "zenpkgs-no-retired-package-roots";
+
   registry-counts =
-    assert builtins.length expectedRegistry.packages == 135;
-    assert builtins.length expectedActiveEntries == 135;
-    assert builtins.length registry.packages == 135;
-    assert builtins.length activeEntries == 135;
-    assert builtins.length importEntries == 126;
+    assert builtins.length expectedRegistry.packages == 4057;
+    assert builtins.length expectedActiveEntries == 4057;
+    assert builtins.length registry.packages == 4057;
+    assert builtins.length activeEntries == 4057;
+    assert builtins.length importEntries == 4048;
     assert builtins.length buildEntries == 9;
     assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 
   package-paths =
-    assert builtins.length (registryPaths expectedRegistry) == 135;
-    assert builtins.length (packagePaths expectedRegistry) == 135;
-    assert builtins.length activePaths == 135;
+    assert builtins.length (registryPaths expectedRegistry) == 4057;
+    assert builtins.length (packagePaths expectedRegistry) == 4057;
+    assert builtins.length activePaths == 4057;
     assert registryPathKeys == lib.sort builtins.lessThan registryPathKeys;
     assert registryPaths registry == registryPaths expectedRegistry;
     assert packagePaths registry == packagePaths expectedSorted;
     pass "zenpkgs-package-registry-paths";
 
   public-package-outputs =
-    assert builtins.length outputIdentities == 135;
+    assert builtins.length outputIdentities == 4057;
     assert lib.all (identity: identity) outputIdentities;
     pass "zenpkgs-public-package-outputs";
 
   registry-build-providers =
     assert
       map (entry: entry.id) buildEntries == [
-        "pkgs.programs.zenos-rebuild"
+        "pkgs.apps.system.zenos.zenos-rebuild"
         "pkgs.system.zenfs"
         "pkgs.system.zenos-oobe-mode"
         "pkgs.system.zenos-recovery-tools"
@@ -278,7 +287,7 @@ in
     pass "zenpkgs-registry-build-providers";
 
   registry-output-ownership =
-    assert builtins.length (lib.unique outputNames) == 135;
+    assert builtins.length (lib.unique outputNames) == 4057;
     assert
       builtins.attrNames publicPackages == lib.sort builtins.lessThan (
         outputNames

@@ -1,0 +1,14 @@
+_meta = {
+  name = "endlines";
+  summary = "Easy conversion between new-line conventions";
+  description = ''
+    Easy conversion between new-line conventions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.2";
+  tags = [ "files" "newlines" "text" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.endlines;

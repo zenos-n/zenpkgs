@@ -1,0 +1,14 @@
+_meta = {
+  name = "Jhead";
+  summary = "Exif Jpeg header manipulation tool";
+  description = ''
+    Exif Jpeg header manipulation tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.08";
+  tags = [ "graphics" "photography" "metadata" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.publicDomain;
+};
+
+import $pkgs.legacy.jhead;

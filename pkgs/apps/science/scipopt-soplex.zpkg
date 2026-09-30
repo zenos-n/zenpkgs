@@ -1,0 +1,14 @@
+_meta = {
+  name = "SoPlex";
+  summary = "Sequential object-oriented simPlex";
+  description = ''
+    Sequential object-oriented simPlex.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.0.1";
+  tags = [ "science" "mathematics" "optimization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.scipopt-soplex;

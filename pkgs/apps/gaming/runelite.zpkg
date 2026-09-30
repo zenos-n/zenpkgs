@@ -1,0 +1,14 @@
+_meta = {
+  name = "RuneLite";
+  summary = "Open source Old School RuneScape client";
+  description = ''
+    Open source Old School RuneScape client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.7.2";
+  tags = [ "gaming" "runescape" "mmorpg" "client" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.runelite;

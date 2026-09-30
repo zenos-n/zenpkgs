@@ -1,0 +1,14 @@
+_meta = {
+  name = "CSSO CLI";
+  summary = "Command line interface for CSSO, a CSS minifier with structural optimizations";
+  description = ''
+    Command line interface for CSSO, a CSS minifier with structural optimizations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.2";
+  tags = [ "development" "css" "minification" "optimization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.csso-cli;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Firezone";
+  summary = "GUI client for the Firezone zero-trust access platform";
+  description = ''
+    GUI client for the Firezone zero-trust access platform.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.2";
+  tags = [ "networking" "vpn" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.firezone-gui-client;

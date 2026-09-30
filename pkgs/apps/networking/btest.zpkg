@@ -1,0 +1,14 @@
+_meta = {
+  name = "btest";
+  summary = "Bandwidth Test server and client";
+  description = ''
+    Bandwidth Test server and client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.3";
+  tags = [ "networking" "bandwidth" "testing" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.btest;

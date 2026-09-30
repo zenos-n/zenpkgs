@@ -1,0 +1,14 @@
+_meta = {
+  name = "Avro Tools";
+  summary = "Avro command-line tools and utilities";
+  description = ''
+    Avro command-line tools and utilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.12.0";
+  tags = [ "development" "avro" "serialization" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.avro-tools;

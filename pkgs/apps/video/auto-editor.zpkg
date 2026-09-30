@@ -1,0 +1,14 @@
+_meta = {
+  name = "Auto-Editor";
+  summary = "Command line application for automatically editing video and audio by analyzing a variety of methods, most notably audio loudness";
+  description = ''
+    Command line application for automatically editing video and audio by analyzing a variety of methods, most notably audio loudness.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "29.7.0";
+  tags = [ "video" "audio" "editing" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.auto-editor;

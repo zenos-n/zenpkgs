@@ -1,0 +1,14 @@
+_meta = {
+  name = "csvlens";
+  summary = "Command line csv viewer";
+  description = ''
+    Command line csv viewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.0";
+  tags = [ "files" "data" "csv" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.csvlens;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gnuplot";
+  summary = "Portable command-line driven graphing utility for many platforms";
+  description = ''
+    Portable command-line driven graphing utility for many platforms.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.0.4";
+  tags = [ "science" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gnuplot;
+};
+
+import $pkgs.legacy.gnuplot;

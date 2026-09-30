@@ -1,0 +1,14 @@
+_meta = {
+  name = "Eigenmath";
+  summary = "Computer algebra system written in C";
+  description = ''
+    Computer algebra system written in C.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "350";
+  tags = [ "science" "mathematics" "computer-algebra" "calculator" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.eigenmath;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "pqiv";
+  summary = "Powerful image viewer with minimal UI";
+  description = ''
+    Powerful image viewer with minimal UI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.13.3";
+  tags = [ "graphics" "images" "viewer" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.pqiv;

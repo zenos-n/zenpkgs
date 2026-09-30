@@ -1,0 +1,14 @@
+_meta = {
+  name = "Balsa";
+  summary = "E-mail client for GNOME";
+  description = ''
+    E-mail client for GNOME.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.5";
+  tags = [ "communication" "email" "gnome" "client" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.balsa;

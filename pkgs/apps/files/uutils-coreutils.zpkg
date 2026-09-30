@@ -1,0 +1,15 @@
+_meta = {
+  name = "uutils-coreutils";
+  summary = "Cross-platform Rust rewrite of the GNU coreutils";
+  description = ''
+    uutils is an attempt at writing universal (as in cross-platform)
+    CLI utils in Rust. This repo is to aggregate the GNU coreutils rewrites.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.0";
+  tags = [ "files" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.uutils-coreutils;

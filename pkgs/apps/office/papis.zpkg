@@ -1,0 +1,14 @@
+_meta = {
+  name = "papis";
+  summary = "Powerful command-line document and bibliography manager";
+  description = ''
+    Powerful command-line document and bibliography manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.0";
+  tags = [ "office" "bibliography" "research" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.papis;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Broot";
+  summary = "Interactive tree view, a fuzzy search, a balanced BFS descent and customizable commands";
+  description = ''
+    Interactive tree view, a fuzzy search, a balanced BFS descent and customizable commands.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.56.4";
+  tags = [ "files" "file-manager" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.broot;

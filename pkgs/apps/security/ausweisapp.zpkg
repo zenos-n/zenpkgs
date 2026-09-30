@@ -1,0 +1,14 @@
+_meta = {
+  name = "AusweisApp";
+  summary = "Official authentication app for German ID card and residence permit";
+  description = ''
+    Official authentication app for German ID card and residence permit.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.1";
+  tags = [ "security" "identity" "authentication" "germany" "smartcards" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.eupl12;
+};
+
+import $pkgs.legacy.ausweisapp;

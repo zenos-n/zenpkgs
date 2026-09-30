@@ -1,0 +1,17 @@
+_meta = {
+  name = "FS-UAE";
+  summary = "Accurate, customizable Amiga Emulator";
+  description = ''
+    FS-UAE integrates the most accurate Amiga emulation code available from
+    WinUAE. FS-UAE emulates A500, A500+, A600, A1200, A1000, A3000 and A4000
+    models, but you can tweak the hardware configuration and create customized
+    Amigas.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.35";
+  tags = [ "gaming" "emulators" "amiga" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.fsuae;

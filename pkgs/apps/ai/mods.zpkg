@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mods";
+  summary = "AI on the command line";
+  description = ''
+    AI on the command line.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.1";
+  tags = [ "ai" "language-models" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.mods;

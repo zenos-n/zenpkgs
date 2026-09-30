@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenSearch";
+  summary = "Open Source, Distributed, RESTful Search Engine";
+  description = ''
+    Open Source, Distributed, RESTful Search Engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5.0";
+  tags = [ "development" "search" "data" "server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.opensearch;

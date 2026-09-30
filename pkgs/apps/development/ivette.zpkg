@@ -1,0 +1,18 @@
+_meta = {
+  name = "Ivette";
+  summary = "Graphical User Interface for Frama-C";
+  description = ''
+    Ivette is the Graphical User Interface (GUI) of Frama-C. It
+    enables exploring code, augmented with several navigation tools
+    and highlighting modes; it allows launching, parametrizing and
+    visualizing analyses; and it allows combining them seamlessly,
+    taking full advantage of the multi-paradigm approach.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "32.1";
+  tags = [ "development" "c" "formal-verification" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.ivette;

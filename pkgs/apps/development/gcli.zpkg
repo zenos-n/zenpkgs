@@ -1,0 +1,14 @@
+_meta = {
+  name = "gcli";
+  summary = "Portable Git(Hub|Lab|ea) CLI tool";
+  description = ''
+    Portable Git(Hub|Lab|ea) CLI tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.11.0";
+  tags = [ "development" "git" "forges" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.gcli;

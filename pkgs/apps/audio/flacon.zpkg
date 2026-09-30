@@ -1,0 +1,14 @@
+_meta = {
+  name = "Flacon";
+  summary = "Extracts audio tracks from an audio CD image to separate tracks";
+  description = ''
+    Extracts audio tracks from an audio CD image to separate tracks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "12.0.0";
+  tags = [ "audio" "conversion" "cd" "music" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.flacon;

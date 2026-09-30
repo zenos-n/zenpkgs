@@ -1,0 +1,14 @@
+_meta = {
+  name = "csvdiff";
+  summary = "Fast diff tool for comparing csv files";
+  description = ''
+    Fast diff tool for comparing csv files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.0";
+  tags = [ "files" "csv" "diff" "comparison" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.csvdiff;

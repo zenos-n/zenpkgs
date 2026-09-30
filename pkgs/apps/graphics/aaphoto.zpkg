@@ -1,0 +1,21 @@
+_meta = {
+  name = "aaphoto";
+  summary = "Free and open source automatic photo adjusting software";
+  description = ''
+    Auto Adjust Photo tries to give a solution for the automatic color
+    correction of photos. This means setting the contrast, color balance,
+    saturation and gamma levels of the image by analization.
+
+    This can be a solution for those kind of users who are not able to manage
+    and correct images with complicated graphical softwares, or just simply
+    don't intend to spend a lot of time with manually correcting the images
+    one-by-one.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.45";
+  tags = [ "graphics" "photography" "correction" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.aaphoto;

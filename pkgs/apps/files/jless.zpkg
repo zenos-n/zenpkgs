@@ -1,0 +1,14 @@
+_meta = {
+  name = "jless";
+  summary = "Command-line pager for JSON data";
+  description = ''
+    Command-line pager for JSON data.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "files" "data" "json" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.jless;

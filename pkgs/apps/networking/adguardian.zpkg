@@ -1,0 +1,14 @@
+_meta = {
+  name = "AdGuardian";
+  summary = "Terminal-based, real-time traffic monitoring and statistics for your AdGuard Home instance";
+  description = ''
+    Terminal-based, real-time traffic monitoring and statistics for your AdGuard Home instance.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.0";
+  tags = [ "networking" "monitoring" "adguard" "dns" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.adguardian;

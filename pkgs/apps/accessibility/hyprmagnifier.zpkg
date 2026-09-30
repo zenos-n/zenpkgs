@@ -1,0 +1,14 @@
+_meta = {
+  name = "hyprmagnifier";
+  summary = "wlroots-compatible Wayland magnifier that does not suck";
+  description = ''
+    wlroots-compatible Wayland magnifier that does not suck.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.1-unstable-2025-05-16";
+  tags = [ "accessibility" "magnification" "vision" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.hyprmagnifier;

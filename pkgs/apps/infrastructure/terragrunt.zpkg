@@ -1,0 +1,14 @@
+_meta = {
+  name = "Terragrunt";
+  summary = "Thin wrapper for Terraform that supports locking for Terraform state and enforces best practices";
+  description = ''
+    Thin wrapper for Terraform that supports locking for Terraform state and enforces best practices.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.4";
+  tags = [ "infrastructure" "automation" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.terragrunt;

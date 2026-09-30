@@ -1,0 +1,14 @@
+_meta = {
+  name = "NVIDIA Settings";
+  summary = "Settings application for NVIDIA graphics cards";
+  description = ''
+    Settings application for NVIDIA graphics cards.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "595.71.05";
+  tags = [ "system" "administration" "graphics" "gpu" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.linuxPackages.nvidia_x11.settings;

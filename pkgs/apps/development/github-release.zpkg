@@ -1,0 +1,16 @@
+_meta = {
+  name = "github-release";
+  summary = "Commandline app to create and edit releases on Github (and upload artifacts)";
+  description = ''
+    A small commandline app written in Go that allows you to easily create and
+    delete releases of your projects on Github.
+    In addition it allows you to attach files to those releases.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.0";
+  tags = [ "development" "github" "releases" "artifacts" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.github-release;

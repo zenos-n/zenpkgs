@@ -1,0 +1,14 @@
+_meta = {
+  name = "YourKit Java Profiler";
+  summary = "Award winning, fully featured low overhead profiler for Java EE and Java SE platforms";
+  description = ''
+    Award winning, fully featured low overhead profiler for Java EE and Java SE platforms.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2025.9-b175";
+  tags = [ "development" "java" "profiling" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.yourkit-java;

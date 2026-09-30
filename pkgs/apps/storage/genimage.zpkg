@@ -1,0 +1,14 @@
+_meta = {
+  name = "genimage";
+  summary = "Generate filesystem images from directory trees";
+  description = ''
+    Generate filesystem images from directory trees.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "19";
+  tags = [ "storage" "filesystems" "disk-images" "embedded" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.genimage;

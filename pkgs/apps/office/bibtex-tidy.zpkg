@@ -1,0 +1,14 @@
+_meta = {
+  name = "bibtex-tidy";
+  summary = "Cleaner and Formatter for BibTeX files";
+  description = ''
+    Cleaner and Formatter for BibTeX files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.14.0";
+  tags = [ "office" "bibliography" "research" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bibtex-tidy;

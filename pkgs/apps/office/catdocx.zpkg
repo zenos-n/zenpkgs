@@ -1,0 +1,14 @@
+_meta = {
+  name = "catdocx";
+  summary = "Extracts plain text from docx files";
+  description = ''
+    Extracts plain text from docx files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2017-01-02";
+  tags = [ "office" "documents" "docx" "extraction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.catdocx;

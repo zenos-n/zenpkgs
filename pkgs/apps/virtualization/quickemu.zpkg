@@ -1,0 +1,14 @@
+_meta = {
+  name = "Quickemu";
+  summary = "Quickly create and run optimised Windows, macOS and Linux virtual machines";
+  description = ''
+    Quickly create and run optimised Windows, macOS and Linux virtual machines.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.9.9";
+  tags = [ "virtualization" "development" "management" "system" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.quickemu;

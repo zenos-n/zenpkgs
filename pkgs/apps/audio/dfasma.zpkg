@@ -1,0 +1,19 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "DFasma";
+  summary = "Analyse and compare audio files in time and frequency";
+  description = ''
+    DFasma is free open-source software to compare audio files by time and
+    frequency. The comparison is first visual, using wavforms and spectra. It
+    is also possible to listen to time-frequency segments in order to allow
+    perceptual comparison. It is basically dedicated to analysis. Even though
+    there are basic functionalities to align the signals in time and
+    amplitude, this software does not aim to be an audio editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.5";
+  tags = [ "audio" "analysis" "waveforms" "frequency" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.dfasma;

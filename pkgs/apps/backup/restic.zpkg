@@ -1,0 +1,14 @@
+_meta = {
+  name = "restic";
+  summary = "Backup program that is fast, efficient and secure";
+  description = ''
+    Backup program that is fast, efficient and secure.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.18.1";
+  tags = [ "backup" "storage" "encryption" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.restic;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "duperemove";
+  summary = "Simple tool for finding duplicated extents and submitting them for deduplication";
+  description = ''
+    Simple tool for finding duplicated extents and submitting them for deduplication.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.2";
+  tags = [ "storage" "deduplication" "files" "disks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.duperemove;

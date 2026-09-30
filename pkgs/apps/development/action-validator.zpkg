@@ -1,0 +1,14 @@
+_meta = {
+  name = "action-validator";
+  summary = "Tool to validate GitHub Action and Workflow YAML files";
+  description = ''
+    Tool to validate GitHub Action and Workflow YAML files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "development" "github-actions" "ci" "validation" "yaml" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.action-validator;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "MyPaint";
+  summary = "Graphics application for digital painters";
+  description = ''
+    Graphics application for digital painters.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.1";
+  tags = [ "graphics" "painting" "illustration" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.mypaint;

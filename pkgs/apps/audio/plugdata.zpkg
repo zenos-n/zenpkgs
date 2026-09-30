@@ -1,0 +1,14 @@
+_meta = {
+  name = "plugdata";
+  summary = "Plugin wrapper around Pure Data to allow patching in a wide selection of DAWs";
+  description = ''
+    Plugin wrapper around Pure Data to allow patching in a wide selection of DAWs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.3-2";
+  tags = [ "audio" "synthesis" "visual-programming" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.plugdata;

@@ -1,0 +1,18 @@
+_meta = {
+  name = "Calcurse";
+  summary = "Calendar and scheduling application for the command line";
+  description = ''
+    calcurse is a calendar and scheduling application for the command line. It helps
+    keep track of events, appointments and everyday tasks. A configurable notification
+    system reminds users of upcoming deadlines, the curses based interface can be
+    customized to suit user needs and a very powerful set of command line options can
+    be used to filter and format appointments, making it suitable for use in scripts.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.8.2";
+  tags = [ "office" "calendar" "tasks" "terminal" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.calcurse;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Buckets";
+  summary = "Private family budgeting app";
+  description = ''
+    Private family budgeting app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.80.0";
+  tags = [ "finance" "budgeting" "personal-finance" "household" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.buckets;

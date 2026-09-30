@@ -1,0 +1,14 @@
+_meta = {
+  name = "Azurite";
+  summary = "Lightweight server clone of Azure Storage that simulates most of the commands supported by it with minimal dependencies";
+  description = ''
+    Lightweight server clone of Azure Storage that simulates most of the commands supported by it with minimal dependencies.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.35.0";
+  tags = [ "development" "azure" "storage" "testing" "emulation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.azurite;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "nix-diff";
+  summary = "Explain why two Nix derivations differ";
+  description = ''
+    Explain why two Nix derivations differ.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.21";
+  tags = [ "development" "nix" "diff" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.nix-diff;

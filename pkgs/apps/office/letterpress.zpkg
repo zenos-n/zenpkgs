@@ -1,0 +1,16 @@
+_meta = {
+  name = "Letterpress";
+  summary = "Create beautiful ASCII art";
+  description = ''
+    Letterpress converts your images into a picture made up of ASCII characters.
+    You can save the output to a file, copy it, and even change its resolution!
+    High-res output can still be viewed comfortably by lowering the zoom factor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2";
+  tags = [ "office" "graphics" "ascii-art" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.letterpress;

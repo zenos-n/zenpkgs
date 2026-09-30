@@ -1,0 +1,14 @@
+_meta = {
+  name = "Git Remote Gcrypt";
+  summary = "Git remote helper for GPG-encrypted remotes";
+  description = ''
+    Git remote helper for GPG-encrypted remotes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5";
+  tags = [ "security" "git" "encryption" "gpg" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.git-remote-gcrypt;

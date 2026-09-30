@@ -1,0 +1,14 @@
+_meta = {
+  name = "kubectx";
+  summary = "Fast way to switch between clusters and namespaces in kubectl";
+  description = ''
+    Fast way to switch between clusters and namespaces in kubectl.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.0";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kubectx;

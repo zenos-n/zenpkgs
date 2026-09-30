@@ -1,0 +1,17 @@
+_meta = {
+  name = "gmrun";
+  summary = "Gnome Completion-Run Utility";
+  description = ''
+    A simple program which provides a "run program" window, featuring a bash-like TAB completion.
+    It uses GTK interface.
+    Also, supports CTRL-R / CTRL-S / "!" for searching through history.
+    Running commands in a terminal with CTRL-Enter. URL handlers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4w";
+  tags = [ "launchers" "desktop" "command-launcher" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.gmrun;

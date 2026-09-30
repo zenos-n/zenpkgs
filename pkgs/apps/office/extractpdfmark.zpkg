@@ -1,0 +1,14 @@
+_meta = {
+  name = "extractpdfmark";
+  summary = "Extract page mode and named destinations as PDFmark from PDF";
+  description = ''
+    Extract page mode and named destinations as PDFmark from PDF.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "office" "pdf" "metadata" "extraction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.extractpdfmark;

@@ -1,0 +1,15 @@
+_meta = {
+  name = "FreeRDP";
+  summary = "Remote Desktop Protocol Client";
+  description = ''
+    FreeRDP is a client-side implementation of the Remote Desktop Protocol (RDP)
+    following the Microsoft Open Specifications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.30.0";
+  tags = [ "networking" "remote-desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.freerdp;

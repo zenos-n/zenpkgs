@@ -1,0 +1,14 @@
+_meta = {
+  name = "AtomicParsley";
+  summary = "CLI program for reading, parsing and setting metadata into MPEG-4 files";
+  description = ''
+    CLI program for reading, parsing and setting metadata into MPEG-4 files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20240608.083822.1ed9031";
+  tags = [ "video" "metadata" "mp4" "tagging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.atomicparsley;

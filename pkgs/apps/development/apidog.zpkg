@@ -1,0 +1,14 @@
+_meta = {
+  name = "Apidog";
+  summary = "All-in-one API design, test, mock and documentation platform";
+  description = ''
+    All-in-one API design, test, mock and documentation platform.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.30";
+  tags = [ "development" "testing" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.apidog;

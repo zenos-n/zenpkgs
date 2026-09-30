@@ -1,0 +1,14 @@
+_meta = {
+  name = "cfm";
+  summary = "Simple and fast TUI file manager with no dependencies";
+  description = ''
+    Simple and fast TUI file manager with no dependencies.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.6";
+  tags = [ "files" "manager" "navigation" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.cfm;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "klog";
+  summary = "Command line tool for time tracking in a human-readable, plain-text file format";
+  description = ''
+    Command line tool for time tracking in a human-readable, plain-text file format.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.1";
+  tags = [ "office" "time-tracking" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.klog-time-tracker;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "LAME";
+  summary = "High quality MPEG Audio Layer III (MP3) encoder";
+  description = ''
+    High quality MPEG Audio Layer III (MP3) encoder.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.100";
+  tags = [ "audio" "mp3" "encoding" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl2;
+};
+
+import $pkgs.legacy.lame;

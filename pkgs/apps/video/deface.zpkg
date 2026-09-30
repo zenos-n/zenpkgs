@@ -1,0 +1,14 @@
+_meta = {
+  name = "Deface";
+  summary = "Video anonymization by face detection";
+  description = ''
+    Video anonymization by face detection.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.0";
+  tags = [ "video" "anonymization" "privacy" "face-detection" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.deface;

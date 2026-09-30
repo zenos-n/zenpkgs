@@ -1,0 +1,14 @@
+_meta = {
+  name = "xmagnify";
+  summary = "Tiny screen magnifier for X11";
+  description = ''
+    Tiny screen magnifier for X11.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.0";
+  tags = [ "accessibility" "magnification" "vision" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.xmagnify;

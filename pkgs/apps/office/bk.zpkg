@@ -1,0 +1,14 @@
+_meta = {
+  name = "bk";
+  summary = "Terminal epub reader written in rust";
+  description = ''
+    Terminal epub reader written in rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0";
+  tags = [ "office" "ebooks" "epub" "reader" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bk;

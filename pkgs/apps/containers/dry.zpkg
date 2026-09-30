@@ -1,0 +1,14 @@
+_meta = {
+  name = "dry";
+  summary = "Terminal application to manage Docker and Docker Swarm";
+  description = ''
+    Terminal application to manage Docker and Docker Swarm.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.0";
+  tags = [ "containers" "docker" "swarm" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dry;

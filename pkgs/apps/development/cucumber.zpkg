@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cucumber";
+  summary = "Tool for executable specifications";
+  description = ''
+    Tool for executable specifications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10.2.0";
+  tags = [ "development" "testing" "bdd" "specifications" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cucumber;

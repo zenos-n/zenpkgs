@@ -1,0 +1,14 @@
+_meta = {
+  name = "Figma Linux";
+  summary = "Unofficial Electron-based Figma desktop app for Linux";
+  description = ''
+    Unofficial Electron-based Figma desktop app for Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.5";
+  tags = [ "graphics" "design" "prototyping" "collaboration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.figma-linux;

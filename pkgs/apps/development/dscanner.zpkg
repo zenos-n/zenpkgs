@@ -1,0 +1,14 @@
+_meta = {
+  name = "D-Scanner";
+  summary = "Swiss-army knife for D source code";
+  description = ''
+    Swiss-army knife for D source code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.2";
+  tags = [ "development" "d-language" "static-analysis" "source-code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.boost;
+};
+
+import $pkgs.legacy.dscanner;

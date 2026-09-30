@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gerbolyze";
+  summary = "Directly render SVG overlays into Gerber and Excellon files";
+  description = ''
+    Directly render SVG overlays into Gerber and Excellon files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.0";
+  tags = [ "cad" "pcb" "svg" "gerber" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.gerbolyze;

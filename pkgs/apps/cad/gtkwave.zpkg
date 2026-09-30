@@ -1,0 +1,14 @@
+_meta = {
+  name = "GTKWave";
+  summary = "VCD/Waveform viewer for Unix and Win32";
+  description = ''
+    VCD/Waveform viewer for Unix and Win32.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.127";
+  tags = [ "cad" "electronics" "waveforms" "graphics" "engineering" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gtkwave;

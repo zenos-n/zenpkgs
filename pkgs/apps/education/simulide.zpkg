@@ -1,0 +1,16 @@
+_meta = {
+  name = "SimulIDE";
+  summary = "Simple real time electronic circuit simulator";
+  description = ''
+    SimulIDE is a simple real time electronic circuit simulator, intended for hobbyist or students
+    to learn and experiment with analog and digital electronic circuits and microcontrollers.
+    It supports PIC, AVR, Arduino and other MCUs and MPUs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0-SR2";
+  tags = [ "education" "electronics" "simulation" "learning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.simulide;

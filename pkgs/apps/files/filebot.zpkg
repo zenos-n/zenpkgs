@@ -1,0 +1,16 @@
+_meta = {
+  name = "FileBot";
+  summary = "Ultimate TV and Movie Renamer";
+  description = ''
+    FileBot is the ultimate tool for organizing and renaming your Movies, TV
+    Shows and Anime as well as fetching subtitles and artwork. It's smart and
+    just works.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.2.0";
+  tags = [ "files" "video" "renaming" "subtitles" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.filebot;

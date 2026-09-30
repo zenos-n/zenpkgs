@@ -1,0 +1,14 @@
+_meta = {
+  name = "ack";
+  summary = "Grep-like tool tailored to working with large trees of source code";
+  description = ''
+    Grep-like tool tailored to working with large trees of source code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.9.0";
+  tags = [ "files" "search" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.artistic2;
+};
+
+import $pkgs.legacy.ack;

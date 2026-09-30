@@ -1,0 +1,14 @@
+_meta = {
+  name = "Forscape";
+  summary = "Scientific computing language";
+  description = ''
+    Scientific computing language.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.2-unstable-2025-04-28";
+  tags = [ "science" "mathematics" "programming" "scientific-computing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.forscape;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "nix-update";
+  summary = "Swiss-knife for updating nix packages";
+  description = ''
+    Swiss-knife for updating nix packages.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.1";
+  tags = [ "development" "nix" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.nix-update;

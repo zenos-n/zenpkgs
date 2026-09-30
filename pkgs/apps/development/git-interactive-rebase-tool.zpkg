@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-interactive-rebase-tool";
+  summary = "Native cross platform full feature terminal based sequence editor for git interactive rebase";
+  description = ''
+    Native cross platform full feature terminal based sequence editor for git interactive rebase.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.1";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-interactive-rebase-tool;

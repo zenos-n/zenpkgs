@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-agecrypt";
+  summary = "Alternative to git-crypt using age instead of GPG";
+  description = ''
+    Alternative to git-crypt using age instead of GPG.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2024-03-11";
+  tags = [ "security" "git" "encryption" "age" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.git-agecrypt;

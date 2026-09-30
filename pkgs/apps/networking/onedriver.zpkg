@@ -1,0 +1,17 @@
+_meta = {
+  name = "OneDriver";
+  summary = "Network filesystem for Linux";
+  description = ''
+    onedriver is a network filesystem that gives your computer direct access to your files on Microsoft OneDrive.
+    This is not a sync client. Instead of syncing files, onedriver performs an on-demand download of files when
+    your computer attempts to use them. onedriver allows you to use files on OneDrive as if they were files on
+    your local computer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.0";
+  tags = [ "networking" "files" "cloud" "synchronization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.onedriver;

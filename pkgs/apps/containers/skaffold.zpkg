@@ -1,0 +1,17 @@
+_meta = {
+  name = "Skaffold";
+  summary = "Easy and Repeatable Kubernetes Development";
+  description = ''
+    Skaffold is a command line tool that facilitates continuous development for Kubernetes applications.
+    You can iterate on your application source code locally then deploy to local or remote Kubernetes clusters.
+    Skaffold handles the workflow for building, pushing and deploying your application.
+    It also provides building blocks and describe customizations for a CI/CD pipeline.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.19.0";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.skaffold;

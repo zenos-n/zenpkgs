@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cantata";
+  summary = "Graphical client for MPD";
+  description = ''
+    Graphical client for MPD.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.1";
+  tags = [ "audio" "mpd" "music" "player" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.cantata;

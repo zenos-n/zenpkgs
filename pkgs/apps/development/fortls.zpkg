@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fortran Language Server";
+  summary = "Fortran Language Server";
+  description = ''
+    Fortran Language Server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.2";
+  tags = [ "development" "fortran" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fortls;

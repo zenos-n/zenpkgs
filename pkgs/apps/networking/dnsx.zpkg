@@ -1,0 +1,17 @@
+_meta = {
+  name = "dnsx";
+  summary = "Fast and multi-purpose DNS toolkit";
+  description = ''
+    dnsx is a fast and multi-purpose DNS toolkit allow to run multiple
+    probers using retryabledns library, that allows you to perform
+    multiple DNS queries of your choice with a list of user supplied
+    resolvers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.3";
+  tags = [ "networking" "dns" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dnsx;

@@ -1,0 +1,16 @@
+_meta = {
+  name = "Cool Retro Term";
+  summary = "Terminal emulator which mimics the old cathode display";
+  description = ''
+    cool-retro-term is a terminal emulator which tries to mimic the look and
+    feel of the old cathode tube screens. It has been designed to be
+    eye-candy, customizable, and reasonably lightweight.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "terminal" "retro" "crt" "emulator" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.cool-retro-term;

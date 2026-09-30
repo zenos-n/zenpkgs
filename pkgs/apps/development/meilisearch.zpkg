@@ -1,0 +1,14 @@
+_meta = {
+  name = "Meilisearch";
+  summary = "Powerful, fast, and an easy to use search engine";
+  description = ''
+    Powerful, fast, and an easy to use search engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.43.1";
+  tags = [ "development" "search" "data" "server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.meilisearch;

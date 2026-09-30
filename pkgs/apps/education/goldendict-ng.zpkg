@@ -1,0 +1,14 @@
+_meta = {
+  name = "GoldenDict-ng";
+  summary = "Advanced multi-dictionary lookup program";
+  description = ''
+    Advanced multi-dictionary lookup program.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.3.0";
+  tags = [ "education" "learning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.goldendict-ng;

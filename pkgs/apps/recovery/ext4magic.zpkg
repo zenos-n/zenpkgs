@@ -1,0 +1,21 @@
+_meta = {
+  name = "ext4magic";
+  summary = "Recover / undelete files from ext3 or ext4 partitions";
+  description = ''
+    ext4magic can recover/undelete files from ext3 or ext4 partitions
+    by retrieving file-information from the filesystem journal.
+
+    If the information in the journal are sufficient, ext4magic can
+    recover the most file types, with original filename, owner and group,
+    file mode bits and also the old atime/mtime stamps.
+
+    It's much more effective and works much better than extundelete.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.2";
+  tags = [ "recovery" "ext4" "ext3" "undelete" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.ext4magic;

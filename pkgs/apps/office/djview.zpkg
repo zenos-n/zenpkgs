@@ -1,0 +1,32 @@
+_meta = {
+  name = "DjView";
+  summary = "Portable DjVu viewer (Qt5)";
+  description = ''
+    The portable DjVu viewer (Qt5) and browser (nsdejavu) plugin.
+
+    Djview highlights:
+      - entirely based on the public DjVulibre api.
+      - entirely written in portable Qt5.
+      - works natively under Unix/X11, MS Windows, and macOS X.
+      - continuous scrolling of pages
+      - side-by-side display of pages
+      - ability to specify a url to the djview command
+      - all plugin and cgi options available from the command line
+      - all silly annotations implemented
+      - display thumbnails as a grid
+      - display outlines
+      - page names supported (see djvused command set-page-title)
+      - metadata dialog (see djvused command set-meta)
+      - implemented as reusable Qt widgets
+
+    nsdejavu: browser plugin for DjVu. It internally uses djview.
+    Has CGI-style arguments to configure the view of document (see man).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.12.3";
+  tags = [ "office" "djvu" "documents" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.djview;

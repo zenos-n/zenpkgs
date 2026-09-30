@@ -1,0 +1,14 @@
+_meta = {
+  name = "pdfgrep";
+  summary = "Commandline utility to search text in PDF files";
+  description = ''
+    Commandline utility to search text in PDF files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.0";
+  tags = [ "office" "pdf" "search" "command-line" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.pdfgrep;

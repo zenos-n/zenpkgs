@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-xwin";
+  summary = "Cross compile Cargo project to Windows MSVC target with ease";
+  description = ''
+    Cross compile Cargo project to Windows MSVC target with ease.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.22.0";
+  tags = [ "development" "rust" "cargo" "cross-compilation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-xwin;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenTabletDriver";
+  summary = "Open source, cross-platform, user-mode tablet driver";
+  description = ''
+    Open source, cross-platform, user-mode tablet driver.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.7";
+  tags = [ "system" "administration" "hardware" "graphics" "drawing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Plus;
+};
+
+import $pkgs.legacy.opentabletdriver;

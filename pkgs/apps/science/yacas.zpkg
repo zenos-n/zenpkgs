@@ -1,0 +1,14 @@
+_meta = {
+  name = "Yacas";
+  summary = "Easy to use, general purpose Computer Algebra System, optionally with GUI";
+  description = ''
+    Easy to use, general purpose Computer Algebra System, optionally with GUI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.1";
+  tags = [ "science" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.yacas;

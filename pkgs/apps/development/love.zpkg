@@ -1,0 +1,14 @@
+_meta = {
+  name = "LÖVE";
+  summary = "Lua-based 2D game engine/scripting language";
+  description = ''
+    Lua-based 2D game engine/scripting language.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "11.5";
+  tags = [ "development" "gaming" "game-development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.love;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ghostie";
+  summary = "Github notifications in your terminal";
+  description = ''
+    Github notifications in your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.1";
+  tags = [ "development" "github" "notifications" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghostie;

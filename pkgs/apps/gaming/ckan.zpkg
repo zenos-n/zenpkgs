@@ -1,0 +1,14 @@
+_meta = {
+  name = "CKAN";
+  summary = "Mod manager for Kerbal Space Program";
+  description = ''
+    Mod manager for Kerbal Space Program.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.36.4";
+  tags = [ "gaming" "mods" "manager" "kerbal-space-program" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ckan;

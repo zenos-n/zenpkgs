@@ -1,0 +1,14 @@
+_meta = {
+  name = "BugStalker";
+  summary = "Rust debugger for Linux x86-64";
+  description = ''
+    Rust debugger for Linux x86-64.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.1";
+  tags = [ "development" "rust" "debugging" "linux" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bugstalker;

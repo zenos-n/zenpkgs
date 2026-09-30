@@ -1,0 +1,15 @@
+_meta = {
+  name = "PixiEditor";
+  summary = "Universal editor for all your 2D needs";
+  description = ''
+    PixiEditor is a universal 2D platform that aims to provide you with tools and features for all your 2D needs.
+    Create beautiful sprites for your games, animations, edit images, create logos. All packed in an eye-friendly dark theme
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.1.4";
+  tags = [ "graphics" "drawing" "pixel-art" "editing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Only;
+};
+
+import $pkgs.legacy.pixieditor;

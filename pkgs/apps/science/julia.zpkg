@@ -1,0 +1,14 @@
+_meta = {
+  name = "Julia";
+  summary = "High-level performance-oriented dynamical language for technical computing";
+  description = ''
+    High-level performance-oriented dynamical language for technical computing.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.12.6";
+  tags = [ "science" "mathematics" "development" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.julia;

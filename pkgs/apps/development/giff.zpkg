@@ -1,0 +1,14 @@
+_meta = {
+  name = "giff";
+  summary = "Terminal-based Git diff viewer with interactive rebase capabilities";
+  description = ''
+    Terminal-based Git diff viewer with interactive rebase capabilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "development" "git" "diff" "rebase" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.giff;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "CPU Energy Meter";
+  summary = "Tool for measuring energy consumption of Intel CPUs";
+  description = ''
+    Tool for measuring energy consumption of Intel CPUs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2";
+  tags = [ "system" "monitoring" "cpu" "energy" "power" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.cpu-energy-meter;

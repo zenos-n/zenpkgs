@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cozy";
+  summary = "Modern audio book player for Linux";
+  description = ''
+    Modern audio book player for Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0";
+  tags = [ "audio" "audiobooks" "player" "library" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.cozy;

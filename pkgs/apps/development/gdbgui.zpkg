@@ -1,0 +1,14 @@
+_meta = {
+  name = "gdbgui";
+  summary = "Browser-based frontend for GDB";
+  description = ''
+    Browser-based frontend for GDB.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.3.0";
+  tags = [ "development" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.gdbgui;

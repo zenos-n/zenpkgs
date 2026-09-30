@@ -1,0 +1,14 @@
+_meta = {
+  name = "rofi-rbw";
+  summary = "Rofi frontend for Bitwarden";
+  description = ''
+    Rofi frontend for Bitwarden.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.1";
+  tags = [ "security" "passwords" "authentication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.rofi-rbw;

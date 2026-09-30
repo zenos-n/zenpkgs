@@ -1,0 +1,56 @@
+_meta = {
+    name = "Calendar views";
+    summary = "Calendar views";
+    description = ''Calendar views.'';
+    tags = [ "desktop" "gnome-calendar" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    zenosVersion = 1.0.0Na;
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure calendar views";
+    summary = "Install and configure calendar views";
+    description = ''Install and configure calendar views.'';
+    tags = [ "desktop" "gnome-calendar" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.legacy.gnome-calendar ];
+    assertions = [
+      { assertion = $path.weekZoom >= 0.334 && $path.weekZoom <= 3.0; message = "programs.gnome-calendar.weekZoom must be between 0.334 and 3.0."; }
+    ];
+    dconf.settings = {
+      "org/gnome/calendar"."active-view" = $path.view;
+      "org/gnome/calendar"."week-view-zoom-level" = $lib.gvariant.mkDouble ($path.weekZoom);
+    };
+  };
+};
+
+view = {
+  _meta = {
+    name = "Calendar view shown when opened";
+    summary = "Calendar view shown when opened";
+    description = ''Calendar view shown when opened. '';
+    tags = [ "desktop" "gnome-calendar" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "month" "week" "agenda" ];
+    default = "month";
+  };
+};
+
+weekZoom = {
+  _meta = {
+    name = "Scale of the weekly calendar grid";
+    summary = "Scale of the weekly calendar grid";
+    description = ''Scale of the weekly calendar grid. '';
+    tags = [ "desktop" "gnome-calendar" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 1.0;
+  };
+};

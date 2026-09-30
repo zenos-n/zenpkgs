@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gnaural";
+  summary = "Programmable auditory binaural-beat synthesizer";
+  description = ''
+    Programmable auditory binaural-beat synthesizer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20110606";
+  tags = [ "audio" "synthesis" "binaural-beats" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.gnaural;

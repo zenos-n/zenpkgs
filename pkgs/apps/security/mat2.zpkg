@@ -1,0 +1,14 @@
+_meta = {
+  name = "Metadata Anonymisation Toolkit";
+  summary = "Handy tool to trash your metadata";
+  description = ''
+    Handy tool to trash your metadata.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14.0";
+  tags = [ "security" "privacy" "metadata" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Plus;
+};
+
+import $pkgs.legacy.mat2;

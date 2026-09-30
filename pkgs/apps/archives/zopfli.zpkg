@@ -1,0 +1,18 @@
+_meta = {
+  name = "Zopfli";
+  summary = "Very good, but slow, deflate or zlib compression";
+  description = ''
+    Zopfli Compression Algorithm is a compression library programmed
+    in C to perform very good, but slow, deflate or zlib compression.
+
+    This library can only compress, not decompress. Existing zlib or
+    deflate libraries can decompress the data.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.3";
+  tags = [ "archives" "compression" "graphics" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.zopfli;

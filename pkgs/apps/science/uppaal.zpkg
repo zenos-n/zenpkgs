@@ -1,0 +1,14 @@
+_meta = {
+  name = "UPPAAL";
+  summary = "Integrated tool environment for modeling, validation and verification of real-time systems";
+  description = ''
+    Integrated tool environment for modeling, validation and verification of real-time systems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.0";
+  tags = [ "science" "development" "verification" "real-time" "model-checking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.uppaal;

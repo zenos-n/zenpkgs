@@ -1,0 +1,14 @@
+_meta = {
+  name = "Loupe";
+  summary = "Simple image viewer application written with GTK4 and Rust";
+  description = ''
+    Simple image viewer application written with GTK4 and Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "50.0";
+  tags = [ "graphics" "images" "viewer" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.loupe;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "PlatformIO";
+  summary = "Open source ecosystem for IoT development";
+  description = ''
+    Open source ecosystem for IoT development.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.1.19";
+  tags = [ "development" "embedded" "electronics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.platformio;

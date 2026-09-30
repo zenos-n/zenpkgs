@@ -1,0 +1,23 @@
+_meta = {
+  name = "Manuskript";
+  summary = "Open-source tool for writers";
+  description = ''
+    Manuskript is a tool for those writer who like to organize and
+    plan everything before writing.  The snowflake method can help you
+    grow your idea into a book, by leading you step by step and asking
+    you questions to go deeper. While writing, keep track of notes
+    about every characters, plot, event, place in your story.
+
+    Develop complex characters and keep track of all useful infos.
+    Create intricate plots, linked to your characters, and use them to
+    outline your story. Organize your ideas about the world your
+    characters live in.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.17.0";
+  tags = [ "office" "writing" "text" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.manuskript;

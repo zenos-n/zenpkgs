@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bulletty";
+  summary = "Terminal UI RSS/ATOM feed reader";
+  description = ''
+    Terminal UI RSS/ATOM feed reader.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.2";
+  tags = [ "office" "rss" "atom" "reader" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bulletty;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-modules";
+  summary = "Cargo plugin for showing a tree-like overview of a crate's modules";
+  description = ''
+    Cargo plugin for showing a tree-like overview of a crate's modules.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.26.0";
+  tags = [ "development" "rust" "cargo" "inspection" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.cargo-modules;

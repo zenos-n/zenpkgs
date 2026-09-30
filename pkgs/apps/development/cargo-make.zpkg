@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-make";
+  summary = "Rust task runner and build tool";
+  description = ''
+    Rust task runner and build tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.37.24";
+  tags = [ "development" "rust" "cargo" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cargo-make;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "VOICEVOX";
+  summary = "Editor for the VOICEVOX speech synthesis software";
+  description = ''
+    Editor for the VOICEVOX speech synthesis software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.25.2";
+  tags = [ "audio" "speech" "accessibility" "text-to-speech" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Only;
+};
+
+import $pkgs.legacy.voicevox;

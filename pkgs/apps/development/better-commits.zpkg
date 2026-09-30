@@ -1,0 +1,14 @@
+_meta = {
+  name = "better-commits";
+  summary = "CLI for creating better commits following the conventional commits specification";
+  description = ''
+    CLI for creating better commits following the conventional commits specification.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.23.1";
+  tags = [ "development" "git" "version-control" "conventional-commits" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.better-commits;

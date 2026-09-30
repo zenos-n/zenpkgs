@@ -1,0 +1,14 @@
+_meta = {
+  name = "YARG";
+  summary = "Free, open-source, plastic guitar game";
+  description = ''
+    Free, open-source, plastic guitar game.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14.0";
+  tags = [ "gaming" "rhythm" "music" "guitar" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Plus;
+};
+
+import $pkgs.legacy.yarg;

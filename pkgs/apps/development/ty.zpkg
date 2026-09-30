@@ -1,0 +1,14 @@
+_meta = {
+  name = "ty";
+  summary = "Extremely fast Python type checker and language server, written in Rust";
+  description = ''
+    Extremely fast Python type checker and language server, written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.38";
+  tags = [ "development" "python" "type-checking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ty;

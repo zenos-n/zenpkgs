@@ -1,0 +1,14 @@
+_meta = {
+  name = "Universal Radio Hacker";
+  summary = "Universal Radio Hacker: investigate wireless protocols like a boss";
+  description = ''
+    Universal Radio Hacker: investigate wireless protocols like a boss.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.9.8-unstable-2025-07-31";
+  tags = [ "radio" "security" "wireless" "reverse-engineering" "sdr" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.urh;

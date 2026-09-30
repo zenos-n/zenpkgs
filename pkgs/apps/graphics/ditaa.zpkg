@@ -1,0 +1,14 @@
+_meta = {
+  name = "ditaa";
+  summary = "Convert ascii art diagrams into proper bitmap graphics";
+  description = ''
+    Convert ascii art diagrams into proper bitmap graphics.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.0";
+  tags = [ "graphics" "diagrams" "development" "documentation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3;
+};
+
+import $pkgs.legacy.ditaa;

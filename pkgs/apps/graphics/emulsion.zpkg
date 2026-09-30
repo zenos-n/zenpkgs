@@ -1,0 +1,14 @@
+_meta = {
+  name = "Emulsion";
+  summary = "Fast and minimalistic image viewer";
+  description = ''
+    Fast and minimalistic image viewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "12.3";
+  tags = [ "graphics" "images" "viewer" "photography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.emulsion;

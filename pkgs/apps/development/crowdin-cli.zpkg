@@ -1,0 +1,14 @@
+_meta = {
+  name = "Crowdin CLI";
+  summary = "Command-line client for the Crowdin API";
+  description = ''
+    Command-line client for the Crowdin API.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.14.2";
+  tags = [ "development" "translation" "localization" "crowdin" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.crowdin-cli;

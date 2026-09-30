@@ -1,0 +1,14 @@
+_meta = {
+  name = "Daikhan";
+  summary = "Media player for the modern desktop";
+  description = ''
+    Media player for the modern desktop.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1-alpha5";
+  tags = [ "video" "player" "audio" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.daikhan;

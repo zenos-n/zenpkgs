@@ -1,0 +1,14 @@
+_meta = {
+  name = "Zenith";
+  summary = "Sort of like top or htop but with zoom-able charts, network, and disk usage";
+  description = ''
+    Sort of like top or htop but with zoom-able charts, network, and disk usage.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.0";
+  tags = [ "system" "monitoring" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.zenith;

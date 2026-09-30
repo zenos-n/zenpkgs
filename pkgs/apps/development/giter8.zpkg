@@ -1,0 +1,14 @@
+_meta = {
+  name = "Giter8";
+  summary = "A command line tool to apply templates defined on GitHub";
+  description = ''
+    A command line tool to apply templates defined on GitHub.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.18.0";
+  tags = [ "development" "templates" "scaffolding" "github" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.giter8;

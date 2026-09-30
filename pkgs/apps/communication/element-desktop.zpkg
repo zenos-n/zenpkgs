@@ -1,0 +1,14 @@
+_meta = {
+  name = "Element";
+  summary = "Feature-rich client for Matrix.org";
+  description = ''
+    Feature-rich client for Matrix.org.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.12.26";
+  tags = [ "communication" "networking" "messaging" "matrix" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.element-desktop;

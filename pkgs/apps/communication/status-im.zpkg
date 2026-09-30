@@ -1,0 +1,14 @@
+_meta = {
+  name = "Status";
+  summary = "Desktop client for the Status Network";
+  description = ''
+    Desktop client for the Status Network.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.36.1";
+  tags = [ "communication" "messaging" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.status-im;

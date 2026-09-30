@@ -1,0 +1,20 @@
+_meta = {
+  name = "XnConvert";
+  summary = "Fast, powerful and free cross-platform batch image converter";
+  description = ''
+    XnConvert is a fast, powerful and free cross-platform batch image converter.
+    It allows to automate editing of your photo collections: you can rotate,
+    convert and compress your images, photos and pictures easily, and apply over
+    80 actions (like resize, crop, color adjustments, filter, ...).
+    All common picture and graphics formats are supported (JPEG, TIFF, PNG, GIF,
+    WebP, PSD, JPEG2000, JPEG-XL, OpenEXR, camera RAW, HEIC, PDF, DNG, CR2).
+    You can save and re-use your presets for another batch image conversion.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.105.0";
+  tags = [ "graphics" "images" "conversion" "photography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.xnconvert;

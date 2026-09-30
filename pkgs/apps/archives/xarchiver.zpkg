@@ -1,0 +1,14 @@
+_meta = {
+  name = "Xarchiver";
+  summary = "GTK frontend to 7z,zip,rar,tar,bzip2, gzip,arj, lha, rpm and deb (open and extract only)";
+  description = ''
+    GTK frontend to 7z,zip,rar,tar,bzip2, gzip,arj, lha, rpm and deb (open and extract only).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.4.26";
+  tags = [ "archives" "files" "compression" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.xarchiver;

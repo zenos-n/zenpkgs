@@ -1,0 +1,14 @@
+_meta = {
+  name = "Clapboard";
+  summary = "Wayland clipboard manager that will make you clap";
+  description = ''
+    Wayland clipboard manager that will make you clap.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "system" "administration" "clipboard" "wayland" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.clapboard;

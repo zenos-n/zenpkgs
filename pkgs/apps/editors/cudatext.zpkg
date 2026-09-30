@@ -1,0 +1,16 @@
+_meta = {
+  name = "CudaText";
+  summary = "Cross-platform code editor";
+  description = ''
+    Text/code editor with lite UI. Syntax highlighting for 200+ languages.
+    Config system in JSON files. Multi-carets and multi-selections.
+    Search and replace with RegEx. Extendable by Python plugins and themes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.202.1";
+  tags = [ "editors" "text" "graphical" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.cudatext;

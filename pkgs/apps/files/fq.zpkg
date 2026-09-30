@@ -1,0 +1,14 @@
+_meta = {
+  name = "fq";
+  summary = "jq for binary formats";
+  description = ''
+    jq for binary formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.17.0";
+  tags = [ "files" "binary" "data" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fq;

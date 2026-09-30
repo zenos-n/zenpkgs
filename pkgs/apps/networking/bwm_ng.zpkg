@@ -1,0 +1,21 @@
+_meta = {
+  name = "bwm-ng";
+  summary = "Small and simple console-based live network and disk io bandwidth monitor";
+  description = ''
+    bwm-ng supports:
+     - /proc/net/dev, netstat, getifaddr, sysctl, kstat, /proc/diskstats /proc/partitions, IOKit,
+       devstat and libstatgrab
+     - unlimited number of interfaces/devices
+     - interfaces/devices are added or removed dynamically from list
+     - white-/blacklist of interfaces/devices
+     - output of KB/s, Kb/s, packets, errors, average, max and total sum
+     - output in curses, plain console, CSV or HTML
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.3";
+  tags = [ "networking" "bandwidth" "monitoring" "disk-io" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.bwm_ng;

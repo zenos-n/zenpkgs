@@ -1,0 +1,14 @@
+_meta = {
+  name = "fzf-make";
+  summary = "Fuzzy finder for Makefile";
+  description = ''
+    Fuzzy finder for Makefile.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.69.0";
+  tags = [ "development" "make" "build-tools" "fuzzy-finder" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fzf-make;

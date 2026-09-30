@@ -1,0 +1,14 @@
+_meta = {
+  name = "DbGate";
+  summary = "Database manager for MySQL, PostgreSQL, SQL Server, MongoDB, SQLite and others";
+  description = ''
+    Database manager for MySQL, PostgreSQL, SQL Server, MongoDB, SQLite and others.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.2.1";
+  tags = [ "development" "databases" "sql" "management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dbgate;

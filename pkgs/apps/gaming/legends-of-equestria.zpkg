@@ -1,0 +1,14 @@
+_meta = {
+  name = "Legends of Equestria";
+  summary = "Free-to-play MMORPG";
+  description = ''
+    Free-to-play MMORPG.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2025.06.002";
+  tags = [ "gaming" "mmorpg" "multiplayer" "role-playing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.legends-of-equestria;

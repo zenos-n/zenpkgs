@@ -1,0 +1,14 @@
+_meta = {
+  name = "Difftastic";
+  summary = "Syntax-aware diff";
+  description = ''
+    Syntax-aware diff.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.69.0";
+  tags = [ "development" "diff" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.difftastic;

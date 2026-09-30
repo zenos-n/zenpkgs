@@ -1,0 +1,23 @@
+_meta = {
+  name = "Faircamp";
+  summary = "Self-hostable, statically generated bandcamp alternative";
+  description = ''
+    Faircamp takes a directory on your disk - your Catalog - and from it
+    produces a fancy-looking (and technically simple and completely static)
+    website, which presents your music in a way similar to how popular
+    commercial service bandcamp does it.
+
+    You can upload the files faircamp generates to any webspace - no database
+    and no programming language support (PHP or such) is required. If your
+    webspace supports SSH access, faircamp can be configured to upload your
+    website for you automatically, otherwise you can use FTP or whichever
+    means you prefer to do that manually.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.0";
+  tags = [ "audio" "music" "publishing" "static-sites" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.faircamp;

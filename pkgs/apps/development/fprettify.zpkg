@@ -1,0 +1,14 @@
+_meta = {
+  name = "fprettify";
+  summary = "Auto-formatter for modern Fortran code that imposes strict whitespace formatting, written in Python";
+  description = ''
+    Auto-formatter for modern Fortran code that imposes strict whitespace formatting, written in Python.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.7";
+  tags = [ "development" "fortran" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.fprettify;

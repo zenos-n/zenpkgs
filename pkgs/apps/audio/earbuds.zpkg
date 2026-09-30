@@ -1,0 +1,14 @@
+_meta = {
+  name = "Earbuds CLI";
+  summary = "Free CLI tool to control your Galaxy Buds";
+  description = ''
+    Free CLI tool to control your Galaxy Buds.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0";
+  tags = [ "audio" "headphones" "galaxy-buds" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.earbuds;

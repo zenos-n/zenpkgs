@@ -1,0 +1,14 @@
+_meta = {
+  name = "Flex Launcher";
+  summary = "Customizable HTPC application launcher";
+  description = ''
+    Customizable HTPC application launcher.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2";
+  tags = [ "launchers" "media-center" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.flex-launcher;

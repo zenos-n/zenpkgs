@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenRA";
+  summary = "Open Source real-time strategy game engine for early Westwood games such as Command & Conquer: Red Alert. release version";
+  description = ''
+    Open Source real-time strategy game engine for early Westwood games such as Command & Conquer: Red Alert. release version.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20250330";
+  tags = [ "gaming" "strategy" "real-time" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.openra;

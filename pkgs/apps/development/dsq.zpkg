@@ -1,0 +1,14 @@
+_meta = {
+  name = "dsq";
+  summary = "Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more";
+  description = ''
+    Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.23.0";
+  tags = [ "development" "sql" "data" "queries" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.dsq;

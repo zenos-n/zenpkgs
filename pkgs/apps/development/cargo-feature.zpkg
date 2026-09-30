@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-feature";
+  summary = "Cargo plugin to manage dependency features";
+  description = ''
+    Cargo plugin to manage dependency features.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.0";
+  tags = [ "development" "rust" "cargo" "dependencies" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-feature;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Kuro";
+  summary = "Unofficial, featureful, open source, community-driven, free Microsoft To-Do app";
+  description = ''
+    Unofficial, featureful, open source, community-driven, free Microsoft To-Do app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.0.0";
+  tags = [ "office" "tasks" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.kuro;

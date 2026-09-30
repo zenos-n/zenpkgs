@@ -1,0 +1,14 @@
+_meta = {
+  name = "Convos";
+  summary = "IRC browser client";
+  description = ''
+    IRC browser client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.05";
+  tags = [ "communication" "irc" "chat" "web" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.artistic2;
+};
+
+import $pkgs.legacy.convos;

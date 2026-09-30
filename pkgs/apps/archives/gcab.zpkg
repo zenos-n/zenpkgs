@@ -1,0 +1,14 @@
+_meta = {
+  name = "gcab";
+  summary = "Create and extract Cabinet archives";
+  description = ''
+    Create and extract Cabinet archives.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6";
+  tags = [ "archives" "cab" "compression" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Plus;
+};
+
+import $pkgs.legacy.gcab;

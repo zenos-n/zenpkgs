@@ -1,0 +1,14 @@
+_meta = {
+  name = "BlueBubbles";
+  summary = "Cross-platform iMessage client";
+  description = ''
+    Cross-platform iMessage client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.4";
+  tags = [ "communication" "imessage" "chat" "messaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bluebubbles;

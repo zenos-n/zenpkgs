@@ -1,0 +1,14 @@
+_meta = {
+  name = "Opus Tools";
+  summary = "Tools to work with opus encoded audio streams";
+  description = ''
+    Tools to work with opus encoded audio streams.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2";
+  tags = [ "audio" "encoding" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.opus-tools;

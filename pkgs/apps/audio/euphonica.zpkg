@@ -1,0 +1,14 @@
+_meta = {
+  name = "Euphonica";
+  summary = "Graphical MPD music client";
+  description = ''
+    Graphical MPD music client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.99.3-beta";
+  tags = [ "audio" "mpd" "music" "player" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.euphonica;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "basedpyright";
+  summary = "Type checker for the Python language";
+  description = ''
+    Type checker for the Python language.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.39.3";
+  tags = [ "development" "python" "type-checking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.basedpyright;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cavalier";
+  summary = "Visualize audio with CAVA";
+  description = ''
+    Visualize audio with CAVA.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2024.1.0";
+  tags = [ "audio" "visualization" "desktop" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cavalier;

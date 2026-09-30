@@ -1,0 +1,17 @@
+_meta = {
+  name = "GemRB";
+  summary = "Reimplementation of the Infinity Engine, used by games such as Baldur's Gate";
+  description = ''
+    GemRB (Game engine made with pre-Rendered Background) is a portable
+    open-source implementation of Bioware's Infinity Engine. It was written to
+    support pseudo-3D role playing games based on the Dungeons & Dragons
+    ruleset (Baldur's Gate and Icewind Dale series, Planescape: Torment).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.5";
+  tags = [ "gaming" "rpg" "game-engines" "infinity-engine" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.gemrb;

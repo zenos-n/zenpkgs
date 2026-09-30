@@ -1,0 +1,17 @@
+_meta = {
+  name = "Repo";
+  summary = "Android's repo management tool";
+  description = ''
+    Repo is a Python script based on Git that helps manage many Git
+    repositories, does the uploads to revision control systems, and automates
+    parts of the development workflow. Repo is not meant to replace Git, only
+    to make it easier to work with Git.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.59";
+  tags = [ "development" "git" "android" "repositories" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-repo;

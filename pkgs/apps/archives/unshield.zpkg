@@ -1,0 +1,14 @@
+_meta = {
+  name = "unshield";
+  summary = "Tool and library to extract CAB files from InstallShield installers";
+  description = ''
+    Tool and library to extract CAB files from InstallShield installers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.2";
+  tags = [ "archives" "files" "compression" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.unshield;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "mmv";
+  summary = "Utility for wildcard renaming, copying, etc";
+  description = ''
+    Utility for wildcard renaming, copying, etc.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.10";
+  tags = [ "files" "renaming" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.mmv;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gambit";
+  summary = "Play chess in your terminal";
+  description = ''
+    Play chess in your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.0";
+  tags = [ "gaming" "chess" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gambit-chess;

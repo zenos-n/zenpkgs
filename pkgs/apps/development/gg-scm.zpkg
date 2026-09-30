@@ -1,0 +1,16 @@
+_meta = {
+  name = "gg";
+  summary = "Git with less typing";
+  description = ''
+    gg is an alternative command-line interface for Git heavily inspired by Mercurial.
+    It's designed for less typing in common workflows,
+    making Git easier to use for both novices and advanced users alike.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.1";
+  tags = [ "development" "git" "version-control" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gg-scm;

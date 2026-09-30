@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bino";
+  summary = "Video player with a focus on 3D and Virtual Reality";
+  description = ''
+    Video player with a focus on 3D and Virtual Reality.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6";
+  tags = [ "video" "3d" "virtual-reality" "player" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.bino3d;

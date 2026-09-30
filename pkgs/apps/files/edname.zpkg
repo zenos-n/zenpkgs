@@ -1,0 +1,14 @@
+_meta = {
+  name = "edname";
+  summary = "Mass renamer using $EDITOR";
+  description = ''
+    Mass renamer using $EDITOR.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.2";
+  tags = [ "files" "renaming" "editor" "batch" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.edname;

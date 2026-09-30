@@ -1,0 +1,14 @@
+_meta = {
+  name = "nix-du";
+  summary = "Tool to determine which gc-roots take space in your nix store";
+  description = ''
+    Tool to determine which gc-roots take space in your nix store.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.4";
+  tags = [ "development" "nix" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Only;
+};
+
+import $pkgs.legacy.nix-du;

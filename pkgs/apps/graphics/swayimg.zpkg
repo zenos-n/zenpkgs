@@ -1,0 +1,14 @@
+_meta = {
+  name = "Swayimg";
+  summary = "Image viewer for Sway/Wayland";
+  description = ''
+    Image viewer for Sway/Wayland.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.7";
+  tags = [ "graphics" "creativity" "images" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.swayimg;

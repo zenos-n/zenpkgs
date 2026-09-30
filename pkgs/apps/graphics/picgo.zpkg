@@ -1,0 +1,16 @@
+_meta = {
+  name = "PicGo";
+  summary = "Simple tool for uploading pictures";
+  description = ''
+    PicGo is a simple & beautiful tool for uploading pictures built by `electron-vue`.
+    It supports uploading images to various cloud storage services and clipboard management.
+    The application features a plugin system for extending functionality.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.2";
+  tags = [ "graphics" "images" "upload" "sharing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.picgo;

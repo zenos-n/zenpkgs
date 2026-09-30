@@ -1,0 +1,14 @@
+_meta = {
+  name = "cljstyle";
+  summary = "Tool for formatting Clojure code";
+  description = ''
+    Tool for formatting Clojure code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.17.642";
+  tags = [ "development" "clojure" "formatting" "source-code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.epl10;
+};
+
+import $pkgs.legacy.cljstyle;

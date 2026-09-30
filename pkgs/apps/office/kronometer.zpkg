@@ -1,0 +1,14 @@
+_meta = {
+  name = "Kronometer";
+  summary = "Stopwatch application";
+  description = ''
+    Stopwatch application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.0-unstable-2026-04-06";
+  tags = [ "office" "stopwatch" "time" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.kronometer;

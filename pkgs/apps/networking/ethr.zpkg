@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ethr";
+  summary = "Comprehensive Network Measurement Tool for TCP, UDP & ICMP";
+  description = ''
+    Comprehensive Network Measurement Tool for TCP, UDP & ICMP.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0-unstable-2025-12-10";
+  tags = [ "networking" "tcp" "udp" "measurement" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ethr;

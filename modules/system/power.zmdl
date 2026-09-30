@@ -1,0 +1,219 @@
+_meta = {
+  name = "Configure power for desktop use";
+  tags = [ "desktop" "power" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Configure power for desktop use";
+  description = ''Configure power for desktop use. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+profiles = {
+  _meta = {
+    name = "Choose power saver, balanced and performance modes in desktop settings";
+    tags = [ "desktop" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Choose power saver, balanced and performance modes in desktop settings";
+    description = ''Choose power saver, balanced and performance modes in desktop settings. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.power-profiles-daemon.enable = $lib.mkIf ($path.profiles != null) $path.profiles;
+  };
+};
+
+batteryInformation = {
+  _meta = {
+    name = "Show battery charge and power-source information";
+    tags = [ "desktop" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Show battery charge and power-source information";
+    description = ''Show battery charge and power-source information. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.upower.enable = $lib.mkIf ($path.batteryInformation != null) ($lib.mkForce $path.batteryInformation);
+  };
+};
+
+lidCloseAction = {
+  _meta = {
+    name = "Action when the laptop lid closes";
+    tags = [ "desktop" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "ignore" "lock" "suspend" "hibernate" "poweroff" ]) $type.null ];
+    default = null;
+    summary = "Action when the laptop lid closes";
+    description = ''Action when the laptop lid closes. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.logind.settings.Login.HandleLidSwitch = $lib.mkIf ($path.lidCloseAction != null) $path.lidCloseAction;
+  };
+};
+
+dockedLidCloseAction = {
+  _meta = {
+    name = "Action when the laptop lid closes while docked";
+    tags = [ "desktop" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "ignore" "lock" "suspend" "hibernate" "poweroff" ]) $type.null ];
+    default = null;
+    summary = "Action when the laptop lid closes while docked";
+    description = ''Action when the laptop lid closes while docked. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.logind.settings.Login.HandleLidSwitchDocked = $lib.mkIf ($path.dockedLidCloseAction != null) $path.dockedLidCloseAction;
+  };
+};
+
+powerButtonAction = {
+  _meta = {
+    name = "Action when the power button is pressed";
+    tags = [ "desktop" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "ignore" "lock" "suspend" "hibernate" "poweroff" ]) $type.null ];
+    default = null;
+    summary = "Action when the power button is pressed";
+    description = ''Action when the power button is pressed. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.logind.settings.Login.HandlePowerKey = $lib.mkIf ($path.powerButtonAction != null) $path.powerButtonAction;
+  };
+};
+
+externalPowerLidCloseAction = {
+  _meta = {
+    name = "Action when the lid closes while connected to external power";
+    tags = [ "desktop" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "ignore" "lock" "suspend" "hibernate" "poweroff" ]) $type.null ];
+    default = null;
+    summary = "Action when the lid closes while connected to external power";
+    description = ''Action when the lid closes while connected to external power. The desktop may take over handling this event while a session is active. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.logind.settings.Login.HandleLidSwitchExternalPower = $lib.mkIf ($path.externalPowerLidCloseAction != null) $path.externalPowerLidCloseAction;
+  };
+};
+
+suspendButtonAction = {
+  _meta = {
+    name = "Action when the suspend button is pressed";
+    tags = [ "desktop" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "ignore" "lock" "suspend" "hibernate" "poweroff" ]) $type.null ];
+    default = null;
+    summary = "Action when the suspend button is pressed";
+    description = ''Action when the suspend button is pressed. The desktop may take over handling this event while a session is active. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.logind.settings.Login.HandleSuspendKey = $lib.mkIf ($path.suspendButtonAction != null) $path.suspendButtonAction;
+  };
+};
+
+hibernateButtonAction = {
+  _meta = {
+    name = "Action when the hibernate button is pressed";
+    tags = [ "desktop" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "ignore" "lock" "suspend" "hibernate" "poweroff" ]) $type.null ];
+    default = null;
+    summary = "Action when the hibernate button is pressed";
+    description = ''Action when the hibernate button is pressed. The desktop may take over handling this event while a session is active. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.logind.settings.Login.HandleHibernateKey = $lib.mkIf ($path.hibernateButtonAction != null) $path.hibernateButtonAction;
+  };
+};
+
+allowSuspend = {
+  _meta = {
+    name = "Allow the computer to suspend to memory";
+    summary = "Allow the computer to suspend to memory";
+    description = ''Availability still depends on kernel and hardware support; hibernation also needs suitable storage and resume configuration. Null keeps the existing system policy.'';
+    tags = [ "system" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    systemd.sleep.settings.Sleep.AllowSuspend = $lib.mkIf ($path.allowSuspend != null) ($path.allowSuspend);
+  };
+};
+
+allowHibernate = {
+  _meta = {
+    name = "Allow the computer to hibernate to disk";
+    summary = "Allow the computer to hibernate to disk";
+    description = ''Availability still depends on kernel and hardware support; hibernation also needs suitable storage and resume configuration. Null keeps the existing system policy.'';
+    tags = [ "system" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    systemd.sleep.settings.Sleep.AllowHibernation = $lib.mkIf ($path.allowHibernate != null) ($path.allowHibernate);
+  };
+};
+
+allowHybridSleep = {
+  _meta = {
+    name = "Allow sleep that preserves memory in RAM and on disk";
+    summary = "Allow sleep that preserves memory in RAM and on disk";
+    description = ''Availability still depends on kernel and hardware support; hibernation also needs suitable storage and resume configuration. Null keeps the existing system policy.'';
+    tags = [ "system" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    systemd.sleep.settings.Sleep.AllowHybridSleep = $lib.mkIf ($path.allowHybridSleep != null) ($path.allowHybridSleep);
+  };
+};
+
+allowSuspendThenHibernate = {
+  _meta = {
+    name = "Allow suspension followed by automatic hibernation";
+    summary = "Allow suspension followed by automatic hibernation";
+    description = ''Availability still depends on kernel and hardware support; hibernation also needs suitable storage and resume configuration. Null keeps the existing system policy.'';
+    tags = [ "system" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    systemd.sleep.settings.Sleep.AllowSuspendThenHibernate = $lib.mkIf ($path.allowSuspendThenHibernate != null) ($path.allowSuspendThenHibernate);
+  };
+};
+
+hibernateAfterSuspendSeconds = {
+  _meta = {
+    name = "Time suspended before hibernating during suspend-then-hibernate";
+    summary = "Time suspended before hibernating during suspend-then-hibernate";
+    description = ''Only applies to suspend-then-hibernate; battery conditions can trigger hibernation earlier. Null keeps the existing system policy.'';
+    tags = [ "system" "power" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  s!! {
+    assertions = [ { assertion = $path.hibernateAfterSuspendSeconds == null || $path.hibernateAfterSuspendSeconds >= 0; message = "system.power.hibernateAfterSuspendSeconds must be nonnegative."; } ];
+    systemd.sleep.settings.Sleep.HibernateDelaySec = $lib.mkIf ($path.hibernateAfterSuspendSeconds != null) ($lib.concatStrings [ ($lib.toString $path.hibernateAfterSuspendSeconds) "s" ]);
+  };
+};
+

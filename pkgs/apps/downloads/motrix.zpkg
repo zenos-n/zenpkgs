@@ -1,0 +1,14 @@
+_meta = {
+  name = "Motrix";
+  summary = "Full-featured download manager";
+  description = ''
+    Full-featured download manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.19";
+  tags = [ "downloads" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.motrix;

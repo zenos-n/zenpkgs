@@ -1,0 +1,14 @@
+_meta = {
+  name = "Sparrow Wallet";
+  summary = "Modern desktop Bitcoin wallet application supporting most hardware wallets and built on common standards such as PSBT, with an emphasis on transparency and usability";
+  description = ''
+    Modern desktop Bitcoin wallet application supporting most hardware wallets and built on common standards such as PSBT, with an emphasis on transparency and usability.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.2";
+  tags = [ "finance" "bitcoin" "wallet" "cryptocurrency" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.sparrow;

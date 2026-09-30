@@ -1,0 +1,19 @@
+_meta = {
+  name = "Gammastep";
+  summary = "Screen color temperature manager";
+  description = ''
+    Gammastep adjusts the color temperature according to the position
+    of the sun. A different color temperature is set during night and
+    daytime. During twilight and early morning, the color temperature
+    transitions smoothly from night to daytime temperature to allow
+    your eyes to slowly adapt. At night the color temperature should
+    be set to match the lamps in your room.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.11";
+  tags = [ "system" "administration" "display" "brightness" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gammastep;

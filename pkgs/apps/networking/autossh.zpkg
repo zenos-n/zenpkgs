@@ -1,0 +1,14 @@
+_meta = {
+  name = "AutoSSH";
+  summary = "Automatically restart SSH sessions and tunnels";
+  description = ''
+    Automatically restart SSH sessions and tunnels.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4g";
+  tags = [ "networking" "remote-access" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd1;
+};
+
+import $pkgs.legacy.autossh;

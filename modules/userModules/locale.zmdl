@@ -1,0 +1,217 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Personal language and formats";
+  summary = "Personal language and formats";
+  description = ''Settings for one user. Unset values preserve existing policy and preferences.'';
+  tags = [ "users" "locale" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+language = {
+  _meta = {
+    name = "Default language and regional format";
+    summary = "Default language and regional format";
+    description = ''Default language and regional format. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.base = $lib.mkIf ($path.language != null) ($path.language);
+  };
+};
+
+messageLanguage = {
+  _meta = {
+    name = "Application interface language";
+    summary = "Application interface language";
+    description = ''Application interface language. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.messages = $lib.mkIf ($path.messageLanguage != null) ($path.messageLanguage);
+  };
+};
+
+numberFormat = {
+  _meta = {
+    name = "Number formatting locale";
+    summary = "Number formatting locale";
+    description = ''Number formatting locale. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.numeric = $lib.mkIf ($path.numberFormat != null) ($path.numberFormat);
+  };
+};
+
+dateTimeFormat = {
+  _meta = {
+    name = "Date and time formatting locale";
+    summary = "Date and time formatting locale";
+    description = ''Date and time formatting locale. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.time = $lib.mkIf ($path.dateTimeFormat != null) ($path.dateTimeFormat);
+  };
+};
+
+currencyFormat = {
+  _meta = {
+    name = "Currency formatting locale";
+    summary = "Currency formatting locale";
+    description = ''Currency formatting locale. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.monetary = $lib.mkIf ($path.currencyFormat != null) ($path.currencyFormat);
+  };
+};
+
+paperFormat = {
+  _meta = {
+    name = "Paper-size locale";
+    summary = "Paper-size locale";
+    description = ''Paper-size locale. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.paper = $lib.mkIf ($path.paperFormat != null) ($path.paperFormat);
+  };
+};
+
+measurementFormat = {
+  _meta = {
+    name = "Measurement-unit locale";
+    summary = "Measurement-unit locale";
+    description = ''Measurement-unit locale. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.measurement = $lib.mkIf ($path.measurementFormat != null) ($path.measurementFormat);
+  };
+};
+
+sortingLanguage = {
+  _meta = {
+    name = "Text sorting locale";
+    summary = "Text sorting locale";
+    description = ''Text sorting locale. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.collate = $lib.mkIf ($path.sortingLanguage != null) ($path.sortingLanguage);
+  };
+};
+
+characterClassification = {
+  _meta = {
+    name = "Character classification locale";
+    summary = "Character classification locale";
+    description = ''Character classification locale. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.ctype = $lib.mkIf ($path.characterClassification != null) ($path.characterClassification);
+  };
+};
+
+nameFormat = {
+  _meta = {
+    name = "Personal-name formatting locale";
+    summary = "Personal-name formatting locale";
+    description = ''Personal-name formatting locale. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.name = $lib.mkIf ($path.nameFormat != null) ($path.nameFormat);
+  };
+};
+
+addressFormat = {
+  _meta = {
+    name = "Address formatting locale";
+    summary = "Address formatting locale";
+    description = ''Address formatting locale. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.address = $lib.mkIf ($path.addressFormat != null) ($path.addressFormat);
+  };
+};
+
+telephoneFormat = {
+  _meta = {
+    name = "Telephone formatting locale";
+    summary = "Telephone formatting locale";
+    description = ''Telephone formatting locale. The requested locale must be available on the machine; this does not install system locales. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.language.telephone = $lib.mkIf ($path.telephoneFormat != null) ($path.telephoneFormat);
+  };
+};
+
+timeZone = {
+  _meta = {
+    name = "Personal time zone";
+    summary = "Personal time zone";
+    description = ''Personal time zone. For applications honoring TZ; does not change the system clock or machine time zone. Null leaves this preference unchanged.'';
+    tags = [ "users" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.sessionVariables.TZ = $lib.mkIf ($path.timeZone != null) ($path.timeZone);
+  };
+};

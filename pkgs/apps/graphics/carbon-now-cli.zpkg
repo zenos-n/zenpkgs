@@ -1,0 +1,14 @@
+_meta = {
+  name = "carbon-now-cli";
+  summary = "Beautiful images of your code — from right inside your terminal";
+  description = ''
+    Beautiful images of your code — from right inside your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.0";
+  tags = [ "graphics" "code" "screenshots" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.carbon-now-cli;

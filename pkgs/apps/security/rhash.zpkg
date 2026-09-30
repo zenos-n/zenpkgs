@@ -1,0 +1,14 @@
+_meta = {
+  name = "rhash";
+  summary = "Console utility and library for computing and verifying hash sums of files";
+  description = ''
+    Console utility and library for computing and verifying hash sums of files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.6";
+  tags = [ "security" "files" "checksums" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd0;
+};
+
+import $pkgs.legacy.rhash;

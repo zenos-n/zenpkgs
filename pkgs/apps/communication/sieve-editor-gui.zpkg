@@ -1,0 +1,14 @@
+_meta = {
+  name = "Sieve Editor";
+  summary = "Activate, edit, delete and add Sieve scripts with a convenient interface";
+  description = ''
+    Activate, edit, delete and add Sieve scripts with a convenient interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.1-unstable-2025-03-12";
+  tags = [ "communication" "email" "filtering" "scripting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.sieve-editor-gui;

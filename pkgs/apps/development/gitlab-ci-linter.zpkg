@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitLab CI Linter";
+  summary = ".gitlab-ci.yml lint helper tool";
+  description = ''
+    .gitlab-ci.yml lint helper tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.0";
+  tags = [ "development" "gitlab" "ci" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitlab-ci-linter;

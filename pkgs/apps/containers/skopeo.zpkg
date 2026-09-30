@@ -1,0 +1,14 @@
+_meta = {
+  name = "Skopeo";
+  summary = "Command line utility for various operations on container images and image repositories";
+  description = ''
+    Command line utility for various operations on container images and image repositories.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.22.2";
+  tags = [ "containers" "development" "images" "transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.skopeo;

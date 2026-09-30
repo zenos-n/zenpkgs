@@ -1,0 +1,14 @@
+_meta = {
+  name = "gNMIc";
+  summary = "gNMI CLI client and collector";
+  description = ''
+    gNMI CLI client and collector.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.46.0";
+  tags = [ "networking" "gnmi" "telemetry" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gnmic;

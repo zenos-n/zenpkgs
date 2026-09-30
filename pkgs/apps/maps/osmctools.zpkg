@@ -1,0 +1,14 @@
+_meta = {
+  name = "osmctools";
+  summary = "Command line tools for transforming Open Street Map files";
+  description = ''
+    Command line tools for transforming Open Street Map files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9";
+  tags = [ "maps" "openstreetmap" "geography" "navigation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.osmctools;

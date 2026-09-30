@@ -1,0 +1,14 @@
+_meta = {
+  name = "badkeys";
+  summary = "Tool to find common vulnerabilities in cryptographic public keys";
+  description = ''
+    Tool to find common vulnerabilities in cryptographic public keys.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.18";
+  tags = [ "security" "cryptography" "keys" "auditing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.badkeys;

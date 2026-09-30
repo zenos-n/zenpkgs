@@ -1,0 +1,14 @@
+_meta = {
+  name = "csvtool";
+  summary = "Command line tool for handling CSV files";
+  description = ''
+    Command line tool for handling CSV files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4";
+  tags = [ "files" "csv" "data-processing" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.csvtool;

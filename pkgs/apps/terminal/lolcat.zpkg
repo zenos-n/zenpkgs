@@ -1,0 +1,14 @@
+_meta = {
+  name = "lolcat";
+  summary = "Rainbow version of cat";
+  description = ''
+    Rainbow version of cat.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "100.0.1";
+  tags = [ "terminal" "text" "entertainment" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.lolcat;

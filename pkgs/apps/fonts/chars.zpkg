@@ -1,0 +1,14 @@
+_meta = {
+  name = "chars";
+  summary = "Commandline tool to display information about unicode characters";
+  description = ''
+    Commandline tool to display information about unicode characters.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.0";
+  tags = [ "fonts" "unicode" "characters" "inspection" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.chars;

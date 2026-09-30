@@ -1,0 +1,14 @@
+_meta = {
+  name = "XIVLauncher";
+  summary = "Custom launcher for FFXIV";
+  description = ''
+    Custom launcher for FFXIV.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.0";
+  tags = [ "gaming" "launcher" "final-fantasy" "mmorpg" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.xivlauncher;

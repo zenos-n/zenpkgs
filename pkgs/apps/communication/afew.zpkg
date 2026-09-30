@@ -1,0 +1,14 @@
+_meta = {
+  name = "afew";
+  summary = "Initial tagging script for notmuch mail";
+  description = ''
+    Initial tagging script for notmuch mail.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.1";
+  tags = [ "communication" "email" "notmuch" "tagging" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.afew;

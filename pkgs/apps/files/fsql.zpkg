@@ -1,0 +1,14 @@
+_meta = {
+  name = "fsql";
+  summary = "Search through your filesystem with SQL-esque queries";
+  description = ''
+    Search through your filesystem with SQL-esque queries.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.2";
+  tags = [ "files" "search" "sql" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fsql;

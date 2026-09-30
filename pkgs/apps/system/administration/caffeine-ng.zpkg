@@ -1,0 +1,14 @@
+_meta = {
+  name = "Caffeine";
+  summary = "Status bar application to temporarily inhibit screensaver and sleep mode";
+  description = ''
+    Status bar application to temporarily inhibit screensaver and sleep mode.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.2.0";
+  tags = [ "system" "administration" "sleep" "screensaver" "inhibition" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.caffeine-ng;

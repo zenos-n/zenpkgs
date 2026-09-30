@@ -1,0 +1,14 @@
+_meta = {
+  name = "Arduino CI";
+  summary = "CI for Arduino Libraries";
+  description = ''
+    CI for Arduino Libraries.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0";
+  tags = [ "development" "arduino" "embedded" "testing" "ci" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.arduino-ci;

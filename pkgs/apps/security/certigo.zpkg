@@ -1,0 +1,14 @@
+_meta = {
+  name = "certigo";
+  summary = "Utility to examine and validate certificates in a variety of formats";
+  description = ''
+    Utility to examine and validate certificates in a variety of formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.18.0";
+  tags = [ "security" "certificates" "cryptography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.certigo;

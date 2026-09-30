@@ -1,0 +1,14 @@
+_meta = {
+  name = "BlobFuse";
+  summary = "Mount an Azure Blob storage as filesystem through FUSE";
+  description = ''
+    Mount an Azure Blob storage as filesystem through FUSE.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.3";
+  tags = [ "files" "azure" "cloud" "fuse" "mounting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.blobfuse;

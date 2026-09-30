@@ -1,0 +1,14 @@
+_meta = {
+  name = "STLink";
+  summary = "In-circuit debug and programming for ST-Link devices";
+  description = ''
+    In-circuit debug and programming for ST-Link devices.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.0";
+  tags = [ "development" "embedded" "hardware" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.stlink;

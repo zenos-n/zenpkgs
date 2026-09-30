@@ -1,0 +1,14 @@
+_meta = {
+  name = "genromfs";
+  summary = "Tool for creating romfs file system images";
+  description = ''
+    Tool for creating romfs file system images.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.2";
+  tags = [ "storage" "filesystems" "romfs" "disk-images" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.genromfs;

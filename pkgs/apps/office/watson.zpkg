@@ -1,0 +1,14 @@
+_meta = {
+  name = "Watson";
+  summary = "Wonderful CLI to track your time";
+  description = ''
+    Wonderful CLI to track your time.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.0";
+  tags = [ "office" "time-tracking" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.watson;

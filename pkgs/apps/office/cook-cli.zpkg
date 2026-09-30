@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cook CLI";
+  summary = "Suite of tools to create shopping lists and maintain recipes";
+  description = ''
+    Suite of tools to create shopping lists and maintain recipes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.30.0";
+  tags = [ "office" "recipes" "cooking" "shopping" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cook-cli;

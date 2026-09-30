@@ -99,6 +99,7 @@ desktops = {
 
 users = {
   _meta = {
+    type = (zmdl users);
     name = "Users";
     summary = "Per-user configuration";
     description = ''Configuration and selectors scoped to individual users.'';

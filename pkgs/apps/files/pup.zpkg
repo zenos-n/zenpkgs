@@ -1,0 +1,14 @@
+_meta = {
+  name = "pup";
+  summary = "Parsing HTML at the command line";
+  description = ''
+    Parsing HTML at the command line.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2022-03-06";
+  tags = [ "files" "html" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pup;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "curlie";
+  summary = "Frontend to curl that adds the ease of use of httpie, without compromising on features and performance";
+  description = ''
+    Frontend to curl that adds the ease of use of httpie, without compromising on features and performance.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.2";
+  tags = [ "networking" "development" "http" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.curlie;

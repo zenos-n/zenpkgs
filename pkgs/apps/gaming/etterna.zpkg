@@ -1,0 +1,14 @@
+_meta = {
+  name = "Etterna";
+  summary = "Advanced cross-platform rhythm game focused on keyboard play";
+  description = ''
+    Advanced cross-platform rhythm game focused on keyboard play.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.74.4";
+  tags = [ "gaming" "rhythm" "music" "keyboard" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.etterna;

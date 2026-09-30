@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gaia Sky";
+  summary = "Open source 3D universe visualization software for desktop and VR with support for more than a billion objects";
+  description = ''
+    Open source 3D universe visualization software for desktop and VR with support for more than a billion objects.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.7.1";
+  tags = [ "science" "astronomy" "visualization" "3d" "vr" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.gaiasky;

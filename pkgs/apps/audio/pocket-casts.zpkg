@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pocket Casts";
+  summary = "Pocket Casts webapp, packaged for the Linux Desktop";
+  description = ''
+    Pocket Casts webapp, packaged for the Linux Desktop.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.0";
+  tags = [ "audio" "podcasts" "player" "streaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pocket-casts;

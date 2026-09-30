@@ -1,0 +1,14 @@
+_meta = {
+  name = "Scene Builder";
+  summary = "Visual, drag'n'drop, layout tool for designing JavaFX application user interfaces";
+  description = ''
+    Visual, drag'n'drop, layout tool for designing JavaFX application user interfaces.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "21.0.1";
+  tags = [ "development" "java" "ui-design" "prototyping" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.scenebuilder;

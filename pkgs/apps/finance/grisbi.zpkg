@@ -1,0 +1,19 @@
+_meta = {
+  name = "Grisbi";
+  summary = "Personnal accounting application";
+  description = ''
+    Grisbi is an application written by French developers, so it perfectly
+    respects French accounting rules. Grisbi can manage multiple accounts,
+    currencies and users. It manages third party, expenditure and receipt
+    categories, budgetary lines, financial years, budget estimates, bankcard
+    management and other information that make Grisbi adapted for
+    associations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.4";
+  tags = [ "finance" "budgeting" "accounting" "office" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.grisbi;

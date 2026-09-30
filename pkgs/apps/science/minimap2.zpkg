@@ -1,0 +1,17 @@
+_meta = {
+  name = "minimap2";
+  summary = "Versatile pairwise aligner for genomic and spliced nucleotide sequences";
+  description = ''
+    Minimap2 is a versatile sequence alignment program that aligns
+    DNA or mRNA sequences against a large reference database. It is
+    particularly efficient for long reads and can handle various
+    sequencing technologies including PacBio and Oxford Nanopore.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.30";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.minimap2;

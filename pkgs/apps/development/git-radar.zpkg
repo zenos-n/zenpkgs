@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-radar";
+  summary = "Tool you can add to your prompt to provide at-a-glance information on your git repo";
+  description = ''
+    Tool you can add to your prompt to provide at-a-glance information on your git repo.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6";
+  tags = [ "development" "git" "shell" "prompt" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-radar;

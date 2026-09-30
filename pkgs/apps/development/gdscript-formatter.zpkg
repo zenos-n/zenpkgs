@@ -1,0 +1,14 @@
+_meta = {
+  name = "GDScript Formatter";
+  summary = "Fast code formatter for GDScript and Godot 4";
+  description = ''
+    Fast code formatter for GDScript and Godot 4.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.18.2";
+  tags = [ "development" "godot" "gdscript" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gdscript-formatter;

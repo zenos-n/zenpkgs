@@ -1,0 +1,14 @@
+_meta = {
+  name = "wdisplays";
+  summary = "Graphical application for configuring displays in Wayland compositors";
+  description = ''
+    Graphical application for configuring displays in Wayland compositors.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.3";
+  tags = [ "system" "administration" "display" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.wdisplays;

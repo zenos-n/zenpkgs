@@ -1,0 +1,14 @@
+_meta = {
+  name = "BenchExec";
+  summary = "Framework for Reliable Benchmarking and Resource Measurement";
+  description = ''
+    Framework for Reliable Benchmarking and Resource Measurement.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.27";
+  tags = [ "development" "benchmarking" "performance" "measurement" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.benchexec;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "anup";
+  summary = "Anime tracker for AniList featuring a TUI";
+  description = ''
+    Anime tracker for AniList featuring a TUI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "video" "anime" "tracking" "anilist" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.anup;

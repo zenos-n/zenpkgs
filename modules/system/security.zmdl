@@ -1,0 +1,234 @@
+_meta = {
+  name = "Configure security for desktop use";
+  tags = [ "desktop" "security" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Configure security for desktop use";
+  description = ''Configure security for desktop use. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+firewall = {
+  _meta = {
+    name = "Filter unsolicited incoming network connections";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Filter unsolicited incoming network connections";
+    description = ''Filter unsolicited incoming network connections. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.firewall.enable = $lib.mkIf ($path.firewall != null) $path.firewall;
+  };
+};
+
+respondToPing = {
+  _meta = {
+    name = "Allow other computers to test reachability with ping";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow other computers to test reachability with ping";
+    description = ''Allow other computers to test reachability with ping. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.firewall.allowPing = $lib.mkIf ($path.respondToPing != null) $path.respondToPing;
+  };
+};
+
+allowedTcpPorts = {
+  _meta = {
+    name = "TCP ports reachable through the firewall";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.int ]) $type.null ];
+    default = null;
+    summary = "TCP ports reachable through the firewall";
+    description = ''TCP ports reachable through the firewall. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.firewall.allowedTCPPorts = $lib.mkIf ($path.allowedTcpPorts != null) $path.allowedTcpPorts;
+  };
+};
+
+allowedUdpPorts = {
+  _meta = {
+    name = "UDP ports reachable through the firewall";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.int ]) $type.null ];
+    default = null;
+    summary = "UDP ports reachable through the firewall";
+    description = ''UDP ports reachable through the firewall. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.firewall.allowedUDPPorts = $lib.mkIf ($path.allowedUdpPorts != null) $path.allowedUdpPorts;
+  };
+};
+
+desktopAuthorization = {
+  _meta = {
+    name = "Allow desktop applications to request privileged actions";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow desktop applications to request privileged actions";
+    description = ''Allow desktop applications to request privileged actions. Null keeps the existing system policy.'';
+  };
+  s!! {
+    security.polkit.enable = $lib.mkIf ($path.desktopAuthorization != null) ($lib.mkForce $path.desktopAuthorization);
+  };
+};
+
+remoteLogin = {
+  _meta = {
+    name = "Allow remote shell access using SSH";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow remote shell access using SSH";
+    description = ''Allow remote shell access using SSH. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.openssh.enable = $lib.mkIf ($path.remoteLogin != null) $path.remoteLogin;
+  };
+};
+
+remotePasswordLogin = {
+  _meta = {
+    name = "Allow passwords for SSH login instead of requiring keys";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow passwords for SSH login instead of requiring keys";
+    description = ''Allow passwords for SSH login instead of requiring keys. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.openssh.settings.PasswordAuthentication = $lib.mkIf ($path.remotePasswordLogin != null) $path.remotePasswordLogin;
+  };
+};
+
+saveApplicationPasswords = {
+  _meta = {
+    name = "Store application passwords in the login keyring";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Store application passwords in the login keyring";
+    description = ''Store application passwords in the login keyring.  Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.gnome.gnome-keyring.enable = $lib.mkIf ($path.saveApplicationPasswords != null) $path.saveApplicationPasswords;
+  };
+};
+
+rememberSshKeys = {
+  _meta = {
+    name = "Keep unlocked SSH keys available during the desktop session";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Keep unlocked SSH keys available during the desktop session";
+    description = ''Keep unlocked SSH keys available during the desktop session.  Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.gnome.gcr-ssh-agent.enable = $lib.mkIf ($path.rememberSshKeys != null) $path.rememberSshKeys;
+  };
+};
+
+smartCards = {
+  _meta = {
+    name = "Use smart-card readers for credentials";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Use smart-card readers for credentials";
+    description = ''Use smart-card readers for credentials.  Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.pcscd.enable = $lib.mkIf ($path.smartCards != null) $path.smartCards;
+  };
+};
+
+allowRemoteLoginThroughFirewall = {
+  _meta = {
+    name = "Allow incoming SSH connections through the firewall";
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow incoming SSH connections through the firewall";
+    description = ''Allow incoming SSH connections through the firewall.  Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.openssh.openFirewall = $lib.mkIf ($path.allowRemoteLoginThroughFirewall != null) $path.allowRemoteLoginThroughFirewall;
+  };
+};
+
+remoteLoginPorts = {
+  _meta = {
+    name = "Ports on which SSH accepts remote shell connections";
+    summary = "Ports on which SSH accepts remote shell connections";
+    description = ''Port numbers must be between 1 and 65535. Firewall opening follows the separate remote-login firewall preference. Null keeps the existing system policy.'';
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.int ]) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.openssh.ports = $lib.mkIf ($path.remoteLoginPorts != null) $path.remoteLoginPorts;
+  };
+};
+
+remoteKeyboardInteractiveLogin = {
+  _meta = {
+    name = "Allow interactive authentication challenges for remote SSH login";
+    summary = "Allow interactive authentication challenges for remote SSH login";
+    description = ''May allow password or multi-factor prompts, depending on authentication configuration. Null keeps the existing system policy.'';
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.openssh.settings.KbdInteractiveAuthentication = $lib.mkIf ($path.remoteKeyboardInteractiveLogin != null) $path.remoteKeyboardInteractiveLogin;
+  };
+};
+
+administratorPassword = {
+  _meta = {
+    name = "Require a password when administrators run commands with sudo";
+    summary = "Require a password when administrators run commands with sudo";
+    description = ''Applies to administrator group members using sudo; it does not affect graphical authorization prompts. Null keeps the existing system policy.'';
+    tags = [ "desktop" "security" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    security.sudo.wheelNeedsPassword = $lib.mkIf ($path.administratorPassword != null) $path.administratorPassword;
+  };
+};
+

@@ -1,0 +1,17 @@
+_meta = {
+  name = "Room Arranger";
+  summary = "3D room planning software";
+  description = ''
+    Room Arranger is a 3D room / apartment / floor planner with a simple user interface.
+    Free for 30 days. Updates are free.
+
+    Note: This package uses XCB (X11) for rendering. On Wayland compositors, it will run via XWayland.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10.3.4";
+  tags = [ "cad" "architecture" "interior-design" "3d" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.roomarranger;

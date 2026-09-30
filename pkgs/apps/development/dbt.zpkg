@@ -1,0 +1,27 @@
+_meta = {
+  name = "dbt";
+  summary = "Enables data analysts and engineers to transform their data using the same practices that software engineers use to build applications";
+  description = ''
+    The dbt tool needs adapters to data sources in order to work. The available
+    adapters are:
+
+      dbt-bigquery
+      dbt-postgres
+      dbt-redshift
+      dbt-snowflake
+
+    An example of building this package with a few adapters:
+
+      dbt.withAdapters (adapters: [
+        adapters.dbt-bigquery
+        adapters.dbt-postgres
+      ])
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.11.2";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.dbt;

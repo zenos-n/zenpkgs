@@ -1,0 +1,14 @@
+_meta = {
+  name = "NetworkManager dmenu";
+  summary = "Small script to manage NetworkManager connections with dmenu instead of nm-applet";
+  description = ''
+    Small script to manage NetworkManager connections with dmenu instead of nm-applet.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.3";
+  tags = [ "networking" "wifi" "management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.networkmanager_dmenu;

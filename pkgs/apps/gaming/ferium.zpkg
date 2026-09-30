@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ferium";
+  summary = "Fast and multi-source CLI program for managing Minecraft mods and modpacks from Modrinth, CurseForge, and GitHub Releases";
+  description = ''
+    Fast and multi-source CLI program for managing Minecraft mods and modpacks from Modrinth, CurseForge, and GitHub Releases.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.7.1";
+  tags = [ "gaming" "minecraft" "mods" "modpacks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.ferium;

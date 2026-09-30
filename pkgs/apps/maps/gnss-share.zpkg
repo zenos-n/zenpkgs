@@ -1,0 +1,20 @@
+_meta = {
+  name = "gnss-share";
+  summary = "Share GNSS data between multiple clients";
+  description = ''
+    gnss-share is an app that facilitates sharing GNSS location data with multiple
+    clients, while providing a way to perform device-specific setup beforehand. For
+    some devices, it can also manage loading and storing A-GPS data.
+
+    This is meant to replace things like gpsd, and gps-share, and work together
+    with geoclue* or other clients that support fetching NMEA location data over
+    sockets.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.1";
+  tags = [ "maps" "gnss" "gps" "location" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.gnss-share;

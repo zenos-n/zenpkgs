@@ -1,0 +1,14 @@
+_meta = {
+  name = "sigrok-cli";
+  summary = "Command-line frontend for the sigrok signal analysis software suite";
+  description = ''
+    Command-line frontend for the sigrok signal analysis software suite.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0-unstable-2024-08-26";
+  tags = [ "cad" "electronics" "diagnostics" "graphics" "engineering" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.sigrok-cli;

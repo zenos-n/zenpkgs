@@ -1,0 +1,14 @@
+_meta = {
+  name = "Frogmouth";
+  summary = "Markdown browser for your terminal";
+  description = ''
+    Markdown browser for your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.1";
+  tags = [ "office" "markdown" "reading" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.frogmouth;

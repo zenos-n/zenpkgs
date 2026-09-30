@@ -1,0 +1,14 @@
+_meta = {
+  name = "DockerSlim";
+  summary = "Minify and secure Docker containers";
+  description = ''
+    Minify and secure Docker containers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.40.11";
+  tags = [ "containers" "images" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.docker-slim;

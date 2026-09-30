@@ -1,0 +1,14 @@
+_meta = {
+  name = "FORMULA";
+  summary = "Formal Specifications for Verification and Synthesis";
+  description = ''
+    Formal Specifications for Verification and Synthesis.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0";
+  tags = [ "development" "formal-methods" "verification" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mspl;
+};
+
+import $pkgs.legacy.formula;

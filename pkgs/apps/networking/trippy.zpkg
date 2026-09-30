@@ -1,0 +1,14 @@
+_meta = {
+  name = "Trippy";
+  summary = "Network diagnostic tool";
+  description = ''
+    Network diagnostic tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.0";
+  tags = [ "networking" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.trippy;

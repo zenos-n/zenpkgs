@@ -1,0 +1,14 @@
+_meta = {
+  name = "PDFsam Basic";
+  summary = "Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files";
+  description = ''
+    Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.4.1";
+  tags = [ "office" "pdf" "documents" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.pdfsam-basic;

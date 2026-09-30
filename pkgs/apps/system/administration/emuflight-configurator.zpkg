@@ -1,0 +1,17 @@
+_meta = {
+  name = "EmuFlight Configurator";
+  summary = "Emuflight flight control system configuration tool";
+  description = ''
+    A crossplatform configuration tool for the Emuflight flight control system.
+    Various types of aircraft are supported by the tool and by Emuflight, e.g.
+    quadcopters, hexacopters, octocopters and fixed-wing aircraft.
+    The application allows you to configure the Emuflight software running on any supported Emuflight target.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.3";
+  tags = [ "system" "administration" "hardware" "drones" "configuration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.emuflight-configurator;

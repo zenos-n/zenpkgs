@@ -1,0 +1,14 @@
+_meta = {
+  name = "fff";
+  summary = "Fast terminal file manager";
+  description = ''
+    Fast terminal file manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2";
+  tags = [ "files" "manager" "terminal" "navigation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fff;

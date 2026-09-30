@@ -1,0 +1,14 @@
+_meta = {
+  name = "OrcaSlicer";
+  summary = "G-code generator for 3D printers (Bambu, Prusa, Voron, VzBot, RatRig, Creality, etc.)";
+  description = ''
+    G-code generator for 3D printers (Bambu, Prusa, Voron, VzBot, RatRig, Creality, etc.).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.2";
+  tags = [ "cad" "graphics" "engineering" "creativity" "3d-printing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.orca-slicer;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "ain";
+  summary = "HTTP API client for the terminal";
+  description = ''
+    HTTP API client for the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.0";
+  tags = [ "development" "http" "api" "testing" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ain;

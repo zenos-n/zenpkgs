@@ -1,0 +1,14 @@
+_meta = {
+  name = "ABI Compliance Checker";
+  summary = "Tool for checking backward API/ABI compatibility of a C/C++ library";
+  description = ''
+    Tool for checking backward API/ABI compatibility of a C/C++ library.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3";
+  tags = [ "development" "abi" "compatibility" "c" "cpp" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.abi-compliance-checker;

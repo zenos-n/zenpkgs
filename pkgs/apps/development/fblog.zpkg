@@ -1,0 +1,14 @@
+_meta = {
+  name = "fblog";
+  summary = "Small command-line JSON log viewer";
+  description = ''
+    Small command-line JSON log viewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.17.0";
+  tags = [ "development" "logs" "json" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.wtfpl;
+};
+
+import $pkgs.legacy.fblog;

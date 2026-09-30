@@ -1,0 +1,14 @@
+_meta = {
+  name = "CyberChef";
+  summary = "Cyber Swiss Army Knife for encryption, encoding, compression and data analysis";
+  description = ''
+    Cyber Swiss Army Knife for encryption, encoding, compression and data analysis.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "11.2.0";
+  tags = [ "development" "security" "conversion" "data-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cyberchef;

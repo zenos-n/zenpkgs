@@ -1,0 +1,14 @@
+_meta = {
+  name = "Backblaze B2 CLI";
+  summary = "Command-line tool for accessing the Backblaze B2 storage service";
+  description = ''
+    Command-line tool for accessing the Backblaze B2 storage service.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.6.0";
+  tags = [ "files" "cloud" "backblaze" "storage" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.backblaze-b2;

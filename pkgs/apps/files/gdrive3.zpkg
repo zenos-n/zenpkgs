@@ -1,0 +1,14 @@
+_meta = {
+  name = "gdrive";
+  summary = "Google Drive CLI Client";
+  description = ''
+    Google Drive CLI Client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.9.1";
+  tags = [ "files" "google-drive" "cloud-storage" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gdrive3;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "APNG Assembler";
+  summary = "Create an APNG from multiple PNG files";
+  description = ''
+    Create an APNG from multiple PNG files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.10";
+  tags = [ "graphics" "png" "animation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.apngasm;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "React Native Debugger";
+  summary = "Standalone app based on official debugger of React Native, and includes React Inspector / Redux DevTools";
+  description = ''
+    Standalone app based on official debugger of React Native, and includes React Inspector / Redux DevTools.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14.0";
+  tags = [ "development" "javascript" "mobile" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.react-native-debugger;

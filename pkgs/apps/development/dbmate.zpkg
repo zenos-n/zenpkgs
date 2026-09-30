@@ -1,0 +1,14 @@
+_meta = {
+  name = "dbmate";
+  summary = "Database migration tool";
+  description = ''
+    Database migration tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.33.0";
+  tags = [ "development" "database" "migrations" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dbmate;

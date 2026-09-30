@@ -1,0 +1,14 @@
+_meta = {
+  name = "csv2parquet";
+  summary = "Convert CSV files to Apache Parquet";
+  description = ''
+    Convert CSV files to Apache Parquet.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.1";
+  tags = [ "files" "csv" "parquet" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.csv2parquet;

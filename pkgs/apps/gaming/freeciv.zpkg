@@ -1,0 +1,17 @@
+_meta = {
+  name = "Freeciv";
+  summary = "Multiplayer (or single player), turn-based strategy game";
+  description = ''
+    Freeciv is a Free and Open Source empire-building strategy game
+    inspired by the history of human civilization. The game commences in
+    prehistory and your mission is to lead your tribe from the stone age
+    to the space age...
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.2";
+  tags = [ "gaming" "strategy" "turn-based" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.freeciv;

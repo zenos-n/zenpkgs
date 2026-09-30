@@ -1,0 +1,17 @@
+_meta = {
+  name = "Super Productivity";
+  summary = "To Do List / Time Tracker with Jira Integration";
+  description = ''
+    Experience the best ToDo app for digital professionals and get more done!
+    Super Productivity comes with integrated time-boxing and time tracking capabilities
+    and you can load your task from your calendars and from
+    Jira, Gitlab, GitHub, Open Project and others all into a single ToDo list.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "18.20.1";
+  tags = [ "office" "tasks" "organization" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.super-productivity;

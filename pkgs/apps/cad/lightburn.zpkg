@@ -1,0 +1,14 @@
+_meta = {
+  name = "LightBurn";
+  summary = "Layout, editing, and control software for your laser cutter";
+  description = ''
+    Layout, editing, and control software for your laser cutter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.08";
+  tags = [ "cad" "laser-cutting" "manufacturing" "graphics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.lightburn;

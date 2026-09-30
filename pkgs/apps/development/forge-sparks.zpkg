@@ -1,0 +1,14 @@
+_meta = {
+  name = "Forge Sparks";
+  summary = "Get Git forges notifications";
+  description = ''
+    Get Git forges notifications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.1";
+  tags = [ "development" "git" "notifications" "forges" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.forge-sparks;

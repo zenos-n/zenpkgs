@@ -1,0 +1,16 @@
+_meta = {
+  name = "syft";
+  summary = "CLI tool and library for generating a Software Bill of Materials from container images and filesystems";
+  description = ''
+    A CLI tool and Go library for generating a Software Bill of Materials
+    (SBOM) from container images and filesystems. Exceptional for
+    vulnerability detection when used with a scanner tool like Grype.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.44.0";
+  tags = [ "security" "development" "auditing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.syft;

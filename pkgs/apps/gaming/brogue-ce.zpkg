@@ -1,0 +1,14 @@
+_meta = {
+  name = "Brogue Community Edition";
+  summary = "Community-lead fork of the minimalist roguelike game Brogue";
+  description = ''
+    Community-lead fork of the minimalist roguelike game Brogue.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.1";
+  tags = [ "gaming" "roguelike" "rpg" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.brogue-ce;

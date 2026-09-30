@@ -1,0 +1,14 @@
+_meta = {
+  name = "extract_url";
+  summary = "Extracts URLs from MIME messages or plain text";
+  description = ''
+    Extracts URLs from MIME messages or plain text.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.2";
+  tags = [ "communication" "email" "links" "extraction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.extract_url;

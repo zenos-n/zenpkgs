@@ -1,0 +1,17 @@
+_meta = {
+  name = "Thonny";
+  summary = "Python IDE for beginners";
+  description = ''
+    Thonny is a Python IDE for beginners. It supports different ways
+    of stepping through the code, step-by-step expression
+    evaluation, detailed visualization of the call stack and a mode
+    for explaining the concepts of references and heap.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.1.7";
+  tags = [ "development" "ide" "python" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.thonny;

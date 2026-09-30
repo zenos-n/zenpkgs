@@ -1,0 +1,14 @@
+_meta = {
+  name = "Journey to the Center of Hawkthorne";
+  summary = "Journey to the Center of Hawkthorne - Community Fan Game";
+  description = ''
+    Journey to the Center of Hawkthorne - Community Fan Game.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "gaming" "platformer" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.hawkthorne-journey;

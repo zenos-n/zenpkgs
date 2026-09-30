@@ -1,0 +1,24 @@
+_meta = {
+  name = "cplay-ng";
+  summary = "Simple curses audio player";
+  description = ''
+    cplay is a minimalist music player with a textual user interface written
+    in Python. It aims to provide a power-user-friendly interface with simple
+    filelist and playlist control.
+
+    Instead of building an elaborate database of your music library, cplay
+    allows you to quickly browse the filesystem and enqueue files,
+    directories, and playlists.
+
+    The original cplay was started by Ulf Betlehem in 1998 and is no longer
+    maintained. This is a rewrite that aims to stay true to the original
+    design while evolving with a shifting environment.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.5.0";
+  tags = [ "audio" "music" "player" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.cplay-ng;

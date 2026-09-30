@@ -1,0 +1,14 @@
+_meta = {
+  name = "ClipQR";
+  summary = "Scan QR codes on screen and from camera, the result is in your clipboard";
+  description = ''
+    Scan QR codes on screen and from camera, the result is in your clipboard.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0";
+  tags = [ "files" "qr-code" "graphics" "clipboard" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.clipqr;

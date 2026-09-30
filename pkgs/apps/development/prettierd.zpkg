@@ -1,0 +1,14 @@
+_meta = {
+  name = "prettierd";
+  summary = "Prettier, as a daemon, for improved formatting speed";
+  description = ''
+    Prettier, as a daemon, for improved formatting speed.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.27.0";
+  tags = [ "development" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.prettierd;

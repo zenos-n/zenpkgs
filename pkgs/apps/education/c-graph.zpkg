@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNU C-Graph";
+  summary = "Tool for Learning about Convolution";
+  description = ''
+    Tool for Learning about Convolution.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.1";
+  tags = [ "education" "mathematics" "convolution" "signal-processing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.c-graph;

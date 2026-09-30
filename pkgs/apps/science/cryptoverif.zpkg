@@ -1,0 +1,14 @@
+_meta = {
+  name = "CryptoVerif";
+  summary = "Cryptographic protocol verifier in the computational model";
+  description = ''
+    Cryptographic protocol verifier in the computational model.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.12";
+  tags = [ "science" "cryptography" "verification" "protocols" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cecill-b;
+};
+
+import $pkgs.legacy.cryptoverif;

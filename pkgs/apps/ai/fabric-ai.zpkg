@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fabric";
+  summary = "Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced set of AI prompts that can be used anywhere";
+  description = ''
+    Fabric is an open-source framework for augmenting humans using AI. It provides a modular framework for solving specific problems using a crowdsourced set of AI prompts that can be used anywhere.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.452";
+  tags = [ "ai" "language-models" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fabric-ai;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-chglog";
+  summary = "CHANGELOG generator implemented in Go (Golang)";
+  description = ''
+    CHANGELOG generator implemented in Go (Golang).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.4";
+  tags = [ "development" "git" "changelogs" "generators" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-chglog;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghfetch";
+  summary = "CLI tool to fetch GitHub user information and show like neofetch";
+  description = ''
+    CLI tool to fetch GitHub user information and show like neofetch.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.19";
+  tags = [ "development" "github" "profiles" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghfetch;

@@ -1,0 +1,22 @@
+_meta = {
+  name = "View Your Mind";
+  summary = "Mind-mapping software";
+  description = ''
+    VYM (View Your Mind) is a tool to generate and manipulate maps which show
+    your thoughts. Such maps can help you to improve your creativity and
+    effectivity. You can use them for time management, to organize tasks, to
+    get an overview over complex contexts, to sort your ideas etc.
+
+    Maps can be drawn by hand on paper or a flip chart and help to structure
+    your thoughs. While a tree like structure like shown on this page can be
+    drawn by hand or any drawing software vym offers much more features to
+    work with such maps.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.9.26";
+  tags = [ "office" "mind-mapping" "planning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.vym;

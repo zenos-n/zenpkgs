@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cocogitto";
+  summary = "Set of cli tools for the conventional commit and semver specifications";
+  description = ''
+    Set of cli tools for the conventional commit and semver specifications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.0.0";
+  tags = [ "development" "conventional-commits" "semver" "releases" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cocogitto;

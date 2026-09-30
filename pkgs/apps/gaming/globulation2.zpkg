@@ -1,0 +1,14 @@
+_meta = {
+  name = "Globulation 2";
+  summary = "RTS without micromanagement";
+  description = ''
+    RTS without micromanagement.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.4.4";
+  tags = [ "gaming" "strategy" "real-time" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.globulation2;

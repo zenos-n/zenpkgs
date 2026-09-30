@@ -1,0 +1,14 @@
+_meta = {
+  name = "Five or More";
+  summary = "Remove colored balls from the board by forming lines";
+  description = ''
+    Remove colored balls from the board by forming lines.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "48.1";
+  tags = [ "gaming" "puzzle" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.five-or-more;

@@ -1,0 +1,16 @@
+_meta = {
+  name = "GNU Gengetopt";
+  summary = "Command-line option parser generator";
+  description = ''
+    GNU Gengetopt program generates a C function that uses getopt_long
+    function to parse the command line options, to validate them and
+    fills a struct
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.23";
+  tags = [ "development" "code-generation" "cli" "argument-parsing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gengetopt;

@@ -1,0 +1,15 @@
+_meta = {
+  name = "Gromit-MPX";
+  summary = "Desktop annotation tool";
+  description = ''
+    Gromit-MPX (GRaphics Over MIscellaneous Things) is a small tool
+    to make annotations on the screen.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.0";
+  tags = [ "office" "graphics" "presentations" "annotation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gromit-mpx;

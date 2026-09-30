@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNOME Nibbles";
+  summary = "Guide a worm around a maze";
+  description = ''
+    Guide a worm around a maze.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.5.2";
+  tags = [ "gaming" "arcade" "snake" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gnome-nibbles;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "BoringTun";
+  summary = "Userspace WireGuard® implementation in Rust";
+  description = ''
+    Userspace WireGuard® implementation in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0";
+  tags = [ "networking" "vpn" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.boringtun;

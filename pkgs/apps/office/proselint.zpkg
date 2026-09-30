@@ -1,0 +1,14 @@
+_meta = {
+  name = "proselint";
+  summary = "Linter for prose";
+  description = ''
+    Linter for prose.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.16.0";
+  tags = [ "office" "writing" "proofreading" "languages" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.proselint;

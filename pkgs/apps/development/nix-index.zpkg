@@ -1,0 +1,14 @@
+_meta = {
+  name = "nix-index";
+  summary = "Files database for nixpkgs";
+  description = ''
+    Files database for nixpkgs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.10";
+  tags = [ "development" "nix" "search" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.nix-index;

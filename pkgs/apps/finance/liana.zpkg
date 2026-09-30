@@ -1,0 +1,14 @@
+_meta = {
+  name = "Liana";
+  summary = "Bitcoin wallet leveraging on-chain timelocks for safety and recovery";
+  description = ''
+    Bitcoin wallet leveraging on-chain timelocks for safety and recovery.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "14.0";
+  tags = [ "finance" "bitcoin" "wallet" "cryptocurrency" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.liana;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fast CLI";
+  summary = "Command line version of fast.com in ~1.2 MB";
+  description = ''
+    Command line version of fast.com in ~1.2 MB.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.5";
+  tags = [ "networking" "bandwidth" "speed-test" "fast-com" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fast-cli-zig;

@@ -1,0 +1,20 @@
+_meta = {
+  name = "FFmpegThumbnailer";
+  summary = "Lightweight video thumbnailer";
+  description = ''
+    FFmpegthumbnailer is a lightweight video
+            thumbnailer that can be used by file managers to create thumbnails
+            for your video files. The thumbnailer uses ffmpeg to decode frames
+            from the video files, so supported videoformats depend on the
+            configuration flags of ffmpeg.
+            This thumbnailer was designed to be as fast and lightweight as possible.
+            The only dependencies are ffmpeg and libpng/libjpeg.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.0";
+  tags = [ "video" "thumbnails" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.ffmpegthumbnailer;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "cdi2iso";
+  summary = "Very simple utility for converting DiscJuggler images to the standard ISO-9660 format";
+  description = ''
+    Very simple utility for converting DiscJuggler images to the standard ISO-9660 format.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1";
+  tags = [ "storage" "disk-images" "discjuggler" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.cdi2iso;

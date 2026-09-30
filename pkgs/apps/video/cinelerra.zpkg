@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cinelerra";
+  summary = "Professional video editing and compositing environment (community version)";
+  description = ''
+    Professional video editing and compositing environment (community version).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3-unstable-2025-01-25";
+  tags = [ "video" "editing" "compositing" "production" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.cinelerra;

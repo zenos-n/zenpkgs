@@ -1,0 +1,195 @@
+_meta = {
+  name = "Files, folders and file browsing";
+  tags = [ "desktop" "nautilus" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Files, folders and file browsing";
+  description = ''Files, folders and file browsing. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = enableOption {
+  _meta.summary = "Install and configure files, folders and file browsing";
+  _meta.name = "Enable";
+  _meta.description = ''Install and configure files, folders and file browsing.'';
+  _meta.tags = [ "desktop" "nautilus" ];
+  _meta.maintainers = [ $m.doromiert ];
+  _meta.license = $l.napl;
+  u! {
+    home.packages = [ $pkgs.legacy.nautilus ];
+    assertions = [
+      { assertion = $path.thumbnailMaxFileSizeMegabytes >= 0 && $path.thumbnailMaxFileSizeMegabytes <= 9223372036854775807; message = "programs.nautilus.thumbnailMaxFileSizeMegabytes must be between 0 and 9223372036854775807."; }
+    ];
+    dconf.settings = {
+          "org/gnome/nautilus/preferences"."click-policy" = if $path.singleClickOpen then "single" else "double";
+          "org/gnome/nautilus/preferences"."show-hidden-files" = $path.showHiddenFiles;
+          "org/gnome/nautilus/preferences"."default-folder-viewer" = $path.defaultView;
+          "org/gnome/nautilus/preferences"."recursive-search" = $path.searchSubfolders;
+          "org/gnome/nautilus/preferences"."show-image-thumbnails" = $path.thumbnails;
+          "org/gnome/nautilus/preferences"."thumbnail-limit" = $lib.gvariant.mkUint64 ($path.thumbnailMaxFileSizeMegabytes);
+          "org/gnome/nautilus/preferences"."show-delete-permanently" = $path.showPermanentDelete;
+          "org/gnome/nautilus/preferences"."show-create-link" = $path.showCreateLink;
+          "org/gnome/nautilus/preferences"."always-use-location-entry" = $path.editableLocation;
+          "org/gnome/nautilus/preferences"."fts-enabled" = $path.searchFileContents;
+          "org/gnome/nautilus/preferences"."default-sort-order" = $path.sortBy;
+          "org/gnome/nautilus/preferences"."default-sort-in-reverse-order" = $path.reverseSort;
+    };
+  };
+};
+
+singleClickOpen = {
+  _meta = {
+    name = "Single click open";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Single click open";
+    description = ''Possible values are “single” to launch files on a single click, or “double” to launch them on a double click.'';
+  };
+};
+
+showHiddenFiles = {
+  _meta = {
+    name = "Show hidden files";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Show hidden files";
+    description = ''This key is deprecated and ignored. The “show-hidden” key from “org.gtk.Settings.FileChooser” is now used instead.'';
+  };
+};
+
+defaultView = {
+  _meta = {
+    name = "Default view";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "list-view" "icon-view" ];
+    default = "icon-view";
+    summary = "Default view";
+    description = ''When a folder is visited this viewer is used. Possible values are “list-view”, and “icon-view”.'';
+  };
+};
+
+searchSubfolders = {
+  _meta = {
+    name = "Search subfolders";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "always" "local-only" "never" ];
+    default = "local-only";
+    summary = "Search subfolders";
+    description = ''Locations in which Files should search subfolders. Available values are “local-only”, “always”, “never”.'';
+  };
+};
+
+thumbnails = {
+  _meta = {
+    name = "Thumbnails";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "always" "local-only" "never" ];
+    default = "local-only";
+    summary = "Thumbnails";
+    description = ''Speed trade-off for when to show a file as a thumbnail. If set to “always” then always thumbnail, even if the folder is on a remote server. If set to “local-only” then only show thumbnails for local file systems. If set to “never” then never bother to thumbnail files, just use a generic icon. Despite what the name may suggest, this applies to any previewable file type.'';
+  };
+};
+
+thumbnailMaxFileSizeMegabytes = {
+  _meta = {
+    name = "Maximum image file size for thumbnails, in megabytes";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 50;
+    summary = "Maximum image file size for thumbnails, in megabytes";
+    description = ''Images over this size (in megabytes) won’t be thumbnailed. The purpose of this setting is to avoid thumbnailing large images that may take a long time to load or use lots of memory.'';
+  };
+};
+
+showPermanentDelete = {
+  _meta = {
+    name = "Show permanent delete";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Show permanent delete";
+    description = ''If set to true, Files will show a delete permanently context menu item to bypass the Trash.'';
+  };
+};
+
+showCreateLink = {
+  _meta = {
+    name = "Show create link";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Show create link";
+    description = ''If set to true, Files will show context menu items to create links from the copied or selected files.'';
+  };
+};
+
+editableLocation = {
+  _meta = {
+    name = "Editable location";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Editable location";
+    description = ''If set to true, Files will always use a textual input entry for the location toolbar, instead of the pathbar.'';
+  };
+};
+
+searchFileContents = {
+  _meta = {
+    name = "Search file contents";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Search file contents";
+    description = ''If set to true, Files will also match the file contents besides the name. This toggles the default active state, which can still be overridden in the search popover'';
+  };
+};
+
+sortBy = {
+  _meta = {
+    name = "Sort by";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "name" "size" "type" "mtime" "atime" "btime" "starred" ];
+    default = "name";
+    summary = "Sort by";
+    description = ''The default sort-order for items in the icon view. Possible values are “name”, “size”, “type”, “mtime”, “atime” and “starred”.'';
+  };
+};
+
+reverseSort = {
+  _meta = {
+    name = "Reverse sort";
+    tags = [ "desktop" "nautilus" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Reverse sort";
+    description = ''If true, files in new windows will be sorted in reverse order. I.e., if sorted by name, then instead of sorting the files from “a” to “z”, they will be sorted from “z” to “a”; if sorted by size, instead of being incrementally they will be sorted decrementally.'';
+  };
+};
+

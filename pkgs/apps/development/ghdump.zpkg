@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghdump";
+  summary = "Export GitHub issues, pull requests, and discussions through customizable templates";
+  description = ''
+    Export GitHub issues, pull requests, and discussions through customizable templates.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.2";
+  tags = [ "development" "github" "issues" "export" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.eupl12;
+};
+
+import $pkgs.legacy.ghdump;

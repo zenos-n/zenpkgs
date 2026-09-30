@@ -1,0 +1,14 @@
+_meta = {
+  name = "Halloy";
+  summary = "IRC application";
+  description = ''
+    IRC application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.7.2";
+  tags = [ "communication" "chat" "irc" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.halloy;

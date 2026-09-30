@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-stack";
+  summary = "Stacked branch management for Git";
+  description = ''
+    Stacked branch management for Git.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.20";
+  tags = [ "development" "git" "branches" "stacks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-stack;

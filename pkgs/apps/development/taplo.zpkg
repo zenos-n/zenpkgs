@@ -1,0 +1,14 @@
+_meta = {
+  name = "Taplo";
+  summary = "TOML toolkit written in Rust";
+  description = ''
+    TOML toolkit written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.0";
+  tags = [ "development" "toml" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.taplo;

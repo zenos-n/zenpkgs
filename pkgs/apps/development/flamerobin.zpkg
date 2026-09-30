@@ -1,0 +1,14 @@
+_meta = {
+  name = "FlameRobin";
+  summary = "Database administration tool for Firebird RDBMS";
+  description = ''
+    Database administration tool for Firebird RDBMS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.14";
+  tags = [ "development" "databases" "firebird" "administration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsdOriginal;
+};
+
+import $pkgs.legacy.flamerobin;

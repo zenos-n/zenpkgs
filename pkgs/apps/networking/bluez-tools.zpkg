@@ -1,0 +1,14 @@
+_meta = {
+  name = "BlueZ Tools";
+  summary = "Set of tools to manage bluetooth devices for linux";
+  description = ''
+    Set of tools to manage bluetooth devices for linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2020-10-24";
+  tags = [ "networking" "bluetooth" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.bluez-tools;

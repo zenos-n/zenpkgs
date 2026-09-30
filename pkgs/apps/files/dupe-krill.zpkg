@@ -1,0 +1,14 @@
+_meta = {
+  name = "dupe-krill";
+  summary = "Fast file deduplicator";
+  description = ''
+    Fast file deduplicator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.0";
+  tags = [ "files" "duplicates" "deduplication" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dupe-krill;

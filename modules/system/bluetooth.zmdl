@@ -1,0 +1,42 @@
+_meta = {
+  name = "Configure bluetooth for desktop use";
+  tags = [ "desktop" "bluetooth" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Configure bluetooth for desktop use";
+  description = ''Configure bluetooth for desktop use. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = {
+  _meta = {
+    name = "Connect Bluetooth headphones, keyboards and other devices";
+    tags = [ "desktop" "bluetooth" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Connect Bluetooth headphones, keyboards and other devices";
+    description = ''Connect Bluetooth headphones, keyboards and other devices. Null keeps the existing system policy.'';
+  };
+  s!! {
+    hardware.bluetooth.enable = $lib.mkIf ($path.enable != null) $path.enable;
+  };
+};
+
+powerOnAtBoot = {
+  _meta = {
+    name = "Turn on Bluetooth adapters when the computer starts";
+    tags = [ "desktop" "bluetooth" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Turn on Bluetooth adapters when the computer starts";
+    description = ''Turn on Bluetooth adapters when the computer starts. Null keeps the existing system policy.'';
+  };
+  s!! {
+    hardware.bluetooth.powerOnBoot = $lib.mkIf ($path.powerOnAtBoot != null) $path.powerOnAtBoot;
+  };
+};
+

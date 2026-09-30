@@ -1,0 +1,15 @@
+_meta = {
+  name = "microcom";
+  summary = "Minimalistic terminal program for communicating\n    with devices over a serial connection";
+  description = ''
+    Minimalistic terminal program for communicating
+        with devices over a serial connection.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2025.11.0";
+  tags = [ "terminal" "serial" "hardware" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.microcom;

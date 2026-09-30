@@ -1,0 +1,14 @@
+_meta = {
+  name = "manga-tui";
+  summary = "Terminal-based manga reader and downloader with image support";
+  description = ''
+    Terminal-based manga reader and downloader with image support.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.0";
+  tags = [ "office" "comics" "reading" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.manga-tui;

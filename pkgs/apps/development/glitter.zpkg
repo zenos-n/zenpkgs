@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glitter";
+  summary = "Git wrapper that allows you to compress multiple commands into one";
+  description = ''
+    Git wrapper that allows you to compress multiple commands into one.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.6";
+  tags = [ "development" "git" "workflow" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.glitter;

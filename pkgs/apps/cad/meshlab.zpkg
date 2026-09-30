@@ -1,0 +1,14 @@
+_meta = {
+  name = "MeshLab";
+  summary = "System for processing and editing 3D triangular meshes";
+  description = ''
+    System for processing and editing 3D triangular meshes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2025.07";
+  tags = [ "cad" "graphics" "3d" "meshes" "engineering" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.meshlab;

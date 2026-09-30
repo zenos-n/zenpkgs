@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gforth";
+  summary = "Forth implementation of the GNU project";
+  description = ''
+    Forth implementation of the GNU project.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.9_20260610";
+  tags = [ "development" "forth" "languages" "interpreters" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gforth;

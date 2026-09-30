@@ -1,0 +1,14 @@
+_meta = {
+  name = "Drawterm";
+  summary = "Connect to Plan 9 CPU servers from other operating systems";
+  description = ''
+    Connect to Plan 9 CPU servers from other operating systems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-05-09";
+  tags = [ "networking" "plan9" "remote-access" "client" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.drawterm;

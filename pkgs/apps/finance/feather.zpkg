@@ -1,0 +1,14 @@
+_meta = {
+  name = "Feather";
+  summary = "Free Monero desktop wallet";
+  description = ''
+    Free Monero desktop wallet.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.1";
+  tags = [ "finance" "monero" "wallet" "cryptocurrency" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.feather;

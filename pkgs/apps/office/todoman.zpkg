@@ -1,0 +1,22 @@
+_meta = {
+  name = "todoman";
+  summary = "Standards-based task manager based on iCalendar";
+  description = ''
+    Todoman is a simple, standards-based, cli todo (aka task) manager. Todos
+    are stored into iCalendar files, which means you can sync them via CalDAV
+    using, for example, vdirsyncer.
+
+    Todos are read from individual ics files from the configured directory.
+    This matches the vdir specification. There is support for the most common TODO
+    features for now (summary, description, location, due date and priority) for
+    now.
+    Unsupported fields may not be shown but are never deleted or altered.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.7.0";
+  tags = [ "office" "tasks" "organization" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.todoman;

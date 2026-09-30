@@ -1,0 +1,14 @@
+_meta = {
+  name = "TIDAL Hi-Fi";
+  summary = "Web version of Tidal running in Electron with Hi-Fi support thanks to Widevine";
+  description = ''
+    Web version of Tidal running in Electron with Hi-Fi support thanks to Widevine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.0.1";
+  tags = [ "audio" "music" "streaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.tidal-hifi;

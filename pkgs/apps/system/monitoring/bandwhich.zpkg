@@ -1,0 +1,18 @@
+_meta = {
+  name = "bandwhich";
+  summary = "CLI utility for displaying current network utilization";
+  description = ''
+    bandwhich sniffs a given network interface and records IP packet size, cross
+    referencing it with the /proc filesystem on linux or lsof on MacOS. It is
+    responsive to the terminal window size, displaying less info if there is
+    no room for it. It will also attempt to resolve ips to their host name in
+    the background using reverse DNS on a best effort basis.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.23.1";
+  tags = [ "system" "monitoring" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bandwhich;

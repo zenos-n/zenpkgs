@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-prole";
+  summary = "`git-worktree(1)` manager";
+  description = ''
+    `git-worktree(1)` manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.3";
+  tags = [ "development" "git" "worktrees" "management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-prole;

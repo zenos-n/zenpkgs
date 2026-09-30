@@ -1,0 +1,14 @@
+_meta = {
+  name = "Yosys";
+  summary = "Open RTL synthesis framework and tools";
+  description = ''
+    Open RTL synthesis framework and tools.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.62";
+  tags = [ "cad" "electronics" "fpga" "development" "graphics" "engineering" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.yosys;

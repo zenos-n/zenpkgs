@@ -1,0 +1,14 @@
+_meta = {
+  name = "aerc";
+  summary = "Email client for your terminal";
+  description = ''
+    Email client for your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.21.0";
+  tags = [ "office" "productivity" "communication" "email" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.aerc;

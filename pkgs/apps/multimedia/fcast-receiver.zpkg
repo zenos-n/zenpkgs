@@ -1,0 +1,14 @@
+_meta = {
+  name = "FCast Receiver";
+  summary = "FCast Receiver, an open-source media streaming receiver";
+  description = ''
+    FCast Receiver is a receiver for an open-source media streaming protocol, FCast, an alternative to Chromecast and AirPlay.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.1";
+  tags = [ "multimedia" "streaming" "video" "audio" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.fcast-receiver;

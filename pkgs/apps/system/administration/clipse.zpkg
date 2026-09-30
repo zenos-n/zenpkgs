@@ -1,0 +1,14 @@
+_meta = {
+  name = "Clipse";
+  summary = "Useful clipboard manager TUI for Unix";
+  description = ''
+    Useful clipboard manager TUI for Unix.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "system" "administration" "clipboard" "terminal" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.clipse;

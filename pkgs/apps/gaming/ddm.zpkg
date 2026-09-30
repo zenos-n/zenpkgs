@@ -1,0 +1,14 @@
+_meta = {
+  name = "DDM";
+  summary = "Tabletop Yugioh Experience";
+  description = ''
+    Tabletop Yugioh Experience.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.1.0";
+  tags = [ "gaming" "cards" "yugioh" "tabletop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.ddm;

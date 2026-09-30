@@ -1,0 +1,14 @@
+_meta = {
+  name = "FLOSS";
+  summary = "Automatically extract obfuscated strings from malware";
+  description = ''
+    Automatically extract obfuscated strings from malware.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.1";
+  tags = [ "security" "reverse-engineering" "malware-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.flare-floss;

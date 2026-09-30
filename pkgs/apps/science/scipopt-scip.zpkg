@@ -1,0 +1,14 @@
+_meta = {
+  name = "SCIP Optimizer";
+  summary = "Solving Constraint Integer Programs";
+  description = ''
+    Solving Constraint Integer Programs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10.0.2";
+  tags = [ "science" "mathematics" "optimization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.scipopt-scip;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "HakuNeko";
+  summary = "Manga & Anime Downloader";
+  description = ''
+    Manga & Anime Downloader.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.1.7";
+  tags = [ "office" "comics" "reading" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.hakuneko;

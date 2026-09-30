@@ -1,0 +1,14 @@
+_meta = {
+  name = "BCFtools";
+  summary = "Tools for manipulating BCF2/VCF/gVCF format, SNP and short indel sequence variants";
+  description = ''
+    Tools for manipulating BCF2/VCF/gVCF format, SNP and short indel sequence variants.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.22";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bcftools;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "cpx";
+  summary = "File copy tool for Linux with progress bars, resume capability";
+  description = ''
+    File copy tool for Linux with progress bars, resume capability.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.4";
+  tags = [ "files" "copying" "transfer" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cpx;

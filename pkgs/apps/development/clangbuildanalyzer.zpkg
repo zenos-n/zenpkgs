@@ -1,0 +1,14 @@
+_meta = {
+  name = "ClangBuildAnalyzer";
+  summary = "Tool for analyzing Clang's -ftime-trace files";
+  description = ''
+    Tool for analyzing Clang's -ftime-trace files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.0";
+  tags = [ "development" "clang" "build" "performance" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.clangbuildanalyzer;

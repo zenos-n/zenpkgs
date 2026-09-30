@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-metrics";
+  summary = "Git extension to be able to track metrics about your project, within the git repository";
+  description = ''
+    Git extension to be able to track metrics about your project, within the git repository.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.6";
+  tags = [ "development" "git" "metrics" "tracking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-metrics;

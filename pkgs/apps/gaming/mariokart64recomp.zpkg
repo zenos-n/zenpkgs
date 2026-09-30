@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Mario Kart 64 Recompiled";
+  summary = "Recompilation of MarioKart 64";
+  description = ''
+    Recompilation of MarioKart 64.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.2";
+  tags = [ "gaming" "source-port" "nintendo64" "racing" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.mariokart64recomp;

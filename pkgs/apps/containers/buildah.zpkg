@@ -1,0 +1,14 @@
+_meta = {
+  name = "Buildah";
+  summary = "Tool which facilitates building OCI images";
+  description = ''
+    Tool which facilitates building OCI images.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.43.1";
+  tags = [ "containers" "development" "images" "build" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.buildah;

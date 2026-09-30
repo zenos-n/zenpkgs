@@ -1,0 +1,14 @@
+_meta = {
+  name = "SunVox";
+  summary = "Small, fast and powerful modular synthesizer with pattern-based sequencer";
+  description = ''
+    Small, fast and powerful modular synthesizer with pattern-based sequencer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.4d";
+  tags = [ "audio" "synthesis" "sequencer" "music" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.sunvox;

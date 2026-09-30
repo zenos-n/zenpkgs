@@ -1,0 +1,14 @@
+_meta = {
+  name = "gibo";
+  summary = "Shell script for easily accessing gitignore boilerplates";
+  description = ''
+    Shell script for easily accessing gitignore boilerplates.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.21";
+  tags = [ "development" "git" "gitignore" "templates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.gibo;

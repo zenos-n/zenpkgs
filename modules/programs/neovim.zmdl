@@ -1,0 +1,177 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Neovim configuration";
+  summary = "Neovim configuration";
+  description = ''Configure Neovim with typed preferences. Unset values preserve existing behavior.'';
+  tags = [ "shell" "neovim" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+aliasVi = {
+  _meta = {
+    name = "Use Neovim for vi";
+    summary = "Use Neovim for vi";
+    description = ''Use Neovim for vi. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+aliasVim = {
+  _meta = {
+    name = "Use Neovim for vim";
+    summary = "Use Neovim for vim";
+    description = ''Use Neovim for vim. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+aliasVimdiff = {
+  _meta = {
+    name = "Use Neovim for vimdiff";
+    summary = "Use Neovim for vimdiff";
+    description = ''Use Neovim for vimdiff. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+defaultEditor = {
+  _meta = {
+    name = "Use Neovim as the session editor";
+    summary = "Use Neovim as the session editor";
+    description = ''Use Neovim as the session editor. Avoid conflicting EDITOR and VISUAL settings in the session environment. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+pythonPlugins = {
+  _meta = {
+    name = "Enable Python plugin support";
+    summary = "Enable Python plugin support";
+    description = ''Enable Python plugin support. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+nodePlugins = {
+  _meta = {
+    name = "Enable Node.js plugin support";
+    summary = "Enable Node.js plugin support";
+    description = ''Enable Node.js plugin support. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+rubyPlugins = {
+  _meta = {
+    name = "Enable Ruby plugin support";
+    summary = "Enable Ruby plugin support";
+    description = ''Enable Ruby plugin support. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+perlPlugins = {
+  _meta = {
+    name = "Enable Perl plugin support";
+    summary = "Enable Perl plugin support";
+    description = ''Enable Perl plugin support. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+waylandClipboard = {
+  _meta = {
+    name = "Provide Wayland clipboard utilities";
+    summary = "Provide Wayland clipboard utilities";
+    description = ''Provide Wayland clipboard utilities. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+vimConfiguration = {
+  _meta = {
+    name = "Additional Vimscript configuration";
+    summary = "Additional Vimscript configuration";
+    description = ''Additional Vimscript configuration. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+luaConfiguration = {
+  _meta = {
+    name = "Additional Lua configuration";
+    summary = "Additional Lua configuration";
+    description = ''Additional Lua configuration. Null preserves existing behavior.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Neovim";
+    summary = "Install and configure Neovim";
+    description = ''Enable Neovim for the selected user scope. Preferences apply while enabled.'';
+    tags = [ "shell" "neovim" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    programs.neovim.enable = true;
+    programs.neovim.viAlias = $lib.mkIf ($path.aliasVi != null) ($path.aliasVi);
+    programs.neovim.vimAlias = $lib.mkIf ($path.aliasVim != null) ($path.aliasVim);
+    programs.neovim.vimdiffAlias = $lib.mkIf ($path.aliasVimdiff != null) ($path.aliasVimdiff);
+    programs.neovim.defaultEditor = $lib.mkIf ($path.defaultEditor != null) ($path.defaultEditor);
+    programs.neovim.withPython3 = $lib.mkIf ($path.pythonPlugins != null) ($path.pythonPlugins);
+    programs.neovim.withNodeJs = $lib.mkIf ($path.nodePlugins != null) ($path.nodePlugins);
+    programs.neovim.withRuby = $lib.mkIf ($path.rubyPlugins != null) ($path.rubyPlugins);
+    programs.neovim.withPerl = $lib.mkIf ($path.perlPlugins != null) ($path.perlPlugins);
+    programs.neovim.waylandSupport = $lib.mkIf ($path.waylandClipboard != null) ($path.waylandClipboard);
+    programs.neovim.extraConfig = $lib.mkIf ($path.vimConfiguration != null) ($path.vimConfiguration);
+    programs.neovim.initLua = $lib.mkIf ($path.luaConfiguration != null) ($path.luaConfiguration);
+  };
+};

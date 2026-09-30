@@ -1,0 +1,14 @@
+_meta = {
+  name = "OnlyKey";
+  summary = "Setup and configure OnlyKey";
+  description = ''
+    Setup and configure OnlyKey.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.5.0";
+  tags = [ "security" "authentication" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.onlykey;

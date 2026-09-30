@@ -1,0 +1,14 @@
+_meta = {
+  name = "Heroku CLI";
+  summary = "Everything you need to get started using Heroku";
+  description = ''
+    Everything you need to get started using Heroku.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10.16.0";
+  tags = [ "infrastructure" "cloud" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.heroku;

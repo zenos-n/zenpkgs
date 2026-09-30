@@ -1,0 +1,14 @@
+_meta = {
+  name = "Eagle Mode";
+  summary = "Zoomable User Interface";
+  description = ''
+    Zoomable User Interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.96.3";
+  tags = [ "files" "file-manager" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.eaglemode;

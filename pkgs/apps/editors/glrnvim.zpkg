@@ -1,0 +1,14 @@
+_meta = {
+  name = "glrnvim";
+  summary = "Really fast & stable neovim GUI which could be accelerated by GPU";
+  description = ''
+    Really fast & stable neovim GUI which could be accelerated by GPU.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.0";
+  tags = [ "editors" "neovim" "gui" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.glrnvim;

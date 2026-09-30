@@ -1,0 +1,14 @@
+_meta = {
+  name = "iodine";
+  summary = "Tool to tunnel IPv4 data through a DNS server";
+  description = ''
+    Tool to tunnel IPv4 data through a DNS server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0";
+  tags = [ "networking" "dns" "tunneling" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.iodine;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Aliyun Drive CLI";
+  summary = "Command line client for Aliyun Drive";
+  description = ''
+    Command line client for Aliyun Drive.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.9";
+  tags = [ "files" "cloud" "aliyun" "transfer" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.aliyunpan;

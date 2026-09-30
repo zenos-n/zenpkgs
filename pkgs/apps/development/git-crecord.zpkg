@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-crecord";
+  summary = "Git subcommand to interactively select changes to commit or stage";
+  description = ''
+    Git subcommand to interactively select changes to commit or stage.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20230226.0";
+  tags = [ "development" "git" "staging" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.git-crecord;

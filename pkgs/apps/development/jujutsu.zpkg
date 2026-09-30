@@ -1,0 +1,14 @@
+_meta = {
+  name = "Jujutsu";
+  summary = "Git-compatible DVCS that is both simple and powerful";
+  description = ''
+    Git-compatible DVCS that is both simple and powerful.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.41.0";
+  tags = [ "development" "version-control" "git" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.jujutsu;

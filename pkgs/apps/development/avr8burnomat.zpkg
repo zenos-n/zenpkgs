@@ -1,0 +1,14 @@
+_meta = {
+  name = "AVR8 Burn-O-Mat";
+  summary = "GUI tool for avrdude";
+  description = ''
+    GUI tool for avrdude.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.2";
+  tags = [ "development" "embedded" "avr" "firmware" "graphical" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.avr8burnomat;

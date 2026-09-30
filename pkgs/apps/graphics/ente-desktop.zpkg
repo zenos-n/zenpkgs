@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ente Photos";
+  summary = "Desktop (Electron) client for Ente Photos";
+  description = ''
+    Desktop (Electron) client for Ente Photos.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.22";
+  tags = [ "graphics" "photography" "backup" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.ente-desktop;

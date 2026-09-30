@@ -1,0 +1,17 @@
+_meta = {
+  name = "fuse-7z-ng";
+  summary = "FUSE-based filesystem that uses the p7zip library";
+  description = ''
+    fuse-7z-ng is a FUSE file system that uses the p7zip
+    library to access all archive formats supported by 7-zip.
+
+    This project is a fork of fuse-7z ( https://gitorious.org/fuse-7z/fuse-7z ).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2014-06-08";
+  tags = [ "archives" "fuse" "filesystems" "7z" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.fuse-7z-ng;

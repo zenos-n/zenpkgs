@@ -1,0 +1,14 @@
+_meta = {
+  name = "MBROLA";
+  summary = "Speech synthesizer based on the concatenation of diphones";
+  description = ''
+    Speech synthesizer based on the concatenation of diphones.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3-unstable-2024-01-29";
+  tags = [ "audio" "speech" "accessibility" "text-to-speech" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.mbrola;

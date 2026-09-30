@@ -1,0 +1,32 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Bencher CLI";
+  summary = "Command-Line interface for the Bencher continuous benchmarking platform";
+  description = ''
+    Bencher is a suite of continuous benchmarking tools.
+    Bencher allows you to detect and prevent performance regressions
+    *before* they hit production.
+
+    - Run: Run your benchmarks locally or in CI using your favorite
+      benchmarking tools. The bencher CLI simply wraps your existing
+      benchmark harness and stores its results.
+    - Track: Track the results of your benchmarks over time. Monitor, query,
+      and graph the results using the Bencher web console based on the source
+      branch, testbed, benchmark, and measure.
+    - Catch: Catch performance regressions in CI. Bencher uses state of the
+      art, customizable analytics to detect performance regressions before
+      they make it to production.
+
+    Bencher's source repo includes non-free features, included in the build
+    as the Cargo feature "plus".
+    Files in the plus directories are proprietary, while the other files
+    are dual Apache-2.0/MIT licensed.
+    The Nix derivation does not compile the proprietary features.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.8";
+  tags = [ "development" "benchmarking" "performance" "ci" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.bencher-cli;

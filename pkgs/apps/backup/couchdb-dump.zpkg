@@ -1,0 +1,14 @@
+_meta = {
+  name = "CouchDB Dump";
+  summary = "Bash command line scripts to dump & restore a couchdb database";
+  description = ''
+    Bash command line scripts to dump & restore a couchdb database.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2021-07-24";
+  tags = [ "backup" "couchdb" "databases" "restore" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.couchdb-dump;

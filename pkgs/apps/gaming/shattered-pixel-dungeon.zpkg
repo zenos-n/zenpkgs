@@ -1,0 +1,14 @@
+_meta = {
+  name = "Shattered Pixel Dungeon";
+  summary = "Traditional roguelike game with pixel-art graphics and simple interface";
+  description = ''
+    Traditional roguelike game with pixel-art graphics and simple interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.8";
+  tags = [ "gaming" "roguelike" "rpg" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.shattered-pixel-dungeon;

@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "ShogiHome";
+  summary = "Shogi frontend supporting USI engines";
+  description = ''
+    Shogi frontend supporting USI engines.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.29.0";
+  tags = [ "gaming" "shogi" "board-games" "usi" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.shogihome;

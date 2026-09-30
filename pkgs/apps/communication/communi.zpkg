@@ -1,0 +1,14 @@
+_meta = {
+  name = "Communi";
+  summary = "Simple and elegant cross-platform IRC client";
+  description = ''
+    Simple and elegant cross-platform IRC client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.6.0";
+  tags = [ "communication" "irc" "chat" "client" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.communi;

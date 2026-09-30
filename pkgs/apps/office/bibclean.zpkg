@@ -1,0 +1,14 @@
+_meta = {
+  name = "bibclean";
+  summary = "Prettyprint and syntax check BibTeX and Scribe bibliography data base files";
+  description = ''
+    Prettyprint and syntax check BibTeX and Scribe bibliography data base files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.07";
+  tags = [ "office" "bibliography" "research" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.bibclean;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "write-good";
+  summary = "Naive linter for English prose";
+  description = ''
+    Naive linter for English prose.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.8";
+  tags = [ "office" "writing" "proofreading" "languages" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.write-good;

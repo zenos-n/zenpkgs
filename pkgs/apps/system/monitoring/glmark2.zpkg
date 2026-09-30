@@ -1,0 +1,15 @@
+_meta = {
+  name = "glmark2";
+  summary = "OpenGL (ES) 2.0 benchmark";
+  description = ''
+    glmark2 is a benchmark for OpenGL (ES) 2.0. It uses only the subset of
+    the OpenGL 2.0 API that is compatible with OpenGL ES 2.0.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2023.01";
+  tags = [ "system" "monitoring" "graphics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.glmark2;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "pre-commit";
+  summary = "Framework for managing and maintaining multi-language pre-commit hooks";
+  description = ''
+    Framework for managing and maintaining multi-language pre-commit hooks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.5.1";
+  tags = [ "development" "git" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pre-commit;

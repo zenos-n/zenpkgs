@@ -1,0 +1,15 @@
+_meta = {
+  name = "Gitleaks";
+  summary = "Scan git repos (or files) for secrets";
+  description = ''
+    Gitleaks is a SAST tool for detecting hardcoded secrets like passwords,
+    API keys and tokens in git repos.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.30.1";
+  tags = [ "security" "privacy" "development" "git" "secrets" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitleaks;

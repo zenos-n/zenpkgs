@@ -1,0 +1,14 @@
+_meta = {
+  name = "APK Editor";
+  summary = "Powerful android apk resources editor";
+  description = ''
+    Powerful android apk resources editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.9";
+  tags = [ "development" "android" "apk" "resources" "editor" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.apkeditor;

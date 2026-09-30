@@ -1,0 +1,14 @@
+_meta = {
+  name = "MQTT Explorer";
+  summary = "All-round MQTT client that provides a structured topic overview";
+  description = ''
+    All-round MQTT client that provides a structured topic overview.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0-beta.6";
+  tags = [ "networking" "messaging" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc-by-nd-40;
+};
+
+import $pkgs.legacy.mqtt-explorer;

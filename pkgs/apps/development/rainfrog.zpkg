@@ -1,0 +1,14 @@
+_meta = {
+  name = "Rainfrog";
+  summary = "Database management TUI for postgres";
+  description = ''
+    Database management TUI for postgres.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.18";
+  tags = [ "development" "database" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.rainfrog;

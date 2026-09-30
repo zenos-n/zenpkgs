@@ -1,0 +1,14 @@
+_meta = {
+  name = "Sauerbraten";
+  summary = "Free multiplayer & singleplayer first person shooter, the successor of the Cube FPS";
+  description = ''
+    Free multiplayer & singleplayer first person shooter, the successor of the Cube FPS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2020-12-29";
+  tags = [ "gaming" "shooter" "multiplayer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.sauerbraten;

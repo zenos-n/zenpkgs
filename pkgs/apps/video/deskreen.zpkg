@@ -1,0 +1,14 @@
+_meta = {
+  name = "Deskreen";
+  summary = "Turn any device into a secondary screen for your computer";
+  description = ''
+    Turn any device into a secondary screen for your computer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.4";
+  tags = [ "video" "screen-sharing" "display" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.deskreen;

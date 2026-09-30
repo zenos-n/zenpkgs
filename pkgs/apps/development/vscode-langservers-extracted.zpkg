@@ -1,0 +1,14 @@
+_meta = {
+  name = "VS Code Language Servers";
+  summary = "HTML/CSS/JSON/ESLint language servers extracted from vscode";
+  description = ''
+    HTML/CSS/JSON/ESLint language servers extracted from vscode.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.116.02821";
+  tags = [ "development" "web" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.vscode-langservers-extracted;

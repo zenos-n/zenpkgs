@@ -1,0 +1,14 @@
+_meta = {
+  name = "SCIP";
+  summary = "SCIP Code Intelligence Protocol CLI";
+  description = ''
+    SCIP Code Intelligence Protocol CLI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.1";
+  tags = [ "development" "code-indexing" "code-intelligence" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.scip;

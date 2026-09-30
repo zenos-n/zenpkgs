@@ -1,0 +1,14 @@
+_meta = {
+  name = "act";
+  summary = "Run your GitHub Actions locally";
+  description = ''
+    Run your GitHub Actions locally.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.88";
+  tags = [ "development" "ci" "github" "containers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.act;

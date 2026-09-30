@@ -1,0 +1,20 @@
+_meta = {
+  name = "GMQCC";
+  summary = "Modern QuakeC compiler";
+  description = ''
+    For an enduring period of time the options for a decent compiler for
+    the Quake C programming language were confined to a specific compiler
+    known as QCC. Attempts were made to extend and improve upon the design
+    of QCC, but many foreseen the consequences of building on a broken
+    foundation. The solution was obvious, a new compiler; one born from
+    the NIH realm of sarcastic wit.
+    We welcome you. You won't find a better Quake C compiler.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2023-05-05";
+  tags = [ "development" "quakec" "compilers" "game-development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gmqcc;

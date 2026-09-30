@@ -1,0 +1,14 @@
+_meta = {
+  name = "Geek Life";
+  summary = "Todo List / Task Manager for Geeks in command line";
+  description = ''
+    Todo List / Task Manager for Geeks in command line.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.3";
+  tags = [ "office" "tasks" "productivity" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.geek-life;

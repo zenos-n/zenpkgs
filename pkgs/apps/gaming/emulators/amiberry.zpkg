@@ -1,0 +1,14 @@
+_meta = {
+  name = "Amiberry";
+  summary = "Optimized Amiga emulator for Linux/macOS";
+  description = ''
+    Optimized Amiga emulator for Linux/macOS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.1.5";
+  tags = [ "gaming" "emulators" "amiga" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.amiberry;

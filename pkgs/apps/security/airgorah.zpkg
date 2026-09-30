@@ -1,0 +1,14 @@
+_meta = {
+  name = "Airgorah";
+  summary = "WiFi security auditing software mainly based on aircrack-ng tools suite";
+  description = ''
+    WiFi security auditing software mainly based on aircrack-ng tools suite.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.4";
+  tags = [ "security" "networking" "wifi" "auditing" "wireless" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.airgorah;

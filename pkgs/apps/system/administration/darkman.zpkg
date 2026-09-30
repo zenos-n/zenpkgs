@@ -1,0 +1,14 @@
+_meta = {
+  name = "Darkman";
+  summary = "Framework for dark-mode and light-mode transitions on Linux desktop";
+  description = ''
+    Framework for dark-mode and light-mode transitions on Linux desktop.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.0";
+  tags = [ "system" "administration" "theming" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.darkman;

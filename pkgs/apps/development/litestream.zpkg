@@ -1,0 +1,14 @@
+_meta = {
+  name = "Litestream";
+  summary = "Streaming replication for SQLite";
+  description = ''
+    Streaming replication for SQLite.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.11";
+  tags = [ "development" "backup" "replication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.litestream;

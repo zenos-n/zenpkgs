@@ -1,0 +1,15 @@
+_meta = {
+  name = "duff";
+  summary = "Quickly find duplicate files";
+  description = ''
+    Duff is a Unix command-line utility for quickly finding duplicates in
+    a given set of files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2024-02-16";
+  tags = [ "files" "duplicates" "search" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.duff;

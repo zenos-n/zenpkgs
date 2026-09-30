@@ -1,0 +1,14 @@
+_meta = {
+  name = "Nuclear";
+  summary = "Streaming music player that finds free music for you";
+  description = ''
+    Streaming music player that finds free music for you.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.48";
+  tags = [ "audio" "music" "streaming" "player" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.nuclear;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-extras";
+  summary = "GIT utilities -- repo summary, repl, changelog population, author commit percentages and more";
+  description = ''
+    GIT utilities -- repo summary, repl, changelog population, author commit percentages and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.5.0";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-extras;

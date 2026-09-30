@@ -1,0 +1,14 @@
+_meta = {
+  name = "afio";
+  summary = "Fault tolerant cpio archiver targeting backups";
+  description = ''
+    Fault tolerant cpio archiver targeting backups.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.2";
+  tags = [ "archives" "backup" "cpio" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.free;
+};
+
+import $pkgs.legacy.afio;

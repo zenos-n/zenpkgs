@@ -1,0 +1,14 @@
+_meta = {
+  name = "PVZGE";
+  summary = "Completely remastered PvZ2 for all desktop platforms";
+  description = ''
+    Completely remastered PvZ2 for all desktop platforms.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.2";
+  tags = [ "gaming" "plants-vs-zombies" "tower-defense" "strategy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.pvzge;

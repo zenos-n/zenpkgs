@@ -1,0 +1,14 @@
+_meta = {
+  name = "Kando";
+  summary = "Cross-Platform Pie Menu";
+  description = ''
+    Cross-Platform Pie Menu.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.0";
+  tags = [ "launchers" "desktop" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.kando;

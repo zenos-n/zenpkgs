@@ -1,0 +1,14 @@
+_meta = {
+  name = "gamescope";
+  summary = "SteamOS session compositing window manager";
+  description = ''
+    SteamOS session compositing window manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.16.23";
+  tags = [ "gaming" "display" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.gamescope;

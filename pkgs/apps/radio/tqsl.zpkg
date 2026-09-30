@@ -1,0 +1,14 @@
+_meta = {
+  name = "TrustedQSL";
+  summary = "Software for using the ARRL Logbook of the World";
+  description = ''
+    Software for using the ARRL Logbook of the World.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.4";
+  tags = [ "radio" "amateur-radio" "logging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.tqsl;

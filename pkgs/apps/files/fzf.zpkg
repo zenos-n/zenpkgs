@@ -1,0 +1,14 @@
+_meta = {
+  name = "fzf";
+  summary = "Command-line fuzzy finder written in Go";
+  description = ''
+    Command-line fuzzy finder written in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.72.0";
+  tags = [ "files" "search" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fzf;

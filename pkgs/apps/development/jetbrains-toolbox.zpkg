@@ -6,7 +6,7 @@ _meta = {
   '';
   zenosVersion = "1.0.0";
   packageVersion = "";
-  tags = [ ];
+  tags = [ "development" "ide" "management" ];
   maintainers = [ $m.doromiert ];
 };
 

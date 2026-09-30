@@ -1,0 +1,14 @@
+_meta = {
+  name = "Jan";
+  summary = "Jan is an open source alternative to ChatGPT that runs 100% offline on your computer";
+  description = ''
+    Jan is an open source alternative to ChatGPT that runs 100% offline on your computer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.9";
+  tags = [ "ai" "language-models" "local-inference" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.jan;

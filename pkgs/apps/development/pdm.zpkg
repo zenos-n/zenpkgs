@@ -1,0 +1,14 @@
+_meta = {
+  name = "PDM";
+  summary = "Modern Python package and dependency manager supporting the latest PEP standards";
+  description = ''
+    Modern Python package and dependency manager supporting the latest PEP standards.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.27.0";
+  tags = [ "development" "python" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pdm;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "xclip";
+  summary = "Tool to access the X clipboard from a console application";
+  description = ''
+    Tool to access the X clipboard from a console application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13";
+  tags = [ "office" "productivity" "clipboard" "x11" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.xclip;

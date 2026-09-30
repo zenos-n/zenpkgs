@@ -1,0 +1,14 @@
+_meta = {
+  name = "Reckon";
+  summary = "Flexibly import bank account CSV files into Ledger for command line accounting";
+  description = ''
+    Flexibly import bank account CSV files into Ledger for command line accounting.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.1";
+  tags = [ "finance" "accounting" "office" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.reckon;

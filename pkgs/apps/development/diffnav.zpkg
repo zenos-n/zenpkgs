@@ -1,0 +1,14 @@
+_meta = {
+  name = "diffnav";
+  summary = "Git diff pager based on delta but with a file tree, à la GitHub";
+  description = ''
+    Git diff pager based on delta but with a file tree, à la GitHub.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.0";
+  tags = [ "development" "git" "diff" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.diffnav;

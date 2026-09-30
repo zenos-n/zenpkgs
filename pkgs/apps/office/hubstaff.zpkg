@@ -1,0 +1,14 @@
+_meta = {
+  name = "Hubstaff";
+  summary = "Time tracking software";
+  description = ''
+    Time tracking software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.8-c835b2c2";
+  tags = [ "office" "productivity" "time-tracking" "work" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.hubstaff;

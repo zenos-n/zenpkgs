@@ -1,0 +1,16 @@
+_meta = {
+  name = "WeeChat";
+  summary = "Fast, light and extensible chat client";
+  description = ''
+    You can find more documentation as to how to customize this package
+    (e.g. adding python modules for scripts that would require them, etc.)
+    on https://nixos.org/nixpkgs/manual/#sec-weechat .
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.10.0";
+  tags = [ "communication" "networking" "irc" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.weechat;

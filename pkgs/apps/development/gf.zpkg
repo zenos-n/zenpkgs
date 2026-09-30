@@ -1,0 +1,14 @@
+_meta = {
+  name = "GF";
+  summary = "GDB Frontend";
+  description = ''
+    GDB Frontend.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-05-03";
+  tags = [ "development" "gdb" "debugging" "gui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gf;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "SageMath";
+  summary = "Open Source Mathematics Software, free alternative to Magma, Maple, Mathematica, and Matlab";
+  description = ''
+    Open Source Mathematics Software, free alternative to Magma, Maple, Mathematica, and Matlab.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10.9";
+  tags = [ "science" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.sage;

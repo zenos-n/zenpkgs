@@ -1,0 +1,14 @@
+_meta = {
+  name = "Alex";
+  summary = "Alex is a tool for generating lexical analysers in Haskell";
+  description = ''
+    Alex is a tool for generating lexical analysers in Haskell.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5.4.2";
+  tags = [ "development" "haskell" "parsing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.alex;

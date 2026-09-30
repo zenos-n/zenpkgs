@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-xet";
+  summary = "Git LFS plugin that uploads and downloads using the Xet protocol";
+  description = ''
+    Git LFS plugin that uploads and downloads using the Xet protocol.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.1";
+  tags = [ "development" "git" "lfs" "xet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-xet;

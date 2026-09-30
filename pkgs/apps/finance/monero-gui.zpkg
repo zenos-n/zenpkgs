@@ -1,0 +1,14 @@
+_meta = {
+  name = "Monero GUI";
+  summary = "Graphical Monero cryptocurrency wallet";
+  description = ''
+    Graphical Monero cryptocurrency wallet.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.18.5.2";
+  tags = [ "finance" "wallet" "cryptocurrency" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.monero-gui;

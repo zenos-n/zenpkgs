@@ -1,0 +1,14 @@
+_meta = {
+  name = "Miller";
+  summary = "Like awk, sed, cut, join, and sort for data formats such as CSV, TSV, JSON, JSON Lines, and positionally-indexed";
+  description = ''
+    Like awk, sed, cut, join, and sort for data formats such as CSV, TSV, JSON, JSON Lines, and positionally-indexed.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.18.1";
+  tags = [ "files" "data" "csv" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.miller;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cruft";
+  summary = "Allows you to maintain all the necessary boilerplate for building projects";
+  description = ''
+    Allows you to maintain all the necessary boilerplate for building projects.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.16.0";
+  tags = [ "development" "templates" "scaffolding" "maintenance" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cruft;

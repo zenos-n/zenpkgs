@@ -1,0 +1,14 @@
+_meta = {
+  name = "Evil Helix";
+  summary = "Post-modern modal text editor, with vim keybindings";
+  description = ''
+    Post-modern modal text editor, with vim keybindings.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20250915";
+  tags = [ "editors" "text" "modal" "vim" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.evil-helix;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Denaro";
+  summary = "Personal finance manager for GNOME";
+  description = ''
+    Personal finance manager for GNOME.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2024.2.0";
+  tags = [ "finance" "budgeting" "office" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.denaro;

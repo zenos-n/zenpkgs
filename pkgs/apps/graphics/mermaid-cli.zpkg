@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mermaid CLI";
+  summary = "Generation of diagrams from text in a similar manner as markdown";
+  description = ''
+    Generation of diagrams from text in a similar manner as markdown.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "11.12.0";
+  tags = [ "graphics" "diagrams" "development" "documentation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.mermaid-cli;

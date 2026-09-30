@@ -1,0 +1,14 @@
+_meta = {
+  name = "csvtk";
+  summary = "Cross-platform, efficient and practical CSV/TSV toolkit in Golang";
+  description = ''
+    Cross-platform, efficient and practical CSV/TSV toolkit in Golang.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.33.0";
+  tags = [ "files" "csv" "tsv" "data-processing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.csvtk;

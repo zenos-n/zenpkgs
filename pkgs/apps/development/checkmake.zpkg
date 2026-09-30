@@ -1,0 +1,14 @@
+_meta = {
+  name = "checkmake";
+  summary = "Linter and analyzer for Makefiles";
+  description = ''
+    checkmake is a linter for Makefiles. It scans Makefiles for potential issues based on configurable rules.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.2";
+  tags = [ "development" "make" "linting" "build" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.checkmake;

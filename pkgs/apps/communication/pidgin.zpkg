@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pidgin";
+  summary = "Multi-protocol instant messaging client";
+  description = ''
+    Multi-protocol instant messaging client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.14.14";
+  tags = [ "communication" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.pidgin;

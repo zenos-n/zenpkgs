@@ -1,0 +1,2428 @@
+{
+  "profile": [
+    {
+      "name": "normalUser",
+      "type": "$type.boolean",
+      "title": "Create a regular login account",
+      "target": "users.users.($f.user).isNormalUser",
+      "scope": "s",
+      "expression": "$path.normalUser",
+      "detail": "True creates a normal user; false does not implicitly select a system account. Existing accounts may leave this unset.",
+      "condition": null
+    },
+    {
+      "name": "displayName",
+      "type": "$type.string",
+      "title": "Name shown on the login screen",
+      "target": "users.users.($f.user).description",
+      "scope": "s",
+      "expression": "$path.displayName",
+      "detail": "",
+      "condition": null
+    },
+    {
+      "name": "homeDirectory",
+      "type": "$type.string",
+      "title": "Absolute path to the home directory",
+      "target": "users.users.($f.user).home",
+      "scope": "s",
+      "expression": "$path.homeDirectory",
+      "detail": "Must be absolute. Changing this path does not migrate existing files.",
+      "condition": null
+    },
+    {
+      "name": "uid",
+      "type": "$type.int",
+      "title": "Stable numeric user identifier",
+      "target": "users.users.($f.user).uid",
+      "scope": "s",
+      "expression": "$path.uid",
+      "detail": "Must be between 0 and 4294967294.",
+      "condition": null
+    },
+    {
+      "name": "groups",
+      "type": "$type.list [ $type.string ]",
+      "title": "Additional group memberships",
+      "target": "users.users.($f.user).extraGroups",
+      "scope": "s",
+      "expression": "$path.groups",
+      "detail": "Uses normal additive group-list merging; an empty list adds no groups.",
+      "condition": null
+    },
+    {
+      "name": "sshKeys",
+      "type": "$type.list [ $type.string ]",
+      "title": "Authorized SSH public keys",
+      "target": "users.users.($f.user).openssh.authorizedKeys.keys",
+      "scope": "s",
+      "expression": "$path.sshKeys",
+      "detail": "Public keys only; uses normal additive list merging.",
+      "condition": null
+    },
+    {
+      "name": "passwordHashFile",
+      "type": "$type.string",
+      "title": "Runtime file containing the password hash",
+      "target": "users.users.($f.user).hashedPasswordFile",
+      "scope": "s",
+      "expression": "$path.passwordHashFile",
+      "detail": "An absolute runtime path, never a plaintext password or store-imported secret.",
+      "condition": null
+    },
+    {
+      "name": "linger",
+      "type": "$type.boolean",
+      "title": "Keep user services running after logout",
+      "target": "users.users.($f.user).linger",
+      "scope": "s",
+      "expression": "$path.linger",
+      "detail": "",
+      "condition": null
+    },
+    {
+      "name": "loginShell",
+      "type": "$type.package",
+      "title": "Login shell package",
+      "target": "users.users.($f.user).shell",
+      "scope": "s",
+      "expression": "$path.loginShell",
+      "detail": "The selected shell must be supported and enabled by the system. This does not enable a system-wide shell service.",
+      "condition": null
+    }
+  ],
+  "shell": [
+    {
+      "name": "aliases",
+      "type": "$type.set [ $type.string ]",
+      "title": "Shell command aliases",
+      "target": "home.shellAliases",
+      "scope": "u",
+      "expression": "$path.aliases",
+      "detail": "Applied by managed shells; enabling a shell program remains a separate choice.",
+      "condition": null
+    }
+  ],
+  "environment": [
+    {
+      "name": "variables",
+      "type": "$type.set [ $type.string ]",
+      "title": "Session environment variables",
+      "target": "home.sessionVariables",
+      "scope": "u",
+      "expression": "$path.variables",
+      "detail": "String values for the login session. Do not store credentials here.",
+      "condition": null
+    },
+    {
+      "name": "searchPath",
+      "type": "$type.list [ $type.string ]",
+      "title": "Additional command search directories",
+      "target": "home.sessionPath",
+      "scope": "u",
+      "expression": "$path.searchPath",
+      "detail": "Directories prepended to PATH; $HOME is expanded by the session shell.",
+      "condition": null
+    },
+    {
+      "name": "editor",
+      "type": "$type.string",
+      "title": "Default terminal editor",
+      "target": "home.sessionVariables.EDITOR",
+      "scope": "u",
+      "expression": "$path.editor",
+      "detail": "A command string; does not install the application. Avoid defining the same variable in environment.variables.",
+      "condition": null
+    },
+    {
+      "name": "visualEditor",
+      "type": "$type.string",
+      "title": "Default visual editor",
+      "target": "home.sessionVariables.VISUAL",
+      "scope": "u",
+      "expression": "$path.visualEditor",
+      "detail": "A command string; does not install the application. Avoid defining the same variable in environment.variables.",
+      "condition": null
+    },
+    {
+      "name": "pager",
+      "type": "$type.string",
+      "title": "Default pager",
+      "target": "home.sessionVariables.PAGER",
+      "scope": "u",
+      "expression": "$path.pager",
+      "detail": "A command string; does not install the application. Avoid defining the same variable in environment.variables.",
+      "condition": null
+    },
+    {
+      "name": "browser",
+      "type": "$type.string",
+      "title": "Browser command for command-line applications",
+      "target": "home.sessionVariables.BROWSER",
+      "scope": "u",
+      "expression": "$path.browser",
+      "detail": "A command string; does not install the application. Avoid defining the same variable in environment.variables.",
+      "condition": null
+    }
+  ],
+  "locale": [
+    {
+      "name": "language",
+      "type": "$type.string",
+      "title": "Default language and regional format",
+      "target": "home.language.base",
+      "scope": "u",
+      "expression": "$path.language",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "messageLanguage",
+      "type": "$type.string",
+      "title": "Application interface language",
+      "target": "home.language.messages",
+      "scope": "u",
+      "expression": "$path.messageLanguage",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "numberFormat",
+      "type": "$type.string",
+      "title": "Number formatting locale",
+      "target": "home.language.numeric",
+      "scope": "u",
+      "expression": "$path.numberFormat",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "dateTimeFormat",
+      "type": "$type.string",
+      "title": "Date and time formatting locale",
+      "target": "home.language.time",
+      "scope": "u",
+      "expression": "$path.dateTimeFormat",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "currencyFormat",
+      "type": "$type.string",
+      "title": "Currency formatting locale",
+      "target": "home.language.monetary",
+      "scope": "u",
+      "expression": "$path.currencyFormat",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "paperFormat",
+      "type": "$type.string",
+      "title": "Paper-size locale",
+      "target": "home.language.paper",
+      "scope": "u",
+      "expression": "$path.paperFormat",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "measurementFormat",
+      "type": "$type.string",
+      "title": "Measurement-unit locale",
+      "target": "home.language.measurement",
+      "scope": "u",
+      "expression": "$path.measurementFormat",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "sortingLanguage",
+      "type": "$type.string",
+      "title": "Text sorting locale",
+      "target": "home.language.collate",
+      "scope": "u",
+      "expression": "$path.sortingLanguage",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "characterClassification",
+      "type": "$type.string",
+      "title": "Character classification locale",
+      "target": "home.language.ctype",
+      "scope": "u",
+      "expression": "$path.characterClassification",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "nameFormat",
+      "type": "$type.string",
+      "title": "Personal-name formatting locale",
+      "target": "home.language.name",
+      "scope": "u",
+      "expression": "$path.nameFormat",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "addressFormat",
+      "type": "$type.string",
+      "title": "Address formatting locale",
+      "target": "home.language.address",
+      "scope": "u",
+      "expression": "$path.addressFormat",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "telephoneFormat",
+      "type": "$type.string",
+      "title": "Telephone formatting locale",
+      "target": "home.language.telephone",
+      "scope": "u",
+      "expression": "$path.telephoneFormat",
+      "detail": "The requested locale must be available on the machine; this does not install system locales.",
+      "condition": null
+    },
+    {
+      "name": "timeZone",
+      "type": "$type.string",
+      "title": "Personal time zone",
+      "target": "home.sessionVariables.TZ",
+      "scope": "u",
+      "expression": "$path.timeZone",
+      "detail": "For applications honoring TZ; does not change the system clock or machine time zone.",
+      "condition": null
+    }
+  ],
+  "userDirs": [
+    {
+      "name": "enable",
+      "type": "$type.boolean",
+      "title": "Manage standard personal folders",
+      "target": "xdg.userDirs.enable",
+      "scope": "u",
+      "expression": "$path.enable",
+      "detail": "",
+      "condition": null
+    },
+    {
+      "name": "createDirectories",
+      "type": "$type.boolean",
+      "title": "Create configured personal folders",
+      "target": "xdg.userDirs.createDirectories",
+      "scope": "u",
+      "expression": "$path.createDirectories",
+      "detail": "Requires userDirs.enable = true.",
+      "condition": null
+    },
+    {
+      "name": "desktop",
+      "type": "$type.string",
+      "title": "Location of the desktop folder",
+      "target": "xdg.userDirs.desktop",
+      "scope": "u",
+      "expression": "$path.desktop",
+      "detail": "Absolute path. Requires userDirs.enable = true. Does not move existing files.",
+      "condition": null
+    },
+    {
+      "name": "documents",
+      "type": "$type.string",
+      "title": "Location of the documents folder",
+      "target": "xdg.userDirs.documents",
+      "scope": "u",
+      "expression": "$path.documents",
+      "detail": "Absolute path. Requires userDirs.enable = true. Does not move existing files.",
+      "condition": null
+    },
+    {
+      "name": "downloads",
+      "type": "$type.string",
+      "title": "Location of the downloads folder",
+      "target": "xdg.userDirs.download",
+      "scope": "u",
+      "expression": "$path.downloads",
+      "detail": "Absolute path. Requires userDirs.enable = true. Does not move existing files.",
+      "condition": null
+    },
+    {
+      "name": "music",
+      "type": "$type.string",
+      "title": "Location of the music folder",
+      "target": "xdg.userDirs.music",
+      "scope": "u",
+      "expression": "$path.music",
+      "detail": "Absolute path. Requires userDirs.enable = true. Does not move existing files.",
+      "condition": null
+    },
+    {
+      "name": "pictures",
+      "type": "$type.string",
+      "title": "Location of the pictures folder",
+      "target": "xdg.userDirs.pictures",
+      "scope": "u",
+      "expression": "$path.pictures",
+      "detail": "Absolute path. Requires userDirs.enable = true. Does not move existing files.",
+      "condition": null
+    },
+    {
+      "name": "videos",
+      "type": "$type.string",
+      "title": "Location of the videos folder",
+      "target": "xdg.userDirs.videos",
+      "scope": "u",
+      "expression": "$path.videos",
+      "detail": "Absolute path. Requires userDirs.enable = true. Does not move existing files.",
+      "condition": null
+    },
+    {
+      "name": "templates",
+      "type": "$type.string",
+      "title": "Location of the templates folder",
+      "target": "xdg.userDirs.templates",
+      "scope": "u",
+      "expression": "$path.templates",
+      "detail": "Absolute path. Requires userDirs.enable = true. Does not move existing files.",
+      "condition": null
+    },
+    {
+      "name": "publicShare",
+      "type": "$type.string",
+      "title": "Location of the publicShare folder",
+      "target": "xdg.userDirs.publicShare",
+      "scope": "u",
+      "expression": "$path.publicShare",
+      "detail": "Absolute path. Requires userDirs.enable = true. Does not move existing files.",
+      "condition": null
+    },
+    {
+      "name": "projects",
+      "type": "$type.string",
+      "title": "Location of the projects folder",
+      "target": "xdg.userDirs.projects",
+      "scope": "u",
+      "expression": "$path.projects",
+      "detail": "Absolute path. Requires userDirs.enable = true. Does not move existing files.",
+      "condition": null
+    }
+  ],
+  "defaultApps": [
+    {
+      "name": "enable",
+      "type": "$type.boolean",
+      "title": "Manage default applications",
+      "target": "xdg.mimeApps.enable",
+      "scope": "u",
+      "expression": "$path.enable",
+      "detail": "",
+      "condition": null
+    },
+    {
+      "name": "browser",
+      "type": "$type.string",
+      "title": "Desktop application for browser",
+      "target": "xdg.mimeApps.defaultApplications.\"text/html\";xdg.mimeApps.defaultApplications.\"x-scheme-handler/http\";xdg.mimeApps.defaultApplications.\"x-scheme-handler/https\"",
+      "scope": "u",
+      "expression": "[ $path.browser ]",
+      "detail": "An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application.",
+      "condition": null
+    },
+    {
+      "name": "email",
+      "type": "$type.string",
+      "title": "Desktop application for email",
+      "target": "xdg.mimeApps.defaultApplications.\"x-scheme-handler/mailto\"",
+      "scope": "u",
+      "expression": "[ $path.email ]",
+      "detail": "An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application.",
+      "condition": null
+    },
+    {
+      "name": "fileManager",
+      "type": "$type.string",
+      "title": "Desktop application for fileManager",
+      "target": "xdg.mimeApps.defaultApplications.\"inode/directory\"",
+      "scope": "u",
+      "expression": "[ $path.fileManager ]",
+      "detail": "An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application.",
+      "condition": null
+    },
+    {
+      "name": "textEditor",
+      "type": "$type.string",
+      "title": "Desktop application for textEditor",
+      "target": "xdg.mimeApps.defaultApplications.\"text/plain\"",
+      "scope": "u",
+      "expression": "[ $path.textEditor ]",
+      "detail": "An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application.",
+      "condition": null
+    },
+    {
+      "name": "pdfViewer",
+      "type": "$type.string",
+      "title": "Desktop application for pdfViewer",
+      "target": "xdg.mimeApps.defaultApplications.\"application/pdf\"",
+      "scope": "u",
+      "expression": "[ $path.pdfViewer ]",
+      "detail": "An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application.",
+      "condition": null
+    },
+    {
+      "name": "imageViewer",
+      "type": "$type.string",
+      "title": "Desktop application for imageViewer",
+      "target": "xdg.mimeApps.defaultApplications.\"image/png\";xdg.mimeApps.defaultApplications.\"image/jpeg\";xdg.mimeApps.defaultApplications.\"image/webp\";xdg.mimeApps.defaultApplications.\"image/gif\"",
+      "scope": "u",
+      "expression": "[ $path.imageViewer ]",
+      "detail": "An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application.",
+      "condition": null
+    },
+    {
+      "name": "musicPlayer",
+      "type": "$type.string",
+      "title": "Desktop application for musicPlayer",
+      "target": "xdg.mimeApps.defaultApplications.\"audio/mpeg\";xdg.mimeApps.defaultApplications.\"audio/flac\";xdg.mimeApps.defaultApplications.\"audio/ogg\"",
+      "scope": "u",
+      "expression": "[ $path.musicPlayer ]",
+      "detail": "An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application.",
+      "condition": null
+    },
+    {
+      "name": "videoPlayer",
+      "type": "$type.string",
+      "title": "Desktop application for videoPlayer",
+      "target": "xdg.mimeApps.defaultApplications.\"video/mp4\";xdg.mimeApps.defaultApplications.\"video/webm\";xdg.mimeApps.defaultApplications.\"video/x-matroska\"",
+      "scope": "u",
+      "expression": "[ $path.videoPlayer ]",
+      "detail": "An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application.",
+      "condition": null
+    }
+  ],
+  "fonts": [
+    {
+      "name": "enable",
+      "type": "$type.boolean",
+      "title": "Manage personal font preferences",
+      "target": "fonts.fontconfig.enable",
+      "scope": "u",
+      "expression": "$path.enable",
+      "detail": "The system must permit user font configuration.",
+      "condition": null
+    },
+    {
+      "name": "sansSerifFamilies",
+      "type": "$type.list [ $type.string ]",
+      "title": "Preferred sansSerif font families",
+      "target": "fonts.fontconfig.defaultFonts.sansSerif",
+      "scope": "u",
+      "expression": "$path.sansSerifFamilies",
+      "detail": "Ordered installed font family names. Requires fonts.enable = true; does not install fonts.",
+      "condition": null
+    },
+    {
+      "name": "serifFamilies",
+      "type": "$type.list [ $type.string ]",
+      "title": "Preferred serif font families",
+      "target": "fonts.fontconfig.defaultFonts.serif",
+      "scope": "u",
+      "expression": "$path.serifFamilies",
+      "detail": "Ordered installed font family names. Requires fonts.enable = true; does not install fonts.",
+      "condition": null
+    },
+    {
+      "name": "monospaceFamilies",
+      "type": "$type.list [ $type.string ]",
+      "title": "Preferred monospace font families",
+      "target": "fonts.fontconfig.defaultFonts.monospace",
+      "scope": "u",
+      "expression": "$path.monospaceFamilies",
+      "detail": "Ordered installed font family names. Requires fonts.enable = true; does not install fonts.",
+      "condition": null
+    },
+    {
+      "name": "emojiFamilies",
+      "type": "$type.list [ $type.string ]",
+      "title": "Preferred emoji font families",
+      "target": "fonts.fontconfig.defaultFonts.emoji",
+      "scope": "u",
+      "expression": "$path.emojiFamilies",
+      "detail": "Ordered installed font family names. Requires fonts.enable = true; does not install fonts.",
+      "condition": null
+    },
+    {
+      "name": "smoothEdges",
+      "type": "$type.boolean",
+      "title": "Smooth the edges of text",
+      "target": "fonts.fontconfig.antialiasing",
+      "scope": "u",
+      "expression": "$path.smoothEdges",
+      "detail": "Requires fonts.enable = true.",
+      "condition": null
+    },
+    {
+      "name": "pixelAlignmentStrength",
+      "type": "$type.enum [ \"none\" \"slight\" \"medium\" \"full\" ]",
+      "title": "Text hinting strength",
+      "target": "fonts.fontconfig.hinting",
+      "scope": "u",
+      "expression": "$path.pixelAlignmentStrength",
+      "detail": "Requires fonts.enable = true.",
+      "condition": null
+    },
+    {
+      "name": "screenSubpixelLayout",
+      "type": "$type.enum [ \"none\" \"rgb\" \"bgr\" \"vertical-rgb\" \"vertical-bgr\" ]",
+      "title": "Screen subpixel arrangement",
+      "target": "fonts.fontconfig.subpixelRendering",
+      "scope": "u",
+      "expression": "$path.screenSubpixelLayout",
+      "detail": "Requires fonts.enable = true.",
+      "condition": null
+    }
+  ],
+  "theming/gnome": [
+    {
+      "name": "appearance.animations",
+      "type": "$type.boolean",
+      "title": "Animations",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"enable-animations\"",
+      "scope": "u",
+      "expression": "$path.appearance.animations",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "appearance.textScale",
+      "type": "$type.float",
+      "title": "Text scale",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"text-scaling-factor\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkDouble ($path.appearance.textScale)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "appearance.interfaceFont",
+      "type": "$type.string",
+      "title": "Interface font",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"font-name\"",
+      "scope": "u",
+      "expression": "$path.appearance.interfaceFont",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "appearance.documentFont",
+      "type": "$type.string",
+      "title": "Document font",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"document-font-name\"",
+      "scope": "u",
+      "expression": "$path.appearance.documentFont",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "appearance.monospaceFont",
+      "type": "$type.string",
+      "title": "Monospace font",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"monospace-font-name\"",
+      "scope": "u",
+      "expression": "$path.appearance.monospaceFont",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "appearance.cursorSize",
+      "type": "$type.int",
+      "title": "Cursor size",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"cursor-size\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.appearance.cursorSize)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "appearance.cursorTheme",
+      "type": "$type.string",
+      "title": "Cursor theme",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"cursor-theme\"",
+      "scope": "u",
+      "expression": "$path.appearance.cursorTheme",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "appearance.iconTheme",
+      "type": "$type.string",
+      "title": "Icon theme",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"icon-theme\"",
+      "scope": "u",
+      "expression": "$path.appearance.iconTheme",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "showBatteryPercentage",
+      "type": "$type.boolean",
+      "title": "Show battery percentage",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"show-battery-percentage\"",
+      "scope": "u",
+      "expression": "$path.showBatteryPercentage",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "clock.format",
+      "type": "$type.enum [ \"24h\" \"12h\" ]",
+      "title": "Format",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"clock-format\"",
+      "scope": "u",
+      "expression": "$path.clock.format",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "clock.showWeekday",
+      "type": "$type.boolean",
+      "title": "Show weekday",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"clock-show-weekday\"",
+      "scope": "u",
+      "expression": "$path.clock.showWeekday",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "clock.showDate",
+      "type": "$type.boolean",
+      "title": "Show date",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"clock-show-date\"",
+      "scope": "u",
+      "expression": "$path.clock.showDate",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "clock.showSeconds",
+      "type": "$type.boolean",
+      "title": "Show seconds",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"clock-show-seconds\"",
+      "scope": "u",
+      "expression": "$path.clock.showSeconds",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "hotCorners",
+      "type": "$type.boolean",
+      "title": "Hot corners",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"enable-hot-corners\"",
+      "scope": "u",
+      "expression": "$path.hotCorners",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "middleClickPaste",
+      "type": "$type.boolean",
+      "title": "Middle click paste",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"gtk-enable-primary-paste\"",
+      "scope": "u",
+      "expression": "$path.middleClickPaste",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "clock.showWeekNumbers",
+      "type": "$type.boolean",
+      "title": "Show week numbers",
+      "target": "dconf.settings.\"org/gnome/desktop/calendar\".\"show-weekdate\"",
+      "scope": "u",
+      "expression": "$path.clock.showWeekNumbers",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "notifications.banners",
+      "type": "$type.boolean",
+      "title": "Banners",
+      "target": "dconf.settings.\"org/gnome/desktop/notifications\".\"show-banners\"",
+      "scope": "u",
+      "expression": "$path.notifications.banners",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "notifications.onLockScreen",
+      "type": "$type.boolean",
+      "title": "On lock screen",
+      "target": "dconf.settings.\"org/gnome/desktop/notifications\".\"show-in-lock-screen\"",
+      "scope": "u",
+      "expression": "$path.notifications.onLockScreen",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "privacy.rememberRecentFiles",
+      "type": "$type.boolean",
+      "title": "Remember recent files",
+      "target": "dconf.settings.\"org/gnome/desktop/privacy\".\"remember-recent-files\"",
+      "scope": "u",
+      "expression": "$path.privacy.rememberRecentFiles",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "privacy.recentFilesDays",
+      "type": "$type.int",
+      "title": "Recent files days",
+      "target": "dconf.settings.\"org/gnome/desktop/privacy\".\"recent-files-max-age\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.privacy.recentFilesDays)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "privacy.removeOldTrash",
+      "type": "$type.boolean",
+      "title": "Remove old trash",
+      "target": "dconf.settings.\"org/gnome/desktop/privacy\".\"remove-old-trash-files\"",
+      "scope": "u",
+      "expression": "$path.privacy.removeOldTrash",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "privacy.removeOldTemporaryFiles",
+      "type": "$type.boolean",
+      "title": "Remove old temporary files",
+      "target": "dconf.settings.\"org/gnome/desktop/privacy\".\"remove-old-temp-files\"",
+      "scope": "u",
+      "expression": "$path.privacy.removeOldTemporaryFiles",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "privacy.cleanupAgeDays",
+      "type": "$type.int",
+      "title": "Cleanup age days",
+      "target": "dconf.settings.\"org/gnome/desktop/privacy\".\"old-files-age\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkUint32 ($path.privacy.cleanupAgeDays)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "privacy.reportTechnicalProblems",
+      "type": "$type.boolean",
+      "title": "Report technical problems",
+      "target": "dconf.settings.\"org/gnome/desktop/privacy\".\"report-technical-problems\"",
+      "scope": "u",
+      "expression": "$path.privacy.reportTechnicalProblems",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "power.screenBlankSeconds",
+      "type": "$type.int",
+      "title": "Screen blank seconds",
+      "target": "dconf.settings.\"org/gnome/desktop/session\".\"idle-delay\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkUint32 ($path.power.screenBlankSeconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "security.lockScreen",
+      "type": "$type.boolean",
+      "title": "Lock screen",
+      "target": "dconf.settings.\"org/gnome/desktop/screensaver\".\"lock-enabled\"",
+      "scope": "u",
+      "expression": "$path.security.lockScreen",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "security.lockDelaySeconds",
+      "type": "$type.int",
+      "title": "Lock delay seconds",
+      "target": "dconf.settings.\"org/gnome/desktop/screensaver\".\"lock-delay\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkUint32 ($path.security.lockDelaySeconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "mouse.speed",
+      "type": "$type.float",
+      "title": "Speed",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/mouse\".\"speed\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkDouble ($path.mouse.speed)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "mouse.acceleration",
+      "type": "$type.enum [ \"default\" \"flat\" \"adaptive\" ]",
+      "title": "Acceleration",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/mouse\".\"accel-profile\"",
+      "scope": "u",
+      "expression": "$path.mouse.acceleration",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "mouse.leftHanded",
+      "type": "$type.boolean",
+      "title": "Left handed",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/mouse\".\"left-handed\"",
+      "scope": "u",
+      "expression": "$path.mouse.leftHanded",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "mouse.naturalScrolling",
+      "type": "$type.boolean",
+      "title": "Natural scrolling",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/mouse\".\"natural-scroll\"",
+      "scope": "u",
+      "expression": "$path.mouse.naturalScrolling",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.tapToClick",
+      "type": "$type.boolean",
+      "title": "Tap to click",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"tap-to-click\"",
+      "scope": "u",
+      "expression": "$path.touchpad.tapToClick",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.naturalScrolling",
+      "type": "$type.boolean",
+      "title": "Natural scrolling",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"natural-scroll\"",
+      "scope": "u",
+      "expression": "$path.touchpad.naturalScrolling",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.speed",
+      "type": "$type.float",
+      "title": "Speed",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"speed\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkDouble ($path.touchpad.speed)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.acceleration",
+      "type": "$type.enum [ \"default\" \"flat\" \"adaptive\" ]",
+      "title": "Acceleration",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"accel-profile\"",
+      "scope": "u",
+      "expression": "$path.touchpad.acceleration",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.disableWhileTyping",
+      "type": "$type.boolean",
+      "title": "Disable while typing",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"disable-while-typing\"",
+      "scope": "u",
+      "expression": "$path.touchpad.disableWhileTyping",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.twoFingerScrolling",
+      "type": "$type.boolean",
+      "title": "Two finger scrolling",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"two-finger-scrolling-enabled\"",
+      "scope": "u",
+      "expression": "$path.touchpad.twoFingerScrolling",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.edgeScrolling",
+      "type": "$type.boolean",
+      "title": "Edge scrolling",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"edge-scrolling-enabled\"",
+      "scope": "u",
+      "expression": "$path.touchpad.edgeScrolling",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.tapAndDrag",
+      "type": "$type.boolean",
+      "title": "Tap and drag",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"tap-and-drag\"",
+      "scope": "u",
+      "expression": "$path.touchpad.tapAndDrag",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.dragLock",
+      "type": "$type.boolean",
+      "title": "Drag lock",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"tap-and-drag-lock\"",
+      "scope": "u",
+      "expression": "$path.touchpad.dragLock",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.clickMethod",
+      "type": "$type.enum [ \"default\" \"none\" \"areas\" \"fingers\" ]",
+      "title": "Click method",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"click-method\"",
+      "scope": "u",
+      "expression": "$path.touchpad.clickMethod",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.whenToUse",
+      "type": "$type.enum [ \"enabled\" \"disabled\" \"disabled-on-external-mouse\" ]",
+      "title": "When to use",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"send-events\"",
+      "scope": "u",
+      "expression": "$path.touchpad.whenToUse",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "touchpad.leftHanded",
+      "type": "$type.enum [ \"right\" \"left\" \"mouse\" ]",
+      "title": "Left handed",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/touchpad\".\"left-handed\"",
+      "scope": "u",
+      "expression": "$path.touchpad.leftHanded",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "keyboard.repeatKeys",
+      "type": "$type.boolean",
+      "title": "Repeat keys",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/keyboard\".\"repeat\"",
+      "scope": "u",
+      "expression": "$path.keyboard.repeatKeys",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "keyboard.repeatDelayMilliseconds",
+      "type": "$type.int",
+      "title": "Repeat delay milliseconds",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/keyboard\".\"delay\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkUint32 ($path.keyboard.repeatDelayMilliseconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "keyboard.repeatIntervalMilliseconds",
+      "type": "$type.int",
+      "title": "Repeat interval milliseconds",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/keyboard\".\"repeat-interval\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkUint32 ($path.keyboard.repeatIntervalMilliseconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "windows.focus",
+      "type": "$type.enum [ \"click\" \"sloppy\" \"mouse\" ]",
+      "title": "Focus",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"focus-mode\"",
+      "scope": "u",
+      "expression": "$path.windows.focus",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "windows.raiseOnFocus",
+      "type": "$type.boolean",
+      "title": "Raise on focus",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"auto-raise\"",
+      "scope": "u",
+      "expression": "$path.windows.raiseOnFocus",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "windows.raiseDelayMilliseconds",
+      "type": "$type.int",
+      "title": "Raise delay milliseconds",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"auto-raise-delay\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.windows.raiseDelayMilliseconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "windows.titlebarButtons",
+      "type": "$type.string",
+      "title": "Titlebar buttons",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"button-layout\"",
+      "scope": "u",
+      "expression": "$path.windows.titlebarButtons",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "windows.doubleClickTitlebar",
+      "type": "$type.enum [ \"toggle-shade\" \"toggle-maximize\" \"toggle-maximize-horizontally\" \"toggle-maximize-vertically\" \"minimize\" \"none\" \"lower\" \"menu\" ]",
+      "title": "Double click titlebar",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"action-double-click-titlebar\"",
+      "scope": "u",
+      "expression": "$path.windows.doubleClickTitlebar",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "workspaces.count",
+      "type": "$type.int",
+      "title": "Count",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"num-workspaces\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.workspaces.count)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "workspaces.names",
+      "type": "$type.list [ $type.string ]",
+      "title": "Names",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"workspace-names\"",
+      "scope": "u",
+      "expression": "if $path.workspaces.names == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.workspaces.names",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.showMenu",
+      "type": "$type.boolean",
+      "title": "Always show the accessibility menu",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y\".\"always-show-universal-access-status\"",
+      "scope": "u",
+      "expression": "$path.accessibility.showMenu",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.showTextCursor",
+      "type": "$type.boolean",
+      "title": "Show the text cursor even when navigation is inactive",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y\".\"always-show-text-caret\"",
+      "scope": "u",
+      "expression": "$path.accessibility.showTextCursor",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.statusShapes",
+      "type": "$type.boolean",
+      "title": "Use shapes as well as color to indicate status",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/interface\".\"show-status-shapes\"",
+      "scope": "u",
+      "expression": "$path.accessibility.statusShapes",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.motionPreference",
+      "type": "$type.enum [ \"no-preference\" \"reduce\" ]",
+      "title": "Preferred amount of interface motion",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/interface\".\"reduced-motion\"",
+      "scope": "u",
+      "expression": "$path.accessibility.motionPreference",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.keyboardShortcuts",
+      "type": "$type.boolean",
+      "title": "Allow keyboard shortcuts to toggle accessibility features",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"enable\"",
+      "scope": "u",
+      "expression": "$path.accessibility.keyboardShortcuts",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.announceFeatureChanges",
+      "type": "$type.boolean",
+      "title": "Beep when keyboard accessibility changes",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"feature-state-change-beep\"",
+      "scope": "u",
+      "expression": "$path.accessibility.announceFeatureChanges",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.disableAfterInactivity",
+      "type": "$type.boolean",
+      "title": "Disable keyboard accessibility after inactivity",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"timeout-enable\"",
+      "scope": "u",
+      "expression": "$path.accessibility.disableAfterInactivity",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.inactivityTimeoutSeconds",
+      "type": "$type.int",
+      "title": "Seconds of inactivity before disabling keyboard accessibility",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"disable-timeout\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.accessibility.inactivityTimeoutSeconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.announceRejectedRepeats",
+      "type": "$type.boolean",
+      "title": "Beep when an accidental repeated key is ignored",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"bouncekeys-beep-reject\"",
+      "scope": "u",
+      "expression": "$path.accessibility.announceRejectedRepeats",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.keyboardMouseSpeed",
+      "type": "$type.int",
+      "title": "Maximum keyboard-controlled pointer speed in pixels per second",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"mousekeys-max-speed\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.accessibility.keyboardMouseSpeed)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.keyboardMouseAccelerationMilliseconds",
+      "type": "$type.int",
+      "title": "Time for the keyboard-controlled pointer to reach full speed",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"mousekeys-accel-time\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.accessibility.keyboardMouseAccelerationMilliseconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.keyboardMouseDelayMilliseconds",
+      "type": "$type.int",
+      "title": "Delay before moving the pointer with the keyboard",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"mousekeys-init-delay\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.accessibility.keyboardMouseDelayMilliseconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.announceSlowKeyPress",
+      "type": "$type.boolean",
+      "title": "Beep when a slow key is first pressed",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"slowkeys-beep-press\"",
+      "scope": "u",
+      "expression": "$path.accessibility.announceSlowKeyPress",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.announceSlowKeyAcceptance",
+      "type": "$type.boolean",
+      "title": "Beep when a slow key is accepted",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"slowkeys-beep-accept\"",
+      "scope": "u",
+      "expression": "$path.accessibility.announceSlowKeyAcceptance",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.announceSlowKeyRejection",
+      "type": "$type.boolean",
+      "title": "Beep when a slow key is rejected",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"slowkeys-beep-reject\"",
+      "scope": "u",
+      "expression": "$path.accessibility.announceSlowKeyRejection",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.releaseStickyKeysWithTwoKeys",
+      "type": "$type.boolean",
+      "title": "Disable sticky keys when two keys are pressed together",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"stickykeys-two-key-off\"",
+      "scope": "u",
+      "expression": "$path.accessibility.releaseStickyKeysWithTwoKeys",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.announceStickyModifiers",
+      "type": "$type.boolean",
+      "title": "Beep when a sticky modifier key is pressed",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"stickykeys-modifier-beep\"",
+      "scope": "u",
+      "expression": "$path.accessibility.announceStickyModifiers",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.announceLockKeys",
+      "type": "$type.boolean",
+      "title": "Beep when Caps Lock or Num Lock changes",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"togglekeys-enable\"",
+      "scope": "u",
+      "expression": "$path.accessibility.announceLockKeys",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.pointerTracking",
+      "type": "$type.enum [ \"none\" \"centered\" \"proportional\" \"push\" ]",
+      "title": "How the magnified view follows the pointer",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"mouse-tracking\"",
+      "scope": "u",
+      "expression": "$path.magnification.pointerTracking",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.focusTracking",
+      "type": "$type.enum [ \"none\" \"centered\" \"proportional\" \"push\" ]",
+      "title": "How the magnified view follows keyboard focus",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"focus-tracking\"",
+      "scope": "u",
+      "expression": "$path.magnification.focusTracking",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.textCursorTracking",
+      "type": "$type.enum [ \"none\" \"centered\" \"proportional\" \"push\" ]",
+      "title": "How the magnified view follows the text cursor",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"caret-tracking\"",
+      "scope": "u",
+      "expression": "$path.magnification.textCursorTracking",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.screenPosition",
+      "type": "$type.enum [ \"none\" \"full-screen\" \"top-half\" \"bottom-half\" \"left-half\" \"right-half\" ]",
+      "title": "Area of the screen used for magnification",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"screen-position\"",
+      "scope": "u",
+      "expression": "$path.magnification.screenPosition",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.zoom",
+      "type": "$type.float",
+      "title": "Magnification factor",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"mag-factor\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkDouble ($path.magnification.zoom)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.followPointerLens",
+      "type": "$type.boolean",
+      "title": "Move the magnifier lens with the pointer",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"lens-mode\"",
+      "scope": "u",
+      "expression": "$path.magnification.followPointerLens",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.scrollBeyondEdges",
+      "type": "$type.boolean",
+      "title": "Allow magnified content to scroll beyond screen edges",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"scroll-at-edges\"",
+      "scope": "u",
+      "expression": "$path.magnification.scrollBeyondEdges",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.showCrosshairs",
+      "type": "$type.boolean",
+      "title": "Show crosshairs around the pointer",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"show-cross-hairs\"",
+      "scope": "u",
+      "expression": "$path.magnification.showCrosshairs",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.crosshairThicknessPixels",
+      "type": "$type.int",
+      "title": "Crosshair line thickness in pixels",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"cross-hairs-thickness\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.magnification.crosshairThicknessPixels)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.crosshairColor",
+      "type": "$type.string",
+      "title": "Crosshair color",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"cross-hairs-color\"",
+      "scope": "u",
+      "expression": "$path.magnification.crosshairColor",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.crosshairOpacity",
+      "type": "$type.float",
+      "title": "Crosshair opacity from transparent to opaque",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"cross-hairs-opacity\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkDouble ($path.magnification.crosshairOpacity)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.crosshairLengthPixels",
+      "type": "$type.int",
+      "title": "Crosshair line length in pixels",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"cross-hairs-length\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.magnification.crosshairLengthPixels)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.crosshairCenterGap",
+      "type": "$type.boolean",
+      "title": "Leave a gap around the pointer at the crosshair center",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"cross-hairs-clip\"",
+      "scope": "u",
+      "expression": "$path.magnification.crosshairCenterGap",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.invertBrightness",
+      "type": "$type.boolean",
+      "title": "Invert brightness in the magnified view",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"invert-lightness\"",
+      "scope": "u",
+      "expression": "$path.magnification.invertBrightness",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "magnification.colorSaturation",
+      "type": "$type.float",
+      "title": "Color saturation of the magnified view",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/magnifier\".\"color-saturation\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkDouble ($path.magnification.colorSaturation)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.hoverClick",
+      "type": "$type.boolean",
+      "title": "Click automatically when the pointer stops moving",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/mouse\".\"dwell-click-enabled\"",
+      "scope": "u",
+      "expression": "$path.accessibility.hoverClick",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.hoverClickDelaySeconds",
+      "type": "$type.float",
+      "title": "Seconds to wait before clicking a stationary pointer",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/mouse\".\"dwell-time\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkDouble ($path.accessibility.hoverClickDelaySeconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.hoverClickMovementPixels",
+      "type": "$type.int",
+      "title": "Pointer movement allowed before restarting the hover-click timer",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/mouse\".\"dwell-threshold\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.accessibility.hoverClickMovementPixels)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.showHoverClickSelector",
+      "type": "$type.boolean",
+      "title": "Show the selector for hover-click actions",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/mouse\".\"click-type-window-visible\"",
+      "scope": "u",
+      "expression": "$path.accessibility.showHoverClickSelector",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.holdForRightClick",
+      "type": "$type.boolean",
+      "title": "Perform a right-click by holding the primary button",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/mouse\".\"secondary-click-enabled\"",
+      "scope": "u",
+      "expression": "$path.accessibility.holdForRightClick",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.rightClickHoldSeconds",
+      "type": "$type.float",
+      "title": "Seconds to hold the primary button for a right-click",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/mouse\".\"secondary-click-time\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkDouble ($path.accessibility.rightClickHoldSeconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "keyboard.rememberNumberLock",
+      "type": "$type.boolean",
+      "title": "Restore the previous Num Lock state",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/keyboard\".\"remember-numlock-state\"",
+      "scope": "u",
+      "expression": "$path.keyboard.rememberNumberLock",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "keyboard.numberLock",
+      "type": "$type.boolean",
+      "title": "Default Num Lock state",
+      "target": "dconf.settings.\"org/gnome/desktop/peripherals/keyboard\".\"numlock-state\"",
+      "scope": "u",
+      "expression": "$path.keyboard.numberLock",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "windows.raiseOnClick",
+      "type": "$type.boolean",
+      "title": "Bring windows to the front when clicked",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"raise-on-click\"",
+      "scope": "u",
+      "expression": "$path.windows.raiseOnClick",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "sound.systemBell",
+      "type": "$type.boolean",
+      "title": "Play a sound for the system bell",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"audible-bell\"",
+      "scope": "u",
+      "expression": "$path.sound.systemBell",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.flashForBell",
+      "type": "$type.boolean",
+      "title": "Flash the screen or window for the system bell",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"visual-bell\"",
+      "scope": "u",
+      "expression": "$path.accessibility.flashForBell",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.bellFlashArea",
+      "type": "$type.enum [ \"fullscreen-flash\" \"frame-flash\" ]",
+      "title": "Area that flashes for the system bell",
+      "target": "dconf.settings.\"org/gnome/desktop/wm/preferences\".\"visual-bell-type\"",
+      "scope": "u",
+      "expression": "$path.accessibility.bellFlashArea",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.openCalculator",
+      "type": "$type.list [ $type.string ]",
+      "title": "Open the calculator",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"calculator\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.openCalculator == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openCalculator",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.openSettings",
+      "type": "$type.list [ $type.string ]",
+      "title": "Open desktop settings",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"control-center\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.openSettings == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openSettings",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.openEmail",
+      "type": "$type.list [ $type.string ]",
+      "title": "Open the default email application",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"email\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.openEmail == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openEmail",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.ejectMedia",
+      "type": "$type.list [ $type.string ]",
+      "title": "Eject removable media",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"eject\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.ejectMedia == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.ejectMedia",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.openHelp",
+      "type": "$type.list [ $type.string ]",
+      "title": "Open desktop help",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"help\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.openHelp == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openHelp",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.openHomeFolder",
+      "type": "$type.list [ $type.string ]",
+      "title": "Open the home folder",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"home\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.openHomeFolder == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openHomeFolder",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.openMediaPlayer",
+      "type": "$type.list [ $type.string ]",
+      "title": "Open the default media player",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"media\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.openMediaPlayer == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openMediaPlayer",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.nextTrack",
+      "type": "$type.list [ $type.string ]",
+      "title": "Skip to the next track",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"next\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.nextTrack == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.nextTrack",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.pausePlayback",
+      "type": "$type.list [ $type.string ]",
+      "title": "Pause media playback",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"pause\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.pausePlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.pausePlayback",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.togglePlayback",
+      "type": "$type.list [ $type.string ]",
+      "title": "Start or pause media playback",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"play\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.togglePlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.togglePlayback",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.logOut",
+      "type": "$type.list [ $type.string ]",
+      "title": "Show the logout dialog",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"logout\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.logOut == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.logOut",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.restart",
+      "type": "$type.list [ $type.string ]",
+      "title": "Show the restart dialog",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"reboot\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.restart == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.restart",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.shutDown",
+      "type": "$type.list [ $type.string ]",
+      "title": "Show the shutdown dialog",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"shutdown\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.shutDown == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.shutDown",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.previousTrack",
+      "type": "$type.list [ $type.string ]",
+      "title": "Skip to the previous track",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"previous\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.previousTrack == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.previousTrack",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.lockScreen",
+      "type": "$type.list [ $type.string ]",
+      "title": "Lock the session",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"screensaver\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.lockScreen == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lockScreen",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.search",
+      "type": "$type.list [ $type.string ]",
+      "title": "Open desktop search",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"search\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.search == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.search",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.stopPlayback",
+      "type": "$type.list [ $type.string ]",
+      "title": "Stop media playback",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"stop\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.stopPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.stopPlayback",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.lowerVolume",
+      "type": "$type.list [ $type.string ]",
+      "title": "Lower the playback volume",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"volume-down\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.lowerVolume == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerVolume",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.muteAudio",
+      "type": "$type.list [ $type.string ]",
+      "title": "Mute or unmute playback",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"volume-mute\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.muteAudio == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.muteAudio",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.raiseVolume",
+      "type": "$type.list [ $type.string ]",
+      "title": "Raise the playback volume",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"volume-up\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.raiseVolume == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseVolume",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.lowerVolumeQuietly",
+      "type": "$type.list [ $type.string ]",
+      "title": "Lower volume without feedback sounds",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"volume-down-quiet\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.lowerVolumeQuietly == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerVolumeQuietly",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.muteAudioQuietly",
+      "type": "$type.list [ $type.string ]",
+      "title": "Toggle audio mute without feedback sounds",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"volume-mute-quiet\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.muteAudioQuietly == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.muteAudioQuietly",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.raiseVolumeQuietly",
+      "type": "$type.list [ $type.string ]",
+      "title": "Raise volume without feedback sounds",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"volume-up-quiet\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.raiseVolumeQuietly == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseVolumeQuietly",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.lowerVolumePrecisely",
+      "type": "$type.list [ $type.string ]",
+      "title": "Lower volume in smaller steps",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"volume-down-precise\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.lowerVolumePrecisely == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerVolumePrecisely",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.raiseVolumePrecisely",
+      "type": "$type.list [ $type.string ]",
+      "title": "Raise volume in smaller steps",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"volume-up-precise\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.raiseVolumePrecisely == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseVolumePrecisely",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.muteMicrophone",
+      "type": "$type.list [ $type.string ]",
+      "title": "Mute or unmute the microphone",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"mic-mute\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.muteMicrophone == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.muteMicrophone",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.openBrowser",
+      "type": "$type.list [ $type.string ]",
+      "title": "Open the default web browser",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"www\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.openBrowser == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openBrowser",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleScreenReader",
+      "type": "$type.list [ $type.string ]",
+      "title": "Turn the screen reader on or off",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"screenreader\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleScreenReader == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleScreenReader",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleScreenKeyboard",
+      "type": "$type.list [ $type.string ]",
+      "title": "Turn the on-screen keyboard on or off",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"on-screen-keyboard\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleScreenKeyboard == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleScreenKeyboard",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.increaseTextSize",
+      "type": "$type.list [ $type.string ]",
+      "title": "Increase desktop text size",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"increase-text-size\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.increaseTextSize == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.increaseTextSize",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.decreaseTextSize",
+      "type": "$type.list [ $type.string ]",
+      "title": "Decrease desktop text size",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"decrease-text-size\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.decreaseTextSize == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.decreaseTextSize",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleHighContrast",
+      "type": "$type.list [ $type.string ]",
+      "title": "Turn high contrast on or off",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"toggle-contrast\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleHighContrast == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleHighContrast",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleMagnifier",
+      "type": "$type.list [ $type.string ]",
+      "title": "Turn screen magnification on or off",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"magnifier\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleMagnifier == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleMagnifier",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.zoomIn",
+      "type": "$type.list [ $type.string ]",
+      "title": "Increase screen magnification",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"magnifier-zoom-in\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.zoomIn == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.zoomIn",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.zoomOut",
+      "type": "$type.list [ $type.string ]",
+      "title": "Decrease screen magnification",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"magnifier-zoom-out\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.zoomOut == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.zoomOut",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleTouchpad",
+      "type": "$type.list [ $type.string ]",
+      "title": "Turn the touchpad on or off",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"touchpad-toggle\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleTouchpad == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleTouchpad",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.rewindPlayback",
+      "type": "$type.list [ $type.string ]",
+      "title": "Skip backward within the current track",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"playback-rewind\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.rewindPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.rewindPlayback",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.fastForwardPlayback",
+      "type": "$type.list [ $type.string ]",
+      "title": "Skip forward within the current track",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"playback-forward\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.fastForwardPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.fastForwardPlayback",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleRepeatPlayback",
+      "type": "$type.list [ $type.string ]",
+      "title": "Turn playback repeat on or off",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"playback-repeat\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleRepeatPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleRepeatPlayback",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleShufflePlayback",
+      "type": "$type.list [ $type.string ]",
+      "title": "Turn shuffled playback on or off",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"playback-random\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleShufflePlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleShufflePlayback",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleScreenRotation",
+      "type": "$type.list [ $type.string ]",
+      "title": "Lock or unlock automatic screen rotation",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"rotate-video-lock\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleScreenRotation == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleScreenRotation",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.raiseKeyboardBrightness",
+      "type": "$type.list [ $type.string ]",
+      "title": "Brighten the keyboard backlight",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"keyboard-brightness-up\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.raiseKeyboardBrightness == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseKeyboardBrightness",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.lowerKeyboardBrightness",
+      "type": "$type.list [ $type.string ]",
+      "title": "Dim the keyboard backlight",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"keyboard-brightness-down\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.lowerKeyboardBrightness == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerKeyboardBrightness",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleKeyboardBacklight",
+      "type": "$type.list [ $type.string ]",
+      "title": "Turn the keyboard backlight on or off",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"keyboard-brightness-toggle\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleKeyboardBacklight == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleKeyboardBacklight",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.showBatteryStatus",
+      "type": "$type.list [ $type.string ]",
+      "title": "Show the battery status",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"battery-status\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.showBatteryStatus == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.showBatteryStatus",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleAirplaneMode",
+      "type": "$type.list [ $type.string ]",
+      "title": "Turn airplane mode on or off",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"rfkill\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleAirplaneMode == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleAirplaneMode",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "shortcuts.toggleBluetooth",
+      "type": "$type.list [ $type.string ]",
+      "title": "Turn Bluetooth radio transmission on or off",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/media-keys\".\"rfkill-bluetooth\"",
+      "scope": "u",
+      "expression": "if $path.shortcuts.toggleBluetooth == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleBluetooth",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.screenReader",
+      "type": "$type.boolean",
+      "title": "Screen reader",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/applications\".\"screen-reader-enabled\"",
+      "scope": "u",
+      "expression": "$path.accessibility.screenReader",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.screenKeyboard",
+      "type": "$type.boolean",
+      "title": "Screen keyboard",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/applications\".\"screen-keyboard-enabled\"",
+      "scope": "u",
+      "expression": "$path.accessibility.screenKeyboard",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.magnifier",
+      "type": "$type.boolean",
+      "title": "Magnifier",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/applications\".\"screen-magnifier-enabled\"",
+      "scope": "u",
+      "expression": "$path.accessibility.magnifier",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.stickyKeys",
+      "type": "$type.boolean",
+      "title": "Sticky keys",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"stickykeys-enable\"",
+      "scope": "u",
+      "expression": "$path.accessibility.stickyKeys",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.slowKeys",
+      "type": "$type.boolean",
+      "title": "Slow keys",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"slowkeys-enable\"",
+      "scope": "u",
+      "expression": "$path.accessibility.slowKeys",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.slowKeyDelayMilliseconds",
+      "type": "$type.int",
+      "title": "Slow key delay milliseconds",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"slowkeys-delay\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.accessibility.slowKeyDelayMilliseconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.ignoreRepeatedKeys",
+      "type": "$type.boolean",
+      "title": "Ignore repeated keys",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"bouncekeys-enable\"",
+      "scope": "u",
+      "expression": "$path.accessibility.ignoreRepeatedKeys",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.repeatKeyDelayMilliseconds",
+      "type": "$type.int",
+      "title": "Repeat key delay milliseconds",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"bouncekeys-delay\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.accessibility.repeatKeyDelayMilliseconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.keyboardMouse",
+      "type": "$type.boolean",
+      "title": "Keyboard mouse",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/keyboard\".\"mousekeys-enable\"",
+      "scope": "u",
+      "expression": "$path.accessibility.keyboardMouse",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "accessibility.highContrast",
+      "type": "$type.boolean",
+      "title": "High contrast",
+      "target": "dconf.settings.\"org/gnome/desktop/a11y/interface\".\"high-contrast\"",
+      "scope": "u",
+      "expression": "$path.accessibility.highContrast",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "sound.eventSounds",
+      "type": "$type.boolean",
+      "title": "Event sounds",
+      "target": "dconf.settings.\"org/gnome/desktop/sound\".\"event-sounds\"",
+      "scope": "u",
+      "expression": "$path.sound.eventSounds",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "sound.inputFeedback",
+      "type": "$type.boolean",
+      "title": "Input feedback",
+      "target": "dconf.settings.\"org/gnome/desktop/sound\".\"input-feedback-sounds\"",
+      "scope": "u",
+      "expression": "$path.sound.inputFeedback",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "sound.theme",
+      "type": "$type.string",
+      "title": "Theme",
+      "target": "dconf.settings.\"org/gnome/desktop/sound\".\"theme-name\"",
+      "scope": "u",
+      "expression": "$path.sound.theme",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "removableMedia.automount",
+      "type": "$type.boolean",
+      "title": "Automount",
+      "target": "dconf.settings.\"org/gnome/desktop/media-handling\".\"automount\"",
+      "scope": "u",
+      "expression": "$path.removableMedia.automount",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "removableMedia.openFolder",
+      "type": "$type.boolean",
+      "title": "Open folder",
+      "target": "dconf.settings.\"org/gnome/desktop/media-handling\".\"automount-open\"",
+      "scope": "u",
+      "expression": "$path.removableMedia.openFolder",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "removableMedia.neverAutorun",
+      "type": "$type.boolean",
+      "title": "Never autorun",
+      "target": "dconf.settings.\"org/gnome/desktop/media-handling\".\"autorun-never\"",
+      "scope": "u",
+      "expression": "$path.removableMedia.neverAutorun",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "nightLight.enable",
+      "type": "$type.boolean",
+      "title": "Enable",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/color\".\"night-light-enabled\"",
+      "scope": "u",
+      "expression": "$path.nightLight.enable",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "nightLight.temperature",
+      "type": "$type.int",
+      "title": "Temperature",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/color\".\"night-light-temperature\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkUint32 ($path.nightLight.temperature)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "nightLight.automaticSchedule",
+      "type": "$type.boolean",
+      "title": "Automatic schedule",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/color\".\"night-light-schedule-automatic\"",
+      "scope": "u",
+      "expression": "$path.nightLight.automaticSchedule",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "nightLight.startHour",
+      "type": "$type.float",
+      "title": "Start hour",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/color\".\"night-light-schedule-from\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkDouble ($path.nightLight.startHour)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "nightLight.endHour",
+      "type": "$type.float",
+      "title": "End hour",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/color\".\"night-light-schedule-to\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkDouble ($path.nightLight.endHour)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "power.dimWhenIdle",
+      "type": "$type.boolean",
+      "title": "Dim when idle",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/power\".\"idle-dim\"",
+      "scope": "u",
+      "expression": "$path.power.dimWhenIdle",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "power.batteryIdleAction",
+      "type": "$type.enum [ \"blank\" \"suspend\" \"shutdown\" \"hibernate\" \"interactive\" \"nothing\" \"logout\" ]",
+      "title": "Battery idle action",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/power\".\"sleep-inactive-battery-type\"",
+      "scope": "u",
+      "expression": "$path.power.batteryIdleAction",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "power.batteryIdleSeconds",
+      "type": "$type.int",
+      "title": "Battery idle seconds",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/power\".\"sleep-inactive-battery-timeout\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.power.batteryIdleSeconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "power.pluggedInIdleAction",
+      "type": "$type.enum [ \"blank\" \"suspend\" \"shutdown\" \"hibernate\" \"interactive\" \"nothing\" \"logout\" ]",
+      "title": "Plugged in idle action",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/power\".\"sleep-inactive-ac-type\"",
+      "scope": "u",
+      "expression": "$path.power.pluggedInIdleAction",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "power.pluggedInIdleSeconds",
+      "type": "$type.int",
+      "title": "Plugged in idle seconds",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/power\".\"sleep-inactive-ac-timeout\"",
+      "scope": "u",
+      "expression": "$lib.gvariant.mkInt32 ($path.power.pluggedInIdleSeconds)",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "power.ambientBrightness",
+      "type": "$type.boolean",
+      "title": "Ambient brightness",
+      "target": "dconf.settings.\"org/gnome/settings-daemon/plugins/power\".\"ambient-enabled\"",
+      "scope": "u",
+      "expression": "$path.power.ambientBrightness",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "defaultAccentColor",
+      "type": "$type.enum [ \"blue\" \"teal\" \"purple\" \"red\" \"orange\" \"yellow\" \"green\" \"pink\" \"grey\" ]",
+      "title": "Primary accent color for the interface",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"accent-color\"",
+      "scope": "u",
+      "expression": "$path.defaultAccentColor",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "defaultDarkMode",
+      "type": "$type.boolean",
+      "title": "Enable personal dark mode",
+      "target": "dconf.settings.\"org/gnome/desktop/interface\".\"color-scheme\"",
+      "scope": "u",
+      "expression": "if $path.defaultDarkMode then \"prefer-dark\" else \"prefer-light\"",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "dockItems",
+      "type": "$type.list [ $type.string ]",
+      "title": "Favorite applications in the dock",
+      "target": "dconf.settings.\"org/gnome/shell\".\"favorite-apps\"",
+      "scope": "u",
+      "expression": "if $path.dockItems == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.dockItems",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "windows.edgeTiling",
+      "type": "$type.boolean",
+      "title": "Tile windows when dragged to the screen edge",
+      "target": "dconf.settings.\"org/gnome/mutter\".\"edge-tiling\"",
+      "scope": "u",
+      "expression": "$path.windows.edgeTiling",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "windows.centerNewWindows",
+      "type": "$type.boolean",
+      "title": "Place new windows in the center of the display",
+      "target": "dconf.settings.\"org/gnome/mutter\".\"center-new-windows\"",
+      "scope": "u",
+      "expression": "$path.windows.centerNewWindows",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "workspaces.dynamic",
+      "type": "$type.boolean",
+      "title": "Create workspaces automatically as windows are opened",
+      "target": "dconf.settings.\"org/gnome/mutter\".\"dynamic-workspaces\"",
+      "scope": "u",
+      "expression": "$path.workspaces.dynamic",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "wallpaper.layout",
+      "type": "$type.enum [ \"none\" \"wallpaper\" \"centered\" \"scaled\" \"stretched\" \"zoom\" \"spanned\" ]",
+      "title": "Layout",
+      "target": "dconf.settings.\"org/gnome/desktop/background\".\"picture-options\"",
+      "scope": "u",
+      "expression": "$path.wallpaper.layout",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "wallpaper.primaryColor",
+      "type": "$type.string",
+      "title": "Primary color",
+      "target": "dconf.settings.\"org/gnome/desktop/background\".\"primary-color\"",
+      "scope": "u",
+      "expression": "$path.wallpaper.primaryColor",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "wallpaper.secondaryColor",
+      "type": "$type.string",
+      "title": "Secondary color",
+      "target": "dconf.settings.\"org/gnome/desktop/background\".\"secondary-color\"",
+      "scope": "u",
+      "expression": "$path.wallpaper.secondaryColor",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "wallpaper.shading",
+      "type": "$type.enum [ \"solid\" \"vertical\" \"horizontal\" ]",
+      "title": "Shading",
+      "target": "dconf.settings.\"org/gnome/desktop/background\".\"color-shading-type\"",
+      "scope": "u",
+      "expression": "$path.wallpaper.shading",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "wallpaper.lightImage",
+      "type": "$type.either [ $type.string $type.null ]",
+      "title": "Light image",
+      "target": "dconf.settings.\"org/gnome/desktop/background\".\"picture-uri\"",
+      "scope": "u",
+      "expression": "$path.wallpaper.lightImage",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    },
+    {
+      "name": "wallpaper.darkImage",
+      "type": "$type.either [ $type.string $type.null ]",
+      "title": "Dark image",
+      "target": "dconf.settings.\"org/gnome/desktop/background\".\"picture-uri-dark\"",
+      "scope": "u",
+      "expression": "$path.wallpaper.darkImage",
+      "detail": "Personal GNOME preference. Applies when using GNOME; does not enable or install the desktop.",
+      "condition": null
+    }
+  ]
+}

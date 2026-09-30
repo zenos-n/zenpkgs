@@ -1,0 +1,14 @@
+_meta = {
+  name = "fsatrace";
+  summary = "Filesystem access tracer";
+  description = ''
+    Filesystem access tracer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.5";
+  tags = [ "development" "filesystems" "tracing" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.fsatrace;

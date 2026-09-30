@@ -1,0 +1,14 @@
+_meta = {
+  name = "bore";
+  summary = "Rust tool to create TCP tunnels";
+  description = ''
+    Rust tool to create TCP tunnels.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0";
+  tags = [ "networking" "tunneling" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bore-cli;

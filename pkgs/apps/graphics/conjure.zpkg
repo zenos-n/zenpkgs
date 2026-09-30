@@ -1,0 +1,18 @@
+_meta = {
+  name = "Conjure";
+  summary = "Magically transform your images";
+  description = ''
+    Resize, crop, rotate, flip images, apply various filters and effects,
+    adjust levels and brightness, and much more. An intuitive tool for designers,
+    artists, or just someone who wants to enhance their images.
+    Built on top of the popular image processing library, ImageMagick with python
+    bindings from Wand.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.2";
+  tags = [ "graphics" "images" "processing" "editing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.conjure;

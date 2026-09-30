@@ -1,0 +1,14 @@
+_meta = {
+  name = "iredis";
+  summary = "Terminal Client for Redis with AutoCompletion and Syntax Highlighting";
+  description = ''
+    Terminal Client for Redis with AutoCompletion and Syntax Highlighting.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.16.1";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.iredis;

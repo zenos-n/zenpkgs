@@ -1,0 +1,14 @@
+_meta = {
+  name = "DCV";
+  summary = "TUI (Terminal User Interface) tool for monitoring Docker containers and Docker Compose applications";
+  description = ''
+    TUI (Terminal User Interface) tool for monitoring Docker containers and Docker Compose applications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.2";
+  tags = [ "containers" "docker" "monitoring" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dcv;

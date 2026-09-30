@@ -1,0 +1,14 @@
+_meta = {
+  name = "YubiKey Manager";
+  summary = "Command line tool for configuring any YubiKey over all USB transports";
+  description = ''
+    Command line tool for configuring any YubiKey over all USB transports.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.9.1";
+  tags = [ "security" "privacy" "authentication" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.yubikey-manager;

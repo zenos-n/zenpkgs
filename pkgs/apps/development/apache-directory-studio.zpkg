@@ -1,0 +1,14 @@
+_meta = {
+  name = "Apache Directory Studio";
+  summary = "Eclipse-based LDAP browser and directory client";
+  description = ''
+    Eclipse-based LDAP browser and directory client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0-M17";
+  tags = [ "development" "ldap" "networking" "administration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.apache-directory-studio;

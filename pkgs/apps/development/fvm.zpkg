@@ -1,0 +1,14 @@
+_meta = {
+  name = "Flutter Version Management";
+  summary = "Simple CLI to manage Flutter SDK versions";
+  description = ''
+    Simple CLI to manage Flutter SDK versions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.5";
+  tags = [ "development" "flutter" "version-management" "dart" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fvm;

@@ -1,0 +1,16 @@
+_meta = {
+  name = "Kubeshark";
+  summary = "API Traffic Viewer for Kubernetes";
+  description = ''
+    The API traffic viewer for Kubernetes providing real-time, protocol-aware visibility into Kubernetes’ internal network,
+    Think TCPDump and Wireshark re-invented for Kubernetes
+    capturing, dissecting and monitoring all traffic and payloads going in, out and across containers, pods, nodes and clusters.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "53.2.3";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kubeshark;

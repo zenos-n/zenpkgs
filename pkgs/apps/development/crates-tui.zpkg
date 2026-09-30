@@ -1,0 +1,14 @@
+_meta = {
+  name = "crates-tui";
+  summary = "TUI for exploring crates.io using Ratatui";
+  description = ''
+    TUI for exploring crates.io using Ratatui.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.25";
+  tags = [ "development" "rust" "crates" "discovery" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.crates-tui;

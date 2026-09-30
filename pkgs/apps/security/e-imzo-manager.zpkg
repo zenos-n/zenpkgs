@@ -1,0 +1,14 @@
+_meta = {
+  name = "E-IMZO Manager";
+  summary = "GTK application for managing E-IMZO keys";
+  description = ''
+    GTK application for managing E-IMZO keys.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "security" "identity" "keys" "uzbekistan" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.e-imzo-manager;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghgrab";
+  summary = "Simple, pretty terminal tool that lets you search and download files from GitHub without leaving your CLI";
+  description = ''
+    Simple, pretty terminal tool that lets you search and download files from GitHub without leaving your CLI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.2";
+  tags = [ "downloads" "github" "files" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghgrab;

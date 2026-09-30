@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-upstream";
+  summary = "Shortcut for `git push --set-upstream`";
+  description = ''
+    Shortcut for `git push --set-upstream`.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.0";
+  tags = [ "development" "git" "remotes" "branches" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-upstream;

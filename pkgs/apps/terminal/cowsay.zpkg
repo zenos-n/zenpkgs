@@ -1,0 +1,14 @@
+_meta = {
+  name = "cowsay";
+  summary = "Program which generates ASCII pictures of a cow with a message";
+  description = ''
+    Program which generates ASCII pictures of a cow with a message.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.8.4";
+  tags = [ "terminal" "text" "entertainment" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.cowsay;

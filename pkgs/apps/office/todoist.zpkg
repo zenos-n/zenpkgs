@@ -1,0 +1,14 @@
+_meta = {
+  name = "Todoist CLI";
+  summary = "Todoist CLI Client";
+  description = ''
+    Todoist CLI Client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.24.0";
+  tags = [ "office" "tasks" "organization" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.todoist;

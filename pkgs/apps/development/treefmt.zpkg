@@ -1,0 +1,24 @@
+_meta = {
+  name = "treefmt";
+  summary = "One CLI to format the code tree";
+  description = ''
+    [treefmt](https://github.com/numtide/treefmt) streamlines the process of applying formatters
+    to your project, making it a breeze with just one command line.
+
+    The `treefmt` package provides functions for configuring treefmt using
+    the module system, which are documented in the [treefmt section] of the
+    Nixpkgs Manual.
+
+    Alternatively, treefmt can be configured using [treefmt-nix].
+
+    [treefmt section]: https://nixos.org/manual/nixpkgs/unstable#treefmt
+    [treefmt-nix]: https://github.com/numtide/treefmt-nix
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.0";
+  tags = [ "development" "formatting" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.treefmt;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Certificate Viewer";
+  summary = "Admin tool to view and inspect multiple x509 Certificates";
+  description = ''
+    Admin tool to view and inspect multiple x509 Certificates.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.1";
+  tags = [ "security" "certificates" "x509" "inspection" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cert-viewer;

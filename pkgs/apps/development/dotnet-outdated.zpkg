@@ -1,0 +1,14 @@
+_meta = {
+  name = "dotnet-outdated";
+  summary = ".NET Core global tool to display and update outdated NuGet packages in a project";
+  description = ''
+    .NET Core global tool to display and update outdated NuGet packages in a project.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.7.1";
+  tags = [ "development" "dotnet" "nuget" "dependencies" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dotnet-outdated;

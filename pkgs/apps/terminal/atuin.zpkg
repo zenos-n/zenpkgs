@@ -1,0 +1,14 @@
+_meta = {
+  name = "Atuin";
+  summary = "Replacement for a shell history which records additional commands context with optional encrypted synchronization between machines";
+  description = ''
+    Replacement for a shell history which records additional commands context with optional encrypted synchronization between machines.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "18.15.2";
+  tags = [ "terminal" "command-line" "history" "search" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.atuin;

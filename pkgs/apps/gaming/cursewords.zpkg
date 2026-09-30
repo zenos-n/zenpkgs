@@ -1,0 +1,14 @@
+_meta = {
+  name = "cursewords";
+  summary = "Graphical command line program for solving crossword puzzles in the terminal";
+  description = ''
+    Graphical command line program for solving crossword puzzles in the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1";
+  tags = [ "gaming" "crossword" "puzzle" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.cursewords;

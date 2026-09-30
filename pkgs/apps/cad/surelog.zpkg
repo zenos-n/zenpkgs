@@ -1,0 +1,14 @@
+_meta = {
+  name = "Surelog";
+  summary = "SystemVerilog 2017 Pre-processor, Parser, Elaborator, UHDM Compiler";
+  description = ''
+    SystemVerilog 2017 Pre-processor, Parser, Elaborator, UHDM Compiler.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.86";
+  tags = [ "cad" "electronics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.surelog;

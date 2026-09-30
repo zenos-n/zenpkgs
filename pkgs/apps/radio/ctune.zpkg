@@ -1,0 +1,14 @@
+_meta = {
+  name = "ctune";
+  summary = "Nice terminal nCurses (tui) internet radio player for Linux, browse and search from api.radio-browser.info";
+  description = ''
+    Nice terminal nCurses (tui) internet radio player for Linux, browse and search from api.radio-browser.info.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.10";
+  tags = [ "radio" "internet-radio" "streaming" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.ctune;

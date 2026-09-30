@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glasskube";
+  summary = "Missing Package Manager for Kubernetes featuring a GUI and a CLI";
+  description = ''
+    Missing Package Manager for Kubernetes featuring a GUI and a CLI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.26.1";
+  tags = [ "containers" "kubernetes" "package-management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.glasskube;

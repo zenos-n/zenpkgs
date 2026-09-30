@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-pages CLI";
+  summary = "Command-line application for uploading a site to a git-pages server";
+  description = ''
+    Command-line application for uploading a site to a git-pages server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.10.1";
+  tags = [ "development" "git" "web" "deployment" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd0;
+};
+
+import $pkgs.legacy.git-pages-cli;

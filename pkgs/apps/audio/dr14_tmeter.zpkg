@@ -1,0 +1,14 @@
+_meta = {
+  name = "DR14 T.meter";
+  summary = "Compute the DR14 of a given audio file according to the procedure described by the Pleasurize Music Foundation";
+  description = ''
+    Compute the DR14 of a given audio file according to the procedure described by the Pleasurize Music Foundation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.16-unstable-2025-09-27";
+  tags = [ "audio" "dynamic-range" "analysis" "music" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.dr14_tmeter;

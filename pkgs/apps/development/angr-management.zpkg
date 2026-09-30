@@ -1,0 +1,14 @@
+_meta = {
+  name = "angr Management";
+  summary = "Graphical binary analysis tool powered by the angr binary analysis platform";
+  description = ''
+    Graphical binary analysis tool powered by the angr binary analysis platform.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.2.154";
+  tags = [ "development" "security" "binary-analysis" "reverse-engineering" "graphical" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.angr-management;

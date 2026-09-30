@@ -1,0 +1,14 @@
+_meta = {
+  name = "Avogadro";
+  summary = "Molecule editor and visualizer";
+  description = ''
+    Molecule editor and visualizer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0";
+  tags = [ "science" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.avogadro2;

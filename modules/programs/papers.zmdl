@@ -1,0 +1,253 @@
+_meta = {
+    name = "Document reading and annotation";
+    summary = "Document reading and annotation";
+    description = ''Document reading and annotation. '';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    zenosVersion = 1.0.0Na;
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure document reading and annotation";
+    summary = "Install and configure document reading and annotation";
+    description = ''Install and configure document reading and annotation. '';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.legacy.papers ];
+    assertions = [
+      { assertion = $path.pageCacheMebibytes >= 0 && $path.pageCacheMebibytes <= 4294967295; message = "programs.papers.pageCacheMebibytes must be between 0 and 4294967295."; }
+      { assertion = $path.zoomFactor > 0.0; message = "programs.papers.zoomFactor must be positive."; }
+    ];
+    dconf.settings = {
+      "org/gnome/papers"."override-restrictions" = $path.allowCopyAndPrint;
+      "org/gnome/papers"."allow-links-change-zoom" = $path.followLinkZoom;
+      "org/gnome/papers"."night-mode" = $path.darkDocumentView;
+      "org/gnome/papers"."page-cache-size" = $lib.gvariant.mkUint32 ($path.pageCacheMebibytes);
+      "org/gnome/papers/default"."enable-spellchecking" = $path.checkAnnotationSpelling;
+      "org/gnome/papers/default"."show-sidebar" = $path.showNavigationSidebar;
+      "org/gnome/papers/default"."continuous" = $path.continuousScrolling;
+      "org/gnome/papers/default"."dual-page" = $path.twoPages;
+      "org/gnome/papers/default"."dual-page-odd-left" = $path.firstPageOnLeft;
+      "org/gnome/papers/default"."fullscreen" = $path.fullscreen;
+      "org/gnome/papers/default"."sizing-mode" = if $path.pageSizing == "custom" then "free" else $path.pageSizing;
+      "org/gnome/papers/default"."zoom" = $lib.gvariant.mkDouble ($path.zoomFactor);
+      "org/gnome/papers/default"."annot-color" = $path.annotationColor;
+      "org/gnome/papers/default"."highlight-color" = $path.highlightColor;
+      "org/gnome/papers/default"."pen-color" = $path.drawingColor;
+      "org/gnome/papers/default"."text-color" = $path.textColor;
+    };
+  };
+};
+
+allowCopyAndPrint = {
+  _meta = {
+    name = "Allow copying and printing despite document permission flags";
+    summary = "Allow copying and printing despite document permission flags";
+    description = ''Allow copying and printing despite document permission flags. '';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
+};
+
+followLinkZoom = {
+  _meta = {
+    name = "Allow document links to change the zoom level";
+    summary = "Allow document links to change the zoom level";
+    description = ''Allow document links to change the zoom level. '';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
+};
+
+darkDocumentView = {
+  _meta = {
+    name = "Use the dark document viewing mode";
+    summary = "Use the dark document viewing mode";
+    description = ''Use the dark document viewing mode. '';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+pageCacheMebibytes = {
+  _meta = {
+    name = "Memory budget for rendered document pages";
+    summary = "Memory budget for rendered document pages";
+    description = ''Memory budget for rendered document pages. The budget is in mebibytes and can limit the maximum available zoom.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 200;
+  };
+};
+
+checkAnnotationSpelling = {
+  _meta = {
+    name = "Check spelling in notes and text forms";
+    summary = "Check spelling in notes and text forms";
+    description = ''Check spelling in notes and text forms. Saved preferences for individual documents can take precedence.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
+};
+
+showNavigationSidebar = {
+  _meta = {
+    name = "Show document navigation beside the pages";
+    summary = "Show document navigation beside the pages";
+    description = ''Show document navigation beside the pages. Saved preferences for individual documents can take precedence.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
+};
+
+continuousScrolling = {
+  _meta = {
+    name = "Scroll continuously between document pages";
+    summary = "Scroll continuously between document pages";
+    description = ''Scroll continuously between document pages. Saved preferences for individual documents can take precedence.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
+};
+
+twoPages = {
+  _meta = {
+    name = "Display two document pages side by side";
+    summary = "Display two document pages side by side";
+    description = ''Display two document pages side by side. Saved preferences for individual documents can take precedence.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+firstPageOnLeft = {
+  _meta = {
+    name = "Place the first page on the left in two-page view";
+    summary = "Place the first page on the left in two-page view";
+    description = ''Place the first page on the left in two-page view. Saved preferences for individual documents can take precedence.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+fullscreen = {
+  _meta = {
+    name = "Open documents in fullscreen view";
+    summary = "Open documents in fullscreen view";
+    description = ''Open documents in fullscreen view. Saved preferences for individual documents can take precedence.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+pageSizing = {
+  _meta = {
+    name = "How document pages fit the viewing area";
+    summary = "How document pages fit the viewing area";
+    description = ''How document pages fit the viewing area. '';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "fit-page" "fit-width" "custom" "automatic" ];
+    default = "automatic";
+  };
+};
+
+zoomFactor = {
+  _meta = {
+    name = "Default document magnification factor";
+    summary = "Default document magnification factor";
+    description = ''Default document magnification factor. One means original size; used with custom page sizing. Saved per-document preferences can take precedence.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 1.0;
+  };
+};
+
+annotationColor = {
+  _meta = {
+    name = "Default color for document annotations";
+    summary = "Default color for document annotations";
+    description = ''Default color for document annotations. Use a color name or color string supported by GTK.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "yellow";
+  };
+};
+
+highlightColor = {
+  _meta = {
+    name = "Default color for document highlights";
+    summary = "Default color for document highlights";
+    description = ''Default color for document highlights. Use a color name or color string supported by GTK.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "yellow";
+  };
+};
+
+drawingColor = {
+  _meta = {
+    name = "Default color for pen drawings";
+    summary = "Default color for pen drawings";
+    description = ''Default color for pen drawings. Use a color name or color string supported by GTK.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "blue";
+  };
+};
+
+textColor = {
+  _meta = {
+    name = "Default color for added text";
+    summary = "Default color for added text";
+    description = ''Default color for added text. Use a color name or color string supported by GTK.'';
+    tags = [ "desktop" "papers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "blue";
+  };
+};

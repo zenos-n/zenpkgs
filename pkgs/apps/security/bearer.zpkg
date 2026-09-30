@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bearer";
+  summary = "Code security scanning tool (SAST) to discover, filter and prioritize security and privacy risks";
+  description = ''
+    Code security scanning tool (SAST) to discover, filter and prioritize security and privacy risks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.2";
+  tags = [ "security" "static-analysis" "development" "scanning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.elastic20;
+};
+
+import $pkgs.legacy.bearer;

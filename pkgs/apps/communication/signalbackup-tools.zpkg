@@ -1,0 +1,14 @@
+_meta = {
+  name = "Signal Backup Tools";
+  summary = "Tool to work with Signal Backup files";
+  description = ''
+    Tool to work with Signal Backup files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20260511";
+  tags = [ "communication" "backup" "files" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.signalbackup-tools;

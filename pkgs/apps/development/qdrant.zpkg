@@ -1,0 +1,15 @@
+_meta = {
+  name = "Qdrant";
+  summary = "Vector Search Engine for the next generation of AI applications";
+  description = ''
+    Expects a config file at config/config.yaml with content similar to
+    https://github.com/qdrant/qdrant/blob/master/config/config.yaml
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.17.1";
+  tags = [ "development" "database" "data" "ai" "search" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.qdrant;

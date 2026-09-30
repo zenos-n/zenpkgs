@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fast SSH";
+  summary = "TUI tool to use the SSH config for connections";
+  description = ''
+    TUI tool to use the SSH config for connections.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.2";
+  tags = [ "networking" "ssh" "connections" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fast-ssh;

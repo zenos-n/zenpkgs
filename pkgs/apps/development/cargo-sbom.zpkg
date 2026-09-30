@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-sbom";
+  summary = "Create software bill of materials (SBOM) for Rust";
+  description = ''
+    Create software bill of materials (SBOM) for Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.0";
+  tags = [ "development" "rust" "cargo" "sbom" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-sbom;

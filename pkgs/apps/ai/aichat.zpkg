@@ -1,0 +1,14 @@
+_meta = {
+  name = "AIChat";
+  summary = "Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal";
+  description = ''
+    Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.30.0";
+  tags = [ "ai" "language-models" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.aichat;

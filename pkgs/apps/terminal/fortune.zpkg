@@ -1,0 +1,14 @@
+_meta = {
+  name = "fortune";
+  summary = "Program that displays a pseudorandom message from a database of quotations";
+  description = ''
+    Program that displays a pseudorandom message from a database of quotations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.26.0";
+  tags = [ "terminal" "text" "entertainment" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsdOriginal;
+};
+
+import $pkgs.legacy.fortune;

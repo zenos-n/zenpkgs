@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bluesky CLI";
+  summary = "Cli application for bluesky social";
+  description = ''
+    Cli application for bluesky social.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.81";
+  tags = [ "communication" "bluesky" "social" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bsky-cli;

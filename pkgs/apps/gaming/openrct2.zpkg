@@ -1,0 +1,30 @@
+_meta = {
+  name = "OpenRCT2";
+  summary = "Open source re-implementation of RollerCoaster Tycoon 2";
+  description = ''
+    OpenRCT2 is an open source re-implementation of RollerCoaster Tycoon 2, a
+    construction and management simulation video game that simulates amusement
+    park management.
+
+    The original RCT2 game data is required to play.
+
+    The path to an existing RCT1 or RCT2 installation can be provided at
+    build time via the rct1Path and rct2Path arguments respectively:
+
+      openrct2.override {
+        rct1Path = "/path/to/rct1";
+        rct2Path = "/path/to/rct2";
+      };
+
+    Alternatively, if no paths are provided, the game will prompt for the
+    RCT2 data on first launch. For RCT1, you will then need to go to
+    the game settings and specify the path to the data directory.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.0";
+  tags = [ "gaming" "simulation" "management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.openrct2;

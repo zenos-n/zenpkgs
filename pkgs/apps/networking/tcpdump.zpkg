@@ -1,0 +1,14 @@
+_meta = {
+  name = "tcpdump";
+  summary = "Network sniffer";
+  description = ''
+    Network sniffer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.99.6";
+  tags = [ "networking" "diagnostics" "security" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.tcpdump;

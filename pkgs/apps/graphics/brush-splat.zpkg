@@ -1,0 +1,14 @@
+_meta = {
+  name = "Brush";
+  summary = "3D Reconstruction for all";
+  description = ''
+    3D Reconstruction for all.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.0";
+  tags = [ "graphics" "3d" "reconstruction" "gaussian-splatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.brush-splat;

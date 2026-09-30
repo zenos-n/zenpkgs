@@ -1,0 +1,26 @@
+_meta = {
+  name = "Dillo";
+  summary = "Fast graphical web browser with a small footprint";
+  description = ''
+    Dillo is a fast and small graphical web browser with the following
+    features:
+
+    - Multi-platform, running on Linux, BSD, MacOS, Windows (via Cygwin) and
+      even Atari.
+    - Written in C and C++ with few dependencies.
+    - Implements its own real-time rendering engine.
+    - Low memory usage and fast rendering, even with large pages.
+    - Uses the fast and bloat-free FLTK GUI library.
+    - Support for HTTP, HTTPS, FTP and local files.
+    - Extensible with plugins written in any language.
+    - Is free software licensed with the GPLv3.
+    - Helps authors to comply with web standards by using the bug meter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.0";
+  tags = [ "browsers" "web" "internet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.dillo;

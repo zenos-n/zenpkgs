@@ -1,0 +1,14 @@
+_meta = {
+  name = "Hyprsunset";
+  summary = "Application to enable a blue-light filter on Hyprland";
+  description = ''
+    Application to enable a blue-light filter on Hyprland.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.3";
+  tags = [ "system" "administration" "display" "brightness" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.hyprsunset;

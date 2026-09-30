@@ -1,0 +1,14 @@
+_meta = {
+  name = "Shaderc";
+  summary = "Collection of tools, libraries and tests for shader compilation";
+  description = ''
+    Collection of tools, libraries and tests for shader compilation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.1";
+  tags = [ "development" "graphics" "shaders" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.shaderc;

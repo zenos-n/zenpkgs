@@ -1,0 +1,14 @@
+_meta = {
+  name = "Veloren";
+  summary = "Open world, open source voxel RPG";
+  description = ''
+    Open world, open source voxel RPG.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.18.0";
+  tags = [ "gaming" "rpg" "multiplayer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.veloren;

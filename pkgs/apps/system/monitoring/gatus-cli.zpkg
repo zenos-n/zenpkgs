@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gatus CLI";
+  summary = "Client for Gatus, an automated developer-oriented status page";
+  description = ''
+    Client for Gatus, an automated developer-oriented status page.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "system" "monitoring" "uptime" "status" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gatus-cli;

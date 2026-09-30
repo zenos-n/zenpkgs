@@ -1,0 +1,32 @@
+_meta = {
+  name = "Auto Multiple Choice";
+  summary = "Create and manage multiple choice questionnaires with automated marking";
+  description = ''
+    Create, manage and mark multiple-choice questionnaires.
+    auto-multiple-choice features automated or manual formatting with
+    LaTeX, shuffling of questions and answers and automated marking using
+    Optical Mark Recognition.
+
+    Questionnaires can be created using either a very simple text syntax,
+    AMC-TXT, or LaTeX. In the latter case, your TeXLive installation must
+    be combined with this package.  This can be done in configuration.nix
+    as follows:
+
+    <screen>
+    …
+    environment.systemPackages = with pkgs; [
+      auto-multiple-choice
+      (texliveFull.withPackages (_: [auto-multiple-choice.tex]))
+    ];
+    </screen>
+
+    For usage instructions, see documentation at the project's homepage.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.0";
+  tags = [ "education" "assessment" "questionnaires" "grading" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.auto-multiple-choice;

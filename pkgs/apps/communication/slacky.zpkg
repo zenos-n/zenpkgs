@@ -1,0 +1,14 @@
+_meta = {
+  name = "Slacky";
+  summary = "Unofficial Slack desktop client for arm64 Linux";
+  description = ''
+    Unofficial Slack desktop client for arm64 Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.8";
+  tags = [ "communication" "chat" "slack" "collaboration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.slacky;

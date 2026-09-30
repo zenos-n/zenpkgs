@@ -1,0 +1,14 @@
+_meta = {
+  name = "genext2fs";
+  summary = "Tool to generate ext2 filesystem images without requiring root privileges";
+  description = ''
+    Tool to generate ext2 filesystem images without requiring root privileges.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.0";
+  tags = [ "storage" "filesystems" "ext2" "disk-images" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.genext2fs;

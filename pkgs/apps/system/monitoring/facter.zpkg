@@ -1,0 +1,14 @@
+_meta = {
+  name = "Facter";
+  summary = "System inventory tool";
+  description = ''
+    System inventory tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.10.0";
+  tags = [ "system" "monitoring" "inventory" "information" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.facter;

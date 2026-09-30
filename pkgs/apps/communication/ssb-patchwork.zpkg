@@ -1,0 +1,14 @@
+_meta = {
+  name = "Patchwork";
+  summary = "Decentralized messaging and sharing app built on top of Secure Scuttlebutt (SSB)";
+  description = ''
+    sea-slang for gossip - a scuttlebutt is basically a watercooler on a ship.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.18.1";
+  tags = [ "communication" "social" "decentralized" "peer-to-peer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.ssb-patchwork;

@@ -1,0 +1,25 @@
+_meta = {
+  name = "QMK";
+  summary = "Program to help users work with QMK Firmware";
+  description = ''
+    qmk_cli is a companion tool to QMK firmware. With it, you can:
+
+    - Interact with your qmk_firmware tree from any location
+    - Use qmk clone to pull down anyone's qmk_firmware fork
+    - Setup and work with your build environment:
+      - qmk setup
+      - qmk doctor
+      - qmk compile
+      - qmk console
+      - qmk flash
+      - qmk lint
+    - ... and many more!
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "system" "administration" "keyboard" "input" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.qmk;

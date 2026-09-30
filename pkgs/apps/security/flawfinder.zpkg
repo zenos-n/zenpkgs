@@ -1,0 +1,14 @@
+_meta = {
+  name = "Flawfinder";
+  summary = "Examine C and C++ source code for security flaws";
+  description = ''
+    Examine C and C++ source code for security flaws.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.20";
+  tags = [ "security" "development" "static-analysis" "c" "cpp" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.flawfinder;

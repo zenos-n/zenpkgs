@@ -1,0 +1,14 @@
+_meta = {
+  name = "GMetronome";
+  summary = "Free software metronome and tempo measurement tool";
+  description = ''
+    Free software metronome and tempo measurement tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.2";
+  tags = [ "audio" "metronome" "tempo" "music" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gmetronome;

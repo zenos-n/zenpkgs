@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenBSD Netcat";
+  summary = "TCP/IP swiss army knife. OpenBSD variant";
+  description = ''
+    TCP/IP swiss army knife. OpenBSD variant.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.234-2";
+  tags = [ "networking" "diagnostics" "transfer" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.netcat-openbsd;

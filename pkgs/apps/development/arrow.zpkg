@@ -1,0 +1,14 @@
+_meta = {
+  name = "Arrow";
+  summary = "Game Narrative Design Tool";
+  description = ''
+    Game Narrative Design Tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.0";
+  tags = [ "development" "gaming" "narrative" "writing" "design" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.arrow;

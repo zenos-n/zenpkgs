@@ -1,0 +1,14 @@
+_meta = {
+  name = "GCFFlasher";
+  summary = "CFFlasher is the tool to program the firmware of dresden elektronik's Zigbee products";
+  description = ''
+    CFFlasher is the tool to program the firmware of dresden elektronik's Zigbee products.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.12.1";
+  tags = [ "system" "administration" "firmware" "zigbee" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.gcfflasher;

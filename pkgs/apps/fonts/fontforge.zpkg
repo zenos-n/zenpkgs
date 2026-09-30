@@ -1,0 +1,14 @@
+_meta = {
+  name = "FontForge";
+  summary = "Font editor";
+  description = ''
+    Font editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20251009";
+  tags = [ "fonts" "graphics" "typography" "theming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.fontforge;

@@ -1,0 +1,25 @@
+_meta = {
+  name = "nsxiv";
+  summary = "New Suckless X Image Viewer";
+  description = ''
+    nsxiv is a fork of now unmaintained sxiv with the purpose of being a
+    drop-in replacement of sxiv, maintaining it and adding simple, sensible
+    features, like:
+
+    - Basic image operations, e.g. zooming, panning, rotating
+    - Customizable key and mouse button mappings (in config.h)
+    - Script-ability via key-handler
+    - Thumbnail mode: grid of selectable previews of all images
+    - Ability to cache thumbnails for fast re-loading
+    - Basic support for animated/multi-frame images (GIF/WebP)
+    - Display image information in status bar
+    - Display image name/path in X title
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "34";
+  tags = [ "graphics" "images" "viewer" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.nsxiv;

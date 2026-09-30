@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glance";
+  summary = "Self-hosted dashboard that puts all your feeds in one place";
+  description = ''
+    Self-hosted dashboard that puts all your feeds in one place.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.5";
+  tags = [ "office" "dashboard" "feeds" "self-hosted" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.glance;

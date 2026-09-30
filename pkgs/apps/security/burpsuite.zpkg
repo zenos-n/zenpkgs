@@ -1,0 +1,17 @@
+_meta = {
+  name = "Burp Suite";
+  summary = "Integrated platform for performing security testing of web applications";
+  description = ''
+    Burp Suite is an integrated platform for performing security testing of web applications.
+    Its various tools work seamlessly together to support the entire testing process, from
+    initial mapping and analysis of an application's attack surface, through to finding and
+    exploiting security vulnerabilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.4.3";
+  tags = [ "security" "development" "web" "testing" "proxy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.burpsuite;

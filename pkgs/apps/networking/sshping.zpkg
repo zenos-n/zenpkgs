@@ -1,0 +1,14 @@
+_meta = {
+  name = "sshping";
+  summary = "Measure character-echo latency and bandwidth for an interactive ssh session";
+  description = ''
+    Measure character-echo latency and bandwidth for an interactive ssh session.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.4";
+  tags = [ "networking" "remote-access" "ssh" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sshping;

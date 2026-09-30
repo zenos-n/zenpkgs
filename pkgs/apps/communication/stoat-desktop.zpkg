@@ -1,0 +1,14 @@
+_meta = {
+  name = "Stoat";
+  summary = "Open source user-first chat platform";
+  description = ''
+    Open source user-first chat platform.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.0";
+  tags = [ "communication" "messaging" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.stoat-desktop;

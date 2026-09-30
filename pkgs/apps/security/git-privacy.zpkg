@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-privacy";
+  summary = "Tool to redact Git author and committer dates";
+  description = ''
+    Tool to redact Git author and committer dates.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.0";
+  tags = [ "security" "git" "privacy" "timestamps" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.git-privacy;

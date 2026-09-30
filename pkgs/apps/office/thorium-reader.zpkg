@@ -1,0 +1,14 @@
+_meta = {
+  name = "Thorium Reader";
+  summary = "EPUB reader";
+  description = ''
+    EPUB reader.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.0";
+  tags = [ "office" "books" "epub" "reading" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.thorium-reader;

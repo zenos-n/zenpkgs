@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "KRuler";
+  summary = "A pixel measuring tool by KDE";
+  description = ''
+    A pixel measuring tool by KDE.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.04.3";
+  tags = [ "graphics" "measurement" "design" "creativity" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.kdePackages.kruler;

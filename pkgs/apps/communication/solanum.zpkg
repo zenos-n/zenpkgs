@@ -1,0 +1,14 @@
+_meta = {
+  name = "Solanum IRCd";
+  summary = "IRCd for unified networks";
+  description = ''
+    IRCd for unified networks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-05-23";
+  tags = [ "communication" "irc" "server" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.solanum;

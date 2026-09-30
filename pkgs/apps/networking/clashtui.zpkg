@@ -1,0 +1,14 @@
+_meta = {
+  name = "ClashTUI";
+  summary = "Mihomo (Clash.Meta) TUI Client";
+  description = ''
+    Mihomo (Clash.Meta) TUI Client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.3";
+  tags = [ "networking" "proxy" "mihomo" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.clashtui;

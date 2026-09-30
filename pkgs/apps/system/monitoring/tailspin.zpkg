@@ -1,0 +1,14 @@
+_meta = {
+  name = "tailspin";
+  summary = "Log file highlighter";
+  description = ''
+    Log file highlighter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.5.0";
+  tags = [ "system" "monitoring" "logs" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.tailspin;

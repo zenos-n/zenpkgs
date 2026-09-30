@@ -1,0 +1,121 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "System shells configuration";
+  summary = "System shells configuration";
+  description = ''Configure System shells with typed preferences. Unset values preserve existing behavior.'';
+  tags = [ "shell" "shell" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+zsh = {
+  _meta = {
+    name = "Make Zsh available as a login shell";
+    summary = "Make Zsh available as a login shell";
+    description = ''Make Zsh available as a login shell. Personal configuration remains in programs.zsh. Null preserves existing behavior.'';
+    tags = [ "shell" "shell" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    programs.zsh.enable = $lib.mkIf ($path.zsh != null) ($path.zsh);
+  };
+};
+
+fish = {
+  _meta = {
+    name = "Make Fish available as a login shell";
+    summary = "Make Fish available as a login shell";
+    description = ''Make Fish available as a login shell. Personal configuration remains in programs.fish. Null preserves existing behavior.'';
+    tags = [ "shell" "shell" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    programs.fish.enable = $lib.mkIf ($path.fish != null) ($path.fish);
+  };
+};
+
+bashCompletion = {
+  _meta = {
+    name = "Provide system Bash completions";
+    summary = "Provide system Bash completions";
+    description = ''Provide system Bash completions. Null preserves existing behavior.'';
+    tags = [ "shell" "shell" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    programs.bash.enableCompletion = $lib.mkIf ($path.bashCompletion != null) ($path.bashCompletion);
+  };
+};
+
+aliases = {
+  _meta = {
+    name = "Command aliases for all users";
+    summary = "Command aliases for all users";
+    description = ''Command aliases for all users. Individual managed shells may override these aliases. Null preserves existing behavior.'';
+    tags = [ "shell" "shell" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+  s!! {
+    environment.shellAliases = $lib.mkIf ($path.aliases != null) ($path.aliases);
+  };
+};
+
+initialCommands = {
+  _meta = {
+    name = "Commands for system shell initialization";
+    summary = "Commands for system shell initialization";
+    description = ''Commands for system shell initialization. Portable shell code executed for all users. Null preserves existing behavior.'';
+    tags = [ "shell" "shell" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  s!! {
+    environment.shellInit = $lib.mkIf ($path.initialCommands != null) ($path.initialCommands);
+  };
+};
+
+loginCommands = {
+  _meta = {
+    name = "Commands for system login shells";
+    summary = "Commands for system login shells";
+    description = ''Commands for system login shells. Portable shell code executed for all users. Null preserves existing behavior.'';
+    tags = [ "shell" "shell" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  s!! {
+    environment.loginShellInit = $lib.mkIf ($path.loginCommands != null) ($path.loginCommands);
+  };
+};
+
+interactiveCommands = {
+  _meta = {
+    name = "Commands for system interactive shells";
+    summary = "Commands for system interactive shells";
+    description = ''Commands for system interactive shells. Portable shell code executed for all users. Null preserves existing behavior.'';
+    tags = [ "shell" "shell" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  s!! {
+    environment.interactiveShellInit = $lib.mkIf ($path.interactiveCommands != null) ($path.interactiveCommands);
+  };
+};

@@ -1,0 +1,14 @@
+_meta = {
+  name = "macchina";
+  summary = "Fast, minimal and customizable system information fetcher";
+  description = ''
+    Fast, minimal and customizable system information fetcher.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.4.0";
+  tags = [ "system" "administration" "system-information" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.macchina;

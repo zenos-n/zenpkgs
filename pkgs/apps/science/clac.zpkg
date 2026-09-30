@@ -1,0 +1,14 @@
+_meta = {
+  name = "clac";
+  summary = "Interactive stack-based calculator";
+  description = ''
+    Interactive stack-based calculator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.5";
+  tags = [ "science" "calculator" "mathematics" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.clac;

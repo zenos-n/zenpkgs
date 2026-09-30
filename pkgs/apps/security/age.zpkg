@@ -1,0 +1,14 @@
+_meta = {
+  name = "age";
+  summary = "Modern encryption tool with small explicit keys";
+  description = ''
+    Modern encryption tool with small explicit keys.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.1";
+  tags = [ "security" "privacy" "encryption" "files" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.age;

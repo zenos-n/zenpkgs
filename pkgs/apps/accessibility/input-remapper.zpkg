@@ -1,0 +1,14 @@
+_meta = {
+  name = "input-remapper";
+  summary = "Easy to use tool to change the mapping of your input device buttons";
+  description = ''
+    Easy to use tool to change the mapping of your input device buttons.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.0";
+  tags = [ "accessibility" "input" "keyboard" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.input-remapper;

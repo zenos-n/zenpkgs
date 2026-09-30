@@ -1,0 +1,15 @@
+_meta = {
+  name = "Cubiomes Viewer";
+  summary = "Graphical Minecraft seed finder and map viewer";
+  description = ''
+    Cubiomes Viewer provides a graphical interface for the efficient and flexible seed-finding
+    utilities provided by cubiomes and a map viewer for the Minecraft biomes and structure generation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.1.2";
+  tags = [ "gaming" "minecraft" "seeds" "maps" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.cubiomes-viewer;

@@ -1,0 +1,18 @@
+_meta = {
+  name = "WireGuard Tools";
+  summary = "Tools for the WireGuard secure network tunnel";
+  description = ''
+    Supplies the main userspace tooling for using and configuring WireGuard tunnels, including the wg(8) and wg-quick(8) utilities.
+    - wg : the configuration utility for getting and setting the configuration of WireGuard tunnel interfaces. The interfaces
+      themselves can be added and removed using ip-link(8) and their IP addresses and routing tables can be set using ip-address(8)
+      and ip-route(8). The wg utility provides a series of sub-commands for changing WireGuard-specific aspects of WireGuard interfaces.
+    - wg-quick : an extremely simple script for easily bringing up a WireGuard interface, suitable for a few common use cases.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.20260223";
+  tags = [ "networking" "vpn" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.wireguard-tools;

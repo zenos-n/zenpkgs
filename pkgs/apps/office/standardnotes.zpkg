@@ -1,0 +1,15 @@
+_meta = {
+  name = "Standard Notes";
+  summary = "Simple and private notes app";
+  description = ''
+    Standard Notes is a private notes app that features unmatched simplicity,
+    end-to-end encryption, powerful extensions, and open-source applications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.195.13";
+  tags = [ "office" "notes" "privacy" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.standardnotes;

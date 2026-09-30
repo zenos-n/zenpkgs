@@ -1,0 +1,14 @@
+_meta = {
+  name = "MEGAsync";
+  summary = "Easy automated syncing between your computers and your MEGA Cloud Drive";
+  description = ''
+    Easy automated syncing between your computers and your MEGA Cloud Drive.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.5.1.0";
+  tags = [ "networking" "files" "cloud" "synchronization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.megasync;

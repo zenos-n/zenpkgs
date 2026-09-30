@@ -1,0 +1,14 @@
+_meta = {
+  name = "Yazi";
+  summary = "Blazing fast terminal file manager written in Rust, based on async I/O";
+  description = ''
+    Blazing fast terminal file manager written in Rust, based on async I/O.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.5.6";
+  tags = [ "files" "file-manager" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.yazi;

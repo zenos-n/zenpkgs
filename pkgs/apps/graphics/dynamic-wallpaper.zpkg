@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dynamic Wallpaper";
+  summary = "Dynamic wallpaper maker for Gnome";
+  description = ''
+    Dynamic wallpaper maker for Gnome.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.0";
+  tags = [ "graphics" "wallpapers" "gnome" "creation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.dynamic-wallpaper;

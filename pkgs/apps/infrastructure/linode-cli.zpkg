@@ -1,0 +1,14 @@
+_meta = {
+  name = "Linode CLI";
+  summary = "Linode Command Line Interface";
+  description = ''
+    Linode Command Line Interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.56.2";
+  tags = [ "infrastructure" "cloud" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.linode-cli;

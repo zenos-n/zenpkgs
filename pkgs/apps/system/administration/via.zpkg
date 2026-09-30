@@ -1,0 +1,14 @@
+_meta = {
+  name = "VIA";
+  summary = "Yet another keyboard configurator";
+  description = ''
+    Yet another keyboard configurator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.0";
+  tags = [ "system" "administration" "keyboard" "input" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.via;

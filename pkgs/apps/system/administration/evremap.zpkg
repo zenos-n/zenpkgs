@@ -1,0 +1,14 @@
+_meta = {
+  name = "evremap";
+  summary = "Keyboard input remapper for Linux/Wayland systems";
+  description = ''
+    Keyboard input remapper for Linux/Wayland systems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2024-06-17";
+  tags = [ "system" "administration" "keyboard" "input" "remapping" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.evremap;

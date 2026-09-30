@@ -1,0 +1,14 @@
+_meta = {
+  name = "email";
+  summary = "Command line SMTP client";
+  description = ''
+    Command line SMTP client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2016-01-31";
+  tags = [ "communication" "smtp" "mail" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.email;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "TPM2 Tools";
+  summary = "Command line tools that provide access to a TPM 2.0 compatible device";
+  description = ''
+    Command line tools that provide access to a TPM 2.0 compatible device.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.7";
+  tags = [ "security" "hardware" "cryptography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.tpm2-tools;

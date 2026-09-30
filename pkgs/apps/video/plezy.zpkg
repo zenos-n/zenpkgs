@@ -1,0 +1,14 @@
+_meta = {
+  name = "Plezy";
+  summary = "Modern cross-platform Plex & Jellyfin client built with Flutter";
+  description = ''
+    Modern cross-platform Plex & Jellyfin client built with Flutter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.0";
+  tags = [ "video" "audio" "multimedia" "plex" "jellyfin" "player" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.plezy;

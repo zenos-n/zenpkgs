@@ -1,0 +1,14 @@
+_meta = {
+  name = "Argo CD";
+  summary = "Declarative continuous deployment for Kubernetes";
+  description = ''
+    Declarative continuous deployment for Kubernetes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.6";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.argocd;

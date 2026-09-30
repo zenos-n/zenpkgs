@@ -1,0 +1,14 @@
+_meta = {
+  name = "Stern";
+  summary = "Multi pod and container log tailing for Kubernetes";
+  description = ''
+    Multi pod and container log tailing for Kubernetes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.34.0";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.stern;

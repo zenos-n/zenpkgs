@@ -1,0 +1,14 @@
+_meta = {
+  name = "dgop";
+  summary = "API & CLI for System & Process Monitoring";
+  description = ''
+    API & CLI for System & Process Monitoring.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.2";
+  tags = [ "system" "monitoring" "processes" "metrics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dgop;

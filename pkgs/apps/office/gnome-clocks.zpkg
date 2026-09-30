@@ -1,0 +1,20 @@
+_meta = {
+  name = "GNOME Clocks";
+  summary = "Simple and elegant clock application for GNOME";
+  description = ''
+    A simple and elegant clock application. It includes world clocks, alarms,
+    a stopwatch, and timers.
+
+    - Show the time in different cities around the world
+    - Set alarms to wake you up
+    - Measure elapsed time with an accurate stopwatch
+    - Set timers to properly cook your food
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "50.0";
+  tags = [ "office" "productivity" "clock" "time" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gnome-clocks;

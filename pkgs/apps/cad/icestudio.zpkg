@@ -1,0 +1,14 @@
+_meta = {
+  name = "Icestudio";
+  summary = "Visual editor for open FPGA boards";
+  description = ''
+    Visual editor for open FPGA boards.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.12-unstable-2026-02-16";
+  tags = [ "cad" "fpga" "electronics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.icestudio;

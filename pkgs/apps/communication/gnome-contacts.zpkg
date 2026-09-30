@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNOME Contacts";
+  summary = "GNOME’s integrated address book";
+  description = ''
+    GNOME’s integrated address book.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "50.0";
+  tags = [ "communication" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gnome-contacts;

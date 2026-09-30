@@ -1,0 +1,14 @@
+_meta = {
+  name = "Just";
+  summary = "Handy way to save and run project-specific commands";
+  description = ''
+    Handy way to save and run project-specific commands.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.51.0";
+  tags = [ "development" "automation" "build" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc0;
+};
+
+import $pkgs.legacy.just;

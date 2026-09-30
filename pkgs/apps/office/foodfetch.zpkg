@@ -1,0 +1,14 @@
+_meta = {
+  name = "foodfetch";
+  summary = "Yet another fetch to quickly get recipes";
+  description = ''
+    Yet another fetch to quickly get recipes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.1";
+  tags = [ "office" "recipes" "cooking" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.foodfetch;

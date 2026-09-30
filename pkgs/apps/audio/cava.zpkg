@@ -1,0 +1,14 @@
+_meta = {
+  name = "CAVA";
+  summary = "Console-based Audio Visualizer for Alsa";
+  description = ''
+    Console-based Audio Visualizer for Alsa.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.7";
+  tags = [ "audio" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cava;

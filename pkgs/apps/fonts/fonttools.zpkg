@@ -1,0 +1,14 @@
+_meta = {
+  name = "FontTools";
+  summary = "Library to manipulate font files from Python";
+  description = ''
+    Library to manipulate font files from Python.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.61.1";
+  tags = [ "fonts" "graphics" "typography" "theming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.python3Packages.fonttools;

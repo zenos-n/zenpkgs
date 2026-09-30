@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bluetooth Battery";
+  summary = "Fetch the battery charge level of some Bluetooth headsets";
+  description = ''
+    Fetch the battery charge level of some Bluetooth headsets.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.1";
+  tags = [ "networking" "bluetooth" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.bluetooth_battery;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tailscale Systray";
+  summary = "Tailscale systray";
+  description = ''
+    Tailscale systray.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2022-10-19";
+  tags = [ "networking" "vpn" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.tailscale-systray;

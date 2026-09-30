@@ -1,0 +1,14 @@
+_meta = {
+  name = "Chameleos";
+  summary = "Screen annotation tool for niri and Hyprland";
+  description = ''
+    Screen annotation tool for niri and Hyprland.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.2";
+  tags = [ "graphics" "annotation" "screen" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.chameleos;

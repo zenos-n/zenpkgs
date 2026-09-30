@@ -1,0 +1,14 @@
+_meta = {
+  name = "raylib Games";
+  summary = "Collection of games made with raylib";
+  description = ''
+    Collection of games made with raylib.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2022-10-24";
+  tags = [ "gaming" "development" "examples" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.raylib-games;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Hurl";
+  summary = "Command line tool that performs HTTP requests defined in a simple plain text format";
+  description = ''
+    Command line tool that performs HTTP requests defined in a simple plain text format.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.1.0";
+  tags = [ "networking" "testing" "development" "http" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.hurl;

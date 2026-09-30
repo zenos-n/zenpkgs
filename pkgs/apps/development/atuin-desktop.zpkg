@@ -1,0 +1,14 @@
+_meta = {
+  name = "Atuin Desktop";
+  summary = "Local-first, executable runbook editor";
+  description = ''
+    Local-first, executable runbook editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.20";
+  tags = [ "development" "runbooks" "automation" "documentation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.atuin-desktop;

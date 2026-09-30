@@ -1,0 +1,14 @@
+_meta = {
+  name = "MSBuild Structured Log Viewer";
+  summary = "Rich interactive log viewer for MSBuild logs";
+  description = ''
+    Rich interactive log viewer for MSBuild logs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.150";
+  tags = [ "development" "dotnet" "build" "logs" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.msbuild-structured-log-viewer;

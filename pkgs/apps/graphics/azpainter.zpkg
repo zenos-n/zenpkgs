@@ -1,0 +1,14 @@
+_meta = {
+  name = "AzPainter";
+  summary = "Full color painting software for illustration drawing";
+  description = ''
+    Full color painting software for illustration drawing.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.12";
+  tags = [ "graphics" "painting" "illustration" "drawing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.azpainter;

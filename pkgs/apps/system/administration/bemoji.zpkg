@@ -1,0 +1,14 @@
+_meta = {
+  name = "bemoji";
+  summary = "Emoji picker with support for bemenu/wofi/rofi/dmenu and wayland/X11";
+  description = ''
+    Emoji picker with support for bemenu/wofi/rofi/dmenu and wayland/X11.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0-unstable-2024-04-28";
+  tags = [ "system" "administration" "emoji" "picker" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bemoji;

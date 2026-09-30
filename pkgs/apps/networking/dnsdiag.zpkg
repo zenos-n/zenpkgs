@@ -1,0 +1,14 @@
+_meta = {
+  name = "dnsdiag";
+  summary = "DNS Measurement, Troubleshooting and Security Auditing Toolset";
+  description = ''
+    DNS Measurement, Troubleshooting and Security Auditing Toolset.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.9.3";
+  tags = [ "networking" "dns" "diagnostics" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.dnsdiag;

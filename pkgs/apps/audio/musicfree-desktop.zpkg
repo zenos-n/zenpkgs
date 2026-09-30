@@ -1,0 +1,14 @@
+_meta = {
+  name = "MusicFree";
+  summary = "Customizable music player with plugin support";
+  description = ''
+    Customizable music player with plugin support.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.8";
+  tags = [ "audio" "music" "streaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.musicfree-desktop;

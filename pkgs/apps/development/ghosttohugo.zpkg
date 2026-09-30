@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghostToHugo";
+  summary = "Convert Ghost export to Hugo posts";
+  description = ''
+    Convert Ghost export to Hugo posts.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.3";
+  tags = [ "development" "ghost" "hugo" "migration" "blogging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghosttohugo;

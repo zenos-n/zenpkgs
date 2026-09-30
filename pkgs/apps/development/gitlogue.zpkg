@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gitlogue";
+  summary = "Cinematic Git commit replay tool for the terminal";
+  description = ''
+    A cinematic Git commit replay tool for the terminal, turning your Git history into a living, animated story.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "development" "git" "history" "visualization" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.gitlogue;

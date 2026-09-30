@@ -1,0 +1,135 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Fish configuration";
+  summary = "Fish configuration";
+  description = ''Configure Fish with typed preferences. Unset values preserve existing behavior.'';
+  tags = [ "shell" "fish" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+generateCompletions = {
+  _meta = {
+    name = "Generate completions from installed manuals";
+    summary = "Generate completions from installed manuals";
+    description = ''Generate completions from installed manuals. Null preserves existing behavior.'';
+    tags = [ "shell" "fish" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+aliases = {
+  _meta = {
+    name = "Fish command aliases";
+    summary = "Fish command aliases";
+    description = ''Fish command aliases. Null preserves existing behavior.'';
+    tags = [ "shell" "fish" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+abbreviations = {
+  _meta = {
+    name = "Abbreviations expanded as you type";
+    summary = "Abbreviations expanded as you type";
+    description = ''Abbreviations expanded as you type. Null preserves existing behavior.'';
+    tags = [ "shell" "fish" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+preferAbbreviations = {
+  _meta = {
+    name = "Prefer abbreviations supplied by integrations";
+    summary = "Prefer abbreviations supplied by integrations";
+    description = ''Prefer abbreviations supplied by integrations. Null preserves existing behavior.'';
+    tags = [ "shell" "fish" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+initialCommands = {
+  _meta = {
+    name = "Commands run when Fish starts";
+    summary = "Commands run when Fish starts";
+    description = ''Commands run when Fish starts. Null preserves existing behavior.'';
+    tags = [ "shell" "fish" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+loginCommands = {
+  _meta = {
+    name = "Commands run in login Fish sessions";
+    summary = "Commands run in login Fish sessions";
+    description = ''Commands run in login Fish sessions. Null preserves existing behavior.'';
+    tags = [ "shell" "fish" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+interactiveCommands = {
+  _meta = {
+    name = "Commands run in interactive Fish";
+    summary = "Commands run in interactive Fish";
+    description = ''Commands run in interactive Fish. Null preserves existing behavior.'';
+    tags = [ "shell" "fish" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+lastInteractiveCommands = {
+  _meta = {
+    name = "Commands run last in interactive Fish";
+    summary = "Commands run last in interactive Fish";
+    description = ''Commands run last in interactive Fish. Null preserves existing behavior.'';
+    tags = [ "shell" "fish" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Fish";
+    summary = "Install and configure Fish";
+    description = ''Enable Fish for the selected user scope. Preferences apply while enabled.'';
+    tags = [ "shell" "fish" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    programs.fish.enable = true;
+    programs.fish.generateCompletions = $lib.mkIf ($path.generateCompletions != null) ($path.generateCompletions);
+    programs.fish.shellAliases = $lib.mkIf ($path.aliases != null) ($path.aliases);
+    programs.fish.shellAbbrs = $lib.mkIf ($path.abbreviations != null) ($path.abbreviations);
+    programs.fish.preferAbbrs = $lib.mkIf ($path.preferAbbreviations != null) ($path.preferAbbreviations);
+    programs.fish.shellInit = $lib.mkIf ($path.initialCommands != null) ($path.initialCommands);
+    programs.fish.loginShellInit = $lib.mkIf ($path.loginCommands != null) ($path.loginCommands);
+    programs.fish.interactiveShellInit = $lib.mkIf ($path.interactiveCommands != null) ($path.interactiveCommands);
+    programs.fish.shellInitLast = $lib.mkIf ($path.lastInteractiveCommands != null) ($path.lastInteractiveCommands);
+  };
+};

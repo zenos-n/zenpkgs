@@ -1,0 +1,15 @@
+_meta = {
+  name = "Serf";
+  summary = "Service orchestration and management tool";
+  description = ''
+    Serf is a decentralized solution for service discovery and orchestration
+    that is lightweight, highly available, and fault tolerant.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.2";
+  tags = [ "infrastructure" "automation" "development" "service-discovery" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.serfdom;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Framework EC Tool";
+  summary = "EC-Tool adjusted for usage with framework embedded controller";
+  description = ''
+    EC-Tool adjusted for usage with framework embedded controller.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2024-04-23";
+  tags = [ "system" "administration" "hardware" "framework" "embedded-controller" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.fw-ectool;

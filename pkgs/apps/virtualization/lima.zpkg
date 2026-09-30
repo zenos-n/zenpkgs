@@ -1,0 +1,14 @@
+_meta = {
+  name = "Lima";
+  summary = "Linux virtual machines with automatic file sharing and port forwarding";
+  description = ''
+    Linux virtual machines with automatic file sharing and port forwarding.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.3";
+  tags = [ "virtualization" "development" "management" "system" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.lima;

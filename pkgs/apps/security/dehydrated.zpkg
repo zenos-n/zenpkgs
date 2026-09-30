@@ -1,0 +1,14 @@
+_meta = {
+  name = "dehydrated";
+  summary = "Letsencrypt/acme client implemented as a shell-script";
+  description = ''
+    Letsencrypt/acme client implemented as a shell-script.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.2";
+  tags = [ "security" "cryptography" "certificates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dehydrated;

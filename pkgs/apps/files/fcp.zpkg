@@ -1,0 +1,14 @@
+_meta = {
+  name = "fcp";
+  summary = "Significantly faster alternative to the classic Unix cp(1) command";
+  description = ''
+    Significantly faster alternative to the classic Unix cp(1) command.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.2";
+  tags = [ "files" "copying" "transfer" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.fcp;

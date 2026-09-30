@@ -1,0 +1,14 @@
+_meta = {
+  name = "kcat";
+  summary = "Generic non-JVM producer and consumer for Apache Kafka";
+  description = ''
+    Generic non-JVM producer and consumer for Apache Kafka.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.1";
+  tags = [ "networking" "messaging" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.kcat;

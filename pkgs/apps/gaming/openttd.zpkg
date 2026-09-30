@@ -1,0 +1,21 @@
+_meta = {
+  name = "OpenTTD";
+  summary = "Open source clone of the Microprose game \"Transport Tycoon Deluxe\"";
+  description = ''
+    OpenTTD is a transportation economics simulator. In single player mode,
+    players control a transportation business, and use rail, road, sea, and air
+    transport to move goods and people around the simulated world.
+
+    In multiplayer networked mode, players may:
+      - play competitively as different businesses
+      - play cooperatively controlling the same business
+      - observe as spectators
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "15.3";
+  tags = [ "gaming" "simulation" "management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.openttd;

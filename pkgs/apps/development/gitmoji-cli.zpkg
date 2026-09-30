@@ -1,0 +1,14 @@
+_meta = {
+  name = "gitmoji CLI";
+  summary = "Gitmoji client for using emojis on commit messages";
+  description = ''
+    Gitmoji client for using emojis on commit messages.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.7.0";
+  tags = [ "development" "git" "emoji" "commit-messages" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitmoji-cli;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-relevant-history";
+  summary = "Extract only relevant history from git repo";
+  description = ''
+    Extract only relevant history from git repo.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0-unstable-2022-09-15";
+  tags = [ "development" "git" "history" "filtering" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-relevant-history;

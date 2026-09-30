@@ -1,0 +1,14 @@
+_meta = {
+  name = "skeema";
+  summary = "Declarative pure-SQL schema management for MySQL and MariaDB";
+  description = ''
+    Declarative pure-SQL schema management for MySQL and MariaDB.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.13.2";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.skeema;

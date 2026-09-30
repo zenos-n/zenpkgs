@@ -1,0 +1,14 @@
+_meta = {
+  name = "cloak";
+  summary = "Command-line OTP authenticator application";
+  description = ''
+    Command-line OTP authenticator application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.0";
+  tags = [ "security" "otp" "authentication" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cloak;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "SideQuest";
+  summary = "Open app store and side-loading tool for Android-based VR devices such as the Oculus Go, Oculus Quest or Moverio BT 300";
+  description = ''
+    Open app store and side-loading tool for Android-based VR devices such as the Oculus Go, Oculus Quest or Moverio BT 300.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.42";
+  tags = [ "gaming" "virtual-reality" "android" "sideloading" "store" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sidequest;

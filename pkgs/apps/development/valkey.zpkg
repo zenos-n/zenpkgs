@@ -1,0 +1,14 @@
+_meta = {
+  name = "Valkey";
+  summary = "High-performance data structure server that primarily serves key/value workloads";
+  description = ''
+    High-performance data structure server that primarily serves key/value workloads.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.1.1";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.valkey;

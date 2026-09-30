@@ -1,0 +1,14 @@
+_meta = {
+  name = "Android Backup Extractor";
+  summary = "Utility to extract and repack Android backups created with adb backup";
+  description = ''
+    Utility to extract and repack Android backups created with adb backup.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-10-27";
+  tags = [ "files" "android" "backup" "extraction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.android-backup-extractor;

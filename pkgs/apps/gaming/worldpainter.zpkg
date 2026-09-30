@@ -1,0 +1,14 @@
+_meta = {
+  name = "WorldPainter";
+  summary = "Interactive map generator for Minecraft";
+  description = ''
+    WorldPainter is an interactive map generator for Minecraft. It allows you to "paint" landscapes using similar tools as a regular paint program. Sculpt and mould the terrain, paint materials, trees, snow and ice, etc. onto it, and much more
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.27.0";
+  tags = [ "gaming" "editor" "maps" "minecraft" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.worldpainter;

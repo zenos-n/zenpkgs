@@ -1,0 +1,14 @@
+_meta = {
+  name = "bpftrace";
+  summary = "High-level tracing language for Linux eBPF";
+  description = ''
+    High-level tracing language for Linux eBPF.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.25.1";
+  tags = [ "system" "monitoring" "diagnostics" "development" "tracing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bpftrace;

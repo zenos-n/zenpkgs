@@ -1,0 +1,19 @@
+_meta = {
+  name = "fzf-preview";
+  summary = "Simple fzf preview script for previewing any filetype in fzf's preview window";
+  description = ''
+    fzf-preview is a lightweight Bash script designed to enhance the user experience
+    with fzf (fuzzy finder) by providing instant previews of files directly in the
+    fzf preview pane. It supports a wide variety of filetypes—including images and
+    text—and delivers relevant file information in the terminal. The script aims to
+    be simple, fast, and highly compatible, making it a useful tool for anyone
+    leveraging fzf for file navigation or search.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-02-22";
+  tags = [ "files" "preview" "fzf" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.fzf-preview;

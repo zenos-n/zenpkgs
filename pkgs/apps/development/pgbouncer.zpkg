@@ -1,0 +1,14 @@
+_meta = {
+  name = "PgBouncer";
+  summary = "Lightweight connection pooler for PostgreSQL";
+  description = ''
+    Lightweight connection pooler for PostgreSQL.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.25.2";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.pgbouncer;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "WhatsApp Electron";
+  summary = "Electron wrapper around Whatsapp";
+  description = ''
+    Electron wrapper around Whatsapp.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "communication" "messaging" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.whatsapp-electron;

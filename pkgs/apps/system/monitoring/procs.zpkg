@@ -1,0 +1,14 @@
+_meta = {
+  name = "procs";
+  summary = "Modern replacement for ps written in Rust";
+  description = ''
+    Modern replacement for ps written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14.11";
+  tags = [ "system" "monitoring" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.procs;

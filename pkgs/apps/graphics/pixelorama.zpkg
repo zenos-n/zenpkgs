@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pixelorama";
+  summary = "Free & open-source 2D sprite editor, made with the Godot Engine";
+  description = ''
+    Free & open-source 2D sprite editor, made with the Godot Engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.8";
+  tags = [ "graphics" "pixel-art" "animation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pixelorama;

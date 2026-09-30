@@ -1,0 +1,14 @@
+_meta = {
+  name = "Resonance";
+  summary = "Intuitive GTK4/LibAdwaita music player";
+  description = ''
+    Intuitive GTK4/LibAdwaita music player.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2023-06-06";
+  tags = [ "audio" "music" "player" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.resonance;

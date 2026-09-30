@@ -1,0 +1,14 @@
+_meta = {
+  name = "github-commenter";
+  summary = "Command line utility for creating GitHub comments on Commits, Pull Request Reviews or Issues";
+  description = ''
+    Command line utility for creating GitHub comments on Commits, Pull Request Reviews or Issues.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.29.0";
+  tags = [ "development" "github" "comments" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.github-commenter;

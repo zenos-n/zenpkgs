@@ -1,0 +1,137 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Personal font preferences";
+  summary = "Personal font preferences";
+  description = ''Settings for one user. Unset values preserve existing policy and preferences.'';
+  tags = [ "users" "fonts" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = {
+  _meta = {
+    name = "Manage personal font preferences";
+    summary = "Manage personal font preferences";
+    description = ''Manage personal font preferences. The system must permit user font configuration. Null leaves this preference unchanged.'';
+    tags = [ "users" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    fonts.fontconfig.enable = $lib.mkIf ($path.enable != null) ($path.enable);
+  };
+};
+
+sansSerifFamilies = {
+  _meta = {
+    name = "Preferred sansSerif font families";
+    summary = "Preferred sansSerif font families";
+    description = ''Preferred sansSerif font families. Ordered installed font family names. Requires fonts.enable = true; does not install fonts. Null leaves this preference unchanged.'';
+    tags = [ "users" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    fonts.fontconfig.defaultFonts.sansSerif = $lib.mkIf ($path.sansSerifFamilies != null) ($path.sansSerifFamilies);
+  };
+};
+
+serifFamilies = {
+  _meta = {
+    name = "Preferred serif font families";
+    summary = "Preferred serif font families";
+    description = ''Preferred serif font families. Ordered installed font family names. Requires fonts.enable = true; does not install fonts. Null leaves this preference unchanged.'';
+    tags = [ "users" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    fonts.fontconfig.defaultFonts.serif = $lib.mkIf ($path.serifFamilies != null) ($path.serifFamilies);
+  };
+};
+
+monospaceFamilies = {
+  _meta = {
+    name = "Preferred monospace font families";
+    summary = "Preferred monospace font families";
+    description = ''Preferred monospace font families. Ordered installed font family names. Requires fonts.enable = true; does not install fonts. Null leaves this preference unchanged.'';
+    tags = [ "users" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    fonts.fontconfig.defaultFonts.monospace = $lib.mkIf ($path.monospaceFamilies != null) ($path.monospaceFamilies);
+  };
+};
+
+emojiFamilies = {
+  _meta = {
+    name = "Preferred emoji font families";
+    summary = "Preferred emoji font families";
+    description = ''Preferred emoji font families. Ordered installed font family names. Requires fonts.enable = true; does not install fonts. Null leaves this preference unchanged.'';
+    tags = [ "users" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    fonts.fontconfig.defaultFonts.emoji = $lib.mkIf ($path.emojiFamilies != null) ($path.emojiFamilies);
+  };
+};
+
+smoothEdges = {
+  _meta = {
+    name = "Smooth the edges of text";
+    summary = "Smooth the edges of text";
+    description = ''Smooth the edges of text. Requires fonts.enable = true. Null leaves this preference unchanged.'';
+    tags = [ "users" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    fonts.fontconfig.antialiasing = $lib.mkIf ($path.smoothEdges != null) ($path.smoothEdges);
+  };
+};
+
+pixelAlignmentStrength = {
+  _meta = {
+    name = "Text hinting strength";
+    summary = "Text hinting strength";
+    description = ''Text hinting strength. Requires fonts.enable = true. Null leaves this preference unchanged.'';
+    tags = [ "users" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "none" "slight" "medium" "full" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    fonts.fontconfig.hinting = $lib.mkIf ($path.pixelAlignmentStrength != null) ($path.pixelAlignmentStrength);
+  };
+};
+
+screenSubpixelLayout = {
+  _meta = {
+    name = "Screen subpixel arrangement";
+    summary = "Screen subpixel arrangement";
+    description = ''Screen subpixel arrangement. Requires fonts.enable = true. Null leaves this preference unchanged.'';
+    tags = [ "users" "fonts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "none" "rgb" "bgr" "vertical-rgb" "vertical-bgr" ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    fonts.fontconfig.subpixelRendering = $lib.mkIf ($path.screenSubpixelLayout != null) ($path.screenSubpixelLayout);
+  };
+};

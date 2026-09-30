@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-chain";
+  summary = "Tool for rebasing a chain of local git branches";
+  description = ''
+    Tool for rebasing a chain of local git branches.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-03-25";
+  tags = [ "development" "git" "branches" "rebase" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-chain;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Altair GraphQL Client";
+  summary = "Feature-rich GraphQL Client IDE";
+  description = ''
+    Feature-rich GraphQL Client IDE.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.5.0";
+  tags = [ "development" "graphql" "api" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.altair;

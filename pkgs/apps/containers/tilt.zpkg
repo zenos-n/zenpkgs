@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tilt";
+  summary = "Local development tool to manage your developer instance when your team deploys to Kubernetes in production";
+  description = ''
+    Local development tool to manage your developer instance when your team deploys to Kubernetes in production.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.37.5";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.tilt;

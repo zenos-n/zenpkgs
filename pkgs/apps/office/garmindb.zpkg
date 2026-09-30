@@ -1,0 +1,14 @@
+_meta = {
+  name = "GarminDB";
+  summary = "Download and parse data from Garmin Connect or a Garmin watch";
+  description = ''
+    Download and parse data from Garmin Connect or a Garmin watch.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.7.0";
+  tags = [ "office" "fitness" "garmin" "data-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.garmindb;

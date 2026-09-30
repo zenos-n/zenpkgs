@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glow";
+  summary = "Render markdown on the CLI, with pizzazz";
+  description = ''
+    Render markdown on the CLI, with pizzazz.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.2";
+  tags = [ "terminal" "command-line" "markdown" "office" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.glow;

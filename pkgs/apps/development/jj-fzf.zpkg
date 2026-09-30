@@ -1,0 +1,14 @@
+_meta = {
+  name = "jj-fzf";
+  summary = "Text UI for Jujutsu based on fzf";
+  description = ''
+    Text UI for Jujutsu based on fzf.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.38.0";
+  tags = [ "development" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.jj-fzf;

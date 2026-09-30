@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mosquitto";
+  summary = "Open source MQTT v3.1/3.1.1/5.0 broker";
+  description = ''
+    Open source MQTT v3.1/3.1.1/5.0 broker.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.2";
+  tags = [ "networking" "messaging" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.epl10;
+};
+
+import $pkgs.legacy.mosquitto;

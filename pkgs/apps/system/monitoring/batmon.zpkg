@@ -1,0 +1,15 @@
+_meta = {
+  name = "batmon";
+  summary = "Interactive batteries viewer";
+  description = ''
+    An interactive viewer, similar to top, htop and other *top utilities,
+    but about the batteries installed in your notebook.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0";
+  tags = [ "system" "monitoring" "battery" "power" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.batmon;

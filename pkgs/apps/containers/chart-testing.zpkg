@@ -1,0 +1,14 @@
+_meta = {
+  name = "Chart Testing";
+  summary = "Tool for testing Helm charts";
+  description = ''
+    Tool for testing Helm charts.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.14.0";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.chart-testing;

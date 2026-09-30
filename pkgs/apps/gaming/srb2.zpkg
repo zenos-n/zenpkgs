@@ -1,0 +1,14 @@
+_meta = {
+  name = "Sonic Robo Blast 2";
+  summary = "Sonic Robo Blast 2 is a 3D Sonic the Hedgehog fangame based on a modified version of Doom Legacy";
+  description = ''
+    Sonic Robo Blast 2 is a 3D Sonic the Hedgehog fangame based on a modified version of Doom Legacy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.15";
+  tags = [ "gaming" "platformer" "3d" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.srb2;

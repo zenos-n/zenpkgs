@@ -1,0 +1,14 @@
+_meta = {
+  name = "askalono";
+  summary = "Tool to detect open source licenses from texts";
+  description = ''
+    Tool to detect open source licenses from texts.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.0";
+  tags = [ "development" "licensing" "analysis" "compliance" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.askalono;

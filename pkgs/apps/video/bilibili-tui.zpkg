@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bilibili TUI";
+  summary = "Terminal user interface (TUI) client for Bilibili";
+  description = ''
+    Terminal user interface (TUI) client for Bilibili.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.9";
+  tags = [ "video" "bilibili" "streaming" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bilibili-tui;

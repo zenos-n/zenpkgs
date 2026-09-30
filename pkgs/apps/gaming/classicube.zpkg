@@ -1,0 +1,14 @@
+_meta = {
+  name = "ClassiCube";
+  summary = "Lightweight, custom Minecraft Classic/ClassiCube client with optional additions written from scratch in C";
+  description = ''
+    Lightweight, custom Minecraft Classic/ClassiCube client with optional additions written from scratch in C.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.8";
+  tags = [ "gaming" "sandbox" "voxel" "multiplayer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.classicube;

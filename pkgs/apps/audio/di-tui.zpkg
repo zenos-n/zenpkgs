@@ -1,0 +1,14 @@
+_meta = {
+  name = "di-tui";
+  summary = "Simple terminal UI player for di.fm";
+  description = ''
+    Simple terminal UI player for di.fm.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.14.0";
+  tags = [ "audio" "di-fm" "streaming" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.di-tui;

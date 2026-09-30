@@ -1,0 +1,17 @@
+_meta = {
+  name = "Project Trellis";
+  summary = "Documentation and bitstream tools for Lattice ECP5 FPGAs";
+  description = ''
+    Project Trellis documents the Lattice ECP5 architecture
+    to enable development of open-source tools. Its goal is
+    to provide sufficient information to develop a free and
+    open Verilog to bitstream toolchain for these devices.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2025-01-30";
+  tags = [ "cad" "electronics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.trellis;

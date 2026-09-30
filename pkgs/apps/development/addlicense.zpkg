@@ -1,0 +1,14 @@
+_meta = {
+  name = "addlicense";
+  summary = "Ensures source code files have copyright license headers by scanning directory patterns recursively";
+  description = ''
+    Ensures source code files have copyright license headers by scanning directory patterns recursively.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "development" "licensing" "automation" "source-code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.addlicense;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "ftx-prog";
+  summary = "Command-line alternative to the FTDI FTProg utility for FTDI's FT-X series";
+  description = ''
+    Command-line alternative to the FTDI FTProg utility for FTDI's FT-X series.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4";
+  tags = [ "system" "administration" "hardware" "ftdi" "programming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.ftx-prog;

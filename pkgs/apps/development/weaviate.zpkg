@@ -1,0 +1,14 @@
+_meta = {
+  name = "Weaviate";
+  summary = "ML-first vector search engine";
+  description = ''
+    ML-first vector search engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.35.2";
+  tags = [ "development" "database" "data" "ai" "search" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.weaviate;

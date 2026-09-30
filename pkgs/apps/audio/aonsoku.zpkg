@@ -1,0 +1,14 @@
+_meta = {
+  name = "Aonsoku";
+  summary = "Modern desktop client for Navidrome/Subsonic servers";
+  description = ''
+    Modern desktop client for Navidrome/Subsonic servers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.0";
+  tags = [ "audio" "music" "streaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.aonsoku;

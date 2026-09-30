@@ -1,0 +1,14 @@
+_meta = {
+  name = "GOST";
+  summary = "Simple tunnel written in golang";
+  description = ''
+    Simple tunnel written in golang.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.6";
+  tags = [ "networking" "proxy" "tunneling" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gost;

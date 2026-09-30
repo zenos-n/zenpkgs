@@ -1,0 +1,14 @@
+_meta = {
+  name = "github-backup";
+  summary = "Backup a github user or organization";
+  description = ''
+    Backup a github user or organization.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.62.1";
+  tags = [ "backup" "github" "repositories" "organizations" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.github-backup;

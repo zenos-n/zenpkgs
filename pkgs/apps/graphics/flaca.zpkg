@@ -1,0 +1,14 @@
+_meta = {
+  name = "flaca";
+  summary = "CLI tool to losslessly compress JPEG and PNG images";
+  description = ''
+    A CLI tool for x86-64 Linux machines that simplifies the task of maximally, losslessly compressing JPEG and PNG images for use in production web environments
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.6.1";
+  tags = [ "graphics" "compression" "images" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.wtfpl;
+};
+
+import $pkgs.legacy.flaca;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "SportsTracker";
+  summary = "Desktop application for people who want to record and analyze their sporting activities";
+  description = ''
+    Desktop application for people who want to record and analyze their sporting activities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.0.1";
+  tags = [ "science" "fitness" "sports" "data-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.sportstracker;

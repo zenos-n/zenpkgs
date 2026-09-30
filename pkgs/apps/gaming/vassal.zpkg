@@ -1,0 +1,14 @@
+_meta = {
+  name = "VASSAL";
+  summary = "Free, open-source boardgame engine";
+  description = ''
+    Free, open-source boardgame engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.7.20";
+  tags = [ "gaming" "board-games" "multiplayer" "game-engine" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Only;
+};
+
+import $pkgs.legacy.vassal;

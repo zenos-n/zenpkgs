@@ -1,0 +1,14 @@
+_meta = {
+  name = "ouch";
+  summary = "Command-line utility for easily compressing and decompressing files and directories";
+  description = ''
+    Command-line utility for easily compressing and decompressing files and directories.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0";
+  tags = [ "files" "archives" "compression" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ouch;

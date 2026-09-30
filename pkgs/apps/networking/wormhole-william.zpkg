@@ -1,0 +1,14 @@
+_meta = {
+  name = "Wormhole William";
+  summary = "End-to-end encrypted file transfers";
+  description = ''
+    End-to-end encrypted file transfers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.8";
+  tags = [ "networking" "files" "transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wormhole-william;

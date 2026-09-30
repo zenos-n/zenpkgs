@@ -1,0 +1,14 @@
+_meta = {
+  name = "adbtuifm";
+  summary = "TUI-based file manager for the Android Debug Bridge";
+  description = ''
+    TUI-based file manager for the Android Debug Bridge.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.8";
+  tags = [ "files" "android" "adb" "manager" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.adbtuifm;

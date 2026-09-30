@@ -1,0 +1,14 @@
+_meta = {
+  name = "file";
+  summary = "Program that shows the type of files";
+  description = ''
+    Program that shows the type of files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.47";
+  tags = [ "files" "identification" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.file;

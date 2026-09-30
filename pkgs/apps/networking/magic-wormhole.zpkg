@@ -1,0 +1,14 @@
+_meta = {
+  name = "Magic Wormhole";
+  summary = "Securely transfer data between computers";
+  description = ''
+    Securely transfer data between computers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.24.0";
+  tags = [ "networking" "files" "transfer" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.magic-wormhole;

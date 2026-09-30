@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-team";
+  summary = "Command line interface for managing and enhancing git commit messages with co-authors";
+  description = ''
+    Command line interface for managing and enhancing git commit messages with co-authors.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.1";
+  tags = [ "development" "git" "coauthors" "commits" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-team;

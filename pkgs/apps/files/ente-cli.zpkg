@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ente CLI";
+  summary = "CLI client for downloading your data from Ente";
+  description = ''
+    The Ente CLI is a Command Line Utility for exporting data from Ente. It also does a few more things, for example, you can use it to decrypting the export from Ente Auth.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.3";
+  tags = [ "files" "ente" "downloads" "cloud" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.ente-cli;

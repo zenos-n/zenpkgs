@@ -1,0 +1,14 @@
+_meta = {
+  name = "EPIC5";
+  summary = "IRC client that offers a great ircII interface";
+  description = ''
+    IRC client that offers a great ircII interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.3";
+  tags = [ "communication" "irc" "chat" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.epic5;

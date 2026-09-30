@@ -1,0 +1,14 @@
+_meta = {
+  name = "Remind";
+  summary = "Sophisticated calendar and alarm program for the console";
+  description = ''
+    Sophisticated calendar and alarm program for the console.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "06.02.06";
+  tags = [ "office" "reminders" "calendar" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.remind;

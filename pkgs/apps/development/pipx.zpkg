@@ -1,0 +1,14 @@
+_meta = {
+  name = "pipx";
+  summary = "Install and run Python applications in isolated environments";
+  description = ''
+    Install and run Python applications in isolated environments.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.0";
+  tags = [ "development" "python" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pipx;

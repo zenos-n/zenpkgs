@@ -1,0 +1,14 @@
+_meta = {
+  name = "EFI Boot Editor";
+  summary = "Boot Editor for (U)EFI based systems";
+  description = ''
+    Boot Editor for (U)EFI based systems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.5";
+  tags = [ "system" "administration" "uefi" "boot" "configuration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Plus;
+};
+
+import $pkgs.legacy.efibooteditor;

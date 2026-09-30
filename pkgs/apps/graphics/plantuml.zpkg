@@ -1,0 +1,14 @@
+_meta = {
+  name = "PlantUML";
+  summary = "Draw UML diagrams using a simple and human readable text description";
+  description = ''
+    Draw UML diagrams using a simple and human readable text description.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2026.3";
+  tags = [ "graphics" "diagrams" "development" "documentation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.plantuml;

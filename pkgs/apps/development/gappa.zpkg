@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Gappa";
+  summary = "Verifying and formally proving properties on numerical programs dealing with floating-point or fixed-point arithmetic";
+  description = ''
+    Verifying and formally proving properties on numerical programs dealing with floating-point or fixed-point arithmetic.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.0";
+  tags = [ "development" "formal-methods" "verification" "numerical-analysis" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.gappa;

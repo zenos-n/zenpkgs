@@ -1,0 +1,14 @@
+_meta = {
+  name = "Airwindows Consolidated";
+  summary = "JUCE Plugin Version of Airwindows Consolidated";
+  description = ''
+    JUCE Plugin Version of Airwindows Consolidated.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.13.0-unstable-2026-01-19";
+  tags = [ "audio" "effects" "plugins" "music" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.airwin2rack;

@@ -2,7 +2,6 @@ from .api import parse, parse_file, tokenize
 from .compiler import (
     BUNDLE_VERSION,
     DESCRIPTOR_VERSION,
-    MAX_TREE_FILES,
     CompilationError,
     check_tree,
     compile_document,
@@ -34,7 +33,6 @@ __all__ = [
     "DESCRIPTOR_VERSION",
     "GRAMMAR_VERSION",
     "IR_VERSION",
-    "MAX_TREE_FILES",
     "Position",
     "Span",
     "ZenLangError",

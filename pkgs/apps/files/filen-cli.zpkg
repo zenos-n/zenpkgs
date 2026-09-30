@@ -1,0 +1,14 @@
+_meta = {
+  name = "Filen CLI";
+  summary = "CLI tool for interacting with the Filen cloud";
+  description = ''
+    CLI tool for interacting with the Filen cloud.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.36";
+  tags = [ "files" "cloud-storage" "synchronization" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.filen-cli;

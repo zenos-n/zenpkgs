@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "cargo-about";
+  summary = "Cargo plugin to generate list of all licenses for a crate";
+  description = ''
+    Cargo plugin to generate list of all licenses for a crate.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "development" "rust" "cargo" "licensing" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.cargo-about;

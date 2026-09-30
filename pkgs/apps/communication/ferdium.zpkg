@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ferdium";
+  summary = "All your services in one place built by the community";
+  description = ''
+    All your services in one place built by the community.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.1.2";
+  tags = [ "communication" "chat" "unified-messaging" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ferdium;

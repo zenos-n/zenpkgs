@@ -1,0 +1,14 @@
+_meta = {
+  name = "ctodo";
+  summary = "Simple ncurses-based task list manager";
+  description = ''
+    Simple ncurses-based task list manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3";
+  tags = [ "office" "tasks" "planning" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ctodo;

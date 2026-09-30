@@ -1,0 +1,105 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Session environment";
+  summary = "Session environment";
+  description = ''Settings for one user. Unset values preserve existing policy and preferences.'';
+  tags = [ "users" "environment" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+variables = {
+  _meta = {
+    name = "Session environment variables";
+    summary = "Session environment variables";
+    description = ''Session environment variables. String values for the login session. Do not store credentials here. Null leaves this preference unchanged.'';
+    tags = [ "users" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.sessionVariables = $lib.mkIf ($path.variables != null) ($path.variables);
+  };
+};
+
+searchPath = {
+  _meta = {
+    name = "Additional command search directories";
+    summary = "Additional command search directories";
+    description = ''Additional command search directories. Directories prepended to PATH; $HOME is expanded by the session shell. Null leaves this preference unchanged.'';
+    tags = [ "users" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.sessionPath = $lib.mkIf ($path.searchPath != null) ($path.searchPath);
+  };
+};
+
+editor = {
+  _meta = {
+    name = "Default terminal editor";
+    summary = "Default terminal editor";
+    description = ''Default terminal editor. A command string; does not install the application. Avoid defining the same variable in environment.variables. Null leaves this preference unchanged.'';
+    tags = [ "users" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.sessionVariables.EDITOR = $lib.mkIf ($path.editor != null) ($path.editor);
+  };
+};
+
+visualEditor = {
+  _meta = {
+    name = "Default visual editor";
+    summary = "Default visual editor";
+    description = ''Default visual editor. A command string; does not install the application. Avoid defining the same variable in environment.variables. Null leaves this preference unchanged.'';
+    tags = [ "users" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.sessionVariables.VISUAL = $lib.mkIf ($path.visualEditor != null) ($path.visualEditor);
+  };
+};
+
+pager = {
+  _meta = {
+    name = "Default pager";
+    summary = "Default pager";
+    description = ''Default pager. A command string; does not install the application. Avoid defining the same variable in environment.variables. Null leaves this preference unchanged.'';
+    tags = [ "users" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.sessionVariables.PAGER = $lib.mkIf ($path.pager != null) ($path.pager);
+  };
+};
+
+browser = {
+  _meta = {
+    name = "Browser command for command-line applications";
+    summary = "Browser command for command-line applications";
+    description = ''Browser command for command-line applications. A command string; does not install the application. Avoid defining the same variable in environment.variables. Null leaves this preference unchanged.'';
+    tags = [ "users" "environment" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.sessionVariables.BROWSER = $lib.mkIf ($path.browser != null) ($path.browser);
+  };
+};

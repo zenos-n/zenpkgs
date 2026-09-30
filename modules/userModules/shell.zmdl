@@ -1,0 +1,25 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Personal shell preferences";
+  summary = "Personal shell preferences";
+  description = ''Settings for one user. Unset values preserve existing policy and preferences.'';
+  tags = [ "users" "shell" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+aliases = {
+  _meta = {
+    name = "Shell command aliases";
+    summary = "Shell command aliases";
+    description = ''Shell command aliases. Applied by managed shells; enabling a shell program remains a separate choice. Null leaves this preference unchanged.'';
+    tags = [ "users" "shell" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+  u!! {
+    home.shellAliases = $lib.mkIf ($path.aliases != null) ($path.aliases);
+  };
+};

@@ -1,0 +1,16 @@
+_meta = {
+  name = "Elvish";
+  summary = "Friendly and expressive command shell";
+  description = ''
+    Elvish is a friendly interactive shell and an expressive programming
+    language. It runs on Linux, BSDs, macOS and Windows. Despite its pre-1.0
+    status, it is already suitable for most daily interactive use.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.21.0";
+  tags = [ "terminal" "shell" "command-line" "scripting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.elvish;

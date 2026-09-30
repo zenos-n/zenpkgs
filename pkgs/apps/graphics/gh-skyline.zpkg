@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitHub Skyline";
+  summary = "Generate a 3D model of your GitHub contribution history";
+  description = ''
+    Generate a 3D model of your GitHub contribution history.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.8";
+  tags = [ "graphics" "github" "3d" "contributions" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-skyline;

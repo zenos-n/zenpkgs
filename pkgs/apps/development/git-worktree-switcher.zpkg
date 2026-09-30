@@ -1,0 +1,14 @@
+_meta = {
+  name = "Git Worktree Switcher";
+  summary = "Switch between git worktrees with speed";
+  description = ''
+    Switch between git worktrees with speed.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.8";
+  tags = [ "development" "git" "worktrees" "navigation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-worktree-switcher;

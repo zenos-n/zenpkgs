@@ -1,0 +1,14 @@
+_meta = {
+  name = "SoX";
+  summary = "Sample Rate Converter for audio";
+  description = ''
+    Sample Rate Converter for audio.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2021-05-09";
+  tags = [ "audio" "conversion" "command-line" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.sox;

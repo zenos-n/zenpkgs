@@ -1,0 +1,14 @@
+_meta = {
+  name = "Verible";
+  summary = "Suite of SystemVerilog developer tools. Including a style-linter, indexer, formatter, and language server";
+  description = ''
+    Suite of SystemVerilog developer tools. Including a style-linter, indexer, formatter, and language server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.4023";
+  tags = [ "cad" "electronics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.verible;

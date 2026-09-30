@@ -1,0 +1,14 @@
+_meta = {
+  name = "gemget";
+  summary = "Command line downloader for the Gemini protocol";
+  description = ''
+    Command line downloader for the Gemini protocol.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.0";
+  tags = [ "downloads" "gemini" "networking" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gemget;

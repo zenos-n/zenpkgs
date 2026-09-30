@@ -1,0 +1,14 @@
+_meta = {
+  name = "BEDTools";
+  summary = "Powerful toolset for genome arithmetic";
+  description = ''
+    Powerful toolset for genome arithmetic.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.31.1";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.bedtools;

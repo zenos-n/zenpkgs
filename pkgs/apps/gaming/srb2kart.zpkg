@@ -1,0 +1,14 @@
+_meta = {
+  name = "SRB2Kart";
+  summary = "Classic styled kart racer";
+  description = ''
+    Classic styled kart racer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6";
+  tags = [ "gaming" "racing" "multiplayer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.srb2kart;

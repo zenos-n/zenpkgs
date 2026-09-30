@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-subtrac";
+  summary = "Keep the content for your git submodules all in one place: the parent repo";
+  description = ''
+    Keep the content for your git submodules all in one place: the parent repo.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.04";
+  tags = [ "development" "git" "submodules" "repositories" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-subtrac;

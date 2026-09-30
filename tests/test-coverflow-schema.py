@@ -61,7 +61,7 @@ def main():
             lib = import <nixpkgs/lib>;
             gvariant = import (HOME_MANAGER + "/modules/lib/gvariant.nix") { inherit lib; };
             hmTypes = import (HOME_MANAGER + "/modules/lib/types.nix") { inherit lib; };
-            pkgs.zenos.apps.gnome-extensions.coverflow-alt-tab = {
+            pkgs.zenos.desktops.gnome.extensions.coverflow-alt-tab = {
               type = "derivation"; name = "fixture"; outPath = "/nix/store/fixture";
               extensionUuid = "CoverflowAltTab@palatis.blogspot.com";
             };

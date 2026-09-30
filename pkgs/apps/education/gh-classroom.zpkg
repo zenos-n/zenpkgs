@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitHub Classroom CLI";
+  summary = "Extension for the GitHub CLI, that enhances it for educators using GitHub classroom";
+  description = ''
+    Extension for the GitHub CLI, that enhances it for educators using GitHub classroom.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.17";
+  tags = [ "education" "github" "github-cli" "classroom" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-classroom;

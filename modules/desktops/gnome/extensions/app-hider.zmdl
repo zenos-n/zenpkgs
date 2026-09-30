@@ -19,10 +19,10 @@ _meta = {
 enable = enableOption {
   _meta.description = ''Whether to enable App Hider GNOME extension configuration.'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.app-hider ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.app-hider ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.app-hider.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.app-hider.extensionUuid ];
     dconf = {
       settings."org/gnome/shell/extensions/app-hider" = {
         hidden-apps = $path.hidden-apps;

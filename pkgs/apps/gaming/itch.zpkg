@@ -1,0 +1,14 @@
+_meta = {
+  name = "itch";
+  summary = "Best way to play itch.io games";
+  description = ''
+    Best way to play itch.io games.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.9.0";
+  tags = [ "gaming" "store" "launcher" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.itch;

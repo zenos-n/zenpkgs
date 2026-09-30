@@ -1,0 +1,14 @@
+_meta = {
+  name = "FreeLens";
+  summary = "Free IDE for Kubernetes";
+  description = ''
+    Freelens is a free and open-source user interface designed for managing Kubernetes clusters. It provides a standalone application compatible with macOS, Windows, and Linux operating systems, making it accessible to a wide range of users. The application aims to simplify the complexities of Kubernetes management by offering an intuitive and user-friendly interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.0";
+  tags = [ "development" "kubernetes" "containers" "ide" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.freelens-bin;

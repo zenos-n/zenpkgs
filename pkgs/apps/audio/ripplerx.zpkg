@@ -1,0 +1,14 @@
+_meta = {
+  name = "RipplerX";
+  summary = "Physically modeled synth";
+  description = ''
+    RipplerX is a physically modeled synth, capable of sounds similar to AAS Chromaphone and Ableton Collision.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.19";
+  tags = [ "audio" "synthesis" "music" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.ripplerx;

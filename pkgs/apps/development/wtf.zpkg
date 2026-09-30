@@ -1,0 +1,14 @@
+_meta = {
+  name = "WTF Fuzzer";
+  summary = "Cross-platform snapshot-based fuzzer";
+  description = ''
+    Cross-platform snapshot-based fuzzer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.7";
+  tags = [ "development" "fuzzing" "testing" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wtf;

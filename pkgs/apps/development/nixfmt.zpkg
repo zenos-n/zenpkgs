@@ -1,0 +1,14 @@
+_meta = {
+  name = "nixfmt";
+  summary = "Official formatter for Nix code";
+  description = ''
+    Official formatter for Nix code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.0";
+  tags = [ "development" "nix" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.nixfmt;

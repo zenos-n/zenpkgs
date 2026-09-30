@@ -1,0 +1,14 @@
+_meta = {
+  name = "Nextcloud Talk";
+  summary = "Nextcloud Talk Desktop Client";
+  description = ''
+    Nextcloud Talk Desktop Client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.1";
+  tags = [ "communication" "messaging" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.nextcloud-talk-desktop;

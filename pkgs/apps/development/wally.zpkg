@@ -1,0 +1,14 @@
+_meta = {
+  name = "Wally";
+  summary = "Modern package manager for Roblox projects inspired by Cargo";
+  description = ''
+    Modern package manager for Roblox projects inspired by Cargo.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.2";
+  tags = [ "development" "gaming" "roblox" "package-manager" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.wally;

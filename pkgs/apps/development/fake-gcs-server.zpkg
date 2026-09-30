@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fake GCS Server";
+  summary = "Google Cloud Storage emulator & testing library";
+  description = ''
+    Google Cloud Storage emulator & testing library.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.54.0";
+  tags = [ "development" "gcs" "testing" "emulation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.fake-gcs-server;

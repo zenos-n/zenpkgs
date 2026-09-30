@@ -1,0 +1,14 @@
+_meta = {
+  name = "Chawan";
+  summary = "Lightweight and featureful terminal web browser";
+  description = ''
+    Lightweight and featureful terminal web browser.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.3";
+  tags = [ "browsers" "web" "terminal" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.chawan;

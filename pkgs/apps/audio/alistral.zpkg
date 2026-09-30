@@ -1,0 +1,14 @@
+_meta = {
+  name = "Alistral";
+  summary = "Power tools for Listenbrainz";
+  description = ''
+    Power tools for Listenbrainz.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.7";
+  tags = [ "audio" "music" "listenbrainz" "tracking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.alistral;

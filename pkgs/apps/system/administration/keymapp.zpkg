@@ -1,0 +1,14 @@
+_meta = {
+  name = "Keymapp";
+  summary = "Application for ZSA keyboards";
+  description = ''
+    Application for ZSA keyboards.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.7";
+  tags = [ "system" "administration" "keyboard" "input" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.keymapp;

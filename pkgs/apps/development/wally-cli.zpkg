@@ -1,0 +1,14 @@
+_meta = {
+  name = "Wally CLI";
+  summary = "Tool to flash firmware to mechanical keyboards";
+  description = ''
+    Tool to flash firmware to mechanical keyboards.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.1";
+  tags = [ "development" "embedded" "hardware" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wally-cli;

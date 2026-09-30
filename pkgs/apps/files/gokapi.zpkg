@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gokapi";
+  summary = "Lightweight selfhosted Firefox Send alternative without public upload";
+  description = ''
+    Lightweight selfhosted Firefox Send alternative without public upload.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.4";
+  tags = [ "files" "networking" "sharing" "transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.gokapi;

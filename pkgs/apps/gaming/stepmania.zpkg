@@ -1,0 +1,14 @@
+_meta = {
+  name = "StepMania";
+  summary = "Free dance and rhythm game for Windows, Mac, and Linux";
+  description = ''
+    Free dance and rhythm game for Windows, Mac, and Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.1.0-b2-unstable-2022-11-14";
+  tags = [ "gaming" "rhythm" "music" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.stepmania;

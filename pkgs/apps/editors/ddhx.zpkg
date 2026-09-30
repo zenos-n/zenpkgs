@@ -1,0 +1,14 @@
+_meta = {
+  name = "ddhx";
+  summary = "Console text-mode hex editor, inspired by GNU nano and vim";
+  description = ''
+    Console text-mode hex editor, inspired by GNU nano and vim.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.0";
+  tags = [ "editors" "hex" "binary" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ddhx;

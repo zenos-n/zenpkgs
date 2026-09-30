@@ -1,0 +1,14 @@
+_meta = {
+  name = "FDT Viewer";
+  summary = "Flattened Device Tree Viewer written in Qt";
+  description = ''
+    Flattened Device Tree Viewer written in Qt.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2024-12-06";
+  tags = [ "development" "device-tree" "viewer" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.fdt-viewer;

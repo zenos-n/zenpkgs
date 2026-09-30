@@ -1,0 +1,12 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "User modules";
+  summary = "Per-user ZenOS module root";
+  description = ''
+    Provides the canonical root for user-scoped modules mounted by structure.zstr.
+  '';
+  tags = [ "users" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Seahorse";
+  summary = "Application for managing encryption keys and passwords in the GnomeKeyring";
+  description = ''
+    Application for managing encryption keys and passwords in the GnomeKeyring.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "47.0.1";
+  tags = [ "security" "privacy" "passwords" "keys" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.seahorse;

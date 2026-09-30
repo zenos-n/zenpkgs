@@ -1,0 +1,21 @@
+_meta = {
+  name = "fim-rs";
+  summary = "Host-based file integrity monitoring tool";
+  description = ''
+    FIM is a File Integrity Monitoring tool that tracks any event over your
+    files. It is capable of keeping historical data of your files. It checks
+    the filesystem changes in the background.
+
+    FIM is the fastest alternative to other software like Ossec, which
+    performs file integrity monitoring. It could integrate with other
+    security tools. The produced data can be ingested and analyzed with
+    tools like ElasticSearch/OpenSearch.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.1";
+  tags = [ "security" "files" "integrity" "monitoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.fim-rs;

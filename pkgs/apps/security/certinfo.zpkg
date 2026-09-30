@@ -1,0 +1,14 @@
+_meta = {
+  name = "certinfo";
+  summary = "Print x509 certificate info";
+  description = ''
+    Print x509 certificate info.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.40";
+  tags = [ "security" "certificates" "x509" "inspection" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.certinfo;

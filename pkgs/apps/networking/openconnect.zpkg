@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenConnect";
+  summary = "VPN Client for Cisco's AnyConnect SSL VPN";
+  description = ''
+    VPN Client for Cisco's AnyConnect SSL VPN.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.12-unstable-2025-11-03";
+  tags = [ "networking" "vpn" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Only;
+};
+
+import $pkgs.legacy.openconnect;

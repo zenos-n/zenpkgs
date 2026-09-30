@@ -1,0 +1,15 @@
+_meta = {
+  name = "WildMIDI";
+  summary = "Software MIDI player and library";
+  description = ''
+    WildMIDI is a simple software midi player which has a core softsynth
+    library that can be use with other applications.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.6";
+  tags = [ "audio" "midi" "player" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3;
+};
+
+import $pkgs.legacy.wildmidi;

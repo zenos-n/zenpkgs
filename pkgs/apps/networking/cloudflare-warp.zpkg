@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cloudflare WARP";
+  summary = "Replaces the connection between your device and the Internet with a modern, optimized, protocol";
+  description = ''
+    Replaces the connection between your device and the Internet with a modern, optimized, protocol.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.3.846.0";
+  tags = [ "networking" "vpn" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.cloudflare-warp;

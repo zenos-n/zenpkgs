@@ -1,0 +1,14 @@
+_meta = {
+  name = "fclones GUI";
+  summary = "Interactive duplicate file remover";
+  description = ''
+    Interactive duplicate file remover.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0";
+  tags = [ "files" "duplicates" "deduplication" "graphical" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fclones-gui;

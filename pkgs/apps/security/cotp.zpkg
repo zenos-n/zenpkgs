@@ -1,0 +1,14 @@
+_meta = {
+  name = "cotp";
+  summary = "Trustworthy, encrypted, command-line TOTP/HOTP authenticator app with import functionality";
+  description = ''
+    Trustworthy, encrypted, command-line TOTP/HOTP authenticator app with import functionality.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.10";
+  tags = [ "security" "otp" "authentication" "encryption" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.cotp;

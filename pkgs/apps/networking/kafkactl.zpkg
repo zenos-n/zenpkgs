@@ -1,0 +1,19 @@
+_meta = {
+  name = "kafkactl";
+  summary = "Command Line Tool for managing Apache Kafka";
+  description = ''
+    A command-line interface for interaction with Apache Kafka.
+    Features:
+    - command auto-completion for bash, zsh, fish shell including dynamic completion for e.g. topics or consumer groups
+    - support for avro schemas
+    - Configuration of different contexts
+    - directly access kafka clusters inside your kubernetes cluster
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.18.0";
+  tags = [ "networking" "messaging" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kafkactl;

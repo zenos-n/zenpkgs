@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fromager";
+  summary = "Build Python wheels from source distributions";
+  description = ''
+    Build Python wheels from source distributions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.71.0";
+  tags = [ "development" "python" "packaging" "wheels" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fromager;

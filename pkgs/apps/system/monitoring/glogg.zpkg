@@ -1,0 +1,14 @@
+_meta = {
+  name = "glogg";
+  summary = "Fast, smart log explorer";
+  description = ''
+    A multi-platform GUI application to browse and search through long or complex log files. It is designed with programmers and system administrators in mind. glogg can be seen as a graphical, interactive combination of grep and less.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.4";
+  tags = [ "system" "monitoring" "logs" "search" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.glogg;

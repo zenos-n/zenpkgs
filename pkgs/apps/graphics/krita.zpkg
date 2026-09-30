@@ -1,0 +1,14 @@
+_meta = {
+  name = "Krita";
+  summary = "Free and open source painting application";
+  description = ''
+    Free and open source painting application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.0.2.1";
+  tags = [ "graphics" "creativity" "painting" "illustration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.krita;

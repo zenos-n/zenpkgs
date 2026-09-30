@@ -1,0 +1,14 @@
+_meta = {
+  name = "mpd-mpris";
+  summary = "Implementation of the MPRIS protocol for MPD";
+  description = ''
+    Implementation of the MPRIS protocol for MPD.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.3";
+  tags = [ "audio" "music" "desktop-integration" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.mpd-mpris;

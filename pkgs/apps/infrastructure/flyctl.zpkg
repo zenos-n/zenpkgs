@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fly.io CLI";
+  summary = "Command line tools for fly.io services";
+  description = ''
+    Command line tools for fly.io services.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.52";
+  tags = [ "infrastructure" "cloud" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.flyctl;

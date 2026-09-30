@@ -1,0 +1,14 @@
+_meta = {
+  name = "arc_unpacker";
+  summary = "Tool to extract files from visual novel archives";
+  description = ''
+    Tool to extract files from visual novel archives.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2021-08-06";
+  tags = [ "archives" "extraction" "gaming" "visual-novel" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.arc_unpacker;

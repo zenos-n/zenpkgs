@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitLab Triage";
+  summary = "GitLab's issues and merge requests triage, automated";
+  description = ''
+    GitLab's issues and merge requests triage, automated.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.51.0";
+  tags = [ "development" "gitlab" "issues" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitlab-triage;

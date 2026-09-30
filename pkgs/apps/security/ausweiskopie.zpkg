@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ausweiskopie";
+  summary = "Create privacy-friendly copies of identity documents";
+  description = ''
+    Create privacy-friendly copies of identity documents.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.4";
+  tags = [ "security" "privacy" "documents" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.ausweiskopie;

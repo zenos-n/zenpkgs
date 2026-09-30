@@ -1,0 +1,14 @@
+_meta = {
+  name = "vokoscreenNG";
+  summary = "User friendly Open Source screencaster for Linux and Windows";
+  description = ''
+    User friendly Open Source screencaster for Linux and Windows.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.8.3";
+  tags = [ "video" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.vokoscreen-ng;

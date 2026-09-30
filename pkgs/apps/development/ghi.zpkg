@@ -1,0 +1,14 @@
+_meta = {
+  name = "ghi";
+  summary = "GitHub Issues on the command line";
+  description = ''
+    GitHub Issues on the command line.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.1";
+  tags = [ "development" "github" "issues" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ghi;

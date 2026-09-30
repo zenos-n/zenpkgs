@@ -1,0 +1,14 @@
+_meta = {
+  name = "Astroterm";
+  summary = "Celestial viewer for the terminal, written in C";
+  description = ''
+    Celestial viewer for the terminal, written in C.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.10";
+  tags = [ "science" "astronomy" "stars" "terminal" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.astroterm;

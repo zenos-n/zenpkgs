@@ -1,0 +1,14 @@
+_meta = {
+  name = "fastgron";
+  summary = "High-performance JSON to GRON (greppable, flattened JSON) converter";
+  description = ''
+    High-performance JSON to GRON (greppable, flattened JSON) converter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.7";
+  tags = [ "development" "json" "gron" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fastgron;

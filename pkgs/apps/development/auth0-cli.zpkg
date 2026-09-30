@@ -1,0 +1,14 @@
+_meta = {
+  name = "Auth0 CLI";
+  summary = "Command-line interface for Auth0";
+  description = ''
+    Command-line interface for Auth0.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.30.0";
+  tags = [ "development" "authentication" "identity" "auth0" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.auth0-cli;

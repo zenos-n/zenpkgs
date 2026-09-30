@@ -1,0 +1,14 @@
+_meta = {
+  name = "MCPHost";
+  summary = "CLI host application that enables Large Language Models (LLMs) to interact with external tools through the Model Context Protocol (MCP)";
+  description = ''
+    CLI host application that enables Large Language Models (LLMs) to interact with external tools through the Model Context Protocol (MCP).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.34.0";
+  tags = [ "ai" "development" "mcp" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.mcphost;

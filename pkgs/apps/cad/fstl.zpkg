@@ -1,0 +1,14 @@
+_meta = {
+  name = "fstl";
+  summary = "Fastest STL file viewer";
+  description = ''
+    Fastest STL file viewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.1";
+  tags = [ "cad" "stl" "3d" "model-viewers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fstl;

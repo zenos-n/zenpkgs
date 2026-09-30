@@ -1,0 +1,14 @@
+_meta = {
+  name = "backdown";
+  summary = "File deduplicator";
+  description = ''
+    File deduplicator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.2";
+  tags = [ "files" "duplicates" "deduplication" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.backdown;

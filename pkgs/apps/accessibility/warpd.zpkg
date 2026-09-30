@@ -1,0 +1,14 @@
+_meta = {
+  name = "warpd";
+  summary = "Modal keyboard driven interface for mouse manipulation";
+  description = ''
+    Modal keyboard driven interface for mouse manipulation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.5";
+  tags = [ "accessibility" "input" "mouse" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.warpd;

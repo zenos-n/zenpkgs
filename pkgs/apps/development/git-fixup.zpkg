@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-fixup";
+  summary = "Fighting the copy-paste element of your rebase workflow";
+  description = ''
+    Fighting the copy-paste element of your rebase workflow.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.1";
+  tags = [ "development" "git" "rebase" "commits" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.git-fixup;

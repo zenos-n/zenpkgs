@@ -1,0 +1,16 @@
+_meta = {
+  name = "CloudDrive 2";
+  summary = "Multi-cloud drives management tool supporting mounting cloud drives locally";
+  description = ''
+    CloudDrive is a powerful multi-cloud drive management tool that provides a multi-cloud
+    drive solution that includes local mounting of cloud drives. It supports lots of cloud
+    drives in China.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.7";
+  tags = [ "files" "cloud" "mounting" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.clouddrive2;

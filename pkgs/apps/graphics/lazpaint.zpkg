@@ -1,0 +1,14 @@
+_meta = {
+  name = "LazPaint";
+  summary = "Image editor like PaintBrush or Paint.Net";
+  description = ''
+    Image editor like PaintBrush or Paint.Net.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.3";
+  tags = [ "graphics" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.lazpaint;

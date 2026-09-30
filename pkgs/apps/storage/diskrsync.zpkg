@@ -1,0 +1,14 @@
+_meta = {
+  name = "diskrsync";
+  summary = "Rsync for block devices and disk images";
+  description = ''
+    Rsync for block devices and disk images.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0";
+  tags = [ "storage" "block-devices" "disk-images" "synchronization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.diskrsync;

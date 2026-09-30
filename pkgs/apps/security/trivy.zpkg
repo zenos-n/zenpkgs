@@ -1,0 +1,18 @@
+_meta = {
+  name = "Trivy";
+  summary = "Simple and comprehensive vulnerability scanner for containers, suitable for CI";
+  description = ''
+    Trivy is a simple and comprehensive vulnerability scanner for containers
+    and other artifacts. A software vulnerability is a glitch, flaw, or
+    weakness present in the software or in an Operating System. Trivy detects
+    vulnerabilities of OS packages (Alpine, RHEL, CentOS, etc.) and
+    application dependencies (Bundler, Composer, npm, yarn, etc.).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.72.0";
+  tags = [ "security" "privacy" "development" "containers" "scanning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.trivy;

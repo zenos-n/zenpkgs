@@ -1,0 +1,14 @@
+_meta = {
+  name = "rusty-psn";
+  summary = "Simple tool to grab updates for PS3 games, directly from Sony's servers using their updates API";
+  description = ''
+    Simple tool to grab updates for PS3 games, directly from Sony's servers using their updates API.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.10";
+  tags = [ "gaming" "playstation" "updates" "downloads" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.rusty-psn;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "r2modman";
+  summary = "Unofficial Thunderstore mod manager";
+  description = ''
+    Unofficial Thunderstore mod manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.18";
+  tags = [ "gaming" "mods" "manager" "thunderstore" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.r2modman;

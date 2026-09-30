@@ -1,0 +1,18 @@
+_meta = {
+  name = "ZXTune";
+  summary = "Crossplatform chiptunes player";
+  description = ''
+    Chiptune music player with truly extensive format support. Supported
+    formats/chips include AY/YM, ZX Spectrum, PC, Amiga, Atari, Acorn, Philips
+    SAA1099, MOS6581 (Commodore 64), NES, SNES, GameBoy, Atari, TurboGrafX,
+    Nintendo DS, Sega Master System, and more. Powered by vgmstream, OpenMPT,
+    sidplay, and many other libraries.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5101";
+  tags = [ "audio" "music" "chiptune" "player" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.zxtune;

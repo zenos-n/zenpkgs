@@ -1,0 +1,14 @@
+_meta = {
+  name = "TFLint";
+  summary = "Terraform linter focused on possible errors, best practices, and so on";
+  description = ''
+    Terraform linter focused on possible errors, best practices, and so on.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.61.0";
+  tags = [ "infrastructure" "development" "linting" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.tflint;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Electron Fiddle";
+  summary = "Easiest way to get started with Electron";
+  description = ''
+    Easiest way to get started with Electron.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.37.2";
+  tags = [ "development" "javascript" "prototyping" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.electron-fiddle;

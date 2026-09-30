@@ -1,0 +1,14 @@
+_meta = {
+  name = "FIDO2 Manage";
+  summary = "Manage FIDO2.1 devices over USB or NFC, including Passkeys";
+  description = ''
+    Manage FIDO2.1 devices over USB or NFC, including Passkeys.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-06-06";
+  tags = [ "security" "authentication" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.fido2-manage;

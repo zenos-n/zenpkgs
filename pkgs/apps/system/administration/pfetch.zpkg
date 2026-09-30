@@ -1,0 +1,14 @@
+_meta = {
+  name = "pfetch";
+  summary = "Pretty system information tool written in POSIX sh";
+  description = ''
+    Pretty system information tool written in POSIX sh.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.11.0";
+  tags = [ "system" "administration" "system-information" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pfetch;

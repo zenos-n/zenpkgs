@@ -1,0 +1,14 @@
+_meta = {
+  name = "Globus CLI";
+  summary = "Command-line interface to Globus REST APIs, including the Transfer API and the Globus Auth API";
+  description = ''
+    Command-line interface to Globus REST APIs, including the Transfer API and the Globus Auth API.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.41.0";
+  tags = [ "files" "file-transfer" "globus" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.globus-cli;

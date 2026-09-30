@@ -1,0 +1,14 @@
+_meta = {
+  name = "ADIF Multitool";
+  summary = "Command-line program for working with ham logfiles";
+  description = ''
+    Command-line program for working with ham logfiles.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.20";
+  tags = [ "radio" "amateur-radio" "logs" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.adif-multitool;

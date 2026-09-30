@@ -1,0 +1,14 @@
+_meta = {
+  name = "GDLauncher Carbon";
+  summary = "Simple, yet powerful Minecraft custom launcher with a strong focus on the user experience";
+  description = ''
+    Simple, yet powerful Minecraft custom launcher with a strong focus on the user experience.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.24";
+  tags = [ "gaming" "launcher" "minecraft" "mods" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsl11;
+};
+
+import $pkgs.legacy.gdlauncher-carbon;

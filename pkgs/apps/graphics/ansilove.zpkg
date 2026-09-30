@@ -1,0 +1,14 @@
+_meta = {
+  name = "AnsiLove";
+  summary = "ANSI and ASCII art to PNG converter in C";
+  description = ''
+    ANSI and ASCII art to PNG converter in C.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.2.1";
+  tags = [ "graphics" "ascii" "ansi" "conversion" "png" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.ansilove;

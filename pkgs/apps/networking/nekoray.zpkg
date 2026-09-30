@@ -1,0 +1,14 @@
+_meta = {
+  name = "Throne";
+  summary = "Qt based cross-platform GUI proxy configuration manager";
+  description = ''
+    Qt based cross-platform GUI proxy configuration manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.13";
+  tags = [ "networking" "proxy" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.throne;

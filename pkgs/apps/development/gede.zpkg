@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gede";
+  summary = "Graphical frontend (GUI) to GDB";
+  description = ''
+    Graphical frontend (GUI) to GDB.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.22.1";
+  tags = [ "development" "gdb" "debugging" "gui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.gede;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Galleta";
+  summary = "Examine the contents of the IE's cookie files for forensic purposes";
+  description = ''
+    Examine the contents of the IE's cookie files for forensic purposes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20040505_1";
+  tags = [ "security" "forensics" "cookies" "browsers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.galleta;

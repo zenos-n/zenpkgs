@@ -1,0 +1,14 @@
+_meta = {
+  name = "Calligra Plan";
+  summary = "Project Management Application";
+  description = ''
+    Project Management Application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.1";
+  tags = [ "office" "projects" "planning" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.calligraplan;

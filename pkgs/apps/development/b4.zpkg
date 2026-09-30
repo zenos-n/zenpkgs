@@ -1,0 +1,14 @@
+_meta = {
+  name = "b4";
+  summary = "Helper utility to work with patches made available via a public-inbox archive";
+  description = ''
+    Helper utility to work with patches made available via a public-inbox archive.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.2";
+  tags = [ "development" "git" "patches" "email" "collaboration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.b4;

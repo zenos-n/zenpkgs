@@ -1,0 +1,14 @@
+_meta = {
+  name = "Terraform Language Server";
+  summary = "Terraform Language Server (official)";
+  description = ''
+    Terraform Language Server (official).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.38.6";
+  tags = [ "infrastructure" "development" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.terraform-ls;

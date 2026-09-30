@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNOME Text Editor";
+  summary = "Text Editor for GNOME";
+  description = ''
+    Text Editor for GNOME.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "50.1";
+  tags = [ "editors" "text" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gnome-text-editor;

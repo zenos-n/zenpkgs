@@ -1,0 +1,16 @@
+_meta = {
+  name = "Doing";
+  summary = "Command line tool for keeping track of what you’re doing and tracking what you’ve done";
+  description = ''
+    doing is a basic CLI for adding and listing "what was I doing" reminders
+    in a TaskPaper-formatted text file. It allows for multiple
+    sections/categories and flexible output formatting.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.88";
+  tags = [ "office" "time-tracking" "journal" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.doing;

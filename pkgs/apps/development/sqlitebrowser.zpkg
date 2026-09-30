@@ -1,0 +1,14 @@
+_meta = {
+  name = "DB Browser for SQLite";
+  summary = "DB Browser for SQLite";
+  description = ''
+    DB Browser for SQLite.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.13.1";
+  tags = [ "development" "database" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.sqlitebrowser;

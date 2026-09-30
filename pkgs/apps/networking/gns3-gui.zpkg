@@ -1,0 +1,16 @@
+_meta = {
+  name = "GNS3";
+  summary = "Graphical Network Simulator 3 GUI";
+  description = ''
+    Graphical user interface for controlling the GNS3 network simulator. This
+    requires access to a local or remote GNS3 server (it's recommended to
+    download the official GNS3 VM).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.56.1";
+  tags = [ "networking" "simulation" "education" "gui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gns3-gui;

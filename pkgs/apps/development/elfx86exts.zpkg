@@ -1,0 +1,16 @@
+_meta = {
+  name = "elfx86exts";
+  summary = "Decode x86 binaries and print out which instruction set extensions they use";
+  description = ''
+    Disassemble a binary containing x86 instructions and print out which extensions it uses.
+    Despite the utterly misleading name, this tool supports ELF and MachO binaries, and
+    perhaps PE-format ones as well. (It used to be more limited.)
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.2";
+  tags = [ "development" "x86" "instruction-sets" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.elfx86exts;

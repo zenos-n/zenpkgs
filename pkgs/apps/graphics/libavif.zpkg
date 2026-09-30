@@ -1,0 +1,18 @@
+_meta = {
+  name = "AVIF Tools";
+  summary = "C implementation of the AV1 Image File Format";
+  description = ''
+    Libavif aims to be a friendly, portable C implementation of the
+    AV1 Image File Format. It is a work-in-progress, but can already
+    encode and decode all AOM supported YUV formats and bit depths
+    (with alpha). It also features an encoder and a decoder
+    (avifenc/avifdec).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.1";
+  tags = [ "graphics" "avif" "conversion" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.libavif;

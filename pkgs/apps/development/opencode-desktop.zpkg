@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenCode Desktop";
+  summary = "AI coding agent desktop client";
+  description = ''
+    AI coding agent desktop client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.10";
+  tags = [ "development" "ai" "programming" "assistant" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.opencode-desktop;

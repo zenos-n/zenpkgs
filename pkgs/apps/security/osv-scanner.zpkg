@@ -1,0 +1,14 @@
+_meta = {
+  name = "osv-scanner";
+  summary = "Vulnerability scanner written in Go which uses the data provided by https://osv.dev";
+  description = ''
+    Vulnerability scanner written in Go which uses the data provided by https://osv.dev.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.3";
+  tags = [ "security" "development" "auditing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.osv-scanner;

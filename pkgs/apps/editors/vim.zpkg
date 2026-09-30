@@ -1,0 +1,14 @@
+_meta = {
+  name = "Vim";
+  summary = "Most popular clone of the VI editor";
+  description = ''
+    Most popular clone of the VI editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.2.0541";
+  tags = [ "editors" "text" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.vim;
+};
+
+import $pkgs.legacy.vim;

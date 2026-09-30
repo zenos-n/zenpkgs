@@ -1,0 +1,15 @@
+_meta = {
+  name = "Quarto";
+  summary = "Open-source scientific and technical publishing system built on Pandoc";
+  description = ''
+    Quarto is an open-source scientific and technical publishing system built on Pandoc.
+    Quarto documents are authored using markdown, an easy to write plain text format.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.37";
+  tags = [ "development" "publishing" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.quarto;

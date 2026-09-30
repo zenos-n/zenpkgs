@@ -1,0 +1,17 @@
+_meta = {
+  name = "Evince";
+  summary = "GNOME's document viewer";
+  description = ''
+    Evince is a document viewer for multiple document formats.  It
+    currently supports PDF, PostScript, DjVu, TIFF and DVI.  The goal
+    of Evince is to replace the multiple document viewers that exist
+    on the GNOME Desktop with a single simple application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "48.4";
+  tags = [ "office" "pdf" "documents" "viewer" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.evince;

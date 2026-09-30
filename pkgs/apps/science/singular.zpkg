@@ -1,0 +1,14 @@
+_meta = {
+  name = "singular";
+  summary = "CAS for polynomial computations";
+  description = ''
+    CAS for polynomial computations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.4.1";
+  tags = [ "science" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.singular;

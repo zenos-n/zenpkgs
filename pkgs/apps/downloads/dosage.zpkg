@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dosage";
+  summary = "Comic strip downloader and archiver";
+  description = ''
+    Comic strip downloader and archiver.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2";
+  tags = [ "downloads" "comics" "archiving" "strips" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dosage;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "AWS CDK CLI";
+  summary = "AWS CDK Toolkit";
+  description = ''
+    AWS CDK Toolkit.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1116.0";
+  tags = [ "development" "aws" "infrastructure-as-code" "cloud" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.aws-cdk-cli;

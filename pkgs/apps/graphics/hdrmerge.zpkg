@@ -1,0 +1,14 @@
+_meta = {
+  name = "HDRMerge";
+  summary = "Combines two or more raw images into an HDR";
+  description = ''
+    Combines two or more raw images into an HDR.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.0-unstable-2025-04-26";
+  tags = [ "graphics" "photography" "hdr" "images" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.hdrmerge;

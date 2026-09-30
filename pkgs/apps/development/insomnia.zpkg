@@ -1,0 +1,14 @@
+_meta = {
+  name = "Insomnia";
+  summary = "Open-source, cross-platform API client for GraphQL, REST, WebSockets, SSE and gRPC, with Cloud, Local and Git storage";
+  description = ''
+    Open-source, cross-platform API client for GraphQL, REST, WebSockets, SSE and gRPC, with Cloud, Local and Git storage.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "12.2.0";
+  tags = [ "development" "networking" "api" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.insomnia;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "gitlab-clippy";
+  summary = "Convert clippy warnings into GitLab Code Quality report";
+  description = ''
+    Convert clippy warnings into GitLab Code Quality report.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.3";
+  tags = [ "development" "gitlab" "rust" "code-quality" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitlab-clippy;

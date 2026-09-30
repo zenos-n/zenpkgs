@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bruno CLI";
+  summary = "CLI of the open-source IDE For exploring and testing APIs";
+  description = ''
+    CLI of the open-source IDE For exploring and testing APIs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.0";
+  tags = [ "development" "api" "http" "testing" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bruno-cli;

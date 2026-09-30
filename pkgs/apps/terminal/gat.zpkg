@@ -1,0 +1,14 @@
+_meta = {
+  name = "gat";
+  summary = "Cat alternative written in Go";
+  description = ''
+    Cat alternative written in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.27.2";
+  tags = [ "terminal" "text" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gat;

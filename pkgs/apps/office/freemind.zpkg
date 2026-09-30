@@ -1,0 +1,14 @@
+_meta = {
+  name = "FreeMind";
+  summary = "Mind-mapping software";
+  description = ''
+    Mind-mapping software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.1";
+  tags = [ "office" "mind-mapping" "planning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.freemind;

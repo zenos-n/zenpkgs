@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dockmate";
+  summary = "Terminal-based Docker container manager that actually works";
+  description = ''
+    Terminal-based Docker container manager that actually works.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.0";
+  tags = [ "containers" "docker" "management" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dockmate;

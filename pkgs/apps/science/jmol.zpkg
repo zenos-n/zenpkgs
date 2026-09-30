@@ -1,0 +1,14 @@
+_meta = {
+  name = "Jmol";
+  summary = "Java 3D viewer for chemical structures";
+  description = ''
+    Java 3D viewer for chemical structures.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "16.3.49";
+  tags = [ "science" "chemistry" "visualization" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl2;
+};
+
+import $pkgs.legacy.jmol;

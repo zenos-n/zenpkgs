@@ -1,0 +1,16 @@
+_meta = {
+  name = "MComix";
+  summary = "Comic book reader and image viewer";
+  description = ''
+    User-friendly, customizable image viewer, specifically designed to handle
+    comic books and manga supporting a variety of container formats
+    (including CBR, CBZ, CB7, CBT, LHA and PDF)
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.1";
+  tags = [ "office" "comics" "reading" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.mcomix;

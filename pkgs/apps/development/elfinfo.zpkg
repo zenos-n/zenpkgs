@@ -1,0 +1,14 @@
+_meta = {
+  name = "elfinfo";
+  summary = "Small utility for showing information about ELF files";
+  description = ''
+    Small utility for showing information about ELF files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.2";
+  tags = [ "development" "elf" "binaries" "inspection" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.elfinfo;

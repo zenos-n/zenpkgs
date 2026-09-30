@@ -1,0 +1,14 @@
+_meta = {
+  name = "fx";
+  summary = "Terminal JSON viewer";
+  description = ''
+    Terminal JSON viewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "39.2.0";
+  tags = [ "files" "data" "json" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fx;

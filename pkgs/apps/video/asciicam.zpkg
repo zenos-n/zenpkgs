@@ -1,0 +1,14 @@
+_meta = {
+  name = "asciicam";
+  summary = "Displays your webcam on the terminal";
+  description = ''
+    Displays your webcam on the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2022-06-25";
+  tags = [ "video" "webcam" "ascii" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.asciicam;

@@ -1,0 +1,17 @@
+_meta = {
+  name = "Proxify";
+  summary = "Proxy tool for HTTP/HTTPS traffic capture";
+  description = ''
+    This tool supports multiple operations such as request/response dump, filtering
+    and manipulation via DSL language, upstream HTTP/Socks5 proxy. Additionally a
+    replay utility allows to import the dumped traffic (request/responses with correct
+    domain name) into other tools by simply setting the upstream proxy to proxify.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.16";
+  tags = [ "networking" "proxy" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.proxify;

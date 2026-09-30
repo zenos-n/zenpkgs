@@ -1,0 +1,14 @@
+_meta = {
+  name = "GI-DocGen";
+  summary = "Documentation generator for GObject-based libraries";
+  description = ''
+    Documentation generator for GObject-based libraries.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.1";
+  tags = [ "development" "gobject" "documentation" "generators" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gi-docgen;

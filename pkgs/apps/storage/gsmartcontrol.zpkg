@@ -1,0 +1,20 @@
+_meta = {
+  name = "GSmartControl";
+  summary = "Hard disk drive health inspection tool";
+  description = ''
+    GSmartControl is a graphical user interface for smartctl (from
+    smartmontools package), which is a tool for querying and controlling
+    SMART (Self-Monitoring, Analysis, and Reporting Technology) data on
+    modern hard disk drives.
+
+    It allows you to inspect the drive's SMART data to determine its health,
+    as well as run various tests on it.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.2";
+  tags = [ "storage" "disks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gsmartcontrol;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-annex";
+  summary = "manage files with git, without checking their contents into git";
+  description = ''
+    manage files with git, without checking their contents into git.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10.20260421";
+  tags = [ "development" "git" "version-control" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.git-annex;

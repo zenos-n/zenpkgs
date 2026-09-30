@@ -1,0 +1,14 @@
+_meta = {
+  name = "bundletool";
+  summary = "Command-line tool to manipulate Android App Bundles";
+  description = ''
+    Command-line tool to manipulate Android App Bundles.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.18.3";
+  tags = [ "development" "android" "packaging" "app-bundles" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bundletool;

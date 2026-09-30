@@ -1,0 +1,15 @@
+_meta = {
+  name = "Lorien";
+  summary = "Infinite canvas drawing/note-taking app";
+  description = ''
+    An infinite canvas drawing/note-taking app that is focused on performance,
+    small savefiles and simplicity
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0";
+  tags = [ "graphics" "drawing" "notes" "office" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.lorien;

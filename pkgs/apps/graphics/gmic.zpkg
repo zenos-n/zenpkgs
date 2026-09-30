@@ -1,0 +1,14 @@
+_meta = {
+  name = "G'MIC";
+  summary = "Open and full-featured framework for image processing";
+  description = ''
+    Open and full-featured framework for image processing.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.7.6";
+  tags = [ "graphics" "images" "filters" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cecill21;
+};
+
+import $pkgs.legacy.gmic;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Google Apps Manager";
+  summary = "Command line management for Google Workspace";
+  description = ''
+    Command line management for Google Workspace.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.21.01";
+  tags = [ "office" "google-workspace" "administration" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gam;

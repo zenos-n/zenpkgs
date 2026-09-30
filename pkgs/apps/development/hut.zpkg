@@ -1,0 +1,14 @@
+_meta = {
+  name = "SourceHut CLI";
+  summary = "CLI tool for Sourcehut / sr.ht";
+  description = ''
+    CLI tool for Sourcehut / sr.ht.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0";
+  tags = [ "development" "git" "version-control" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.hut;

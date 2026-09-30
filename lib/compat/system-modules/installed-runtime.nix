@@ -34,11 +34,11 @@ in
         (hooks.installed { inherit config; })
         {
           services.openssh = lib.mkIf (!oobe) {
-            enable = true;
-            openFirewall = true;
+            enable = lib.mkDefault true;
+            openFirewall = lib.mkDefault true;
             settings = {
               KbdInteractiveAuthentication = false;
-              PasswordAuthentication = true;
+              PasswordAuthentication = lib.mkDefault true;
               PermitEmptyPasswords = false;
               PermitRootLogin = "no";
             };
@@ -59,10 +59,10 @@ in
           time.timeZone = lib.mkDefault "UTC";
           i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
           console.keyMap = lib.mkDefault "us";
-          hardware.graphics.enable = true;
-          services.pipewire.alsa.support32Bit = true;
-          services.fwupd.enable = true;
-          services.fstrim.enable = true;
+          hardware.graphics.enable = lib.mkDefault true;
+          services.pipewire.alsa.support32Bit = lib.mkDefault true;
+          services.fwupd.enable = lib.mkDefault true;
+          services.fstrim.enable = lib.mkDefault true;
           services.qemuGuest.enable = true;
           zramSwap.enable = true;
           nix.settings.auto-optimise-store = true;
@@ -73,7 +73,7 @@ in
           };
           environment.systemPackages = [
             pkgs.nixos-rebuild
-            pkgs.zenos.programs.zenos-rebuild
+            pkgs.zenos.apps.system.zenos.zenos-rebuild
           ];
           environment.sessionVariables = {
             XDG_CONFIG_HOME = "$HOME/.private/Config";

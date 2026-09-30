@@ -1,0 +1,14 @@
+_meta = {
+  name = "QtAlarm";
+  summary = "Nifty alarm clock written in QT";
+  description = ''
+    Nifty alarm clock written in QT.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.1";
+  tags = [ "office" "clock" "time" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.qtalarm;

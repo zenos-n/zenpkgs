@@ -1,0 +1,17 @@
+_meta = {
+  name = "Snapper GUI";
+  summary = "Graphical interface for snapper";
+  description = ''
+    A graphical user interface for the tool snapper for Linux filesystem
+    snapshot management. It can compare snapshots and revert differences between snapshots.
+    In simple terms, this allows root and non-root users to view older versions of files
+    and revert changes. Currently works with btrfs, ext4 and thin-provisioned LVM volumes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1-unstable-2022-06-26";
+  tags = [ "storage" "backup" "snapshots" "recovery" "disks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.snapper-gui;

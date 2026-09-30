@@ -1,0 +1,16 @@
+_meta = {
+  name = "Kustomize";
+  summary = "Customization of kubernetes YAML configurations";
+  description = ''
+    kustomize lets you customize raw, template-free YAML files for
+    multiple purposes, leaving the original YAML untouched and usable
+    as is.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.8.1";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kustomize;

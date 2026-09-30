@@ -1,0 +1,14 @@
+_meta = {
+  name = "Firezone CLI";
+  summary = "CLI client for the Firezone zero-trust access platform";
+  description = ''
+    CLI client for the Firezone zero-trust access platform.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.5";
+  tags = [ "networking" "security" "vpn" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.firezone-headless-client;

@@ -1,0 +1,18 @@
+_meta = {
+  name = "doxx";
+  summary = "Terminal document viewer for .docx files";
+  description = ''
+    `doxx` is a lightning-fast, terminal-native document viewer for
+    Microsoft Word files. Built with Rust for performance and
+    reliability, it brings Word documents to your command line with
+    beautiful rendering, smart table support, and powerful export
+    capabilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.2";
+  tags = [ "office" "docx" "documents" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.doxx;

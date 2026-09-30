@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ispell";
+  summary = "Interactive spell-checking program for Unix";
+  description = ''
+    Interactive spell-checking program for Unix.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.4.06";
+  tags = [ "office" "writing" "proofreading" "languages" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.free;
+};
+
+import $pkgs.legacy.ispell;

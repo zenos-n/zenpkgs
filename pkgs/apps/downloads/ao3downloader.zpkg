@@ -1,0 +1,14 @@
+_meta = {
+  name = "AO3 Downloader";
+  summary = "Utility for downloading fanfiction in bulk from the Archive of Our Own";
+  description = ''
+    Utility for downloading fanfiction in bulk from the Archive of Our Own.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.4.9";
+  tags = [ "downloads" "reading" "fanfiction" "archive-of-our-own" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.ao3downloader;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "TKMM";
+  summary = "Tears of the Kingdom Mod Manager, a mod merger and manager for TotK";
+  description = ''
+    Tears of the Kingdom Mod Manager, a mod merger and manager for TotK.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0-beta3";
+  tags = [ "gaming" "mods" "manager" "zelda" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.tkmm;

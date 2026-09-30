@@ -1,0 +1,14 @@
+_meta = {
+  name = "bbe";
+  summary = "Sed-like editor for binary files";
+  description = ''
+    Sed-like editor for binary files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.2";
+  tags = [ "editors" "binary" "files" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.bbe;

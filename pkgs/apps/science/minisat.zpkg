@@ -1,0 +1,14 @@
+_meta = {
+  name = "MiniSat";
+  summary = "Compact and readable SAT solver";
+  description = ''
+    Compact and readable SAT solver.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.1";
+  tags = [ "science" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.minisat;

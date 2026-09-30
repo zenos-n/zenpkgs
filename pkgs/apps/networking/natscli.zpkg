@@ -1,0 +1,14 @@
+_meta = {
+  name = "NATS CLI";
+  summary = "NATS Command Line Interface";
+  description = ''
+    NATS Command Line Interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "networking" "messaging" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.natscli;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "aseq2json";
+  summary = "Listens for MIDI events on the Alsa sequencer and outputs as JSON to stdout";
+  description = ''
+    Listens for MIDI events on the Alsa sequencer and outputs as JSON to stdout.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2018-04-28";
+  tags = [ "audio" "midi" "alsa" "json" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.aseq2json;

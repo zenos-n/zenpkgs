@@ -1,0 +1,14 @@
+_meta = {
+  name = "VS Code JSON Language Server";
+  summary = "JSON language server";
+  description = ''
+    JSON language server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.4";
+  tags = [ "development" "json" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.vscode-json-languageserver;

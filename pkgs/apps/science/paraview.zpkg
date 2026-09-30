@@ -1,0 +1,14 @@
+_meta = {
+  name = "ParaView";
+  summary = "3D Data analysis and visualization application";
+  description = ''
+    3D Data analysis and visualization application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.0.1";
+  tags = [ "science" "3d" "visualization" "data-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.paraview;

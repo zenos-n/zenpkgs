@@ -1,0 +1,14 @@
+_meta = {
+  name = "onefetch";
+  summary = "Git repository summary on your terminal";
+  description = ''
+    Git repository summary on your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.27.1";
+  tags = [ "development" "git" "statistics" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.onefetch;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Apache NetBeans";
+  summary = "Integrated development environment for Java, C, C++ and PHP";
+  description = ''
+    Integrated development environment for Java, C, C++ and PHP.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "30";
+  tags = [ "development" "ide" "java" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.netbeans;

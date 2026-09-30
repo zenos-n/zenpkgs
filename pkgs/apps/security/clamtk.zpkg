@@ -1,0 +1,15 @@
+_meta = {
+  name = "ClamTk";
+  summary = "Easy to use, lightweight front-end for ClamAV (Clam Antivirus).\n";
+  description = ''
+    Easy to use, lightweight front-end for ClamAV (Clam Antivirus).
+    .
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.18";
+  tags = [ "security" "privacy" "antivirus" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl1Plus;
+};
+
+import $pkgs.legacy.clamtk;

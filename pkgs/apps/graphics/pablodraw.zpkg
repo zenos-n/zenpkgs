@@ -1,0 +1,14 @@
+_meta = {
+  name = "PabloDraw";
+  summary = "Ansi/Ascii text and RIPscrip vector graphic art editor/viewer with multi-user capabilities";
+  description = ''
+    Ansi/Ascii text and RIPscrip vector graphic art editor/viewer with multi-user capabilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.14-beta";
+  tags = [ "graphics" "text-art" "drawing" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pablodraw;

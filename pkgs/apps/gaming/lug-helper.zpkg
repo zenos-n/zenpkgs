@@ -1,0 +1,14 @@
+_meta = {
+  name = "LUG Helper";
+  summary = "Script to manage and optimize Star Citizen on Linux";
+  description = ''
+    Script to manage and optimize Star Citizen on Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.13";
+  tags = [ "gaming" "star-citizen" "configuration" "wine" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.lug-helper;

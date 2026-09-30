@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bashly";
+  summary = "Bash command line framework and CLI generator";
+  description = ''
+    Bash command line framework and CLI generator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.10";
+  tags = [ "development" "bash" "shell" "cli" "code-generation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bashly;

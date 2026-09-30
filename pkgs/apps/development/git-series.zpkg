@@ -1,0 +1,16 @@
+_meta = {
+  name = "git-series";
+  summary = "Tool to help with formatting git patches for review on mailing lists";
+  description = ''
+    git series tracks changes to a patch series over time. git
+    series also tracks a cover letter for the patch series,
+    formats the series for email, and prepares pull requests.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.1-unstable-2024-02-02";
+  tags = [ "development" "git" "patches" "code-review" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-series;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "pbzip2";
+  summary = "Parallel implementation of bzip2 for multi-core machines";
+  description = ''
+    Parallel implementation of bzip2 for multi-core machines.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.13";
+  tags = [ "archives" "command-line" "files" "compression" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.pbzip2;

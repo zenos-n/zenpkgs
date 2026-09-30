@@ -1,0 +1,18 @@
+_meta = {
+  name = "GCstar";
+  summary = "Manage your collections of movies, games, books, music and more";
+  description = ''
+    GCstar is an application for managing your collections.
+    It supports many types of collections, including movies, books, games, comics, stamps, coins, and many more.
+    You can even create your own collection type for whatever unique thing it is that you collect!
+    Detailed information on each item can be automatically retrieved from the internet and you can store additional data, such as the location or who you've lent it to.
+    You may also search and filter your collections by many criteria.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.0";
+  tags = [ "office" "collections" "cataloging" "media" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gcstar;

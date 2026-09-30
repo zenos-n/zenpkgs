@@ -1,0 +1,23 @@
+_meta = {
+  name = "git-when-merged";
+  summary = "Helps you figure out when and why a commit was merged into a branch";
+  description = ''
+    If you use standard Git workflows, then you create a feature
+    branch for each feature that you are working on. When the feature
+    is complete, you merge it into your master branch. You might even
+    have sub-feature branches that are merged into a feature branch
+    before the latter is merged.
+
+    In such a workflow, the first-parent history of master consists
+    mainly of merges of feature branches into the mainline. git
+    when-merged can be used to ask, "When (and why) was commit C
+    merged into the current branch?"
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.1";
+  tags = [ "development" "git" "history" "merge" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.git-when-merged;

@@ -1,0 +1,17 @@
+_meta = {
+  name = "Duply";
+  summary = "Shell front end for the duplicity backup tool";
+  description = ''
+    Duply is a shell front end for the duplicity backup tool
+    https://www.nongnu.org/duplicity. It greatly simplifies its usage by
+    implementing backup job profiles, batch commands and more. Who says
+    secure backups on non-trusted spaces are no child's play?
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.6";
+  tags = [ "backup" "duplicity" "automation" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.duply;

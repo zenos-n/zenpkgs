@@ -1,0 +1,14 @@
+_meta = {
+  name = "QGit";
+  summary = "Graphical front-end to Git";
+  description = ''
+    Graphical front-end to Git.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.13";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.qgit;

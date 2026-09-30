@@ -1,0 +1,16 @@
+_meta = {
+  name = "gdu";
+  summary = "Disk usage analyzer with console interface";
+  description = ''
+    Gdu is intended primarily for SSD disks where it can fully
+    utilize parallel processing. However HDDs work as well, but
+    the performance gain is not so huge.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.36.1";
+  tags = [ "storage" "disks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gdu;

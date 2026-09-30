@@ -1,0 +1,14 @@
+_meta = {
+  name = "wttrbar";
+  summary = "Simple but detailed weather indicator for Waybar using wttr.in";
+  description = ''
+    Simple but detailed weather indicator for Waybar using wttr.in.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.14.5";
+  tags = [ "weather" "waybar" "desktop" "forecast" "information" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wttrbar;

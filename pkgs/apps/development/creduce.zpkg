@@ -1,0 +1,18 @@
+_meta = {
+  name = "C-Reduce";
+  summary = "C program reducer";
+  description = ''
+    C-Reduce is a tool that takes a large C or C++ program that has a
+    property of interest (such as triggering a compiler bug) and
+    automatically produces a much smaller C/C++ program that has the same
+    property.  It is intended for use by people who discover and report
+    bugs in compilers and other tools that process C/C++ code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.10.0-unstable-2024-06-01";
+  tags = [ "development" "c" "cpp" "test-reduction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.ncsa;
+};
+
+import $pkgs.legacy.creduce;

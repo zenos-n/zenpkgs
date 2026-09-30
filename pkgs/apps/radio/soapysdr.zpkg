@@ -1,0 +1,14 @@
+_meta = {
+  name = "SoapySDR";
+  summary = "Vendor and platform neutral SDR support library";
+  description = ''
+    Vendor and platform neutral SDR support library.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.1-unstable-2025-10-05-03";
+  tags = [ "radio" "sdr" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.boost;
+};
+
+import $pkgs.legacy.soapysdr;

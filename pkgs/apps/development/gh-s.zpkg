@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-s";
+  summary = "Search github repositories interactively";
+  description = ''
+    Search github repositories interactively.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.12";
+  tags = [ "development" "github" "github-cli" "repositories" "search" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gh-s;

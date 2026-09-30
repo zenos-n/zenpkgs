@@ -1,0 +1,14 @@
+_meta = {
+  name = "Chamber";
+  summary = "Tool for managing secrets by storing them in AWS SSM Parameter Store";
+  description = ''
+    Tool for managing secrets by storing them in AWS SSM Parameter Store.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.5";
+  tags = [ "security" "secrets" "aws" "credentials" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.chamber;

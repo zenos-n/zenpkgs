@@ -1,0 +1,14 @@
+_meta = {
+  name = "Anytype";
+  summary = "P2P note-taking tool";
+  description = ''
+    P2P note-taking tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.56.5";
+  tags = [ "office" "notes" "knowledge-management" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.anytype;

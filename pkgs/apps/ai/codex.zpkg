@@ -1,0 +1,14 @@
+_meta = {
+  name = "Codex CLI";
+  summary = "Lightweight coding agent that runs in your terminal";
+  description = ''
+    Lightweight coding agent that runs in your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.146.0";
+  tags = [ "ai" "development" "coding" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.codex;

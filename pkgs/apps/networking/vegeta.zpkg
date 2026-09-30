@@ -1,0 +1,16 @@
+_meta = {
+  name = "Vegeta";
+  summary = "Versatile HTTP load testing tool";
+  description = ''
+    Vegeta is a versatile HTTP load testing tool built out of a need to drill
+    HTTP services with a constant request rate. It can be used both as a
+    command line utility and a library.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "12.13.0";
+  tags = [ "networking" "benchmarking" "development" "http" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.vegeta;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Didder";
+  summary = "Extensive, fast, and accurate command-line image dithering tool";
+  description = ''
+    Extensive, fast, and accurate command-line image dithering tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0";
+  tags = [ "graphics" "dithering" "images" "processing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.didder;

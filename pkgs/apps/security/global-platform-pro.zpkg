@@ -1,0 +1,18 @@
+_meta = {
+  name = "GlobalPlatformPro";
+  summary = "Command-line utility for managing applets and keys on Java Cards";
+  description = ''
+    This command-line utility can be used to manage applets and keys
+    on Java Cards. It is made available as the `gp` executable.
+
+    The executable requires the PC/SC daemon running for correct execution.
+    If you run NixOS, it can be enabled with `services.pcscd.enable = true;`.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "25.10.20";
+  tags = [ "security" "smart-cards" "java-card" "keys" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3;
+};
+
+import $pkgs.legacy.global-platform-pro;

@@ -1,0 +1,16 @@
+_meta = {
+  name = "Beeper";
+  summary = "Universal chat app";
+  description = ''
+    Beeper is a universal chat app. With Beeper, you can send
+    and receive messages to friends, family and colleagues on
+    many different chat networks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.2.808";
+  tags = [ "communication" "chat" "unified-messaging" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.beeper;

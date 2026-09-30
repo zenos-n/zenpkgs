@@ -1,0 +1,14 @@
+_meta = {
+  name = "Nix Output Monitor";
+  summary = "Processes output of Nix commands to show helpful and pretty information";
+  description = ''
+    Processes output of Nix commands to show helpful and pretty information.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.0";
+  tags = [ "development" "nix" "monitoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.eupl12;
+};
+
+import $pkgs.legacy.nix-output-monitor;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "dmlive";
+  summary = "Tool to play and record videos or live streams with danmaku";
+  description = ''
+    Tool to play and record videos or live streams with danmaku.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.7.0-unstable-2026-01-02";
+  tags = [ "video" "streaming" "recording" "danmaku" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dmlive;

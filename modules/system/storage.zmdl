@@ -1,0 +1,58 @@
+_meta = {
+  name = "Configure storage for desktop use";
+  tags = [ "desktop" "storage" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Configure storage for desktop use";
+  description = ''Configure storage for desktop use. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+removableDrives = {
+  _meta = {
+    name = "Manage removable disks from desktop applications";
+    tags = [ "desktop" "storage" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Manage removable disks from desktop applications";
+    description = ''Manage removable disks from desktop applications. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.udisks2.enable = $lib.mkIf ($path.removableDrives != null) ($lib.mkForce $path.removableDrives);
+  };
+};
+
+networkShares = {
+  _meta = {
+    name = "Browse network shares and remote files in desktop applications";
+    tags = [ "desktop" "storage" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Browse network shares and remote files in desktop applications";
+    description = ''Browse network shares and remote files in desktop applications. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.gvfs.enable = $lib.mkIf ($path.networkShares != null) ($lib.mkForce $path.networkShares);
+  };
+};
+
+ssdMaintenance = {
+  _meta = {
+    name = "Periodically reclaim unused space on solid-state drives";
+    tags = [ "desktop" "storage" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Periodically reclaim unused space on solid-state drives";
+    description = ''Periodically reclaim unused space on solid-state drives. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.fstrim.enable = $lib.mkIf ($path.ssdMaintenance != null) $path.ssdMaintenance;
+  };
+};
+

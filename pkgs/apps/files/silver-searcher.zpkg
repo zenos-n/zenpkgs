@@ -1,0 +1,14 @@
+_meta = {
+  name = "silver-searcher";
+  summary = "Code-searching tool similar to ack, but faster";
+  description = ''
+    Code-searching tool similar to ack, but faster.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.0";
+  tags = [ "files" "search" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.silver-searcher;

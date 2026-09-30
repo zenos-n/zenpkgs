@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bashcards";
+  summary = "Practice flashcards in bash";
+  description = ''
+    Practice flashcards in bash.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.3";
+  tags = [ "education" "flashcards" "learning" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.bashcards;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "BLAST+";
+  summary = "Basic Local Alignment Search Tool (BLAST) finds regions of similarity between biological sequences";
+  description = ''
+    Basic Local Alignment Search Tool (BLAST) finds regions of similarity between biological sequences.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.17.0";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.publicDomain;
+};
+
+import $pkgs.legacy.blast;

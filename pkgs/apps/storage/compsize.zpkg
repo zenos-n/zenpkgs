@@ -1,0 +1,14 @@
+_meta = {
+  name = "compsize";
+  summary = "Find compression type/ratio on a file or set of files in the Btrfs filesystem";
+  description = ''
+    Find compression type/ratio on a file or set of files in the Btrfs filesystem.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5";
+  tags = [ "storage" "btrfs" "analysis" "disks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.compsize;

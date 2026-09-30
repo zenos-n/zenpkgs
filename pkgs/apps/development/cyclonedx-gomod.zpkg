@@ -1,0 +1,14 @@
+_meta = {
+  name = "CycloneDX Go";
+  summary = "Tool to create CycloneDX Software Bill of Materials (SBOM) from Go modules";
+  description = ''
+    Tool to create CycloneDX Software Bill of Materials (SBOM) from Go modules.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.10.0";
+  tags = [ "development" "go" "sbom" "cyclonedx" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cyclonedx-gomod;

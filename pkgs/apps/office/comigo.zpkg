@@ -1,0 +1,14 @@
+_meta = {
+  name = "Comigo";
+  summary = "Simple and Efficient Comic Reader";
+  description = ''
+    Simple and Efficient Comic Reader.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.31";
+  tags = [ "office" "comics" "reader" "ebooks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.comigo;

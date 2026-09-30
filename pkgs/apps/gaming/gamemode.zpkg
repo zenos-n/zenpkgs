@@ -1,0 +1,14 @@
+_meta = {
+  name = "gamemode";
+  summary = "Optimise Linux system performance on demand";
+  description = ''
+    Optimise Linux system performance on demand.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.2";
+  tags = [ "gaming" "graphics" "performance" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.gamemode;

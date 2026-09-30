@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ghostfolio";
+  summary = "Open Source Wealth Management Software";
+  description = ''
+    Open Source Wealth Management Software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.59.1";
+  tags = [ "finance" "wealth-management" "portfolio" "investing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.ghostfolio;

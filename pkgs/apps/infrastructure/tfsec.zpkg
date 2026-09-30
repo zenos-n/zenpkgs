@@ -1,0 +1,14 @@
+_meta = {
+  name = "tfsec";
+  summary = "Static analysis powered security scanner for terraform code";
+  description = ''
+    Static analysis powered security scanner for terraform code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.28.14";
+  tags = [ "infrastructure" "development" "linting" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.tfsec;

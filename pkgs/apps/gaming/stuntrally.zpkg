@@ -1,0 +1,14 @@
+_meta = {
+  name = "Stunt Rally";
+  summary = "3D racing game with Sci-Fi elements and own Track Editor";
+  description = ''
+    3D racing game with Sci-Fi elements and own Track Editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3";
+  tags = [ "gaming" "racing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.stuntrally;

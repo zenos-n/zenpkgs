@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-poi";
+  summary = "GitHub CLI extension to safely clean up your local branches";
+  description = ''
+    GitHub CLI extension to safely clean up your local branches.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.17.1";
+  tags = [ "development" "github-cli" "git" "branches" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-poi;

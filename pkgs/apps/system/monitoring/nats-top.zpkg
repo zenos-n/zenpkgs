@@ -1,0 +1,14 @@
+_meta = {
+  name = "NATS Top";
+  summary = "top-like tool for monitoring NATS servers";
+  description = ''
+    top-like tool for monitoring NATS servers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.4";
+  tags = [ "system" "monitoring" "nats" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.nats-top;

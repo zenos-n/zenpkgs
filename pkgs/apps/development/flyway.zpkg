@@ -1,0 +1,18 @@
+_meta = {
+  name = "Flyway";
+  summary = "Evolve your Database Schema easily and reliably across all your instances";
+  description = ''
+    The Flyway command-line tool is a standalone Flyway distribution.
+    It is primarily meant for users who wish to migrate their database from the command-line
+    without having to integrate Flyway into their applications nor having to install a build tool.
+
+    This package is only the Community Edition of the Flyway command-line tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "12.0.0";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.flyway;

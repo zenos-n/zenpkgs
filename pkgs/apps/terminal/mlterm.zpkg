@@ -1,0 +1,14 @@
+_meta = {
+  name = "MLTerm";
+  summary = "Multi Lingual TERMinal emulator";
+  description = ''
+    Multi Lingual TERMinal emulator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.9.4";
+  tags = [ "terminal" "command-line" "unicode" "multilingual" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.mlterm;

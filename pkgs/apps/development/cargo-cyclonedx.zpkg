@@ -1,0 +1,17 @@
+_meta = {
+  name = "cargo-cyclonedx";
+  summary = "Creates CycloneDX Software Bill of Materials (SBOM) from Rust (Cargo) projects";
+  description = ''
+    The CycloneDX module for Rust (Cargo) creates a valid CycloneDX Software
+    Bill-of-Material (SBOM) containing an aggregate of all project
+    dependencies. CycloneDX is a lightweight SBOM specification that is
+    easily created, human and machine readable, and simple to parse.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.9";
+  tags = [ "development" "rust" "cargo" "sbom" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cargo-cyclonedx;

@@ -1,0 +1,22 @@
+_meta = {
+  name = "Black Magic Debug";
+  summary = "In-application debugger for ARM Cortex microcontrollers";
+  description = ''
+    The Black Magic Probe is a modern, in-application debugging tool
+    for embedded microprocessors. It allows you to see what is going
+    on "inside" an application running on an embedded microprocessor
+    while it executes.
+
+    This package builds the firmware for all supported platforms,
+    placing them in separate directories under the firmware
+    directory.  It also places the FTDI version of the blackmagic
+    executable in the bin directory.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0";
+  tags = [ "development" "embedded" "hardware" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.blackmagic;

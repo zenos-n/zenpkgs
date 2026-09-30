@@ -1,0 +1,14 @@
+_meta = {
+  name = "WordGrinder";
+  summary = "Text-based word processor";
+  description = ''
+    Text-based word processor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8";
+  tags = [ "office" "writing" "text" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wordgrinder;

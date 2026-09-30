@@ -1,0 +1,14 @@
+_meta = {
+  name = "Neovide";
+  summary = "Simple, no-nonsense, cross-platform graphical user interface for Neovim";
+  description = ''
+    Simple, no-nonsense, cross-platform graphical user interface for Neovim.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.16.2";
+  tags = [ "editors" "neovim" "graphical" "text" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.neovide;

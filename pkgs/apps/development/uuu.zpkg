@@ -1,0 +1,14 @@
+_meta = {
+  name = "UUU";
+  summary = "Freescale/NXP I.MX Chip image deploy tools";
+  description = ''
+    Freescale/NXP I.MX Chip image deploy tools.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.243";
+  tags = [ "development" "embedded" "hardware" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.uuu;

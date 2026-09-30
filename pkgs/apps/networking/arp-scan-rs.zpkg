@@ -1,0 +1,14 @@
+_meta = {
+  name = "arp-scan-rs";
+  summary = "ARP scan tool for fast local network scans";
+  description = ''
+    ARP scan tool for fast local network scans.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.1";
+  tags = [ "networking" "arp" "discovery" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.arp-scan-rs;

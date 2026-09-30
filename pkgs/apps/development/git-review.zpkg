@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-review";
+  summary = "Tool to submit code to Gerrit";
+  description = ''
+    Tool to submit code to Gerrit.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.0";
+  tags = [ "development" "git" "gerrit" "code-review" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.git-review;

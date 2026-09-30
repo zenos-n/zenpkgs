@@ -1,0 +1,14 @@
+_meta = {
+  name = "Netpbm";
+  summary = "Toolkit for manipulation of graphic images";
+  description = ''
+    Toolkit for manipulation of graphic images.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "11.13.3";
+  tags = [ "graphics" "images" "conversion" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.free;
+};
+
+import $pkgs.legacy.netpbm;

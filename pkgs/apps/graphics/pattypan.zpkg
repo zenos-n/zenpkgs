@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pattypan";
+  summary = "Uploader for Wikimedia Commons";
+  description = ''
+    Uploader for Wikimedia Commons.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "22.03";
+  tags = [ "graphics" "wikimedia" "upload" "photography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pattypan;

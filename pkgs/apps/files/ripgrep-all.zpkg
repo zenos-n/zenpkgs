@@ -1,0 +1,18 @@
+_meta = {
+  name = "ripgrep-all";
+  summary = "Ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, and more";
+  description = ''
+    Ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, etc.
+
+    rga is a line-oriented search tool that allows you to look for a regex in
+    a multitude of file types. rga wraps the awesome ripgrep and enables it
+    to search in pdf, docx, sqlite, jpg, movie subtitles (mkv, mp4), etc.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.10";
+  tags = [ "files" "search" "text" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.ripgrep-all;

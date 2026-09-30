@@ -1,0 +1,14 @@
+_meta = {
+  name = "cdxgen";
+  summary = "Creates CycloneDX Software Bill-of-Materials (SBOM) for your projects from source and container images";
+  description = ''
+    Creates CycloneDX Software Bill-of-Materials (SBOM) for your projects from source and container images.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "11.10.0";
+  tags = [ "development" "sbom" "cyclonedx" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cdxgen;

@@ -1,0 +1,22 @@
+_meta = {
+  name = "SM64CoopDX";
+  summary = "Multiplayer fork of the Super Mario 64 decompilation";
+  description = ''
+    This is a fork of sm64ex-coop, which was itself a fork of sm64ex, which was a fork of the sm64 decompilation project.
+
+    It allows multiple people to play within and across levels, has multiple character models, and mods in the form of lua scripts.
+
+    Arguments:
+
+    - `enableTextureFix`: (default: `true`) whether to enable texture fixes. Upstream describes disabling this as "for purists"
+    - `enableDiscord`: (default: `true`) whether to enable discord integration, which allows showing status and connecting to games over discord
+    - `enableCoopNet`: (default: `true`) whether to enable Co-op Net integration, a server made specifically for multiplayer sm64
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.1";
+  tags = [ "gaming" "source-port" "platformer" "multiplayer" "mario" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.sm64coopdx;

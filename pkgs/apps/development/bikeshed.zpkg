@@ -1,0 +1,18 @@
+_meta = {
+  name = "Bikeshed";
+  summary = "Preprocessor for anyone writing specifications that converts source files into actual specs";
+  description = ''
+    Bikeshed is a pre-processor for spec documents, turning a source document
+    (containing only the actual spec content, plus several shorthands for linking
+    to terms and other things) into a final spec document, with appropriate boilerplate,
+    bibliography, indexes, etc all filled in. It's used on specs for CSS
+    and many other W3C working groups, WHATWG, the C++ standards committee, and elsewhere!
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.0.7";
+  tags = [ "development" "documentation" "specifications" "publishing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc0;
+};
+
+import $pkgs.legacy.bikeshed;

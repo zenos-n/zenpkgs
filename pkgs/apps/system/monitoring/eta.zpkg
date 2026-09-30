@@ -1,0 +1,14 @@
+_meta = {
+  name = "eta";
+  summary = "Tool for monitoring progress and ETA of an arbitrary process";
+  description = ''
+    Tool for monitoring progress and ETA of an arbitrary process.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.1-unstable-2026-01-04";
+  tags = [ "system" "monitoring" "progress" "processes" "time" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.eta;

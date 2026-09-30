@@ -47,10 +47,10 @@ _let normalizeColor: $type.function "color" = value:
 enable = enableOption {
   _meta.description = ''Whether to enable Coverflow Alt-Tab GNOME extension configuration.'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.coverflow-alt-tab ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.coverflow-alt-tab ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.coverflow-alt-tab.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.coverflow-alt-tab.extensionUuid ];
     dconf.settings."org/gnome/shell/extensions/coverflowalttab" = {
           hide-panel = $path.hide-panel;
           enforce-primary-monitor = $path.enforce-primary-monitor;

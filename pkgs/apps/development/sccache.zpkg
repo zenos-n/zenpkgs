@@ -1,0 +1,14 @@
+_meta = {
+  name = "sccache";
+  summary = "Ccache with Cloud Storage";
+  description = ''
+    Ccache with Cloud Storage.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.0";
+  tags = [ "development" "build" "caching" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.sccache;

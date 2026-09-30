@@ -1,0 +1,14 @@
+_meta = {
+  name = "fonttosfnt";
+  summary = "Wraps a set of bdf or pcf bitmap fonts in a sfnt (TrueType or OpenType) wrapper";
+  description = ''
+    Wraps a set of bdf or pcf bitmap fonts in a sfnt (TrueType or OpenType) wrapper.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.5";
+  tags = [ "fonts" "conversion" "bitmap-fonts" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fonttosfnt;

@@ -1,0 +1,16 @@
+_meta = {
+  name = "Spyder";
+  summary = "Scientific python development environment";
+  description = ''
+    Spyder (previously known as Pydee) is a powerful interactive development
+    environment for the Python language with advanced editing, interactive
+    testing, debugging and introspection features.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.1.2";
+  tags = [ "science" "development" "python" "ide" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.python3Packages.spyder;

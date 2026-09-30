@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-enhance";
+  summary = "Terminal UI for GitHub Actions";
+  description = ''
+    Terminal UI for GitHub Actions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.1";
+  tags = [ "development" "github-actions" "ci" "tui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-enhance;

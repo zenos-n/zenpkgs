@@ -1,0 +1,14 @@
+_meta = {
+  name = "fastmod";
+  summary = "Utility that makes sweeping changes to large, shared code bases";
+  description = ''
+    Utility that makes sweeping changes to large, shared code bases.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.4";
+  tags = [ "development" "refactoring" "replacement" "code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fastmod;

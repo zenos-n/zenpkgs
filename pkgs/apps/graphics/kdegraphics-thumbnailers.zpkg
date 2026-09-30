@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "KDE Graphics Thumbnailers";
+  summary = "Thumbnailers for various graphics file formats";
+  description = ''
+    Thumbnailers for various graphics file formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.04.3";
+  tags = [ "graphics" "files" "thumbnails" "kde" "creativity" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.kdePackages.kdegraphics-thumbnailers;

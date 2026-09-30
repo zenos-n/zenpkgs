@@ -1,0 +1,14 @@
+_meta = {
+  name = "evtest-qt";
+  summary = "Simple input device tester for linux with Qt GUI";
+  description = ''
+    Simple input device tester for linux with Qt GUI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0-unstable-2023-09-13";
+  tags = [ "system" "monitoring" "input" "devices" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.evtest-qt;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "wdiff";
+  summary = "Comparing files on a word by word basis";
+  description = ''
+    Comparing files on a word by word basis.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.2";
+  tags = [ "development" "diff" "files" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.wdiff;

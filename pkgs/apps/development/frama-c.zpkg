@@ -1,0 +1,18 @@
+_meta = {
+  name = "Frama-C";
+  summary = "Extensible and collaborative platform dedicated to source-code analysis of C software";
+  description = ''
+    Frama-C is an open-source extensible and collaborative platform
+    dedicated to source-code analysis of C software. The Frama-C
+    analyzers assist you in various source-code-related activities,
+    from the navigation through unfamiliar projects up to the
+    certification of critical software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "32.1";
+  tags = [ "development" "c" "static-analysis" "verification" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.frama-c;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tint";
+  summary = "Command-line tool to recolor images using theme palettes";
+  description = ''
+    Command-line tool to recolor images using theme palettes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.7";
+  tags = [ "graphics" "images" "colors" "theming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.tint;

@@ -1,0 +1,16 @@
+_meta = {
+  name = "PyCharm";
+  summary = "Python IDE from JetBrains";
+  description = ''
+    Python IDE with complete set of tools for productive development with Python programming language.
+    In addition, the IDE provides high-class capabilities for professional Web development with Django framework and Google App Engine.
+    It has powerful coding assistance, navigation, a lot of refactoring features, tight integration with various Version Control Systems, Unit testing and powerful Debugger.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.2.0.1";
+  tags = [ "development" "ide" "python" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.jetbrains.pycharm;

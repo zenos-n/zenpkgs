@@ -1,0 +1,15 @@
+_meta = {
+  name = "NetLogo";
+  summary = "Multi-agent programmable modeling environment";
+  description = ''
+    NetLogo is a multi-agent programmable modeling environment. It is used by
+    many tens of thousands of students, teachers and researchers worldwide.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.4.0";
+  tags = [ "education" "science" "simulation" "modeling" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.netlogo;

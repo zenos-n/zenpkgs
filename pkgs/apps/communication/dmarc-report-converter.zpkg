@@ -1,0 +1,14 @@
+_meta = {
+  name = "DMARC Report Converter";
+  summary = "Convert DMARC report files from xml to human-readable formats";
+  description = ''
+    Convert DMARC report files from xml to human-readable formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.1";
+  tags = [ "communication" "email" "dmarc" "reports" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dmarc-report-converter;

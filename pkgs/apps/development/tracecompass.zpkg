@@ -1,0 +1,16 @@
+_meta = {
+  name = "Trace Compass";
+  summary = "Eclipse Trace Compass trace event analyzer";
+  description = ''
+    Trace Compass is an Eclipse application for analyzing and visualizing traces and logs.
+    It helps diagnose performance issues in the Linux kernel, Android, and other systems
+    by understanding what the system is doing over time.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "11.2.0";
+  tags = [ "development" "tracing" "debugging" "system" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.epl20;
+};
+
+import $pkgs.legacy.tracecompass;

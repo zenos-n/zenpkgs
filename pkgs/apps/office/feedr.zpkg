@@ -1,0 +1,14 @@
+_meta = {
+  name = "Feedr";
+  summary = "Feature-rich terminal-based RSS/Atom feed reader written in Rust";
+  description = ''
+    Feedr is a modern terminal-based RSS/Atom feed reader with advanced filtering, categorization, and search capabilities. It supports both RSS and Atom feeds with compression handling and provides an intuitive TUI interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0";
+  tags = [ "office" "rss" "atom" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.feedr;

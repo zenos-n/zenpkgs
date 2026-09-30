@@ -1,0 +1,14 @@
+_meta = {
+  name = "certbot";
+  summary = "ACME client that can obtain certs and extensibly update server configurations";
+  description = ''
+    ACME client that can obtain certs and extensibly update server configurations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.4.0";
+  tags = [ "security" "cryptography" "certificates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.certbot;

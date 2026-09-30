@@ -1,0 +1,14 @@
+_meta = {
+  name = "Satty";
+  summary = "Screenshot annotation tool inspired by Swappy and Flameshot";
+  description = ''
+    Screenshot annotation tool inspired by Swappy and Flameshot.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.20.1";
+  tags = [ "graphics" "screenshots" "annotation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.satty;

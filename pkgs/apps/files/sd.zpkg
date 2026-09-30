@@ -1,0 +1,14 @@
+_meta = {
+  name = "sd";
+  summary = "Intuitive find & replace CLI (sed alternative)";
+  description = ''
+    Intuitive find & replace CLI (sed alternative).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "files" "text" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sd;

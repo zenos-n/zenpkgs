@@ -1,0 +1,16 @@
+_meta = {
+  name = "GeoGebra";
+  summary = "Dynamic mathematics software with graphics, algebra and spreadsheets";
+  description = ''
+    Dynamic mathematics software for all levels of education that brings
+    together geometry, algebra, spreadsheets, graphing, statistics and
+    calculus in one easy-to-use package.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6-0-794-0";
+  tags = [ "science" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.geogebra;
+};
+
+import $pkgs.legacy.geogebra6;

@@ -1,0 +1,18 @@
+_meta = {
+  name = "Cointop";
+  summary = "Fastest and most interactive terminal based UI application for tracking cryptocurrencies";
+  description = ''
+    cointop is a fast and lightweight interactive terminal based UI
+    application for tracking and monitoring cryptocurrency coin stats in
+    real-time.
+
+    The interface is inspired by htop and shortcut keys are inspired by vim.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.10";
+  tags = [ "finance" "cryptocurrency" "prices" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cointop;

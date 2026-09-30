@@ -1,0 +1,14 @@
+_meta = {
+  name = "K9s";
+  summary = "Kubernetes CLI To Manage Your Clusters In Style";
+  description = ''
+    Kubernetes CLI To Manage Your Clusters In Style.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.50.18";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.k9s;

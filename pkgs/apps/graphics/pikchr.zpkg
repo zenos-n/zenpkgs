@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pikchr";
+  summary = "PIC-like markup language for diagrams in technical documentation";
+  description = ''
+    PIC-like markup language for diagrams in technical documentation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-04-03";
+  tags = [ "graphics" "diagrams" "development" "documentation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd0;
+};
+
+import $pkgs.legacy.pikchr;

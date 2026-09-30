@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bisq 2";
+  summary = "Decentralized bitcoin exchange network";
+  description = ''
+    Decentralized bitcoin exchange network.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.10";
+  tags = [ "finance" "bitcoin" "cryptocurrency" "exchange" "peer-to-peer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bisq2;

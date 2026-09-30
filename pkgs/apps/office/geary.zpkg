@@ -1,0 +1,14 @@
+_meta = {
+  name = "Geary";
+  summary = "Mail client for GNOME 3";
+  description = ''
+    Mail client for GNOME 3.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "46.0";
+  tags = [ "office" "productivity" "communication" "email" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Plus;
+};
+
+import $pkgs.legacy.geary;

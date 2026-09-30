@@ -1,0 +1,15 @@
+_meta = {
+  name = "VRCX";
+  summary = "Friendship management tool for VRChat";
+  description = ''
+    VRCX is an assistant/companion application for VRChat that provides information about and helps you accomplish various things
+    related to VRChat in a more convenient fashion than relying on the plain VRChat client (desktop or VR), or website alone.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.07.18";
+  tags = [ "gaming" "virtual-reality" "vrchat" "social" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.vrcx;

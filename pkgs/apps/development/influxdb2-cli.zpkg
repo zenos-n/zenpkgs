@@ -1,0 +1,14 @@
+_meta = {
+  name = "InfluxDB CLI";
+  summary = "CLI for managing resources in InfluxDB v2";
+  description = ''
+    CLI for managing resources in InfluxDB v2.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.0";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.influxdb2-cli;

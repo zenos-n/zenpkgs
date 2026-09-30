@@ -1,0 +1,19 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Endless Sky";
+  summary = "Sandbox-style space exploration game similar to Elite, Escape Velocity, or Star Control";
+  description = ''
+    Endless Sky is a sandbox-style space exploration game. You start as the captain
+    of a tiny spaceship and can choose what to do from there. The game includes a
+    major plot line and many minor missions, but you can play as a merchant, bounty
+    hunter, or explorer entirely at your own discretion. Trade goods between star
+    systems, upgrade your ship, recruit a fleet, and uncover alien civilisations
+    beyond the boundaries of human space.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.1";
+  tags = [ "gaming" "space" "simulation" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.endless-sky;

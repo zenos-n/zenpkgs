@@ -1,0 +1,14 @@
+_meta = {
+  name = "DDD";
+  summary = "Graphical front-end for command-line debuggers";
+  description = ''
+    Graphical front-end for command-line debuggers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.4.0";
+  tags = [ "development" "debugging" "gdb" "graphical" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.ddd;

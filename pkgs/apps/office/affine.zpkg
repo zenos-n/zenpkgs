@@ -1,0 +1,17 @@
+_meta = {
+  name = "AFFiNE";
+  summary = "Workspace with fully merged docs, whiteboards and databases";
+  description = ''
+    AFFiNE is an open-source, all-in-one workspace and an operating
+    system for all the building blocks that assemble your knowledge
+    base and much more -- wiki, knowledge management, presentation
+    and digital assets
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.26.6";
+  tags = [ "office" "notes" "knowledge-management" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.affine;

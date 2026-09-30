@@ -1,0 +1,14 @@
+_meta = {
+  name = "DMRConfig";
+  summary = "Configuration utility for DMR radios";
+  description = ''
+    DMRconfig is a utility for programming digital radios via USB programming cable.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1";
+  tags = [ "radio" "dmr" "configuration" "devices" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.dmrconfig;

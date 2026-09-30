@@ -1,0 +1,14 @@
+_meta = {
+  name = "hey";
+  summary = "HTTP load generator, ApacheBench (ab) replacement";
+  description = ''
+    HTTP load generator, ApacheBench (ab) replacement.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.4";
+  tags = [ "networking" "benchmarking" "development" "http" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.hey;

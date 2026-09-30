@@ -1,0 +1,13 @@
+_meta = {
+  name = "signal-desktop";
+  summary = "Private, simple, and secure messenger";
+  description = ''
+    Private, simple, and secure messenger.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.24.0";
+  tags = [ "communication" "desktop" "networking" "messaging" "privacy" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.signal-desktop;

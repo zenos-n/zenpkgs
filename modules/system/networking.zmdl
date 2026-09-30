@@ -1,0 +1,234 @@
+_meta = {
+  name = "Configure networking for desktop use";
+  tags = [ "desktop" "networking" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Configure networking for desktop use";
+  description = ''Configure networking for desktop use. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+computerName = {
+  _meta = {
+    name = "Name used to identify this computer on networks";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Name used to identify this computer on networks";
+    description = ''Name used to identify this computer on networks. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.hostName = $lib.mkIf ($path.computerName != null) $path.computerName;
+  };
+};
+
+manageConnections = {
+  _meta = {
+    name = "Manage wired, Wi-Fi and VPN connections in desktop settings";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Manage wired, Wi-Fi and VPN connections in desktop settings";
+    description = ''Manage wired, Wi-Fi and VPN connections in desktop settings. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.networkmanager.enable = $lib.mkIf ($path.manageConnections != null) $path.manageConnections;
+  };
+};
+
+dnsServers = {
+  _meta = {
+    name = "DNS servers used to look up internet addresses";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+    summary = "DNS servers used to look up internet addresses";
+    description = ''DNS servers used to look up internet addresses. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.nameservers = $lib.mkIf ($path.dnsServers != null) $path.dnsServers;
+  };
+};
+
+ipv6 = {
+  _meta = {
+    name = "Allow IPv6 network connections";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Allow IPv6 network connections";
+    description = ''Allow IPv6 network connections. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.enableIPv6 = $lib.mkIf ($path.ipv6 != null) $path.ipv6;
+  };
+};
+
+discoverLocalDevices = {
+  _meta = {
+    name = "Discover printers and other devices on the local network";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Discover printers and other devices on the local network";
+    description = ''Discover printers and other devices on the local network. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.avahi.enable = $lib.mkIf ($path.discoverLocalDevices != null) $path.discoverLocalDevices;
+  };
+};
+
+resolveLocalNames = {
+  _meta = {
+    name = "Resolve local device names ending in .local";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Resolve local device names ending in .local";
+    description = ''Resolve local device names ending in .local. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.avahi.nssmdns4 = $lib.mkIf ($path.resolveLocalNames != null) $path.resolveLocalNames;
+  };
+};
+
+wifiPowerSaving = {
+  _meta = {
+    name = "Reduce Wi-Fi power use, potentially increasing latency";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Reduce Wi-Fi power use, potentially increasing latency";
+    description = ''Reduce Wi-Fi power use, potentially increasing latency. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.networkmanager.wifi.powersave = $lib.mkIf ($path.wifiPowerSaving != null) $path.wifiPowerSaving;
+  };
+};
+
+checkInternetAccess = {
+  _meta = {
+    name = "Check internet access and detect captive portals";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Check internet access and detect captive portals";
+    description = ''Check internet access and detect captive portals. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.networkmanager.settings.connectivity.enabled = $lib.mkIf ($path.checkInternetAccess != null) $path.checkInternetAccess;
+  };
+};
+
+hideWifiIdentityWhileScanning = {
+  _meta = {
+    name = "Randomize the device address while searching for Wi-Fi networks";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Randomize the device address while searching for Wi-Fi networks";
+    description = ''Randomize the device address while searching for Wi-Fi networks.  Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.networkmanager.wifi.scanRandMacAddress = $lib.mkIf ($path.hideWifiIdentityWhileScanning != null) $path.hideWifiIdentityWhileScanning;
+  };
+};
+
+wifiDeviceIdentity = {
+  _meta = {
+    name = "Device address policy for Wi-Fi connections";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "permanent" "preserve" "random" "stable" "stable-ssid" ]) $type.null ];
+    default = null;
+    summary = "Device address policy for Wi-Fi connections";
+    description = ''Device address policy for Wi-Fi connections. Permanent uses the hardware address; preserve retains the current address; random changes per connection; stable uses a persistent generated address; stable-ssid generates one per network name. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.networkmanager.wifi.macAddress = $lib.mkIf ($path.wifiDeviceIdentity != null) $path.wifiDeviceIdentity;
+  };
+};
+
+wiredDeviceIdentity = {
+  _meta = {
+    name = "Device address policy for wired connections";
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "permanent" "preserve" "random" "stable" ]) $type.null ];
+    default = null;
+    summary = "Device address policy for wired connections";
+    description = ''Device address policy for wired connections. Permanent uses the hardware address; preserve retains the current address; random changes per connection; stable uses a persistent generated address. Null keeps the existing system policy.'';
+  };
+  s!! {
+    networking.networkmanager.ethernet.macAddress = $lib.mkIf ($path.wiredDeviceIdentity != null) $path.wiredDeviceIdentity;
+  };
+};
+
+publishComputerName = {
+  _meta = {
+    name = "Advertise this computer name through local network discovery";
+    summary = "Advertise this computer name through local network discovery";
+    description = ''Requires local device discovery to be enabled. Individual advertised records retain their existing policy. Null keeps the existing system policy.'';
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.avahi.publish.enable = $lib.mkIf ($path.publishComputerName != null) $path.publishComputerName;
+  };
+};
+
+publishAddresses = {
+  _meta = {
+    name = "Advertise this computer addresses through local network discovery";
+    summary = "Advertise this computer addresses through local network discovery";
+    description = ''Requires local device discovery and computer-name publication. Null keeps the existing system policy.'';
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.avahi.publish.addresses = $lib.mkIf ($path.publishAddresses != null) $path.publishAddresses;
+  };
+};
+
+allowDiscoveryThroughFirewall = {
+  _meta = {
+    name = "Allow local network discovery traffic through the firewall";
+    summary = "Allow local network discovery traffic through the firewall";
+    description = ''Applies when the local discovery service is enabled. Null keeps the existing system policy.'';
+    tags = [ "desktop" "networking" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.avahi.openFirewall = $lib.mkIf ($path.allowDiscoveryThroughFirewall != null) $path.allowDiscoveryThroughFirewall;
+  };
+};
+

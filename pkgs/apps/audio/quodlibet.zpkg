@@ -1,0 +1,24 @@
+_meta = {
+  name = "Quod Libet";
+  summary = "GTK-based audio player written in Python, using the Mutagen tagging library";
+  description = ''
+    Quod Libet is a GTK-based audio player written in Python, using
+    the Mutagen tagging library. It's designed around the idea that
+    you know how to organize your music better than we do. It lets
+    you make playlists based on regular expressions (don't worry,
+    regular searches work too). It lets you display and edit any
+    tags you want in the file. And it lets you do this for all the
+    file formats it supports. Quod Libet easily scales to libraries
+    of thousands (or even tens of thousands) of songs. It also
+    supports most of the features you expect from a modern media
+    player, like Unicode support, tag editing, Replay Gain, podcasts
+    & internet radio, and all major audio formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.7.1";
+  tags = [ "audio" "multimedia" "music" "player" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.quodlibet;

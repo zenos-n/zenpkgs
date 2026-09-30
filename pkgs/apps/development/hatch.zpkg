@@ -1,0 +1,14 @@
+_meta = {
+  name = "Hatch";
+  summary = "Modern, extensible Python project manager";
+  description = ''
+    Modern, extensible Python project manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.16.5";
+  tags = [ "development" "python" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.hatch;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "flac123";
+  summary = "Command-line program for playing FLAC audio files";
+  description = ''
+    Command-line program for playing FLAC audio files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.1";
+  tags = [ "audio" "music" "players" "flac" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.flac123;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Xray";
+  summary = "Platform for building proxies to bypass network restrictions. A replacement for v2ray-core, with XTLS support and fully compatible configuration";
+  description = ''
+    Platform for building proxies to bypass network restrictions. A replacement for v2ray-core, with XTLS support and fully compatible configuration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.3.27";
+  tags = [ "networking" "proxy" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.xray;

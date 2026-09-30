@@ -1,0 +1,18 @@
+_meta = {
+  name = "DeSmuME";
+  summary = "Open-source Nintendo DS emulator";
+  description = ''
+    DeSmuME is a freeware emulator for the NDS roms & Nintendo DS Lite games
+    created by YopYop156 and now maintained by the TASvideos team. It supports
+    many homebrew nds rom demoes as well as a handful of Wireless Multiboot
+    demo nds roms. DeSmuME is also able to emulate nearly all of the
+    commercial nds rom titles which other DS Emulators aren't.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.13";
+  tags = [ "gaming" "emulators" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.desmume;

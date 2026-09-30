@@ -1,0 +1,22 @@
+_meta = {
+  name = "Frobby";
+  summary = "Software system and project for computations with monomial ideals";
+  description = ''
+    Current functionality includes Euler characteristic, Hilbert series,
+    maximal standard monomials, combinatorial optimization on monomial
+    ideals, primary decomposition, irreducible decomposition, Alexander dual,
+    associated primes, minimization and intersection of monomial ideals as
+    well as the computation of Frobenius problems (using 4ti2) with very
+    large numbers. Frobby is also able to translate between formats that can
+    be used with several different computer systems, such as Macaulay2,
+    Monos, 4ti2, CoCoA4 and Singular. Thus Frobby can be used with any of
+    those systems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.9";
+  tags = [ "science" "mathematics" "algebra" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.frobby;

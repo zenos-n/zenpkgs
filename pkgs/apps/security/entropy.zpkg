@@ -1,0 +1,14 @@
+_meta = {
+  name = "Entropy";
+  summary = "Tool to scan your codebase for high entropy lines, which are often secrets";
+  description = ''
+    Tool to scan your codebase for high entropy lines, which are often secrets.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.7";
+  tags = [ "security" "secrets" "scanning" "code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.entropy;

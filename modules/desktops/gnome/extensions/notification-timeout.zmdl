@@ -21,10 +21,10 @@ _meta = {
 enable = enableOption {
   _meta.description = ''Notification Timeout GNOME extension configuration'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.notification-timeout ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.notification-timeout ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.notification-timeout.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.notification-timeout.extensionUuid ];
     dconf.settings."org/gnome/shell/extensions/notification-timeout" = {
         ignore-idle = $path.ignore-idle;
         always-normal = $path.always-normal;

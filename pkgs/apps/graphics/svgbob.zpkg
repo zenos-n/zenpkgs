@@ -1,0 +1,14 @@
+_meta = {
+  name = "Svgbob";
+  summary = "Convert your ascii diagram scribbles into happy little SVG";
+  description = ''
+    Convert your ascii diagram scribbles into happy little SVG.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.6";
+  tags = [ "graphics" "diagrams" "development" "documentation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.svgbob;

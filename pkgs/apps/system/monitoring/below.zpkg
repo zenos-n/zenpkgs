@@ -1,0 +1,14 @@
+_meta = {
+  name = "below";
+  summary = "Time traveling resource monitor for modern Linux systems";
+  description = ''
+    Time traveling resource monitor for modern Linux systems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.0";
+  tags = [ "system" "monitoring" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.below;

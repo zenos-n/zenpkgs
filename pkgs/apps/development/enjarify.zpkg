@@ -1,0 +1,14 @@
+_meta = {
+  name = "Enjarify";
+  summary = "Tool for translating Dalvik bytecode to equivalent Java bytecode";
+  description = ''
+    Tool for translating Dalvik bytecode to equivalent Java bytecode.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.3";
+  tags = [ "development" "android" "dalvik" "java" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.enjarify;

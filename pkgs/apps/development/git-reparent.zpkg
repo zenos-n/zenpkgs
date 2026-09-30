@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-reparent";
+  summary = "Git command to recommit HEAD with a new set of parents";
+  description = ''
+    Git command to recommit HEAD with a new set of parents.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2017-09-03";
+  tags = [ "development" "git" "commits" "history" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.git-reparent;

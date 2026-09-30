@@ -1,0 +1,14 @@
+_meta = {
+  name = "Capacities";
+  summary = "Calm place to make sense of the world and create amazing things";
+  description = ''
+    Calm place to make sense of the world and create amazing things.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.64.6";
+  tags = [ "office" "notes" "knowledge" "organization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.capacities;

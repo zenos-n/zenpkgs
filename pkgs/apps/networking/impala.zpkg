@@ -1,0 +1,14 @@
+_meta = {
+  name = "Impala";
+  summary = "TUI for managing wifi";
+  description = ''
+    TUI for managing wifi.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.4";
+  tags = [ "networking" "wifi" "management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.impala;

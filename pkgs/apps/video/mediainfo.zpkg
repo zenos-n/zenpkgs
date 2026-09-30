@@ -1,0 +1,15 @@
+_meta = {
+  name = "MediaInfo";
+  summary = "Supplies technical and tag information about a video or audio file";
+  description = ''
+    MediaInfo is a convenient unified display of the most relevant technical
+    and tag data for video and audio files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.05";
+  tags = [ "video" "audio" "metadata" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.mediainfo;

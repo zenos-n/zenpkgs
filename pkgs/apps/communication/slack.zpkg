@@ -1,0 +1,14 @@
+_meta = {
+  name = "Slack";
+  summary = "Desktop client for Slack";
+  description = ''
+    Desktop client for Slack.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.49.89";
+  tags = [ "communication" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.slack;

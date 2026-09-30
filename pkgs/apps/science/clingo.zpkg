@@ -1,0 +1,14 @@
+_meta = {
+  name = "clingo";
+  summary = "ASP system to ground and solve logic programs";
+  description = ''
+    ASP system to ground and solve logic programs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.8.0";
+  tags = [ "science" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.clingo;

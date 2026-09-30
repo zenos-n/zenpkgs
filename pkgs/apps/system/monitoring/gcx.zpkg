@@ -1,0 +1,14 @@
+_meta = {
+  name = "Grafana Cloud CLI";
+  summary = "Grafana Cloud CLI";
+  description = ''
+    Grafana Cloud CLI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.14";
+  tags = [ "system" "monitoring" "grafana" "cloud" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gcx;

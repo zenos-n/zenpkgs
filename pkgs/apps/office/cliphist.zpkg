@@ -1,0 +1,14 @@
+_meta = {
+  name = "cliphist";
+  summary = "Wayland clipboard manager";
+  description = ''
+    Wayland clipboard manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.0";
+  tags = [ "office" "productivity" "clipboard" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.cliphist;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "GDash";
+  summary = "Maze-based puzzle video game, a clone of the original Boulder Dash";
+  description = ''
+    Maze-based puzzle video game, a clone of the original Boulder Dash.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2023-06-24";
+  tags = [ "gaming" "puzzle" "arcade" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gdash;

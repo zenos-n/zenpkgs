@@ -1,0 +1,14 @@
+_meta = {
+  name = "DbVisualizer";
+  summary = "Universal database tool";
+  description = ''
+    Universal database tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "25.3.3";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.dbvisualizer;

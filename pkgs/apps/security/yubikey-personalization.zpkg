@@ -1,0 +1,14 @@
+_meta = {
+  name = "yubikey-personalization";
+  summary = "Library and command line tool to personalize YubiKeys";
+  description = ''
+    Library and command line tool to personalize YubiKeys.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.20.0";
+  tags = [ "security" "authentication" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.yubikey-personalization;

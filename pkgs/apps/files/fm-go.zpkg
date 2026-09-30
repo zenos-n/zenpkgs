@@ -1,0 +1,14 @@
+_meta = {
+  name = "fm-go";
+  summary = "Terminal based file manager";
+  description = ''
+    Terminal based file manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "files" "file-manager" "tui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fm-go;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "HedgeDoc";
+  summary = "Realtime collaborative markdown notes on all platforms";
+  description = ''
+    Realtime collaborative markdown notes on all platforms.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.11.1";
+  tags = [ "office" "notes" "knowledge-management" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.hedgedoc;

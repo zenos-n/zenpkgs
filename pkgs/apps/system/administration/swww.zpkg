@@ -1,0 +1,14 @@
+_meta = {
+  name = "awww";
+  summary = "Efficient animated wallpaper daemon for wayland, controlled at runtime";
+  description = ''
+    Efficient animated wallpaper daemon for wayland, controlled at runtime.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.12.1";
+  tags = [ "system" "administration" "wallpaper" "theming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.awww;

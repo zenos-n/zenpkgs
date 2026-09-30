@@ -1,0 +1,14 @@
+_meta = {
+  name = "hdparm";
+  summary = "Tool to get/set ATA/SATA drive parameters under Linux";
+  description = ''
+    Tool to get/set ATA/SATA drive parameters under Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.65";
+  tags = [ "storage" "hardware" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.hdparm;

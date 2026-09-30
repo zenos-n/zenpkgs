@@ -1,0 +1,14 @@
+_meta = {
+  name = "Filebench";
+  summary = "File system and storage benchmark that can generate both micro and macro workloads";
+  description = ''
+    File system and storage benchmark that can generate both micro and macro workloads.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5-alpha3-unstable-2020-02-20";
+  tags = [ "system" "monitoring" "storage" "benchmarks" "filesystems" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cddl;
+};
+
+import $pkgs.legacy.filebench;

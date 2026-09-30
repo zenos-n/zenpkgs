@@ -1,0 +1,14 @@
+_meta = {
+  name = "G933 Utilities";
+  summary = "Application to configure Logitech wireless G933/G533 headsets";
+  description = ''
+    Application to configure Logitech wireless G933/G533 headsets.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2021-11-19";
+  tags = [ "audio" "headsets" "hardware" "logitech" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.g933-utils;

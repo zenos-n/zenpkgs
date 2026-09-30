@@ -1,0 +1,14 @@
+_meta = {
+  name = "Varia";
+  summary = "Simple download manager based on aria2 and libadwaita";
+  description = ''
+    Simple download manager based on aria2 and libadwaita.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2025.10.14-1";
+  tags = [ "downloads" "files" "transfer" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.varia;

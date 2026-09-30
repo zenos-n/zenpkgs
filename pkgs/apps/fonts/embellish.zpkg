@@ -1,0 +1,22 @@
+_meta = {
+  name = "Embellish";
+  summary = "User-friendly application designed for managing Nerd Fonts on your system";
+  description = ''
+    Embellish provides a seamless experience for installing, uninstalling
+    and updating of Nerd Fonts. It's able to:
+    - List all available Nerd Fonts
+    - Download and install a Font
+    - Uninstall an installed Font
+    - Update an installed font
+    - Preview fonts
+    - Search fonts
+    - Read font's licence(s)
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.1";
+  tags = [ "fonts" "nerd-fonts" "management" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.embellish;

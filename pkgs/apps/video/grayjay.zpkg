@@ -1,0 +1,18 @@
+_meta = {
+  name = "Grayjay";
+  summary = "Cross-platform application to stream and download content from various sources";
+  description = ''
+    Grayjay is a cross-platform application that enables users to
+    stream and download multimedia content from various online sources,
+    most prominently YouTube.
+    It also offers an extensible plugin API to create and import new
+    integrations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "17";
+  tags = [ "video" "streaming" "downloads" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.sfl;
+};
+
+import $pkgs.legacy.grayjay;

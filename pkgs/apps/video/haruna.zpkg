@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Haruna";
+  summary = "Open source video player built with Qt/QML and libmpv";
+  description = ''
+    Open source video player built with Qt/QML and libmpv.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.1";
+  tags = [ "video" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.haruna;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "FreeNukum";
+  summary = "Clone of the original Duke Nukum 1 Jump'n Run game";
+  description = ''
+    Clone of the original Duke Nukum 1 Jump'n Run game.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "gaming" "platformer" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.freenukum;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "fm";
+  summary = "Small, general purpose file manager built with GTK4";
+  description = ''
+    Small, general purpose file manager built with GTK4.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2024-01-03";
+  tags = [ "files" "file-manager" "gtk" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fm;

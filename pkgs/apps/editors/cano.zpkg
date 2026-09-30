@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cano";
+  summary = "Text Editor Written In C Using ncurses";
+  description = ''
+    Text Editor Written In C Using ncurses.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0-alpha";
+  tags = [ "editors" "text" "terminal" "ncurses" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cano;

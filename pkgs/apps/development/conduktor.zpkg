@@ -1,0 +1,15 @@
+_meta = {
+  name = "Conduktor";
+  summary = "Apache Kafka Desktop Client";
+  description = ''
+    Conduktor is a GUI over the Kafka ecosystem, to make the development
+    and management of Apache Kafka clusters as easy as possible.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.24.9";
+  tags = [ "development" "kafka" "messaging" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.conduktor;

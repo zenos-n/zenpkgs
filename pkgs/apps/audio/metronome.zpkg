@@ -1,0 +1,17 @@
+_meta = {
+  name = "Metronome";
+  summary = "Keep the tempo";
+  description = ''
+    Metronome beats the rhythm for you, you simply
+    need to tell it the required time signature and
+    beats per minutes. You can also tap to let the
+    application guess the required beats per minute.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0";
+  tags = [ "audio" "music" "practice" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.metronome;

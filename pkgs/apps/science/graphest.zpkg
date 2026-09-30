@@ -1,0 +1,14 @@
+_meta = {
+  name = "Graphest";
+  summary = "Graphing calculator that can faithfully plot arbitrary mathematical relations";
+  description = ''
+    Graphing calculator that can faithfully plot arbitrary mathematical relations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.2-unstable-2026-01-21";
+  tags = [ "science" "calculator" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.graphest;

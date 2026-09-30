@@ -1,0 +1,14 @@
+_meta = {
+  name = "fujprog";
+  summary = "JTAG programmer for the ULX3S and ULX2S open hardware FPGA development boards";
+  description = ''
+    JTAG programmer for the ULX3S and ULX2S open hardware FPGA development boards.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.8";
+  tags = [ "cad" "fpga" "jtag" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.fujprog;

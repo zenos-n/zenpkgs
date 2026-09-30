@@ -1,0 +1,14 @@
+_meta = {
+  name = "ATAC";
+  summary = "Simple API client (postman like) in your terminal";
+  description = ''
+    Simple API client (postman like) in your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.23.0";
+  tags = [ "development" "http" "api" "testing" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.atac;

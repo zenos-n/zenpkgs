@@ -1,0 +1,15 @@
+_meta = {
+  name = "Gnucap";
+  summary = "Gnu Circuit Analysis Package";
+  description = ''
+    Gnucap is a modern general purpose circuit simulator with several advantages over Spice derivatives.
+    It performs nonlinear dc and transient analyses, fourier analysis, and ac analysis.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20240220";
+  tags = [ "cad" "electronics" "circuits" "simulation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.gnucap;

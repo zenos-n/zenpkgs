@@ -1,0 +1,21 @@
+_meta = {
+  name = "Freedoom";
+  summary = "Game based on the Doom engine";
+  description = ''
+    Freedoom is a complete, free content first person shooter game,
+    based on the Doom engine.
+
+    Freedoom is not a program - rather, it consists of the levels,
+    artwork, sound effects and music that make up the game.  To play
+    Freedoom, [it must be paired with an
+    engine](https://github.com/freedoom/freedoom#How-to-play) that
+    can play it.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.0";
+  tags = [ "gaming" "shooter" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.freedoom;

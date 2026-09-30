@@ -1,0 +1,14 @@
+_meta = {
+  name = "Vagrant";
+  summary = "Tool for building complete development environments";
+  description = ''
+    Tool for building complete development environments.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.9";
+  tags = [ "virtualization" "development" "management" "system" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsl11;
+};
+
+import $pkgs.legacy.vagrant;

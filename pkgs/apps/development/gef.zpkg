@@ -1,0 +1,14 @@
+_meta = {
+  name = "GEF";
+  summary = "Modern experience for GDB with advanced debugging features for exploit developers & reverse engineers";
+  description = ''
+    Modern experience for GDB with advanced debugging features for exploit developers & reverse engineers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.01";
+  tags = [ "development" "gdb" "debugging" "reverse-engineering" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gef;

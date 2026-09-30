@@ -1,0 +1,14 @@
+_meta = {
+  name = "Git Hooks";
+  summary = "Git hooks manager with per-repo and shared Git hooks including version control";
+  description = ''
+    Git hooks manager with per-repo and shared Git hooks including version control.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.6";
+  tags = [ "development" "git" "hooks" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.githooks;

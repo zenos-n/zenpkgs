@@ -1,0 +1,17 @@
+_meta = {
+  name = "Gaw";
+  summary = "Gtk Analog Wave viewer";
+  description = ''
+    Gaw is a software tool for displaying analog waveforms from
+    sampled datas, for example from the output of simulators or
+    input from sound cards. Data can be imported to gaw using files,
+    direct tcp/ip connection or directly from the sound card.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20250128";
+  tags = [ "cad" "electronics" "waveforms" "visualization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gaw;

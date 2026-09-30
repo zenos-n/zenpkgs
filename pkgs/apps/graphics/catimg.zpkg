@@ -1,0 +1,14 @@
+_meta = {
+  name = "catimg";
+  summary = "Insanely fast image printing in your terminal";
+  description = ''
+    Insanely fast image printing in your terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.0";
+  tags = [ "graphics" "images" "viewer" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.catimg;

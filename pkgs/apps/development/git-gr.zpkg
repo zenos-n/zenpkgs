@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-gr";
+  summary = "Gerrit CLI client";
+  description = ''
+    Gerrit CLI client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.6";
+  tags = [ "development" "git" "gerrit" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-gr;

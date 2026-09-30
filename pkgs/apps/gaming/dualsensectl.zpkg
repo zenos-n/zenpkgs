@@ -1,0 +1,14 @@
+_meta = {
+  name = "dualsensectl";
+  summary = "Linux tool for controlling PS5 DualSense controller";
+  description = ''
+    Linux tool for controlling PS5 DualSense controller.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7";
+  tags = [ "gaming" "playstation" "controllers" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.dualsensectl;

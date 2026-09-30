@@ -1,0 +1,14 @@
+_meta = {
+  name = "Seafile";
+  summary = "Desktop client for Seafile, the Next-generation Open Source Cloud Storage";
+  description = ''
+    Desktop client for Seafile, the Next-generation Open Source Cloud Storage.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.0.20";
+  tags = [ "networking" "files" "cloud" "synchronization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.seafile-client;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Logisim";
+  summary = "Educational tool for designing and simulating digital logic circuits";
+  description = ''
+    Educational tool for designing and simulating digital logic circuits.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.7.1";
+  tags = [ "education" "electronics" "simulation" "learning" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.logisim;

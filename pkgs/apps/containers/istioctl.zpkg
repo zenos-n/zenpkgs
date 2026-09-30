@@ -1,0 +1,14 @@
+_meta = {
+  name = "istioctl";
+  summary = "Istio configuration command line utility for service operators to debug and diagnose their Istio mesh";
+  description = ''
+    Istio configuration command line utility for service operators to debug and diagnose their Istio mesh.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.29.2";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.istioctl;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "dum";
+  summary = "Npm scripts runner written in Rust";
+  description = ''
+    Npm scripts runner written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.20";
+  tags = [ "development" "npm" "scripts" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dum;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "dfrs";
+  summary = "Display file system space usage using graphs and colors";
+  description = ''
+    Display file system space usage using graphs and colors.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.7";
+  tags = [ "storage" "disk-usage" "filesystems" "visualization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dfrs;

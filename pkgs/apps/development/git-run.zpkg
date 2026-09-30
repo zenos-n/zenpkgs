@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-run";
+  summary = "Multiple git repository management tool";
+  description = ''
+    Multiple git repository management tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.5";
+  tags = [ "development" "git" "repositories" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.git-run;

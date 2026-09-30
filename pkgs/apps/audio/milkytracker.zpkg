@@ -1,0 +1,14 @@
+_meta = {
+  name = "MilkyTracker";
+  summary = "Music tracker application, similar to Fasttracker II";
+  description = ''
+    Music tracker application, similar to Fasttracker II.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.06";
+  tags = [ "audio" "tracker" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.milkytracker;

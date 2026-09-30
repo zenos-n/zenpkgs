@@ -1,0 +1,14 @@
+_meta = {
+  name = "Vis";
+  summary = "Vim like editor";
+  description = ''
+    Vim like editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9";
+  tags = [ "editors" "terminal" "text" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.vis;

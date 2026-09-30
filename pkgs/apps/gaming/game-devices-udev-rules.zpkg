@@ -1,0 +1,17 @@
+_meta = {
+  name = "Game device udev rules";
+  summary = "Udev rules to make supported controllers available with user-grade permissions";
+  description = ''
+    These udev rules are intended to be used as a package under 'services.udev.packages'.
+    They will not be activated if installed as 'environment.systemPackages' or 'users.user.<user>.packages'.
+
+    Additionally, you may need to enable 'hardware.uinput'.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0";
+  tags = [ "gaming" "controllers" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.game-devices-udev-rules;

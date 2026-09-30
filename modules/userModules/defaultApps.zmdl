@@ -1,0 +1,162 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Default applications";
+  summary = "Default applications";
+  description = ''Settings for one user. Unset values preserve existing policy and preferences.'';
+  tags = [ "users" "defaultApps" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = {
+  _meta = {
+    name = "Manage default applications";
+    summary = "Manage default applications";
+    description = ''Manage default applications. Null leaves this preference unchanged.'';
+    tags = [ "users" "defaultApps" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.mimeApps.enable = $lib.mkIf ($path.enable != null) ($path.enable);
+  };
+};
+
+browser = {
+  _meta = {
+    name = "Desktop application for browser";
+    summary = "Desktop application for browser";
+    description = ''Desktop application for browser. An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application. Null leaves this preference unchanged.'';
+    tags = [ "users" "defaultApps" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.mimeApps.defaultApplications."text/html" = $lib.mkIf ($path.browser != null) ([ $path.browser ]);
+    xdg.mimeApps.defaultApplications."x-scheme-handler/http" = $lib.mkIf ($path.browser != null) ([ $path.browser ]);
+    xdg.mimeApps.defaultApplications."x-scheme-handler/https" = $lib.mkIf ($path.browser != null) ([ $path.browser ]);
+  };
+};
+
+email = {
+  _meta = {
+    name = "Desktop application for email";
+    summary = "Desktop application for email";
+    description = ''Desktop application for email. An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application. Null leaves this preference unchanged.'';
+    tags = [ "users" "defaultApps" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.mimeApps.defaultApplications."x-scheme-handler/mailto" = $lib.mkIf ($path.email != null) ([ $path.email ]);
+  };
+};
+
+fileManager = {
+  _meta = {
+    name = "Desktop application for fileManager";
+    summary = "Desktop application for fileManager";
+    description = ''Desktop application for fileManager. An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application. Null leaves this preference unchanged.'';
+    tags = [ "users" "defaultApps" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.mimeApps.defaultApplications."inode/directory" = $lib.mkIf ($path.fileManager != null) ([ $path.fileManager ]);
+  };
+};
+
+textEditor = {
+  _meta = {
+    name = "Desktop application for textEditor";
+    summary = "Desktop application for textEditor";
+    description = ''Desktop application for textEditor. An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application. Null leaves this preference unchanged.'';
+    tags = [ "users" "defaultApps" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.mimeApps.defaultApplications."text/plain" = $lib.mkIf ($path.textEditor != null) ([ $path.textEditor ]);
+  };
+};
+
+pdfViewer = {
+  _meta = {
+    name = "Desktop application for pdfViewer";
+    summary = "Desktop application for pdfViewer";
+    description = ''Desktop application for pdfViewer. An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application. Null leaves this preference unchanged.'';
+    tags = [ "users" "defaultApps" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.mimeApps.defaultApplications."application/pdf" = $lib.mkIf ($path.pdfViewer != null) ([ $path.pdfViewer ]);
+  };
+};
+
+imageViewer = {
+  _meta = {
+    name = "Desktop application for imageViewer";
+    summary = "Desktop application for imageViewer";
+    description = ''Desktop application for imageViewer. An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application. Null leaves this preference unchanged.'';
+    tags = [ "users" "defaultApps" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.mimeApps.defaultApplications."image/png" = $lib.mkIf ($path.imageViewer != null) ([ $path.imageViewer ]);
+    xdg.mimeApps.defaultApplications."image/jpeg" = $lib.mkIf ($path.imageViewer != null) ([ $path.imageViewer ]);
+    xdg.mimeApps.defaultApplications."image/webp" = $lib.mkIf ($path.imageViewer != null) ([ $path.imageViewer ]);
+    xdg.mimeApps.defaultApplications."image/gif" = $lib.mkIf ($path.imageViewer != null) ([ $path.imageViewer ]);
+  };
+};
+
+musicPlayer = {
+  _meta = {
+    name = "Desktop application for musicPlayer";
+    summary = "Desktop application for musicPlayer";
+    description = ''Desktop application for musicPlayer. An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application. Null leaves this preference unchanged.'';
+    tags = [ "users" "defaultApps" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.mimeApps.defaultApplications."audio/mpeg" = $lib.mkIf ($path.musicPlayer != null) ([ $path.musicPlayer ]);
+    xdg.mimeApps.defaultApplications."audio/flac" = $lib.mkIf ($path.musicPlayer != null) ([ $path.musicPlayer ]);
+    xdg.mimeApps.defaultApplications."audio/ogg" = $lib.mkIf ($path.musicPlayer != null) ([ $path.musicPlayer ]);
+  };
+};
+
+videoPlayer = {
+  _meta = {
+    name = "Desktop application for videoPlayer";
+    summary = "Desktop application for videoPlayer";
+    description = ''Desktop application for videoPlayer. An installed .desktop file ID, such as org.gnome.Nautilus.desktop. Requires defaultApps.enable = true; does not install the application. Null leaves this preference unchanged.'';
+    tags = [ "users" "defaultApps" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+  u!! {
+    xdg.mimeApps.defaultApplications."video/mp4" = $lib.mkIf ($path.videoPlayer != null) ([ $path.videoPlayer ]);
+    xdg.mimeApps.defaultApplications."video/webm" = $lib.mkIf ($path.videoPlayer != null) ([ $path.videoPlayer ]);
+    xdg.mimeApps.defaultApplications."video/x-matroska" = $lib.mkIf ($path.videoPlayer != null) ([ $path.videoPlayer ]);
+  };
+};

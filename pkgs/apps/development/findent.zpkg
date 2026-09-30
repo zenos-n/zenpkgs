@@ -1,0 +1,14 @@
+_meta = {
+  name = "findent";
+  summary = "Fortran source code formatter";
+  description = ''
+    Fortran source code formatter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.3.6";
+  tags = [ "development" "fortran" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.findent;

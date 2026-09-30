@@ -1,0 +1,16 @@
+_meta = {
+  name = "Safe Eyes";
+  summary = "Break reminder to prevent eye strain";
+  description = ''
+    Protect your eyes from eye strain using this simple and
+    beautiful, yet extensible break reminder.  Free GNU/Linux
+    alternative to EyeLeo.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.0";
+  tags = [ "accessibility" "break-reminders" "productivity" "assistive-technology" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.safeeyes;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-zigbuild";
+  summary = "Tool to compile Cargo projects with zig as the linker";
+  description = ''
+    Tool to compile Cargo projects with zig as the linker.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.23.2";
+  tags = [ "development" "rust" "cargo" "cross-compilation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-zigbuild;

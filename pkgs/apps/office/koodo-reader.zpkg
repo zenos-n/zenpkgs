@@ -1,0 +1,15 @@
+_meta = {
+  name = "Koodo Reader";
+  summary = "Cross-platform ebook reader";
+  description = ''
+    A modern ebook manager and reader with sync and backup capacities
+    for Windows, macOS, Linux and Web
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.4";
+  tags = [ "office" "ebooks" "reading" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.koodo-reader;

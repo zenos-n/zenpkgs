@@ -1,0 +1,14 @@
+_meta = {
+  name = "Apio";
+  summary = "Open source ecosystem for open FPGA boards";
+  description = ''
+    Open source ecosystem for open FPGA boards.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.5";
+  tags = [ "development" "fpga" "electronics" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.apio;

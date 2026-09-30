@@ -1,0 +1,58 @@
+_meta = {
+  name = "Configure packaging for desktop use";
+  tags = [ "desktop" "packaging" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Configure packaging for desktop use";
+  description = ''Configure packaging for desktop use. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+flatpak = {
+  _meta = {
+    name = "Install and run sandboxed Flatpak applications";
+    tags = [ "desktop" "packaging" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Install and run sandboxed Flatpak applications";
+    description = ''Install and run sandboxed Flatpak applications. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.flatpak.enable = $lib.mkIf ($path.flatpak != null) $path.flatpak;
+  };
+};
+
+appImage = {
+  _meta = {
+    name = "Support running AppImage applications";
+    tags = [ "desktop" "packaging" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Support running AppImage applications";
+    description = ''Support running AppImage applications. Null keeps the existing system policy.'';
+  };
+  s!! {
+    programs.appimage.enable = $lib.mkIf ($path.appImage != null) $path.appImage;
+  };
+};
+
+runAppImagesDirectly = {
+  _meta = {
+    name = "Open executable AppImage files directly";
+    tags = [ "desktop" "packaging" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Open executable AppImage files directly";
+    description = ''Open executable AppImage files directly. Null keeps the existing system policy.'';
+  };
+  s!! {
+    programs.appimage.binfmt = $lib.mkIf ($path.runAppImagesDirectly != null) $path.runAppImagesDirectly;
+  };
+};
+

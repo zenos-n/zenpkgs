@@ -1,0 +1,218 @@
+_meta = {
+  name = "Configure locale for desktop use";
+  tags = [ "desktop" "locale" ];
+  zenosVersion = 1.0.0Na;
+  summary = "Configure locale for desktop use";
+  description = ''Configure locale for desktop use. Settings describe user-visible behavior.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+language = {
+  _meta = {
+    name = "Default language and regional format, such as en_US.UTF-8";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Default language and regional format, such as en_US.UTF-8";
+    description = ''Default language and regional format, such as en_US.UTF-8. Null keeps the existing system policy.'';
+  };
+  s!! {
+    i18n.defaultLocale = $lib.mkIf ($path.language != null) $path.language;
+  };
+};
+
+timeZone = {
+  _meta = {
+    name = "Time zone used to display local time, such as Europe/Warsaw";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Time zone used to display local time, such as Europe/Warsaw";
+    description = ''Time zone used to display local time, such as Europe/Warsaw. Null keeps the existing system policy.'';
+  };
+  s!! {
+    time.timeZone = $lib.mkIf ($path.timeZone != null) $path.timeZone;
+  };
+};
+
+automaticTime = {
+  _meta = {
+    name = "Synchronize the clock with network time servers";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+    summary = "Synchronize the clock with network time servers";
+    description = ''Synchronize the clock with network time servers. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.timesyncd.enable = $lib.mkIf ($path.automaticTime != null) $path.automaticTime;
+  };
+};
+
+keyboardLayout = {
+  _meta = {
+    name = "Default keyboard layout for graphical sessions";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Default keyboard layout for graphical sessions";
+    description = ''Default keyboard layout for graphical sessions. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.xserver.xkb.layout = $lib.mkIf ($path.keyboardLayout != null) $path.keyboardLayout;
+  };
+};
+
+keyboardVariant = {
+  _meta = {
+    name = "Keyboard layout variant for graphical sessions";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Keyboard layout variant for graphical sessions";
+    description = ''Keyboard layout variant for graphical sessions. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.xserver.xkb.variant = $lib.mkIf ($path.keyboardVariant != null) $path.keyboardVariant;
+  };
+};
+
+keyboardBehavior = {
+  _meta = {
+    name = "Additional keyboard behaviors such as Caps Lock remapping";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Additional keyboard behaviors such as Caps Lock remapping";
+    description = ''Additional keyboard behaviors such as Caps Lock remapping. Null keeps the existing system policy.'';
+  };
+  s!! {
+    services.xserver.xkb.options = $lib.mkIf ($path.keyboardBehavior != null) $path.keyboardBehavior;
+  };
+};
+
+consoleKeyboardLayout = {
+  _meta = {
+    name = "Keyboard layout used on text consoles";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Keyboard layout used on text consoles";
+    description = ''Keyboard layout used on text consoles. Null keeps the existing system policy.'';
+  };
+  s!! {
+    console.keyMap = $lib.mkIf ($path.consoleKeyboardLayout != null) $path.consoleKeyboardLayout;
+  };
+};
+
+numberFormat = {
+  _meta = {
+    name = "Locale used for decimal separators and number formatting";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Locale used for decimal separators and number formatting";
+    description = ''Locale used for decimal separators and number formatting. Use a locale name such as en_US.UTF-8. Null keeps the existing system policy.'';
+  };
+  s!! {
+    i18n.extraLocaleSettings.LC_NUMERIC = $lib.mkIf ($path.numberFormat != null) $path.numberFormat;
+  };
+};
+
+dateTimeFormat = {
+  _meta = {
+    name = "Locale used for date and time formatting";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Locale used for date and time formatting";
+    description = ''Locale used for date and time formatting. Use a locale name such as en_US.UTF-8. Null keeps the existing system policy.'';
+  };
+  s!! {
+    i18n.extraLocaleSettings.LC_TIME = $lib.mkIf ($path.dateTimeFormat != null) $path.dateTimeFormat;
+  };
+};
+
+currencyFormat = {
+  _meta = {
+    name = "Locale used for currency formatting";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Locale used for currency formatting";
+    description = ''Locale used for currency formatting. Use a locale name such as en_US.UTF-8. Null keeps the existing system policy.'';
+  };
+  s!! {
+    i18n.extraLocaleSettings.LC_MONETARY = $lib.mkIf ($path.currencyFormat != null) $path.currencyFormat;
+  };
+};
+
+paperFormat = {
+  _meta = {
+    name = "Locale used for paper sizes";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Locale used for paper sizes";
+    description = ''Locale used for paper sizes. Use a locale name such as en_US.UTF-8. Null keeps the existing system policy.'';
+  };
+  s!! {
+    i18n.extraLocaleSettings.LC_PAPER = $lib.mkIf ($path.paperFormat != null) $path.paperFormat;
+  };
+};
+
+measurementFormat = {
+  _meta = {
+    name = "Locale used for measurement units";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Locale used for measurement units";
+    description = ''Locale used for measurement units. Use a locale name such as en_US.UTF-8. Null keeps the existing system policy.'';
+  };
+  s!! {
+    i18n.extraLocaleSettings.LC_MEASUREMENT = $lib.mkIf ($path.measurementFormat != null) $path.measurementFormat;
+  };
+};
+
+sortingLanguage = {
+  _meta = {
+    name = "Locale used for alphabetical sorting";
+    tags = [ "desktop" "locale" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+    summary = "Locale used for alphabetical sorting";
+    description = ''Locale used for alphabetical sorting. Use a locale name such as en_US.UTF-8. Null keeps the existing system policy.'';
+  };
+  s!! {
+    i18n.extraLocaleSettings.LC_COLLATE = $lib.mkIf ($path.sortingLanguage != null) $path.sortingLanguage;
+  };
+};
+

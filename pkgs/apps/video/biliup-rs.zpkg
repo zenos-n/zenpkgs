@@ -1,0 +1,14 @@
+_meta = {
+  name = "biliup";
+  summary = "CLI tool for uploading videos to Bilibili";
+  description = ''
+    CLI tool for uploading videos to Bilibili.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.4";
+  tags = [ "video" "bilibili" "upload" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.biliup-rs;

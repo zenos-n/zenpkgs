@@ -1,0 +1,14 @@
+_meta = {
+  name = "GoAccess";
+  summary = "Real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems";
+  description = ''
+    Real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.11";
+  tags = [ "system" "monitoring" "logs" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.goaccess;

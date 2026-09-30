@@ -1,0 +1,14 @@
+_meta = {
+  name = "Yubico Authenticator";
+  summary = "Yubico Authenticator for Desktop";
+  description = ''
+    Yubico Authenticator for Desktop.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.3.3";
+  tags = [ "security" "authentication" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.yubioath-flutter;

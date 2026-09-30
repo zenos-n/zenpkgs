@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitHub Actions Cache CLI";
+  summary = "gh extension to manage GitHub Actions caches";
+  description = ''
+    gh extension to manage GitHub Actions caches.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.4";
+  tags = [ "development" "github" "github-cli" "ci" "caches" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-actions-cache;

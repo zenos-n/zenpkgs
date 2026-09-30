@@ -1,0 +1,14 @@
+_meta = {
+  name = "Curv";
+  summary = "2D and 3D geometric modelling programming language for creating art with maths";
+  description = ''
+    2D and 3D geometric modelling programming language for creating art with maths.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5-unstable-2026-02-26";
+  tags = [ "cad" "modelling" "geometry" "programming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.curv;

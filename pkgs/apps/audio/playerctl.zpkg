@@ -1,0 +1,14 @@
+_meta = {
+  name = "playerctl";
+  summary = "Command-line utility and library for controlling media players that implement MPRIS";
+  description = ''
+    Command-line utility and library for controlling media players that implement MPRIS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.1";
+  tags = [ "audio" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3;
+};
+
+import $pkgs.legacy.playerctl;

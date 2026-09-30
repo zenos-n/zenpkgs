@@ -1,0 +1,14 @@
+_meta = {
+  name = "Terraform";
+  summary = "Tool for building, changing, and versioning infrastructure";
+  description = ''
+    Tool for building, changing, and versioning infrastructure.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.3";
+  tags = [ "infrastructure" "automation" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsl11;
+};
+
+import $pkgs.legacy.terraform;

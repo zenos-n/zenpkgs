@@ -1,0 +1,14 @@
+_meta = {
+  name = "QSSTV";
+  summary = "Qt-based slow-scan TV and fax";
+  description = ''
+    Qt-based slow-scan TV and fax.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.5.8";
+  tags = [ "radio" "amateur-radio" "digital-modes" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.qsstv;

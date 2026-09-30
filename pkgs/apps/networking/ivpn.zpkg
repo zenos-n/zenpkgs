@@ -1,0 +1,14 @@
+_meta = {
+  name = "IVPN CLI";
+  summary = "Official IVPN Desktop app";
+  description = ''
+    Official IVPN Desktop app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.15.6";
+  tags = [ "networking" "vpn" "security" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.ivpn;

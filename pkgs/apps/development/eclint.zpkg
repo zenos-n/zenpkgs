@@ -1,0 +1,14 @@
+_meta = {
+  name = "eclint";
+  summary = "EditorConfig linter written in Go";
+  description = ''
+    EditorConfig linter written in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.1";
+  tags = [ "development" "editorconfig" "linting" "style" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.eclint;

@@ -1,0 +1,295 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Tmux configuration";
+  summary = "Tmux configuration";
+  description = ''Configure Tmux with typed preferences. Unset values preserve existing behavior.'';
+  tags = [ "shell" "tmux" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+mouse = {
+  _meta = {
+    name = "Use the mouse to select panes";
+    summary = "Use the mouse to select panes";
+    description = ''Use the mouse to select panes. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+keyMode = {
+  _meta = {
+    name = "Copy-mode editing keys";
+    summary = "Copy-mode editing keys";
+    description = ''Copy-mode editing keys. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "emacs" "vi" ]) $type.null ];
+    default = null;
+  };
+};
+
+prefix = {
+  _meta = {
+    name = "Prefix key for Tmux commands";
+    summary = "Prefix key for Tmux commands";
+    description = ''Prefix key for Tmux commands. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+firstWindowIndex = {
+  _meta = {
+    name = "Starting index for windows and panes";
+    summary = "Starting index for windows and panes";
+    description = ''Starting index for windows and panes. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+historyLines = {
+  _meta = {
+    name = "Scrollback lines per pane";
+    summary = "Scrollback lines per pane";
+    description = ''Scrollback lines per pane. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+escapeDelayMilliseconds = {
+  _meta = {
+    name = "Wait time after an Escape key";
+    summary = "Wait time after an Escape key";
+    description = ''Wait time after an Escape key. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+resizeStep = {
+  _meta = {
+    name = "Rows or columns per resize action";
+    summary = "Rows or columns per resize action";
+    description = ''Rows or columns per resize action. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+clock24Hours = {
+  _meta = {
+    name = "Use a 24-hour clock";
+    summary = "Use a 24-hour clock";
+    description = ''Use a 24-hour clock. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+focusEvents = {
+  _meta = {
+    name = "Pass terminal focus events to applications";
+    summary = "Pass terminal focus events to applications";
+    description = ''Pass terminal focus events to applications. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+createSessionOnAttach = {
+  _meta = {
+    name = "Create a session when no session exists";
+    summary = "Create a session when no session exists";
+    description = ''Create a session when no session exists. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+reverseSplitKeys = {
+  _meta = {
+    name = "Swap horizontal and vertical split shortcuts";
+    summary = "Swap horizontal and vertical split shortcuts";
+    description = ''Swap horizontal and vertical split shortcuts. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+paneNavigationKeys = {
+  _meta = {
+    name = "Use Vim-style pane navigation and resize keys";
+    summary = "Use Vim-style pane navigation and resize keys";
+    description = ''Use Vim-style pane navigation and resize keys. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+aggressiveResize = {
+  _meta = {
+    name = "Resize windows to their smallest active session";
+    summary = "Resize windows to their smallest active session";
+    description = ''Resize windows to their smallest active session. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+secureSocket = {
+  _meta = {
+    name = "Store the socket in the runtime directory";
+    summary = "Store the socket in the runtime directory";
+    description = ''Store the socket in the runtime directory. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+terminalType = {
+  _meta = {
+    name = "Terminal type advertised inside Tmux";
+    summary = "Terminal type advertised inside Tmux";
+    description = ''Terminal type advertised inside Tmux. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+shellCommand = {
+  _meta = {
+    name = "Shell executable used in new panes";
+    summary = "Shell executable used in new panes";
+    description = ''Shell executable used in new panes. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+sessionManager = {
+  _meta = {
+    name = "Install the tmuxp session manager";
+    summary = "Install the tmuxp session manager";
+    description = ''Install the tmuxp session manager. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+extraConfiguration = {
+  _meta = {
+    name = "Additional Tmux configuration";
+    summary = "Additional Tmux configuration";
+    description = ''Additional Tmux configuration. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+confirmClose = {
+  _meta = {
+    name = "Confirm before closing a pane or window";
+    summary = "Confirm before closing a pane or window";
+    description = ''Confirm before closing a pane or window. Null preserves existing behavior.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Tmux";
+    summary = "Install and configure Tmux";
+    description = ''Enable Tmux for the selected user scope. Preferences apply while enabled.'';
+    tags = [ "shell" "tmux" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    programs.tmux.enable = true;
+    programs.tmux.mouse = $lib.mkIf ($path.mouse != null) ($path.mouse);
+    programs.tmux.keyMode = $lib.mkIf ($path.keyMode != null) ($path.keyMode);
+    programs.tmux.prefix = $lib.mkIf ($path.prefix != null) ($path.prefix);
+    programs.tmux.baseIndex = $lib.mkIf ($path.firstWindowIndex != null) ($path.firstWindowIndex);
+    programs.tmux.historyLimit = $lib.mkIf ($path.historyLines != null) ($path.historyLines);
+    programs.tmux.escapeTime = $lib.mkIf ($path.escapeDelayMilliseconds != null) ($path.escapeDelayMilliseconds);
+    programs.tmux.resizeAmount = $lib.mkIf ($path.resizeStep != null) ($path.resizeStep);
+    programs.tmux.clock24 = $lib.mkIf ($path.clock24Hours != null) ($path.clock24Hours);
+    programs.tmux.focusEvents = $lib.mkIf ($path.focusEvents != null) ($path.focusEvents);
+    programs.tmux.newSession = $lib.mkIf ($path.createSessionOnAttach != null) ($path.createSessionOnAttach);
+    programs.tmux.reverseSplit = $lib.mkIf ($path.reverseSplitKeys != null) ($path.reverseSplitKeys);
+    programs.tmux.customPaneNavigationAndResize = $lib.mkIf ($path.paneNavigationKeys != null) ($path.paneNavigationKeys);
+    programs.tmux.aggressiveResize = $lib.mkIf ($path.aggressiveResize != null) ($path.aggressiveResize);
+    programs.tmux.secureSocket = $lib.mkIf ($path.secureSocket != null) ($path.secureSocket);
+    programs.tmux.terminal = $lib.mkIf ($path.terminalType != null) ($path.terminalType);
+    programs.tmux.shell = $lib.mkIf ($path.shellCommand != null) ($path.shellCommand);
+    programs.tmux.tmuxp.enable = $lib.mkIf ($path.sessionManager != null) ($path.sessionManager);
+    programs.tmux.extraConfig = $lib.mkIf ($path.extraConfiguration != null) ($path.extraConfiguration);
+    programs.tmux.disableConfirmationPrompt = $lib.mkIf ($path.confirmClose != null) (!$path.confirmClose);
+    assertions = [
+      { assertion = $path.firstWindowIndex == null || $path.firstWindowIndex >= 0; message = "programs.tmux.firstWindowIndex must be at least 0."; }
+      { assertion = $path.historyLines == null || $path.historyLines >= 1; message = "programs.tmux.historyLines must be at least 1."; }
+      { assertion = $path.escapeDelayMilliseconds == null || $path.escapeDelayMilliseconds >= 0; message = "programs.tmux.escapeDelayMilliseconds must be at least 0."; }
+      { assertion = $path.resizeStep == null || $path.resizeStep >= 1; message = "programs.tmux.resizeStep must be at least 1."; }
+    ];
+  };
+};

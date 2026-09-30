@@ -1,0 +1,14 @@
+_meta = {
+  name = "Consul";
+  summary = "Tool for service discovery, monitoring and configuration";
+  description = ''
+    Tool for service discovery, monitoring and configuration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.22.7";
+  tags = [ "infrastructure" "automation" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsl11;
+};
+
+import $pkgs.legacy.consul;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "FreeSASA";
+  summary = "Calculate solvent-accessible surface areas of molecules";
+  description = ''
+    Calculate solvent-accessible surface areas of molecules.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.2";
+  tags = [ "science" "chemistry" "molecular-analysis" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.freesasa;

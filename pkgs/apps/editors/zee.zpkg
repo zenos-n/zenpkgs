@@ -1,0 +1,14 @@
+_meta = {
+  name = "Zee";
+  summary = "Modern text editor for the terminal written in Rust";
+  description = ''
+    Modern text editor for the terminal written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.2";
+  tags = [ "editors" "terminal" "text" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.zee;

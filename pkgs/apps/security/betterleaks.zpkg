@@ -1,0 +1,14 @@
+_meta = {
+  name = "BetterLeaks";
+  summary = "Scan code for secrets";
+  description = ''
+    Scan code for secrets.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.1";
+  tags = [ "security" "secrets" "scanning" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.betterleaks;

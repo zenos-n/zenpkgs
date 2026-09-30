@@ -1,0 +1,26 @@
+_meta = {
+  name = "Decode Spam Headers";
+  summary = "Script that helps you understand why your E-Mail ended up in Spam";
+  description = ''
+    Whether you are trying to understand why a specific e-mail ended up in
+    SPAM/Junk for your daily Administrative duties or for your Red-Team
+    Phishing simulation purposes, this script is there for you to help!
+
+    This tool accepts on input an *.EML or *.txt file with all the SMTP
+    headers. It will then extract a subset of interesting headers and using
+    105+ tests will attempt to decode them as much as possible.
+
+    This script also extracts all IPv4 addresses and domain names and performs
+    full DNS resolution of them.
+
+    Resulting output will contain useful information on why this e-mail might
+    have been blocked.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2022-09-22-unreleased";
+  tags = [ "communication" "email" "spam" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.decode-spam-headers;

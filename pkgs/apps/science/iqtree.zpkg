@@ -1,0 +1,14 @@
+_meta = {
+  name = "IQ-TREE";
+  summary = "Efficient and versatile phylogenomic software by maximum likelihood";
+  description = ''
+    Efficient and versatile phylogenomic software by maximum likelihood.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.1";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl2;
+};
+
+import $pkgs.legacy.iqtree;

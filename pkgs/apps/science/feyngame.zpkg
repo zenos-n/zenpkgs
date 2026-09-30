@@ -1,0 +1,14 @@
+_meta = {
+  name = "FeynGame";
+  summary = "Java-based graphical tool for drawing Feynman diagrams";
+  description = ''
+    Java-based graphical tool for drawing Feynman diagrams.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.0";
+  tags = [ "science" "physics" "feynman-diagrams" "drawing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.feyngame;

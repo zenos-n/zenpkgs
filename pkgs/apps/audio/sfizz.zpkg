@@ -1,0 +1,14 @@
+_meta = {
+  name = "sfizz";
+  summary = "SFZ jack client and LV2 plugin";
+  description = ''
+    SFZ jack client and LV2 plugin.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.3";
+  tags = [ "audio" "synthesis" "music-production" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.sfizz;

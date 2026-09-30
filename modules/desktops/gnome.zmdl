@@ -1,6 +1,8 @@
 # Transitional parity source: lib/compat/modules/desktops/gnome/base/module.nix
 # Schema migration: the canonical module id uses path-derived desktops.gnome.
 _meta = {
+  name = "GNOME desktop environment for ZenOS";
+  tags = [ "desktop" "gnome" ];
   zenosVersion = 1.0.0Na;
   summary = "GNOME desktop environment for ZenOS";
   description = ''
@@ -9,14 +11,61 @@ _meta = {
   '';
   maintainers = [ $m.doromiert ];
   license = $l.napl;
-  platforms = $lib.platforms.zenos;
 };
 
 enable = enableOption {
   _meta.summary = "Enable the GNOME desktop base module";
 
   s! {
+    assertions = [
+      { assertion = $path.loginScreen.attemptsBeforeUserSelection == null || ($path.loginScreen.attemptsBeforeUserSelection >= 1 && $path.loginScreen.attemptsBeforeUserSelection <= 2147483647); message = "desktops.gnome.loginScreen.attemptsBeforeUserSelection must be between 1 and 2147483647."; }
+      { assertion = $path.loginScreen.textScale == null || $path.loginScreen.textScale > 0.0; message = "desktops.gnome.loginScreen.textScale must be positive."; }
+      { assertion = $path.accessibility.inactivityTimeoutSeconds >= 0 && $path.accessibility.inactivityTimeoutSeconds <= 2147483647; message = "desktops.gnome.accessibility.inactivityTimeoutSeconds must be between 0 and 2147483647."; }
+      { assertion = $path.accessibility.keyboardMouseSpeed >= 0 && $path.accessibility.keyboardMouseSpeed <= 2147483647; message = "desktops.gnome.accessibility.keyboardMouseSpeed must be between 0 and 2147483647."; }
+      { assertion = $path.accessibility.keyboardMouseAccelerationMilliseconds >= 0 && $path.accessibility.keyboardMouseAccelerationMilliseconds <= 2147483647; message = "desktops.gnome.accessibility.keyboardMouseAccelerationMilliseconds must be between 0 and 2147483647."; }
+      { assertion = $path.accessibility.keyboardMouseDelayMilliseconds >= 0 && $path.accessibility.keyboardMouseDelayMilliseconds <= 2147483647; message = "desktops.gnome.accessibility.keyboardMouseDelayMilliseconds must be between 0 and 2147483647."; }
+      { assertion = $path.magnification.zoom >= 0.1 && $path.magnification.zoom <= 32.0; message = "desktops.gnome.magnification.zoom must be between 0.1 and 32.0."; }
+      { assertion = $path.magnification.crosshairThicknessPixels >= 0 && $path.magnification.crosshairThicknessPixels <= 2147483647; message = "desktops.gnome.magnification.crosshairThicknessPixels must be between 0 and 2147483647."; }
+      { assertion = $path.magnification.crosshairOpacity >= 0.0 && $path.magnification.crosshairOpacity <= 1.0; message = "desktops.gnome.magnification.crosshairOpacity must be between 0.0 and 1.0."; }
+      { assertion = $path.magnification.crosshairLengthPixels >= 20 && $path.magnification.crosshairLengthPixels <= 4096; message = "desktops.gnome.magnification.crosshairLengthPixels must be between 20 and 4096."; }
+      { assertion = $path.magnification.colorSaturation >= 0.0 && $path.magnification.colorSaturation <= 1.0; message = "desktops.gnome.magnification.colorSaturation must be between 0.0 and 1.0."; }
+      { assertion = $path.accessibility.hoverClickDelaySeconds >= 0.0; message = "desktops.gnome.accessibility.hoverClickDelaySeconds must be at least 0.0."; }
+      { assertion = $path.accessibility.hoverClickMovementPixels >= 0 && $path.accessibility.hoverClickMovementPixels <= 2147483647; message = "desktops.gnome.accessibility.hoverClickMovementPixels must be between 0 and 2147483647."; }
+      { assertion = $path.accessibility.rightClickHoldSeconds >= 0.0; message = "desktops.gnome.accessibility.rightClickHoldSeconds must be at least 0.0."; }
+      { assertion = $path.appearance.textScale >= 0.5 && $path.appearance.textScale <= 3.0; message = "desktops.gnome.appearance.textScale must be between 0.5 and 3.0."; }
+      { assertion = $path.privacy.cleanupAgeDays >= 0 && $path.privacy.cleanupAgeDays <= 4294967295; message = "desktops.gnome.privacy.cleanupAgeDays must be between 0 and 4294967295."; }
+      { assertion = $path.power.screenBlankSeconds >= 0 && $path.power.screenBlankSeconds <= 4294967295; message = "desktops.gnome.power.screenBlankSeconds must be between 0 and 4294967295."; }
+      { assertion = $path.security.lockDelaySeconds >= 0 && $path.security.lockDelaySeconds <= 4294967295; message = "desktops.gnome.security.lockDelaySeconds must be between 0 and 4294967295."; }
+      { assertion = $path.mouse.speed >= -1 && $path.mouse.speed <= 1; message = "desktops.gnome.mouse.speed must be between -1 and 1."; }
+      { assertion = $path.touchpad.speed >= -1 && $path.touchpad.speed <= 1; message = "desktops.gnome.touchpad.speed must be between -1 and 1."; }
+      { assertion = $path.keyboard.repeatDelayMilliseconds >= 0 && $path.keyboard.repeatDelayMilliseconds <= 4294967295; message = "desktops.gnome.keyboard.repeatDelayMilliseconds must be between 0 and 4294967295."; }
+      { assertion = $path.keyboard.repeatIntervalMilliseconds >= 0 && $path.keyboard.repeatIntervalMilliseconds <= 4294967295; message = "desktops.gnome.keyboard.repeatIntervalMilliseconds must be between 0 and 4294967295."; }
+      { assertion = $path.windows.raiseDelayMilliseconds >= 0 && $path.windows.raiseDelayMilliseconds <= 10000; message = "desktops.gnome.windows.raiseDelayMilliseconds must be between 0 and 10000."; }
+      { assertion = $path.workspaces.count >= 1 && $path.workspaces.count <= 36; message = "desktops.gnome.workspaces.count must be between 1 and 36."; }
+      { assertion = $path.nightLight.temperature >= 0 && $path.nightLight.temperature <= 4294967295; message = "desktops.gnome.nightLight.temperature must be between 0 and 4294967295."; }
+    ];
     services.displayManager.gdm.enable = true;
+    services.displayManager.gdm.autoSuspend = $lib.mkIf ($path.loginScreen.automaticSuspend != null) $path.loginScreen.automaticSuspend;
+    programs.dconf.profiles.gdm.databases = $lib.mkBefore ($lib.optional ($path.loginScreen.showUsers != null || $path.loginScreen.showPowerButtons != null || $path.loginScreen.allowPasswords != null || $path.loginScreen.allowFingerprints != null || $path.loginScreen.allowSmartCards != null || $path.loginScreen.allowPasskeys != null || $path.loginScreen.allowWebLogin != null || $path.loginScreen.attemptsBeforeUserSelection != null || $path.loginScreen.logo != null || $path.loginScreen.screenReader != null || $path.loginScreen.screenKeyboard != null || $path.loginScreen.textScale != null || $path.loginScreen.highContrast != null || $path.loginScreen.clockFormat != null || $path.loginScreen.message != null) {
+      settings = $lib.foldl $lib.recursiveUpdate { } [
+        ($lib.optionalAttrs ($path.loginScreen.showUsers != null) { "org/gnome/login-screen"."disable-user-list" = $path.loginScreen.showUsers == false; })
+        ($lib.optionalAttrs ($path.loginScreen.showPowerButtons != null) { "org/gnome/login-screen"."disable-restart-buttons" = $path.loginScreen.showPowerButtons == false; })
+        ($lib.optionalAttrs ($path.loginScreen.allowPasswords != null) { "org/gnome/login-screen"."enable-password-authentication" = $path.loginScreen.allowPasswords; })
+        ($lib.optionalAttrs ($path.loginScreen.allowFingerprints != null) { "org/gnome/login-screen"."enable-fingerprint-authentication" = $path.loginScreen.allowFingerprints; })
+        ($lib.optionalAttrs ($path.loginScreen.allowSmartCards != null) { "org/gnome/login-screen"."enable-smartcard-authentication" = $path.loginScreen.allowSmartCards; })
+        ($lib.optionalAttrs ($path.loginScreen.allowPasskeys != null) { "org/gnome/login-screen"."enable-passkey-authentication" = $path.loginScreen.allowPasskeys; })
+        ($lib.optionalAttrs ($path.loginScreen.allowWebLogin != null) { "org/gnome/login-screen"."enable-web-authentication" = $path.loginScreen.allowWebLogin; })
+        ($lib.optionalAttrs ($path.loginScreen.attemptsBeforeUserSelection != null) { "org/gnome/login-screen"."allowed-failures" = $lib.gvariant.mkInt32 $path.loginScreen.attemptsBeforeUserSelection; })
+        ($lib.optionalAttrs ($path.loginScreen.logo != null) { "org/gnome/login-screen"."logo" = $path.loginScreen.logo; })
+        ($lib.optionalAttrs ($path.loginScreen.screenReader != null) { "org/gnome/desktop/a11y/applications"."screen-reader-enabled" = $path.loginScreen.screenReader; })
+        ($lib.optionalAttrs ($path.loginScreen.screenKeyboard != null) { "org/gnome/desktop/a11y/applications"."screen-keyboard-enabled" = $path.loginScreen.screenKeyboard; })
+        ($lib.optionalAttrs ($path.loginScreen.textScale != null) { "org/gnome/desktop/interface"."text-scaling-factor" = $lib.gvariant.mkDouble $path.loginScreen.textScale; })
+        ($lib.optionalAttrs ($path.loginScreen.highContrast != null) { "org/gnome/desktop/a11y/interface"."high-contrast" = $path.loginScreen.highContrast; })
+        ($lib.optionalAttrs ($path.loginScreen.clockFormat != null) { "org/gnome/desktop/interface"."clock-format" = $path.loginScreen.clockFormat; })
+        ($lib.optionalAttrs ($path.loginScreen.message != null) { "org/gnome/login-screen" = { banner-message-enable = $path.loginScreen.message != ""; banner-message-source = "settings"; banner-message-text = $path.loginScreen.message; }; })
+      ];
+    });
+
     services.desktopManager.gnome.enable = true;
     services.gnome.gnome-initial-setup.enable = false;
     nixpkgs.overlays = [
@@ -72,29 +121,202 @@ enable = enableOption {
     programs.dconf.profiles.user.databases = [
       {
         settings = {
-          "org/gnome/desktop/notifications".show-in-lock-screen = false;
+          "org/gnome/desktop/interface"."enable-animations" = $path.appearance.animations;
+          "org/gnome/desktop/interface"."text-scaling-factor" = $lib.gvariant.mkDouble ($path.appearance.textScale);
+          "org/gnome/desktop/interface"."font-name" = $path.appearance.interfaceFont;
+          "org/gnome/desktop/interface"."document-font-name" = $path.appearance.documentFont;
+          "org/gnome/desktop/interface"."monospace-font-name" = $path.appearance.monospaceFont;
+          "org/gnome/desktop/interface"."cursor-size" = $lib.gvariant.mkInt32 ($path.appearance.cursorSize);
+          "org/gnome/desktop/interface"."cursor-theme" = $path.appearance.cursorTheme;
+          "org/gnome/desktop/interface"."icon-theme" = $path.appearance.iconTheme;
+          "org/gnome/desktop/interface"."show-battery-percentage" = $path.showBatteryPercentage;
+          "org/gnome/desktop/interface"."clock-format" = $path.clock.format;
+          "org/gnome/desktop/interface"."clock-show-weekday" = $path.clock.showWeekday;
+          "org/gnome/desktop/interface"."clock-show-date" = $path.clock.showDate;
+          "org/gnome/desktop/interface"."clock-show-seconds" = $path.clock.showSeconds;
+          "org/gnome/desktop/interface"."enable-hot-corners" = $path.hotCorners;
+          "org/gnome/desktop/interface"."gtk-enable-primary-paste" = $path.middleClickPaste;
+          "org/gnome/desktop/calendar"."show-weekdate" = $path.clock.showWeekNumbers;
+          "org/gnome/desktop/notifications"."show-banners" = $path.notifications.banners;
+          "org/gnome/desktop/notifications"."show-in-lock-screen" = $path.notifications.onLockScreen;
+          "org/gnome/desktop/privacy"."remember-recent-files" = $path.privacy.rememberRecentFiles;
+          "org/gnome/desktop/privacy"."recent-files-max-age" = $lib.gvariant.mkInt32 ($path.privacy.recentFilesDays);
+          "org/gnome/desktop/privacy"."remove-old-trash-files" = $path.privacy.removeOldTrash;
+          "org/gnome/desktop/privacy"."remove-old-temp-files" = $path.privacy.removeOldTemporaryFiles;
+          "org/gnome/desktop/privacy"."old-files-age" = $lib.gvariant.mkUint32 ($path.privacy.cleanupAgeDays);
+          "org/gnome/desktop/privacy"."report-technical-problems" = $path.privacy.reportTechnicalProblems;
+          "org/gnome/desktop/session"."idle-delay" = $lib.gvariant.mkUint32 ($path.power.screenBlankSeconds);
+          "org/gnome/desktop/screensaver"."lock-enabled" = $path.security.lockScreen;
+          "org/gnome/desktop/screensaver"."lock-delay" = $lib.gvariant.mkUint32 ($path.security.lockDelaySeconds);
+          "org/gnome/desktop/peripherals/mouse"."speed" = $lib.gvariant.mkDouble ($path.mouse.speed);
+          "org/gnome/desktop/peripherals/mouse"."accel-profile" = $path.mouse.acceleration;
+          "org/gnome/desktop/peripherals/mouse"."left-handed" = $path.mouse.leftHanded;
+          "org/gnome/desktop/peripherals/mouse"."natural-scroll" = $path.mouse.naturalScrolling;
+          "org/gnome/desktop/peripherals/touchpad"."tap-to-click" = $path.touchpad.tapToClick;
+          "org/gnome/desktop/peripherals/touchpad"."natural-scroll" = $path.touchpad.naturalScrolling;
+          "org/gnome/desktop/peripherals/touchpad"."speed" = $lib.gvariant.mkDouble ($path.touchpad.speed);
+          "org/gnome/desktop/peripherals/touchpad"."accel-profile" = $path.touchpad.acceleration;
+          "org/gnome/desktop/peripherals/touchpad"."disable-while-typing" = $path.touchpad.disableWhileTyping;
+          "org/gnome/desktop/peripherals/touchpad"."two-finger-scrolling-enabled" = $path.touchpad.twoFingerScrolling;
+          "org/gnome/desktop/peripherals/touchpad"."edge-scrolling-enabled" = $path.touchpad.edgeScrolling;
+          "org/gnome/desktop/peripherals/touchpad"."tap-and-drag" = $path.touchpad.tapAndDrag;
+          "org/gnome/desktop/peripherals/touchpad"."tap-and-drag-lock" = $path.touchpad.dragLock;
+          "org/gnome/desktop/peripherals/touchpad"."click-method" = $path.touchpad.clickMethod;
+          "org/gnome/desktop/peripherals/touchpad"."send-events" = $path.touchpad.whenToUse;
+          "org/gnome/desktop/peripherals/touchpad"."left-handed" = $path.touchpad.leftHanded;
+          "org/gnome/desktop/peripherals/keyboard"."repeat" = $path.keyboard.repeatKeys;
+          "org/gnome/desktop/peripherals/keyboard"."delay" = $lib.gvariant.mkUint32 ($path.keyboard.repeatDelayMilliseconds);
+          "org/gnome/desktop/peripherals/keyboard"."repeat-interval" = $lib.gvariant.mkUint32 ($path.keyboard.repeatIntervalMilliseconds);
+          "org/gnome/desktop/wm/preferences"."focus-mode" = $path.windows.focus;
+          "org/gnome/desktop/wm/preferences"."auto-raise" = $path.windows.raiseOnFocus;
+          "org/gnome/desktop/wm/preferences"."auto-raise-delay" = $lib.gvariant.mkInt32 ($path.windows.raiseDelayMilliseconds);
+          "org/gnome/desktop/wm/preferences"."button-layout" = $path.windows.titlebarButtons;
+          "org/gnome/desktop/wm/preferences"."action-double-click-titlebar" = $path.windows.doubleClickTitlebar;
+          "org/gnome/desktop/wm/preferences"."num-workspaces" = $lib.gvariant.mkInt32 ($path.workspaces.count);
+          "org/gnome/desktop/wm/preferences"."workspace-names" = if $path.workspaces.names == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.workspaces.names;
+          "org/gnome/desktop/a11y"."always-show-universal-access-status" = $path.accessibility.showMenu;
+          "org/gnome/desktop/a11y"."always-show-text-caret" = $path.accessibility.showTextCursor;
+          "org/gnome/desktop/a11y/interface"."show-status-shapes" = $path.accessibility.statusShapes;
+          "org/gnome/desktop/a11y/interface"."reduced-motion" = $path.accessibility.motionPreference;
+          "org/gnome/desktop/a11y/keyboard"."enable" = $path.accessibility.keyboardShortcuts;
+          "org/gnome/desktop/a11y/keyboard"."feature-state-change-beep" = $path.accessibility.announceFeatureChanges;
+          "org/gnome/desktop/a11y/keyboard"."timeout-enable" = $path.accessibility.disableAfterInactivity;
+          "org/gnome/desktop/a11y/keyboard"."disable-timeout" = $lib.gvariant.mkInt32 ($path.accessibility.inactivityTimeoutSeconds);
+          "org/gnome/desktop/a11y/keyboard"."bouncekeys-beep-reject" = $path.accessibility.announceRejectedRepeats;
+          "org/gnome/desktop/a11y/keyboard"."mousekeys-max-speed" = $lib.gvariant.mkInt32 ($path.accessibility.keyboardMouseSpeed);
+          "org/gnome/desktop/a11y/keyboard"."mousekeys-accel-time" = $lib.gvariant.mkInt32 ($path.accessibility.keyboardMouseAccelerationMilliseconds);
+          "org/gnome/desktop/a11y/keyboard"."mousekeys-init-delay" = $lib.gvariant.mkInt32 ($path.accessibility.keyboardMouseDelayMilliseconds);
+          "org/gnome/desktop/a11y/keyboard"."slowkeys-beep-press" = $path.accessibility.announceSlowKeyPress;
+          "org/gnome/desktop/a11y/keyboard"."slowkeys-beep-accept" = $path.accessibility.announceSlowKeyAcceptance;
+          "org/gnome/desktop/a11y/keyboard"."slowkeys-beep-reject" = $path.accessibility.announceSlowKeyRejection;
+          "org/gnome/desktop/a11y/keyboard"."stickykeys-two-key-off" = $path.accessibility.releaseStickyKeysWithTwoKeys;
+          "org/gnome/desktop/a11y/keyboard"."stickykeys-modifier-beep" = $path.accessibility.announceStickyModifiers;
+          "org/gnome/desktop/a11y/keyboard"."togglekeys-enable" = $path.accessibility.announceLockKeys;
+          "org/gnome/desktop/a11y/magnifier"."mouse-tracking" = $path.magnification.pointerTracking;
+          "org/gnome/desktop/a11y/magnifier"."focus-tracking" = $path.magnification.focusTracking;
+          "org/gnome/desktop/a11y/magnifier"."caret-tracking" = $path.magnification.textCursorTracking;
+          "org/gnome/desktop/a11y/magnifier"."screen-position" = $path.magnification.screenPosition;
+          "org/gnome/desktop/a11y/magnifier"."mag-factor" = $lib.gvariant.mkDouble ($path.magnification.zoom);
+          "org/gnome/desktop/a11y/magnifier"."lens-mode" = $path.magnification.followPointerLens;
+          "org/gnome/desktop/a11y/magnifier"."scroll-at-edges" = $path.magnification.scrollBeyondEdges;
+          "org/gnome/desktop/a11y/magnifier"."show-cross-hairs" = $path.magnification.showCrosshairs;
+          "org/gnome/desktop/a11y/magnifier"."cross-hairs-thickness" = $lib.gvariant.mkInt32 ($path.magnification.crosshairThicknessPixels);
+          "org/gnome/desktop/a11y/magnifier"."cross-hairs-color" = $path.magnification.crosshairColor;
+          "org/gnome/desktop/a11y/magnifier"."cross-hairs-opacity" = $lib.gvariant.mkDouble ($path.magnification.crosshairOpacity);
+          "org/gnome/desktop/a11y/magnifier"."cross-hairs-length" = $lib.gvariant.mkInt32 ($path.magnification.crosshairLengthPixels);
+          "org/gnome/desktop/a11y/magnifier"."cross-hairs-clip" = $path.magnification.crosshairCenterGap;
+          "org/gnome/desktop/a11y/magnifier"."invert-lightness" = $path.magnification.invertBrightness;
+          "org/gnome/desktop/a11y/magnifier"."color-saturation" = $lib.gvariant.mkDouble ($path.magnification.colorSaturation);
+          "org/gnome/desktop/a11y/mouse"."dwell-click-enabled" = $path.accessibility.hoverClick;
+          "org/gnome/desktop/a11y/mouse"."dwell-time" = $lib.gvariant.mkDouble ($path.accessibility.hoverClickDelaySeconds);
+          "org/gnome/desktop/a11y/mouse"."dwell-threshold" = $lib.gvariant.mkInt32 ($path.accessibility.hoverClickMovementPixels);
+          "org/gnome/desktop/a11y/mouse"."click-type-window-visible" = $path.accessibility.showHoverClickSelector;
+          "org/gnome/desktop/a11y/mouse"."secondary-click-enabled" = $path.accessibility.holdForRightClick;
+          "org/gnome/desktop/a11y/mouse"."secondary-click-time" = $lib.gvariant.mkDouble ($path.accessibility.rightClickHoldSeconds);
+          "org/gnome/desktop/peripherals/keyboard"."remember-numlock-state" = $path.keyboard.rememberNumberLock;
+          "org/gnome/desktop/peripherals/keyboard"."numlock-state" = $path.keyboard.numberLock;
+          "org/gnome/desktop/wm/preferences"."raise-on-click" = $path.windows.raiseOnClick;
+          "org/gnome/desktop/wm/preferences"."audible-bell" = $path.sound.systemBell;
+          "org/gnome/desktop/wm/preferences"."visual-bell" = $path.accessibility.flashForBell;
+          "org/gnome/desktop/wm/preferences"."visual-bell-type" = $path.accessibility.bellFlashArea;
+          "org/gnome/settings-daemon/plugins/media-keys"."calculator" = if $path.shortcuts.openCalculator == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openCalculator;
+          "org/gnome/settings-daemon/plugins/media-keys"."control-center" = if $path.shortcuts.openSettings == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openSettings;
+          "org/gnome/settings-daemon/plugins/media-keys"."email" = if $path.shortcuts.openEmail == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openEmail;
+          "org/gnome/settings-daemon/plugins/media-keys"."eject" = if $path.shortcuts.ejectMedia == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.ejectMedia;
+          "org/gnome/settings-daemon/plugins/media-keys"."help" = if $path.shortcuts.openHelp == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openHelp;
+          "org/gnome/settings-daemon/plugins/media-keys"."home" = if $path.shortcuts.openHomeFolder == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openHomeFolder;
+          "org/gnome/settings-daemon/plugins/media-keys"."media" = if $path.shortcuts.openMediaPlayer == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openMediaPlayer;
+          "org/gnome/settings-daemon/plugins/media-keys"."next" = if $path.shortcuts.nextTrack == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.nextTrack;
+          "org/gnome/settings-daemon/plugins/media-keys"."pause" = if $path.shortcuts.pausePlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.pausePlayback;
+          "org/gnome/settings-daemon/plugins/media-keys"."play" = if $path.shortcuts.togglePlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.togglePlayback;
+          "org/gnome/settings-daemon/plugins/media-keys"."logout" = if $path.shortcuts.logOut == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.logOut;
+          "org/gnome/settings-daemon/plugins/media-keys"."reboot" = if $path.shortcuts.restart == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.restart;
+          "org/gnome/settings-daemon/plugins/media-keys"."shutdown" = if $path.shortcuts.shutDown == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.shutDown;
+          "org/gnome/settings-daemon/plugins/media-keys"."previous" = if $path.shortcuts.previousTrack == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.previousTrack;
+          "org/gnome/settings-daemon/plugins/media-keys"."screensaver" = if $path.shortcuts.lockScreen == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lockScreen;
+          "org/gnome/settings-daemon/plugins/media-keys"."search" = if $path.shortcuts.search == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.search;
+          "org/gnome/settings-daemon/plugins/media-keys"."stop" = if $path.shortcuts.stopPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.stopPlayback;
+          "org/gnome/settings-daemon/plugins/media-keys"."volume-down" = if $path.shortcuts.lowerVolume == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerVolume;
+          "org/gnome/settings-daemon/plugins/media-keys"."volume-mute" = if $path.shortcuts.muteAudio == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.muteAudio;
+          "org/gnome/settings-daemon/plugins/media-keys"."volume-up" = if $path.shortcuts.raiseVolume == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseVolume;
+          "org/gnome/settings-daemon/plugins/media-keys"."volume-down-quiet" = if $path.shortcuts.lowerVolumeQuietly == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerVolumeQuietly;
+          "org/gnome/settings-daemon/plugins/media-keys"."volume-mute-quiet" = if $path.shortcuts.muteAudioQuietly == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.muteAudioQuietly;
+          "org/gnome/settings-daemon/plugins/media-keys"."volume-up-quiet" = if $path.shortcuts.raiseVolumeQuietly == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseVolumeQuietly;
+          "org/gnome/settings-daemon/plugins/media-keys"."volume-down-precise" = if $path.shortcuts.lowerVolumePrecisely == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerVolumePrecisely;
+          "org/gnome/settings-daemon/plugins/media-keys"."volume-up-precise" = if $path.shortcuts.raiseVolumePrecisely == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseVolumePrecisely;
+          "org/gnome/settings-daemon/plugins/media-keys"."mic-mute" = if $path.shortcuts.muteMicrophone == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.muteMicrophone;
+          "org/gnome/settings-daemon/plugins/media-keys"."www" = if $path.shortcuts.openBrowser == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.openBrowser;
+          "org/gnome/settings-daemon/plugins/media-keys"."screenreader" = if $path.shortcuts.toggleScreenReader == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleScreenReader;
+          "org/gnome/settings-daemon/plugins/media-keys"."on-screen-keyboard" = if $path.shortcuts.toggleScreenKeyboard == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleScreenKeyboard;
+          "org/gnome/settings-daemon/plugins/media-keys"."increase-text-size" = if $path.shortcuts.increaseTextSize == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.increaseTextSize;
+          "org/gnome/settings-daemon/plugins/media-keys"."decrease-text-size" = if $path.shortcuts.decreaseTextSize == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.decreaseTextSize;
+          "org/gnome/settings-daemon/plugins/media-keys"."toggle-contrast" = if $path.shortcuts.toggleHighContrast == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleHighContrast;
+          "org/gnome/settings-daemon/plugins/media-keys"."magnifier" = if $path.shortcuts.toggleMagnifier == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleMagnifier;
+          "org/gnome/settings-daemon/plugins/media-keys"."magnifier-zoom-in" = if $path.shortcuts.zoomIn == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.zoomIn;
+          "org/gnome/settings-daemon/plugins/media-keys"."magnifier-zoom-out" = if $path.shortcuts.zoomOut == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.zoomOut;
+          "org/gnome/settings-daemon/plugins/media-keys"."touchpad-toggle" = if $path.shortcuts.toggleTouchpad == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleTouchpad;
+          "org/gnome/settings-daemon/plugins/media-keys"."playback-rewind" = if $path.shortcuts.rewindPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.rewindPlayback;
+          "org/gnome/settings-daemon/plugins/media-keys"."playback-forward" = if $path.shortcuts.fastForwardPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.fastForwardPlayback;
+          "org/gnome/settings-daemon/plugins/media-keys"."playback-repeat" = if $path.shortcuts.toggleRepeatPlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleRepeatPlayback;
+          "org/gnome/settings-daemon/plugins/media-keys"."playback-random" = if $path.shortcuts.toggleShufflePlayback == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleShufflePlayback;
+          "org/gnome/settings-daemon/plugins/media-keys"."rotate-video-lock" = if $path.shortcuts.toggleScreenRotation == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleScreenRotation;
+          "org/gnome/settings-daemon/plugins/media-keys"."keyboard-brightness-up" = if $path.shortcuts.raiseKeyboardBrightness == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.raiseKeyboardBrightness;
+          "org/gnome/settings-daemon/plugins/media-keys"."keyboard-brightness-down" = if $path.shortcuts.lowerKeyboardBrightness == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.lowerKeyboardBrightness;
+          "org/gnome/settings-daemon/plugins/media-keys"."keyboard-brightness-toggle" = if $path.shortcuts.toggleKeyboardBacklight == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleKeyboardBacklight;
+          "org/gnome/settings-daemon/plugins/media-keys"."battery-status" = if $path.shortcuts.showBatteryStatus == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.showBatteryStatus;
+          "org/gnome/settings-daemon/plugins/media-keys"."rfkill" = if $path.shortcuts.toggleAirplaneMode == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleAirplaneMode;
+          "org/gnome/settings-daemon/plugins/media-keys"."rfkill-bluetooth" = if $path.shortcuts.toggleBluetooth == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.shortcuts.toggleBluetooth;
+          "org/gnome/desktop/a11y/applications"."screen-reader-enabled" = $path.accessibility.screenReader;
+          "org/gnome/desktop/a11y/applications"."screen-keyboard-enabled" = $path.accessibility.screenKeyboard;
+          "org/gnome/desktop/a11y/applications"."screen-magnifier-enabled" = $path.accessibility.magnifier;
+          "org/gnome/desktop/a11y/keyboard"."stickykeys-enable" = $path.accessibility.stickyKeys;
+          "org/gnome/desktop/a11y/keyboard"."slowkeys-enable" = $path.accessibility.slowKeys;
+          "org/gnome/desktop/a11y/keyboard"."slowkeys-delay" = $lib.gvariant.mkInt32 ($path.accessibility.slowKeyDelayMilliseconds);
+          "org/gnome/desktop/a11y/keyboard"."bouncekeys-enable" = $path.accessibility.ignoreRepeatedKeys;
+          "org/gnome/desktop/a11y/keyboard"."bouncekeys-delay" = $lib.gvariant.mkInt32 ($path.accessibility.repeatKeyDelayMilliseconds);
+          "org/gnome/desktop/a11y/keyboard"."mousekeys-enable" = $path.accessibility.keyboardMouse;
+          "org/gnome/desktop/a11y/interface"."high-contrast" = $path.accessibility.highContrast;
+          "org/gnome/desktop/sound"."event-sounds" = $path.sound.eventSounds;
+          "org/gnome/desktop/sound"."input-feedback-sounds" = $path.sound.inputFeedback;
+          "org/gnome/desktop/sound"."theme-name" = $path.sound.theme;
+          "org/gnome/desktop/media-handling"."automount" = $path.removableMedia.automount;
+          "org/gnome/desktop/media-handling"."automount-open" = $path.removableMedia.openFolder;
+          "org/gnome/desktop/media-handling"."autorun-never" = $path.removableMedia.neverAutorun;
+          "org/gnome/desktop/background" = {
+            picture-options = $path.wallpaper.layout;
+            primary-color = $path.wallpaper.primaryColor;
+            secondary-color = $path.wallpaper.secondaryColor;
+            color-shading-type = $path.wallpaper.shading;
+          } // ($lib.optionalAttrs ($path.wallpaper.lightImage != null) {
+            picture-uri = $path.wallpaper.lightImage;
+          }) // ($lib.optionalAttrs ($path.wallpaper.darkImage != null) {
+            picture-uri-dark = $path.wallpaper.darkImage;
+          });
+          "org/gnome/settings-daemon/plugins/color"."night-light-enabled" = $path.nightLight.enable;
+          "org/gnome/settings-daemon/plugins/color"."night-light-temperature" = $lib.gvariant.mkUint32 ($path.nightLight.temperature);
+          "org/gnome/settings-daemon/plugins/color"."night-light-schedule-automatic" = $path.nightLight.automaticSchedule;
+          "org/gnome/settings-daemon/plugins/color"."night-light-schedule-from" = $lib.gvariant.mkDouble ($path.nightLight.startHour);
+          "org/gnome/settings-daemon/plugins/color"."night-light-schedule-to" = $lib.gvariant.mkDouble ($path.nightLight.endHour);
+          "org/gnome/settings-daemon/plugins/power"."idle-dim" = $path.power.dimWhenIdle;
+          "org/gnome/settings-daemon/plugins/power"."sleep-inactive-battery-type" = $path.power.batteryIdleAction;
+          "org/gnome/settings-daemon/plugins/power"."sleep-inactive-battery-timeout" = $lib.gvariant.mkInt32 ($path.power.batteryIdleSeconds);
+          "org/gnome/settings-daemon/plugins/power"."sleep-inactive-ac-type" = $path.power.pluggedInIdleAction;
+          "org/gnome/settings-daemon/plugins/power"."sleep-inactive-ac-timeout" = $lib.gvariant.mkInt32 ($path.power.pluggedInIdleSeconds);
+          "org/gnome/settings-daemon/plugins/power"."ambient-enabled" = $path.power.ambientBrightness;
           "org/gnome/desktop/interface" = {
             accent-color = $path.defaultAccentColor;
             color-scheme = if $path.defaultDarkMode then "prefer-dark" else "prefer-light";
-            enable-hot-corners = false;
-            gtk-enable-primary-paste = false;
-            clock-show-weekday = true;
-            show-battery-percentage = true;
           };
-          "org/gnome/desktop/peripherals/mouse".accel-profile = "flat";
           "org/gnome/shell" = {
             disable-user-extensions = false;
             favorite-apps = $path.dockItems;
           };
           "org/gnome/desktop/wm/preferences" = {
-            edge-tiling = false;
-            action-double-click-titlebar = "toggle-maximize";
-            button-layout = ":close";
           };
           "org/gnome/mutter" = {
-            edge-tiling = false;
-            center-new-windows = true;
-            dynamic-workspaces = true;
+            edge-tiling = $path.windows.edgeTiling;
+            center-new-windows = $path.windows.centerNewWindows;
+            dynamic-workspaces = $path.workspaces.dynamic;
             experimental-features = [
               "scale-monitor-framebuffer"
               "xwayland-native-scaling"
@@ -112,6 +334,10 @@ enable = enableOption {
 
 defaultAccentColor = {
   _meta = {
+    name = "Primary accent color for the interface";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
     type = $type.enum [ "blue" "teal" "purple" "red" "orange" "yellow" "green" "pink" "grey" ];
     default = "purple";
     summary = "Primary accent color for the interface";
@@ -121,6 +347,10 @@ defaultAccentColor = {
 
 defaultDarkMode = {
   _meta = {
+    name = "Enable system-wide dark mode";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
     type = $type.boolean;
     default = true;
     summary = "Enable system-wide dark mode";
@@ -130,6 +360,10 @@ defaultDarkMode = {
 
 fileIndexing.enable = {
   _meta = {
+    name = "Enable Tracker file indexing";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
     type = $type.boolean;
     default = true;
     summary = "Enable Tracker file indexing";
@@ -139,6 +373,10 @@ fileIndexing.enable = {
 
 dockItems = {
   _meta = {
+    name = "Default favorite applications in the dock";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
     type = $type.list [ $type.string ];
     default = [
       "firefox.desktop"
@@ -153,6 +391,10 @@ dockItems = {
 
 extensionPackages = {
   _meta = {
+    name = "GNOME Shell extension packages";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
     type = $type.list [ $type.package ];
     default = [ ];
     summary = "GNOME Shell extension packages";
@@ -162,6 +404,10 @@ extensionPackages = {
 
 extensionUuids = {
   _meta = {
+    name = "Enabled GNOME Shell extension UUIDs";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
     type = $type.list [ $type.string ];
     default = [ ];
     summary = "Enabled GNOME Shell extension UUIDs";
@@ -171,6 +417,11 @@ extensionUuids = {
 
 extraPackages.enable = {
   _meta = {
+    name = "Install extra curated GNOME applications";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    description = ''Install extra curated GNOME applications.'';
     type = $type.boolean;
     default = false;
     summary = "Install extra curated GNOME applications";
@@ -179,6 +430,10 @@ extraPackages.enable = {
 
 excludeGnomeConsole = {
   _meta = {
+    name = "Remove the default GNOME Console";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
     type = $type.boolean;
     default = false;
     summary = "Remove the default GNOME Console";
@@ -188,9 +443,2748 @@ excludeGnomeConsole = {
 
 variableRefreshRate = {
   _meta = {
+    name = "Enable Variable Refresh Rate support";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
     type = $type.boolean;
     default = true;
     summary = "Enable Variable Refresh Rate support";
     description = ''Activates experimental VRR support in Mutter.'';
   };
+};
+
+# User-facing desktop preferences. Values remain editable in GNOME Settings.
+
+appearance.animations = {
+  _meta = {
+    name = "Animations";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Animations";
+    description = ''Whether animations should be displayed. Note: This is a global key, it changes the behaviour of the window manager, the panel etc.'';
+  };
+};
+
+appearance.textScale = {
+  _meta = {
+    name = "Text scale";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 1.0;
+    summary = "Text scale";
+    description = ''Factor used to enlarge or reduce text display, without changing font size.'';
+  };
+};
+
+appearance.interfaceFont = {
+  _meta = {
+    name = "Interface font";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "Adwaita Sans 11";
+    summary = "Interface font";
+    description = ''Name of the default font used by gtk+.'';
+  };
+};
+
+appearance.documentFont = {
+  _meta = {
+    name = "Document font";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "Adwaita Sans 12";
+    summary = "Document font";
+    description = ''Name of the default font used for reading documents.'';
+  };
+};
+
+appearance.monospaceFont = {
+  _meta = {
+    name = "Monospace font";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "Adwaita Mono 11";
+    summary = "Monospace font";
+    description = ''Name of a monospaced (fixed-width) font for use in locations like terminals.'';
+  };
+};
+
+appearance.cursorSize = {
+  _meta = {
+    name = "Cursor size";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 24;
+    summary = "Cursor size";
+    description = ''Size of the cursor used as cursor theme.'';
+  };
+};
+
+appearance.cursorTheme = {
+  _meta = {
+    name = "Cursor theme";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "Adwaita";
+    summary = "Cursor theme";
+    description = ''Cursor theme name. Used only by Xservers that support the Xcursor extension.'';
+  };
+};
+
+appearance.iconTheme = {
+  _meta = {
+    name = "Icon theme";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "Adwaita";
+    summary = "Icon theme";
+    description = ''Icon theme to use for the panel, nautilus etc.'';
+  };
+};
+
+showBatteryPercentage = {
+  _meta = {
+    name = "Show battery percentage";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Show battery percentage";
+    description = ''If true, display battery percentage in the status menu, in addition to the icon.'';
+  };
+};
+
+clock.format = {
+  _meta = {
+    name = "Format";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "24h" "12h" ];
+    default = "24h";
+    summary = "Format";
+    description = ''Whether the clock displays in 24h or 12h format'';
+  };
+};
+
+clock.showWeekday = {
+  _meta = {
+    name = "Show weekday";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Show weekday";
+    description = ''If true, display weekday in the clock, in addition to time.'';
+  };
+};
+
+clock.showDate = {
+  _meta = {
+    name = "Show date";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Show date";
+    description = ''If true, display date in the clock, in addition to time.'';
+  };
+};
+
+clock.showSeconds = {
+  _meta = {
+    name = "Show seconds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Show seconds";
+    description = ''If true, display seconds in the clock.'';
+  };
+};
+
+hotCorners = {
+  _meta = {
+    name = "Hot corners";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Hot corners";
+    description = ''If true, the activities overview can be accessed by moving the mouse to the top-left corner.'';
+  };
+};
+
+middleClickPaste = {
+  _meta = {
+    name = "Middle click paste";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Middle click paste";
+    description = ''If true, gtk+ uses the primary paste selection, usually triggered by a middle mouse button click.'';
+  };
+};
+
+clock.showWeekNumbers = {
+  _meta = {
+    name = "Show week numbers";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Show week numbers";
+    description = ''If true, display the ISO week date in the calendar.'';
+  };
+};
+
+notifications.banners = {
+  _meta = {
+    name = "Banners";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Banners";
+    description = ''Whether notification banners are visible for application notifications.'';
+  };
+};
+
+notifications.onLockScreen = {
+  _meta = {
+    name = "On lock screen";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "On lock screen";
+    description = ''Whether notifications are shown in the lock screen or not.'';
+  };
+};
+
+privacy.rememberRecentFiles = {
+  _meta = {
+    name = "Remember recent files";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Remember recent files";
+    description = ''If FALSE, applications will not remember recently used files.'';
+  };
+};
+
+privacy.recentFilesDays = {
+  _meta = {
+    name = "Recent files days";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = -1;
+    summary = "Recent files days";
+    description = ''Recently used files will be remembered for this many days. If set to 0, recent files will not be remembered; if set to -1, they will be retained indefinitely.'';
+  };
+};
+
+privacy.removeOldTrash = {
+  _meta = {
+    name = "Remove old trash";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Remove old trash";
+    description = ''If TRUE, automatically remove files from the trash when they are older than “old-files-age” days.'';
+  };
+};
+
+privacy.removeOldTemporaryFiles = {
+  _meta = {
+    name = "Remove old temporary files";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Remove old temporary files";
+    description = ''If TRUE, automatically remove temporary files when they are older than “old-files-age” days.'';
+  };
+};
+
+privacy.cleanupAgeDays = {
+  _meta = {
+    name = "Cleanup age days";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 30;
+    summary = "Cleanup age days";
+    description = ''Consider trash and temporary files old after this many days.'';
+  };
+};
+
+privacy.reportTechnicalProblems = {
+  _meta = {
+    name = "Report technical problems";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Report technical problems";
+    description = ''If TRUE, anonymized reports will be sent automatically to the vendor.'';
+  };
+};
+
+power.screenBlankSeconds = {
+  _meta = {
+    name = "Screen blank seconds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 300;
+    summary = "Screen blank seconds";
+    description = ''The number of seconds of inactivity before the session is considered idle.'';
+  };
+};
+
+security.lockScreen = {
+  _meta = {
+    name = "Lock screen";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Lock screen";
+    description = ''Set this to TRUE to lock the screen when the screensaver goes active.'';
+  };
+};
+
+security.lockDelaySeconds = {
+  _meta = {
+    name = "Lock delay seconds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 0;
+    summary = "Lock delay seconds";
+    description = ''The number of seconds after screensaver activation before locking the screen.'';
+  };
+};
+
+mouse.speed = {
+  _meta = {
+    name = "Speed";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 0.0;
+    summary = "Speed";
+    description = ''Pointer speed for mice. Accepted values are in the [-1..1] range (from “unaccelerated” to “fast”). A value of 0 is the system default.'';
+  };
+};
+
+mouse.acceleration = {
+  _meta = {
+    name = "Acceleration";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "default" "flat" "adaptive" ];
+    default = "flat";
+    summary = "Acceleration";
+    description = ''Acceleration profile used for connected mice. The acceleration profile can be set to either default (“default”) which uses the default acceleration profile for each device, flat (“flat”), which accelerates by a device specific constant factor derived from the configured pointer speed, or adaptive (“adaptive”) which adapts the acceleration depending on the mouse movement. If a mouse doesn’t support the configured profile, “default” will be used.'';
+  };
+};
+
+mouse.leftHanded = {
+  _meta = {
+    name = "Left handed";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Left handed";
+    description = ''Swap left and right mouse buttons for left-handed mice.'';
+  };
+};
+
+mouse.naturalScrolling = {
+  _meta = {
+    name = "Natural scrolling";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Natural scrolling";
+    description = ''Set this to TRUE to enable natural (reverse) scrolling for mice.'';
+  };
+};
+
+touchpad.tapToClick = {
+  _meta = {
+    name = "Tap to click";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Tap to click";
+    description = ''Set this to TRUE to be able to send mouse clicks by tapping on the touchpad.'';
+  };
+};
+
+touchpad.naturalScrolling = {
+  _meta = {
+    name = "Natural scrolling";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Natural scrolling";
+    description = ''Set this to TRUE to enable natural (reverse) scrolling for touchpads.'';
+  };
+};
+
+touchpad.speed = {
+  _meta = {
+    name = "Speed";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 0.0;
+    summary = "Speed";
+    description = ''Pointer speed for the touchpad. Accepted values are in the [-1..1] range (from “unaccelerated” to “fast”). A value of 0 is the system default.'';
+  };
+};
+
+touchpad.acceleration = {
+  _meta = {
+    name = "Acceleration";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "default" "flat" "adaptive" ];
+    default = "default";
+    summary = "Acceleration";
+    description = ''Acceleration profile used for connected touchpads. The acceleration profile can be set to either default (“default”) which uses the default acceleration profile for each device, flat (“flat”), which accelerates by a device specific constant factor derived from the configured pointer speed, or adaptive (“adaptive”) which adapts the acceleration depending on the mouse movement. If a touchpad doesn’t support the configured profile, “default” will be used.'';
+  };
+};
+
+touchpad.disableWhileTyping = {
+  _meta = {
+    name = "Disable while typing";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Disable while typing";
+    description = ''When enabled, touchpads will be disabled while typing on the keyboard.'';
+  };
+};
+
+touchpad.twoFingerScrolling = {
+  _meta = {
+    name = "Two finger scrolling";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Two finger scrolling";
+    description = ''When enabled, touchpads that support two-finger scrolling will have that feature enabled.'';
+  };
+};
+
+touchpad.edgeScrolling = {
+  _meta = {
+    name = "Edge scrolling";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Edge scrolling";
+    description = ''When enabled, touchpads that support edge scrolling will have that feature enabled.'';
+  };
+};
+
+touchpad.tapAndDrag = {
+  _meta = {
+    name = "Tap and drag";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Tap and drag";
+    description = ''Set this to TRUE to be able to start a drag by tapping and immediately moving the finger that’s now pressed on the touchpad.'';
+  };
+};
+
+touchpad.dragLock = {
+  _meta = {
+    name = "Drag lock";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Drag lock";
+    description = ''Set this to TRUE to lock the dragging process within a short timeout when the finger is lifted on the touchpad and the tap-and-drag setting is enabled.'';
+  };
+};
+
+touchpad.clickMethod = {
+  _meta = {
+    name = "Click method";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "default" "none" "areas" "fingers" ];
+    default = "fingers";
+    summary = "Click method";
+    description = ''How to generate software-emulated buttons, either disabled (“none”), through specific areas (“areas”), number of fingers (“fingers”) or left as hardware default (“default”).'';
+  };
+};
+
+touchpad.whenToUse = {
+  _meta = {
+    name = "When to use";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "enabled" "disabled" "disabled-on-external-mouse" ];
+    default = "enabled";
+    summary = "When to use";
+    description = ''Defines the situations in which the touchpad is enabled.'';
+  };
+};
+
+touchpad.leftHanded = {
+  _meta = {
+    name = "Left handed";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "right" "left" "mouse" ];
+    default = "mouse";
+    summary = "Left handed";
+    description = ''Swap left and right mouse buttons for left-handed mice with “left”, “right” for right-handed, “mouse” to follow the mouse setting.'';
+  };
+};
+
+keyboard.repeatKeys = {
+  _meta = {
+    name = "Repeat keys";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Repeat keys";
+    description = ''Set this to TRUE to enable keyboard repeat.'';
+  };
+};
+
+keyboard.repeatDelayMilliseconds = {
+  _meta = {
+    name = "Repeat delay milliseconds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 500;
+    summary = "Repeat delay milliseconds";
+    description = ''Initial key repeat delay in milliseconds.'';
+  };
+};
+
+keyboard.repeatIntervalMilliseconds = {
+  _meta = {
+    name = "Repeat interval milliseconds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 30;
+    summary = "Repeat interval milliseconds";
+    description = ''Delay between repeats in milliseconds.'';
+  };
+};
+
+windows.focus = {
+  _meta = {
+    name = "Focus";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "click" "sloppy" "mouse" ];
+    default = "click";
+    summary = "Focus";
+    description = ''The window focus mode indicates how windows are activated. It has three possible values; “click” means windows must be clicked in order to focus them, “sloppy” means windows are focused when the mouse enters the window, and “mouse” means windows are focused when the mouse enters the window and unfocused when the mouse leaves the window.'';
+  };
+};
+
+windows.raiseOnFocus = {
+  _meta = {
+    name = "Raise on focus";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Raise on focus";
+    description = ''If set to true, and the focus mode is either “sloppy” or “mouse” then the focused window will be automatically raised after a delay specified by the auto-raise-delay key. This is not related to clicking on a window to raise it, nor to entering a window during drag-and-drop.'';
+  };
+};
+
+windows.raiseDelayMilliseconds = {
+  _meta = {
+    name = "Raise delay milliseconds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 500;
+    summary = "Raise delay milliseconds";
+    description = ''The time delay before raising a window if auto-raise is set to true. The delay is given in thousandths of a second.'';
+  };
+};
+
+windows.titlebarButtons = {
+  _meta = {
+    name = "Titlebar buttons";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = ":close";
+    summary = "Titlebar buttons";
+    description = ''Arrangement of buttons on the titlebar. The value should be a string, such as “menu:minimize,maximize,spacer,close”; the colon separates the left corner of the window from the right corner, and the button names are comma-separated. Duplicate buttons are not allowed. Unknown button names are silently ignored so that buttons can be added in future metacity versions without breaking older versions. A special spacer tag can be used to insert some space between two adjacent buttons.'';
+  };
+};
+
+windows.doubleClickTitlebar = {
+  _meta = {
+    name = "Double click titlebar";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "toggle-shade" "toggle-maximize" "toggle-maximize-horizontally" "toggle-maximize-vertically" "minimize" "none" "lower" "menu" ];
+    default = "toggle-maximize";
+    summary = "Double click titlebar";
+    description = ''This option determines the effects of double-clicking on the title bar. Current valid options are “toggle-maximize” which will maximize/unmaximize the window, “toggle-maximize-horizontally” and “toggle-maximize-vertically” which will maximize/unmaximize the window in that direction only, “minimize” which will minimize the window, “menu” which will display the window menu, “lower” which will put the window behind all the others, and “none” which will not do anything.'';
+  };
+};
+
+workspaces.count = {
+  _meta = {
+    name = "Count";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 4;
+    summary = "Count";
+    description = ''Number of workspaces. Must be more than zero, and has a fixed maximum to prevent making the desktop unusable by accidentally asking for too many workspaces.'';
+  };
+};
+
+workspaces.names = {
+  _meta = {
+    name = "Names";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+    summary = "Names";
+    description = ''Defines the names that should be assigned to workspaces. If the list is too long for the current number of workspaces, names in excess will be ignored. If the list is too short, or includes empty names, missing values will be replaced with the default (“Workspace N”).'';
+  };
+};
+
+accessibility.screenReader = {
+  _meta = {
+    name = "Screen reader";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Screen reader";
+    description = ''Whether the screen reader is turned on.'';
+  };
+};
+
+accessibility.screenKeyboard = {
+  _meta = {
+    name = "Screen keyboard";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Screen keyboard";
+    description = ''Whether the on-screen keyboard is turned on.'';
+  };
+};
+
+accessibility.magnifier = {
+  _meta = {
+    name = "Magnifier";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Magnifier";
+    description = ''Whether the screen magnifier is turned on.'';
+  };
+};
+
+accessibility.stickyKeys = {
+  _meta = {
+    name = "Sticky keys";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Sticky keys";
+    description = ''Whether the sticky keys accessibility feature is turned on.'';
+  };
+};
+
+accessibility.slowKeys = {
+  _meta = {
+    name = "Slow keys";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Slow keys";
+    description = ''Whether the “Slow Keys” accessibility feature is turned on.'';
+  };
+};
+
+accessibility.slowKeyDelayMilliseconds = {
+  _meta = {
+    name = "Slow key delay milliseconds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 300;
+    summary = "Slow key delay milliseconds";
+    description = ''Do not accept a key as being pressed unless held for this many milliseconds.'';
+  };
+};
+
+accessibility.ignoreRepeatedKeys = {
+  _meta = {
+    name = "Ignore repeated keys";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Ignore repeated keys";
+    description = ''Whether the “Bounce Keys” keyboard accessibility feature is turned on.'';
+  };
+};
+
+accessibility.repeatKeyDelayMilliseconds = {
+  _meta = {
+    name = "Repeat key delay milliseconds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 300;
+    summary = "Repeat key delay milliseconds";
+    description = ''Ignore multiple presses of the same key within this many milliseconds.'';
+  };
+};
+
+accessibility.keyboardMouse = {
+  _meta = {
+    name = "Keyboard mouse";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Keyboard mouse";
+    description = ''Whether the “Mouse Keys” accessibility feature is turned on.'';
+  };
+};
+
+accessibility.highContrast = {
+  _meta = {
+    name = "High contrast";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "High contrast";
+    description = ''Whether to use the high contrast style.'';
+  };
+};
+
+sound.eventSounds = {
+  _meta = {
+    name = "Event sounds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Event sounds";
+    description = ''Whether to play sounds on user events.'';
+  };
+};
+
+sound.inputFeedback = {
+  _meta = {
+    name = "Input feedback";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Input feedback";
+    description = ''Whether to play sounds on input events.'';
+  };
+};
+
+sound.theme = {
+  _meta = {
+    name = "Theme";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "freedesktop";
+    summary = "Theme";
+    description = ''The XDG sound theme to use for event sounds.'';
+  };
+};
+
+removableMedia.automount = {
+  _meta = {
+    name = "Automount";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Automount";
+    description = ''If set to true, then Nautilus will automatically mount media such as user-visible hard disks and removable media on start-up and media insertion.'';
+  };
+};
+
+removableMedia.openFolder = {
+  _meta = {
+    name = "Open folder";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Open folder";
+    description = ''If set to true, then Nautilus will automatically open a folder when media is automounted. This only applies to media where no known x-content/* type was detected; for media where a known x-content type is detected, the user configurable action will be taken instead.'';
+  };
+};
+
+removableMedia.neverAutorun = {
+  _meta = {
+    name = "Never autorun";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Never autorun";
+    description = ''If set to true, then Nautilus will never prompt nor autorun/autostart programs when a medium is inserted.'';
+  };
+};
+
+wallpaper.lightImage = {
+  _meta = {
+    name = "Light image";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ $type.string $type.null ];
+    default = null;
+    summary = "Light image";
+    description = ''Local file:// URI for the background image. Null preserves the distribution wallpaper.'';
+  };
+};
+
+wallpaper.darkImage = {
+  _meta = {
+    name = "Dark image";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ $type.string $type.null ];
+    default = null;
+    summary = "Dark image";
+    description = ''Local file:// URI for the background image. Null preserves the distribution wallpaper.'';
+  };
+};
+
+wallpaper.layout = {
+  _meta = {
+    name = "Layout";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "none" "wallpaper" "centered" "scaled" "stretched" "zoom" "spanned" ];
+    default = "zoom";
+    summary = "Layout";
+    description = ''Determines how the image set by wallpaper_filename is rendered. Possible values are “none”, “wallpaper”, “centered”, “scaled”, “stretched”, “zoom”, “spanned”.'';
+  };
+};
+
+wallpaper.primaryColor = {
+  _meta = {
+    name = "Primary color";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "#023c88";
+    summary = "Primary color";
+    description = ''Left or Top color when drawing gradients, or the solid color.'';
+  };
+};
+
+wallpaper.secondaryColor = {
+  _meta = {
+    name = "Secondary color";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "#5789ca";
+    summary = "Secondary color";
+    description = ''Right or Bottom color when drawing gradients, not used for solid color.'';
+  };
+};
+
+wallpaper.shading = {
+  _meta = {
+    name = "Shading";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "solid" "vertical" "horizontal" ];
+    default = "solid";
+    summary = "Shading";
+    description = ''How to shade the background color. Possible values are “horizontal”, “vertical”, and “solid”.'';
+  };
+};
+
+nightLight.enable = {
+  _meta = {
+    name = "Enable";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Enable";
+    description = ''Night light mode changes the color temperature of your display when the sun has gone down or at preset times.'';
+  };
+};
+
+nightLight.temperature = {
+  _meta = {
+    name = "Temperature";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 2700;
+    summary = "Temperature";
+    description = ''This temperature in Kelvin is used to modify the screen tones when night light mode is enabled. Higher values are bluer, lower redder.'';
+  };
+};
+
+nightLight.automaticSchedule = {
+  _meta = {
+    name = "Automatic schedule";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Automatic schedule";
+    description = ''Calculate the sunrise and sunset times automatically, from the current location.'';
+  };
+};
+
+nightLight.startHour = {
+  _meta = {
+    name = "Start hour";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 20.0;
+    summary = "Start hour";
+    description = ''When “night-light-schedule-automatic” is disabled, use this start time in hours from midnight.'';
+  };
+};
+
+nightLight.endHour = {
+  _meta = {
+    name = "End hour";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 6.0;
+    summary = "End hour";
+    description = ''When “night-light-schedule-automatic” is disabled, use this end time in hours from midnight.'';
+  };
+};
+
+power.dimWhenIdle = {
+  _meta = {
+    name = "Dim when idle";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Dim when idle";
+    description = ''If the screen should be dimmed to save power when the computer is idle.'';
+  };
+};
+
+power.batteryIdleAction = {
+  _meta = {
+    name = "Battery idle action";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "blank" "suspend" "shutdown" "hibernate" "interactive" "nothing" "logout" ];
+    default = "suspend";
+    summary = "Battery idle action";
+    description = ''The type of sleeping that should be performed when the computer is inactive.'';
+  };
+};
+
+power.batteryIdleSeconds = {
+  _meta = {
+    name = "Battery idle seconds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 900;
+    summary = "Battery idle seconds";
+    description = ''The amount of time in seconds the computer on battery power needs to be inactive before it goes to sleep. A value of 0 means never.'';
+  };
+};
+
+power.pluggedInIdleAction = {
+  _meta = {
+    name = "Plugged in idle action";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "blank" "suspend" "shutdown" "hibernate" "interactive" "nothing" "logout" ];
+    default = "suspend";
+    summary = "Plugged in idle action";
+    description = ''The type of sleeping that should be performed when the computer is inactive.'';
+  };
+};
+
+power.pluggedInIdleSeconds = {
+  _meta = {
+    name = "Plugged in idle seconds";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 900;
+    summary = "Plugged in idle seconds";
+    description = ''The amount of time in seconds the computer on AC power needs to be inactive before it goes to sleep. A value of 0 means never.'';
+  };
+};
+
+power.ambientBrightness = {
+  _meta = {
+    name = "Ambient brightness";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Ambient brightness";
+    description = ''If the ambient light sensor functionality is enabled.'';
+  };
+};
+
+
+workspaces.dynamic = {
+  _meta = {
+    name = "Create workspaces automatically as windows are opened";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Create workspaces automatically as windows are opened";
+    description = ''Create workspaces automatically as windows are opened. Disable this to use workspaces.count.'';
+  };
+};
+
+windows.centerNewWindows = {
+  _meta = {
+    name = "Place new windows in the center of the display";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+    summary = "Place new windows in the center of the display";
+    description = ''Place new windows in the center of the display.'';
+  };
+};
+
+windows.edgeTiling = {
+  _meta = {
+    name = "Tile windows when dragged to the screen edge";
+    tags = [ "desktop" "gnome" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+    summary = "Tile windows when dragged to the screen edge";
+    description = ''Tile windows when dragged to the screen edge.'';
+  };
+};
+
+accessibility._meta = {
+  name = "Accessibility";
+  summary = "GNOME accessibility preferences";
+  description = ''Configure accessibility behavior for the GNOME desktop.'';
+  tags = [ "gnome" "accessibility" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+appearance._meta = {
+  name = "Appearance";
+  summary = "GNOME appearance preferences";
+  description = ''Configure appearance behavior for the GNOME desktop.'';
+  tags = [ "gnome" "appearance" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+clock._meta = {
+  name = "Clock";
+  summary = "GNOME clock preferences";
+  description = ''Configure clock behavior for the GNOME desktop.'';
+  tags = [ "gnome" "clock" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+keyboard._meta = {
+  name = "Keyboard";
+  summary = "GNOME keyboard preferences";
+  description = ''Configure keyboard behavior for the GNOME desktop.'';
+  tags = [ "gnome" "keyboard" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+mouse._meta = {
+  name = "Mouse";
+  summary = "GNOME mouse preferences";
+  description = ''Configure mouse behavior for the GNOME desktop.'';
+  tags = [ "gnome" "mouse" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+nightLight._meta = {
+  name = "NightLight";
+  summary = "GNOME nightLight preferences";
+  description = ''Configure nightLight behavior for the GNOME desktop.'';
+  tags = [ "gnome" "nightLight" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+notifications._meta = {
+  name = "Notifications";
+  summary = "GNOME notifications preferences";
+  description = ''Configure notifications behavior for the GNOME desktop.'';
+  tags = [ "gnome" "notifications" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+power._meta = {
+  name = "Power";
+  summary = "GNOME power preferences";
+  description = ''Configure power behavior for the GNOME desktop.'';
+  tags = [ "gnome" "power" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+privacy._meta = {
+  name = "Privacy";
+  summary = "GNOME privacy preferences";
+  description = ''Configure privacy behavior for the GNOME desktop.'';
+  tags = [ "gnome" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+removableMedia._meta = {
+  name = "RemovableMedia";
+  summary = "GNOME removableMedia preferences";
+  description = ''Configure removableMedia behavior for the GNOME desktop.'';
+  tags = [ "gnome" "removableMedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+security._meta = {
+  name = "Security";
+  summary = "GNOME security preferences";
+  description = ''Configure security behavior for the GNOME desktop.'';
+  tags = [ "gnome" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+sound._meta = {
+  name = "Sound";
+  summary = "GNOME sound preferences";
+  description = ''Configure sound behavior for the GNOME desktop.'';
+  tags = [ "gnome" "sound" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+touchpad._meta = {
+  name = "Touchpad";
+  summary = "GNOME touchpad preferences";
+  description = ''Configure touchpad behavior for the GNOME desktop.'';
+  tags = [ "gnome" "touchpad" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+wallpaper._meta = {
+  name = "Wallpaper";
+  summary = "GNOME wallpaper preferences";
+  description = ''Configure wallpaper behavior for the GNOME desktop.'';
+  tags = [ "gnome" "wallpaper" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+windows._meta = {
+  name = "Windows";
+  summary = "GNOME windows preferences";
+  description = ''Configure windows behavior for the GNOME desktop.'';
+  tags = [ "gnome" "windows" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+workspaces._meta = {
+  name = "Workspaces";
+  summary = "GNOME workspaces preferences";
+  description = ''Configure workspaces behavior for the GNOME desktop.'';
+  tags = [ "gnome" "workspaces" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+accessibility.showMenu = {
+  _meta = {
+    name = "Always show the accessibility menu";
+    summary = "Always show the accessibility menu";
+    description = ''Always show the accessibility menu. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.showTextCursor = {
+  _meta = {
+    name = "Show the text cursor even when navigation is inactive";
+    summary = "Show the text cursor even when navigation is inactive";
+    description = ''Show the text cursor even when navigation is inactive. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.statusShapes = {
+  _meta = {
+    name = "Use shapes as well as color to indicate status";
+    summary = "Use shapes as well as color to indicate status";
+    description = ''Use shapes as well as color to indicate status. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.motionPreference = {
+  _meta = {
+    name = "Preferred amount of interface motion";
+    summary = "Preferred amount of interface motion";
+    description = ''Preferred amount of interface motion. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "no-preference" "reduce" ];
+    default = "no-preference";
+  };
+};
+
+accessibility.keyboardShortcuts = {
+  _meta = {
+    name = "Allow keyboard shortcuts to toggle accessibility features";
+    summary = "Allow keyboard shortcuts to toggle accessibility features";
+    description = ''Allow keyboard shortcuts to toggle accessibility features. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.announceFeatureChanges = {
+  _meta = {
+    name = "Beep when keyboard accessibility changes";
+    summary = "Beep when keyboard accessibility changes";
+    description = ''Beep when keyboard accessibility changes. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.disableAfterInactivity = {
+  _meta = {
+    name = "Disable keyboard accessibility after inactivity";
+    summary = "Disable keyboard accessibility after inactivity";
+    description = ''Disable keyboard accessibility after inactivity. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.inactivityTimeoutSeconds = {
+  _meta = {
+    name = "Seconds of inactivity before disabling keyboard accessibility";
+    summary = "Seconds of inactivity before disabling keyboard accessibility";
+    description = ''Seconds of inactivity before disabling keyboard accessibility. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 200;
+  };
+};
+
+accessibility.announceRejectedRepeats = {
+  _meta = {
+    name = "Beep when an accidental repeated key is ignored";
+    summary = "Beep when an accidental repeated key is ignored";
+    description = ''Beep when an accidental repeated key is ignored. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.keyboardMouseSpeed = {
+  _meta = {
+    name = "Maximum keyboard-controlled pointer speed in pixels per second";
+    summary = "Maximum keyboard-controlled pointer speed in pixels per second";
+    description = ''Maximum keyboard-controlled pointer speed in pixels per second. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 10;
+  };
+};
+
+accessibility.keyboardMouseAccelerationMilliseconds = {
+  _meta = {
+    name = "Time for the keyboard-controlled pointer to reach full speed";
+    summary = "Time for the keyboard-controlled pointer to reach full speed";
+    description = ''Time for the keyboard-controlled pointer to reach full speed. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 300;
+  };
+};
+
+accessibility.keyboardMouseDelayMilliseconds = {
+  _meta = {
+    name = "Delay before moving the pointer with the keyboard";
+    summary = "Delay before moving the pointer with the keyboard";
+    description = ''Delay before moving the pointer with the keyboard. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 300;
+  };
+};
+
+accessibility.announceSlowKeyPress = {
+  _meta = {
+    name = "Beep when a slow key is first pressed";
+    summary = "Beep when a slow key is first pressed";
+    description = ''Beep when a slow key is first pressed. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.announceSlowKeyAcceptance = {
+  _meta = {
+    name = "Beep when a slow key is accepted";
+    summary = "Beep when a slow key is accepted";
+    description = ''Beep when a slow key is accepted. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.announceSlowKeyRejection = {
+  _meta = {
+    name = "Beep when a slow key is rejected";
+    summary = "Beep when a slow key is rejected";
+    description = ''Beep when a slow key is rejected. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.releaseStickyKeysWithTwoKeys = {
+  _meta = {
+    name = "Disable sticky keys when two keys are pressed together";
+    summary = "Disable sticky keys when two keys are pressed together";
+    description = ''Disable sticky keys when two keys are pressed together. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.announceStickyModifiers = {
+  _meta = {
+    name = "Beep when a sticky modifier key is pressed";
+    summary = "Beep when a sticky modifier key is pressed";
+    description = ''Beep when a sticky modifier key is pressed. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.announceLockKeys = {
+  _meta = {
+    name = "Beep when Caps Lock or Num Lock changes";
+    summary = "Beep when Caps Lock or Num Lock changes";
+    description = ''Beep when Caps Lock or Num Lock changes. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+magnification.pointerTracking = {
+  _meta = {
+    name = "How the magnified view follows the pointer";
+    summary = "How the magnified view follows the pointer";
+    description = ''How the magnified view follows the pointer. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "none" "centered" "proportional" "push" ];
+    default = "proportional";
+  };
+};
+
+magnification.focusTracking = {
+  _meta = {
+    name = "How the magnified view follows keyboard focus";
+    summary = "How the magnified view follows keyboard focus";
+    description = ''How the magnified view follows keyboard focus. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "none" "centered" "proportional" "push" ];
+    default = "proportional";
+  };
+};
+
+magnification.textCursorTracking = {
+  _meta = {
+    name = "How the magnified view follows the text cursor";
+    summary = "How the magnified view follows the text cursor";
+    description = ''How the magnified view follows the text cursor. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "none" "centered" "proportional" "push" ];
+    default = "centered";
+  };
+};
+
+magnification.screenPosition = {
+  _meta = {
+    name = "Area of the screen used for magnification";
+    summary = "Area of the screen used for magnification";
+    description = ''Area of the screen used for magnification. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "none" "full-screen" "top-half" "bottom-half" "left-half" "right-half" ];
+    default = "full-screen";
+  };
+};
+
+magnification.zoom = {
+  _meta = {
+    name = "Magnification factor";
+    summary = "Magnification factor";
+    description = ''Magnification factor. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 2.0;
+  };
+};
+
+magnification.followPointerLens = {
+  _meta = {
+    name = "Move the magnifier lens with the pointer";
+    summary = "Move the magnifier lens with the pointer";
+    description = ''Move the magnifier lens with the pointer. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+magnification.scrollBeyondEdges = {
+  _meta = {
+    name = "Allow magnified content to scroll beyond screen edges";
+    summary = "Allow magnified content to scroll beyond screen edges";
+    description = ''Allow magnified content to scroll beyond screen edges. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+magnification.showCrosshairs = {
+  _meta = {
+    name = "Show crosshairs around the pointer";
+    summary = "Show crosshairs around the pointer";
+    description = ''Show crosshairs around the pointer. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+magnification.crosshairThicknessPixels = {
+  _meta = {
+    name = "Crosshair line thickness in pixels";
+    summary = "Crosshair line thickness in pixels";
+    description = ''Crosshair line thickness in pixels. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 8;
+  };
+};
+
+magnification.crosshairColor = {
+  _meta = {
+    name = "Crosshair color";
+    summary = "Crosshair color";
+    description = ''Crosshair color. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.string;
+    default = "#ff0000";
+  };
+};
+
+magnification.crosshairOpacity = {
+  _meta = {
+    name = "Crosshair opacity from transparent to opaque";
+    summary = "Crosshair opacity from transparent to opaque";
+    description = ''Crosshair opacity from transparent to opaque. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 0.66;
+  };
+};
+
+magnification.crosshairLengthPixels = {
+  _meta = {
+    name = "Crosshair line length in pixels";
+    summary = "Crosshair line length in pixels";
+    description = ''Crosshair line length in pixels. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 4096;
+  };
+};
+
+magnification.crosshairCenterGap = {
+  _meta = {
+    name = "Leave a gap around the pointer at the crosshair center";
+    summary = "Leave a gap around the pointer at the crosshair center";
+    description = ''Leave a gap around the pointer at the crosshair center. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+magnification.invertBrightness = {
+  _meta = {
+    name = "Invert brightness in the magnified view";
+    summary = "Invert brightness in the magnified view";
+    description = ''Invert brightness in the magnified view. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+magnification.colorSaturation = {
+  _meta = {
+    name = "Color saturation of the magnified view";
+    summary = "Color saturation of the magnified view";
+    description = ''Color saturation of the magnified view. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 1.0;
+  };
+};
+
+accessibility.hoverClick = {
+  _meta = {
+    name = "Click automatically when the pointer stops moving";
+    summary = "Click automatically when the pointer stops moving";
+    description = ''Click automatically when the pointer stops moving. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.hoverClickDelaySeconds = {
+  _meta = {
+    name = "Seconds to wait before clicking a stationary pointer";
+    summary = "Seconds to wait before clicking a stationary pointer";
+    description = ''Seconds to wait before clicking a stationary pointer. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 1.20;
+  };
+};
+
+accessibility.hoverClickMovementPixels = {
+  _meta = {
+    name = "Pointer movement allowed before restarting the hover-click timer";
+    summary = "Pointer movement allowed before restarting the hover-click timer";
+    description = ''Pointer movement allowed before restarting the hover-click timer. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 10;
+  };
+};
+
+accessibility.showHoverClickSelector = {
+  _meta = {
+    name = "Show the selector for hover-click actions";
+    summary = "Show the selector for hover-click actions";
+    description = ''Show the selector for hover-click actions. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
+};
+
+accessibility.holdForRightClick = {
+  _meta = {
+    name = "Perform a right-click by holding the primary button";
+    summary = "Perform a right-click by holding the primary button";
+    description = ''Perform a right-click by holding the primary button. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.rightClickHoldSeconds = {
+  _meta = {
+    name = "Seconds to hold the primary button for a right-click";
+    summary = "Seconds to hold the primary button for a right-click";
+    description = ''Seconds to hold the primary button for a right-click. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.float;
+    default = 1.20;
+  };
+};
+
+keyboard.rememberNumberLock = {
+  _meta = {
+    name = "Restore the previous Num Lock state";
+    summary = "Restore the previous Num Lock state";
+    description = ''Restore the previous Num Lock state. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
+};
+
+keyboard.numberLock = {
+  _meta = {
+    name = "Default Num Lock state";
+    summary = "Default Num Lock state";
+    description = ''Default Num Lock state. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+windows.raiseOnClick = {
+  _meta = {
+    name = "Bring windows to the front when clicked";
+    summary = "Bring windows to the front when clicked";
+    description = ''Bring windows to the front when clicked. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
+};
+
+sound.systemBell = {
+  _meta = {
+    name = "Play a sound for the system bell";
+    summary = "Play a sound for the system bell";
+    description = ''Play a sound for the system bell. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
+};
+
+accessibility.flashForBell = {
+  _meta = {
+    name = "Flash the screen or window for the system bell";
+    summary = "Flash the screen or window for the system bell";
+    description = ''Flash the screen or window for the system bell. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+accessibility.bellFlashArea = {
+  _meta = {
+    name = "Area that flashes for the system bell";
+    summary = "Area that flashes for the system bell";
+    description = ''Area that flashes for the system bell. Applies to the GNOME session and remains user-editable.'';
+    tags = [ "desktop" "gnome" "accessibility" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "fullscreen-flash" "frame-flash" ];
+    default = "fullscreen-flash";
+  };
+};
+
+magnification._meta = {
+  name = "Screen magnification";
+  summary = "Control the magnified view and pointer crosshairs";
+  description = ''These preferences apply when the accessibility magnifier is enabled.'';
+  tags = [ "gnome" "accessibility" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+shortcuts.openCalculator = {
+  _meta = {
+    name = "Open the calculator";
+    summary = "Keyboard shortcuts to open the calculator";
+    description = ''Additional keyboard shortcuts to open the calculator. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.openSettings = {
+  _meta = {
+    name = "Open desktop settings";
+    summary = "Keyboard shortcuts to open desktop settings";
+    description = ''Additional keyboard shortcuts to open desktop settings. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.openEmail = {
+  _meta = {
+    name = "Open the default email application";
+    summary = "Keyboard shortcuts to open the default email application";
+    description = ''Additional keyboard shortcuts to open the default email application. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.ejectMedia = {
+  _meta = {
+    name = "Eject removable media";
+    summary = "Keyboard shortcuts to eject removable media";
+    description = ''Additional keyboard shortcuts to eject removable media. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.openHelp = {
+  _meta = {
+    name = "Open desktop help";
+    summary = "Keyboard shortcuts to open desktop help";
+    description = ''Additional keyboard shortcuts to open desktop help. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [ "<Super>F1" ];
+  };
+};
+
+shortcuts.openHomeFolder = {
+  _meta = {
+    name = "Open the home folder";
+    summary = "Keyboard shortcuts to open the home folder";
+    description = ''Additional keyboard shortcuts to open the home folder. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.openMediaPlayer = {
+  _meta = {
+    name = "Open the default media player";
+    summary = "Keyboard shortcuts to open the default media player";
+    description = ''Additional keyboard shortcuts to open the default media player. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.nextTrack = {
+  _meta = {
+    name = "Skip to the next track";
+    summary = "Keyboard shortcuts to skip to the next track";
+    description = ''Additional keyboard shortcuts to skip to the next track. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.pausePlayback = {
+  _meta = {
+    name = "Pause media playback";
+    summary = "Keyboard shortcuts to pause media playback";
+    description = ''Additional keyboard shortcuts to pause media playback. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.togglePlayback = {
+  _meta = {
+    name = "Start or pause media playback";
+    summary = "Keyboard shortcuts to start or pause media playback";
+    description = ''Additional keyboard shortcuts to start or pause media playback. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.logOut = {
+  _meta = {
+    name = "Show the logout dialog";
+    summary = "Keyboard shortcuts to show the logout dialog";
+    description = ''Additional keyboard shortcuts to show the logout dialog. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [ "<Control><Alt>Delete" ];
+  };
+};
+
+shortcuts.restart = {
+  _meta = {
+    name = "Show the restart dialog";
+    summary = "Keyboard shortcuts to show the restart dialog";
+    description = ''Additional keyboard shortcuts to show the restart dialog. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.shutDown = {
+  _meta = {
+    name = "Show the shutdown dialog";
+    summary = "Keyboard shortcuts to show the shutdown dialog";
+    description = ''Additional keyboard shortcuts to show the shutdown dialog. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.previousTrack = {
+  _meta = {
+    name = "Skip to the previous track";
+    summary = "Keyboard shortcuts to skip to the previous track";
+    description = ''Additional keyboard shortcuts to skip to the previous track. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.lockScreen = {
+  _meta = {
+    name = "Lock the session";
+    summary = "Keyboard shortcuts to lock the session";
+    description = ''Additional keyboard shortcuts to lock the session. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [ "<Super>l" ];
+  };
+};
+
+shortcuts.search = {
+  _meta = {
+    name = "Open desktop search";
+    summary = "Keyboard shortcuts to open desktop search";
+    description = ''Additional keyboard shortcuts to open desktop search. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.stopPlayback = {
+  _meta = {
+    name = "Stop media playback";
+    summary = "Keyboard shortcuts to stop media playback";
+    description = ''Additional keyboard shortcuts to stop media playback. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.lowerVolume = {
+  _meta = {
+    name = "Lower the playback volume";
+    summary = "Keyboard shortcuts to lower the playback volume";
+    description = ''Additional keyboard shortcuts to lower the playback volume. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.muteAudio = {
+  _meta = {
+    name = "Mute or unmute playback";
+    summary = "Keyboard shortcuts to mute or unmute playback";
+    description = ''Additional keyboard shortcuts to mute or unmute playback. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.raiseVolume = {
+  _meta = {
+    name = "Raise the playback volume";
+    summary = "Keyboard shortcuts to raise the playback volume";
+    description = ''Additional keyboard shortcuts to raise the playback volume. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.lowerVolumeQuietly = {
+  _meta = {
+    name = "Lower volume without feedback sounds";
+    summary = "Keyboard shortcuts to lower volume without feedback sounds";
+    description = ''Additional keyboard shortcuts to lower volume without feedback sounds. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.muteAudioQuietly = {
+  _meta = {
+    name = "Toggle audio mute without feedback sounds";
+    summary = "Keyboard shortcuts to toggle audio mute without feedback sounds";
+    description = ''Additional keyboard shortcuts to toggle audio mute without feedback sounds. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.raiseVolumeQuietly = {
+  _meta = {
+    name = "Raise volume without feedback sounds";
+    summary = "Keyboard shortcuts to raise volume without feedback sounds";
+    description = ''Additional keyboard shortcuts to raise volume without feedback sounds. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.lowerVolumePrecisely = {
+  _meta = {
+    name = "Lower volume in smaller steps";
+    summary = "Keyboard shortcuts to lower volume in smaller steps";
+    description = ''Additional keyboard shortcuts to lower volume in smaller steps. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.raiseVolumePrecisely = {
+  _meta = {
+    name = "Raise volume in smaller steps";
+    summary = "Keyboard shortcuts to raise volume in smaller steps";
+    description = ''Additional keyboard shortcuts to raise volume in smaller steps. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.muteMicrophone = {
+  _meta = {
+    name = "Mute or unmute the microphone";
+    summary = "Keyboard shortcuts to mute or unmute the microphone";
+    description = ''Additional keyboard shortcuts to mute or unmute the microphone. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.openBrowser = {
+  _meta = {
+    name = "Open the default web browser";
+    summary = "Keyboard shortcuts to open the default web browser";
+    description = ''Additional keyboard shortcuts to open the default web browser. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.toggleScreenReader = {
+  _meta = {
+    name = "Turn the screen reader on or off";
+    summary = "Keyboard shortcuts to turn the screen reader on or off";
+    description = ''Additional keyboard shortcuts to turn the screen reader on or off. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [ "<Alt><Super>s" ];
+  };
+};
+
+shortcuts.toggleScreenKeyboard = {
+  _meta = {
+    name = "Turn the on-screen keyboard on or off";
+    summary = "Keyboard shortcuts to turn the on-screen keyboard on or off";
+    description = ''Additional keyboard shortcuts to turn the on-screen keyboard on or off. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.increaseTextSize = {
+  _meta = {
+    name = "Increase desktop text size";
+    summary = "Keyboard shortcuts to increase desktop text size";
+    description = ''Additional keyboard shortcuts to increase desktop text size. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.decreaseTextSize = {
+  _meta = {
+    name = "Decrease desktop text size";
+    summary = "Keyboard shortcuts to decrease desktop text size";
+    description = ''Additional keyboard shortcuts to decrease desktop text size. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.toggleHighContrast = {
+  _meta = {
+    name = "Turn high contrast on or off";
+    summary = "Keyboard shortcuts to turn high contrast on or off";
+    description = ''Additional keyboard shortcuts to turn high contrast on or off. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.toggleMagnifier = {
+  _meta = {
+    name = "Turn screen magnification on or off";
+    summary = "Keyboard shortcuts to turn screen magnification on or off";
+    description = ''Additional keyboard shortcuts to turn screen magnification on or off. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [ "<Alt><Super>8" ];
+  };
+};
+
+shortcuts.zoomIn = {
+  _meta = {
+    name = "Increase screen magnification";
+    summary = "Keyboard shortcuts to increase screen magnification";
+    description = ''Additional keyboard shortcuts to increase screen magnification. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [ "<Alt><Super>equal" ];
+  };
+};
+
+shortcuts.zoomOut = {
+  _meta = {
+    name = "Decrease screen magnification";
+    summary = "Keyboard shortcuts to decrease screen magnification";
+    description = ''Additional keyboard shortcuts to decrease screen magnification. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [ "<Alt><Super>minus" ];
+  };
+};
+
+shortcuts.toggleTouchpad = {
+  _meta = {
+    name = "Turn the touchpad on or off";
+    summary = "Keyboard shortcuts to turn the touchpad on or off";
+    description = ''Additional keyboard shortcuts to turn the touchpad on or off. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.rewindPlayback = {
+  _meta = {
+    name = "Skip backward within the current track";
+    summary = "Keyboard shortcuts to skip backward within the current track";
+    description = ''Additional keyboard shortcuts to skip backward within the current track. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.fastForwardPlayback = {
+  _meta = {
+    name = "Skip forward within the current track";
+    summary = "Keyboard shortcuts to skip forward within the current track";
+    description = ''Additional keyboard shortcuts to skip forward within the current track. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.toggleRepeatPlayback = {
+  _meta = {
+    name = "Turn playback repeat on or off";
+    summary = "Keyboard shortcuts to turn playback repeat on or off";
+    description = ''Additional keyboard shortcuts to turn playback repeat on or off. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.toggleShufflePlayback = {
+  _meta = {
+    name = "Turn shuffled playback on or off";
+    summary = "Keyboard shortcuts to turn shuffled playback on or off";
+    description = ''Additional keyboard shortcuts to turn shuffled playback on or off. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.toggleScreenRotation = {
+  _meta = {
+    name = "Lock or unlock automatic screen rotation";
+    summary = "Keyboard shortcuts to lock or unlock automatic screen rotation";
+    description = ''Additional keyboard shortcuts to lock or unlock automatic screen rotation. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.raiseKeyboardBrightness = {
+  _meta = {
+    name = "Brighten the keyboard backlight";
+    summary = "Keyboard shortcuts to brighten the keyboard backlight";
+    description = ''Additional keyboard shortcuts to brighten the keyboard backlight. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.lowerKeyboardBrightness = {
+  _meta = {
+    name = "Dim the keyboard backlight";
+    summary = "Keyboard shortcuts to dim the keyboard backlight";
+    description = ''Additional keyboard shortcuts to dim the keyboard backlight. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.toggleKeyboardBacklight = {
+  _meta = {
+    name = "Turn the keyboard backlight on or off";
+    summary = "Keyboard shortcuts to turn the keyboard backlight on or off";
+    description = ''Additional keyboard shortcuts to turn the keyboard backlight on or off. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.showBatteryStatus = {
+  _meta = {
+    name = "Show the battery status";
+    summary = "Keyboard shortcuts to show the battery status";
+    description = ''Additional keyboard shortcuts to show the battery status. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.toggleAirplaneMode = {
+  _meta = {
+    name = "Turn airplane mode on or off";
+    summary = "Keyboard shortcuts to turn airplane mode on or off";
+    description = ''Additional keyboard shortcuts to turn airplane mode on or off. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts.toggleBluetooth = {
+  _meta = {
+    name = "Turn Bluetooth radio transmission on or off";
+    summary = "Keyboard shortcuts to turn bluetooth radio transmission on or off";
+    description = ''Additional keyboard shortcuts to turn bluetooth radio transmission on or off. Use GTK accelerator strings such as <Super>l. An empty list clears these shortcuts; dedicated hardware keys retain their standard bindings. The relevant application or desktop handler must be available.'';
+    tags = [ "gnome" "shortcuts" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [  ];
+  };
+};
+
+shortcuts._meta = {
+  name = "Desktop action shortcuts";
+  summary = "Assign keyboard shortcuts to desktop actions";
+  description = ''Configure additional keyboard shortcuts while preserving dedicated hardware media keys.'';
+  tags = [ "gnome" "shortcuts" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+loginScreen.showUsers = {
+  _meta = {
+    name = "Show available accounts on the login screen";
+    summary = "Show available accounts on the login screen";
+    description = ''Show available accounts on the login screen. Disabling the list requires users to type their account name. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.showPowerButtons = {
+  _meta = {
+    name = "Show restart and shutdown controls before login";
+    summary = "Show restart and shutdown controls before login";
+    description = ''Show restart and shutdown controls before login.  Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.allowPasswords = {
+  _meta = {
+    name = "Offer password authentication at the login screen";
+    summary = "Offer password authentication at the login screen";
+    description = ''Offer password authentication at the login screen. Authentication still requires the configured PAM support. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.allowFingerprints = {
+  _meta = {
+    name = "Offer enrolled fingerprints at the login screen";
+    summary = "Offer enrolled fingerprints at the login screen";
+    description = ''Offer enrolled fingerprints at the login screen. Requires fingerprint hardware, enrollment and authentication support. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.allowSmartCards = {
+  _meta = {
+    name = "Offer smart-card authentication at the login screen";
+    summary = "Offer smart-card authentication at the login screen";
+    description = ''Offer smart-card authentication at the login screen. Requires a configured smart-card authentication service. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.allowPasskeys = {
+  _meta = {
+    name = "Offer passkey authentication at the login screen";
+    summary = "Offer passkey authentication at the login screen";
+    description = ''Offer passkey authentication at the login screen. Requires configured passkey authentication support. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.allowWebLogin = {
+  _meta = {
+    name = "Offer supported web authentication at the login screen";
+    summary = "Offer supported web authentication at the login screen";
+    description = ''Offer supported web authentication at the login screen. Requires a configured web authentication service. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.attemptsBeforeUserSelection = {
+  _meta = {
+    name = "Failed attempts before returning to account selection";
+    summary = "Failed attempts before returning to account selection";
+    description = ''Failed attempts before returning to account selection. This changes the greeter flow, not account lockout policy. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.logo = {
+  _meta = {
+    name = "Image shown above the login account list";
+    summary = "Image shown above the login account list";
+    description = ''Image shown above the login account list. Use the path to an installed image. An empty string hides the logo. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.screenReader = {
+  _meta = {
+    name = "Read login-screen content aloud";
+    summary = "Read login-screen content aloud";
+    description = ''Read login-screen content aloud.  Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.screenKeyboard = {
+  _meta = {
+    name = "Show an on-screen keyboard before login";
+    summary = "Show an on-screen keyboard before login";
+    description = ''Show an on-screen keyboard before login.  Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.textScale = {
+  _meta = {
+    name = "Scale the text on the login screen";
+    summary = "Scale the text on the login screen";
+    description = ''Scale the text on the login screen. One uses the normal text size. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.float) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.highContrast = {
+  _meta = {
+    name = "Use high contrast on the login screen";
+    summary = "Use high contrast on the login screen";
+    description = ''Use high contrast on the login screen.  Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.clockFormat = {
+  _meta = {
+    name = "Clock format shown before login";
+    summary = "Clock format shown before login";
+    description = ''Clock format shown before login.  Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "12h" "24h" ]) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.message = {
+  _meta = {
+    name = "Message displayed before login";
+    summary = "Message displayed before login";
+    description = ''Message displayed before login. An empty string hides the message; null preserves the current greeter policy. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen.automaticSuspend = {
+  _meta = {
+    name = "Suspend after inactivity at the login screen";
+    summary = "Suspend after inactivity at the login screen";
+    description = ''Suspend after inactivity at the login screen. Does not change suspend behavior after login or on the lock screen. Null keeps the existing login-screen policy.'';
+    tags = [ "gnome" "login" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+loginScreen._meta = {
+  name = "Login screen";
+  summary = "Configure the greeter separately from desktop sessions";
+  description = ''Choose login-screen presentation and available authentication methods.'';
+  tags = [ "gnome" "login" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
 };

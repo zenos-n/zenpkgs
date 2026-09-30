@@ -1,0 +1,17 @@
+_meta = {
+  name = "TigerJython";
+  summary = "Simple development environment for programming in Python";
+  description = ''
+    Designing, coding, and amazing. TigerJython offers everything you need
+    to go from Python programming beginner to professional.
+    You will find a wide variety of tutorials and can get started right away
+    in programming environments specially developed for you.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.40";
+  tags = [ "education" "python" "ide" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.tigerjython;

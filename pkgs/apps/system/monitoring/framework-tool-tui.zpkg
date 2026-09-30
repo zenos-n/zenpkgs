@@ -1,0 +1,15 @@
+_meta = {
+  name = "Framework Tool TUI";
+  summary = "TUI for controlling and monitoring Framework Computers hardware";
+  description = ''
+    A snappy TUI dashboard for controlling and monitoring your Framework Laptop hardware —
+    charging, privacy, lighting, USB PD ports, and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.4";
+  tags = [ "system" "monitoring" "hardware" "framework" "laptops" "tui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.framework-tool-tui;

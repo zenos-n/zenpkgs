@@ -1,0 +1,14 @@
+_meta = {
+  name = "Armitage";
+  summary = "Graphical cyber attack management tool for Metasploit";
+  description = ''
+    Graphical cyber attack management tool for Metasploit.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2022-12-05";
+  tags = [ "security" "networking" "penetration-testing" "metasploit" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.armitage;

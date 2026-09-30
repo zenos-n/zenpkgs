@@ -1,0 +1,14 @@
+_meta = {
+  name = "tiptop";
+  summary = "Performance monitoring tool for Linux";
+  description = ''
+    Performance monitoring tool for Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.1";
+  tags = [ "system" "monitoring" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.tiptop;

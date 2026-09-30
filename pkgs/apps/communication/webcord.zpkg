@@ -1,0 +1,14 @@
+_meta = {
+  name = "WebCord";
+  summary = "Discord and SpaceBar electron-based client implemented without Discord API";
+  description = ''
+    Discord and SpaceBar electron-based client implemented without Discord API.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.13.0";
+  tags = [ "communication" "discord" "messaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.webcord;

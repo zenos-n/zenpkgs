@@ -1,0 +1,14 @@
+_meta = {
+  name = "ARandR";
+  summary = "Simple visual front end for XRandR";
+  description = ''
+    Simple visual front end for XRandR.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.11";
+  tags = [ "system" "administration" "display" "x11" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.arandr;

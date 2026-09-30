@@ -1,0 +1,16 @@
+_meta = {
+  name = "fdupes";
+  summary = "Identifies duplicate files residing within specified directories";
+  description = ''
+    fdupes searches the given path for duplicate files.
+    Such files are found by comparing file sizes and MD5 signatures,
+    followed by a byte-by-byte comparison.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.0";
+  tags = [ "files" "duplicates" "search" "deduplication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fdupes;

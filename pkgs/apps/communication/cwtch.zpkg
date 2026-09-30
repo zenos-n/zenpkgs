@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cwtch";
+  summary = "Decentralized, privacy-preserving, multi-party messaging protocol";
+  description = ''
+    Decentralized, privacy-preserving, multi-party messaging protocol.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.1";
+  tags = [ "communication" "chat" "privacy" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cwtch;

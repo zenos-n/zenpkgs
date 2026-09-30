@@ -1,0 +1,20 @@
+_meta = {
+  name = "dfu-util";
+  summary = "Device firmware update (DFU) USB programmer";
+  description = ''
+    dfu-util is a program that implements the host (PC) side of the USB
+    DFU 1.0 and 1.1 (Universal Serial Bus Device Firmware Upgrade) protocol.
+
+    DFU is intended to download and upload firmware to devices connected over
+    USB. It ranges from small devices like micro-controller boards up to mobile
+    phones. With dfu-util you are able to download firmware to your device or
+    upload firmware from it.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11";
+  tags = [ "development" "embedded" "hardware" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.dfu-util;

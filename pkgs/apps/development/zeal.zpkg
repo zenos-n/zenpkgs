@@ -1,0 +1,15 @@
+_meta = {
+  name = "Zeal";
+  summary = "Simple offline API documentation browser";
+  description = ''
+    Zeal is a simple offline API documentation browser inspired by Dash (macOS
+    app), available for Linux and Windows.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.1";
+  tags = [ "development" "documentation" "reference" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.zeal;

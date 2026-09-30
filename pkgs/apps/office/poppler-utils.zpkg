@@ -1,0 +1,15 @@
+_meta = {
+  name = "Poppler Tools";
+  summary = "PDF rendering library";
+  description = ''
+    Poppler is a PDF rendering library based on the xpdf-3.0 code base. In
+    addition it provides a number of tools that can be installed separately.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.06.0";
+  tags = [ "office" "pdf" "conversion" "command-line" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.poppler-utils;

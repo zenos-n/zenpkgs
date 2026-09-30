@@ -1,0 +1,17 @@
+_meta = {
+  name = "Libarchive Tools";
+  summary = "Multi-format archive and compression library";
+  description = ''
+    The libarchive project develops a portable, efficient C library that can
+    read and write streaming archives in a variety of formats. It also
+    includes implementations of the common tar, cpio, and zcat command-line
+    tools that use the libarchive library.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.8.8";
+  tags = [ "archives" "files" "compression" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.libarchive;

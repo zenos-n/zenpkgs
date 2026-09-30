@@ -1,0 +1,14 @@
+_meta = {
+  name = "dysk";
+  summary = "Get information on your mounted disks";
+  description = ''
+    Get information on your mounted disks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.6.1";
+  tags = [ "storage" "disks" "mounts" "information" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dysk;

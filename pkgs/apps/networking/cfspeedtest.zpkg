@@ -1,0 +1,14 @@
+_meta = {
+  name = "cfspeedtest";
+  summary = "Unofficial CLI for speed.cloudflare.com";
+  description = ''
+    Unofficial CLI for speed.cloudflare.com.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.2";
+  tags = [ "networking" "bandwidth" "speed-test" "cloudflare" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cfspeedtest;

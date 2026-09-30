@@ -1,0 +1,14 @@
+_meta = {
+  name = "pspg";
+  summary = "Postgres Pager";
+  description = ''
+    Postgres Pager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.8.16";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.pspg;

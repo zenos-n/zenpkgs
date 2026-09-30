@@ -1,0 +1,14 @@
+_meta = {
+  name = "Goose";
+  summary = "Database migration tool which supports SQL migrations and Go functions";
+  description = ''
+    Database migration tool which supports SQL migrations and Go functions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.27.1";
+  tags = [ "development" "database" "migrations" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.goose;

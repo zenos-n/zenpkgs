@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-codereview";
+  summary = "Manage the code review process for Git changes using a Gerrit server";
+  description = ''
+    Manage the code review process for Git changes using a Gerrit server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.20.0";
+  tags = [ "development" "git" "gerrit" "code-review" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.git-codereview;

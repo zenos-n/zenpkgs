@@ -1,0 +1,14 @@
+_meta = {
+  name = "JDiskReport";
+  summary = "Graphical utility to visualize disk usage";
+  description = ''
+    Graphical utility to visualize disk usage.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.1";
+  tags = [ "files" "storage" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.jdiskreport;

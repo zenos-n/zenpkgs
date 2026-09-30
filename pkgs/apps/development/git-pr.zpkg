@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-pr";
+  summary = "Simple git collaboration tool";
+  description = ''
+    Simple git collaboration tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.0";
+  tags = [ "development" "git" "collaboration" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-pr;

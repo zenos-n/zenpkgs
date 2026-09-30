@@ -1,0 +1,14 @@
+_meta = {
+  name = "intel-gpu-tools";
+  summary = "Tools for development and testing of the Intel DRM driver";
+  description = ''
+    Tools for development and testing of the Intel DRM driver.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3";
+  tags = [ "system" "monitoring" "graphics" "hardware" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.intel-gpu-tools;

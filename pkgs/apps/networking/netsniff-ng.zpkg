@@ -1,0 +1,18 @@
+_meta = {
+  name = "netsniff-ng";
+  summary = "Swiss army knife for daily Linux network plumbing";
+  description = ''
+    netsniff-ng is a free Linux networking toolkit. Its gain of performance
+    is reached by zero-copy mechanisms, so that on packet reception and
+    transmission the kernel does not need to copy packets from kernel space
+    to user space and vice versa. The toolkit can be used for network
+    development and analysis, debugging, auditing or network reconnaissance.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.9";
+  tags = [ "networking" "diagnostics" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.netsniff-ng;

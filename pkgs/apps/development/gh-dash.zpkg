@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitHub CLI Dashboard";
+  summary = "Github Cli extension to display a dashboard with pull requests and issues";
+  description = ''
+    Github Cli extension to display a dashboard with pull requests and issues.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.25.0";
+  tags = [ "development" "github" "github-cli" "pull-requests" "tui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-dash;

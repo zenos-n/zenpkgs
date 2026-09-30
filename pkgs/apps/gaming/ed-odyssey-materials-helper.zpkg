@@ -1,0 +1,14 @@
+_meta = {
+  name = "ED Odyssey Materials Helper";
+  summary = "Helper for managing materials in Elite Dangerous Odyssey";
+  description = ''
+    Helper for managing materials in Elite Dangerous Odyssey.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.7.0";
+  tags = [ "gaming" "elite-dangerous" "materials" "companion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ed-odyssey-materials-helper;

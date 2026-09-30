@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mindustry";
+  summary = "Sandbox tower defense game";
+  description = ''
+    Sandbox tower defense game.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "155.4";
+  tags = [ "gaming" "tower-defense" "automation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.mindustry;

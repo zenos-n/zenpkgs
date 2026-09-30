@@ -1,0 +1,14 @@
+_meta = {
+  name = "Molecule";
+  summary = "Aids in the development and testing of Ansible roles";
+  description = ''
+    Aids in the development and testing of Ansible roles.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.4.0";
+  tags = [ "infrastructure" "testing" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.molecule;

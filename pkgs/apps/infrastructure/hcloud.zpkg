@@ -1,0 +1,14 @@
+_meta = {
+  name = "Hetzner Cloud CLI";
+  summary = "Command-line interface for Hetzner Cloud, a provider for cloud virtual private servers";
+  description = ''
+    Command-line interface for Hetzner Cloud, a provider for cloud virtual private servers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.64.1";
+  tags = [ "infrastructure" "cloud" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.hcloud;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Nomad";
+  summary = "Distributed, Highly Available, Datacenter-Aware Scheduler";
+  description = ''
+    Distributed, Highly Available, Datacenter-Aware Scheduler.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.11.3";
+  tags = [ "infrastructure" "automation" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsl11;
+};
+
+import $pkgs.legacy.nomad;

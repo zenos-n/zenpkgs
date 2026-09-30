@@ -1,0 +1,14 @@
+_meta = {
+  name = "Jailer";
+  summary = "Tool for database subsetting and relational data browsing";
+  description = ''
+    Tool for database subsetting and relational data browsing.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "16.11";
+  tags = [ "development" "database" "data" "modeling" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.jailer;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Frodo";
+  summary = "C64 emulator with emphasis on graphical accuracy";
+  description = ''
+    C64 emulator with emphasis on graphical accuracy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.5";
+  tags = [ "gaming" "emulators" "commodore" "c64" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.frodo4;

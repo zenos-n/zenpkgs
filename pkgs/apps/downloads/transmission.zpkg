@@ -1,0 +1,22 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "Transmission";
+  summary = "Fast, easy and free BitTorrent client";
+  description = ''
+    Transmission is a BitTorrent client which features a simple interface
+    on top of a cross-platform back-end.
+    Feature spotlight:
+      * Uses fewer resources than other clients
+      * Native Mac, GTK and Qt GUI clients
+      * Daemon ideal for servers, embedded systems, and headless use
+      * All these can be remote controlled by Web and Terminal clients
+      * Bluetack (PeerGuardian) blocklists with automatic updates
+      * Full encryption, DHT, and PEX support
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.1.3";
+  tags = [ "downloads" "networking" "bittorrent" "files" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.transmission_4-gtk;

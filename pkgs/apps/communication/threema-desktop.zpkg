@@ -1,0 +1,14 @@
+_meta = {
+  name = "Threema";
+  summary = "Desktop client for Threema, a privacy-focused end-to-end encrypted mobile messenger";
+  description = ''
+    Desktop client for Threema, a privacy-focused end-to-end encrypted mobile messenger.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.50";
+  tags = [ "communication" "messaging" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.threema-desktop;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bitwarden Menu";
+  summary = "Dmenu/Rofi frontend for managing Bitwarden vaults. Uses the Bitwarden CLI tool to interact with the Bitwarden database";
+  description = ''
+    Dmenu/Rofi frontend for managing Bitwarden vaults. Uses the Bitwarden CLI tool to interact with the Bitwarden database.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.5";
+  tags = [ "security" "passwords" "bitwarden" "rofi" "dmenu" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bitwarden-menu;

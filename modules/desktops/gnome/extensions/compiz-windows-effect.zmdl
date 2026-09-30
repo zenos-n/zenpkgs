@@ -19,10 +19,10 @@ _meta = {
 enable = enableOption {
   _meta.description = ''Whether to enable Compiz Windows Effect GNOME extension configuration.'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.compiz-windows-effect ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.compiz-windows-effect ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.compiz-windows-effect.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.compiz-windows-effect.extensionUuid ];
     dconf.settings."org/gnome/shell/extensions/com/github/hermes83/compiz-windows-effect" = {
         friction = $path.friction;
         spring-k = $path.spring-k;

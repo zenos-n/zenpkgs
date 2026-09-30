@@ -1,0 +1,15 @@
+_meta = {
+  name = "Climate Data Operators";
+  summary = "Collection of command line Operators to manipulate and analyse Climate and NWP model Data";
+  description = ''
+    Supported data formats are GRIB 1/2, netCDF 3/4, SERVICE, EXTRA and IEG.
+    There are more than 600 operators available.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.1";
+  tags = [ "science" "climate" "weather" "data-processing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.cdo;

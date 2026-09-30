@@ -1,0 +1,20 @@
+_meta = {
+  name = "Meson";
+  summary = "Open source, fast and friendly build system made in Python";
+  description = ''
+    Meson is an open source build system meant to be both extremely fast, and,
+    even more importantly, as user friendly as possible.
+
+    The main design point of Meson is that every moment a developer spends
+    writing or debugging build definitions is a second wasted. So is every
+    second spent waiting for the build system to actually start compiling
+    code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.10.2";
+  tags = [ "development" "build" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.meson;

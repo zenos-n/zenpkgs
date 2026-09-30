@@ -1,0 +1,14 @@
+_meta = {
+  name = "nixd";
+  summary = "Feature-rich Nix language server interoperating with C++ nix";
+  description = ''
+    Feature-rich Nix language server interoperating with C++ nix.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.9.1";
+  tags = [ "development" "nix" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3Plus;
+};
+
+import $pkgs.legacy.nixd;

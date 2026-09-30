@@ -1,0 +1,16 @@
+_meta = {
+  name = "Checkstyle";
+  summary = "Checks Java source against a coding standard";
+  description = ''
+    checkstyle is a development tool to help programmers write Java code that
+    adheres to a coding standard. By default it supports the Sun Code
+    Conventions, but is highly configurable.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "14.0.0";
+  tags = [ "development" "java" "linting" "style" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.checkstyle;

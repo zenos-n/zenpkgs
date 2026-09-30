@@ -1,0 +1,14 @@
+_meta = {
+  name = "g-ls";
+  summary = "Powerful ls alternative written in Go";
+  description = ''
+    Powerful ls alternative written in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.31.2";
+  tags = [ "files" "listing" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.g-ls;

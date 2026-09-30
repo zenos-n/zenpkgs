@@ -1,0 +1,14 @@
+_meta = {
+  name = "formatjson5";
+  summary = "JSON5 formatter";
+  description = ''
+    JSON5 formatter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.6";
+  tags = [ "development" "json" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.formatjson5;

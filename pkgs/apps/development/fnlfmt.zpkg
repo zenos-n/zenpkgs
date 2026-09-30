@@ -1,0 +1,14 @@
+_meta = {
+  name = "fnlfmt";
+  summary = "Formatter for Fennel";
+  description = ''
+    Formatter for Fennel.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.2";
+  tags = [ "development" "fennel" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fnlfmt;

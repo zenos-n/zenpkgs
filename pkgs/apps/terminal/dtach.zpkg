@@ -1,0 +1,19 @@
+_meta = {
+  name = "dtach";
+  summary = "Program that emulates the detach feature of screen";
+  description = ''
+    dtach is a tiny program that emulates the detach feature of
+    screen, allowing you to run a program in an environment that is
+    protected from the controlling terminal and attach to it later.
+    dtach does not keep track of the contents of the screen, and
+    thus works best with programs that know how to redraw
+    themselves.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9";
+  tags = [ "terminal" "sessions" "detach" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.dtach;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "CaDiCaL";
+  summary = "Simplified Satisfiability Solver";
+  description = ''
+    Simplified Satisfiability Solver.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.0";
+  tags = [ "science" "mathematics" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cadical;

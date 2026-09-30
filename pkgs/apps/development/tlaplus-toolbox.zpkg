@@ -1,0 +1,16 @@
+_meta = {
+  name = "TLA+ Toolbox";
+  summary = "IDE for the TLA+ tools";
+  description = ''
+    Integrated development environment for the TLA+ tools, based on Eclipse. You can use it
+    to create and edit your specs, run the PlusCal translator, view the pretty-printed
+    versions of your modules, run the TLC model checker, and run TLAPS, the TLA+ proof system.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.4";
+  tags = [ "development" "formal-verification" "mathematics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.tlaplus-toolbox;

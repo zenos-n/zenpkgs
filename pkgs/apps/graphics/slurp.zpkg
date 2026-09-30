@@ -1,0 +1,14 @@
+_meta = {
+  name = "slurp";
+  summary = "Select a region in a Wayland compositor";
+  description = ''
+    Select a region in a Wayland compositor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.0";
+  tags = [ "graphics" "creativity" "screenshots" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.slurp;

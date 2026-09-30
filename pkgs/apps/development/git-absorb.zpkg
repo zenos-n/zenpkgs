@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-absorb";
+  summary = "git commit --fixup, but automatic";
+  description = ''
+    git commit --fixup, but automatic.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.git-absorb;

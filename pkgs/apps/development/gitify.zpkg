@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gitify";
+  summary = "GitHub notifications on your menu bar";
+  description = ''
+    GitHub notifications on your menu bar.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.20.0";
+  tags = [ "development" "git" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitify;

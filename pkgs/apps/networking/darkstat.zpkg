@@ -1,0 +1,20 @@
+_meta = {
+  name = "Darkstat";
+  summary = "Network statistics web interface";
+  description = ''
+    Captures network traffic, calculates statistics about usage, and serves
+    reports over HTTP. Features:
+    - Traffic graphs, reports per host, shows ports for each host.
+    - Embedded web-server with deflate compression.
+    - Asynchronous reverse DNS resolution using a child process.
+    - Small. Portable. Single-threaded. Efficient.
+    - Supports IPv6.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.722";
+  tags = [ "networking" "network-traffic" "statistics" "monitoring" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.darkstat;

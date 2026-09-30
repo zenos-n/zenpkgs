@@ -1,0 +1,14 @@
+_meta = {
+  name = "ffmpeg-normalize";
+  summary = "Normalize audio via ffmpeg";
+  description = ''
+    Normalize audio via ffmpeg.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.37.7";
+  tags = [ "audio" "normalization" "ffmpeg" "loudness" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ffmpeg-normalize;

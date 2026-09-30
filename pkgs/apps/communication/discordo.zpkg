@@ -1,0 +1,14 @@
+_meta = {
+  name = "Discordo";
+  summary = "Lightweight, secure, and feature-rich Discord terminal client";
+  description = ''
+    Lightweight, secure, and feature-rich Discord terminal client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-05-12";
+  tags = [ "communication" "chat" "terminal" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.discordo;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "elfcat";
+  summary = "ELF visualizer, generates HTML files from ELF binaries";
+  description = ''
+    ELF visualizer, generates HTML files from ELF binaries.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.10";
+  tags = [ "development" "elf" "binaries" "visualization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.elfcat;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Clooj";
+  summary = "Lightweight IDE for Clojure";
+  description = ''
+    Lightweight IDE for Clojure.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.4";
+  tags = [ "development" "clojure" "ide" "programming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.clooj;

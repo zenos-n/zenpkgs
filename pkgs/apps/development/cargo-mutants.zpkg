@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-mutants";
+  summary = "Mutation testing tool for Rust";
+  description = ''
+    Mutation testing tool for Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "27.1.0";
+  tags = [ "development" "rust" "cargo" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-mutants;

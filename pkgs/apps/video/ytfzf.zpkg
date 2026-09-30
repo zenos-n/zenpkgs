@@ -1,0 +1,14 @@
+_meta = {
+  name = "ytfzf";
+  summary = "Posix script to find and watch youtube videos from the terminal";
+  description = ''
+    Posix script to find and watch youtube videos from the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.2";
+  tags = [ "video" "youtube" "streaming" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.ytfzf;

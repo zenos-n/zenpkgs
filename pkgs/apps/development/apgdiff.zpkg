@@ -1,0 +1,14 @@
+_meta = {
+  name = "APGdiff";
+  summary = "Another PostgreSQL diff tool";
+  description = ''
+    Another PostgreSQL diff tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.7.0";
+  tags = [ "development" "postgresql" "databases" "schema" "diff" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.apgdiff;

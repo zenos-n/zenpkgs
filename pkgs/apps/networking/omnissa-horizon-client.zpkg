@@ -1,0 +1,14 @@
+_meta = {
+  name = "Omnissa Horizon Client";
+  summary = "Allows you to connect to your Omnissa Horizon virtual desktop";
+  description = ''
+    Allows you to connect to your Omnissa Horizon virtual desktop.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2605";
+  tags = [ "networking" "remote-desktop" "virtualization" "enterprise" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.omnissa-horizon-client;

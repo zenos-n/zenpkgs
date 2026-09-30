@@ -1,0 +1,14 @@
+_meta = {
+  name = "crex";
+  summary = "Explore, test, and check regular expressions in the terminal";
+  description = ''
+    Explore, test, and check regular expressions in the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.5";
+  tags = [ "development" "regex" "testing" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.crex;

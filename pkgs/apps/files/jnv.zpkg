@@ -1,0 +1,14 @@
+_meta = {
+  name = "jnv";
+  summary = "Interactive JSON filter using jq";
+  description = ''
+    Interactive JSON filter using jq.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.1";
+  tags = [ "files" "json" "data" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.jnv;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "tun2proxy";
+  summary = "Tunnel (TUN) interface for SOCKS and HTTP proxies";
+  description = ''
+    Tunnel (TUN) interface for SOCKS and HTTP proxies.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.20";
+  tags = [ "networking" "proxy" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.tun2proxy;

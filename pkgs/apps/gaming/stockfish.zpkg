@@ -1,0 +1,15 @@
+_meta = {
+  name = "Stockfish";
+  summary = "Strong open source chess engine";
+  description = ''
+    Stockfish is one of the strongest chess engines in the world. It is also
+    much stronger than the best human chess grandmasters.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "18";
+  tags = [ "gaming" "chess" "board" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.stockfish;

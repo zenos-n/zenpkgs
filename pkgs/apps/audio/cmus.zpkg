@@ -1,0 +1,14 @@
+_meta = {
+  name = "cmus";
+  summary = "Small, fast and powerful console music player for Linux and *BSD";
+  description = ''
+    Small, fast and powerful console music player for Linux and *BSD.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.12.0";
+  tags = [ "audio" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.cmus;

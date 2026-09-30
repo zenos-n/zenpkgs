@@ -1,0 +1,14 @@
+_meta = {
+  name = "FM Toy";
+  summary = "FM synthesiser based on emulated Yamaha YM chips (OPL, OPM and OPN series)";
+  description = ''
+    FM synthesiser based on emulated Yamaha YM chips (OPL, OPM and OPN series).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2024-12-15";
+  tags = [ "audio" "synthesizers" "music" "fm-synthesis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.fmtoy;

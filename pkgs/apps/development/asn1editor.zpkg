@@ -1,0 +1,14 @@
+_meta = {
+  name = "ASN.1 Editor";
+  summary = "Python based editor for ASN.1 encoded data";
+  description = ''
+    Python based editor for ASN.1 encoded data.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.0";
+  tags = [ "development" "asn1" "binary" "editor" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.asn1editor;

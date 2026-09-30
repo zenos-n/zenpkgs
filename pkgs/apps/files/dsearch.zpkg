@@ -1,0 +1,14 @@
+_meta = {
+  name = "dsearch";
+  summary = "Fast, configurable filesystem search with fuzzy matching";
+  description = ''
+    Fast, configurable filesystem search with fuzzy matching.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.1";
+  tags = [ "files" "search" "fuzzy" "filesystems" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dsearch;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-bars";
+  summary = "Utility for visualising git commit activity as bars on the terminal";
+  description = ''
+    Utility for visualising git commit activity as bars on the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2023-08-08";
+  tags = [ "development" "git" "statistics" "visualization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-bars;

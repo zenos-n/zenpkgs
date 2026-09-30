@@ -1,0 +1,14 @@
+_meta = {
+  name = "grim";
+  summary = "Grab images from a Wayland compositor";
+  description = ''
+    Grab images from a Wayland compositor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.0";
+  tags = [ "graphics" "creativity" "screenshots" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.grim;

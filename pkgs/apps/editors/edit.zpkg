@@ -1,0 +1,14 @@
+_meta = {
+  name = "Edit";
+  summary = "Relaxing mix of Vi and ACME";
+  description = ''
+    Relaxing mix of Vi and ACME.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2021-04-05";
+  tags = [ "editors" "terminal" "text" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.publicDomain;
+};
+
+import $pkgs.legacy.edit;

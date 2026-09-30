@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cine";
+  summary = "Video Player for Linux";
+  description = ''
+    Video Player for Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.1";
+  tags = [ "video" "player" "playback" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.cine;

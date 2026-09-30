@@ -1,0 +1,14 @@
+_meta = {
+  name = "Algolia CLI";
+  summary = "Algolia’s official CLI devtool";
+  description = ''
+    Algolia’s official CLI devtool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.4";
+  tags = [ "development" "search" "algolia" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.algolia-cli;

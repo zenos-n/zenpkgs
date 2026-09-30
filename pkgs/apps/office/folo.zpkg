@@ -1,0 +1,14 @@
+_meta = {
+  name = "Folo";
+  summary = "Next generation information browser";
+  description = ''
+    Next generation information browser.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.10.0";
+  tags = [ "office" "reading" "information" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.folo;

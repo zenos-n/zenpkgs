@@ -1,0 +1,14 @@
+_meta = {
+  name = "LMMS";
+  summary = "DAW similar to FL Studio (music production software)";
+  description = ''
+    DAW similar to FL Studio (music production software).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.2-unstable-2026-04-21";
+  tags = [ "audio" "multimedia" "music-production" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.lmms;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Nushell";
+  summary = "Modern shell written in Rust";
+  description = ''
+    Modern shell written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.112.2";
+  tags = [ "terminal" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.nushell;

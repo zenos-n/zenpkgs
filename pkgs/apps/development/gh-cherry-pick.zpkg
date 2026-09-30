@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-cherry-pick";
+  summary = "Cherry-pick commits across GitHub repositories using only the GitHub API";
+  description = ''
+    Cherry-pick commits across GitHub repositories using only the GitHub API.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.0";
+  tags = [ "development" "github" "github-cli" "git" "cherry-pick" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-cherry-pick;

@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "sqldef";
+  summary = "Idempotent SQL schema management tool";
+  description = ''
+    Idempotent SQL schema management tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.11.1";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.sqldef;

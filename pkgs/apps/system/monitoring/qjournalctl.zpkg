@@ -1,0 +1,14 @@
+_meta = {
+  name = "QJournalctl";
+  summary = "Qt-based graphical user interface for systemd's journalctl command";
+  description = ''
+    Qt-based graphical user interface for systemd's journalctl command.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.4";
+  tags = [ "system" "monitoring" "logs" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.qjournalctl;

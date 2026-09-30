@@ -1,0 +1,17 @@
+_meta = {
+  name = "Liferea";
+  summary = "GTK-based news feed aggregator";
+  description = ''
+    Liferea (Linux Feed Reader) is an RSS/RDF feed reader.
+    It's intended to be a clone of the Windows-only FeedReader.
+    It can be used to maintain a list of subscribed feeds,
+    browse through their items, and show their contents.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.16.10";
+  tags = [ "office" "productivity" "rss" "news" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.liferea;

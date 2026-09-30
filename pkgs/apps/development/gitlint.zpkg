@@ -1,0 +1,14 @@
+_meta = {
+  name = "gitlint";
+  summary = "Linting for your git commit messages";
+  description = ''
+    Linting for your git commit messages.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.19.1";
+  tags = [ "development" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitlint;

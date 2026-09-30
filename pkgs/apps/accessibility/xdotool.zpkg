@@ -1,0 +1,14 @@
+_meta = {
+  name = "xdotool";
+  summary = "Fake keyboard/mouse input, window management, and more";
+  description = ''
+    Fake keyboard/mouse input, window management, and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.20211022.1";
+  tags = [ "accessibility" "keyboard" "automation" "assistive-technology" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.xdotool;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Openterface";
+  summary = "Openterface mini-KVM host application for linux";
+  description = ''
+    Openterface mini-KVM host application for linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.18";
+  tags = [ "system" "administration" "hardware" "kvm" "remote-access" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.openterface-qt;

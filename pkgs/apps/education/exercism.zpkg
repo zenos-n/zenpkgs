@@ -1,0 +1,14 @@
+_meta = {
+  name = "Exercism CLI";
+  summary = "Go based command line tool for exercism.io";
+  description = ''
+    Go based command line tool for exercism.io.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5.8";
+  tags = [ "education" "programming" "practice" "exercises" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.exercism;

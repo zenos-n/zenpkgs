@@ -1,0 +1,14 @@
+_meta = {
+  name = "SAGA GIS";
+  summary = "System for Automated Geoscientific Analyses";
+  description = ''
+    System for Automated Geoscientific Analyses.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.12.3";
+  tags = [ "maps" "science" "geography" "geospatial" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.saga;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "fzf-tab";
+  summary = "Replace zsh's default completion selection menu with fzf";
+  description = ''
+    Replace zsh's default completion selection menu with fzf.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.0";
+  tags = [ "terminal" "shell" "completion" "zsh" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.zsh-fzf-tab;

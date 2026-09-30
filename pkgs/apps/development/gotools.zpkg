@@ -1,0 +1,14 @@
+_meta = {
+  name = "Go Tools";
+  summary = "Additional tools for Go development";
+  description = ''
+    This package contains tools like: godoc, goimports, callgraph, digraph, stringer or toolstash.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.44.0";
+  tags = [ "development" "go" "toolchain" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.gotools;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "SQLx CLI";
+  summary = "CLI for managing databases, migrations, and enabling offline mode with `sqlx::query!()` and friends";
+  description = ''
+    CLI for managing databases, migrations, and enabling offline mode with `sqlx::query!()` and friends.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.6";
+  tags = [ "development" "database" "rust" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.sqlx-cli;

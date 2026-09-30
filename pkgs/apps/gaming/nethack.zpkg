@@ -1,0 +1,14 @@
+_meta = {
+  name = "NetHack";
+  summary = "Rogue-like game";
+  description = ''
+    Rogue-like game.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.6.7";
+  tags = [ "gaming" "roguelike" "rpg" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.ngpl;
+};
+
+import $pkgs.legacy.nethack;

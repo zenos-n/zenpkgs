@@ -1,0 +1,14 @@
+_meta = {
+  name = "draw.io";
+  summary = "Desktop version of draw.io for creating diagrams";
+  description = ''
+    Desktop version of draw.io for creating diagrams.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "31.1.8";
+  tags = [ "graphics" "diagrams" "development" "documentation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.drawio;

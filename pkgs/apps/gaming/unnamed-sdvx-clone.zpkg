@@ -1,0 +1,14 @@
+_meta = {
+  name = "Unnamed SDVX Clone";
+  summary = "Game based on K-Shoot MANIA and Sound Voltex";
+  description = ''
+    Game based on K-Shoot MANIA and Sound Voltex.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0-unstable-2025-07-31";
+  tags = [ "gaming" "rhythm" "music" "arcade" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.unnamed-sdvx-clone;

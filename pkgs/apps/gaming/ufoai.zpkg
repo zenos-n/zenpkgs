@@ -1,0 +1,14 @@
+_meta = {
+  name = "UFO: Alien Invasion";
+  summary = "Squad-based tactical strategy game in the tradition of X-Com";
+  description = ''
+    Squad-based tactical strategy game in the tradition of X-Com.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4";
+  tags = [ "gaming" "strategy" "turn-based" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.ufoai;

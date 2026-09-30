@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitHub Distributed Owners";
+  summary = "Generate GitHub CODEOWNERS files from OWNERS files distributed through the file tree";
+  description = ''
+    Generate GitHub CODEOWNERS files from OWNERS files distributed through the file tree.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.12";
+  tags = [ "development" "github" "codeowners" "generators" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.github-distributed-owners;

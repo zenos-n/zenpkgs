@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-f";
+  summary = "GitHub CLI ultimate FZF extension";
+  description = ''
+    GitHub CLI ultimate FZF extension.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9.0";
+  tags = [ "development" "github" "github-cli" "fzf" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.gh-f;

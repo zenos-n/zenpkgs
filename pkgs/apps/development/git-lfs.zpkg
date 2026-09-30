@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-lfs";
+  summary = "Git extension for versioning large files";
+  description = ''
+    Git extension for versioning large files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.7.1";
+  tags = [ "development" "git" "version-control" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-lfs;

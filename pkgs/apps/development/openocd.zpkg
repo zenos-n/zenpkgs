@@ -1,0 +1,20 @@
+_meta = {
+  name = "OpenOCD";
+  summary = "Free and Open On-Chip Debugging, In-System Programming and Boundary-Scan Testing";
+  description = ''
+    OpenOCD provides on-chip programming and debugging support with a layered
+    architecture of JTAG interface and TAP support, debug target support
+    (e.g. ARM, MIPS), and flash chip drivers (e.g. CFI, NAND, etc.).  Several
+    network interfaces are available for interactiving with OpenOCD: HTTP,
+    telnet, TCL, and GDB.  The GDB server enables OpenOCD to function as a
+    "remote target" for source-level debugging of embedded systems using the
+    GNU GDB program.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.12.0";
+  tags = [ "development" "embedded" "hardware" "firmware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.openocd;

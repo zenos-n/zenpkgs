@@ -1,0 +1,14 @@
+_meta = {
+  name = "plocate";
+  summary = "Much faster locate";
+  description = ''
+    Much faster locate.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.24";
+  tags = [ "files" "search" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.plocate;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "kubectl-neat";
+  summary = "Clean up Kubernetes yaml and json output to make it readable";
+  description = ''
+    Clean up Kubernetes yaml and json output to make it readable.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.3";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kubectl-neat;

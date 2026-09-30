@@ -1,0 +1,14 @@
+_meta = {
+  name = "seqdiag";
+  summary = "Generate sequence-diagram image from spec-text file (similar to Graphviz)";
+  description = ''
+    Generate sequence-diagram image from spec-text file (similar to Graphviz).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.0";
+  tags = [ "graphics" "diagrams" "development" "documentation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.seqdiag;

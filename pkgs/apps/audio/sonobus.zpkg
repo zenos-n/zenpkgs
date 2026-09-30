@@ -1,0 +1,14 @@
+_meta = {
+  name = "SonoBus";
+  summary = "High-quality network audio streaming";
+  description = ''
+    High-quality network audio streaming.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.2";
+  tags = [ "audio" "networking" "streaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.sonobus;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Organic Maps";
+  summary = "Detailed Offline Maps for Travellers, Tourists, Hikers and Cyclists";
+  description = ''
+    Detailed Offline Maps for Travellers, Tourists, Hikers and Cyclists.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.05.27-11";
+  tags = [ "maps" "gps" "navigation" "geography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.organicmaps;

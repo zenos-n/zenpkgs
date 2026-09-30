@@ -1,0 +1,14 @@
+_meta = {
+  name = "Sony Headphones Client";
+  summary = "Client recreating the functionality of the Sony Headphones app";
+  description = ''
+    Client recreating the functionality of the Sony Headphones app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.2";
+  tags = [ "audio" "bluetooth" "headphones" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sony-headphones-client;

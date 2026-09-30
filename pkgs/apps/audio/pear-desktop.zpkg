@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pear Desktop";
+  summary = "Electron wrapper around YouTube Music";
+  description = ''
+    Electron wrapper around YouTube Music.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.11.0";
+  tags = [ "audio" "music" "youtube" "streaming" "player" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pear-desktop;

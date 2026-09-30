@@ -1,0 +1,14 @@
+_meta = {
+  name = "Howdy";
+  summary = "Windows Hello™ style facial authentication for Linux";
+  description = ''
+    Windows Hello™ style facial authentication for Linux.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.0";
+  tags = [ "security" "authentication" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.howdy;

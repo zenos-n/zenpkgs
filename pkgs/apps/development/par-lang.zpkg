@@ -1,0 +1,14 @@
+_meta = {
+  name = "Par";
+  summary = "Experimental concurrent programming language";
+  description = ''
+    Experimental concurrent programming language.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-05-23";
+  tags = [ "development" "programming" "languages" "concurrency" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.par-lang;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "imv";
+  summary = "Command line image viewer for tiling window managers";
+  description = ''
+    Command line image viewer for tiling window managers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.0.1";
+  tags = [ "graphics" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.imv;

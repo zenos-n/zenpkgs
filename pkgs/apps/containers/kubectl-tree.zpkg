@@ -1,0 +1,14 @@
+_meta = {
+  name = "kubectl-tree";
+  summary = "kubectl plugin to browse Kubernetes object hierarchies as a tree";
+  description = ''
+    kubectl plugin to browse Kubernetes object hierarchies as a tree.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.0";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kubectl-tree;

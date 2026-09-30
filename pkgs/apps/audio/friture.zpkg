@@ -1,0 +1,14 @@
+_meta = {
+  name = "Friture";
+  summary = "Real-time audio analyzer";
+  description = ''
+    Real-time audio analyzer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.54";
+  tags = [ "audio" "analysis" "visualization" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.friture;

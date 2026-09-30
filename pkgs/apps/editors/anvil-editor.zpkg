@@ -1,0 +1,14 @@
+_meta = {
+  name = "Anvil";
+  summary = "Graphical, multi-pane tiling editor inspired by Acme";
+  description = ''
+    Graphical, multi-pane tiling editor inspired by Acme.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7";
+  tags = [ "editors" "development" "text" "graphical" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.anvil-editor;

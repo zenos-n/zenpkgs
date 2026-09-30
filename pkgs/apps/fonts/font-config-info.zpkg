@@ -1,0 +1,14 @@
+_meta = {
+  name = "font-config-info";
+  summary = "Prints a Linux system's font configuration";
+  description = ''
+    Prints a Linux system's font configuration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "fonts" "diagnostics" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.font-config-info;

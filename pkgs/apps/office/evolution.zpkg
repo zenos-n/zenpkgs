@@ -1,0 +1,14 @@
+_meta = {
+  name = "Evolution";
+  summary = "Personal information management application that provides integrated mail, calendaring and address book functionality";
+  description = ''
+    Personal information management application that provides integrated mail, calendaring and address book functionality.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.60.2";
+  tags = [ "office" "productivity" "communication" "email" "calendar" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl2Plus;
+};
+
+import $pkgs.legacy.evolution;

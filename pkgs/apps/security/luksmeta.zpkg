@@ -1,0 +1,14 @@
+_meta = {
+  name = "luksmeta";
+  summary = "Simple library for storing metadata in the LUKSv1 header";
+  description = ''
+    Simple library for storing metadata in the LUKSv1 header.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10";
+  tags = [ "security" "storage" "encryption" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Plus;
+};
+
+import $pkgs.legacy.luksmeta;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "FlashGBX";
+  summary = "GUI for reading and writing GB and GBA cartridges with the GBxCart RW";
+  description = ''
+    GUI for reading and writing GB and GBA cartridges with the GBxCart RW.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.4";
+  tags = [ "gaming" "hardware" "retro" "archiving" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.flashgbx;

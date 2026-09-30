@@ -1,0 +1,14 @@
+_meta = {
+  name = "ROOT";
+  summary = "Data analysis framework";
+  description = ''
+    Data analysis framework.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.40.00";
+  tags = [ "science" "physics" "data-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.root;

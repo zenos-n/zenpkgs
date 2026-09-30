@@ -1,0 +1,14 @@
+_meta = {
+  name = "dumpvdl2";
+  summary = "VDL Mode 2 message decoder and protocol analyzer";
+  description = ''
+    VDL Mode 2 message decoder and protocol analyzer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.0";
+  tags = [ "radio" "vdl2" "aviation" "decoding" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.dumpvdl2;

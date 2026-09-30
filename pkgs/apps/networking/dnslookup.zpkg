@@ -1,0 +1,14 @@
+_meta = {
+  name = "dnslookup";
+  summary = "Simple command line utility to make DNS lookups to the specified server";
+  description = ''
+    Simple command line utility to make DNS lookups to the specified server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.11.2";
+  tags = [ "networking" "dns" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dnslookup;

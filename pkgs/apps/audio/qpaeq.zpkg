@@ -1,0 +1,14 @@
+_meta = {
+  name = "Qpaeq";
+  summary = "Equalizer interface for pulseaudio's equalizer sinks";
+  description = ''
+    Equalizer interface for pulseaudio's equalizer sinks.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "17.0";
+  tags = [ "audio" "equalizer" "pulseaudio" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl2Plus;
+};
+
+import $pkgs.legacy.qpaeq;

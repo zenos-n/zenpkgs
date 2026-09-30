@@ -1,0 +1,14 @@
+_meta = {
+  name = "redsocks";
+  summary = "Transparent redirector of any TCP connection to proxy";
+  description = ''
+    Transparent redirector of any TCP connection to proxy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5";
+  tags = [ "networking" "proxy" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.redsocks;

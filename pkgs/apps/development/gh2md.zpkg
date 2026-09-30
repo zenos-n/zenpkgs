@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh2md";
+  summary = "Export Github repository issues to markdown files";
+  description = ''
+    Export Github repository issues to markdown files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.1";
+  tags = [ "development" "github" "issues" "markdown" "export" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh2md;

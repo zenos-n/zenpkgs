@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fantomas";
+  summary = "F# source code formatter";
+  description = ''
+    F# source code formatter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.0.3";
+  tags = [ "development" "fsharp" "formatting" "source-code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fantomas;

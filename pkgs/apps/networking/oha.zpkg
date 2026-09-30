@@ -1,0 +1,14 @@
+_meta = {
+  name = "oha";
+  summary = "HTTP load generator inspired by rakyll/hey with tui animation";
+  description = ''
+    HTTP load generator inspired by rakyll/hey with tui animation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.14.0";
+  tags = [ "networking" "benchmarking" "development" "http" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.oha;

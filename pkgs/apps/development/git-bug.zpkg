@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-bug";
+  summary = "Distributed bug tracker embedded in Git";
+  description = ''
+    Distributed bug tracker embedded in Git.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.1";
+  tags = [ "development" "git" "issues" "bug-tracking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.git-bug;

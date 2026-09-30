@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-smash";
+  summary = "Smash staged changes into previous commits to support your Git workflow, pull request and feature branch maintenance";
+  description = ''
+    Smash staged changes into previous commits to support your Git workflow, pull request and feature branch maintenance.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.2";
+  tags = [ "development" "git" "commits" "workflow" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-smash;

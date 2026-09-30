@@ -1,0 +1,14 @@
+_meta = {
+  name = "fswebcam";
+  summary = "Neat and simple webcam app";
+  description = ''
+    Neat and simple webcam app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20200725";
+  tags = [ "video" "webcam" "capture" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.fswebcam;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gleam";
+  summary = "Statically typed language for the Erlang VM";
+  description = ''
+    Statically typed language for the Erlang VM.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.18.1";
+  tags = [ "development" "languages" "erlang" "compilers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gleam;

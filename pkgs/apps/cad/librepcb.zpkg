@@ -1,0 +1,14 @@
+_meta = {
+  name = "LibrePCB";
+  summary = "Free EDA software to develop printed circuit boards";
+  description = ''
+    Free EDA software to develop printed circuit boards.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0";
+  tags = [ "cad" "electronics" "pcb" "graphics" "engineering" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.librepcb;

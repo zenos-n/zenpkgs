@@ -1,0 +1,16 @@
+_meta = {
+  name = "Flux";
+  summary = "Open and extensible continuous delivery solution for Kubernetes";
+  description = ''
+    Flux is a tool for keeping Kubernetes clusters in sync
+    with sources of configuration (like Git repositories), and automating
+    updates to configuration when there is new code to deploy.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.8";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fluxcd;

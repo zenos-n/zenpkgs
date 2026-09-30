@@ -1,0 +1,14 @@
+_meta = {
+  name = "Garble";
+  summary = "Obfuscate Go code by wrapping the Go toolchain";
+  description = ''
+    Obfuscate Go code by wrapping the Go toolchain.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.0";
+  tags = [ "development" "go" "obfuscation" "build-tools" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.garble;

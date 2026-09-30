@@ -1,0 +1,18 @@
+_meta = {
+  name = "em";
+  summary = "Editor for Mortals";
+  description = ''
+    Em is a QMC variant of the standard Unix text editor - ed. It includes all
+    of ed, so the documentation for ed is fully applicable to em. Em also has
+    a number of new commands and facilities designed to improve its
+    interaction and increase its usefulness to users at fast vdu terminals
+    (such as the ITT's at QMC).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "editors" "text" "terminal" "editing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.publicDomain;
+};
+
+import $pkgs.legacy.em;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "JabRef";
+  summary = "Open source bibliography reference manager";
+  description = ''
+    Open source bibliography reference manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.0-alpha.4";
+  tags = [ "office" "bibliography" "science" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.jabref;

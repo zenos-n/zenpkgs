@@ -1,0 +1,17 @@
+_meta = {
+  name = "Catfish";
+  summary = "Handy file search tool";
+  description = ''
+    Catfish is a handy file searching tool. The interface is
+    intentionally lightweight and simple, using only GTK 3.
+    You can configure it to your needs by using several command line
+    options.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.20.1";
+  tags = [ "files" "search" "desktop" "discovery" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.catfish;

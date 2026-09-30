@@ -1,0 +1,14 @@
+_meta = {
+  name = "skim";
+  summary = "Command-line fuzzy finder written in Rust";
+  description = ''
+    Command-line fuzzy finder written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.7.0";
+  tags = [ "files" "search" "fuzzy" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.skim;

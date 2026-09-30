@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tectonic";
+  summary = "TeX/LaTeX engine, wrapped with a compatible biber";
+  description = ''
+    TeX/LaTeX engine, wrapped with a compatible biber.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.17.0";
+  tags = [ "office" "latex" "writing" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.tectonic;

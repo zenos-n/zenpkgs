@@ -1,0 +1,14 @@
+_meta = {
+  name = "Honey Home";
+  summary = "A game where you save the bees, Ludum Dare 38 Game Jam winner";
+  description = ''
+    A game where you save the bees, Ludum Dare 38 Game Jam winner.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2022-10-25";
+  tags = [ "gaming" "puzzle" "casual" "bees" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfreeRedistributable;
+};
+
+import $pkgs.legacy.honey-home;

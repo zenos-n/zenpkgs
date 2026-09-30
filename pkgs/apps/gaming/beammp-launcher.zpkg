@@ -1,0 +1,14 @@
+_meta = {
+  name = "BeamMP Launcher";
+  summary = "Launcher for the BeamMP mod for BeamNG.drive";
+  description = ''
+    Launcher for the BeamMP mod for BeamNG.drive.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.0";
+  tags = [ "gaming" "launcher" "multiplayer" "beamng" "racing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.beammp-launcher;

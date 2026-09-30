@@ -1,0 +1,14 @@
+_meta = {
+  name = "DNGLab";
+  summary = "Camera RAW to DNG file format converter";
+  description = ''
+    Camera RAW to DNG file format converter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.2";
+  tags = [ "graphics" "raw" "dng" "photography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Only;
+};
+
+import $pkgs.legacy.dnglab;

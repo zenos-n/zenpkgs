@@ -1,0 +1,14 @@
+_meta = {
+  name = "musikcube";
+  summary = "Terminal-based music player, library, and streaming audio server";
+  description = ''
+    Terminal-based music player, library, and streaming audio server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.5";
+  tags = [ "audio" "music" "player" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.musikcube;

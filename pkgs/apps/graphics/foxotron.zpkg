@@ -1,0 +1,15 @@
+_meta = {
+  name = "Foxotron";
+  summary = "General purpose model viewer";
+  description = ''
+    ASSIMP based general purpose model viewer ("turntable") created for the
+    Revision 2021 3D Graphics Competition.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2024-09-23-unstable-2026-03-20";
+  tags = [ "graphics" "3d" "model-viewers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.foxotron;

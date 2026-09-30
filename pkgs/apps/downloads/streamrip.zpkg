@@ -1,0 +1,14 @@
+_meta = {
+  name = "streamrip";
+  summary = "Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer";
+  description = ''
+    Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.0";
+  tags = [ "downloads" "audio" "music" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.streamrip;

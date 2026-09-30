@@ -1,0 +1,15 @@
+_meta = {
+  name = "arp-scan";
+  summary = "ARP scanning and fingerprinting tool";
+  description = ''
+    Arp-scan is a command-line tool that uses the ARP protocol to discover
+    and fingerprint IP hosts on the local network.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.10.0";
+  tags = [ "networking" "diagnostics" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.arp-scan;

@@ -1,0 +1,17 @@
+_meta = {
+  name = "NE";
+  summary = "Nice editor";
+  description = ''
+    ne is a free (GPL'd) text editor based on the POSIX standard that runs
+    (we hope) on almost any UN*X machine.  ne is easy to use for the beginner,
+    but powerful and fully configurable for the wizard, and most sparing in its
+    resource usage.  See the manual for some highlights of ne's features.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.4";
+  tags = [ "editors" "terminal" "text" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.ne;

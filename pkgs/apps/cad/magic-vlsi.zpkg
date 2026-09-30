@@ -1,0 +1,14 @@
+_meta = {
+  name = "Magic VLSI";
+  summary = "VLSI layout tool written in Tcl";
+  description = ''
+    VLSI layout tool written in Tcl.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "8.3.629";
+  tags = [ "cad" "electronics" "verification" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.magic-vlsi;

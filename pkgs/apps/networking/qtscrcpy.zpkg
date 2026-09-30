@@ -1,0 +1,14 @@
+_meta = {
+  name = "QtScrcpy";
+  summary = "Android real-time display control software";
+  description = ''
+    Android real-time display control software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.3.3";
+  tags = [ "networking" "android" "remote-access" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.qtscrcpy;

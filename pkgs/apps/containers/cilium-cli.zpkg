@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cilium CLI";
+  summary = "CLI to install, manage & troubleshoot Kubernetes clusters running Cilium";
+  description = ''
+    CLI to install, manage & troubleshoot Kubernetes clusters running Cilium.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.19.2";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cilium-cli;

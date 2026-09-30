@@ -1,0 +1,14 @@
+_meta = {
+  name = "nurl";
+  summary = "Command-line tool to generate Nix fetcher calls from repository URLs";
+  description = ''
+    Command-line tool to generate Nix fetcher calls from repository URLs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "development" "nix" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.nurl;

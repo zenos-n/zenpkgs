@@ -1,0 +1,14 @@
+_meta = {
+  name = "ec";
+  summary = "Easy terminal-native 3-way git conflict resolver vim-like workflow";
+  description = ''
+    Easy terminal-native 3-way git conflict resolver vim-like workflow.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.2";
+  tags = [ "development" "git" "merge" "conflicts" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ec;

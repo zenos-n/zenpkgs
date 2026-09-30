@@ -1,0 +1,16 @@
+_meta = {
+  name = "Ultimate Doom Builder";
+  summary = "Advanced Doom map editor based on Doom Builder 2 with Mono support";
+  description = ''
+    Ultimate Doom Builder is a map editor for Doom, Heretic, Hexen, and Strife.
+    It is a continuation of Doom Builder 2 with many new features and improvements,
+    including cross-platform support via Mono.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-02-01";
+  tags = [ "gaming" "development" "editor" "maps" "doom" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.ultimate-doom-builder;

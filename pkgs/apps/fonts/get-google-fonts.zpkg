@@ -1,0 +1,14 @@
+_meta = {
+  name = "get-google-fonts";
+  summary = "Downloads and adapts Google fonts to working offline";
+  description = ''
+    Downloads and adapts Google fonts to working offline.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.2-unstable-2020-06-30";
+  tags = [ "fonts" "downloads" "google-fonts" "web" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.get-google-fonts;

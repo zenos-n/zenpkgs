@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fasttracker II Clone";
+  summary = "Highly accurate clone of the classic Fasttracker II software for MS-DOS";
+  description = ''
+    Highly accurate clone of the classic Fasttracker II software for MS-DOS.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.19";
+  tags = [ "audio" "music-production" "trackers" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.ft2-clone;

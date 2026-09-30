@@ -1,0 +1,14 @@
+_meta = {
+  name = "WebP Tools";
+  summary = "Tools and library for the WebP image format";
+  description = ''
+    Tools and library for the WebP image format.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.0";
+  tags = [ "graphics" "webp" "conversion" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.libwebp;

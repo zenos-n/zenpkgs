@@ -1,0 +1,14 @@
+_meta = {
+  name = "Foreman";
+  summary = "Process manager for applications with multiple components";
+  description = ''
+    Process manager for applications with multiple components.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.87.2";
+  tags = [ "development" "process-management" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.foreman;

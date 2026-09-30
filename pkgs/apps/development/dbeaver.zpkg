@@ -1,0 +1,17 @@
+_meta = {
+  name = "DBeaver";
+  summary = "Universal SQL Client for developers, DBA and analysts. Supports MySQL, PostgreSQL, MariaDB, SQLite, and more";
+  description = ''
+    Free multi-platform database tool for developers, SQL programmers, database
+    administrators and analysts. Supports all popular databases: MySQL,
+    PostgreSQL, MariaDB, SQLite, Oracle, DB2, SQL Server, Sybase, MS Access,
+    Teradata, Firebird, Derby, etc.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.1.3";
+  tags = [ "development" "database" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.dbeaver-bin;

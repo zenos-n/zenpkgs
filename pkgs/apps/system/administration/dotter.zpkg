@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dotter";
+  summary = "Dotfile manager and templater written in Rust";
+  description = ''
+    Dotfile manager and templater written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.4";
+  tags = [ "system" "administration" "dotfiles" "templates" "configuration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unlicense;
+};
+
+import $pkgs.legacy.dotter;

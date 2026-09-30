@@ -1,0 +1,14 @@
+_meta = {
+  name = "Appium Inspector";
+  summary = "GUI inspector for the appium UI automation tool";
+  description = ''
+    GUI inspector for the appium UI automation tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.7.1";
+  tags = [ "development" "testing" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.appium-inspector;

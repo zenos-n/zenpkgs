@@ -52,10 +52,10 @@ _let shadow: $type.function "json" = json:
 enable = enableOption {
   _meta.description = ''Rounded Window Corners Reborn configuration'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.rounded-window-corners-reborn ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.rounded-window-corners-reborn ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.rounded-window-corners-reborn.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.rounded-window-corners-reborn.extensionUuid ];
     dconf.settings."org/gnome/shell/extensions/rounded-window-corners-reborn" = {
         border-width = $lib.gvariant.mkInt32 $path.settings.border-size;
         settings-version = $lib.gvariant.mkUint32 $path.general.settings-version;

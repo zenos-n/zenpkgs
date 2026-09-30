@@ -1,0 +1,14 @@
+_meta = {
+  name = "Eternal Terminal";
+  summary = "Remote shell that automatically reconnects without interrupting the session";
+  description = ''
+    Remote shell that automatically reconnects without interrupting the session.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.2.11";
+  tags = [ "networking" "remote-access" "ssh" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.eternal-terminal;

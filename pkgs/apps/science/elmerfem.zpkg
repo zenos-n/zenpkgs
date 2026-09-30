@@ -1,0 +1,14 @@
+_meta = {
+  name = "Elmer";
+  summary = "Finite element software for multiphysical problems";
+  description = ''
+    Finite element software for multiphysical problems.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.0-unstable-2025-05-25";
+  tags = [ "science" "engineering" "simulation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.elmerfem;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "ClickHouse Backup";
+  summary = "Tool for easy ClickHouse backup and restore using object storage for backup files";
+  description = ''
+    Tool for easy ClickHouse backup and restore using object storage for backup files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.6.43";
+  tags = [ "backup" "clickhouse" "databases" "restore" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.clickhouse-backup;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Browsersync";
+  summary = "Keep multiple browsers & devices in sync when building websites";
+  description = ''
+    Keep multiple browsers & devices in sync when building websites.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.4";
+  tags = [ "development" "web" "browsers" "live-reload" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.browser-sync;

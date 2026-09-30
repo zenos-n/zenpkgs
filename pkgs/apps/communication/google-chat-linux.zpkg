@@ -1,0 +1,14 @@
+_meta = {
+  name = "Google Chat (Linux)";
+  summary = "Electron-base client for Google Hangouts Chat";
+  description = ''
+    Electron-base client for Google Hangouts Chat.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.39.24-1";
+  tags = [ "communication" "messaging" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.wtfpl;
+};
+
+import $pkgs.legacy.google-chat-linux;

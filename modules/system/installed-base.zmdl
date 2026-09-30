@@ -24,18 +24,18 @@ enable = enableOption {
     users.mutableUsers = false;
     system.stateVersion = "26.05";
     nix.settings.experimental-features = [ "nix-command" "flakes" ];
-    networking.networkmanager.enable = true;
+    networking.networkmanager.enable = $lib.mkDefault true;
     security = {
-      rtkit.enable = true;
+      rtkit.enable = $lib.mkDefault true;
       sudo.wheelNeedsPassword = !$cfg.system.oobeMode;
     };
     services.pipewire = {
-      enable = true;
-      alsa.enable = true;
-      pulse.enable = true;
+      enable = $lib.mkDefault true;
+      alsa.enable = $lib.mkDefault true;
+      pulse.enable = $lib.mkDefault true;
     };
     programs.dconf.enable = true;
-    hardware.enableRedistributableFirmware = true;
+    hardware.enableRedistributableFirmware = $lib.mkDefault true;
 
     systemd.tmpfiles.rules = if ($cfg.desktops.gnome.enable or false) then
       [ "d /var/lib/AccountsService/users 0755 root root -" ]

@@ -1,0 +1,14 @@
+_meta = {
+  name = "FwAnalyzer";
+  summary = "Tool to analyze filesystem images";
+  description = ''
+    Tool to analyze filesystem images.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.4";
+  tags = [ "security" "firmware" "filesystems" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fwanalyzer;

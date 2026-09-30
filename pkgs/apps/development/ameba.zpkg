@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ameba";
+  summary = "Static code analysis tool for Crystal";
+  description = ''
+    Static code analysis tool for Crystal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.4";
+  tags = [ "development" "crystal" "linting" "static-analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ameba;

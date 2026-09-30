@@ -1,0 +1,14 @@
+_meta = {
+  name = "MQTTX";
+  summary = "Powerful cross-platform MQTT 5.0 Desktop, CLI, and WebSocket client tools";
+  description = ''
+    Powerful cross-platform MQTT 5.0 Desktop, CLI, and WebSocket client tools.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.12.1";
+  tags = [ "networking" "messaging" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.mqttx;

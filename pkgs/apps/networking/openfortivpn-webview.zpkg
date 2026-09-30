@@ -1,0 +1,14 @@
+_meta = {
+  name = "openfortivpn WebView";
+  summary = "Application to perform the SAML single sing-on and easily retrieve the SVPNCOOKIE needed by openfortivpn";
+  description = ''
+    Application to perform the SAML single sing-on and easily retrieve the SVPNCOOKIE needed by openfortivpn.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.3";
+  tags = [ "networking" "vpn" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.openfortivpn-webview;

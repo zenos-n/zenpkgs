@@ -1,0 +1,14 @@
+_meta = {
+  name = "gimme-aws-creds";
+  summary = "CLI that utilizes Okta IdP via SAML to acquire temporary AWS credentials";
+  description = ''
+    CLI that utilizes Okta IdP via SAML to acquire temporary AWS credentials.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.8.2";
+  tags = [ "security" "aws" "okta" "authentication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.gimme-aws-creds;

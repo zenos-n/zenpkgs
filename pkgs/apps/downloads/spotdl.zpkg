@@ -1,0 +1,14 @@
+_meta = {
+  name = "spotDL";
+  summary = "Download your Spotify playlists and songs along with album art and metadata";
+  description = ''
+    Download your Spotify playlists and songs along with album art and metadata.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.5.0";
+  tags = [ "downloads" "audio" "music" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.spotdl;

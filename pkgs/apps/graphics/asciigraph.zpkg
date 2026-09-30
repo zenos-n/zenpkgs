@@ -1,0 +1,14 @@
+_meta = {
+  name = "asciigraph";
+  summary = "Lightweight ASCII line graph ╭┈╯ command line app";
+  description = ''
+    Lightweight ASCII line graph ╭┈╯ command line app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.3";
+  tags = [ "graphics" "charts" "ascii" "terminal" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.asciigraph;

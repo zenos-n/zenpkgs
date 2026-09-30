@@ -1,0 +1,14 @@
+_meta = {
+  name = "apkeep";
+  summary = "Command-line tool for downloading APK files from various sources";
+  description = ''
+    Command-line tool for downloading APK files from various sources.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "downloads" "android" "apk" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.apkeep;

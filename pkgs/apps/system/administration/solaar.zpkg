@@ -1,0 +1,21 @@
+_meta = {
+  name = "Solaar";
+  summary = "Linux devices manager for the Logitech Unifying Receiver";
+  description = ''
+    Solaar is a Linux manager for many Logitech keyboards, mice, and trackpads that
+    connect wirelessly to a USB Unifying, Lightspeed, or Nano receiver, connect
+    directly via a USB cable, or connect via Bluetooth. Solaar does not work with
+    peripherals from other companies.
+
+    Solaar can be used as a GUI application or via its command-line interface.
+
+    This tool requires either to be run with root/sudo or alternatively to have the udev rules files installed. On NixOS this can be achieved by setting `hardware.logitech.wireless.enable`.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.19";
+  tags = [ "system" "administration" "hardware" "input" "devices" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.solaar;

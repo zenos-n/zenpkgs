@@ -1,0 +1,15 @@
+_meta = {
+  name = "GoLand";
+  summary = "Go IDE from JetBrains";
+  description = ''
+    Goland is a commercial IDE by JetBrains aimed at providing an ergonomic environment for Go development.
+    The IDE extends the IntelliJ platform with the coding assistance and tool integrations specific for the Go language.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.2.0.1";
+  tags = [ "development" "ide" "go" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.jetbrains.goland;

@@ -1,0 +1,15 @@
+_meta = {
+  name = "gmnitohtml";
+  summary = "Gemini text to HTML converter";
+  description = ''
+    he gmnitohtml utility reads Gemini text from the standard input and writes
+    HTML to the standard output.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.3";
+  tags = [ "development" "gemini" "html" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gmnitohtml;

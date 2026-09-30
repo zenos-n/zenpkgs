@@ -1,0 +1,16 @@
+_meta = {
+  name = "waypipe";
+  summary = "Network proxy for Wayland clients (applications)";
+  description = ''
+    waypipe is a proxy for Wayland clients. It forwards Wayland messages and
+    serializes changes to shared memory buffers over a single socket. This
+    makes application forwarding similar to ssh -X feasible.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.0";
+  tags = [ "networking" "remote-desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.waypipe;

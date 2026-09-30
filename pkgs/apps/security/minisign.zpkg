@@ -1,0 +1,16 @@
+_meta = {
+  name = "Minisign";
+  summary = "Simple tool for signing files and verifying signatures";
+  description = ''
+    minisign uses public key cryptography to help facilitate secure (but not
+    necessarily private) file transfer, e.g., of software artefacts. minisign
+    is similar to and compatible with OpenBSD's signify.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.12";
+  tags = [ "security" "privacy" "signing" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.minisign;

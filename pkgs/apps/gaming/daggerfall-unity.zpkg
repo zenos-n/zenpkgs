@@ -1,0 +1,18 @@
+_meta = {
+  name = "Daggerfall Unity";
+  summary = "Open source recreation of Daggerfall in the Unity engine";
+  description = ''
+    Daggerfall Unity is an open source recreation of Daggerfall in the Unity engine created by Daggerfall Workshop.
+
+    Experience the adventure and intrigue of Daggerfall with all of its original charm along with hundreds of fixes, quality of life enhancements, and extensive mod support.
+
+    Includes Daggerfall Unity manual.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "gaming" "rpg" "game-engine" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.daggerfall-unity;

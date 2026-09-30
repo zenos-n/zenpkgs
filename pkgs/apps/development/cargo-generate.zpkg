@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "cargo-generate";
+  summary = "Tool to generate a new Rust project by leveraging a pre-existing git repository as a template";
+  description = ''
+    Tool to generate a new Rust project by leveraging a pre-existing git repository as a template.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.23.9";
+  tags = [ "development" "rust" "cargo" "templates" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.cargo-generate;

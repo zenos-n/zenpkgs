@@ -1,0 +1,15 @@
+_meta = {
+  name = "castget";
+  summary = "Simple, command-line based RSS enclosure downloader";
+  description = ''
+    castget is a simple, command-line based RSS enclosure downloader. It is
+    primarily intended for automatic, unattended downloading of podcasts.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.1-unstable-2026-02-04";
+  tags = [ "downloads" "rss" "podcasts" "enclosures" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.castget;

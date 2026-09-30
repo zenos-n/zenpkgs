@@ -1,0 +1,14 @@
+_meta = {
+  name = "cables";
+  summary = "Standalone version of cables, a tool for creating beautiful interactive content";
+  description = ''
+    Standalone version of cables, a tool for creating beautiful interactive content.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.2";
+  tags = [ "graphics" "interactive" "visual-programming" "creative-coding" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cables;

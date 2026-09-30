@@ -1,0 +1,14 @@
+_meta = {
+  name = "Certificate Ripper";
+  summary = "CLI tool to extract server certificates";
+  description = ''
+    CLI tool to extract server certificates.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.1";
+  tags = [ "security" "certificates" "tls" "extraction" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.certificate-ripper;

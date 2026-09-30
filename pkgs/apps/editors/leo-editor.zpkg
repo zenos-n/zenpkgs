@@ -1,0 +1,14 @@
+_meta = {
+  name = "Leo Editor";
+  summary = "Powerful folding editor";
+  description = ''
+    Leo is a PIM, IDE and outliner that accelerates the work flow of programmers, authors and web designers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.8.8";
+  tags = [ "editors" "outliner" "notes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.leo-editor;

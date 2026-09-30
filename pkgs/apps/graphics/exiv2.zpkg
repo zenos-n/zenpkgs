@@ -1,0 +1,14 @@
+_meta = {
+  name = "Exiv2";
+  summary = "Library and command-line utility to manage image metadata";
+  description = ''
+    Library and command-line utility to manage image metadata.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.28.8";
+  tags = [ "graphics" "photography" "metadata" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.exiv2;

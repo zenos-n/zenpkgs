@@ -1,0 +1,14 @@
+_meta = {
+  name = "Binwalk";
+  summary = "Firmware Analysis Tool";
+  description = ''
+    Firmware Analysis Tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.0";
+  tags = [ "development" "reverse-engineering" "firmware" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.binwalk;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "VRC Video Cacher";
+  summary = "Cache VRChat videos locally and fix YouTube videos that fail to load";
+  description = ''
+    Cache VRChat videos locally and fix YouTube videos that fail to load.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.5.1";
+  tags = [ "gaming" "virtual-reality" "vrchat" "video" "cache" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.vrcvideocacher;

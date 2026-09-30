@@ -1,0 +1,199 @@
+_meta = {
+    name = "Calculations and unit conversions";
+    summary = "Calculations and unit conversions";
+    description = ''Calculations and unit conversions.'';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    zenosVersion = 1.0.0Na;
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure calculations and unit conversions";
+    summary = "Install and configure calculations and unit conversions";
+    description = ''Install and configure calculations and unit conversions.'';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.legacy.gnome-calculator ];
+    assertions = [
+      { assertion = $path.decimalPlaces >= 0 && $path.decimalPlaces <= 100; message = "programs.gnome-calculator.decimalPlaces must be between 0 and 100."; }
+      { assertion = $path.bitwiseWordSize >= 8 && $path.bitwiseWordSize <= 64; message = "programs.gnome-calculator.bitwiseWordSize must be between 8 and 64."; }
+      { assertion = $path.numberBase >= 2 && $path.numberBase <= 16; message = "programs.gnome-calculator.numberBase must be between 2 and 16."; }
+      { assertion = $path.exchangeRateRefreshSeconds >= 0 && $path.exchangeRateRefreshSeconds <= 2147483647; message = "programs.gnome-calculator.exchangeRateRefreshSeconds must be between 0 and 2147483647."; }
+    ];
+    dconf.settings = {
+      "org/gnome/calculator"."accuracy" = $lib.gvariant.mkInt32 ($path.decimalPlaces);
+      "org/gnome/calculator"."word-size" = $lib.gvariant.mkInt32 ($path.bitwiseWordSize);
+      "org/gnome/calculator"."base" = $lib.gvariant.mkInt32 ($path.numberBase);
+      "org/gnome/calculator"."show-thousands" = $path.groupDigits;
+      "org/gnome/calculator"."show-zeroes" = $path.showTrailingZeroes;
+      "org/gnome/calculator"."number-format" = $path.numberFormat;
+      "org/gnome/calculator"."angle-units" = $path.angleUnit;
+      "org/gnome/calculator"."refresh-interval" = $lib.gvariant.mkInt32 ($path.exchangeRateRefreshSeconds);
+      "org/gnome/calculator"."currency-display" = $path.currencyLabels;
+      "org/gnome/calculator"."button-mode" = $path.mode;
+      "org/gnome/calculator"."enabled-completions" = if $path.suggestionTypes == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.suggestionTypes;
+      "org/gnome/calculator"."favorite-currencies" = if $path.favoriteCurrencies == [ ] then $lib.gvariant.mkEmptyArray $lib.gvariant.type.string else $lib.gvariant.mkArray $path.favoriteCurrencies;
+    };
+  };
+};
+
+decimalPlaces = {
+  _meta = {
+    name = "Digits displayed after the decimal point";
+    summary = "Digits displayed after the decimal point";
+    description = ''Digits displayed after the decimal point. Controls displayed digits, not internal calculation precision.'';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 9;
+  };
+};
+
+bitwiseWordSize = {
+  _meta = {
+    name = "Number of bits used for bitwise calculations";
+    summary = "Number of bits used for bitwise calculations";
+    description = ''Number of bits used for bitwise calculations. '';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 64;
+  };
+};
+
+numberBase = {
+  _meta = {
+    name = "Base used to display programming calculations";
+    summary = "Base used to display programming calculations";
+    description = ''Base used to display programming calculations. '';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 10;
+  };
+};
+
+groupDigits = {
+  _meta = {
+    name = "Group digits in large numbers";
+    summary = "Group digits in large numbers";
+    description = ''Group digits in large numbers. '';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+showTrailingZeroes = {
+  _meta = {
+    name = "Keep trailing zeroes after the decimal point";
+    summary = "Keep trailing zeroes after the decimal point";
+    description = ''Keep trailing zeroes after the decimal point. '';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = false;
+  };
+};
+
+numberFormat = {
+  _meta = {
+    name = "Format used to display calculation results";
+    summary = "Format used to display calculation results";
+    description = ''Format used to display calculation results. '';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "automatic" "fixed" "scientific" "engineering" ];
+    default = "automatic";
+  };
+};
+
+angleUnit = {
+  _meta = {
+    name = "Unit used for angle calculations";
+    summary = "Unit used for angle calculations";
+    description = ''Unit used for angle calculations. '';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "radians" "degrees" "gradians" ];
+    default = "degrees";
+  };
+};
+
+exchangeRateRefreshSeconds = {
+  _meta = {
+    name = "Seconds between currency exchange-rate updates";
+    summary = "Seconds between currency exchange-rate updates";
+    description = ''Seconds between currency exchange-rate updates. Zero disables downloading exchange rates.'';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.int;
+    default = 604800;
+  };
+};
+
+currencyLabels = {
+  _meta = {
+    name = "Show currency codes, names, or both";
+    summary = "Show currency codes, names, or both";
+    description = ''Show currency codes, names, or both. '';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "code" "name" "both" ];
+    default = "name";
+  };
+};
+
+mode = {
+  _meta = {
+    name = "Calculator mode shown when opened";
+    summary = "Calculator mode shown when opened";
+    description = ''Calculator mode shown when opened. '';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.enum [ "basic" "advanced" "financial" "programming" "keyboard" "conversion" ];
+    default = "basic";
+  };
+};
+
+suggestionTypes = {
+  _meta = {
+    name = "Types of suggestions shown while typing calculations";
+    summary = "Types of suggestions shown while typing calculations";
+    description = ''Types of suggestions shown while typing calculations. '';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ ($type.enum [ "builtin" "function" "currency" "favorite" "variable" ]) ];
+    default = [ "builtin" "function" "currency" "favorite" "variable" ];
+  };
+};
+
+favoriteCurrencies = {
+  _meta = {
+    name = "Currency codes shown first in the currency list";
+    summary = "Currency codes shown first in the currency list";
+    description = ''Currency codes shown first in the currency list. Use currency codes such as EUR or PLN.'';
+    tags = [ "desktop" "gnome-calculator" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.list [ $type.string ];
+    default = [ ];
+  };
+};

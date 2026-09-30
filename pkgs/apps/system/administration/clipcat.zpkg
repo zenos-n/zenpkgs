@@ -1,0 +1,14 @@
+_meta = {
+  name = "Clipcat";
+  summary = "Clipboard Manager written in Rust Programming Language";
+  description = ''
+    Clipboard Manager written in Rust Programming Language.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.25.0";
+  tags = [ "system" "administration" "clipboard" "desktop" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.clipcat;

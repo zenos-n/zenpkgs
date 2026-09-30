@@ -1,0 +1,1358 @@
+{
+  "programs/bash": [
+    {
+      "name": "completion",
+      "type": "$type.boolean",
+      "title": "Complete commands and arguments",
+      "target": "programs.bash.enableCompletion",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.completion",
+      "minimum": null
+    },
+    {
+      "name": "historyLines",
+      "type": "$type.int",
+      "title": "History lines kept in memory",
+      "target": "programs.bash.historySize",
+      "sample": 5000,
+      "expected": 5000,
+      "detail": "",
+      "expression": "$path.historyLines",
+      "minimum": 0
+    },
+    {
+      "name": "savedHistoryLines",
+      "type": "$type.int",
+      "title": "History lines saved on disk",
+      "target": "programs.bash.historyFileSize",
+      "sample": 20000,
+      "expected": 20000,
+      "detail": "",
+      "expression": "$path.savedHistoryLines",
+      "minimum": 0
+    },
+    {
+      "name": "historyFile",
+      "type": "$type.string",
+      "title": "History file location",
+      "target": "programs.bash.historyFile",
+      "sample": "$HOME/.bash_history",
+      "expected": "$HOME/.bash_history",
+      "detail": "",
+      "expression": "$path.historyFile",
+      "minimum": null
+    },
+    {
+      "name": "ignoredHistoryPatterns",
+      "type": "$type.list [ $type.string ]",
+      "title": "Commands excluded from history",
+      "target": "programs.bash.historyIgnore",
+      "sample": [
+        "ls",
+        "exit"
+      ],
+      "expected": [
+        "ls",
+        "exit"
+      ],
+      "detail": "",
+      "expression": "$path.ignoredHistoryPatterns",
+      "minimum": null
+    },
+    {
+      "name": "historyControl",
+      "type": "$type.list [ ($type.enum [ \"erasedups\" \"ignoredups\" \"ignorespace\" \"ignoreboth\" ]) ]",
+      "title": "History filtering rules",
+      "target": "programs.bash.historyControl",
+      "sample": [
+        "ignoredups",
+        "ignorespace"
+      ],
+      "expected": [
+        "ignoredups",
+        "ignorespace"
+      ],
+      "detail": "",
+      "expression": "$path.historyControl",
+      "minimum": null
+    },
+    {
+      "name": "shellOptions",
+      "type": "$type.list [ $type.string ]",
+      "title": "Bash shopt settings",
+      "target": "programs.bash.shellOptions",
+      "sample": [
+        "histappend",
+        "checkwinsize"
+      ],
+      "expected": [
+        "histappend",
+        "checkwinsize"
+      ],
+      "detail": "Shell option lists merge with existing defaults.",
+      "expression": "$path.shellOptions",
+      "minimum": null
+    },
+    {
+      "name": "aliases",
+      "type": "$type.set [ $type.string ]",
+      "title": "Bash command aliases",
+      "target": "programs.bash.shellAliases",
+      "sample": {
+        "ll": "ls -l"
+      },
+      "expected": {
+        "ll": "ls -l"
+      },
+      "detail": "",
+      "expression": "$path.aliases",
+      "minimum": null
+    },
+    {
+      "name": "variables",
+      "type": "$type.set [ $type.string ]",
+      "title": "Bash session variables",
+      "target": "programs.bash.sessionVariables",
+      "sample": {
+        "PAGER": "less"
+      },
+      "expected": {
+        "PAGER": "less"
+      },
+      "detail": "",
+      "expression": "$path.variables",
+      "minimum": null
+    },
+    {
+      "name": "loginCommands",
+      "type": "$type.string",
+      "title": "Commands run when logging in",
+      "target": "programs.bash.profileExtra",
+      "sample": "echo ready",
+      "expected": "echo ready",
+      "detail": "",
+      "expression": "$path.loginCommands",
+      "minimum": null
+    },
+    {
+      "name": "interactiveCommands",
+      "type": "$type.string",
+      "title": "Commands run in interactive Bash",
+      "target": "programs.bash.initExtra",
+      "sample": "bind \"set completion-ignore-case on\"",
+      "expected": "bind \"set completion-ignore-case on\"",
+      "detail": "",
+      "expression": "$path.interactiveCommands",
+      "minimum": null
+    },
+    {
+      "name": "logoutCommands",
+      "type": "$type.string",
+      "title": "Commands run when logging out",
+      "target": "programs.bash.logoutExtra",
+      "sample": "echo goodbye",
+      "expected": "echo goodbye",
+      "detail": "",
+      "expression": "$path.logoutCommands",
+      "minimum": null
+    }
+  ],
+  "programs/zsh": [
+    {
+      "name": "completion",
+      "type": "$type.boolean",
+      "title": "Complete commands and arguments",
+      "target": "programs.zsh.enableCompletion",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.completion",
+      "minimum": null
+    },
+    {
+      "name": "autoChangeDirectory",
+      "type": "$type.boolean",
+      "title": "Enter directories by typing their path",
+      "target": "programs.zsh.autocd",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.autoChangeDirectory",
+      "minimum": null
+    },
+    {
+      "name": "directorySearchPaths",
+      "type": "$type.list [ $type.string ]",
+      "title": "Directories searched by cd",
+      "target": "programs.zsh.cdpath",
+      "sample": [
+        "/Projects"
+      ],
+      "expected": [
+        "/Projects"
+      ],
+      "detail": "",
+      "expression": "$path.directorySearchPaths",
+      "minimum": null
+    },
+    {
+      "name": "aliases",
+      "type": "$type.set [ $type.string ]",
+      "title": "Zsh command aliases",
+      "target": "programs.zsh.shellAliases",
+      "sample": {
+        "ll": "ls -l"
+      },
+      "expected": {
+        "ll": "ls -l"
+      },
+      "detail": "",
+      "expression": "$path.aliases",
+      "minimum": null
+    },
+    {
+      "name": "globalAliases",
+      "type": "$type.set [ $type.string ]",
+      "title": "Aliases expanded anywhere in a command",
+      "target": "programs.zsh.shellGlobalAliases",
+      "sample": {
+        "G": "| grep"
+      },
+      "expected": {
+        "G": "| grep"
+      },
+      "detail": "",
+      "expression": "$path.globalAliases",
+      "minimum": null
+    },
+    {
+      "name": "suggestions",
+      "type": "$type.boolean",
+      "title": "Suggest commands while typing",
+      "target": "programs.zsh.autosuggestion.enable",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.suggestions",
+      "minimum": null
+    },
+    {
+      "name": "suggestionSources",
+      "type": "$type.list [ ($type.enum [ \"history\" \"completion\" \"match_prev_cmd\" ]) ]",
+      "title": "Sources used for command suggestions",
+      "target": "programs.zsh.autosuggestion.strategy",
+      "sample": [
+        "history"
+      ],
+      "expected": [
+        "history"
+      ],
+      "detail": "",
+      "expression": "$path.suggestionSources",
+      "minimum": null
+    },
+    {
+      "name": "syntaxHighlighting",
+      "type": "$type.boolean",
+      "title": "Highlight shell command syntax",
+      "target": "programs.zsh.syntaxHighlighting.enable",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.syntaxHighlighting",
+      "minimum": null
+    },
+    {
+      "name": "historyLines",
+      "type": "$type.int",
+      "title": "History lines kept in memory",
+      "target": "programs.zsh.history.size",
+      "sample": 5000,
+      "expected": 5000,
+      "detail": "",
+      "expression": "$path.historyLines",
+      "minimum": 0
+    },
+    {
+      "name": "savedHistoryLines",
+      "type": "$type.int",
+      "title": "History lines saved on disk",
+      "target": "programs.zsh.history.save",
+      "sample": 20000,
+      "expected": 20000,
+      "detail": "",
+      "expression": "$path.savedHistoryLines",
+      "minimum": 0
+    },
+    {
+      "name": "historyFile",
+      "type": "$type.string",
+      "title": "History file location",
+      "target": "programs.zsh.history.path",
+      "sample": "$HOME/.zsh_history",
+      "expected": "$HOME/.zsh_history",
+      "detail": "",
+      "expression": "$path.historyFile",
+      "minimum": null
+    },
+    {
+      "name": "shareHistory",
+      "type": "$type.boolean",
+      "title": "Share history across Zsh sessions",
+      "target": "programs.zsh.history.share",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.shareHistory",
+      "minimum": null
+    },
+    {
+      "name": "appendHistory",
+      "type": "$type.boolean",
+      "title": "Append session history to the history file",
+      "target": "programs.zsh.history.append",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.appendHistory",
+      "minimum": null
+    },
+    {
+      "name": "ignoreConsecutiveDuplicates",
+      "type": "$type.boolean",
+      "title": "Skip consecutive duplicate commands",
+      "target": "programs.zsh.history.ignoreDups",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.ignoreConsecutiveDuplicates",
+      "minimum": null
+    },
+    {
+      "name": "removeOlderDuplicates",
+      "type": "$type.boolean",
+      "title": "Remove older copies of repeated commands",
+      "target": "programs.zsh.history.ignoreAllDups",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.removeOlderDuplicates",
+      "minimum": null
+    },
+    {
+      "name": "ignoreLeadingSpace",
+      "type": "$type.boolean",
+      "title": "Skip commands beginning with a space",
+      "target": "programs.zsh.history.ignoreSpace",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.ignoreLeadingSpace",
+      "minimum": null
+    },
+    {
+      "name": "recordHistoryTimes",
+      "type": "$type.boolean",
+      "title": "Record timestamps with history entries",
+      "target": "programs.zsh.history.extended",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.recordHistoryTimes",
+      "minimum": null
+    },
+    {
+      "name": "ignoredHistoryPatterns",
+      "type": "$type.list [ $type.string ]",
+      "title": "Commands excluded from history",
+      "target": "programs.zsh.history.ignorePatterns",
+      "sample": [
+        "rm *"
+      ],
+      "expected": [
+        "rm *"
+      ],
+      "detail": "",
+      "expression": "$path.ignoredHistoryPatterns",
+      "minimum": null
+    },
+    {
+      "name": "substringHistorySearch",
+      "type": "$type.boolean",
+      "title": "Search history by command substring",
+      "target": "programs.zsh.historySubstringSearch.enable",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.substringHistorySearch",
+      "minimum": null
+    },
+    {
+      "name": "interactiveCommands",
+      "type": "$type.string",
+      "title": "Commands run in interactive Zsh",
+      "target": "programs.zsh.initContent",
+      "sample": "setopt AUTO_CD",
+      "expected": "setopt AUTO_CD",
+      "detail": "",
+      "expression": "$path.interactiveCommands",
+      "minimum": null
+    },
+    {
+      "name": "loginCommands",
+      "type": "$type.string",
+      "title": "Commands run before a login session",
+      "target": "programs.zsh.profileExtra",
+      "sample": "echo ready",
+      "expected": "echo ready",
+      "detail": "",
+      "expression": "$path.loginCommands",
+      "minimum": null
+    },
+    {
+      "name": "editingMode",
+      "type": "$type.enum [ \"emacs\" \"vi\" ]",
+      "title": "Command-line editing keys",
+      "target": "programs.zsh.defaultKeymap",
+      "sample": "vi",
+      "expected": "viins",
+      "detail": "",
+      "expression": "if $path.editingMode == \"vi\" then \"viins\" else \"emacs\"",
+      "minimum": null
+    }
+  ],
+  "programs/fish": [
+    {
+      "name": "generateCompletions",
+      "type": "$type.boolean",
+      "title": "Generate completions from installed manuals",
+      "target": "programs.fish.generateCompletions",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.generateCompletions",
+      "minimum": null
+    },
+    {
+      "name": "aliases",
+      "type": "$type.set [ $type.string ]",
+      "title": "Fish command aliases",
+      "target": "programs.fish.shellAliases",
+      "sample": {
+        "ll": "ls -l"
+      },
+      "expected": {
+        "ll": "ls -l"
+      },
+      "detail": "",
+      "expression": "$path.aliases",
+      "minimum": null
+    },
+    {
+      "name": "abbreviations",
+      "type": "$type.set [ $type.string ]",
+      "title": "Abbreviations expanded as you type",
+      "target": "programs.fish.shellAbbrs",
+      "sample": {
+        "gco": "git checkout"
+      },
+      "expected": {
+        "gco": "git checkout"
+      },
+      "detail": "",
+      "expression": "$path.abbreviations",
+      "minimum": null
+    },
+    {
+      "name": "preferAbbreviations",
+      "type": "$type.boolean",
+      "title": "Prefer abbreviations supplied by integrations",
+      "target": "programs.fish.preferAbbrs",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.preferAbbreviations",
+      "minimum": null
+    },
+    {
+      "name": "initialCommands",
+      "type": "$type.string",
+      "title": "Commands run when Fish starts",
+      "target": "programs.fish.shellInit",
+      "sample": "set -g fish_greeting",
+      "expected": "set -g fish_greeting",
+      "detail": "",
+      "expression": "$path.initialCommands",
+      "minimum": null
+    },
+    {
+      "name": "loginCommands",
+      "type": "$type.string",
+      "title": "Commands run in login Fish sessions",
+      "target": "programs.fish.loginShellInit",
+      "sample": "echo ready",
+      "expected": "echo ready",
+      "detail": "",
+      "expression": "$path.loginCommands",
+      "minimum": null
+    },
+    {
+      "name": "interactiveCommands",
+      "type": "$type.string",
+      "title": "Commands run in interactive Fish",
+      "target": "programs.fish.interactiveShellInit",
+      "sample": "fish_vi_key_bindings",
+      "expected": "fish_vi_key_bindings",
+      "detail": "",
+      "expression": "$path.interactiveCommands",
+      "minimum": null
+    },
+    {
+      "name": "lastInteractiveCommands",
+      "type": "$type.string",
+      "title": "Commands run last in interactive Fish",
+      "target": "programs.fish.shellInitLast",
+      "sample": "echo ready",
+      "expected": "echo ready",
+      "detail": "",
+      "expression": "$path.lastInteractiveCommands",
+      "minimum": null
+    }
+  ],
+  "programs/tmux": [
+    {
+      "name": "mouse",
+      "type": "$type.boolean",
+      "title": "Use the mouse to select panes",
+      "target": "programs.tmux.mouse",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.mouse",
+      "minimum": null
+    },
+    {
+      "name": "keyMode",
+      "type": "$type.enum [ \"emacs\" \"vi\" ]",
+      "title": "Copy-mode editing keys",
+      "target": "programs.tmux.keyMode",
+      "sample": "vi",
+      "expected": "vi",
+      "detail": "",
+      "expression": "$path.keyMode",
+      "minimum": null
+    },
+    {
+      "name": "prefix",
+      "type": "$type.string",
+      "title": "Prefix key for Tmux commands",
+      "target": "programs.tmux.prefix",
+      "sample": "C-a",
+      "expected": "C-a",
+      "detail": "",
+      "expression": "$path.prefix",
+      "minimum": null
+    },
+    {
+      "name": "firstWindowIndex",
+      "type": "$type.int",
+      "title": "Starting index for windows and panes",
+      "target": "programs.tmux.baseIndex",
+      "sample": 1,
+      "expected": 1,
+      "detail": "",
+      "expression": "$path.firstWindowIndex",
+      "minimum": 0
+    },
+    {
+      "name": "historyLines",
+      "type": "$type.int",
+      "title": "Scrollback lines per pane",
+      "target": "programs.tmux.historyLimit",
+      "sample": 5000,
+      "expected": 5000,
+      "detail": "",
+      "expression": "$path.historyLines",
+      "minimum": 1
+    },
+    {
+      "name": "escapeDelayMilliseconds",
+      "type": "$type.int",
+      "title": "Wait time after an Escape key",
+      "target": "programs.tmux.escapeTime",
+      "sample": 0,
+      "expected": 0,
+      "detail": "",
+      "expression": "$path.escapeDelayMilliseconds",
+      "minimum": 0
+    },
+    {
+      "name": "resizeStep",
+      "type": "$type.int",
+      "title": "Rows or columns per resize action",
+      "target": "programs.tmux.resizeAmount",
+      "sample": 5,
+      "expected": 5,
+      "detail": "",
+      "expression": "$path.resizeStep",
+      "minimum": 1
+    },
+    {
+      "name": "clock24Hours",
+      "type": "$type.boolean",
+      "title": "Use a 24-hour clock",
+      "target": "programs.tmux.clock24",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.clock24Hours",
+      "minimum": null
+    },
+    {
+      "name": "focusEvents",
+      "type": "$type.boolean",
+      "title": "Pass terminal focus events to applications",
+      "target": "programs.tmux.focusEvents",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.focusEvents",
+      "minimum": null
+    },
+    {
+      "name": "createSessionOnAttach",
+      "type": "$type.boolean",
+      "title": "Create a session when no session exists",
+      "target": "programs.tmux.newSession",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.createSessionOnAttach",
+      "minimum": null
+    },
+    {
+      "name": "reverseSplitKeys",
+      "type": "$type.boolean",
+      "title": "Swap horizontal and vertical split shortcuts",
+      "target": "programs.tmux.reverseSplit",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.reverseSplitKeys",
+      "minimum": null
+    },
+    {
+      "name": "paneNavigationKeys",
+      "type": "$type.boolean",
+      "title": "Use Vim-style pane navigation and resize keys",
+      "target": "programs.tmux.customPaneNavigationAndResize",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.paneNavigationKeys",
+      "minimum": null
+    },
+    {
+      "name": "aggressiveResize",
+      "type": "$type.boolean",
+      "title": "Resize windows to their smallest active session",
+      "target": "programs.tmux.aggressiveResize",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.aggressiveResize",
+      "minimum": null
+    },
+    {
+      "name": "secureSocket",
+      "type": "$type.boolean",
+      "title": "Store the socket in the runtime directory",
+      "target": "programs.tmux.secureSocket",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.secureSocket",
+      "minimum": null
+    },
+    {
+      "name": "terminalType",
+      "type": "$type.string",
+      "title": "Terminal type advertised inside Tmux",
+      "target": "programs.tmux.terminal",
+      "sample": "tmux-256color",
+      "expected": "tmux-256color",
+      "detail": "",
+      "expression": "$path.terminalType",
+      "minimum": null
+    },
+    {
+      "name": "shellCommand",
+      "type": "$type.string",
+      "title": "Shell executable used in new panes",
+      "target": "programs.tmux.shell",
+      "sample": "/run/current-system/sw/bin/bash",
+      "expected": "/run/current-system/sw/bin/bash",
+      "detail": "",
+      "expression": "$path.shellCommand",
+      "minimum": null
+    },
+    {
+      "name": "sessionManager",
+      "type": "$type.boolean",
+      "title": "Install the tmuxp session manager",
+      "target": "programs.tmux.tmuxp.enable",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.sessionManager",
+      "minimum": null
+    },
+    {
+      "name": "extraConfiguration",
+      "type": "$type.string",
+      "title": "Additional Tmux configuration",
+      "target": "programs.tmux.extraConfig",
+      "sample": "set -g status-position top",
+      "expected": "set -g status-position top",
+      "detail": "",
+      "expression": "$path.extraConfiguration",
+      "minimum": null
+    },
+    {
+      "name": "confirmClose",
+      "type": "$type.boolean",
+      "title": "Confirm before closing a pane or window",
+      "target": "programs.tmux.disableConfirmationPrompt",
+      "sample": false,
+      "expected": true,
+      "detail": "",
+      "expression": "!$path.confirmClose",
+      "minimum": null
+    }
+  ],
+  "programs/neovim": [
+    {
+      "name": "aliasVi",
+      "type": "$type.boolean",
+      "title": "Use Neovim for vi",
+      "target": "programs.neovim.viAlias",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.aliasVi",
+      "minimum": null
+    },
+    {
+      "name": "aliasVim",
+      "type": "$type.boolean",
+      "title": "Use Neovim for vim",
+      "target": "programs.neovim.vimAlias",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.aliasVim",
+      "minimum": null
+    },
+    {
+      "name": "aliasVimdiff",
+      "type": "$type.boolean",
+      "title": "Use Neovim for vimdiff",
+      "target": "programs.neovim.vimdiffAlias",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.aliasVimdiff",
+      "minimum": null
+    },
+    {
+      "name": "defaultEditor",
+      "type": "$type.boolean",
+      "title": "Use Neovim as the session editor",
+      "target": "programs.neovim.defaultEditor",
+      "sample": false,
+      "expected": false,
+      "detail": "Avoid conflicting EDITOR and VISUAL settings in the session environment.",
+      "expression": "$path.defaultEditor",
+      "minimum": null
+    },
+    {
+      "name": "pythonPlugins",
+      "type": "$type.boolean",
+      "title": "Enable Python plugin support",
+      "target": "programs.neovim.withPython3",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.pythonPlugins",
+      "minimum": null
+    },
+    {
+      "name": "nodePlugins",
+      "type": "$type.boolean",
+      "title": "Enable Node.js plugin support",
+      "target": "programs.neovim.withNodeJs",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.nodePlugins",
+      "minimum": null
+    },
+    {
+      "name": "rubyPlugins",
+      "type": "$type.boolean",
+      "title": "Enable Ruby plugin support",
+      "target": "programs.neovim.withRuby",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.rubyPlugins",
+      "minimum": null
+    },
+    {
+      "name": "perlPlugins",
+      "type": "$type.boolean",
+      "title": "Enable Perl plugin support",
+      "target": "programs.neovim.withPerl",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.perlPlugins",
+      "minimum": null
+    },
+    {
+      "name": "waylandClipboard",
+      "type": "$type.boolean",
+      "title": "Provide Wayland clipboard utilities",
+      "target": "programs.neovim.waylandSupport",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.waylandClipboard",
+      "minimum": null
+    },
+    {
+      "name": "vimConfiguration",
+      "type": "$type.string",
+      "title": "Additional Vimscript configuration",
+      "target": "programs.neovim.extraConfig",
+      "sample": "set number",
+      "expected": "set number",
+      "detail": "",
+      "expression": "$path.vimConfiguration",
+      "minimum": null
+    },
+    {
+      "name": "luaConfiguration",
+      "type": "$type.string",
+      "title": "Additional Lua configuration",
+      "target": "programs.neovim.initLua",
+      "sample": "vim.opt.number = true",
+      "expected": "vim.opt.number = true",
+      "detail": "",
+      "expression": "$path.luaConfiguration",
+      "minimum": null
+    }
+  ],
+  "programs/fzf": [
+    {
+      "name": "bashIntegration",
+      "type": "$type.boolean",
+      "title": "Enable Bash integration",
+      "target": "programs.fzf.enableBashIntegration",
+      "sample": false,
+      "expected": false,
+      "detail": "Requires that shell to be managed; does not select a login shell.",
+      "expression": "$path.bashIntegration",
+      "minimum": null
+    },
+    {
+      "name": "zshIntegration",
+      "type": "$type.boolean",
+      "title": "Enable Zsh integration",
+      "target": "programs.fzf.enableZshIntegration",
+      "sample": false,
+      "expected": false,
+      "detail": "Requires that shell to be managed; does not select a login shell.",
+      "expression": "$path.zshIntegration",
+      "minimum": null
+    },
+    {
+      "name": "fishIntegration",
+      "type": "$type.boolean",
+      "title": "Enable Fish integration",
+      "target": "programs.fzf.enableFishIntegration",
+      "sample": false,
+      "expected": false,
+      "detail": "Requires that shell to be managed; does not select a login shell.",
+      "expression": "$path.fishIntegration",
+      "minimum": null
+    },
+    {
+      "name": "fileSourceCommand",
+      "type": "$type.string",
+      "title": "Command supplying the default file list",
+      "target": "programs.fzf.defaultCommand",
+      "sample": "find . -type f",
+      "expected": "find . -type f",
+      "detail": "",
+      "expression": "$path.fileSourceCommand",
+      "minimum": null
+    },
+    {
+      "name": "options",
+      "type": "$type.list [ $type.string ]",
+      "title": "Default fuzzy-finder arguments",
+      "target": "programs.fzf.defaultOptions",
+      "sample": [
+        "--height=40%"
+      ],
+      "expected": [
+        "--height=40%"
+      ],
+      "detail": "",
+      "expression": "$path.options",
+      "minimum": null
+    },
+    {
+      "name": "fileWidgetCommand",
+      "type": "$type.string",
+      "title": "Command supplying the Control-T picker",
+      "target": "programs.fzf.fileWidgetCommand",
+      "sample": "find . -type f",
+      "expected": "find . -type f",
+      "detail": "",
+      "expression": "$path.fileWidgetCommand",
+      "minimum": null
+    },
+    {
+      "name": "fileWidgetOptions",
+      "type": "$type.list [ $type.string ]",
+      "title": "Arguments for the Control-T picker",
+      "target": "programs.fzf.fileWidgetOptions",
+      "sample": [
+        "--multi"
+      ],
+      "expected": [
+        "--multi"
+      ],
+      "detail": "",
+      "expression": "$path.fileWidgetOptions",
+      "minimum": null
+    },
+    {
+      "name": "directoryWidgetCommand",
+      "type": "$type.string",
+      "title": "Command supplying the Alt-C picker",
+      "target": "programs.fzf.changeDirWidgetCommand",
+      "sample": "find . -type d",
+      "expected": "find . -type d",
+      "detail": "",
+      "expression": "$path.directoryWidgetCommand",
+      "minimum": null
+    },
+    {
+      "name": "directoryWidgetOptions",
+      "type": "$type.list [ $type.string ]",
+      "title": "Arguments for the Alt-C picker",
+      "target": "programs.fzf.changeDirWidgetOptions",
+      "sample": [
+        "--reverse"
+      ],
+      "expected": [
+        "--reverse"
+      ],
+      "detail": "",
+      "expression": "$path.directoryWidgetOptions",
+      "minimum": null
+    },
+    {
+      "name": "historyWidgetOptions",
+      "type": "$type.list [ $type.string ]",
+      "title": "Arguments for the history picker",
+      "target": "programs.fzf.historyWidgetOptions",
+      "sample": [
+        "--exact"
+      ],
+      "expected": [
+        "--exact"
+      ],
+      "detail": "",
+      "expression": "$path.historyWidgetOptions",
+      "minimum": null
+    },
+    {
+      "name": "colors",
+      "type": "$type.set [ $type.string ]",
+      "title": "Fuzzy-finder color settings",
+      "target": "programs.fzf.colors",
+      "sample": {
+        "bg": "#202020"
+      },
+      "expected": {
+        "bg": "#202020"
+      },
+      "detail": "",
+      "expression": "$path.colors",
+      "minimum": null
+    },
+    {
+      "name": "tmuxPopup",
+      "type": "$type.boolean",
+      "title": "Use the Tmux wrapper for shell pickers",
+      "target": "programs.fzf.tmux.enableShellIntegration",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.tmuxPopup",
+      "minimum": null
+    },
+    {
+      "name": "tmuxOptions",
+      "type": "$type.list [ $type.string ]",
+      "title": "Tmux wrapper arguments",
+      "target": "programs.fzf.tmux.shellIntegrationOptions",
+      "sample": [
+        "-p",
+        "80%,60%"
+      ],
+      "expected": [
+        "-p",
+        "80%,60%"
+      ],
+      "detail": "",
+      "expression": "$path.tmuxOptions",
+      "minimum": null
+    }
+  ],
+  "programs/eza": [
+    {
+      "name": "bashIntegration",
+      "type": "$type.boolean",
+      "title": "Enable Bash integration",
+      "target": "programs.eza.enableBashIntegration",
+      "sample": false,
+      "expected": false,
+      "detail": "Requires that shell to be managed; does not select a login shell.",
+      "expression": "$path.bashIntegration",
+      "minimum": null
+    },
+    {
+      "name": "zshIntegration",
+      "type": "$type.boolean",
+      "title": "Enable Zsh integration",
+      "target": "programs.eza.enableZshIntegration",
+      "sample": false,
+      "expected": false,
+      "detail": "Requires that shell to be managed; does not select a login shell.",
+      "expression": "$path.zshIntegration",
+      "minimum": null
+    },
+    {
+      "name": "fishIntegration",
+      "type": "$type.boolean",
+      "title": "Enable Fish integration",
+      "target": "programs.eza.enableFishIntegration",
+      "sample": false,
+      "expected": false,
+      "detail": "Requires that shell to be managed; does not select a login shell.",
+      "expression": "$path.fishIntegration",
+      "minimum": null
+    },
+    {
+      "name": "icons",
+      "type": "$type.enum [ \"auto\" \"always\" \"never\" ]",
+      "title": "Show icons beside files",
+      "target": "programs.eza.icons",
+      "sample": "never",
+      "expected": "never",
+      "detail": "",
+      "expression": "$path.icons",
+      "minimum": null
+    },
+    {
+      "name": "colors",
+      "type": "$type.enum [ \"auto\" \"always\" \"never\" ]",
+      "title": "Use colors in directory listings",
+      "target": "programs.eza.colors",
+      "sample": "never",
+      "expected": "never",
+      "detail": "",
+      "expression": "$path.colors",
+      "minimum": null
+    },
+    {
+      "name": "showGitStatus",
+      "type": "$type.boolean",
+      "title": "Show version-control status beside files",
+      "target": "programs.eza.git",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.showGitStatus",
+      "minimum": null
+    },
+    {
+      "name": "extraArguments",
+      "type": "$type.list [ $type.string ]",
+      "title": "Additional directory-listing arguments",
+      "target": "programs.eza.extraOptions",
+      "sample": [
+        "--group-directories-first"
+      ],
+      "expected": [
+        "--group-directories-first"
+      ],
+      "detail": "",
+      "expression": "$path.extraArguments",
+      "minimum": null
+    }
+  ],
+  "programs/direnv": [
+    {
+      "name": "bashIntegration",
+      "type": "$type.boolean",
+      "title": "Enable Bash integration",
+      "target": "programs.direnv.enableBashIntegration",
+      "sample": false,
+      "expected": false,
+      "detail": "Requires that shell to be managed; does not select a login shell.",
+      "expression": "$path.bashIntegration",
+      "minimum": null
+    },
+    {
+      "name": "zshIntegration",
+      "type": "$type.boolean",
+      "title": "Enable Zsh integration",
+      "target": "programs.direnv.enableZshIntegration",
+      "sample": false,
+      "expected": false,
+      "detail": "Requires that shell to be managed; does not select a login shell.",
+      "expression": "$path.zshIntegration",
+      "minimum": null
+    },
+    {
+      "name": "fishIntegration",
+      "type": "$type.boolean",
+      "title": "Enable Fish integration",
+      "target": "programs.direnv.enableFishIntegration",
+      "sample": false,
+      "expected": false,
+      "detail": "Requires that shell to be managed; does not select a login shell.",
+      "expression": "$path.fishIntegration",
+      "minimum": null
+    },
+    {
+      "name": "cacheNixEnvironments",
+      "type": "$type.boolean",
+      "title": "Cache Nix development environments",
+      "target": "programs.direnv.nix-direnv.enable",
+      "sample": false,
+      "expected": false,
+      "detail": "Enable nix-direnv support; project authorization remains explicit.",
+      "expression": "$path.cacheNixEnvironments",
+      "minimum": null
+    },
+    {
+      "name": "miseIntegration",
+      "type": "$type.boolean",
+      "title": "Support mise-managed project environments",
+      "target": "programs.direnv.mise.enable",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.miseIntegration",
+      "minimum": null
+    },
+    {
+      "name": "logging",
+      "type": "$type.boolean",
+      "title": "Show Direnv log messages",
+      "target": "programs.direnv.silent",
+      "sample": false,
+      "expected": true,
+      "detail": "",
+      "expression": "!$path.logging",
+      "minimum": null
+    },
+    {
+      "name": "libraryCommands",
+      "type": "$type.string",
+      "title": "Custom Direnv helper commands",
+      "target": "programs.direnv.stdlib",
+      "sample": "layout_example() { echo example; }",
+      "expected": "layout_example() { echo example; }",
+      "detail": "Trusted shell code. Does not automatically authorize project directories.",
+      "expression": "$path.libraryCommands",
+      "minimum": null
+    }
+  ],
+  "system/shell": [
+    {
+      "name": "zsh",
+      "type": "$type.boolean",
+      "title": "Make Zsh available as a login shell",
+      "target": "programs.zsh.enable",
+      "sample": false,
+      "expected": false,
+      "detail": "Personal configuration remains in programs.zsh.",
+      "expression": "$path.zsh",
+      "minimum": null
+    },
+    {
+      "name": "fish",
+      "type": "$type.boolean",
+      "title": "Make Fish available as a login shell",
+      "target": "programs.fish.enable",
+      "sample": false,
+      "expected": false,
+      "detail": "Personal configuration remains in programs.fish.",
+      "expression": "$path.fish",
+      "minimum": null
+    },
+    {
+      "name": "bashCompletion",
+      "type": "$type.boolean",
+      "title": "Provide system Bash completions",
+      "target": "programs.bash.enableCompletion",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.bashCompletion",
+      "minimum": null
+    },
+    {
+      "name": "aliases",
+      "type": "$type.set [ $type.string ]",
+      "title": "Command aliases for all users",
+      "target": "environment.shellAliases",
+      "sample": {
+        "ll": "ls -l"
+      },
+      "expected": {
+        "ll": "ls -l"
+      },
+      "detail": "Individual managed shells may override these aliases.",
+      "expression": "$path.aliases",
+      "minimum": null
+    },
+    {
+      "name": "initialCommands",
+      "type": "$type.string",
+      "title": "Commands for system shell initialization",
+      "target": "environment.shellInit",
+      "sample": "export EXAMPLE=1",
+      "expected": "export EXAMPLE=1",
+      "detail": "Portable shell code executed for all users.",
+      "expression": "$path.initialCommands",
+      "minimum": null
+    },
+    {
+      "name": "loginCommands",
+      "type": "$type.string",
+      "title": "Commands for system login shells",
+      "target": "environment.loginShellInit",
+      "sample": "echo ready",
+      "expected": "echo ready",
+      "detail": "Portable shell code executed for all users.",
+      "expression": "$path.loginCommands",
+      "minimum": null
+    },
+    {
+      "name": "interactiveCommands",
+      "type": "$type.string",
+      "title": "Commands for system interactive shells",
+      "target": "environment.interactiveShellInit",
+      "sample": "echo ready",
+      "expected": "echo ready",
+      "detail": "Portable shell code executed for all users.",
+      "expression": "$path.interactiveCommands",
+      "minimum": null
+    }
+  ],
+  "system/environment": [
+    {
+      "name": "variables",
+      "type": "$type.set [ $type.string ]",
+      "title": "Environment variables for system shells",
+      "target": "environment.variables",
+      "sample": {
+        "EDITOR": "vi"
+      },
+      "expected": {
+        "EDITOR": "vi"
+      },
+      "detail": "No credentials. Values apply to shell sessions; sessionVariables also applies during PAM login.",
+      "expression": "$path.variables",
+      "minimum": null
+    },
+    {
+      "name": "sessionVariables",
+      "type": "$type.set [ $type.string ]",
+      "title": "Environment variables for login sessions",
+      "target": "environment.sessionVariables",
+      "sample": {
+        "BROWSER": "firefox"
+      },
+      "expected": {
+        "BROWSER": "firefox"
+      },
+      "detail": "No credentials. New login sessions receive the values.",
+      "expression": "$path.sessionVariables",
+      "minimum": null
+    },
+    {
+      "name": "homeBinInPath",
+      "type": "$type.boolean",
+      "title": "Add each user bin directory to PATH",
+      "target": "environment.homeBinInPath",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.homeBinInPath",
+      "minimum": null
+    },
+    {
+      "name": "localBinInPath",
+      "type": "$type.boolean",
+      "title": "Add each user local bin directory to PATH",
+      "target": "environment.localBinInPath",
+      "sample": false,
+      "expected": false,
+      "detail": "",
+      "expression": "$path.localBinInPath",
+      "minimum": null
+    },
+    {
+      "name": "linkedDirectories",
+      "type": "$type.list [ $type.string ]",
+      "title": "Package directories linked into the system profile",
+      "target": "environment.pathsToLink",
+      "sample": [
+        "/share/zsh"
+      ],
+      "expected": [
+        "/share/zsh"
+      ],
+      "detail": "Additive list; existing profile links remain.",
+      "expression": "$path.linkedDirectories",
+      "minimum": null
+    },
+    {
+      "name": "extraPackageOutputs",
+      "type": "$type.list [ $type.string ]",
+      "title": "Additional outputs installed with system packages",
+      "target": "environment.extraOutputsToInstall",
+      "sample": [
+        "info"
+      ],
+      "expected": [
+        "info"
+      ],
+      "detail": "Additive output names such as dev or info; does not select additional packages.",
+      "expression": "$path.extraPackageOutputs",
+      "minimum": null
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-point";
+  summary = "Set Git references through a command-line interface";
+  description = ''
+    Set Git references through a command-line interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.2";
+  tags = [ "development" "git" "refs" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-point;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "BaiduPCS-Go";
+  summary = "Baidu Netdisk commandline client, mimicking Linux shell file handling commands";
+  description = ''
+    Baidu Netdisk commandline client, mimicking Linux shell file handling commands.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.1";
+  tags = [ "files" "cloud" "baidu" "transfer" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.baidupcs-go;

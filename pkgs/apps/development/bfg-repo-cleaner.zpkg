@@ -1,0 +1,21 @@
+_meta = {
+  name = "BFG Repo-Cleaner";
+  summary = "Removes large or troublesome blobs in a git repository like git-filter-branch does, but faster";
+  description = ''
+    The BFG is a simpler, faster alternative to git-filter-branch for
+    cleansing bad data out of your Git repository history, in particular removing
+    crazy big files and removing passwords, credentials, and other private data.
+
+    The git-filter-branch command is enormously powerful and can do things
+    that the BFG can't - but the BFG is much better for the tasks above, because
+    it's faster (10-720x), simpler (dedicated to just removing things), and
+    beautiful (can use Scala instead of bash to script customizations).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.0";
+  tags = [ "development" "git" "history" "cleanup" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.bfg-repo-cleaner;

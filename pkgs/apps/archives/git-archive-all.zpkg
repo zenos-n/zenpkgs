@@ -1,0 +1,15 @@
+_meta = {
+  name = "git-archive-all";
+  summary = "Archive a repository with all its submodules";
+  description = ''
+    A python script wrapper for git-archive that archives a git superproject
+    and its submodules, if it has any. Takes into account .gitattributes
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.23.1";
+  tags = [ "archives" "git" "submodules" "export" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-archive-all;

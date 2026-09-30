@@ -1,0 +1,14 @@
+_meta = {
+  name = "GURPS Character Sheet";
+  summary = "Stand-alone, interactive, character sheet editor for the GURPS 4th Edition roleplaying game system";
+  description = ''
+    Stand-alone, interactive, character sheet editor for the GURPS 4th Edition roleplaying game system.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.42.0";
+  tags = [ "gaming" "tabletop" "rpg" "character-sheets" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.gcs;

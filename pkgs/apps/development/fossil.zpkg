@@ -1,0 +1,18 @@
+_meta = {
+  name = "Fossil";
+  summary = "Simple, high-reliability, distributed software configuration management";
+  description = ''
+    Fossil is a software configuration management system.  Fossil is
+    software that is designed to control and track the development of a
+    software project and to record the history of the project. There are
+    many such systems in use today. Fossil strives to distinguish itself
+    from the others by being extremely simple to setup and operate.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.28";
+  tags = [ "development" "version-control" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.fossil;

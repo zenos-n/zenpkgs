@@ -1,0 +1,14 @@
+_meta = {
+  name = "NVIDIA System Monitor Qt";
+  summary = "Task Manager for Linux for NVIDIA graphics cards";
+  description = ''
+    Task Manager for Linux for NVIDIA graphics cards.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6-1";
+  tags = [ "system" "monitoring" "gpu" "hardware" "performance" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.nvidia-system-monitor-qt;

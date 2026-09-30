@@ -1,0 +1,14 @@
+_meta = {
+  name = "ydotool";
+  summary = "Generic Linux command-line automation tool";
+  description = ''
+    Generic Linux command-line automation tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.4";
+  tags = [ "accessibility" "keyboard" "automation" "assistive-technology" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.ydotool;

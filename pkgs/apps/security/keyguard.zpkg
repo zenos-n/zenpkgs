@@ -1,0 +1,14 @@
+_meta = {
+  name = "Keyguard";
+  summary = "Alternative client for the Bitwarden platform";
+  description = ''
+    Alternative client for the Bitwarden platform.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.4";
+  tags = [ "security" "passwords" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.keyguard;

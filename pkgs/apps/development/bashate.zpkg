@@ -1,0 +1,14 @@
+_meta = {
+  name = "bashate";
+  summary = "Style enforcement for bash programs";
+  description = ''
+    Style enforcement for bash programs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.1";
+  tags = [ "development" "bash" "shell" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bashate;

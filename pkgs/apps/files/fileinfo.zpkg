@@ -1,0 +1,14 @@
+_meta = {
+  name = "fileinfo";
+  summary = "File extension metadata lookup tool";
+  description = ''
+    File extension metadata lookup tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2022-09-16";
+  tags = [ "files" "metadata" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fileinfo;

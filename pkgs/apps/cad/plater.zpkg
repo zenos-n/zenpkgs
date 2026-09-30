@@ -1,0 +1,14 @@
+_meta = {
+  name = "Plater";
+  summary = "3D-printer parts placer and plate generator";
+  description = ''
+    3D-printer parts placer and plate generator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0-unstable-2025-03-24";
+  tags = [ "cad" "3d-printing" "layout" "manufacturing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc-by-nc-30;
+};
+
+import $pkgs.legacy.plater;

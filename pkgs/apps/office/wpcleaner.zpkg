@@ -1,0 +1,16 @@
+_meta = {
+  name = "WPCleaner";
+  summary = "Utility for performing maintenance on Wikipedia";
+  description = ''
+    WPCleaner is a tool designed to help with various maintenance tasks, especially repairing
+    links to disambiguation pages, checking Wikipedia, fixing spelling and typography, and
+    helping with translation of articles coming from other wikis.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.5-unstable-2026-05-11";
+  tags = [ "office" "wikipedia" "editing" "maintenance" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.wpcleaner;

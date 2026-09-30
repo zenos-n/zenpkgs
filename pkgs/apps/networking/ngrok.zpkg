@@ -1,0 +1,14 @@
+_meta = {
+  name = "ngrok";
+  summary = "Allows you to expose a web server running on your local machine to the internet";
+  description = ''
+    Allows you to expose a web server running on your local machine to the internet.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.31.0";
+  tags = [ "networking" "tunneling" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.ngrok;

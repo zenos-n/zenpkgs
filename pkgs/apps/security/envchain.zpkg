@@ -1,0 +1,14 @@
+_meta = {
+  name = "envchain";
+  summary = "Set environment variables with macOS keychain or D-Bus secret service";
+  description = ''
+    Set environment variables with macOS keychain or D-Bus secret service.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "security" "credentials" "environment" "secrets" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.envchain;

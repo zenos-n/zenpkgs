@@ -1,0 +1,14 @@
+_meta = {
+  name = "better-adb-sync";
+  summary = "Synchronize files between a PC and an Android device using ADB (Android Debug Bridge)";
+  description = ''
+    Synchronize files between a PC and an Android device using ADB (Android Debug Bridge).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.0";
+  tags = [ "files" "android" "adb" "synchronization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.better-adb-sync;

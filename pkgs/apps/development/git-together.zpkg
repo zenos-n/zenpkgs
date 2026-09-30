@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-together";
+  summary = "Better commit attribution while pairing without messing with your git workflow";
+  description = ''
+    Better commit attribution while pairing without messing with your git workflow.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.0-alpha.26";
+  tags = [ "development" "git" "pair-programming" "coauthors" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.git-together;

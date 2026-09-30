@@ -1,0 +1,14 @@
+_meta = {
+  name = "nix-init";
+  summary = "Command line tool to generate Nix packages from URLs";
+  description = ''
+    Command line tool to generate Nix packages from URLs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.3.6";
+  tags = [ "development" "nix" "packaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.nix-init;

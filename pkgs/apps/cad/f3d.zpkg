@@ -1,0 +1,14 @@
+_meta = {
+  name = "F3D";
+  summary = "Fast and minimalist 3D viewer using VTK";
+  description = ''
+    Fast and minimalist 3D viewer using VTK.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.5.0";
+  tags = [ "cad" "graphics" "3d" "viewer" "engineering" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.f3d;

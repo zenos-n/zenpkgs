@@ -1,0 +1,14 @@
+_meta = {
+  name = "glpaper";
+  summary = "Wallpaper program for wlroots based Wayland compositors such as sway that allows you to render glsl shaders as your wallpaper";
+  description = ''
+    Wallpaper program for wlroots based Wayland compositors such as sway that allows you to render glsl shaders as your wallpaper.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2024-08-07";
+  tags = [ "graphics" "wallpaper" "shaders" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.glpaper;

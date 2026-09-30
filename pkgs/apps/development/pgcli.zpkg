@@ -1,0 +1,15 @@
+_meta = {
+  name = "pgcli";
+  summary = "Command-line interface for PostgreSQL";
+  description = ''
+    Rich command-line interface for PostgreSQL with auto-completion and
+    syntax highlighting.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.4.0";
+  tags = [ "development" "database" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.pgcli;

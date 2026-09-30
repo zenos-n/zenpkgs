@@ -1,0 +1,14 @@
+_meta = {
+  name = "Virt Viewer";
+  summary = "Viewer for remote virtual machines";
+  description = ''
+    Viewer for remote virtual machines.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "11.0";
+  tags = [ "virtualization" "management" "remote-access" "system" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.virt-viewer;

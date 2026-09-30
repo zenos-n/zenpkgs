@@ -1,0 +1,14 @@
+_meta = {
+  name = "rmlint";
+  summary = "Extremely fast tool to remove duplicates and other lint from your filesystem";
+  description = ''
+    Extremely fast tool to remove duplicates and other lint from your filesystem.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.10.2";
+  tags = [ "files" "duplicates" "storage" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.rmlint;

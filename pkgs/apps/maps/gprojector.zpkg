@@ -1,0 +1,14 @@
+_meta = {
+  name = "G.Projector";
+  summary = "G.Projector transforms an input map image into any of about 200 global and regional map projections";
+  description = ''
+    G.Projector transforms an input map image into any of about 200 global and regional map projections.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.0";
+  tags = [ "maps" "geography" "science" "cartography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.gprojector;

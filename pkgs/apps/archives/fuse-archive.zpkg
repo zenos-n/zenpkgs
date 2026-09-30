@@ -1,0 +1,14 @@
+_meta = {
+  name = "fuse-archive";
+  summary = "Serve an archive or a compressed file as a read-only FUSE file system";
+  description = ''
+    Serve an archive or a compressed file as a read-only FUSE file system.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.10";
+  tags = [ "archives" "fuse" "filesystems" "mounting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fuse-archive;

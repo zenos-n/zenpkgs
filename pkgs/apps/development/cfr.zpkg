@@ -1,0 +1,16 @@
+_meta = {
+  name = "CFR";
+  summary = "Another java decompiler";
+  description = ''
+    CFR will decompile modern Java features - Java 8 lambdas (pre and post
+    Java beta 103 changes), Java 7 String switches etc, but is written
+    entirely in Java 6.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.152";
+  tags = [ "development" "java" "decompiler" "reverse-engineering" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cfr;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Betterlockscreen";
+  summary = "Fast and sweet looking lockscreen for linux systems with effects";
+  description = ''
+    Fast and sweet looking lockscreen for linux systems with effects.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.4.0";
+  tags = [ "security" "screen-lock" "desktop" "x11" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.betterlockscreen;

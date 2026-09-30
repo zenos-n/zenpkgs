@@ -1,0 +1,17 @@
+_meta = {
+  name = "whois";
+  summary = "Intelligent WHOIS client from Debian";
+  description = ''
+    This package provides a commandline client for the WHOIS (RFC 3912)
+    protocol, which queries online servers for information such as contact
+    details for domains and IP address assignments. It can intelligently
+    select the appropriate WHOIS server for most queries.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.6.6";
+  tags = [ "networking" "dns" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.whois;

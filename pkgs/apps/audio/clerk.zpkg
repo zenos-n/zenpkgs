@@ -1,0 +1,14 @@
+_meta = {
+  name = "clerk";
+  summary = "MPD client based on rofi/fzf";
+  description = ''
+    MPD client based on rofi/fzf.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2024-02-20";
+  tags = [ "audio" "mpd" "music" "rofi" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.clerk;

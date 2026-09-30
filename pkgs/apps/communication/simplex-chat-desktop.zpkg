@@ -1,0 +1,14 @@
+_meta = {
+  name = "SimpleX Chat";
+  summary = "Desktop application for SimpleX Chat";
+  description = ''
+    Desktop application for SimpleX Chat.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.0.1";
+  tags = [ "communication" "chat" "privacy" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.simplex-chat-desktop;

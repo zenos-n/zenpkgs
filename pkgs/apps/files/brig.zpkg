@@ -1,0 +1,17 @@
+_meta = {
+  name = "brig";
+  summary = "File synchronization on top of IPFS with a git-like interface and a FUSE filesystem";
+  description = ''
+    brig is a distributed and secure file synchronization tool with a version
+    control system. It is based on IPFS, written in Go and will feel familiar
+    to git users. Think of it as a swiss army knife for file synchronization
+    or as a peer to peer alternative to Dropbox.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.1";
+  tags = [ "files" "synchronization" "ipfs" "fuse" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.brig;

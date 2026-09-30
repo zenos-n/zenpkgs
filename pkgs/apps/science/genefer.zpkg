@@ -1,0 +1,15 @@
+_meta = {
+  name = "Genefer";
+  summary = "Generalized Fermat Prime search program";
+  description = ''
+    genefer is an OpenMP® application on CPU and an OpenCL™ application on GPU.
+    It performs a fast probable primality test for numbers of the form b^2n + 1 with the Fermat test.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "25.12.0";
+  tags = [ "science" "mathematics" "prime-numbers" "number-theory" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.genefer;

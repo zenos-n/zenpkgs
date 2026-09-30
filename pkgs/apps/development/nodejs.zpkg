@@ -1,0 +1,14 @@
+_meta = {
+  name = "Node.js";
+  summary = "Event-driven I/O framework for the V8 JavaScript engine";
+  description = ''
+    Event-driven I/O framework for the V8 JavaScript engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "24.19.0";
+  tags = [ "development" "javascript" "runtime" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.nodejs;

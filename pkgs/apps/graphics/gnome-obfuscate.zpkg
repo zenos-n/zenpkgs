@@ -1,0 +1,14 @@
+_meta = {
+  name = "Obfuscate";
+  summary = "Censor private information";
+  description = ''
+    Censor private information.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.10";
+  tags = [ "graphics" "privacy" "redaction" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gnome-obfuscate;

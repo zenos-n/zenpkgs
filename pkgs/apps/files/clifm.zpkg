@@ -1,0 +1,14 @@
+_meta = {
+  name = "Clifm";
+  summary = "CLI-based, shell-like, and non-curses terminal file manager";
+  description = ''
+    CLI-based, shell-like, and non-curses terminal file manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.27.1";
+  tags = [ "files" "manager" "navigation" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.clifm;

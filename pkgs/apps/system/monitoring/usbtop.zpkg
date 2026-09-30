@@ -1,0 +1,14 @@
+_meta = {
+  name = "usbtop";
+  summary = "Top utility that shows an estimated instantaneous bandwidth on USB buses and devices";
+  description = ''
+    Top utility that shows an estimated instantaneous bandwidth on USB buses and devices.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0";
+  tags = [ "system" "monitoring" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.usbtop;

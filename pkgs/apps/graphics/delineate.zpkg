@@ -1,0 +1,14 @@
+_meta = {
+  name = "Delineate";
+  summary = "View and edit graphs";
+  description = ''
+    View and edit graphs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.2";
+  tags = [ "graphics" "graphs" "editor" "visualization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.delineate;

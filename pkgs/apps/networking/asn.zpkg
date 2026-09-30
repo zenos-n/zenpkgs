@@ -1,0 +1,16 @@
+_meta = {
+  name = "asn";
+  summary = "OSINT command line tool for investigating network data";
+  description = ''
+    ASN / RPKI validity / BGP stats / IPv4v6 / Prefix / URL / ASPath / Organization /
+    IP reputation / IP geolocation / IP fingerprinting / Network recon /
+    lookup API server / Web traceroute server
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.81.0";
+  tags = [ "networking" "osint" "security" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.asn;

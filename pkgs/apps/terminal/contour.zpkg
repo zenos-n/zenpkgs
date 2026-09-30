@@ -1,0 +1,14 @@
+_meta = {
+  name = "Contour";
+  summary = "Modern C++ Terminal Emulator";
+  description = ''
+    Modern C++ Terminal Emulator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.3.8249";
+  tags = [ "terminal" "command-line" "desktop" "emulator" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.contour;

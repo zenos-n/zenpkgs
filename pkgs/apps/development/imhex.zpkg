@@ -1,0 +1,14 @@
+_meta = {
+  name = "ImHex";
+  summary = "Hex Editor for Reverse Engineers, Programmers and people who value their retinas when working at 3 AM";
+  description = ''
+    Hex Editor for Reverse Engineers, Programmers and people who value their retinas when working at 3 AM.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.38.1";
+  tags = [ "development" "hex" "reverse-engineering" "files" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.imhex;

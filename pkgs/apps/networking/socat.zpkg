@@ -1,0 +1,14 @@
+_meta = {
+  name = "socat";
+  summary = "Utility for bidirectional data transfer between two independent data channels";
+  description = ''
+    Utility for bidirectional data transfer between two independent data channels.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.1.3";
+  tags = [ "networking" "transfer" "debugging" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.socat;

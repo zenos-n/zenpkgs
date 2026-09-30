@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fragments";
+  summary = "Easy to use BitTorrent client for the GNOME desktop environment";
+  description = ''
+    Easy to use BitTorrent client for the GNOME desktop environment.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.0.1";
+  tags = [ "downloads" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.fragments;

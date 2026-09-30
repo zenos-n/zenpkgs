@@ -1,0 +1,14 @@
+_meta = {
+  name = "Jitsi Meet";
+  summary = "Jitsi Meet desktop application powered by Electron";
+  description = ''
+    Jitsi Meet desktop application powered by Electron.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.5.0";
+  tags = [ "communication" "video-conferencing" "messaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.jitsi-meet-electron;

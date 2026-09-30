@@ -1,0 +1,14 @@
+_meta = {
+  name = "latexminted";
+  summary = "Python executable for LaTeX minted package";
+  description = ''
+    Python executable for LaTeX minted package.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.1";
+  tags = [ "office" "latex" "writing" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lppl13c;
+};
+
+import $pkgs.legacy.latexminted;

@@ -1,0 +1,20 @@
+_meta = {
+  name = "SameBoy";
+  summary = "Game Boy, Game Boy Color, and Super Game Boy emulator";
+  description = ''
+    SameBoy is a user friendly Game Boy, Game Boy Color and Super
+    Game Boy emulator for macOS, Windows and Unix-like platforms.
+    SameBoy is extremely accurate and includes a wide range of
+    powerful debugging features, making it ideal for both casual
+    players and developers. In addition to accuracy and developer
+    capabilities, SameBoy has all the features one would expect from
+    an emulator – from save states to scaling filters.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.2";
+  tags = [ "gaming" "emulators" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sameboy;

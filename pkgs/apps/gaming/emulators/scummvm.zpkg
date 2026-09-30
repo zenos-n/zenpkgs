@@ -1,0 +1,14 @@
+_meta = {
+  name = "ScummVM";
+  summary = "Program to run certain classic graphical point-and-click adventure games (such as Monkey Island)";
+  description = ''
+    Program to run certain classic graphical point-and-click adventure games (such as Monkey Island).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.1.0";
+  tags = [ "gaming" "emulators" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.scummvm;

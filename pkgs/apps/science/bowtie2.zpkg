@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bowtie 2";
+  summary = "Ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences";
+  description = ''
+    Ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.5.4";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.bowtie2;

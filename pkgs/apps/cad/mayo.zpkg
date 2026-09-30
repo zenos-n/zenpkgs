@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mayo";
+  summary = "3D CAD viewer and converter based on Qt + OpenCascade";
+  description = ''
+    3D CAD viewer and converter based on Qt + OpenCascade.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.0";
+  tags = [ "cad" "3d" "viewer" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.mayo;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Chroma";
+  summary = "General purpose syntax highlighter in pure Go";
+  description = ''
+    General purpose syntax highlighter in pure Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.24.1";
+  tags = [ "development" "syntax-highlighting" "terminal" "text" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.chroma;

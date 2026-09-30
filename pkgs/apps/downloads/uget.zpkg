@@ -1,0 +1,18 @@
+_meta = {
+  name = "uGet";
+  summary = "Download manager using GTK and libcurl";
+  description = ''
+    uGet is a VERY Powerful download manager application with a large
+    inventory of features but is still very light-weight and low on
+    resources, so don't let the impressive list of features scare you into
+    thinking that it "might be too powerful" because remember power is good
+    and lightweight power is uGet!
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.3-1";
+  tags = [ "downloads" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.uget;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Zim";
+  summary = "Desktop wiki";
+  description = ''
+    Desktop wiki.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.76.3";
+  tags = [ "office" "notes" "organization" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.zim;

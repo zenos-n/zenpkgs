@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dockrtui";
+  summary = "Fast, modern and keyboard-driven terminal dashboard for Docker";
+  description = ''
+    Fast, modern and keyboard-driven terminal dashboard for Docker.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.3";
+  tags = [ "containers" "docker" "dashboard" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.dockrtui;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-udeps";
+  summary = "Find unused dependencies in Cargo.toml";
+  description = ''
+    Find unused dependencies in Cargo.toml.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.61";
+  tags = [ "development" "rust" "cargo" "dependencies" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-udeps;

@@ -1,0 +1,18 @@
+_meta = {
+  name = "wayvnc";
+  summary = "VNC server for wlroots based Wayland compositors";
+  description = ''
+    This is a VNC server for wlroots based Wayland compositors. It attaches
+    to a running Wayland session, creates virtual input devices and exposes a
+    single display via the RFB protocol. The Wayland session may be a
+    headless one, so it is also possible to run wayvnc without a physical
+    display attached.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.0";
+  tags = [ "networking" "remote-desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.wayvnc;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "KMyMoney";
+  summary = "Personal finance manager for KDE";
+  description = ''
+    Personal finance manager for KDE.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.2.2";
+  tags = [ "finance" "office" "productivity" "budgeting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.kmymoney;

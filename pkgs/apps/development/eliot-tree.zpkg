@@ -1,0 +1,14 @@
+_meta = {
+  name = "Eliot Tree";
+  summary = "Render Eliot logs as an ASCII tree";
+  description = ''
+    Render Eliot logs as an ASCII tree.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "24.0.0";
+  tags = [ "development" "logs" "eliot" "visualization" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.eliot-tree;

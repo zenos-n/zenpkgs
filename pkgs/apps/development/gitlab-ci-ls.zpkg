@@ -1,0 +1,14 @@
+_meta = {
+  name = "GitLab CI Language Server";
+  summary = "GitLab CI Language Server (gitlab-ci-ls)";
+  description = ''
+    GitLab CI Language Server (gitlab-ci-ls).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.2";
+  tags = [ "development" "gitlab" "ci" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gitlab-ci-ls;

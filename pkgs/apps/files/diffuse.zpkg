@@ -1,0 +1,14 @@
+_meta = {
+  name = "Diffuse";
+  summary = "Graphical tool for merging and comparing text files";
+  description = ''
+    Graphical tool for merging and comparing text files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.0";
+  tags = [ "files" "diff" "merge" "comparison" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.diffuse;

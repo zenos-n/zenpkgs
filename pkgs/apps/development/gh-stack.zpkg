@@ -1,0 +1,14 @@
+_meta = {
+  name = "gh-stack";
+  summary = "GitHub CLI extension to use stacked PRs";
+  description = ''
+    GitHub CLI extension to use stacked PRs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.4";
+  tags = [ "development" "github-cli" "git" "stacked-pull-requests" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gh-stack;

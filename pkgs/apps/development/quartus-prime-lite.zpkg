@@ -1,0 +1,14 @@
+_meta = {
+  name = "Quartus Prime Lite";
+  summary = "FPGA design and simulation software";
+  description = ''
+    FPGA design and simulation software.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "25.1std.0.1129";
+  tags = [ "development" "electronics" "fpga" "simulation" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.quartus-prime-lite;

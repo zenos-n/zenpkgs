@@ -1,0 +1,14 @@
+_meta = {
+  name = "PCManFM";
+  summary = "File manager with GTK interface";
+  description = ''
+    File manager with GTK interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.0";
+  tags = [ "files" "file-manager" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.pcmanfm;

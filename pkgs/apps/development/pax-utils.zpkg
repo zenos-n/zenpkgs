@@ -1,0 +1,17 @@
+_meta = {
+  name = "pax-utils";
+  summary = "ELF utils that can check files for security relevant properties";
+  description = ''
+    A suite of ELF tools to aid auditing systems. Contains
+    various ELF related utils for ELF32, ELF64 binaries useful
+    for displaying PaX and security info on a large groups of
+    binary files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.10";
+  tags = [ "development" "binaries" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.pax-utils;

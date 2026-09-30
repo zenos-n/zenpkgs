@@ -1,0 +1,14 @@
+_meta = {
+  name = "Fetchtastic";
+  summary = "Utility for downloading and managing the latest Meshtastic firmware releases";
+  description = ''
+    Utility for downloading and managing the latest Meshtastic firmware releases.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.9";
+  tags = [ "radio" "meshtastic" "firmware" "downloads" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fetchtastic;

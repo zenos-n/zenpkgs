@@ -1,0 +1,14 @@
+_meta = {
+  name = "nmon";
+  summary = "AIX & Linux Performance Monitoring tool";
+  description = ''
+    AIX & Linux Performance Monitoring tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "16s";
+  tags = [ "system" "monitoring" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.nmon;

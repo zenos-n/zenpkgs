@@ -1,0 +1,14 @@
+_meta = {
+  name = "SeqKit";
+  summary = "Cross-platform and ultrafast toolkit for FASTA/Q file manipulation";
+  description = ''
+    Cross-platform and ultrafast toolkit for FASTA/Q file manipulation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.13.0";
+  tags = [ "science" "biology" "bioinformatics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.seqkit;

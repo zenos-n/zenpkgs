@@ -1,0 +1,14 @@
+_meta = {
+  name = "Android Image Kitchen";
+  summary = "Unpack & repack Android boot files";
+  description = ''
+    Unpack & repack Android boot files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-10-17";
+  tags = [ "files" "android" "boot-images" "unpacking" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.free;
+};
+
+import $pkgs.legacy.android-image-kitchen;

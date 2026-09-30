@@ -1,0 +1,14 @@
+_meta = {
+  name = "ActivityWatch";
+  summary = "Best free and open-source automated time tracker";
+  description = ''
+    Best free and open-source automated time tracker.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.2";
+  tags = [ "office" "time-tracking" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.activitywatch;

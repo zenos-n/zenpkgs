@@ -1,0 +1,14 @@
+_meta = {
+  name = "yamlfmt";
+  summary = "Extensible command line tool or library to format yaml files";
+  description = ''
+    Extensible command line tool or library to format yaml files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.21.0";
+  tags = [ "development" "yaml" "formatting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.yamlfmt;

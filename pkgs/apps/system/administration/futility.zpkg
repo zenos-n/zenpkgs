@@ -1,0 +1,14 @@
+_meta = {
+  name = "Futility";
+  summary = "ChromeOS firmware utility";
+  description = ''
+    ChromeOS firmware utility.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-release-R145-16552.B";
+  tags = [ "system" "administration" "firmware" "chromeos" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.futility;

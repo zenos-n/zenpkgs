@@ -1,0 +1,14 @@
+_meta = {
+  name = "innoextract";
+  summary = "Tool to unpack installers created by Inno Setup";
+  description = ''
+    Tool to unpack installers created by Inno Setup.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.9-unstable-2025-02-06";
+  tags = [ "archives" "files" "compression" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.innoextract;

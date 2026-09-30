@@ -1,0 +1,14 @@
+_meta = {
+  name = "glyr";
+  summary = "Music related metadata searchengine";
+  description = ''
+    Music related metadata searchengine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.10";
+  tags = [ "audio" "music" "metadata" "search" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3;
+};
+
+import $pkgs.legacy.glyr;

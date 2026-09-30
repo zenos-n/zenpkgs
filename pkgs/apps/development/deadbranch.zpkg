@@ -1,0 +1,14 @@
+_meta = {
+  name = "Deadbranch";
+  summary = "Clean up stale git branches safely";
+  description = ''
+    Clean up stale git branches safely.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "development" "git" "branches" "cleanup" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.deadbranch;

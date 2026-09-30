@@ -1,0 +1,14 @@
+_meta = {
+  name = "Wayst";
+  summary = "Simple terminal emulator";
+  description = ''
+    Simple terminal emulator.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2023-07-16";
+  tags = [ "terminal" "command-line" "graphics" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wayst;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Framework Tool";
+  summary = "Swiss army knife for Framework laptops";
+  description = ''
+    Swiss army knife for Framework laptops.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.3";
+  tags = [ "system" "administration" "hardware" "framework" "laptops" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.framework-tool;

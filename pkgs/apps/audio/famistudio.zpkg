@@ -1,0 +1,15 @@
+_meta = {
+  name = "FamiStudio";
+  summary = "NES Music Editor";
+  description = ''
+    FamiStudio is very simple music editor for the Nintendo Entertainment System
+    or Famicom. It is targeted at both chiptune artists and NES homebrewers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.5.1";
+  tags = [ "audio" "chiptune" "composition" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.famistudio;

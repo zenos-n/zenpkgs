@@ -1,0 +1,16 @@
+_meta = {
+  name = "CiderPress II";
+  summary = "File archive utility for Apple II disk images and file archives";
+  description = ''
+    CiderPress 2 is a file archive utility for Apple II disk images and file
+    archives. It can extract files from disk images and file archives, and
+    create new archives.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "archives" "apple-ii" "disk-images" "retro" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ciderpress2;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "VHS";
+  summary = "Tool for generating terminal GIFs with code";
+  description = ''
+    Tool for generating terminal GIFs with code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.0";
+  tags = [ "video" "terminal" "recording" "multimedia" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.vhs;

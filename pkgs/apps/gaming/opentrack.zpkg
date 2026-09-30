@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenTrack";
+  summary = "Head tracking software for MS Windows, Linux, and Apple OSX";
+  description = ''
+    Head tracking software for MS Windows, Linux, and Apple OSX.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.1.0-unstable-2026-03-25";
+  tags = [ "gaming" "head-tracking" "hardware" "simulation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.opentrack;

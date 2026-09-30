@@ -1,0 +1,14 @@
+_meta = {
+  name = "CSpell";
+  summary = "Spell checker for code";
+  description = ''
+    Spell checker for code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.7.0";
+  tags = [ "development" "spelling" "code" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cspell;

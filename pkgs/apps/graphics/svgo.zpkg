@@ -1,0 +1,14 @@
+_meta = {
+  name = "SVGO";
+  summary = "Node.js tool for optimizing SVG files";
+  description = ''
+    Node.js tool for optimizing SVG files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.1";
+  tags = [ "graphics" "svg" "development" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.svgo;

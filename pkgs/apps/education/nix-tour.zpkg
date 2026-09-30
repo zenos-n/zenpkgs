@@ -1,0 +1,14 @@
+_meta = {
+  name = "Nix Tour";
+  summary = "'the tour of nix' from nixcloud.io/tour as offline version";
+  description = ''
+    'the tour of nix' from nixcloud.io/tour as offline version.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2022-01-03";
+  tags = [ "education" "development" "nix" "programming" "tutorial" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.nix-tour;

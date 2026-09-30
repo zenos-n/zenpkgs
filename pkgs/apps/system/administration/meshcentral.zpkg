@@ -1,0 +1,14 @@
+_meta = {
+  name = "MeshCentral";
+  summary = "Computer management web app";
+  description = ''
+    Computer management web app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.0";
+  tags = [ "system" "administration" "networking" "remote-access" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.meshcentral;

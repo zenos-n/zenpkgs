@@ -1,0 +1,14 @@
+_meta = {
+  name = "gifski";
+  summary = "GIF encoder based on libimagequant (pngquant)";
+  description = ''
+    GIF encoder based on libimagequant (pngquant).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.34.0";
+  tags = [ "graphics" "gif" "encoding" "animation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.gifski;

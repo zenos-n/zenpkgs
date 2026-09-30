@@ -1,0 +1,14 @@
+_meta = {
+  name = "WindSend";
+  summary = "Quickly and securely sync clipboard, transfer files and directories between devices";
+  description = ''
+    Quickly and securely sync clipboard, transfer files and directories between devices.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.7.1";
+  tags = [ "files" "networking" "sharing" "clipboard" "transfer" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.windsend;

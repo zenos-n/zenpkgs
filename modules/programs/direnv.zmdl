@@ -1,0 +1,121 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Direnv configuration";
+  summary = "Direnv configuration";
+  description = ''Configure Direnv with typed preferences. Unset values preserve existing behavior.'';
+  tags = [ "shell" "direnv" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+bashIntegration = {
+  _meta = {
+    name = "Enable Bash integration";
+    summary = "Enable Bash integration";
+    description = ''Enable Bash integration. Requires that shell to be managed; does not select a login shell. Null preserves existing behavior.'';
+    tags = [ "shell" "direnv" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+zshIntegration = {
+  _meta = {
+    name = "Enable Zsh integration";
+    summary = "Enable Zsh integration";
+    description = ''Enable Zsh integration. Requires that shell to be managed; does not select a login shell. Null preserves existing behavior.'';
+    tags = [ "shell" "direnv" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+fishIntegration = {
+  _meta = {
+    name = "Enable Fish integration";
+    summary = "Enable Fish integration";
+    description = ''Enable Fish integration. Requires that shell to be managed; does not select a login shell. Null preserves existing behavior.'';
+    tags = [ "shell" "direnv" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+cacheNixEnvironments = {
+  _meta = {
+    name = "Cache Nix development environments";
+    summary = "Cache Nix development environments";
+    description = ''Cache Nix development environments. Enable nix-direnv support; project authorization remains explicit. Null preserves existing behavior.'';
+    tags = [ "shell" "direnv" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+miseIntegration = {
+  _meta = {
+    name = "Support mise-managed project environments";
+    summary = "Support mise-managed project environments";
+    description = ''Support mise-managed project environments. Null preserves existing behavior.'';
+    tags = [ "shell" "direnv" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+logging = {
+  _meta = {
+    name = "Show Direnv log messages";
+    summary = "Show Direnv log messages";
+    description = ''Show Direnv log messages. Null preserves existing behavior.'';
+    tags = [ "shell" "direnv" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+libraryCommands = {
+  _meta = {
+    name = "Custom Direnv helper commands";
+    summary = "Custom Direnv helper commands";
+    description = ''Custom Direnv helper commands. Trusted shell code. Does not automatically authorize project directories. Null preserves existing behavior.'';
+    tags = [ "shell" "direnv" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Direnv";
+    summary = "Install and configure Direnv";
+    description = ''Enable Direnv for the selected user scope. Preferences apply while enabled.'';
+    tags = [ "shell" "direnv" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    programs.direnv.enable = true;
+    programs.direnv.enableBashIntegration = $lib.mkIf ($path.bashIntegration != null) ($path.bashIntegration);
+    programs.direnv.enableZshIntegration = $lib.mkIf ($path.zshIntegration != null) ($path.zshIntegration);
+    programs.direnv.enableFishIntegration = $lib.mkIf ($path.fishIntegration != null) ($path.fishIntegration);
+    programs.direnv.nix-direnv.enable = $lib.mkIf ($path.cacheNixEnvironments != null) ($path.cacheNixEnvironments);
+    programs.direnv.mise.enable = $lib.mkIf ($path.miseIntegration != null) ($path.miseIntegration);
+    programs.direnv.silent = $lib.mkIf ($path.logging != null) (!$path.logging);
+    programs.direnv.stdlib = $lib.mkIf ($path.libraryCommands != null) ($path.libraryCommands);
+  };
+};

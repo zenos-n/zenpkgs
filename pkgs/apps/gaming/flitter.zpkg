@@ -1,0 +1,14 @@
+_meta = {
+  name = "Flitter";
+  summary = "Livesplit-inspired speedrunning split timer for Linux/macOS terminal";
+  description = ''
+    Livesplit-inspired speedrunning split timer for Linux/macOS terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.5";
+  tags = [ "gaming" "speedrunning" "timers" "tui" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.flitter;

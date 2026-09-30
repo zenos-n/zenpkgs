@@ -1,0 +1,14 @@
+_meta = {
+  name = "Dolphin";
+  summary = "Gamecube/Wii/Triforce emulator for x86_64 and ARMv8";
+  description = ''
+    Gamecube/Wii/Triforce emulator for x86_64 and ARMv8.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2603a";
+  tags = [ "gaming" "emulators" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.dolphin-emu;

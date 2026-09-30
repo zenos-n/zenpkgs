@@ -1,0 +1,14 @@
+_meta = {
+  name = "FerretDB";
+  summary = "Truly Open Source MongoDB alternative";
+  description = ''
+    Truly Open Source MongoDB alternative.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.24.0";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ferretdb;

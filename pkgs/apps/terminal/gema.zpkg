@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gema";
+  summary = "General purpose text processing utility based on the concept of pattern matching";
+  description = ''
+    Reads an input file and copies it to an output file transforming the data as specified by the patterns defined by the user.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0";
+  tags = [ "terminal" "text-processing" "pattern-matching" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gema;

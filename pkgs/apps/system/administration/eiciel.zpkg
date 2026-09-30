@@ -1,0 +1,14 @@
+_meta = {
+  name = "Eiciel";
+  summary = "Graphical editor for ACLs and extended attributes";
+  description = ''
+    Graphical editor for ACLs and extended attributes.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.1";
+  tags = [ "system" "administration" "permissions" "acl" "attributes" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.eiciel;

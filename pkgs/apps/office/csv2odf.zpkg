@@ -1,0 +1,22 @@
+_meta = {
+  name = "csv2odf";
+  summary = "Convert csv files to OpenDocument Format";
+  description = ''
+    csv2odf is a command line tool that can convert a comma separated value
+    (csv) file to an odf, ods, html, xlsx, or docx document that can be viewed in
+    LibreOffice and other office productivity programs. csv2odf is useful for
+    creating reports from databases and other data sources that produce csv files.
+    csv2odf can be combined with cron and shell scripts to automatically generate
+    business reports.
+
+    The output format (fonts, number formatting, etc.) is controlled by a
+    template file that you can design in your office application of choice.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.09";
+  tags = [ "office" "csv" "opendocument" "conversion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.csv2odf;

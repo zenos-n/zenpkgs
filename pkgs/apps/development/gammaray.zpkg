@@ -1,0 +1,14 @@
+_meta = {
+  name = "GammaRay";
+  summary = "Software introspection tool for Qt applications developed by KDAB";
+  description = ''
+    Software introspection tool for Qt applications developed by KDAB.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.4.0";
+  tags = [ "development" "qt" "debugging" "introspection" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.gammaray;

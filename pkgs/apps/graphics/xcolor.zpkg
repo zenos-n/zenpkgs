@@ -1,0 +1,14 @@
+_meta = {
+  name = "xcolor";
+  summary = "Lightweight color picker for X11";
+  description = ''
+    Lightweight color picker for X11.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.1";
+  tags = [ "graphics" "color-picker" "design" "x11" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.xcolor;

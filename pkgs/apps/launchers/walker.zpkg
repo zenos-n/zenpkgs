@@ -1,0 +1,14 @@
+_meta = {
+  name = "Walker";
+  summary = "Wayland-native application runner";
+  description = ''
+    Wayland-native application runner.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.16.2";
+  tags = [ "launchers" "productivity" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.walker;

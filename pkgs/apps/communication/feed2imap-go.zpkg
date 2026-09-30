@@ -1,0 +1,14 @@
+_meta = {
+  name = "feed2imap-go";
+  summary = "Uploads rss feeds as e-mails onto an IMAP server";
+  description = ''
+    Uploads rss feeds as e-mails onto an IMAP server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.0";
+  tags = [ "communication" "rss" "email" "imap" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.feed2imap-go;

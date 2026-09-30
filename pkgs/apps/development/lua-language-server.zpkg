@@ -1,0 +1,14 @@
+_meta = {
+  name = "Lua Language Server";
+  summary = "Language server that offers Lua language support";
+  description = ''
+    Language server that offers Lua language support.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.18.1";
+  tags = [ "development" "lua" "language-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.lua-language-server;

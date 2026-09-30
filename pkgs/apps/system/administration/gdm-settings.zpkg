@@ -1,0 +1,14 @@
+_meta = {
+  name = "GDM Settings";
+  summary = "Settings app for GNOME's Login Manager";
+  description = ''
+    Settings app for GNOME's Login Manager.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.0";
+  tags = [ "system" "administration" "gnome" "gdm" "configuration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.gdm-settings;

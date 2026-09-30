@@ -1,0 +1,14 @@
+_meta = {
+  name = "acme-client";
+  summary = "Secure ACME/Let's Encrypt client";
+  description = ''
+    Secure ACME/Let's Encrypt client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.7";
+  tags = [ "security" "cryptography" "certificates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.acme-client;

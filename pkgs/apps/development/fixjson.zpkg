@@ -1,0 +1,14 @@
+_meta = {
+  name = "fixjson";
+  summary = "JSON Fixer for Humans using (relaxed) JSON5";
+  description = ''
+    JSON Fixer for Humans using (relaxed) JSON5.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2023-01-06";
+  tags = [ "development" "json" "formatting" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fixjson;

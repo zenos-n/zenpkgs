@@ -1,0 +1,14 @@
+_meta = {
+  name = "MTR";
+  summary = "Network diagnostics tool";
+  description = ''
+    Network diagnostics tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.96";
+  tags = [ "networking" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.mtr;

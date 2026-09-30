@@ -1,0 +1,14 @@
+_meta = {
+  name = "LiteFS";
+  summary = "FUSE-based file system for replicating SQLite databases across a cluster of machines";
+  description = ''
+    FUSE-based file system for replicating SQLite databases across a cluster of machines.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.14";
+  tags = [ "development" "backup" "replication" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.litefs;

@@ -1,0 +1,16 @@
+_meta = {
+  name = "sshuttle";
+  summary = "Transparent proxy server that works as a poor man's VPN";
+  description = ''
+    Forward connections over SSH, without requiring administrator access to the
+    target network (though it does require Python 2.7, Python 3.5 or later at both ends).
+    Works with Linux and Mac OS and supports DNS tunneling.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.2";
+  tags = [ "networking" "vpn" "remote-access" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21Plus;
+};
+
+import $pkgs.legacy.sshuttle;

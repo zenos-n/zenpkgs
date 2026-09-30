@@ -1,0 +1,14 @@
+_meta = {
+  name = "Tailscale";
+  summary = "Node agent for Tailscale, a mesh VPN built on WireGuard";
+  description = ''
+    Node agent for Tailscale, a mesh VPN built on WireGuard.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.98.10";
+  tags = [ "networking" "vpn" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.tailscale;

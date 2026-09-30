@@ -98,7 +98,23 @@ let
     then
       "set"
     else
-      text (type.description or name);
+      name;
+  typeDescription =
+    type:
+    let
+      name = type.name or "unknown";
+      composite = builtins.elem name [
+        "attrs"
+        "attrsOf"
+        "coercedTo"
+        "either"
+        "lazyAttrsOf"
+        "listOf"
+        "nullOr"
+        "submodule"
+      ];
+    in
+    if composite then name else text (type.description or name);
 
   # Read descriptive fields from the compiler's data IR, never execute metadata
   # expressions as defaults. Schema discovery remains exclusively type-driven.
@@ -255,6 +271,7 @@ rec {
       mountPaths ? [ ],
       typeDepth ? 0,
       upstream ? false,
+      evaluateDefaults ? true,
     }:
     let
       evaluated = builtins.tryEval tree;
@@ -297,6 +314,8 @@ rec {
             { defaultStatus = "unavailable"; }
         else if !(value ? default) then
           { defaultStatus = if isUpstream then "unavailable" else "absent"; }
+        else if !evaluateDefaults then
+          { defaultStatus = "unavailable"; }
         else if
           builtins.any (
             part:
@@ -345,7 +364,7 @@ rec {
         serializeOptions {
           inherit (children.${name}) tree upstream;
           path = path ++ [ name ];
-          inherit limits metadataAt mountPaths;
+          inherit limits metadataAt mountPaths evaluateDefaults;
           typeDepth = depth + (if isOption then 1 else 0);
         }
       );
@@ -360,7 +379,7 @@ rec {
           upstream = isUpstream;
           traversal = status;
           type = if isOption then clientType value.type else "set";
-          typeDescription = if isOption then text (value.type.description or value.type.name) else null;
+          typeDescription = if isOption then typeDescription value.type else null;
           typeName = if isOption then value.type.name or "unknown" else "set";
           default = null;
           example = if isOption then safe null (value.example or null) else null;
@@ -408,7 +427,16 @@ rec {
         || (
           upstream
           && (
-            lib.hasPrefix "pkgs" name
+            # These pinned Python 2 Beets variants recurse through disabledTestPaths
+            # and finalPackage. Match full paths before evaluating their values.
+            builtins.elem (lib.concatStringsSep "." (path ++ [ name ])) [
+              "legacy.python27Packages.beets"
+              "legacy.python2Packages.beets"
+              "legacy.pypy27Packages.beets"
+              "legacy.pypy2Packages.beets"
+              "legacy.pypyPackages.beets"
+            ]
+            || lib.hasPrefix "pkgs" name
             || builtins.elem name [
               "buildPackages"
               "targetPackages"
@@ -532,6 +560,7 @@ rec {
         inherit limits;
         metadataAt = path: metadata.${key path} or { };
         mountPaths = map (mount: publicPath mount.path) mounts;
+        evaluateDefaults = false;
       };
       packageMount = builtins.any (mount: mount.kind == "packages") mounts;
       packages = serializePackages {

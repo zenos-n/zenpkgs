@@ -1,0 +1,14 @@
+_meta = {
+  name = "SOPS";
+  summary = "Simple and flexible tool for managing secrets";
+  description = ''
+    Simple and flexible tool for managing secrets.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.13.3";
+  tags = [ "security" "privacy" "development" "encryption" "configuration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.sops;

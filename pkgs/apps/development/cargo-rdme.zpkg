@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-rdme";
+  summary = "Cargo command to create the README.md from your crate's documentation";
+  description = ''
+    Cargo command to create the README.md from your crate's documentation.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.0";
+  tags = [ "development" "rust" "cargo" "documentation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.cargo-rdme;

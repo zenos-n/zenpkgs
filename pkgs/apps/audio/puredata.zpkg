@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pure Data";
+  summary = "Real-time graphical programming environment for audio, video, and graphical processing";
+  description = ''
+    Real-time graphical programming environment for audio, video, and graphical processing.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.55-2";
+  tags = [ "audio" "development" "visual-programming" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.puredata;

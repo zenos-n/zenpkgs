@@ -1,0 +1,14 @@
+_meta = {
+  name = "hyprprop";
+  summary = "Xprop replacement for Hyprland";
+  description = ''
+    Xprop replacement for Hyprland.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1-unstable-2026-02-19";
+  tags = [ "system" "administration" "wayland" "hyprland" "inspection" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.hyprprop;

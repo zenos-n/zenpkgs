@@ -1,0 +1,14 @@
+_meta = {
+  name = "ANT-FS CLI";
+  summary = "Extracts FIT files from ANT-FS based sport watches";
+  description = ''
+    Extracts FIT files from ANT-FS based sport watches.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2017-02-11";
+  tags = [ "files" "fitness" "devices" "transfer" "ant-fs" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.antfs-cli;

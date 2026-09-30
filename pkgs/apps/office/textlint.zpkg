@@ -1,0 +1,14 @@
+_meta = {
+  name = "textlint";
+  summary = "Pluggable natural language linter for text and markdown";
+  description = ''
+    Pluggable natural language linter for text and markdown.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "15.7.1";
+  tags = [ "office" "writing" "proofreading" "languages" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.textlint;

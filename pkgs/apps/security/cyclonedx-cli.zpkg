@@ -1,0 +1,14 @@
+_meta = {
+  name = "CycloneDX CLI";
+  summary = "CycloneDX CLI tool for SBOM analysis, merging, diffs and format conversions";
+  description = ''
+    CycloneDX CLI tool for SBOM analysis, merging, diffs and format conversions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.30.0";
+  tags = [ "security" "sbom" "cyclonedx" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.cyclonedx-cli;

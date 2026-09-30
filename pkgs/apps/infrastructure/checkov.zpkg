@@ -1,0 +1,15 @@
+_meta = {
+  name = "Checkov";
+  summary = "Static code analysis tool for infrastructure-as-code";
+  description = ''
+    Prevent cloud misconfigurations during build-time for Terraform, Cloudformation,
+    Kubernetes, Serverless framework and other infrastructure-as-code-languages.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.529";
+  tags = [ "infrastructure" "development" "linting" "security" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.checkov;

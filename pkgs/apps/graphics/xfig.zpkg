@@ -1,0 +1,15 @@
+_meta = {
+  name = "Xfig";
+  summary = "Interactive drawing tool for X11";
+  description = ''
+    Note that you need to have the <literal>netpbm</literal> tools
+    in your path to export bitmaps.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.2.9a";
+  tags = [ "graphics" "diagrams" "development" "documentation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.xfig;
+};
+
+import $pkgs.legacy.xfig;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Ruff";
+  summary = "Extremely fast Python linter and code formatter";
+  description = ''
+    Extremely fast Python linter and code formatter.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.14";
+  tags = [ "development" "python" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ruff;

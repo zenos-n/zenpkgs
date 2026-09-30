@@ -1,0 +1,14 @@
+_meta = {
+  name = "Barman";
+  summary = "Backup and Recovery Manager for PostgreSQL";
+  description = ''
+    Backup and Recovery Manager for PostgreSQL.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.14.1";
+  tags = [ "backup" "postgresql" "databases" "recovery" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.barman;

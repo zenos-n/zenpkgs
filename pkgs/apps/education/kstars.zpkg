@@ -1,0 +1,16 @@
+_meta = {
+  name = "KStars";
+  summary = "Virtual planetarium astronomy software";
+  description = ''
+    It provides an accurate graphical simulation of the night sky, from any location on Earth, at any date and time.
+    The display includes up to 100 million stars, 13.000 deep-sky objects, all 8 planets, the Sun and Moon, and thousands of comets, asteroids, supernovae, and satellites.
+    For students and teachers, it supports adjustable simulation speeds in order to view phenomena that happen over long timescales, the KStars Astrocalculator to predict conjunctions, and many common astronomical calculations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.8.3";
+  tags = [ "education" "learning" "astronomy" "science" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.kstars;

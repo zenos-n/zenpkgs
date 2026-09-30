@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenROAD";
+  summary = "OpenROAD's unified application implementing an RTL-to-GDS flow";
+  description = ''
+    OpenROAD's unified application implementing an RTL-to-GDS flow.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26Q2";
+  tags = [ "cad" "electronics" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.openroad;

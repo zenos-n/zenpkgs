@@ -1,0 +1,16 @@
+_meta = {
+  name = "Isabelle";
+  summary = "Generic proof assistant";
+  description = ''
+    Isabelle is a generic proof assistant.  It allows mathematical formulas
+    to be expressed in a formal language and provides tools for proving those
+    formulas in a logical calculus.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2025-2";
+  tags = [ "science" "mathematics" "formal-verification" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.isabelle;

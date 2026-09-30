@@ -1,0 +1,17 @@
+_meta = {
+  name = "ydiff";
+  summary = "View colored, incremental diff in workspace or from stdin with side by side and auto pager support (Was \"cdiff\")";
+  description = ''
+    Term based tool to view colored, incremental diff in a version
+    controlled workspace (supports Git, Mercurial, Perforce and Svn
+    so far) or from stdin, with side by side (similar to diff -y)
+    and auto pager support.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5";
+  tags = [ "development" "diff" "files" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.ydiff;

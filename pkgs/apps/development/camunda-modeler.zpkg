@@ -1,0 +1,14 @@
+_meta = {
+  name = "Camunda Modeler";
+  summary = "Integrated modeling solution for BPMN, DMN and Forms based on bpmn.io";
+  description = ''
+    Integrated modeling solution for BPMN, DMN and Forms based on bpmn.io.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.46.1";
+  tags = [ "development" "modeling" "workflow" "office" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.camunda-modeler;

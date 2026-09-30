@@ -21,10 +21,10 @@ _meta = {
 enable = enableOption {
   _meta.description = ''Whether to enable Date Menu Formatter GNOME extension configuration.'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.date-menu-formatter ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.date-menu-formatter ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.date-menu-formatter.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.date-menu-formatter.extensionUuid ];
     dconf.settings."org/gnome/shell/extensions/date-menu-formatter" = {
         formatter = $path.formatter;
         pattern = $path.pattern;

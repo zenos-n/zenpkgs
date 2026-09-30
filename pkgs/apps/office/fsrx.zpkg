@@ -1,0 +1,14 @@
+_meta = {
+  name = "fsrx";
+  summary = "Flow state reader in the terminal";
+  description = ''
+    Flow state reader in the terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.2";
+  tags = [ "office" "reading" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.fsrx;

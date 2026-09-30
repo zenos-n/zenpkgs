@@ -1,0 +1,14 @@
+_meta = {
+  name = "Carapace";
+  summary = "Multi-shell multi-command argument completer";
+  description = ''
+    Multi-shell multi-command argument completer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.3";
+  tags = [ "terminal" "command-line" "completion" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.carapace;

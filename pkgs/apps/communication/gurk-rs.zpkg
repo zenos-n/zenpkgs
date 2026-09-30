@@ -1,0 +1,14 @@
+_meta = {
+  name = "gurk";
+  summary = "Signal Messenger client for terminal";
+  description = ''
+    Signal Messenger client for terminal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.3";
+  tags = [ "communication" "networking" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Only;
+};
+
+import $pkgs.legacy.gurk-rs;

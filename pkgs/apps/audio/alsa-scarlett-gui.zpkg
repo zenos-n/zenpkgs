@@ -1,0 +1,14 @@
+_meta = {
+  name = "ALSA Scarlett GUI";
+  summary = "GUI for alsa controls presented by Focusrite Scarlett Gen 2/3/4 Mixer Driver";
+  description = ''
+    GUI for alsa controls presented by Focusrite Scarlett Gen 2/3/4 Mixer Driver.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.1";
+  tags = [ "audio" "hardware" "mixer" "alsa" "focusrite" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.alsa-scarlett-gui;

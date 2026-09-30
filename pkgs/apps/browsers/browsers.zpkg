@@ -1,0 +1,14 @@
+_meta = {
+  name = "Browsers";
+  summary = "Open the right browser at the right time";
+  description = ''
+    Open the right browser at the right time.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.3";
+  tags = [ "browsers" "launcher" "links" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.browsers;

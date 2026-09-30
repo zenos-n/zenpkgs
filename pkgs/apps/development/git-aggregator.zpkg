@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-aggregator";
+  summary = "Manage the aggregation of git branches from different remotes to build a consolidated one";
+  description = ''
+    Manage the aggregation of git branches from different remotes to build a consolidated one.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.1";
+  tags = [ "development" "git" "branches" "aggregation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.git-aggregator;

@@ -1,0 +1,21 @@
+_meta = {
+  name = "dvdisaster";
+  summary = "Data loss/scratch/aging protection for CD/DVD media (unofficial version)";
+  description = ''
+    Dvdisaster provides a margin of safety against data loss on CD and
+    DVD media caused by scratches or aging media. It creates error correction
+    data which is used to recover unreadable sectors if the disc becomes
+    damaged at a later time.
+
+    This version is built on top of the latest upstream version (2021),
+    it is backwards compatible with it, and adds a list of improvements,
+    such as BD-R support, CLI-only mode, and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.79.10-pl5";
+  tags = [ "backup" "cd" "dvd" "data-protection" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.dvdisaster;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "zoxide";
+  summary = "Fast cd command that learns your habits";
+  description = ''
+    Fast cd command that learns your habits.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.9";
+  tags = [ "files" "terminal" "navigation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.zoxide;

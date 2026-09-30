@@ -1,0 +1,14 @@
+_meta = {
+  name = "PDF Arranger";
+  summary = "Merge or split pdf documents and rotate, crop and rearrange their pages using a graphical interface";
+  description = ''
+    Merge or split pdf documents and rotate, crop and rearrange their pages using a graphical interface.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.13.0";
+  tags = [ "office" "productivity" "pdf" "editing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.pdfarranger;

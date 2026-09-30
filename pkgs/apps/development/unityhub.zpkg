@@ -1,0 +1,14 @@
+_meta = {
+  name = "Unity Hub";
+  summary = "Official Unity3D app to download and manage Unity Projects and installations";
+  description = ''
+    Official Unity3D app to download and manage Unity Projects and installations.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.19.5";
+  tags = [ "development" "gaming" "game-development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.unityhub;

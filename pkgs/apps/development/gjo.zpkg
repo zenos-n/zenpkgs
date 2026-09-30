@@ -1,0 +1,14 @@
+_meta = {
+  name = "gjo";
+  summary = "Small utility to create JSON objects";
+  description = ''
+    Small utility to create JSON objects.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.3";
+  tags = [ "development" "json" "generators" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gjo;

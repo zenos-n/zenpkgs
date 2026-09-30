@@ -1,0 +1,14 @@
+_meta = {
+  name = "gojq";
+  summary = "Pure Go implementation of jq";
+  description = ''
+    Pure Go implementation of jq.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.12.19";
+  tags = [ "files" "data" "json" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gojq;

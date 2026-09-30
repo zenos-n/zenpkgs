@@ -1,0 +1,335 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Zsh configuration";
+  summary = "Zsh configuration";
+  description = ''Configure Zsh with typed preferences. Unset values preserve existing behavior.'';
+  tags = [ "shell" "zsh" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+completion = {
+  _meta = {
+    name = "Complete commands and arguments";
+    summary = "Complete commands and arguments";
+    description = ''Complete commands and arguments. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+autoChangeDirectory = {
+  _meta = {
+    name = "Enter directories by typing their path";
+    summary = "Enter directories by typing their path";
+    description = ''Enter directories by typing their path. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+directorySearchPaths = {
+  _meta = {
+    name = "Directories searched by cd";
+    summary = "Directories searched by cd";
+    description = ''Directories searched by cd. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+aliases = {
+  _meta = {
+    name = "Zsh command aliases";
+    summary = "Zsh command aliases";
+    description = ''Zsh command aliases. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+globalAliases = {
+  _meta = {
+    name = "Aliases expanded anywhere in a command";
+    summary = "Aliases expanded anywhere in a command";
+    description = ''Aliases expanded anywhere in a command. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.set [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+suggestions = {
+  _meta = {
+    name = "Suggest commands while typing";
+    summary = "Suggest commands while typing";
+    description = ''Suggest commands while typing. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+suggestionSources = {
+  _meta = {
+    name = "Sources used for command suggestions";
+    summary = "Sources used for command suggestions";
+    description = ''Sources used for command suggestions. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ ($type.enum [ "history" "completion" "match_prev_cmd" ]) ]) $type.null ];
+    default = null;
+  };
+};
+
+syntaxHighlighting = {
+  _meta = {
+    name = "Highlight shell command syntax";
+    summary = "Highlight shell command syntax";
+    description = ''Highlight shell command syntax. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+historyLines = {
+  _meta = {
+    name = "History lines kept in memory";
+    summary = "History lines kept in memory";
+    description = ''History lines kept in memory. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+savedHistoryLines = {
+  _meta = {
+    name = "History lines saved on disk";
+    summary = "History lines saved on disk";
+    description = ''History lines saved on disk. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+};
+
+historyFile = {
+  _meta = {
+    name = "History file location";
+    summary = "History file location";
+    description = ''History file location. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+shareHistory = {
+  _meta = {
+    name = "Share history across Zsh sessions";
+    summary = "Share history across Zsh sessions";
+    description = ''Share history across Zsh sessions. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+appendHistory = {
+  _meta = {
+    name = "Append session history to the history file";
+    summary = "Append session history to the history file";
+    description = ''Append session history to the history file. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+ignoreConsecutiveDuplicates = {
+  _meta = {
+    name = "Skip consecutive duplicate commands";
+    summary = "Skip consecutive duplicate commands";
+    description = ''Skip consecutive duplicate commands. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+removeOlderDuplicates = {
+  _meta = {
+    name = "Remove older copies of repeated commands";
+    summary = "Remove older copies of repeated commands";
+    description = ''Remove older copies of repeated commands. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+ignoreLeadingSpace = {
+  _meta = {
+    name = "Skip commands beginning with a space";
+    summary = "Skip commands beginning with a space";
+    description = ''Skip commands beginning with a space. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+recordHistoryTimes = {
+  _meta = {
+    name = "Record timestamps with history entries";
+    summary = "Record timestamps with history entries";
+    description = ''Record timestamps with history entries. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+ignoredHistoryPatterns = {
+  _meta = {
+    name = "Commands excluded from history";
+    summary = "Commands excluded from history";
+    description = ''Commands excluded from history. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+    default = null;
+  };
+};
+
+substringHistorySearch = {
+  _meta = {
+    name = "Search history by command substring";
+    summary = "Search history by command substring";
+    description = ''Search history by command substring. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.boolean) $type.null ];
+    default = null;
+  };
+};
+
+interactiveCommands = {
+  _meta = {
+    name = "Commands run in interactive Zsh";
+    summary = "Commands run in interactive Zsh";
+    description = ''Commands run in interactive Zsh. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+loginCommands = {
+  _meta = {
+    name = "Commands run before a login session";
+    summary = "Commands run before a login session";
+    description = ''Commands run before a login session. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.string) $type.null ];
+    default = null;
+  };
+};
+
+editingMode = {
+  _meta = {
+    name = "Command-line editing keys";
+    summary = "Command-line editing keys";
+    description = ''Command-line editing keys. Null preserves existing behavior.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "emacs" "vi" ]) $type.null ];
+    default = null;
+  };
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Zsh";
+    summary = "Install and configure Zsh";
+    description = ''Enable Zsh for the selected user scope. Preferences apply while enabled.'';
+    tags = [ "shell" "zsh" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    programs.zsh.enable = true;
+    programs.zsh.enableCompletion = $lib.mkIf ($path.completion != null) ($path.completion);
+    programs.zsh.autocd = $lib.mkIf ($path.autoChangeDirectory != null) ($path.autoChangeDirectory);
+    programs.zsh.cdpath = $lib.mkIf ($path.directorySearchPaths != null) ($path.directorySearchPaths);
+    programs.zsh.shellAliases = $lib.mkIf ($path.aliases != null) ($path.aliases);
+    programs.zsh.shellGlobalAliases = $lib.mkIf ($path.globalAliases != null) ($path.globalAliases);
+    programs.zsh.autosuggestion.enable = $lib.mkIf ($path.suggestions != null) ($path.suggestions);
+    programs.zsh.autosuggestion.strategy = $lib.mkIf ($path.suggestionSources != null) ($path.suggestionSources);
+    programs.zsh.syntaxHighlighting.enable = $lib.mkIf ($path.syntaxHighlighting != null) ($path.syntaxHighlighting);
+    programs.zsh.history.size = $lib.mkIf ($path.historyLines != null) ($path.historyLines);
+    programs.zsh.history.save = $lib.mkIf ($path.savedHistoryLines != null) ($path.savedHistoryLines);
+    programs.zsh.history.path = $lib.mkIf ($path.historyFile != null) ($path.historyFile);
+    programs.zsh.history.share = $lib.mkIf ($path.shareHistory != null) ($path.shareHistory);
+    programs.zsh.history.append = $lib.mkIf ($path.appendHistory != null) ($path.appendHistory);
+    programs.zsh.history.ignoreDups = $lib.mkIf ($path.ignoreConsecutiveDuplicates != null) ($path.ignoreConsecutiveDuplicates);
+    programs.zsh.history.ignoreAllDups = $lib.mkIf ($path.removeOlderDuplicates != null) ($path.removeOlderDuplicates);
+    programs.zsh.history.ignoreSpace = $lib.mkIf ($path.ignoreLeadingSpace != null) ($path.ignoreLeadingSpace);
+    programs.zsh.history.extended = $lib.mkIf ($path.recordHistoryTimes != null) ($path.recordHistoryTimes);
+    programs.zsh.history.ignorePatterns = $lib.mkIf ($path.ignoredHistoryPatterns != null) ($path.ignoredHistoryPatterns);
+    programs.zsh.historySubstringSearch.enable = $lib.mkIf ($path.substringHistorySearch != null) ($path.substringHistorySearch);
+    programs.zsh.initContent = $lib.mkIf ($path.interactiveCommands != null) ($path.interactiveCommands);
+    programs.zsh.profileExtra = $lib.mkIf ($path.loginCommands != null) ($path.loginCommands);
+    programs.zsh.defaultKeymap = $lib.mkIf ($path.editingMode != null) (if $path.editingMode == "vi" then "viins" else "emacs");
+    assertions = [
+      { assertion = $path.historyLines == null || $path.historyLines >= 0; message = "programs.zsh.historyLines must be at least 0."; }
+      { assertion = $path.savedHistoryLines == null || $path.savedHistoryLines >= 0; message = "programs.zsh.savedHistoryLines must be at least 0."; }
+    ];
+  };
+};

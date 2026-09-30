@@ -1,0 +1,14 @@
+_meta = {
+  name = "Finamp";
+  summary = "Open source Jellyfin music player";
+  description = ''
+    Open source Jellyfin music player.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.24-beta";
+  tags = [ "audio" "music" "streaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.finamp;

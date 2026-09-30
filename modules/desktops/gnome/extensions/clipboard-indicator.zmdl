@@ -24,10 +24,10 @@ _let modes: $type.set [ $type.int ] = { icon = 0; content = 1; both = 2; neither
 enable = enableOption {
   _meta.description = ''Whether to enable Clipboard Indicator GNOME extension configuration.'';
   s! {
-    environment.systemPackages = [ $pkgs.apps.gnome-extensions.clipboard-indicator ];
+    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.clipboard-indicator ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.apps.gnome-extensions.clipboard-indicator.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.clipboard-indicator.extensionUuid ];
   };
 };
 

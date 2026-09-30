@@ -1,0 +1,15 @@
+_meta = {
+  name = "IntelliJ IDEA";
+  summary = "Java, Kotlin, Groovy and Scala IDE from JetBrains";
+  description = ''
+    IDE for Java SE, Groovy & Scala development Powerful environment for building Google Android apps Integration with JUnit, TestNG, popular SCMs, Ant & Maven.
+    Also known as IntelliJ.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026.2.0.1";
+  tags = [ "development" "ide" "java" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.jetbrains.idea;

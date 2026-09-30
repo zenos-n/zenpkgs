@@ -1,0 +1,16 @@
+_meta = {
+  name = "IRPF";
+  summary = "Brazilian government application for reporting income tax";
+  description = ''
+    Brazillian government application for reporting income tax.
+
+    IRFP - Imposto de Renda Pessoa Física - Receita Federal do Brasil.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2026-1.5";
+  tags = [ "finance" "tax" "brazil" "office" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.irpf;

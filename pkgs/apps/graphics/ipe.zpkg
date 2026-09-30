@@ -1,0 +1,16 @@
+_meta = {
+  name = "Ipe";
+  summary = "Editor for drawing figures";
+  description = ''
+    Ipe is an extensible drawing editor for creating figures in PDF and Postscript format.
+    It supports making small figures for inclusion into LaTeX-documents
+    as well as presentations in PDF.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.2.30";
+  tags = [ "graphics" "diagrams" "development" "documentation" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.ipe;

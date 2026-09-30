@@ -1,0 +1,14 @@
+_meta = {
+  name = "Xenia Canary";
+  summary = "Xbox 360 Emulator Research Project";
+  description = ''
+    Xbox 360 Emulator Research Project.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-05-03";
+  tags = [ "gaming" "emulators" "xbox-360" "compatibility" "research" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.xenia-canary;

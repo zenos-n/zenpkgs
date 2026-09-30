@@ -1,0 +1,14 @@
+_meta = {
+  name = "websocat";
+  summary = "Command-line client for WebSockets (like netcat/socat)";
+  description = ''
+    Command-line client for WebSockets (like netcat/socat).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.14.0";
+  tags = [ "networking" "development" "websocket" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.websocat;

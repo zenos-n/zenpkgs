@@ -1,0 +1,14 @@
+_meta = {
+  name = "Genemichaels";
+  summary = "Format Rust source code, including macros";
+  description = ''
+    Format Rust source code, including macros.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.9.6";
+  tags = [ "development" "rust" "formatting" "macros" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.genemichaels;

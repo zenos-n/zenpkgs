@@ -1,0 +1,14 @@
+_meta = {
+  name = "atool";
+  summary = "Archive command line helper";
+  description = ''
+    Archive command line helper.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.39.0";
+  tags = [ "archives" "command-line" "files" "compression" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.atool;

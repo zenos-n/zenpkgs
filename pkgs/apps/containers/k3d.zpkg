@@ -1,0 +1,17 @@
+_meta = {
+  name = "k3d";
+  summary = "Helper to run k3s (Lightweight Kubernetes. 5 less than k8s) in a docker container";
+  description = ''
+    k3s is the lightweight Kubernetes distribution by Rancher: rancher/k3s
+
+    k3d creates containerized k3s clusters. This means, that you can spin up a
+    multi-node k3s cluster on a single machine using docker.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "5.8.3";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.k3d;

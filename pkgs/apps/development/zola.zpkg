@@ -1,0 +1,14 @@
+_meta = {
+  name = "Zola";
+  summary = "Fast static site generator with everything built-in";
+  description = ''
+    Fast static site generator with everything built-in.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.22.1";
+  tags = [ "development" "documentation" "static-site" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.zola;

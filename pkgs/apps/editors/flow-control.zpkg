@@ -1,0 +1,14 @@
+_meta = {
+  name = "Flow Control";
+  summary = "Programmer's text editor";
+  description = ''
+    Programmer's text editor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.2";
+  tags = [ "editors" "development" "text" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.flow-control;

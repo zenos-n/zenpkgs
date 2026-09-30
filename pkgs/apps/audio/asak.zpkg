@@ -1,0 +1,14 @@
+_meta = {
+  name = "asak";
+  summary = "Cross-platform audio recording/playback CLI tool with TUI, written in Rust";
+  description = ''
+    Cross-platform audio recording/playback CLI tool with TUI, written in Rust.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.0";
+  tags = [ "audio" "recording" "playback" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.asak;

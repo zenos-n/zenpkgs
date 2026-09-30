@@ -1,0 +1,14 @@
+_meta = {
+  name = "FunnelWeb";
+  summary = "Simple, reliable literate-programming macro preprocessor";
+  description = ''
+    Simple, reliable literate-programming macro preprocessor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.20";
+  tags = [ "development" "literate-programming" "preprocessors" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.funnelweb;

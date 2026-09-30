@@ -1,0 +1,14 @@
+_meta = {
+  name = "SQLPage";
+  summary = "SQL-only webapp builder, empowering data analysts to build websites and applications quickly";
+  description = ''
+    SQL-only webapp builder, empowering data analysts to build websites and applications quickly.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.45.0";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sqlpage;

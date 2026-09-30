@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "cargo-outdated";
+  summary = "Cargo subcommand for displaying when Rust dependencies are out of date";
+  description = ''
+    Cargo subcommand for displaying when Rust dependencies are out of date.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.19.0";
+  tags = [ "development" "rust" "cargo" "dependencies" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.cargo-outdated;

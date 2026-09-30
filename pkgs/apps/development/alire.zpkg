@@ -1,0 +1,14 @@
+_meta = {
+  name = "Alire";
+  summary = "Source-based package manager for the Ada and SPARK programming languages";
+  description = ''
+    Source-based package manager for the Ada and SPARK programming languages.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.1.1";
+  tags = [ "development" "ada" "spark" "package-management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.alire;

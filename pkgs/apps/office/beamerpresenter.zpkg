@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "BeamerPresenter";
+  summary = "Modular multi screen pdf presentation viewer";
+  description = ''
+    Modular multi screen pdf presentation viewer.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.6";
+  tags = [ "office" "pdf" "presentations" "multi-monitor" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.beamerpresenter;

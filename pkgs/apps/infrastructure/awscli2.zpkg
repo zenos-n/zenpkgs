@@ -1,0 +1,14 @@
+_meta = {
+  name = "AWS CLI";
+  summary = "Unified tool to manage your AWS services";
+  description = ''
+    Unified tool to manage your AWS services.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.34.24";
+  tags = [ "infrastructure" "cloud" "networking" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.awscli2;

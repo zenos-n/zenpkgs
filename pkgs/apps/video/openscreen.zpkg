@@ -1,0 +1,14 @@
+_meta = {
+  name = "OpenScreen";
+  summary = "Free, open-source alternative to Screen Studio (sort of)";
+  description = ''
+    Free, open-source alternative to Screen Studio (sort of).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.0";
+  tags = [ "video" "recording" "screen-capture" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.openscreen;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Gamepad Tool";
+  summary = "Simple GUI tool to create/modify gamepad mappings for games that use SDL2 Game Controller API";
+  description = ''
+    Simple GUI tool to create/modify gamepad mappings for games that use SDL2 Game Controller API.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2";
+  tags = [ "gaming" "controllers" "input" "sdl" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.gamepad-tool;

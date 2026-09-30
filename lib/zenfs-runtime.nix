@@ -45,6 +45,7 @@ let
     ) drive.privateMounts
   ) drives);
   mountTargets = map (drive: drive.mountPoint) (builtins.attrValues drives) ++ map (mount: mount.targetPath) mounts;
+  flatpakEnabled = cfg.apps.enable && cfg.apps.flatpak.enable && config.services.flatpak.enable;
   remote = cfg.apps.flatpak.remote;
   descriptor = if remote.descriptor != null then remote.descriptor else pkgs.fetchurl {
     url = "https://dl.flathub.org/repo/flathub.flatpakrepo";
@@ -62,9 +63,9 @@ let
         (lib.filter (mount: mount.name == name) mounts);
     }) drives;
     flatpak = {
-      enable = cfg.apps.enable && cfg.apps.flatpak.enable;
+      enable = flatpakEnabled;
       inherit (remote) name;
-      descriptor = if cfg.apps.enable && cfg.apps.flatpak.enable then toString descriptor else null;
+      descriptor = if flatpakEnabled then toString descriptor else null;
     };
   });
   session = "${zenfs}/bin/zenfs-session --manifest ${manifest}";
@@ -208,14 +209,16 @@ in
       };
       systemd.user.services.zenos-user-app-index = (userService "index") // {
         requires = [ "zenfs-user-init.service" ];
-        after = [ "zenfs-user-init.service" ] ++ lib.optional cfg.apps.flatpak.enable "zenos-flatpak-policy.service";
+        after = [ "zenfs-user-init.service" ] ++ lib.optional flatpakEnabled "zenos-flatpak-policy.service";
       };
     })
     (lib.mkIf (cfg.apps.enable && cfg.apps.appimage.enable) {
-      programs.appimage = { enable = true; binfmt = true; package = cfg.apps.appimage.runPackage; };
+      programs.appimage = { enable = lib.mkDefault true; binfmt = lib.mkDefault true; package = cfg.apps.appimage.runPackage; };
     })
     (lib.mkIf (cfg.apps.enable && cfg.apps.flatpak.enable) {
-      services.flatpak.enable = true;
+      services.flatpak.enable = lib.mkDefault true;
+    })
+    (lib.mkIf flatpakEnabled {
       xdg.portal.enable = true;
       environment.profiles = [ "$HOME/.private/Packages/flatpak/exports" ];
       environment.sessionVariables.ZENOS_FLATPAK_REMOTE = remote.name;

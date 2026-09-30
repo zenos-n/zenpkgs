@@ -1,0 +1,14 @@
+_meta = {
+  name = "TkSafe";
+  summary = "Electronic medical record (ePA) by Techniker Krankenkasse (TK)";
+  description = ''
+    Electronic medical record (ePA) by Techniker Krankenkasse (TK).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "25.12.3";
+  tags = [ "office" "health" "records" "documents" "germany" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.tk-safe;

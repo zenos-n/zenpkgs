@@ -1,0 +1,14 @@
+_meta = {
+  name = "Labelle";
+  summary = "Print labels with LabelManager PnP from Dymo";
+  description = ''
+    Print labels with LabelManager PnP from Dymo.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.4";
+  tags = [ "office" "printing" "labels" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.labelle;

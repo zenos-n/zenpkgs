@@ -1,0 +1,14 @@
+_meta = {
+  name = "Biome";
+  summary = "Toolchain of the web";
+  description = ''
+    Toolchain of the web.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.15";
+  tags = [ "development" "javascript" "linting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.biome;

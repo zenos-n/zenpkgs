@@ -1,0 +1,19 @@
+_meta = {
+  name = "Ghostscript";
+  summary = "PostScript interpreter (mainline version)";
+  description = ''
+    Ghostscript is the name of a set of tools that provides (i) an
+    interpreter for the PostScript language and the PDF file format,
+    (ii) a set of C procedures (the Ghostscript library) that
+    implement the graphics capabilities that appear as primitive
+    operations in the PostScript language, and (iii) a wide variety
+    of output drivers for various file formats and printers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "10.07.1";
+  tags = [ "office" "postscript" "pdf" "documents" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.agpl3Plus;
+};
+
+import $pkgs.legacy.ghostscript;

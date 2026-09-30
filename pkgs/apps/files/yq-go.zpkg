@@ -1,0 +1,14 @@
+_meta = {
+  name = "yq";
+  summary = "Portable command-line YAML processor";
+  description = ''
+    Portable command-line YAML processor.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.53.2";
+  tags = [ "files" "data" "yaml" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.yq-go;

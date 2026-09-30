@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-identity";
+  summary = "Manage your identity in Git";
+  description = ''
+    Manage your identity in Git.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "development" "git" "identity" "configuration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.wtfpl;
+};
+
+import $pkgs.legacy.git-identity;

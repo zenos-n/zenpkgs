@@ -1,0 +1,14 @@
+_meta = {
+  name = "Sublime Text";
+  summary = "Sophisticated text editor for code, markup and prose";
+  description = ''
+    Sophisticated text editor for code, markup and prose.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.2";
+  tags = [ "editors" "development" "text" "programming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.sublime;

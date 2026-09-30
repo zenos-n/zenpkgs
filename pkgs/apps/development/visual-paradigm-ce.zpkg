@@ -1,0 +1,14 @@
+_meta = {
+  name = "Visual Paradigm Community Edition";
+  summary = "All-in-one UML CASE tool for software development";
+  description = ''
+    All-in-one UML CASE tool for software development.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "18.0.20260511";
+  tags = [ "development" "uml" "modeling" "design" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.visual-paradigm-ce;

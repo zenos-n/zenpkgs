@@ -1,0 +1,14 @@
+_meta = {
+  name = "BigQuery Emulator";
+  summary = "BigQuery emulator server implemented in Go";
+  description = ''
+    BigQuery emulator server implemented in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.6";
+  tags = [ "development" "bigquery" "databases" "testing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.bigquery-emulator;

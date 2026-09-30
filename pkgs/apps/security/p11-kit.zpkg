@@ -1,0 +1,16 @@
+_meta = {
+  name = "p11-kit";
+  summary = "Library for loading and sharing PKCS#11 modules";
+  description = ''
+    Provides a way to load and enumerate PKCS#11 modules.
+    Provides a standard configuration setup for installing
+    PKCS#11 modules in such a way that they're discoverable.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.26.2";
+  tags = [ "security" "cryptography" "certificates" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.p11-kit;

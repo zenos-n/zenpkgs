@@ -1,0 +1,111 @@
+_meta = {
+  name = "System diagnostic logs";
+  summary = "Choose how diagnostic logs are stored and retained";
+  description = ''Configure storage budgets, retention and rate limiting for system logs.'';
+  tags = [ "system" "diagnostics" ];
+  zenosVersion = 1.0.0Na;
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+logStorage = {
+  _meta = {
+    name = "Where system diagnostic logs are kept";
+    summary = "Where system diagnostic logs are kept";
+    description = ''Disk preserves logs across restarts; memory keeps them only until restart; disabled discards stored journal entries. Null keeps the existing system policy.'';
+    tags = [ "system" "diagnostics" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.enum [ "disk" "memory" "disabled" ]) $type.null ];
+    default = null;
+  };
+  s!! {
+    services.journald.storage = $lib.mkIf ($path.logStorage != null) (if $path.logStorage == "disk" then "persistent" else if $path.logStorage == "memory" then "volatile" else "none");
+  };
+};
+
+logRetentionDays = {
+  _meta = {
+    name = "Maximum age of stored diagnostic log files";
+    summary = "Maximum age of stored diagnostic log files";
+    description = ''Zero disables age-based deletion; size limits still apply. Null keeps the existing system policy.'';
+    tags = [ "system" "diagnostics" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  s!! {
+    assertions = [ { assertion = $path.logRetentionDays == null || $path.logRetentionDays >= 0; message = "system.diagnostics.logRetentionDays must be nonnegative."; } ];
+    services.journald.extraConfig = $lib.mkIf ($path.logRetentionDays != null) ($lib.concatStrings [ "MaxRetentionSec=" ($lib.toString $path.logRetentionDays) "day" ]);
+  };
+};
+
+diskLogLimitMebibytes = {
+  _meta = {
+    name = "Disk-space budget for persistent diagnostic logs";
+    summary = "Disk-space budget for persistent diagnostic logs";
+    description = ''Limits archived journal use in units of 1048576 bytes; active log files and rotation affect the exact total. Null keeps the existing system policy.'';
+    tags = [ "system" "diagnostics" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  s!! {
+    assertions = [ { assertion = $path.diskLogLimitMebibytes == null || $path.diskLogLimitMebibytes >= 0; message = "system.diagnostics.diskLogLimitMebibytes must be nonnegative."; } ];
+    services.journald.extraConfig = $lib.mkIf ($path.diskLogLimitMebibytes != null) ($lib.concatStrings [ "SystemMaxUse=" ($lib.toString $path.diskLogLimitMebibytes) "M" ]);
+  };
+};
+
+memoryLogLimitMebibytes = {
+  _meta = {
+    name = "Memory-filesystem budget for temporary diagnostic logs";
+    summary = "Memory-filesystem budget for temporary diagnostic logs";
+    description = ''Limits journal use in units of 1048576 bytes; active log files and rotation affect the exact total. Null keeps the existing system policy.'';
+    tags = [ "system" "diagnostics" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  s!! {
+    assertions = [ { assertion = $path.memoryLogLimitMebibytes == null || $path.memoryLogLimitMebibytes >= 0; message = "system.diagnostics.memoryLogLimitMebibytes must be nonnegative."; } ];
+    services.journald.extraConfig = $lib.mkIf ($path.memoryLogLimitMebibytes != null) ($lib.concatStrings [ "RuntimeMaxUse=" ($lib.toString $path.memoryLogLimitMebibytes) "M" ]);
+  };
+};
+
+logRateWindowSeconds = {
+  _meta = {
+    name = "Time window for limiting repeated log messages";
+    summary = "Time window for limiting repeated log messages";
+    description = ''Zero disables rate limiting. The limit applies per service. Null keeps the existing system policy.'';
+    tags = [ "system" "diagnostics" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  s!! {
+    assertions = [ { assertion = $path.logRateWindowSeconds == null || $path.logRateWindowSeconds >= 0; message = "system.diagnostics.logRateWindowSeconds must be nonnegative."; } ];
+    services.journald.rateLimitInterval = $lib.mkIf ($path.logRateWindowSeconds != null) ($lib.concatStrings [ ($lib.toString $path.logRateWindowSeconds) "s" ]);
+  };
+};
+
+logMessagesPerWindow = {
+  _meta = {
+    name = "Base number of log messages accepted per service and time window";
+    summary = "Base number of log messages accepted per service and time window";
+    description = ''Zero disables rate limiting. The effective limit is multiplied according to available disk space. Null keeps the existing system policy.'';
+    tags = [ "system" "diagnostics" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.either [ ($type.int) $type.null ];
+    default = null;
+  };
+  s!! {
+    assertions = [ { assertion = $path.logMessagesPerWindow == null || $path.logMessagesPerWindow >= 0; message = "system.diagnostics.logMessagesPerWindow must be nonnegative."; } ];
+    services.journald.rateLimitBurst = $lib.mkIf ($path.logMessagesPerWindow != null) ($path.logMessagesPerWindow);
+  };
+};
+

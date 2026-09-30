@@ -1,0 +1,14 @@
+_meta = {
+  name = "gay";
+  summary = "Colour your text / terminal to be more gay";
+  description = ''
+    Colour your text / terminal to be more gay.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.4";
+  tags = [ "terminal" "colors" "text" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gay;

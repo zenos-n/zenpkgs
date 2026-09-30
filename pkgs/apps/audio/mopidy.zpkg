@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mopidy";
+  summary = "Extensible music server that plays music from local disk, Spotify, SoundCloud, and more";
+  description = ''
+    Extensible music server that plays music from local disk, Spotify, SoundCloud, and more.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.4.2";
+  tags = [ "audio" "music" "streaming" "server" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.mopidy;

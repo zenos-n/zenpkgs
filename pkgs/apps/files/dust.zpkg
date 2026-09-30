@@ -1,0 +1,14 @@
+_meta = {
+  name = "dust";
+  summary = "du, but more intuitive";
+  description = ''
+    du, but more intuitive.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.2.4";
+  tags = [ "files" "storage" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.dust;

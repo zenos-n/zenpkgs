@@ -1,0 +1,14 @@
+_meta = {
+  name = "Glasgow";
+  summary = "Software for Glasgow, a digital interface multitool";
+  description = ''
+    Software for Glasgow, a digital interface multitool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2025-12-22";
+  tags = [ "cad" "electronics" "hardware" "debugging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd0;
+};
+
+import $pkgs.legacy.glasgow;

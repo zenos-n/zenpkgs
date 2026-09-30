@@ -1,0 +1,14 @@
+_meta = {
+  name = "trdsql";
+  summary = "CLI tool for execute SQL queries on CSV, LTSV, JSON, YAML and TBLN with various output formats";
+  description = ''
+    CLI tool for execute SQL queries on CSV, LTSV, JSON, YAML and TBLN with various output formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.trdsql;

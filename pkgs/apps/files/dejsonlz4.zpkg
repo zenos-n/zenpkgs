@@ -1,0 +1,14 @@
+_meta = {
+  name = "dejsonlz4";
+  summary = "Decompress Mozilla Firefox bookmarks backup files";
+  description = ''
+    Decompress Mozilla Firefox bookmarks backup files.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1";
+  tags = [ "files" "firefox" "bookmarks" "decompression" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.dejsonlz4;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNU Octave";
+  summary = "Scientific Programming Language";
+  description = ''
+    Scientific Programming Language.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "11.1.0";
+  tags = [ "science" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.octave;

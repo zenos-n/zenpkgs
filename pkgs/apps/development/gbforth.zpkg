@@ -1,0 +1,16 @@
+_meta = {
+  name = "GBForth";
+  summary = "Forth-based Game Boy development kit";
+  description = ''
+    A Forth-based Game Boy development kit.
+    It features a Forth-based assembler, a cross-compiler with support for
+    lazy code generation and a library of useful words.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2025-10-08";
+  tags = [ "development" "game-boy" "forth" "game-development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gbforth;

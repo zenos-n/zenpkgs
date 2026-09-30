@@ -1,0 +1,14 @@
+_meta = {
+  name = "ABI Dumper";
+  summary = "Dump ABI of an ELF object containing DWARF debug info";
+  description = ''
+    Dump ABI of an ELF object containing DWARF debug info.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4";
+  tags = [ "development" "abi" "elf" "debugging" "analysis" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.abi-dumper;

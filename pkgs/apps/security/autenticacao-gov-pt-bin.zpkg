@@ -1,0 +1,32 @@
+_meta = {
+  name = "Autenticação.gov";
+  summary = "Middleware for Electronic Identification in Portugal (with precompiled binaries by AMA)";
+  description = ''
+    This package provides the official Portuguese Citizen Card middleware (Autenticação.gov),
+    extracted from AMA’s Flatpak release. It enables authentication and digital signing using
+    the Portuguese eID system.
+
+    On NixOS, it works with a supported card reader and Citizen Card, as long as
+    `services.pcscd.enable = true` is set in the system configuration.
+
+    Notes:
+      - Depends on xerces-c 3.2.3, which is no longer in nixpkgs. This package includes a version
+        override to restore it for compatibility.
+
+      - The application uses hardcoded paths for libraries and binaries. To accommodate this,
+        `proot` is used at runtime to simulate a traditional filesystem layout. This allows the
+        binary to run unmodified, though it may introduce minor latency.
+
+      - A desktop entry is included for integration with graphical environments.
+
+    Building from source is possible, but upstream disables signing in source builds. Using the
+    official binary avoids this limitation and provides full functionality.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.14.0";
+  tags = [ "security" "identity" "smartcards" "authentication" "portugal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.eupl12;
+};
+
+import $pkgs.legacy.autenticacao-gov-pt-bin;

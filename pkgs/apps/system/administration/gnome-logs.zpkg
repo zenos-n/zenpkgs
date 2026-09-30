@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNOME Logs";
+  summary = "Log viewer for the systemd journal";
+  description = ''
+    Log viewer for the systemd journal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "50.0";
+  tags = [ "system" "administration" "logs" "diagnostics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.gnome-logs;

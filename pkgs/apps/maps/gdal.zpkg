@@ -1,0 +1,14 @@
+_meta = {
+  name = "GDAL";
+  summary = "Translator library for raster geospatial data formats";
+  description = ''
+    Translator library for raster geospatial data formats.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.12.4";
+  tags = [ "maps" "science" "geography" "geospatial" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gdal;

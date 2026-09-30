@@ -1,0 +1,14 @@
+_meta = {
+  name = "Wasabi Wallet";
+  summary = "Privacy focused Bitcoin wallet";
+  description = ''
+    Privacy focused Bitcoin wallet.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.7.1";
+  tags = [ "finance" "bitcoin" "wallet" "privacy" "cryptocurrency" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.wasabiwallet;

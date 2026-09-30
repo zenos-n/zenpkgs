@@ -1,0 +1,14 @@
+_meta = {
+  name = "nextpnr";
+  summary = "Place and route tool for FPGAs";
+  description = ''
+    Place and route tool for FPGAs.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10";
+  tags = [ "cad" "electronics" "fpga" "development" "graphics" "engineering" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.isc;
+};
+
+import $pkgs.legacy.nextpnr;

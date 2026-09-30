@@ -1,0 +1,14 @@
+_meta = {
+  name = "Flowtime";
+  summary = "Get what motivates you done, without losing concentration";
+  description = ''
+    Get what motivates you done, without losing concentration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "6.5";
+  tags = [ "office" "productivity" "focus" "timers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.flowtime;

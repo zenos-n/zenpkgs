@@ -1,0 +1,14 @@
+_meta = {
+  name = "cargo-chef";
+  summary = "Cargo-subcommand to speed up Rust Docker builds using Docker layer caching";
+  description = ''
+    Cargo-subcommand to speed up Rust Docker builds using Docker layer caching.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.77";
+  tags = [ "development" "rust" "cargo" "caching" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.cargo-chef;

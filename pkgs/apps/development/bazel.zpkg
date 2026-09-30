@@ -1,0 +1,14 @@
+_meta = {
+  name = "Bazel";
+  summary = "Build tool that builds code quickly and reliably";
+  description = ''
+    Build tool that builds code quickly and reliably.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.6.0";
+  tags = [ "development" "build" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.bazel;

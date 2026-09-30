@@ -1,0 +1,14 @@
+_meta = {
+  name = "Cuneiform";
+  summary = "Multi-language OCR system";
+  description = ''
+    Multi-language OCR system.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.0";
+  tags = [ "office" "ocr" "documents" "recognition" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.cuneiform;

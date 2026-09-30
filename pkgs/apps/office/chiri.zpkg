@@ -1,0 +1,14 @@
+_meta = {
+  name = "Chiri";
+  summary = "Cross-platform CalDAV task management app";
+  description = ''
+    Cross-platform CalDAV task management app.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "office" "tasks" "caldav" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.zlib;
+};
+
+import $pkgs.legacy.chiri;

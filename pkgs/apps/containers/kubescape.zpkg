@@ -1,0 +1,22 @@
+_meta = {
+  name = "Kubescape";
+  summary = "Tool for testing if Kubernetes is deployed securely";
+  description = ''
+    Kubescape is the first open-source tool for testing if Kubernetes is
+    deployed securely according to multiple frameworks: regulatory, customized
+    company policies and DevSecOps best practices, such as the NSA-CISA and
+    the MITRE ATT&CK®.
+    Kubescape scans K8s clusters, YAML files, and HELM charts, and detect
+    misconfigurations and software vulnerabilities at early stages of the
+    CI/CD pipeline and provides a risk score instantly and risk trends over
+    time. Kubescape integrates natively with other DevOps tools, including
+    Jenkins, CircleCI and Github workflows.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.0.8";
+  tags = [ "containers" "kubernetes" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.kubescape;

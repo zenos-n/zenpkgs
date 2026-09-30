@@ -1,0 +1,14 @@
+# Upstream license metadata is retained by the imported recipe.
+_meta = {
+  name = "cargo-audit";
+  summary = "Audit Cargo.lock files for crates with security vulnerabilities";
+  description = ''
+    Audit Cargo.lock files for crates with security vulnerabilities.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.22.1";
+  tags = [ "development" "rust" "cargo" "security" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.cargo-audit;

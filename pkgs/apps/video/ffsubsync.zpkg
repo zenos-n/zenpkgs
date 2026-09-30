@@ -1,0 +1,14 @@
+_meta = {
+  name = "ffsubsync";
+  summary = "Automagically synchronize subtitles with video";
+  description = ''
+    Automagically synchronize subtitles with video.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.31";
+  tags = [ "video" "subtitles" "synchronization" "processing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ffsubsync;

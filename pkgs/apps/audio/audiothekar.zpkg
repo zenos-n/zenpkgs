@@ -1,0 +1,15 @@
+_meta = {
+  name = "Audiothekar";
+  summary = "Download client for the ARD Audiothek";
+  description = ''
+    Audiothekar is a command line client to browse and download programs from
+    German public broadcast online offering at https://www.ardaudiothek.de/.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.1";
+  tags = [ "audio" "downloads" "radio" "podcasts" "ard" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.audiothekar;

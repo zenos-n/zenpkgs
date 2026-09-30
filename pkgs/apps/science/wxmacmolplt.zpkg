@@ -1,0 +1,14 @@
+_meta = {
+  name = "wxMacMolPlt";
+  summary = "Graphical user interface for GAMESS-US";
+  description = ''
+    Graphical user interface for GAMESS-US.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "7.7.3";
+  tags = [ "science" "chemistry" "molecular-modeling" "education" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.wxmacmolplt;

@@ -1,0 +1,17 @@
+_meta = {
+  name = "Plex Desktop";
+  summary = "Streaming media player for Plex";
+  description = ''
+    Plex for Linux is your client for playback on the Linux
+    desktop. It features the point and click interface you see in your browser
+    but uses a more powerful playback engine as well as
+    some other advance features.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.112.0";
+  tags = [ "video" "audio" "multimedia" "plex" "player" "streaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+import $pkgs.legacy.plex-desktop;

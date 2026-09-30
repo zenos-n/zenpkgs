@@ -1,0 +1,14 @@
+_meta = {
+  name = "abook";
+  summary = "Text-based addressbook program designed to use with mutt mail client";
+  description = ''
+    Text-based addressbook program designed to use with mutt mail client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.2";
+  tags = [ "office" "contacts" "terminal" "productivity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.abook;

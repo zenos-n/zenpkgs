@@ -1,0 +1,14 @@
+_meta = {
+  name = "cljfmt";
+  summary = "Tool for formatting Clojure code";
+  description = ''
+    Tool for formatting Clojure code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.16.4";
+  tags = [ "development" "clojure" "formatting" "source-code" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.epl10;
+};
+
+import $pkgs.legacy.cljfmt;

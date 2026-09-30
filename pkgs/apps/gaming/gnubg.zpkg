@@ -1,0 +1,14 @@
+_meta = {
+  name = "GNU Backgammon";
+  summary = "World class backgammon application";
+  description = ''
+    World class backgammon application.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.08.003";
+  tags = [ "gaming" "board-games" "strategy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.gnubg;

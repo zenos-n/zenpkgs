@@ -1,0 +1,14 @@
+_meta = {
+  name = "checksec";
+  summary = "Tool for checking security bits on executables";
+  description = ''
+    Tool for checking security bits on executables.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.0";
+  tags = [ "security" "development" "auditing" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.checksec;

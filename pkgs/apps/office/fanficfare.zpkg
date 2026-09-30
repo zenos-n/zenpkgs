@@ -1,0 +1,14 @@
+_meta = {
+  name = "FanFicFare";
+  summary = "Tool for making eBooks from fanfiction web sites";
+  description = ''
+    Tool for making eBooks from fanfiction web sites.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.54.0";
+  tags = [ "office" "fanfiction" "ebooks" "downloads" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3;
+};
+
+import $pkgs.legacy.fanficfare;

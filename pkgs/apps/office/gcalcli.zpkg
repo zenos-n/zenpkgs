@@ -1,0 +1,14 @@
+_meta = {
+  name = "gcalcli";
+  summary = "CLI for Google Calendar";
+  description = ''
+    CLI for Google Calendar.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.5.1";
+  tags = [ "office" "calendar" "google" "cli" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.gcalcli;

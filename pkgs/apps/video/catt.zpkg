@@ -1,0 +1,14 @@
+_meta = {
+  name = "catt";
+  summary = "Send media from online sources to Chromecast devices";
+  description = ''
+    Send media from online sources to Chromecast devices.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.13.1";
+  tags = [ "video" "chromecast" "streaming" "casting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.catt;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "git-cache";
+  summary = "Program to add and manage a system-wide or user-wide cache for remote git repositories";
+  description = ''
+    Program to add and manage a system-wide or user-wide cache for remote git repositories.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2018-06-18";
+  tags = [ "development" "git" "repositories" "caching" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.wtfpl;
+};
+
+import $pkgs.legacy.git-cache;

@@ -1,0 +1,15 @@
+_meta = {
+  name = "Vorbis Tools";
+  summary = "Extra tools for Ogg-Vorbis audio codec";
+  description = ''
+    A set of command-line tools to manipulate Ogg Vorbis audio
+    files, notably the `ogg123' player and the `oggenc' encoder.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.4.3";
+  tags = [ "audio" "encoding" "multimedia" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.vorbis-tools;

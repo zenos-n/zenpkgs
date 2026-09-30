@@ -1,0 +1,23 @@
+_meta = {
+  name = "Apache FOP";
+  summary = "XML formatter driven by XSL Formatting Objects (XSL-FO)";
+  description = ''
+    FOP is a Java application that reads a formatting object tree and then
+    turns it into a wide variety of output presentations (including AFP, PCL,
+    PDF, PNG, PostScript, RTF, TIFF, and plain text), or displays the result
+    on-screen.
+
+    The formatting object tree can be in the form of an XML document (output
+    by an XSLT engine like xalan) or can be passed in memory as a DOM
+    Document or (in the case of xalan) SAX events.
+
+    This package contains the fop command line tool.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.11";
+  tags = [ "office" "documents" "xml" "typesetting" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fop;

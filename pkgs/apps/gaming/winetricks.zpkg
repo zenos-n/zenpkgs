@@ -1,0 +1,14 @@
+_meta = {
+  name = "Winetricks";
+  summary = "Script to install DLLs needed to work around problems in Wine";
+  description = ''
+    Script to install DLLs needed to work around problems in Wine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "20260125";
+  tags = [ "gaming" "compatibility" "windows" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.winetricks;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "FuseSoC";
+  summary = "Package manager and build tools for HDL code";
+  description = ''
+    Package manager and build tools for HDL code.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.6";
+  tags = [ "cad" "hdl" "fpga" "package-management" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.fusesoc;

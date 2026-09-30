@@ -1,0 +1,14 @@
+_meta = {
+  name = "Mihomo";
+  summary = "Rule-based tunnel in Go";
+  description = ''
+    Rule-based tunnel in Go.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.19.24";
+  tags = [ "networking" "proxy" "privacy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.mihomo;

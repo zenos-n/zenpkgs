@@ -6,7 +6,7 @@ _meta = {
   '';
   zenosVersion = "1.0.0";
   packageVersion = "";
-  tags = [ "browser" "desktop" ];
+  tags = [ "browser" "desktop" "browsers" "internet" ];
   maintainers = [ $m.doromiert ];
 };
 

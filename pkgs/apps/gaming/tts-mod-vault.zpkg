@@ -1,0 +1,14 @@
+_meta = {
+  name = "TTS Mod Vault";
+  summary = "Download and backup assets for your Tabletop Simulator mods";
+  description = ''
+    Download and backup assets for your Tabletop Simulator mods.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0";
+  tags = [ "gaming" "tabletop-simulator" "mods" "backup" "downloads" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+import $pkgs.legacy.tts-mod-vault;

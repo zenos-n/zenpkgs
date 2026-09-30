@@ -1,0 +1,22 @@
+_meta = {
+  name = "Freewheeling";
+  summary = "Live looping instrument with JACK and MIDI support";
+  description = ''
+    Freewheeling allows us to build repetitive grooves
+    by sampling and directing loops from within spirited improvisation.
+
+    It works because, down to the core, it's built around
+    improv. We leave mice and menus, and dive into our own process
+    of making sound.
+
+    Freewheeling runs under macOS and Linux, and is open source
+    software, released under the GNU GPL license.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.6";
+  tags = [ "audio" "music-production" "looping" "jack" "midi" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.freewheeling;

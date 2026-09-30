@@ -1,0 +1,14 @@
+_meta = {
+  name = "BIND";
+  summary = "Domain name server";
+  description = ''
+    Domain name server.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9.20.26";
+  tags = [ "networking" "dns" "server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.bind;

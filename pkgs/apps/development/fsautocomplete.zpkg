@@ -1,0 +1,14 @@
+_meta = {
+  name = "FsAutoComplete";
+  summary = "Backend service for rich editing or intellisense features for editors";
+  description = ''
+    Backend service for rich editing or intellisense features for editors.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.83.0";
+  tags = [ "development" "fsharp" "language-server" "editors" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.fsautocomplete;

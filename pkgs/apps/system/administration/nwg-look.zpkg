@@ -1,0 +1,14 @@
+_meta = {
+  name = "nwg-look";
+  summary = "GTK settings editor, designed to work properly in wlroots-based Wayland environment";
+  description = ''
+    GTK settings editor, designed to work properly in wlroots-based Wayland environment.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.1";
+  tags = [ "system" "administration" "theming" "settings" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.nwg-look;

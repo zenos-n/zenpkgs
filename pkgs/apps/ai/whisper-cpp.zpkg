@@ -1,0 +1,15 @@
+_meta = {
+  name = "whisper.cpp";
+  summary = "Port of OpenAI's Whisper model in C/C++";
+  description = ''
+    To download the models as described in the project's readme, you may
+    use the `whisper-cpp-download-ggml-model` binary from this package.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.8.4";
+  tags = [ "ai" "audio" "transcription" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.whisper-cpp;

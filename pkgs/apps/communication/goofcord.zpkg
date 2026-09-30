@@ -1,0 +1,14 @@
+_meta = {
+  name = "Goofcord";
+  summary = "Highly configurable and privacy-focused Discord client";
+  description = ''
+    Highly configurable and privacy-focused Discord client.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.2.1";
+  tags = [ "communication" "discord" "messaging" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.osl3;
+};
+
+import $pkgs.legacy.goofcord;

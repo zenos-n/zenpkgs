@@ -1,0 +1,14 @@
+_meta = {
+  name = "Pinta";
+  summary = "Drawing/editing program modeled after Paint.NET";
+  description = ''
+    Drawing/editing program modeled after Paint.NET.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.1.2";
+  tags = [ "graphics" "creativity" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.pinta;

@@ -1,0 +1,14 @@
+_meta = {
+  name = "Darktile";
+  summary = "GPU rendered terminal emulator designed for tiling window managers";
+  description = ''
+    GPU rendered terminal emulator designed for tiling window managers.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.0.11";
+  tags = [ "terminal" "gpu" "desktop" "emulator" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.darktile;

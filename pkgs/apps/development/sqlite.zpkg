@@ -1,0 +1,14 @@
+_meta = {
+  name = "SQLite";
+  summary = "Self-contained, serverless, zero-configuration, transactional SQL database engine";
+  description = ''
+    Self-contained, serverless, zero-configuration, transactional SQL database engine.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.51.2";
+  tags = [ "development" "database" "command-line" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.publicDomain;
+};
+
+import $pkgs.legacy.sqlite;

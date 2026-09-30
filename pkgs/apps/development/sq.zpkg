@@ -1,0 +1,14 @@
+_meta = {
+  name = "sq";
+  summary = "Swiss army knife for data";
+  description = ''
+    Swiss army knife for data.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.50.0";
+  tags = [ "development" "database" "data" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.sq;

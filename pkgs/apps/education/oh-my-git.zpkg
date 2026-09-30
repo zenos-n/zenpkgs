@@ -1,0 +1,14 @@
+_meta = {
+  name = "Oh My Git!";
+  summary = "Interactive Git learning game";
+  description = ''
+    Interactive Git learning game.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.6.5";
+  tags = [ "education" "git" "development" "gaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.blueOak100;
+};
+
+import $pkgs.legacy.oh-my-git;

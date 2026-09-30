@@ -1,0 +1,14 @@
+_meta = {
+  name = "ALSA Modular Synth";
+  summary = "Realtime modular synthesizer for ALSA";
+  description = ''
+    Realtime modular synthesizer for ALSA.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2019-04-27";
+  tags = [ "audio" "music" "synthesizer" "modular" "alsa" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2;
+};
+
+import $pkgs.legacy.ams;

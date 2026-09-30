@@ -1,0 +1,14 @@
+_meta = {
+  name = "EJSON";
+  summary = "Manage asymmetrically encrypted secrets from the command line";
+  description = ''
+    Manage asymmetrically encrypted secrets from the command line.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.5.4";
+  tags = [ "security" "secrets" "encryption" "development" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.ejson;
