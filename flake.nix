@@ -8,32 +8,33 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     disko = {
-      url = "github:nix-community/disko";
+      url = "github:nix-community/disko/v1.13.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixos-hardware.url = "github:nixos/nixos-hardware";
-    nix-flatpak.url = "github:gmodena/nix-flatpak";
-    jovian.url = "github:Jovian-Experiments/Jovian-NixOS";
-    nix-gaming.url = "github:fufexan/nix-gaming";
-    vsc-extensions.url = "github:nix-community/nix-vscode-extensions";
-    nixcord.url = "github:kaylorben/nixcord";
-    nix-minecraft.url = "github:Infinidoge/nix-minecraft";
+    nixos-hardware.url = "github:nixos/nixos-hardware/31cc5f4d9b9ba601071e8b8504601b9b176e2756";
+    nix-flatpak.url = "github:gmodena/nix-flatpak/v0.7.0";
+    # Upstream release tags predate its flake, so pin the latest commit.
+    jovian.url = "github:Jovian-Experiments/Jovian-NixOS/23be28be9808ebc8f8bf1da5eed673fd6c6b62bc";
+    nix-gaming.url = "github:fufexan/nix-gaming/7504a53ba97299b8d0536625aec3683aca8a700f";
+    vsc-extensions.url = "github:nix-community/nix-vscode-extensions/10cb8298d5bf73196c70f7ba25a7aac01d3b9b4f";
+    nixcord.url = "github:kaylorben/nixcord/2f2c1f3be0e90ccc8a083d1b83ebf2ebb4e1edff";
+    nix-minecraft.url = "github:Infinidoge/nix-minecraft/d3d8c17890760791f755b122eac30b19ea74443c";
     nur = {
-      url = "github:nix-community/NUR";
+      url = "github:nix-community/NUR/b3d988c4a22356f4bbffec07952f30c7771509cb";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     masterful-gestures = {
-      url = "github:doromiert/masterful-gestures";
+      url = "github:doromiert/masterful-gestures/7bc5670a750ba84f205aa2e82eaaf6c9fa45212f";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nixpkgs-popcorn.url = "github:NixOS/nixpkgs/1c3fe55ad329cbcb28471bb30f05c9827f724c76";
+    nixpkgs-popcorn.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     nixpwamaker = {
-      url = "github:doromiert/nixpwamaker/f28ff38b57f9a64fc925f7fc4d18d4472512593e";
+      url = "github:doromiert/nixpwamaker/1.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     source-plymouth = {
-      url = "github:zenos-n/plymouth-theme/b7040721520bc2c7bb3e9aba6de21cbe2bb5636f";
+      url = "github:zenos-n/plymouth-theme/1.0.0";
       flake = false;
     };
     source-rebuild = {
@@ -61,7 +62,7 @@
       flake = false;
     };
     source-oobe = {
-      url = "github:zenos-n/zenos-oobe-mode-extension/228b597601273c0e0537913db4e2a04b24154c79";
+      url = "github:zenos-n/zenos-oobe-mode-extension/1.0.0";
       flake = false;
     };
     source-zenfs = {
@@ -69,7 +70,7 @@
       flake = false;
     };
     # Development snapshots of the extracted package sources. These repositories
-    # can be published and replaced with pinned Git URLs without changing ZPKGs.
+    # can be published and replaced with release or latest-commit URLs without changing ZPKGs.
     source-vr-tools = {
       url = "path:/home/doromiert/Projects/zenos-vr";
       flake = false;
@@ -107,6 +108,7 @@
           bundle =
             bootstrapPkgs.runCommand "zenpkgs-dsl-bundle"
               {
+                enableParallelBuilding = true;
                 nativeBuildInputs = [
                   zenDsl
                   bootstrapPkgs.python3
@@ -133,6 +135,8 @@
                 zen-dsl compile-tree \
                   --root "$src" \
                   --output "$out/bundle.json" \
+                  --jobs "$NIX_BUILD_CORES" \
+                  --no-cache \
                   --mode interface
 
                 python3 - "$out/bundle.json" "$out" <<'PY'
@@ -637,6 +641,9 @@
           };
         in
         {
+          flake-inputs = dsl.bootstrapPkgs.writeText "zenpkgs-flake-inputs.json" (
+            builtins.toJSON (import ./tests/flake-inputs.nix)
+          );
           migration-options =
             assert nixpkgs.lib.all (value: value) (builtins.attrValues migrationPolicies);
             pkgs.writeText "zenos-migration-options" (builtins.toJSON migrationPolicies);

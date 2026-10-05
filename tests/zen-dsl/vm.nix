@@ -270,7 +270,17 @@ pkgs.testers.runNixOSTest {
 
     machine.succeed(
       "zen-dsl compile-tree --root /run/zen-dsl-valid "
-      "--output /tmp/bundle.json --mode interface"
+      "--output /tmp/bundle.json --mode interface --jobs 2 --cache-dir /tmp/zen-dsl-cache"
+    )
+    machine.succeed(
+      "zen-dsl compile-tree --root /run/zen-dsl-valid "
+      "--output /tmp/bundle-warm.json --mode interface --jobs 2 --cache-dir /tmp/zen-dsl-cache; "
+      "cmp /tmp/bundle.json /tmp/bundle-warm.json"
+    )
+    machine.succeed(
+      "zen-dsl compile-tree --root /run/zen-dsl-valid "
+      "--output /tmp/bundle-serial.json --mode interface --jobs 1 --no-cache; "
+      "cmp /tmp/bundle.json /tmp/bundle-serial.json"
     )
     machine.succeed(
       "jq -e '.bundleVersion == \"zenlang.bundle/2\" and "

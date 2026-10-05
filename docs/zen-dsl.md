@@ -163,8 +163,8 @@ executable is an alias of this canonical frontend; the previous restricted
 implementation is available as `zcfg-legacy` during migration.
 
 Tree commands recursively discover the four source extensions without entering
-symlink directories. They reject relative path case collisions and trees over
-4096 source files, and validate every import relative to the requested root.
+symlink directories. They reject relative path case collisions, have no fixed
+source-count limit, and validate every import relative to the requested root.
 Every ZMDL must be a named leaf below `modules/`; generic `default`, `index`, and
 `module` leaves, duplicate or case-colliding identities, and any authored
 `_meta.id` are rejected. `modules/desktops/gnome.zmdl` has canonical
@@ -316,3 +316,51 @@ source inventories, without evaluating package builders to discover tree shape.
 
 The foundation checks do not certify all existing library options' enabled
 behavior, activation, or boot. Run integration acceptance in a ZenOS VM.
+
+## Parallel compilation and persistent caching
+
+Tree commands now parse and validate each uncached source once. `compile-tree`
+uses concurrent worker processes for parsing and Nix emission, so Python can use
+multiple cores. Both tree commands default to the available CPU affinity, capped
+at eight workers. `--jobs 1` selects serial execution; `--jobs N` requests a
+particular worker count. Source and diagnostic ordering remain deterministic.
+
+```sh
+zen-dsl compile-tree --root sources --output /tmp/bundle.json --jobs 4
+zen-dsl compile-tree --root sources --output /tmp/bundle.json --no-cache
+zen-dsl check-tree --root sources --cache-dir /tmp/zen-dsl-cache
+```
+
+The CLI caches validated source ASTs and generated Nix in
+`$XDG_CACHE_HOME/zen-dsl` (or `~/.cache/zen-dsl`). `compile-tree` also caches its
+complete serialized successful output and original diagnostics. An unchanged
+run verifies the source inventory and every dependency, then reuses that output
+without parsing, emission, AST reconstruction, or bundle serialization. A
+changed tree reuses valid individual entries and repeats global identity,
+mounting and declaration-ownership checks. The cache is optional: missing,
+corrupt, unwritable, or interrupted entries fall back to compilation.
+
+Cache keys include the logical absolute root, compilation mode and compiler /
+backend content, including language and bundle versions. DSL and Markdown imports
+are content-hashed and reopened under the resolver's filesystem rules. Physical
+file identities are checked too, so symlink changes cannot hide import cycles.
+Same-timestamp changes invalidate the cache. Added, deleted, moved and renamed
+sources are rediscovered on every run. Caches must live outside the editable
+source root; remove the cache directory to reclaim its space. `--no-cache`
+bypasses both reads and writes.
+
+The Python APIs keep their existing serial, uncached defaults. Opt in with
+`compile_tree(root, jobs=4, use_cache=True, cache_dir=...)` or the equivalent
+`check_tree` arguments. These APIs return ASTs / bundles; the serialized output
+cache is used by the CLI.
+
+Production Nix bundle builds use `NIX_BUILD_CORES` and bypass compiler-cache writes
+for the one-shot build. Nix retains the resulting immutable bundle in the store for subsequent
+installs with the same inputs. This optimization covers DSL compilation, not
+runtime-dependent Nix evaluation, trusted-schema requests, package builds, or
+activation. Installing a package still evaluates that package and its dependencies.
+
+The normative contract is in the sibling design repository's
+`design/incremental-compilation.md`. Frontend regression coverage lives in
+`tests/zen-dsl/zenlang/test_incremental_compilation.py`; runtime/integration
+acceptance belongs in the ZenOS VM.

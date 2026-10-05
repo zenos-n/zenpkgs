@@ -9,7 +9,7 @@ import sys
 from typing import TextIO
 
 from .api import parse_file
-from .compiler import CompilationError, check_tree, compile_document, compile_tree
+from .compiler import CompilationError, check_tree, compile_document, compile_tree_output
 from .diagnostics import render_human, render_json
 from .emitter import NixEmissionError
 from .model import Diagnostic, FileKind, Span, ZenLangError, ast_to_dict
@@ -78,12 +78,14 @@ def build_parser() -> argparse.ArgumentParser:
         "check-tree", help="validate every ZenOS DSL source below a root"
     )
     check_tree_command.add_argument("--root", required=True, help="source tree root")
+    _add_tree_performance_arguments(check_tree_command)
     _add_diagnostic_argument(check_tree_command)
     compile_tree_command = commands.add_parser(
         "compile-tree", help="compile a deterministic ZenOS DSL JSON bundle"
     )
     compile_tree_command.add_argument("--root", required=True, help="source tree root")
     compile_tree_command.add_argument("--output", required=True, help="bundle output file")
+    _add_tree_performance_arguments(compile_tree_command)
     compile_tree_command.add_argument(
         "--mode",
         choices=("interface", "build"),
@@ -92,6 +94,23 @@ def build_parser() -> argparse.ArgumentParser:
     )
     _add_diagnostic_argument(compile_tree_command)
     return parser
+
+
+def _add_tree_performance_arguments(parser: argparse.ArgumentParser) -> None:
+    parser.add_argument("--jobs", type=_worker_count, default=0,
+                        help="parallel workers (default: 0 = available cores, capped at 8; 1 = serial)")
+    parser.add_argument("--cache-dir", help="private cache directory (default: $XDG_CACHE_HOME/zen-dsl)")
+    parser.add_argument("--no-cache", action="store_true", help="bypass reading and writing the compiler cache")
+
+
+def _worker_count(value: str) -> int:
+    try:
+        count = int(value)
+    except ValueError as error:
+        raise argparse.ArgumentTypeError("jobs must be a nonnegative integer") from error
+    if count < 0:
+        raise argparse.ArgumentTypeError("jobs must be a nonnegative integer")
+    return count
 
 
 def _add_diagnostic_argument(parser: argparse.ArgumentParser) -> None:
@@ -245,8 +264,10 @@ def _validate_schema(arguments: argparse.Namespace, document) -> SchemaValidatio
 
 def _tree(arguments: argparse.Namespace, stdout: TextIO, stderr: TextIO) -> int:
     try:
+        options = {"jobs": arguments.jobs, "cache_dir": arguments.cache_dir,
+                   "use_cache": not arguments.no_cache}
         if arguments.command == "check-tree":
-            documents = check_tree(arguments.root)
+            documents = check_tree(arguments.root, **options)
             warnings = [
                 diagnostic
                 for document in documents.values()
@@ -258,24 +279,13 @@ def _tree(arguments: argparse.Namespace, stdout: TextIO, stderr: TextIO) -> int:
                 for document in documents.values():
                     _write_warnings(document, stderr, "human")
             return 0
-        checked = check_tree(arguments.root)
-        warnings = tuple(
-            dict.fromkeys(
-                diagnostic
-                for document in checked.values()
-                for diagnostic in document.diagnostics
-            )
-        )
+        output, warnings = compile_tree_output(arguments.root, mode=arguments.mode, **options)
         if warnings:
             if arguments.diagnostic_format == "json":
                 stderr.write(render_json(list(warnings)) + "\n")
             else:
                 for diagnostic in warnings:
                     stderr.write(render_human(diagnostic, {}) + "\n")
-        bundle = compile_tree(arguments.root, mode=arguments.mode)
-        output = json.dumps(
-            bundle, indent=2, sort_keys=True, ensure_ascii=False
-        ) + "\n"
         write_output_atomic(Path(arguments.output), output)
         return 0
     except ZenLangError as error:

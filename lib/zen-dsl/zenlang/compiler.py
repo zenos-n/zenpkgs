@@ -1,12 +1,15 @@
 from __future__ import annotations
 
+import json
 import os
+from concurrent.futures import ProcessPoolExecutor
+from functools import partial
 from dataclasses import dataclass
 from pathlib import Path, PurePath
 from typing import Any
 
 from .api import parse_file
-from .emitter import NixEmitter, emit_attr_name, emit_nix_data, semantic_descriptor
+from .emitter import NixEmissionError, NixEmitter, emit_attr_name, emit_nix_data, semantic_descriptor
 from .validation import infer_type
 from .model import (
     ActionStatement,
@@ -15,6 +18,7 @@ from .model import (
     CallExpr,
     ConditionalStatement,
     Document,
+    Diagnostic,
     DynamicSegment,
     EnableOption,
     Expression,
@@ -84,79 +88,148 @@ def document_descriptor(document: Document) -> dict[str, Any]:
     }
 
 
-def check_tree(root: str | Path) -> dict[str, Document]:
-    resolved_root = _tree_root(root)
-    documents: dict[str, Document] = {}
-    merge_errors: list[ZenLangError] = []
+@dataclass
+class _TreeEntry:
+    document: Document | None = None
+    source: dict[str, Any] | None = None
+    parse_error: tuple[Any, dict[str, str]] | None = None
+    merge_error: tuple[Any, dict[str, str]] | None = None
+    emission_error: tuple[str, str, Any] | None = None
+    dependencies: dict[str, Any] | None = None
+
+
+def _entry_worker(item: tuple[str, Path], *, root: Path, mode: str | None,
+                  cache_directory: str | Path | None, fingerprint: str) -> _TreeEntry:
+    # Errors cross process boundaries as data: ZenLangError's constructor expects
+    # a Diagnostic rather than the string Exception normally pickles.
+    from .cache import SourceCache
+    relative, source = item
+    cache = SourceCache(cache_directory, root, mode or "check", fingerprint) if cache_directory else None
+    if cache is not None:
+        cached = cache.load(relative)
+        if cached is not None:
+            return _TreeEntry(document=cached[0], source=cached[1], dependencies=cached[2])
+    dependencies: dict[str, Any] = {}
+    entry = _TreeEntry(dependencies=dependencies)
+    try:
+        entry.document = parse_file(source, import_root=root, dependencies=dependencies)
+    except ZenLangError as error:
+        if error.diagnostic.code != "ZEN218" or source.suffix not in (".zstr", ".zmdl"):
+            entry.parse_error = (error.diagnostic, error.sources)
+            return entry
+        entry.merge_error = (error.diagnostic, error.sources)
+        try:
+            entry.document = parse_file(source, import_root=root, validate_semantics=False)
+        except ZenLangError as recovered_error:
+            entry.parse_error = (recovered_error.diagnostic, recovered_error.sources)
+        return entry
+    if mode is not None:
+        try:
+            entry.source = _compile_source(relative, entry.document, root, mode)
+        except (CompilationError, NixEmissionError, ZenLangError) as error:
+            if isinstance(error, ZenLangError):
+                entry.emission_error = ("zenlang", "", (error.diagnostic, error.sources))
+            else:
+                entry.emission_error = ("emission" if isinstance(error, NixEmissionError) else "compilation",
+                                        str(error), error.span)
+            return entry
+    if cache is not None:
+        cache.store(relative, entry.document, entry.source, dependencies)
+    return entry
+
+
+def _raise_language_error(record: tuple[Any, dict[str, str]]) -> None:
+    error = ZenLangError(record[0])
+    error.sources.update(record[1])
+    raise error
+
+
+def _cache_directory(root: Path, requested: str | Path | None) -> Path | None:
+    from .cache import default_cache_dir
+    try:
+        directory = Path(requested or default_cache_dir()).absolute()
+        physical_directory = directory.resolve()
+    except (OSError, RuntimeError, ValueError):
+        return None
+    if physical_directory.is_relative_to(root.resolve()):
+        raise CompilationError("compiler cache must be outside the editable source root")
+    return directory
+
+
+def _load_tree(root: Path, *, mode: str | None, jobs: int,
+               cache_dir: str | Path | None, use_cache: bool) -> tuple[dict[str, _TreeEntry], list[dict[str, Any]], dict[str, Any]]:
+    from .cache import compiler_fingerprint
+    if not isinstance(jobs, int) or jobs < 0:
+        raise CompilationError("jobs must be a nonnegative integer (0 selects available cores)")
+    workers = jobs or min(8, len(os.sched_getaffinity(0)) if hasattr(os, "sched_getaffinity") else (os.cpu_count() or 1))
+    cache_directory = _cache_directory(root, cache_dir) if use_cache else None
+    discovered = _discover_tree(root)
     folded_paths: dict[str, str] = {}
-    for relative, source in _discover_tree(resolved_root):
+    for relative, _ in discovered:
         folded = relative.casefold()
         previous = folded_paths.get(folded)
         if previous is not None:
-            if previous == relative:
-                message = f"duplicate source path: {relative}"
-            else:
-                message = f"case-colliding source paths: {previous} and {relative}"
+            message = (f"duplicate source path: {relative}" if previous == relative
+                       else f"case-colliding source paths: {previous} and {relative}")
             raise CompilationError(message)
         folded_paths[folded] = relative
-        try:
-            documents[relative] = parse_file(source, import_root=resolved_root)
-        except ZenLangError as error:
-            if error.diagnostic.code != "ZEN218" or source.suffix not in (".zstr", ".zmdl"):
-                raise
-            # Recover the unmerged AST only to improve mounted collision
-            # diagnostics. Never accept a document whose validation failed.
-            merge_errors.append(error)
-            documents[relative] = parse_file(source, import_root=resolved_root, validate_semantics=False)
-    _mounted_ownership(documents, [_module_record(relative, document)
+    worker = partial(_entry_worker, root=root, mode=mode, cache_directory=cache_directory,
+                     fingerprint=compiler_fingerprint() if use_cache else "")
+    if workers == 1 or len(discovered) < 2:
+        results = list(map(worker, discovered))
+    else:
+        # map preserves discovery order, including which error is reported first.
+        with ProcessPoolExecutor(max_workers=min(workers, len(discovered))) as executor:
+            chunksize = max(1, min(16, len(discovered) // (workers * 4)))
+            results = list(executor.map(worker, discovered, chunksize=chunksize))
+    entries = dict(zip((relative for relative, _ in discovered), results))
+    for entry in entries.values():
+        if entry.parse_error is not None:
+            _raise_language_error(entry.parse_error)
+    documents = {relative: entry.document for relative, entry in entries.items()}
+    ownership = _mounted_ownership(documents, [_module_record(relative, document)
                                  for relative, document in documents.items()
                                  if document.kind is FileKind.ZMDL])
-    if merge_errors:
-        raise merge_errors[0]
-    _tree_modules(documents)
-    return documents
+    for entry in entries.values():
+        if entry.merge_error is not None:
+            _raise_language_error(entry.merge_error)
+    modules = _tree_modules(documents)
+    return entries, modules, ownership
 
 
-def compile_tree(root: str | Path, *, mode: str = "build") -> dict[str, Any]:
+def check_tree(root: str | Path, *, jobs: int = 1,
+               cache_dir: str | Path | None = None, use_cache: bool = False) -> dict[str, Document]:
+    entries, _, _ = _load_tree(_tree_root(root), mode=None, jobs=jobs, cache_dir=cache_dir, use_cache=use_cache)
+    return {relative: entry.document for relative, entry in entries.items()}
+
+
+def compile_tree(root: str | Path, *, mode: str = "build", jobs: int = 1,
+                 cache_dir: str | Path | None = None, use_cache: bool = False,
+                 diagnostics: list[Diagnostic] | None = None,
+                 dependencies: dict[str, Any] | None = None) -> dict[str, Any]:
     if mode not in ("interface", "build"):
         raise CompilationError("ZPKG mode must be 'interface' or 'build'")
     resolved_root = _tree_root(root)
-    documents = check_tree(resolved_root)
-    modules = _tree_modules(documents)
-    sources = []
-    ownership = _mounted_ownership(documents, modules)
+    entries, modules, ownership = _load_tree(resolved_root, mode=mode, jobs=jobs, cache_dir=cache_dir, use_cache=use_cache)
+    documents = {relative: entry.document for relative, entry in entries.items()}
+    if diagnostics is not None:
+        diagnostics.extend(dict.fromkeys(diagnostic for document in documents.values()
+                                         for diagnostic in document.diagnostics))
     structure = _tree_structure(documents)
-    for relative, document in documents.items():
-        diagnostics = []
-        for diagnostic in document.diagnostics:
-            record = diagnostic.to_dict()
-            # Bundle diagnostics carry portable locations, not parser AST spans.
-            record.pop("span")
-            record["source"] = diagnostic.span.source
-            record["line"] = diagnostic.span.start.line
-            record["column"] = diagnostic.span.start.column
-            try:
-                record["source"] = Path(diagnostic.span.source).relative_to(resolved_root).as_posix()
-            except ValueError:
-                pass
-            diagnostics.append(record)
-        if document.kind is FileKind.ZMDL:
-            compiled = compile_zmdl(document, root=resolved_root)
-        else:
-            compiled = compile_document(document, mode=mode)
-        sources.append(
-            {
-                "compiledNix": compiled,
-                **({"buildNix": compile_zpkg(document, mode="build")}
-                   if document.kind is FileKind.ZPKG else {}),
-                **({"mountNix": compile_zmdl_mount(document, root=resolved_root)}
-                   if document.kind is FileKind.ZMDL else {}),
-                "descriptor": document_descriptor(document),
-                "diagnostics": diagnostics,
-                "kind": document.kind.value,
-                "path": relative,
-            }
-        )
+    sources = []
+    for entry in entries.values():
+        if entry.emission_error is not None:
+            kind, message, span = entry.emission_error
+            if kind == "zenlang":
+                _raise_language_error(span)
+            error_type = NixEmissionError if kind == "emission" else CompilationError
+            raise error_type(message, span)
+        sources.append(entry.source)
+        if dependencies is not None:
+            for path, identity in (entry.dependencies or {}).items():
+                if path in dependencies and dependencies[path] != identity:
+                    raise CompilationError(f"source changed during compilation; retry: {path}")
+                dependencies[path] = identity
     return {
         "bundleVersion": BUNDLE_VERSION,
         "grammarVersion": GRAMMAR_VERSION,
@@ -166,6 +239,60 @@ def compile_tree(root: str | Path, *, mode: str = "build") -> dict[str, Any]:
         "mountedOwnership": ownership,
         "sources": sources,
         "diagnostics": [diagnostic for source in sources for diagnostic in source["diagnostics"]],
+    }
+
+
+def compile_tree_output(root: str | Path, *, mode: str = "build", jobs: int = 1,
+                        cache_dir: str | Path | None = None,
+                        use_cache: bool = False) -> tuple[str, list[Diagnostic]]:
+    """CLI output cache: verify all inputs before reusing serialized output."""
+    from .cache import BundleCache, compiler_fingerprint
+    if mode not in ("interface", "build"):
+        raise CompilationError("ZPKG mode must be 'interface' or 'build'")
+    if not isinstance(jobs, int) or jobs < 0:
+        raise CompilationError("jobs must be a nonnegative integer (0 selects available cores)")
+    resolved_root = _tree_root(root)
+    cache = None
+    directory = _cache_directory(resolved_root, cache_dir) if use_cache else None
+    if directory is not None:
+        cache = BundleCache(directory, resolved_root, mode, compiler_fingerprint())
+        cached = cache.load_output([relative for relative, _ in _discover_tree(resolved_root)])
+        if cached is not None:
+            return cached
+    warnings: list[Diagnostic] = []
+    dependencies: dict[str, Any] = {}
+    bundle = compile_tree(resolved_root, mode=mode, jobs=jobs, cache_dir=cache_dir,
+                          use_cache=use_cache, diagnostics=warnings, dependencies=dependencies)
+    output = json.dumps(bundle, indent=2, sort_keys=True, ensure_ascii=False) + "\n"
+    if cache is not None:
+        cache.store_output(output, warnings, dependencies, [source["path"] for source in bundle["sources"]])
+    return output, warnings
+
+
+def _compile_source(relative: str, document: Document, root: Path, mode: str) -> dict[str, Any]:
+    diagnostics = []
+    for diagnostic in document.diagnostics:
+        record = diagnostic.to_dict()
+        record.pop("span")
+        record["source"] = diagnostic.span.source
+        record["line"] = diagnostic.span.start.line
+        record["column"] = diagnostic.span.start.column
+        try:
+            record["source"] = Path(diagnostic.span.source).relative_to(root).as_posix()
+        except ValueError:
+            pass
+        diagnostics.append(record)
+    compiled = compile_document(document, mode=mode, root=root)
+    return {
+        "compiledNix": compiled,
+        **({"buildNix": compiled if mode == "build" else compile_zpkg(document, mode="build")}
+           if document.kind is FileKind.ZPKG else {}),
+        **({"mountNix": compile_zmdl_mount(document, root=root)}
+           if document.kind is FileKind.ZMDL else {}),
+        "descriptor": document_descriptor(document),
+        "diagnostics": diagnostics,
+        "kind": document.kind.value,
+        "path": relative,
     }
 
 

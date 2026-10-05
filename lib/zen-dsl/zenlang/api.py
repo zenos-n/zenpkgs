@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import errno
+import hashlib
 import os
 import stat
 from dataclasses import fields, is_dataclass, replace
@@ -61,6 +62,7 @@ def parse_file(
     validate_semantics: bool = True,
     import_root: str | Path | None = None,
     defer_schema_guards: bool = False,
+    dependencies: dict[str, dict[str, Any]] | None = None,
 ) -> Document:
     entry = _logical_path(path)
     source = str(entry)
@@ -93,6 +95,7 @@ def parse_file(
             validate_semantics=validate_semantics,
             defer_schema_guards=defer_schema_guards,
             sources=sources,
+            dependencies=dependencies,
         )
         try:
             return resolver.load(entry, source, Span.point(source), imported=False)
@@ -112,12 +115,14 @@ class _ImportResolver:
         validate_semantics: bool,
         defer_schema_guards: bool,
         sources: dict[str, str],
+        dependencies: dict[str, dict[str, Any]] | None = None,
     ):
         self.root = root
         self.root_descriptor = root_descriptor
         self.validate_semantics = validate_semantics
         self.defer_schema_guards = defer_schema_guards
         self.sources = sources
+        self.dependencies = dependencies
         self.cache: dict[tuple[Path, _PhysicalIdentity], Document] = {}
         self.expanded_import_counts: dict[int, int] = {}
         self.expanded_source_bytes: dict[int, int] = {}
@@ -184,6 +189,7 @@ class _ImportResolver:
             remaining_total_bytes=_MAX_TOTAL_SOURCE_BYTES - self.total_source_bytes,
         )
         self.total_source_bytes += source_bytes
+        self._record_dependency(path, text, metadata)
         self.sources[label] = text
         document = parse(text, label, validate_semantics=False)
         before_markdown = self.total_source_bytes
@@ -321,6 +327,7 @@ class _ImportResolver:
                 remaining_total_bytes=_MAX_TOTAL_SOURCE_BYTES - self.total_source_bytes,
             )
             self.total_source_bytes += size
+            self._record_dependency(target, text, metadata)
             return StringExpr((StringText(text, value.span),), True, value.span)
         if isinstance(value, tuple):
             return tuple(self._resolve_markdown(item, current_path) for item in value)
@@ -330,6 +337,13 @@ class _ImportResolver:
                 for field in fields(value) if field.name != "span"
             })
         return value
+
+    def _record_dependency(self, path: Path, text: str, metadata: os.stat_result) -> None:
+        if self.dependencies is not None:
+            self.dependencies[str(path)] = {
+                "digest": hashlib.sha256(text.encode("utf-8")).hexdigest(),
+                "identity": [metadata.st_dev, metadata.st_ino],
+            }
 
 
 def _logical_path(path: str | Path) -> Path:
