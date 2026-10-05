@@ -1,0 +1,14 @@
+_meta = {
+  name = "ccls";
+  summary = "C/c++ language server powered by clang";
+  description = ''
+    C/c++ language server powered by clang
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.20250815.1";
+  tags = [ "development" "migration" "ccls" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.ccls;

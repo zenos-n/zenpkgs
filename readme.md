@@ -7,6 +7,7 @@ the [package path migration](docs/package-layout-migration.md).
 Shell and terminal configuration is covered in the [shell options guide](docs/shell-terminal-options.md).
 Native per-user configuration is covered in the [user options guide](docs/user-options.md).
 Desktop configuration is covered in the [system, GNOME, and program options guide](docs/desktop-options.md).
+Migration capability coverage and opt-in examples are in the [migration guide](docs/migration-parity.md).
 
 Curated nixpkgs interfaces are named leaves under `pkgs/`. A source such as
 `pkgs/apps/browsers/firefox.zpkg` mechanically defines
@@ -16,7 +17,7 @@ are legal; targets are exact and unique, with no alternate alias catalog.
 The flake compiles the
 repository root in interface mode and uses the path-sorted result for the
 overlay, registry documentation, and flattened public package outputs.
-The 4057-entry normalized contract in `tests/fixtures/package-registry.json`
+The 4132-entry normalized contract in `tests/fixtures/package-registry.json`
 protects every full public ID, derived target, metadata record, and imported
 nixpkgs source path.
 

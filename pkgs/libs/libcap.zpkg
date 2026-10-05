@@ -1,0 +1,14 @@
+_meta = {
+  name = "libcap";
+  summary = "Library for working with POSIX capabilities";
+  description = ''
+    Library for working with POSIX capabilities
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.77";
+  tags = [ "libs" "migration" "libcap" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.libcap;

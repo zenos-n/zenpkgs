@@ -1,0 +1,89 @@
+_meta = {
+  name = "Swisstag";
+  summary = "Automated music tagging and lyrics retrieval";
+  description = ''Automated music tagging and lyrics retrieval. Optional migration package; installation does not activate a service.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "music" "metadata" "lyrics" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+build = let packageSet = $pkgs.legacy;
+        lyricsgenius = packageSet.python3Packages.buildPythonPackage {
+          pname = "lyricsgenius";
+          version = "3.7.5";
+          pyproject = true;
+          src = packageSet.python3Packages.fetchPypi {
+            pname = "lyricsgenius"; version = "3.7.5";
+            sha256 = "sha256-xPEMFPeYBFXGXIfQz9EIa+CWba7K+ZaTAy02tlo4qhY=";
+          };
+          doCheck = false;
+          build-system = [ packageSet.python3Packages.setuptools packageSet.python3Packages.hatchling ];
+          propagatedBuildInputs = [ packageSet.python3Packages.requests packageSet.python3Packages.beautifulsoup4 packageSet.python3Packages.hatchling ];
+        };
+
+        syncedlyrics = packageSet.python3Packages.buildPythonPackage {
+          pname = "syncedlyrics";
+          version = "1.0.0";
+          pyproject = true;
+
+          src = packageSet.python3Packages.fetchPypi {
+            pname = "syncedlyrics"; version = "1.0.0";
+            sha256 = "sha256-JrwIR7s1tYAyS3eYCsmxzkHJz/7WOe7rkDABfhumuZE="; 
+          };
+
+          doCheck = false;
+          build-system = [ packageSet.python3Packages.poetry-core ];
+          # rapidfuzz is a key dependency for syncedlyrics
+          propagatedBuildInputs = [ packageSet.python3Packages.requests packageSet.python3Packages.beautifulsoup4 packageSet.python3Packages.rapidfuzz ];
+        };
+
+        pythonEnv = packageSet.python3.withPackages (ps: [
+          ps.mutagen
+          ps.musicbrainzngs
+          ps.thefuzz
+          ps.requests
+          ps.unidecode
+          ps.pillow
+          ps.beautifulsoup4
+          ps.rapidfuzz      # Required by syncedlyrics
+          syncedlyrics 
+          lyricsgenius
+        ]);
+
+in packageSet.stdenv.mkDerivation {
+          pname = "swisstag";
+          version = "1.0.0";
+          src = packageSet.fetchFromGitHub { owner = "doromiert"; repo = "swisstag"; rev = "d86156d3b81875fa9e8f99447e1542592f3c00e1"; hash = "sha256-iWRIAsywQqdH8Yy8vI1o9/96R/elY7S7RYWnOcP8hRo="; };
+          
+          # We use makeWrapper to ensure fpcalc is found in PATH
+          nativeBuildInputs = [ packageSet.makeWrapper ];
+          propagatedBuildInputs = [ pythonEnv packageSet.chromaprint ];
+          
+          installPhase = ''
+            mkdir -p $out/bin
+            cp swisstag.py $out/bin/swisstag
+            chmod +x $out/bin/swisstag
+            
+            # Man Page
+            mkdir -p $out/share/man/man1
+            cp swisstag.1 $out/share/man/man1/swisstag.1
+          '';
+          
+          postFixup = ''
+            # 1. Fix python interpreter path
+            sed -i '1s|^#!/usr/bin/env python3|#!${pythonEnv}/bin/python3|' $out/bin/swisstag
+            
+            # 2. Wrap the binary to include fpcalc (chromaprint) in PATH
+            wrapProgram $out/bin/swisstag \
+              --prefix PATH : ${packageSet.lib.makeBinPath [ packageSet.chromaprint ]}
+          '';
+
+          meta = {
+            description = "Automated music tagger using Genius and MusicBrainz";
+            homepage = "https://github.com/doromiert/swisstag";
+            license = packageSet.lib.licenses.gpl3Only;
+            platforms = [ "x86_64-linux" ];
+          };
+        };

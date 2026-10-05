@@ -168,3 +168,84 @@ locationServices = {
   };
 };
 
+
+amdOpenCL = {
+_meta = {
+  name = "Enable AMD OpenCL computation";
+  summary = "Enable AMD OpenCL computation";
+  description = ''Enable AMD OpenCL computation. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    hardware.amdgpu.opencl.enable = $lib.mkIf ($path.amdOpenCL != null) ($path.amdOpenCL);
+  };
+};
+
+graphicsPackages = {
+_meta = {
+  name = "Additional hardware graphics driver packages";
+  summary = "Additional hardware graphics driver packages";
+  description = ''Additional hardware graphics driver packages. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.list [ $type.package ]) $type.null ];
+  default = null;
+};
+  s!! {
+    hardware.graphics.extraPackages = $lib.mkIf ($path.graphicsPackages != null) ($path.graphicsPackages);
+  };
+};
+
+logitechWireless = {
+_meta = {
+  name = "Support Logitech wireless receivers";
+  summary = "Support Logitech wireless receivers";
+  description = ''Support Logitech wireless receivers. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    hardware.logitech.wireless.enable = $lib.mkIf ($path.logitechWireless != null) ($path.logitechWireless);
+  };
+};
+
+androidDebugging = {
+_meta = {
+  name = "Enable Android debugging and device access";
+  summary = "Enable Android debugging and device access";
+  description = ''Enable Android debugging and device access. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    environment.systemPackages = $lib.mkIf ($path.androidDebugging == true) [ $pkgs.apps.development.android-tools ];
+  };
+};
+
+kinect2 = {
+_meta = {
+  name = "Install Kinect v2 device access and libfreenect2";
+  summary = "Install Kinect v2 device access and libfreenect2";
+  description = ''Install Kinect v2 device access and libfreenect2. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    services.udev.packages = $lib.mkIf ($path.kinect2 != null) (if $path.kinect2 then [ $pkgs.libs.libfreenect2 ] else [ ]);
+    environment.systemPackages = $lib.mkIf ($path.kinect2 == true) [ $pkgs.libs.libfreenect2 ];
+  };
+};

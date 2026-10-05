@@ -1,0 +1,14 @@
+_meta = {
+  name = "zsh-autosuggestions";
+  summary = "Fish shell autosuggestions for Zsh";
+  description = ''
+    Fish shell autosuggestions for Zsh
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.7.1";
+  tags = [ "terminal" "migration" "zsh-autosuggestions" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.zsh-autosuggestions;

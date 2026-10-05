@@ -1,0 +1,14 @@
+_meta = {
+  name = "swtpm";
+  summary = "Libtpms-based TPM emulator";
+  description = ''
+    Libtpms-based TPM emulator
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.10.1";
+  tags = [ "virtualization" "migration" "swtpm" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.swtpm;

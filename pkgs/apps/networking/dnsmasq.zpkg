@@ -1,0 +1,14 @@
+_meta = {
+  name = "dnsmasq";
+  summary = "Integrated DNS, DHCP and TFTP server for small networks";
+  description = ''
+    Integrated DNS, DHCP and TFTP server for small networks
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.93";
+  tags = [ "networking" "migration" "dnsmasq" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Only;
+};
+
+import $pkgs.legacy.dnsmasq;

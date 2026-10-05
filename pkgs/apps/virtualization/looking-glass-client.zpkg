@@ -1,0 +1,14 @@
+_meta = {
+  name = "looking-glass-client";
+  summary = "KVM Frame Relay (KVMFR) implementation";
+  description = ''
+    KVM Frame Relay (KVMFR) implementation
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "B7";
+  tags = [ "virtualization" "migration" "looking-glass-client" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+import $pkgs.legacy.looking-glass-client;

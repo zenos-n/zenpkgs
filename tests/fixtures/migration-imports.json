@@ -1,0 +1,202 @@
+[
+  {
+    "id": "pkgs.apps.development.cargo",
+    "source": "cargo"
+  },
+  {
+    "id": "pkgs.apps.development.rustc",
+    "source": "rustc"
+  },
+  {
+    "id": "pkgs.apps.development.ccls",
+    "source": "ccls"
+  },
+  {
+    "id": "pkgs.apps.development.gcc",
+    "source": "gcc"
+  },
+  {
+    "id": "pkgs.apps.development.android-tools",
+    "source": "android-tools"
+  },
+  {
+    "id": "pkgs.apps.development.scrcpy",
+    "source": "scrcpy"
+  },
+  {
+    "id": "pkgs.apps.development.vscode-css-languageserver",
+    "source": "vscode-css-languageserver"
+  },
+  {
+    "id": "pkgs.apps.development.python.pip",
+    "source": "python3Packages.pip"
+  },
+  {
+    "id": "pkgs.apps.development.python.python-lsp-server",
+    "source": "python3Packages.python-lsp-server"
+  },
+  {
+    "id": "pkgs.apps.ai.llama-cpp-rocm",
+    "source": "llama-cpp-rocm"
+  },
+  {
+    "id": "pkgs.apps.system.appimage-run",
+    "source": "appimage-run"
+  },
+  {
+    "id": "pkgs.apps.system.dbus",
+    "source": "dbus"
+  },
+  {
+    "id": "pkgs.apps.system.libnotify",
+    "source": "libnotify"
+  },
+  {
+    "id": "pkgs.apps.system.zenity",
+    "source": "zenity"
+  },
+  {
+    "id": "pkgs.apps.system.nautilus-open-any-terminal",
+    "source": "nautilus-open-any-terminal"
+  },
+  {
+    "id": "pkgs.apps.system.ltunify",
+    "source": "ltunify"
+  },
+  {
+    "id": "pkgs.apps.virtualization.qemu-kvm",
+    "source": "qemu_kvm"
+  },
+  {
+    "id": "pkgs.apps.virtualization.bridge-utils",
+    "source": "bridge-utils"
+  },
+  {
+    "id": "pkgs.apps.virtualization.vde2",
+    "source": "vde2"
+  },
+  {
+    "id": "pkgs.apps.virtualization.spice-vdagent",
+    "source": "spice-vdagent"
+  },
+  {
+    "id": "pkgs.apps.virtualization.looking-glass-client",
+    "source": "looking-glass-client"
+  },
+  {
+    "id": "pkgs.apps.virtualization.swtpm",
+    "source": "swtpm"
+  },
+  {
+    "id": "pkgs.apps.virtualization.passt",
+    "source": "passt"
+  },
+  {
+    "id": "pkgs.apps.networking.dnsmasq",
+    "source": "dnsmasq"
+  },
+  {
+    "id": "pkgs.apps.gaming.wayvr",
+    "source": "wayvr"
+  },
+  {
+    "id": "pkgs.apps.gaming.proton-ge-bin",
+    "source": "proton-ge-bin"
+  },
+  {
+    "id": "pkgs.apps.gaming.steam-run",
+    "source": "steam-run"
+  },
+  {
+    "id": "pkgs.apps.gaming.uzdoom",
+    "source": "uzdoom"
+  },
+  {
+    "id": "pkgs.apps.terminal.zsh-powerlevel10k",
+    "source": "zsh-powerlevel10k"
+  },
+  {
+    "id": "pkgs.apps.terminal.zplug",
+    "source": "zplug"
+  },
+  {
+    "id": "pkgs.apps.terminal.zsh-autosuggestions",
+    "source": "zsh-autosuggestions"
+  },
+  {
+    "id": "pkgs.system.drivers.printing.brlaser",
+    "source": "brlaser"
+  },
+  {
+    "id": "pkgs.system.drivers.printing.gutenprint",
+    "source": "gutenprint"
+  },
+  {
+    "id": "pkgs.system.drivers.graphics.rocm-opencl",
+    "source": "rocmPackages.clr.icd"
+  },
+  {
+    "id": "pkgs.system.drivers.graphics.libva-vdpau-driver",
+    "source": "libva-vdpau-driver"
+  },
+  {
+    "id": "pkgs.system.drivers.graphics.libvdpau-va-gl",
+    "source": "libvdpau-va-gl"
+  },
+  {
+    "id": "pkgs.libs.libsm",
+    "source": "libSM"
+  },
+  {
+    "id": "pkgs.libs.libice",
+    "source": "libICE"
+  },
+  {
+    "id": "pkgs.libs.nss",
+    "source": "nss"
+  },
+  {
+    "id": "pkgs.libs.nspr",
+    "source": "nspr"
+  },
+  {
+    "id": "pkgs.libs.libcap",
+    "source": "libcap"
+  },
+  {
+    "id": "pkgs.libs.libusb1",
+    "source": "libusb1"
+  },
+  {
+    "id": "pkgs.libs.opencl-headers",
+    "source": "opencl-headers"
+  },
+  {
+    "id": "pkgs.libs.ocl-icd",
+    "source": "ocl-icd"
+  },
+  {
+    "id": "pkgs.libs.gstreamer.gstreamer",
+    "source": "gst_all_1.gstreamer"
+  },
+  {
+    "id": "pkgs.libs.gstreamer.gst-plugins-base",
+    "source": "gst_all_1.gst-plugins-base"
+  },
+  {
+    "id": "pkgs.libs.gstreamer.gst-plugins-good",
+    "source": "gst_all_1.gst-plugins-good"
+  },
+  {
+    "id": "pkgs.libs.gstreamer.gst-plugins-bad",
+    "source": "gst_all_1.gst-plugins-bad"
+  },
+  {
+    "id": "pkgs.libs.gstreamer.gst-plugins-ugly",
+    "source": "gst_all_1.gst-plugins-ugly"
+  },
+  {
+    "id": "pkgs.libs.gstreamer.gst-libav",
+    "source": "gst_all_1.gst-libav"
+  }
+]

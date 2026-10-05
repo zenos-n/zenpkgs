@@ -5,30 +5,42 @@ _meta = {
     Lightweight coding agent that runs in your terminal.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "0.153.4";
+  packageVersion = "0.159.0";
   tags = [ "ai" "development" "coding" "terminal" ];
   maintainers = [ $m.doromiert ];
   license = $l.asl20;
 };
 
 build = $pkgs.legacy.stdenvNoCC.mkDerivation {
-  pname = "codex";
-  version = "0.153.4";
-  src = $pkgs.legacy.fetchurl {
-    url = "https://github.com/openai/codex/releases/download/rust-v0.153.4/codex-x86_64-unknown-linux-musl.tar.gz";
-    hash = "sha256-9HlCTsoJJITcQNh64oxE9MxAI0pgBF1hMeSTgA2BSjA=";
+    pname = "codex";
+    version = "0.159.0";
+
+    src = $pkgs.legacy.fetchurl {
+      url = "https://github.com/openai/codex/releases/download/rust-v0.159.0/codex-package-x86_64-unknown-linux-musl.tar.gz";
+      hash = "sha256-Ndpl1+hkTijqCk1OPYwVtAxrSSNW1M8hmGx+NB+Dok4=";
+    };
+
+    sourceRoot = ".";
+    dontConfigure = true;
+    dontBuild = true;
+    nativeBuildInputs = [ $pkgs.legacy.makeWrapper ];
+
+    installPhase = ''
+      runHook preInstall
+      mkdir -p $out
+      cp -R bin codex-package.json codex-path codex-resources $out/
+
+      # Match nixpkgs' Codex packaging: use Nix's sandbox helper and ripgrep
+      # instead of the opaque copies shipped in the upstream release bundle.
+      rm -f $out/codex-resources/bwrap $out/codex-path/rg
+      ln -s ${$pkgs.legacy.bubblewrap}/bin/bwrap $out/codex-resources/bwrap
+      ln -s ${$pkgs.legacy.ripgrep}/bin/rg $out/codex-path/rg
+      wrapProgram $out/bin/codex \
+        --prefix PATH : ${$pkgs.legacy.lib.makeBinPath [ $pkgs.legacy.ripgrep $pkgs.legacy.bubblewrap ]}
+      runHook postInstall
+    '';
+
+    meta = $pkgs.legacy.codex.meta // {
+      platforms = [ "x86_64-linux" ];
+    };
   };
-  sourceRoot = ".";
-  installPhase = ''
-    runHook preInstall
-    install -Dm755 codex-x86_64-unknown-linux-musl "$out/bin/codex"
-    runHook postInstall
-  '';
-  meta = {
-    description = "OpenAI Codex CLI";
-    homepage = "https://github.com/openai/codex";
-    license = $lib.licenses.asl20;
-    mainProgram = "codex";
-    platforms = [ "x86_64-linux" ];
-  };
-};

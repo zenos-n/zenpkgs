@@ -221,39 +221,66 @@ in
     pass "zenpkgs-no-retired-package-roots";
 
   registry-counts =
-    assert builtins.length expectedRegistry.packages == 4057;
-    assert builtins.length expectedActiveEntries == 4057;
-    assert builtins.length registry.packages == 4057;
-    assert builtins.length activeEntries == 4057;
-    assert builtins.length importEntries == 4048;
-    assert builtins.length buildEntries == 9;
+    assert builtins.length expectedRegistry.packages == 4132;
+    assert builtins.length expectedActiveEntries == 4132;
+    assert builtins.length registry.packages == 4132;
+    assert builtins.length activeEntries == 4132;
+    assert builtins.length importEntries == 4096;
+    assert builtins.length buildEntries == 36;
     assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 
   package-paths =
-    assert builtins.length (registryPaths expectedRegistry) == 4057;
-    assert builtins.length (packagePaths expectedRegistry) == 4057;
-    assert builtins.length activePaths == 4057;
+    assert builtins.length (registryPaths expectedRegistry) == 4132;
+    assert builtins.length (packagePaths expectedRegistry) == 4132;
+    assert builtins.length activePaths == 4132;
     assert registryPathKeys == lib.sort builtins.lessThan registryPathKeys;
     assert registryPaths registry == registryPaths expectedRegistry;
     assert packagePaths registry == packagePaths expectedSorted;
     pass "zenpkgs-package-registry-paths";
 
   public-package-outputs =
-    assert builtins.length outputIdentities == 4057;
+    assert builtins.length outputIdentities == 4132;
     assert lib.all (identity: identity) outputIdentities;
     pass "zenpkgs-public-package-outputs";
 
   registry-build-providers =
     assert
       map (entry: entry.id) buildEntries == [
+        "pkgs.apps.accessibility.hapticspp"
+        "pkgs.apps.ai.codex"
+        "pkgs.apps.ai.codex-desktop"
+        "pkgs.apps.ai.codex-telegram-bot"
+        "pkgs.apps.ai.opencode"
+        "pkgs.apps.ai.opencode-telegram-bot"
+        "pkgs.apps.ai.takopi"
+        "pkgs.apps.audio.swisstag"
+        "pkgs.apps.browsers.hyperbeam"
+        "pkgs.apps.connectivity.zbridge"
+        "pkgs.apps.development.gnome-builder-lsp"
+        "pkgs.apps.gaming.alvr-zenos-compat"
+        "pkgs.apps.gaming.emulators.ryubing-canary"
+        "pkgs.apps.gaming.fnuidesktop-vr"
+        "pkgs.apps.gaming.ovr-advanced-settings"
+        "pkgs.apps.gaming.wlx-overlay-s"
+        "pkgs.apps.gaming.zenos-vr-tools"
+        "pkgs.apps.graphics.blender-hip"
         "pkgs.apps.system.zenos.zenos-rebuild"
+        "pkgs.apps.video.tubefin"
+        "pkgs.desktops.gnome.extensions.codex-usage"
+        "pkgs.desktops.gnome.extensions.wiggly"
+        "pkgs.desktops.gnome.extensions.zane-indicator"
+        "pkgs.desktops.gnome.extensions.zen-vision"
+        "pkgs.libs.libfreenect2"
+        "pkgs.system.kernel.popcorn"
+        "pkgs.system.kernel.popcorn-zen4"
         "pkgs.system.zenfs"
         "pkgs.system.zenos-oobe-mode"
         "pkgs.system.zenos-recovery-tools"
         "pkgs.system.zenos-refind-installer"
         "pkgs.system.zenos-setup"
         "pkgs.system.zenos-shell-defaults"
+        "pkgs.theming.system.zenos-branding"
         "pkgs.theming.system.zenos-plymouth"
         "pkgs.theming.system.zenos-refind-theme"
       ];
@@ -287,7 +314,7 @@ in
     pass "zenpkgs-registry-build-providers";
 
   registry-output-ownership =
-    assert builtins.length (lib.unique outputNames) == 4057;
+    assert builtins.length (lib.unique outputNames) == 4132;
     assert
       builtins.attrNames publicPackages == lib.sort builtins.lessThan (
         outputNames

@@ -1,0 +1,14 @@
+_meta = {
+  name = "nspr";
+  summary = "Netscape Portable Runtime, a platform-neutral API for system-level and libc-like functions";
+  description = ''
+    Netscape Portable Runtime, a platform-neutral API for system-level and libc-like functions
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.40";
+  tags = [ "libs" "migration" "nspr" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mpl20;
+};
+
+import $pkgs.legacy.nspr;

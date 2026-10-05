@@ -1,0 +1,26 @@
+_meta = {
+  name = "Hyperbeam";
+  summary = "Shared browser desktop application";
+  description = ''Shared browser desktop application. Optional migration package; installation does not activate a service.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.21.0";
+  tags = [ "browser" "communication" "watch-together" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+build = let
+  appImageSource = $pkgs.legacy.fetchurl {
+    url = "https://cdn.hyperbeam.com/Hyperbeam-0.21.0.AppImage";
+    hash = "sha256-7UYxtbqT65CAdngmrIq4290Ny8sCybt4FQgbUZHMd7I=";
+  };
+  extracted = $pkgs.legacy.appimageTools.extractType2 { pname = "hyperbeam"; version = "0.21.0"; src = appImageSource; };
+in $pkgs.legacy.appimageTools.wrapType2 {
+  pname = "hyperbeam"; version = "0.21.0"; src = appImageSource;
+  extraInstallCommands = ''
+    install -Dm644 ${extracted}/hyperbeam.desktop "$out/share/applications/hyperbeam.desktop"
+    substituteInPlace "$out/share/applications/hyperbeam.desktop" --replace-fail 'Exec=AppRun --no-sandbox %U' 'Exec=hyperbeam %U'
+    install -Dm644 ${extracted}/hyperbeam.png "$out/share/pixmaps/hyperbeam.png"
+  '';
+  meta = { description = "Hyperbeam shared browser"; homepage = "https://hyperbeam.com"; license = $lib.licenses.unfree; platforms = [ "x86_64-linux" ]; mainProgram = "hyperbeam"; };
+};

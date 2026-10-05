@@ -1,0 +1,21 @@
+_meta = {
+  name = "GNOME Builder with language servers";
+  summary = "GNOME Builder with Python, Rust, C and TypeScript tooling";
+  description = ''GNOME Builder with the language servers from the migration reference available in its executable search path. Optional development variant.'';
+  zenosVersion = "1.0.0"; packageVersion = "50.0";
+  tags = [ "development" "gnome" ]; maintainers = [ $m.doromiert ]; license = $l.gpl3Plus;
+};
+build = $pkgs.legacy.symlinkJoin {
+  name = "gnome-builder-lsp-${$pkgs.legacy.gnome-builder.version}";
+  paths = [ $pkgs.legacy.gnome-builder ];
+  nativeBuildInputs = [ $pkgs.legacy.makeWrapper ];
+  postBuild = ''
+    wrapProgram "$out/bin/gnome-builder" --prefix PATH : ${$lib.makeBinPath [
+      $pkgs.apps.development.python.python-lsp-server
+      $pkgs.apps.development.rust-analyzer
+      $pkgs.apps.development.clang-tools
+      $pkgs.apps.development.typescript-language-server
+    ]}
+  '';
+  meta = $pkgs.legacy.gnome-builder.meta;
+};

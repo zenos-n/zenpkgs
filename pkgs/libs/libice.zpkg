@@ -1,0 +1,14 @@
+_meta = {
+  name = "libice";
+  summary = "Inter-Client Exchange Library";
+  description = ''
+    Inter-Client Exchange Library
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.1.2";
+  tags = [ "libs" "migration" "libice" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mitOpenGroup;
+};
+
+import $pkgs.legacy.libICE;

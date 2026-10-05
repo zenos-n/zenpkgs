@@ -1,0 +1,14 @@
+_meta = {
+  name = "libnotify";
+  summary = "Library that sends desktop notifications to a notification daemon";
+  description = ''
+    Library that sends desktop notifications to a notification daemon
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.8.8";
+  tags = [ "system" "migration" "libnotify" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl21;
+};
+
+import $pkgs.legacy.libnotify;

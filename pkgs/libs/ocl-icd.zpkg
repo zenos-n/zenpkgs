@@ -1,0 +1,14 @@
+_meta = {
+  name = "ocl-icd";
+  summary = "OpenCL ICD Loader for opencl-headers-2025.07.22";
+  description = ''
+    OpenCL ICD Loader for opencl-headers-2025.07.22
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.3.4";
+  tags = [ "libs" "migration" "ocl-icd" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd2;
+};
+
+import $pkgs.legacy.ocl-icd;

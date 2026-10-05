@@ -1,0 +1,16 @@
+_meta = {
+  name = "WlxOverlay-S";
+  summary = "Legacy Wayland desktop overlay for SteamVR and OpenXR";
+  description = ''Legacy Wayland desktop overlay for SteamVR and OpenXR. Optional migration package; installation does not activate a service.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "25.4.2";
+  tags = [ "vr" "wayland" "overlay" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+build = ($lib.callPackageWith {} ($pkgs.legacy.fetchFromGitHub {
+  owner = "NixOS"; repo = "nixpkgs";
+  rev = "b6018f87da91d19d0ab4cf979885689b469cdd41";
+  hash = "sha256-twXPFqFsrrY5r28Zh7Homgcp2gUMBgQ6WDS98Q/3xFI=";
+}) { system = "x86_64-linux"; config = {}; overlays = [ ]; }).wlx-overlay-s;

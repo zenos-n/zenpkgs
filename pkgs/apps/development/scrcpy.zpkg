@@ -1,0 +1,14 @@
+_meta = {
+  name = "scrcpy";
+  summary = "Display and control Android devices over USB or TCP/IP";
+  description = ''
+    Display and control Android devices over USB or TCP/IP
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.1";
+  tags = [ "development" "migration" "scrcpy" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.scrcpy;

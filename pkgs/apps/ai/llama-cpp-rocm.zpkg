@@ -1,0 +1,14 @@
+_meta = {
+  name = "llama-cpp-rocm";
+  summary = "Inference of Meta's LLaMA model (and others) in pure C/C++";
+  description = ''
+    Inference of Meta's LLaMA model (and others) in pure C/C++
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "9190";
+  tags = [ "ai" "migration" "llama-cpp-rocm" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.llama-cpp-rocm;

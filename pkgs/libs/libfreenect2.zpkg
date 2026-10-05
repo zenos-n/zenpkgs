@@ -1,0 +1,33 @@
+_meta = {
+  name = "Kinect v2 library";
+  summary = "OpenKinect driver and diagnostic examples for Kinect v2";
+  description = ''OpenKinect driver and diagnostic examples for Kinect v2. Optional migration package; installation does not activate a service.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0";
+  tags = [ "kinect" "usb" "hardware" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+build = $pkgs.legacy.stdenv.mkDerivation {
+  pname = "libfreenect2";
+  version = "0.2.0";
+  src = $pkgs.legacy.fetchFromGitHub {
+    owner = "OpenKinect"; repo = "libfreenect2"; rev = "v0.2.0";
+    hash = "sha256-5JjZANfkkgK8YRXrdfOCXOBMXxW+UNv6JiNfEDUQscc=";
+  };
+  nativeBuildInputs = [ $pkgs.legacy.cmake $pkgs.legacy.pkg-config ];
+  buildInputs = [ $pkgs.legacy.libusb1 $pkgs.legacy.glfw3 $pkgs.legacy.libjpeg_turbo $pkgs.legacy.libGL $pkgs.legacy.libGLU $pkgs.legacy.opencl-headers $pkgs.legacy.ocl-icd ];
+  cmakeFlags = [ "-DCMAKE_POLICY_VERSION_MINIMUM=3.10" "-DDEPENDS_DIR=" "-DBUILD_EXAMPLES=ON" "-DENABLE_OPENGL=ON" "-DENABLE_OPENCL=OFF" "-DENABLE_CUDA=OFF" ];
+  postInstall = ''
+    install -Dm644 ../platform/linux/udev/90-kinect2.rules "$out/lib/udev/rules.d/70-kinect2.rules"
+    substituteInPlace "$out/lib/udev/rules.d/70-kinect2.rules" \
+      --replace-fail 'MODE="0666"' 'MODE="0660", TAG+="uaccess"'
+  '';
+  meta = {
+    description = "OpenKinect driver and diagnostic examples for Kinect v2";
+    homepage = "https://github.com/OpenKinect/libfreenect2";
+    license = $lib.licenses.asl20;
+    platforms = [ "x86_64-linux" ];
+  };
+};

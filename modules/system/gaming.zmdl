@@ -1,0 +1,170 @@
+_meta = {
+  name = "Gaming and VR runtime support";
+  summary = "Gaming and VR runtime support";
+  description = ''Gaming and VR runtime support. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  zenosVersion = 1.0.0Na;
+};
+
+steam.enable = {
+_meta = {
+  name = "Install and configure Steam";
+  summary = "Install and configure Steam";
+  description = ''Install and configure Steam. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.steam.enable = $lib.mkIf ($path.steam.enable != null) ($path.steam.enable);
+  };
+};
+
+steam.remotePlay = {
+_meta = {
+  name = "Allow Steam Remote Play through the firewall";
+  summary = "Allow Steam Remote Play through the firewall";
+  description = ''Allow Steam Remote Play through the firewall. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.steam.remotePlay.openFirewall = $lib.mkIf ($path.steam.remotePlay != null) ($path.steam.remotePlay);
+  };
+};
+
+steam.dedicatedServer = {
+_meta = {
+  name = "Allow Steam dedicated servers through the firewall";
+  summary = "Allow Steam dedicated servers through the firewall";
+  description = ''Allow Steam dedicated servers through the firewall. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.steam.dedicatedServer.openFirewall = $lib.mkIf ($path.steam.dedicatedServer != null) ($path.steam.dedicatedServer);
+  };
+};
+
+steam.compatibilityTools = {
+_meta = {
+  name = "Steam compatibility tool packages";
+  summary = "Steam compatibility tool packages";
+  description = ''Steam compatibility tool packages. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.list [ $type.package ]) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.steam.extraCompatPackages = $lib.mkIf ($path.steam.compatibilityTools != null) ($path.steam.compatibilityTools);
+  };
+};
+
+steam.runtimeLibraries = {
+_meta = {
+  name = "Additional libraries in the Steam runtime";
+  summary = "Additional libraries in the Steam runtime";
+  description = ''Additional libraries in the Steam runtime. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.list [ $type.package ]) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.steam.extraPackages = $lib.mkIf ($path.steam.runtimeLibraries != null) ($path.steam.runtimeLibraries);
+  };
+};
+
+steamDevices = {
+_meta = {
+  name = "Install Steam controller and VR device rules";
+  summary = "Install Steam controller and VR device rules";
+  description = ''Install Steam controller and VR device rules. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    hardware.steam-hardware.enable = $lib.mkIf ($path.steamDevices != null) ($path.steamDevices);
+  };
+};
+
+gameMode = {
+_meta = {
+  name = "Allow games to request GameMode performance policy";
+  summary = "Allow games to request GameMode performance policy";
+  description = ''Allow games to request GameMode performance policy. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.gamemode.enable = $lib.mkIf ($path.gameMode != null) ($path.gameMode);
+  };
+};
+
+alvr.enable = {
+_meta = {
+  name = "Install and configure ALVR headset streaming";
+  summary = "Install and configure ALVR headset streaming";
+  description = ''Install and configure ALVR headset streaming. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.alvr.enable = $lib.mkIf ($path.alvr.enable != null) ($path.alvr.enable);
+  };
+};
+
+alvr.allowNetworkAccess = {
+_meta = {
+  name = "Allow ALVR headset streaming through the firewall";
+  summary = "Allow ALVR headset streaming through the firewall";
+  description = ''Allow ALVR headset streaming through the firewall. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.alvr.openFirewall = $lib.mkIf ($path.alvr.allowNetworkAccess != null) ($path.alvr.allowNetworkAccess);
+  };
+};
+
+alvr.package = {
+_meta = {
+  name = "ALVR streamer package and driver";
+  summary = "ALVR streamer package and driver";
+  description = ''ALVR streamer package and driver. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.package) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.alvr.package = $lib.mkIf ($path.alvr.package != null) ($path.alvr.package);
+  };
+};
+

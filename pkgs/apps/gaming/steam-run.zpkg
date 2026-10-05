@@ -1,0 +1,14 @@
+_meta = {
+  name = "steam-run";
+  summary = "Run commands in the same FHS environment that is used for Steam";
+  description = ''
+    Run commands in the same FHS environment that is used for Steam
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0.85";
+  tags = [ "gaming" "migration" "steam-run" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.steam-run;

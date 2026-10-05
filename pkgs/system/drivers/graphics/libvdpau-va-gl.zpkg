@@ -1,0 +1,14 @@
+_meta = {
+  name = "libvdpau-va-gl";
+  summary = "VDPAU driver with OpenGL/VAAPI backend";
+  description = ''
+    VDPAU driver with OpenGL/VAAPI backend
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.4.2-unstable-2025-05-18";
+  tags = [ "system" "migration" "libvdpau-va-gl" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl3;
+};
+
+import $pkgs.legacy.libvdpau-va-gl;

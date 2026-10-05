@@ -177,4 +177,33 @@ _meta = {
       users.users.($f.user).shell = $lib.mkIf ($path.($f.user).profile.loginShell != null) ($path.($f.user).profile.loginShell);
     };
   };
+
+  # Optional account-scoped VR runtime requirements.
+  s!! {
+
+    programs.steam.enable = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault true);
+    programs.steam.extraCompatPackages = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ([ $pkgs.apps.gaming.proton-ge-bin ]);
+    programs.steam.extraPackages = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ([ $pkgs.libs.libice $pkgs.libs.libsm ]);
+    programs.alvr.enable = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault true);
+    programs.alvr.package = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault $pkgs.apps.gaming.alvr-zenos-compat);
+    programs.alvr.openFirewall = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault ($lib.any (u: (u.services.vr.enable or false) && (u.services.vr.allowNetworkAccess or false)) ($lib.attrValues $cfg.users)));
+    hardware.steam-hardware.enable = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault true);
+    hardware.graphics.enable = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault true);
+    hardware.graphics.enable32Bit = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault true);
+    security.rtkit.enable = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault true);
+    programs.gamemode.enable = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault true);
+    boot.kernel.sysctl."vm.max_map_count" = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault 2147483642);
+    security.pam.loginLimits = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) [
+      { domain = $f.user; type = "hard"; item = "nofile"; value = "524288"; }
+      { domain = $f.user; type = "-"; item = "rtprio"; value = "95"; }
+      { domain = $f.user; type = "-"; item = "nice"; value = "-19"; }
+    ];
+    };
+
+  s!! {
+    environment.systemPackages = $lib.mkIf ($cfg.users.($f.user).services.zbridge.enable or false) [ $pkgs.apps.development.android-tools ];
+  };
+  s!! {
+    services.udev.packages = $lib.mkIf ($cfg.users.($f.user).services.haptics.enable or false) [ $pkgs.apps.accessibility.hapticspp ];
+  };
 };

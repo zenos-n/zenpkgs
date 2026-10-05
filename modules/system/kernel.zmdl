@@ -1,0 +1,130 @@
+_meta = {
+  name = "Kernel and device startup settings";
+  summary = "Kernel and device startup settings";
+  description = ''Kernel and device startup settings. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  zenosVersion = 1.0.0Na;
+};
+
+package = {
+_meta = {
+  name = "Select a Linux kernel derivation";
+  summary = "Select a Linux kernel derivation";
+  description = ''Select a Linux kernel derivation. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.package) $type.null ];
+  default = null;
+};
+  s!! {
+    boot.kernelPackages = $lib.mkIf ($path.package != null) ($pkgs.legacy.linuxPackagesFor $path.package);
+  };
+};
+
+parameters = {
+_meta = {
+  name = "Additional kernel command-line parameters";
+  summary = "Additional kernel command-line parameters";
+  description = ''Additional kernel command-line parameters. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+  default = null;
+};
+  s!! {
+    boot.kernelParams = $lib.mkIf ($path.parameters != null) ($path.parameters);
+  };
+};
+
+modules = {
+_meta = {
+  name = "Kernel modules loaded at startup";
+  summary = "Kernel modules loaded at startup";
+  description = ''Kernel modules loaded at startup. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+  default = null;
+};
+  s!! {
+    boot.kernelModules = $lib.mkIf ($path.modules != null) ($path.modules);
+  };
+};
+
+initrdModules = {
+_meta = {
+  name = "Kernel modules loaded before mounting the root";
+  summary = "Kernel modules loaded before mounting the root";
+  description = ''Kernel modules loaded before mounting the root. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+  default = null;
+};
+  s!! {
+    boot.initrd.kernelModules = $lib.mkIf ($path.initrdModules != null) ($path.initrdModules);
+  };
+};
+
+availableInitrdModules = {
+_meta = {
+  name = "Kernel modules available in the initrd";
+  summary = "Kernel modules available in the initrd";
+  description = ''Kernel modules available in the initrd. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ];
+  default = null;
+};
+  s!! {
+    boot.initrd.availableKernelModules = $lib.mkIf ($path.availableInitrdModules != null) ($path.availableInitrdModules);
+  };
+};
+
+moduleSettings = {
+_meta = {
+  name = "Additional kernel module settings";
+  summary = "Additional kernel module settings";
+  description = ''Additional kernel module settings. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.string) $type.null ];
+  default = null;
+};
+  s!! {
+    boot.extraModprobeConfig = $lib.mkIf ($path.moduleSettings != null) ($path.moduleSettings);
+  };
+};
+
+sysctl = {
+_meta = {
+  name = "Kernel runtime parameters";
+  summary = "Kernel runtime parameters";
+  description = ''Kernel runtime parameters. Unset values preserve existing policy.'';
+  tags = [ "kernel" "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  zenosVersion = 1.0.0Na;
+};
+  _meta.type = (alias nixpkgs.boot.kernel.sysctl);
+};
+
+extraModulePackages = {
+  _meta = {
+    name = "External kernel module packages";
+    summary = "External kernel module packages";
+    description = ''Kernel modules built for the selected kernel, such as v4l2loopback. Null leaves existing policy unchanged.'';
+    tags = [ "kernel" "hardware" ];
+    maintainers = [ $m.doromiert ]; license = $l.napl;
+    type = $type.either [ ($type.list [ $type.package ]) $type.null ]; default = null;
+  };
+  s!! { boot.extraModulePackages = $lib.mkIf ($path.extraModulePackages != null) $path.extraModulePackages; };
+};

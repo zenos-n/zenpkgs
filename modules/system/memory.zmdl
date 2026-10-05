@@ -1,0 +1,75 @@
+_meta = {
+  name = "Compressed memory swap";
+  summary = "Compressed memory swap";
+  description = ''Compressed memory swap. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  zenosVersion = 1.0.0Na;
+};
+
+zram.enable = {
+_meta = {
+  name = "Use compressed RAM for swap";
+  summary = "Use compressed RAM for swap";
+  description = ''Use compressed RAM for swap. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    zramSwap.enable = $lib.mkIf ($path.zram.enable != null) ($path.zram.enable);
+  };
+};
+
+zram.algorithm = {
+_meta = {
+  name = "ZRAM compression algorithm";
+  summary = "ZRAM compression algorithm";
+  description = ''ZRAM compression algorithm. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.enum [ "lzo" "lz4" "zstd" "lzo-rle" ]) $type.null ];
+  default = null;
+};
+  s!! {
+    zramSwap.algorithm = $lib.mkIf ($path.zram.algorithm != null) ($path.zram.algorithm);
+  };
+};
+
+zram.memoryPercent = {
+_meta = {
+  name = "RAM percentage used by compressed swap";
+  summary = "RAM percentage used by compressed swap";
+  description = ''RAM percentage used by compressed swap. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.int) $type.null ];
+  default = null;
+};
+  s!! {
+    zramSwap.memoryPercent = $lib.mkIf ($path.zram.memoryPercent != null) ($path.zram.memoryPercent);
+    assertions = [ { assertion = $path.zram.memoryPercent == null || ($path.zram.memoryPercent >= 1 && $path.zram.memoryPercent <= 100); message = "ZRAM memoryPercent must be between 1 and 100"; } ];
+  };
+};
+
+zram.priority = {
+_meta = {
+  name = "Compressed swap priority";
+  summary = "Compressed swap priority";
+  description = ''Compressed swap priority. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.int) $type.null ];
+  default = null;
+};
+  s!! {
+    zramSwap.priority = $lib.mkIf ($path.zram.priority != null) ($path.zram.priority);
+  };
+};
+

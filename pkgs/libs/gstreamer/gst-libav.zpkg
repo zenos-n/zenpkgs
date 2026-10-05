@@ -1,0 +1,14 @@
+_meta = {
+  name = "gst-libav";
+  summary = "FFmpeg plugin for GStreamer";
+  description = ''
+    FFmpeg plugin for GStreamer
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.26.11";
+  tags = [ "libs" "migration" "gst-libav" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl2Plus;
+};
+
+import $pkgs.legacy.gst_all_1.gst-libav;

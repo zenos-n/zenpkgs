@@ -1,0 +1,73 @@
+_meta = {
+  name = "fnuidesktop VR";
+  summary = "Wayland desktop mirror for SteamVR using PipeWire";
+  description = ''Wayland desktop mirror for SteamVR using PipeWire. Optional migration package; installation does not activate a service.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "unstable-2026-08-23";
+  tags = [ "vr" "wayland" "pipewire" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+build = let
+  openvr-python = $pkgs.legacy.python3Packages.buildPythonPackage {
+    pname = "openvr";
+    version = "2.12.1401";
+    format = "wheel";
+    src = $pkgs.legacy.fetchurl {
+      url = "https://files.pythonhosted.org/packages/46/a2/e6cb89bd1803ffe70a25c20121ad8bb533fa1f1334ce7f0f7585d35e5096/openvr-2.12.1401-py3-none-any.whl";
+      hash = "sha256-73Yc7zFihDqAJaeBLV4kT9lKs6mSyo9e8NGwGIrVbLM=";
+    };
+    doCheck = false;
+  };
+
+  python = $pkgs.legacy.python3Packages.python.withPackages (ps: [
+    ps.glfw
+    ps.gst-python
+    ps.numpy
+    ps.pycairo
+    ps.pygobject3
+    ps.pynput
+    ps.pyopengl
+    openvr-python
+  ]);
+in
+$pkgs.legacy.stdenvNoCC.mkDerivation {
+  pname = "fnuidesktop-vr";
+  version = "unstable-2026-08-23";
+
+  src = $pkgs.legacy.fetchFromGitHub {
+    owner = "PhialsBasement";
+    repo = "fnuidesktop-VR";
+    rev = "5ea052a21fe27a576055ec6f6a5bff827cd9d4c8";
+    hash = "sha256-Itrb6wySJb5q97HMeYojyfRUvCHrcREMxv5pPYRtNSU=";
+  };
+
+  nativeBuildInputs = [ $pkgs.legacy.makeWrapper ];
+
+  installPhase = ''
+    runHook preInstall
+    mkdir -p "$out/share/fnuidesktop-vr"
+    cp main.py test_wayland_capture.py vr_display.py "$out/share/fnuidesktop-vr/"
+    makeWrapper ${python}/bin/python "$out/bin/fnuidesktop-vr" \
+      --add-flags "$out/share/fnuidesktop-vr/main.py" \
+      --prefix GI_TYPELIB_PATH : ${$lib.makeSearchPath "lib/girepository-1.0" [
+        ($lib.getLib $pkgs.legacy.glib)
+        ($lib.getLib $pkgs.legacy.gobject-introspection)
+        ($lib.getLib $pkgs.legacy.gst_all_1.gstreamer)
+      ]} \
+      --prefix GST_PLUGIN_SYSTEM_PATH_1_0 : ${$lib.makeSearchPath "lib/gstreamer-1.0" [
+        ($lib.getLib $pkgs.legacy.gst_all_1.gst-plugins-base)
+        ($lib.getLib $pkgs.legacy.pipewire)
+      ]}
+    runHook postInstall
+  '';
+
+  meta = {
+    description = "Wayland desktop mirror for SteamVR using PipeWire";
+    homepage = "https://github.com/PhialsBasement/fnuidesktop-VR";
+    license = $lib.licenses.mit;
+    mainProgram = "fnuidesktop-vr";
+    platforms = $lib.platforms.linux;
+  };
+};

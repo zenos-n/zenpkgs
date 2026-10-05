@@ -1,0 +1,14 @@
+_meta = {
+  name = "zplug";
+  summary = "Next-generation plugin manager for zsh";
+  description = ''
+    Next-generation plugin manager for zsh
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.4.2";
+  tags = [ "terminal" "migration" "zplug" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.zplug;

@@ -56,3 +56,52 @@ runAppImagesDirectly = {
   };
 };
 
+
+environmentExecutables = {
+_meta = {
+  name = "Resolve environment executables using envfs";
+  summary = "Resolve environment executables using envfs";
+  description = ''Resolve environment executables using envfs. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    services.envfs.enable = $lib.mkIf ($path.environmentExecutables != null) ($path.environmentExecutables);
+  };
+};
+
+compatibilityLibraries = {
+_meta = {
+  name = "Run dynamically linked Linux executables using nix-ld";
+  summary = "Run dynamically linked Linux executables using nix-ld";
+  description = ''Run dynamically linked Linux executables using nix-ld. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.nix-ld.enable = $lib.mkIf ($path.compatibilityLibraries != null) ($path.compatibilityLibraries);
+  };
+};
+
+dynamicLibraries = {
+_meta = {
+  name = "Libraries available to dynamically linked Linux executables";
+  summary = "Libraries available to dynamically linked Linux executables";
+  description = ''Libraries available to dynamically linked Linux executables. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.list [ $type.package ]) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.nix-ld.libraries = $lib.mkIf ($path.dynamicLibraries != null) ($path.dynamicLibraries);
+  };
+};
+

@@ -91,3 +91,29 @@ drivers = {
   };
 };
 
+
+printers = {
+_meta = {
+  name = "Declaratively configured printers";
+  summary = "Declaratively configured printers";
+  description = ''Declaratively configured printers. Unset values preserve existing policy.'';
+  tags = [ "printing" "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  zenosVersion = 1.0.0Na;
+};
+  _meta.type = (alias nixpkgs.hardware.printers.ensurePrinters);
+};
+
+defaultPrinter = {
+_meta = {
+  name = "Default printer name";
+  summary = "Default printer name";
+  description = ''Default printer name. Unset values preserve existing policy.'';
+  tags = [ "printing" "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  zenosVersion = 1.0.0Na;
+};
+  _meta.type = (alias nixpkgs.hardware.printers.ensureDefaultPrinter);
+};

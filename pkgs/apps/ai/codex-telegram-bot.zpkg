@@ -1,0 +1,15 @@
+_meta = {
+  name = "codex-telegram-bot"; summary = "Telegram bridge for codex";
+  description = ''Telegram bridge for codex. Installs the pinned command-line client without starting a bot or storing credentials.'';
+  zenosVersion = "1.0.0"; packageVersion = "1.1.1";
+  tags = [ "ai" "telegram" ]; maintainers = [ $m.doromiert ]; license = $l.mit;
+};
+build = $pkgs.legacy.buildNpmPackage {
+  pname = "codex-telegram-bot"; version = "1.1.1";
+  src = $pkgs.legacy.fetchFromGitHub { owner = "artickc"; repo = "codex-telegram-bot"; rev = "e084c58ee5d358f80cdde4d982b13b144b035421"; hash = "sha256-ESD7YUAUODa5YbdET2vwekW12N37T7uV8LGpITzJHOw="; };
+  nodejs = $pkgs.legacy.nodejs_22;
+  npmDepsHash = "sha256-xE6qGBvj+/frmdDcTZjlW53YXlqJ9GfkJDXPFgt6hkQ=";
+  nativeBuildInputs = [ $pkgs.legacy.python3 $pkgs.legacy.pkg-config ];
+  dontNpmBuild = true;
+  meta = { description = "Telegram bridge for codex"; homepage = "https://github.com/artickc/codex-telegram-bot"; license = $lib.licenses.mit; platforms = $lib.platforms.linux; mainProgram = "codex-tg"; };
+};

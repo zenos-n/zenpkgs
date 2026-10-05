@@ -1,0 +1,124 @@
+_meta = {
+  name = "Codex Desktop";
+  summary = "Official OpenAI desktop app with Codex and ChatGPT";
+  description = ''
+    Official Linux desktop application from OpenAI, currently branded ChatGPT.
+    Includes the Codex workspace, integrated terminal, local projects, and bundled
+    Codex helpers. Packaged from the versioned upstream Debian release for NixOS.
+    Use `codex-desktop` or `chatgpt` to launch it. The separate `codex` package
+    provides the terminal CLI.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.930.41038";
+  tags = [ "ai" "development" "coding" "desktop" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.unfree;
+};
+
+build = let
+  packageSet = $pkgs.legacy;
+  runtimeLibraries = [
+    packageSet.alsa-lib
+    packageSet.at-spi2-core
+    packageSet.cairo
+    packageSet.cups
+    packageSet.dbus
+    packageSet.expat
+    packageSet.gdk-pixbuf
+    packageSet.glib
+    packageSet.gtk3
+    packageSet.libGL
+    packageSet.libdrm
+    packageSet.libgbm
+    packageSet.libnotify
+    packageSet.libsecret
+    packageSet.libusb1
+    packageSet.libx11
+    packageSet.libxcb
+    packageSet.libxcomposite
+    packageSet.libxdamage
+    packageSet.libxext
+    packageSet.libxfixes
+    packageSet.libxkbcommon
+    packageSet.libxrandr
+    packageSet.nspr
+    packageSet.nss
+    packageSet.openssl
+    packageSet.pango
+    (packageSet.lib.getLib packageSet.qt5.qtbase)
+    (packageSet.lib.getLib packageSet.qt6.qtbase)
+    packageSet.stdenv.cc.cc.lib
+    packageSet.systemdLibs
+    packageSet.tpm2-tss
+    packageSet.vulkan-loader
+  ];
+in
+packageSet.stdenvNoCC.mkDerivation {
+  pname = "codex-desktop";
+  version = "26.930.41038";
+
+  src = packageSet.fetchurl {
+    url = "https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.930.41038_amd64.deb";
+    hash = "sha256-7nhUFFVUcY1yOdAeo31E9roeC6SpP0esCX1uD5ZNpHw=";
+  };
+
+  nativeBuildInputs = [
+    packageSet.autoPatchelfHook
+    packageSet.dpkg
+    packageSet.makeWrapper
+    packageSet.wrapGAppsHook3
+  ];
+  buildInputs = runtimeLibraries;
+  # Chromium and native modules also load libraries with dlopen.
+  runtimeDependencies = runtimeLibraries;
+  dontConfigure = true;
+  dontBuild = true;
+  dontStrip = true;
+  dontWrapGApps = true;
+
+  unpackPhase = ''
+    runHook preUnpack
+    dpkg-deb --fsys-tarfile "$src" | tar --extract --no-same-owner --no-same-permissions
+    runHook postUnpack
+  '';
+
+  installPhase = ''
+    runHook preInstall
+    mkdir -p "$out/lib" "$out/share"
+    cp -a usr/lib/chatgpt "$out/lib/codex-desktop"
+    cp -a usr/share/applications usr/share/pixmaps usr/share/metainfo "$out/share/"
+    install -Dm644 usr/share/doc/chatgpt/copyright "$out/share/doc/codex-desktop/copyright"
+
+    # These prebuilds target musl; Electron on NixOS uses the glibc variants.
+    find "$out/lib/codex-desktop" -type f -name '*musl*.node' -delete
+    find "$out/lib/codex-desktop" -type d -name '*-musl' -prune -exec rm -rf {} +
+    rm "$out/lib/codex-desktop/resources/rg"
+    ln -s ${packageSet.ripgrep}/bin/rg "$out/lib/codex-desktop/resources/rg"
+    runHook postInstall
+  '';
+
+  preFixup = ''
+    addAutoPatchelfSearchPath "$out/lib/codex-desktop"
+    gappsWrapperArgs+=(
+      --prefix PATH : ${packageSet.lib.makeBinPath [ packageSet.bubblewrap packageSet.git packageSet.glib packageSet.ripgrep packageSet.trash-cli packageSet.xdg-utils packageSet.xz ]}
+    )
+  '';
+
+  postFixup = ''
+    mkdir -p "$out/bin"
+    makeWrapper "$out/lib/codex-desktop/ChatGPT" "$out/bin/codex-desktop" \
+      "''${gappsWrapperArgs[@]}"
+    ln -s codex-desktop "$out/bin/chatgpt"
+    substituteInPlace "$out/share/applications/chatgpt.desktop" \
+      --replace-fail 'Exec=chatgpt %U' "Exec=$out/bin/codex-desktop %U"
+  '';
+
+  meta = {
+    description = "Official OpenAI desktop app with Codex (currently branded ChatGPT)";
+    homepage = "https://developers.openai.com/codex/app";
+    license = packageSet.lib.licenses.unfree;
+    mainProgram = "codex-desktop";
+    platforms = [ "x86_64-linux" ];
+    sourceProvenance = [ packageSet.lib.sourceTypes.binaryNativeCode ];
+  };
+};

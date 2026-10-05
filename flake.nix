@@ -26,6 +26,12 @@
       url = "github:doromiert/masterful-gestures";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-popcorn.url = "github:NixOS/nixpkgs/1c3fe55ad329cbcb28471bb30f05c9827f724c76";
+
+    nixpwamaker = {
+      url = "github:doromiert/nixpwamaker/f28ff38b57f9a64fc925f7fc4d18d4472512593e";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     source-plymouth = {
       url = "github:zenos-n/plymouth-theme/b7040721520bc2c7bb3e9aba6de21cbe2bb5636f";
       flake = false;
@@ -62,6 +68,19 @@
       url = "github:zenos-n/zenfs/6a6ac505bd153b5235170e3e021138166c9c4bda";
       flake = false;
     };
+    # Development snapshots of the extracted package sources. These repositories
+    # can be published and replaced with pinned Git URLs without changing ZPKGs.
+    source-vr-tools = {
+      url = "path:/home/doromiert/Projects/zenos-vr";
+      flake = false;
+    };
+    source-alvr-compat = {
+      url = "path:/home/doromiert/Projects/alvr-zenos-compat";
+      flake = false;
+    };
+    source-haptics = { url = "path:/home/doromiert/Projects/haptics++"; flake = false; };
+    source-zane-indicator = { url = "path:/home/doromiert/Projects/zenos-zane-indicator"; flake = false; };
+    source-vision-indicator = { url = "path:/home/doromiert/Projects/zenos-vision-indicator"; flake = false; };
   };
 
   outputs =
@@ -387,6 +406,14 @@
           lib = prev.lib // {
             licenses = prev.lib.licenses // utils.licenses;
             platforms = prev.lib.platforms // utils.platforms;
+            zenPackageSources = {
+              popcornNixpkgs = inputs.nixpkgs-popcorn.outPath;
+              vrTools = inputs.source-vr-tools.outPath;
+              alvrCompat = inputs.source-alvr-compat.outPath;
+              haptics = inputs.source-haptics.outPath;
+              zaneIndicator = inputs.source-zane-indicator.outPath;
+              visionIndicator = inputs.source-vision-indicator.outPath;
+            };
           };
           zenos =
             if zstrRuntime.packageExposure (mkDslArtifacts prev.stdenv.hostPlatform.system).bundleJSON then
@@ -481,6 +508,8 @@
               ./lib/compat/system-modules/installed-runtime.nix
               ./lib/compat/system-modules/oobe-runtime.nix
               inputs.home-manager.nixosModules.home-manager
+              inputs.nix-flatpak.nixosModules.nix-flatpak
+              inputs.masterful-gestures.nixosModules.default
               inputs.disko.nixosModules.disko
               (zstrRuntime.moduleFromBundle {
                 bundle = (mkDslArtifacts (builtins.head systems)).bundleJSON;
@@ -488,6 +517,12 @@
               })
             ];
             nixpkgs.overlays = [ self.overlays.default ];
+            home-manager.sharedModules = [
+              inputs.nix-flatpak.homeManagerModules.nix-flatpak
+              ({ lib, ... }: { services.flatpak.enable = lib.mkDefault false; })
+              inputs.nixcord.homeModules.nixcord
+              inputs.nixpwamaker.homeManagerModules.pwamaker
+            ];
           };
         }
         // zenosTree;
@@ -596,8 +631,22 @@
             inherit pkgs;
             inherit (dsl) candidates;
           };
+          migrationPolicies = import ./tests/migration-options.nix {
+            inherit nixpkgs;
+            zenosModule = self.nixosModules.default;
+          };
         in
         {
+          migration-options =
+            assert nixpkgs.lib.all (value: value) (builtins.attrValues migrationPolicies);
+            pkgs.writeText "zenos-migration-options" (builtins.toJSON migrationPolicies);
+          migration-packages = import ./tests/migration-packages.nix { inherit pkgs registry; };
+          migration-options-vm = import ./tests/migration-options-vm.nix {
+            pkgs = dsl.bootstrapPkgs;
+            zenosModule = self.nixosModules.default;
+            policies = migrationPolicies;
+            vrSupervisorSource = inputs.source-vr-tools.outPath + "/src/vr-overlay-supervisor.sh";
+          };
           user-options-vm = import ./tests/user-options-vm.nix {
             pkgs = dsl.bootstrapPkgs;
             zenosModule = self.nixosModules.default;
@@ -608,6 +657,10 @@
             pkgs = dsl.bootstrapPkgs;
             zenosModule = self.nixosModules.default;
             inherit (dsl) zenDsl;
+          };
+          codex-desktop-vm = import ./tests/codex-desktop-vm.nix {
+            inherit pkgs;
+            zenosModule = self.nixosModules.default;
           };
           package-catalog-vm = import ./tests/package-catalog-vm.nix {
             pkgs = dsl.bootstrapPkgs;

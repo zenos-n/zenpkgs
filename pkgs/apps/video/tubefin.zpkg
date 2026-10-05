@@ -1,0 +1,117 @@
+_meta = {
+  name = "TubeFin";
+  summary = "Native YouTube and Jellyfin client for GNOME";
+  description = ''Native YouTube and Jellyfin client for GNOME. Optional migration package; installation does not activate a service.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.6.4";
+  tags = [ "video" "youtube" "jellyfin" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+build = let
+  packageSet = $pkgs.legacy;
+  pythonRuntime = packageSet.python3;
+          pythonMpv = pythonRuntime.pkgs.buildPythonPackage {
+            pname = "python-mpv";
+            version = "1.0.8";
+            pyproject = true;
+            src = packageSet.fetchPypi {
+              pname = "python_mpv";
+              version = "1.0.8";
+              hash = "sha256-AX+jWdoFnIMalMQZCDSRkD5tL3yBuYQcM8GWyr9LP+M=";
+            };
+            build-system = [ pythonRuntime.pkgs.setuptools ];
+            postPatch = ''
+              substituteInPlace mpv.py \
+                --replace-fail "ctypes.util.find_library('mpv')" \
+                "'${packageSet.mpv}/lib/libmpv.so.2'"
+            '';
+            doCheck = false;
+          };
+
+in pythonRuntime.pkgs.buildPythonApplication {
+            pname = "tubefin";
+            version = "1.6.4";
+            pyproject = true;
+
+            src = packageSet.fetchFromGitHub { owner = "doromiert"; repo = "tubefin"; rev = "b954dd487ea58ac32dd980eb7f0ed4edb760a657"; hash = "sha256-tt9bR6szI0mJ5n4BS8S2LNIMLZmIVbFZ8m6NSBMGAyk="; };
+
+            postPatch = ''
+              substituteInPlace src/tubefin/mpv_player.py \
+                --replace-fail '"libEGL.so.1"' '"${packageSet.libglvnd}/lib/libEGL.so.1"' \
+                --replace-fail '"libGL.so.1"' '"${packageSet.libglvnd}/lib/libGL.so.1"' \
+                --replace-fail '"libgtk-4.so.1"' '"${packageSet.gtk4}/lib/libgtk-4.so.1"'
+            '';
+
+            build-system = [ pythonRuntime.pkgs.setuptools ];
+            dependencies = [
+              pythonRuntime.pkgs.pygobject3
+              pythonRuntime.pkgs.yt-dlp
+              pythonMpv
+              pythonRuntime.pkgs.websocket-client
+            ];
+
+            # Release/package builds must not launch the test harness. Tests remain
+            # available explicitly from the development shell.
+            doCheck = false;
+
+            checkPhase = ''
+              runHook preCheck
+              python -m unittest discover -s tests -v
+              runHook postCheck
+            '';
+
+            nativeBuildInputs = [
+              packageSet.wrapGAppsHook4
+              packageSet.gobject-introspection
+            ];
+
+            buildInputs = [
+              packageSet.gtk4
+              packageSet.libadwaita
+              packageSet.mpv
+              packageSet.libglvnd
+              packageSet.gst_all_1.gstreamer
+              packageSet.gst_all_1.gstreamer.out
+              packageSet.gst_all_1.gst-plugins-base
+              packageSet.gst_all_1.gst-plugins-good
+              packageSet.gst_all_1.gst-plugins-bad
+              packageSet.gst_all_1.gst-plugins-ugly
+              packageSet.gst_all_1.gst-libav
+            ];
+
+            preFixup = ''
+              gappsWrapperArgs+=(
+                --prefix PATH : ${packageSet.lib.makeBinPath [ packageSet.yt-dlp packageSet.deno packageSet.ffmpeg packageSet.libsecret ]}
+                --prefix LD_LIBRARY_PATH : ${packageSet.lib.makeLibraryPath [ packageSet.mpv packageSet.libglvnd ]}
+                --prefix GST_PLUGIN_SYSTEM_PATH_1_0 : ${
+                  packageSet.lib.makeSearchPath "lib/gstreamer-1.0" [
+                    packageSet.gst_all_1.gst-plugins-base
+                    packageSet.gst_all_1.gst-plugins-good
+                    packageSet.gst_all_1.gst-plugins-bad
+                    packageSet.gst_all_1.gst-plugins-ugly
+                    packageSet.gst_all_1.gst-libav
+                    packageSet.gst_all_1.gstreamer.out
+                  ]
+                }
+              )
+            '';
+
+            postInstall = ''
+              install -Dm644 data/io.github.doromiert.TubeFin.desktop \
+                $out/share/applications/io.github.doromiert.TubeFin.desktop
+              install -Dm644 data/io.github.doromiert.TubeFin.metainfo.xml \
+                $out/share/metainfo/io.github.doromiert.TubeFin.metainfo.xml
+              install -Dm644 data/io.github.doromiert.TubeFin.svg \
+                $out/share/icons/hicolor/scalable/apps/io.github.doromiert.TubeFin.svg
+            '';
+
+            meta = {
+              description = "Native YouTube and Jellyfin client for GNOME";
+              homepage = "https://github.com/doromiert/tubefin";
+              license = packageSet.lib.licenses.gpl3Plus;
+              mainProgram = "tubefin";
+              platforms = packageSet.lib.platforms.linux;
+            };
+          };

@@ -1,0 +1,53 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "Legacy VR session";
+  summary = "Legacy VR session";
+  description = ''Launch the existing ALVR and SteamVR stack with its compositor-aware desktop overlays. Disabled by default and scoped to the selected account.'';
+  tags = [ "migration" "services" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+allowNetworkAccess._meta = {
+  type = $type.bool; default = false;
+  name = "Allow headset streaming"; summary = "Allow headset streaming";
+  description = ''Request ALVR firewall access. Other system firewall policy can independently allow ALVR.'';
+  tags = [ "vr" "network" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+startOverlays._meta = {
+  type = $type.bool; default = true;
+  name = "Start the overlay supervisor at login"; summary = "Start the overlay supervisor at login";
+  description = ''Wait for a stable compositor before starting overlays. No VR runtime is started merely by logging in.'';
+  tags = [ "vr" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+overlayFont._meta = {
+  type = $type.either [ $type.string $type.null ]; default = null;
+  name = "Desktop overlay font"; summary = "Desktop overlay font";
+  description = ''Fontconfig family for the Wlx desktop overlay. Null preserves the user configuration. Install the matching font separately.'';
+  tags = [ "vr" "fonts" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+enable = enableOption {
+  _meta = {
+    name = "Enable the legacy VR session tools"; summary = "Enable the legacy VR session tools";
+    description = ''Install the VR manager and launcher for this user and configure the required system runtime.'';
+    tags = [ "vr" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.apps.gaming.zenos-vr-tools $pkgs.apps.gaming.ovr-advanced-settings $pkgs.apps.gaming.wlx-overlay-s $pkgs.apps.gaming.wayvr $pkgs.apps.gaming.fnuidesktop-vr ];
+    xdg.configFile."wlxoverlay/conf.d/00-zenos-font.yaml" = $lib.mkIf ($path.overlayFont != null) {
+      text = $lib.generators.toJSON {} { primary_font = $path.overlayFont; };
+    };
+    systemd.user.services.zenos-vr-overlays = $lib.mkIf $path.startOverlays {
+      Unit = {
+        Description = "ZenOS VR overlay supervisor";
+        After = [ "graphical-session.target" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${$pkgs.apps.gaming.zenos-vr-tools}/bin/vr-overlay-supervisor";
+        Restart = "on-failure"; RestartSec = 2;
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
+  };
+};

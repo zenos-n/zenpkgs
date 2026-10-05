@@ -1,0 +1,250 @@
+_meta = {
+  name = "Virtual machines and containers";
+  summary = "Virtual machines and containers";
+  description = ''Virtual machines and containers. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  zenosVersion = 1.0.0Na;
+};
+
+libvirt.enable = {
+_meta = {
+  name = "Run virtual machines using Libvirt";
+  summary = "Run virtual machines using Libvirt";
+  description = ''Run virtual machines using Libvirt. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.libvirtd.enable = $lib.mkIf ($path.libvirt.enable != null) ($path.libvirt.enable);
+  };
+};
+
+libvirt.virtualTpm = {
+_meta = {
+  name = "Provide virtual trusted platform modules";
+  summary = "Provide virtual trusted platform modules";
+  description = ''Provide virtual trusted platform modules. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.libvirtd.qemu.swtpm.enable = $lib.mkIf ($path.libvirt.virtualTpm != null) ($path.libvirt.virtualTpm);
+  };
+};
+
+libvirt.runAsRoot = {
+_meta = {
+  name = "Run virtual machines as root";
+  summary = "Run virtual machines as root";
+  description = ''Run virtual machines as root. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.libvirtd.qemu.runAsRoot = $lib.mkIf ($path.libvirt.runAsRoot != null) ($path.libvirt.runAsRoot);
+  };
+};
+
+libvirt.startGuestsOnBoot = {
+_meta = {
+  name = "Restore previously running guests at boot";
+  summary = "Restore previously running guests at boot";
+  description = ''Restore previously running guests at boot. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.enum [ "ignore" "start" ]) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.libvirtd.onBoot = $lib.mkIf ($path.libvirt.startGuestsOnBoot != null) ($path.libvirt.startGuestsOnBoot);
+  };
+};
+
+libvirt.stopGuestsOnShutdown = {
+_meta = {
+  name = "Guest action when shutting down the host";
+  summary = "Guest action when shutting down the host";
+  description = ''Guest action when shutting down the host. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.enum [ "shutdown" "suspend" ]) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.libvirtd.onShutdown = $lib.mkIf ($path.libvirt.stopGuestsOnShutdown != null) ($path.libvirt.stopGuestsOnShutdown);
+  };
+};
+
+libvirt.manager = {
+_meta = {
+  name = "Install the graphical virtual machine manager";
+  summary = "Install the graphical virtual machine manager";
+  description = ''Install the graphical virtual machine manager. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    programs.virt-manager.enable = $lib.mkIf ($path.libvirt.manager != null) ($path.libvirt.manager);
+  };
+};
+
+libvirt.socketNetworkTransport = {
+_meta = {
+  name = "Make passt available to enabled Libvirt guests";
+  summary = "Make passt available to enabled Libvirt guests";
+  description = ''Make passt available to enabled Libvirt guests. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    systemd.services.libvirtd.path = $lib.mkIf ($path.libvirt.socketNetworkTransport != null) ($lib.mkIf ($path.libvirt.enable == true && $path.libvirt.socketNetworkTransport) [ $pkgs.apps.virtualization.passt ]);
+  };
+};
+
+docker.enable = {
+_meta = {
+  name = "Run Docker containers";
+  summary = "Run Docker containers";
+  description = ''Run Docker containers. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.docker.enable = $lib.mkIf ($path.docker.enable != null) ($path.docker.enable);
+  };
+};
+
+docker.rootless = {
+_meta = {
+  name = "Run a per-user Docker daemon without root";
+  summary = "Run a per-user Docker daemon without root";
+  description = ''Run a per-user Docker daemon without root. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.docker.rootless.enable = $lib.mkIf ($path.docker.rootless != null) ($path.docker.rootless);
+  };
+};
+
+docker.exportSocket = {
+_meta = {
+  name = "Export the rootless Docker socket to user sessions";
+  summary = "Export the rootless Docker socket to user sessions";
+  description = ''Export the rootless Docker socket to user sessions. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.docker.rootless.setSocketVariable = $lib.mkIf ($path.docker.exportSocket != null) ($path.docker.exportSocket);
+  };
+};
+
+docker.storageDriver = {
+_meta = {
+  name = "Docker container storage driver";
+  summary = "Docker container storage driver";
+  description = ''Docker container storage driver. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.string) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.docker.storageDriver = $lib.mkIf ($path.docker.storageDriver != null) ($path.docker.storageDriver);
+  };
+};
+
+podman.enable = {
+_meta = {
+  name = "Run Podman containers";
+  summary = "Run Podman containers";
+  description = ''Run Podman containers. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.podman.enable = $lib.mkIf ($path.podman.enable != null) ($path.podman.enable);
+  };
+};
+
+podman.dockerCompatibility = {
+_meta = {
+  name = "Provide the Docker command using Podman";
+  summary = "Provide the Docker command using Podman";
+  description = ''Provide the Docker command using Podman. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    virtualisation.podman.dockerCompat = $lib.mkIf ($path.podman.dockerCompatibility != null) ($path.podman.dockerCompatibility);
+  };
+};
+
+guest.qemuAgent = {
+_meta = {
+  name = "Enable the QEMU guest agent";
+  summary = "Enable the QEMU guest agent";
+  description = ''Enable the QEMU guest agent. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    services.qemuGuest.enable = $lib.mkIf ($path.guest.qemuAgent != null) ($path.guest.qemuAgent);
+  };
+};
+
+guest.spiceAgent = {
+_meta = {
+  name = "Enable SPICE desktop integration";
+  summary = "Enable SPICE desktop integration";
+  description = ''Enable SPICE desktop integration. Unset values preserve existing policy.'';
+  tags = [ "migration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    services.spice-vdagentd.enable = $lib.mkIf ($path.guest.spiceAgent != null) ($path.guest.spiceAgent);
+  };
+};
+

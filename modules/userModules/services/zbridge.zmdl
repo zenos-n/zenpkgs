@@ -1,0 +1,32 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  name = "ZeroBridge Android integration";
+  summary = "ZeroBridge Android integration";
+  description = ''Bridge Android audio and video into the desktop. Disabled by default and scoped to the selected account.'';
+  tags = [ "migration" "services" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Run ZeroBridge for this user"; summary = "Run ZeroBridge for this user";
+    description = ''Install the bridge and GNOME control extension and start the daemon. A virtual camera requires a separately configured v4l2loopback kernel module.'';
+    tags = [ "android" "pipewire" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.apps.connectivity.zbridge ];
+    dconf.settings."org/gnome/shell".enabled-extensions = $lib.mkIf $path.gnomeIndicator [ "zbridge@neg-zero.com" ];
+    systemd.user.services.zbridge = {
+      Unit = { Description = "ZeroBridge Android audio/video bridge"; After = [ "pipewire.service" ]; };
+      Service = { ExecStart = "${$pkgs.apps.connectivity.zbridge}/bin/zb-daemon"; Restart = "on-failure"; RestartSec = 5; };
+      Install.WantedBy = [ "default.target" ];
+    };
+  };
+};
+gnomeIndicator._meta = {
+  type = $type.bool; default = false;
+  name = "Enable the GNOME control indicator"; summary = "Enable the GNOME control indicator";
+  description = ''Enable the bridge extension in the selected user session. Requires GNOME.'';
+  tags = [ "gnome" "android" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};

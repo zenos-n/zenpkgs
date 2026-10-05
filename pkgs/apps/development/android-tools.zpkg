@@ -1,0 +1,13 @@
+_meta = {
+  name = "android-tools";
+  summary = "Android SDK platform tools";
+  description = ''
+    Android SDK platform tools
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "35.0.2";
+  tags = [ "development" "migration" "android-tools" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.android-tools;

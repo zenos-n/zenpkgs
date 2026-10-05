@@ -1,0 +1,14 @@
+_meta = {
+  name = "gst-plugins-base";
+  summary = "Base GStreamer plug-ins and helper libraries";
+  description = ''
+    Base GStreamer plug-ins and helper libraries
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.26.11";
+  tags = [ "libs" "migration" "gst-plugins-base" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.lgpl2Plus;
+};
+
+import $pkgs.legacy.gst_all_1.gst-plugins-base;

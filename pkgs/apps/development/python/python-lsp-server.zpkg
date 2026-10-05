@@ -1,0 +1,14 @@
+_meta = {
+  name = "python-lsp-server";
+  summary = "Python implementation of the Language Server Protocol";
+  description = ''
+    Python implementation of the Language Server Protocol
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.14.0";
+  tags = [ "development" "migration" "python-lsp-server" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.python3Packages.python-lsp-server;

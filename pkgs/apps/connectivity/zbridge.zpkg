@@ -1,0 +1,24 @@
+_meta = {
+  name = "ZeroBridge";
+  summary = "Android and Linux audio/video bridge with a GNOME control extension";
+  description = ''Android and Linux audio/video bridge with a GNOME control extension. Optional migration package; installation does not activate a service.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "android" "pipewire" "camera" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+build = let
+  source = $pkgs.legacy.fetchFromGitHub { owner = "doromiert"; repo = "zerobridge"; rev = "a2ca3c681258d56706e75b2fbea31907caf9081f"; hash = "sha256-tYlxxAfXLlXgL206a9ivYiLnVn+EnV4JrhRTCMLVKNU="; };
+  core = $pkgs.legacy.callPackage (source + "/nix/backend.nix") {
+    gstreamer = $pkgs.legacy.gst_all_1.gstreamer;
+    gst-plugins-base = $pkgs.legacy.gst_all_1.gst-plugins-base;
+    gst-plugins-good = $pkgs.legacy.gst_all_1.gst-plugins-good;
+    gst-plugins-bad = $pkgs.legacy.gst_all_1.gst-plugins-bad;
+    gst-plugins-ugly = $pkgs.legacy.gst_all_1.gst-plugins-ugly;
+  };
+  extension = $pkgs.legacy.callPackage (source + "/nix/extension.nix") {};
+in $pkgs.legacy.buildEnv { name = "zbridge-1.0.0"; paths = [ core extension ];
+  meta = { description = "Android-Linux audio/video bridge"; license = $lib.licenses.mit; platforms = [ "x86_64-linux" ]; mainProgram = "zb-daemon"; };
+};

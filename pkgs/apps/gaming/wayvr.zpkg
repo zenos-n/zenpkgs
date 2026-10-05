@@ -1,0 +1,13 @@
+_meta = {
+  name = "wayvr";
+  summary = "Your way to enjoy VR on Linux! Access your Wayland/X11 desktop from SteamVR/Monado (OpenVR+OpenXR support)";
+  description = ''
+    Your way to enjoy VR on Linux! Access your Wayland/X11 desktop from SteamVR/Monado (OpenVR+OpenXR support)
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "26.8.0";
+  tags = [ "gaming" "migration" "wayvr" ];
+  maintainers = [ $m.doromiert ];
+};
+
+import $pkgs.legacy.wayvr;

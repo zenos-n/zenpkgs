@@ -1,0 +1,14 @@
+_meta = {
+  name = "uzdoom";
+  summary = "Modder-friendly OpenGL and Vulkan source port based on the DOOM engine";
+  description = ''
+    Modder-friendly OpenGL and Vulkan source port based on the DOOM engine
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "4.14.3";
+  tags = [ "gaming" "migration" "uzdoom" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+import $pkgs.legacy.uzdoom;

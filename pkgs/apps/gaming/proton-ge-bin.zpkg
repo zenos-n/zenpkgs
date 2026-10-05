@@ -1,0 +1,16 @@
+_meta = {
+  name = "proton-ge-bin";
+  summary = "Compatibility tool for Steam Play based on Wine and additional components.";
+  description = ''
+    Compatibility tool for Steam Play based on Wine and additional components.
+    
+    (This is intended for use in the `programs.steam.extraCompatPackages` option only.)
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "GE-Proton11-1";
+  tags = [ "gaming" "migration" "proton-ge-bin" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.bsd3;
+};
+
+import $pkgs.legacy.proton-ge-bin;

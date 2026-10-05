@@ -63,8 +63,8 @@ in
           services.pipewire.alsa.support32Bit = lib.mkDefault true;
           services.fwupd.enable = lib.mkDefault true;
           services.fstrim.enable = lib.mkDefault true;
-          services.qemuGuest.enable = true;
-          zramSwap.enable = true;
+          services.qemuGuest.enable = lib.mkDefault true;
+          zramSwap.enable = lib.mkDefault true;
           nix.settings.auto-optimise-store = true;
           nix.gc = {
             automatic = true;

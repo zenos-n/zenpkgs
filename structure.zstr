@@ -72,6 +72,26 @@ system = {
       license = $l.napalm;
     };
   };
+
+  flatpak._meta = {
+    type = (alias nixpkgs.services.flatpak);
+    name = "flatpak";
+    summary = "Typed flatpak configuration";
+    description = ''Configure flatpak using its pinned upstream schema. This mount does not enable the capability.'';
+    tags = [ "migration" "configuration" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+
+  programs.firefox._meta = {
+    type = (alias nixpkgs.programs.firefox);
+    name = "firefox";
+    summary = "Typed firefox configuration";
+    description = ''Configure firefox using its pinned upstream schema. This mount does not enable the capability.'';
+    tags = [ "migration" "configuration" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
   syncthing._meta = {
     type = (alias nixpkgs.services.syncthing);
     zenosVersion = 1.0.0Na;
@@ -81,6 +101,14 @@ system = {
     tags = [ "syncthing" "compatibility" ];
     maintainers = [ $m.doromiert ];
     license = $l.napalm;
+  };
+  hardware.mouseGestures._meta = {
+    type = (alias nixpkgs.services.masterfulGestures);
+    name = "Mouse gestures";
+    summary = "Configure mouse gestures";
+    description = ''Expose the pinned Masterful Gestures backend. Device paths and bindings are selected by the host.'';
+    tags = [ "hardware" "input" ];
+    maintainers = [ $m.doromiert ]; license = $l.napl;
   };
 };
 
@@ -149,6 +177,96 @@ users = {
         default = { };
       };
     };
+
+    programs.pwamaker._meta = {
+      type = (alias nixpkgs.home-manager.users.($f.user).programs.pwamaker);
+      name = "Firefox web applications";
+      summary = "Configure Firefox PWAs and URL dispatch";
+      description = ''Migration backend for existing Firefox web applications, profiles, extensions and URL dispatch rules. Disabled until explicitly selected.'';
+      tags = [ "browser" "web-apps" "migration" ];
+      maintainers = [ $m.doromiert ]; license = $l.napl;
+    };
+
+    programs.firefox._meta = {
+      type = (alias nixpkgs.home-manager.users.($f.user).programs.firefox);
+      name = "firefox";
+      summary = "Typed firefox configuration";
+      description = ''Configure firefox using its pinned upstream schema. This mount does not enable the capability.'';
+      tags = [ "migration" "configuration" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+    };
+
+    programs.vscode._meta = {
+      type = (alias nixpkgs.home-manager.users.($f.user).programs.vscode);
+      name = "vscode";
+      summary = "Typed vscode configuration";
+      description = ''Configure vscode using its pinned upstream schema. This mount does not enable the capability.'';
+      tags = [ "migration" "configuration" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+    };
+
+    programs.kitty._meta = {
+      type = (alias nixpkgs.home-manager.users.($f.user).programs.kitty);
+      name = "kitty";
+      summary = "Typed kitty configuration";
+      description = ''Configure kitty using its pinned upstream schema. This mount does not enable the capability.'';
+      tags = [ "migration" "configuration" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+    };
+
+    programs.keepassxc._meta = {
+      type = (alias nixpkgs.home-manager.users.($f.user).programs.keepassxc);
+      name = "keepassxc";
+      summary = "Typed keepassxc configuration";
+      description = ''Configure keepassxc using its pinned upstream schema. This mount does not enable the capability.'';
+      tags = [ "migration" "configuration" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+    };
+
+    programs.zoxide._meta = {
+      type = (alias nixpkgs.home-manager.users.($f.user).programs.zoxide);
+      name = "zoxide";
+      summary = "Typed zoxide configuration";
+      description = ''Configure zoxide using its pinned upstream schema. This mount does not enable the capability.'';
+      tags = [ "migration" "configuration" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+    };
+
+    programs.nixcord._meta = {
+      type = (alias nixpkgs.home-manager.users.($f.user).programs.nixcord);
+      name = "nixcord";
+      summary = "Typed nixcord configuration";
+      description = ''Configure nixcord using its pinned upstream schema. This mount does not enable the capability.'';
+      tags = [ "migration" "configuration" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+    };
+
+    programs.zed-editor._meta = {
+      type = (alias nixpkgs.home-manager.users.($f.user).programs.zed-editor);
+      name = "zed-editor";
+      summary = "Typed zed-editor configuration";
+      description = ''Configure zed-editor using its pinned upstream schema. This mount does not enable the capability.'';
+      tags = [ "migration" "configuration" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+    };
+
+    services.flatpak._meta = {
+      type = (alias nixpkgs.home-manager.users.($f.user).services.flatpak);
+      name = "flatpak";
+      summary = "Typed flatpak configuration";
+      description = ''Configure flatpak using its pinned upstream schema. This mount does not enable the capability.'';
+      tags = [ "migration" "configuration" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+    };
+
     legacy = {
       _meta = {
         type = (alias nixpkgs.users.users.($f.user));

@@ -1,0 +1,8 @@
+_meta = {
+  name = "Haptics++";
+  summary = "GNOME pointer haptics for Logitech HID++ mice";
+  description = ''Package the existing mouse haptics daemon, GNOME extension and receiver access rules. Does not start the daemon.'';
+  zenosVersion = "1.0.0"; packageVersion = "unstable-2026-10-02";
+  tags = [ "hardware" "gnome" ]; maintainers = [ $m.doromiert ]; license = $l.unfree;
+};
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.haptics + "/package.nix") {};

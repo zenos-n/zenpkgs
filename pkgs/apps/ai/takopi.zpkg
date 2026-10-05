@@ -1,0 +1,48 @@
+_meta = {
+  name = "Takopi";
+  summary = "Telegram bridge for agent command-line tools";
+  description = ''Telegram bridge for Codex, OpenCode and other agent command-line tools. Installation does not start a bot or configure credentials.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.23.4";
+  tags = [ "ai" "telegram" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+build = let
+  pythonPackages = $pkgs.legacy.python314Packages;
+  sulguk = pythonPackages.buildPythonPackage {
+    pname = "sulguk";
+    version = "0.12.0";
+    format = "wheel";
+    src = $pkgs.legacy.fetchurl {
+      url = "https://files.pythonhosted.org/packages/ca/65/4ee61d3d4856230d2abda454e7511e0675a01024dc19101bb90d397ebd59/sulguk-0.12.0-py3-none-any.whl";
+      hash = "sha256-IpgayakIPUmIguIA78+VJ8PG3vJPa4Z3t7Dtenz7vWg=";
+    };
+    dependencies = [ pythonPackages.html5lib pythonPackages.lxml ];
+    pythonImportsCheck = [ "sulguk" ];
+  };
+in pythonPackages.buildPythonApplication {
+  pname = "takopi";
+  version = "0.23.4";
+  format = "wheel";
+  src = $pkgs.legacy.fetchurl {
+    url = "https://files.pythonhosted.org/packages/ce/ed/ce72ae5a347f0327d527dadbe648898154146a21d4223a50fec3989b4b19/takopi-0.23.4-py3-none-any.whl";
+    hash = "sha256-YFkiOXwDjAnV1uIvg2I/DpANkQGqR+Z5TtsvsW8mttw=";
+  };
+  dependencies = [
+    pythonPackages.anyio pythonPackages.httpx pythonPackages.markdown-it-py
+    pythonPackages.msgspec pythonPackages.openai pythonPackages.pydantic
+    pythonPackages.pydantic-settings pythonPackages.questionary pythonPackages.rich
+    pythonPackages.structlog sulguk pythonPackages.tomli-w pythonPackages.typer
+    pythonPackages.watchfiles
+  ];
+  pythonImportsCheck = [ "takopi" "takopi.cli" ];
+  meta = {
+    description = "Telegram bridge for agent command-line tools";
+    homepage = "https://github.com/banteg/takopi";
+    license = $lib.licenses.mit;
+    platforms = $lib.platforms.linux;
+    mainProgram = "takopi";
+  };
+};

@@ -1,0 +1,11 @@
+_meta = {
+  name = "alvr-zenos-compat";
+  summary = "ALVR with the ZenOS SteamVR compatibility patches";
+  description = ''ALVR with the ZenOS SteamVR compatibility patches. Optional migration package; installation does not activate a service.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "20.14.1";
+  tags = [ "vr" "steamvr" "migration" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.alvrCompat + "/package.nix") {};

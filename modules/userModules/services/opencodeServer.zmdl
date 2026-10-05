@@ -1,0 +1,49 @@
+_meta = {
+  name = "OpenCode server"; summary = "OpenCode server";
+  description = ''Optional user-scoped OpenCode HTTP server. Binds to localhost by default and does not open the firewall.'';
+  tags = [ "ai" "services" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+address._meta = {
+  name = "Bind address"; summary = "Bind address";
+  description = ''Interface address used by the server. Defaults to loopback.'';
+  type = $type.string; default = "127.0.0.1";
+  tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+port._meta = {
+  name = "Server port"; summary = "Server port";
+  description = ''TCP port between 1 and 65535.'';
+  type = $type.int; default = 4096;
+  tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+workingDirectory._meta = {
+  name = "Server working directory"; summary = "Server working directory";
+  description = ''Existing project directory; %h expands to the account home directory.'';
+  type = $type.string; default = "%h";
+  tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+package._meta = {
+  name = "OpenCode package"; summary = "OpenCode package";
+  description = ''Package supplying opencode.'';
+  type = $type.package; default = $pkgs.apps.ai.opencode;
+  tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+enable = enableOption {
+  _meta = {
+    name = "Enable the OpenCode server"; summary = "Enable the OpenCode server";
+    description = ''Run the server at this user's default target.'';
+    tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+  };
+  u! {
+    assertions = [ { assertion = $path.port >= 1 && $path.port <= 65535; message = "opencodeServer.port must be between 1 and 65535"; } ];
+    home.packages = [ $path.package ];
+    systemd.user.services.opencodeServer = {
+      Unit = { Description = "OpenCode HTTP server"; After = [ "network-online.target" ]; };
+      Service = {
+        ExecStart = "${$path.package}/bin/opencode serve --hostname ${$lib.escapeShellArg $path.address} --port ${$path.port}";
+        WorkingDirectory = $path.workingDirectory;
+        Restart = "on-failure"; RestartSec = 5;
+      };
+      Install.WantedBy = [ "default.target" ];
+    };
+  };
+};

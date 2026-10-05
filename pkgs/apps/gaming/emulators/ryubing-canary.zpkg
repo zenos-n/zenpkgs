@@ -1,0 +1,23 @@
+_meta = {
+  name = "Ryubing Canary";
+  summary = "Ryubing Canary Nintendo Switch emulator";
+  description = ''Ryubing Canary Nintendo Switch emulator. Optional migration package; installation does not activate a service.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.274";
+  tags = [ "gaming" "emulator" "switch" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+build = $pkgs.legacy.appimageTools.wrapType2 {
+  pname = "ryubing-canary"; version = "1.3.274";
+  src = $pkgs.legacy.fetchurl {
+    urls = [
+      "https://ryubing.creepso.com/1.3.274/ryujinx-canary-1.3.274-x64.AppImage"
+      "https://git.ryujinx.app/Ryubing/Canary/releases/download/1.3.274/ryujinx-canary-1.3.274-x64.AppImage"
+    ];
+    hash = "sha256-bCmqYv2tCnF9oVlnTulArfcPm2yrZntWMjJcz1pe96U=";
+  };
+  extraPkgs = p: [ p.libx11 p.vulkan-loader p.openal p.icu ];
+  meta = { description = "Ryubing Canary emulator"; license = $lib.licenses.mit; platforms = [ "x86_64-linux" ]; mainProgram = "ryubing-canary"; };
+};

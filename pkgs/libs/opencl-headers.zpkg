@@ -1,0 +1,14 @@
+_meta = {
+  name = "opencl-headers";
+  summary = "Khronos OpenCL headers version 2025.07.22";
+  description = ''
+    Khronos OpenCL headers version 2025.07.22
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2025.07.22";
+  tags = [ "libs" "migration" "opencl-headers" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.asl20;
+};
+
+import $pkgs.legacy.opencl-headers;

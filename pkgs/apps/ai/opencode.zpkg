@@ -5,10 +5,14 @@ _meta = {
     AI coding agent built for the terminal.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "1.15.10";
+  packageVersion = "1.18.3";
   tags = [ "ai" "development" "coding" "terminal" ];
   maintainers = [ $m.doromiert ];
   license = $l.mit;
 };
 
-import $pkgs.legacy.opencode;
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "NixOS"; repo = "nixpkgs";
+  rev = "7812a64698104d7f86d762307097e5e0329b1e44";
+  hash = "sha256-tZbCWkqDMTLJUXvUbImiQqukFDPl+giC9OMlQFLp+Bk=";
+}) + "/pkgs/by-name/op/opencode/package.nix") {};

@@ -373,6 +373,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-popcorn": {
+      "locked": {
+        "lastModified": 1777268161,
+        "narHash": "sha256-bxrdOn8SCOv8tN4JbTF/TXq7kjo9ag4M+C8yzzIRYbE=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1c3fe55ad329cbcb28471bb30f05c9827f724c76",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "1c3fe55ad329cbcb28471bb30f05c9827f724c76",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1787964612,
@@ -466,6 +482,27 @@
         "type": "github"
       }
     },
+    "nixpwamaker": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1769182108,
+        "narHash": "sha256-9iiMkpMp1LUf6B3dcX7I3qyJKXVaG1+s320zKaUus84=",
+        "owner": "doromiert",
+        "repo": "nixpwamaker",
+        "rev": "f28ff38b57f9a64fc925f7fc4d18d4472512593e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doromiert",
+        "repo": "nixpwamaker",
+        "rev": "f28ff38b57f9a64fc925f7fc4d18d4472512593e",
+        "type": "github"
+      }
+    },
     "nur": {
       "inputs": {
         "flake-parts": "flake-parts_3",
@@ -499,7 +536,11 @@
         "nixcord": "nixcord",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
+        "nixpkgs-popcorn": "nixpkgs-popcorn",
+        "nixpwamaker": "nixpwamaker",
         "nur": "nur",
+        "source-alvr-compat": "source-alvr-compat",
+        "source-haptics": "source-haptics",
         "source-oobe": "source-oobe",
         "source-plymouth": "source-plymouth",
         "source-rebuild": "source-rebuild",
@@ -508,8 +549,37 @@
         "source-refind-theme": "source-refind-theme",
         "source-setup": "source-setup",
         "source-shell-defaults": "source-shell-defaults",
+        "source-vision-indicator": "source-vision-indicator",
+        "source-vr-tools": "source-vr-tools",
+        "source-zane-indicator": "source-zane-indicator",
         "source-zenfs": "source-zenfs",
         "vsc-extensions": "vsc-extensions"
+      }
+    },
+    "source-alvr-compat": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790978802,
+        "narHash": "sha256-jtMGbXjkQLQDqZE2cqRptmUPHL5eibYq3vmodE371rQ=",
+        "path": "/home/doromiert/Projects/alvr-zenos-compat",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/doromiert/Projects/alvr-zenos-compat",
+        "type": "path"
+      }
+    },
+    "source-haptics": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790981128,
+        "narHash": "sha256-CIILw4fKfWYOgSS+y3jATvGB+3u3664RGjVlPiF0n70=",
+        "path": "/home/doromiert/Projects/haptics++",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/doromiert/Projects/haptics++",
+        "type": "path"
       }
     },
     "source-oobe": {
@@ -646,6 +716,45 @@
         "repo": "zenos-shell-defaults",
         "rev": "29d54418b0e7e966e33a0f5766b92d9c94b1345e",
         "type": "github"
+      }
+    },
+    "source-vision-indicator": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790978802,
+        "narHash": "sha256-buD2X1s4btoiM3YGhue5WsVVsiLUzDUONU618xCiFVw=",
+        "path": "/home/doromiert/Projects/zenos-vision-indicator",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/doromiert/Projects/zenos-vision-indicator",
+        "type": "path"
+      }
+    },
+    "source-vr-tools": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790978802,
+        "narHash": "sha256-S8qb8XS0HpTH1+MGFVBzgMl0ACnIdFOie9AFWNBQ0GA=",
+        "path": "/home/doromiert/Projects/zenos-vr",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/doromiert/Projects/zenos-vr",
+        "type": "path"
+      }
+    },
+    "source-zane-indicator": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1790978802,
+        "narHash": "sha256-2hdG+Gq9MTImHTJWukDQmYu6CbfTzylEn1EU0xaERQ0=",
+        "path": "/home/doromiert/Projects/zenos-zane-indicator",
+        "type": "path"
+      },
+      "original": {
+        "path": "/home/doromiert/Projects/zenos-zane-indicator",
+        "type": "path"
       }
     },
     "source-zenfs": {

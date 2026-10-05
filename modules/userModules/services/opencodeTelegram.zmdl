@@ -1,0 +1,51 @@
+_meta = {
+  name = "opencodeTelegram"; summary = "Run the opencode Telegram bridge";
+  description = ''Run the bridge in the selected user account. Disabled by default; credentials are read from a runtime file.'';
+  tags = [ "ai" "telegram" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+environmentFile._meta = {
+  name = "Runtime credential file"; summary = "Runtime credential file";
+  description = ''Absolute path to a systemd environment file containing bot credentials. File contents are never imported into the store.'';
+  type = $type.either [ $type.string $type.null ]; default = null;
+  tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+workingDirectory._meta = {
+  name = "Bot working directory"; summary = "Bot working directory";
+  description = ''Existing working directory; %h expands to the account home directory.'';
+  type = $type.string; default = "%h";
+  tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+package._meta = {
+  name = "Bot package"; summary = "Bot package";
+  description = ''Package supplying opencode-telegram.'';
+  type = $type.package; default = $pkgs.apps.ai.opencode-telegram-bot;
+  tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+arguments._meta = {
+  name = "Foreground command arguments"; summary = "Foreground command arguments";
+  description = ''Run the bot in the foreground so systemd owns its lifetime.'';
+  type = $type.list [ $type.string ]; default = [ "start" "--mode" "installed" ];
+  tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+enable = enableOption {
+  _meta = {
+    name = "Enable the Telegram bridge"; summary = "Enable the Telegram bridge";
+    description = ''Start this bot on the selected user's default target. Requires a runtime environment file.'';
+    tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+  };
+  u! {
+    assertions = [ { assertion = $path.environmentFile != null && $lib.hasPrefix "/" $path.environmentFile; message = "opencodeTelegram.environmentFile must be an absolute runtime path"; } ];
+    home.packages = [ $path.package $pkgs.apps.ai.opencode ];
+    systemd.user.services.opencodeTelegram = {
+      Unit = { Description = "opencode Telegram bridge"; After = [ "network-online.target" ]; };
+      Service = {
+        ExecStart = "${$path.package}/bin/opencode-telegram ${$lib.escapeShellArgs $path.arguments}";
+        WorkingDirectory = $path.workingDirectory;
+        EnvironmentFile = $lib.mkIf ($path.environmentFile != null) $path.environmentFile;
+        Environment = [ "PATH=${$lib.makeBinPath [ $pkgs.apps.ai.opencode $pkgs.apps.development-tools.git $pkgs.legacy.bash ]}:%h/.nix-profile/bin:/run/current-system/sw/bin" ];
+        Restart = "on-failure"; RestartSec = 5;
+      };
+      Install.WantedBy = [ "default.target" ];
+    };
+  };
+};

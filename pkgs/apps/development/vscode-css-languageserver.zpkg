@@ -1,0 +1,14 @@
+_meta = {
+  name = "vscode-css-languageserver";
+  summary = "CSS language server";
+  description = ''
+    CSS language server
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.105.0";
+  tags = [ "development" "migration" "vscode-css-languageserver" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+import $pkgs.legacy.vscode-css-languageserver;

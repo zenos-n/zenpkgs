@@ -1,0 +1,15 @@
+_meta = {
+  name = "opencode-telegram-bot"; summary = "Telegram bridge for opencode";
+  description = ''Telegram bridge for opencode. Installs the pinned command-line client without starting a bot or storing credentials.'';
+  zenosVersion = "1.0.0"; packageVersion = "0.25.0";
+  tags = [ "ai" "telegram" ]; maintainers = [ $m.doromiert ]; license = $l.mit;
+};
+build = $pkgs.legacy.buildNpmPackage {
+  pname = "opencode-telegram-bot"; version = "0.25.0";
+  src = $pkgs.legacy.fetchFromGitHub { owner = "grinev"; repo = "opencode-telegram-bot"; rev = "v0.25.0"; hash = "sha256-AIq3jXmBktBizivs2hS8GHoxG9buXSU6k0DWu37/xKs="; };
+  nodejs = $pkgs.legacy.nodejs_22;
+  npmDepsHash = "sha256-lE+4XzZRwGRZn/BDLVGt/1UtUqeDhBAau51z4qVbYsg=";
+  nativeBuildInputs = [ $pkgs.legacy.python3 $pkgs.legacy.pkg-config ];
+  npmBuildScript = "build";
+  meta = { description = "Telegram bridge for opencode"; homepage = "https://github.com/grinev/opencode-telegram-bot"; license = $lib.licenses.mit; platforms = $lib.platforms.linux; mainProgram = "opencode-telegram"; };
+};

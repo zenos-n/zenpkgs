@@ -1,0 +1,30 @@
+_meta = {
+  name = "Mouse haptics"; summary = "Mouse haptics";
+  description = ''Run the existing HID++ haptics daemon in the selected GNOME session. Requires a supported Logitech mouse and cursor calibration.'';
+  tags = [ "hardware" "gnome" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+arguments._meta = {
+  name = "Haptics daemon arguments"; summary = "Haptics daemon arguments";
+  description = ''Arguments passed to hapticsd, for example a device path or minimum interval. No hardware identity is selected by default.'';
+  type = $type.list [ $type.string ]; default = [ ];
+  tags = [ "hardware" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+enable = enableOption {
+  _meta = {
+    name = "Enable mouse haptics"; summary = "Enable mouse haptics";
+    description = ''Install the daemon and extension and start it only in this account's graphical session.'';
+    tags = [ "hardware" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.apps.accessibility.hapticspp ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ "hapticspp@doromiert" ];
+    systemd.user.services.hapticspp = {
+      Unit = { Description = "Logitech mouse cursor haptics"; After = [ "graphical-session.target" ]; PartOf = [ "graphical-session.target" ]; };
+      Service = {
+        ExecStart = "${$pkgs.apps.accessibility.hapticspp}/bin/hapticspp-daemon ${$lib.escapeShellArgs $path.arguments}";
+        Restart = "on-failure"; RestartSec = 5;
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
+  };
+};
