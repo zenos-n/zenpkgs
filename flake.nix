@@ -665,6 +665,10 @@
             zenosModule = self.nixosModules.default;
             inherit (dsl) zenDsl;
           };
+          codex-cli-vm = import ./tests/codex-cli-vm.nix {
+            inherit pkgs;
+            zenosModule = self.nixosModules.default;
+          };
           codex-desktop-vm = import ./tests/codex-desktop-vm.nix {
             inherit pkgs;
             zenosModule = self.nixosModules.default;

@@ -23,20 +23,19 @@ build = $pkgs.legacy.stdenvNoCC.mkDerivation {
     sourceRoot = ".";
     dontConfigure = true;
     dontBuild = true;
-    nativeBuildInputs = [ $pkgs.legacy.makeWrapper ];
 
     installPhase = ''
       runHook preInstall
       mkdir -p $out
       cp -R bin codex-package.json codex-path codex-resources $out/
 
-      # Match nixpkgs' Codex packaging: use Nix's sandbox helper and ripgrep
-      # instead of the opaque copies shipped in the upstream release bundle.
+      # The daemon copies and validates the entire package before starting.
+      # Keep Nix's helpers inside the package: external symlinks fail validation.
       rm -f $out/codex-resources/bwrap $out/codex-path/rg
-      ln -s ${$pkgs.legacy.bubblewrap}/bin/bwrap $out/codex-resources/bwrap
-      ln -s ${$pkgs.legacy.ripgrep}/bin/rg $out/codex-path/rg
-      wrapProgram $out/bin/codex \
-        --prefix PATH : ${$pkgs.legacy.lib.makeBinPath [ $pkgs.legacy.ripgrep $pkgs.legacy.bubblewrap ]}
+      cp -L ${$pkgs.legacy.bubblewrap}/bin/bwrap $out/codex-resources/bwrap
+      cp -L ${$pkgs.legacy.ripgrep}/bin/rg $out/codex-path/rg
+      # Keep the entrypoint as the actual executable. The daemon compares its
+      # digest to bin/codex; a makeWrapper script fails that integrity check.
       runHook postInstall
     '';
 
