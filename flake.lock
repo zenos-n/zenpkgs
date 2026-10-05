@@ -588,27 +588,35 @@
     "source-alvr-compat": {
       "flake": false,
       "locked": {
-        "lastModified": 1790978802,
-        "narHash": "sha256-jtMGbXjkQLQDqZE2cqRptmUPHL5eibYq3vmodE371rQ=",
-        "path": "/home/doromiert/Projects/alvr-zenos-compat",
-        "type": "path"
+        "lastModified": 1791195267,
+        "narHash": "sha256-AJjhrfoqZPtKpFNsoIL8qOJha1MvYaA1QQW4z+2OCtI=",
+        "owner": "zenos-n",
+        "repo": "alvr-zenos-compat",
+        "rev": "4f24245e95fbe201fd3055be2b34da84e38ebdc2",
+        "type": "github"
       },
       "original": {
-        "path": "/home/doromiert/Projects/alvr-zenos-compat",
-        "type": "path"
+        "owner": "zenos-n",
+        "repo": "alvr-zenos-compat",
+        "rev": "4f24245e95fbe201fd3055be2b34da84e38ebdc2",
+        "type": "github"
       }
     },
     "source-haptics": {
       "flake": false,
       "locked": {
-        "lastModified": 1790981128,
-        "narHash": "sha256-CIILw4fKfWYOgSS+y3jATvGB+3u3664RGjVlPiF0n70=",
-        "path": "/home/doromiert/Projects/haptics++",
-        "type": "path"
+        "lastModified": 1791195267,
+        "narHash": "sha256-nYIFBmIYIy7lPZn6Wj2wXxujtH9XrJf87cjf0dqTv1A=",
+        "owner": "zenos-n",
+        "repo": "haptics-plus-plus",
+        "rev": "cb8df54b96676ec7dbd35f073385a3077189e168",
+        "type": "github"
       },
       "original": {
-        "path": "/home/doromiert/Projects/haptics++",
-        "type": "path"
+        "owner": "zenos-n",
+        "repo": "haptics-plus-plus",
+        "rev": "cb8df54b96676ec7dbd35f073385a3077189e168",
+        "type": "github"
       }
     },
     "source-oobe": {
@@ -750,40 +758,52 @@
     "source-vision-indicator": {
       "flake": false,
       "locked": {
-        "lastModified": 1790978802,
-        "narHash": "sha256-buD2X1s4btoiM3YGhue5WsVVsiLUzDUONU618xCiFVw=",
-        "path": "/home/doromiert/Projects/zenos-vision-indicator",
-        "type": "path"
+        "lastModified": 1791195267,
+        "narHash": "sha256-3XEbk57JZnrsdGvnCan95ybDgDMW+VU4NH9L/vn1iQU=",
+        "owner": "zenos-n",
+        "repo": "zenos-vision-indicator",
+        "rev": "1421f18f791cc249d2bbe70d7e52fb2adc2c0947",
+        "type": "github"
       },
       "original": {
-        "path": "/home/doromiert/Projects/zenos-vision-indicator",
-        "type": "path"
+        "owner": "zenos-n",
+        "repo": "zenos-vision-indicator",
+        "rev": "1421f18f791cc249d2bbe70d7e52fb2adc2c0947",
+        "type": "github"
       }
     },
     "source-vr-tools": {
       "flake": false,
       "locked": {
-        "lastModified": 1790978802,
-        "narHash": "sha256-S8qb8XS0HpTH1+MGFVBzgMl0ACnIdFOie9AFWNBQ0GA=",
-        "path": "/home/doromiert/Projects/zenos-vr",
-        "type": "path"
+        "lastModified": 1791195267,
+        "narHash": "sha256-w9EqTP/zwkjDNI/vMo/6AG6Y2YwXFqbSq9tbaNnwvfY=",
+        "owner": "zenos-n",
+        "repo": "zenos-vr",
+        "rev": "80dfa19f62fa821fe83de6dc3cac203bd7644474",
+        "type": "github"
       },
       "original": {
-        "path": "/home/doromiert/Projects/zenos-vr",
-        "type": "path"
+        "owner": "zenos-n",
+        "repo": "zenos-vr",
+        "rev": "80dfa19f62fa821fe83de6dc3cac203bd7644474",
+        "type": "github"
       }
     },
     "source-zane-indicator": {
       "flake": false,
       "locked": {
-        "lastModified": 1790978802,
-        "narHash": "sha256-2hdG+Gq9MTImHTJWukDQmYu6CbfTzylEn1EU0xaERQ0=",
-        "path": "/home/doromiert/Projects/zenos-zane-indicator",
-        "type": "path"
+        "lastModified": 1791195267,
+        "narHash": "sha256-63BAw0qQXquEqBiKaG1FcLrf2rLYlFObIw6xm6CzHlA=",
+        "owner": "zenos-n",
+        "repo": "zenos-zane-indicator",
+        "rev": "1846242f7e6940119d2b19e57daf501274b020ad",
+        "type": "github"
       },
       "original": {
-        "path": "/home/doromiert/Projects/zenos-zane-indicator",
-        "type": "path"
+        "owner": "zenos-n",
+        "repo": "zenos-zane-indicator",
+        "rev": "1846242f7e6940119d2b19e57daf501274b020ad",
+        "type": "github"
       }
     },
     "source-zenfs": {

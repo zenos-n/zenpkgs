@@ -69,19 +69,19 @@
       url = "github:zenos-n/zenfs/6a6ac505bd153b5235170e3e021138166c9c4bda";
       flake = false;
     };
-    # Development snapshots of the extracted package sources. These repositories
-    # can be published and replaced with release or latest-commit URLs without changing ZPKGs.
+    # Extracted package sources are published separately from the package catalog.
+    # Until releases are available, use their latest published commits.
     source-vr-tools = {
-      url = "path:/home/doromiert/Projects/zenos-vr";
+      url = "github:zenos-n/zenos-vr/80dfa19f62fa821fe83de6dc3cac203bd7644474";
       flake = false;
     };
     source-alvr-compat = {
-      url = "path:/home/doromiert/Projects/alvr-zenos-compat";
+      url = "github:zenos-n/alvr-zenos-compat/4f24245e95fbe201fd3055be2b34da84e38ebdc2";
       flake = false;
     };
-    source-haptics = { url = "path:/home/doromiert/Projects/haptics++"; flake = false; };
-    source-zane-indicator = { url = "path:/home/doromiert/Projects/zenos-zane-indicator"; flake = false; };
-    source-vision-indicator = { url = "path:/home/doromiert/Projects/zenos-vision-indicator"; flake = false; };
+    source-haptics = { url = "github:zenos-n/haptics-plus-plus/cb8df54b96676ec7dbd35f073385a3077189e168"; flake = false; };
+    source-zane-indicator = { url = "github:zenos-n/zenos-zane-indicator/1846242f7e6940119d2b19e57daf501274b020ad"; flake = false; };
+    source-vision-indicator = { url = "github:zenos-n/zenos-vision-indicator/1421f18f791cc249d2bbe70d7e52fb2adc2c0947"; flake = false; };
   };
 
   outputs =
