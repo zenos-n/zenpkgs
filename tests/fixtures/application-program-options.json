@@ -1,0 +1,1494 @@
+{
+  "codex": [
+    {
+      "name": "model",
+      "key": [
+        "model"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "reviewModel",
+      "key": [
+        "review_model"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "reasoningEffort",
+      "key": [
+        "model_reasoning_effort"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "planningReasoningEffort",
+      "key": [
+        "plan_mode_reasoning_effort"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "responsePriority",
+      "key": [
+        "service_tier"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "modelProvider",
+      "key": [
+        "model_provider"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "instructionFile",
+      "key": [
+        "model_instructions_file"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "extraInstructions",
+      "key": [
+        "developer_instructions"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "logDirectory",
+      "key": [
+        "log_dir"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "reasoningSummary",
+      "key": [
+        "model_reasoning_summary"
+      ],
+      "type": "$type.enum [ \"auto\" \"concise\" \"detailed\" \"none\" ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "answerDetail",
+      "key": [
+        "model_verbosity"
+      ],
+      "type": "$type.enum [ \"low\" \"medium\" \"high\" ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "localModelServer",
+      "key": [
+        "oss_provider"
+      ],
+      "type": "$type.enum [ \"ollama\" \"lmstudio\" ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "contextWindowTokens",
+      "key": [
+        "model_context_window"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 1,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "compactAfterTokens",
+      "key": [
+        "model_auto_compact_token_limit"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 1,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "compactAfterReplyPercent",
+      "key": [
+        "model_post_turn_compact_threshold_percent"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": 100,
+      "note": ""
+    },
+    {
+      "name": "instructionLimitBytes",
+      "key": [
+        "project_doc_max_bytes"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "tools.outputLimitTokens",
+      "key": [
+        "tool_output_token_limit"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "tools.backgroundPollLimitMilliseconds",
+      "key": [
+        "background_terminal_max_timeout"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "tools.optionalServerWaitMilliseconds",
+      "key": [
+        "mcp_optional_startup_grace_ms"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "historyLimitBytes",
+      "key": [
+        "history",
+        "max_bytes"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "commandApproval",
+      "key": [
+        "approval_policy"
+      ],
+      "type": "$type.enum [ \"ask-when-needed\" \"never\" ]",
+      "transform": {
+        "ask-when-needed": "on-request",
+        "never": "never"
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "fileAccess",
+      "key": [
+        "sandbox_mode"
+      ],
+      "type": "$type.enum [ \"read-only\" \"workspace\" \"unrestricted\" ]",
+      "transform": {
+        "read-only": "read-only",
+        "workspace": "workspace-write",
+        "unrestricted": "danger-full-access"
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "commandNetworkAccess",
+      "key": [
+        "sandbox_workspace_write",
+        "network_access"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Applies to commands in workspace file-access mode."
+    },
+    {
+      "name": "workspace.extraWritableDirectories",
+      "key": [
+        "sandbox_workspace_write",
+        "writable_roots"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "workspace.writeSystemTemporaryFiles",
+      "key": [
+        "sandbox_workspace_write",
+        "exclude_slash_tmp"
+      ],
+      "type": "$type.boolean",
+      "transform": "invert",
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "workspace.writeSessionTemporaryFiles",
+      "key": [
+        "sandbox_workspace_write",
+        "exclude_tmpdir_env_var"
+      ],
+      "type": "$type.boolean",
+      "transform": "invert",
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "credentialStorage",
+      "key": [
+        "cli_auth_credentials_store"
+      ],
+      "type": "$type.enum [ \"file\" \"keyring\" \"automatic\" \"session\" ]",
+      "transform": {
+        "file": "file",
+        "keyring": "keyring",
+        "automatic": "auto",
+        "session": "ephemeral"
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "loginMethod",
+      "key": [
+        "forced_login_method"
+      ],
+      "type": "$type.enum [ \"chatgpt\" \"api-key\" ]",
+      "transform": {
+        "chatgpt": "chatgpt",
+        "api-key": "api"
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "loginWorkspaces",
+      "key": [
+        "forced_chatgpt_workspace_id"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "storeHistory",
+      "key": [
+        "history",
+        "persistence"
+      ],
+      "type": "$type.boolean",
+      "transform": "history",
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "notificationCommand",
+      "key": [
+        "notify"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "sendUsageStatistics",
+      "key": [
+        "analytics",
+        "enabled"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "allowFeedback",
+      "key": [
+        "feedback",
+        "enabled"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "checkForUpdates",
+      "key": [
+        "check_for_update_on_startup"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "environment.loginShells",
+      "key": [
+        "allow_login_shell"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "environment.keepCredentialVariables",
+      "key": [
+        "shell_environment_policy",
+        "ignore_default_excludes"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "agents.enable",
+      "key": [
+        "agents",
+        "enabled"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "agents.reportInterruptions",
+      "key": [
+        "agents",
+        "interrupt_message"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "memories.createFromConversations",
+      "key": [
+        "memories",
+        "generate_memories"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "memories.useForAnswers",
+      "key": [
+        "memories",
+        "use_memories"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "browser.allowHistoryAccess",
+      "key": [
+        "browser_use",
+        "allow_history_access"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "skills.includeInstructions",
+      "key": [
+        "skills",
+        "include_instructions"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "instructionFallbackNames",
+      "key": [
+        "project_doc_fallback_filenames"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Fallback instruction filenames when the normal AGENTS files are absent."
+    },
+    {
+      "name": "projectRootMarkers",
+      "key": [
+        "project_root_markers"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "environment.inherit",
+      "key": [
+        "shell_environment_policy",
+        "inherit"
+      ],
+      "type": "$type.enum [ \"core\" \"all\" \"none\" ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "environment.variables",
+      "key": [
+        "shell_environment_policy",
+        "set"
+      ],
+      "type": "$type.set [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Values are generated into the Nix store; use this for non-secret environment variables."
+    },
+    {
+      "name": "environment.excludeNames",
+      "key": [
+        "shell_environment_policy",
+        "exclude"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Regular expressions for inherited environment variable names to exclude."
+    },
+    {
+      "name": "environment.includeNames",
+      "key": [
+        "shell_environment_policy",
+        "include_only"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Regular expressions limiting inherited environment variable names."
+    },
+    {
+      "name": "agents.defaultModel",
+      "key": [
+        "agents",
+        "default_subagent_model"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "agents.reasoningEffort",
+      "key": [
+        "agents",
+        "default_subagent_reasoning_effort"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "agents.maximumConcurrentAgents",
+      "key": [
+        "agents",
+        "max_concurrent_threads_per_session"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 1,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "agents.maximumDepth",
+      "key": [
+        "agents",
+        "max_depth"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": "Applies to the original agent engine; the newer engine ignores this setting."
+    },
+    {
+      "name": "memories.conversationSummaryModel",
+      "key": [
+        "memories",
+        "extract_model"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "memories.consolidationModel",
+      "key": [
+        "memories",
+        "consolidation_model"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "memories.maximumConversationAgeDays",
+      "key": [
+        "memories",
+        "max_rollout_age_days"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "memories.minimumIdleHours",
+      "key": [
+        "memories",
+        "min_rollout_idle_hours"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "memories.minimumRemainingUsagePercent",
+      "key": [
+        "memories",
+        "min_rate_limit_remaining_percent"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": 100,
+      "note": ""
+    },
+    {
+      "name": "memories.maximumConversationsPerPass",
+      "key": [
+        "memories",
+        "max_rollouts_per_startup"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "memories.maximumUnusedDays",
+      "key": [
+        "memories",
+        "max_unused_days"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "skills.instructionLimitTokens",
+      "key": [
+        "skills",
+        "max_context_tokens"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.animations",
+      "key": [
+        "tui",
+        "animations"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.fullscreenTranscript",
+      "key": [
+        "tui",
+        "fullscreen_transcript"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.rawScrollback",
+      "key": [
+        "tui",
+        "raw_output_mode"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.automaticRecaps",
+      "key": [
+        "tui",
+        "auto_recap"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.startupHints",
+      "key": [
+        "tui",
+        "show_tooltips"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.startInVimMode",
+      "key": [
+        "tui",
+        "vim_mode_default"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.colorStatusItems",
+      "key": [
+        "tui",
+        "status_line_use_colors"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.renderTables",
+      "key": [
+        "tui",
+        "rendering",
+        "tables"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.renderMath",
+      "key": [
+        "tui",
+        "rendering",
+        "math"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.renderDiagrams",
+      "key": [
+        "tui",
+        "rendering",
+        "mermaid"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.renderLists",
+      "key": [
+        "tui",
+        "rendering",
+        "lists"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.syntaxTheme",
+      "key": [
+        "tui",
+        "theme"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.alternateScreen",
+      "key": [
+        "tui",
+        "alternate_screen"
+      ],
+      "type": "$type.enum [ \"automatic\" \"always\" \"never\" ]",
+      "transform": {
+        "automatic": "auto",
+        "always": "always",
+        "never": "never"
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.copySelection",
+      "key": [
+        "tui",
+        "copy_on_select"
+      ],
+      "type": "$type.enum [ \"automatic\" \"always\" \"never\" ]",
+      "transform": {
+        "automatic": "auto",
+        "always": "always",
+        "never": "never"
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.rightClickPaste",
+      "key": [
+        "tui",
+        "right_click_paste"
+      ],
+      "type": "$type.enum [ \"automatic\" \"always\" \"never\" ]",
+      "transform": {
+        "automatic": "auto",
+        "always": "on",
+        "never": "off"
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.groupPastedText",
+      "key": [
+        "tui",
+        "disable_paste_burst"
+      ],
+      "type": "$type.boolean",
+      "transform": "invert",
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.notifications",
+      "key": [
+        "tui",
+        "notifications"
+      ],
+      "type": "$type.either [ $type.boolean ($type.list [ $type.string ]) ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "True enables all events, false disables them, or supply event names to select notifications."
+    },
+    {
+      "name": "terminal.notifyWhen",
+      "key": [
+        "tui",
+        "notification_condition"
+      ],
+      "type": "$type.enum [ \"unfocused\" \"always\" ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.notificationDelivery",
+      "key": [
+        "tui",
+        "notification_method"
+      ],
+      "type": "$type.enum [ \"automatic\" \"escape-sequence\" \"bell\" ]",
+      "transform": {
+        "automatic": "auto",
+        "escape-sequence": "osc9",
+        "bell": "bel"
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.statusItems",
+      "key": [
+        "tui",
+        "status_line"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.titleItems",
+      "key": [
+        "tui",
+        "terminal_title"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.resumeDirectory",
+      "key": [
+        "tui",
+        "resume_cwd"
+      ],
+      "type": "$type.enum [ \"current\" \"session\" ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.sessionListDensity",
+      "key": [
+        "tui",
+        "session_picker_view"
+      ],
+      "type": "$type.enum [ \"comfortable\" \"dense\" ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.showReasoningSummaries",
+      "key": [
+        "hide_agent_reasoning"
+      ],
+      "type": "$type.boolean",
+      "transform": "invert",
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.showUnfilteredReasoning",
+      "key": [
+        "show_raw_agent_reasoning"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "terminal.resizeHistoryLines",
+      "key": [
+        "tui",
+        "terminal_resize_reflow_max_rows"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "webSearch",
+      "key": [
+        "web_search"
+      ],
+      "type": "$type.enum [ \"disabled\" \"cached\" \"indexed\" \"live\" ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "fileLinksOpenIn",
+      "key": [
+        "file_opener"
+      ],
+      "type": "$type.enum [ \"none\" \"vscode\" \"vscode-insiders\" \"windsurf\" \"cursor\" ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "toolCredentialStorage",
+      "key": [
+        "mcp_oauth_credentials_store"
+      ],
+      "type": "$type.enum [ \"file\" \"keyring\" \"automatic\" ]",
+      "transform": {
+        "file": "file",
+        "keyring": "keyring",
+        "automatic": "auto"
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "toolLoginCallbackPort",
+      "key": [
+        "mcp_oauth_callback_port"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 1,
+      "maximum": 65535,
+      "note": ""
+    },
+    {
+      "name": "toolLoginCallbackUrl",
+      "key": [
+        "mcp_oauth_callback_url"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "defaultProfile",
+      "key": [
+        "profile"
+      ],
+      "type": "$type.string",
+      "transform": null
+    }
+  ],
+  "select-for-figma": [
+    {
+      "name": "showCreateFileButton",
+      "key": [
+        "app",
+        "visibleNewProjectBtn"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "useSystemFileDialogs",
+      "key": [
+        "app",
+        "useZenity"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Use Zenity system dialogs instead of the built-in Electron dialogs."
+    },
+    {
+      "name": "forceStandardRgb",
+      "key": [
+        "app",
+        "enableColorSpaceSrgb"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Force the sRGB color space. Restart the app to apply this choice."
+    },
+    {
+      "name": "customThemes",
+      "key": [
+        "app",
+        "disableThemes"
+      ],
+      "type": "$type.boolean",
+      "transform": "invert",
+      "minimum": null,
+      "maximum": null,
+      "note": "Allow custom desktop chrome themes; false uses the built-in theme."
+    },
+    {
+      "name": "theme",
+      "key": [
+        "theme",
+        "currentTheme"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Desktop chrome theme identifier. The built-in theme is 0; installed theme files supply other identifiers."
+    },
+    {
+      "name": "restoreOpenFiles",
+      "key": [
+        "app",
+        "saveLastOpenedTabs"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Restore the files that were open when the client last closed."
+    },
+    {
+      "name": "exportDirectory",
+      "key": [
+        "app",
+        "exportDir"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Absolute destination for exports. The directory must be writable by the user."
+    },
+    {
+      "name": "fontSearchDirectories",
+      "key": [
+        "app",
+        "fontDirs"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Directories recursively searched for fonts; include Nix font directories when needed."
+    },
+    {
+      "name": "browserArguments",
+      "key": [
+        "app",
+        "commandSwitches"
+      ],
+      "type": "$type.list [ $type.string ]",
+      "transform": "switches",
+      "minimum": null,
+      "maximum": null,
+      "note": "Chromium arguments such as --enable-gpu-rasterization or --force-device-scale-factor=1. Restart to apply."
+    },
+    {
+      "name": "tabBarHeightPixels",
+      "key": [
+        "app",
+        "panelHeight"
+      ],
+      "type": "$type.int",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "tabBarScale",
+      "key": [
+        "ui",
+        "scalePanel"
+      ],
+      "type": "$type.either [ $type.int $type.float ]",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "canvasInterfaceScale",
+      "key": [
+        "ui",
+        "scaleFigmaUI"
+      ],
+      "type": "$type.either [ $type.int $type.float ]",
+      "transform": null,
+      "minimum": 0,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "logging",
+      "key": [
+        "app",
+        "logLevel"
+      ],
+      "type": "$type.enum [ \"debug\" \"info\" \"warning\" \"error\" ]",
+      "transform": {
+        "debug": 0,
+        "info": 1,
+        "warning": 2,
+        "error": 3
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": ""
+    },
+    {
+      "name": "themeEditor.legacyPreview",
+      "key": [
+        "app",
+        "useOldPreviewer"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Use the older theme preview renderer in the theme editor."
+    }
+  ],
+  "records": {
+    "providers": [
+      "model_providers",
+      [
+        [
+          "displayName",
+          "name",
+          "$type.string"
+        ],
+        [
+          "apiUrl",
+          "base_url",
+          "$type.string"
+        ],
+        [
+          "apiKeyVariable",
+          "env_key",
+          "$type.string"
+        ],
+        [
+          "apiKeyHelp",
+          "env_key_instructions",
+          "$type.string"
+        ],
+        [
+          "headerVariables",
+          "env_http_headers",
+          "$type.set [ $type.string ]"
+        ],
+        [
+          "queryParameters",
+          "query_params",
+          "$type.set [ $type.string ]"
+        ],
+        [
+          "useOpenAiLogin",
+          "requires_openai_auth",
+          "$type.boolean"
+        ],
+        [
+          "websocketTransport",
+          "supports_websockets",
+          "$type.boolean"
+        ],
+        [
+          "requestRetryLimit",
+          "request_max_retries",
+          "$type.int"
+        ],
+        [
+          "streamRetryLimit",
+          "stream_max_retries",
+          "$type.int"
+        ],
+        [
+          "streamIdleTimeoutMilliseconds",
+          "stream_idle_timeout_ms",
+          "$type.int"
+        ],
+        [
+          "connectionTimeoutMilliseconds",
+          "websocket_connect_timeout_ms",
+          "$type.int"
+        ]
+      ]
+    ],
+    "toolServers": [
+      "mcp_servers",
+      [
+        [
+          "enable",
+          "enabled",
+          "$type.boolean"
+        ],
+        [
+          "requiredForStartup",
+          "required",
+          "$type.boolean"
+        ],
+        [
+          "command",
+          "command",
+          "$type.string"
+        ],
+        [
+          "arguments",
+          "args",
+          "$type.list [ $type.string ]"
+        ],
+        [
+          "workingDirectory",
+          "cwd",
+          "$type.string"
+        ],
+        [
+          "serverUrl",
+          "url",
+          "$type.string"
+        ],
+        [
+          "bearerTokenVariable",
+          "bearer_token_env_var",
+          "$type.string"
+        ],
+        [
+          "environmentVariables",
+          "env",
+          "$type.set [ $type.string ]"
+        ],
+        [
+          "inheritedVariables",
+          "env_vars",
+          "$type.list [ $type.string ]"
+        ],
+        [
+          "headerVariables",
+          "env_http_headers",
+          "$type.set [ $type.string ]"
+        ],
+        [
+          "allowedTools",
+          "enabled_tools",
+          "$type.list [ $type.string ]"
+        ],
+        [
+          "blockedTools",
+          "disabled_tools",
+          "$type.list [ $type.string ]"
+        ],
+        [
+          "startupTimeoutSeconds",
+          "startup_timeout_sec",
+          "$type.either [ $type.int $type.float ]"
+        ],
+        [
+          "toolTimeoutSeconds",
+          "tool_timeout_sec",
+          "$type.either [ $type.int $type.float ]"
+        ],
+        [
+          "parallelToolCalls",
+          "supports_parallel_tool_calls",
+          "$type.boolean"
+        ],
+        [
+          "loginScopes",
+          "scopes",
+          "$type.list [ $type.string ]"
+        ]
+      ]
+    ],
+    "profiles": [
+      "profiles",
+      [
+        [
+          "model",
+          "model",
+          "$type.string"
+        ],
+        [
+          "modelProvider",
+          "model_provider",
+          "$type.string"
+        ],
+        [
+          "reasoningEffort",
+          "model_reasoning_effort",
+          "$type.string"
+        ],
+        [
+          "planningReasoningEffort",
+          "plan_mode_reasoning_effort",
+          "$type.string"
+        ],
+        [
+          "answerDetail",
+          "model_verbosity",
+          "$type.enum [ \"low\" \"medium\" \"high\" ]"
+        ],
+        [
+          "responsePriority",
+          "service_tier",
+          "$type.string"
+        ],
+        [
+          "webSearch",
+          "web_search",
+          "$type.enum [ \"disabled\" \"cached\" \"indexed\" \"live\" ]"
+        ],
+        [
+          "instructionFile",
+          "model_instructions_file",
+          "$type.string"
+        ]
+      ]
+    ],
+    "agentRoles": [
+      "agents",
+      [
+        [
+          "purpose",
+          "description",
+          "$type.string"
+        ],
+        [
+          "configurationFile",
+          "config_file",
+          "$type.string"
+        ]
+      ]
+    ]
+  }
+}

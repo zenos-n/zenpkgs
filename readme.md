@@ -6,6 +6,7 @@ See [catalog coverage and verification](docs/package-catalog-expansion.md) and
 the [package path migration](docs/package-layout-migration.md).
 Shell and terminal configuration is covered in the [shell options guide](docs/shell-terminal-options.md).
 Native per-user configuration is covered in the [user options guide](docs/user-options.md).
+Codex and Select for Figma use [native program preferences](docs/application-program-options.md).
 Desktop configuration is covered in the [system, GNOME, and program options guide](docs/desktop-options.md).
 Migration capability coverage and opt-in examples are in the [migration guide](docs/migration-parity.md).
 

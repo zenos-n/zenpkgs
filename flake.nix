@@ -362,7 +362,10 @@
         inherit (nixpkgs) lib;
         inherit inputs self;
       };
-      dslLibrary = { inherit (utils) mkVersionString; };
+      dslLibrary = {
+        inherit (utils) mkVersionString;
+        mkWritableProgramConfig = import ./lib/program-config.nix { inherit (nixpkgs) lib; };
+      };
 
       # --- Package Overlay ---
       zenOverlay =
@@ -648,6 +651,10 @@
             assert nixpkgs.lib.all (value: value) (builtins.attrValues migrationPolicies);
             pkgs.writeText "zenos-migration-options" (builtins.toJSON migrationPolicies);
           migration-packages = import ./tests/migration-packages.nix { inherit pkgs registry; };
+          application-program-options = import ./tests/application-program-options.nix {
+            pkgs = dsl.bootstrapPkgs;
+            sourceRoot = self;
+          };
           migration-options-vm = import ./tests/migration-options-vm.nix {
             pkgs = dsl.bootstrapPkgs;
             zenosModule = self.nixosModules.default;

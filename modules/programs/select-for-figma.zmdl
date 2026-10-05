@@ -1,0 +1,130 @@
+_meta = {
+  name = "Select for Figma configuration"; summary = "Configure Select for Figma";
+  description = ''Install Select for Figma and configure selected preferences while preserving writable application state.'';
+  zenosVersion = 1.0.0Nb; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
+showCreateFileButton._meta = {
+  name = "Show create file button"; summary = "Show create file button";
+  description = ''Show create file button. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+useSystemFileDialogs._meta = {
+  name = "Use system file dialogs"; summary = "Use system file dialogs";
+  description = ''Use system file dialogs. Use Zenity system dialogs instead of the built-in Electron dialogs. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+forceStandardRgb._meta = {
+  name = "Force standard rgb"; summary = "Force standard rgb";
+  description = ''Force standard rgb. Force the sRGB color space. Restart the app to apply this choice. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+customThemes._meta = {
+  name = "Custom themes"; summary = "Custom themes";
+  description = ''Custom themes. Allow custom desktop chrome themes; false uses the built-in theme. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+theme._meta = {
+  name = "Theme"; summary = "Theme";
+  description = ''Theme. Desktop chrome theme identifier. The built-in theme is 0; installed theme files supply other identifiers. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+restoreOpenFiles._meta = {
+  name = "Restore open files"; summary = "Restore open files";
+  description = ''Restore open files. Restore the files that were open when the client last closed. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+exportDirectory._meta = {
+  name = "Export directory"; summary = "Export directory";
+  description = ''Export directory. Absolute destination for exports. The directory must be writable by the user. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+fontSearchDirectories._meta = {
+  name = "Font search directories"; summary = "Font search directories";
+  description = ''Font search directories. Directories recursively searched for fonts; include Nix font directories when needed. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+browserArguments._meta = {
+  name = "Browser arguments"; summary = "Browser arguments";
+  description = ''Browser arguments. Chromium arguments such as --enable-gpu-rasterization or --force-device-scale-factor=1. Restart to apply. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+tabBarHeightPixels._meta = {
+  name = "Tab bar height pixels"; summary = "Tab bar height pixels";
+  description = ''Tab bar height pixels. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+tabBarScale._meta = {
+  name = "Tab bar scale"; summary = "Tab bar scale";
+  description = ''Tab bar scale. Null preserves the existing preference.'';
+  type = $type.either [ ($type.either [ $type.int $type.float ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+canvasInterfaceScale._meta = {
+  name = "Canvas interface scale"; summary = "Canvas interface scale";
+  description = ''Canvas interface scale. Null preserves the existing preference.'';
+  type = $type.either [ ($type.either [ $type.int $type.float ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+logging._meta = {
+  name = "Logging"; summary = "Logging";
+  description = ''Logging. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "debug" "info" "warning" "error" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+themeEditor.legacyPreview._meta = {
+  name = "Legacy preview"; summary = "Legacy preview";
+  description = ''Legacy preview. Use the older theme preview renderer in the theme editor. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
+themeEditor._meta = { name = "Themeeditor preferences"; summary = "Themeeditor preferences"; description = ''Selected themeEditor preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+
+_let preferences: $type.list [ $type.set ] =
+    ($lib.optional ($path.showCreateFileButton != null) { path = [ "app" "visibleNewProjectBtn" ]; value = $path.showCreateFileButton; }) ++
+    ($lib.optional ($path.useSystemFileDialogs != null) { path = [ "app" "useZenity" ]; value = $path.useSystemFileDialogs; }) ++
+    ($lib.optional ($path.forceStandardRgb != null) { path = [ "app" "enableColorSpaceSrgb" ]; value = $path.forceStandardRgb; }) ++
+    ($lib.optional ($path.customThemes != null) { path = [ "app" "disableThemes" ]; value = (!$path.customThemes); }) ++
+    ($lib.optional ($path.theme != null) { path = [ "theme" "currentTheme" ]; value = $path.theme; }) ++
+    ($lib.optional ($path.restoreOpenFiles != null) { path = [ "app" "saveLastOpenedTabs" ]; value = $path.restoreOpenFiles; }) ++
+    ($lib.optional ($path.exportDirectory != null) { path = [ "app" "exportDir" ]; value = $path.exportDirectory; }) ++
+    ($lib.optional ($path.fontSearchDirectories != null) { path = [ "app" "fontDirs" ]; value = $path.fontSearchDirectories; }) ++
+    ($lib.optional ($path.browserArguments != null) { path = [ "app" "commandSwitches" ]; value = ($lib.map (argument: let parts = $lib.splitString "=" ($lib.removePrefix "--" argument); in
+ { switch = $lib.head parts; } // ($lib.optionalAttrs ($lib.length parts > 1) { value = $lib.concatStringsSep "=" ($lib.tail parts); })) $path.browserArguments); }) ++
+    ($lib.optional ($path.tabBarHeightPixels != null) { path = [ "app" "panelHeight" ]; value = $path.tabBarHeightPixels; }) ++
+    ($lib.optional ($path.tabBarScale != null) { path = [ "ui" "scalePanel" ]; value = $path.tabBarScale; }) ++
+    ($lib.optional ($path.canvasInterfaceScale != null) { path = [ "ui" "scaleFigmaUI" ]; value = $path.canvasInterfaceScale; }) ++
+    ($lib.optional ($path.logging != null) { path = [ "app" "logLevel" ]; value = ($lib.getAttr $path.logging { "debug" = 0; "info" = 1; "warning" = 2; "error" = 3; }); }) ++
+    ($lib.optional ($path.themeEditor.legacyPreview != null) { path = [ "app" "useOldPreviewer" ]; value = $path.themeEditor.legacyPreview; });
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Select for Figma"; summary = "Install and configure Select for Figma";
+    description = ''Enable this program for the selected user scope. Restart running instances after applying preferences.'';
+    tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.apps.graphics.select-for-figma ];
+    home.activation.zenosSelectforFigmaPreferences = $lib.mkWritableProgramConfig {
+      pkgs = $pkgs.legacy; application = "select-for-figma"; assignments = $v.preferences;
+    };
+    assertions = [
+      { assertion = $path.tabBarHeightPixels == null || ($path.tabBarHeightPixels >= 0); message = "Select for Figma: tabBarHeightPixels is outside its supported range."; }
+      { assertion = $path.tabBarScale == null || ($path.tabBarScale > 0); message = "Select for Figma: tabBarScale is outside its supported range."; }
+      { assertion = $path.canvasInterfaceScale == null || ($path.canvasInterfaceScale > 0); message = "Select for Figma: canvasInterfaceScale is outside its supported range."; }
+      { assertion = $path.exportDirectory == null || $lib.hasPrefix "/" $path.exportDirectory; message = "Select for Figma: exportDirectory must be an absolute path."; }
+      { assertion = $path.browserArguments == null || $lib.all (argument: $lib.hasPrefix "--" argument && $lib.stringLength argument > 2) $path.browserArguments; message = "Select for Figma: browserArguments must start with -- and contain a switch name."; }
+    ];
+  };
+};

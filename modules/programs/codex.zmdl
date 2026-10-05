@@ -1,0 +1,1012 @@
+_meta = {
+  name = "Codex configuration"; summary = "Configure Codex";
+  description = ''Install Codex and configure selected preferences while preserving writable application state.'';
+  zenosVersion = 1.0.0Nb; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
+model._meta = {
+  name = "Model"; summary = "Model";
+  description = ''Model. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+reviewModel._meta = {
+  name = "Review model"; summary = "Review model";
+  description = ''Review model. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+reasoningEffort._meta = {
+  name = "Reasoning effort"; summary = "Reasoning effort";
+  description = ''Reasoning effort. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+planningReasoningEffort._meta = {
+  name = "Planning reasoning effort"; summary = "Planning reasoning effort";
+  description = ''Planning reasoning effort. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+responsePriority._meta = {
+  name = "Response priority"; summary = "Response priority";
+  description = ''Response priority. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+modelProvider._meta = {
+  name = "Model provider"; summary = "Model provider";
+  description = ''Model provider. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+instructionFile._meta = {
+  name = "Instruction file"; summary = "Instruction file";
+  description = ''Instruction file. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+extraInstructions._meta = {
+  name = "Extra instructions"; summary = "Extra instructions";
+  description = ''Extra instructions. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+logDirectory._meta = {
+  name = "Log directory"; summary = "Log directory";
+  description = ''Log directory. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+reasoningSummary._meta = {
+  name = "Reasoning summary"; summary = "Reasoning summary";
+  description = ''Reasoning summary. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "auto" "concise" "detailed" "none" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+answerDetail._meta = {
+  name = "Answer detail"; summary = "Answer detail";
+  description = ''Answer detail. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "low" "medium" "high" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+localModelServer._meta = {
+  name = "Local model server"; summary = "Local model server";
+  description = ''Local model server. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "ollama" "lmstudio" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+contextWindowTokens._meta = {
+  name = "Context window tokens"; summary = "Context window tokens";
+  description = ''Context window tokens. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+compactAfterTokens._meta = {
+  name = "Compact after tokens"; summary = "Compact after tokens";
+  description = ''Compact after tokens. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+compactAfterReplyPercent._meta = {
+  name = "Compact after reply percent"; summary = "Compact after reply percent";
+  description = ''Compact after reply percent. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+instructionLimitBytes._meta = {
+  name = "Instruction limit bytes"; summary = "Instruction limit bytes";
+  description = ''Instruction limit bytes. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+tools.outputLimitTokens._meta = {
+  name = "Output limit tokens"; summary = "Output limit tokens";
+  description = ''Output limit tokens. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+tools.backgroundPollLimitMilliseconds._meta = {
+  name = "Background poll limit milliseconds"; summary = "Background poll limit milliseconds";
+  description = ''Background poll limit milliseconds. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+tools.optionalServerWaitMilliseconds._meta = {
+  name = "Optional server wait milliseconds"; summary = "Optional server wait milliseconds";
+  description = ''Optional server wait milliseconds. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+historyLimitBytes._meta = {
+  name = "History limit bytes"; summary = "History limit bytes";
+  description = ''History limit bytes. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+commandApproval._meta = {
+  name = "Command approval"; summary = "Command approval";
+  description = ''Command approval. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "ask-when-needed" "never" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+fileAccess._meta = {
+  name = "File access"; summary = "File access";
+  description = ''File access. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "read-only" "workspace" "unrestricted" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+commandNetworkAccess._meta = {
+  name = "Command network access"; summary = "Command network access";
+  description = ''Command network access. Applies to commands in workspace file-access mode. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+workspace.extraWritableDirectories._meta = {
+  name = "Extra writable directories"; summary = "Extra writable directories";
+  description = ''Extra writable directories. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+workspace.writeSystemTemporaryFiles._meta = {
+  name = "Write system temporary files"; summary = "Write system temporary files";
+  description = ''Write system temporary files. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+workspace.writeSessionTemporaryFiles._meta = {
+  name = "Write session temporary files"; summary = "Write session temporary files";
+  description = ''Write session temporary files. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+credentialStorage._meta = {
+  name = "Credential storage"; summary = "Credential storage";
+  description = ''Credential storage. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "file" "keyring" "automatic" "session" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+loginMethod._meta = {
+  name = "Login method"; summary = "Login method";
+  description = ''Login method. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "chatgpt" "api-key" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+loginWorkspaces._meta = {
+  name = "Login workspaces"; summary = "Login workspaces";
+  description = ''Login workspaces. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+storeHistory._meta = {
+  name = "Store history"; summary = "Store history";
+  description = ''Store history. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+notificationCommand._meta = {
+  name = "Notification command"; summary = "Notification command";
+  description = ''Notification command. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+sendUsageStatistics._meta = {
+  name = "Send usage statistics"; summary = "Send usage statistics";
+  description = ''Send usage statistics. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+allowFeedback._meta = {
+  name = "Allow feedback"; summary = "Allow feedback";
+  description = ''Allow feedback. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+checkForUpdates._meta = {
+  name = "Check for updates"; summary = "Check for updates";
+  description = ''Check for updates. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+environment.loginShells._meta = {
+  name = "Login shells"; summary = "Login shells";
+  description = ''Login shells. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+environment.keepCredentialVariables._meta = {
+  name = "Keep credential variables"; summary = "Keep credential variables";
+  description = ''Keep credential variables. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+agents.enable._meta = {
+  name = "Enable"; summary = "Enable";
+  description = ''Enable. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+agents.reportInterruptions._meta = {
+  name = "Report interruptions"; summary = "Report interruptions";
+  description = ''Report interruptions. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+memories.createFromConversations._meta = {
+  name = "Create from conversations"; summary = "Create from conversations";
+  description = ''Create from conversations. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+memories.useForAnswers._meta = {
+  name = "Use for answers"; summary = "Use for answers";
+  description = ''Use for answers. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+browser.allowHistoryAccess._meta = {
+  name = "Allow history access"; summary = "Allow history access";
+  description = ''Allow history access. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+skills.includeInstructions._meta = {
+  name = "Include instructions"; summary = "Include instructions";
+  description = ''Include instructions. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+instructionFallbackNames._meta = {
+  name = "Instruction fallback names"; summary = "Instruction fallback names";
+  description = ''Instruction fallback names. Fallback instruction filenames when the normal AGENTS files are absent. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+projectRootMarkers._meta = {
+  name = "Project root markers"; summary = "Project root markers";
+  description = ''Project root markers. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+environment.inherit._meta = {
+  name = "Inherit"; summary = "Inherit";
+  description = ''Inherit. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "core" "all" "none" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+environment.variables._meta = {
+  name = "Variables"; summary = "Variables";
+  description = ''Variables. Values are generated into the Nix store; use this for non-secret environment variables. Null preserves the existing preference.'';
+  type = $type.either [ ($type.set [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+environment.excludeNames._meta = {
+  name = "Exclude names"; summary = "Exclude names";
+  description = ''Exclude names. Regular expressions for inherited environment variable names to exclude. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+environment.includeNames._meta = {
+  name = "Include names"; summary = "Include names";
+  description = ''Include names. Regular expressions limiting inherited environment variable names. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+agents.defaultModel._meta = {
+  name = "Default model"; summary = "Default model";
+  description = ''Default model. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+agents.reasoningEffort._meta = {
+  name = "Reasoning effort"; summary = "Reasoning effort";
+  description = ''Reasoning effort. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+agents.maximumConcurrentAgents._meta = {
+  name = "Maximum concurrent agents"; summary = "Maximum concurrent agents";
+  description = ''Maximum concurrent agents. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+agents.maximumDepth._meta = {
+  name = "Maximum depth"; summary = "Maximum depth";
+  description = ''Maximum depth. Applies to the original agent engine; the newer engine ignores this setting. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+memories.conversationSummaryModel._meta = {
+  name = "Conversation summary model"; summary = "Conversation summary model";
+  description = ''Conversation summary model. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+memories.consolidationModel._meta = {
+  name = "Consolidation model"; summary = "Consolidation model";
+  description = ''Consolidation model. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+memories.maximumConversationAgeDays._meta = {
+  name = "Maximum conversation age days"; summary = "Maximum conversation age days";
+  description = ''Maximum conversation age days. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+memories.minimumIdleHours._meta = {
+  name = "Minimum idle hours"; summary = "Minimum idle hours";
+  description = ''Minimum idle hours. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+memories.minimumRemainingUsagePercent._meta = {
+  name = "Minimum remaining usage percent"; summary = "Minimum remaining usage percent";
+  description = ''Minimum remaining usage percent. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+memories.maximumConversationsPerPass._meta = {
+  name = "Maximum conversations per pass"; summary = "Maximum conversations per pass";
+  description = ''Maximum conversations per pass. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+memories.maximumUnusedDays._meta = {
+  name = "Maximum unused days"; summary = "Maximum unused days";
+  description = ''Maximum unused days. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+skills.instructionLimitTokens._meta = {
+  name = "Instruction limit tokens"; summary = "Instruction limit tokens";
+  description = ''Instruction limit tokens. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.animations._meta = {
+  name = "Animations"; summary = "Animations";
+  description = ''Animations. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.fullscreenTranscript._meta = {
+  name = "Fullscreen transcript"; summary = "Fullscreen transcript";
+  description = ''Fullscreen transcript. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.rawScrollback._meta = {
+  name = "Raw scrollback"; summary = "Raw scrollback";
+  description = ''Raw scrollback. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.automaticRecaps._meta = {
+  name = "Automatic recaps"; summary = "Automatic recaps";
+  description = ''Automatic recaps. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.startupHints._meta = {
+  name = "Startup hints"; summary = "Startup hints";
+  description = ''Startup hints. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.startInVimMode._meta = {
+  name = "Start in vim mode"; summary = "Start in vim mode";
+  description = ''Start in vim mode. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.colorStatusItems._meta = {
+  name = "Color status items"; summary = "Color status items";
+  description = ''Color status items. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.renderTables._meta = {
+  name = "Render tables"; summary = "Render tables";
+  description = ''Render tables. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.renderMath._meta = {
+  name = "Render math"; summary = "Render math";
+  description = ''Render math. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.renderDiagrams._meta = {
+  name = "Render diagrams"; summary = "Render diagrams";
+  description = ''Render diagrams. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.renderLists._meta = {
+  name = "Render lists"; summary = "Render lists";
+  description = ''Render lists. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.syntaxTheme._meta = {
+  name = "Syntax theme"; summary = "Syntax theme";
+  description = ''Syntax theme. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.alternateScreen._meta = {
+  name = "Alternate screen"; summary = "Alternate screen";
+  description = ''Alternate screen. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "automatic" "always" "never" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.copySelection._meta = {
+  name = "Copy selection"; summary = "Copy selection";
+  description = ''Copy selection. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "automatic" "always" "never" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.rightClickPaste._meta = {
+  name = "Right click paste"; summary = "Right click paste";
+  description = ''Right click paste. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "automatic" "always" "never" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.groupPastedText._meta = {
+  name = "Group pasted text"; summary = "Group pasted text";
+  description = ''Group pasted text. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.notifications._meta = {
+  name = "Notifications"; summary = "Notifications";
+  description = ''Notifications. True enables all events, false disables them, or supply event names to select notifications. Null preserves the existing preference.'';
+  type = $type.either [ ($type.either [ $type.boolean ($type.list [ $type.string ]) ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.notifyWhen._meta = {
+  name = "Notify when"; summary = "Notify when";
+  description = ''Notify when. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "unfocused" "always" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.notificationDelivery._meta = {
+  name = "Notification delivery"; summary = "Notification delivery";
+  description = ''Notification delivery. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "automatic" "escape-sequence" "bell" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.statusItems._meta = {
+  name = "Status items"; summary = "Status items";
+  description = ''Status items. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.titleItems._meta = {
+  name = "Title items"; summary = "Title items";
+  description = ''Title items. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.resumeDirectory._meta = {
+  name = "Resume directory"; summary = "Resume directory";
+  description = ''Resume directory. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "current" "session" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.sessionListDensity._meta = {
+  name = "Session list density"; summary = "Session list density";
+  description = ''Session list density. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "comfortable" "dense" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.showReasoningSummaries._meta = {
+  name = "Show reasoning summaries"; summary = "Show reasoning summaries";
+  description = ''Show reasoning summaries. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.showUnfilteredReasoning._meta = {
+  name = "Show unfiltered reasoning"; summary = "Show unfiltered reasoning";
+  description = ''Show unfiltered reasoning. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+terminal.resizeHistoryLines._meta = {
+  name = "Resize history lines"; summary = "Resize history lines";
+  description = ''Resize history lines. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+webSearch._meta = {
+  name = "Web search"; summary = "Web search";
+  description = ''Web search. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "disabled" "cached" "indexed" "live" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+fileLinksOpenIn._meta = {
+  name = "File links open in"; summary = "File links open in";
+  description = ''File links open in. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "none" "vscode" "vscode-insiders" "windsurf" "cursor" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+toolCredentialStorage._meta = {
+  name = "Tool credential storage"; summary = "Tool credential storage";
+  description = ''Tool credential storage. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "file" "keyring" "automatic" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+toolLoginCallbackPort._meta = {
+  name = "Tool login callback port"; summary = "Tool login callback port";
+  description = ''Tool login callback port. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+toolLoginCallbackUrl._meta = {
+  name = "Tool login callback url"; summary = "Tool login callback url";
+  description = ''Tool login callback url. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+stateDirectory._meta = {
+  name = "State directory"; summary = "State directory";
+  description = ''State directory. Absolute directory for Codex settings, authentication and sessions. Sets CODEX_HOME. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+defaultProfile._meta = {
+  name = "Default profile"; summary = "Default profile";
+  description = ''Default profile. Select a named configuration profile at startup. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
+providers = {
+  _meta = { name = "Providers"; summary = "Providers"; description = ''Named providers configured with behavioral option names.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+  (freeform entry) = {
+    _meta = { name = "Named entry"; summary = "Named entry"; description = ''A named configuration entry. Unset fields preserve existing values.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+    displayName._meta = {
+  name = "Display name"; summary = "Display name";
+  description = ''Display name. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    apiUrl._meta = {
+  name = "Api url"; summary = "Api url";
+  description = ''Api url. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    apiKeyVariable._meta = {
+  name = "Api key variable"; summary = "Api key variable";
+  description = ''Api key variable. Values are public Nix configuration; reference environment variables for credentials. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    apiKeyHelp._meta = {
+  name = "Api key help"; summary = "Api key help";
+  description = ''Api key help. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    headerVariables._meta = {
+  name = "Header variables"; summary = "Header variables";
+  description = ''Header variables. Values are public Nix configuration; reference environment variables for credentials. Null preserves the existing preference.'';
+  type = $type.either [ ($type.set [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    queryParameters._meta = {
+  name = "Query parameters"; summary = "Query parameters";
+  description = ''Query parameters. Null preserves the existing preference.'';
+  type = $type.either [ ($type.set [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    useOpenAiLogin._meta = {
+  name = "Use open ai login"; summary = "Use open ai login";
+  description = ''Use open ai login. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    websocketTransport._meta = {
+  name = "Websocket transport"; summary = "Websocket transport";
+  description = ''Websocket transport. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    requestRetryLimit._meta = {
+  name = "Request retry limit"; summary = "Request retry limit";
+  description = ''Request retry limit. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    streamRetryLimit._meta = {
+  name = "Stream retry limit"; summary = "Stream retry limit";
+  description = ''Stream retry limit. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    streamIdleTimeoutMilliseconds._meta = {
+  name = "Stream idle timeout milliseconds"; summary = "Stream idle timeout milliseconds";
+  description = ''Stream idle timeout milliseconds. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    connectionTimeoutMilliseconds._meta = {
+  name = "Connection timeout milliseconds"; summary = "Connection timeout milliseconds";
+  description = ''Connection timeout milliseconds. Null preserves the existing preference.'';
+  type = $type.either [ ($type.int) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+  };
+};
+
+toolServers = {
+  _meta = { name = "Tool servers"; summary = "Tool servers"; description = ''Named toolServers configured with behavioral option names.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+  (freeform entry) = {
+    _meta = { name = "Named entry"; summary = "Named entry"; description = ''A named configuration entry. Unset fields preserve existing values.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+    enable._meta = {
+  name = "Enable"; summary = "Enable";
+  description = ''Enable. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    requiredForStartup._meta = {
+  name = "Required for startup"; summary = "Required for startup";
+  description = ''Required for startup. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    command._meta = {
+  name = "Command"; summary = "Command";
+  description = ''Command. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    arguments._meta = {
+  name = "Arguments"; summary = "Arguments";
+  description = ''Arguments. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    workingDirectory._meta = {
+  name = "Working directory"; summary = "Working directory";
+  description = ''Working directory. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    serverUrl._meta = {
+  name = "Server url"; summary = "Server url";
+  description = ''Server url. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    bearerTokenVariable._meta = {
+  name = "Bearer token variable"; summary = "Bearer token variable";
+  description = ''Bearer token variable. Values are public Nix configuration; reference environment variables for credentials. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    environmentVariables._meta = {
+  name = "Environment variables"; summary = "Environment variables";
+  description = ''Environment variables. Values are public Nix configuration; reference environment variables for credentials. Null preserves the existing preference.'';
+  type = $type.either [ ($type.set [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    inheritedVariables._meta = {
+  name = "Inherited variables"; summary = "Inherited variables";
+  description = ''Inherited variables. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    headerVariables._meta = {
+  name = "Header variables"; summary = "Header variables";
+  description = ''Header variables. Values are public Nix configuration; reference environment variables for credentials. Null preserves the existing preference.'';
+  type = $type.either [ ($type.set [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    allowedTools._meta = {
+  name = "Allowed tools"; summary = "Allowed tools";
+  description = ''Allowed tools. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    blockedTools._meta = {
+  name = "Blocked tools"; summary = "Blocked tools";
+  description = ''Blocked tools. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    startupTimeoutSeconds._meta = {
+  name = "Startup timeout seconds"; summary = "Startup timeout seconds";
+  description = ''Startup timeout seconds. Null preserves the existing preference.'';
+  type = $type.either [ ($type.either [ $type.int $type.float ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    toolTimeoutSeconds._meta = {
+  name = "Tool timeout seconds"; summary = "Tool timeout seconds";
+  description = ''Tool timeout seconds. Null preserves the existing preference.'';
+  type = $type.either [ ($type.either [ $type.int $type.float ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    parallelToolCalls._meta = {
+  name = "Parallel tool calls"; summary = "Parallel tool calls";
+  description = ''Parallel tool calls. Null preserves the existing preference.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    loginScopes._meta = {
+  name = "Login scopes"; summary = "Login scopes";
+  description = ''Login scopes. Null preserves the existing preference.'';
+  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+  };
+};
+
+profiles = {
+  _meta = { name = "Profiles"; summary = "Profiles"; description = ''Named profiles configured with behavioral option names.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+  (freeform entry) = {
+    _meta = { name = "Named entry"; summary = "Named entry"; description = ''A named configuration entry. Unset fields preserve existing values.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+    model._meta = {
+  name = "Model"; summary = "Model";
+  description = ''Model. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    modelProvider._meta = {
+  name = "Model provider"; summary = "Model provider";
+  description = ''Model provider. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    reasoningEffort._meta = {
+  name = "Reasoning effort"; summary = "Reasoning effort";
+  description = ''Reasoning effort. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    planningReasoningEffort._meta = {
+  name = "Planning reasoning effort"; summary = "Planning reasoning effort";
+  description = ''Planning reasoning effort. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    answerDetail._meta = {
+  name = "Answer detail"; summary = "Answer detail";
+  description = ''Answer detail. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "low" "medium" "high" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    responsePriority._meta = {
+  name = "Response priority"; summary = "Response priority";
+  description = ''Response priority. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    webSearch._meta = {
+  name = "Web search"; summary = "Web search";
+  description = ''Web search. Null preserves the existing preference.'';
+  type = $type.either [ ($type.enum [ "disabled" "cached" "indexed" "live" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    instructionFile._meta = {
+  name = "Instruction file"; summary = "Instruction file";
+  description = ''Instruction file. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+  };
+};
+
+agentRoles = {
+  _meta = { name = "Agent roles"; summary = "Agent roles"; description = ''Named agentRoles configured with behavioral option names.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+  (freeform entry) = {
+    _meta = { name = "Named entry"; summary = "Named entry"; description = ''A named configuration entry. Unset fields preserve existing values.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+    purpose._meta = {
+  name = "Purpose"; summary = "Purpose";
+  description = ''Purpose. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+    configurationFile._meta = {
+  name = "Configuration file"; summary = "Configuration file";
+  description = ''Configuration file. Null preserves the existing preference.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+  };
+};
+
+agents._meta = { name = "Agents preferences"; summary = "Agents preferences"; description = ''Selected agents preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+browser._meta = { name = "Browser preferences"; summary = "Browser preferences"; description = ''Selected browser preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+environment._meta = { name = "Environment preferences"; summary = "Environment preferences"; description = ''Selected environment preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+memories._meta = { name = "Memories preferences"; summary = "Memories preferences"; description = ''Selected memories preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+skills._meta = { name = "Skills preferences"; summary = "Skills preferences"; description = ''Selected skills preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+terminal._meta = { name = "Terminal preferences"; summary = "Terminal preferences"; description = ''Selected terminal preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+tools._meta = { name = "Tools preferences"; summary = "Tools preferences"; description = ''Selected tools preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+workspace._meta = { name = "Workspace preferences"; summary = "Workspace preferences"; description = ''Selected workspace preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+
+_let preferences: $type.list [ $type.set ] =
+    ($lib.optional ($path.model != null) { path = [ "model" ]; value = $path.model; }) ++
+    ($lib.optional ($path.reviewModel != null) { path = [ "review_model" ]; value = $path.reviewModel; }) ++
+    ($lib.optional ($path.reasoningEffort != null) { path = [ "model_reasoning_effort" ]; value = $path.reasoningEffort; }) ++
+    ($lib.optional ($path.planningReasoningEffort != null) { path = [ "plan_mode_reasoning_effort" ]; value = $path.planningReasoningEffort; }) ++
+    ($lib.optional ($path.responsePriority != null) { path = [ "service_tier" ]; value = $path.responsePriority; }) ++
+    ($lib.optional ($path.modelProvider != null) { path = [ "model_provider" ]; value = $path.modelProvider; }) ++
+    ($lib.optional ($path.instructionFile != null) { path = [ "model_instructions_file" ]; value = $path.instructionFile; }) ++
+    ($lib.optional ($path.extraInstructions != null) { path = [ "developer_instructions" ]; value = $path.extraInstructions; }) ++
+    ($lib.optional ($path.logDirectory != null) { path = [ "log_dir" ]; value = $path.logDirectory; }) ++
+    ($lib.optional ($path.reasoningSummary != null) { path = [ "model_reasoning_summary" ]; value = $path.reasoningSummary; }) ++
+    ($lib.optional ($path.answerDetail != null) { path = [ "model_verbosity" ]; value = $path.answerDetail; }) ++
+    ($lib.optional ($path.localModelServer != null) { path = [ "oss_provider" ]; value = $path.localModelServer; }) ++
+    ($lib.optional ($path.contextWindowTokens != null) { path = [ "model_context_window" ]; value = $path.contextWindowTokens; }) ++
+    ($lib.optional ($path.compactAfterTokens != null) { path = [ "model_auto_compact_token_limit" ]; value = $path.compactAfterTokens; }) ++
+    ($lib.optional ($path.compactAfterReplyPercent != null) { path = [ "model_post_turn_compact_threshold_percent" ]; value = $path.compactAfterReplyPercent; }) ++
+    ($lib.optional ($path.instructionLimitBytes != null) { path = [ "project_doc_max_bytes" ]; value = $path.instructionLimitBytes; }) ++
+    ($lib.optional ($path.tools.outputLimitTokens != null) { path = [ "tool_output_token_limit" ]; value = $path.tools.outputLimitTokens; }) ++
+    ($lib.optional ($path.tools.backgroundPollLimitMilliseconds != null) { path = [ "background_terminal_max_timeout" ]; value = $path.tools.backgroundPollLimitMilliseconds; }) ++
+    ($lib.optional ($path.tools.optionalServerWaitMilliseconds != null) { path = [ "mcp_optional_startup_grace_ms" ]; value = $path.tools.optionalServerWaitMilliseconds; }) ++
+    ($lib.optional ($path.historyLimitBytes != null) { path = [ "history" "max_bytes" ]; value = $path.historyLimitBytes; }) ++
+    ($lib.optional ($path.commandApproval != null) { path = [ "approval_policy" ]; value = ($lib.getAttr $path.commandApproval { "ask-when-needed" = "on-request"; "never" = "never"; }); }) ++
+    ($lib.optional ($path.fileAccess != null) { path = [ "sandbox_mode" ]; value = ($lib.getAttr $path.fileAccess { "read-only" = "read-only"; "workspace" = "workspace-write"; "unrestricted" = "danger-full-access"; }); }) ++
+    ($lib.optional ($path.commandNetworkAccess != null) { path = [ "sandbox_workspace_write" "network_access" ]; value = $path.commandNetworkAccess; }) ++
+    ($lib.optional ($path.workspace.extraWritableDirectories != null) { path = [ "sandbox_workspace_write" "writable_roots" ]; value = $path.workspace.extraWritableDirectories; }) ++
+    ($lib.optional ($path.workspace.writeSystemTemporaryFiles != null) { path = [ "sandbox_workspace_write" "exclude_slash_tmp" ]; value = (!$path.workspace.writeSystemTemporaryFiles); }) ++
+    ($lib.optional ($path.workspace.writeSessionTemporaryFiles != null) { path = [ "sandbox_workspace_write" "exclude_tmpdir_env_var" ]; value = (!$path.workspace.writeSessionTemporaryFiles); }) ++
+    ($lib.optional ($path.credentialStorage != null) { path = [ "cli_auth_credentials_store" ]; value = ($lib.getAttr $path.credentialStorage { "file" = "file"; "keyring" = "keyring"; "automatic" = "auto"; "session" = "ephemeral"; }); }) ++
+    ($lib.optional ($path.loginMethod != null) { path = [ "forced_login_method" ]; value = ($lib.getAttr $path.loginMethod { "chatgpt" = "chatgpt"; "api-key" = "api"; }); }) ++
+    ($lib.optional ($path.loginWorkspaces != null) { path = [ "forced_chatgpt_workspace_id" ]; value = $path.loginWorkspaces; }) ++
+    ($lib.optional ($path.storeHistory != null) { path = [ "history" "persistence" ]; value = (if $path.storeHistory then "save-all" else "none"); }) ++
+    ($lib.optional ($path.notificationCommand != null) { path = [ "notify" ]; value = $path.notificationCommand; }) ++
+    ($lib.optional ($path.sendUsageStatistics != null) { path = [ "analytics" "enabled" ]; value = $path.sendUsageStatistics; }) ++
+    ($lib.optional ($path.allowFeedback != null) { path = [ "feedback" "enabled" ]; value = $path.allowFeedback; }) ++
+    ($lib.optional ($path.checkForUpdates != null) { path = [ "check_for_update_on_startup" ]; value = $path.checkForUpdates; }) ++
+    ($lib.optional ($path.environment.loginShells != null) { path = [ "allow_login_shell" ]; value = $path.environment.loginShells; }) ++
+    ($lib.optional ($path.environment.keepCredentialVariables != null) { path = [ "shell_environment_policy" "ignore_default_excludes" ]; value = $path.environment.keepCredentialVariables; }) ++
+    ($lib.optional ($path.agents.enable != null) { path = [ "agents" "enabled" ]; value = $path.agents.enable; }) ++
+    ($lib.optional ($path.agents.reportInterruptions != null) { path = [ "agents" "interrupt_message" ]; value = $path.agents.reportInterruptions; }) ++
+    ($lib.optional ($path.memories.createFromConversations != null) { path = [ "memories" "generate_memories" ]; value = $path.memories.createFromConversations; }) ++
+    ($lib.optional ($path.memories.useForAnswers != null) { path = [ "memories" "use_memories" ]; value = $path.memories.useForAnswers; }) ++
+    ($lib.optional ($path.browser.allowHistoryAccess != null) { path = [ "browser_use" "allow_history_access" ]; value = $path.browser.allowHistoryAccess; }) ++
+    ($lib.optional ($path.skills.includeInstructions != null) { path = [ "skills" "include_instructions" ]; value = $path.skills.includeInstructions; }) ++
+    ($lib.optional ($path.instructionFallbackNames != null) { path = [ "project_doc_fallback_filenames" ]; value = $path.instructionFallbackNames; }) ++
+    ($lib.optional ($path.projectRootMarkers != null) { path = [ "project_root_markers" ]; value = $path.projectRootMarkers; }) ++
+    ($lib.optional ($path.environment.inherit != null) { path = [ "shell_environment_policy" "inherit" ]; value = $path.environment.inherit; }) ++
+    ($lib.optional ($path.environment.variables != null) { path = [ "shell_environment_policy" "set" ]; value = $path.environment.variables; }) ++
+    ($lib.optional ($path.environment.excludeNames != null) { path = [ "shell_environment_policy" "exclude" ]; value = $path.environment.excludeNames; }) ++
+    ($lib.optional ($path.environment.includeNames != null) { path = [ "shell_environment_policy" "include_only" ]; value = $path.environment.includeNames; }) ++
+    ($lib.optional ($path.agents.defaultModel != null) { path = [ "agents" "default_subagent_model" ]; value = $path.agents.defaultModel; }) ++
+    ($lib.optional ($path.agents.reasoningEffort != null) { path = [ "agents" "default_subagent_reasoning_effort" ]; value = $path.agents.reasoningEffort; }) ++
+    ($lib.optional ($path.agents.maximumConcurrentAgents != null) { path = [ "agents" "max_concurrent_threads_per_session" ]; value = $path.agents.maximumConcurrentAgents; }) ++
+    ($lib.optional ($path.agents.maximumDepth != null) { path = [ "agents" "max_depth" ]; value = $path.agents.maximumDepth; }) ++
+    ($lib.optional ($path.memories.conversationSummaryModel != null) { path = [ "memories" "extract_model" ]; value = $path.memories.conversationSummaryModel; }) ++
+    ($lib.optional ($path.memories.consolidationModel != null) { path = [ "memories" "consolidation_model" ]; value = $path.memories.consolidationModel; }) ++
+    ($lib.optional ($path.memories.maximumConversationAgeDays != null) { path = [ "memories" "max_rollout_age_days" ]; value = $path.memories.maximumConversationAgeDays; }) ++
+    ($lib.optional ($path.memories.minimumIdleHours != null) { path = [ "memories" "min_rollout_idle_hours" ]; value = $path.memories.minimumIdleHours; }) ++
+    ($lib.optional ($path.memories.minimumRemainingUsagePercent != null) { path = [ "memories" "min_rate_limit_remaining_percent" ]; value = $path.memories.minimumRemainingUsagePercent; }) ++
+    ($lib.optional ($path.memories.maximumConversationsPerPass != null) { path = [ "memories" "max_rollouts_per_startup" ]; value = $path.memories.maximumConversationsPerPass; }) ++
+    ($lib.optional ($path.memories.maximumUnusedDays != null) { path = [ "memories" "max_unused_days" ]; value = $path.memories.maximumUnusedDays; }) ++
+    ($lib.optional ($path.skills.instructionLimitTokens != null) { path = [ "skills" "max_context_tokens" ]; value = $path.skills.instructionLimitTokens; }) ++
+    ($lib.optional ($path.terminal.animations != null) { path = [ "tui" "animations" ]; value = $path.terminal.animations; }) ++
+    ($lib.optional ($path.terminal.fullscreenTranscript != null) { path = [ "tui" "fullscreen_transcript" ]; value = $path.terminal.fullscreenTranscript; }) ++
+    ($lib.optional ($path.terminal.rawScrollback != null) { path = [ "tui" "raw_output_mode" ]; value = $path.terminal.rawScrollback; }) ++
+    ($lib.optional ($path.terminal.automaticRecaps != null) { path = [ "tui" "auto_recap" ]; value = $path.terminal.automaticRecaps; }) ++
+    ($lib.optional ($path.terminal.startupHints != null) { path = [ "tui" "show_tooltips" ]; value = $path.terminal.startupHints; }) ++
+    ($lib.optional ($path.terminal.startInVimMode != null) { path = [ "tui" "vim_mode_default" ]; value = $path.terminal.startInVimMode; }) ++
+    ($lib.optional ($path.terminal.colorStatusItems != null) { path = [ "tui" "status_line_use_colors" ]; value = $path.terminal.colorStatusItems; }) ++
+    ($lib.optional ($path.terminal.renderTables != null) { path = [ "tui" "rendering" "tables" ]; value = $path.terminal.renderTables; }) ++
+    ($lib.optional ($path.terminal.renderMath != null) { path = [ "tui" "rendering" "math" ]; value = $path.terminal.renderMath; }) ++
+    ($lib.optional ($path.terminal.renderDiagrams != null) { path = [ "tui" "rendering" "mermaid" ]; value = $path.terminal.renderDiagrams; }) ++
+    ($lib.optional ($path.terminal.renderLists != null) { path = [ "tui" "rendering" "lists" ]; value = $path.terminal.renderLists; }) ++
+    ($lib.optional ($path.terminal.syntaxTheme != null) { path = [ "tui" "theme" ]; value = $path.terminal.syntaxTheme; }) ++
+    ($lib.optional ($path.terminal.alternateScreen != null) { path = [ "tui" "alternate_screen" ]; value = ($lib.getAttr $path.terminal.alternateScreen { "automatic" = "auto"; "always" = "always"; "never" = "never"; }); }) ++
+    ($lib.optional ($path.terminal.copySelection != null) { path = [ "tui" "copy_on_select" ]; value = ($lib.getAttr $path.terminal.copySelection { "automatic" = "auto"; "always" = "always"; "never" = "never"; }); }) ++
+    ($lib.optional ($path.terminal.rightClickPaste != null) { path = [ "tui" "right_click_paste" ]; value = ($lib.getAttr $path.terminal.rightClickPaste { "automatic" = "auto"; "always" = "on"; "never" = "off"; }); }) ++
+    ($lib.optional ($path.terminal.groupPastedText != null) { path = [ "tui" "disable_paste_burst" ]; value = (!$path.terminal.groupPastedText); }) ++
+    ($lib.optional ($path.terminal.notifications != null) { path = [ "tui" "notifications" ]; value = $path.terminal.notifications; }) ++
+    ($lib.optional ($path.terminal.notifyWhen != null) { path = [ "tui" "notification_condition" ]; value = $path.terminal.notifyWhen; }) ++
+    ($lib.optional ($path.terminal.notificationDelivery != null) { path = [ "tui" "notification_method" ]; value = ($lib.getAttr $path.terminal.notificationDelivery { "automatic" = "auto"; "escape-sequence" = "osc9"; "bell" = "bel"; }); }) ++
+    ($lib.optional ($path.terminal.statusItems != null) { path = [ "tui" "status_line" ]; value = $path.terminal.statusItems; }) ++
+    ($lib.optional ($path.terminal.titleItems != null) { path = [ "tui" "terminal_title" ]; value = $path.terminal.titleItems; }) ++
+    ($lib.optional ($path.terminal.resumeDirectory != null) { path = [ "tui" "resume_cwd" ]; value = $path.terminal.resumeDirectory; }) ++
+    ($lib.optional ($path.terminal.sessionListDensity != null) { path = [ "tui" "session_picker_view" ]; value = $path.terminal.sessionListDensity; }) ++
+    ($lib.optional ($path.terminal.showReasoningSummaries != null) { path = [ "hide_agent_reasoning" ]; value = (!$path.terminal.showReasoningSummaries); }) ++
+    ($lib.optional ($path.terminal.showUnfilteredReasoning != null) { path = [ "show_raw_agent_reasoning" ]; value = $path.terminal.showUnfilteredReasoning; }) ++
+    ($lib.optional ($path.terminal.resizeHistoryLines != null) { path = [ "tui" "terminal_resize_reflow_max_rows" ]; value = $path.terminal.resizeHistoryLines; }) ++
+    ($lib.optional ($path.webSearch != null) { path = [ "web_search" ]; value = $path.webSearch; }) ++
+    ($lib.optional ($path.fileLinksOpenIn != null) { path = [ "file_opener" ]; value = $path.fileLinksOpenIn; }) ++
+    ($lib.optional ($path.toolCredentialStorage != null) { path = [ "mcp_oauth_credentials_store" ]; value = ($lib.getAttr $path.toolCredentialStorage { "file" = "file"; "keyring" = "keyring"; "automatic" = "auto"; }); }) ++
+    ($lib.optional ($path.toolLoginCallbackPort != null) { path = [ "mcp_oauth_callback_port" ]; value = $path.toolLoginCallbackPort; }) ++
+    ($lib.optional ($path.toolLoginCallbackUrl != null) { path = [ "mcp_oauth_callback_url" ]; value = $path.toolLoginCallbackUrl; }) ++
+    ($lib.optional ($path.defaultProfile != null) { path = [ "profile" ]; value = $path.defaultProfile; }) ++
+    ($lib.concatLists ($lib.mapAttrsToList (entryName: entry:
+      ($lib.optional (entry.displayName != null) { path = [ "model_providers" entryName "name" ]; value = entry.displayName; }) ++
+    ($lib.optional (entry.apiUrl != null) { path = [ "model_providers" entryName "base_url" ]; value = entry.apiUrl; }) ++
+    ($lib.optional (entry.apiKeyVariable != null) { path = [ "model_providers" entryName "env_key" ]; value = entry.apiKeyVariable; }) ++
+    ($lib.optional (entry.apiKeyHelp != null) { path = [ "model_providers" entryName "env_key_instructions" ]; value = entry.apiKeyHelp; }) ++
+    ($lib.optional (entry.headerVariables != null) { path = [ "model_providers" entryName "env_http_headers" ]; value = entry.headerVariables; }) ++
+    ($lib.optional (entry.queryParameters != null) { path = [ "model_providers" entryName "query_params" ]; value = entry.queryParameters; }) ++
+    ($lib.optional (entry.useOpenAiLogin != null) { path = [ "model_providers" entryName "requires_openai_auth" ]; value = entry.useOpenAiLogin; }) ++
+    ($lib.optional (entry.websocketTransport != null) { path = [ "model_providers" entryName "supports_websockets" ]; value = entry.websocketTransport; }) ++
+    ($lib.optional (entry.requestRetryLimit != null) { path = [ "model_providers" entryName "request_max_retries" ]; value = entry.requestRetryLimit; }) ++
+    ($lib.optional (entry.streamRetryLimit != null) { path = [ "model_providers" entryName "stream_max_retries" ]; value = entry.streamRetryLimit; }) ++
+    ($lib.optional (entry.streamIdleTimeoutMilliseconds != null) { path = [ "model_providers" entryName "stream_idle_timeout_ms" ]; value = entry.streamIdleTimeoutMilliseconds; }) ++
+    ($lib.optional (entry.connectionTimeoutMilliseconds != null) { path = [ "model_providers" entryName "websocket_connect_timeout_ms" ]; value = entry.connectionTimeoutMilliseconds; })) $path.providers)) ++
+    ($lib.concatLists ($lib.mapAttrsToList (entryName: entry:
+      ($lib.optional (entry.enable != null) { path = [ "mcp_servers" entryName "enabled" ]; value = entry.enable; }) ++
+    ($lib.optional (entry.requiredForStartup != null) { path = [ "mcp_servers" entryName "required" ]; value = entry.requiredForStartup; }) ++
+    ($lib.optional (entry.command != null) { path = [ "mcp_servers" entryName "command" ]; value = entry.command; }) ++
+    ($lib.optional (entry.arguments != null) { path = [ "mcp_servers" entryName "args" ]; value = entry.arguments; }) ++
+    ($lib.optional (entry.workingDirectory != null) { path = [ "mcp_servers" entryName "cwd" ]; value = entry.workingDirectory; }) ++
+    ($lib.optional (entry.serverUrl != null) { path = [ "mcp_servers" entryName "url" ]; value = entry.serverUrl; }) ++
+    ($lib.optional (entry.bearerTokenVariable != null) { path = [ "mcp_servers" entryName "bearer_token_env_var" ]; value = entry.bearerTokenVariable; }) ++
+    ($lib.optional (entry.environmentVariables != null) { path = [ "mcp_servers" entryName "env" ]; value = entry.environmentVariables; }) ++
+    ($lib.optional (entry.inheritedVariables != null) { path = [ "mcp_servers" entryName "env_vars" ]; value = entry.inheritedVariables; }) ++
+    ($lib.optional (entry.headerVariables != null) { path = [ "mcp_servers" entryName "env_http_headers" ]; value = entry.headerVariables; }) ++
+    ($lib.optional (entry.allowedTools != null) { path = [ "mcp_servers" entryName "enabled_tools" ]; value = entry.allowedTools; }) ++
+    ($lib.optional (entry.blockedTools != null) { path = [ "mcp_servers" entryName "disabled_tools" ]; value = entry.blockedTools; }) ++
+    ($lib.optional (entry.startupTimeoutSeconds != null) { path = [ "mcp_servers" entryName "startup_timeout_sec" ]; value = entry.startupTimeoutSeconds; }) ++
+    ($lib.optional (entry.toolTimeoutSeconds != null) { path = [ "mcp_servers" entryName "tool_timeout_sec" ]; value = entry.toolTimeoutSeconds; }) ++
+    ($lib.optional (entry.parallelToolCalls != null) { path = [ "mcp_servers" entryName "supports_parallel_tool_calls" ]; value = entry.parallelToolCalls; }) ++
+    ($lib.optional (entry.loginScopes != null) { path = [ "mcp_servers" entryName "scopes" ]; value = entry.loginScopes; })) $path.toolServers)) ++
+    ($lib.concatLists ($lib.mapAttrsToList (entryName: entry:
+      ($lib.optional (entry.model != null) { path = [ "profiles" entryName "model" ]; value = entry.model; }) ++
+    ($lib.optional (entry.modelProvider != null) { path = [ "profiles" entryName "model_provider" ]; value = entry.modelProvider; }) ++
+    ($lib.optional (entry.reasoningEffort != null) { path = [ "profiles" entryName "model_reasoning_effort" ]; value = entry.reasoningEffort; }) ++
+    ($lib.optional (entry.planningReasoningEffort != null) { path = [ "profiles" entryName "plan_mode_reasoning_effort" ]; value = entry.planningReasoningEffort; }) ++
+    ($lib.optional (entry.answerDetail != null) { path = [ "profiles" entryName "model_verbosity" ]; value = entry.answerDetail; }) ++
+    ($lib.optional (entry.responsePriority != null) { path = [ "profiles" entryName "service_tier" ]; value = entry.responsePriority; }) ++
+    ($lib.optional (entry.webSearch != null) { path = [ "profiles" entryName "web_search" ]; value = entry.webSearch; }) ++
+    ($lib.optional (entry.instructionFile != null) { path = [ "profiles" entryName "model_instructions_file" ]; value = entry.instructionFile; })) $path.profiles)) ++
+    ($lib.concatLists ($lib.mapAttrsToList (entryName: entry:
+      ($lib.optional (entry.purpose != null) { path = [ "agents" entryName "description" ]; value = entry.purpose; }) ++
+    ($lib.optional (entry.configurationFile != null) { path = [ "agents" entryName "config_file" ]; value = entry.configurationFile; })) $path.agentRoles));
+
+enable = enableOption {
+  _meta = {
+    name = "Install and configure Codex"; summary = "Install and configure Codex";
+    description = ''Enable this program for the selected user scope. Restart running instances after applying preferences.'';
+    tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.apps.ai.codex ];
+    home.sessionVariables = $lib.optionalAttrs ($path.stateDirectory != null) { CODEX_HOME = $path.stateDirectory; };
+    home.activation.zenosCodexPreferences = $lib.mkWritableProgramConfig {
+      pkgs = $pkgs.legacy; application = "codex"; assignments = $v.preferences;
+      stateDirectory = $path.stateDirectory;
+    };
+    assertions = [
+      { assertion = $lib.all (entry: (entry.requestRetryLimit == null || entry.requestRetryLimit >= 0) && (entry.streamRetryLimit == null || entry.streamRetryLimit >= 0) && (entry.streamIdleTimeoutMilliseconds == null || entry.streamIdleTimeoutMilliseconds >= 0) && (entry.connectionTimeoutMilliseconds == null || entry.connectionTimeoutMilliseconds >= 0)) ($lib.attrValues $path.providers); message = "Codex: providers timeouts and retry counts must be nonnegative."; }
+      { assertion = $lib.all (entry: (entry.startupTimeoutSeconds == null || entry.startupTimeoutSeconds >= 0) && (entry.toolTimeoutSeconds == null || entry.toolTimeoutSeconds >= 0)) ($lib.attrValues $path.toolServers); message = "Codex: toolServers timeouts and retry counts must be nonnegative."; }
+      { assertion = $path.reasoningEffort == null || $path.reasoningEffort != ""; message = "Codex: reasoningEffort must not be empty."; }
+      { assertion = $path.planningReasoningEffort == null || $path.planningReasoningEffort != ""; message = "Codex: planningReasoningEffort must not be empty."; }
+      { assertion = $path.agents.reasoningEffort == null || $path.agents.reasoningEffort != ""; message = "Codex: agents.reasoningEffort must not be empty."; }
+      { assertion = $path.contextWindowTokens == null || ($path.contextWindowTokens >= 1); message = "Codex: contextWindowTokens is outside its supported range."; }
+      { assertion = $path.compactAfterTokens == null || ($path.compactAfterTokens >= 1); message = "Codex: compactAfterTokens is outside its supported range."; }
+      { assertion = $path.compactAfterReplyPercent == null || ($path.compactAfterReplyPercent >= 0 && $path.compactAfterReplyPercent <= 100); message = "Codex: compactAfterReplyPercent is outside its supported range."; }
+      { assertion = $path.instructionLimitBytes == null || ($path.instructionLimitBytes >= 0); message = "Codex: instructionLimitBytes is outside its supported range."; }
+      { assertion = $path.tools.outputLimitTokens == null || ($path.tools.outputLimitTokens >= 0); message = "Codex: tools.outputLimitTokens is outside its supported range."; }
+      { assertion = $path.tools.backgroundPollLimitMilliseconds == null || ($path.tools.backgroundPollLimitMilliseconds >= 0); message = "Codex: tools.backgroundPollLimitMilliseconds is outside its supported range."; }
+      { assertion = $path.tools.optionalServerWaitMilliseconds == null || ($path.tools.optionalServerWaitMilliseconds >= 0); message = "Codex: tools.optionalServerWaitMilliseconds is outside its supported range."; }
+      { assertion = $path.historyLimitBytes == null || ($path.historyLimitBytes >= 0); message = "Codex: historyLimitBytes is outside its supported range."; }
+      { assertion = $path.agents.maximumConcurrentAgents == null || ($path.agents.maximumConcurrentAgents >= 1); message = "Codex: agents.maximumConcurrentAgents is outside its supported range."; }
+      { assertion = $path.agents.maximumDepth == null || ($path.agents.maximumDepth >= 0); message = "Codex: agents.maximumDepth is outside its supported range."; }
+      { assertion = $path.memories.maximumConversationAgeDays == null || ($path.memories.maximumConversationAgeDays >= 0); message = "Codex: memories.maximumConversationAgeDays is outside its supported range."; }
+      { assertion = $path.memories.minimumIdleHours == null || ($path.memories.minimumIdleHours >= 0); message = "Codex: memories.minimumIdleHours is outside its supported range."; }
+      { assertion = $path.memories.minimumRemainingUsagePercent == null || ($path.memories.minimumRemainingUsagePercent >= 0 && $path.memories.minimumRemainingUsagePercent <= 100); message = "Codex: memories.minimumRemainingUsagePercent is outside its supported range."; }
+      { assertion = $path.memories.maximumConversationsPerPass == null || ($path.memories.maximumConversationsPerPass >= 0); message = "Codex: memories.maximumConversationsPerPass is outside its supported range."; }
+      { assertion = $path.memories.maximumUnusedDays == null || ($path.memories.maximumUnusedDays >= 0); message = "Codex: memories.maximumUnusedDays is outside its supported range."; }
+      { assertion = $path.skills.instructionLimitTokens == null || ($path.skills.instructionLimitTokens >= 0); message = "Codex: skills.instructionLimitTokens is outside its supported range."; }
+      { assertion = $path.terminal.resizeHistoryLines == null || ($path.terminal.resizeHistoryLines >= 0); message = "Codex: terminal.resizeHistoryLines is outside its supported range."; }
+      { assertion = $path.toolLoginCallbackPort == null || ($path.toolLoginCallbackPort >= 1 && $path.toolLoginCallbackPort <= 65535); message = "Codex: toolLoginCallbackPort is outside its supported range."; }
+      { assertion = $path.stateDirectory == null || $lib.hasPrefix "/" $path.stateDirectory; message = "Codex: stateDirectory must be an absolute path."; }
+      { assertion = $path.instructionFile == null || $lib.hasPrefix "/" $path.instructionFile; message = "Codex: instructionFile must be an absolute path."; }
+      { assertion = $path.logDirectory == null || $lib.hasPrefix "/" $path.logDirectory; message = "Codex: logDirectory must be an absolute path."; }
+      { assertion = $lib.all (entryName: !($lib.elem entryName [ "enabled" "default_subagent_model" "default_subagent_reasoning_effort" "max_concurrent_threads_per_session" "max_depth" "interrupt_message" ])) ($lib.attrNames $path.agentRoles); message = "Codex: an agent role name collides with a scalar agent setting."; }
+      { assertion = $lib.all (entry: entry.apiUrl == null || $lib.hasPrefix "https://" entry.apiUrl || $lib.hasPrefix "http://" entry.apiUrl) ($lib.attrValues $path.providers); message = "Codex: provider API URLs must use HTTP or HTTPS."; }
+      { assertion = $lib.all (entry: entry.command == null || entry.serverUrl == null) ($lib.attrValues $path.toolServers); message = "Codex: tool servers must select a command or URL, not both."; }
+    ];
+  };
+};

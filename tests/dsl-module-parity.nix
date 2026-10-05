@@ -1,7 +1,7 @@
 { candidates, pkgs }:
 
 let
-  expectedModuleCount = 120;
+  expectedModuleCount = 122;
   moduleCount = builtins.length candidates;
   sourcePaths = map (candidate: candidate.sourcePath) candidates;
   modulePaths = map (candidate: builtins.toJSON candidate.modulePath) candidates;
