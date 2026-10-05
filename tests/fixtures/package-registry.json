@@ -73480,7 +73480,6 @@
       },
       "provider": {
         "expression": {
-          "type": "call",
           "arguments": [
             {
               "recursive": false,
@@ -73655,35 +73654,6 @@
                   "target": [
                     {
                       "kind": "identifier",
-                      "value": "nativeBuildInputs"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "items": [
-                      {
-                        "name": "pkgs",
-                        "path": [
-                          {
-                            "kind": "identifier",
-                            "value": "legacy"
-                          },
-                          {
-                            "kind": "identifier",
-                            "value": "makeWrapper"
-                          }
-                        ],
-                        "type": "variable"
-                      }
-                    ],
-                    "type": "list"
-                  }
-                },
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
                       "value": "installPhase"
                     }
                   ],
@@ -73693,7 +73663,7 @@
                     "parts": [
                       {
                         "type": "text",
-                        "value": "\n      runHook preInstall\n      mkdir -p $out\n      cp -R bin codex-package.json codex-path codex-resources $out/\n\n      # Match nixpkgs' Codex packaging: use Nix's sandbox helper and ripgrep\n      # instead of the opaque copies shipped in the upstream release bundle.\n      rm -f $out/codex-resources/bwrap $out/codex-path/rg\n      ln -s "
+                        "value": "\n      runHook preInstall\n      mkdir -p $out\n      cp -R bin codex-package.json codex-path codex-resources $out/\n\n      # The daemon copies and validates the entire package before starting.\n      # Keep Nix's helpers inside the package: external symlinks fail validation.\n      rm -f $out/codex-resources/bwrap $out/codex-path/rg\n      cp -L "
                       },
                       {
                         "expression": {
@@ -73714,7 +73684,7 @@
                       },
                       {
                         "type": "text",
-                        "value": "/bin/bwrap $out/codex-resources/bwrap\n      ln -s "
+                        "value": "/bin/bwrap $out/codex-resources/bwrap\n      cp -L "
                       },
                       {
                         "expression": {
@@ -73735,70 +73705,7 @@
                       },
                       {
                         "type": "text",
-                        "value": "/bin/rg $out/codex-path/rg\n      wrapProgram $out/bin/codex \\\n        --prefix PATH : "
-                      },
-                      {
-                        "expression": {
-                          "arguments": [
-                            {
-                              "items": [
-                                {
-                                  "name": "pkgs",
-                                  "path": [
-                                    {
-                                      "kind": "identifier",
-                                      "value": "legacy"
-                                    },
-                                    {
-                                      "kind": "identifier",
-                                      "value": "ripgrep"
-                                    }
-                                  ],
-                                  "type": "variable"
-                                },
-                                {
-                                  "name": "pkgs",
-                                  "path": [
-                                    {
-                                      "kind": "identifier",
-                                      "value": "legacy"
-                                    },
-                                    {
-                                      "kind": "identifier",
-                                      "value": "bubblewrap"
-                                    }
-                                  ],
-                                  "type": "variable"
-                                }
-                              ],
-                              "type": "list"
-                            }
-                          ],
-                          "callee": {
-                            "name": "pkgs",
-                            "path": [
-                              {
-                                "kind": "identifier",
-                                "value": "legacy"
-                              },
-                              {
-                                "kind": "identifier",
-                                "value": "lib"
-                              },
-                              {
-                                "kind": "identifier",
-                                "value": "makeBinPath"
-                              }
-                            ],
-                            "type": "variable"
-                          },
-                          "type": "call"
-                        },
-                        "type": "interpolation"
-                      },
-                      {
-                        "type": "text",
-                        "value": "\n      runHook postInstall\n    "
+                        "value": "/bin/rg $out/codex-path/rg\n      # Keep the entrypoint as the actual executable. The daemon compares its\n      # digest to bin/codex; a makeWrapper script fails that integrity check.\n      runHook postInstall\n    "
                       }
                     ],
                     "type": "string"
@@ -73888,7 +73795,8 @@
               }
             ],
             "type": "variable"
-          }
+          },
+          "type": "call"
         },
         "kind": "build"
       },
@@ -203077,6 +202985,189 @@
         "theming",
         "system",
         "zenos-branding"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.apps.graphics.select-for-figma",
+      "meta": {
+        "description": "\n    Rebranded Figma Linux desktop client with the Select for Figma icon.\n    Starts on the Figma homepage and uses its standard web login modal.\n  ",
+        "license": "$l.gpl2Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Select for Figma",
+        "packageVersion": "0.11.5",
+        "summary": "Figma desktop client with the standard web login flow",
+        "tags": [
+          "graphics",
+          "design",
+          "prototyping",
+          "collaboration"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "select-for-figma"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "1.0.0"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-jRjTAxZ1ASUISjt7Gy2MTW+RBEHcN1kK622O2LcUwJ4="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "apps",
+        "graphics",
+        "select-for-figma"
       ]
     }
   ]

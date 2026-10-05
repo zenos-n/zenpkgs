@@ -17,7 +17,7 @@ are legal; targets are exact and unique, with no alternate alias catalog.
 The flake compiles the
 repository root in interface mode and uses the path-sorted result for the
 overlay, registry documentation, and flattened public package outputs.
-The 4132-entry normalized contract in `tests/fixtures/package-registry.json`
+The 4133-entry normalized contract in `tests/fixtures/package-registry.json`
 protects every full public ID, derived target, metadata record, and imported
 nixpkgs source path.
 

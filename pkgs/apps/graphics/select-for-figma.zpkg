@@ -1,0 +1,20 @@
+_meta = {
+  name = "Select for Figma";
+  summary = "Figma desktop client with the standard web login flow";
+  description = ''
+    Rebranded Figma Linux desktop client with the Select for Figma icon.
+    Starts on the Figma homepage and uses its standard web login modal.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.11.5";
+  tags = [ "graphics" "design" "prototyping" "collaboration" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl2Plus;
+};
+
+build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+  owner = "zenos-n";
+  repo = "select-for-figma";
+  rev = "1.0.0";
+  hash = "sha256-jRjTAxZ1ASUISjt7Gy2MTW+RBEHcN1kK622O2LcUwJ4=";
+}) + "/package.nix") { };
