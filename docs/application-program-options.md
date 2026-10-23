@@ -5,20 +5,23 @@ corresponding `select-for-figma` path. Both `enable` switches default to false.
 
 Every preference defaults to null and preserves the existing live value. Selected
 fields are reapplied on rebuild; removing a selection leaves the last live value.
-Configuration remains writable. Restart running apps after changing preferences.
+Configuration remains writable. Close Select before applying selected preferences;
+activation checks both the native and legacy application names on the session bus.
+Restart other running apps after changing preferences.
 Named records preserve fields and entries you have not selected. Store credentials
 in the app or keyring; environment-variable options name secrets without copying
 them into the public Nix store. Codex TOML comments and both apps’ runtime state
 are preserved. Changed files have a private `.zenos-backup` beside them.
 
 Codex follows CODEX_HOME (default ~/.codex); stateDirectory also sets CODEX_HOME.
-Figma Linux follows XDG_CONFIG_HOME/figma-linux (default ~/.config/figma-linux).
+Native Select for Figma v1.0.2 follows XDG_DATA_HOME/select-for-figma/state.json
+(default ~/.local/share/select-for-figma/state.json).
 Activation uses the environment of the user activation service. Immutable config
 symlinks require migration to writable files before selecting preferences.
 
 Sources: [Codex reference](https://learn.chatgpt.com/docs/config-file/config-reference),
 [Codex 0.159.0 schema](https://github.com/openai/codex/blob/rust-v0.159.0/codex-rs/core/config.schema.json),
-[Figma Linux 0.11.5](https://github.com/Figma-Linux/figma-linux/tree/v0.11.5).
+[Select for Figma v1.0.2](https://github.com/doromiert/select-for-figma/tree/v1.0.2).
 
 ```zcfg
 users.alex.programs.codex = {
@@ -33,8 +36,15 @@ users.alex.programs.codex = {
 users.alex.programs.select-for-figma = {
   enable = true;
   restoreOpenFiles = true;
-  canvasInterfaceScale = 1.0;
-  fontSearchDirectories = [ "/run/current-system/sw/share/fonts" ];
+  appearance = "system";
+  adwaitaEditorTheme = true;
+  tabSwitchingOrder = "recent";
+  localFonts = true;
+  notifications = true;
+  downloadDirectory = "/home/alex/Downloads";
+  zane.chat.reasoningEffort = "";
+  zane.showAccountPresence = false;
+  zane.automaticEditAccess = false;
 };
 ```
 
@@ -176,19 +186,69 @@ users.alex.programs.select-for-figma = {
 
 ## select-for-figma
 
-| Option | Backend field | Details |
+These options target native GTK/libadwaita Select for Figma v1.0.2, not the
+older Electron Figma Linux application. Every option below defaults to null
+(no write); the defaults in the table are upstream defaults, not module defaults.
+Backend keys are flat JSON members of `state.json`.
+
+| Option | Backend field | Type, upstream default, and validation |
 | --- | --- | --- |
-| `showCreateFileButton` | `app.visibleNewProjectBtn` |  |
-| `useSystemFileDialogs` | `app.useZenity` | Use Zenity system dialogs instead of the built-in Electron dialogs. |
-| `forceStandardRgb` | `app.enableColorSpaceSrgb` | Force the sRGB color space. Restart the app to apply this choice. |
-| `customThemes` | `app.disableThemes` | Allow custom desktop chrome themes; false uses the built-in theme. |
-| `theme` | `theme.currentTheme` | Desktop chrome theme identifier. The built-in theme is 0; installed theme files supply other identifiers. |
-| `restoreOpenFiles` | `app.saveLastOpenedTabs` | Restore the files that were open when the client last closed. |
-| `exportDirectory` | `app.exportDir` | Absolute destination for exports. The directory must be writable by the user. |
-| `fontSearchDirectories` | `app.fontDirs` | Directories recursively searched for fonts; include Nix font directories when needed. |
-| `browserArguments` | `app.commandSwitches` | Chromium arguments such as --enable-gpu-rasterization or --force-device-scale-factor=1. Restart to apply. |
-| `tabBarHeightPixels` | `app.panelHeight` |  |
-| `tabBarScale` | `ui.scalePanel` |  |
-| `canvasInterfaceScale` | `ui.scaleFigmaUI` |  |
-| `logging` | `app.logLevel` |  |
-| `themeEditor.legacyPreview` | `app.useOldPreviewer` | Use the older theme preview renderer in the theme editor. |
+| `appearance` | `appearance` | Nullable enum `system`, `light`, `dark`; upstream `system`. |
+| `adwaitaEditorTheme` | `adwaita-editor` | Nullable boolean; upstream true. GNOME styling for Figma homepage, panels, and controls. |
+| `restoreOpenFiles` | `restore-session` | Nullable boolean; upstream true. |
+| `tabSwitchingOrder` | `tab-switcher-mru` | Nullable enum `position`, `recent`; lowers to false/true respectively. Upstream `position`. |
+| `localFonts` | `local-fonts` | Nullable boolean; upstream true. Makes installed fonts available to Figma. |
+| `notifications` | `notifications` | Nullable boolean; upstream true. Figma notifications and background download alerts. |
+| `downloadDirectory` | `download-folder` | Nullable string; require an absolute path. Upstream uses the user's XDG Downloads directory, falling back to home. The app itself accepts a string without path validation and updates this preference after downloads. |
+| `zane.chat.model` | `zane-chat-model` | Nullable string, at most 200 UTF-8 bytes; upstream empty string inherits Codex settings. |
+| `zane.chat.reasoningEffort` | `zane-chat-effort` | Nullable string, at most 32 UTF-8 bytes; upstream empty string inherits. Use values supported by the selected model. |
+| `zane.work.model` | `zane-work-model` | Nullable string, at most 200 UTF-8 bytes; upstream empty string inherits Codex settings. |
+| `zane.work.reasoningEffort` | `zane-work-effort` | Nullable string, at most 32 UTF-8 bytes; upstream empty string inherits. Use values supported by the selected model. |
+| `zane.showAccountPresence` | `zane-account-presence` | Nullable boolean; upstream false. Uses Zane's separate signed-in Figma account, visible to collaborators; this preference does not establish a login. |
+| `zane.automaticEditAccess` | `zane-auto-edit-access` | Nullable boolean; upstream true. Automatically invites Zane's signed-in account to the current file; paid-plan seat changes retain Figma's approval flow. |
+
+Reasoning efforts are model-dependent strings returned by Codex `model/list`
+(`supportedReasoningEfforts[].reasoningEffort`), not a closed enum. Null leaves
+the current choice untouched; an explicit empty string selects inheritance.
+The native loader clears model strings longer than 200 bytes and effort strings
+longer than 32 bytes; declarations should reject these rather than silently reset.
+
+The Electron-only options `showCreateFileButton`, `useSystemFileDialogs`,
+`forceStandardRgb`, `customThemes`, `theme`, `exportDirectory`,
+`fontSearchDirectories`, `browserArguments`, `tabBarHeightPixels`, `tabBarScale`,
+`canvasInterfaceScale`, `logging`, and `themeEditor.legacyPreview` are removed.
+`restoreOpenFiles` remains but now writes `restore-session`, not
+`app.saveLastOpenedTabs`. No Electron settings file is read or migrated.
+
+Apply only selected flat keys to a writable, user-owned JSON object, preserving
+unselected members. Use private backups and atomic replacement (directory mode
+0700, file mode 0600); reject malformed JSON and immutable store files without
+changing them. With no selected preferences, perform no write or migration.
+
+Before the first activation write, mirror the native whole-directory migration:
+if the destination `XDG_DATA_HOME/select-for-figma` does not exist (including a
+symlink) and `XDG_DATA_HOME/figma-gtk` is a directory, rename the entire legacy
+directory to the destination. Do not create the destination first: doing so
+suppresses upstream migration and strands Chromium profiles and session data.
+If the destination already exists, leave both directories intact. A failed
+required rename must stop the update without replacing legacy state.
+
+Apply while Select and any legacy FigmaGtk instance are closed; defer or fail
+with an actionable message when running, and do not terminate them implicitly.
+The app loads state into memory and rewrites the complete file on preference
+changes, session persistence, and shutdown. Atomic replacement alone cannot
+prevent a running instance from overwriting activation changes. Restart to load
+applied preferences; there is no external live-settings reload contract.
+
+Do not declare window geometry, tabs, groups, recents, export history, Chromium
+profiles/cookies, `keepassxc-paired`, tokens, or keyring associations as program
+preferences. Keep authentication in the app/keyring and preserve runtime state.
+
+Source evidence is the local `select-for-figma` repository at tag `v1.0.2`
+(commit `6d0444148334e169ca4a8ab78744f0d8be2e8932`): `src/state.hpp` defines
+initial defaults; `src/state.cpp:51` implements migration, `:57` resolves the
+data directory, `:64` loads and validates preferences, and `:135` saves state.
+`src/application.cpp:801` defines native preferences; `src/zane-models.cpp:107`
+parses the model catalog (`:124` reads reasoning efforts); `src/zane.cpp:960`
+defines account-presence and automatic-access preferences. The working checkout
+contains newer changes, so the tagged files are the authority for this version.

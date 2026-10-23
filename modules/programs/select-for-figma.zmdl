@@ -1,130 +1,134 @@
 _meta = {
-  name = "Select for Figma configuration"; summary = "Configure Select for Figma";
-  description = ''Install Select for Figma and configure selected preferences while preserving writable application state.'';
-  zenosVersion = 1.0.0Nb; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+  name = "Select for Figma";
+  summary = "Install and configure the native Select for Figma client";
+  description = ''Native GTK Select preferences. Selected settings are reapplied during user activation; other preferences, sessions and login data remain writable and unchanged.'';
+  zenosVersion = 1.0.0Nb; tags = [ "programs" "graphics" ];
+  maintainers = [ $m.doromiert ]; license = $l.napl;
 };
 
-showCreateFileButton._meta = {
-  name = "Show create file button"; summary = "Show create file button";
-  description = ''Show create file button. Null preserves the existing preference.'';
+appearance._meta = {
+  name = "Appearance"; summary = "Appearance";
+  description = ''Follow the desktop appearance or force light or dark mode. Null preserves the current preference. Restart Select after applying changes.'';
+  type = $type.either [ ($type.enum [ "system" "light" "dark" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
+adwaitaEditorTheme._meta = {
+  name = "Adwaita editor theme"; summary = "Adwaita editor theme";
+  description = ''Apply the native Adwaita theme to Figma editor chrome. Null preserves the current preference. Restart Select after applying changes.'';
   type = $type.either [ ($type.boolean) $type.null ]; default = null;
   tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
-useSystemFileDialogs._meta = {
-  name = "Use system file dialogs"; summary = "Use system file dialogs";
-  description = ''Use system file dialogs. Use Zenity system dialogs instead of the built-in Electron dialogs. Null preserves the existing preference.'';
-  type = $type.either [ ($type.boolean) $type.null ]; default = null;
-  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
-};
-forceStandardRgb._meta = {
-  name = "Force standard rgb"; summary = "Force standard rgb";
-  description = ''Force standard rgb. Force the sRGB color space. Restart the app to apply this choice. Null preserves the existing preference.'';
-  type = $type.either [ ($type.boolean) $type.null ]; default = null;
-  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
-};
-customThemes._meta = {
-  name = "Custom themes"; summary = "Custom themes";
-  description = ''Custom themes. Allow custom desktop chrome themes; false uses the built-in theme. Null preserves the existing preference.'';
-  type = $type.either [ ($type.boolean) $type.null ]; default = null;
-  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
-};
-theme._meta = {
-  name = "Theme"; summary = "Theme";
-  description = ''Theme. Desktop chrome theme identifier. The built-in theme is 0; installed theme files supply other identifiers. Null preserves the existing preference.'';
-  type = $type.either [ ($type.string) $type.null ]; default = null;
-  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
-};
+
 restoreOpenFiles._meta = {
   name = "Restore open files"; summary = "Restore open files";
-  description = ''Restore open files. Restore the files that were open when the client last closed. Null preserves the existing preference.'';
+  description = ''Restore the previous document session when Select starts. Null preserves the current preference. Restart Select after applying changes.'';
   type = $type.either [ ($type.boolean) $type.null ]; default = null;
   tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
-exportDirectory._meta = {
-  name = "Export directory"; summary = "Export directory";
-  description = ''Export directory. Absolute destination for exports. The directory must be writable by the user. Null preserves the existing preference.'';
+
+tabSwitchingOrder._meta = {
+  name = "Tab switching order"; summary = "Tab switching order";
+  description = ''Cycle with Ctrl+Tab in tab position or most recently used order, including Home. Null preserves the current preference. Restart Select after applying changes.'';
+  type = $type.either [ ($type.enum [ "position" "recent" ]) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
+localFonts._meta = {
+  name = "Local fonts"; summary = "Local fonts";
+  description = ''Make installed local fonts available to Figma. Null preserves the current preference. Restart Select after applying changes.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
+notifications._meta = {
+  name = "Notifications"; summary = "Notifications";
+  description = ''Allow desktop notifications from the embedded Figma client. Null preserves the current preference. Restart Select after applying changes.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
+downloadDirectory._meta = {
+  name = "Download directory"; summary = "Download directory";
+  description = ''Absolute directory for downloads and exported files. Null preserves the current preference. Restart Select after applying changes.'';
   type = $type.either [ ($type.string) $type.null ]; default = null;
   tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
-fontSearchDirectories._meta = {
-  name = "Font search directories"; summary = "Font search directories";
-  description = ''Font search directories. Directories recursively searched for fonts; include Nix font directories when needed. Null preserves the existing preference.'';
-  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+
+zane.chat.model._meta = {
+  name = "Chat model"; summary = "Chat model";
+  description = ''Chat model identifier, at most 200 UTF-8 bytes. An empty string uses Codex settings. Null preserves the current preference. Restart Select after applying changes.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
   tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
-browserArguments._meta = {
-  name = "Browser arguments"; summary = "Browser arguments";
-  description = ''Browser arguments. Chromium arguments such as --enable-gpu-rasterization or --force-device-scale-factor=1. Restart to apply. Null preserves the existing preference.'';
-  type = $type.either [ ($type.list [ $type.string ]) $type.null ]; default = null;
+
+zane.chat.reasoningEffort._meta = {
+  name = "Chat reasoning effort"; summary = "Chat reasoning effort";
+  description = ''Reasoning level supported by the selected model, at most 32 UTF-8 bytes. An empty string uses Codex settings. Null preserves the current preference. Restart Select after applying changes.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
   tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
-tabBarHeightPixels._meta = {
-  name = "Tab bar height pixels"; summary = "Tab bar height pixels";
-  description = ''Tab bar height pixels. Null preserves the existing preference.'';
-  type = $type.either [ ($type.int) $type.null ]; default = null;
+
+zane.work.model._meta = {
+  name = "Work model"; summary = "Work model";
+  description = ''Work model identifier, at most 200 UTF-8 bytes. An empty string uses Codex settings. Null preserves the current preference. Restart Select after applying changes.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
   tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
-tabBarScale._meta = {
-  name = "Tab bar scale"; summary = "Tab bar scale";
-  description = ''Tab bar scale. Null preserves the existing preference.'';
-  type = $type.either [ ($type.either [ $type.int $type.float ]) $type.null ]; default = null;
+
+zane.work.reasoningEffort._meta = {
+  name = "Work reasoning effort"; summary = "Work reasoning effort";
+  description = ''Reasoning level supported by the selected model, at most 32 UTF-8 bytes. An empty string uses Codex settings. Null preserves the current preference. Restart Select after applying changes.'';
+  type = $type.either [ ($type.string) $type.null ]; default = null;
   tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
-canvasInterfaceScale._meta = {
-  name = "Canvas interface scale"; summary = "Canvas interface scale";
-  description = ''Canvas interface scale. Null preserves the existing preference.'';
-  type = $type.either [ ($type.either [ $type.int $type.float ]) $type.null ]; default = null;
-  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
-};
-logging._meta = {
-  name = "Logging"; summary = "Logging";
-  description = ''Logging. Null preserves the existing preference.'';
-  type = $type.either [ ($type.enum [ "debug" "info" "warning" "error" ]) $type.null ]; default = null;
-  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
-};
-themeEditor.legacyPreview._meta = {
-  name = "Legacy preview"; summary = "Legacy preview";
-  description = ''Legacy preview. Use the older theme preview renderer in the theme editor. Null preserves the existing preference.'';
+
+zane.showAccountPresence._meta = {
+  name = "Show account presence"; summary = "Show account presence";
+  description = ''Show Zane account presence in the signed-in editor. Null preserves the current preference. Restart Select after applying changes.'';
   type = $type.either [ ($type.boolean) $type.null ]; default = null;
   tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
 
-themeEditor._meta = { name = "Themeeditor preferences"; summary = "Themeeditor preferences"; description = ''Selected themeEditor preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+zane.automaticEditAccess._meta = {
+  name = "Automatic edit access"; summary = "Automatic edit access";
+  description = ''Let Zane request editor access automatically when performing edits. Null preserves the current preference. Restart Select after applying changes.'';
+  type = $type.either [ ($type.boolean) $type.null ]; default = null;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
 
 _let preferences: $type.list [ $type.set ] =
-    ($lib.optional ($path.showCreateFileButton != null) { path = [ "app" "visibleNewProjectBtn" ]; value = $path.showCreateFileButton; }) ++
-    ($lib.optional ($path.useSystemFileDialogs != null) { path = [ "app" "useZenity" ]; value = $path.useSystemFileDialogs; }) ++
-    ($lib.optional ($path.forceStandardRgb != null) { path = [ "app" "enableColorSpaceSrgb" ]; value = $path.forceStandardRgb; }) ++
-    ($lib.optional ($path.customThemes != null) { path = [ "app" "disableThemes" ]; value = (!$path.customThemes); }) ++
-    ($lib.optional ($path.theme != null) { path = [ "theme" "currentTheme" ]; value = $path.theme; }) ++
-    ($lib.optional ($path.restoreOpenFiles != null) { path = [ "app" "saveLastOpenedTabs" ]; value = $path.restoreOpenFiles; }) ++
-    ($lib.optional ($path.exportDirectory != null) { path = [ "app" "exportDir" ]; value = $path.exportDirectory; }) ++
-    ($lib.optional ($path.fontSearchDirectories != null) { path = [ "app" "fontDirs" ]; value = $path.fontSearchDirectories; }) ++
-    ($lib.optional ($path.browserArguments != null) { path = [ "app" "commandSwitches" ]; value = ($lib.map (argument: let parts = $lib.splitString "=" ($lib.removePrefix "--" argument); in
- { switch = $lib.head parts; } // ($lib.optionalAttrs ($lib.length parts > 1) { value = $lib.concatStringsSep "=" ($lib.tail parts); })) $path.browserArguments); }) ++
-    ($lib.optional ($path.tabBarHeightPixels != null) { path = [ "app" "panelHeight" ]; value = $path.tabBarHeightPixels; }) ++
-    ($lib.optional ($path.tabBarScale != null) { path = [ "ui" "scalePanel" ]; value = $path.tabBarScale; }) ++
-    ($lib.optional ($path.canvasInterfaceScale != null) { path = [ "ui" "scaleFigmaUI" ]; value = $path.canvasInterfaceScale; }) ++
-    ($lib.optional ($path.logging != null) { path = [ "app" "logLevel" ]; value = ($lib.getAttr $path.logging { "debug" = 0; "info" = 1; "warning" = 2; "error" = 3; }); }) ++
-    ($lib.optional ($path.themeEditor.legacyPreview != null) { path = [ "app" "useOldPreviewer" ]; value = $path.themeEditor.legacyPreview; });
+  ($lib.optional ($path.appearance != null) { path = [ "appearance" ]; value = $path.appearance; }) ++
+  ($lib.optional ($path.adwaitaEditorTheme != null) { path = [ "adwaita-editor" ]; value = $path.adwaitaEditorTheme; }) ++
+  ($lib.optional ($path.restoreOpenFiles != null) { path = [ "restore-session" ]; value = $path.restoreOpenFiles; }) ++
+  ($lib.optional ($path.tabSwitchingOrder != null) { path = [ "tab-switcher-mru" ]; value = $path.tabSwitchingOrder == "recent"; }) ++
+  ($lib.optional ($path.localFonts != null) { path = [ "local-fonts" ]; value = $path.localFonts; }) ++
+  ($lib.optional ($path.notifications != null) { path = [ "notifications" ]; value = $path.notifications; }) ++
+  ($lib.optional ($path.downloadDirectory != null) { path = [ "download-folder" ]; value = $path.downloadDirectory; }) ++
+  ($lib.optional ($path.zane.chat.model != null) { path = [ "zane-chat-model" ]; value = $path.zane.chat.model; }) ++
+  ($lib.optional ($path.zane.chat.reasoningEffort != null) { path = [ "zane-chat-effort" ]; value = $path.zane.chat.reasoningEffort; }) ++
+  ($lib.optional ($path.zane.work.model != null) { path = [ "zane-work-model" ]; value = $path.zane.work.model; }) ++
+  ($lib.optional ($path.zane.work.reasoningEffort != null) { path = [ "zane-work-effort" ]; value = $path.zane.work.reasoningEffort; }) ++
+  ($lib.optional ($path.zane.showAccountPresence != null) { path = [ "zane-account-presence" ]; value = $path.zane.showAccountPresence; }) ++
+  ($lib.optional ($path.zane.automaticEditAccess != null) { path = [ "zane-auto-edit-access" ]; value = $path.zane.automaticEditAccess; });
 
 enable = enableOption {
   _meta = {
     name = "Install and configure Select for Figma"; summary = "Install and configure Select for Figma";
-    description = ''Enable this program for the selected user scope. Restart running instances after applying preferences.'';
+    description = ''Install native Select for the selected user scope. Apply only non-null preferences to its writable state file. Existing figma-gtk data is migrated before the first preference write.'';
     tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
   };
   u! {
-    home.packages = [ $pkgs.byCategories.apps.graphics.select-for-figma ];
-    home.activation.zenosSelectforFigmaPreferences = $lib.mkWritableProgramConfig {
+    home.packages = [ $pkgs.io.github.doromiert.SelectForFigma ];
+    home.activation.zenosSelectForFigmaPreferences = $lib.mkWritableProgramConfig {
       pkgs = $pkgs.legacy; application = "select-for-figma"; assignments = $v.preferences;
     };
     assertions = [
-      { assertion = $path.tabBarHeightPixels == null || ($path.tabBarHeightPixels >= 0); message = "Select for Figma: tabBarHeightPixels is outside its supported range."; }
-      { assertion = $path.tabBarScale == null || ($path.tabBarScale > 0); message = "Select for Figma: tabBarScale is outside its supported range."; }
-      { assertion = $path.canvasInterfaceScale == null || ($path.canvasInterfaceScale > 0); message = "Select for Figma: canvasInterfaceScale is outside its supported range."; }
-      { assertion = $path.exportDirectory == null || $lib.hasPrefix "/" $path.exportDirectory; message = "Select for Figma: exportDirectory must be an absolute path."; }
-      { assertion = $path.browserArguments == null || $lib.all (argument: $lib.hasPrefix "--" argument && $lib.stringLength argument > 2) $path.browserArguments; message = "Select for Figma: browserArguments must start with -- and contain a switch name."; }
+      { assertion = $path.downloadDirectory == null || $lib.hasPrefix "/" $path.downloadDirectory; message = "Select for Figma: downloadDirectory must be an absolute path."; }
+      { assertion = $path.zane.chat.model == null || $lib.stringLength $path.zane.chat.model <= 200; message = "Select for Figma: zane.chat.model must be at most 200 UTF-8 bytes."; }
+      { assertion = $path.zane.work.model == null || $lib.stringLength $path.zane.work.model <= 200; message = "Select for Figma: zane.work.model must be at most 200 UTF-8 bytes."; }
+      { assertion = $path.zane.chat.reasoningEffort == null || $lib.stringLength $path.zane.chat.reasoningEffort <= 32; message = "Select for Figma: zane.chat.reasoningEffort must be at most 32 UTF-8 bytes."; }
+      { assertion = $path.zane.work.reasoningEffort == null || $lib.stringLength $path.zane.work.reasoningEffort <= 32; message = "Select for Figma: zane.work.reasoningEffort must be at most 32 UTF-8 bytes."; }
     ];
   };
 };
