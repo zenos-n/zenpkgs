@@ -103,9 +103,14 @@ rec {
         insert entry.categoryTarget (lib.getAttrFromPath entry.target canonicalTree) result
       ) { } checked.packages;
       tree = canonicalTree // { byCategories = categoryTree; };
+      # Keep compatibility siblings in the provider context only. Insert by
+      # registry paths so constructing the context never inspects derivations.
+      contextCategoryTree = lib.foldl' (result: entry:
+        insert entry.categoryTarget (lib.getAttrFromPath entry.target canonicalTree) result
+      ) (pkgs.zenos.byCategories or { }) checked.packages;
       publicTree = lib.foldl' (result: entry:
         insert entry.target (lib.getAttrFromPath entry.target tree) result
-      ) ((pkgs.zenos or { }) // { byCategories = categoryTree; }) checked.packages;
+      ) ((pkgs.zenos or { }) // { byCategories = contextCategoryTree; }) checked.packages;
     in tree;
 
   buildPackageTree = pkgs: registry: buildPackageTreeWith {

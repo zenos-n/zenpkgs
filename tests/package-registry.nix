@@ -229,6 +229,25 @@ let
     };
   repeated = adapt bundle;
   repeatedTree = interface.buildPackageTree { inherit (pkgs) hello; } repeated;
+  contextSiblingTree = interface.buildPackageTreeWith {
+    pkgs = pkgs // {
+      zenos.byCategories = {
+        compat.tool = pkgs.hello;
+        apps.first.compat = pkgs.hello;
+      };
+    };
+    legacyPkgs = pkgs;
+    registry = repeated;
+    buildPackage = entry: context:
+      assert context.pkgs.zenos.byCategories.compat.tool.drvPath == pkgs.hello.drvPath;
+      assert context.pkgs.zenos.byCategories.apps.first.compat.drvPath == pkgs.hello.drvPath;
+      # The second provider can consume the first registry leaf through either view.
+      assert entry.id != "pkgs.net.example.second-tool" || (
+        context.pkgs.zenos.byCategories.apps.first.tool.drvPath
+        == context.pkgs.zenos.org.example.first-tool.drvPath
+      );
+      pkgs.hello;
+  };
   firstEntry = lib.findFirst (entry: entry.id == "pkgs.org.example.first-tool") (throw "registry fixture is missing pkgs.org.example.first-tool") repeated.packages;
   registryWith = packages: {
     schemaVersion = 1;
@@ -274,7 +293,7 @@ in
   registry-build-providers =
     assert
       map (entry: "${lib.concatStringsSep "." entry.categoryTarget}")
-        (lib.sort (a: lib.concatStringsSep "/" a.categoryTarget < lib.concatStringsSep "/" b.categoryTarget) buildEntries) == [
+        (lib.sort (a: b: lib.concatStringsSep "/" a.categoryTarget < lib.concatStringsSep "/" b.categoryTarget) buildEntries) == [
         "apps.accessibility.hapticspp"
         "apps.ai.codex"
         "apps.ai.codex-desktop"
@@ -417,6 +436,11 @@ in
     assert repeatedTree.org.example.first-tool.src == pkgs.hello.src;
     assert repeatedTree.byCategories.apps.first.tool.src == repeatedTree.org.example.first-tool.src;
     assert pkgs.zenos.legacy.hello.src == pkgs.hello.src;
+    assert contextSiblingTree.net.example.second-tool.drvPath == pkgs.hello.drvPath;
+    assert contextSiblingTree.byCategories.apps.first.tool.drvPath
+      == contextSiblingTree.org.example.first-tool.drvPath;
+    assert !(contextSiblingTree.byCategories ? compat);
+    assert !(contextSiblingTree.byCategories.apps.first ? compat);
     assert firstEntry.id == "pkgs.org.example.first-tool";
     assert firstEntry.meta.id == "org.example.first-tool";
     assert firstEntry.target == [ "org" "example" "first-tool" ];
