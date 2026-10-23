@@ -651,6 +651,7 @@
             assert nixpkgs.lib.all (value: value) (builtins.attrValues migrationPolicies);
             pkgs.writeText "zenos-migration-options" (builtins.toJSON migrationPolicies);
           migration-packages = import ./tests/migration-packages.nix { inherit pkgs registry; };
+          nzportable = import ./tests/nzportable.nix { inherit pkgs; };
           application-program-options = import ./tests/application-program-options.nix {
             pkgs = dsl.bootstrapPkgs;
             sourceRoot = self;

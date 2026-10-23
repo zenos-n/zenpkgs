@@ -2,7 +2,7 @@
 
 The Nix packages repository for ZenOS.
 
-The registry contains 4152 declarations: 4098 imports and 54 build providers.
+The registry contains 4153 declarations: 4098 imports and 55 build providers.
 Ten former compatibility-only recipes now have canonical ZPKG wrappers; the
 existing internal recipes remain trusted transitional builders behind those
 declarations, not implicit exports. Their IDs preserve established identities

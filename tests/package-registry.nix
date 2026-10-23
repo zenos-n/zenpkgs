@@ -280,26 +280,26 @@ in
     pass "zenpkgs-no-retired-package-roots";
 
   registry-counts =
-    assert builtins.length expectedRegistry.packages == 4152;
-    assert builtins.length expectedActiveEntries == 4152;
-    assert builtins.length registry.packages == 4152;
-    assert builtins.length activeEntries == 4152;
+    assert builtins.length expectedRegistry.packages == 4153;
+    assert builtins.length expectedActiveEntries == 4153;
+    assert builtins.length registry.packages == 4153;
+    assert builtins.length activeEntries == 4153;
     assert builtins.length importEntries == 4098;
-    assert builtins.length buildEntries == 54;
+    assert builtins.length buildEntries == 55;
     assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 
   package-paths =
-    assert builtins.length (registryPaths expectedRegistry) == 4152;
-    assert builtins.length (packagePaths expectedRegistry) == 4152;
-    assert builtins.length activePaths == 4152;
+    assert builtins.length (registryPaths expectedRegistry) == 4153;
+    assert builtins.length (packagePaths expectedRegistry) == 4153;
+    assert builtins.length activePaths == 4153;
     assert registryPathKeys == lib.sort builtins.lessThan registryPathKeys;
     assert registryPaths registry == registryPaths expectedRegistry;
     assert packagePaths registry == packagePaths expectedSorted;
     pass "zenpkgs-package-registry-paths";
 
   public-package-outputs =
-    assert builtins.length outputIdentities == 4152;
+    assert builtins.length outputIdentities == 4153;
     assert lib.all (identity: identity) outputIdentities;
     pass "zenpkgs-public-package-outputs";
 
@@ -323,6 +323,7 @@ in
         "apps.gaming.emulators.ryubing-canary"
         "apps.gaming.emulators.yuzu-mainline"
         "apps.gaming.fnuidesktop-vr"
+        "apps.gaming.nzportable"
         "apps.gaming.ovr-advanced-settings"
         "apps.gaming.wlx-overlay-s"
         "apps.gaming.zenos-vr-tools"
@@ -392,7 +393,7 @@ in
     pass "zenpkgs-registry-build-providers";
 
   registry-output-ownership =
-    assert builtins.length (lib.unique outputNames) == 4152;
+    assert builtins.length (lib.unique outputNames) == 4153;
     assert
       builtins.attrNames publicPackages == lib.sort builtins.lessThan (
         outputNames
@@ -408,6 +409,15 @@ in
       builtins.length (lib.filter (entry: entry.categoryTarget == categoryTarget) buildEntries) == 1
     ) compatBuilderCategories;
     pass "zenpkgs-registry-output-ownership";
+
+  registry-nzportable-identity =
+    let
+      entries = lib.filter (entry: entry.id == "pkgs.gay.nzp.nzportable") activeEntries;
+    in
+    assert builtins.length entries == 1;
+    assert (builtins.head entries).target == [ "gay" "nzp" "nzportable" ];
+    assert (builtins.head entries).categoryTarget == [ "apps" "gaming" "nzportable" ];
+    pass "zenpkgs-nzportable-identity";
 
   registry-path-identities =
     assert
