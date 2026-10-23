@@ -750,10 +750,9 @@
       },
       "original": {
         "owner": "zenos-n",
-        "ref": "de3a35e",
         "repo": "zenos-setup",
-        "type": "github",
-        "rev": "de3a35e1fb0297468da12dd8a9ea609115a61c3d"
+        "rev": "de3a35e1fb0297468da12dd8a9ea609115a61c3d",
+        "type": "github"
       }
     },
     "source-shell-defaults": {

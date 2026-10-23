@@ -204549,7 +204549,7 @@
                       "parts": [
                         {
                           "type": "text",
-                          "value": "\n    runHook preBuild\n    python3 builder.py --src glyphs --output Zero-Mono.otf --mono\n    cat > thin.py <<'PY'\n    import fontforge\n\n    font = fontforge.open(\"Zero-Mono.otf\")\n    font.selection.all()\n    font.changeWeight(-45)\n    font.familyname = \"Zero Mono Thin\"\n    font.fullname = \"Zero Mono Thin\"\n    font.fontname = \"ZeroMonoThin\"\n    font.weight = \"Thin\"\n    font.os2_weight = 100\n    font.generate(\"Zero-Mono-Thin.otf\")\n    PY\n    fontforge -lang=py -script thin.py\n    runHook postBuild\n  "
+                          "value": "\n    runHook preBuild\n    python3 builder.py --src glyphs --output Zero-Mono.otf --mono\n    fontforge -lang=py -c 'import fontforge; font = fontforge.open(\"Zero-Mono.otf\"); font.selection.all(); font.changeWeight(-45); font.familyname = \"Zero Mono Thin\"; font.fullname = \"Zero Mono Thin\"; font.fontname = \"ZeroMonoThin\"; font.weight = \"Thin\"; font.os2_weight = 100; font.generate(\"Zero-Mono-Thin.otf\")'\n    runHook postBuild\n  "
                         }
                       ],
                       "type": "string"

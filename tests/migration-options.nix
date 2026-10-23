@@ -107,6 +107,11 @@ in {
     && h.programs.pwamaker.apps.example.openUrls == [ "example.invalid" ];
   userIsolation = !configured.home-manager.users.bob.programs.firefox.enable
     && !configured.home-manager.users.bob.programs.keepassxc.enable;
+  vrKernelDefault = vr.boot.kernel.sysctl."vm.max_map_count" == 2147483642;
+  vrKernelUserOverride = (evaluate {
+    zenos.users.alice.services.vr.enable = true;
+    zenos.system.kernel.sysctl."vm.max_map_count" = 1048576;
+  }).boot.kernel.sysctl."vm.max_map_count" == 1048576;
   vrRuntime = vr.programs.steam.enable && vr.programs.alvr.enable
     && !vr.programs.alvr.openFirewall && vr.hardware.graphics.enable32Bit
     && vr.security.rtkit.enable && vr.programs.gamemode.enable;

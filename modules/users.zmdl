@@ -192,7 +192,7 @@ _meta = {
     hardware.graphics.enable32Bit = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault true);
     security.rtkit.enable = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault true);
     programs.gamemode.enable = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault true);
-    boot.kernel.sysctl."vm.max_map_count" = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkDefault 2147483642);
+    boot.kernel.sysctl."vm.max_map_count" = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) ($lib.mkOverride 900 2147483642);
     security.pam.loginLimits = $lib.mkIf ($cfg.users.($f.user).services.vr.enable or false) [
       { domain = $f.user; type = "hard"; item = "nofile"; value = "524288"; }
       { domain = $f.user; type = "-"; item = "rtprio"; value = "95"; }

@@ -31,20 +31,7 @@ stdenvNoCC.mkDerivation {
   buildPhase = ''
     runHook preBuild
     python3 builder.py --src glyphs --output Zero-Mono.otf --mono
-    cat > thin.py <<'PY'
-    import fontforge
-
-    font = fontforge.open("Zero-Mono.otf")
-    font.selection.all()
-    font.changeWeight(-45)
-    font.familyname = "Zero Mono Thin"
-    font.fullname = "Zero Mono Thin"
-    font.fontname = "ZeroMonoThin"
-    font.weight = "Thin"
-    font.os2_weight = 100
-    font.generate("Zero-Mono-Thin.otf")
-    PY
-    fontforge -lang=py -script thin.py
+    fontforge -lang=py -c 'import fontforge; font = fontforge.open("Zero-Mono.otf"); font.selection.all(); font.changeWeight(-45); font.familyname = "Zero Mono Thin"; font.fullname = "Zero Mono Thin"; font.fontname = "ZeroMonoThin"; font.weight = "Thin"; font.os2_weight = 100; font.generate("Zero-Mono-Thin.otf")'
     runHook postBuild
   '';
 
