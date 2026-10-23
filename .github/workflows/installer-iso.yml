@@ -50,7 +50,7 @@ jobs:
             --print-build-logs
           mkdir -p artifacts
           cp -L installer-result/iso/*.iso artifacts/
-          sha256sum artifacts/*.iso > artifacts/SHA256SUMS
+          (cd artifacts && sha256sum *.iso > SHA256SUMS)
           git -C zenos rev-parse HEAD > artifacts/zenos-revision.txt
           git -C zenpkgs rev-parse HEAD > artifacts/toolchain-revision.txt
           cp zenos/flake.lock artifacts/installer-flake.lock
@@ -62,3 +62,9 @@ jobs:
           path: artifacts/
           compression-level: 0
           retention-days: 14
+
+      - name: Verify Codex daemon in a ZenOS VM
+        run: |
+          nix build ./zenpkgs#checks.x86_64-linux.codex-cli-vm --no-link \
+            --option max-jobs 1 --option cores 2 --option max-substitution-jobs 2 \
+            --print-build-logs
