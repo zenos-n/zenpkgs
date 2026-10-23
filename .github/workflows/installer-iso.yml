@@ -1,0 +1,64 @@
+name: Build installer ISO
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: installer-iso
+  cancel-in-progress: false
+
+jobs:
+  installer:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - name: Checkout package toolchain
+        uses: actions/checkout@v4
+        with:
+          path: zenpkgs
+
+      - name: Checkout installer composition
+        uses: actions/checkout@v4
+        with:
+          repository: zenos-n/zenos-config
+          ref: main
+          path: zenos
+
+      # These are preinstalled SDKs on the disposable GitHub runner, not files
+      # on a developer machine. Reserve the runner's disk for the Nix closure.
+      - name: Reserve runner disk for the image
+        run: |
+          sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc
+          df -h /
+
+      - name: Install bootstrap Nix
+        uses: cachix/install-nix-action@v27
+
+      - name: Use the locked Nix toolchain
+        working-directory: zenpkgs
+        run: |
+          ZENPKGS_NIX=$(nix build --no-link --print-out-paths --inputs-from . 'nixpkgs#nix^out')
+          printf '%s/bin\n' "$ZENPKGS_NIX" >> "$GITHUB_PATH"
+
+      - name: Build the general installer
+        run: |
+          nix build ./zenos#iso --out-link installer-result \
+            --option max-jobs 1 --option cores 2 --option max-substitution-jobs 2 \
+            --print-build-logs
+          mkdir -p artifacts
+          cp -L installer-result/iso/*.iso artifacts/
+          sha256sum artifacts/*.iso > artifacts/SHA256SUMS
+          git -C zenos rev-parse HEAD > artifacts/zenos-revision.txt
+          git -C zenpkgs rev-parse HEAD > artifacts/toolchain-revision.txt
+          cp zenos/flake.lock artifacts/installer-flake.lock
+
+      - name: Upload installer and checksums
+        uses: actions/upload-artifact@v4
+        with:
+          name: zenos-next-installer
+          path: artifacts/
+          compression-level: 0
+          retention-days: 14
