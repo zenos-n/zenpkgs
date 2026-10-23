@@ -23,11 +23,9 @@ enable = enableOption {
   };
   u! {
     dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.app-hider.extensionUuid ];
-    dconf = {
-      settings."org/gnome/shell/extensions/app-hider" = {
-        hidden-apps = $path.hidden-apps;
-        hidden-search-apps = $path.hidden-search-apps;
-      };
+    dconf.settings."org/gnome/shell/extensions/app-hider" = {
+      hidden-apps = $path.hidden-apps;
+      hidden-search-apps = $path.hidden-search-apps;
     };
   };
 };
