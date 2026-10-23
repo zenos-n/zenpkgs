@@ -291,7 +291,12 @@ class TrustedContextOutputTests(unittest.TestCase):
             try:
                 for _ in range(100):
                     status = Path(f"/proc/{child}/stat")
-                    if not status.exists() or status.read_text().split(")", 1)[1].split()[0] == "Z":
+                    try:
+                        state = status.read_text().split(")", 1)[1].split()[0]
+                    except (FileNotFoundError, ProcessLookupError):
+                        # Reaping can remove the process during the procfs read.
+                        break
+                    if state == "Z":
                         break
                     time.sleep(0.01)
                 else:
