@@ -14,6 +14,9 @@ let
   }).config;
   blur = evaluate { zenos.desktops.gnome.extensions.blur-my-shell.enable = true; };
   blurDatabase = builtins.head (builtins.filter (db: db.settings ? "org/gnome/shell/extensions/blur-my-shell") blur.programs.dconf.profiles.user.databases);
+  zeroFontProfile = evaluate {
+    zenos.desktops.gnome.tweaks.zenos-fonts.enable = true;
+  };
   defaults = evaluate {};
   configured = evaluate ({ pkgs, ... }: {
     zenos = {
@@ -137,6 +140,10 @@ in {
     && !(agents.home-manager.users.bob.systemd.user.services ? hapticspp)
     && !(agents.home-manager.users.bob.systemd.user.services ? zbridge);
   serverLoopback = lib.any (lib.hasInfix "127.0.0.1") agents.home-manager.users.alice.systemd.user.services.opencodeServer.Service.ExecStart;
+  enabledGnomeFontsResolveCanonicalPackage = lib.any
+    (package: (package.meta.zenos.registryId or null)
+      == "pkgs.org.zenos.packages.theming.fonts.zero.regular")
+    zeroFontProfile.fonts.packages;
   blurNumericSettingsAreTyped =
     blurDatabase.settings."org/gnome/shell/extensions/blur-my-shell".settings-version._type == "gvariant"
     && builtins.isString (toString blur.environment.etc.dconf.source);
