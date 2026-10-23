@@ -28,7 +28,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     nixpkgs-emulators.url = "github:NixOS/nixpkgs/205fd4226592cc83fd4c0885a3e4c9c400efabb5";
-    nixpkgs-popcorn.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-popcorn.url = "github:NixOS/nixpkgs/1c3fe55ad329cbcb28471bb30f05c9827f724c76";
 
     nixpwamaker = {
       url = "github:doromiert/nixpwamaker/1.1";
@@ -374,29 +374,17 @@
         let
           lib = prev.lib;
           registry = registryFor prev.stdenv.hostPlatform.system;
-          inflate =
-            tree: f:
-            if builtins.isPath tree then
-              f.callPackage tree {
-                lib = f.lib // {
-                  # INJECT: Custom definitions
-                  licenses = f.lib.licenses // utils.licenses;
-                  platforms = f.lib.platforms // utils.platforms;
-                  maintainers =
-                    f.lib.maintainers
-                    // (
-                      if builtins.pathExists ./lib/maintainers.nix then
-                        import ./lib/maintainers.nix { inherit (f) lib; }
-                      else
-                        { }
-                    );
-                  zenUtils = utils;
-                };
-              }
-            else
-              lib.recurseIntoAttrs (lib.mapAttrs (name: value: inflate value f) tree);
-
-          zenTree = loader.generateTree ./lib/compat/package-recipes;
+          compatLib = final.lib // {
+            licenses = final.lib.licenses // utils.licenses;
+            platforms = final.lib.platforms // utils.platforms;
+            maintainers = final.lib.maintainers // (
+              if builtins.pathExists ./lib/maintainers.nix then
+                import ./lib/maintainers.nix { lib = final.lib; }
+              else
+                { }
+            );
+            zenUtils = utils;
+          };
           mappedTree = interface.buildPackageTreeWith {
             pkgs = final;
             legacyPkgs = prev;
@@ -406,7 +394,6 @@
               licenses = lib.licenses // utils.licenses;
             };
           };
-          customTree = if zenTree == { } then { } else inflate zenTree final;
         in
         # ZenPkgs owns one internal package namespace. User-facing package
         # references are prefixed by the zcfg compiler.
@@ -414,7 +401,22 @@
           lib = prev.lib // {
             licenses = prev.lib.licenses // utils.licenses;
             platforms = prev.lib.platforms // utils.platforms;
+            # Transitional recipes use the same final package set and custom
+            # library as before; ZPKG wrappers now own their public identities.
+            zenCompatPackage = recipe: final.callPackage recipe { lib = compatLib; };
             zenPackageSources = {
+              compatRecipes = {
+                "desktops/gnome/extensions/dash-stacks" = ./lib/compat/package-recipes/desktops/gnome/extensions/dash-stacks/package.nix;
+                "desktops/gnome/extensions/forge" = ./lib/compat/package-recipes/desktops/gnome/extensions/forge/package.nix;
+                "desktops/gnome/extensions/zenlink-indicator" = ./lib/compat/package-recipes/desktops/gnome/extensions/zenlink-indicator/package.nix;
+                "desktops/gnome/tweaks/zero-gnome-clock" = ./lib/compat/package-recipes/desktops/gnome/tweaks/zero-gnome-clock/package.nix;
+                "system/zenboot" = ./lib/compat/package-recipes/system/zenboot/package.nix;
+                "system/zenclean" = ./lib/compat/package-recipes/system/zenclean/package.nix;
+                "system/zenlink" = ./lib/compat/package-recipes/system/zenlink/package.nix;
+                "theming/icons/zenos-icons" = ./lib/compat/package-recipes/theming/icons/zenos-icons/package.nix;
+                "theming/system/fastfetch" = ./lib/compat/package-recipes/theming/system/fastfetch/package.nix;
+                "theming/wallpapers/destination-2" = ./lib/compat/package-recipes/theming/wallpapers/destination-2/package.nix;
+              };
               emulatorsNixpkgs = inputs.nixpkgs-emulators.outPath;
               popcornNixpkgs = inputs.nixpkgs-popcorn.outPath;
               vrTools = inputs.source-vr-tools.outPath;
@@ -426,14 +428,7 @@
           };
           zenos =
             if zstrRuntime.packageExposure (mkDslArtifacts prev.stdenv.hostPlatform.system).bundleJSON then
-              assert packageOutputs.checkLegacyOwnership {
-                inherit registry;
-                sourceTree = zenTree;
-              };
-              mappedTree // {
-                legacy = prev;
-                byCategories = lib.recursiveUpdate mappedTree.byCategories customTree;
-              }
+              mappedTree // { legacy = prev; }
             else
               { };
         };

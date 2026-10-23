@@ -314,7 +314,7 @@ rec {
             { defaultStatus = "unavailable"; }
         else if !(value ? default) then
           { defaultStatus = if isUpstream then "unavailable" else "absent"; }
-        else if !evaluateDefaults then
+        else if !evaluateDefaults || isUpstream then
           { defaultStatus = "unavailable"; }
         else if
           builtins.any (
@@ -586,7 +586,9 @@ rec {
         inherit limits;
         metadataAt = path: metadata.${key path} or { };
         mountPaths = map (mount: publicPath mount.path) mounts;
-        evaluateDefaults = false;
+        # Local scalar defaults are part of the authored schema. serializeOptions
+        # still skips upstream, complex, throwing and placeholder defaults.
+        evaluateDefaults = true;
       };
       packageMount = builtins.any (mount: mount.kind == "packages") mounts;
       packageEntries = builtins.listToAttrs (map (entry: {

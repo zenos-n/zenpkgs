@@ -1,0 +1,23 @@
+_meta = {
+  id = "org.zenos.packages.system.zenclean";
+  name = "zenos-maintenance";
+  summary = "Automated system maintenance and optimization utility";
+  description = ''
+    Automated system maintenance and optimization utility
+
+    The ZenOS Maintenance package provides an intelligent background service that
+    optimizes the system during idle periods.
+
+    **Features:**
+    - **Smart Idle Detection:** Monitors CPU load to run tasks when user is away.
+    - **Garbage Collection:** Automatically clears old Nix store paths.
+    - **Notifications:** Alerts the user when maintenance is completed.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.0";
+  tags = [ "system" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+build = $lib.zenCompatPackage $lib.zenPackageSources.compatRecipes."system/zenclean";

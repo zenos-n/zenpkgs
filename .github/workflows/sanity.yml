@@ -56,7 +56,8 @@ jobs:
         shell: bash
         run: |
           failed=()
-          checks=(registry-contract registry-counts registry-path-identities
+          checks=(registry-contract registry-counts package-paths registry-build-providers
+            registry-output-ownership registry-path-identities
             registry-invalid-identities registry-structure-exposure
             registry-metadata-defaults public-package-outputs
             package-output-collisions migration-packages search-index)

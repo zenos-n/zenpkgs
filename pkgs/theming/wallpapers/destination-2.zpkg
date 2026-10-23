@@ -1,0 +1,14 @@
+_meta = {
+  id = "org.zenos.packages.theming.wallpapers.destination-2";
+  name = "destination-2-wallpapers";
+  summary = "Destination 2 wallpaper collection for ZenOS";
+  description = ''
+    Destination 2 wallpaper collection for ZenOS
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "theming" "wallpapers" ];
+  license = $l.napalm;
+};
+
+build = $lib.zenCompatPackage $lib.zenPackageSources.compatRecipes."theming/wallpapers/destination-2";

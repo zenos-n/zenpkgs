@@ -1,0 +1,24 @@
+_meta = {
+  id = "org.zenos.packages.system.zenboot";
+  name = "zenboot";
+  summary = "ZenOS bootloader automation based on rEFInd";
+  description = ''
+    ZenOS bootloader automation based on rEFInd
+
+    **ZenBoot** is an automated bootloader management tool for ZenOS, built on top
+    of rEFInd. It handles the generation of boot entries, manages EFI variables,
+    and applies the ZenOS branding to the boot stage.
+
+    **Features:**
+    - Automatic generation of rEFInd configuration.
+    - Integrated system profile versioning.
+    - Themed boot menu with custom icons.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0";
+  tags = [ "system" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+build = $lib.zenCompatPackage $lib.zenPackageSources.compatRecipes."system/zenboot";

@@ -321,9 +321,12 @@ require ZSTR mounting; boundaries and VM commands are in
 `tests/mounting/module-aliases.md` and `tests/mounting/run-ownership.py`.
 
 Package outputs use canonical IDs and the derived `byCategories` view.
-Collisions are rejected instead of silently overwriting another package. The package overlay
-also rejects overlapping ZPKG and compatibility-recipe ownership from their static
-source inventories, without evaluating package builders to discover tree shape.
+Collisions are rejected instead of silently overwriting another package.
+Ten former compatibility-only recipes now serve as trusted transitional builders
+behind canonical ZPKG wrappers. Their internal recipe paths do not implicitly
+export packages or create competing ownership: the declarations define the
+registry entries and both public views. Static ownership checks reject conflicting
+exports without evaluating package builders to discover tree shape.
 
 The foundation checks do not certify all existing library options' enabled
 behavior, activation, or boot. Run integration acceptance in a ZenOS VM.

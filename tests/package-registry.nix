@@ -40,6 +40,19 @@ let
   registryPathKeys = map pathKey registry.packages;
   outputName = path: lib.concatStringsSep "-" ([ "zenos" ] ++ path);
   outputNames = map (entry: outputName entry.target) activeEntries;
+  # These recipes are internal builders, each owned by one canonical ZPKG.
+  compatBuilderCategories = [
+    [ "desktops" "gnome" "extensions" "dash-stacks" ]
+    [ "desktops" "gnome" "extensions" "forge" ]
+    [ "desktops" "gnome" "extensions" "zenlink-indicator" ]
+    [ "desktops" "gnome" "tweaks" "zero-gnome-clock" ]
+    [ "system" "zenboot" ]
+    [ "system" "zenclean" ]
+    [ "system" "zenlink" ]
+    [ "theming" "icons" "zenos-icons" ]
+    [ "theming" "system" "fastfetch" ]
+    [ "theming" "wallpapers" "destination-2" ]
+  ];
   buildProvider =
     entry:
     import entry.buildFile {
@@ -267,26 +280,26 @@ in
     pass "zenpkgs-no-retired-package-roots";
 
   registry-counts =
-    assert builtins.length expectedRegistry.packages == 4142;
-    assert builtins.length expectedActiveEntries == 4142;
-    assert builtins.length registry.packages == 4142;
-    assert builtins.length activeEntries == 4142;
+    assert builtins.length expectedRegistry.packages == 4152;
+    assert builtins.length expectedActiveEntries == 4152;
+    assert builtins.length registry.packages == 4152;
+    assert builtins.length activeEntries == 4152;
     assert builtins.length importEntries == 4098;
-    assert builtins.length buildEntries == 44;
+    assert builtins.length buildEntries == 54;
     assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 
   package-paths =
-    assert builtins.length (registryPaths expectedRegistry) == 4142;
-    assert builtins.length (packagePaths expectedRegistry) == 4142;
-    assert builtins.length activePaths == 4142;
+    assert builtins.length (registryPaths expectedRegistry) == 4152;
+    assert builtins.length (packagePaths expectedRegistry) == 4152;
+    assert builtins.length activePaths == 4152;
     assert registryPathKeys == lib.sort builtins.lessThan registryPathKeys;
     assert registryPaths registry == registryPaths expectedRegistry;
     assert packagePaths registry == packagePaths expectedSorted;
     pass "zenpkgs-package-registry-paths";
 
   public-package-outputs =
-    assert builtins.length outputIdentities == 4142;
+    assert builtins.length outputIdentities == 4152;
     assert lib.all (identity: identity) outputIdentities;
     pass "zenpkgs-public-package-outputs";
 
@@ -318,13 +331,20 @@ in
         "apps.system.zenos.zenos-rebuild"
         "apps.video.tubefin"
         "desktops.gnome.extensions.codex-usage"
+        "desktops.gnome.extensions.dash-stacks"
+        "desktops.gnome.extensions.forge"
         "desktops.gnome.extensions.wiggly"
         "desktops.gnome.extensions.zane-indicator"
         "desktops.gnome.extensions.zen-vision"
+        "desktops.gnome.extensions.zenlink-indicator"
+        "desktops.gnome.tweaks.zero-gnome-clock"
         "libs.libfreenect2"
         "system.kernel.popcorn"
         "system.kernel.popcorn-zen4"
+        "system.zenboot"
+        "system.zenclean"
         "system.zenfs"
+        "system.zenlink"
         "system.zenos-oobe-mode"
         "system.zenos-recovery-tools"
         "system.zenos-refind-installer"
@@ -335,9 +355,12 @@ in
         "theming.fonts.zero.mono-thin"
         "theming.fonts.zero.regular"
         "theming.icons.adwaita-hacks"
+        "theming.icons.zenos-icons"
+        "theming.system.fastfetch"
         "theming.system.zenos-branding"
         "theming.system.zenos-plymouth"
         "theming.system.zenos-refind-theme"
+        "theming.wallpapers.destination-2"
       ];
     assert lib.all (
       entry:
@@ -369,7 +392,7 @@ in
     pass "zenpkgs-registry-build-providers";
 
   registry-output-ownership =
-    assert builtins.length (lib.unique outputNames) == 4142;
+    assert builtins.length (lib.unique outputNames) == 4152;
     assert
       builtins.attrNames publicPackages == lib.sort builtins.lessThan (
         outputNames
@@ -380,10 +403,10 @@ in
           "zenos-rebuild"
         ]
       );
-    assert (import ../lib/package-outputs.nix { inherit lib; }).checkLegacyOwnership {
-      inherit registry;
-      sourceTree = (import ../lib/loader.nix { inherit lib; }).generateTree ../lib/compat/package-recipes;
-    };
+    assert builtins.length compatBuilderCategories == 10;
+    assert lib.all (categoryTarget:
+      builtins.length (lib.filter (entry: entry.categoryTarget == categoryTarget) buildEntries) == 1
+    ) compatBuilderCategories;
     pass "zenpkgs-registry-output-ownership";
 
   registry-path-identities =

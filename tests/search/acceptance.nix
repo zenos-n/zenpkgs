@@ -192,6 +192,16 @@ let
       typeDepth = 2;
     };
   };
+  # Failure-only, bounded data: keep provenance and default failures distinguishable
+  # without serializing the mounted subtree or forcing unrelated schemas.
+  localMountDiagnostic = {
+    upstream = localMount.meta.upstream or null;
+    messageUpstream = localMount.sub.message.meta.upstream or null;
+    messageDefault = localMount.sub.message.meta.default or null;
+    messageDefaultStatus = localMount.sub.message.meta.defaultStatus or null;
+    labelUpstream = localMount.sub.instances.sub."<name>".sub.label.meta.upstream or null;
+    hasUpstreamOnly = localMount.sub ? upstreamOnly;
+  };
   checks = {
     mountedModule = demo.sub.message.meta.default == "hello";
     movedMount = index.options.relocated.sub.demo.sub.message.meta.default == "hello";
@@ -232,6 +242,10 @@ let
       && !localMount.sub.message.meta.upstream
       && !localMount.sub.instances.sub."<name>".sub.label.meta.upstream
       && !(localMount.sub ? upstreamOnly)
+      && localMount.sub.message.meta.default == "hello";
+    disjointLocalMountSchema = !(localMount.sub ? upstreamOnly);
+    disjointLocalMountDefault =
+      localMount.sub.message.meta.defaultStatus == "value"
       && localMount.sub.message.meta.default == "hello";
     localMountWithinAlias =
       !userLocalMount.meta.upstream
@@ -330,6 +344,22 @@ let
       && index.options.legacy.sub.future.sub.marker.meta.maintainers == [ ];
     scalarDefault =
       unit.sub.scalar.meta.defaultStatus == "value" && unit.sub.scalar.meta.default == false;
+    upstreamDefaultNotEvaluated =
+      let serialized = search.serializeOptions {
+        tree = lib.mkOption {
+          type = lib.types.str;
+          default = builtins.abort "upstream default forced";
+        };
+        upstream = true;
+      }; in serialized.meta.upstream
+        && serialized.meta.defaultStatus == "unavailable"
+        && serialized.meta.default == null;
+    defaultsExplicitlyDisabled =
+      let serialized = search.serializeOptions {
+        tree = unitTree.scalar;
+        evaluateDefaults = false;
+      }; in serialized.meta.defaultStatus == "unavailable"
+        && serialized.meta.default == null;
     absentDefault = unit.sub.required.meta.defaultStatus == "absent";
     defaultText =
       unit.sub.documented.meta.defaultStatus == "documented"
@@ -392,7 +422,9 @@ let
     );
   };
 in
-assert lib.all (name: lib.assertMsg checks.${name} "search acceptance failed: ${name}") (
-  builtins.attrNames checks
-);
+assert lib.all (name: lib.assertMsg checks.${name} (
+  "search acceptance failed: ${name}"
+  + lib.optionalString (lib.hasPrefix "disjointLocalMount" name)
+    " localMount=${builtins.toJSON localMountDiagnostic}"
+)) (builtins.attrNames checks);
 checks

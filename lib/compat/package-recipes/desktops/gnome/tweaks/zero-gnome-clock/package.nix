@@ -10,7 +10,7 @@ stdenv.mkDerivation {
   version = "1.0";
 
   nativeBuildInputs = with pkgs; [
-    zenos.theming.fonts.zero.regular
+    zenos.byCategories.theming.fonts.zero.regular
     gnomeExtensions.user-themes
   ];
 

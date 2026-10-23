@@ -243292,6 +243292,693 @@
         "icons",
         "adwaita-hacks"
       ]
+    },
+    {
+      "id": "pkgs.org.zenos.packages.desktops.gnome.extensions.dash-stacks",
+      "target": [
+        "org",
+        "zenos",
+        "packages",
+        "desktops",
+        "gnome",
+        "extensions",
+        "dash-stacks"
+      ],
+      "meta": {
+        "name": "dash-stacks",
+        "summary": "macOS-style folder stacks for the GNOME dash",
+        "description": "\n    macOS-style folder stacks for the GNOME dash\n  ",
+        "tags": [
+          "desktops",
+          "gnome",
+          "extensions"
+        ],
+        "maintainers": [],
+        "license": "$l.napalm",
+        "zenosVersion": "1.0.0",
+        "id": "org.zenos.packages.desktops.gnome.extensions.dash-stacks",
+        "packageVersion": "0-unstable-2026-08-30"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "arguments": [
+            {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "zenPackageSources"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "compatRecipes"
+                },
+                {
+                  "kind": "string",
+                  "value": "desktops/gnome/extensions/dash-stacks"
+                }
+              ],
+              "type": "variable"
+            }
+          ],
+          "callee": {
+            "name": "lib",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "zenCompatPackage"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
+        "dash-stacks"
+      ]
+    },
+    {
+      "id": "pkgs.org.zenos.packages.desktops.gnome.extensions.forge",
+      "target": [
+        "org",
+        "zenos",
+        "packages",
+        "desktops",
+        "gnome",
+        "extensions",
+        "forge"
+      ],
+      "meta": {
+        "name": "forge",
+        "summary": "Forge tiling window manager extension built from GNOME 50-compatible upstream",
+        "description": "\n    Forge tiling window manager extension built from GNOME 50-compatible upstream\n  ",
+        "tags": [
+          "desktops",
+          "gnome",
+          "extensions"
+        ],
+        "maintainers": [],
+        "license": "$l.gpl3Only",
+        "zenosVersion": "1.0.0",
+        "id": "org.zenos.packages.desktops.gnome.extensions.forge",
+        "packageVersion": "0-unstable-2026-06-25"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "arguments": [
+            {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "zenPackageSources"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "compatRecipes"
+                },
+                {
+                  "kind": "string",
+                  "value": "desktops/gnome/extensions/forge"
+                }
+              ],
+              "type": "variable"
+            }
+          ],
+          "callee": {
+            "name": "lib",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "zenCompatPackage"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
+        "forge"
+      ]
+    },
+    {
+      "id": "pkgs.org.zenos.packages.desktops.gnome.extensions.zenlink-indicator",
+      "target": [
+        "org",
+        "zenos",
+        "packages",
+        "desktops",
+        "gnome",
+        "extensions",
+        "zenlink-indicator"
+      ],
+      "meta": {
+        "name": "zenlink-indicator",
+        "summary": "ZenLink status indicator and control interface for GNOME",
+        "description": "\n    ZenLink status indicator and control interface for GNOME\n\n    **ZenLink Indicator** provides a status icon and control interface for the\n    ZenLink service. It integrates directly into the GNOME control center or\n    top bar, offering quick access to device pairing, file transfers, and\n    notification settings.\n\n    **Features:**\n    - Visual status indicator for connectivity.\n    - Quick access menu for common actions.\n  ",
+        "tags": [
+          "desktops",
+          "gnome",
+          "extensions"
+        ],
+        "maintainers": [
+          "doromiert"
+        ],
+        "license": "$l.napl",
+        "zenosVersion": "1.0.0",
+        "id": "org.zenos.packages.desktops.gnome.extensions.zenlink-indicator",
+        "packageVersion": "1.0"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "arguments": [
+            {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "zenPackageSources"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "compatRecipes"
+                },
+                {
+                  "kind": "string",
+                  "value": "desktops/gnome/extensions/zenlink-indicator"
+                }
+              ],
+              "type": "variable"
+            }
+          ],
+          "callee": {
+            "name": "lib",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "zenCompatPackage"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
+        "zenlink-indicator"
+      ]
+    },
+    {
+      "id": "pkgs.org.zenos.packages.desktops.gnome.tweaks.zero-gnome-clock",
+      "target": [
+        "org",
+        "zenos",
+        "packages",
+        "desktops",
+        "gnome",
+        "tweaks",
+        "zero-gnome-clock"
+      ],
+      "meta": {
+        "name": "zero-gnome-clock",
+        "summary": "GNOME Shell top bar clock typography override",
+        "description": "\n    GNOME Shell top bar clock typography override\n\n    **Zero GNOME Clock** is a custom GNOME Shell theme component that overrides the\n    default top bar clock font. It uses the custom \"Zero\" font to provide a minimal\n    and stylized clock appearance.\n\n    **Features:**\n    - Applies the \"Zero\" font family to the clock display.\n    - Uses `@font-face` injection via generated CSS.\n    - Includes dconf profile setup for user theme integration.\n  ",
+        "tags": [
+          "desktops",
+          "gnome",
+          "tweaks"
+        ],
+        "maintainers": [
+          "doromiert"
+        ],
+        "license": "$l.napl",
+        "zenosVersion": "1.0.0",
+        "id": "org.zenos.packages.desktops.gnome.tweaks.zero-gnome-clock",
+        "packageVersion": "1.0"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "arguments": [
+            {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "zenPackageSources"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "compatRecipes"
+                },
+                {
+                  "kind": "string",
+                  "value": "desktops/gnome/tweaks/zero-gnome-clock"
+                }
+              ],
+              "type": "variable"
+            }
+          ],
+          "callee": {
+            "name": "lib",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "zenCompatPackage"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "tweaks",
+        "zero-gnome-clock"
+      ]
+    },
+    {
+      "id": "pkgs.org.zenos.packages.system.zenboot",
+      "target": [
+        "org",
+        "zenos",
+        "packages",
+        "system",
+        "zenboot"
+      ],
+      "meta": {
+        "name": "zenboot",
+        "summary": "ZenOS bootloader automation based on rEFInd",
+        "description": "\n    ZenOS bootloader automation based on rEFInd\n\n    **ZenBoot** is an automated bootloader management tool for ZenOS, built on top\n    of rEFInd. It handles the generation of boot entries, manages EFI variables,\n    and applies the ZenOS branding to the boot stage.\n\n    **Features:**\n    - Automatic generation of rEFInd configuration.\n    - Integrated system profile versioning.\n    - Themed boot menu with custom icons.\n  ",
+        "tags": [
+          "system"
+        ],
+        "maintainers": [
+          "doromiert"
+        ],
+        "license": "$l.napl",
+        "zenosVersion": "1.0.0",
+        "id": "org.zenos.packages.system.zenboot",
+        "packageVersion": "1.0"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "arguments": [
+            {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "zenPackageSources"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "compatRecipes"
+                },
+                {
+                  "kind": "string",
+                  "value": "system/zenboot"
+                }
+              ],
+              "type": "variable"
+            }
+          ],
+          "callee": {
+            "name": "lib",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "zenCompatPackage"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "system",
+        "zenboot"
+      ]
+    },
+    {
+      "id": "pkgs.org.zenos.packages.system.zenclean",
+      "target": [
+        "org",
+        "zenos",
+        "packages",
+        "system",
+        "zenclean"
+      ],
+      "meta": {
+        "name": "zenos-maintenance",
+        "summary": "Automated system maintenance and optimization utility",
+        "description": "\n    Automated system maintenance and optimization utility\n\n    The ZenOS Maintenance package provides an intelligent background service that\n    optimizes the system during idle periods.\n\n    **Features:**\n    - **Smart Idle Detection:** Monitors CPU load to run tasks when user is away.\n    - **Garbage Collection:** Automatically clears old Nix store paths.\n    - **Notifications:** Alerts the user when maintenance is completed.\n  ",
+        "tags": [
+          "system"
+        ],
+        "maintainers": [
+          "doromiert"
+        ],
+        "license": "$l.napl",
+        "zenosVersion": "1.0.0",
+        "id": "org.zenos.packages.system.zenclean",
+        "packageVersion": "0.1.0"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "arguments": [
+            {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "zenPackageSources"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "compatRecipes"
+                },
+                {
+                  "kind": "string",
+                  "value": "system/zenclean"
+                }
+              ],
+              "type": "variable"
+            }
+          ],
+          "callee": {
+            "name": "lib",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "zenCompatPackage"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "system",
+        "zenclean"
+      ]
+    },
+    {
+      "id": "pkgs.org.zenos.packages.system.zenlink",
+      "target": [
+        "org",
+        "zenos",
+        "packages",
+        "system",
+        "zenlink"
+      ],
+      "meta": {
+        "name": "zenlink",
+        "summary": "The Android to ZenOS communication bridge",
+        "description": "\n    The Android to ZenOS communication bridge\n\n    **ZenLink** (formerly ZeroBridge)\n\n    ZenLink uses termux to stream PC audio to your phone and ADB to stream phone's mic and camera to your PC.\n    It provides a seamless integration between mobile hardware and the ZenOS desktop environment.\n    Configure using `zl-config` or the gnome extension (`pkgs.byCategories.desktops.gnome.extensions.zenlink-indicator`).\n  ",
+        "tags": [
+          "system"
+        ],
+        "maintainers": [
+          "doromiert"
+        ],
+        "license": "$l.napl",
+        "zenosVersion": "1.0.0",
+        "id": "org.zenos.packages.system.zenlink",
+        "packageVersion": "1.0.0"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "arguments": [
+            {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "zenPackageSources"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "compatRecipes"
+                },
+                {
+                  "kind": "string",
+                  "value": "system/zenlink"
+                }
+              ],
+              "type": "variable"
+            }
+          ],
+          "callee": {
+            "name": "lib",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "zenCompatPackage"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "system",
+        "zenlink"
+      ]
+    },
+    {
+      "id": "pkgs.org.zenos.packages.theming.icons.zenos-icons",
+      "target": [
+        "org",
+        "zenos",
+        "packages",
+        "theming",
+        "icons",
+        "zenos-icons"
+      ],
+      "meta": {
+        "name": "zenos-icons",
+        "summary": "Core iconography set for the ZenOS environment",
+        "description": "\n    Core iconography set for the ZenOS environment\n\n    **ZenOS Icons** provides the central brand iconography for the ZenOS\n    desktop environment. It includes system icons, folder symbols, and\n    app icons designed to match the brand's minimal aesthetic.\n\n    **Features:**\n    - Consistent visual style across all sizes.\n    - High-quality scalable vector graphics (SVG).\n  ",
+        "tags": [
+          "theming",
+          "icons"
+        ],
+        "maintainers": [
+          "doromiert"
+        ],
+        "license": "$l.napl",
+        "zenosVersion": "1.0.0",
+        "id": "org.zenos.packages.theming.icons.zenos-icons",
+        "packageVersion": "1.0"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "arguments": [
+            {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "zenPackageSources"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "compatRecipes"
+                },
+                {
+                  "kind": "string",
+                  "value": "theming/icons/zenos-icons"
+                }
+              ],
+              "type": "variable"
+            }
+          ],
+          "callee": {
+            "name": "lib",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "zenCompatPackage"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "theming",
+        "icons",
+        "zenos-icons"
+      ]
+    },
+    {
+      "id": "pkgs.org.zenos.packages.theming.system.fastfetch",
+      "target": [
+        "org",
+        "zenos",
+        "packages",
+        "theming",
+        "system",
+        "fastfetch"
+      ],
+      "meta": {
+        "name": "zenos-fastfetch",
+        "summary": "ZenOS fastfetch theming and ASCII art",
+        "description": "\n    ZenOS fastfetch theming and ASCII art\n\n    **ZenOS Fastfetch** provides a custom configuration for `fastfetch` that aligns\n    with the ZenOS brand. It wraps the standard `fastfetch` binary to load the\n    ZenOS preset and ASCII art by default.\n\n    **Features:**\n    - Custom ZenOS ASCII art.\n    - Pre-configured JSONC preset.\n    - Global availability without user-level configuration.\n  ",
+        "tags": [
+          "theming",
+          "system"
+        ],
+        "maintainers": [
+          "doromiert"
+        ],
+        "license": "$l.napl",
+        "zenosVersion": "1.0.0",
+        "id": "org.zenos.packages.theming.system.fastfetch",
+        "packageVersion": "1.0"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "arguments": [
+            {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "zenPackageSources"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "compatRecipes"
+                },
+                {
+                  "kind": "string",
+                  "value": "theming/system/fastfetch"
+                }
+              ],
+              "type": "variable"
+            }
+          ],
+          "callee": {
+            "name": "lib",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "zenCompatPackage"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "theming",
+        "system",
+        "fastfetch"
+      ]
+    },
+    {
+      "id": "pkgs.org.zenos.packages.theming.wallpapers.destination-2",
+      "target": [
+        "org",
+        "zenos",
+        "packages",
+        "theming",
+        "wallpapers",
+        "destination-2"
+      ],
+      "meta": {
+        "name": "destination-2-wallpapers",
+        "summary": "Destination 2 wallpaper collection for ZenOS",
+        "description": "\n    Destination 2 wallpaper collection for ZenOS\n  ",
+        "tags": [
+          "theming",
+          "wallpapers"
+        ],
+        "maintainers": [],
+        "license": "$l.napalm",
+        "zenosVersion": "1.0.0",
+        "id": "org.zenos.packages.theming.wallpapers.destination-2",
+        "packageVersion": "1.0.0"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "arguments": [
+            {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "zenPackageSources"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "compatRecipes"
+                },
+                {
+                  "kind": "string",
+                  "value": "theming/wallpapers/destination-2"
+                }
+              ],
+              "type": "variable"
+            }
+          ],
+          "callee": {
+            "name": "lib",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "zenCompatPackage"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "theming",
+        "wallpapers",
+        "destination-2"
+      ]
     }
   ]
 }
