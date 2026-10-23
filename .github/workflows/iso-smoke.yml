@@ -1,0 +1,43 @@
+name: Boot installer ISO
+on:
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: Successful ISO build run containing zenos-next-installer
+        required: true
+        type: string
+permissions:
+  contents: read
+  actions: read
+jobs:
+  boot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          repository: zenos-n/zenos-config
+          ref: main
+          path: zenos
+      - uses: actions/download-artifact@v4
+        with:
+          name: zenos-next-installer
+          path: image
+          run-id: ${{ inputs.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Install VM tools on the disposable runner
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install --no-install-recommends -y qemu-system-x86 ovmf sshpass
+          if [ -e /dev/kvm ]; then sudo chmod a+rw /dev/kvm; fi
+      - name: Boot and check the live session
+        run: |
+          iso=$(find image -maxdepth 1 -name '*.iso' -print -quit)
+          test -n "$iso"
+          bash zenos/hosts/installer-iso/test-boot.sh "$iso" boot-report
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: installer-boot-report
+          path: boot-report/
+          retention-days: 14
