@@ -165,7 +165,7 @@ sibling = enableOption {};
     def test_package_build_metadata_and_derivation_identity_match_interface(self):
         for package_version, expected in ((None, "1.2.3"), ('""', "1.2.3"), ('"upstream-9"', "upstream-9")):
             with self.subTest(package_version=package_version):
-                fields = '''name = "Authored"; summary = "Summary"; description = ''Markdown'';
+                fields = '''id = "org.example.Test"; name = "Authored"; summary = "Summary"; description = ''Markdown'';
                     zenosVersion = 1.2.3; tags = [ "test" ]; maintainers = [ $m.doromiert ]; license = $l.mit;'''
                 if package_version is not None:
                     fields += "packageVersion = " + package_version + ";"
@@ -229,7 +229,7 @@ sibling = enableOption {};
             ('license = $l.missing;', 'maintainers = {}; licenses = {};', "missing"),
         ):
             with self.subTest(metadata=metadata):
-                document = parse("_meta = { " + metadata + " }; import $pkgs.legacy.demo;", "demo.zpkg")
+                document = parse('_meta = { id = "org.example.Test"; ' + metadata + " }; import $pkgs.legacy.demo;", "demo.zpkg")
                 output = compile_zpkg(document)
                 expression = "((" + output + ") { pkgs.zenos.legacy.demo = { type = \"derivation\"; drvPath = \"unchanged\"; }; " + arguments + " }).drvPath"
                 result = subprocess.run(["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--expr", expression], capture_output=True, text=True)
