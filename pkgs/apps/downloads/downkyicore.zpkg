@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.downkyicore";
   name = "DownKyi";
   summary = "Cross-platform Bilibili downloader built with Avalonia";
   description = ''

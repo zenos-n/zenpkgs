@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-wt";
   name = "git-wt";
   summary = "Git subcommand that makes git worktree simple";
   description = ''

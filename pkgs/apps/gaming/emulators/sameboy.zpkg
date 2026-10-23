@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.sameboy";
   name = "SameBoy";
   summary = "Game Boy, Game Boy Color, and Super Game Boy emulator";
   description = ''

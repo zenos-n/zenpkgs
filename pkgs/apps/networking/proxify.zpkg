@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.proxify";
   name = "Proxify";
   summary = "Proxy tool for HTTP/HTTPS traffic capture";
   description = ''

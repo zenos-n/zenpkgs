@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.libs.ocl-icd";
   name = "ocl-icd";
   summary = "OpenCL ICD Loader for opencl-headers-2025.07.22";
   description = ''

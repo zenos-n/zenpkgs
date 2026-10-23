@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.clipqr";
   name = "ClipQR";
   summary = "Scan QR codes on screen and from camera, the result is in your clipboard";
   description = ''

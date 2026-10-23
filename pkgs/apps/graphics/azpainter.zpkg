@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.azpainter";
   name = "AzPainter";
   summary = "Full color painting software for illustration drawing";
   description = ''

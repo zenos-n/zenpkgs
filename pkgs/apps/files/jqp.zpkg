@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.jqp";
   name = "jqp";
   summary = "TUI playground to experiment with jq";
   description = ''

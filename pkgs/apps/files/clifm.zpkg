@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.clifm";
   name = "Clifm";
   summary = "CLI-based, shell-like, and non-curses terminal file manager";
   description = ''

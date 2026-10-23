@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.iwd";
   name = "iwd";
   summary = "Wireless daemon for Linux";
   description = ''

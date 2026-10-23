@@ -3,7 +3,7 @@
 { config, lib, pkgs, ... }:
 let
   cfg = config.zenos.system.zenfs;
-  zenfs = if package == null then pkgs.zenos.system.zenfs else package;
+  zenfs = if package == null then pkgs.zenos.byCategories.system.zenfs else package;
   users = lib.mapAttrs (_: user: { inherit (user) home; group = user.group or "users"; }) managedUsers;
   aliases = lib.optionalAttrs includeBootAlias { "/Boot" = "/boot"; } // {
     "/Config" = "/etc";

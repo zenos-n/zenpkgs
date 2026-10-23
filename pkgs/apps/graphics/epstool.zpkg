@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.epstool";
   name = "epstool";
   summary = "Utility to create or extract preview images in EPS files, fix bounding boxes and convert to bitmaps";
   description = ''

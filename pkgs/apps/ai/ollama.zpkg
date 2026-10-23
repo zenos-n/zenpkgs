@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.ollama";
   name = "Ollama";
   summary = "Get up and running with large language models locally";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.decode-spam-headers";
   name = "Decode Spam Headers";
   summary = "Script that helps you understand why your E-Mail ended up in Spam";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.feedr";
   name = "Feedr";
   summary = "Feature-rich terminal-based RSS/Atom feed reader written in Rust";
   description = ''

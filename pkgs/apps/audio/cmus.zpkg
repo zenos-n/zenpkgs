@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.cmus";
   name = "cmus";
   summary = "Small, fast and powerful console music player for Linux and *BSD";
   description = ''

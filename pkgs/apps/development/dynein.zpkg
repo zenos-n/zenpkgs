@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dynein";
   name = "Dynein";
   summary = "DynamoDB CLI written in Rust";
   description = ''

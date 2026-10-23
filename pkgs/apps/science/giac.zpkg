@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.giac";
   name = "Giac";
   summary = "Free computer algebra system (CAS)";
   description = ''

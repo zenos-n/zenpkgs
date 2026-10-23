@@ -153,6 +153,7 @@ def validate(
 def validate_document_contract(document: Document) -> None:
     if document.kind is FileKind.ZPKG:
         _validate_zpkg_declaration(tuple(_effective_statements(document)), document.span)
+        package_identity(document)
     elif document.kind is FileKind.ZMDL:
         validate_metadata(document, warn_missing=False, require_option_types=True)
 
@@ -178,7 +179,7 @@ def validate_metadata(
     defaults: dict[tuple[str, ...], Expression] = {}
     allowed = set(_DESCRIPTIVE_FIELDS) | {"zenosVersion", "type", "default", "weight"}
     if document.kind is FileKind.ZPKG:
-        allowed |= {"packageVersion", "dependencies"}
+        allowed |= {"id", "packageVersion", "dependencies"}
 
     source = PurePath(document.span.source)
     root_name = source.stem
@@ -231,7 +232,9 @@ def validate_metadata(
         if len(names) != 1:
             raise ZenLangError(Diagnostic("ZEN225", f"metadata {name} does not accept nested fields", value.span))
         valid = True
-        if name in ("name", "summary", "packageVersion"):
+        if name == "id":
+            _validate_package_id(value)
+        elif name in ("name", "summary", "packageVersion"):
             valid = isinstance(value, StringExpr)
         elif name == "description":
             valid = isinstance(value, StringExpr) and value.multiline or (
@@ -339,6 +342,46 @@ def validate_metadata(
         if version is None and (document.kind is FileKind.ZMDL or not path):
             diagnostics.append(Diagnostic("ZEN228", f"{label}: unresolved effective zenosVersion", spans[path], "warning"))
     return tuple(dict.fromkeys(diagnostics))
+
+
+def _validate_package_id(value: Expression) -> str:
+    while isinstance(value, GroupExpr):
+        value = value.value
+    identity = "".join(part.value for part in value.parts) if _is_plain_string(value) else ""
+    # Keep the declaration grammar identical to the registry adapter.
+    label = r"[A-Za-z][A-Za-z0-9_-]*"
+    if (not isinstance(value, StringExpr) or value.multiline
+            or re.fullmatch(label + r"(?:\." + label + r")+", identity) is None
+            or identity.split(".")[0] in {"legacy", "byCategories"}):
+        raise ZenLangError(Diagnostic(
+            "ZEN231", "ZPKG _meta.id requires a literal reverse-DNS string (for example org.example.Tool); legacy and byCategories roots are reserved", value.span
+        ))
+    return identity
+
+
+def package_identity(document: Document) -> str:
+    """Read the required identity from effective root metadata, including imports."""
+    found: list[Expression] = []
+
+    def visit(statements: tuple[Statement, ...], prefix: tuple[str, ...] = ()) -> None:
+        for statement in statements:
+            if not isinstance(statement, Assignment):
+                continue
+            path = (*prefix, *_target_names(statement))
+            value = statement.value
+            while isinstance(value, GroupExpr):
+                value = value.value
+            if path == ("_meta", "id"):
+                found.append(value)
+            elif path == ("_meta",) and isinstance(value, AttrSet):
+                visit(value.statements, path)
+
+    visit(tuple(_effective_statements(document)))
+    if len(found) != 1:
+        raise ZenLangError(Diagnostic(
+            "ZEN231", "ZPKG requires exactly one _meta.id literal reverse-DNS string", found[-1].span if found else document.span
+        ))
+    return _validate_package_id(found[0])
 
 
 def _registry_reference(value: Expression, namespace: str) -> bool:

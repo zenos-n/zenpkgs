@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-mutants";
   name = "cargo-mutants";
   summary = "Mutation testing tool for Rust";
   description = ''

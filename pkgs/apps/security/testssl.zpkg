@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.testssl";
   name = "testssl.sh";
   summary = "CLI tool to check a server's TLS/SSL capabilities";
   description = ''

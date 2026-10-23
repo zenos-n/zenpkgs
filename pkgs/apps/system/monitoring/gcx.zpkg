@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.gcx";
   name = "Grafana Cloud CLI";
   summary = "Grafana Cloud CLI";
   description = ''

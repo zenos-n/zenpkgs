@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.xmagnify";
   name = "xmagnify";
   summary = "Tiny screen magnifier for X11";
   description = ''

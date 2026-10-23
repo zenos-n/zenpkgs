@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.apache-directory-studio";
   name = "Apache Directory Studio";
   summary = "Eclipse-based LDAP browser and directory client";
   description = ''

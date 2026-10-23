@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.ugrep";
   name = "ugrep";
   summary = "Ultra fast grep with interactive query UI";
   description = ''

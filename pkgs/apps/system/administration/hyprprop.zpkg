@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.hyprprop";
   name = "hyprprop";
   summary = "Xprop replacement for Hyprland";
   description = ''

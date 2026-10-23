@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.age-plugin-fido2-hmac";
   name = "age-plugin-fido2-hmac";
   summary = "Age plugin to encrypt files with fido2 tokens using the hmac-secret extension and non-discoverable credentials";
   description = ''

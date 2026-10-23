@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.luanti";
   name = "Luanti";
   summary = "Open source voxel game engine (formerly Minetest)";
   description = ''

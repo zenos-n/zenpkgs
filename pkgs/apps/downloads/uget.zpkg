@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.uget";
   name = "uGet";
   summary = "Download manager using GTK and libcurl";
   description = ''

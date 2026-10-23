@@ -13,6 +13,7 @@ let
 in
 search.mkIndex {
   inherit evaluated;
+  registry = flake.lib.dslRegistryFor system;
   bundle = flake.lib.dslBundleFor system;
   # The Git archive is a bounded overview. Deeper alias schemas retain their
   # depth-limit markers and can be explored through the full generator.

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.globalping-cli";
   name = "Globalping CLI";
   summary = "Simple CLI tool to run networking commands remotely from hundreds of globally distributed servers";
   description = ''

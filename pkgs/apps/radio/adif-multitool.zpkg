@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.adif-multitool";
   name = "ADIF Multitool";
   summary = "Command-line program for working with ham logfiles";
   description = ''

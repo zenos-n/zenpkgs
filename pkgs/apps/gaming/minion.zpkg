@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.minion";
   name = "Minion";
   summary = "Addon manager for World of Warcraft and The Elder Scrolls Online";
   description = ''

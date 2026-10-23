@@ -22,6 +22,29 @@ let
       broken = throw "unavailable package";
     };
   };
+  registryPackage = {
+    id = "pkgs.org.example.Tool";
+    target = [ "org" "example" "Tool" ];
+    categoryTarget = [ "apps" "utilities" "tool" ];
+    meta = {
+      id = "org.example.Tool";
+      name = "Registry tool";
+      summary = "Data-only package metadata";
+      description = "Registry description";
+      zenosVersion = "1.0.0";
+      packageVersion = "2.3.4";
+      tags = [ "fixture" ];
+    };
+    provider = throw "registry provider forced";
+  };
+  registryPackages = search.serializePackages {
+    tree = {
+      org.example.Tool = throw "provider forced";
+      byCategories = throw "category aliases forced";
+    };
+    registryAt = path: if path == registryPackage.target then registryPackage else null;
+  };
+  registryLeaf = registryPackages.sub.org.sub.example.sub.Tool;
   evaluate =
     bundle:
     import (nixpkgs + "/nixos/lib/eval-config.nix") {
@@ -169,6 +192,16 @@ let
       typeDepth = 2;
     };
   };
+  # Failure-only, bounded data: keep provenance and default failures distinguishable
+  # without serializing the mounted subtree or forcing unrelated schemas.
+  localMountDiagnostic = {
+    upstream = localMount.meta.upstream or null;
+    messageUpstream = localMount.sub.message.meta.upstream or null;
+    messageDefault = localMount.sub.message.meta.default or null;
+    messageDefaultStatus = localMount.sub.message.meta.defaultStatus or null;
+    labelUpstream = localMount.sub.instances.sub."<name>".sub.label.meta.upstream or null;
+    hasUpstreamOnly = localMount.sub ? upstreamOnly;
+  };
   checks = {
     mountedModule = demo.sub.message.meta.default == "hello";
     movedMount = index.options.relocated.sub.demo.sub.message.meta.default == "hello";
@@ -210,6 +243,10 @@ let
       && !localMount.sub.instances.sub."<name>".sub.label.meta.upstream
       && !(localMount.sub ? upstreamOnly)
       && localMount.sub.message.meta.default == "hello";
+    disjointLocalMountSchema = !(localMount.sub ? upstreamOnly);
+    disjointLocalMountDefault =
+      localMount.sub.message.meta.defaultStatus == "value"
+      && localMount.sub.message.meta.default == "hello";
     localMountWithinAlias =
       !userLocalMount.meta.upstream
       && !userLocalMount.sub.message.meta.upstream
@@ -249,6 +286,25 @@ let
     packageHierarchy =
       index.pkgs.first.sub.same.meta.id == "pkgs.first.same"
       && index.pkgs.second.sub.same.meta.id == "pkgs.second.same";
+    registryPackageMetadata =
+      registryLeaf.meta.id == "pkgs.org.example.Tool"
+      && registryLeaf.meta.path == [ "org" "example" "Tool" ]
+      && registryLeaf.meta.categoryTarget == [ "apps" "utilities" "tool" ]
+      && registryLeaf.meta.categoryPath == [ "pkgs" "byCategories" "apps" "utilities" "tool" ]
+      && registryLeaf.meta.name == "Registry tool"
+      && registryLeaf.meta.summary == "Data-only package metadata"
+      && registryLeaf.meta.longDescription == "Registry description"
+      && registryLeaf.meta.tags == [ "fixture" ]
+      && registryLeaf.meta.zenosVersion == "1.0.0"
+      && registryLeaf.meta.version == "2.3.4"
+      && registryLeaf.meta.packageVersion == "2.3.4"
+      && registryLeaf.meta.kind == "package"
+      && registryLeaf.meta.traversal == "complete"
+      && !(registryLeaf ? sub);
+    registryPackageSerialization =
+      builtins.isString (builtins.toJSON registryPackages)
+      && builtins.attrNames registryPackages.sub == [ "org" ]
+      && !(registryPackages.sub ? byCategories);
     upstreamPackages = index.pkgs.legacy.sub.hello.meta.upstream;
     excludeUniverses = !(index.pkgs.legacy.sub ? pkgsCross) && !(index.pkgs.legacy.sub ? pkgsLinux);
     packageFailure = index.pkgs.legacy.sub.broken.meta.traversal == "unavailable";
@@ -288,6 +344,22 @@ let
       && index.options.legacy.sub.future.sub.marker.meta.maintainers == [ ];
     scalarDefault =
       unit.sub.scalar.meta.defaultStatus == "value" && unit.sub.scalar.meta.default == false;
+    upstreamDefaultNotEvaluated =
+      let serialized = search.serializeOptions {
+        tree = lib.mkOption {
+          type = lib.types.str;
+          default = builtins.abort "upstream default forced";
+        };
+        upstream = true;
+      }; in serialized.meta.upstream
+        && serialized.meta.defaultStatus == "unavailable"
+        && serialized.meta.default == null;
+    defaultsExplicitlyDisabled =
+      let serialized = search.serializeOptions {
+        tree = unitTree.scalar;
+        evaluateDefaults = false;
+      }; in serialized.meta.defaultStatus == "unavailable"
+        && serialized.meta.default == null;
     absentDefault = unit.sub.required.meta.defaultStatus == "absent";
     defaultText =
       unit.sub.documented.meta.defaultStatus == "documented"
@@ -350,7 +422,9 @@ let
     );
   };
 in
-assert lib.all (name: lib.assertMsg checks.${name} "search acceptance failed: ${name}") (
-  builtins.attrNames checks
-);
+assert lib.all (name: lib.assertMsg checks.${name} (
+  "search acceptance failed: ${name}"
+  + lib.optionalString (lib.hasPrefix "disjointLocalMount" name)
+    " localMount=${builtins.toJSON localMountDiagnostic}"
+)) (builtins.attrNames checks);
 checks

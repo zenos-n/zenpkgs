@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.git-remote-gcrypt";
   name = "Git Remote Gcrypt";
   summary = "Git remote helper for GPG-encrypted remotes";
   description = ''

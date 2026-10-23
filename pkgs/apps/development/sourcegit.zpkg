@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.sourcegit";
   name = "SourceGit";
   summary = "Free & OpenSource GUI client for GIT users";
   description = ''

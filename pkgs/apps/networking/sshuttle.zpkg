@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.sshuttle";
   name = "sshuttle";
   summary = "Transparent proxy server that works as a poor man's VPN";
   description = ''

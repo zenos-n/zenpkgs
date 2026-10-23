@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.minizinc-ide";
   name = "MiniZinc IDE";
   summary = "IDE for MiniZinc, a medium-level constraint modelling language";
   description = ''

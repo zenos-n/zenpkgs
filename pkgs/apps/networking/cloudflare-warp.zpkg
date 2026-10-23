@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.cloudflare-warp";
   name = "Cloudflare WARP";
   summary = "Replaces the connection between your device and the Internet with a modern, optimized, protocol";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.shfmt";
   name = "shfmt";
   summary = "Shell parser and formatter";
   description = ''

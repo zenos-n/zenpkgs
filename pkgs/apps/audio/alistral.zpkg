@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.alistral";
   name = "Alistral";
   summary = "Power tools for Listenbrainz";
   description = ''

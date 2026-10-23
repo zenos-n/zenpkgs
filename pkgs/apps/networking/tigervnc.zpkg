@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.tigervnc";
   name = "TigerVNC";
   summary = "Fork of tightVNC, made in cooperation with VirtualGL";
   description = ''

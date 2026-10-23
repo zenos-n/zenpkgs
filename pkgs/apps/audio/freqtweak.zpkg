@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.freqtweak";
   name = "FreqTweak";
   summary = "Realtime audio frequency spectral manipulation";
   description = ''

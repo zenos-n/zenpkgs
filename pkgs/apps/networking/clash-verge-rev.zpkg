@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.clash-verge-rev";
   name = "Clash Verge Rev";
   summary = "Clash GUI based on tauri";
   description = ''

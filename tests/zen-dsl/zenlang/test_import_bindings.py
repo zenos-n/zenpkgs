@@ -6,10 +6,12 @@ import shutil
 import subprocess
 import tempfile
 import unittest
+from unittest.mock import patch
 
 from zenlang import ZenLangError, parse, parse_file
 from zenlang.compiler import compile_zcfg, compile_zmdl, compile_zmdl_mount
 from zenlang.emitter import NixEmitter
+from zenlang.model import ResolvedImport
 
 
 class ImportBindingTests(unittest.TestCase):
@@ -54,12 +56,13 @@ class ImportBindingTests(unittest.TestCase):
         for kind in ("zcfg", "zmdl", "zpkg", "zstr"):
             with self.subTest(kind=kind):
                 self.source(f"data.{kind}", '_let hidden: $type.string = "blue"; color = $v.hidden;')
-                package = "import $pkgs.legacy.demo;" if kind == "zpkg" else ""
+                package = '_meta.id = "org.example.Test"; import $pkgs.legacy.demo;' if kind == "zpkg" else ""
                 entry = self.source(f"entry.{kind}", f'_import palette: $type.set [ $type.string ] = "data.{kind}"; {package}')
                 document = parse_file(entry, import_root=self.root)
                 if kind != "zpkg":
                     self.assertEqual({}, self.evaluate(NixEmitter().document_value(document)))
-                binding = document.statements[0]
+                binding = next(statement for statement in document.statements
+                               if isinstance(statement, ResolvedImport) and statement.binding == "palette")
                 self.assertEqual({"color": "blue"}, self.evaluate(
                     NixEmitter().document_value(binding.document, annotation=binding.annotation)))
 
@@ -88,12 +91,23 @@ class ImportBindingTests(unittest.TestCase):
 
     def test_bound_package_records_are_checked_without_forcing_package_metadata(self):
         self.source("packages.zpkg", "hello = $pkgs.legacy.hello;")
-        source = self.source("entry.zpkg", '_import values: $type.set [ $type.package ] = "packages.zpkg"; import $pkgs.legacy.hello;')
+        source = self.source("entry.zpkg", '_meta.id = "org.example.Test"; _import values: $type.set [ $type.package ] = "packages.zpkg"; import $pkgs.legacy.hello;')
         document = parse_file(source)
-        emitted = NixEmitter().statement(document.statements[0])
+        binding = next(statement for statement in document.statements
+                       if isinstance(statement, ResolvedImport) and statement.binding == "values")
+        emitted = NixEmitter().statement(binding)
+        self.assertIn("values =", emitted)
         self.assertTrue(self.evaluate("let upstream = import <nixpkgs> {}; "
             "pkgs = upstream // { zenos.legacy = upstream; }; " + emitted
             + " in values.hello.drvPath == upstream.hello.drvPath"))
+
+    def test_bound_package_record_evaluation_uses_named_import_with_metadata_first(self):
+        with patch.object(self, "evaluate", return_value=True) as evaluate:
+            self.test_bound_package_records_are_checked_without_forcing_package_metadata()
+        expression = evaluate.call_args.args[0]
+        self.assertIn("values =", expression)
+        self.assertNotIn("_meta.id =", expression)
+        self.assertIn("in values.hello.drvPath", expression)
 
     def test_typed_collections_do_not_skip_invalid_members_with_derivation_shaped_keys(self):
         source = '_let value: $type.set [ ($type.either [ $type.string $type.int ]) ] = $lib.id { type = "derivation"; outPath = "fake"; bad = true; };'
@@ -104,7 +118,7 @@ class ImportBindingTests(unittest.TestCase):
         for kind in ("zcfg", "zmdl", "zpkg", "zstr"):
             with self.subTest(kind=kind):
                 self.source(f"data.{kind}", "port = 8080;")
-                package = "import $pkgs.legacy.demo;" if kind == "zpkg" else ""
+                package = '_meta.id = "org.example.Test"; import $pkgs.legacy.demo;' if kind == "zpkg" else ""
                 entry = self.source(f"entry.{kind}", f'_import data: $type.set [ $type.string ] = "data.{kind}"; {package}')
                 with self.assertRaises(ZenLangError) as raised:
                     parse_file(entry)

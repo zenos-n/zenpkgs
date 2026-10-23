@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.sqlite";
   name = "SQLite";
   summary = "Self-contained, serverless, zero-configuration, transactional SQL database engine";
   description = ''

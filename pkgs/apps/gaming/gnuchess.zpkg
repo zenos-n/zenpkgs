@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gnuchess";
   name = "GNU Chess";
   summary = "GNU Chess engine";
   description = ''

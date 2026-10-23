@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.pgformatter";
   name = "pgFormatter";
   summary = "PostgreSQL SQL syntax beautifier that can work as a console program or as a CGI";
   description = ''

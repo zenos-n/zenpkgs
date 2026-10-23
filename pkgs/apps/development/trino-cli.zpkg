@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.trino-cli";
   name = "Trino CLI";
   summary = "Trino CLI provides a terminal-based, interactive shell for running queries";
   description = ''

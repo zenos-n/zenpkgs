@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.ft2-clone";
   name = "Fasttracker II Clone";
   summary = "Highly accurate clone of the classic Fasttracker II software for MS-DOS";
   description = ''

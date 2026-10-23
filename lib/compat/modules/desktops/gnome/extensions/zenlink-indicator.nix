@@ -41,6 +41,6 @@ in
   };
 
   config = mkIf cfg.enable {
-    environment.systemPackages = [ pkgs.zenos.desktops.gnome.extensions.zenlink-indicator ];
+    environment.systemPackages = [ pkgs.zenos.byCategories.desktops.gnome.extensions.zenlink-indicator ];
   };
 }

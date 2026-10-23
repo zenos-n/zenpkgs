@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.brightnessctl";
   name = "brightnessctl";
   summary = "This program allows you read and control device brightness";
   description = ''

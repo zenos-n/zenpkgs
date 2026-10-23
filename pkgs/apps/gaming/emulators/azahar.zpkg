@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.azahar";
   name = "Azahar";
   summary = "Open-source 3DS emulator project based on Citra";
   description = ''

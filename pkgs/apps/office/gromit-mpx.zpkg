@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.gromit-mpx";
   name = "Gromit-MPX";
   summary = "Desktop annotation tool";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.a-keys-path";
   name = "A Key's Path";
   summary = "Short puzzle-platformer game made with Godot, running on GLES 2.0";
   description = ''

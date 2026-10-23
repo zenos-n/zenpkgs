@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.api-linter";
   name = "API Linter";
   summary = "Linter for APIs defined in protocol buffers";
   description = ''

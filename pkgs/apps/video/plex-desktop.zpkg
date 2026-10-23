@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.plex-desktop";
   name = "Plex Desktop";
   summary = "Streaming media player for Plex";
   description = ''

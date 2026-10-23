@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.exaile";
   name = "Exaile";
   summary = "Music player with a simple interface and powerful music management capabilities";
   description = ''

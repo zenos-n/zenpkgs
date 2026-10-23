@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.retroshare";
   name = "RetroShare";
   summary = "Decentralized peer to peer chat application";
   description = ''

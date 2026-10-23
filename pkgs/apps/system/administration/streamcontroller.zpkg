@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.streamcontroller";
   name = "StreamController";
   summary = "Elegant Linux app for the Elgato Stream Deck with support for plugins";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.afew";
   name = "afew";
   summary = "Initial tagging script for notmuch mail";
   description = ''

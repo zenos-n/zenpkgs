@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.warpinator";
   name = "Warpinator";
   summary = "Share files across the LAN";
   description = ''

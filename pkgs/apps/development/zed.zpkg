@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.zed";
   name = "zed";
   summary = "Curated zed package for ZenOS";
   description = ''

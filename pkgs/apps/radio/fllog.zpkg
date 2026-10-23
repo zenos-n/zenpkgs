@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.fllog";
   name = "FLLOG";
   summary = "Digital modem log program";
   description = ''

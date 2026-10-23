@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.meson";
   name = "Meson";
   summary = "Open source, fast and friendly build system made in Python";
   description = ''

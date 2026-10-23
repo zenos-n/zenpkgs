@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.resonance";
   name = "Resonance";
   summary = "Intuitive GTK4/LibAdwaita music player";
   description = ''

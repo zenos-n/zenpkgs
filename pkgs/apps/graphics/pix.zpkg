@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.pix";
   name = "Pix";
   summary = "Generic image viewer from Linux Mint";
   description = ''

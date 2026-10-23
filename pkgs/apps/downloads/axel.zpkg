@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.axel";
   name = "Axel";
   summary = "Console downloading program with some features for parallel connections for faster downloading";
   description = ''

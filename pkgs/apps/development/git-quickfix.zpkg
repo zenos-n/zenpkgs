@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-quickfix";
   name = "git-quickfix";
   summary = "Commit changes in your git repository to a new branch without leaving the current branch";
   description = ''

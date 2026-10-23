@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.screenfetch";
   name = "screenfetch";
   summary = "Fetches system/theme information in terminal for Linux desktop screenshots";
   description = ''

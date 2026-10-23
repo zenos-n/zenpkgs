@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.felix-fm";
   name = "Felix";
   summary = "Tui file manager with vim-like key mapping";
   description = ''

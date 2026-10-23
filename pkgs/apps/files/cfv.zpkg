@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.cfv";
   name = "cfv";
   summary = "Utility to verify and create a wide range of checksums";
   description = ''

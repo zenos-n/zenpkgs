@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.rosegarden";
   name = "Rosegarden";
   summary = "Music composition and editing environment";
   description = ''

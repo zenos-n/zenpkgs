@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gfold";
   name = "gfold";
   summary = "CLI tool to help keep track of your Git repositories, written in Rust";
   description = ''

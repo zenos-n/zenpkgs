@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.datafusion-cli";
   name = "DataFusion CLI";
   summary = "CLI for Apache Arrow DataFusion";
   description = ''

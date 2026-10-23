@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.puredata";
   name = "Pure Data";
   summary = "Real-time graphical programming environment for audio, video, and graphical processing";
   description = ''

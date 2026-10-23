@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.pencil2d";
   name = "Pencil2D";
   summary = "Easy, intuitive tool to make 2D hand-drawn animations";
   description = ''

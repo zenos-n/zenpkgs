@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.airwin2rack";
   name = "Airwindows Consolidated";
   summary = "JUCE Plugin Version of Airwindows Consolidated";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.sm64coopdx";
   name = "SM64CoopDX";
   summary = "Multiplayer fork of the Super Mario 64 decompilation";
   description = ''

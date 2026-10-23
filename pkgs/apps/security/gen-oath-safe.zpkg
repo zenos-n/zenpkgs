@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.gen-oath-safe";
   name = "gen-oath-safe";
   summary = "Script for generating HOTP/TOTP keys (and QR code)";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.mayo";
   name = "Mayo";
   summary = "3D CAD viewer and converter based on Qt + OpenCascade";
   description = ''

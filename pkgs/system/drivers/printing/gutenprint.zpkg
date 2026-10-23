@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.system.drivers.printing.gutenprint";
   name = "gutenprint";
   summary = "Ghostscript and cups printer drivers";
   description = ''

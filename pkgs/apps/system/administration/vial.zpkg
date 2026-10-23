@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.vial";
   name = "Vial";
   summary = "Open-source GUI and QMK fork for configuring your keyboard in real time";
   description = ''

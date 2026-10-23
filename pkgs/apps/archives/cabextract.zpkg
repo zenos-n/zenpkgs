@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.cabextract";
   name = "cabextract";
   summary = "Free Software for extracting Microsoft cabinet files";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.yamlfmt";
   name = "yamlfmt";
   summary = "Extensible command line tool or library to format yaml files";
   description = ''

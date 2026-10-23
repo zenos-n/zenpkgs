@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.DiskUtility";
   name = "gnome-disks";
   summary = "Curated gnome-disks package for ZenOS";
   description = ''

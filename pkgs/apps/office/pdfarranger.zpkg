@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.pdfarranger";
   name = "PDF Arranger";
   summary = "Merge or split pdf documents and rotate, crop and rearrange their pages using a graphical interface";
   description = ''

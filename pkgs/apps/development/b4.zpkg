@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.b4";
   name = "b4";
   summary = "Helper utility to work with patches made available via a public-inbox archive";
   description = ''

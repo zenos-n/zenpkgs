@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.siyuan";
   name = "SiYuan";
   summary = "Privacy-first personal knowledge management system that supports complete offline usage, as well as end-to-end encrypted data sync";
   description = ''

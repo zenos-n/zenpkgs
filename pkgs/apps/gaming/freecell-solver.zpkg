@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.freecell-solver";
   name = "FreeCell Solver";
   summary = "FreeCell automatic solver";
   description = ''

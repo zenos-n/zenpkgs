@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.xnviewmp";
   name = "XnView MP";
   summary = "Efficient multimedia viewer, browser and converter";
   description = ''

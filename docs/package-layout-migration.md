@@ -1,13 +1,18 @@
 # Package layout migration — 2026-09-22
 
-Package paths are public identities. Update package selectors and references
-using the mapping below (paths are relative to `pkgs/`, without `.zpkg`).
-There are no compatibility aliases. Module paths under `programs` are unchanged.
+The table below records filesystem category moves (paths relative to `pkgs/`,
+without `.zpkg`). Under the current two-view contract these paths are selectors
+below `pkgs.byCategories`, not canonical IDs. Canonical `pkgs.<reverse DNS>`
+comes from required `_meta.id` and survives category moves. Both views resolve
+to the same derivation; no old root category aliases are exported. Preserve
+established IDs, otherwise author one under `org.zenos.packages`.
+`pkgs.legacy` and module paths under `programs` are unchanged. See
+[metadata guidelines](metadata-guidelines.md).
 
 GNOME extension packages now live under `desktops/gnome/extensions`,
 `apps/themes/adw-gtk3` is `theming/apps/adw-gtk3`, and
 `apps/cursors/google-dot` is `theming/cursors/google-dot`. Extension modules,
-OOBE, Setup, and the live ISO must use these same filesystem-derived identities.
+OOBE, Setup, and the live ISO must use canonical IDs or the corresponding `pkgs.byCategories` selectors.
 
 | Previous path | New path |
 | --- | --- |

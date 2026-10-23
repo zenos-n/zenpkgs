@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gdlv";
   name = "Gdlv";
   summary = "GUI frontend for Delve";
   description = ''

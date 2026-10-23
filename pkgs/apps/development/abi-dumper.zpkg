@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.abi-dumper";
   name = "ABI Dumper";
   summary = "Dump ABI of an ELF object containing DWARF debug info";
   description = ''

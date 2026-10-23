@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.megasync";
   name = "MEGAsync";
   summary = "Easy automated syncing between your computers and your MEGA Cloud Drive";
   description = ''

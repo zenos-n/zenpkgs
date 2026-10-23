@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.lynx";
   name = "Lynx";
   summary = "Text-mode web browser";
   description = ''

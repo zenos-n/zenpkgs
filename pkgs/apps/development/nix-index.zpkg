@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.nix-index";
   name = "nix-index";
   summary = "Files database for nixpkgs";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.warpd";
   name = "warpd";
   summary = "Modal keyboard driven interface for mouse manipulation";
   description = ''

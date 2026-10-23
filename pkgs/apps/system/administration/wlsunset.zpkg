@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.wlsunset";
   name = "wlsunset";
   summary = "Day/night gamma adjustments for Wayland";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.flitter";
   name = "Flitter";
   summary = "Livesplit-inspired speedrunning split timer for Linux/macOS terminal";
   description = ''

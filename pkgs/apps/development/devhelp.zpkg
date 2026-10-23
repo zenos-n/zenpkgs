@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.devhelp";
   name = "Devhelp";
   summary = "API documentation browser for GNOME";
   description = ''

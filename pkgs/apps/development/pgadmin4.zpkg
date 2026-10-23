@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.pgadmin4";
   name = "pgAdmin";
   summary = "Administration and development platform for PostgreSQL";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.alttpr-opentracker";
   name = "OpenTracker";
   summary = "Tracking application for A Link to the Past Randomizer";
   description = ''

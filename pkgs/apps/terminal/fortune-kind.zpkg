@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.fortune-kind";
   name = "fortune-kind";
   summary = "Kinder, curated fortune, written in rust";
   description = ''

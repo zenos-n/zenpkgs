@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitlab-ci-linter";
   name = "GitLab CI Linter";
   summary = ".gitlab-ci.yml lint helper tool";
   description = ''

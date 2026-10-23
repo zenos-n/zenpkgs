@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.fluentd";
   name = "Fluentd";
   summary = "Data collector";
   description = ''

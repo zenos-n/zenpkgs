@@ -33,7 +33,7 @@ enable = enableOption {
     tags = [ "vr" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
   };
   u! {
-    home.packages = [ $pkgs.apps.gaming.zenos-vr-tools $pkgs.apps.gaming.ovr-advanced-settings $pkgs.apps.gaming.wlx-overlay-s $pkgs.apps.gaming.wayvr $pkgs.apps.gaming.fnuidesktop-vr ];
+    home.packages = [ $pkgs.byCategories.apps.gaming.zenos-vr-tools $pkgs.byCategories.apps.gaming.ovr-advanced-settings $pkgs.byCategories.apps.gaming.wlx-overlay-s $pkgs.byCategories.apps.gaming.wayvr $pkgs.byCategories.apps.gaming.fnuidesktop-vr ];
     xdg.configFile."wlxoverlay/conf.d/00-zenos-font.yaml" = $lib.mkIf ($path.overlayFont != null) {
       text = $lib.generators.toJSON {} { primary_font = $path.overlayFont; };
     };
@@ -44,7 +44,7 @@ enable = enableOption {
         PartOf = [ "graphical-session.target" ];
       };
       Service = {
-        ExecStart = "${$pkgs.apps.gaming.zenos-vr-tools}/bin/vr-overlay-supervisor";
+        ExecStart = "${$pkgs.byCategories.apps.gaming.zenos-vr-tools}/bin/vr-overlay-supervisor";
         Restart = "on-failure"; RestartSec = 2;
       };
       Install.WantedBy = [ "graphical-session.target" ];

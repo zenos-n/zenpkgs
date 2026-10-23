@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.nauty";
   name = "nauty";
   summary = "Programs for computing automorphism groups of graphs and digraphs";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.gat";
   name = "gat";
   summary = "Cat alternative written in Go";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.podman-compose";
   name = "Podman Compose";
   summary = "Implementation of docker-compose with podman backend";
   description = ''

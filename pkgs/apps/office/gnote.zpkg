@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.gnote";
   name = "Gnote";
   summary = "Note taking application";
   description = ''

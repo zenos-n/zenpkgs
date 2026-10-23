@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.feishu";
   name = "Feishu";
   summary = "All-in-one collaboration suite";
   description = ''

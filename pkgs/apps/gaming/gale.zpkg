@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gale";
   name = "Gale";
   summary = "Lightweight Thunderstore client";
   description = ''

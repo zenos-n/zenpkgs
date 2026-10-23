@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.lan-mouse";
   name = "LAN Mouse";
   summary = "Software KVM switch for sharing a mouse and keyboard with multiple hosts through the network";
   description = ''

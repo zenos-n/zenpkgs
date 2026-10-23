@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Showtime";
   name = "Showtime";
   summary = "Watch without distraction";
   description = ''

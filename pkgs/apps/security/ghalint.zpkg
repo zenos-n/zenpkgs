@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.ghalint";
   name = "ghalint";
   summary = "GitHub Actions linter for security best practice";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.klavaro";
   name = "Klavaro";
   summary = "Free touch typing tutor program";
   description = ''

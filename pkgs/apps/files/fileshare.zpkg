@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fileshare";
   name = "fileshare";
   summary = "Small HTTP Server for quickly sharing files over the network";
   description = ''

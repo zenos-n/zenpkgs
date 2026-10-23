@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.alarm-clock-applet";
   name = "Alarm Clock";
   summary = "Fully-featured alarm clock with an indicator";
   description = ''

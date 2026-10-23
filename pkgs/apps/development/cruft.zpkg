@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cruft";
   name = "Cruft";
   summary = "Allows you to maintain all the necessary boilerplate for building projects";
   description = ''

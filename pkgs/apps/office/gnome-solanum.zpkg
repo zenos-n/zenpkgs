@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.gnome-solanum";
   name = "Solanum";
   summary = "Pomodoro timer for the GNOME desktop";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.lockbook-desktop";
   name = "Lockbook";
   summary = "Private, polished note-taking platform";
   description = ''

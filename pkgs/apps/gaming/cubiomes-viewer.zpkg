@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.cubiomes-viewer";
   name = "Cubiomes Viewer";
   summary = "Graphical Minecraft seed finder and map viewer";
   description = ''

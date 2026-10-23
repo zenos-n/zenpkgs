@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.disktui";
   name = "disktui";
   summary = "TUI for disk management on Linux";
   description = ''

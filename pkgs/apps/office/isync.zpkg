@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.isync";
   name = "isync";
   summary = "Free IMAP and MailDir mailbox synchronizer";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gzdoom";
   name = "GZDoom";
   summary = "Modder-friendly OpenGL and Vulkan source port based on the DOOM engine";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.renpy";
   name = "Ren'Py";
   summary = "Visual Novel Engine";
   description = ''

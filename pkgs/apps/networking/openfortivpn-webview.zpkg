@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.openfortivpn-webview";
   name = "openfortivpn WebView";
   summary = "Application to perform the SAML single sing-on and easily retrieve the SVPNCOOKIE needed by openfortivpn";
   description = ''

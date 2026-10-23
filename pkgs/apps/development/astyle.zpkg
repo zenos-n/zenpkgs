@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.astyle";
   name = "Artistic Style";
   summary = "Source code indenter, formatter, and beautifier for C, C++, C# and Java";
   description = ''

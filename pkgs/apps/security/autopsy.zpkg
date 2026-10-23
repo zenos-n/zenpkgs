@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.security.autopsy";
   name = "Autopsy";
   summary = "Graphical interface to The Sleuth Kit and other open source digital forensics tools";
   description = ''

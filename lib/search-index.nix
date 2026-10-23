@@ -314,7 +314,7 @@ rec {
             { defaultStatus = "unavailable"; }
         else if !(value ? default) then
           { defaultStatus = if isUpstream then "unavailable" else "absent"; }
-        else if !evaluateDefaults then
+        else if !evaluateDefaults || isUpstream then
           { defaultStatus = "unavailable"; }
         else if
           builtins.any (
@@ -397,10 +397,15 @@ rec {
       path ? [ ],
       depth ? defaultLimits.packageDepth,
       upstream ? false,
+      registryAt ? (_: null),
     }:
     let
+      entry = registryAt path;
+      # Registry leaves are data-only: never inspect or evaluate their providers.
       evaluated = builtins.tryEval (
-        if builtins.isAttrs tree then
+        if entry != null then
+          { value = { }; derivation = false; }
+        else if builtins.isAttrs tree then
           let
             derivation = lib.isDerivation tree;
           in
@@ -414,9 +419,11 @@ rec {
       valid = evaluated.success && evaluated.value != null;
       value = evaluated.value.value;
       derivation = valid && evaluated.value.derivation;
+      # Category aliases refer to the same leaves; index canonical packages once.
       blocked =
         name:
-        lib.hasPrefix "_" name
+        (path == [ ] && name == "byCategories")
+        || lib.hasPrefix "_" name
         || builtins.elem name [
           "recurseForDerivations"
           "override"
@@ -454,17 +461,20 @@ rec {
           )
         );
       names =
-        if !valid || derivation || depth == 0 then
+        if entry != null || !valid || derivation || depth == 0 then
           [ ]
         else
           builtins.filter (
             name:
             !blocked name
             && (
-              let
-                child = builtins.tryEval (builtins.isAttrs value.${name});
-              in
-              !child.success || child.value
+              registryAt (path ++ [ name ]) != null
+              || (
+                let
+                  child = builtins.tryEval (builtins.isAttrs value.${name});
+                in
+                !child.success || child.value
+              )
             )
           ) (builtins.attrNames value);
       sub = lib.genAttrs names (
@@ -473,10 +483,16 @@ rec {
           tree = value.${name};
           path = path ++ [ name ];
           depth = depth - 1;
-          inherit upstream;
+          inherit upstream registryAt;
         }
       );
-      meta = if derivation then value.meta.zenos or value.meta or { } else { };
+      meta =
+        if entry != null then
+          entry.meta
+        else if derivation then
+          value.meta.zenos or value.meta or { }
+        else
+          { };
     in
     if evaluated.success && evaluated.value == null then
       { }
@@ -484,19 +500,28 @@ rec {
       {
         meta = describe meta // {
           inherit path upstream;
-          id = lib.concatStringsSep "." ([ "pkgs" ] ++ path);
-          kind = if derivation then "package" else "package-set";
+          id = if entry != null then entry.id else lib.concatStringsSep "." ([ "pkgs" ] ++ path);
+          categoryTarget = if entry != null then entry.categoryTarget else null;
+          categoryPath =
+            if entry != null then [ "pkgs" "byCategories" ] ++ entry.categoryTarget else null;
+          kind = if derivation || entry != null then "package" else "package-set";
           traversal =
             if !valid then
               "unavailable"
-            else if !derivation && depth == 0 then
+            else if entry == null && !derivation && depth == 0 then
               "depth-limit"
             else
               "complete";
-          version = if derivation then text (value.version or null) else null;
+          version =
+            if entry != null then text (meta.packageVersion or null)
+            else if derivation then text (value.version or null)
+            else null;
           packageVersion = text (meta.packageVersion or null);
           dependencies = safe null (meta.dependencies or null);
-          homepage = if derivation then safe null (value.meta.homepage or null) else null;
+          homepage =
+            if entry != null then safe null (meta.homepage or null)
+            else if derivation then safe null (value.meta.homepage or null)
+            else null;
         };
       }
       // lib.optionalAttrs (sub != { }) { inherit sub; };
@@ -506,6 +531,7 @@ rec {
       evaluated,
       bundle,
       packageTree ? evaluated.pkgs.zenos or { },
+      registry ? { packages = [ ]; },
       maintainers ? { },
       versionInfo ? { },
       limits ? defaultLimits,
@@ -560,10 +586,17 @@ rec {
         inherit limits;
         metadataAt = path: metadata.${key path} or { };
         mountPaths = map (mount: publicPath mount.path) mounts;
-        evaluateDefaults = false;
+        # Local scalar defaults are part of the authored schema. serializeOptions
+        # still skips upstream, complex, throwing and placeholder defaults.
+        evaluateDefaults = true;
       };
       packageMount = builtins.any (mount: mount.kind == "packages") mounts;
+      packageEntries = builtins.listToAttrs (map (entry: {
+        name = key entry.target;
+        value = entry;
+      }) registry.packages);
       packages = serializePackages {
+        registryAt = path: packageEntries.${key path} or null;
         tree = removeAttrs packageTree [ "legacy" ];
         depth = limits.packageDepth;
       };
@@ -572,10 +605,13 @@ rec {
         ++ lib.optionals packageMount (
           map (source: {
             inherit source;
-            path = [
-              "pkgs"
-            ]
-            ++ lib.splitString "/" (lib.removeSuffix ".zpkg" (lib.removePrefix "pkgs/" source.path));
+            path =
+              if source ? target then
+                [ "pkgs" ] ++ source.target
+              else
+                [ "pkgs" "byCategories" ]
+                ++ (source.categoryTarget or
+                  (lib.splitString "/" (lib.removeSuffix ".zpkg" (lib.removePrefix "pkgs/" source.path))));
           }) (builtins.filter (source: source.kind == "zpkg") (bundle.sources or [ ]))
         );
       diagnostics = lib.concatMap (

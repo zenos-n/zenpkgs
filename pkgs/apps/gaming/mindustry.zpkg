@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.mindustry";
   name = "Mindustry";
   summary = "Sandbox tower defense game";
   description = ''

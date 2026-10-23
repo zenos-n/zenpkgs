@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.gnomecast";
   name = "Gnomecast";
   summary = "Native Linux GUI for Chromecasting local files";
   description = ''

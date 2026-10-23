@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.flclash";
   name = "FlClash";
   summary = "Proxy client based on ClashMeta, simple and easy to use";
   description = ''

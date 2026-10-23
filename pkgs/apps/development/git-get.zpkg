@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-get";
   name = "git-get";
   summary = "Better way to clone, organize and manage multiple git repositories";
   description = ''

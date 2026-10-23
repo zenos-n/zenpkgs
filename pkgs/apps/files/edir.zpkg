@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.edir";
   name = "edir";
   summary = "Program to rename and remove files and directories using your editor";
   description = ''

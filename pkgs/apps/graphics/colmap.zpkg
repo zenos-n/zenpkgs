@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.colmap";
   name = "COLMAP";
   summary = "Structure-From-Motion and Multi-View Stereo pipeline";
   description = ''

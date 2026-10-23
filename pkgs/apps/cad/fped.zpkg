@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.fped";
   name = "fped";
   summary = "Editor that allows the interactive creation of footprints electronic components";
   description = ''

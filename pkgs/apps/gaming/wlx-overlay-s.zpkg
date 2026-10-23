@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.wlx-overlay-s";
   name = "WlxOverlay-S";
   summary = "Legacy Wayland desktop overlay for SteamVR and OpenXR";
   description = ''Legacy Wayland desktop overlay for SteamVR and OpenXR. Optional migration package; installation does not activate a service.'';

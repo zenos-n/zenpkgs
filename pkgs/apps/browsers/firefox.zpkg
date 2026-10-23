@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.mozilla.firefox";
   name = "Mozilla Firefox";
   summary = "Curated Mozilla Firefox package for ZenOS";
   description = ''

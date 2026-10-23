@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.sublime-merge";
   name = "Sublime Merge";
   summary = "Git client from the makers of Sublime Text";
   description = ''

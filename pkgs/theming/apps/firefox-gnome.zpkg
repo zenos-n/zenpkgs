@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.theming.apps.firefox-gnome";
   name = "Firefox GNOME theme"; summary = "Native GNOME appearance for Firefox";
   description = ''Firefox GNOME CSS theme used by the desktop and web application profiles.'';
   zenosVersion = "1.0.0"; packageVersion = "143";

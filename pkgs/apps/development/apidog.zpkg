@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.apidog";
   name = "Apidog";
   summary = "All-in-one API design, test, mock and documentation platform";
   description = ''

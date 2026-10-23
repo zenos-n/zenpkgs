@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.keyguard";
   name = "Keyguard";
   summary = "Alternative client for the Bitwarden platform";
   description = ''

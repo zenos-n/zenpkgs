@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.argbash";
   name = "Argbash";
   summary = "Bash argument parsing code generator";
   description = ''

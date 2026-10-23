@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.backup.rustic";
   name = "rustic";
   summary = "Fast, encrypted, deduplicated backups powered by pure Rust";
   description = ''

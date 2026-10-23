@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.fw-ectool";
   name = "Framework EC Tool";
   summary = "EC-Tool adjusted for usage with framework embedded controller";
   description = ''

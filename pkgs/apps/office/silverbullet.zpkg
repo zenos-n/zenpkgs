@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.silverbullet";
   name = "SilverBullet";
   summary = "Open-source, self-hosted, offline-capable Personal Knowledge Management (PKM) web application";
   description = ''

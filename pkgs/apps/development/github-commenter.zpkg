@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.github-commenter";
   name = "github-commenter";
   summary = "Command line utility for creating GitHub comments on Commits, Pull Request Reviews or Issues";
   description = ''

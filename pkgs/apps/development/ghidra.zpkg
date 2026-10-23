@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ghidra";
   name = "Ghidra";
   summary = "Software reverse engineering (SRE) suite of tools";
   description = ''

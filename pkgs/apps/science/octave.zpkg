@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.octave";
   name = "GNU Octave";
   summary = "Scientific Programming Language";
   description = ''

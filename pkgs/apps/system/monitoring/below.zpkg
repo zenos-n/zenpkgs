@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.below";
   name = "below";
   summary = "Time traveling resource monitor for modern Linux systems";
   description = ''

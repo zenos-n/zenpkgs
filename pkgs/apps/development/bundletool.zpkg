@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.bundletool";
   name = "bundletool";
   summary = "Command-line tool to manipulate Android App Bundles";
   description = ''

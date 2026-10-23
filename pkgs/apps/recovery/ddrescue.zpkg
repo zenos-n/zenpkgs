@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.ddrescue";
   name = "ddrescue";
   summary = "Curated ddrescue package for ZenOS";
   description = ''

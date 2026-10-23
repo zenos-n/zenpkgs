@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gersemi";
   name = "Gersemi";
   summary = "Formatter to make your CMake code the real treasure";
   description = ''

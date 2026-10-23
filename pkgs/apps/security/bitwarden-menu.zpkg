@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.bitwarden-menu";
   name = "Bitwarden Menu";
   summary = "Dmenu/Rofi frontend for managing Bitwarden vaults. Uses the Bitwarden CLI tool to interact with the Bitwarden database";
   description = ''

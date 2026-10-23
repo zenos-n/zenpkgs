@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.kaf";
   name = "kaf";
   summary = "Modern CLI for Apache Kafka, written in Go";
   description = ''

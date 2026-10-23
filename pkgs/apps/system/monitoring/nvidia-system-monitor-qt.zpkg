@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.nvidia-system-monitor-qt";
   name = "NVIDIA System Monitor Qt";
   summary = "Task Manager for Linux for NVIDIA graphics cards";
   description = ''

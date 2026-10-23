@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.hashdeep";
   name = "hashdeep";
   summary = "Set of cross-platform tools to compute hashes";
   description = ''

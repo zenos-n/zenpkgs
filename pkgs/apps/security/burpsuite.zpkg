@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.burpsuite";
   name = "Burp Suite";
   summary = "Integrated platform for performing security testing of web applications";
   description = ''

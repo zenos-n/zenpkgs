@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.cockpit";
   name = "cockpit";
   summary = "Curated cockpit package for ZenOS";
   description = ''

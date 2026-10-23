@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.virtualization.virt-top";
   name = "virt-top";
   summary = "Top-like utility for showing stats of virtualized domains";
   description = ''

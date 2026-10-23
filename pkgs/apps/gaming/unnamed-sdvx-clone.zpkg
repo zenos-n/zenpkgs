@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.unnamed-sdvx-clone";
   name = "Unnamed SDVX Clone";
   summary = "Game based on K-Shoot MANIA and Sound Voltex";
   description = ''

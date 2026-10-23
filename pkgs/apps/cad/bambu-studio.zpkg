@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.cad.bambu-studio";
   name = "Bambu Studio";
   summary = "PC Software for BambuLab's 3D printers";
   description = ''

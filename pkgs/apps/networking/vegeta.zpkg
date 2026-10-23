@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.vegeta";
   name = "Vegeta";
   summary = "Versatile HTTP load testing tool";
   description = ''

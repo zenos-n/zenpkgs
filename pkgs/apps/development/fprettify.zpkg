@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fprettify";
   name = "fprettify";
   summary = "Auto-formatter for modern Fortran code that imposes strict whitespace formatting, written in Python";
   description = ''

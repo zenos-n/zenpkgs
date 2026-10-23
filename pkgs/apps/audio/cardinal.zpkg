@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.cardinal";
   name = "Cardinal";
   summary = "Plugin wrapper around VCV Rack";
   description = ''

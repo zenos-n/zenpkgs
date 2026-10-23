@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.brogue-ce";
   name = "Brogue Community Edition";
   summary = "Community-lead fork of the minimalist roguelike game Brogue";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.owncloud-client";
   name = "ownCloud Desktop";
   summary = "Synchronise your ownCloud with your computer using this desktop client";
   description = ''

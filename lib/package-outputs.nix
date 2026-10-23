@@ -12,10 +12,10 @@
           lib.all (
             entry:
             if
-              lib.take (builtins.length target) entry.target == target
-              || lib.take (builtins.length entry.target) target == entry.target
+              lib.take (builtins.length target) entry.categoryTarget == target
+              || lib.take (builtins.length entry.categoryTarget) target == entry.categoryTarget
             then
-              throw "ZenPkgs package ownership collision: pkgs/${lib.concatStringsSep "/" entry.target}.zpkg and compatibility recipe '${toString source}' at pkgs.zenos.${lib.concatStringsSep "." target}"
+              throw "ZenPkgs package ownership collision: pkgs/${lib.concatStringsSep "/" entry.categoryTarget}.zpkg and compatibility recipe '${toString source}' at pkgs.zenos.byCategories.${lib.concatStringsSep "." target}"
             else
               true
           ) registry.packages
@@ -24,7 +24,7 @@
             lib.mapAttrsToList (name: child: check (target ++ [ name ]) child) source
           )
         else
-          throw "ZenPkgs compatibility source inventory at pkgs.zenos.${lib.concatStringsSep "." target}: expected a recipe path or branch, got ${builtins.typeOf source}";
+          throw "ZenPkgs compatibility source inventory at pkgs.zenos.byCategories.${lib.concatStringsSep "." target}: expected a recipe path or branch, got ${builtins.typeOf source}";
     in
     check [ ] sourceTree;
 
@@ -40,7 +40,7 @@
     let
       entries = map (entry: {
         name = lib.concatStringsSep "-" ([ "zenos" ] ++ entry.target);
-        owner = "pkgs/${lib.concatStringsSep "/" entry.target}.zpkg";
+        owner = "pkgs/${lib.concatStringsSep "/" entry.categoryTarget}.zpkg";
         value = lib.getAttrFromPath entry.target tree;
       }) registry.packages;
       owners = lib.foldl' (

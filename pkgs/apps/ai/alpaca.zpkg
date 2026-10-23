@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.alpaca";
   name = "Alpaca";
   summary = "Ollama client made with GTK4 and Adwaita";
   description = ''

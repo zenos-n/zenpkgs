@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.smplayer";
   name = "SMPlayer";
   summary = "Complete front-end for MPlayer";
   description = ''

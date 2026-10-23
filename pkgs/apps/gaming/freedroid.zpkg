@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.freedroid";
   name = "Freedroid Classic";
   summary = "Clone of the classic game 'Paradroid' on Commodore 64";
   description = ''

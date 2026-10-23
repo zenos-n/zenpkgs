@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-hub";
   name = "git-hub";
   summary = "Git command line interface to GitHub";
   description = ''

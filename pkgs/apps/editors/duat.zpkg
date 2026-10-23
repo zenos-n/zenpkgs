@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.duat";
   name = "Duat";
   summary = "Modern and customizable text editor, built and configured in Rust";
   description = ''

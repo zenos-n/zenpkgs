@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.stepmania";
   name = "StepMania";
   summary = "Free dance and rhythm game for Windows, Mac, and Linux";
   description = ''

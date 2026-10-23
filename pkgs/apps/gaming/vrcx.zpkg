@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.vrcx";
   name = "VRCX";
   summary = "Friendship management tool for VRChat";
   description = ''

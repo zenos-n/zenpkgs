@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.weather.wttrbar";
   name = "wttrbar";
   summary = "Simple but detailed weather indicator for Waybar using wttr.in";
   description = ''

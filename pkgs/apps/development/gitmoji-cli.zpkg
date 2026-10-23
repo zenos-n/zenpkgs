@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitmoji-cli";
   name = "gitmoji CLI";
   summary = "Gitmoji client for using emojis on commit messages";
   description = ''

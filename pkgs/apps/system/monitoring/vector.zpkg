@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.vector";
   name = "vector";
   summary = "High-performance observability data pipeline";
   description = ''

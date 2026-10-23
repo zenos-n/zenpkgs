@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ghatm";
   name = "ghatm";
   summary = "Set timeout-minutes to all GitHub Actions jobs";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.ripgrep-all";
   name = "ripgrep-all";
   summary = "Ripgrep, but also search in PDFs, E-Books, Office documents, zip, tar.gz, and more";
   description = ''

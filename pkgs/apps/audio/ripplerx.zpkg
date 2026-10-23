@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.ripplerx";
   name = "RipplerX";
   summary = "Physically modeled synth";
   description = ''

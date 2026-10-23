@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.nodejs";
   name = "Node.js";
   summary = "Event-driven I/O framework for the V8 JavaScript engine";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.aegis-rs";
   name = "Aegis CLI";
   summary = "Aegis compatible OTP generator for the CLI";
   description = ''

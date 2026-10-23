@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cbfmt";
   name = "cbfmt";
   summary = "Tool to format codeblocks inside markdown and org documents";
   description = ''

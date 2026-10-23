@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.uutils-diffutils";
   name = "uutils-diffutils";
   summary = "Drop-in replacement of diffutils in Rust";
   description = ''

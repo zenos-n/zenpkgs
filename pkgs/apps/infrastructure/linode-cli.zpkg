@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.infrastructure.linode-cli";
   name = "Linode CLI";
   summary = "Linode Command Line Interface";
   description = ''

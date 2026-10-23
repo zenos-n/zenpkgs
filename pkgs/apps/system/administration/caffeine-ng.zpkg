@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.caffeine-ng";
   name = "Caffeine";
   summary = "Status bar application to temporarily inhibit screensaver and sleep mode";
   description = ''

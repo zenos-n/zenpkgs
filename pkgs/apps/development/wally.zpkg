@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.wally";
   name = "Wally";
   summary = "Modern package manager for Roblox projects inspired by Cargo";
   description = ''

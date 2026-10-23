@@ -1,4 +1,5 @@
 _meta = {
+  id = "io.github.doromiert.Jupiter";
   name = "Jupiter";
   summary = "GNOME browser with a Chromium engine and uBlock Origin";
   description = ''Native Epiphany-based GTK browser using Chromium Embedded Framework and full uBlock Origin. Uses an independent browser profile.'';

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.verible";
   name = "Verible";
   summary = "Suite of SystemVerilog developer tools. Including a style-linter, indexer, formatter, and language server";
   description = ''

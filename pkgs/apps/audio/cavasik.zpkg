@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.cavasik";
   name = "Cavasik";
   summary = "Audio visualizer based on CAVA with extended capabilities";
   description = ''

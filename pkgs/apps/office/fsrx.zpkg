@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.fsrx";
   name = "fsrx";
   summary = "Flow state reader in the terminal";
   description = ''

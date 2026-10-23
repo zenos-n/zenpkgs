@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.entropy";
   name = "Entropy";
   summary = "Tool to scan your codebase for high entropy lines, which are often secrets";
   description = ''

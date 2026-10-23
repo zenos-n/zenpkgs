@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.fonts.fontforge";
   name = "FontForge";
   summary = "Font editor";
   description = ''

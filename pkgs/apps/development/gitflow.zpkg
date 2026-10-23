@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitflow";
   name = "Gitflow";
   summary = "Extend git with the Gitflow branching model";
   description = ''

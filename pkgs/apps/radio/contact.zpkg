@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.contact";
   name = "Contact";
   summary = "Console UI for Meshtastic";
   description = ''

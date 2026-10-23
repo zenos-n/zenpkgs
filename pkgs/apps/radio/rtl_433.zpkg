@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.rtl-u5f-433";
   name = "rtl_433";
   summary = "Decode traffic from devices that broadcast on 433.9 MHz, 868 MHz, 315 MHz, 345 MHz and 915 MHz";
   description = ''

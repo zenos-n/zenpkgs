@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.glider";
   name = "Glider";
   summary = "Forward proxy with multiple protocols support";
   description = ''

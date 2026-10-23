@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.losslesscut";
   name = "LosslessCut";
   summary = "Swiss army knife of lossless video/audio editing";
   description = ''

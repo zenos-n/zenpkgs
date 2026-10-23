@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.comodoro";
   name = "Comodoro";
   summary = "CLI to manage your time";
   description = ''

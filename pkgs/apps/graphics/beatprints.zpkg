@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.beatprints";
   name = "BeatPrints";
   summary = "Create eye-catching, Pinterest-style music posters effortlessly";
   description = ''

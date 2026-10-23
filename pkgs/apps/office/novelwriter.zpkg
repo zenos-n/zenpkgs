@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.novelwriter";
   name = "novelWriter";
   summary = "Open source plain text editor designed for writing novels";
   description = ''

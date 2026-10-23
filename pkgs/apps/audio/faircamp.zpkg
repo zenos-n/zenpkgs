@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.faircamp";
   name = "Faircamp";
   summary = "Self-hostable, statically generated bandcamp alternative";
   description = ''

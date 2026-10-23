@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.dotool";
   name = "dotool";
   summary = "Command to simulate input anywhere";
   description = ''

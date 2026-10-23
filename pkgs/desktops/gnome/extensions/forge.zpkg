@@ -1,0 +1,14 @@
+_meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.forge";
+  name = "forge";
+  summary = "Forge tiling window manager extension built from GNOME 50-compatible upstream";
+  description = ''
+    Forge tiling window manager extension built from GNOME 50-compatible upstream
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-06-25";
+  tags = [ "desktops" "gnome" "extensions" ];
+  license = $l.gpl3Only;
+};
+
+build = $lib.zenCompatPackage $lib.zenPackageSources.compatRecipes."desktops/gnome/extensions/forge";

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.tauon";
   name = "Tauon Music Box";
   summary = "Linux desktop music player from the future";
   description = ''

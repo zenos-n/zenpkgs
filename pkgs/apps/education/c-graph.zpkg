@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.c-graph";
   name = "GNU C-Graph";
   summary = "Tool for Learning about Convolution";
   description = ''

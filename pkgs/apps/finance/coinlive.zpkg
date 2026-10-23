@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.finance.coinlive";
   name = "coinlive";
   summary = "Live cryptocurrency prices CLI";
   description = ''

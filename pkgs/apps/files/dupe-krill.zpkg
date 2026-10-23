@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.dupe-krill";
   name = "dupe-krill";
   summary = "Fast file deduplicator";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.intel-gpu-tools";
   name = "intel-gpu-tools";
   summary = "Tools for development and testing of the Intel DRM driver";
   description = ''

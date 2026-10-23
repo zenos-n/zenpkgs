@@ -42,8 +42,8 @@ in
 
     package = mkOption {
       type = types.package;
-      default = pkgs.zenos.system.zenlink;
-      defaultText = literalExpression "pkgs.zenos.system.zenlink";
+      default = pkgs.zenos.byCategories.system.zenlink;
+      defaultText = literalExpression "pkgs.zenos.byCategories.system.zenlink";
       description = ''
         The ZenLink package to install
       '';

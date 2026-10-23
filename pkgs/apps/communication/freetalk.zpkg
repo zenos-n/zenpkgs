@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.freetalk";
   name = "GNU Freetalk";
   summary = "Console XMPP client";
   description = ''

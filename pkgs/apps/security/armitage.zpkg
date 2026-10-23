@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.armitage";
   name = "Armitage";
   summary = "Graphical cyber attack management tool for Metasploit";
   description = ''

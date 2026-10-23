@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.ani-cli";
   name = "ani-cli";
   summary = "Cli tool to browse and play anime";
   description = ''

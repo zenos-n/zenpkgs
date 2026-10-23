@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.xboard";
   name = "XBoard";
   summary = "GUI for chess engines";
   description = ''

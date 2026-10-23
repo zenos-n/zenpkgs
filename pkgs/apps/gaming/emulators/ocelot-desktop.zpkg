@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.ocelot-desktop";
   name = "Ocelot Desktop";
   summary = "Advanced OpenComputers emulator";
   description = ''

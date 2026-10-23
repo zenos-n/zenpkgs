@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.R";
   name = "R";
   summary = "Free software environment for statistical computing and graphics";
   description = ''

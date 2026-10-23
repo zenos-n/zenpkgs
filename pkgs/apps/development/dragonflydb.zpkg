@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dragonflydb";
   name = "Dragonfly";
   summary = "Modern replacement for Redis and Memcached";
   description = ''

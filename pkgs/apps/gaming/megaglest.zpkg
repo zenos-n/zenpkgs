@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.megaglest";
   name = "MegaGlest";
   summary = "Entertaining free (freeware and free software) and open source cross-platform 3D real-time strategy (RTS) game";
   description = ''

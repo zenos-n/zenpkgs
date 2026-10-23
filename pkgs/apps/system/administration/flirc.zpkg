@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.flirc";
   name = "Flirc";
   summary = "Use any Remote with your Media Center";
   description = ''

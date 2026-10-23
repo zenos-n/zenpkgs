@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.bc";
   name = "bc";
   summary = "GNU software calculator";
   description = ''

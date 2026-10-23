@@ -18,7 +18,7 @@ workingDirectory._meta = {
 package._meta = {
   name = "Bot package"; summary = "Bot package";
   description = ''Package supplying opencode-telegram.'';
-  type = $type.package; default = $pkgs.apps.ai.opencode-telegram-bot;
+  type = $type.package; default = $pkgs.byCategories.apps.ai.opencode-telegram-bot;
   tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
 arguments._meta = {
@@ -35,14 +35,14 @@ enable = enableOption {
   };
   u! {
     assertions = [ { assertion = $path.environmentFile != null && $lib.hasPrefix "/" $path.environmentFile; message = "opencodeTelegram.environmentFile must be an absolute runtime path"; } ];
-    home.packages = [ $path.package $pkgs.apps.ai.opencode ];
+    home.packages = [ $path.package $pkgs.byCategories.apps.ai.opencode ];
     systemd.user.services.opencodeTelegram = {
       Unit = { Description = "opencode Telegram bridge"; After = [ "network-online.target" ]; };
       Service = {
         ExecStart = "${$path.package}/bin/opencode-telegram ${$lib.escapeShellArgs $path.arguments}";
         WorkingDirectory = $path.workingDirectory;
         EnvironmentFile = $lib.mkIf ($path.environmentFile != null) $path.environmentFile;
-        Environment = [ "PATH=${$lib.makeBinPath [ $pkgs.apps.ai.opencode $pkgs.apps.development-tools.git $pkgs.legacy.bash ]}:%h/.nix-profile/bin:/run/current-system/sw/bin" ];
+        Environment = [ "PATH=${$lib.makeBinPath [ $pkgs.byCategories.apps.ai.opencode $pkgs.byCategories.apps.development-tools.git $pkgs.legacy.bash ]}:%h/.nix-profile/bin:/run/current-system/sw/bin" ];
         Restart = "on-failure"; RestartSec = 5;
       };
       Install.WantedBy = [ "default.target" ];

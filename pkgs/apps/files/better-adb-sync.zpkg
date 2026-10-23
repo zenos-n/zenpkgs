@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.better-adb-sync";
   name = "better-adb-sync";
   summary = "Synchronize files between a PC and an Android device using ADB (Android Debug Bridge)";
   description = ''

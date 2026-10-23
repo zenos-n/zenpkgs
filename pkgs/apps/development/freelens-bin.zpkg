@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.freelens-bin";
   name = "FreeLens";
   summary = "Free IDE for Kubernetes";
   description = ''

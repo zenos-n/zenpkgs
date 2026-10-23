@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.sgt-puzzles";
   name = "Simon Tatham's Puzzles";
   summary = "Simon Tatham's portable puzzle collection";
   description = ''

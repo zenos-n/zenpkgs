@@ -1,0 +1,24 @@
+_meta = {
+  id = "org.zenos.packages.theming.system.fastfetch";
+  name = "zenos-fastfetch";
+  summary = "ZenOS fastfetch theming and ASCII art";
+  description = ''
+    ZenOS fastfetch theming and ASCII art
+
+    **ZenOS Fastfetch** provides a custom configuration for `fastfetch` that aligns
+    with the ZenOS brand. It wraps the standard `fastfetch` binary to load the
+    ZenOS preset and ASCII art by default.
+
+    **Features:**
+    - Custom ZenOS ASCII art.
+    - Pre-configured JSONC preset.
+    - Global availability without user-level configuration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0";
+  tags = [ "theming" "system" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+build = $lib.zenCompatPackage $lib.zenPackageSources.compatRecipes."theming/system/fastfetch";

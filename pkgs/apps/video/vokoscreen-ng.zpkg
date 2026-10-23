@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.vokoscreen-ng";
   name = "vokoscreenNG";
   summary = "User friendly Open Source screencaster for Linux and Windows";
   description = ''

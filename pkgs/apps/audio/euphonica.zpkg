@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.euphonica";
   name = "Euphonica";
   summary = "Graphical MPD music client";
   description = ''

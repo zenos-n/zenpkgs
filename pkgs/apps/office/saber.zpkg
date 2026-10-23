@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.saber";
   name = "Saber";
   summary = "Cross-platform open-source app built for handwriting";
   description = ''

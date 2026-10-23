@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.tangram";
   name = "Tangram";
   summary = "Run web apps on your desktop";
   description = ''

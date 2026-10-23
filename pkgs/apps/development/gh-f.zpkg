@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh-f";
   name = "gh-f";
   summary = "GitHub CLI ultimate FZF extension";
   description = ''

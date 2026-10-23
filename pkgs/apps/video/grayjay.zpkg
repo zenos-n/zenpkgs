@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.grayjay";
   name = "Grayjay";
   summary = "Cross-platform application to stream and download content from various sources";
   description = ''

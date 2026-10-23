@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-workspaces";
   name = "cargo-workspaces";
   summary = "Tool for managing cargo workspaces and their crates, inspired by lerna";
   description = ''

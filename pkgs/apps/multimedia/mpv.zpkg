@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.multimedia.mpv";
   name = "mpv";
   summary = "General-purpose media player, fork of MPlayer and mplayer2";
   description = ''

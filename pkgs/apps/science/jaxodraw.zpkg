@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.jaxodraw";
   name = "JaxoDraw";
   summary = "Java program for drawing Feynman diagrams";
   description = ''

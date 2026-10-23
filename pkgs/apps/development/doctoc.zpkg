@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.doctoc";
   name = "DocToc";
   summary = "Generate table of contents for Markdown files";
   description = ''

@@ -37,7 +37,7 @@ enable = enableOption {
 package = {
   _meta = {
     type = $type.package;
-    default = $pkgs.system.zenlink;
+    default = $pkgs.byCategories.system.zenlink;
     summary = "ZenLink package";
   };
 };

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.frogmouth";
   name = "Frogmouth";
   summary = "Markdown browser for your terminal";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.bibtex2html";
   name = "bibtex2html";
   summary = "Collection of tools for translating from BibTeX to HTML";
   description = ''

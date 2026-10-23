@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.bililiverecorder";
   name = "BiliLiveRecorder";
   summary = "Convenient free open source bilibili live recording tool";
   description = ''

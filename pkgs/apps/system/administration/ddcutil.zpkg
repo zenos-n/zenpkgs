@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.ddcutil";
   name = "ddcutil";
   summary = "Query and change Linux monitor settings using DDC/CI and USB";
   description = ''

@@ -1,0 +1,24 @@
+_meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.zenlink-indicator";
+  name = "zenlink-indicator";
+  summary = "ZenLink status indicator and control interface for GNOME";
+  description = ''
+    ZenLink status indicator and control interface for GNOME
+
+    **ZenLink Indicator** provides a status icon and control interface for the
+    ZenLink service. It integrates directly into the GNOME control center or
+    top bar, offering quick access to device pairing, file transfers, and
+    notification settings.
+
+    **Features:**
+    - Visual status indicator for connectivity.
+    - Quick access menu for common actions.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0";
+  tags = [ "desktops" "gnome" "extensions" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+build = $lib.zenCompatPackage $lib.zenPackageSources.compatRecipes."desktops/gnome/extensions/zenlink-indicator";

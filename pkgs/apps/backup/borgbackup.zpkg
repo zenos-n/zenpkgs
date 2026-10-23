@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.borgbackup";
   name = "BorgBackup";
   summary = "Deduplicating archiver with compression and encryption";
   description = ''

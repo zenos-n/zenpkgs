@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.exiv2";
   name = "Exiv2";
   summary = "Library and command-line utility to manage image metadata";
   description = ''

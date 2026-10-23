@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.totem";
   name = "Totem";
   summary = "Movie player for the GNOME desktop based on GStreamer";
   description = ''

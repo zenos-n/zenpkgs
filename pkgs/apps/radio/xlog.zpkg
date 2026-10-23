@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.xlog";
   name = "Xlog";
   summary = "Amateur radio logging program";
   description = ''

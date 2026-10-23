@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.dioxus-cli";
   name = "Dioxus CLI";
   summary = "CLI for building fullstack web, desktop, and mobile apps with a single codebase.";
   description = ''

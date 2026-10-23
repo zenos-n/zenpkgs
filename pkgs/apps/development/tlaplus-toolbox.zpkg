@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.tlaplus-toolbox";
   name = "TLA+ Toolbox";
   summary = "IDE for the TLA+ tools";
   description = ''

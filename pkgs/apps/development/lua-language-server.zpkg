@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.lua-language-server";
   name = "Lua Language Server";
   summary = "Language server that offers Lua language support";
   description = ''

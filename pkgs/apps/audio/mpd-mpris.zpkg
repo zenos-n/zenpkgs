@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.mpd-mpris";
   name = "mpd-mpris";
   summary = "Implementation of the MPRIS protocol for MPD";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dura";
   name = "Dura";
   summary = "Background process that saves uncommitted changes on git";
   description = ''

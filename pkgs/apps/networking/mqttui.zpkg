@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.mqttui";
   name = "mqttui";
   summary = "Terminal client for MQTT";
   description = ''

@@ -7,10 +7,17 @@ Flatpak applications, local GNOME extensions, desktop entries, and enabled user
 units. No credentials, browser databases, chat histories, or bot environment
 files were imported.
 
-The catalog now has 4142 declarations (4098 imports and 44 build providers),
-including 74 additions. Codex and OpenCode also have explicit recipes for the
+The catalog now has 4152 declarations (4098 imports and 54 build providers).
+The migration expansion added 74 declarations; ten former compatibility-only
+recipes now also have canonical ZPKG wrappers. Codex and OpenCode also have explicit recipes for the
 versions used by the reference profile. The registry fixture refresh corrects
 pre-existing stale Codex, ZenFS, and setup provider records.
+
+Those ten internal recipes remain trusted transitional builders behind the
+explicit declarations, not implicit package exports. Each wrapper has a required
+reverse-DNS `_meta.id`, preserving an established ID or explicitly using the
+`org.zenos.packages` fallback namespace. Canonical and `byCategories` views
+resolve to the same derivation through one registry record.
 
 ## Capability routes
 
@@ -95,7 +102,7 @@ and paths with actual migration state; import `nixosModules.default` once.
 ```
 
 To select the old kernel, set `zenos.system.kernel.package` to
-`pkgs.zenos.system.kernel.popcorn` or `.popcorn-zen4`. The latter reproduces the
+`pkgs.zenos.byCategories.system.kernel.popcorn` or `.popcorn-zen4`. The latter reproduces the
 Zen 4 CPU-tuned host variant. Inspection of its generated configuration and
 the live kernel confirms that both retain WLAN and i915 support; comments in the
 old recipe about stripping drivers do not describe its actual generated config. Neither is selected automatically. Out-of-tree modules

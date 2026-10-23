@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.ab-av1";
   name = "ab-av1";
   summary = "AV1 re-encoding using ffmpeg, svt-av1 & vmaf";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.xfsprogs";
   name = "xfsprogs";
   summary = "Curated xfsprogs package for ZenOS";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.finance.skrooge";
   name = "Skrooge";
   summary = "Personal finances manager, powered by KDE";
   description = ''

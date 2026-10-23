@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.llama-cpp";
   name = "llama.cpp";
   summary = "Inference of Meta's LLaMA model (and others) in pure C/C++";
   description = ''

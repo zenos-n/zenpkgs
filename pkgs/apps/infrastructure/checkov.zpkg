@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.infrastructure.checkov";
   name = "Checkov";
   summary = "Static code analysis tool for infrastructure-as-code";
   description = ''

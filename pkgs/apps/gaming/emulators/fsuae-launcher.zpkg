@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.fsuae-launcher";
   name = "FS-UAE Launcher";
   summary = "Graphical front-end for the FS-UAE emulator";
   description = ''

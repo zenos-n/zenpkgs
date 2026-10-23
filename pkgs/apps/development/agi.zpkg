@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.agi";
   name = "Android GPU Inspector";
   summary = "Android GPU Inspector";
   description = ''

@@ -51,8 +51,8 @@ import ./hardware/base.zcfg;
 
 system.network.hostName = "zenos";
 system.software.packages = [
-  $pkgs.catalog.git
-  $pkgs.catalog.gnome-console
+  $pkgs.byCategories.dev.vcs.git
+  $pkgs.byCategories.desktops.gnome.apps.gnome-console
 ];
 
 # Explicit access to an underlying NixOS option.
@@ -66,8 +66,8 @@ leaf cannot be assigned twice, including through dotted and nested forms.
 Import cycles and unreadable files are errors.
 
 Only `$pkgs` attribute references are accepted. Package paths are resolved
-inside the curated ZenPkgs namespace; `$pkgs.catalog.firefox`, for example,
-compiles to `pkgs.zenos.catalog.firefox`. Arbitrary identifiers, function calls,
+inside the curated ZenPkgs namespace; `$pkgs.org.mozilla.firefox`, for example,
+compiles to `pkgs.zenos.org.mozilla.firefox`. Arbitrary identifiers, function calls,
 interpolation, arithmetic, conditionals, `with`, `let`, quoted attribute names,
 URL/absolute imports, floats, and comma-separated lists are unsupported and
 rejected.
@@ -299,6 +299,17 @@ bundles compile from filtered immutable sources so emitted paths do not point to
 temporary builder directories. `checks.x86_64-linux.dsl-bundle-context` verifies
 that executable fragments retain and can read their referenced assets.
 
+## Package identity views
+
+ZPKGs require reverse-DNS `_meta.id`. Registry `id = "pkgs." + _meta.id` and
+`target = _meta.id.split(".")`; `categoryTarget` contains filesystem segments
+relative to `pkgs/` without `.zpkg`. Canonical `pkgs.<reverse DNS>` and
+`pkgs.byCategories.<existing category path>` resolve to the same derivation,
+with one registry record. Preserve established IDs; otherwise author a unique
+ID under `org.zenos.packages`. Missing/malformed/duplicate IDs fail. No old root
+category aliases are exported. `pkgs.legacy` and module identity are unchanged.
+See [metadata guidelines](metadata-guidelines.md).
+
 ## Declaration ownership
 
 Independent declarations owning the same mounted option path are compilation
@@ -309,10 +320,13 @@ construction checks upstream aliases before action values run. Module-local alia
 require ZSTR mounting; boundaries and VM commands are in
 `tests/mounting/module-aliases.md` and `tests/mounting/run-ownership.py`.
 
-Package output names retain their existing spelling, but collisions are rejected
-instead of silently overwriting another full-path package. The package overlay
-also rejects overlapping ZPKG and compatibility-recipe ownership from their static
-source inventories, without evaluating package builders to discover tree shape.
+Package outputs use canonical IDs and the derived `byCategories` view.
+Collisions are rejected instead of silently overwriting another package.
+Ten former compatibility-only recipes now serve as trusted transitional builders
+behind canonical ZPKG wrappers. Their internal recipe paths do not implicitly
+export packages or create competing ownership: the declarations define the
+registry entries and both public views. Static ownership checks reject conflicting
+exports without evaluating package builders to discover tree shape.
 
 The foundation checks do not certify all existing library options' enabled
 behavior, activation, or boot. Run integration acceptance in a ZenOS VM.

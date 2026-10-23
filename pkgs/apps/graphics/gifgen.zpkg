@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.gifgen";
   name = "gifgen";
   summary = "Simple high quality GIF encoding";
   description = ''

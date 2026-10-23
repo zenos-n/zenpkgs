@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.citations";
   name = "Citations";
   summary = "Manage your bibliographies using the BibTeX format";
   description = ''

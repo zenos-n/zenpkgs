@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.cruise";
   name = "Cruise";
   summary = "TUI for managing Docker containers, images, volumes, networks, and more";
   description = ''

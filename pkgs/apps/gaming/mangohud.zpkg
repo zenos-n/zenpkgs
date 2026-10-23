@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.mangohud";
   name = "MangoHud";
   summary = "Vulkan and OpenGL overlay for monitoring FPS, temperatures, CPU/GPU load and more";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh-i";
   name = "gh-i";
   summary = "Search github issues interactively";
   description = ''

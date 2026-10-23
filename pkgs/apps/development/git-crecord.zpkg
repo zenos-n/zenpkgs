@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-crecord";
   name = "git-crecord";
   summary = "Git subcommand to interactively select changes to commit or stage";
   description = ''

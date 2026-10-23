@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.netcat-openbsd";
   name = "OpenBSD Netcat";
   summary = "TCP/IP swiss army knife. OpenBSD variant";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.extractpdfmark";
   name = "extractpdfmark";
   summary = "Extract page mode and named destinations as PDFmark from PDF";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.quarto";
   name = "Quarto";
   summary = "Open-source scientific and technical publishing system built on Pandoc";
   description = ''

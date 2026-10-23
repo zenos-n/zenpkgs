@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cassowary";
   name = "Cassowary";
   summary = "Modern cross-platform HTTP load-testing tool written in Go";
   description = ''

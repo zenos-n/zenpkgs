@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.easytag";
   name = "EasyTAG";
   summary = "View and edit tags for various audio files";
   description = ''

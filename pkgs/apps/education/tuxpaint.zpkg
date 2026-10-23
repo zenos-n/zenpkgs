@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.tuxpaint";
   name = "Tux Paint";
   summary = "Open Source Drawing Software for Children";
   description = ''

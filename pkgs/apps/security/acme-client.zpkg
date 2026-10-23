@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.acme-client";
   name = "acme-client";
   summary = "Secure ACME/Let's Encrypt client";
   description = ''

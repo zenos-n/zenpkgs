@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.kcat";
   name = "kcat";
   summary = "Generic non-JVM producer and consumer for Apache Kafka";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.libnotify";
   name = "libnotify";
   summary = "Library that sends desktop notifications to a notification daemon";
   description = ''

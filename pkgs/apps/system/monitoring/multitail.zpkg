@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.multitail";
   name = "multitail";
   summary = "tail on steroids";
   description = ''

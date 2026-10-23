@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.glrnvim";
   name = "glrnvim";
   summary = "Really fast & stable neovim GUI which could be accelerated by GPU";
   description = ''

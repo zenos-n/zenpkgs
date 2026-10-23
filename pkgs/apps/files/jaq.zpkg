@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.jaq";
   name = "jaq";
   summary = "Jq clone focused on correctness, speed and simplicity";
   description = ''

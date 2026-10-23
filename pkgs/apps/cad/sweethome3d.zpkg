@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.sweethome3d";
   name = "Sweet Home 3D";
   summary = "Design and visualize your future home";
   description = ''

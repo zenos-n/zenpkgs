@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.detect-it-easy";
   name = "Detect It Easy";
   summary = "Program for determining types of files for Windows, Linux and MacOS";
   description = ''

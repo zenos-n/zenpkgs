@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.ristretto";
   name = "Ristretto";
   summary = "Fast and lightweight picture-viewer for the Xfce desktop environment";
   description = ''

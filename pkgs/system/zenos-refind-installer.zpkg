@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.system.zenos-refind-installer";
   name = "ZenOS rEFInd installer";
   summary = "Synchronizes ZenOS generations into rEFInd";
   description = ''Packages the original ZenOS generation synchronizer used after systemd-boot writes EFI kernels.'';

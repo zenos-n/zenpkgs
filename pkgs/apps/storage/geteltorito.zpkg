@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.geteltorito";
   name = "geteltorito";
   summary = "Extract the initial/default boot image from a CD image if existent";
   description = ''

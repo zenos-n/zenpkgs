@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.asciinema-agg";
   name = "agg";
   summary = "Command-line tool for generating animated GIF files from asciicast files produced by asciinema terminal recorder";
   description = ''

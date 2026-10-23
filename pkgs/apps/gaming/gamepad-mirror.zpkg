@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gamepad-mirror";
   name = "Gamepad Mirror";
   summary = "Small Adwaita application to show game pad inputs using libmanette";
   description = ''

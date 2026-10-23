@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.rcu";
   name = "reMarkable Connection Utility";
   summary = "All-in-one offline/local management software for reMarkable e-paper tablets";
   description = ''

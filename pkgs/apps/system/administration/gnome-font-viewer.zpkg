@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.font-viewer";
   name = "GNOME Fonts";
   summary = "Program that can preview fonts and create thumbnails for fonts";
   description = ''

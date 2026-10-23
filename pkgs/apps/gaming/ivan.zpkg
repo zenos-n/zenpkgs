@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.ivan";
   name = "IVAN";
   summary = "Graphical roguelike game";
   description = ''

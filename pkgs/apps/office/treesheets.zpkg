@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.treesheets";
   name = "TreeSheets";
   summary = "Free Form Data Organizer";
   description = ''

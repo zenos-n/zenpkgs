@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.chezmoi";
   name = "chezmoi";
   summary = "Manage your dotfiles across multiple machines, securely";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.networking.sniffnet";
   name = "Sniffnet";
   summary = "Cross-platform application to monitor your network traffic with ease";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.vim";
   name = "Vim";
   summary = "Most popular clone of the VI editor";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.endeavour";
   name = "Endeavour";
   summary = "Personal task manager for GNOME";
   description = ''

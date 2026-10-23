@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.deadnix";
   name = "deadnix";
   summary = "Find and remove unused code in .nix source files";
   description = ''

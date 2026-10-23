@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.dive";
   name = "Dive";
   summary = "Tool for exploring each layer in a docker image";
   description = ''

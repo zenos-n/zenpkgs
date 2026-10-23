@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.vkmark";
   name = "vkmark";
   summary = "Extensible Vulkan benchmarking suite";
   description = ''

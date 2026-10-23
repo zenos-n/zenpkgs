@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.unshield";
   name = "unshield";
   summary = "Tool and library to extract CAB files from InstallShield installers";
   description = ''

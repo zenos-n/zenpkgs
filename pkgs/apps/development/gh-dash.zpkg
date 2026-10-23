@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh-dash";
   name = "GitHub CLI Dashboard";
   summary = "Github Cli extension to display a dashboard with pull requests and issues";
   description = ''

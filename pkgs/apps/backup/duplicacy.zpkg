@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.duplicacy";
   name = "Duplicacy";
   summary = "New generation cloud backup tool";
   description = ''

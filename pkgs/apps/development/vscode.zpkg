@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.vscode";
   name = "vscode";
   summary = "Curated vscode package for ZenOS";
   description = ''

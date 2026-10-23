@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development-tools.git";
   name = "git";
   summary = "Curated git package for ZenOS";
   description = ''

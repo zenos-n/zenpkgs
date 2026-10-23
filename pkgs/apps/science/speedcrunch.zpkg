@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.speedcrunch";
   name = "SpeedCrunch";
   summary = "High-precision scientific calculator";
   description = ''

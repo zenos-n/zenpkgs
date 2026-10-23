@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.gui-for-clash";
   name = "GUI for Clash";
   summary = "Clash GUI program developed by vue3 + wails";
   description = ''

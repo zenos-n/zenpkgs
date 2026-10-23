@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.stereotool";
   name = "Stereo Tool";
   summary = "Stereo Tool is a software-based audio processor which offers outstanding audio quality and comes with many unique features";
   description = ''

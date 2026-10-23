@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.ansilove";
   name = "AnsiLove";
   summary = "ANSI and ASCII art to PNG converter in C";
   description = ''

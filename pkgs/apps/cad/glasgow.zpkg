@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.glasgow";
   name = "Glasgow";
   summary = "Software for Glasgow, a digital interface multitool";
   description = ''

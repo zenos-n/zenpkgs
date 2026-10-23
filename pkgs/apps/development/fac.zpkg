@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fac";
   name = "fac";
   summary = "CUI for fixing git conflicts";
   description = ''

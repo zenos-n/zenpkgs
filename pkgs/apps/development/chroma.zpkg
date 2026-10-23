@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.chroma";
   name = "Chroma";
   summary = "General purpose syntax highlighter in pure Go";
   description = ''

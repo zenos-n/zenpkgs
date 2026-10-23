@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.diffnav";
   name = "diffnav";
   summary = "Git diff pager based on delta but with a file tree, à la GitHub";
   description = ''

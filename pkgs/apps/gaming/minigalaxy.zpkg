@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.minigalaxy";
   name = "Minigalaxy";
   summary = "Simple GOG client for Linux";
   description = ''

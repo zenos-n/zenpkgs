@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.dool";
   name = "Dool";
   summary = "Python3 compatible clone of dstat";
   description = ''

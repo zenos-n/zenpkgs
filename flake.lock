@@ -422,17 +422,17 @@
     },
     "nixpkgs-popcorn": {
       "locked": {
-        "lastModified": 1791143449,
-        "narHash": "sha256-9+n3ReS2y9xS199LoJjKUWHwZrISGHWgkD/LUZTDZyA=",
+        "lastModified": 1777268161,
+        "narHash": "sha256-bxrdOn8SCOv8tN4JbTF/TXq7kjo9ag4M+C8yzzIRYbE=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "0d9e9b832d03ac387417e16ce1febf73b2e631e1",
+        "rev": "1c3fe55ad329cbcb28471bb30f05c9827f724c76",
         "type": "github"
       },
       "original": {
         "owner": "NixOS",
-        "ref": "nixos-26.05",
         "repo": "nixpkgs",
+        "rev": "1c3fe55ad329cbcb28471bb30f05c9827f724c76",
         "type": "github"
       }
     },
@@ -741,17 +741,17 @@
     "source-setup": {
       "flake": false,
       "locked": {
-        "lastModified": 1792738577,
-        "narHash": "sha256-HbaA46NW+T9NfYkK9XnJzMRT2yFS3Nt3dj+BBo/RbdM=",
+        "lastModified": 1792761734,
+        "narHash": "sha256-WJZ6oR/gE2JWo1dmYrTcPVGZk4HHzhiQJ7oQGETLld8=",
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "de3a35e1fb0297468da12dd8a9ea609115a61c3d",
+        "rev": "ce26f896fa488747f22eb7002e452fd9cfb18802",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "de3a35e1fb0297468da12dd8a9ea609115a61c3d",
+        "rev": "ce26f896fa488747f22eb7002e452fd9cfb18802",
         "type": "github"
       }
     },

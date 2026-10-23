@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.massif-visualizer";
   name = "Massif Visualizer";
   summary = "Visualizer for Valgrind Massif data files";
   description = ''

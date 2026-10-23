@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.apostrophe";
   name = "apostrophe";
   summary = "Curated apostrophe package for ZenOS";
   description = ''

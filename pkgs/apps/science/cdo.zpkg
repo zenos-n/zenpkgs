@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.cdo";
   name = "Climate Data Operators";
   summary = "Collection of command line Operators to manipulate and analyse Climate and NWP model Data";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.asn";
   name = "asn";
   summary = "OSINT command line tool for investigating network data";
   description = ''

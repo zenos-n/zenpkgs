@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.cfspeedtest";
   name = "cfspeedtest";
   summary = "Unofficial CLI for speed.cloudflare.com";
   description = ''

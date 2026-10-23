@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.audio-sharing";
   name = "Audio Sharing";
   summary = "Automatically share the current audio playback in the form of an RTSP stream";
   description = ''

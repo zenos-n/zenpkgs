@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.everdo";
   name = "Everdo";
   summary = "Cross-platform GTD app with focus on privacy";
   description = ''

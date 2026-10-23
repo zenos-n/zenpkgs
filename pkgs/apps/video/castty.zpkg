@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.castty";
   name = "castty";
   summary = "CLI tool to record audio-enabled screencasts of your terminal, for the web";
   description = ''

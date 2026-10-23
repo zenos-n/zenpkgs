@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.tuxtype";
   name = "Tux Typing";
   summary = "Educational Typing Tutor Game Starring Tux, the Linux Penguin";
   description = ''

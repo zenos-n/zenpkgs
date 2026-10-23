@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.super-slicer";
   name = "SuperSlicer";
   summary = "PrusaSlicer fork with more features and faster development cycle";
   description = ''

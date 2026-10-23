@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.pax-britannica";
   name = "Pax Britannica";
   summary = "One-button multi-player real-time strategy game";
   description = ''

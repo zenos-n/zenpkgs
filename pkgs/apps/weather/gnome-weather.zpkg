@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.weather.gnome-weather";
   name = "GNOME Weather";
   summary = "Access current weather conditions and forecasts";
   description = ''

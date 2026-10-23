@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.seabird";
   name = "Seabird";
   summary = "Native Kubernetes desktop client";
   description = ''

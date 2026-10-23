@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.stm32cubemx";
   name = "STM32CubeMX";
   summary = "Graphical tool for configuring STM32 microcontrollers and microprocessors";
   description = ''

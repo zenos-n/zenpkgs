@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.cutentr";
   name = "CuteNTR";
   summary = "3DS streaming client for Linux";
   description = ''

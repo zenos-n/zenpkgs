@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.jpegoptim";
   name = "jpegoptim";
   summary = "Optimize JPEG files";
   description = ''

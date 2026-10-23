@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development-tools.nano";
   name = "nano";
   summary = "Curated nano package for ZenOS";
   description = ''

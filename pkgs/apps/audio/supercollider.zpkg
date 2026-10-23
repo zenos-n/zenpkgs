@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.supercollider";
   name = "SuperCollider";
   summary = "Programming language for real time audio synthesis";
   description = ''

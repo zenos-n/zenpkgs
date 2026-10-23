@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.freedoom";
   name = "Freedoom";
   summary = "Game based on the Doom engine";
   description = ''

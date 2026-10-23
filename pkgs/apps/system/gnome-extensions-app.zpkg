@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Extensions";
   name = "gnome-extensions-app";
   summary = "Curated gnome-extensions-app package for ZenOS";
   description = ''

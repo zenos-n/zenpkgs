@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.pitivi";
   name = "Pitivi";
   summary = "Non-Linear video editor utilizing the power of GStreamer";
   description = ''

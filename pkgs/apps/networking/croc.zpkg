@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.croc";
   name = "croc";
   summary = "Easily and securely send things from one computer to another";
   description = ''

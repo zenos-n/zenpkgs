@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.syft";
   name = "syft";
   summary = "CLI tool and library for generating a Software Bill of Materials from container images and filesystems";
   description = ''

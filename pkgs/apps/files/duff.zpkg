@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.duff";
   name = "duff";
   summary = "Quickly find duplicate files";
   description = ''

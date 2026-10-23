@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.ispell";
   name = "Ispell";
   summary = "Interactive spell-checking program for Unix";
   description = ''

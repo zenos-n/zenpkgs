@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.dns2tcp";
   name = "dns2tcp";
   summary = "Tool for relaying TCP connections over DNS";
   description = ''

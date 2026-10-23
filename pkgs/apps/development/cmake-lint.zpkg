@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cmake-lint";
   name = "cmake-lint";
   summary = "Static code checker for CMake files";
   description = ''

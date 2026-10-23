@@ -7,7 +7,7 @@ pkgs.testers.runNixOSTest {
     imports = [ zenosModule ];
     boot.consoleLogLevel = lib.mkForce 7;
     boot.initrd.verbose = lib.mkForce true;
-    zenos.system.packages.apps.ai.codex = true;
+    zenos.system.packages.byCategories.apps.ai.codex = true;
     users.users.alice = {
       isNormalUser = true;
       home = "/Users/alice";

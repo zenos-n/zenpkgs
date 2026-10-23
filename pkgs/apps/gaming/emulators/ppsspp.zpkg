@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.ppsspp";
   name = "PPSSPP";
   summary = "HLE Playstation Portable emulator, written in C++ (SDL + headless)";
   description = ''

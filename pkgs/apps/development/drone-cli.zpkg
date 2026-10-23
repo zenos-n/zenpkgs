@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.drone-cli";
   name = "Drone CLI";
   summary = "Command line client for the Drone continuous integration server";
   description = ''

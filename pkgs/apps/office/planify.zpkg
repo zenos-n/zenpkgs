@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.planify";
   name = "Planify";
   summary = "Task manager with Todoist support designed for GNU/Linux";
   description = ''

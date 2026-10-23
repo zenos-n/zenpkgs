@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.streamlink";
   name = "Streamlink";
   summary = "CLI for extracting streams from various websites to video player of your choosing";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.gh-screensaver";
   name = "GitHub CLI Screensavers";
   summary = "gh extension with animated terminal screensavers";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-point";
   name = "git-point";
   summary = "Set Git references through a command-line interface";
   description = ''

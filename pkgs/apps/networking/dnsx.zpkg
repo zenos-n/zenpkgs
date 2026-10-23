@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.dnsx";
   name = "dnsx";
   summary = "Fast and multi-purpose DNS toolkit";
   description = ''

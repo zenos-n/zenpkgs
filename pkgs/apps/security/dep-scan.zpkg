@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.dep-scan";
   name = "Dependency Scan";
   summary = "Security and risk audit tool based on known vulnerabilities, advisories, and license limitations for project dependencies";
   description = ''

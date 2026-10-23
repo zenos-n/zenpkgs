@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fx";
   name = "fx";
   summary = "Terminal JSON viewer";
   description = ''

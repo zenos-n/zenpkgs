@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.stylua";
   name = "StyLua";
   summary = "Opinionated Lua code formatter";
   description = ''

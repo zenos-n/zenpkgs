@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.nekoray";
   name = "Throne";
   summary = "Qt based cross-platform GUI proxy configuration manager";
   description = ''

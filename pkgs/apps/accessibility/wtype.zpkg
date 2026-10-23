@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.wtype";
   name = "wtype";
   summary = "xdotool type for wayland";
   description = ''

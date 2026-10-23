@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.syncthingtray";
   name = "Syncthing Tray";
   summary = "Tray application and Dolphin/Plasma integration for Syncthing";
   description = ''

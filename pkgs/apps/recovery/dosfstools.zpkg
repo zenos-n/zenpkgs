@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.dosfstools";
   name = "dosfstools";
   summary = "Curated dosfstools package for ZenOS";
   description = ''

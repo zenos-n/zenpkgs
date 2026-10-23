@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.cook-cli";
   name = "Cook CLI";
   summary = "Suite of tools to create shopping lists and maintain recipes";
   description = ''

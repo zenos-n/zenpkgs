@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.gappa";
   name = "Gappa";
   summary = "Verifying and formally proving properties on numerical programs dealing with floating-point or fixed-point arithmetic";
   description = ''

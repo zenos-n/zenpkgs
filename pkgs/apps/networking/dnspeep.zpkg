@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.dnspeep";
   name = "dnspeep";
   summary = "Spy on the DNS queries your computer is making";
   description = ''

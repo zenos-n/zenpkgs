@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.calcurse";
   name = "Calcurse";
   summary = "Calendar and scheduling application for the command line";
   description = ''

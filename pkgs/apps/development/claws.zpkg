@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.claws";
   name = "claws";
   summary = "Interactive command line client for testing websocket servers";
   description = ''

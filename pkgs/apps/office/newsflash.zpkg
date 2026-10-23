@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.newsflash";
   name = "NewsFlash";
   summary = "Modern feed reader designed for the GNOME desktop";
   description = ''

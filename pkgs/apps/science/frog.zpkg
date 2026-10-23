@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.frog";
   name = "Frog NLP";
   summary = "Tagger-Lemmatizer-Morphological-Analyzer-Dependency-Parser for Dutch";
   description = ''

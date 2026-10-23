@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gbforth";
   name = "GBForth";
   summary = "Forth-based Game Boy development kit";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.surge-XT";
   name = "Surge XT";
   summary = "LV2, VST3 & CLAP synthesizer plug-in (previously released as Vember Audio Surge)";
   description = ''

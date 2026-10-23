@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.kdialog";
   name = "KDialog";
   summary = "Tool to show nice dialog boxes from shell scripts";
   description = ''

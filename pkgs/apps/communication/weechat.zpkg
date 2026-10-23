@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.weechat";
   name = "WeeChat";
   summary = "Fast, light and extensible chat client";
   description = ''

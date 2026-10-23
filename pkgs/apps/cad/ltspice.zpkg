@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.ltspice";
   name = "LTspice";
   summary = "SPICE simulator, schematic capture and waveform viewer";
   description = ''

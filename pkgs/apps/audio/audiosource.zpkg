@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.audiosource";
   name = "Audio Source";
   summary = "Use an Android device as a USB microphone";
   description = ''

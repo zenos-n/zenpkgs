@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.earbuds";
   name = "Earbuds CLI";
   summary = "Free CLI tool to control your Galaxy Buds";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.arch-install-scripts";
   name = "arch-install-scripts";
   summary = "Curated arch-install-scripts package for ZenOS";
   description = ''

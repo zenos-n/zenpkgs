@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.xdotool";
   name = "xdotool";
   summary = "Fake keyboard/mouse input, window management, and more";
   description = ''

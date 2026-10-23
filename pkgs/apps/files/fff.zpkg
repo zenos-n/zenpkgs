@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fff";
   name = "fff";
   summary = "Fast terminal file manager";
   description = ''

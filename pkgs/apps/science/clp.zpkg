@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.clp";
   name = "CLP";
   summary = "Open-source linear programming solver written in C++";
   description = ''

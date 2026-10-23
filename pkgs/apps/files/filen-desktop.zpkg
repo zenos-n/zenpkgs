@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.filen-desktop";
   name = "Filen";
   summary = "Filen Desktop Client";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.clipboard-jh";
   name = "Clipboard";
   summary = "Cut, copy, and paste anything, anywhere, all from the terminal";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.davmail";
   name = "DavMail";
   summary = "Java application which presents a Microsoft Exchange server as local CALDAV, IMAP and SMTP servers";
   description = ''

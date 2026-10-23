@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.vorbis-tools";
   name = "Vorbis Tools";
   summary = "Extra tools for Ogg-Vorbis audio codec";
   description = ''

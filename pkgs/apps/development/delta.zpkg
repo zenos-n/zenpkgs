@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.delta";
   name = "delta";
   summary = "Syntax-highlighting pager for git";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.gtkwave";
   name = "GTKWave";
   summary = "VCD/Waveform viewer for Unix and Win32";
   description = ''

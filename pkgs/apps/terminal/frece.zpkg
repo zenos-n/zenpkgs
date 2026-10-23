@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.frece";
   name = "frece";
   summary = "Maintain a database sorted by frecency (frequency + recency)";
   description = ''

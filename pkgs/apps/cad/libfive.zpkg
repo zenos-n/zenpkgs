@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.cad.libfive";
   name = "libfive Studio";
   summary = "Infrastructure for solid modeling with F-Reps in C, C++, and Guile";
   description = ''

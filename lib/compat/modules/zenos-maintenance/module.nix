@@ -7,7 +7,7 @@
 
 let
   cfg = config.zenos.system.maintenance;
-  zenos-maintenance = pkgs.zenos.system.zenclean;
+  zenos-maintenance = pkgs.zenos.byCategories.system.zenclean;
 
   configFile = pkgs.writeText "zenos-maintenance-config.json" (
     builtins.toJSON {

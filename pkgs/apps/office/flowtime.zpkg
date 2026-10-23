@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.flowtime";
   name = "Flowtime";
   summary = "Get what motivates you done, without losing concentration";
   description = ''

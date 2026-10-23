@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.tidal-hifi";
   name = "TIDAL Hi-Fi";
   summary = "Web version of Tidal running in Electron with Hi-Fi support thanks to Widevine";
   description = ''

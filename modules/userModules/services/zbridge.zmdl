@@ -15,11 +15,11 @@ enable = enableOption {
     tags = [ "android" "pipewire" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
   };
   u! {
-    home.packages = [ $pkgs.apps.connectivity.zbridge ];
+    home.packages = [ $pkgs.byCategories.apps.connectivity.zbridge ];
     dconf.settings."org/gnome/shell".enabled-extensions = $lib.mkIf $path.gnomeIndicator [ "zbridge@neg-zero.com" ];
     systemd.user.services.zbridge = {
       Unit = { Description = "ZeroBridge Android audio/video bridge"; After = [ "pipewire.service" ]; };
-      Service = { ExecStart = "${$pkgs.apps.connectivity.zbridge}/bin/zb-daemon"; Restart = "on-failure"; RestartSec = 5; };
+      Service = { ExecStart = "${$pkgs.byCategories.apps.connectivity.zbridge}/bin/zb-daemon"; Restart = "on-failure"; RestartSec = 5; };
       Install.WantedBy = [ "default.target" ];
     };
   };

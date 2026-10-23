@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.launchers.anyrun";
   name = "Anyrun";
   summary = "Wayland-native, highly customizable runner";
   description = ''

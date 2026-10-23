@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.plocate";
   name = "plocate";
   summary = "Much faster locate";
   description = ''

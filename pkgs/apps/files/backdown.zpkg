@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.backdown";
   name = "backdown";
   summary = "File deduplicator";
   description = ''

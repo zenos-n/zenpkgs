@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.pyright";
   name = "Pyright";
   summary = "Type checker for the Python language";
   description = ''

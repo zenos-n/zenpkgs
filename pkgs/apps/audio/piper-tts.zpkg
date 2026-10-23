@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.piper-tts";
   name = "Piper";
   summary = "Fast, local neural text to speech system";
   description = ''

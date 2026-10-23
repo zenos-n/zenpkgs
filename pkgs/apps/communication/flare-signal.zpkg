@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.flare-signal";
   name = "Flare";
   summary = "Unofficial Signal GTK client";
   description = ''

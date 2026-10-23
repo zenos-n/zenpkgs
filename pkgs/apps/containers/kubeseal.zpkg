@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.kubeseal";
   name = "Sealed Secrets";
   summary = "Kubernetes controller and tool for one-way encrypted Secrets";
   description = ''

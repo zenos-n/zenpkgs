@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.clickup";
   name = "ClickUp";
   summary = "All in one project management solution";
   description = ''

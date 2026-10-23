@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.TextEditor";
   name = "GNOME Text Editor";
   summary = "Text Editor for GNOME";
   description = ''

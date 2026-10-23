@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.sish";
   name = "sish";
   summary = "HTTP(S)/WS(S)/TCP Tunnels to localhost";
   description = ''

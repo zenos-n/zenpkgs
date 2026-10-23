@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.cliamp";
   name = "cliamp";
   summary = "Terminal Winamp - a retro terminal music player inspired by Winamp 2.x";
   description = ''

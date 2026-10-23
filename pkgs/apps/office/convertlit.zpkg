@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.convertlit";
   name = "Convert LIT";
   summary = "Tool for converting Microsoft Reader ebooks to more open formats";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.trippy";
   name = "Trippy";
   summary = "Network diagnostic tool";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.subtitleedit";
   name = "Subtitle Edit";
   summary = "Subtitle editor";
   description = ''

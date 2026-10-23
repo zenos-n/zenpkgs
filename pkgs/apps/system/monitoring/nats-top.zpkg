@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.nats-top";
   name = "NATS Top";
   summary = "top-like tool for monitoring NATS servers";
   description = ''

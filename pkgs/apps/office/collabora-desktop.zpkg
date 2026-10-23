@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.collabora-desktop";
   name = "Collabora Office";
   summary = "Collaborative Office for desktop, based on LibreOffice technology";
   description = ''

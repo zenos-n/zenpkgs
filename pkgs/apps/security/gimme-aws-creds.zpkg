@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.gimme-aws-creds";
   name = "gimme-aws-creds";
   summary = "CLI that utilizes Okta IdP via SAML to acquire temporary AWS credentials";
   description = ''

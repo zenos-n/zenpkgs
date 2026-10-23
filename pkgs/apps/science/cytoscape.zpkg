@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.cytoscape";
   name = "Cytoscape";
   summary = "General platform for complex network analysis and visualization";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.atuin-desktop";
   name = "Atuin Desktop";
   summary = "Local-first, executable runbook editor";
   description = ''

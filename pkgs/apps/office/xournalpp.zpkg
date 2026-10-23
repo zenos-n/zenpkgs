@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.xournalpp";
   name = "Xournal++";
   summary = "Xournal++ is a handwriting Notetaking software with PDF annotation support";
   description = ''

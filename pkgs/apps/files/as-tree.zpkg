@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.as-tree";
   name = "as-tree";
   summary = "Print a list of paths as a tree of paths";
   description = ''

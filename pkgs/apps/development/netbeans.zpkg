@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.netbeans";
   name = "Apache NetBeans";
   summary = "Integrated development environment for Java, C, C++ and PHP";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.emulsion";
   name = "Emulsion";
   summary = "Fast and minimalistic image viewer";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.lite-xl";
   name = "Lite XL";
   summary = "Lightweight text editor written in Lua";
   description = ''

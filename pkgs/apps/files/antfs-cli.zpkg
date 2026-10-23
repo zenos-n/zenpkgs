@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.antfs-cli";
   name = "ANT-FS CLI";
   summary = "Extracts FIT files from ANT-FS based sport watches";
   description = ''

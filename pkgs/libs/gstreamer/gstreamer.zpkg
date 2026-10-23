@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.libs.gstreamer.gstreamer";
   name = "gstreamer";
   summary = "Open source multimedia framework";
   description = ''

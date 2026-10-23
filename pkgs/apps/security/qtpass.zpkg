@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.qtpass";
   name = "QtPass";
   summary = "Multi-platform GUI for pass, the standard unix password manager";
   description = ''

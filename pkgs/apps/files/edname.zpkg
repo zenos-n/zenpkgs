@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.edname";
   name = "edname";
   summary = "Mass renamer using $EDITOR";
   description = ''

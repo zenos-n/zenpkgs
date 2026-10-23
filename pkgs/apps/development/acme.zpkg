@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.acme";
   name = "ACME Cross-Assembler";
   summary = "Multi-platform cross assembler for 6502/6510/65816 CPUs";
   description = ''

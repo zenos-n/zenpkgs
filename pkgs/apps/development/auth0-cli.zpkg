@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.auth0-cli";
   name = "Auth0 CLI";
   summary = "Command-line interface for Auth0";
   description = ''

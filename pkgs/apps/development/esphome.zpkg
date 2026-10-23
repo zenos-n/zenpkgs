@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.esphome";
   name = "ESPHome";
   summary = "Make creating custom firmwares for ESP32/ESP8266 super easy";
   description = ''

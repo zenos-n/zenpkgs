@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ahoy";
   name = "Ahoy";
   summary = "Create self-documenting cli programs from YAML files";
   description = ''

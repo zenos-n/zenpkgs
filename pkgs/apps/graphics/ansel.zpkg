@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.ansel";
   name = "Ansel";
   summary = "Darktable fork minus the bloat plus some design vision";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.clj-kondo";
   name = "clj-kondo";
   summary = "Linter for Clojure code that sparks joy";
   description = ''

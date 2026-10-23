@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.eddie";
   name = "Eddie";
   summary = "AirVPN's OpenVPN and WireGuard wrapper";
   description = ''

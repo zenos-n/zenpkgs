@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.cli53";
   name = "cli53";
   summary = "CLI tool for the Amazon Route 53 DNS service";
   description = ''

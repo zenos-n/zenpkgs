@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cgdb";
   name = "CGDB";
   summary = "Curses interface to gdb";
   description = ''

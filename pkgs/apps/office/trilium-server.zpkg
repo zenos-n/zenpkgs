@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.trilium-server";
   name = "Trilium Server";
   summary = "Hierarchical note taking application with focus on building large personal knowledge bases";
   description = ''

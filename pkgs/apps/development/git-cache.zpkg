@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-cache";
   name = "git-cache";
   summary = "Program to add and manage a system-wide or user-wide cache for remote git repositories";
   description = ''

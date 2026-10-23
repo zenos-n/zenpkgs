@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.file-rename";
   name = "file-rename";
   summary = "Rename multiple files using Perl expressions";
   description = ''

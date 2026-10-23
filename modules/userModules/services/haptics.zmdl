@@ -16,12 +16,12 @@ enable = enableOption {
     tags = [ "hardware" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
   };
   u! {
-    home.packages = [ $pkgs.apps.accessibility.hapticspp ];
+    home.packages = [ $pkgs.byCategories.apps.accessibility.hapticspp ];
     dconf.settings."org/gnome/shell".enabled-extensions = [ "hapticspp@doromiert" ];
     systemd.user.services.hapticspp = {
       Unit = { Description = "Logitech mouse cursor haptics"; After = [ "graphical-session.target" ]; PartOf = [ "graphical-session.target" ]; };
       Service = {
-        ExecStart = "${$pkgs.apps.accessibility.hapticspp}/bin/hapticspp-daemon ${$lib.escapeShellArgs $path.arguments}";
+        ExecStart = "${$pkgs.byCategories.apps.accessibility.hapticspp}/bin/hapticspp-daemon ${$lib.escapeShellArgs $path.arguments}";
         Restart = "on-failure"; RestartSec = 5;
       };
       Install.WantedBy = [ "graphical-session.target" ];

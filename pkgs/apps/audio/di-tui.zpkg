@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.di-tui";
   name = "di-tui";
   summary = "Simple terminal UI player for di.fm";
   description = ''

@@ -210,7 +210,7 @@ build = $lib.id { owner = "zenos-n"; };
 
     def test_zpkg_dependencies_use_fixed_unprefixed_scopes(self) -> None:
         document = parse(
-            "_meta.dependencies = { general = [ $pkgs.legacy.a ]; build = [ $pkgs.legacy.b ]; runtime = [ $pkgs.legacy.c ]; };",
+            '_meta.dependencies = { general = [ $pkgs.legacy.a ]; build = [ $pkgs.legacy.b ]; runtime = [ $pkgs.legacy.c ]; };',
             "cascade.zpkg",
         )
         operators = [statement.operator for statement in document.statements[0].value.statements]
@@ -1165,7 +1165,7 @@ class CliTests(unittest.TestCase):
         sources = {
             "zcfg": "legacy.enabled = true;",
             "zmdl": "enabled._meta.type = $type.bool;",
-            "zpkg": "import $pkgs.legacy.bat;",
+            "zpkg": '_meta.id = "org.example.Test"; import $pkgs.legacy.bat;',
             "zstr": "system._meta.type = (zmdl system);",
         }
         with tempfile.TemporaryDirectory() as directory:
@@ -1221,7 +1221,7 @@ class CliTests(unittest.TestCase):
 
             stdout = StringIO()
             package = root / "bat.zpkg"
-            package.write_text("import $pkgs.legacy.bat;", encoding="utf-8")
+            package.write_text('_meta.id = "org.example.Test"; import $pkgs.legacy.bat;', encoding="utf-8")
             self.assertEqual(
                 0,
                 main(["compile", str(package)], stdout, StringIO()),

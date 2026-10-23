@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-about";
   name = "cargo-about";
   summary = "Cargo plugin to generate list of all licenses for a crate";
   description = ''

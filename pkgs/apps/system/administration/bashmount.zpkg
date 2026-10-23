@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.bashmount";
   name = "bashmount";
   summary = "Menu-driven bash script for the management of removable media with udisks";
   description = ''

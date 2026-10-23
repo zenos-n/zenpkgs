@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.aichat";
   name = "AIChat";
   summary = "Use GPT-4(V), Gemini, LocalAI, Ollama and other LLMs in the terminal";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.cozy-drive";
   name = "Cozy Drive";
   summary = "Cozy Drive is a synchronization tool for your files and folders with Cozy Cloud";
   description = ''

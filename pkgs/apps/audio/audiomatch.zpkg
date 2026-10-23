@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.audiomatch";
   name = "audiomatch";
   summary = "A small command-line tool to find similar audio files";
   description = ''

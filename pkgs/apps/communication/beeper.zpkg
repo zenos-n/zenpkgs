@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.beeper";
   name = "Beeper";
   summary = "Universal chat app";
   description = ''

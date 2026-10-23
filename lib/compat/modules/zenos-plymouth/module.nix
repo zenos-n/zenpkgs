@@ -8,7 +8,7 @@
 let
   cfg = config.zenos.system.boot.plymouth.theme.zenos;
 
-  plymouthTheme = pkgs.zenos.plymouth.override {
+  plymouthTheme = pkgs.zenos.byCategories.plymouth.override {
     distroName = cfg.distroName;
     releaseVersion = cfg.releaseVersion;
     deviceName = cfg.deviceName;

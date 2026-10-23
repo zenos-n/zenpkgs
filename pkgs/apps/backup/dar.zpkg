@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.dar";
   name = "DAR";
   summary = "Disk ARchiver, allows backing up files into indexed archives";
   description = ''

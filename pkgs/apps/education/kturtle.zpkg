@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.education.kturtle";
   name = "KTurtle";
   summary = "Educational programming environment that uses TurtleSpeak";
   description = ''

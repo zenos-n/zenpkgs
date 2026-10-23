@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-town";
   name = "git-town";
   summary = "Generic, high-level git support for git-flow workflows";
   description = ''

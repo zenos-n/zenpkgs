@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.inspectrum";
   name = "inspectrum";
   summary = "Tool for analysing captured signals from sdr receivers";
   description = ''

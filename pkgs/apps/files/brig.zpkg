@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.brig";
   name = "brig";
   summary = "File synchronization on top of IPFS with a git-like interface and a FUSE filesystem";
   description = ''

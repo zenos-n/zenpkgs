@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.debase";
   name = "Debase";
   summary = "TUI for drag-and-drop manipulation of git commits";
   description = ''

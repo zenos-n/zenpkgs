@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fcp";
   name = "fcp";
   summary = "Significantly faster alternative to the classic Unix cp(1) command";
   description = ''

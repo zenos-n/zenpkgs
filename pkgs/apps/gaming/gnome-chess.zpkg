@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gnome-chess";
   name = "GNOME Chess";
   summary = "Play the classic two-player boardgame of chess";
   description = ''

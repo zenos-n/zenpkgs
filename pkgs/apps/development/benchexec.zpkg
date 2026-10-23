@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.benchexec";
   name = "BenchExec";
   summary = "Framework for Reliable Benchmarking and Resource Measurement";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.cfm";
   name = "cfm";
   summary = "Simple and fast TUI file manager with no dependencies";
   description = ''

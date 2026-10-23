@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.gif-for-cli";
   name = "gif-for-cli";
   summary = "Render gifs as ASCII art in your cli";
   description = ''

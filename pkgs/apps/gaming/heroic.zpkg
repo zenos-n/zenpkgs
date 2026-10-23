@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.heroic";
   name = "heroic";
   summary = "Curated heroic package for ZenOS";
   description = ''

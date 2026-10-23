@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.evremap";
   name = "evremap";
   summary = "Keyboard input remapper for Linux/Wayland systems";
   description = ''

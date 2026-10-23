@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-show-asm";
   name = "cargo-show-asm";
   summary = "Cargo subcommand showing the assembly, LLVM-IR and MIR generated for Rust code";
   description = ''

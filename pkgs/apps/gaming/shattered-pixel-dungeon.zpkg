@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.shattered-pixel-dungeon";
   name = "Shattered Pixel Dungeon";
   summary = "Traditional roguelike game with pixel-art graphics and simple interface";
   description = ''

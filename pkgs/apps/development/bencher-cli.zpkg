@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.bencher-cli";
   name = "Bencher CLI";
   summary = "Command-Line interface for the Bencher continuous benchmarking platform";
   description = ''

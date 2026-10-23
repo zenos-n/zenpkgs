@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.fsmark";
   name = "fs_mark";
   summary = "Synchronous write workload file system benchmark";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.alacritty";
   name = "Alacritty";
   summary = "Cross-platform, GPU-accelerated terminal emulator";
   description = ''

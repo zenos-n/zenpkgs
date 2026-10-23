@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.distrobox-tui";
   name = "Distrobox TUI";
   summary = "TUI for DistroBox";
   description = ''

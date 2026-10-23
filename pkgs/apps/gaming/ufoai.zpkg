@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.ufoai";
   name = "UFO: Alien Invasion";
   summary = "Squad-based tactical strategy game in the tradition of X-Com";
   description = ''

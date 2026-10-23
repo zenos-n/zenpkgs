@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.ggshield";
   name = "ggshield";
   summary = "Tool to find and fix various types of hardcoded secrets and infrastructure-as-code misconfigurations";
   description = ''

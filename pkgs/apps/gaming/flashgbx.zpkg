@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.flashgbx";
   name = "FlashGBX";
   summary = "GUI for reading and writing GB and GBA cartridges with the GBxCart RW";
   description = ''

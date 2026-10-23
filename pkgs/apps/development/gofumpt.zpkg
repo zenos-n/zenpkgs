@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gofumpt";
   name = "gofumpt";
   summary = "Stricter gofmt";
   description = ''

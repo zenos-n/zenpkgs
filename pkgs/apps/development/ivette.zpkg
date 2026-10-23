@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ivette";
   name = "Ivette";
   summary = "Graphical User Interface for Frama-C";
   description = ''

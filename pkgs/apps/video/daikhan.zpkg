@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.daikhan";
   name = "Daikhan";
   summary = "Media player for the modern desktop";
   description = ''

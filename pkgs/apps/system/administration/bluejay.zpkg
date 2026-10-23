@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.bluejay";
   name = "Bluejay";
   summary = "Bluetooth manager written in Qt";
   description = ''

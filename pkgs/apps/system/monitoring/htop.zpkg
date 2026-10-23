@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.htop";
   name = "htop";
   summary = "Interactive process viewer";
   description = ''

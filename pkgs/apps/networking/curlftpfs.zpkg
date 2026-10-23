@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.curlftpfs";
   name = "CurlFtpFS";
   summary = "Filesystem for accessing FTP hosts based on FUSE and libcurl";
   description = ''

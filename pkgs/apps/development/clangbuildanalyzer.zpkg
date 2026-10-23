@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.clangbuildanalyzer";
   name = "ClangBuildAnalyzer";
   summary = "Tool for analyzing Clang's -ftime-trace files";
   description = ''

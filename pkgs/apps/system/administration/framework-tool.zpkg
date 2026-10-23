@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.framework-tool";
   name = "Framework Tool";
   summary = "Swiss army knife for Framework laptops";
   description = ''

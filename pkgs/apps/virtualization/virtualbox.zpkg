@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.virtualization.virtualbox";
   name = "VirtualBox";
   summary = "PC emulator";
   description = ''

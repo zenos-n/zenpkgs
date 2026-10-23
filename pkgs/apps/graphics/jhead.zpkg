@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.jhead";
   name = "Jhead";
   summary = "Exif Jpeg header manipulation tool";
   description = ''

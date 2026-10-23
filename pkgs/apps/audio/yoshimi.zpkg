@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.yoshimi";
   name = "Yoshimi";
   summary = "High quality software synthesizer based on ZynAddSubFX";
   description = ''

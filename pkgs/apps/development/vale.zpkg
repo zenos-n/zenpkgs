@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.vale";
   name = "Vale";
   summary = "Syntax-aware linter for prose built with speed and extensibility in mind";
   description = ''

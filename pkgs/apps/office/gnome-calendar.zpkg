@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Calendar";
   name = "GNOME Calendar";
   summary = "Simple and beautiful calendar application for GNOME";
   description = ''

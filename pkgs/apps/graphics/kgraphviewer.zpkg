@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.kgraphviewer";
   name = "KGraphViewer";
   summary = "GraphViz dot graph viewer";
   description = ''

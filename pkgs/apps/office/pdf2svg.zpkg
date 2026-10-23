@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.pdf2svg";
   name = "pdf2svg";
   summary = "PDF converter to SVG format";
   description = ''

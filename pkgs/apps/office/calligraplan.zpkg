@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.calligraplan";
   name = "Calligra Plan";
   summary = "Project Management Application";
   description = ''

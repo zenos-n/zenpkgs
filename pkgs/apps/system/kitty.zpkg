@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.kitty";
   name = "kitty";
   summary = "Curated kitty package for ZenOS";
   description = ''

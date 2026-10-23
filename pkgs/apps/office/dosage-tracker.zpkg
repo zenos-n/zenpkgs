@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.dosage-tracker";
   name = "Dosage";
   summary = "Medication tracker for Linux";
   description = ''

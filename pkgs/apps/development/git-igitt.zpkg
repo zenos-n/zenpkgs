@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-igitt";
   name = "git-igitt";
   summary = "Interactive, cross-platform Git terminal application with clear git graphs arranged for your branching model";
   description = ''

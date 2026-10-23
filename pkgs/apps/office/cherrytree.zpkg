@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.cherrytree";
   name = "CherryTree";
   summary = "Hierarchical note taking application";
   description = ''

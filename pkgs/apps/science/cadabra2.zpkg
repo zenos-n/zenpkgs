@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.cadabra2";
   name = "Cadabra";
   summary = "Field-theory motivated approach to computer algebra";
   description = ''

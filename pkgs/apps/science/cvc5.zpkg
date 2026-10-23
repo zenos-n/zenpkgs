@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.cvc5";
   name = "cvc5";
   summary = "High-performance theorem prover and SMT solver";
   description = ''

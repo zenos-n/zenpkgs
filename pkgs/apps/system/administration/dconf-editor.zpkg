@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.dconf-editor";
   name = "dconf Editor";
   summary = "GSettings editor for GNOME";
   description = ''

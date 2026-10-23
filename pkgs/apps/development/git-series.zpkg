@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-series";
   name = "git-series";
   summary = "Tool to help with formatting git patches for review on mailing lists";
   description = ''

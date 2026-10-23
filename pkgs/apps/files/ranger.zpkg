@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.ranger";
   name = "ranger";
   summary = "File manager with minimalistic curses interface";
   description = ''

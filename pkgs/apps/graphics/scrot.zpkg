@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.scrot";
   name = "scrot";
   summary = "Command-line screen capture utility";
   description = ''

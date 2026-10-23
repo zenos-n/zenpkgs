@@ -1,0 +1,14 @@
+_meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.dash-stacks";
+  name = "dash-stacks";
+  summary = "macOS-style folder stacks for the GNOME dash";
+  description = ''
+    macOS-style folder stacks for the GNOME dash
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0-unstable-2026-08-30";
+  tags = [ "desktops" "gnome" "extensions" ];
+  license = $l.napalm;
+};
+
+build = $lib.zenCompatPackage $lib.zenPackageSources.compatRecipes."desktops/gnome/extensions/dash-stacks";

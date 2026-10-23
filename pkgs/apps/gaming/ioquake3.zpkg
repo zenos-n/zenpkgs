@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.ioquake3";
   name = "ioquake3";
   summary = "Fast-paced 3D first-person shooter, a community effort to continue supporting/developing id's Quake III Arena";
   description = ''

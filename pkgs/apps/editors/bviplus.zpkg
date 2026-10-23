@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.bviplus";
   name = "bvi+";
   summary = "Ncurses based hex editor with a vim-like interface";
   description = ''

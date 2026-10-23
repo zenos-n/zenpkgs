@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitcs";
   name = "gitcs";
   summary = "Scan local git repositories and generate a visual contributions graph";
   description = ''

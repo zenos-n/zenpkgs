@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.seqkit";
   name = "SeqKit";
   summary = "Cross-platform and ultrafast toolkit for FASTA/Q file manipulation";
   description = ''

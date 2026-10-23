@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.genealogos-cli";
   name = "Genealogos";
   summary = "Nix sbom generator";
   description = ''

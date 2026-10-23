@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.office.korganizer";
   name = "KOrganizer";
   summary = "Organizational assistant, providing calendars and other similar functionality";
   description = ''

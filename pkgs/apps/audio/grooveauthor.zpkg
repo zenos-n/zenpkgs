@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.audio.grooveauthor";
   name = "GrooveAuthor";
   summary = "GrooveAuthor is an editor for authoring StepMania charts";
   description = ''

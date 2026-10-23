@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.dnsutils";
   name = "dnsutils";
   summary = "Curated dnsutils package for ZenOS";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.meshcentral";
   name = "MeshCentral";
   summary = "Computer management web app";
   description = ''

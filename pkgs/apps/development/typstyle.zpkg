@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.typstyle";
   name = "Typstyle";
   summary = "Format your typst source code";
   description = ''

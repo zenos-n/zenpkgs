@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.bcal";
   name = "bcal";
   summary = "Storage conversion and expression calculator";
   description = ''

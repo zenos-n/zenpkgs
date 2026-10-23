@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.goattracker";
   name = "GoatTracker";
   summary = "Crossplatform music editor for creating Commodore 64 music. Uses reSID library by Dag Lem and supports alternatively HardSID & CatWeasel devices";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.aegisub";
   name = "Aegisub";
   summary = "Advanced subtitle editor";
   description = ''

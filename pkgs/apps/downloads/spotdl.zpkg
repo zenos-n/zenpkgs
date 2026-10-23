@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.spotdl";
   name = "spotDL";
   summary = "Download your Spotify playlists and songs along with album art and metadata";
   description = ''

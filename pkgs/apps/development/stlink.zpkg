@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.stlink";
   name = "STLink";
   summary = "In-circuit debug and programming for ST-Link devices";
   description = ''

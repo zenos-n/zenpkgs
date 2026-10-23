@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.stoat-desktop";
   name = "Stoat";
   summary = "Open source user-first chat platform";
   description = ''

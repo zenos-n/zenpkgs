@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.changie";
   name = "Changie";
   summary = "Automated changelog tool for preparing releases with lots of customization options";
   description = ''

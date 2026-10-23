@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.koules";
   name = "Koules";
   summary = "Fast arcade game based on the fundamental law of body attraction";
   description = ''

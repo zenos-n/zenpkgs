@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.hyprpicker";
   name = "Hyprpicker";
   summary = "Wlroots-compatible Wayland color picker that does not suck";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.snes9x-gtk";
   name = "Snes9x";
   summary = "Super Nintendo Entertainment System (SNES) emulator, GTK version";
   description = ''

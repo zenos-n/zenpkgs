@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.scummvm";
   name = "ScummVM";
   summary = "Program to run certain classic graphical point-and-click adventure games (such as Monkey Island)";
   description = ''

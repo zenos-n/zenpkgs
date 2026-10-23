@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.cpc";
   name = "cpc";
   summary = "Text calculator with support for units and conversion";
   description = ''

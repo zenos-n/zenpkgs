@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fw";
   name = "fw";
   summary = "Workspace productivity booster";
   description = ''

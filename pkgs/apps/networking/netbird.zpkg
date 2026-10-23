@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.netbird";
   name = "NetBird";
   summary = "Connect your devices into a single secure private WireGuard®-based mesh network with SSO/MFA and simple access controls";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.csv2svg";
   name = "csv2svg";
   summary = "Take a csv as input and outputs svg";
   description = ''

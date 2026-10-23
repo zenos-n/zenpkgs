@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.dockmate";
   name = "Dockmate";
   summary = "Terminal-based Docker container manager that actually works";
   description = ''

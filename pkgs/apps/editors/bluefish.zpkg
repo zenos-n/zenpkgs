@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.bluefish";
   name = "Bluefish";
   summary = "Powerful editor targeted towards programmers and webdevelopers";
   description = ''

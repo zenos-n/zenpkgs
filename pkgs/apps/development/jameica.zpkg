@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.jameica";
   name = "Jameica";
   summary = "Free Runtime Environment for Java Applications";
   description = ''

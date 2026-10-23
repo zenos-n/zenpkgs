@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ffizer";
   name = "ffizer";
   summary = "Files and folders initializer / generator based on templates";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.files.bat";
   name = "bat";
   summary = "Cat(1) clone with syntax highlighting and Git integration";
   description = ''

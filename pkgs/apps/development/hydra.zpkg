@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.hydra";
   name = "Hydra";
   summary = "Nix-based continuous build system";
   description = ''

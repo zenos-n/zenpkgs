@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.lsd2dsl";
   name = "lsd2dsl";
   summary = "Lingvo dictionaries decompiler";
   description = ''

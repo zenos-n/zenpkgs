@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.jmol";
   name = "Jmol";
   summary = "Java 3D viewer for chemical structures";
   description = ''

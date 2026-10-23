@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.duplicity";
   name = "Duplicity";
   summary = "Encrypted bandwidth-efficient backup using the rsync algorithm";
   description = ''

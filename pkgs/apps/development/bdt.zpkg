@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.bdt";
   name = "Big Data Tools";
   summary = "CLI tool to query parquet, json and avro files";
   description = ''

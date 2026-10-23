@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.himalaya";
   name = "Himalaya";
   summary = "CLI to manage emails";
   description = ''

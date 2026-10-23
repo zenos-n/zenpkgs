@@ -1,0 +1,23 @@
+_meta = {
+  id = "org.zenos.packages.theming.icons.zenos-icons";
+  name = "zenos-icons";
+  summary = "Core iconography set for the ZenOS environment";
+  description = ''
+    Core iconography set for the ZenOS environment
+
+    **ZenOS Icons** provides the central brand iconography for the ZenOS
+    desktop environment. It includes system icons, folder symbols, and
+    app icons designed to match the brand's minimal aesthetic.
+
+    **Features:**
+    - Consistent visual style across all sizes.
+    - High-quality scalable vector graphics (SVG).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0";
+  tags = [ "theming" "icons" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+build = $lib.zenCompatPackage $lib.zenPackageSources.compatRecipes."theming/icons/zenos-icons";

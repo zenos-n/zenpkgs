@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.aide";
   name = "AIDE";
   summary = "File and directory integrity checker";
   description = ''

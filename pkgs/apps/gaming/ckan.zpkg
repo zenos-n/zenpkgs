@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.ckan";
   name = "CKAN";
   summary = "Mod manager for Kerbal Space Program";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-machete";
   name = "cargo-machete";
   summary = "Cargo tool that detects unused dependencies in Rust projects";
   description = ''

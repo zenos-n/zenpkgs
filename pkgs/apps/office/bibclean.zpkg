@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.bibclean";
   name = "bibclean";
   summary = "Prettyprint and syntax check BibTeX and Scribe bibliography data base files";
   description = ''

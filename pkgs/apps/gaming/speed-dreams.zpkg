@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.speed-dreams";
   name = "Speed Dreams";
   summary = "Car racing game - TORCS fork with more experimental approach";
   description = ''

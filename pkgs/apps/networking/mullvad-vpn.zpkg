@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.mullvad-vpn";
   name = "Mullvad VPN";
   summary = "Client for Mullvad VPN";
   description = ''

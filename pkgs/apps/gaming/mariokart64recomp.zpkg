@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.mariokart64recomp";
   name = "Mario Kart 64 Recompiled";
   summary = "Recompilation of MarioKart 64";
   description = ''

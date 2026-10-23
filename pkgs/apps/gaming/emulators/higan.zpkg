@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.higan";
   name = "higan";
   summary = "Open-source, cycle-accurate multi-system emulator";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.protege";
   name = "Protégé";
   summary = "Free and open-source OWL 2 ontology editor";
   description = ''

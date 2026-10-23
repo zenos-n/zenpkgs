@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.teams-for-linux";
   name = "Teams for Linux";
   summary = "Unofficial Microsoft Teams client for Linux";
   description = ''

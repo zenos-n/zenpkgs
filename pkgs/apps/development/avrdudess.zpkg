@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.avrdudess";
   name = "AVRDUDESS";
   summary = "GUI for AVRDUDE (AVR microcontroller programmer)";
   description = ''

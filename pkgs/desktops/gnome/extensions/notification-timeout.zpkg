@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.notification-timeout";
   name = "notification-timeout";
   summary = "Curated notification-timeout package for ZenOS";
   description = ''

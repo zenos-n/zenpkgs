@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.lazydocker";
   name = "LazyDocker";
   summary = "Simple terminal UI for both docker and docker-compose";
   description = ''

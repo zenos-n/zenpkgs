@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.snapper-gui";
   name = "Snapper GUI";
   summary = "Graphical interface for snapper";
   description = ''

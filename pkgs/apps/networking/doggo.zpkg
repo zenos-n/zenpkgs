@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.doggo";
   name = "doggo";
   summary = "Command-line DNS Client for Humans. Written in Golang";
   description = ''

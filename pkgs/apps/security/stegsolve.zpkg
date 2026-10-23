@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.stegsolve";
   name = "Stegsolve";
   summary = "Steganographic image analyzer, solver and data extractor for challanges";
   description = ''

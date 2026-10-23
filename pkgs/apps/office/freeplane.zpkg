@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.freeplane";
   name = "Freeplane";
   summary = "Mind-mapping software";
   description = ''

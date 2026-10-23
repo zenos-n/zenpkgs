@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.google-chat-linux";
   name = "Google Chat (Linux)";
   summary = "Electron-base client for Google Hangouts Chat";
   description = ''

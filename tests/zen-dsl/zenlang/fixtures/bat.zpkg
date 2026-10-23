@@ -1,3 +1,4 @@
+_meta.id = "test.zenlang.fixtures.bat";
 _meta = {
   name = "bat";
   summary = "A cat(1) clone with wings";

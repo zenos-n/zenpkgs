@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.angle-grinder";
   name = "angle-grinder";
   summary = "Slice and dice logs on the command line";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.cardpeek";
   name = "Cardpeek";
   summary = "Tool to read the contents of ISO7816 smart cards";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.githooks";
   name = "Git Hooks";
   summary = "Git hooks manager with per-repo and shared Git hooks including version control";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.libarchive";
   name = "Libarchive Tools";
   summary = "Multi-format archive and compression library";
   description = ''

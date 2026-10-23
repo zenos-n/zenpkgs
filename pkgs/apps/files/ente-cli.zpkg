@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.ente-cli";
   name = "Ente CLI";
   summary = "CLI client for downloading your data from Ente";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.certgraph";
   name = "certgraph";
   summary = "Intelligence tool to crawl the graph of certificate alternate names";
   description = ''

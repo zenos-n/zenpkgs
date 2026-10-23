@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.launchers.bemenu";
   name = "bemenu";
   summary = "Dynamic menu library and client program inspired by dmenu";
   description = ''

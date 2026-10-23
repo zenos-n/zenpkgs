@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.pdfgrep";
   name = "pdfgrep";
   summary = "Commandline utility to search text in PDF files";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.plantuml";
   name = "PlantUML";
   summary = "Draw UML diagrams using a simple and human readable text description";
   description = ''

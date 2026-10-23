@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.pcmanfm";
   name = "PCManFM";
   summary = "File manager with GTK interface";
   description = ''

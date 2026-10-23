@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.sqls";
   name = "sqls";
   summary = "SQL language server written in Go";
   description = ''

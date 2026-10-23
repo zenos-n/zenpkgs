@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.patchutils";
   name = "patchutils";
   summary = "Tools to manipulate patch files";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.flow-control";
   name = "Flow Control";
   summary = "Programmer's text editor";
   description = ''

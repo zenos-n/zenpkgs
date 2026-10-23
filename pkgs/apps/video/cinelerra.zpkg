@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.cinelerra";
   name = "Cinelerra";
   summary = "Professional video editing and compositing environment (community version)";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.kmonad";
   name = "KMonad";
   summary = "Advanced keyboard remapping utility";
   description = ''

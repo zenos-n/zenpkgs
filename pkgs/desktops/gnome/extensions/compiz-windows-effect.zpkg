@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.compiz-windows-effect";
   name = "compiz-windows-effect";
   summary = "Curated compiz-windows-effect package for ZenOS";
   description = ''

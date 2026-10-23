@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.yubikey-agent";
   name = "yubikey-agent";
   summary = "Seamless ssh-agent for YubiKeys";
   description = ''

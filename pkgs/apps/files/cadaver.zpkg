@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.cadaver";
   name = "cadaver";
   summary = "Command-line WebDAV client";
   description = ''

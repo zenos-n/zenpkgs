@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.neo4j";
   name = "Neo4j";
   summary = "Highly scalable, robust (fully ACID) native graph database";
   description = ''

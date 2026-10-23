@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.notepad-next";
   name = "Notepad Next";
   summary = "Cross-platform, reimplementation of Notepad++";
   description = ''

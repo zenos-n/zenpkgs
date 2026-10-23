@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.furmark";
   name = "FurMark";
   summary = "OpenGL and Vulkan Benchmark and Stress Test";
   description = ''

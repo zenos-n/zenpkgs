@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.direwolf";
   name = "Dire Wolf";
   summary = "Soundcard Packet TNC, APRS Digipeater, IGate, APRStt gateway";
   description = ''

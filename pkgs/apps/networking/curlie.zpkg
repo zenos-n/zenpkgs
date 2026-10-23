@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.curlie";
   name = "curlie";
   summary = "Frontend to curl that adds the ease of use of httpie, without compromising on features and performance";
   description = ''

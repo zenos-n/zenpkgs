@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.bfs";
   name = "bfs";
   summary = "Breadth-first version of the UNIX find command";
   description = ''

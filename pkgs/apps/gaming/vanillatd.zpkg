@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.vanillatd";
   name = "Vanilla Conquer: Tiberian Dawn";
   summary = "Vanilla Conquer is a modern, multi-platform source port of Command & Conquer: Tiberian Dawn";
   description = ''

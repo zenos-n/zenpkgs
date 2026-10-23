@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.demucs-rs";
   name = "Demucs Rust";
   summary = "Native Rust implementation of HTDemucs v4 music source separation CLI";
   description = ''

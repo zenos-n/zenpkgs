@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.goverlay";
   name = "GOverlay";
   summary = "Opensource project that aims to create a Graphical UI to help manage Linux overlays";
   description = ''

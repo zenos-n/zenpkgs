@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.xfig";
   name = "Xfig";
   summary = "Interactive drawing tool for X11";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.tshark";
   name = "TShark";
   summary = "Powerful network protocol analyzer";
   description = ''

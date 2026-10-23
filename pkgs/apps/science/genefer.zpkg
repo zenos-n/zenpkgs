@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.genefer";
   name = "Genefer";
   summary = "Generalized Fermat Prime search program";
   description = ''

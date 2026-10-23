@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.fuse-overlayfs";
   name = "fuse-overlayfs";
   summary = "FUSE implementation for overlayfs";
   description = ''

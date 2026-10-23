@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.wordgrinder";
   name = "WordGrinder";
   summary = "Text-based word processor";
   description = ''

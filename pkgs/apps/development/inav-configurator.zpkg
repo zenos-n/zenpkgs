@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.inav-configurator";
   name = "INAV Configurator";
   summary = "INav flight control system configuration tool";
   description = ''

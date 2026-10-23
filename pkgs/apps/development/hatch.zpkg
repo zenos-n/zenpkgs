@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.hatch";
   name = "Hatch";
   summary = "Modern, extensible Python project manager";
   description = ''

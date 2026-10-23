@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.tigerjython";
   name = "TigerJython";
   summary = "Simple development environment for programming in Python";
   description = ''

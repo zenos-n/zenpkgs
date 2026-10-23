@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.caribou";
   name = "Caribou";
   summary = "Input assistive technology intended for switch and pointer users";
   description = ''

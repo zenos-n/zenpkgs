@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.fish-fillets-ng";
   name = "Fish Fillets NG";
   summary = "Puzzle game";
   description = ''

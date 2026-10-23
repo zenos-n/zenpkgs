@@ -10,7 +10,7 @@ from zenlang.cli import main
 ROOT = Path(__file__).resolve().parents[2]
 CASES = (
     ("validPaths", '''
-        system.packages.apps.development-tools.git = true;
+        system.packages.byCategories.apps.development-tools.git = true;
         system.packages.legacy.hello = false;
         users.alice.programs.zenlink.autoStart = true;
         legacy.networking.hostName = "schema-validation";

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.btop-rocm";
   name = "btop ROCm";
   summary = "Monitor of resources";
   description = ''

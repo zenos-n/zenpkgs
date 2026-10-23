@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.doing";
   name = "Doing";
   summary = "Command line tool for keeping track of what you’re doing and tracking what you’ve done";
   description = ''

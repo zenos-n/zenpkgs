@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.kernelshark";
   name = "KernelShark";
   summary = "GUI for trace-cmd which is an interface for the Linux kernel ftrace subsystem";
   description = ''

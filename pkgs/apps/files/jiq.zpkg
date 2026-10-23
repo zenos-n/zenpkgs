@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.jiq";
   name = "jiq";
   summary = "Interactive JSON query tool using jq expressions";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.ddcui";
   name = "ddcui";
   summary = "Graphical user interface for ddcutil - control monitor settings";
   description = ''

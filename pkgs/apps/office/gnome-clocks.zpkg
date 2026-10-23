@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.clocks";
   name = "GNOME Clocks";
   summary = "Simple and elegant clock application for GNOME";
   description = ''

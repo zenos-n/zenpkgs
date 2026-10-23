@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.hwinfo";
   name = "hwinfo";
   summary = "Hardware detection tool from openSUSE";
   description = ''

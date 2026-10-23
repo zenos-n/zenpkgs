@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.tectonic";
   name = "Tectonic";
   summary = "TeX/LaTeX engine, wrapped with a compatible biber";
   description = ''

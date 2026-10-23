@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.orthorobot";
   name = "Ortho Robot";
   summary = "Recharge the robot";
   description = ''

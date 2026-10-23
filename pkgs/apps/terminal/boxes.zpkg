@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.boxes";
   name = "boxes";
   summary = "Command line program which draws, removes, and repairs ASCII art boxes";
   description = ''

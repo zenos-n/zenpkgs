@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.appeditor";
   name = "AppEditor";
   summary = "Edit the Pantheon desktop application menu";
   description = ''

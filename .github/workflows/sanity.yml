@@ -38,7 +38,7 @@ jobs:
         id: eval
         run: |
           echo "Running Integrity Check..."
-          OUTPUT=$(nix eval --show-trace --file tests/integrity.nix report 2>&1)
+          OUTPUT=$(nix eval --show-trace --option log-lines 300 --file tests/integrity.nix report 2>&1)
 
           echo "Nix Evaluation Output:"
           echo "$OUTPUT"
@@ -49,6 +49,32 @@ jobs:
           else
             echo "❌ Integrity check FAILED."
             echo "status=failure" >> $GITHUB_OUTPUT
+            exit 1
+          fi
+
+      - name: Verify package identities and category aliases
+        shell: bash
+        run: |
+          failed=()
+          checks=(registry-contract registry-counts package-paths registry-build-providers
+            registry-output-ownership registry-path-identities
+            registry-invalid-identities registry-structure-exposure
+            registry-metadata-defaults public-package-outputs
+            package-output-collisions migration-packages migration-options search-index)
+          for check in "${checks[@]}"; do
+            echo "Checking $check"
+            if nix build --no-link --print-build-logs --show-trace \
+              ".#checks.x86_64-linux.$check" \
+              --option max-jobs 1 --option cores 2 --option max-substitution-jobs 2 \
+              > "$RUNNER_TEMP/$check.log" 2>&1; then
+              echo "$check passed"
+            else
+              failed+=("$check")
+              tail -n 120 "$RUNNER_TEMP/$check.log"
+            fi
+          done
+          if (( ${#failed[@]} )); then
+            printf 'Failed check: %s\n' "${failed[@]}"
             exit 1
           fi
 

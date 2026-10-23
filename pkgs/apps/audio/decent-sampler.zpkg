@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.decent-sampler";
   name = "Decent Sampler";
   summary = "Audio sample player";
   description = ''

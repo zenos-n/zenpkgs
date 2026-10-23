@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.aseprite";
   name = "Aseprite";
   summary = "Animated sprite editor & pixel art tool";
   description = ''

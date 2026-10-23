@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-recent";
   name = "git-recent";
   summary = "See your latest local git branches, formatted real fancy";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.libqalculate";
   name = "Qalculate! CLI";
   summary = "Advanced calculator library";
   description = ''

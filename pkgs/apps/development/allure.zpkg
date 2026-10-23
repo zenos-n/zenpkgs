@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.allure";
   name = "Allure";
   summary = "Flexible, lightweight multi-language test reporting tool";
   description = ''

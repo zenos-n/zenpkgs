@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ddev";
   name = "DDEV";
   summary = "Docker-based local PHP+Node.js web development environments";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.pdfchain";
   name = "PDF Chain";
   summary = "Graphical user interface for the PDF Toolkit (PDFtk)";
   description = ''

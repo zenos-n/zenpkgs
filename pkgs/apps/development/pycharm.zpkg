@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.pycharm";
   name = "PyCharm";
   summary = "Python IDE from JetBrains";
   description = ''

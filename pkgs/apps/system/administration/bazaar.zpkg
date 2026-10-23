@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.bazaar";
   name = "Bazaar";
   summary = "FlatHub-first app store for GNOME";
   description = ''

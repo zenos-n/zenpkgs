@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.clamav";
   name = "ClamAV";
   summary = "Antivirus engine designed for detecting Trojans, viruses, malware and other malicious threats";
   description = ''

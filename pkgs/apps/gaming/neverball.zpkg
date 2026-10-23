@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.neverball";
   name = "Neverball";
   summary = "Tilt the floor to roll a ball";
   description = ''

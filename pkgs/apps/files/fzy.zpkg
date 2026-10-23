@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fzy";
   name = "fzy";
   summary = "Better fuzzy finder";
   description = ''

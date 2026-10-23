@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.dl-librescore";
   name = "Librescore Downloader";
   summary = "Download sheet music";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.files.copyparty";
   name = "copyparty";
   summary = "turn almost any device into a file server over http(s), webdav, ftp(s), and tftp";
   description = ''

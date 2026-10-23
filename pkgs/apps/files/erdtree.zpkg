@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.erdtree";
   name = "erdtree";
   summary = "File-tree visualizer and disk usage analyzer";
   description = ''

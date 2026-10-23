@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.gkrellm";
   name = "GKrellM";
   summary = "Themeable process stack of system monitors";
   description = ''

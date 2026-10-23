@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.effitask";
   name = "Effitask";
   summary = "Graphical task manager, based on the todo.txt format";
   description = ''

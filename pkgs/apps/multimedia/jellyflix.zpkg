@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.multimedia.jellyflix";
   name = "Jellyflix";
   summary = "Easy-to-use Jellyfin client for movies and shows";
   description = ''

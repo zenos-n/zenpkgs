@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.halloy";
   name = "Halloy";
   summary = "IRC application";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.squeekboard";
   name = "Squeekboard";
   summary = "Virtual keyboard supporting Wayland";
   description = ''

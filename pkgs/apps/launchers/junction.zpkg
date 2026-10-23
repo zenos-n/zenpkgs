@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.launchers.junction";
   name = "Junction";
   summary = "Choose the application to open files and links";
   description = ''

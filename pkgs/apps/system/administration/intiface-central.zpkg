@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.intiface-central";
   name = "Intiface Central";
   summary = "Intiface Central (Buttplug Frontend) Application for Desktop";
   description = ''

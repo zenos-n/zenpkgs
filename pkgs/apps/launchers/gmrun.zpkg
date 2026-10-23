@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.launchers.gmrun";
   name = "gmrun";
   summary = "Gnome Completion-Run Utility";
   description = ''

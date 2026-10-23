@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.bashcards";
   name = "Bashcards";
   summary = "Practice flashcards in bash";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-criterion";
   name = "cargo-criterion";
   summary = "Cargo extension for running Criterion.rs benchmarks";
   description = ''

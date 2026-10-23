@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.stress-ng";
   name = "stress-ng";
   summary = "Stress test a computer system";
   description = ''

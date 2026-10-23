@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.input-leap";
   name = "Input Leap";
   summary = "Open-source KVM software";
   description = ''

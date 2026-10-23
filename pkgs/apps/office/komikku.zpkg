@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.komikku";
   name = "Komikku";
   summary = "Manga reader for GNOME";
   description = ''

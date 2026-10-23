@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.butt";
   name = "butt";
   summary = "Easy to use, multi OS streaming tool";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.infrastructure.google-cloud-sdk";
   name = "Google Cloud CLI";
   summary = "Tools for the google cloud platform";
   description = ''

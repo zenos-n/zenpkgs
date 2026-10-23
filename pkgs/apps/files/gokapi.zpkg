@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.gokapi";
   name = "Gokapi";
   summary = "Lightweight selfhosted Firefox Send alternative without public upload";
   description = ''

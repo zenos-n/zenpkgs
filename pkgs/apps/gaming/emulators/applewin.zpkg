@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.applewin";
   name = "AppleWin";
   summary = "Apple II emulator for Linux";
   description = ''

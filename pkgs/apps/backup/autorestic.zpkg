@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.autorestic";
   name = "autorestic";
   summary = "High level CLI utility for restic";
   description = ''

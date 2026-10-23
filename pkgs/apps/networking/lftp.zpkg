@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.lftp";
   name = "LFTP";
   summary = "File transfer program supporting a number of network protocols";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.clzip";
   name = "clzip";
   summary = "C language version of lzip";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.lugaru";
   name = "Lugaru";
   summary = "Third person ninja rabbit fighting game";
   description = ''

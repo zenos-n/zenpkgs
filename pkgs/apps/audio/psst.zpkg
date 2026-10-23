@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.psst";
   name = "Psst";
   summary = "Spotify client with native GUI written in Rust, without Electron";
   description = ''

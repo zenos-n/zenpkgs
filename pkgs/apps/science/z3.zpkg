@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.z3";
   name = "Z3";
   summary = "High-performance theorem prover and SMT solver";
   description = ''

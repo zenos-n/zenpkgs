@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.direnv";
   name = "direnv";
   summary = "Shell extension that manages your environment";
   description = ''

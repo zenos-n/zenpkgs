@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.darkstat";
   name = "Darkstat";
   summary = "Network statistics web interface";
   description = ''

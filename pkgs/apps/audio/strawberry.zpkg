@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.strawberry";
   name = "Strawberry";
   summary = "Music player and music collection organizer";
   description = ''

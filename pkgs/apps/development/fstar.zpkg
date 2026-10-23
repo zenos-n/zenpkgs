@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fstar";
   name = "F*";
   summary = "ML-like functional programming language aimed at program verification";
   description = ''

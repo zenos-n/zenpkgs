@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.clipboard-indicator";
   name = "clipboard-indicator";
   summary = "Curated clipboard-indicator package for ZenOS";
   description = ''

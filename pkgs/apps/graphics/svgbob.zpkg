@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.svgbob";
   name = "Svgbob";
   summary = "Convert your ascii diagram scribbles into happy little SVG";
   description = ''

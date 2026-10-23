@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.chatterino2";
   name = "Chatterino";
   summary = "Chat client for Twitch chat";
   description = ''

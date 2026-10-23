@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.magic-wormhole";
   name = "Magic Wormhole";
   summary = "Securely transfer data between computers";
   description = ''

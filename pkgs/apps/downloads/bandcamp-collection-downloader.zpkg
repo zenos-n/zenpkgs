@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.bandcamp-collection-downloader";
   name = "Bandcamp Collection Downloader";
   summary = "Tool to automatically download purchased music from bandcamp";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.apngopt";
   name = "APNG Optimizer";
   summary = "Optimizes APNG animations";
   description = ''

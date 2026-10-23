@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.opensupaplex";
   name = "OpenSupaplex";
   summary = "Decompilation of Supaplex in C and SDL";
   description = ''

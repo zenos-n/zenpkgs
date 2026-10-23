@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.tun2proxy";
   name = "tun2proxy";
   summary = "Tunnel (TUN) interface for SOCKS and HTTP proxies";
   description = ''

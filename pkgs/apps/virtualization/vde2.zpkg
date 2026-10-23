@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.virtualization.vde2";
   name = "vde2";
   summary = "Virtual Distributed Ethernet, an Ethernet compliant virtual network";
   description = ''

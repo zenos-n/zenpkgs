@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.clouddrive2";
   name = "CloudDrive 2";
   summary = "Multi-cloud drives management tool supporting mounting cloud drives locally";
   description = ''

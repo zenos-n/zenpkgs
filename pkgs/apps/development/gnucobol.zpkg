@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.gnucobol";
   name = "GnuCOBOL";
   summary = "Free/libre COBOL compiler";
   description = ''

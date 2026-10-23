@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.check-jsonschema";
   name = "check-jsonschema";
   summary = "Jsonschema CLI and pre-commit hook";
   description = ''

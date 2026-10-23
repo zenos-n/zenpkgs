@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.audiowaveform";
   name = "audiowaveform";
   summary = "C++ program to generate waveform data and render waveform images from audio files";
   description = ''

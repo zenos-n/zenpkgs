@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.smartmontools";
   name = "smartmontools";
   summary = "Curated smartmontools package for ZenOS";
   description = ''

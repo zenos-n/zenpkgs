@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.qtcreator";
   name = "Qt Creator";
   summary = "Cross-platform IDE tailored to the needs of Qt developers";
   description = ''

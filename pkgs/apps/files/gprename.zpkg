@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.gprename";
   name = "GPRename";
   summary = "Complete batch renamer for files and directories";
   description = ''

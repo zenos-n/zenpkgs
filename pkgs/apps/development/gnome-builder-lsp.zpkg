@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gnome-builder-lsp";
   name = "GNOME Builder with language servers";
   summary = "GNOME Builder with Python, Rust, C and TypeScript tooling";
   description = ''GNOME Builder with the language servers from the migration reference available in its executable search path. Optional development variant.'';
@@ -11,10 +12,10 @@ build = $pkgs.legacy.symlinkJoin {
   nativeBuildInputs = [ $pkgs.legacy.makeWrapper ];
   postBuild = ''
     wrapProgram "$out/bin/gnome-builder" --prefix PATH : ${$lib.makeBinPath [
-      $pkgs.apps.development.python.python-lsp-server
-      $pkgs.apps.development.rust-analyzer
-      $pkgs.apps.development.clang-tools
-      $pkgs.apps.development.typescript-language-server
+      $pkgs.byCategories.apps.development.python.python-lsp-server
+      $pkgs.byCategories.apps.development.rust-analyzer
+      $pkgs.byCategories.apps.development.clang-tools
+      $pkgs.byCategories.apps.development.typescript-language-server
     ]}
   '';
   meta = $pkgs.legacy.gnome-builder.meta;

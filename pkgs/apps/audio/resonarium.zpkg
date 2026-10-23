@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.resonarium";
   name = "Resonarium";
   summary = "MPE-compatible physical modelling synthesizer based on coupled string waveguides";
   description = ''

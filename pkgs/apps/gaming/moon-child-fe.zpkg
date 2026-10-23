@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.moon-child-fe";
   name = "Moon Child Forever Edition";
   summary = "Modern source port of the 1997 Windows 95 classic, Moon Child";
   description = ''

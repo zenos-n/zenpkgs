@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.cryptor";
   name = "Cryptor";
   summary = "Simple gocryptfs GUI";
   description = ''

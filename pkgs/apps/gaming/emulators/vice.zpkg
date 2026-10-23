@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.vice";
   name = "VICE";
   summary = "Emulators for a variety of 8-bit Commodore computers";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.dovi-tool";
   name = "DOVI Tool";
   summary = "CLI tool combining multiple utilities for working with Dolby Vision";
   description = ''

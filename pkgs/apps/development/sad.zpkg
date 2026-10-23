@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.sad";
   name = "sad";
   summary = "CLI tool to search and replace";
   description = ''

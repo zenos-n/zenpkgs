@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.yarg";
   name = "YARG";
   summary = "Free, open-source, plastic guitar game";
   description = ''

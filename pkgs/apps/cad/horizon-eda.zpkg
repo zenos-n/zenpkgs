@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.horizon-eda";
   name = "Horizon EDA";
   summary = "Free EDA software to develop printed circuit boards";
   description = ''

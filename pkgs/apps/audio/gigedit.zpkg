@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.gigedit";
   name = "Gigedit";
   summary = "Edit Gigasampler instrument files";
   description = ''

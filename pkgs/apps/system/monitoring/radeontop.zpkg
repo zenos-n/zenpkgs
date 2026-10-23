@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.radeontop";
   name = "radeontop";
   summary = "Top-like tool for viewing AMD Radeon GPU utilization";
   description = ''

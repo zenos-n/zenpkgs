@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.visual-paradigm-ce";
   name = "Visual Paradigm Community Edition";
   summary = "All-in-one UML CASE tool for software development";
   description = ''

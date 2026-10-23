@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.doublecmd";
   name = "Double Commander";
   summary = "Two-panel graphical file manager written in Pascal";
   description = ''

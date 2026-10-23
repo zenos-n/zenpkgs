@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.eigenmath";
   name = "Eigenmath";
   summary = "Computer algebra system written in C";
   description = ''

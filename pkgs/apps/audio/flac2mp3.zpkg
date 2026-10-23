@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.flac2mp3";
   name = "flac2mp3";
   summary = "Tool to convert audio files from flac to mp3 format including the copying of tags";
   description = ''

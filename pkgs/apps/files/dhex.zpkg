@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.dhex";
   name = "dhex";
   summary = "Themeable hex editor with diff mode";
   description = ''

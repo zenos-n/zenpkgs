@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.sq";
   name = "sq";
   summary = "Swiss army knife for data";
   description = ''

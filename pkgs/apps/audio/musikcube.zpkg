@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.musikcube";
   name = "musikcube";
   summary = "Terminal-based music player, library, and streaming audio server";
   description = ''

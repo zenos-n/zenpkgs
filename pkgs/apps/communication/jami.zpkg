@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.jami";
   name = "Jami";
   summary = "Free and universal communication platform that respects the privacy and freedoms of its users";
   description = ''

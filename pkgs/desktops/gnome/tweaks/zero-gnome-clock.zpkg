@@ -1,0 +1,24 @@
+_meta = {
+  id = "org.zenos.packages.desktops.gnome.tweaks.zero-gnome-clock";
+  name = "zero-gnome-clock";
+  summary = "GNOME Shell top bar clock typography override";
+  description = ''
+    GNOME Shell top bar clock typography override
+
+    **Zero GNOME Clock** is a custom GNOME Shell theme component that overrides the
+    default top bar clock font. It uses the custom "Zero" font to provide a minimal
+    and stylized clock appearance.
+
+    **Features:**
+    - Applies the "Zero" font family to the clock display.
+    - Uses `@font-face` injection via generated CSS.
+    - Includes dconf profile setup for user theme integration.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0";
+  tags = [ "desktops" "gnome" "tweaks" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+build = $lib.zenCompatPackage $lib.zenPackageSources.compatRecipes."desktops/gnome/tweaks/zero-gnome-clock";

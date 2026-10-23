@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.jdupes";
   name = "jdupes";
   summary = "Powerful duplicate file finder and an enhanced fork of 'fdupes'";
   description = ''

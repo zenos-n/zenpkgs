@@ -70,7 +70,7 @@ users = { (freeform user) = { _meta.type = $type.bool; s! { target.($f.user) = t
         paths = {item.message.split(": missing metadata:")[0] for item in document.diagnostics if item.code == "ZEN226"}
         self.assertEqual({"entry.branch", "entry.branch.child", "entry.users", "entry.users.{freeform:user}"}, paths)
         self.assertFalse(any("target" in item.message or "entry._meta" in item.message for item in document.diagnostics))
-        document = parse(META + '_meta.dependencies = { general = []; build = []; runtime = []; };', "entry.zpkg")
+        document = parse(META + '_meta.id = "org.example.Test"; _meta.dependencies = { general = []; build = []; runtime = []; };', "entry.zpkg")
         self.assertEqual((), document.diagnostics)
 
     def test_normal_children_are_not_renamed_or_treated_as_metadata(self):
@@ -235,7 +235,7 @@ users = { (freeform user) = { _meta.type = $type.bool; s! { target.($f.user) = t
             '_meta.dependencies = { general = true; };',
             '_meta.dependencies = { global = []; };',
             '_meta.dependencies = { runtime = [ "zlib" ]; };',
-            '_meta.dependencies = { build = [ { id = $pkgs.a.tool; } ]; };',
+            '_meta.id = "org.example.Test"; _meta.dependencies = { build = [ { id = $pkgs.a.tool; } ]; };',
             '_meta.dependencies.runtime = [ $pkgs ];',
             '_meta.dependencies.runtime.bad = [];',
         ):
@@ -290,18 +290,18 @@ class MetadataImportAndCliTests(unittest.TestCase):
 
     def test_empty_imported_markdown_warns_without_becoming_dsl(self):
         self.write("description.md", " \n ")
-        entry = self.write("entry.zpkg", META + '_meta.description = _import ./description.md; import $pkgs.legacy.bat;')
+        entry = self.write("entry.zpkg", META + '_meta.id = "org.example.Test"; _meta.description = _import ./description.md; import $pkgs.legacy.bat;')
         document = parse_file(entry)
         self.assertEqual(1, len(document.diagnostics))
         self.assertIn("empty metadata description", document.diagnostics[0].message)
 
     def test_zpkg_import_fragments_merge_before_full_document_contract(self):
         self.write("metadata.zpkg", META)
-        entry = self.write("entry.zpkg", '_import "metadata.zpkg"; import $pkgs.legacy.bat;')
+        entry = self.write("entry.zpkg", '_meta.id = "org.example.Test"; _import "metadata.zpkg"; import $pkgs.legacy.bat;')
         self.assertEqual((), parse_file(entry).diagnostics)
 
     def test_missing_descriptions_warn_in_human_and_json_cli(self):
-        for kind, text in (("zpkg", "import $pkgs.legacy.bat;"), ("zmdl", "option = false;"), ("zstr", "system._meta.type = (zmdl system);")):
+        for kind, text in (("zpkg", '_meta.id = "org.example.Test"; import $pkgs.legacy.bat;'), ("zmdl", "option = false;"), ("zstr", "system._meta.type = (zmdl system);")):
             entry = self.write("entry." + kind, text)
             with self.subTest(kind=kind):
                 stdout, stderr = StringIO(), StringIO()
@@ -314,7 +314,7 @@ class MetadataImportAndCliTests(unittest.TestCase):
 
     def test_cli_keeps_full_package_contract_while_parse_accepts_fragments(self):
         parse(META, "fragment.zpkg")
-        for source in (META, META + "value = true; import $pkgs.legacy.bat;", META + "import $pkgs.legacy.bat; import $pkgs.legacy.git;"):
+        for source in (META, META + "value = true; import $pkgs.legacy.bat;", META + '_meta.id = "org.example.Test"; import $pkgs.legacy.bat; import $pkgs.legacy.git;'):
             entry = self.write("entry.zpkg", source)
             with self.subTest(source=source):
                 stderr = StringIO()
@@ -322,7 +322,7 @@ class MetadataImportAndCliTests(unittest.TestCase):
                 self.assertIn("ZEN222", stderr.getvalue())
 
     def test_successful_compilation_reports_metadata_warnings(self):
-        entry = self.write("entry.zpkg", "import $pkgs.legacy.bat;")
+        entry = self.write("entry.zpkg", '_meta.id = "org.example.Test"; import $pkgs.legacy.bat;')
         stdout, stderr = StringIO(), StringIO()
         self.assertEqual(0, main(["compile", str(entry)], stdout, stderr))
         self.assertIn("pkgs.zenos.legacy.bat", stdout.getvalue())
@@ -335,9 +335,9 @@ class MetadataImportAndCliTests(unittest.TestCase):
             '_meta = { name = "Demo"; description = _import "./description.md"; };',
             '_meta.name = "Demo"; _meta.description = _import "./description.md";',
         ):
-            entry = self.write("entry.zpkg", source + " import $pkgs.legacy.bat;")
+            entry = self.write("entry.zpkg", source + '_meta.id = "org.example.Test";  import $pkgs.legacy.bat;')
             document = parse_file(entry)
-            value = document.statements[0].value.statements[1].value if len(document.statements) == 2 else document.statements[1].value
+            value = document.statements[0].value.statements[1].value if len(document.statements) == 3 else document.statements[1].value
             self.assertTrue(value.multiline)
             self.assertEqual(text, value.parts[0].value)
 

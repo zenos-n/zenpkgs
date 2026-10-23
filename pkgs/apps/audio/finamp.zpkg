@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.finamp";
   name = "Finamp";
   summary = "Open source Jellyfin music player";
   description = ''

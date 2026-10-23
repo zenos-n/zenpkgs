@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gnum4";
   name = "GNU M4";
   summary = "GNU M4, a macro processor";
   description = ''

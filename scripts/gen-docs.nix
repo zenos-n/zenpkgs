@@ -13,6 +13,7 @@ let
 in
 search.mkIndex {
   inherit evaluated;
+  registry = flake.lib.dslRegistryFor system;
   bundle = flake.lib.dslBundleFor system;
   limits = search.defaultLimits // { legacyPackageDepth = 0; };
   maintainers = import ../lib/maintainers.nix { };

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.forge-sparks";
   name = "Forge Sparks";
   summary = "Get Git forges notifications";
   description = ''

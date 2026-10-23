@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.calc";
   name = "Calc";
   summary = "C-style arbitrary precision calculator";
   description = ''

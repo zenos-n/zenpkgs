@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gleam";
   name = "Gleam";
   summary = "Statically typed language for the Erlang VM";
   description = ''

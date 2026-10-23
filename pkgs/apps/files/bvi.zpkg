@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.bvi";
   name = "Bvi";
   summary = "Hex editor with vim style keybindings";
   description = ''

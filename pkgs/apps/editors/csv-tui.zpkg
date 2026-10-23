@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.csv-tui";
   name = "csv-tui";
   summary = "Terminal based csv editor which is designed to be memory efficient but still useful";
   description = ''

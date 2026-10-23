@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.foliate";
   name = "foliate";
   summary = "Curated foliate package for ZenOS";
   description = ''

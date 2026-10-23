@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.filebrowser";
   name = "File Browser";
   summary = "Web application for managing files and directories";
   description = ''

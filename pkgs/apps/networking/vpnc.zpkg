@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.vpnc";
   name = "vpnc";
   summary = "Virtual private network (VPN) client for Cisco's VPN concentrators";
   description = ''

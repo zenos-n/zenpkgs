@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.rawtherapee";
   name = "RawTherapee";
   summary = "RAW converter and digital photo processing software";
   description = ''

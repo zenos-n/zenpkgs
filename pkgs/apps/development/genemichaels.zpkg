@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.genemichaels";
   name = "Genemichaels";
   summary = "Format Rust source code, including macros";
   description = ''

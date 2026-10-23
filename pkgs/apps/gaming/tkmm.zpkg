@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.tkmm";
   name = "TKMM";
   summary = "Tears of the Kingdom Mod Manager, a mod merger and manager for TotK";
   description = ''

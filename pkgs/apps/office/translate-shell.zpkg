@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.translate-shell";
   name = "Translate Shell";
   summary = "Command-line translator using Google Translate, Bing Translator, Yandex.Translate, and Apertium";
   description = ''

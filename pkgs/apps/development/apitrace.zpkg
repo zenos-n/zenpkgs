@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.apitrace";
   name = "apitrace";
   summary = "Tools to trace OpenGL, OpenGL ES, Direct3D, and DirectDraw APIs";
   description = ''

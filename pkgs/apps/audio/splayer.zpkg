@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.splayer";
   name = "SPlayer";
   summary = "Simple Netease Cloud Music player";
   description = ''

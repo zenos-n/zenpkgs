@@ -237,7 +237,7 @@ enable = enableOption {
 setupPackage = {
   _meta = {
     type = $type.package;
-    default = $pkgs.zenos.system.zenos-setup;
+    default = $pkgs.zenos.byCategories.system.zenos-setup;
     summary = "Setup application package launched by OOBE";
     example = "pkgs.zenos.setup";
   };
@@ -246,7 +246,7 @@ setupPackage = {
 extensionPackage = {
   _meta = {
     type = $type.package;
-    default = $pkgs.zenos.system.zenos-oobe-mode;
+    default = $pkgs.zenos.byCategories.system.zenos-oobe-mode;
     summary = "GNOME Shell extension and mode package for OOBE";
     example = "pkgs.zenos.oobe-extension";
   };
@@ -256,8 +256,8 @@ extraExtensionPackages = {
   _meta = {
     type = $type.list [ $type.package ];
     default = [
-      $pkgs.zenos.desktops.gnome.extensions.date-menu-formatter
-      $pkgs.zenos.desktops.gnome.extensions.user-themes
+      $pkgs.zenos.byCategories.desktops.gnome.extensions.date-menu-formatter
+      $pkgs.zenos.byCategories.desktops.gnome.extensions.user-themes
     ];
     summary = "Additional OOBE GNOME extension packages";
   };

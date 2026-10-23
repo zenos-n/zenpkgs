@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.pdftk";
   name = "PDFtk";
   summary = "Command-line tool for working with PDFs";
   description = ''

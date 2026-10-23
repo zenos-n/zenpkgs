@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.zsh-fzf-tab";
   name = "fzf-tab";
   summary = "Replace zsh's default completion selection menu with fzf";
   description = ''

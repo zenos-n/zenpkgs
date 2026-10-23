@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ghost-cli";
   name = "Ghost CLI";
   summary = "CLI Tool for installing & updating Ghost";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.dynamic-wallpaper";
   name = "Dynamic Wallpaper";
   summary = "Dynamic wallpaper maker for Gnome";
   description = ''

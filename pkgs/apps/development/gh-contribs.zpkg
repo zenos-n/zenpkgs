@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh-contribs";
   name = "gh-contribs";
   summary = "GitHub Contribution Graph CLI";
   description = ''

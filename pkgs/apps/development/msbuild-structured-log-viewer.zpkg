@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.msbuild-structured-log-viewer";
   name = "MSBuild Structured Log Viewer";
   summary = "Rich interactive log viewer for MSBuild logs";
   description = ''

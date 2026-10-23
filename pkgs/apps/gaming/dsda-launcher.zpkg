@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.dsda-launcher";
   name = "DSDA Launcher";
   summary = "Launcher GUI for the dsda-doom source port";
   description = ''

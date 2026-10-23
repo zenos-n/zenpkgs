@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.sslscan";
   name = "sslscan";
   summary = "Tests SSL/TLS services and discover supported cipher suites";
   description = ''

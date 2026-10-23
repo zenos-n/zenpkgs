@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.rnote";
   name = "Rnote";
   summary = "Simple drawing application to create handwritten notes";
   description = ''

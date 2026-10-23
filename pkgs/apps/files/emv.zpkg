@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.emv";
   name = "emv";
   summary = "Editor Move: Rename files with your favourite text editor";
   description = ''

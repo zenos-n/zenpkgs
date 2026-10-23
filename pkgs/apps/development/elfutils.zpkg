@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.elfutils";
   name = "elfutils";
   summary = "Set of utilities to handle ELF objects";
   description = ''

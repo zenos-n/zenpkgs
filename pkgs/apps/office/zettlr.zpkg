@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.zettlr";
   name = "Zettlr";
   summary = "Markdown editor for writing academic texts and taking notes";
   description = ''

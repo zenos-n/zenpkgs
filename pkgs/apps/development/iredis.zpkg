@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.iredis";
   name = "iredis";
   summary = "Terminal Client for Redis with AutoCompletion and Syntax Highlighting";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.elfcat";
   name = "elfcat";
   summary = "ELF visualizer, generates HTML files from ELF binaries";
   description = ''

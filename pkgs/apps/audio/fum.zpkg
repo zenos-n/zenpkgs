@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.fum";
   name = "fum";
   summary = "Fully ricable tui-based music client";
   description = ''

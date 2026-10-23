@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.zola";
   name = "Zola";
   summary = "Fast static site generator with everything built-in";
   description = ''

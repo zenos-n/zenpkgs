@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.files.deark";
   name = "Deark";
   summary = "Utility for file format and metadata analysis, data extraction, decompression, and image format decoding";
   description = ''

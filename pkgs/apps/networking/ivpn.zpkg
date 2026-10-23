@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.ivpn";
   name = "IVPN CLI";
   summary = "Official IVPN Desktop app";
   description = ''

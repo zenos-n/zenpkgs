@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.glucose";
   name = "Glucose";
   summary = "SAT solver for Boolean satisfiability problems";
   description = ''

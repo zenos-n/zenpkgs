@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-up";
   name = "git-up";
   summary = "Git pull replacement that rebases all local branches when pulling";
   description = ''

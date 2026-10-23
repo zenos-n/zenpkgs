@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.asn1editor";
   name = "ASN.1 Editor";
   summary = "Python based editor for ASN.1 encoded data";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fossil";
   name = "Fossil";
   summary = "Simple, high-reliability, distributed software configuration management";
   description = ''

@@ -11,7 +11,7 @@ enable = enableOption {
   s! { environment.variables.ZSTR_SYSTEM = $path.message; };
   u! {
     home.sessionVariables.ZSTR_USER = $path.message;
-    home.packages = [ $pkgs.tools.one ];
+    home.packages = [ $pkgs.byCategories.tools.one ];
     xdg.configFile."demo-enabled".text = $path.message;
   };
 };

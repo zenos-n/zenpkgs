@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.confy";
   name = "Confy";
   summary = "Conferences schedule viewer";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.zplug";
   name = "zplug";
   summary = "Next-generation plugin manager for zsh";
   description = ''

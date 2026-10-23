@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.tinymist";
   name = "Tinymist";
   summary = "Integrated language service for Typst";
   description = ''

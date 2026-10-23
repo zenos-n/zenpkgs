@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.kubeconform";
   name = "Kubeconform";
   summary = "FAST Kubernetes manifests validator, with support for Custom Resources";
   description = ''

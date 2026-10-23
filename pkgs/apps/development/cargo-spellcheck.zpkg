@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-spellcheck";
   name = "cargo-spellcheck";
   summary = "Checks rust documentation for spelling and grammar mistakes";
   description = ''

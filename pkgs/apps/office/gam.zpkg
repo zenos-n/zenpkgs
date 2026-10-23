@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.gam";
   name = "Google Apps Manager";
   summary = "Command line management for Google Workspace";
   description = ''

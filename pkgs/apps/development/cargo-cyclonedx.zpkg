@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-cyclonedx";
   name = "cargo-cyclonedx";
   summary = "Creates CycloneDX Software Bill of Materials (SBOM) from Rust (Cargo) projects";
   description = ''

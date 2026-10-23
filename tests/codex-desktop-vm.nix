@@ -1,6 +1,6 @@
 { pkgs, zenosModule }:
 let
-  app = pkgs.zenos.apps.ai.codex-desktop;
+  app = pkgs.zenos.byCategories.apps.ai.codex-desktop;
   appRoot = "${app}/lib/codex-desktop";
 in
 pkgs.testers.runNixOSTest {
@@ -15,7 +15,7 @@ pkgs.testers.runNixOSTest {
     boot.consoleLogLevel = lib.mkForce 7;
     boot.initrd.verbose = lib.mkForce true;
     zenos.system.installed-base.enable = true;
-    zenos.system.packages.apps.ai.codex-desktop = true;
+    zenos.system.packages.byCategories.apps.ai.codex-desktop = true;
     test-support.displayManager.auto.user = "alice";
     users.users.alice = {
       isNormalUser = true;

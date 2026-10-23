@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.sioyek";
   name = "Sioyek";
   summary = "PDF viewer designed for research papers and technical books";
   description = ''

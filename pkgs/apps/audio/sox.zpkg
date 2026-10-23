@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.sox";
   name = "SoX";
   summary = "Sample Rate Converter for audio";
   description = ''

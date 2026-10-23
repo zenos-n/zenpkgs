@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.ao3downloader";
   name = "AO3 Downloader";
   summary = "Utility for downloading fanfiction in bulk from the Archive of Our Own";
   description = ''

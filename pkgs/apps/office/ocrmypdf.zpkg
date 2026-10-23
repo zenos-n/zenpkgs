@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.office.ocrmypdf";
   name = "OCRmyPDF";
   summary = "Adds an OCR text layer to scanned PDF files, allowing them to be searched";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.bottom";
   name = "bottom";
   summary = "Cross-platform graphical process/system monitor with a customizable interface";
   description = ''

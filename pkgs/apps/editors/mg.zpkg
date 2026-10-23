@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.mg";
   name = "Micro GNU Emacs";
   summary = "Micro GNU/emacs, a portable version of the mg maintained by the OpenBSD team";
   description = ''

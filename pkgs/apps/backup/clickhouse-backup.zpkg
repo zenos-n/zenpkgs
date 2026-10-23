@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.clickhouse-backup";
   name = "ClickHouse Backup";
   summary = "Tool for easy ClickHouse backup and restore using object storage for backup files";
   description = ''

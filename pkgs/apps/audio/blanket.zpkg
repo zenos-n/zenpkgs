@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.blanket";
   name = "Blanket";
   summary = "Listen to different sounds";
   description = ''

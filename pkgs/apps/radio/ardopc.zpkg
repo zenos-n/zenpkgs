@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.ardopc";
   name = "ARDOPC";
   summary = "ARDOP (Amateur Radio Digital Open Protocol) TNC implementation by John Wiseman (GM8BPQ)";
   description = ''

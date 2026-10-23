@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.logisim-evolution";
   name = "Logisim Evolution";
   summary = "Digital logic designer and simulator";
   description = ''

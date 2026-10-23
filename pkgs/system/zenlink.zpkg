@@ -1,0 +1,21 @@
+_meta = {
+  id = "org.zenos.packages.system.zenlink";
+  name = "zenlink";
+  summary = "The Android to ZenOS communication bridge";
+  description = ''
+    The Android to ZenOS communication bridge
+
+    **ZenLink** (formerly ZeroBridge)
+
+    ZenLink uses termux to stream PC audio to your phone and ADB to stream phone's mic and camera to your PC.
+    It provides a seamless integration between mobile hardware and the ZenOS desktop environment.
+    Configure using `zl-config` or the gnome extension (`pkgs.byCategories.desktops.gnome.extensions.zenlink-indicator`).
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.0";
+  tags = [ "system" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+build = $lib.zenCompatPackage $lib.zenPackageSources.compatRecipes."system/zenlink";

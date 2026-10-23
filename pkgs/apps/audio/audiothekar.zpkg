@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.audiothekar";
   name = "Audiothekar";
   summary = "Download client for the ARD Audiothek";
   description = ''

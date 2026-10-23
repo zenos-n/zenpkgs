@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.firezone-gui-client";
   name = "Firezone";
   summary = "GUI client for the Firezone zero-trust access platform";
   description = ''

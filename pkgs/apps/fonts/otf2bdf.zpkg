@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.fonts.otf2bdf";
   name = "otf2bdf";
   summary = "OpenType to BDF font converter";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ccls";
   name = "ccls";
   summary = "C/c++ language server powered by clang";
   description = ''

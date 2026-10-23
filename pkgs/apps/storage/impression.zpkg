@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.impression";
   name = "impression";
   summary = "Curated impression package for ZenOS";
   description = ''

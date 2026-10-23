@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.blender";
   name = "Blender";
   summary = "3D Creation/Animation/Publishing System";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.circumflex";
   name = "Circumflex";
   summary = "Command line tool for browsing Hacker News in your terminal";
   description = ''

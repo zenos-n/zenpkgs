@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.shipwright";
   name = "Ship of Harkinian";
   summary = "PC port of Ocarina of Time with modern controls, widescreen, high-resolution, and more";
   description = ''

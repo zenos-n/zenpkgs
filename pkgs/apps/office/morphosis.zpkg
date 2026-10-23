@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.morphosis";
   name = "Morphosis";
   summary = "Convert your documents";
   description = ''

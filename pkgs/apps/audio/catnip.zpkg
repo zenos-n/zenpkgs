@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.catnip";
   name = "catnip";
   summary = "Terminal audio visualizer for linux/unix/macOS/windows";
   description = ''

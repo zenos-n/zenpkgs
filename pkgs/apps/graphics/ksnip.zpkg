@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.ksnip";
   name = "ksnip";
   summary = "Cross-platform screenshot tool with many annotation features";
   description = ''

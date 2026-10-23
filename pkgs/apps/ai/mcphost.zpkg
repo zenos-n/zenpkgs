@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.mcphost";
   name = "MCPHost";
   summary = "CLI host application that enables Large Language Models (LLMs) to interact with external tools through the Model Context Protocol (MCP)";
   description = ''

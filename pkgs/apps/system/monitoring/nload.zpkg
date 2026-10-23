@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.nload";
   name = "nload";
   summary = "Monitors network traffic and bandwidth usage with ncurses graphs";
   description = ''

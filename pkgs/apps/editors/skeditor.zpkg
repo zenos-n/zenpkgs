@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.skeditor";
   name = "SkEditor";
   summary = "App for editing Skript files";
   description = ''

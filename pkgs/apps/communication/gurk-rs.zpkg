@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.gurk-rs";
   name = "gurk";
   summary = "Signal Messenger client for terminal";
   description = ''

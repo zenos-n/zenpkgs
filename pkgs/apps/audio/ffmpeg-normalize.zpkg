@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.ffmpeg-normalize";
   name = "ffmpeg-normalize";
   summary = "Normalize audio via ffmpeg";
   description = ''

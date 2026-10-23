@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.crawl";
   name = "Dungeon Crawl Stone Soup";
   summary = "Open-source, single-player, role-playing roguelike game";
   description = ''

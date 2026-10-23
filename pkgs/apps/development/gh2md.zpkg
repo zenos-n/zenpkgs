@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh2md";
   name = "gh2md";
   summary = "Export Github repository issues to markdown files";
   description = ''

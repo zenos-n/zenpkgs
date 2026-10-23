@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.design";
   name = "Design";
   summary = "2D CAD For GNOME";
   description = ''

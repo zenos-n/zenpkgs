@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.corectrl";
   name = "CoreCtrl";
   summary = "Control your computer hardware via application profiles";
   description = ''

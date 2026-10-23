@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.gema";
   name = "Gema";
   summary = "General purpose text processing utility based on the concept of pattern matching";
   description = ''

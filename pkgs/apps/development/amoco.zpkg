@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.amoco";
   name = "Amoco";
   summary = "Tool for analysing binaries";
   description = ''

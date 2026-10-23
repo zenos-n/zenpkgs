@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.jitsi";
   name = "Jitsi";
   summary = "Open Source Video Calls and Chat";
   description = ''

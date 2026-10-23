@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.mari0";
   name = "Mari0";
   summary = "Crossover between Super Mario Bros. and Portal";
   description = ''

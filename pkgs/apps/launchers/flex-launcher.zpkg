@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.launchers.flex-launcher";
   name = "Flex Launcher";
   summary = "Customizable HTPC application launcher";
   description = ''

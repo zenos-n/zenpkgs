@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.keybase-gui";
   name = "Keybase Desktop";
   summary = "Keybase official GUI";
   description = ''

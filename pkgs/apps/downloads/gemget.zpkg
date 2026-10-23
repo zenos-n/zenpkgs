@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.gemget";
   name = "gemget";
   summary = "Command line downloader for the Gemini protocol";
   description = ''

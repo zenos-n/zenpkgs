@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gnome-2048";
   name = "GNOME 2048";
   summary = "Obtain the 2048 tile";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.chunksync";
   name = "chunksync";
   summary = "Space-efficient incremental backups of large files or block devices";
   description = ''

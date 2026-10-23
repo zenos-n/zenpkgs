@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.wildmidi";
   name = "WildMIDI";
   summary = "Software MIDI player and library";
   description = ''

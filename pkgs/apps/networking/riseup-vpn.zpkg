@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.riseup-vpn";
   name = "Riseup VPN";
   summary = "Generic VPN client by LEAP";
   description = ''

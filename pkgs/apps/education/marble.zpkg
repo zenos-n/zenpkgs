@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.education.marble";
   name = "Marble";
   summary = "Virtual Globe and World Atlas that you can use to learn more about the Earth";
   description = ''

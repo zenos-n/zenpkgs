@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.keyspersecond";
   name = "KeysPerSecond";
   summary = "Keys-per-second meter and counter for rhythm games";
   description = ''

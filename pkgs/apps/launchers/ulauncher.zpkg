@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.launchers.ulauncher";
   name = "Ulauncher";
   summary = "Fast application launcher for Linux, written in Python, using GTK";
   description = ''

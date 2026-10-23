@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.delve";
   name = "Delve";
   summary = "Debugger for the Go programming language";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Nautilus";
   name = "nautilus";
   summary = "Curated nautilus package for ZenOS";
   description = ''

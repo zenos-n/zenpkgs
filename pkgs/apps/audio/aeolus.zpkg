@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.aeolus";
   name = "Aeolus";
   summary = "Synthetized (not sampled) pipe organ emulator";
   description = ''

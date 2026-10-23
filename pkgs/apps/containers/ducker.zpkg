@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.ducker";
   name = "Ducker";
   summary = "Terminal app for managing docker containers, inspired by K9s";
   description = ''

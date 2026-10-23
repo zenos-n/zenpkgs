@@ -5,6 +5,7 @@ let
   registryFor = targets: {
     packages = map (target: {
       inherit target;
+      categoryTarget = target;
       id = builtins.abort "output discovery evaluated registry identity metadata";
       sourcePath = builtins.abort "output discovery evaluated package provider";
       meta = builtins.abort "output discovery evaluated package metadata";
@@ -17,12 +18,13 @@ let
     "registry-docs"
     "zenos-rebuild"
   ] (_: builtins.abort "output discovery evaluated a reserved output");
-  collisionTargets = [ [ "a-b" "c" ] [ "a" "b-c" ] ];
+  collisionTargets = [ [ "org" "example" "foo-bar" ] [ "org" "example" "foo" "bar" ] ];
   rejects = args: !(builtins.tryEval (packageOutputs.flatten args)).success;
   tree = {
     apps.first.tool = { type = "derivation"; outPath = "/first-tool"; };
     dev.second.tool = { type = "derivation"; outPath = "/second-tool"; };
     "hyphen-dir".some_tool = { type = "derivation"; outPath = "/hyphen-tool"; };
+    byCategories = builtins.abort "output discovery traversed category aliases";
     unrelated = builtins.abort "output discovery traversed an unregistered branch";
   };
   targets = [

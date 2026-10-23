@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.cataclysm-dda";
   name = "Cataclysm: Dark Days Ahead";
   summary = "Free, post apocalyptic, zombie infested rogue-like";
   description = ''

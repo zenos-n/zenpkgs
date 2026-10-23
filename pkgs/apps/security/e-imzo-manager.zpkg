@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.e-imzo-manager";
   name = "E-IMZO Manager";
   summary = "GTK application for managing E-IMZO keys";
   description = ''

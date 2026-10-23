@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.psmisc";
   name = "PSmisc";
   summary = "Set of small useful utilities that use the proc filesystem (such as fuser, killall and pstree)";
   description = ''

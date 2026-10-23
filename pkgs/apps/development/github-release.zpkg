@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.github-release";
   name = "github-release";
   summary = "Commandline app to create and edit releases on Github (and upload artifacts)";
   description = ''

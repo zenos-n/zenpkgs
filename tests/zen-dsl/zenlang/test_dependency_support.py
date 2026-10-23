@@ -18,7 +18,7 @@ META = '''_meta = {
   zenosVersion = "1.0.0"; tags = []; maintainers = []; license = $l.mit;
 };
 '''
-IMPORT = "\nimport $pkgs.legacy.hello;"
+IMPORT = '_meta.id = "org.example.Test"; \nimport $pkgs.legacy.hello;'
 
 
 class DependencySupportTests(unittest.TestCase):
@@ -90,7 +90,7 @@ class DependencySupportTests(unittest.TestCase):
             root = Path(temporary)
             imported = root / "dependencies.zpkg"
             entry = root / "example.zpkg"
-            imported.write_text("_meta.dependencies.build = [ $pkgs.legacy.hello ];\n")
+            imported.write_text('_meta.dependencies.build = [ $pkgs.legacy.hello ];\n')
             entry.write_text('_import "./dependencies.zpkg";' + IMPORT)
             compiled = compile_zpkg(parse_file(entry, import_root=root))
             self.assertIn(str(imported) + ":1:", compiled)
@@ -99,7 +99,7 @@ class DependencySupportTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
             entry, output = root / "example.zpkg", root / "example.nix"
-            entry.write_text(META + "_meta.dependencies.build = [ $pkgs.legacy.hello ];" + IMPORT)
+            entry.write_text(META + '_meta.dependencies.build = [ $pkgs.legacy.hello ];' + IMPORT)
             stdout, stderr = StringIO(), StringIO()
             result = main(["compile", str(entry), "-o", str(output)], stdout=stdout, stderr=stderr)
             self.assertEqual(0, result, stderr.getvalue())

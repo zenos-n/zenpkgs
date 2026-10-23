@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.espeak-ng";
   name = "eSpeak NG";
   summary = "Speech synthesizer that supports more than hundred languages and accents";
   description = ''

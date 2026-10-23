@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.frogatto";
   name = "Frogatto & Friends";
   summary = "Action-adventure game, starring a certain quixotic frog";
   description = ''

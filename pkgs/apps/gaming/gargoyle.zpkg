@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gargoyle";
   name = "Gargoyle";
   summary = "Interactive fiction interpreter GUI";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.openscad";
   name = "OpenSCAD";
   summary = "3D parametric model compiler";
   description = ''

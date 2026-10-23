@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.SimpleScan";
   name = "Document Scanner";
   summary = "Simple scanning utility";
   description = ''

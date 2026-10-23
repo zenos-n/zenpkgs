@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.csvlens";
   name = "csvlens";
   summary = "Command line csv viewer";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.digikam";
   name = "digiKam";
   summary = "Photo management application";
   description = ''

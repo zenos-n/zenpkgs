@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.termius";
   name = "Termius";
   summary = "Cross-platform SSH client with cloud data sync and more";
   description = ''

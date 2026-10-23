@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.asnmap";
   name = "asnmap";
   summary = "Tool to gather network ranges using ASN information";
   description = ''

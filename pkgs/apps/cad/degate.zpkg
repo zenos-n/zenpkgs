@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.degate";
   name = "Degate";
   summary = "Modern and open-source cross-platform software for chips reverse engineering";
   description = ''

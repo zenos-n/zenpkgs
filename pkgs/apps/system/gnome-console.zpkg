@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.gnome-console";
   name = "gnome-console";
   summary = "Curated gnome-console package for ZenOS";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.massren";
   name = "massren";
   summary = "Easily rename multiple files using your text editor";
   description = ''

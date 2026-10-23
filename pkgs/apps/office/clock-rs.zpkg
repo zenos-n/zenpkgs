@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.clock-rs";
   name = "clock-rs";
   summary = "Modern, digital clock that effortlessly runs in your terminal";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.tesseract";
   name = "Tesseract";
   summary = "OCR engine";
   description = ''

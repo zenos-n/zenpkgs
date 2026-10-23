@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.arduino-ide";
   name = "Arduino IDE";
   summary = "Open-source electronics prototyping platform";
   description = ''

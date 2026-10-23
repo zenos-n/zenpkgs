@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.tuxclocker";
   name = "TuxClocker";
   summary = "Qt overclocking tool for GNU/Linux";
   description = ''

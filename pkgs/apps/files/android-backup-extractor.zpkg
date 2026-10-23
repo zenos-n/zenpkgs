@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.android-backup-extractor";
   name = "Android Backup Extractor";
   summary = "Utility to extract and repack Android backups created with adb backup";
   description = ''

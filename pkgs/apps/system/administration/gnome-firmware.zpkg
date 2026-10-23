@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.gnome-firmware";
   name = "GNOME Firmware";
   summary = "Tool for installing firmware on devices";
   description = ''

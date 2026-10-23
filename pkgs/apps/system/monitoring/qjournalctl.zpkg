@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.qjournalctl";
   name = "QJournalctl";
   summary = "Qt-based graphical user interface for systemd's journalctl command";
   description = ''

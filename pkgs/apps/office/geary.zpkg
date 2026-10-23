@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Geary";
   name = "Geary";
   summary = "Mail client for GNOME 3";
   description = ''

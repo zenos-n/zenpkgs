@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.openmotor";
   name = "openMotor";
   summary = "Open-source internal ballistics simulator for rocket motor experimenters";
   description = ''

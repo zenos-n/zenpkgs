@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.artem";
   name = "artem";
   summary = "Small CLI program to convert images to ASCII art";
   description = ''

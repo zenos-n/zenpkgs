@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-insta";
   name = "cargo-insta";
   summary = "Cargo subcommand for snapshot testing";
   description = ''

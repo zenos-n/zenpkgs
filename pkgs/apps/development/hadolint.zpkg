@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.hadolint";
   name = "Hadolint";
   summary = "Dockerfile Linter JavaScript API";
   description = ''

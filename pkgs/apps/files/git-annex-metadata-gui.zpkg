@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.git-annex-metadata-gui";
   name = "git-annex Metadata GUI";
   summary = "Graphical interface for git-annex metadata commands";
   description = ''

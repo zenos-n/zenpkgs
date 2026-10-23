@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.texstudio";
   name = "TeXstudio";
   summary = "TeX and LaTeX editor";
   description = ''

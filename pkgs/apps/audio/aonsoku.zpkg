@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.aonsoku";
   name = "Aonsoku";
   summary = "Modern desktop client for Navidrome/Subsonic servers";
   description = ''

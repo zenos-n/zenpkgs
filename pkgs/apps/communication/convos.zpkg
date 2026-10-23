@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.convos";
   name = "Convos";
   summary = "IRC browser client";
   description = ''

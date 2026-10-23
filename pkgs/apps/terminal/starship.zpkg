@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.starship";
   name = "Starship";
   summary = "Minimal, blazing fast, and extremely customizable prompt for any shell";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.legends-of-equestria";
   name = "Legends of Equestria";
   summary = "Free-to-play MMORPG";
   description = ''

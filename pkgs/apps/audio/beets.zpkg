@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.beets";
   name = "beets";
   summary = "Music tagger and library organizer";
   description = ''

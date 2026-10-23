@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.launchers.aphorme";
   name = "Aphorme";
   summary = "Program launcher for window managers, written in Rust";
   description = ''

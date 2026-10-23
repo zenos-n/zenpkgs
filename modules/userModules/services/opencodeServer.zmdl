@@ -24,7 +24,7 @@ workingDirectory._meta = {
 package._meta = {
   name = "OpenCode package"; summary = "OpenCode package";
   description = ''Package supplying opencode.'';
-  type = $type.package; default = $pkgs.apps.ai.opencode;
+  type = $type.package; default = $pkgs.byCategories.apps.ai.opencode;
   tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
 enable = enableOption {

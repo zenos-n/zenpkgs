@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.editors.pluma";
   name = "Pluma";
   summary = "Powerful text editor for the MATE desktop";
   description = ''

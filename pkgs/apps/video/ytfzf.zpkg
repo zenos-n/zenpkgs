@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.ytfzf";
   name = "ytfzf";
   summary = "Posix script to find and watch youtube videos from the terminal";
   description = ''

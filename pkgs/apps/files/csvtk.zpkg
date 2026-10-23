@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.csvtk";
   name = "csvtk";
   summary = "Cross-platform, efficient and practical CSV/TSV toolkit in Golang";
   description = ''

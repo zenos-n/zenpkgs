@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.textlint";
   name = "textlint";
   summary = "Pluggable natural language linter for text and markdown";
   description = ''

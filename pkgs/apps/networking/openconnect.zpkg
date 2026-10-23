@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.openconnect";
   name = "OpenConnect";
   summary = "VPN Client for Cisco's AnyConnect SSL VPN";
   description = ''

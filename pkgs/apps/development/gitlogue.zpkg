@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitlogue";
   name = "Gitlogue";
   summary = "Cinematic Git commit replay tool for the terminal";
   description = ''

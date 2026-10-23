@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.bluemail";
   name = "BlueMail";
   summary = "Cross platform email and calendar app, with AI features and a modern design";
   description = ''

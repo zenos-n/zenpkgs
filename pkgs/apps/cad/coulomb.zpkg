@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.coulomb";
   name = "Coulomb";
   summary = "Simple and beautiful circuit simulator app";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fastgron";
   name = "fastgron";
   summary = "High-performance JSON to GRON (greppable, flattened JSON) converter";
   description = ''

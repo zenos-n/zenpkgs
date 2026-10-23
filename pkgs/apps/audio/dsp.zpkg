@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.dsp";
   name = "dsp";
   summary = "Audio processing program with an interactive mode";
   description = ''

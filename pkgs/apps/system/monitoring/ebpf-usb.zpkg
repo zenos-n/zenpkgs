@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.ebpf-usb";
   name = "eBPF USB Monitor";
   summary = "Python script for USB monitoring using eBPF";
   description = ''

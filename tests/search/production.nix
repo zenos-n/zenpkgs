@@ -29,7 +29,9 @@ let
       && user.sub.legacy.sub.homeManager.sub.home.sub.stateVersion.meta.upstream;
     systemPackages = index.options.system.sub.packages.meta.typeName == "zstr-package-selectors";
     userPackages = user.sub.packages.meta.typeName == "zstr-package-selectors";
-    packageHierarchy = index.pkgs.apps.sub.browsers.sub.firefox.meta.id == "pkgs.apps.browsers.firefox";
+    packageHierarchy = index.pkgs.org.sub.mozilla.sub.firefox.meta.id == "pkgs.org.mozilla.firefox";
+    packageCategory = index.pkgs.org.sub.mozilla.sub.firefox.meta.categoryTarget == [ "apps" "browsers" "firefox" ];
+    noCategorySearchDuplicates = !(index.pkgs ? byCategories) && !(index.pkgs ? apps);
     legacyPackage = index.pkgs.legacy.sub.hello.meta.upstream;
     excludedUniverse = !(index.pkgs.legacy.sub ? pkgsCross);
     noPhantomRoots =
@@ -38,7 +40,7 @@ let
     sampleJSON = builtins.isString (
       builtins.toJSON {
         option = index.options.legacy.sub.networking.sub.hostName;
-        package = index.pkgs.apps.sub.browsers.sub.firefox;
+        package = index.pkgs.org.sub.mozilla.sub.firefox;
         program = index.options.system.sub.programs.sub.zenlink;
       }
     );

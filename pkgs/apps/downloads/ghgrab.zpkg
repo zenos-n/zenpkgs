@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.ghgrab";
   name = "ghgrab";
   summary = "Simple, pretty terminal tool that lets you search and download files from GitHub without leaving your CLI";
   description = ''

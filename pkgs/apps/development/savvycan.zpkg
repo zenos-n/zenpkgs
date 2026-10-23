@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.savvycan";
   name = "SavvyCAN";
   summary = "QT based cross platform canbus tool";
   description = ''

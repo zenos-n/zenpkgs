@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.skeema";
   name = "skeema";
   summary = "Declarative pure-SQL schema management for MySQL and MariaDB";
   description = ''

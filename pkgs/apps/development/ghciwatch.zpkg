@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ghciwatch";
   name = "ghciwatch";
   summary = "Ghci-based file watching recompiler for Haskell development";
   description = ''

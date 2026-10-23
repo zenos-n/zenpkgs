@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.cursewords";
   name = "cursewords";
   summary = "Graphical command line program for solving crossword puzzles in the terminal";
   description = ''

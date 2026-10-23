@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.ipe";
   name = "Ipe";
   summary = "Editor for drawing figures";
   description = ''

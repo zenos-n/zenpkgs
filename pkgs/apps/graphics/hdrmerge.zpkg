@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.hdrmerge";
   name = "HDRMerge";
   summary = "Combines two or more raw images into an HDR";
   description = ''

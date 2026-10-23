@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.eclipse-mat";
   name = "Eclipse Memory Analyzer";
   summary = "Fast and feature-rich Java heap analyzer";
   description = ''

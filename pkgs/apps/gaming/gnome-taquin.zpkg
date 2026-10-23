@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gnome-taquin";
   name = "GNOME Taquin";
   summary = "Move tiles so that they reach their places";
   description = ''

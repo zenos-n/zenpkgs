@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.carl";
   name = "carl";
   summary = "cal(1) with more features and written in rust";
   description = ''

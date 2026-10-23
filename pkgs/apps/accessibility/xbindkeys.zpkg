@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.xbindkeys";
   name = "xbindkeys";
   summary = "Launch shell commands with your keyboard or your mouse under X Window";
   description = ''

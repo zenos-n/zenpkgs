@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.altair";
   name = "Altair GraphQL Client";
   summary = "Feature-rich GraphQL Client IDE";
   description = ''

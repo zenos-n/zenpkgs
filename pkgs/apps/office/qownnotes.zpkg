@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.qownnotes";
   name = "QOwnNotes";
   summary = "Plain-text file notepad and todo-list manager with markdown support and Nextcloud/ownCloud integration";
   description = ''

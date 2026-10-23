@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.clapboard";
   name = "Clapboard";
   summary = "Wayland clipboard manager that will make you clap";
   description = ''

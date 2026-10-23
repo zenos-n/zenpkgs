@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.bchunk";
   name = "bchunk";
   summary = "Program that converts CD images in BIN/CUE format into a set of ISO and CDR tracks";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.galaxis";
   name = "Galaxis";
   summary = "Rescue lifeboats lost in interstellar space";
   description = ''

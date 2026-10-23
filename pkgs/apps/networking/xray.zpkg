@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.xray";
   name = "Xray";
   summary = "Platform for building proxies to bypass network restrictions. A replacement for v2ray-core, with XTLS support and fully compatible configuration";
   description = ''

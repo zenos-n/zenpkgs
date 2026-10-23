@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.via";
   name = "VIA";
   summary = "Yet another keyboard configurator";
   description = ''

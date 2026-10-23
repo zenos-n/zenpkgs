@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.todoman";
   name = "todoman";
   summary = "Standards-based task manager based on iCalendar";
   description = ''

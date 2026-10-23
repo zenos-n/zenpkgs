@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.neovim";
   name = "neovim";
   summary = "Curated neovim package for ZenOS";
   description = ''

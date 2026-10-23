@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.evcxr";
   name = "evcxr";
   summary = "Evaluation context for Rust";
   description = ''

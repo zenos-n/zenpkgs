@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gammaray";
   name = "GammaRay";
   summary = "Software introspection tool for Qt applications developed by KDAB";
   description = ''

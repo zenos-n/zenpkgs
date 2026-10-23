@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.castnow";
   name = "castnow";
   summary = "Command-line Chromecast player";
   description = ''

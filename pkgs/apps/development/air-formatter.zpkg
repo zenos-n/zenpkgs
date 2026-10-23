@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.air-formatter";
   name = "Air Formatter";
   summary = "Extremely fast R code formatter";
   description = ''

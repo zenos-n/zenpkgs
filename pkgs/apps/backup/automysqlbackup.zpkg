@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.automysqlbackup";
   name = "AutoMySQLBackup";
   summary = "Script to run daily, weekly and monthly backups for your MySQL database";
   description = ''

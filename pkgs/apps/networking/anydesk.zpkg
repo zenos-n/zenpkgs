@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.anydesk";
   name = "AnyDesk";
   summary = "Desktop sharing application, providing remote support and online meetings";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo";
   name = "cargo";
   summary = "Downloads your Rust project's dependencies and builds your project";
   description = ''

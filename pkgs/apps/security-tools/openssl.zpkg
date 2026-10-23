@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security-tools.openssl";
   name = "openssl";
   summary = "Curated openssl package for ZenOS";
   description = ''

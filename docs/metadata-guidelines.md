@@ -5,24 +5,50 @@ The sibling `zenos-n-next/design/node-metadata.md`, `zpkg-format.md`,
 
 ## Package Identity
 
-Package declarations are named leaves at `pkgs/<path>.zpkg`. The full filesystem
-path defines the public identity `pkgs.<path>` and internal view
-`pkgs.zenos.<path>`. For example, `pkgs/apps/graphics/example.zpkg` has registry
-ID `pkgs.apps.graphics.example` and target `[ "apps" "graphics" "example" ]`.
-Different directories may contain the same basename. Targets and full identities
-must be unique; there is no basename lookup or alias catalog. Moving a file
-changes its identity.
+Every ZPKG requires `_meta.id`, a nonempty reverse-DNS string without the
+`pkgs.` prefix. Preserve an established upstream ID where one exists (for
+example `org.mozilla.firefox`). For packages without an established ID, author
+an explicit unique ID under `org.zenos.packages`, for example
+`org.zenos.packages.example`. This namespace is an authoring fallback, not an
+implicit value for missing metadata.
 
-Do not author `id`, `target`, `sourcePath`, `status`, `aliases`, or `category`
-metadata. The registry's internal `sourcePath` records the imported Nixpkgs
-attribute path, not identity. `package.zpkg` is reserved. `pkgs/legacy/` must not
-exist: public `pkgs.legacy` is a virtual view of pinned Nixpkgs.
+The registry contains one record per declaration:
 
-Filesystem discovery establishes identity; ZSTR controls exposure. Without a
-root `structure.zstr`, the adapter returns no packages or module candidates.
-Multiple structures are an error. The compiled registry feeds the package
-overlay and flake outputs. `tests/fixtures/package-registry.json` records the
-4057-entry normalized contract, not a second declaration source.
+- `id = "pkgs." + _meta.id` is the canonical public identity.
+- `target = _meta.id.split(".")` is the canonical target, without `pkgs`.
+- `categoryTarget` is the relative filesystem path below `pkgs/`, split into
+  segments after removing `.zpkg`.
+
+For `pkgs/apps/browsers/firefox.zpkg` with `_meta.id = "org.mozilla.firefox"`,
+`id` is `pkgs.org.mozilla.firefox`, `target` is
+`[ "org" "mozilla" "firefox" ]`, and `categoryTarget` is
+`[ "apps" "browsers" "firefox" ]`.
+
+The public views are `pkgs.org.mozilla.firefox` and
+`pkgs.byCategories.apps.browsers.firefox`; generated Nix uses
+`pkgs.zenos.org.mozilla.firefox` and
+`pkgs.zenos.byCategories.apps.browsers.firefox`. Both resolve to the same
+derivation. `byCategories` is a derived alias view, not a second registry entry
+or a second build. Old root category aliases such as
+`pkgs.apps.browsers.firefox` are not exported.
+
+Keep the existing category filesystem. Moving a file changes `categoryTarget`
+and its category selector, but preserves the canonical identity when `_meta.id`
+is unchanged. Canonical IDs and category targets must be unique; duplicate IDs,
+malformed or missing IDs, and conflicting exported paths are errors. The two
+views must not overwrite each other or the reserved `legacy` view.
+
+ZSTR controls exposure of both views. No root structure means no exported
+packages or options. `pkgs.legacy` (internally `pkgs.zenos.legacy`) remains the
+direct pinned Nixpkgs view, with no ZPKG metadata or ID requirement.
+
+Do not author `target`, `categoryTarget`, `sourcePath`, `status`, `aliases`, or
+`category` metadata. Registry `sourcePath` records the imported Nixpkgs attribute
+path. `package.zpkg` is reserved and `pkgs/legacy/` must not exist.
+
+The compiled registry feeds the overlay and flake outputs. Registry fixtures
+are verification snapshots, not a second declaration source; historical
+filesystem-ID fixtures do not certify the new two-view contract.
 
 ## Package Declarations
 
@@ -30,6 +56,7 @@ Only `_meta` is prefixed. Its fields and dependency scopes are unprefixed:
 
 ```zpkg
 _meta = {
+  id = "org.zenos.packages.example";
   name = "Example";
   summary = "An example package for ZenOS";
   description = ''
@@ -71,7 +98,7 @@ text, including whitespace, and normalized unprefixed metadata keys.
 Every exposed package and option node, including branches and freeform schemas,
 must be checked during evaluation and compilation. Missing descriptive fields
 warn with full node path and source location, rather than failing a build.
-Empty descriptions also warn. Unknown metadata fields warn, with a spelling
+Missing, malformed, or duplicate package IDs fail. Empty descriptions also warn. Unknown metadata fields warn, with a spelling
 suggestion when available. Invalid supplied types, versions, references, scopes,
 weights, defaults, and conflicting identities are errors, not missing metadata.
 
@@ -113,8 +140,11 @@ and dependency scopes are not option nodes.
 
 Update `tests/fixtures/package-registry.json` alongside declaration changes and
 review exact public IDs, targets, imported paths, and metadata. Package checks
-cover all 4057 mappings, repeated basenames without aliases, invalid/conflicting
-targets, absent/multiple structures, and metadata defaults and scope decoding.
+must cover canonical IDs and targets, filesystem `categoryTarget` values,
+same-derivation category aliases without duplicate records, unchanged legacy,
+absent old root category aliases, missing/malformed/duplicate IDs, conflicting
+exports, structure exposure, and metadata defaults and scope decoding. Existing
+historical results do not establish acceptance of the new contract.
 
 Run acceptance checks inside a ZenOS VM, not on the host:
 

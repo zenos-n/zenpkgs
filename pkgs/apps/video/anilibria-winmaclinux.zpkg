@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.anilibria-winmaclinux";
   name = "AniLibria";
   summary = "AniLibria cross platform desktop client";
   description = ''

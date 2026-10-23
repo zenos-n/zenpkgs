@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.sublime";
   name = "Sublime Text";
   summary = "Sophisticated text editor for code, markup and prose";
   description = ''

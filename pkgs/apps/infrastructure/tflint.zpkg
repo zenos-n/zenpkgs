@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.infrastructure.tflint";
   name = "TFLint";
   summary = "Terraform linter focused on possible errors, best practices, and so on";
   description = ''

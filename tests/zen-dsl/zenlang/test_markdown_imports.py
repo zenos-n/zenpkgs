@@ -72,7 +72,7 @@ class MarkdownImportTests(unittest.TestCase):
             '_meta = { ' + fields + ' }; _meta.description = _import "./description.md";',
         ):
             with self.subTest(source=source):
-                document = self.load(source + ' import $pkgs.legacy.demo;')
+                document = self.load(source + '_meta.id = "org.example.Test";  import $pkgs.legacy.demo;')
                 self.assertEqual((), document.diagnostics)
                 self.assertIn(quote_nix_string(text), compile_zpkg(document, mode="interface"))
                 build = compile_zpkg(document, mode="build")

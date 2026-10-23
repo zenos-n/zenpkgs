@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.forge-mtg";
   name = "Forge";
   summary = "Magic: the Gathering card game with rules enforcement";
   description = ''

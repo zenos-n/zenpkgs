@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.tiptop";
   name = "tiptop";
   summary = "Performance monitoring tool for Linux";
   description = ''

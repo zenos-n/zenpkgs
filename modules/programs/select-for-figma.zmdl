@@ -115,7 +115,7 @@ enable = enableOption {
     tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
   };
   u! {
-    home.packages = [ $pkgs.apps.graphics.select-for-figma ];
+    home.packages = [ $pkgs.byCategories.apps.graphics.select-for-figma ];
     home.activation.zenosSelectforFigmaPreferences = $lib.mkWritableProgramConfig {
       pkgs = $pkgs.legacy; application = "select-for-figma"; assignments = $v.preferences;
     };

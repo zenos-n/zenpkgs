@@ -117,7 +117,7 @@ assert
   == "/run/wrappers/bin:/run/current-system/sw/bin";
 assert
   temporary.systemd.user.services.zenos-oobe.serviceConfig.ExecStart
-  == "${lib.getExe pkgs.zenos.system.zenos-setup} --oobe";
+  == "${lib.getExe pkgs.zenos.byCategories.system.zenos-setup} --oobe";
 assert
   !(temporary.systemd.user.services."org.gnome.Shell@zenos-oobe".environment ? ZENOS_SETUP_DRY_RUN);
 assert

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.archives.engrampa";
   name = "Engrampa";
   summary = "Archive Manager for MATE";
   description = ''

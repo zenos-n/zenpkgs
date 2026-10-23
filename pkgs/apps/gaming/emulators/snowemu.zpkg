@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.snowemu";
   name = "SnowEmu";
   summary = "Early Macintosh emulator";
   description = ''

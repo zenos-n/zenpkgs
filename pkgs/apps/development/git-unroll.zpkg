@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-unroll";
   name = "git-unroll";
   summary = "Convert Git repositories with submodules to a Nix expression based on non-recursive Git sources";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.flycast";
   name = "Flycast";
   summary = "Multi-platform Sega Dreamcast, Naomi and Atomiswave emulator";
   description = ''

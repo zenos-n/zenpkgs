@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.peazip";
   name = "PeaZip";
   summary = "File and archive manager";
   description = ''

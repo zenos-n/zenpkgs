@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.carapace";
   name = "Carapace";
   summary = "Multi-shell multi-command argument completer";
   description = ''

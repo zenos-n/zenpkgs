@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.hawkthorne-journey";
   name = "Journey to the Center of Hawkthorne";
   summary = "Journey to the Center of Hawkthorne - Community Fan Game";
   description = ''

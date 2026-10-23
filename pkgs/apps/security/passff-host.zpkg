@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.passff-host";
   name = "passff-host";
   summary = "Host app for the WebExtension PassFF";
   description = ''

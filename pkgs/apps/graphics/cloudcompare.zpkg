@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.cloudcompare";
   name = "CloudCompare";
   summary = "3D point cloud and mesh processing software";
   description = ''

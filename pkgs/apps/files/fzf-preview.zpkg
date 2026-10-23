@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fzf-preview";
   name = "fzf-preview";
   summary = "Simple fzf preview script for previewing any filetype in fzf's preview window";
   description = ''

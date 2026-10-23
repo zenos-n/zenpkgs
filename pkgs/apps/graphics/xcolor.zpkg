@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.xcolor";
   name = "xcolor";
   summary = "Lightweight color picker for X11";
   description = ''

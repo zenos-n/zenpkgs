@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.afio";
   name = "afio";
   summary = "Fault tolerant cpio archiver targeting backups";
   description = ''

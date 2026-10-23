@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.adbfs-rootless";
   name = "adbfs-rootless";
   summary = "Mount Android phones on Linux with adb, no root required";
   description = ''

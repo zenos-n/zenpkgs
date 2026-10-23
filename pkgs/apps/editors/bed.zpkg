@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.bed";
   name = "bed";
   summary = "Binary editor written in Go";
   description = ''

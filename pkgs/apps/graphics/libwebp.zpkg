@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.libwebp";
   name = "WebP Tools";
   summary = "Tools and library for the WebP image format";
   description = ''

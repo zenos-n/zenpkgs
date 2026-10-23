@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.crosspatch";
   name = "CrossPatch";
   summary = "A mod Manager for Sonic Racing: CrossWorlds";
   description = ''

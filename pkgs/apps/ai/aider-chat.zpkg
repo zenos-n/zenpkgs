@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.aider-chat";
   name = "Aider";
   summary = "AI pair programming in your terminal";
   description = ''

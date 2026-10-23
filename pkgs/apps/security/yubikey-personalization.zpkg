@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.yubikey-personalization";
   name = "yubikey-personalization";
   summary = "Library and command line tool to personalize YubiKeys";
   description = ''

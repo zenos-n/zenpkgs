@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.astrolabe-generator";
   name = "Astrolabe Generator";
   summary = "Java-based tool for generating EPS files for constructing astrolabes and related tools";
   description = ''

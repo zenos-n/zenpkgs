@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.feyngame";
   name = "FeynGame";
   summary = "Java-based graphical tool for drawing Feynman diagrams";
   description = ''

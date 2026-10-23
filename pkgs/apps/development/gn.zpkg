@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gn";
   name = "GN";
   summary = "Meta-build system that generates build files for Ninja";
   description = ''

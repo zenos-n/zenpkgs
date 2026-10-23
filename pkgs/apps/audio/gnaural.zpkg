@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.gnaural";
   name = "Gnaural";
   summary = "Programmable auditory binaural-beat synthesizer";
   description = ''

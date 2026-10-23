@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.drumkv1";
   name = "drumkv1";
   summary = "Old-school drum-kit sampler synthesizer with stereo fx";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.rclone";
   name = "Rclone";
   summary = "Command line program to sync files and directories to and from major cloud storage";
   description = ''

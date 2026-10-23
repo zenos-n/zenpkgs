@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.eog";
   name = "Eye of GNOME";
   summary = "GNOME image viewer";
   description = ''

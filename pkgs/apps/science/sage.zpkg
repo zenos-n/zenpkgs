@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.sage";
   name = "SageMath";
   summary = "Open Source Mathematics Software, free alternative to Magma, Maple, Mathematica, and Matlab";
   description = ''

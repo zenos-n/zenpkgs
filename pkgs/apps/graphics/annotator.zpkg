@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.annotator";
   name = "Annotator";
   summary = "Image annotation for Elementary OS";
   description = ''

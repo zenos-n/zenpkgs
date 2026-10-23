@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.arftracksat";
   name = "arftracksat";
   summary = "Satellite tracking software for linux";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.critcmp";
   name = "critcmp";
   summary = "Command line tool for comparing benchmarks run by Criterion";
   description = ''

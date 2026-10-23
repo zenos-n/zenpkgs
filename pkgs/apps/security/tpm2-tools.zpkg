@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.tpm2-tools";
   name = "TPM2 Tools";
   summary = "Command line tools that provide access to a TPM 2.0 compatible device";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.foxglove-cli";
   name = "Foxglove CLI";
   summary = "Interact with the Foxglove platform";
   description = ''

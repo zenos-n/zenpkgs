@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.dillo";
   name = "Dillo";
   summary = "Fast graphical web browser with a small footprint";
   description = ''

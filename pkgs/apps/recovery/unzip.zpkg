@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.unzip";
   name = "unzip";
   summary = "Curated unzip package for ZenOS";
   description = ''

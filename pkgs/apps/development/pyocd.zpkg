@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.pyocd";
   name = "pyOCD";
   summary = "Python library for programming and debugging Arm Cortex-M microcontrollers";
   description = ''

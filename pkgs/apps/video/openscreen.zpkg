@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.openscreen";
   name = "OpenScreen";
   summary = "Free, open-source alternative to Screen Studio (sort of)";
   description = ''

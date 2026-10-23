@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.game-devices-udev-rules";
   name = "Game device udev rules";
   summary = "Udev rules to make supported controllers available with user-grade permissions";
   description = ''

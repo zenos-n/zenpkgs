@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.artisan";
   name = "Artisan";
   summary = "Visual scope for coffee roasters";
   description = ''

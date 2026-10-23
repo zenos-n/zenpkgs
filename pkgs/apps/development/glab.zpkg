@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.glab";
   name = "GitLab CLI";
   summary = "GitLab CLI tool bringing GitLab to your command line";
   description = ''

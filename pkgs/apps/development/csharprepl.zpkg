@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.csharprepl";
   name = "CSharpRepl";
   summary = "C# REPL with syntax highlighting";
   description = ''

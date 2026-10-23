@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.nix-du";
   name = "nix-du";
   summary = "Tool to determine which gc-roots take space in your nix store";
   description = ''

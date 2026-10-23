@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.feishin";
   name = "Feishin";
   summary = "Full-featured Jellyfin, Navidrome, and OpenSubsonic Compatible Music Player";
   description = ''

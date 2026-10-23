@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.antora";
   name = "Antora";
   summary = "Modular documentation site generator. Designed for users of Asciidoctor";
   description = ''

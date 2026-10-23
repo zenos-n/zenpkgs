@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.threema-desktop";
   name = "Threema";
   summary = "Desktop client for Threema, a privacy-focused end-to-end encrypted mobile messenger";
   description = ''

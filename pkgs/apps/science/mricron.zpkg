@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.mricron";
   name = "MRIcron";
   summary = "Application to display NIfTI medical imaging data";
   description = ''

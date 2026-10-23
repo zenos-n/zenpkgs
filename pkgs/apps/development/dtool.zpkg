@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dtool";
   name = "dtool";
   summary = "Command-line tool collection to assist development written in RUST";
   description = ''

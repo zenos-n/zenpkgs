@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.silver-searcher";
   name = "silver-searcher";
   summary = "Code-searching tool similar to ack, but faster";
   description = ''
