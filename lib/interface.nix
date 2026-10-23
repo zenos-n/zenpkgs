@@ -4,7 +4,24 @@ let
   pathString = path: lib.concatStringsSep "." path;
   validate = registry:
     let
-      entries = registry.packages;
+      entries =
+        assert lib.assertMsg (
+          builtins.isAttrs registry
+          && (registry.schemaVersion or null) == 1
+          && builtins.isList (registry.packages or null)
+          && lib.all (entry:
+            builtins.isAttrs entry
+            && lib.all (field: builtins.hasAttr field entry)
+              [ "id" "target" "categoryTarget" "meta" "provider" "dependenciesDeclared" ]
+            && builtins.isString entry.id
+            && validPath entry.target
+            && validPath entry.categoryTarget
+            && builtins.isAttrs entry.meta
+            && builtins.isAttrs entry.provider
+            && entry.provider ? kind
+          ) registry.packages
+        ) "ZenPkgs registry requires complete canonical package records with categoryTarget";
+        registry.packages;
       ids = map (entry: entry.id) entries;
       paths = map (entry: builtins.toJSON entry.target) entries;
       categoryPaths = map (entry: builtins.toJSON entry.categoryTarget) entries;
@@ -23,20 +40,21 @@ let
         && lib.all (segment: builtins.match "[A-Za-z][A-Za-z0-9_-]*" segment != null) entry.target
         && !(builtins.elem (builtins.head entry.target) [ "legacy" "byCategories" ])
         && validPath entry.categoryTarget
+        && builtins.head entry.categoryTarget != "legacy"
         && lib.last entry.categoryTarget != "package"
         && (entry.meta.id or null) == pathString entry.target
         && entry.id == "pkgs.${pathString entry.target}"
         && builtins.elem entry.provider.kind [ "import" "build" ]
         && builtins.isBool entry.dependenciesDeclared
         && (if entry.provider.kind == "import" then
-          builtins.isList entry.sourcePath && entry.sourcePath != [ ]
+          builtins.isList (entry.sourcePath or null) && entry.sourcePath != [ ]
           && lib.all (segment: builtins.isString segment && segment != "") entry.sourcePath
         else !(entry ? sourcePath))
         && noAncestor targetSet entry.target
         && noAncestor categorySet entry.categoryTarget
       ) entries;
     in
-    assert registry.schemaVersion == 1;
+    assert builtins.isAttrs registry && (registry.schemaVersion or null) == 1;
     assert builtins.length (builtins.attrNames (builtins.listToAttrs (map (id: { name = id; value = true; }) ids))) == builtins.length ids;
     assert builtins.length (builtins.attrNames targetSet) == builtins.length paths;
     assert builtins.length (builtins.attrNames categorySet) == builtins.length categoryPaths;

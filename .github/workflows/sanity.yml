@@ -53,19 +53,29 @@ jobs:
           fi
 
       - name: Verify package identities and category aliases
+        shell: bash
         run: |
-          nix build --no-link --print-build-logs \
-            .#checks.x86_64-linux.registry-contract \
-            .#checks.x86_64-linux.registry-counts \
-            .#checks.x86_64-linux.registry-path-identities \
-            .#checks.x86_64-linux.registry-invalid-identities \
-            .#checks.x86_64-linux.registry-structure-exposure \
-            .#checks.x86_64-linux.registry-metadata-defaults \
-            .#checks.x86_64-linux.public-package-outputs \
-            .#checks.x86_64-linux.package-output-collisions \
-            .#checks.x86_64-linux.migration-packages \
-            .#checks.x86_64-linux.search-index \
-            --option max-jobs 1 --option cores 2 --option max-substitution-jobs 2
+          failed=()
+          checks=(registry-contract registry-counts registry-path-identities
+            registry-invalid-identities registry-structure-exposure
+            registry-metadata-defaults public-package-outputs
+            package-output-collisions migration-packages search-index)
+          for check in "${checks[@]}"; do
+            echo "Checking $check"
+            if nix build --no-link --print-build-logs --show-trace \
+              ".#checks.x86_64-linux.$check" \
+              --option max-jobs 1 --option cores 2 --option max-substitution-jobs 2 \
+              > "$RUNNER_TEMP/$check.log" 2>&1; then
+              echo "$check passed"
+            else
+              failed+=("$check")
+              tail -n 120 "$RUNNER_TEMP/$check.log"
+            fi
+          done
+          if (( ${#failed[@]} )); then
+            printf 'Failed check: %s\n' "${failed[@]}"
+            exit 1
+          fi
 
       - name: Generate Documentation JSON
         if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
