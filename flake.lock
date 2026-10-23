@@ -376,6 +376,22 @@
         "url": "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst"
       }
     },
+    "nixpkgs-emulators": {
+      "locked": {
+        "lastModified": 1720535198,
+        "narHash": "sha256-zwVvxrdIzralnSbcpghA92tWu2DV2lwv89xZc8MTrbg=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "205fd4226592cc83fd4c0885a3e4c9c400efabb5",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "205fd4226592cc83fd4c0885a3e4c9c400efabb5",
+        "type": "github"
+      }
+    },
     "nixpkgs-lib": {
       "locked": {
         "lastModified": 1790477367,
@@ -565,6 +581,7 @@
         "nixcord": "nixcord",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_6",
+        "nixpkgs-emulators": "nixpkgs-emulators",
         "nixpkgs-popcorn": "nixpkgs-popcorn",
         "nixpwamaker": "nixpwamaker",
         "nur": "nur",
@@ -724,18 +741,19 @@
     "source-setup": {
       "flake": false,
       "locked": {
-        "lastModified": 1790809187,
-        "narHash": "sha256-JXeuE6YmJ+7G/hX9BSVgnPnSSdCyozC29HEN9/dpZ2c=",
+        "lastModified": 1792738577,
+        "narHash": "sha256-HbaA46NW+T9NfYkK9XnJzMRT2yFS3Nt3dj+BBo/RbdM=",
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "d762a9405f739361dcf941a1653a4ac39fb8cc13",
+        "rev": "de3a35e1fb0297468da12dd8a9ea609115a61c3d",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
+        "ref": "de3a35e",
         "repo": "zenos-setup",
-        "rev": "d762a9405f739361dcf941a1653a4ac39fb8cc13",
-        "type": "github"
+        "type": "github",
+        "rev": "de3a35e1fb0297468da12dd8a9ea609115a61c3d"
       }
     },
     "source-shell-defaults": {

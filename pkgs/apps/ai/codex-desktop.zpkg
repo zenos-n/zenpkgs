@@ -9,7 +9,7 @@ _meta = {
     provides the terminal CLI.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "26.930.41038";
+  packageVersion = "26.1016.61520";
   tags = [ "ai" "development" "coding" "desktop" ];
   maintainers = [ $m.doromiert ];
   license = $l.unfree;
@@ -55,11 +55,11 @@ build = let
 in
 packageSet.stdenvNoCC.mkDerivation {
   pname = "codex-desktop";
-  version = "26.930.41038";
+  version = "26.1016.61520";
 
   src = packageSet.fetchurl {
-    url = "https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.930.41038_amd64.deb";
-    hash = "sha256-7nhUFFVUcY1yOdAeo31E9roeC6SpP0esCX1uD5ZNpHw=";
+    url = "https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.1016.61520_amd64.deb";
+    hash = "sha256-mt1iKRbF+jhhr9lQga934lSIwQjKnFQ+H2dWCzkNKNQ=";
   };
 
   nativeBuildInputs = [

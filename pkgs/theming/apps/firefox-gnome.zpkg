@@ -1,0 +1,15 @@
+_meta = {
+  name = "Firefox GNOME theme"; summary = "Native GNOME appearance for Firefox";
+  description = ''Firefox GNOME CSS theme used by the desktop and web application profiles.'';
+  zenosVersion = "1.0.0"; packageVersion = "143";
+  tags = [ "theming" "firefox" ]; maintainers = [ $m.doromiert ]; license = $l.unlicense;
+};
+build = $pkgs.legacy.stdenvNoCC.mkDerivation {
+  pname = "firefox-gnome-theme"; version = "143";
+  src = $pkgs.legacy.fetchFromGitHub {
+    owner = "rafaelmardojai"; repo = "firefox-gnome-theme"; rev = "v143";
+    hash = "sha256-0E3TqvXAy81qeM/jZXWWOTZ14Hs1RT7o78UyZM+Jbr4=";
+  };
+  dontBuild = true;
+  installPhase = ''mkdir -p "$out/share/firefox-gnome-theme"; cp -r . "$out/share/firefox-gnome-theme/"'';
+};

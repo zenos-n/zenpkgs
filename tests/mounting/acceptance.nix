@@ -50,6 +50,7 @@ let
         };
         packages.tools.two = true;
         legacy.homeManager.home.sessionVariables.ALIAS = "alice-only";
+        legacy.homeManager.programs.git.package = nixpkgs.git;
       };
       users.bob.programs.demo = false;
       legacy.networking.hostName = "zstr-fixture";
@@ -98,6 +99,7 @@ assert !(alice.home.sessionVariables ? SECOND);
 assert !(bob.home.sessionVariables ? FIRST);
 assert !(bob.home.sessionVariables ? ZSTR_USER);
 assert alice.home.sessionVariables.ALIAS == "alice-only";
+assert alice.programs.git.package.drvPath == nixpkgs.git.drvPath;
 assert !(bob.home.sessionVariables ? ALIAS);
 assert alice.home.sessionVariables.ZSTR_BASE == "loaded";
 assert bob.home.sessionVariables.ZSTR_BASE == "loaded";

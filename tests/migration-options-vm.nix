@@ -69,7 +69,7 @@ in pkgs.testers.runNixOSTest {
     machine.succeed("grep -x 'font_size 11' /Users/alice/.config/kitty/kitty.conf")
     machine.fail("systemctl is-enabled flatpak-managed-install.service")
     machine.fail("systemctl is-enabled syncthing.service")
-    machine.succeed("codex --version | grep '0.159.0'")
+    machine.succeed("codex --version | grep '0.164.0'")
     machine.succeed("opencode --version | grep '1.18.3'")
     machine.succeed("takopi --help >/dev/null")
     machine.succeed("hapticspp-daemon --help >/dev/null")

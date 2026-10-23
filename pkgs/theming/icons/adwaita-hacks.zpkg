@@ -1,10 +1,15 @@
-{
-  fetchFromGitHub,
-  lib,
-  stdenv,
-  ...
-}:
+_meta = {
+  name = "Adwaita Hacks"; summary = "Extended Adwaita icon theme";
+  description = ''Extended Adwaita icon theme. Preserves the existing ZenOS theme provider.'';
+  zenosVersion = "1.0.0"; packageVersion = "1.0";
+  tags = [ "theming" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
 
+build = let
+  fetchFromGitHub = $pkgs.legacy.fetchFromGitHub;
+  stdenv = $pkgs.legacy.stdenv;
+  themeLib = $lib;
+in
 stdenv.mkDerivation {
   pname = "adwaita-hacks";
   version = "1.0";
@@ -24,7 +29,7 @@ stdenv.mkDerivation {
     cp -r $src/resources/* $out/share/icons
   '';
 
-  meta = with lib; {
+  meta = {
     description = ''
       Extended Adwaita icon pack for ZenOS compatibility
 
@@ -37,8 +42,8 @@ stdenv.mkDerivation {
       - Seamless integration with the default GNOME icon theme.
     '';
     homepage = "https://zenos.neg-zero.com";
-    license = licenses.napl;
-    maintainers = with maintainers; [ doromiert ];
-    platforms = platforms.linux;
+    license = themeLib.licenses.napalm;
+    maintainers = [ $m.doromiert ];
+    platforms = themeLib.platforms.linux;
   };
-}
+};

@@ -1,11 +1,17 @@
-{
-  fetchFromGitHub,
-  fontforge,
-  lib,
-  python3Packages,
-  stdenvNoCC,
-}:
+_meta = {
+  name = "Zero Mono Thin"; summary = "Thin monospaced Zero display typeface";
+  description = ''Thin monospaced Zero display typeface. Preserves the existing ZenOS theme provider.'';
+  zenosVersion = "1.0.0"; packageVersion = "1.0.0";
+  tags = [ "theming" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
 
+build = let
+  fetchFromGitHub = $pkgs.legacy.fetchFromGitHub;
+  fontforge = $pkgs.legacy.fontforge;
+  python3Packages = $pkgs.legacy.python3Packages;
+  stdenvNoCC = $pkgs.legacy.stdenvNoCC;
+  themeLib = $lib;
+in
 stdenvNoCC.mkDerivation {
   pname = "zero-mono-thin-font";
   version = "1.0.0";
@@ -51,7 +57,7 @@ stdenvNoCC.mkDerivation {
   meta = {
     description = "Thin monospaced Zero display typeface";
     homepage = "https://github.com/negative-zero-inft/zero-font";
-    license = lib.licenses.napalm;
-    platforms = lib.platforms.all;
+    license = themeLib.licenses.napalm;
+    platforms = themeLib.platforms.all;
   };
-}
+};

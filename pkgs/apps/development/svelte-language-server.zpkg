@@ -1,0 +1,6 @@
+_meta = {
+  name = "svelte-language-server"; summary = "Svelte language server"; description = ''Svelte language server.'';
+  zenosVersion = "1.0.0"; packageVersion = "0.17.31"; tags = [ "migration" ];
+  maintainers = [ $m.doromiert ]; license = $l.mit;
+};
+import $pkgs.legacy.svelte-language-server;

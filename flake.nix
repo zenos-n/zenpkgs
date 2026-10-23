@@ -27,6 +27,7 @@
       url = "github:doromiert/masterful-gestures/7bc5670a750ba84f205aa2e82eaaf6c9fa45212f";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixpkgs-emulators.url = "github:NixOS/nixpkgs/205fd4226592cc83fd4c0885a3e4c9c400efabb5";
     nixpkgs-popcorn.url = "github:NixOS/nixpkgs/nixos-26.05";
 
     nixpwamaker = {
@@ -54,7 +55,7 @@
       flake = false;
     };
     source-setup = {
-      url = "github:zenos-n/zenos-setup/d762a9405f739361dcf941a1653a4ac39fb8cc13";
+      url = "github:zenos-n/zenos-setup/de3a35e1fb0297468da12dd8a9ea609115a61c3d";
       flake = false;
     };
     source-shell-defaults = {
@@ -414,6 +415,7 @@
             licenses = prev.lib.licenses // utils.licenses;
             platforms = prev.lib.platforms // utils.platforms;
             zenPackageSources = {
+              emulatorsNixpkgs = inputs.nixpkgs-emulators.outPath;
               popcornNixpkgs = inputs.nixpkgs-popcorn.outPath;
               vrTools = inputs.source-vr-tools.outPath;
               alvrCompat = inputs.source-alvr-compat.outPath;

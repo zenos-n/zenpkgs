@@ -5,7 +5,7 @@ _meta = {
     Lightweight coding agent that runs in your terminal.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "0.159.0";
+  packageVersion = "0.164.0";
   tags = [ "ai" "development" "coding" "terminal" ];
   maintainers = [ $m.doromiert ];
   license = $l.asl20;
@@ -13,11 +13,11 @@ _meta = {
 
 build = $pkgs.legacy.stdenvNoCC.mkDerivation {
     pname = "codex";
-    version = "0.159.0";
+    version = "0.164.0";
 
     src = $pkgs.legacy.fetchurl {
-      url = "https://github.com/openai/codex/releases/download/rust-v0.159.0/codex-package-x86_64-unknown-linux-musl.tar.gz";
-      hash = "sha256-Ndpl1+hkTijqCk1OPYwVtAxrSSNW1M8hmGx+NB+Dok4=";
+      url = "https://github.com/openai/codex/releases/download/rust-v0.164.0/codex-package-x86_64-unknown-linux-musl.tar.gz";
+      hash = "sha256-PsVQUxCWCNUDj35QdQ99Jfdo39dA/vBxqnEOJVm2Oqw=";
     };
 
     sourceRoot = ".";

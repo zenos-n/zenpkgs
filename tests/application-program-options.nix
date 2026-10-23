@@ -3,8 +3,8 @@
 let
   python = pkgs.python3.withPackages (p: [ p.lark p.tomlkit p.jsonschema ]);
   codexSchema = pkgs.fetchurl {
-    url = "https://raw.githubusercontent.com/openai/codex/rust-v0.159.0/codex-rs/core/config.schema.json";
-    hash = "sha256-7aclG35G4LnQ89ju9dq0UeEaVdcj4rgC4VK3IIBFg2o=";
+    url = "https://raw.githubusercontent.com/openai/codex/rust-v0.164.0/codex-rs/core/config.schema.json";
+    hash = "sha256-6mEe4/EqbfMUs+SVhQFexuLrx8Pwcsy/Y8ITBqTNtdw=";
   };
   activation = (import ../lib/program-config.nix { inherit (pkgs) lib; }) {
     inherit pkgs;

@@ -73468,7 +73468,7 @@
           "doromiert"
         ],
         "name": "Codex CLI",
-        "packageVersion": "0.159.0",
+        "packageVersion": "0.164.0",
         "summary": "Lightweight coding agent that runs in your terminal",
         "tags": [
           "ai",
@@ -73518,7 +73518,7 @@
                     "parts": [
                       {
                         "type": "text",
-                        "value": "0.159.0"
+                        "value": "0.164.0"
                       }
                     ],
                     "type": "string"
@@ -73552,7 +73552,7 @@
                               "parts": [
                                 {
                                   "type": "text",
-                                  "value": "https://github.com/openai/codex/releases/download/rust-v0.159.0/codex-package-x86_64-unknown-linux-musl.tar.gz"
+                                  "value": "https://github.com/openai/codex/releases/download/rust-v0.164.0/codex-package-x86_64-unknown-linux-musl.tar.gz"
                                 }
                               ],
                               "type": "string"
@@ -73572,7 +73572,7 @@
                               "parts": [
                                 {
                                   "type": "text",
-                                  "value": "sha256-Ndpl1+hkTijqCk1OPYwVtAxrSSNW1M8hmGx+NB+Dok4="
+                                  "value": "sha256-PsVQUxCWCNUDj35QdQ99Jfdo39dA/vBxqnEOJVm2Oqw="
                                 }
                               ],
                               "type": "string"
@@ -73816,7 +73816,7 @@
           "doromiert"
         ],
         "name": "Codex Desktop",
-        "packageVersion": "26.930.41038",
+        "packageVersion": "26.1016.61520",
         "summary": "Official OpenAI desktop app with Codex and ChatGPT",
         "tags": [
           "ai",
@@ -73867,7 +73867,7 @@
                       "parts": [
                         {
                           "type": "text",
-                          "value": "26.930.41038"
+                          "value": "26.1016.61520"
                         }
                       ],
                       "type": "string"
@@ -73901,7 +73901,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.930.41038_amd64.deb"
+                                    "value": "https://persistent.oaistatic.com/codex-app-prod/linux/deb/pool/main/c/chatgpt/chatgpt_26.1016.61520_amd64.deb"
                                   }
                                 ],
                                 "type": "string"
@@ -73921,7 +73921,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "sha256-7nhUFFVUcY1yOdAeo31E9roeC6SpP0esCX1uD5ZNpHw="
+                                    "value": "sha256-mt1iKRbF+jhhr9lQga934lSIwQjKnFQ+H2dWCzkNKNQ="
                                   }
                                 ],
                                 "type": "string"
@@ -202991,14 +202991,14 @@
       "dependenciesDeclared": false,
       "id": "pkgs.apps.graphics.select-for-figma",
       "meta": {
-        "description": "\n    Rebranded Figma Linux desktop client with the Select for Figma icon.\n    Starts on the Figma homepage and uses its standard web login modal.\n  ",
-        "license": "$l.gpl2Plus",
+        "description": "\n    Figma in a native GNOME window with embedded Chromium, document tab groups,\n    a thumbnail overview, local fonts, and KeePassXC integration. The homepage\n    and editor follow the GNOME accent color and app appearance. Ctrl+Tab opens\n    a thumbnail grid, including Home, with tab position or most recently used order.\n  ",
+        "license": "$l.gpl3Only",
         "maintainers": [
           "doromiert"
         ],
         "name": "Select for Figma",
-        "packageVersion": "0.11.5",
-        "summary": "Figma desktop client with the standard web login flow",
+        "packageVersion": "1.0.2",
+        "summary": "Native GTK and libadwaita Figma workspace",
         "tags": [
           "graphics",
           "design",
@@ -203012,7 +203012,28 @@
           "arguments": [
             {
               "recursive": false,
-              "statements": [],
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "pkgs"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
               "type": "attr-set"
             }
           ],
@@ -203042,7 +203063,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "zenos-n"
+                                    "value": "doromiert"
                                   }
                                 ],
                                 "type": "string"
@@ -203082,7 +203103,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "1.0.0"
+                                    "value": "v1.0.2"
                                   }
                                 ],
                                 "type": "string"
@@ -203102,7 +203123,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "sha256-jRjTAxZ1ASUISjt7Gy2MTW+RBEHcN1kK622O2LcUwJ4="
+                                    "value": "sha256-Q9QAcR4oHTX/D0p3ZTHQC2OnGXRehy+cM4a0sE7f5/I="
                                   }
                                 ],
                                 "type": "string"
@@ -203168,6 +203189,2587 @@
         "apps",
         "graphics",
         "select-for-figma"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.apps.browsers.jupiter",
+      "meta": {
+        "description": "Native Epiphany-based GTK browser using Chromium Embedded Framework and full uBlock Origin. Uses an independent browser profile.",
+        "license": "$l.gpl3Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Jupiter",
+        "packageVersion": "0.1.0",
+        "summary": "GNOME browser with a Chromium engine and uBlock Origin",
+        "tags": [
+          "browser",
+          "gnome",
+          "web"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "pkgs"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "doromiert"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "jupiter-browser"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "cdc33c33249b36f4210e006f7939896f2e8466d3"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-VJ31F3LcGoMw7ddgrbIb0SRwagXxCVXd7XtbZQQhM28="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "apps",
+        "browsers",
+        "jupiter"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.apps.development.svelte-language-server",
+      "meta": {
+        "description": "Svelte language server.",
+        "license": "$l.mit",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "svelte-language-server",
+        "packageVersion": "0.17.31",
+        "summary": "Svelte language server",
+        "tags": [
+          "migration"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "svelte-language-server"
+            }
+          ],
+          "type": "variable"
+        },
+        "kind": "import"
+      },
+      "sourcePath": [
+        "svelte-language-server"
+      ],
+      "target": [
+        "apps",
+        "development",
+        "svelte-language-server"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.apps.gaming.emulators.yuzu-mainline",
+      "meta": {
+        "description": "Yuzu Mainline 1611 from pinned NixOS 23.11, replacing the discontinued Flatpak. Upstream source repositories have been removed; the original Nix binary cache currently provides this build.",
+        "license": "$l.gpl2Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Yuzu Mainline",
+        "packageVersion": "1611",
+        "summary": "Archived Yuzu Nintendo Switch emulator",
+        "tags": [
+          "gaming",
+          "emulator",
+          "switch"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "body": {
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "emulatorPackages"
+              },
+              {
+                "kind": "identifier",
+                "value": "yuzu-mainline"
+              }
+            ],
+            "type": "reference"
+          },
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "emulatorPackages"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "system"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "x86_64-linux"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "arguments": [
+                    {
+                      "name": "lib",
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "zenPackageSources"
+                        },
+                        {
+                          "kind": "identifier",
+                          "value": "emulatorsNixpkgs"
+                        }
+                      ],
+                      "type": "variable"
+                    }
+                  ],
+                  "callee": {
+                    "arguments": [
+                      {
+                        "recursive": false,
+                        "statements": [],
+                        "type": "attr-set"
+                      }
+                    ],
+                    "callee": {
+                      "name": "lib",
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "callPackageWith"
+                        }
+                      ],
+                      "type": "variable"
+                    },
+                    "type": "call"
+                  },
+                  "type": "call"
+                },
+                "type": "call"
+              }
+            }
+          ],
+          "type": "let"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "apps",
+        "gaming",
+        "emulators",
+        "yuzu-mainline"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.apps.graphics.lorem",
+      "meta": {
+        "description": "Placeholder text generator.",
+        "license": "$l.gpl3Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "lorem",
+        "packageVersion": "1.6",
+        "summary": "Placeholder text generator",
+        "tags": [
+          "migration"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "lorem"
+            }
+          ],
+          "type": "variable"
+        },
+        "kind": "import"
+      },
+      "sourcePath": [
+        "lorem"
+      ],
+      "target": [
+        "apps",
+        "graphics",
+        "lorem"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.theming.apps.firefox-gnome",
+      "meta": {
+        "description": "Firefox GNOME CSS theme used by the desktop and web application profiles.",
+        "license": "$l.unlicense",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Firefox GNOME theme",
+        "packageVersion": "143",
+        "summary": "Native GNOME appearance for Firefox",
+        "tags": [
+          "theming",
+          "firefox"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "pname"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "firefox-gnome-theme"
+                      }
+                    ],
+                    "type": "string"
+                  }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "version"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "143"
+                      }
+                    ],
+                    "type": "string"
+                  }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "src"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "arguments": [
+                      {
+                        "recursive": false,
+                        "statements": [
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "owner"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "multiline": false,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "rafaelmardojai"
+                                }
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "repo"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "multiline": false,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "firefox-gnome-theme"
+                                }
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "rev"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "multiline": false,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "v143"
+                                }
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "hash"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "multiline": false,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "sha256-0E3TqvXAy81qeM/jZXWWOTZ14Hs1RT7o78UyZM+Jbr4="
+                                }
+                              ],
+                              "type": "string"
+                            }
+                          }
+                        ],
+                        "type": "attr-set"
+                      }
+                    ],
+                    "callee": {
+                      "name": "pkgs",
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "legacy"
+                        },
+                        {
+                          "kind": "identifier",
+                          "value": "fetchFromGitHub"
+                        }
+                      ],
+                      "type": "variable"
+                    },
+                    "type": "call"
+                  }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "dontBuild"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "kind": "true",
+                    "type": "literal",
+                    "value": true
+                  }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "installPhase"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "multiline": true,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "mkdir -p \"$out/share/firefox-gnome-theme\"; cp -r . \"$out/share/firefox-gnome-theme/\""
+                      }
+                    ],
+                    "type": "string"
+                  }
+                }
+              ],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "name": "pkgs",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "legacy"
+              },
+              {
+                "kind": "identifier",
+                "value": "stdenvNoCC"
+              },
+              {
+                "kind": "identifier",
+                "value": "mkDerivation"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "theming",
+        "apps",
+        "firefox-gnome"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.theming.fonts.zero.mono",
+      "meta": {
+        "description": "Monospaced Zero display typeface. Preserves the existing ZenOS theme provider.",
+        "license": "$l.napl",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Zero Mono",
+        "packageVersion": "1.0.0",
+        "summary": "Monospaced Zero display typeface",
+        "tags": [
+          "theming"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "body": {
+            "arguments": [
+              {
+                "recursive": false,
+                "statements": [
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "pname"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "zero-mono-font"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "version"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "1.0.0"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "src"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "negative-zero-inft"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zero-font"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "1.0.0"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-PnrdkHBDUYwJe/KPPEgFKxoJEpWMVZyuewCy+1Wn6qk="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "reference"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "nativeBuildInputs"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "items": [
+                        {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "python3Packages"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "fonttools"
+                            }
+                          ],
+                          "type": "reference"
+                        }
+                      ],
+                      "type": "list"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "buildPhase"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": true,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "\n    runHook preBuild\n    python3 builder.py --src glyphs --output Zero-Mono.otf --mono\n    runHook postBuild\n  "
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "installPhase"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": true,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "\n    runHook preInstall\n    install -Dm644 Zero-Mono.otf \"$out/share/fonts/opentype/Zero-Mono.otf\"\n    runHook postInstall\n  "
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "meta"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "recursive": false,
+                      "statements": [
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "description"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "Monospaced Zero display typeface"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "homepage"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "https://github.com/negative-zero-inft/zero-font"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "license"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "themeLib"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "licenses"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "napalm"
+                              }
+                            ],
+                            "type": "reference"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "platforms"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "themeLib"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "platforms"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "all"
+                              }
+                            ],
+                            "type": "reference"
+                          }
+                        }
+                      ],
+                      "type": "attr-set"
+                    }
+                  }
+                ],
+                "type": "attr-set"
+              }
+            ],
+            "callee": {
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "stdenvNoCC"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "mkDerivation"
+                }
+              ],
+              "type": "reference"
+            },
+            "type": "call"
+          },
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "fetchFromGitHub"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "fetchFromGitHub"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "python3Packages"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "python3Packages"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "stdenvNoCC"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "stdenvNoCC"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "themeLib"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "lib",
+                "path": [],
+                "type": "variable"
+              }
+            }
+          ],
+          "type": "let"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "theming",
+        "fonts",
+        "zero",
+        "mono"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.theming.fonts.zero.mono-thin",
+      "meta": {
+        "description": "Thin monospaced Zero display typeface. Preserves the existing ZenOS theme provider.",
+        "license": "$l.napl",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Zero Mono Thin",
+        "packageVersion": "1.0.0",
+        "summary": "Thin monospaced Zero display typeface",
+        "tags": [
+          "theming"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "body": {
+            "arguments": [
+              {
+                "recursive": false,
+                "statements": [
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "pname"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "zero-mono-thin-font"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "version"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "1.0.0"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "src"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "negative-zero-inft"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zero-font"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "1.0.0"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-PnrdkHBDUYwJe/KPPEgFKxoJEpWMVZyuewCy+1Wn6qk="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "reference"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "nativeBuildInputs"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "items": [
+                        {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "fontforge"
+                            }
+                          ],
+                          "type": "reference"
+                        },
+                        {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "python3Packages"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "fonttools"
+                            }
+                          ],
+                          "type": "reference"
+                        }
+                      ],
+                      "type": "list"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "buildPhase"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": true,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "\n    runHook preBuild\n    python3 builder.py --src glyphs --output Zero-Mono.otf --mono\n    cat > thin.py <<'PY'\n    import fontforge\n\n    font = fontforge.open(\"Zero-Mono.otf\")\n    font.selection.all()\n    font.changeWeight(-45)\n    font.familyname = \"Zero Mono Thin\"\n    font.fullname = \"Zero Mono Thin\"\n    font.fontname = \"ZeroMonoThin\"\n    font.weight = \"Thin\"\n    font.os2_weight = 100\n    font.generate(\"Zero-Mono-Thin.otf\")\n    PY\n    fontforge -lang=py -script thin.py\n    runHook postBuild\n  "
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "installPhase"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": true,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "\n    runHook preInstall\n    install -Dm644 Zero-Mono-Thin.otf \"$out/share/fonts/opentype/Zero-Mono-Thin.otf\"\n    runHook postInstall\n  "
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "meta"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "recursive": false,
+                      "statements": [
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "description"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "Thin monospaced Zero display typeface"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "homepage"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "https://github.com/negative-zero-inft/zero-font"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "license"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "themeLib"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "licenses"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "napalm"
+                              }
+                            ],
+                            "type": "reference"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "platforms"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "themeLib"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "platforms"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "all"
+                              }
+                            ],
+                            "type": "reference"
+                          }
+                        }
+                      ],
+                      "type": "attr-set"
+                    }
+                  }
+                ],
+                "type": "attr-set"
+              }
+            ],
+            "callee": {
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "stdenvNoCC"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "mkDerivation"
+                }
+              ],
+              "type": "reference"
+            },
+            "type": "call"
+          },
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "fetchFromGitHub"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "fetchFromGitHub"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "fontforge"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "fontforge"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "python3Packages"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "python3Packages"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "stdenvNoCC"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "stdenvNoCC"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "themeLib"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "lib",
+                "path": [],
+                "type": "variable"
+              }
+            }
+          ],
+          "type": "let"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "theming",
+        "fonts",
+        "zero",
+        "mono-thin"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.theming.fonts.zero.regular",
+      "meta": {
+        "description": "Zero display typeface. Preserves the existing ZenOS theme provider.",
+        "license": "$l.napl",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Zero Regular",
+        "packageVersion": "1.0.0",
+        "summary": "Zero display typeface",
+        "tags": [
+          "theming"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "body": {
+            "arguments": [
+              {
+                "recursive": false,
+                "statements": [
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "pname"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "zero-font"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "version"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "1.0.0"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "src"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "negative-zero-inft"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zero-font"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "1.0.0"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-PnrdkHBDUYwJe/KPPEgFKxoJEpWMVZyuewCy+1Wn6qk="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "reference"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "nativeBuildInputs"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "items": [
+                        {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "python3Packages"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "fonttools"
+                            }
+                          ],
+                          "type": "reference"
+                        }
+                      ],
+                      "type": "list"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "postPatch"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": true,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "\n    substituteInPlace builder.py \\\n      --replace-fail 'x_offset = FONT_PAD' 'x_offset = SCALE' \\\n      --replace-fail 'adv = _r(svg_w * SCALE + 2 * FONT_PAD)' 'adv = _r(svg_w * SCALE + 2 * SCALE)' \\\n      --replace-fail 'lsb = FONT_PAD' 'lsb = SCALE'\n  "
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "buildPhase"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": true,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "\n    runHook preBuild\n    python3 builder.py --src glyphs --output Zero-Regular.otf\n    runHook postBuild\n  "
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "installPhase"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": true,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "\n    runHook preInstall\n    install -Dm644 Zero-Regular.otf \"$out/share/fonts/opentype/Zero-Regular.otf\"\n    runHook postInstall\n  "
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "meta"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "recursive": false,
+                      "statements": [
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "description"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "Zero display typeface"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "homepage"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "https://github.com/negative-zero-inft/zero-font"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "license"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "themeLib"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "licenses"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "napalm"
+                              }
+                            ],
+                            "type": "reference"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "platforms"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "themeLib"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "platforms"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "all"
+                              }
+                            ],
+                            "type": "reference"
+                          }
+                        }
+                      ],
+                      "type": "attr-set"
+                    }
+                  }
+                ],
+                "type": "attr-set"
+              }
+            ],
+            "callee": {
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "stdenvNoCC"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "mkDerivation"
+                }
+              ],
+              "type": "reference"
+            },
+            "type": "call"
+          },
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "fetchFromGitHub"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "fetchFromGitHub"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "python3Packages"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "python3Packages"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "stdenvNoCC"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "stdenvNoCC"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "themeLib"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "lib",
+                "path": [],
+                "type": "variable"
+              }
+            }
+          ],
+          "type": "let"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "theming",
+        "fonts",
+        "zero",
+        "regular"
+      ]
+    },
+    {
+      "dependenciesDeclared": false,
+      "id": "pkgs.theming.icons.adwaita-hacks",
+      "meta": {
+        "description": "Extended Adwaita icon theme. Preserves the existing ZenOS theme provider.",
+        "license": "$l.napl",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Adwaita Hacks",
+        "packageVersion": "1.0",
+        "summary": "Extended Adwaita icon theme",
+        "tags": [
+          "theming"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "body": {
+            "arguments": [
+              {
+                "recursive": false,
+                "statements": [
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "pname"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "adwaita-hacks"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "version"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "1.0"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "src"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "adwaita-hacks"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "43fcf4a6448ae3ce4c386950f656e649d745bb1f"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-llATSR56yVWDKm6w+3071X77bpl8UDJ9GHKz//F2BoM="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "reference"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "dontUnpack"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "kind": "true",
+                      "type": "literal",
+                      "value": true
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "dontCheckForBrokenSymlinks"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "kind": "true",
+                      "type": "literal",
+                      "value": true
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "installPhase"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": true,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "\n    mkdir -p $out/share/icons\n    cp -r $src/resources/* $out/share/icons\n  "
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "meta"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "recursive": false,
+                      "statements": [
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "description"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": true,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "\n      Extended Adwaita icon pack for ZenOS compatibility\n\n      **Adwaita Hacks** extends the standard Adwaita icon theme with additional \n      icons needed for a complete ZenOS experience. It fills in gaps where \n      standard themes are missing specific application or system icons.\n\n      **Features:**\n      - Additional icons matching the Adwaita aesthetic.\n      - Seamless integration with the default GNOME icon theme.\n    "
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "homepage"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "https://zenos.neg-zero.com"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "license"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "themeLib"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "licenses"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "napalm"
+                              }
+                            ],
+                            "type": "reference"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "maintainers"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "items": [
+                              {
+                                "name": "m",
+                                "path": [
+                                  {
+                                    "kind": "identifier",
+                                    "value": "doromiert"
+                                  }
+                                ],
+                                "type": "variable"
+                              }
+                            ],
+                            "type": "list"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "platforms"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "themeLib"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "platforms"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "linux"
+                              }
+                            ],
+                            "type": "reference"
+                          }
+                        }
+                      ],
+                      "type": "attr-set"
+                    }
+                  }
+                ],
+                "type": "attr-set"
+              }
+            ],
+            "callee": {
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "stdenv"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "mkDerivation"
+                }
+              ],
+              "type": "reference"
+            },
+            "type": "call"
+          },
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "fetchFromGitHub"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "fetchFromGitHub"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "stdenv"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "stdenv"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "themeLib"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "lib",
+                "path": [],
+                "type": "variable"
+              }
+            }
+          ],
+          "type": "let"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "theming",
+        "icons",
+        "adwaita-hacks"
       ]
     }
   ]

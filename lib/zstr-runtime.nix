@@ -99,7 +99,7 @@ let
     else if (value._type or "") == "override" then
       let content = pruneInactive schema value.content; in
       if emptyDefinition content then content else lib.mkOverride value.priority content
-    else if lib.isOption schema || !builtins.isAttrs value then value
+    else if lib.isOption schema || !builtins.isAttrs value || lib.isDerivation value then value
     else let children = lib.filterAttrs (_: child: !emptyDefinition child)
       (lib.mapAttrs (key: child: pruneInactive (schema.${key} or { }) child) value);
     in if children == { } then lib.mkMerge [ ] else children;

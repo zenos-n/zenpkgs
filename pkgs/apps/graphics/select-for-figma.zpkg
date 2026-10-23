@@ -1,20 +1,22 @@
 _meta = {
   name = "Select for Figma";
-  summary = "Figma desktop client with the standard web login flow";
+  summary = "Native GTK and libadwaita Figma workspace";
   description = ''
-    Rebranded Figma Linux desktop client with the Select for Figma icon.
-    Starts on the Figma homepage and uses its standard web login modal.
+    Figma in a native GNOME window with embedded Chromium, document tab groups,
+    a thumbnail overview, local fonts, and KeePassXC integration. The homepage
+    and editor follow the GNOME accent color and app appearance. Ctrl+Tab opens
+    a thumbnail grid, including Home, with tab position or most recently used order.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "0.11.5";
+  packageVersion = "1.0.2";
   tags = [ "graphics" "design" "prototyping" "collaboration" ];
   maintainers = [ $m.doromiert ];
-  license = $l.gpl2Plus;
+  license = $l.gpl3Only;
 };
 
 build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
-  owner = "zenos-n";
+  owner = "doromiert";
   repo = "select-for-figma";
-  rev = "1.0.0";
-  hash = "sha256-jRjTAxZ1ASUISjt7Gy2MTW+RBEHcN1kK622O2LcUwJ4=";
-}) + "/package.nix") { };
+  rev = "v1.0.2";
+  hash = "sha256-Q9QAcR4oHTX/D0p3ZTHQC2OnGXRehy+cM4a0sE7f5/I=";
+}) + "/package.nix") { pkgs = $pkgs.legacy; };

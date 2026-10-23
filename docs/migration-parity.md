@@ -7,7 +7,7 @@ Flatpak applications, local GNOME extensions, desktop entries, and enabled user
 units. No credentials, browser databases, chat histories, or bot environment
 files were imported.
 
-The catalog now has 4131 declarations (4096 imports and 35 build providers),
+The catalog now has 4142 declarations (4098 imports and 44 build providers),
 including 74 additions. Codex and OpenCode also have explicit recipes for the
 versions used by the reference profile. The registry fixture refresh corrects
 pre-existing stale Codex, ZenFS, and setup provider records.
@@ -153,23 +153,18 @@ Custom implementations and patches live outside ZenPkgs. Published sources
 revisions and hashes. Hyperbeam and OVR use pinned release artifacts. Ryubing's
 mirror was checked against the original 1.3.274 checksum.
 
-The extracted VR tools, ALVR patches, Haptics++, and
-the Zane/vision indicators currently use locked local development snapshots:
+The VR tools, ALVR patches, Haptics++, Zane and vision indicators now use
+published GitHub revisions in flake.nix and flake.lock. No local workspace paths
+are required by those inputs. The personal online configuration lives at
+[doromiert/zenos-next-config](https://github.com/doromiert/zenos-next-config),
+separate from distribution defaults.
 
-| Input | Source repository |
-| --- | --- |
-| `source-vr-tools` | `../zenos-vr` |
-| `source-alvr-compat` | `../alvr-zenos-compat` |
-| `source-haptics` | `../haptics++` |
-| `source-zane-indicator` | `../zenos-zane-indicator` |
-| `source-vision-indicator` | `../zenos-vision-indicator` |
-
-The lock records each snapshot's NAR hash. Carry these repositories to a new
-checkout and override the corresponding inputs with their new `path:` locations,
-or publish them and replace the development URLs with pinned Git revisions.
-The current absolute development paths must be replaced before distribution to
-machines that do not have this workspace. Sources have not been published by
-this change. Updating a source requires explicitly updating its input lock.
+The current catalog includes native Jupiter and Select for Figma 1.0.2,
+Codex CLI 0.164.0, Codex Desktop 26.1016.61520, the public Adwaita Hacks and
+Zero font providers, and the Firefox GNOME theme. Yuzu Mainline 1611 is
+restored from pinned NixOS 23.11. The binary cache currently serves that exact
+build; its deleted upstream source is not a promise of future source rebuilds.
+It is an explicit optional package and does not replace the current package set.
 
 ## Repeat the audit and checks
 
