@@ -146,3 +146,11 @@ built with `search.mkIndex`, `self.lib.dslBundleFor system`, and a `nixosSystem`
 evaluation importing `self.nixosModules.default`; do not call `getFlake` on an
 unlocked working path inside a pure flake check. Build the resulting report using
 `bootstrapPkgs.writeText` and `builtins.toJSON`.
+
+## Git archive profile
+
+CI uses `scripts/gen-archive.nix` for the `json` branch. It preserves the same
+metadata/sub schema, with option depth 10, type-wrapper depth 2, and legacy
+package depth 0. Truncated nodes retain `depth-limit` markers and the effective
+limits are recorded in metadata. The full local export remains available from
+`gen-docs.nix`; CI rejects archives over 90 MiB before attempting a Git push.

@@ -55,7 +55,8 @@ jobs:
       - name: Generate Documentation JSON
         if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
         run: |
-          nix eval --json --file scripts/gen-docs.nix > docs.json
+          nix eval --json --file scripts/gen-archive.nix > docs.json
+          python3 -c 'from pathlib import Path; size = Path("docs.json").stat().st_size; print(f"Archive JSON: {size / 1024**2:.1f} MiB"); assert size < 90 * 1024**2, "Archive exceeds the 90 MiB budget; do not push an oversized Git blob"'
 
       - name: Archive JSON to 'json' branch
         if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
