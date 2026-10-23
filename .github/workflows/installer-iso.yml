@@ -43,10 +43,30 @@ jobs:
           ZENPKGS_NIX=$(nix build --no-link --print-out-paths --inputs-from . 'nixpkgs#nix^out')
           printf '%s/bin\n' "$ZENPKGS_NIX" >> "$GITHUB_PATH"
 
+      - name: Verify the pinned toolchain revision
+        run: |
+          python3 - <<'PYTHON'
+          import json, subprocess
+          lock = json.load(open("zenos/flake.lock"))
+          node = lock["nodes"][lock["root"]]["inputs"]["zenpkgs"]
+          pinned = lock["nodes"][node]["locked"]["rev"]
+          checkout = subprocess.check_output(["git", "-C", "zenpkgs", "rev-parse", "HEAD"], text=True).strip()
+          assert pinned == checkout, f"Update the installer ZenPkgs pin before building: {pinned} != {checkout}"
+          PYTHON
+
+      - name: Verify installer composition
+        run: |
+          nix build --no-link --print-build-logs \
+            ./zenos#checks.x86_64-linux.installer-contract \
+            ./zenos#checks.x86_64-linux.installer-appearance \
+            ./zenos#checks.x86_64-linux.live-config-contract \
+            ./zenos#checks.x86_64-linux.repository-structure \
+            --no-write-lock-file \
+            --option max-jobs 1 --option cores 2 --option max-substitution-jobs 2
+
       - name: Build the general installer
         run: |
           nix build ./zenos#iso --out-link installer-result \
-            --override-input zenpkgs "path:$GITHUB_WORKSPACE/zenpkgs" \
             --no-write-lock-file \
             --option max-jobs 1 --option cores 2 --option max-substitution-jobs 2 \
             --print-build-logs
@@ -57,7 +77,6 @@ jobs:
           git -C zenpkgs rev-parse HEAD > artifacts/toolchain-revision.txt
           cp zenos/flake.lock artifacts/installer-flake.lock
           nix flake metadata ./zenos --json \
-            --override-input zenpkgs "path:$GITHUB_WORKSPACE/zenpkgs" \
             --no-write-lock-file > artifacts/effective-inputs.json
 
       - name: Upload installer and checksums
