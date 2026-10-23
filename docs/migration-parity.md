@@ -7,7 +7,7 @@ Flatpak applications, local GNOME extensions, desktop entries, and enabled user
 units. No credentials, browser databases, chat histories, or bot environment
 files were imported.
 
-The catalog now has 4152 declarations (4098 imports and 54 build providers).
+The catalog now has 4153 declarations (4098 imports and 55 build providers).
 The migration expansion added 74 declarations; ten former compatibility-only
 recipes now also have canonical ZPKG wrappers. Codex and OpenCode also have explicit recipes for the
 versions used by the reference profile. The registry fixture refresh corrects
@@ -18,6 +18,15 @@ explicit declarations, not implicit package exports. Each wrapper has a required
 reverse-DNS `_meta.id`, preserving an established ID or explicitly using the
 `org.zenos.packages` fallback namespace. Canonical and `byCategories` views
 resolve to the same derivation through one registry record.
+
+## Native NZPortable
+
+NZPortable uses the existing upstream project and its established ID
+`gay.nzp.nzportable`, exported as `pkgs.gay.nzp.nzportable` and
+`pkgs.byCategories.apps.gaming.nzportable` for the same derivation. Its native
+source build pins upstream engine, QuakeC, and assets, together with the official
+compiled-map release asset. It requires neither a new source repository nor
+vendored maps. The native package replaces a manual NZP restore requirement.
 
 ## Capability routes
 

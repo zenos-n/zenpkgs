@@ -1,0 +1,143 @@
+_meta = {
+  id = "gay.nzp.nzportable";
+  name = "NZPortable";
+  summary = "Cooperative zombie survival FPS built from the upstream sources";
+  description = ''
+    Native Nazi Zombies: Portable, built from pinned upstream Vril engine,
+    QuakeC game code and assets. Maps come from the hash-verified official
+    Linux release asset. Engine/game code use GPLv2; game assets use
+    CC BY-SA 4.0. Writable configuration and saves stay in the user's data directory.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0-unstable-2026-10-23";
+  tags = [ "game" "fps" "zombies" ];
+  maintainers = [ $m.doromiert ];
+};
+
+build = let
+  p = $pkgs.legacy;
+  l = $lib;
+  # Asset IDs identify the exact upstream upload; never trust a moving nightly's bytes.
+  releaseArchive = p.fetchurl {
+    url = "https://api.github.com/repos/nzp-team/nzportable/releases/assets/665884245";
+    hash = "sha256-aweoYi5ADQHRPkLuD58ozq3thoYGAXWaDGyJ7Slbz+o=";
+    curlOptsList = [ "--header" "Accept: application/octet-stream" "--user-agent" "ZenPkgs" ];
+  };
+  releaseMaps = p.runCommand "nzportable-official-maps-2026-10-22" {
+    nativeBuildInputs = [ p.unzip ];
+  } ''
+    mkdir -p "$out"
+    unzip -j ${releaseArchive} 'nzp/maps/*.bsp' 'nzp/maps/*.nsz' 'nzp/licenses/*' -d "$out"
+    test -s "$out/wahnsinn.bsp"
+  '';
+  mapsProvenance = p.writeText "nzportable-maps-provenance.json" ''
+    {"upstream":"nzp-team/nzportable","releaseAssetId":665884245,"archiveSha256":"6b07a8622e400d01d13e42ee0f9f28ceaded86860601759a0c6c89ed295bcfea","assetsSource":"f59187789f3d83f0502ac61dbc8bf7105daa4ff0","license":"CC-BY-SA-4.0"}
+  '';
+  engineSource = p.fetchFromGitHub {
+    owner = "nzp-team"; repo = "vril-engine";
+    rev = "ac0a0ac6b081be3b44e669dafe842b21b2a033d1";
+    hash = "sha256-3nabMZ0VtpG3Oz1WQOHVIRYD2pwHjq7R2mIfpunjC3Y=";
+  };
+  gameSource = p.fetchFromGitHub {
+    owner = "nzp-team"; repo = "quakec";
+    rev = "06c49a0cac21f2729587893b065c514748a1c8e2";
+    hash = "sha256-k0mC3jCnxgNl//AeqwJ3Y4W8iF5p8Sw5HetN9VIc4fc=";
+  };
+  assetsSource = p.fetchFromGitHub {
+    owner = "nzp-team"; repo = "assets";
+    rev = "f59187789f3d83f0502ac61dbc8bf7105daa4ff0";
+    hash = "sha256-IZDSBjuiHK3IwEVOvoABsVP1mQWDJUidmhx/iUYCdWc=";
+  };
+  gameCode = p.stdenvNoCC.mkDerivation {
+    pname = "nzportable-game-code";
+    version = "2026-10-23";
+    src = gameSource;
+    nativeBuildInputs = [ (p.python3.withPackages (p: [ p.pandas p.fastcrc p.colorama ])) p.patchelf ];
+    dontConfigure = true;
+    buildPhase = ''
+      runHook preBuild
+      chmod +x bin/fteqcc-cli-lin
+      patchelf --set-interpreter ${p.stdenv.cc.bintools.dynamicLinker} bin/fteqcc-cli-lin
+      python3 bin/qc_hash_generator.py -i tools/asset_conversion_table.csv -o source/server/hash_table.qc
+      mkdir -p build/standard
+      bin/fteqcc-cli-lin -O3 -Ono-compound_jumps -Wall -srcfile progs/ssqc.src
+      runHook postBuild
+    '';
+    installPhase = ''
+      mkdir -p "$out"
+      cp build/standard/* "$out/"
+    '';
+  };
+  engine = p.stdenv.mkDerivation {
+    pname = "nzportable-engine";
+    version = "2026-10-23";
+    src = engineSource;
+    nativeBuildInputs = [ p.pkg-config ];
+    buildInputs = [ p.SDL2 p.SDL2_mixer p.libGL p.libGLU ];
+    env.NIX_CFLAGS_COMPILE = "-I${l.getDev p.SDL2_mixer}/include/SDL2";
+    dontConfigure = true;
+    enableParallelBuilding = true;
+    makefile = "Makefile.sdl";
+    postPatch = ''
+      # glibc 2.42 added double rsqrt(double); keep the engine's float helper distinct.
+      find source -type f \( -name '*.c' -o -name '*.h' \) -exec sed -i 's/\<rsqrt\>/NZP_InvSqrt/g' {} +
+    '';
+    preBuild = ''
+      mkdir -p build/sdl
+      cat > build/sdl/_build_info.h <<'HEADER'
+      #define GIT_HASH "ac0a0ac6b081be3b44e669dafe842b21b2a033d1"
+      #define GIT_BRANCH "pinned"
+      #define BUILD_DATE "2026-10-23T00:00:00Z"
+      HEADER
+    '';
+    installPhase = ''install -Dm755 build/sdl/nzportable "$out/bin/nzportable-engine"'';
+  };
+in p.stdenvNoCC.mkDerivation {
+  pname = "nzportable";
+  version = "2.0.0-unstable-2026-10-23";
+  dontUnpack = true;
+  nativeBuildInputs = [ p.makeWrapper p.copyDesktopItems ];
+  desktopItems = [ (p.makeDesktopItem {
+    name = "gay.nzp.nzportable"; desktopName = "Nazi Zombies: Portable";
+    exec = "nzportable"; categories = [ "Game" "ActionGame" ];
+  }) ];
+  installPhase = ''
+    runHook preInstall
+    mkdir -p "$out/share/nzportable/nzp" "$out/bin" "$out/share/doc/nzportable"
+    cp -r --no-preserve=mode ${assetsSource}/common/. "$out/share/nzportable/nzp/"
+    cp -r --no-preserve=mode ${assetsSource}/pc/nzp/. "$out/share/nzportable/nzp/"
+    cp ${releaseMaps}/*.bsp ${releaseMaps}/*.nsz "$out/share/nzportable/nzp/maps/"
+    cp ${releaseMaps}/*.txt "$out/share/doc/nzportable/"
+    cp ${mapsProvenance} "$out/share/doc/nzportable/MAPS-PROVENANCE.json"
+    cp ${gameCode}/* "$out/share/nzportable/nzp/"
+    echo '2.0.0-indev+pinned-20261023' > "$out/share/nzportable/nzp/version.txt"
+    cp ${engineSource}/LICENSE "$out/share/doc/nzportable/ENGINE-LICENSE"
+    cp ${gameSource}/LICENSE "$out/share/doc/nzportable/GAME-CODE-LICENSE"
+    cp ${assetsSource}/LICENSE.md "$out/share/doc/nzportable/ASSETS-LICENSE.md"
+    cat > "$out/bin/nzportable" <<SCRIPT
+    #!${p.runtimeShell}
+    set -eu
+    nzp_data="\''${XDG_DATA_HOME:-\$HOME/.local/share}/nzportable"
+    mkdir -p "\$nzp_data/nzp"
+    for asset in "$out/share/nzportable/nzp/"*; do
+      name=\''${asset##*/}
+      if [ "\$name" = config.cfg ]; then
+        [ -e "\$nzp_data/nzp/\$name" ] || cp --no-preserve=mode "\$asset" "\$nzp_data/nzp/\$name"
+      elif [ ! -e "\$nzp_data/nzp/\$name" ] || [ -L "\$nzp_data/nzp/\$name" ]; then
+        ln -sfn "\$asset" "\$nzp_data/nzp/\$name"
+      fi
+    done
+    exec ${engine}/bin/nzportable-engine -basedir "\$nzp_data" "\$@"
+    SCRIPT
+    chmod +x "$out/bin/nzportable"
+    runHook postInstall
+  '';
+  passthru = { inherit engine gameCode assetsSource releaseArchive releaseMaps; };
+  meta = {
+    description = "Nazi Zombies: Portable, built from pinned engine, QuakeC and assets";
+    homepage = "https://github.com/nzp-team/nzportable";
+    license = [ l.licenses.gpl2Plus l.licenses.cc-by-sa-40 ];
+    platforms = [ "x86_64-linux" ];
+    mainProgram = "nzportable";
+  };
+};

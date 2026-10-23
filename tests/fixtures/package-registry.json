@@ -243979,6 +243979,2025 @@
         "wallpapers",
         "destination-2"
       ]
+    },
+    {
+      "id": "pkgs.gay.nzp.nzportable",
+      "target": [
+        "gay",
+        "nzp",
+        "nzportable"
+      ],
+      "meta": {
+        "name": "NZPortable",
+        "summary": "Cooperative zombie survival FPS built from the upstream sources",
+        "description": "\n    Native Nazi Zombies: Portable, built from pinned upstream Vril engine,\n    QuakeC game code and assets. Maps come from the hash-verified official\n    Linux release asset. Engine/game code use GPLv2; game assets use\n    CC BY-SA 4.0. Writable configuration and saves stay in the user's data directory.\n  ",
+        "tags": [
+          "game",
+          "fps",
+          "zombies"
+        ],
+        "maintainers": [
+          "doromiert"
+        ],
+        "license": null,
+        "zenosVersion": "1.0.0",
+        "id": "gay.nzp.nzportable",
+        "packageVersion": "2.0.0-unstable-2026-10-23"
+      },
+      "provider": {
+        "kind": "build",
+        "expression": {
+          "body": {
+            "arguments": [
+              {
+                "recursive": false,
+                "statements": [
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "pname"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "nzportable"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "version"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "2.0.0-unstable-2026-10-23"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "dontUnpack"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "kind": "true",
+                      "type": "literal",
+                      "value": true
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "nativeBuildInputs"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "items": [
+                        {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "p"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "makeWrapper"
+                            }
+                          ],
+                          "type": "reference"
+                        },
+                        {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "p"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "copyDesktopItems"
+                            }
+                          ],
+                          "type": "reference"
+                        }
+                      ],
+                      "type": "list"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "desktopItems"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "items": [
+                        {
+                          "type": "group",
+                          "value": {
+                            "arguments": [
+                              {
+                                "recursive": false,
+                                "statements": [
+                                  {
+                                    "operator": "=",
+                                    "target": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "name"
+                                      }
+                                    ],
+                                    "type": "assignment",
+                                    "value": {
+                                      "multiline": false,
+                                      "parts": [
+                                        {
+                                          "type": "text",
+                                          "value": "gay.nzp.nzportable"
+                                        }
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  {
+                                    "operator": "=",
+                                    "target": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "desktopName"
+                                      }
+                                    ],
+                                    "type": "assignment",
+                                    "value": {
+                                      "multiline": false,
+                                      "parts": [
+                                        {
+                                          "type": "text",
+                                          "value": "Nazi Zombies: Portable"
+                                        }
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  {
+                                    "operator": "=",
+                                    "target": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "exec"
+                                      }
+                                    ],
+                                    "type": "assignment",
+                                    "value": {
+                                      "multiline": false,
+                                      "parts": [
+                                        {
+                                          "type": "text",
+                                          "value": "nzportable"
+                                        }
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  {
+                                    "operator": "=",
+                                    "target": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "categories"
+                                      }
+                                    ],
+                                    "type": "assignment",
+                                    "value": {
+                                      "items": [
+                                        {
+                                          "multiline": false,
+                                          "parts": [
+                                            {
+                                              "type": "text",
+                                              "value": "Game"
+                                            }
+                                          ],
+                                          "type": "string"
+                                        },
+                                        {
+                                          "multiline": false,
+                                          "parts": [
+                                            {
+                                              "type": "text",
+                                              "value": "ActionGame"
+                                            }
+                                          ],
+                                          "type": "string"
+                                        }
+                                      ],
+                                      "type": "list"
+                                    }
+                                  }
+                                ],
+                                "type": "attr-set"
+                              }
+                            ],
+                            "callee": {
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "p"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "makeDesktopItem"
+                                }
+                              ],
+                              "type": "reference"
+                            },
+                            "type": "call"
+                          }
+                        }
+                      ],
+                      "type": "list"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "installPhase"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "multiline": true,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "\n    runHook preInstall\n    mkdir -p \"$out/share/nzportable/nzp\" \"$out/bin\" \"$out/share/doc/nzportable\"\n    cp -r --no-preserve=mode "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "assetsSource"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "/common/. \"$out/share/nzportable/nzp/\"\n    cp -r --no-preserve=mode "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "assetsSource"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "/pc/nzp/. \"$out/share/nzportable/nzp/\"\n    cp "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "releaseMaps"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "/*.bsp "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "releaseMaps"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "/*.nsz \"$out/share/nzportable/nzp/maps/\"\n    cp "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "releaseMaps"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "/*.txt \"$out/share/doc/nzportable/\"\n    cp "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "mapsProvenance"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": " \"$out/share/doc/nzportable/MAPS-PROVENANCE.json\"\n    cp "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "gameCode"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "/* \"$out/share/nzportable/nzp/\"\n    echo '2.0.0-indev+pinned-20261023' > \"$out/share/nzportable/nzp/version.txt\"\n    cp "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "engineSource"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "/LICENSE \"$out/share/doc/nzportable/ENGINE-LICENSE\"\n    cp "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "gameSource"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "/LICENSE \"$out/share/doc/nzportable/GAME-CODE-LICENSE\"\n    cp "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "assetsSource"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "/LICENSE.md \"$out/share/doc/nzportable/ASSETS-LICENSE.md\"\n    cat > \"$out/bin/nzportable\" <<SCRIPT\n    #!"
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "p"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "runtimeShell"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "\n    set -eu\n    nzp_data=\"\\${XDG_DATA_HOME:-\\$HOME/.local/share}/nzportable\"\n    mkdir -p \"\\$nzp_data/nzp\"\n    for asset in \"$out/share/nzportable/nzp/\"*; do\n      name=\\${asset##*/}\n      if [ \"\\$name\" = config.cfg ]; then\n        [ -e \"\\$nzp_data/nzp/\\$name\" ] || cp --no-preserve=mode \"\\$asset\" \"\\$nzp_data/nzp/\\$name\"\n      elif [ ! -e \"\\$nzp_data/nzp/\\$name\" ] || [ -L \"\\$nzp_data/nzp/\\$name\" ]; then\n        ln -sfn \"\\$asset\" \"\\$nzp_data/nzp/\\$name\"\n      fi\n    done\n    exec "
+                        },
+                        {
+                          "expression": {
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "engine"
+                              }
+                            ],
+                            "type": "reference"
+                          },
+                          "type": "interpolation"
+                        },
+                        {
+                          "type": "text",
+                          "value": "/bin/nzportable-engine -basedir \"\\$nzp_data\" \"\\$@\"\n    SCRIPT\n    chmod +x \"$out/bin/nzportable\"\n    runHook postInstall\n  "
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "passthru"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "recursive": false,
+                      "statements": [
+                        {
+                          "names": [
+                            "engine",
+                            "gameCode",
+                            "assetsSource",
+                            "releaseArchive",
+                            "releaseMaps"
+                          ],
+                          "source": null,
+                          "type": "inherit"
+                        }
+                      ],
+                      "type": "attr-set"
+                    }
+                  },
+                  {
+                    "operator": "=",
+                    "target": [
+                      {
+                        "kind": "identifier",
+                        "value": "meta"
+                      }
+                    ],
+                    "type": "assignment",
+                    "value": {
+                      "recursive": false,
+                      "statements": [
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "description"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "Nazi Zombies: Portable, built from pinned engine, QuakeC and assets"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "homepage"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "https://github.com/nzp-team/nzportable"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "license"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "items": [
+                              {
+                                "path": [
+                                  {
+                                    "kind": "identifier",
+                                    "value": "l"
+                                  },
+                                  {
+                                    "kind": "identifier",
+                                    "value": "licenses"
+                                  },
+                                  {
+                                    "kind": "identifier",
+                                    "value": "gpl2Plus"
+                                  }
+                                ],
+                                "type": "reference"
+                              },
+                              {
+                                "path": [
+                                  {
+                                    "kind": "identifier",
+                                    "value": "l"
+                                  },
+                                  {
+                                    "kind": "identifier",
+                                    "value": "licenses"
+                                  },
+                                  {
+                                    "kind": "identifier",
+                                    "value": "cc-by-sa-40"
+                                  }
+                                ],
+                                "type": "reference"
+                              }
+                            ],
+                            "type": "list"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "platforms"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "items": [
+                              {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "x86_64-linux"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            ],
+                            "type": "list"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "mainProgram"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "nzportable"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "type": "attr-set"
+                    }
+                  }
+                ],
+                "type": "attr-set"
+              }
+            ],
+            "callee": {
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "p"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "stdenvNoCC"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "mkDerivation"
+                }
+              ],
+              "type": "reference"
+            },
+            "type": "call"
+          },
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "p"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  }
+                ],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "l"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "name": "lib",
+                "path": [],
+                "type": "variable"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "releaseArchive"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "url"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "https://api.github.com/repos/nzp-team/nzportable/releases/assets/665884245"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "hash"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "sha256-aweoYi5ADQHRPkLuD58ozq3thoYGAXWaDGyJ7Slbz+o="
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "curlOptsList"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "items": [
+                            {
+                              "multiline": false,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "--header"
+                                }
+                              ],
+                              "type": "string"
+                            },
+                            {
+                              "multiline": false,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "Accept: application/octet-stream"
+                                }
+                              ],
+                              "type": "string"
+                            },
+                            {
+                              "multiline": false,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "--user-agent"
+                                }
+                              ],
+                              "type": "string"
+                            },
+                            {
+                              "multiline": false,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "ZenPkgs"
+                                }
+                              ],
+                              "type": "string"
+                            }
+                          ],
+                          "type": "list"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "p"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "fetchurl"
+                    }
+                  ],
+                  "type": "reference"
+                },
+                "type": "call"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "releaseMaps"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "multiline": true,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "\n    mkdir -p \"$out\"\n    unzip -j "
+                      },
+                      {
+                        "expression": {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "releaseArchive"
+                            }
+                          ],
+                          "type": "reference"
+                        },
+                        "type": "interpolation"
+                      },
+                      {
+                        "type": "text",
+                        "value": " 'nzp/maps/*.bsp' 'nzp/maps/*.nsz' 'nzp/licenses/*' -d \"$out\"\n    test -s \"$out/wahnsinn.bsp\"\n  "
+                      }
+                    ],
+                    "type": "string"
+                  }
+                ],
+                "callee": {
+                  "arguments": [
+                    {
+                      "recursive": false,
+                      "statements": [
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "nativeBuildInputs"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "items": [
+                              {
+                                "path": [
+                                  {
+                                    "kind": "identifier",
+                                    "value": "p"
+                                  },
+                                  {
+                                    "kind": "identifier",
+                                    "value": "unzip"
+                                  }
+                                ],
+                                "type": "reference"
+                              }
+                            ],
+                            "type": "list"
+                          }
+                        }
+                      ],
+                      "type": "attr-set"
+                    }
+                  ],
+                  "callee": {
+                    "arguments": [
+                      {
+                        "multiline": false,
+                        "parts": [
+                          {
+                            "type": "text",
+                            "value": "nzportable-official-maps-2026-10-22"
+                          }
+                        ],
+                        "type": "string"
+                      }
+                    ],
+                    "callee": {
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "p"
+                        },
+                        {
+                          "kind": "identifier",
+                          "value": "runCommand"
+                        }
+                      ],
+                      "type": "reference"
+                    },
+                    "type": "call"
+                  },
+                  "type": "call"
+                },
+                "type": "call"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "mapsProvenance"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "multiline": true,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "\n    {\"upstream\":\"nzp-team/nzportable\",\"releaseAssetId\":665884245,\"archiveSha256\":\"6b07a8622e400d01d13e42ee0f9f28ceaded86860601759a0c6c89ed295bcfea\",\"assetsSource\":\"f59187789f3d83f0502ac61dbc8bf7105daa4ff0\",\"license\":\"CC-BY-SA-4.0\"}\n  "
+                      }
+                    ],
+                    "type": "string"
+                  }
+                ],
+                "callee": {
+                  "arguments": [
+                    {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "nzportable-maps-provenance.json"
+                        }
+                      ],
+                      "type": "string"
+                    }
+                  ],
+                  "callee": {
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "p"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "writeText"
+                      }
+                    ],
+                    "type": "reference"
+                  },
+                  "type": "call"
+                },
+                "type": "call"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "engineSource"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "owner"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "nzp-team"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "repo"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "vril-engine"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "rev"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "ac0a0ac6b081be3b44e669dafe842b21b2a033d1"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "hash"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "sha256-3nabMZ0VtpG3Oz1WQOHVIRYD2pwHjq7R2mIfpunjC3Y="
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "p"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "fetchFromGitHub"
+                    }
+                  ],
+                  "type": "reference"
+                },
+                "type": "call"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "gameSource"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "owner"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "nzp-team"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "repo"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "quakec"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "rev"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "06c49a0cac21f2729587893b065c514748a1c8e2"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "hash"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "sha256-k0mC3jCnxgNl//AeqwJ3Y4W8iF5p8Sw5HetN9VIc4fc="
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "p"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "fetchFromGitHub"
+                    }
+                  ],
+                  "type": "reference"
+                },
+                "type": "call"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "assetsSource"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "owner"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "nzp-team"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "repo"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "assets"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "rev"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "f59187789f3d83f0502ac61dbc8bf7105daa4ff0"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "hash"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "sha256-IZDSBjuiHK3IwEVOvoABsVP1mQWDJUidmhx/iUYCdWc="
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "p"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "fetchFromGitHub"
+                    }
+                  ],
+                  "type": "reference"
+                },
+                "type": "call"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "gameCode"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "pname"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "nzportable-game-code"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "version"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "2026-10-23"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "src"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "gameSource"
+                            }
+                          ],
+                          "type": "reference"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "nativeBuildInputs"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "items": [
+                            {
+                              "type": "group",
+                              "value": {
+                                "arguments": [
+                                  {
+                                    "type": "group",
+                                    "value": {
+                                      "form": "identifier",
+                                      "parameters": [
+                                        {
+                                          "default": null,
+                                          "name": "p",
+                                          "variadic": false
+                                        }
+                                      ],
+                                      "body": {
+                                        "items": [
+                                          {
+                                            "path": [
+                                              {
+                                                "kind": "identifier",
+                                                "value": "p"
+                                              },
+                                              {
+                                                "kind": "identifier",
+                                                "value": "pandas"
+                                              }
+                                            ],
+                                            "type": "reference"
+                                          },
+                                          {
+                                            "path": [
+                                              {
+                                                "kind": "identifier",
+                                                "value": "p"
+                                              },
+                                              {
+                                                "kind": "identifier",
+                                                "value": "fastcrc"
+                                              }
+                                            ],
+                                            "type": "reference"
+                                          },
+                                          {
+                                            "path": [
+                                              {
+                                                "kind": "identifier",
+                                                "value": "p"
+                                              },
+                                              {
+                                                "kind": "identifier",
+                                                "value": "colorama"
+                                              }
+                                            ],
+                                            "type": "reference"
+                                          }
+                                        ],
+                                        "type": "list"
+                                      },
+                                      "type": "lambda"
+                                    }
+                                  }
+                                ],
+                                "callee": {
+                                  "path": [
+                                    {
+                                      "kind": "identifier",
+                                      "value": "p"
+                                    },
+                                    {
+                                      "kind": "identifier",
+                                      "value": "python3"
+                                    },
+                                    {
+                                      "kind": "identifier",
+                                      "value": "withPackages"
+                                    }
+                                  ],
+                                  "type": "reference"
+                                },
+                                "type": "call"
+                              }
+                            },
+                            {
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "p"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "patchelf"
+                                }
+                              ],
+                              "type": "reference"
+                            }
+                          ],
+                          "type": "list"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "dontConfigure"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "kind": "true",
+                          "type": "literal",
+                          "value": true
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "buildPhase"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": true,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "\n      runHook preBuild\n      chmod +x bin/fteqcc-cli-lin\n      patchelf --set-interpreter "
+                            },
+                            {
+                              "expression": {
+                                "path": [
+                                  {
+                                    "kind": "identifier",
+                                    "value": "p"
+                                  },
+                                  {
+                                    "kind": "identifier",
+                                    "value": "stdenv"
+                                  },
+                                  {
+                                    "kind": "identifier",
+                                    "value": "cc"
+                                  },
+                                  {
+                                    "kind": "identifier",
+                                    "value": "bintools"
+                                  },
+                                  {
+                                    "kind": "identifier",
+                                    "value": "dynamicLinker"
+                                  }
+                                ],
+                                "type": "reference"
+                              },
+                              "type": "interpolation"
+                            },
+                            {
+                              "type": "text",
+                              "value": " bin/fteqcc-cli-lin\n      python3 bin/qc_hash_generator.py -i tools/asset_conversion_table.csv -o source/server/hash_table.qc\n      mkdir -p build/standard\n      bin/fteqcc-cli-lin -O3 -Ono-compound_jumps -Wall -srcfile progs/ssqc.src\n      runHook postBuild\n    "
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "installPhase"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": true,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "\n      mkdir -p \"$out\"\n      cp build/standard/* \"$out/\"\n    "
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "p"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "stdenvNoCC"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "mkDerivation"
+                    }
+                  ],
+                  "type": "reference"
+                },
+                "type": "call"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "engine"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "pname"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "nzportable-engine"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "version"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "2026-10-23"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "src"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "engineSource"
+                            }
+                          ],
+                          "type": "reference"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "nativeBuildInputs"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "items": [
+                            {
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "p"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "pkg-config"
+                                }
+                              ],
+                              "type": "reference"
+                            }
+                          ],
+                          "type": "list"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "buildInputs"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "items": [
+                            {
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "p"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "SDL2"
+                                }
+                              ],
+                              "type": "reference"
+                            },
+                            {
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "p"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "SDL2_mixer"
+                                }
+                              ],
+                              "type": "reference"
+                            },
+                            {
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "p"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "libGL"
+                                }
+                              ],
+                              "type": "reference"
+                            },
+                            {
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "p"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "libGLU"
+                                }
+                              ],
+                              "type": "reference"
+                            }
+                          ],
+                          "type": "list"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "env"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "NIX_CFLAGS_COMPILE"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "-I"
+                            },
+                            {
+                              "expression": {
+                                "arguments": [
+                                  {
+                                    "path": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "p"
+                                      },
+                                      {
+                                        "kind": "identifier",
+                                        "value": "SDL2_mixer"
+                                      }
+                                    ],
+                                    "type": "reference"
+                                  }
+                                ],
+                                "callee": {
+                                  "path": [
+                                    {
+                                      "kind": "identifier",
+                                      "value": "l"
+                                    },
+                                    {
+                                      "kind": "identifier",
+                                      "value": "getDev"
+                                    }
+                                  ],
+                                  "type": "reference"
+                                },
+                                "type": "call"
+                              },
+                              "type": "interpolation"
+                            },
+                            {
+                              "type": "text",
+                              "value": "/include/SDL2"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "dontConfigure"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "kind": "true",
+                          "type": "literal",
+                          "value": true
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "enableParallelBuilding"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "kind": "true",
+                          "type": "literal",
+                          "value": true
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "makefile"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "Makefile.sdl"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "postPatch"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": true,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "\n      # glibc 2.42 added double rsqrt(double); keep the engine's float helper distinct.\n      find source -type f \\( -name '*.c' -o -name '*.h' \\) -exec sed -i 's/\\<rsqrt\\>/NZP_InvSqrt/g' {} +\n    "
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "preBuild"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": true,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "\n      mkdir -p build/sdl\n      cat > build/sdl/_build_info.h <<'HEADER'\n      #define GIT_HASH \"ac0a0ac6b081be3b44e669dafe842b21b2a033d1\"\n      #define GIT_BRANCH \"pinned\"\n      #define BUILD_DATE \"2026-10-23T00:00:00Z\"\n      HEADER\n    "
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "installPhase"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": true,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "install -Dm755 build/sdl/nzportable \"$out/bin/nzportable-engine\""
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "p"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "stdenv"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "mkDerivation"
+                    }
+                  ],
+                  "type": "reference"
+                },
+                "type": "call"
+              }
+            }
+          ],
+          "type": "let"
+        }
+      },
+      "dependenciesDeclared": false,
+      "categoryTarget": [
+        "apps",
+        "gaming",
+        "nzportable"
+      ]
     }
   ]
 }

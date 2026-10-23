@@ -1,11 +1,18 @@
 # Package catalog expansion — September 2026
 
-The current registry contains 4152 declarations: 4098 Nixpkgs imports and 54
+The current registry contains 4153 declarations: 4098 Nixpkgs imports and 55
 build providers. Ten former compatibility-only recipes now have canonical ZPKG
 wrappers. The existing internal recipes remain trusted transitional builders
 behind explicit declarations, not implicit exports. Established IDs are
 preserved; packages without one explicitly use `org.zenos.packages` IDs. Each
 wrapper contributes one registry record for its canonical and category views.
+
+NZPortable adds the native build declaration at `apps/gaming/nzportable`, using
+its established upstream ID `gay.nzp.nzportable`. The recipe pins the existing
+upstream engine, QuakeC, and assets and the official compiled-map release asset;
+no new repository or vendored maps are needed. Canonical
+`pkgs.gay.nzp.nzportable` and `pkgs.byCategories.apps.gaming.nzportable` expose
+the same derivation.
 
 The historical September expansion snapshot contained 4057 declarations: 4048
 Nixpkgs imports and 9 custom build providers. That expansion added 3914 imports

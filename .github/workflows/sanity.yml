@@ -60,7 +60,7 @@ jobs:
             registry-output-ownership registry-path-identities
             registry-invalid-identities registry-structure-exposure
             registry-metadata-defaults public-package-outputs
-            package-output-collisions migration-packages migration-options search-index)
+            package-output-collisions migration-packages migration-options search-index nzportable)
           for check in "${checks[@]}"; do
             echo "Checking $check"
             if nix build --no-link --print-build-logs --show-trace \
