@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.pass";
   name = "pass";
   summary = "Stores, retrieves, generates, and synchronizes passwords securely";
   description = ''

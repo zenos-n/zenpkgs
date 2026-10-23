@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.repath-studio";
   name = "Repath Studio";
   summary = "Cross-platform vector graphics editor, that combines procedural tooling with traditional design workflows";
   description = ''

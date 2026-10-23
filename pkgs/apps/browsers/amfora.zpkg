@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.amfora";
   name = "Amfora";
   summary = "Fancy terminal browser for the Gemini protocol";
   description = ''

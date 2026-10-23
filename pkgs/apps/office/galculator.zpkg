@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.galculator";
   name = "Galculator";
   summary = "GTK algebraic and RPN calculator";
   description = ''

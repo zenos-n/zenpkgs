@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.asciinema";
   name = "asciinema";
   summary = "Terminal session recorder and the best companion of asciinema.org";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitlab-release-cli";
   name = "GitLab Release CLI";
   summary = "Toolset to create, retrieve and update releases on GitLab";
   description = ''

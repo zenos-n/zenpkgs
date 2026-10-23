@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.sqlcheck";
   name = "sqlcheck";
   summary = "Automatically identify anti-patterns in SQL queries";
   description = ''

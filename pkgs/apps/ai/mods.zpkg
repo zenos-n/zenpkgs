@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.mods";
   name = "Mods";
   summary = "AI on the command line";
   description = ''

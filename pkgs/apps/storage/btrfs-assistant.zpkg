@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.btrfs-assistant";
   name = "Btrfs Assistant";
   summary = "GUI management tool to make managing a Btrfs filesystem easier";
   description = ''

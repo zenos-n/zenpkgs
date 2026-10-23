@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.calibre";
   name = "Calibre";
   summary = "Comprehensive e-book software";
   description = ''

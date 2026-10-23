@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.android-ota-payload-extractor";
   name = "Android OTA Payload Extractor";
   summary = "A fast & natively cross-platform Android OTA payload extractor written in Go";
   description = ''

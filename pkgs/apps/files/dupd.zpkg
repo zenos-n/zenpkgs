@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.dupd";
   name = "dupd";
   summary = "CLI utility to find duplicate files";
   description = ''

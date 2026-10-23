@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.brook";
   name = "Brook";
   summary = "Cross-platform Proxy/VPN software";
   description = ''

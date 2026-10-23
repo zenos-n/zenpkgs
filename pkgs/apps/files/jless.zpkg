@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.jless";
   name = "jless";
   summary = "Command-line pager for JSON data";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.smartsynchronize";
   name = "SmartSynchronize";
   summary = "File Manager, File/Directory Compare";
   description = ''

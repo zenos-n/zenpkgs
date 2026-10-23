@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.agenda";
   name = "Agenda";
   summary = "Simple, fast, no-nonsense to-do (task) list designed for elementary OS";
   description = ''

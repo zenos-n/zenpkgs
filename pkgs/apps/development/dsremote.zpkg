@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dsremote";
   name = "DSRemote";
   summary = "Rigol DS1000Z remote control and waveform viewer";
   description = ''

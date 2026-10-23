@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.nix-tour";
   name = "Nix Tour";
   summary = "'the tour of nix' from nixcloud.io/tour as offline version";
   description = ''

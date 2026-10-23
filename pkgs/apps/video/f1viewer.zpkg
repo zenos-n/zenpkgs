@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.f1viewer";
   name = "F1 Viewer";
   summary = "TUI to view Formula 1 footage using VLC or another media player";
   description = ''

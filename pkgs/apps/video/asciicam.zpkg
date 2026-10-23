@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.asciicam";
   name = "asciicam";
   summary = "Displays your webcam on the terminal";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.lux";
   name = "Lux";
   summary = "Fast and simple video download library and CLI tool written in Go";
   description = ''

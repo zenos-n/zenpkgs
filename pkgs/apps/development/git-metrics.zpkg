@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-metrics";
   name = "git-metrics";
   summary = "Git extension to be able to track metrics about your project, within the git repository";
   description = ''

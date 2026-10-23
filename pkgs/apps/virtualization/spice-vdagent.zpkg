@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.virtualization.spice-vdagent";
   name = "spice-vdagent";
   summary = "Enhanced SPICE integration for linux QEMU guest";
   description = ''

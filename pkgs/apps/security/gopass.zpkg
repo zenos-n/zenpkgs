@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.gopass";
   name = "gopass";
   summary = "Slightly more awesome Standard Unix Password Manager for Teams. Written in Go";
   description = ''

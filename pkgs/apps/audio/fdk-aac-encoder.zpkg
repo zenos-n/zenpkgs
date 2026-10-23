@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.fdk-aac-encoder";
   name = "FDK AAC Encoder";
   summary = "Command line encoder frontend for libfdk-aac encoder";
   description = ''

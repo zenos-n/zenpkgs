@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.seafile-client";
   name = "Seafile";
   summary = "Desktop client for Seafile, the Next-generation Open Source Cloud Storage";
   description = ''

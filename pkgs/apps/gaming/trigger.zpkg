@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.trigger";
   name = "Trigger Rally";
   summary = "Fast-paced single-player racing game";
   description = ''

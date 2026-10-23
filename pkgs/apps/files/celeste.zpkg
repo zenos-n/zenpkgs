@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.celeste";
   name = "Celeste";
   summary = "GUI file synchronization client that can sync with any cloud provider";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.discordo";
   name = "Discordo";
   summary = "Lightweight, secure, and feature-rich Discord terminal client";
   description = ''

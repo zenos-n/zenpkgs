@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.luakit";
   name = "Luakit";
   summary = "Fast, small, webkit-based browser framework extensible in Lua";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.bugstalker";
   name = "BugStalker";
   summary = "Rust debugger for Linux x86-64";
   description = ''

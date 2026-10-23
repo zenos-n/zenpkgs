@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.postman";
   name = "Postman";
   summary = "API Development Environment";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.github-cli";
   name = "github-cli";
   summary = "Curated github-cli package for ZenOS";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cspell";
   name = "CSpell";
   summary = "Spell checker for code";
   description = ''

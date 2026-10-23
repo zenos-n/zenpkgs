@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.cheese";
   name = "Cheese";
   summary = "Take photos and videos with your webcam, with fun graphical effects";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.qucs-s";
   name = "Qucs-S";
   summary = "Spin-off of Qucs that allows custom simulation kernels";
   description = ''

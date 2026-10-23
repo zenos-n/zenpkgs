@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.bicep";
   name = "Bicep";
   summary = "Domain Specific Language (DSL) for deploying Azure resources declaratively";
   description = ''

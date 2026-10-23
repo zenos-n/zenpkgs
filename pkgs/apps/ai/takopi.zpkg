@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.takopi";
   name = "Takopi";
   summary = "Telegram bridge for agent command-line tools";
   description = ''Telegram bridge for Codex, OpenCode and other agent command-line tools. Installation does not start a bot or configure credentials.'';

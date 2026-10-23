@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.status-im";
   name = "Status";
   summary = "Desktop client for the Status Network";
   description = ''

@@ -1,11 +1,19 @@
 { lib }:
 
 let
-  duplicates =
-    values:
-    lib.filter (value: builtins.length (lib.filter (item: item == value) values) > 1) (
-      lib.unique values
-    );
+  duplicates = values:
+    map (record: record.value) (builtins.attrValues (lib.filterAttrs (_: record: record.count > 1)
+      (lib.foldl' (counts: value:
+        let key = builtins.toJSON value;
+        in counts // {
+          ${key} = { inherit value; count = (counts.${key}.count or 0) + 1; };
+        }
+      ) { } values)));
+
+  hasAncestor = paths: path:
+    lib.any (length: builtins.hasAttr
+      (builtins.toJSON (lib.take length path)) paths)
+      (lib.range 1 (builtins.length path - 1));
 
   require =
     condition: message: value:
@@ -51,9 +59,8 @@ let
       require (builtins.head segments != "legacy") "pkgs/legacy is reserved for the virtual Nixpkgs view"
         {
           inherit segments source;
-          id = lib.concatStringsSep "." ([ "pkgs" ] ++ segments);
           kind = "zpkg";
-          target = segments;
+          categoryTarget = segments;
         }
     else if source.kind == "zmdl" then
       let
@@ -194,6 +201,7 @@ let
       unknown = lib.subtractLists (
         (builtins.attrNames defaults)
         ++ [
+          "id"
           "dependencies"
           "packageVersion"
           "weight"
@@ -228,6 +236,9 @@ let
           };
         };
     in
+    assert require (builtins.isString (metadata.id or null)
+      && builtins.match "[A-Za-z][A-Za-z0-9_-]*([.][A-Za-z][A-Za-z0-9_-]*)+" metadata.id != null)
+      "${identity} (${location}) requires a reverse-DNS _meta.id string" true;
     assert descriptor.descriptorVersion == "zenlang.semantic/2";
     assert descriptor.kind == "zpkg";
     assert builtins.elem provider.kind [ "import" "build" ];
@@ -372,7 +383,7 @@ in
     }:
     let
       packageSources = builtins.filter (source: source.kind == "zpkg") (canonicalSources bundle);
-      duplicateTargets = duplicates (map (source: source.id) packageSources);
+      duplicateTargets = duplicates (map (source: builtins.toJSON source.categoryTarget) packageSources);
       sources = require (
         duplicateTargets == [ ]
       ) "duplicate package identities: ${builtins.toJSON duplicateTargets}" packageSources;
@@ -380,19 +391,39 @@ in
         canonical:
         let
           source = canonical.source;
-          entry = decodeInterfaceAt canonical.id source.path (
+          entry = decodeInterfaceAt source.path source.path (
             import (bundlePath + "/interfaces/${source.path}.nix") { }
           );
         in
         {
           inherit source;
-          entry = entry // {
-            id = canonical.id;
-            target = canonical.target;
+          entry = let
+            id = entry.meta.id or null;
+            validId = builtins.isString id
+              && builtins.match "[A-Za-z][A-Za-z0-9_-]*([.][A-Za-z][A-Za-z0-9_-]*)+" id != null;
+            target = lib.splitString "." id;
+          in require validId "${source.path} requires a reverse-DNS _meta.id string" (
+            require (!(builtins.elem (builtins.head target) [ "legacy" "byCategories" ]))
+              "${source.path} _meta.id uses a reserved package namespace" (entry // {
+            id = "pkgs.${id}";
+            inherit target;
+            categoryTarget = canonical.categoryTarget;
             buildFile = bundlePath + "/builds/${source.path}.nix";
-          };
+          }));
         }
       ) sources;
+      targetPaths = builtins.listToAttrs (map (record: {
+        name = builtins.toJSON record.entry.target;
+        value = true;
+      }) decoded);
+      categoryPaths = builtins.listToAttrs (map (record: {
+        name = builtins.toJSON record.entry.categoryTarget;
+        value = true;
+      }) decoded);
+      prefixConflicts = builtins.filter (record:
+        hasAncestor targetPaths record.entry.target
+        || hasAncestor categoryPaths record.entry.categoryTarget
+      ) decoded;
       ordered = lib.sort (
         left: right:
         lib.concatStringsSep "/" left.entry.target < lib.concatStringsSep "/" right.entry.target
@@ -400,6 +431,13 @@ in
     in
     {
       schemaVersion = 1;
-      packages = map (record: record.entry) ordered;
+      packages = let
+        identities = map (record: record.entry.id) ordered;
+        duplicateIdentities = duplicates identities;
+      in require (duplicateIdentities == [ ])
+        "duplicate package identities: ${builtins.toJSON duplicateIdentities}"
+        (require (prefixConflicts == [ ])
+          "package leaf/branch collision: ${builtins.toJSON (map (record: record.entry.id) prefixConflicts)}"
+          (map (record: record.entry) ordered));
     };
 }

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.httpie";
   name = "HTTPie";
   summary = "Command line HTTP client whose goal is to make CLI human-friendly";
   description = ''

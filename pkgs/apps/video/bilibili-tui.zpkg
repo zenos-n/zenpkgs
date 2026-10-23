@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.bilibili-tui";
   name = "Bilibili TUI";
   summary = "Terminal user interface (TUI) client for Bilibili";
   description = ''

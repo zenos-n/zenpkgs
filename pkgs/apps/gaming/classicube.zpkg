@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.classicube";
   name = "ClassiCube";
   summary = "Lightweight, custom Minecraft Classic/ClassiCube client with optional additions written from scratch in C";
   description = ''

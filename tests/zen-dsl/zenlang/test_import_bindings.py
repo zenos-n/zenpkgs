@@ -54,7 +54,7 @@ class ImportBindingTests(unittest.TestCase):
         for kind in ("zcfg", "zmdl", "zpkg", "zstr"):
             with self.subTest(kind=kind):
                 self.source(f"data.{kind}", '_let hidden: $type.string = "blue"; color = $v.hidden;')
-                package = "import $pkgs.legacy.demo;" if kind == "zpkg" else ""
+                package = '_meta.id = "org.example.Test"; import $pkgs.legacy.demo;' if kind == "zpkg" else ""
                 entry = self.source(f"entry.{kind}", f'_import palette: $type.set [ $type.string ] = "data.{kind}"; {package}')
                 document = parse_file(entry, import_root=self.root)
                 if kind != "zpkg":
@@ -88,7 +88,7 @@ class ImportBindingTests(unittest.TestCase):
 
     def test_bound_package_records_are_checked_without_forcing_package_metadata(self):
         self.source("packages.zpkg", "hello = $pkgs.legacy.hello;")
-        source = self.source("entry.zpkg", '_import values: $type.set [ $type.package ] = "packages.zpkg"; import $pkgs.legacy.hello;')
+        source = self.source("entry.zpkg", '_meta.id = "org.example.Test"; _import values: $type.set [ $type.package ] = "packages.zpkg"; import $pkgs.legacy.hello;')
         document = parse_file(source)
         emitted = NixEmitter().statement(document.statements[0])
         self.assertTrue(self.evaluate("let upstream = import <nixpkgs> {}; "
@@ -104,7 +104,7 @@ class ImportBindingTests(unittest.TestCase):
         for kind in ("zcfg", "zmdl", "zpkg", "zstr"):
             with self.subTest(kind=kind):
                 self.source(f"data.{kind}", "port = 8080;")
-                package = "import $pkgs.legacy.demo;" if kind == "zpkg" else ""
+                package = '_meta.id = "org.example.Test"; import $pkgs.legacy.demo;' if kind == "zpkg" else ""
                 entry = self.source(f"entry.{kind}", f'_import data: $type.set [ $type.string ] = "data.{kind}"; {package}')
                 with self.assertRaises(ZenLangError) as raised:
                     parse_file(entry)

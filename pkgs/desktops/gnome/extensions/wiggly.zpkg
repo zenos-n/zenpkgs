@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.wiggly";
   name = "wiggly";
   summary = "GNOME Shell wiggly extension";
   description = ''Package the existing wiggly GNOME Shell extension. Installing it does not enable the extension.'';

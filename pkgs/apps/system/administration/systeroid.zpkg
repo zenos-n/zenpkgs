@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.systeroid";
   name = "systeroid";
   summary = "More powerful alternative to sysctl(8) with a terminal user interface";
   description = ''

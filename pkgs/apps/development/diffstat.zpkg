@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.diffstat";
   name = "diffstat";
   summary = "Read output of diff and display a histogram of the changes";
   description = ''

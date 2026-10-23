@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.amdgpu-top";
   name = "AMDGPU Top";
   summary = "Tool to display AMDGPU usage";
   description = ''

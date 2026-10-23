@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.kuro";
   name = "Kuro";
   summary = "Unofficial, featureful, open source, community-driven, free Microsoft To-Do app";
   description = ''

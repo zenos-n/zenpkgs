@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.kube-linter";
   name = "KubeLinter";
   summary = "Static analysis tool that checks Kubernetes YAML files and Helm charts";
   description = ''

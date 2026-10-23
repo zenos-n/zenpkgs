@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.playerctl";
   name = "playerctl";
   summary = "Command-line utility and library for controlling media players that implement MPRIS";
   description = ''

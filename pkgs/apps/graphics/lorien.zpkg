@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.lorien";
   name = "Lorien";
   summary = "Infinite canvas drawing/note-taking app";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.hitori";
   name = "Hitori";
   summary = "GTK application to generate and let you play games of Hitori";
   description = ''

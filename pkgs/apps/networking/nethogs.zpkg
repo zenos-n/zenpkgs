@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.nethogs";
   name = "NetHogs";
   summary = "Small 'net top' tool, grouping bandwidth by process";
   description = ''

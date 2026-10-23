@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.flyway";
   name = "Flyway";
   summary = "Evolve your Database Schema easily and reliably across all your instances";
   description = ''

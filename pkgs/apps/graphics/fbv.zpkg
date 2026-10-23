@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.fbv";
   name = "fbv";
   summary = "View pictures on a linux framebuffer device";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-dist";
   name = "cargo-dist";
   summary = "Tool for building final distributable artifacts and uploading them to an archive";
   description = ''

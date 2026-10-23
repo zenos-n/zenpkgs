@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.rtl-sdr";
   name = "RTL-SDR";
   summary = "Software to turn the RTL2832U into a SDR receiver";
   description = ''

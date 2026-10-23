@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.unar";
   name = "The Unarchiver CLI";
   summary = "Archive unpacker program";
   description = ''

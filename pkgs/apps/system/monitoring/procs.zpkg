@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.procs";
   name = "procs";
   summary = "Modern replacement for ps written in Rust";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Papers";
   name = "papers";
   summary = "Curated papers package for ZenOS";
   description = ''

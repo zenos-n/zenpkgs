@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.saleae-logic-2";
   name = "Saleae Logic 2";
   summary = "Software for Saleae logic analyzers";
   description = ''

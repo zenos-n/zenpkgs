@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.fresh-editor";
   name = "Fresh";
   summary = "Terminal-based text editor with LSP support and TypeScript plugins";
   description = ''

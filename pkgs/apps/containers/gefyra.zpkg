@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.gefyra";
   name = "Gefyra";
   summary = "Tool to connect local containers to kubernetes clusters";
   description = ''

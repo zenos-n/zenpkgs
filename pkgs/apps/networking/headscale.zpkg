@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.headscale";
   name = "Headscale";
   summary = "Open source, self-hosted implementation of the Tailscale control server";
   description = ''

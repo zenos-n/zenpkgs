@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.fuseiso";
   name = "FuseISO";
   summary = "FUSE module to mount ISO filesystem images";
   description = ''

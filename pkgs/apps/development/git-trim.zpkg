@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-trim";
   name = "git-trim";
   summary = "Automatically trims your branches whose tracking remote refs are merged or gone";
   description = ''

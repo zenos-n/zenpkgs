@@ -217,7 +217,7 @@ sibling = enableOption {};
     def test_package_import_metadata_merges_before_normalizing_version(self):
         (self.root / "base.zpkg").write_text('_meta = { name = "Base"; zenosVersion = "1.0.0"; };', encoding="utf-8")
         entry = self.root / "demo.zpkg"
-        entry.write_text('_import "base.zpkg"; _meta.zenosVersion = "2.0.0"; import $pkgs.legacy.demo;', encoding="utf-8")
+        entry.write_text('_meta.id = "org.example.Test"; _import "base.zpkg"; _meta.zenosVersion = "2.0.0"; import $pkgs.legacy.demo;', encoding="utf-8")
         document = parse_file(entry, import_root=self.root)
         self.assertIn('packageVersion = "2.0.0";', compile_zpkg(document))
         self.assertIn('value = "2.0.0";', compile_zpkg(document, mode="interface"))
@@ -238,7 +238,7 @@ sibling = enableOption {};
 
     @unittest.skipUnless(shutil.which("nix-instantiate"), "Nix evaluation requires the VM")
     def test_package_import_must_resolve_to_a_derivation(self):
-        output = compile_zpkg(parse("import $pkgs.legacy.demo;", "demo.zpkg"))
+        output = compile_zpkg(parse('_meta.id = "org.example.Test"; import $pkgs.legacy.demo;', "demo.zpkg"))
         result = subprocess.run(
             ["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--expr", "(" + output + ") { pkgs.zenos.legacy.demo = {}; }"],
             capture_output=True, text=True,
@@ -252,7 +252,7 @@ sibling = enableOption {};
         if available.returncode:
             self.skipTest("the VM must provide a Nixpkgs evaluation context")
         registry = Path(os.environ["ZEN_MAINTAINERS"]) if "ZEN_MAINTAINERS" in os.environ else Path(__file__).parents[3] / "lib" / "maintainers.nix"
-        document = parse('''
+        document = parse('''_meta.id = "org.example.Test";
 _meta = {
   name = "Authored Hello"; summary = "Imported package";
   description = ''Markdown for Hello.''; zenosVersion = "1.2.3";

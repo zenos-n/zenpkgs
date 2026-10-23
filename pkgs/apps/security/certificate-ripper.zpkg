@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.certificate-ripper";
   name = "Certificate Ripper";
   summary = "CLI tool to extract server certificates";
   description = ''

@@ -52,7 +52,7 @@ class IncrementalCompilationTests(unittest.TestCase):
         self.assertEqual(compile_tree(self.root), second)
 
     def test_markdown_edit_invalidates_importer(self):
-        self.write("pkgs/demo.zpkg", 'import $pkgs.legacy.hello; _meta.description = _import "description.md";')
+        self.write("pkgs/demo.zpkg", '_meta.id = "org.example.Test"; import $pkgs.legacy.hello; _meta.description = _import "description.md";')
         self.write("pkgs/description.md", "first description")
         first = self.compile()
         self.write("pkgs/description.md", "other description")
@@ -63,7 +63,7 @@ class IncrementalCompilationTests(unittest.TestCase):
         self.assertEqual(compile_tree(self.root), second)
 
     def test_serial_parallel_and_warm_bundles_are_identical(self):
-        self.write("pkgs/demo.zpkg", "import $pkgs.legacy.hello;")
+        self.write("pkgs/demo.zpkg", '_meta.id = "org.example.Test"; import $pkgs.legacy.hello;')
         self.write("modules/demo.zmdl", "enabled = true;")
         serial = compile_tree(self.root, mode="interface")
         parallel = self.compile(jobs=2, mode="interface")
@@ -123,7 +123,7 @@ class IncrementalCompilationTests(unittest.TestCase):
         self.assertEqual(6, parser.call_count)
 
     def test_mode_root_and_compiler_changes_cannot_reuse_cache(self):
-        self.write("pkgs/demo.zpkg", "import $pkgs.legacy.hello;")
+        self.write("pkgs/demo.zpkg", '_meta.id = "org.example.Test"; import $pkgs.legacy.hello;')
         self.compile(mode="interface")
         with patch("zenlang.compiler.parse_file", wraps=parse_file) as parser:
             self.compile(mode="build")
@@ -168,7 +168,7 @@ class IncrementalCompilationTests(unittest.TestCase):
         self.assertEqual("ZEN305", raised.exception.diagnostic.code)
 
     def test_markdown_symlink_cannot_escape_root_after_cache_hit(self):
-        self.write("pkgs/demo.zpkg", 'import $pkgs.legacy.hello; _meta.description = _import "description.md";')
+        self.write("pkgs/demo.zpkg", '_meta.id = "org.example.Test"; import $pkgs.legacy.hello; _meta.description = _import "description.md";')
         description = self.write("pkgs/description.md", "description")
         self.compile()
         external = self.base / "outside.md"
@@ -196,7 +196,7 @@ class IncrementalCompilationTests(unittest.TestCase):
 
     def test_serialized_cache_rechecks_imports_inventory_and_diagnostics(self):
         output = self.base / "bundle.json"
-        self.write("pkgs/demo.zpkg", "import $pkgs.legacy.hello;")
+        self.write("pkgs/demo.zpkg", '_meta.id = "org.example.Test"; import $pkgs.legacy.hello;')
         arguments = ["compile-tree", "--root", str(self.root), "--output", str(output),
                      "--jobs", "1", "--cache-dir", str(self.cache), "--diagnostic-format", "json"]
         cold_stderr = StringIO()

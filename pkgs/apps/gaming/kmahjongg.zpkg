@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.kmahjongg";
   name = "KMahjongg";
   summary = "KMahjongg is a tile matching game for one or two players";
   description = ''

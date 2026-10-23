@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.melonds";
   name = "melonDS";
   summary = "Work in progress Nintendo DS emulator";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.cpupower-gui";
   name = "CPU Power GUI";
   summary = "Change the frequency limits of your cpu and its governor";
   description = ''

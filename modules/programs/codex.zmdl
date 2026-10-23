@@ -971,7 +971,7 @@ enable = enableOption {
     tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
   };
   u! {
-    home.packages = [ $pkgs.apps.ai.codex ];
+    home.packages = [ $pkgs.byCategories.apps.ai.codex ];
     home.sessionVariables = $lib.optionalAttrs ($path.stateDirectory != null) { CODEX_HOME = $path.stateDirectory; };
     home.activation.zenosCodexPreferences = $lib.mkWritableProgramConfig {
       pkgs = $pkgs.legacy; application = "codex"; assignments = $v.preferences;

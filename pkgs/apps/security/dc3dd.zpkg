@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.dc3dd";
   name = "dc3dd";
   summary = "Patched version of dd that includes a number of features useful for computer forensics";
   description = ''

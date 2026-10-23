@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.sqlx-cli";
   name = "SQLx CLI";
   summary = "CLI for managing databases, migrations, and enabling offline mode with `sqlx::query!()` and friends";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.vassal";
   name = "VASSAL";
   summary = "Free, open-source boardgame engine";
   description = ''

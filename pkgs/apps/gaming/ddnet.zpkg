@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.ddnet";
   name = "DDNet";
   summary = "Teeworlds modification with a unique cooperative gameplay";
   description = ''

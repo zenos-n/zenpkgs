@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.qiv";
   name = "qiv";
   summary = "Quick image viewer";
   description = ''

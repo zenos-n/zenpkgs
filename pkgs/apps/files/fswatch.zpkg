@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fswatch";
   name = "fswatch";
   summary = "Cross-platform file change monitor with multiple backends";
   description = ''

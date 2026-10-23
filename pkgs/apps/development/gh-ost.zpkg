@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh-ost";
   name = "gh-ost";
   summary = "Triggerless online schema migration solution for MySQL";
   description = ''

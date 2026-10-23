@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.pcb2gcode";
   name = "pcb2gcode";
   summary = "Command-line tool for isolation, routing and drilling of PCBs";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.resources";
   name = "resources";
   summary = "Curated resources package for ZenOS";
   description = ''

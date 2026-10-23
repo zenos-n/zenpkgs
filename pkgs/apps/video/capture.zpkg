@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.capture";
   name = "Capture";
   summary = "Screen capture tool";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.networking.libreswan";
   name = "Libreswan";
   summary = "Free software implementation of the VPN protocol based on IPSec and the Internet Key Exchange";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.golangci-lint";
   name = "golangci-lint";
   summary = "Fast linters Runner for Go";
   description = ''

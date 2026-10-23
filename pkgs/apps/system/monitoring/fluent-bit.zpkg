@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.fluent-bit";
   name = "Fluent Bit";
   summary = "Fast and lightweight logs and metrics processor for Linux, BSD, OSX and Windows";
   description = ''

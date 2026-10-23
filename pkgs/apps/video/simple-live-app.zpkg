@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.simple-live-app";
   name = "Simple Live";
   summary = "Simply Watch Live";
   description = ''

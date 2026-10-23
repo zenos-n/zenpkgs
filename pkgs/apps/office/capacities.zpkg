@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.capacities";
   name = "Capacities";
   summary = "Calm place to make sense of the world and create amazing things";
   description = ''

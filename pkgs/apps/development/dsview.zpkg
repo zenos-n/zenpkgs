@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dsview";
   name = "DSView";
   summary = "GUI program for supporting various instruments from DreamSourceLab, including logic analyzer, oscilloscope, etc";
   description = ''

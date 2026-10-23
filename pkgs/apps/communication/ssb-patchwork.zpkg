@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.ssb-patchwork";
   name = "Patchwork";
   summary = "Decentralized messaging and sharing app built on top of Secure Scuttlebutt (SSB)";
   description = ''

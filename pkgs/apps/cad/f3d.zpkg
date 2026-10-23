@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.f3d";
   name = "F3D";
   summary = "Fast and minimalist 3D viewer using VTK";
   description = ''

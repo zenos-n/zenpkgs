@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.celestia";
   name = "Celestia";
   summary = "Real-time 3D simulation of space";
   description = ''

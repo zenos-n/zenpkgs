@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.calcure";
   name = "Calcure";
   summary = "Modern TUI calendar and task manager with minimal and customizable UI";
   description = ''

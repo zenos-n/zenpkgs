@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.chamber";
   name = "Chamber";
   summary = "Tool for managing secrets by storing them in AWS SSM Parameter Store";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.w3m";
   name = "w3m";
   summary = "Text-mode web browser";
   description = ''

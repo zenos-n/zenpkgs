@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.server-box";
   name = "ServerBox";
   summary = "Server status & toolbox";
   description = ''

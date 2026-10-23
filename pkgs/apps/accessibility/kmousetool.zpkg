@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.kmousetool";
   name = "KMouseTool";
   summary = "Program that clicks the mouse for you";
   description = ''

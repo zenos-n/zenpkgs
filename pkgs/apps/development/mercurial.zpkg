@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.mercurial";
   name = "Mercurial";
   summary = "Fast, lightweight SCM system for very large distributed projects";
   description = ''

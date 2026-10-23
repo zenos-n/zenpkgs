@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.finance.denaro";
   name = "Denaro";
   summary = "Personal finance manager for GNOME";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.bsync";
   name = "bsync";
   summary = "Bidirectional Synchronization using Rsync";
   description = ''

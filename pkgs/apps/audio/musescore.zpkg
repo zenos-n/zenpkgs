@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.musescore";
   name = "MuseScore";
   summary = "Music notation and composition software";
   description = ''

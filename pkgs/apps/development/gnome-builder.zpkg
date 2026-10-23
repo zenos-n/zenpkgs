@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Builder";
   name = "gnome-builder";
   summary = "Curated gnome-builder package for ZenOS";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.tenacity";
   name = "Tenacity";
   summary = "Sound editor with graphical UI";
   description = ''

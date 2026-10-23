@@ -46,6 +46,8 @@ jobs:
       - name: Build the general installer
         run: |
           nix build ./zenos#iso --out-link installer-result \
+            --override-input zenpkgs "path:$GITHUB_WORKSPACE/zenpkgs" \
+            --no-write-lock-file \
             --option max-jobs 1 --option cores 2 --option max-substitution-jobs 2 \
             --print-build-logs
           mkdir -p artifacts
@@ -54,6 +56,9 @@ jobs:
           git -C zenos rev-parse HEAD > artifacts/zenos-revision.txt
           git -C zenpkgs rev-parse HEAD > artifacts/toolchain-revision.txt
           cp zenos/flake.lock artifacts/installer-flake.lock
+          nix flake metadata ./zenos --json \
+            --override-input zenpkgs "path:$GITHUB_WORKSPACE/zenpkgs" \
+            --no-write-lock-file > artifacts/effective-inputs.json
 
       - name: Upload installer and checksums
         uses: actions/upload-artifact@v4

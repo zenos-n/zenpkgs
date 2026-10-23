@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.findent";
   name = "findent";
   summary = "Fortran source code formatter";
   description = ''

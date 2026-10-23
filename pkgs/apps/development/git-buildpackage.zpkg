@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-buildpackage";
   name = "git-buildpackage";
   summary = "Suite to help with maintaining Debian packages in Git repositories";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.minikube";
   name = "Minikube";
   summary = "Tool that makes it easy to run Kubernetes locally";
   description = ''

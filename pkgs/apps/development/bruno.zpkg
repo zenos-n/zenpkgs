@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.bruno";
   name = "Bruno";
   summary = "Open-source IDE For exploring and testing APIs";
   description = ''

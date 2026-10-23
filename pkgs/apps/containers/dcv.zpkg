@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.dcv";
   name = "DCV";
   summary = "TUI (Terminal User Interface) tool for monitoring Docker containers and Docker Compose applications";
   description = ''

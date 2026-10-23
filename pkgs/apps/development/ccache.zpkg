@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ccache";
   name = "ccache";
   summary = "Compiler cache for fast recompilation of C/C++ code";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.gcfflasher";
   name = "GCFFlasher";
   summary = "CFFlasher is the tool to program the firmware of dresden elektronik's Zigbee products";
   description = ''

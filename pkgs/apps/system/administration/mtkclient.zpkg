@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.mtkclient";
   name = "MTKClient";
   summary = "MTK reverse engineering and flash tool";
   description = ''

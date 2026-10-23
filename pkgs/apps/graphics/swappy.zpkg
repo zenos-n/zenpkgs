@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.swappy";
   name = "Swappy";
   summary = "Wayland native snapshot editing tool, inspired by Snappy on macOS";
   description = ''

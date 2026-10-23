@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.wxmacmolplt";
   name = "wxMacMolPlt";
   summary = "Graphical user interface for GAMESS-US";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.sdrangel";
   name = "SDRangel";
   summary = "Software defined radio (SDR) software";
   description = ''

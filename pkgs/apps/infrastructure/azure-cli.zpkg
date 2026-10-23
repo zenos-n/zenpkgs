@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.infrastructure.azure-cli";
   name = "Azure CLI";
   summary = "Next generation multi-platform command line experience for Azure";
   description = ''

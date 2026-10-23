@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.vivaldi";
   name = "Vivaldi";
   summary = "Browser for our Friends, powerful and personal";
   description = ''

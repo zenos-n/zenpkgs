@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.usbtop";
   name = "usbtop";
   summary = "Top utility that shows an estimated instantaneous bandwidth on USB buses and devices";
   description = ''

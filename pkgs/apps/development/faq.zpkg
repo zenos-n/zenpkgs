@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.faq";
   name = "faq";
   summary = "Intended to be a more flexible jq, supporting additional formats";
   description = ''

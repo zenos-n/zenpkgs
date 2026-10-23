@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.progress";
   name = "progress";
   summary = "Tool that shows the progress of coreutils programs";
   description = ''

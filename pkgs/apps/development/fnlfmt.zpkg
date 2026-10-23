@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fnlfmt";
   name = "fnlfmt";
   summary = "Formatter for Fennel";
   description = ''

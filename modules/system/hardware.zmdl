@@ -229,7 +229,7 @@ _meta = {
   default = null;
 };
   s!! {
-    environment.systemPackages = $lib.mkIf ($path.androidDebugging == true) [ $pkgs.apps.development.android-tools ];
+    environment.systemPackages = $lib.mkIf ($path.androidDebugging == true) [ $pkgs.byCategories.apps.development.android-tools ];
   };
 };
 
@@ -245,7 +245,7 @@ _meta = {
   default = null;
 };
   s!! {
-    services.udev.packages = $lib.mkIf ($path.kinect2 != null) (if $path.kinect2 then [ $pkgs.libs.libfreenect2 ] else [ ]);
-    environment.systemPackages = $lib.mkIf ($path.kinect2 == true) [ $pkgs.libs.libfreenect2 ];
+    services.udev.packages = $lib.mkIf ($path.kinect2 != null) (if $path.kinect2 then [ $pkgs.byCategories.libs.libfreenect2 ] else [ ]);
+    environment.systemPackages = $lib.mkIf ($path.kinect2 == true) [ $pkgs.byCategories.libs.libfreenect2 ];
   };
 };

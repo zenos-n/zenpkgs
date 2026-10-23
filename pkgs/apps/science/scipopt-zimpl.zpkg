@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.scipopt-zimpl";
   name = "ZIMPL";
   summary = "Zuse Institute Mathematical Programming Language";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.gnome-pomodoro";
   name = "GNOME Pomodoro";
   summary = "Time management utility for GNOME based on the pomodoro technique";
   description = ''

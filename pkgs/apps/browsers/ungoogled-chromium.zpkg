@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.ungoogled-chromium";
   name = "ungoogled-chromium";
   summary = "Curated ungoogled-chromium package for ZenOS";
   description = ''

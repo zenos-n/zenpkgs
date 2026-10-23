@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.gnome-obfuscate";
   name = "Obfuscate";
   summary = "Censor private information";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.lollypop";
   name = "Lollypop";
   summary = "Modern music player for GNOME";
   description = ''

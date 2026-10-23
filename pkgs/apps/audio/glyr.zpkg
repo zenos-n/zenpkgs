@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.glyr";
   name = "glyr";
   summary = "Music related metadata searchengine";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.networking.gip";
   name = "gip";
   summary = "Command-line tool to get global IP address";
   description = ''

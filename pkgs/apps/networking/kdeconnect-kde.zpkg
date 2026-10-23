@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.networking.kdeconnect-kde";
   name = "KDE Connect";
   summary = "Multi-platform app that allows your devices to communicate";
   description = ''

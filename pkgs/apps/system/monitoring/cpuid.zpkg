@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.cpuid";
   name = "cpuid";
   summary = "Linux tool to dump x86 CPUID information about the CPU";
   description = ''

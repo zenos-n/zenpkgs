@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.freeorion";
   name = "FreeOrion";
   summary = "Free, open source, turn-based space empire and galactic conquest (4X) computer game";
   description = ''

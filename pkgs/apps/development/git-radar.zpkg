@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-radar";
   name = "git-radar";
   summary = "Tool you can add to your prompt to provide at-a-glance information on your git repo";
   description = ''

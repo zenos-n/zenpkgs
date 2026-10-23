@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.thunderbird";
   name = "thunderbird";
   summary = "Curated thunderbird package for ZenOS";
   description = ''

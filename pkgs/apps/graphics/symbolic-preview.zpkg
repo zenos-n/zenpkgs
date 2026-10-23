@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.symbolic-preview";
   name = "Symbolic Preview";
   summary = "Symbolics made easy";
   description = ''

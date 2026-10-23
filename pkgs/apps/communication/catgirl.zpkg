@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.catgirl";
   name = "catgirl";
   summary = "TLS-only terminal IRC client";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.bup";
   name = "bup";
   summary = "Efficient file backup system based on the git packfile format";
   description = ''

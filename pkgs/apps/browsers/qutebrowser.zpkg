@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.qutebrowser";
   name = "qutebrowser";
   summary = "Keyboard-focused browser with a minimal GUI";
   description = ''

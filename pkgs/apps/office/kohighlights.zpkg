@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.kohighlights";
   name = "KOHighlights";
   summary = "Utility for viewing and/or exporting KOReader's highlights";
   description = ''

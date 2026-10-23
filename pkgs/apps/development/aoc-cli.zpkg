@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.aoc-cli";
   name = "Advent of Code CLI";
   summary = "Advent of code command line tool";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.openarena";
   name = "OpenArena";
   summary = "Fast-paced 3D first-person shooter, similar to id Software Inc.'s Quake III Arena";
   description = ''

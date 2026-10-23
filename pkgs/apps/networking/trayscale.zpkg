@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.trayscale";
   name = "Trayscale";
   summary = "Unofficial GUI wrapper around the Tailscale CLI client";
   description = ''

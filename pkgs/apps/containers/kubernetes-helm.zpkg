@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.kubernetes-helm";
   name = "Helm";
   summary = "Package manager for kubernetes";
   description = ''

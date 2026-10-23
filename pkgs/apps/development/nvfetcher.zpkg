@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.nvfetcher";
   name = "nvfetcher";
   summary = "Generate nix sources expr for the latest version of packages";
   description = ''

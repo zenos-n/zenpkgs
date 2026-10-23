@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Logs";
   name = "GNOME Logs";
   summary = "Log viewer for the systemd journal";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.identity";
   name = "Identity";
   summary = "Program for comparing multiple versions of an image or video";
   description = ''

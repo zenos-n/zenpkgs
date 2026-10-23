@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.angband";
   name = "Angband";
   summary = "Single-player roguelike dungeon exploration game";
   description = ''

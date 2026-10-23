@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.xarchiver";
   name = "Xarchiver";
   summary = "GTK frontend to 7z,zip,rar,tar,bzip2, gzip,arj, lha, rpm and deb (open and extract only)";
   description = ''

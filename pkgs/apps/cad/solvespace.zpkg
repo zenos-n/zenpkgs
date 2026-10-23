@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.solvespace";
   name = "SolveSpace";
   summary = "Parametric 3d CAD program";
   description = ''

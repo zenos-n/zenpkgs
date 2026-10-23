@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.emblem";
   name = "Emblem";
   summary = "Generate project icons and avatars from a symbolic icon";
   description = ''

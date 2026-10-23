@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.slurp";
   name = "slurp";
   summary = "Select a region in a Wayland compositor";
   description = ''

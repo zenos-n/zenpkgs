@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ty";
   name = "ty";
   summary = "Extremely fast Python type checker and language server, written in Rust";
   description = ''

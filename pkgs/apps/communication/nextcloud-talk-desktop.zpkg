@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.nextcloud-talk-desktop";
   name = "Nextcloud Talk";
   summary = "Nextcloud Talk Desktop Client";
   description = ''

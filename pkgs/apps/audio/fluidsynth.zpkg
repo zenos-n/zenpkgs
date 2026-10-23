@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.fluidsynth";
   name = "FluidSynth";
   summary = "Real-time software synthesizer based on the SoundFont 2 specifications";
   description = ''

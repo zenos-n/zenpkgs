@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.chisel";
   name = "Chisel";
   summary = "TCP/UDP tunnel over HTTP";
   description = ''

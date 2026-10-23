@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.category-sorted-app-grid";
   name = "category-sorted-app-grid";
   summary = "Curated category-sorted-app-grid package for ZenOS";
   description = ''

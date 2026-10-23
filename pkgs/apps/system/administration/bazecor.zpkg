@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.bazecor";
   name = "Bazecor";
   summary = "Graphical configurator for Dygma Products";
   description = ''

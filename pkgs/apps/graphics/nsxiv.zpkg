@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.nsxiv";
   name = "nsxiv";
   summary = "New Suckless X Image Viewer";
   description = ''

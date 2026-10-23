@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.ouch";
   name = "ouch";
   summary = "Command-line utility for easily compressing and decompressing files and directories";
   description = ''

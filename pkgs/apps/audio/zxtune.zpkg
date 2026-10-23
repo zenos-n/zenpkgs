@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.zxtune";
   name = "ZXTune";
   summary = "Crossplatform chiptunes player";
   description = ''

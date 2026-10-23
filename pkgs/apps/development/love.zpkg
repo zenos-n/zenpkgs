@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.love";
   name = "LÖVE";
   summary = "Lua-based 2D game engine/scripting language";
   description = ''

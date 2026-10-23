@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.lsix";
   name = "lsix";
   summary = "Shows thumbnails in terminal using sixel graphics";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.gemmi";
   name = "Gemmi";
   summary = "Macromolecular crystallography library and utilities";
   description = ''

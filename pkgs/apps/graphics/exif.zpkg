@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.exif";
   name = "exif";
   summary = "Utility to read and manipulate EXIF data in digital photographs";
   description = ''

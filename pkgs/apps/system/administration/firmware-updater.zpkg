@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.firmware-updater";
   name = "Firmware Updater";
   summary = "Firmware Updater for Linux";
   description = ''

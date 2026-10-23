@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.finance.expenses";
   name = "Expenses";
   summary = "Interactive command line expense logger";
   description = ''

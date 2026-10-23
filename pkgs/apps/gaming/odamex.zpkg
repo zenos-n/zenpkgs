@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.odamex";
   name = "Odamex";
   summary = "Client/server port for playing old-school Doom online";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.knetwalk";
   name = "KNetWalk";
   summary = "KNetWalk: connect all the terminals to the server, in as few turns as possible";
   description = ''

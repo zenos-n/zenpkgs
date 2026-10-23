@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.fonts.fontc";
   name = "fontc";
   summary = "Compile fonts with a Rust implementation of the fontmake pipeline";
   description = ''

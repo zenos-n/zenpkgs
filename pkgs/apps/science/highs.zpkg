@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.highs";
   name = "HiGHS";
   summary = "Linear optimization software";
   description = ''

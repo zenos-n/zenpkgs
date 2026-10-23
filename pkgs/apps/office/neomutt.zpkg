@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.neomutt";
   name = "NeoMutt";
   summary = "Small but very powerful text-based mail client";
   description = ''

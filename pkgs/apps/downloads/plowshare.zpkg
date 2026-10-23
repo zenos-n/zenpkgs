@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.plowshare";
   name = "Plowshare";
   summary = "Command-line download/upload tool for popular file sharing websites";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.icdiff";
   name = "icdiff";
   summary = "Improved colorized diff";
   description = ''

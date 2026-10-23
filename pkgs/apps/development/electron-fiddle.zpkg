@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.electron-fiddle";
   name = "Electron Fiddle";
   summary = "Easiest way to get started with Electron";
   description = ''

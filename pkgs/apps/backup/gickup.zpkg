@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.gickup";
   name = "Gickup";
   summary = "Tool to backup repositories";
   description = ''

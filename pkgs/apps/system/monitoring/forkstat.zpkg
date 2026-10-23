@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.forkstat";
   name = "forkstat";
   summary = "Process fork/exec/exit monitoring tool";
   description = ''

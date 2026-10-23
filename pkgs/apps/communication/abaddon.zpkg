@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.abaddon";
   name = "Abaddon";
   summary = "Discord client reimplementation, written in C++";
   description = ''

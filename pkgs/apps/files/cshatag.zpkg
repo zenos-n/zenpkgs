@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.cshatag";
   name = "cshatag";
   summary = "Tool to detect silent data corruption";
   description = ''

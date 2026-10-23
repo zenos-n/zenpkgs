@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.acpilight";
   name = "acpilight";
   summary = "ACPI backlight control";
   description = ''

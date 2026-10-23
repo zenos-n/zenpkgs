@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.cell";
   name = "Cell";
   summary = "Fast terminal spreadsheet editor with Vim keybindings";
   description = ''

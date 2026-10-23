@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.hexedit";
   name = "Hexedit";
   summary = "View and edit files in hexadecimal or in ASCII";
   description = ''

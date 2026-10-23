@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.milkytracker";
   name = "MilkyTracker";
   summary = "Music tracker application, similar to Fasttracker II";
   description = ''

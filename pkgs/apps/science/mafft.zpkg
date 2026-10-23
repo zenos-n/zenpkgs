@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.mafft";
   name = "MAFFT";
   summary = "Multiple alignment program for amino acid or nucleotide sequences";
   description = ''

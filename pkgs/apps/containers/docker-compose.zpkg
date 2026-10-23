@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.docker-compose";
   name = "Docker Compose";
   summary = "Docker CLI plugin to define and run multi-container applications with Docker";
   description = ''

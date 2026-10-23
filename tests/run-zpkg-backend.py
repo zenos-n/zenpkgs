@@ -90,12 +90,12 @@ def test_registry(root):
         "apps/poison": 'build = $pkgs.legacy.abortProvider "sibling evaluated";',
         "apps/empty": '_meta.dependencies = {}; build = $pkgs.legacy.runCommand "empty" {} "mkdir $out";',
         "apps/library": 'build = $lib.customPackage;',
-        "apps/library-runtime": '_meta.dependencies.runtime = [ $pkgs.runtime.command ]; build = $lib.customPackage;',
+        "apps/library-runtime": '_meta.dependencies.runtime = [ $pkgs.byCategories.runtime.command ]; build = $lib.customPackage;',
         "apps/tool": '''
           _meta.dependencies = {
-            build = [ $pkgs.tools.generator ];
+            build = [ $pkgs.byCategories.tools.generator ];
             general = [ $pkgs.legacy."quoted.tool" ];
-            runtime = [ $pkgs.runtime.command $pkgs.tools.external ];
+            runtime = [ $pkgs.byCategories.runtime.command $pkgs.byCategories.tools.external ];
           };
           build = $pkgs.legacy.runCommand "registry-application" {} ''
             test "$(generator)" = generated
@@ -117,7 +117,7 @@ EOF
     for name, text in sources.items():
         path = root / "pkgs" / (name + ".zpkg")
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(metadata + text)
+        path.write_text(f'_meta.id = "org.example.{name.replace("/", "-")}";\n' + metadata + text)
     bundle = compile_tree(root, mode="interface")
     (root / "bundle.json").write_text(json.dumps(bundle))
     for source in bundle["sources"]:
@@ -139,8 +139,10 @@ EOF
         abortProvider = builtins.abort;
       }};
       finalPkgs = pkgs // {{ zenos = tree // {{
-        tools.external = pkgs.writeShellScriptBin "external-command" "echo registry-external";
-        tools.unused = builtins.abort "external sibling evaluated";
+        byCategories = tree.byCategories // {{ tools = tree.byCategories.tools // {{
+          external = pkgs.writeShellScriptBin "external-command" "echo registry-external";
+          unused = builtins.abort "external sibling evaluated";
+        }}; }};
         legacy = builtins.abort "nonpinned legacy selected";
       }}; }};
       tree = interface.buildPackageTreeWith {{
@@ -175,23 +177,26 @@ EOF
             pkgs = packagePkgs // {{ zenos = packagePkgs.zenos // {{ legacy = legacyPkgs; }}; }};
           }} // lib.optionalAttrs (!(packagePkgs ? lib)) {{ lib = helperLib; }} // packageArgs;
         in lib.genAttrs [ "library" "library-runtime" ] (name: {{
-          tree = selectedTree.apps.${{name}};
+          tree = selectedTree.byCategories.apps.${{name}};
           standalone = import ({root}/builds/pkgs/apps + "/${{name}}.zpkg.nix") standaloneArgs;
         }});
     in {{
       docs = interface.registryDocs registry;
-      shape = builtins.attrNames noeval.apps;
-      toolShape = builtins.attrNames noeval.tools;
-      package = tree.apps.tool;
+      shape = builtins.attrNames noeval.byCategories.apps;
+      toolShape = builtins.attrNames noeval.byCategories.tools;
+      package = tree.byCategories.apps.tool;
       standalone = import {root}/builds/pkgs/apps/tool.zpkg.nix {{
         pkgs = finalPkgs // {{ zenos = finalPkgs.zenos // {{
-          tools = finalPkgs.zenos.tools // tree.tools;
+          byCategories.tools = finalPkgs.zenos.byCategories.tools // tree.byCategories.tools;
           legacy = legacyPkgs;
         }}; }};
       }};
-      identity = tree.apps.inherited.drvPath == legacyPkgs."quoted.tool".drvPath;
-      poison = tree.apps.poison;
-      toolPoison = tree.tools.poison;
+      identity = tree.byCategories.apps.inherited.drvPath == legacyPkgs."quoted.tool".drvPath
+        && tree.org.example.apps-inherited.drvPath == tree.byCategories.apps.inherited.drvPath
+        && tree.org.example.apps-inherited.outPath == tree.byCategories.apps.inherited.outPath
+        && !(tree ? apps) && !(tree ? tools) && !(tree ? runtime);
+      poison = tree.byCategories.apps.poison;
+      toolPoison = tree.byCategories.tools.poison;
       libraryCases = {{
         default = libraryCase {{ packagePkgs = finalPkgs // {{ lib = defaultLib; }}; }};
         explicit = libraryCase {{
@@ -208,13 +213,18 @@ EOF
     context_file.write_text(expression)
     docs = json.loads(run("nix-instantiate", "--eval", "--strict", "--json", str(context_file), "-A", "docs"))
     entries = {entry["id"]: entry for entry in docs["packages"]}
-    imported = entries["pkgs.apps.inherited"]
+    assert len(entries) == len(sources) == len(docs["packages"])
+    for entry in entries.values():
+        assert entry["id"] == "pkgs." + entry["meta"]["id"]
+        assert entry["target"] == entry["meta"]["id"].split(".")
+        assert "/".join(entry["categoryTarget"]) in sources
+    imported = entries["pkgs.org.example.apps-inherited"]
     assert imported["sourcePath"] == ["quoted.tool"] and not imported["dependenciesDeclared"]
     assert "dependencies" not in imported["meta"]
-    empty = entries["pkgs.apps.empty"]
+    empty = entries["pkgs.org.example.apps-empty"]
     assert empty["dependenciesDeclared"] and empty["meta"]["dependencies"] == {"general": [], "build": [], "runtime": []}
     assert "sourcePath" not in empty
-    assert entries["pkgs.apps.tool"]["meta"]["dependencies"]["general"][0] == {
+    assert entries["pkgs.org.example.apps-tool"]["meta"]["dependencies"]["general"][0] == {
         "namespace": "pkgs", "path": ["legacy", "quoted.tool"],
     }
     assert json.loads(run("nix-instantiate", "--eval", "--strict", "--json", str(context_file), "-A", "shape")) == ["empty", "inherited", "library", "library-runtime", "poison", "tool"]

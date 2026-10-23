@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.gparted";
   name = "gparted";
   summary = "Curated gparted package for ZenOS";
   description = ''

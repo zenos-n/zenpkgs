@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.tsocks";
   name = "tsocks";
   summary = "Transparent SOCKS v4 proxying library";
   description = ''

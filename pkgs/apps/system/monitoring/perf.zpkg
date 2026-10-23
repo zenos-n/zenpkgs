@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.perf";
   name = "perf";
   summary = "Linux tools to profile with performance counters";
   description = ''

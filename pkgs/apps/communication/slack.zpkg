@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.slack";
   name = "Slack";
   summary = "Desktop client for Slack";
   description = ''

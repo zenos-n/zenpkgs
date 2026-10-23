@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.virtualization.libvirt";
   name = "libvirt";
   summary = "Toolkit to interact with the virtualization capabilities of recent versions of Linux and other OSes";
   description = ''

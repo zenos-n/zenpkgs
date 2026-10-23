@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.giada";
   name = "Giada";
   summary = "Free, minimal, hardcore audio tool for DJs, live performers and electronic musicians";
   description = ''

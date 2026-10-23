@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.redshift";
   name = "Redshift";
   summary = "Screen color temperature manager";
   description = ''

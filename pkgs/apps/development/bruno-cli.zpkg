@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.bruno-cli";
   name = "Bruno CLI";
   summary = "CLI of the open-source IDE For exploring and testing APIs";
   description = ''

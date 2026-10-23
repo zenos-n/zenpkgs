@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.emote";
   name = "Emote";
   summary = "Modern emoji picker for Linux";
   description = ''

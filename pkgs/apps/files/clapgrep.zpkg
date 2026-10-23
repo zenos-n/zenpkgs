@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.clapgrep";
   name = "Clapgrep";
   summary = "Search through all your files";
   description = ''

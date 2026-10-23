@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.free42";
   name = "Free42";
   summary = "Software clone of the HP-42S calculator";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.virtualization.passt";
   name = "passt";
   summary = "Plug A Simple Socket Transport";
   description = ''

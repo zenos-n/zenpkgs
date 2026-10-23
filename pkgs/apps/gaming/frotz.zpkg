@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.frotz";
   name = "Frotz";
   summary = "Z-machine interpreter for Infocom games and other interactive fiction (ncurses)";
   description = ''

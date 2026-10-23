@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.quake3e";
   name = "Quake3e";
   summary = "Improved Quake III Arena engine";
   description = ''

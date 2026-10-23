@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.zap";
   name = "OWASP ZAP";
   summary = "Java application for web penetration testing";
   description = ''

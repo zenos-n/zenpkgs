@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.proselint";
   name = "proselint";
   summary = "Linter for prose";
   description = ''

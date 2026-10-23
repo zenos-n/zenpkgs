@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.stm32flash";
   name = "stm32flash";
   summary = "Open source flash program for the STM32 ARM processors using the ST bootloader";
   description = ''

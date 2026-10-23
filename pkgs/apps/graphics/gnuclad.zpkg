@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.gnuclad";
   name = "GNUclad";
   summary = "Generating cladogram trees for the GNU/Linux distro timeline project";
   description = ''

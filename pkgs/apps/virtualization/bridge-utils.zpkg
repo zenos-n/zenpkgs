@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.virtualization.bridge-utils";
   name = "bridge-utils";
   summary = "Userspace tool to configure linux bridges (deprecated in favour or iproute2)";
   description = ''

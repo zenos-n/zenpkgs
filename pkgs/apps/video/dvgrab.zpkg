@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.dvgrab";
   name = "dvgrab";
   summary = "Receive and store audio & video over IEEE1394";
   description = ''

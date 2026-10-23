@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.schismtracker";
   name = "Schism Tracker";
   summary = "Music tracker application, free reimplementation of Impulse Tracker";
   description = ''

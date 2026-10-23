@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.abook";
   name = "abook";
   summary = "Text-based addressbook program designed to use with mutt mail client";
   description = ''

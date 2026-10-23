@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.dooit";
   name = "Dooit";
   summary = "TUI todo manager";
   description = ''

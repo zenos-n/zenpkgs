@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-outdated";
   name = "cargo-outdated";
   summary = "Cargo subcommand for displaying when Rust dependencies are out of date";
   description = ''

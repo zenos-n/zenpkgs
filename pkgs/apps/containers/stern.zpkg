@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.stern";
   name = "Stern";
   summary = "Multi pod and container log tailing for Kubernetes";
   description = ''

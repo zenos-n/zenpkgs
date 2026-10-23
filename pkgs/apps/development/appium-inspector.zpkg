@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.appium-inspector";
   name = "Appium Inspector";
   summary = "GUI inspector for the appium UI automation tool";
   description = ''

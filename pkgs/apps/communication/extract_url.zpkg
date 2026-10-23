@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.extract-u5f-url";
   name = "extract_url";
   summary = "Extracts URLs from MIME messages or plain text";
   description = ''

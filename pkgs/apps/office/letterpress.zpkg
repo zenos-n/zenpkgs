@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.letterpress";
   name = "Letterpress";
   summary = "Create beautiful ASCII art";
   description = ''

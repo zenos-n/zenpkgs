@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.crow-translate";
   name = "Crow Translate";
   summary = "Simple and lightweight translator that allows to translate and speak text using Google, Yandex and Bing";
   description = ''

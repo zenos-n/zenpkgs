@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.collision";
   name = "Collision";
   summary = "Check hashes for your files";
   description = ''

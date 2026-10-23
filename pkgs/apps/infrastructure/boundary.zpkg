@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.infrastructure.boundary";
   name = "Boundary";
   summary = "Enables identity-based access management for dynamic infrastructure";
   description = ''

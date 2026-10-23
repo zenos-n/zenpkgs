@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-nomad";
   name = "git-nomad";
   summary = "Synchronize work-in-progress git branches in a light weight fashion";
   description = ''

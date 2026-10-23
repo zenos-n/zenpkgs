@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.finance.grisbi";
   name = "Grisbi";
   summary = "Personnal accounting application";
   description = ''

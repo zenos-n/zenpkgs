@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.stone-kingdoms";
   name = "Stone Kingdoms";
   summary = "Real-time strategy game made with LÖVE based on the original Stronghold by Firefly studios";
   description = ''

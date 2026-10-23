@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.openutau";
   name = "OpenUtau";
   summary = "Open source singing synthesis platform and UTAU successor";
   description = ''

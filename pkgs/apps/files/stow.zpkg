@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.stow";
   name = "GNU Stow";
   summary = "Tool for managing the installation of multiple software packages in the same run-time directory tree";
   description = ''

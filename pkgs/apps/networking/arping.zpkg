@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.arping";
   name = "arping";
   summary = "Broadcasts a who-has ARP packet on the network and prints answers";
   description = ''

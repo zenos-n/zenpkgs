@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.prism-launcher";
   name = "prism-launcher";
   summary = "Curated prism-launcher package for ZenOS";
   description = ''

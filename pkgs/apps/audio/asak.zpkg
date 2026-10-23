@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.asak";
   name = "asak";
   summary = "Cross-platform audio recording/playback CLI tool with TUI, written in Rust";
   description = ''

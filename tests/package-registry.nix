@@ -28,6 +28,7 @@ let
           id
           provider
           target
+          categoryTarget
           ;
       }
       // lib.optionalAttrs (entry.provider.kind == "import") {
@@ -57,12 +58,16 @@ let
         else
           buildProvider entry;
       overlayPackage = lib.attrByPath ([ "zenos" ] ++ entry.target) null pkgs;
+      categoryPackage = lib.attrByPath ([ "zenos" "byCategories" ] ++ entry.categoryTarget) null pkgs;
       publicPackage = publicPackages.${outputName entry.target} or null;
     in
     [
       (
         upstream != null
         && overlayPackage != null
+        && categoryPackage != null
+        && categoryPackage.drvPath == overlayPackage.drvPath
+        && categoryPackage.outPath == overlayPackage.outPath
         && publicPackage != null
         && overlayPackage.drvPath == upstream.drvPath
         && overlayPackage.outPath == upstream.outPath
@@ -89,6 +94,7 @@ let
   descriptor = {
     descriptorVersion = "zenlang.semantic/2";
     kind = "zpkg";
+    # Semantic descriptor names identify the source; metadata.id is the package identity.
     name = "pkgs.apps.first.tool";
     imports = [ ];
     provider = {
@@ -100,6 +106,7 @@ let
     };
     dependenciesDeclared = false;
     metadata = {
+      id = literal "org.example.first-tool";
       name = literal "Tool";
       summary = literal "Example package";
       description = {
@@ -119,7 +126,7 @@ let
     };
   };
   decoded = adapter.decodeInterface descriptor;
-  incomplete = adapter.decodeInterface (removeAttrs descriptor [ "metadata" ]);
+  incomplete = adapter.decodeInterface (descriptor // { metadata.id = literal "org.example.first-tool"; });
   scoped = adapter.decodeInterface (
     descriptor
     // {
@@ -142,6 +149,7 @@ let
                   type = "list";
                   items = [
                     (packageReference [
+                      "byCategories"
                       "libs"
                       scope
                       "tool"
@@ -159,6 +167,11 @@ let
     }
   );
   fixtureInterface = builtins.toFile "registry-interface.nix" "{ ... }: builtins.fromJSON ${builtins.toJSON (builtins.toJSON descriptor)}";
+  secondDescriptor = descriptor // {
+    name = "pkgs.dev.second.tool";
+    metadata = descriptor.metadata // { id = literal "net.example.second-tool"; };
+  };
+  secondInterface = builtins.toFile "registry-second-interface.nix" "{ ... }: builtins.fromJSON ${builtins.toJSON (builtins.toJSON secondDescriptor)}";
   fixtureBuild = builtins.toFile "registry-build.nix" ''
     { pkgs, zpkgRuntime, ... }: zpkgRuntime {
       provider = pkgs.zenos.legacy.hello;
@@ -166,13 +179,27 @@ let
       dependenciesDeclared = false;
     }
   '';
+  secondBuild = builtins.toFile "registry-second-build.nix" ''
+    { pkgs, zpkgRuntime, ... }: zpkgRuntime {
+      provider = pkgs.zenos.legacy.hello;
+      metadata = builtins.fromJSON ${builtins.toJSON (builtins.toJSON (adapter.decodeInterface secondDescriptor).meta)};
+      dependenciesDeclared = false;
+    }
+  '';
   fixtureBundle = pkgs.runCommand "zenpkgs-registry-adapter-fixture" { } ''
     mkdir -p "$out/interfaces/pkgs/apps/first" "$out/interfaces/pkgs/dev/second"
     mkdir -p "$out/builds/pkgs/apps/first" "$out/builds/pkgs/dev/second"
     cp ${fixtureInterface} "$out/interfaces/pkgs/apps/first/tool.zpkg.nix"
-    cp ${fixtureInterface} "$out/interfaces/pkgs/dev/second/tool.zpkg.nix"
+    cp ${secondInterface} "$out/interfaces/pkgs/dev/second/tool.zpkg.nix"
     cp ${fixtureBuild} "$out/builds/pkgs/apps/first/tool.zpkg.nix"
-    cp ${fixtureBuild} "$out/builds/pkgs/dev/second/tool.zpkg.nix"
+    cp ${secondBuild} "$out/builds/pkgs/dev/second/tool.zpkg.nix"
+    # Populate reserved paths so missing fixture files cannot mask validation regressions.
+    mkdir -p "$out/interfaces/pkgs/legacy" "$out/builds/pkgs/legacy"
+    mkdir -p "$out/interfaces/pkgs/apps" "$out/builds/pkgs/apps"
+    cp ${fixtureInterface} "$out/interfaces/pkgs/legacy/tool.zpkg.nix"
+    cp ${fixtureBuild} "$out/builds/pkgs/legacy/tool.zpkg.nix"
+    cp ${fixtureInterface} "$out/interfaces/pkgs/apps/package.zpkg.nix"
+    cp ${fixtureBuild} "$out/builds/pkgs/apps/package.zpkg.nix"
   '';
   structure = {
     kind = "zstr";
@@ -202,7 +229,7 @@ let
     };
   repeated = adapt bundle;
   repeatedTree = interface.buildPackageTree { inherit (pkgs) hello; } repeated;
-  firstEntry = builtins.head repeated.packages;
+  firstEntry = lib.findFirst (entry: entry.id == "pkgs.org.example.first-tool") (throw "registry fixture is missing pkgs.org.example.first-tool") repeated.packages;
   registryWith = packages: {
     schemaVersion = 1;
     inherit packages;
@@ -214,10 +241,10 @@ in
     pass "zenpkgs-package-registry-contract";
 
   registry-no-retired-package-roots =
-    assert !(pkgs.zenos ? programs);
-    assert !(pkgs.zenos.apps ? advanced);
-    assert !(pkgs.zenos.apps ? utilities);
-    assert pkgs.zenos.apps.audio.swisstag.pname == "swisstag";
+    assert lib.all (name: !(builtins.hasAttr name pkgs.zenos)) [ "apps" "desktops" "libs" "system" "theming" "dev" "programs" ];
+    assert !(pkgs.zenos.byCategories.apps ? advanced);
+    assert !(pkgs.zenos.byCategories.apps ? utilities);
+    assert pkgs.zenos.byCategories.apps.audio.swisstag.pname == "swisstag";
     pass "zenpkgs-no-retired-package-roots";
 
   registry-counts =
@@ -246,44 +273,52 @@ in
 
   registry-build-providers =
     assert
-      map (entry: entry.id) buildEntries == [
-        "pkgs.apps.accessibility.hapticspp"
-        "pkgs.apps.ai.codex"
-        "pkgs.apps.ai.codex-desktop"
-        "pkgs.apps.ai.codex-telegram-bot"
-        "pkgs.apps.ai.opencode"
-        "pkgs.apps.ai.opencode-telegram-bot"
-        "pkgs.apps.ai.takopi"
-        "pkgs.apps.audio.swisstag"
-        "pkgs.apps.browsers.hyperbeam"
-        "pkgs.apps.connectivity.zbridge"
-        "pkgs.apps.development.gnome-builder-lsp"
-        "pkgs.apps.gaming.alvr-zenos-compat"
-        "pkgs.apps.gaming.emulators.ryubing-canary"
-        "pkgs.apps.gaming.fnuidesktop-vr"
-        "pkgs.apps.gaming.ovr-advanced-settings"
-        "pkgs.apps.gaming.wlx-overlay-s"
-        "pkgs.apps.gaming.zenos-vr-tools"
-        "pkgs.apps.graphics.blender-hip"
-        "pkgs.apps.graphics.select-for-figma"
-        "pkgs.apps.system.zenos.zenos-rebuild"
-        "pkgs.apps.video.tubefin"
-        "pkgs.desktops.gnome.extensions.codex-usage"
-        "pkgs.desktops.gnome.extensions.wiggly"
-        "pkgs.desktops.gnome.extensions.zane-indicator"
-        "pkgs.desktops.gnome.extensions.zen-vision"
-        "pkgs.libs.libfreenect2"
-        "pkgs.system.kernel.popcorn"
-        "pkgs.system.kernel.popcorn-zen4"
-        "pkgs.system.zenfs"
-        "pkgs.system.zenos-oobe-mode"
-        "pkgs.system.zenos-recovery-tools"
-        "pkgs.system.zenos-refind-installer"
-        "pkgs.system.zenos-setup"
-        "pkgs.system.zenos-shell-defaults"
-        "pkgs.theming.system.zenos-branding"
-        "pkgs.theming.system.zenos-plymouth"
-        "pkgs.theming.system.zenos-refind-theme"
+      map (entry: "${lib.concatStringsSep "." entry.categoryTarget}")
+        (lib.sort (a: lib.concatStringsSep "/" a.categoryTarget < lib.concatStringsSep "/" b.categoryTarget) buildEntries) == [
+        "apps.accessibility.hapticspp"
+        "apps.ai.codex"
+        "apps.ai.codex-desktop"
+        "apps.ai.codex-telegram-bot"
+        "apps.ai.opencode"
+        "apps.ai.opencode-telegram-bot"
+        "apps.ai.takopi"
+        "apps.audio.swisstag"
+        "apps.browsers.hyperbeam"
+        "apps.browsers.jupiter"
+        "apps.connectivity.zbridge"
+        "apps.development.gnome-builder-lsp"
+        "apps.gaming.alvr-zenos-compat"
+        "apps.gaming.emulators.ryubing-canary"
+        "apps.gaming.emulators.yuzu-mainline"
+        "apps.gaming.fnuidesktop-vr"
+        "apps.gaming.ovr-advanced-settings"
+        "apps.gaming.wlx-overlay-s"
+        "apps.gaming.zenos-vr-tools"
+        "apps.graphics.blender-hip"
+        "apps.graphics.select-for-figma"
+        "apps.system.zenos.zenos-rebuild"
+        "apps.video.tubefin"
+        "desktops.gnome.extensions.codex-usage"
+        "desktops.gnome.extensions.wiggly"
+        "desktops.gnome.extensions.zane-indicator"
+        "desktops.gnome.extensions.zen-vision"
+        "libs.libfreenect2"
+        "system.kernel.popcorn"
+        "system.kernel.popcorn-zen4"
+        "system.zenfs"
+        "system.zenos-oobe-mode"
+        "system.zenos-recovery-tools"
+        "system.zenos-refind-installer"
+        "system.zenos-setup"
+        "system.zenos-shell-defaults"
+        "theming.apps.firefox-gnome"
+        "theming.fonts.zero.mono"
+        "theming.fonts.zero.mono-thin"
+        "theming.fonts.zero.regular"
+        "theming.icons.adwaita-hacks"
+        "theming.system.zenos-branding"
+        "theming.system.zenos-plymouth"
+        "theming.system.zenos-refind-theme"
       ];
     assert lib.all (
       entry:
@@ -294,8 +329,8 @@ in
       !(entry ? sourcePath)
       && !entry.dependenciesDeclared
       && !(entry.meta ? dependencies)
-      && lib.hasInfix "/pkgs/${pathKey entry}.zpkg:" entry.location
-      && lib.hasSuffix "/builds/pkgs/${pathKey entry}.zpkg.nix" (toString entry.buildFile)
+      && lib.hasInfix "/pkgs/${lib.concatStringsSep "/" entry.categoryTarget}.zpkg:" entry.location
+      && lib.hasSuffix "/builds/pkgs/${lib.concatStringsSep "/" entry.categoryTarget}.zpkg.nix" (toString entry.buildFile)
       && builtins.pathExists entry.buildFile
       && package._zmeta.id == entry.id
       && package._zmeta.interface == entry.provider
@@ -335,15 +370,16 @@ in
   registry-path-identities =
     assert
       map (entry: entry.id) repeated.packages == [
-        "pkgs.apps.first.tool"
-        "pkgs.dev.second.tool"
+        "pkgs.net.example.second-tool"
+        "pkgs.org.example.first-tool"
       ];
-    assert repeatedTree.apps.first.tool.drvPath == pkgs.hello.drvPath;
-    assert repeatedTree.dev.second.tool.drvPath == pkgs.hello.drvPath;
+    assert repeatedTree.org.example.first-tool.drvPath == pkgs.hello.drvPath;
+    assert repeatedTree.net.example.second-tool.drvPath == pkgs.hello.drvPath;
     assert
       builtins.attrNames repeatedTree == [
-        "apps"
-        "dev"
+        "byCategories"
+        "net"
+        "org"
       ];
     assert !(repeatedTree ? tool) && !(repeatedTree ? hello) && !(repeatedTree ? legacy);
     assert
@@ -369,7 +405,22 @@ in
             '';
           }
         )
-      ])).apps.first.tool._zmeta.id == "pkgs.apps.first.tool";
+      ])).org.example.first-tool._zmeta.id == "pkgs.org.example.first-tool";
+    assert repeatedTree.byCategories.apps.first.tool.drvPath == repeatedTree.org.example.first-tool.drvPath;
+    assert repeatedTree.byCategories.apps.first.tool.outPath == repeatedTree.org.example.first-tool.outPath;
+    assert repeatedTree.byCategories.dev.second.tool.drvPath == repeatedTree.net.example.second-tool.drvPath;
+    assert !(repeatedTree ? apps) && !(repeatedTree ? dev);
+    assert builtins.length repeated.packages == 2;
+    assert (interface.buildPackageTree { inherit (pkgs) hello; } (registryWith [
+      (firstEntry // { categoryTarget = [ "dev" "moved-tool" ]; })
+    ])).org.example.first-tool.drvPath == repeatedTree.org.example.first-tool.drvPath;
+    assert repeatedTree.org.example.first-tool.src == pkgs.hello.src;
+    assert repeatedTree.byCategories.apps.first.tool.src == repeatedTree.org.example.first-tool.src;
+    assert pkgs.zenos.legacy.hello.src == pkgs.hello.src;
+    assert firstEntry.id == "pkgs.org.example.first-tool";
+    assert firstEntry.meta.id == "org.example.first-tool";
+    assert firstEntry.target == [ "org" "example" "first-tool" ];
+    assert firstEntry.categoryTarget == [ "apps" "first" "tool" ];
     assert firstEntry.buildFile == fixtureBundle + "/builds/pkgs/apps/first/tool.zpkg.nix";
     assert firstEntry.provider == descriptor.provider;
     assert !firstEntry.dependenciesDeclared;
@@ -389,27 +440,41 @@ in
         }
       )
     );
-    assert rejects (
-      adapt (
-        bundle
-        // {
-          sources = [
-            structure
-            {
-              kind = "zpkg";
-              path = "pkgs/legacy/tool.zpkg";
-            }
-          ];
-        }
-      )
-    );
+    assert lib.all (path: rejects (adapt (bundle // {
+      sources = [ structure { kind = "zpkg"; inherit path; } ];
+    }))) [ "pkgs/legacy/tool.zpkg" "pkgs/apps/package.zpkg" ];
     assert rejects (
       interface.registryDocs (registryWith [
         firstEntry
         firstEntry
       ])
     );
+    # Isolate duplicate canonical identity from duplicate category detection.
+    assert rejects (interface.registryDocs (registryWith [
+      firstEntry
+      (firstEntry // { categoryTarget = [ "dev" "other-tool" ]; })
+    ]));
+    # Isolate category leaf/branch collision with a distinct, valid canonical ID.
+    assert rejects (interface.registryDocs (registryWith [
+      firstEntry
+      (firstEntry // {
+        id = "pkgs.net.example.category-child";
+        target = [ "net" "example" "category-child" ];
+        meta = firstEntry.meta // { id = "net.example.category-child"; };
+        categoryTarget = firstEntry.categoryTarget ++ [ "child" ];
+      })
+    ]));
     assert rejects (interface.registryDocs (registryWith [ (firstEntry // { id = "tool"; }) ]));
+    assert rejects (adapter.decodeInterface (descriptor // { metadata = removeAttrs descriptor.metadata [ "id" ]; }));
+    assert lib.all (id: rejects (adapter.decodeInterface (descriptor // {
+      metadata = descriptor.metadata // { id = literal id; };
+    }))) [ "" "tool" "org..tool" ".org.tool" "org.tool." "org/example/tool" 123 ];
+    assert rejects (interface.registryDocs (registryWith [ (removeAttrs firstEntry [ "categoryTarget" ]) ]));
+    assert rejects (interface.registryDocs (registryWith [
+      firstEntry
+      (firstEntry // { id = "pkgs.net.example.other"; target = [ "net" "example" "other" ];
+        meta = firstEntry.meta // { id = "net.example.other"; }; })
+    ]));
     assert rejects (
       interface.registryDocs (registryWith [
         (
@@ -429,8 +494,10 @@ in
         (
           firstEntry
           // {
-            id = "pkgs.apps.first.tool.child";
+            id = "pkgs.org.example.first-tool.child";
             target = firstEntry.target ++ [ "child" ];
+            categoryTarget = [ "apps" "other" ];
+            meta = firstEntry.meta // { id = "org.example.first-tool.child"; };
           }
         )
       ])
@@ -490,6 +557,7 @@ in
   registry-metadata-defaults =
     assert
       incomplete.meta == {
+        id = "org.example.first-tool";
         name = "";
         summary = "";
         description = "";
@@ -539,6 +607,7 @@ in
           {
             namespace = "pkgs";
             path = [
+              "byCategories"
               "libs"
               "general"
               "tool"
@@ -549,6 +618,7 @@ in
           {
             namespace = "pkgs";
             path = [
+              "byCategories"
               "libs"
               "build"
               "tool"
@@ -559,6 +629,7 @@ in
           {
             namespace = "pkgs";
             path = [
+              "byCategories"
               "libs"
               "runtime"
               "tool"
@@ -659,7 +730,7 @@ in
               metadata = record.meta;
               inherit (record) dependenciesDeclared;
             };
-        }).apps.first.tool;
+        }).org.example.first-tool;
       emptyScopes = {
         general = [ ];
         build = [ ];

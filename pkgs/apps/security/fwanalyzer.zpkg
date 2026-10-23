@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.fwanalyzer";
   name = "FwAnalyzer";
   summary = "Tool to analyze filesystem images";
   description = ''

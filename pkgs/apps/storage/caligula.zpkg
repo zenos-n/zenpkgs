@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.caligula";
   name = "Caligula";
   summary = "User-friendly, lightweight TUI for disk imaging";
   description = ''

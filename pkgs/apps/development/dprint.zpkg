@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dprint";
   name = "dprint";
   summary = "Code formatting platform written in Rust";
   description = ''

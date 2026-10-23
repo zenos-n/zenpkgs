@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitui";
   name = "GitUI";
   summary = "Blazing fast terminal-ui for Git written in Rust";
   description = ''

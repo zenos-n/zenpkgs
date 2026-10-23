@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.tar";
   name = "tar";
   summary = "Curated tar package for ZenOS";
   description = ''

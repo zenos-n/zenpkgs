@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.wget";
   name = "wget";
   summary = "Curated wget package for ZenOS";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Loupe";
   name = "Loupe";
   summary = "Simple image viewer application written with GTK4 and Rust";
   description = ''

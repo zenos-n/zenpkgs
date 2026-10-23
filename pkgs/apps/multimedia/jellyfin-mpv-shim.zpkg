@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.multimedia.jellyfin-mpv-shim";
   name = "Jellyfin MPV Shim";
   summary = "Allows casting of videos to MPV via the jellyfin mobile and web app";
   description = ''

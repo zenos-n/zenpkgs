@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.maps.organicmaps";
   name = "Organic Maps";
   summary = "Detailed Offline Maps for Travellers, Tourists, Hikers and Cyclists";
   description = ''

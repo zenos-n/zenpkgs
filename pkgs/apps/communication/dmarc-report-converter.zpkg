@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.dmarc-report-converter";
   name = "DMARC Report Converter";
   summary = "Convert DMARC report files from xml to human-readable formats";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fclones-gui";
   name = "fclones GUI";
   summary = "Interactive duplicate file remover";
   description = ''

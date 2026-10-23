@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-repo";
   name = "Repo";
   summary = "Android's repo management tool";
   description = ''

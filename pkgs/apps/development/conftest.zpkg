@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.conftest";
   name = "Conftest";
   summary = "Write tests against structured configuration data";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.sonic-visualiser";
   name = "Sonic Visualiser";
   summary = "View and analyse contents of music audio files";
   description = ''

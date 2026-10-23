@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.wofi-pass";
   name = "wofi-pass";
   summary = "Script to make wofi work with password-store";
   description = ''

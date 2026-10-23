@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.finance.reckon";
   name = "Reckon";
   summary = "Flexibly import bank account CSV files into Ledger for command line accounting";
   description = ''

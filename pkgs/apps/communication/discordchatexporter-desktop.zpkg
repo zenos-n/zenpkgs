@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.discordchatexporter-desktop";
   name = "DiscordChatExporter";
   summary = "Tool to export Discord chat logs to a file (GUI version)";
   description = ''

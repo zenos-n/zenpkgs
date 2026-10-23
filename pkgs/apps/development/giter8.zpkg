@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.giter8";
   name = "Giter8";
   summary = "A command line tool to apply templates defined on GitHub";
   description = ''

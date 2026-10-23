@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.ekho";
   name = "Ekho";
   summary = "Chinese text-to-speech software";
   description = ''

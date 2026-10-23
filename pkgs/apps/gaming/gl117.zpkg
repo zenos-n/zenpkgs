@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gl117";
   name = "GL-117";
   summary = "Air combat simulator";
   description = ''

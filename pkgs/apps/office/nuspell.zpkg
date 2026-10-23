@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.nuspell";
   name = "Nuspell";
   summary = "Free and open source C++ spell checking library";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.musicfree-desktop";
   name = "MusicFree";
   summary = "Customizable music player with plugin support";
   description = ''

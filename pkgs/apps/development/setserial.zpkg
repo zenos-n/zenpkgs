@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.setserial";
   name = "setserial";
   summary = "Serial port configuration utility";
   description = ''

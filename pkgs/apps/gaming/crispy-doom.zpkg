@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.crispy-doom";
   name = "Crispy Doom";
   summary = "Limit-removing enhanced-resolution Doom source port based on Chocolate Doom";
   description = ''

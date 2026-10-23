@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.radio.hamlib";
   name = "Hamlib";
   summary = "Runtime library to control radio transceivers and receivers";
   description = ''

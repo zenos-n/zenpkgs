@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.easyeffects";
   name = "Easy Effects";
   summary = "Audio effects for PipeWire applications";
   description = ''

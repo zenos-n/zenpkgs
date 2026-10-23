@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gnonograms";
   name = "Gnonograms";
   summary = "Nonograms puzzle game";
   description = ''

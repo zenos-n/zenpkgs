@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.sqlfluff";
   name = "SQLFluff";
   summary = "SQL linter and auto-formatter";
   description = ''

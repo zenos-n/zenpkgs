@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.aria2";
   name = "aria2";
   summary = "Lightweight, multi-protocol, multi-source, command-line download utility";
   description = ''

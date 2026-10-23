@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dwdiff";
   name = "dwdiff";
   summary = "Front-end for the diff program that operates at the word level instead of the line level";
   description = ''

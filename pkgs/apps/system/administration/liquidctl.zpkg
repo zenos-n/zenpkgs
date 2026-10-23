@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.liquidctl";
   name = "liquidctl";
   summary = "Cross-platform CLI and Python drivers for AIO liquid coolers and other devices";
   description = ''

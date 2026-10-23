@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.opentrack";
   name = "OpenTrack";
   summary = "Head tracking software for MS Windows, Linux, and Apple OSX";
   description = ''

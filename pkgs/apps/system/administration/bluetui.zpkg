@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.bluetui";
   name = "bluetui";
   summary = "TUI for managing bluetooth on Linux";
   description = ''

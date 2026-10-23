@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.structorizer";
   name = "Structorizer";
   summary = "Create Nassi-Shneiderman diagrams (NSD)";
   description = ''

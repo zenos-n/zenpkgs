@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.zsh";
   name = "zsh";
   summary = "Curated zsh package for ZenOS";
   description = ''

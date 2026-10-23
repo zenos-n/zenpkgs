@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.yarn";
   name = "Yarn";
   summary = "Fast, reliable, and secure dependency management for javascript";
   description = ''

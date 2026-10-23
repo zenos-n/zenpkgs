@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-pkgs";
   name = "git-pkgs";
   summary = "Git subcommand for analyzing package/dependency usage in git repositories over time";
   description = ''

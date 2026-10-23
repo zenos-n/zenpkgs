@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.filebrowser-quantum";
   name = "File Browser Quantum";
   summary = "Access and manage your files from the web";
   description = ''

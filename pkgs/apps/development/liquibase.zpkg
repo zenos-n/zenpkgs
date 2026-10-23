@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.liquibase";
   name = "Liquibase";
   summary = "Version Control for your database";
   description = ''

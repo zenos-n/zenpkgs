@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.geany";
   name = "Geany";
   summary = "Small and lightweight IDE";
   description = ''

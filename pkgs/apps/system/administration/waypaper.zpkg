@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.waypaper";
   name = "Waypaper";
   summary = "GUI wallpaper setter for Wayland-based window managers";
   description = ''

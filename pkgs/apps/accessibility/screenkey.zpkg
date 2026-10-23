@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.screenkey";
   name = "Screenkey";
   summary = "Screencast tool to display your keys inspired by Screenflick";
   description = ''

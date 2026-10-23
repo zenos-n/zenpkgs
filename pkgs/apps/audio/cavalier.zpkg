@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.cavalier";
   name = "Cavalier";
   summary = "Visualize audio with CAVA";
   description = ''

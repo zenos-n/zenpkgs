@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.gspeech";
   name = "gSpeech";
   summary = "Minimal GUI for the Text To Speech 'Svox Pico'. Read clipboard or selected text in different languages and manage it : pause, stop, replay";
   description = ''

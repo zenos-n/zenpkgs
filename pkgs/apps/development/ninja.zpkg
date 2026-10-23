@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ninja";
   name = "Ninja";
   summary = "Small build system with a focus on speed";
   description = ''

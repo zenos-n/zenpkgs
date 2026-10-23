@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ydiff";
   name = "ydiff";
   summary = "View colored, incremental diff in workspace or from stdin with side by side and auto pager support (Was \"cdiff\")";
   description = ''

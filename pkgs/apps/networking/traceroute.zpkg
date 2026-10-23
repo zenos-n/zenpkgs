@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.traceroute";
   name = "traceroute";
   summary = "Tracks the route taken by packets over an IP network";
   description = ''

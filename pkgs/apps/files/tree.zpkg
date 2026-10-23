@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.tree";
   name = "tree";
   summary = "Command to produce a depth indented directory listing";
   description = ''

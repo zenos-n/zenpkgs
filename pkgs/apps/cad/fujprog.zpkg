@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.fujprog";
   name = "fujprog";
   summary = "JTAG programmer for the ULX3S and ULX2S open hardware FPGA development boards";
   description = ''

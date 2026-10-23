@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.adrs";
   name = "adrs";
   summary = "Command-line tool for managing Architectural Decision Records";
   description = ''

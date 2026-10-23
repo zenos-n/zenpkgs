@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.tweaks";
   name = "gnome-tweaks";
   summary = "Curated gnome-tweaks package for ZenOS";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fromager";
   name = "Fromager";
   summary = "Build Python wheels from source distributions";
   description = ''

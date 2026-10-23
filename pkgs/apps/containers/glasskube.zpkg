@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.glasskube";
   name = "Glasskube";
   summary = "Missing Package Manager for Kubernetes featuring a GUI and a CLI";
   description = ''

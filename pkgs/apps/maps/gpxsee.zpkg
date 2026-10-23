@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.maps.gpxsee";
   name = "GPXSee";
   summary = "GPS log file viewer and analyzer";
   description = ''

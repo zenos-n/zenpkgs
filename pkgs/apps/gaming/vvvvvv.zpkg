@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.vvvvvv";
   name = "VVVVVV";
   summary = "A retro-styled platform game";
   description = ''

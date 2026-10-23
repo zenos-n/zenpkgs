@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.protonvpn-gui";
   name = "Proton VPN";
   summary = "Official Proton VPN client";
   description = ''

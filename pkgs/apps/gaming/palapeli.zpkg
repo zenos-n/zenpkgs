@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.palapeli";
   name = "Palapeli";
   summary = "Palapeli is a single-player jigsaw puzzle game";
   description = ''

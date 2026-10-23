@@ -1,4 +1,5 @@
 _meta = {
+  id = "com.openai.codex.desktop";
   name = "Codex Desktop";
   summary = "Official OpenAI desktop app with Codex and ChatGPT";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.garmindb";
   name = "GarminDB";
   summary = "Download and parse data from Garmin Connect or a Garmin watch";
   description = ''

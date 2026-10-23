@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.esptool";
   name = "esptool";
   summary = "ESP8266 and ESP32 serial bootloader utility";
   description = ''

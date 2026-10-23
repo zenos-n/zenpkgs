@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.dtach";
   name = "dtach";
   summary = "Program that emulates the detach feature of screen";
   description = ''

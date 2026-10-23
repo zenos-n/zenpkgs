@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.openxcom";
   name = "OpenXcom";
   summary = "Open source clone of UFO: Enemy Unknown";
   description = ''

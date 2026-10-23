@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.gnuradio";
   name = "GNU Radio";
   summary = "Software Defined Radio (SDR) software";
   description = ''

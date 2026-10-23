@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.comical";
   name = "Comical";
   summary = "Viewer of CBR and CBZ files, often used to store scanned comics";
   description = ''

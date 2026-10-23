@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.ace-of-penguins";
   name = "Ace of Penguins";
   summary = "Solitaire games in X11";
   description = ''

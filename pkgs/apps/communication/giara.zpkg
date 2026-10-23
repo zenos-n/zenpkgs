@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.giara";
   name = "Giara";
   summary = "Reddit app, built with Python, GTK and Handy; Created with mobile Linux in mind";
   description = ''

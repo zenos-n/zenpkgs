@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.ffpb";
   name = "ffpb";
   summary = "FFmpeg progress formatter to display a nice progress bar and an adaptative ETA timer";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.diylc";
   name = "DIY Layout Creator";
   summary = "Multi platform circuit layout and schematic drawing tool";
   description = ''

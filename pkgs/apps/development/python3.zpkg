@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.python3";
   name = "Python 3";
   summary = "High-level dynamically-typed programming language";
   description = ''

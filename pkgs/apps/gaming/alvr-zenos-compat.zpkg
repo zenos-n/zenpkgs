@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.alvr-zenos-compat";
   name = "alvr-zenos-compat";
   summary = "ALVR with the ZenOS SteamVR compatibility patches";
   description = ''ALVR with the ZenOS SteamVR compatibility patches. Optional migration package; installation does not activate a service.'';

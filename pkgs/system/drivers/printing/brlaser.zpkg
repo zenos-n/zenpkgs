@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.system.drivers.printing.brlaser";
   name = "brlaser";
   summary = "CUPS driver for Brother laser printers";
   description = ''

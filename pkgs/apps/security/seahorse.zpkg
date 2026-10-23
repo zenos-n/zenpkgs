@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.seahorse";
   name = "Seahorse";
   summary = "Application for managing encryption keys and passwords in the GnomeKeyring";
   description = ''

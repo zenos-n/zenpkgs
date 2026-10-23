@@ -9,10 +9,10 @@ _meta = {
 
 enable = enableOption {
   s! {
-    environment.systemPackages = [ $pkgs.desktops.gnome.extensions.dash-stacks ];
+    environment.systemPackages = [ $pkgs.byCategories.desktops.gnome.extensions.dash-stacks ];
   };
   u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.desktops.gnome.extensions.dash-stacks.extensionUuid ];
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.byCategories.desktops.gnome.extensions.dash-stacks.extensionUuid ];
   };
 };
 

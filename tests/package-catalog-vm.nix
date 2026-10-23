@@ -11,7 +11,7 @@ pkgs.testers.runNixOSTest {
     boot.initrd.verbose = lib.mkForce true;
     environment.systemPackages = [ zenDsl pkgs.python3 pkgs.nix ];
     zenos.system.installed-base.enable = true;
-    zenos.system.packages.apps = {
+    zenos.system.packages.byCategories.apps = {
       audio.sox = true;
       backup.restic = true;
       science.numbat = true;
@@ -24,7 +24,7 @@ pkgs.testers.runNixOSTest {
       home = "/Users/catalog";
     };
     home-manager.users.catalog.home.stateVersion = "26.05";
-    zenos.users.catalog.packages.apps.files.bat = true;
+    zenos.users.catalog.packages.byCategories.apps.files.bat = true;
     system.stateVersion = "26.05";
     virtualisation = {
       memorySize = 3072;

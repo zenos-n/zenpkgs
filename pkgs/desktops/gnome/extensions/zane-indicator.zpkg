@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.zane-indicator";
   name = "zane-indicator";
   summary = "GNOME Shell zane-indicator extension";
   description = ''Package the existing zane-indicator GNOME Shell extension. Installing it does not enable the extension.'';

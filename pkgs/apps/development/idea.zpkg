@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.idea";
   name = "IntelliJ IDEA";
   summary = "Java, Kotlin, Groovy and Scala IDE from JetBrains";
   description = ''

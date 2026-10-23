@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.zynaddsubfx";
   name = "ZynAddSubFX";
   summary = "High quality software synthesizer (Zyn-Fusion GUI)";
   description = ''

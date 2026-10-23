@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dummyhttp";
   name = "dummyhttp";
   summary = "Super simple HTTP server that replies a fixed body with a fixed response code";
   description = ''

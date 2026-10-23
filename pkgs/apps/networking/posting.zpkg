@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.posting";
   name = "Posting";
   summary = "Modern API client that lives in your terminal";
   description = ''

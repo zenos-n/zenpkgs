@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-cola";
   name = "git-cola";
   summary = "Sleek and powerful Git GUI";
   description = ''

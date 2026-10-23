@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.todo-txt-cli";
   name = "todo.txt CLI";
   summary = "Simple plaintext todo list manager";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.algia";
   name = "algia";
   summary = "CLI application for nostr";
   description = ''

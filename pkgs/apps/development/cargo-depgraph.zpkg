@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-depgraph";
   name = "cargo-depgraph";
   summary = "Create dependency graphs for cargo projects using `cargo metadata` and graphviz";
   description = ''

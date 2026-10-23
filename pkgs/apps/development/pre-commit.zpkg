@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.pre-commit";
   name = "pre-commit";
   summary = "Framework for managing and maintaining multi-language pre-commit hooks";
   description = ''

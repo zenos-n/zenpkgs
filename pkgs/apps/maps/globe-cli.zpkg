@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.maps.globe-cli";
   name = "globe-cli";
   summary = "Display an interactive ASCII globe in your terminal";
   description = ''

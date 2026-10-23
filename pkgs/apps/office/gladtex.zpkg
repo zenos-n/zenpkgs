@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.gladtex";
   name = "GladTeX";
   summary = "Embed LaTeX formulas into HTML documents as SVG images";
   description = ''

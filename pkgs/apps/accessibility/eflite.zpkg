@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.eflite";
   name = "EFlite";
   summary = "Speech server for screen readers";
   description = ''

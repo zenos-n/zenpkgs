@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.ganttproject-bin";
   name = "GanttProject";
   summary = "Project scheduling and management";
   description = ''

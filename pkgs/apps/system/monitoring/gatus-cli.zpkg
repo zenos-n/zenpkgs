@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.gatus-cli";
   name = "Gatus CLI";
   summary = "Client for Gatus, an automated developer-oriented status page";
   description = ''

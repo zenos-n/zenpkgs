@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.subversion";
   name = "Apache Subversion";
   summary = "Version control system intended to be a compelling replacement for CVS in the open source community";
   description = ''

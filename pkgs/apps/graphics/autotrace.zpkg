@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.autotrace";
   name = "AutoTrace";
   summary = "Utility for converting bitmap into vector graphics";
   description = ''

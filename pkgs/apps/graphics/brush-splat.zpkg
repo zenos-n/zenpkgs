@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.brush-splat";
   name = "Brush";
   summary = "3D Reconstruction for all";
   description = ''

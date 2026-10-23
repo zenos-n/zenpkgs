@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.pods";
   name = "Pods";
   summary = "Podman desktop application";
   description = ''

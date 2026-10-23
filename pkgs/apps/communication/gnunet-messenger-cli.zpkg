@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.gnunet-messenger-cli";
   name = "GNUnet Messenger CLI";
   summary = "Decentralized, privacy-preserving networking framework for secure peer-to-peer communication";
   description = ''

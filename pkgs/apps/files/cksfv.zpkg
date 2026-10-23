@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.cksfv";
   name = "cksfv";
   summary = "Tool for verifying files against a SFV checksum file";
   description = ''

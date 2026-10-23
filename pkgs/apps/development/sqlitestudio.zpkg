@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.sqlitestudio";
   name = "SQLiteStudio";
   summary = "Free, open source, multi-platform SQLite database manager";
   description = ''

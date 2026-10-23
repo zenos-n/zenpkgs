@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.nyxt";
   name = "Nyxt";
   summary = "Infinitely extensible web-browser (with Lisp development files using WebKitGTK platform port)";
   description = ''

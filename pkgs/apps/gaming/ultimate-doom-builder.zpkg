@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.ultimate-doom-builder";
   name = "Ultimate Doom Builder";
   summary = "Advanced Doom map editor based on Doom Builder 2 with Mono support";
   description = ''

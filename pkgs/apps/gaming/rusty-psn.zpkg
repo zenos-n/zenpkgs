@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.rusty-psn";
   name = "rusty-psn";
   summary = "Simple tool to grab updates for PS3 games, directly from Sony's servers using their updates API";
   description = ''

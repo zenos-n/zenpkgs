@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ldtk";
   name = "LDtk";
   summary = "Modern, lightweight and efficient 2D level editor";
   description = ''

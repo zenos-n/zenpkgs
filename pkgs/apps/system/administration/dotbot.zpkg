@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.dotbot";
   name = "Dotbot";
   summary = "Tool that bootstraps your dotfiles";
   description = ''

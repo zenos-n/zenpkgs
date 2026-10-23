@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.freenukum";
   name = "FreeNukum";
   summary = "Clone of the original Duke Nukum 1 Jump'n Run game";
   description = ''

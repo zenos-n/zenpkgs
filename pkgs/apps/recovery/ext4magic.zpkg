@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.ext4magic";
   name = "ext4magic";
   summary = "Recover / undelete files from ext3 or ext4 partitions";
   description = ''

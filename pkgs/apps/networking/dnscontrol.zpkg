@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.dnscontrol";
   name = "DNSControl";
   summary = "Synchronize your DNS to multiple providers from a simple DSL";
   description = ''

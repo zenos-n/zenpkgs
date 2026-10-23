@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.guitarix";
   name = "Guitarix";
   summary = "Virtual guitar amplifier for Linux running with JACK";
   description = ''

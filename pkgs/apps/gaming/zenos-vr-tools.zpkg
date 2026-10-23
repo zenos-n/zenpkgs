@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.zenos-vr-tools";
   name = "zenos-vr-tools";
   summary = "ZenOS VR launcher, manager and overlay supervisor";
   description = ''ZenOS VR launcher, manager and overlay supervisor. Optional migration package; installation does not activate a service.'';
@@ -10,8 +11,8 @@ _meta = {
 
 build = $pkgs.legacy.callPackage ($lib.zenPackageSources.vrTools + "/package.nix") {
   pkgs = $pkgs.legacy;
-  alvr = $pkgs.apps.gaming.alvr-zenos-compat;
-  fnuidesktop-vr = $pkgs.apps.gaming.fnuidesktop-vr;
-  ovr-advanced-settings = $pkgs.apps.gaming.ovr-advanced-settings;
-  wlx-overlay-s = $pkgs.apps.gaming.wlx-overlay-s;
+  alvr = $pkgs.byCategories.apps.gaming.alvr-zenos-compat;
+  fnuidesktop-vr = $pkgs.byCategories.apps.gaming.fnuidesktop-vr;
+  ovr-advanced-settings = $pkgs.byCategories.apps.gaming.ovr-advanced-settings;
+  wlx-overlay-s = $pkgs.byCategories.apps.gaming.wlx-overlay-s;
 };

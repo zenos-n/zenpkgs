@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.valkey";
   name = "Valkey";
   summary = "High-performance data structure server that primarily serves key/value workloads";
   description = ''

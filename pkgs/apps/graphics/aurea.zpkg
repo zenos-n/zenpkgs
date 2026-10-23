@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.aurea";
   name = "Aurea";
   summary = "Flatpak metainfo banner previewer";
   description = ''

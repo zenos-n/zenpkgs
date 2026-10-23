@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-xet";
   name = "git-xet";
   summary = "Git LFS plugin that uploads and downloads using the Xet protocol";
   description = ''

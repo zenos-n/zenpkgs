@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cocogitto";
   name = "Cocogitto";
   summary = "Set of cli tools for the conventional commit and semver specifications";
   description = ''

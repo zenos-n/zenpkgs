@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.nwg-displays";
   name = "nwg-displays";
   summary = "Output management utility for Sway, Hyprland and Niri";
   description = ''

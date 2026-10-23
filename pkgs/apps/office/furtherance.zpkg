@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.furtherance";
   name = "Furtherance";
   summary = "Track your time without being tracked";
   description = ''

@@ -26,7 +26,7 @@ enable = enableOption {
       }
     ];
     environment.systemPackages = [
-      ($pkgs.system.zenboot.override {
+      ($pkgs.byCategories.system.zenboot.override {
         resolution = $path.resolution;
         scannedDevices = $path.scannedDevices;
         extraIncludedFiles = $path.extraIncludedFiles;
@@ -42,7 +42,7 @@ enable = enableOption {
     ];
     system.activationScripts.zenboot = ''
       echo " [ZenBoot] Updating bootloader configuration..."
-      ${$pkgs.system.zenboot.override {
+      ${$pkgs.byCategories.system.zenboot.override {
         resolution = $path.resolution;
         scannedDevices = $path.scannedDevices;
         extraIncludedFiles = $path.extraIncludedFiles;
@@ -60,7 +60,7 @@ enable = enableOption {
       enable = true;
       theme = "zenos";
       themePackages = [
-        ($pkgs.theming.system.zenos-plymouth.override {
+        ($pkgs.byCategories.theming.system.zenos-plymouth.override {
           distroName = $path.distroName;
           releaseVersion = $cfg.legacy.system.nixos.label;
           deviceName = if ($cfg.system.branding.prettyName or null) != null

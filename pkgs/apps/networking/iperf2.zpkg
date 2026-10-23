@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.iperf2";
   name = "iperf 2";
   summary = "Tool to measure IP bandwidth using UDP or TCP";
   description = ''

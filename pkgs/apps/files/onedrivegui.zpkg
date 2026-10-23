@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.onedrivegui";
   name = "OneDriveGUI";
   summary = "Simple GUI for Linux OneDrive Client, with multi-account support";
   description = ''

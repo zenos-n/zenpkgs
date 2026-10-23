@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.cudatext";
   name = "CudaText";
   summary = "Cross-platform code editor";
   description = ''

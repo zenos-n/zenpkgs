@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.open-ecard";
   name = "Open eCard";
   summary = "Client implementation of the eCard API framework and electronic identity standards";
   description = ''

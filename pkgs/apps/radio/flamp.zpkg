@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.flamp";
   name = "FLAMP";
   summary = "Digital modem program";
   description = ''

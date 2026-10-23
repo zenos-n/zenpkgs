@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.roomarranger";
   name = "Room Arranger";
   summary = "3D room planning software";
   description = ''

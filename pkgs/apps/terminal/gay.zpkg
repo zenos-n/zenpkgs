@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.gay";
   name = "gay";
   summary = "Colour your text / terminal to be more gay";
   description = ''

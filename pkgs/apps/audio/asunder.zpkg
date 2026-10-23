@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.asunder";
   name = "Asunder";
   summary = "Graphical Audio CD ripper and encoder for Linux";
   description = ''

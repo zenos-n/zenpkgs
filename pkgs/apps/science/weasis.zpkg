@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.science.weasis";
   name = "Weasis";
   summary = "Multipurpose standalone and web-based DICOM viewer with a highly modular architecture";
   description = ''

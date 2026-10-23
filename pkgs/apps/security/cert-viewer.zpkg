@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.cert-viewer";
   name = "Certificate Viewer";
   summary = "Admin tool to view and inspect multiple x509 Certificates";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.networking.sftpgo";
   name = "SFTPGo";
   summary = "Fully featured and highly configurable SFTP server";
   description = ''

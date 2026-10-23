@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.curl";
   name = "curl";
   summary = "Curated curl package for ZenOS";
   description = ''

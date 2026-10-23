@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.svlint";
   name = "svlint";
   summary = "SystemVerilog linter";
   description = ''

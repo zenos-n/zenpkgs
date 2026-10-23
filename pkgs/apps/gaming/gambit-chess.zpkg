@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gambit-chess";
   name = "Gambit";
   summary = "Play chess in your terminal";
   description = ''

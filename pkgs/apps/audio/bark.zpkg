@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.bark";
   name = "Bark";
   summary = "Live sync audio streaming for local networks";
   description = ''

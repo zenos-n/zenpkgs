@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.shell-gpt";
   name = "ShellGPT";
   summary = "Access ChatGPT from your terminal";
   description = ''

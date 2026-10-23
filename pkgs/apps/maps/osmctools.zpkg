@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.maps.osmctools";
   name = "osmctools";
   summary = "Command line tools for transforming Open Street Map files";
   description = ''

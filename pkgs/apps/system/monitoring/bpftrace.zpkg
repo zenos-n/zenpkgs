@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.bpftrace";
   name = "bpftrace";
   summary = "High-level tracing language for Linux eBPF";
   description = ''

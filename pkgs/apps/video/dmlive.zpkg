@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.dmlive";
   name = "dmlive";
   summary = "Tool to play and record videos or live streams with danmaku";
   description = ''

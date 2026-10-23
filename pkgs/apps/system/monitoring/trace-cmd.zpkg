@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.trace-cmd";
   name = "trace-cmd";
   summary = "User-space tools for the Linux kernel ftrace subsystem";
   description = ''

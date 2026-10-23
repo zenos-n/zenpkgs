@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.typst";
   name = "Typst";
   summary = "New markup-based typesetting system that is powerful and easy to learn";
   description = ''

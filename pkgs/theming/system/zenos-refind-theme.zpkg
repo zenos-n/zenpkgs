@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.theming.system.zenos-refind-theme";
   name = "ZenOS rEFInd theme";
   summary = "Provides the original ZenOS boot picker theme";
   description = ''Packages the unchanged rEFInd configuration, icons, selections, and background from zenos-old.'';

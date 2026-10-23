@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ride";
   name = "RIDE";
   summary = "Remote IDE for Dyalog APL";
   description = ''

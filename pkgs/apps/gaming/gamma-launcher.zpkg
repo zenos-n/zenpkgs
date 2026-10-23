@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gamma-launcher";
   name = "GAMMA Launcher";
   summary = "Python cli to download S.T.A.L.K.E.R. GAMMA";
   description = ''

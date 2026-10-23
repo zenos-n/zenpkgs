@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.sieve-editor-gui";
   name = "Sieve Editor";
   summary = "Activate, edit, delete and add Sieve scripts with a convenient interface";
   description = ''

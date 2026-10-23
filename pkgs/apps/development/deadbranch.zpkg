@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.deadbranch";
   name = "Deadbranch";
   summary = "Clean up stale git branches safely";
   description = ''

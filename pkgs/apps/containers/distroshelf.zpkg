@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.distroshelf";
   name = "Distroshelf";
   summary = "GUI for Distrobox Containers";
   description = ''

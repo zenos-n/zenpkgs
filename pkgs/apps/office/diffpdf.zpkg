@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.diffpdf";
   name = "DiffPDF";
   summary = "Tool for diffing pdf files visually or textually";
   description = ''

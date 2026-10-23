@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Calculator";
   name = "GNOME Calculator";
   summary = "Application that solves mathematical equations and is suitable as a default application in a Desktop environment";
   description = ''

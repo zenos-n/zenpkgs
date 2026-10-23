@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.diffuse";
   name = "Diffuse";
   summary = "Graphical tool for merging and comparing text files";
   description = ''

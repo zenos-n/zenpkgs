@@ -116,7 +116,7 @@ _meta = {
   default = null;
 };
   s!! {
-    systemd.services.libvirtd.path = $lib.mkIf ($path.libvirt.socketNetworkTransport != null) ($lib.mkIf ($path.libvirt.enable == true && $path.libvirt.socketNetworkTransport) [ $pkgs.apps.virtualization.passt ]);
+    systemd.services.libvirtd.path = $lib.mkIf ($path.libvirt.socketNetworkTransport != null) ($lib.mkIf ($path.libvirt.enable == true && $path.libvirt.socketNetworkTransport) [ $pkgs.byCategories.apps.virtualization.passt ]);
   };
 };
 

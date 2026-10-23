@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cppman";
   name = "cppman";
   summary = "Terminal viewer for C++ 98/11/14 manual pages";
   description = ''

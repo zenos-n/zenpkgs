@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.hamster";
   name = "Hamster";
   summary = "Time tracking application";
   description = ''

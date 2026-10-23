@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.remmina";
   name = "Remmina";
   summary = "Remote desktop client written in GTK";
   description = ''

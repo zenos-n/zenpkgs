@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.qdrant";
   name = "Qdrant";
   summary = "Vector Search Engine for the next generation of AI applications";
   description = ''

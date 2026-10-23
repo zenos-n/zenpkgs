@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.wike";
   name = "Wike";
   summary = "Wikipedia Reader for the GNOME Desktop";
   description = ''

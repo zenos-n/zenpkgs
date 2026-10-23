@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.infrastructure.railway";
   name = "Railway CLI";
   summary = "Railway.app CLI";
   description = ''

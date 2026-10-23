@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.dash-mpd-cli";
   name = "dash-mpd-cli";
   summary = "Download media content from a DASH-MPEG or DASH-WebM MPD manifest";
   description = ''

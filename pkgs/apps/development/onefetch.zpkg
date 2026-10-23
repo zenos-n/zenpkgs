@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.onefetch";
   name = "onefetch";
   summary = "Git repository summary on your terminal";
   description = ''

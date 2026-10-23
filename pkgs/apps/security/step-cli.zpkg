@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.step-cli";
   name = "step-cli";
   summary = "Zero trust swiss army knife for working with X509, OAuth, JWT, OATH OTP, etc";
   description = ''

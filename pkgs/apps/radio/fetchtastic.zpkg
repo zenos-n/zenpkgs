@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.fetchtastic";
   name = "Fetchtastic";
   summary = "Utility for downloading and managing the latest Meshtastic firmware releases";
   description = ''

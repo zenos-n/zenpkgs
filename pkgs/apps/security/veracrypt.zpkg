@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.security.veracrypt";
   name = "VeraCrypt";
   summary = "Free Open-Source filesystem on-the-fly encryption";
   description = ''

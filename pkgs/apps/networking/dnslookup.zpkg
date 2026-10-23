@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.dnslookup";
   name = "dnslookup";
   summary = "Simple command line utility to make DNS lookups to the specified server";
   description = ''

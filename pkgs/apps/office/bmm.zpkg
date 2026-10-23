@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.bmm";
   name = "bmm";
   summary = "Get to your bookmarks in a flash";
   description = ''

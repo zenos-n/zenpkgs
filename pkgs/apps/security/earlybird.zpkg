@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.earlybird";
   name = "EarlyBird";
   summary = "Sensitive data detection tool capable of scanning source code repositories for passwords, key files, and more";
   description = ''

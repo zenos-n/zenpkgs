@@ -47,7 +47,7 @@ in
 
     setupPackage = lib.mkOption {
       type = lib.types.package;
-      example = lib.literalExpression "pkgs.zenos.setup";
+      example = lib.literalExpression "pkgs.zenos.byCategories.setup";
       description = ''
         Setup application package launched for OOBE
 
@@ -57,7 +57,7 @@ in
 
     extensionPackage = lib.mkOption {
       type = lib.types.package;
-      example = lib.literalExpression "pkgs.zenos.oobe-extension";
+      example = lib.literalExpression "pkgs.zenos.byCategories.oobe-extension";
       description = ''
         GNOME Shell extension and mode package used by OOBE
 

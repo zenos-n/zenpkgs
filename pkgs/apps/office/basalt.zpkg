@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.basalt";
   name = "Basalt";
   summary = "TUI Application to manage Obsidian notes directly from the terminal";
   description = ''

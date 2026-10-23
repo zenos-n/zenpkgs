@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.rusty-path-of-building";
   name = "Rusty Path of Building";
   summary = "A cross-platform runtime for Path of Building and Path of Building 2.";
   description = ''

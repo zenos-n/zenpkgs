@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.science.numbat";
   name = "Numbat";
   summary = "High precision scientific calculator with full support for physical units";
   description = ''

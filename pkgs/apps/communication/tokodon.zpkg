@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.communication.tokodon";
   name = "Tokodon";
   summary = "Tokodon is a Mastodon client for Plasma and Plasma Mobile";
   description = ''

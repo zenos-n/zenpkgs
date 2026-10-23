@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.coulr";
   name = "Coulr";
   summary = "Color box to help developers and designers";
   description = ''

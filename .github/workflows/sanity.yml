@@ -52,6 +52,21 @@ jobs:
             exit 1
           fi
 
+      - name: Verify package identities and category aliases
+        run: |
+          nix build --no-link --print-build-logs \
+            .#checks.x86_64-linux.registry-contract \
+            .#checks.x86_64-linux.registry-counts \
+            .#checks.x86_64-linux.registry-path-identities \
+            .#checks.x86_64-linux.registry-invalid-identities \
+            .#checks.x86_64-linux.registry-structure-exposure \
+            .#checks.x86_64-linux.registry-metadata-defaults \
+            .#checks.x86_64-linux.public-package-outputs \
+            .#checks.x86_64-linux.package-output-collisions \
+            .#checks.x86_64-linux.migration-packages \
+            .#checks.x86_64-linux.search-index \
+            --option max-jobs 1 --option cores 2 --option max-substitution-jobs 2
+
       - name: Generate Documentation JSON
         if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
         run: |

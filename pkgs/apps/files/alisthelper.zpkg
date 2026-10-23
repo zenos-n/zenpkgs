@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.alisthelper";
   name = "Alist Helper";
   summary = "Designed to simplify the use of the desktop version of alist/openlist";
   description = ''

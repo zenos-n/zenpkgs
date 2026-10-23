@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.freac";
   name = "fre:ac";
   summary = "Audio converter and CD ripper with support for various popular formats and encoders";
   description = ''

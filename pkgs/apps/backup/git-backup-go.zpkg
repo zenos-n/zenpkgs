@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.git-backup-go";
   name = "git-backup";
   summary = "Backup all your GitHub & GitLab repositories";
   description = ''

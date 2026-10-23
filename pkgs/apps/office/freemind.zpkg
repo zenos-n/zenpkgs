@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.freemind";
   name = "FreeMind";
   summary = "Mind-mapping software";
   description = ''

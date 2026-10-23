@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.four-in-a-row";
   name = "Four in a Row";
   summary = "Make lines of the same color to win";
   description = ''

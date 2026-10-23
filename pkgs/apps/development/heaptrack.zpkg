@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.heaptrack";
   name = "Heaptrack";
   summary = "Heap memory profiler for Linux";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.cpu-x";
   name = "CPU-X";
   summary = "Free software that gathers information on CPU, motherboard and more";
   description = ''

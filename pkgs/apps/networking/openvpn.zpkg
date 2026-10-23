@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.openvpn";
   name = "OpenVPN";
   summary = "Robust and highly flexible tunneling application";
   description = ''

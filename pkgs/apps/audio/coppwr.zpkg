@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.coppwr";
   name = "coppwr";
   summary = "Low level control GUI for the PipeWire multimedia server";
   description = ''

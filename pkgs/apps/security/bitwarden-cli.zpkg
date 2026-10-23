@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.bitwarden-cli";
   name = "Bitwarden CLI";
   summary = "Secure and free password manager for all of your devices";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.dehydrated";
   name = "dehydrated";
   summary = "Letsencrypt/acme client implemented as a shell-script";
   description = ''

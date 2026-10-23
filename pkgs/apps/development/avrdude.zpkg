@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.avrdude";
   name = "AVRDUDE";
   summary = "Command-line tool for programming Atmel AVR microcontrollers";
   description = ''

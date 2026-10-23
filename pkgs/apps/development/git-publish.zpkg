@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-publish";
   name = "git-publish";
   summary = "Prepare and store patch revisions as git tags";
   description = ''

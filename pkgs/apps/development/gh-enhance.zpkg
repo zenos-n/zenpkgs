@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh-enhance";
   name = "gh-enhance";
   summary = "Terminal UI for GitHub Actions";
   description = ''

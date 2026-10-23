@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.asciigraph";
   name = "asciigraph";
   summary = "Lightweight ASCII line graph ╭┈╯ command line app";
   description = ''

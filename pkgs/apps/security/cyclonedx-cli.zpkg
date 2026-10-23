@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.cyclonedx-cli";
   name = "CycloneDX CLI";
   summary = "CycloneDX CLI tool for SBOM analysis, merging, diffs and format conversions";
   description = ''

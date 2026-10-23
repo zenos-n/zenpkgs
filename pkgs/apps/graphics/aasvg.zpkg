@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.aasvg";
   name = "aasvg";
   summary = "Convert ASCII art diagrams into SVG";
   description = ''

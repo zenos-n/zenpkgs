@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.aba";
   name = "aba";
   summary = "Address book for aerc";
   description = ''

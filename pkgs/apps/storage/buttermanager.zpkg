@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.buttermanager";
   name = "ButterManager";
   summary = "Btrfs tool for managing snapshots, balancing filesystems and upgrading the system safetly";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.opus-tools";
   name = "Opus Tools";
   summary = "Tools to work with opus encoded audio streams";
   description = ''

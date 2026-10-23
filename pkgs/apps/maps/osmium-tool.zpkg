@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.maps.osmium-tool";
   name = "Osmium Tool";
   summary = "Multipurpose command line tool for working with OpenStreetMap data based on the Osmium library";
   description = ''

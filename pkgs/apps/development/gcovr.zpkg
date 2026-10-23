@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gcovr";
   name = "gcovr";
   summary = "Python script for summarizing gcov data";
   description = ''

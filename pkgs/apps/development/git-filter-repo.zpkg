@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.git-filter-repo";
   name = "git-filter-repo";
   summary = "Quickly rewrite git repository history";
   description = ''

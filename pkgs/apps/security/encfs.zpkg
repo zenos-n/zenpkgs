@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.security.encfs";
   name = "encfs";
   summary = "Encrypted filesystem in user-space via FUSE";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.binocle";
   name = "Binocle";
   summary = "Graphical tool to visualize binary data";
   description = ''

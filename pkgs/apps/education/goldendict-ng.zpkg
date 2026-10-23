@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.goldendict-ng";
   name = "GoldenDict-ng";
   summary = "Advanced multi-dictionary lookup program";
   description = ''

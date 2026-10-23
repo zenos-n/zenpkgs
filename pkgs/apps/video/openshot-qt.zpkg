@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.openshot-qt";
   name = "OpenShot";
   summary = "Free, open-source video editor";
   description = ''

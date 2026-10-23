@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.zrythm";
   name = "Zrythm";
   summary = "Automated and intuitive digital audio workstation";
   description = ''

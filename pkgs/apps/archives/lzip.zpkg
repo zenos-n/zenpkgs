@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.lzip";
   name = "lzip";
   summary = "Lossless data compressor based on the LZMA algorithm";
   description = ''

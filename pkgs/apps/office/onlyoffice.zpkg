@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.onlyoffice";
   name = "onlyoffice";
   summary = "Curated onlyoffice package for ZenOS";
   description = ''

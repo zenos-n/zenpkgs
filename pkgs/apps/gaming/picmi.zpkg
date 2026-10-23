@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.picmi";
   name = "Picmi";
   summary = "A nonogram logic game by KDE";
   description = ''

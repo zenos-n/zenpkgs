@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.sauerbraten";
   name = "Sauerbraten";
   summary = "Free multiplayer & singleplayer first person shooter, the successor of the Cube FPS";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.mprocs";
   name = "mprocs";
   summary = "TUI tool to run multiple commands in parallel and show the output of each command separately";
   description = ''

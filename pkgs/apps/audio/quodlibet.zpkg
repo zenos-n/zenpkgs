@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.quodlibet";
   name = "Quod Libet";
   summary = "GTK-based audio player written in Python, using the Mutagen tagging library";
   description = ''

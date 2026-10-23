@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.inkscape";
   name = "inkscape";
   summary = "Vector graphics editor";
   description = ''

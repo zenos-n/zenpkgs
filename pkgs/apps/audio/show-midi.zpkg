@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.show-midi";
   name = "ShowMIDI";
   summary = "Multi-platform GUI application to effortlessly visualize MIDI activity";
   description = ''

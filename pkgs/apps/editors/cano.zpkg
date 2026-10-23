@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.cano";
   name = "Cano";
   summary = "Text Editor Written In C Using ncurses";
   description = ''

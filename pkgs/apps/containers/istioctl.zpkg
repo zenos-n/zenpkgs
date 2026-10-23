@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.istioctl";
   name = "istioctl";
   summary = "Istio configuration command line utility for service operators to debug and diagnose their Istio mesh";
   description = ''

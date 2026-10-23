@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.dgop";
   name = "dgop";
   summary = "API & CLI for System & Process Monitoring";
   description = ''

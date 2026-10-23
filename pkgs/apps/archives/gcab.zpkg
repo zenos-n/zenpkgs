@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.gcab";
   name = "gcab";
   summary = "Create and extract Cabinet archives";
   description = ''

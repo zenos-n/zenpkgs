@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.blastem";
   name = "BlastEm";
   summary = "Fast and accurate Genesis emulator";
   description = ''

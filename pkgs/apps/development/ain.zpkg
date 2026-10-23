@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ain";
   name = "ain";
   summary = "HTTP API client for the terminal";
   description = ''

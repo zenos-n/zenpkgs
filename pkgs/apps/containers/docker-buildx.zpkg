@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.docker-buildx";
   name = "Docker Buildx";
   summary = "Docker CLI plugin for extended build capabilities with BuildKit";
   description = ''

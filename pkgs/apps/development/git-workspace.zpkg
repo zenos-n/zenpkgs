@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-workspace";
   name = "git-workspace";
   summary = "Sync personal and work git repositories from multiple providers";
   description = ''

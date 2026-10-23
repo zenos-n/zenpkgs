@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.gitleaks";
   name = "Gitleaks";
   summary = "Scan git repos (or files) for secrets";
   description = ''

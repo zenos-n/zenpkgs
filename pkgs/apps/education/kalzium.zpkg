@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.education.kalzium";
   name = "Kalzium";
   summary = "Periodic Table of Elements";
   description = ''

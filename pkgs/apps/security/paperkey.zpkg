@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.paperkey";
   name = "paperkey";
   summary = "Store OpenPGP or GnuPG on paper";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.jq";
   name = "jq";
   summary = "Curated jq package for ZenOS";
   description = ''

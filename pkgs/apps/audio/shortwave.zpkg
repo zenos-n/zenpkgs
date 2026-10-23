@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.shortwave";
   name = "Shortwave";
   summary = "Find and listen to internet radio stations";
   description = ''

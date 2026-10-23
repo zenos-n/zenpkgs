@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.dotter";
   name = "Dotter";
   summary = "Dotfile manager and templater written in Rust";
   description = ''

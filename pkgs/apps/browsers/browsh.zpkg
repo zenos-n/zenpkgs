@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.browsh";
   name = "Browsh";
   summary = "Fully-modern text-based browser, rendering to TTY and browsers";
   description = ''

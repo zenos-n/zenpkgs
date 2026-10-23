@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.dosbox-x";
   name = "DOSBox-X";
   summary = "Cross-platform DOS emulator based on the DOSBox project";
   description = ''

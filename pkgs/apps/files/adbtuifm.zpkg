@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.adbtuifm";
   name = "adbtuifm";
   summary = "TUI-based file manager for the Android Debug Bridge";
   description = ''

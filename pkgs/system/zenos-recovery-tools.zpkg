@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.system.zenos-recovery-tools";
   name = "ZenOS recovery tools";
   summary = "Provides safe live recovery workflows";
   description = ''Packages diagnostics, read-only mounting, Linux recovery entry points, Windows guidance, and desktop launchers.'';

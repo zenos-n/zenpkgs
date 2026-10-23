@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.bashdb";
   name = "Bash Debugger";
   summary = "A gdb-like debugger for bash";
   description = ''

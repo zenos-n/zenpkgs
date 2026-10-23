@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.ccextractor";
   name = "CCExtractor";
   summary = "Tool that produces subtitles from closed caption data in videos";
   description = ''

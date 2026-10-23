@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.catfish";
   name = "Catfish";
   summary = "Handy file search tool";
   description = ''

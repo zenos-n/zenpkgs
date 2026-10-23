@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.xcape";
   name = "xcape";
   summary = "Utility to configure modifier keys to act as other keys";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.texlab";
   name = "texlab";
   summary = "Implementation of the Language Server Protocol for LaTeX";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.hugo";
   name = "Hugo";
   summary = "Fast and modern static website engine";
   description = ''

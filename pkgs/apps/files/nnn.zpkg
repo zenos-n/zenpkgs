@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.nnn";
   name = "nnn";
   summary = "Small ncurses-based file browser forked from noice";
   description = ''

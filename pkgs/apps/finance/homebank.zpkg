@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.finance.homebank";
   name = "HomeBank";
   summary = "Free, easy, personal accounting for everyone";
   description = ''

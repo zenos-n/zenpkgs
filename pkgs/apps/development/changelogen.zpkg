@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.changelogen";
   name = "Changelogen";
   summary = "Beautiful Changelogs using Conventional Commits";
   description = ''

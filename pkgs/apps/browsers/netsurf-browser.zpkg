@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.netsurf-browser";
   name = "NetSurf";
   summary = "Free, open source, small web browser";
   description = ''

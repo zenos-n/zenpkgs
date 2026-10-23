@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.viddy";
   name = "viddy";
   summary = "Modern `watch` command";
   description = ''

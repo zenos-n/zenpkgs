@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.gau";
   name = "GetAllUrls";
   summary = "Tool to fetch known URLs";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.system.zenos-setup";
   name = "ZenOS Setup";
   summary = "ZenOS installer and first-boot setup";
   description = ''Installs ZenOS and finishes user setup after the first boot.'';

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.ncspot";
   name = "ncspot";
   summary = "Cross-platform ncurses Spotify client written in Rust, inspired by ncmpc and the likes";
   description = ''

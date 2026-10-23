@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.kodi";
   name = "Kodi";
   summary = "Media center";
   description = ''

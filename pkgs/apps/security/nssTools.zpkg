@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.nssTools";
   name = "NSS Tools";
   summary = "Set of libraries for development of security-enabled client and server applications";
   description = ''

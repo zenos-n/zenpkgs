@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.affine-bin";
   name = "AFFiNE";
   summary = "Workspace with fully merged docs, whiteboards and databases";
   description = ''

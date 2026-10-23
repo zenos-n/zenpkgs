@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.fping";
   name = "fping";
   summary = "Send ICMP echo probes to network hosts";
   description = ''

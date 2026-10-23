@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.fim-rs";
   name = "fim-rs";
   summary = "Host-based file integrity monitoring tool";
   description = ''

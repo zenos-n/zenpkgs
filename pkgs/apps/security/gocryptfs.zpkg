@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.gocryptfs";
   name = "gocryptfs";
   summary = "Encrypted overlay filesystem written in Go";
   description = ''

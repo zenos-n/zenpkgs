@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.tcpdump";
   name = "tcpdump";
   summary = "Network sniffer";
   description = ''

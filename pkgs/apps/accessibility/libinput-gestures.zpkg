@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.libinput-gestures";
   name = "libinput-gestures";
   summary = "Gesture mapper for libinput";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.amarok";
   name = "Amarok";
   summary = "Powerful music player with an intuitive interface";
   description = ''

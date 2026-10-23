@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.nix-output-monitor";
   name = "Nix Output Monitor";
   summary = "Processes output of Nix commands to show helpful and pretty information";
   description = ''

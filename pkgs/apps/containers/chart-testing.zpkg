@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.chart-testing";
   name = "Chart Testing";
   summary = "Tool for testing Helm charts";
   description = ''

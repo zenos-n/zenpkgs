@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-zigbuild";
   name = "cargo-zigbuild";
   summary = "Tool to compile Cargo projects with zig as the linker";
   description = ''

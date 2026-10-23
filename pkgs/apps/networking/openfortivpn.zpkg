@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.openfortivpn";
   name = "openfortivpn";
   summary = "Client for PPP+SSL VPN tunnel services";
   description = ''

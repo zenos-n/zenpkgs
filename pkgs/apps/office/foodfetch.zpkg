@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.foodfetch";
   name = "foodfetch";
   summary = "Yet another fetch to quickly get recipes";
   description = ''

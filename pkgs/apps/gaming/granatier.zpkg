@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.granatier";
   name = "Granatier";
   summary = "Granatier is a clone of the classic Bomberman game";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.glances";
   name = "Glances";
   summary = "Cross-platform curses-based monitoring tool";
   description = ''

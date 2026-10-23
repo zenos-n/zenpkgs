@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.clingo";
   name = "clingo";
   summary = "ASP system to ground and solve logic programs";
   description = ''

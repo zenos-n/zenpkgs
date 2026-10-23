@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.fscryptctl";
   name = "fscryptctl";
   summary = "Small C tool for Linux filesystem encryption";
   description = ''

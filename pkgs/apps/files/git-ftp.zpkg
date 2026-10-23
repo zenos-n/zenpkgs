@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.git-ftp";
   name = "git-ftp";
   summary = "Git powered FTP client written as shell script";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.feh";
   name = "feh";
   summary = "Light-weight image viewer";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.nomacs";
   name = "nomacs";
   summary = "Qt-based image viewer";
   description = ''

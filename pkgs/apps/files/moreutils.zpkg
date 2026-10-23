@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.moreutils";
   name = "moreutils";
   summary = "Growing collection of the unix tools that nobody thought to write long ago when unix was young";
   description = ''

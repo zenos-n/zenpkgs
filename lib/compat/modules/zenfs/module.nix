@@ -7,7 +7,7 @@
 
 let
   cfg = config.zenos.zenfs;
-  zenfsPkg = pkgs.zenos.system.zenfs;
+  zenfsPkg = pkgs.zenos.byCategories.system.zenfs;
 
   configMapFile = pkgs.writeText "config_categories.json" (builtins.toJSON cfg.fhs.configMap);
   ignoreFile = pkgs.writeText "ignore_list.json" (builtins.toJSON cfg.database.ignoredFiles);

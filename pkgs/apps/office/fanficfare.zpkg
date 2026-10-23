@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.fanficfare";
   name = "FanFicFare";
   summary = "Tool for making eBooks from fanfiction web sites";
   description = ''

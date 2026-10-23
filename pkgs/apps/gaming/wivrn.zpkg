@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.wivrn";
   name = "WiVRn";
   summary = "OpenXR streaming application to a standalone headset";
   description = ''

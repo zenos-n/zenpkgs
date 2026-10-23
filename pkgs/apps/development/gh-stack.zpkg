@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh-stack";
   name = "gh-stack";
   summary = "GitHub CLI extension to use stacked PRs";
   description = ''

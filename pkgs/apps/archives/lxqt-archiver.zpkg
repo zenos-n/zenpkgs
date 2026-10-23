@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.lxqt-archiver";
   name = "LXQt Archiver";
   summary = "Archive tool for the LXQt desktop environment";
   description = ''

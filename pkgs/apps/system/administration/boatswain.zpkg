@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.boatswain";
   name = "Boatswain";
   summary = "Control Elgato Stream Deck devices";
   description = ''

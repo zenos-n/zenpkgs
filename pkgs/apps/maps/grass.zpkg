@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.maps.grass";
   name = "GRASS GIS";
   summary = "GIS software suite used for geospatial data management and analysis, image processing, graphics and maps production, spatial modeling, and visualization";
   description = ''

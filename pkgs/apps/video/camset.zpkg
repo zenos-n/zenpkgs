@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.camset";
   name = "camset";
   summary = "GUI for Video4Linux adjustments of webcams";
   description = ''

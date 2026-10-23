@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.microcom";
   name = "microcom";
   summary = "Minimalistic terminal program for communicating\n    with devices over a serial connection";
   description = ''

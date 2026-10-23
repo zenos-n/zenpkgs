@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gdlauncher-carbon";
   name = "GDLauncher Carbon";
   summary = "Simple, yet powerful Minecraft custom launcher with a strong focus on the user experience";
   description = ''

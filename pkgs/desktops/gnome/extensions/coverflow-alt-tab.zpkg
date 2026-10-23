@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.coverflow-alt-tab";
   name = "coverflow-alt-tab";
   summary = "Curated coverflow-alt-tab package for ZenOS";
   description = ''

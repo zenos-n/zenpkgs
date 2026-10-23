@@ -23,7 +23,7 @@ enable = enableOption {
         $pkgs.zenos.legacy.noto-fonts
         $pkgs.zenos.legacy.noto-fonts-color-emoji
         $pkgs.zenos.legacy.nerd-fonts.atkynson-mono
-        $pkgs.theming.fonts.zero.regular
+        $pkgs.byCategories.theming.fonts.zero.regular
       ];
       fontDir.enable = true;
       fontconfig.defaultFonts = {

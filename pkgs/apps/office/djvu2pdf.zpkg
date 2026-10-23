@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.djvu2pdf";
   name = "djvu2pdf";
   summary = "Convert DjVu files to PDF files";
   description = ''

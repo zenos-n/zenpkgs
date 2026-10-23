@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.variety";
   name = "Variety";
   summary = "Wallpaper manager for Linux systems";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cloc";
   name = "cloc";
   summary = "Program that counts lines of source code";
   description = ''

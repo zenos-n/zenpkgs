@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.copyq";
   name = "CopyQ";
   summary = "Clipboard Manager with Advanced Features";
   description = ''

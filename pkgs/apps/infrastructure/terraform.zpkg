@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.infrastructure.terraform";
   name = "Terraform";
   summary = "Tool for building, changing, and versioning infrastructure";
   description = ''

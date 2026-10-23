@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.deface";
   name = "Deface";
   summary = "Video anonymization by face detection";
   description = ''

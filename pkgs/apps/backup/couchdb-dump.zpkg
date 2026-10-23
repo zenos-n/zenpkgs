@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.couchdb-dump";
   name = "CouchDB Dump";
   summary = "Bash command line scripts to dump & restore a couchdb database";
   description = ''

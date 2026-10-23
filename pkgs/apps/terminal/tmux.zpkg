@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.tmux";
   name = "tmux";
   summary = "Terminal multiplexer";
   description = ''

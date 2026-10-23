@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.baobab";
   name = "Disk Usage Analyzer";
   summary = "Graphical application to analyse disk usage in any GNOME environment";
   description = ''

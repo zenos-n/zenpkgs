@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.jpeg-archive";
   name = "JPEG Archive";
   summary = "Utilities for archiving photos for saving to long term storage or serving over the web";
   description = ''

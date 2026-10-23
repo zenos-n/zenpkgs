@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.koboldcpp";
   name = "KoboldCpp";
   summary = "Way to run various GGML and GGUF models";
   description = ''

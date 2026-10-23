@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.virtualization.virt-viewer";
   name = "Virt Viewer";
   summary = "Viewer for remote virtual machines";
   description = ''

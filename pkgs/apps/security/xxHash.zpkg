@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.security.xxHash";
   name = "xxHash";
   summary = "Extremely fast hash algorithm";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.clerk";
   name = "clerk";
   summary = "MPD client based on rofi/fzf";
   description = ''

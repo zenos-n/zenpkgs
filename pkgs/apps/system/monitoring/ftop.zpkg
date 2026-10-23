@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.ftop";
   name = "ftop";
   summary = "Show progress of open files and file systems";
   description = ''

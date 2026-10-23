@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.yubikey-manager";
   name = "YubiKey Manager";
   summary = "Command line tool for configuring any YubiKey over all USB transports";
   description = ''

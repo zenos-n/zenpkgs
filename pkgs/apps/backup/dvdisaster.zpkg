@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.dvdisaster";
   name = "dvdisaster";
   summary = "Data loss/scratch/aging protection for CD/DVD media (unofficial version)";
   description = ''

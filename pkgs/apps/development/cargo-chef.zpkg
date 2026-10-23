@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-chef";
   name = "cargo-chef";
   summary = "Cargo-subcommand to speed up Rust Docker builds using Docker layer caching";
   description = ''

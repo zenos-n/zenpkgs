@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.transgui";
   name = "Transmission Remote GUI";
   summary = "Cross platform front-end for the Transmission BitTorrent client";
   description = ''

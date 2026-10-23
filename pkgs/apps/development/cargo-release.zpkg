@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-release";
   name = "cargo-release";
   summary = "Cargo subcommand \"release\": everything about releasing a rust crate";
   description = ''

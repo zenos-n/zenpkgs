@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.jnv";
   name = "jnv";
   summary = "Interactive JSON filter using jq";
   description = ''

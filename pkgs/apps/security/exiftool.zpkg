@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.security.exiftool";
   name = "ExifTool";
   summary = "Tool to read, write and edit EXIF meta information";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.starsector";
   name = "Starsector";
   summary = "Open-world single-player space-combat, roleplaying, exploration, and economic game";
   description = ''

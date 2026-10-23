@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.dpic";
   name = "dpic";
   summary = "Implementation of the pic little language for creating drawings";
   description = ''

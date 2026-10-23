@@ -37,7 +37,7 @@ stdenv.mkDerivation {
     refind
     python3
   ];
-  buildInputs = [ pkgs.zenos.theming.system.zenos-refind-theme ];
+  buildInputs = [ pkgs.zenos.byCategories.theming.system.zenos-refind-theme ];
 
   buildPhase = ''
     mkdir -p build/config
@@ -61,7 +61,7 @@ stdenv.mkDerivation {
     mkdir -p $out/bin $out/share/zenboot
     cp build/config/refind.conf $out/share/zenboot/refind.conf
     cp $src/scripts/zenboot-setup.py $out/share/zenboot/zenboot-setup.py
-    cp -r ${pkgs.zenos.theming.system.zenos-refind-theme}/boot/EFI/refind/themes/zenos-refind-theme/* $out/share/zenboot/theme/
+    cp -r ${pkgs.zenos.byCategories.theming.system.zenos-refind-theme}/boot/EFI/refind/themes/zenos-refind-theme/* $out/share/zenboot/theme/
 
     cat > $out/bin/zenboot-setup << EOF
     #!${pkgs.bash}/bin/bash

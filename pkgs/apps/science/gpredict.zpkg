@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.gpredict";
   name = "Gpredict";
   summary = "Real time satellite tracking and orbit prediction";
   description = ''

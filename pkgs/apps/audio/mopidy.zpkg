@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.mopidy";
   name = "Mopidy";
   summary = "Extensible music server that plays music from local disk, Spotify, SoundCloud, and more";
   description = ''

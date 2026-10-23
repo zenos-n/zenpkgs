@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.vym";
   name = "View Your Mind";
   summary = "Mind-mapping software";
   description = ''

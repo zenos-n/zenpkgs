@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.go";
   name = "Go";
   summary = "Go Programming language";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.evans";
   name = "Evans";
   summary = "More expressive universal gRPC client";
   description = ''

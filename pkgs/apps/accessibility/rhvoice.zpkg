@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.rhvoice";
   name = "RHVoice";
   summary = "Free and open source speech synthesizer for Russian language and others";
   description = ''

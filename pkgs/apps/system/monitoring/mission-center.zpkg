@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.mission-center";
   name = "mission-center";
   summary = "Curated mission-center package for ZenOS";
   description = ''

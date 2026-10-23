@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.maps.diebahn";
   name = "Railway";
   summary = "Travel with all your train information in one place. Also known as Railway";
   description = ''

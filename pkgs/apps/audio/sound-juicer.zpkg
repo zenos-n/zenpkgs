@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.sound-juicer";
   name = "Sound Juicer";
   summary = "Gnome CD Ripper";
   description = ''

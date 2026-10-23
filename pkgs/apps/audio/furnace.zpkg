@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.furnace";
   name = "Furnace";
   summary = "Multi-system chiptune tracker compatible with DefleMask modules";
   description = ''

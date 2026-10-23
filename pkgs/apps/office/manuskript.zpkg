@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.manuskript";
   name = "Manuskript";
   summary = "Open-source tool for writers";
   description = ''

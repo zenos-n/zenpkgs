@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.styluslabs-write-bin";
   name = "Write (Stylus Labs)";
   summary = "Write is a word processor for handwriting";
   description = ''

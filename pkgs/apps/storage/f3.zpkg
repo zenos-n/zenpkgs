@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.f3";
   name = "F3";
   summary = "Fight Flash Fraud";
   description = ''

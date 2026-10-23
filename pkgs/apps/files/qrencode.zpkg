@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.qrencode";
   name = "QRencode";
   summary = "C library and command line tool for encoding data in a QR Code symbol";
   description = ''

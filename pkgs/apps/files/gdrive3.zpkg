@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.gdrive3";
   name = "gdrive";
   summary = "Google Drive CLI Client";
   description = ''

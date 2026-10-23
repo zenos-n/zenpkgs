@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitlab-art";
   name = "gitlab-art";
   summary = "Pull cross-project Gitlab artifact dependencies";
   description = ''

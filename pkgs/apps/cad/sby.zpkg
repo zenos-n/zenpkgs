@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.sby";
   name = "SymbiYosys";
   summary = "SymbiYosys, a front-end for Yosys-based formal verification flows";
   description = ''

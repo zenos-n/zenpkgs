@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.supertuxkart";
   name = "SuperTuxKart";
   summary = "3D open-source arcade racer";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.system-syzygy";
   name = "System Syzygy";
   summary = "Story and a puzzle game, where you solve a variety of puzzle";
   description = ''

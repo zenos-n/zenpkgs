@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.hyprsunset";
   name = "Hyprsunset";
   summary = "Application to enable a blue-light filter on Hyprland";
   description = ''

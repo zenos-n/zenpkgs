@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.chkbit";
   name = "chkbit";
   summary = "Check your files for data corruption and run quick file deduplication";
   description = ''

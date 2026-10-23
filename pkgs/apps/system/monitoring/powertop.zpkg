@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.powertop";
   name = "PowerTOP";
   summary = "Analyze power consumption on Intel-based laptops";
   description = ''

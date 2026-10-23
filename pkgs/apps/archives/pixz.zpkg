@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.pixz";
   name = "pixz";
   summary = "Parallel compressor/decompressor for xz format";
   description = ''

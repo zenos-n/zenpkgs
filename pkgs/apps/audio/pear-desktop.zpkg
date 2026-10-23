@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.pear-desktop";
   name = "Pear Desktop";
   summary = "Electron wrapper around YouTube Music";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.deltachat-desktop";
   name = "Delta Chat";
   summary = "Email-based instant messaging for Desktop";
   description = ''

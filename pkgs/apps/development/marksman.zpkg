@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.marksman";
   name = "Marksman";
   summary = "Language Server for Markdown";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.engauge-digitizer";
   name = "Engauge Digitizer";
   summary = "Engauge Digitizer is a tool for recovering graph data from an image file";
   description = ''

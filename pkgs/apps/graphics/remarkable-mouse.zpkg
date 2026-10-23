@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.remarkable-mouse";
   name = "reMarkable Mouse";
   summary = "Program to use a reMarkable as a graphics tablet";
   description = ''

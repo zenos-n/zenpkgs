@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.abcm2ps";
   name = "abcm2ps";
   summary = "Command line program which converts ABC to music sheet in PostScript or SVG format";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.fonts.bdfresize";
   name = "bdfresize";
   summary = "Tool to resize BDF fonts";
   description = ''

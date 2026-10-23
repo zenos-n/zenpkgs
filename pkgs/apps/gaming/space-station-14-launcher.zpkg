@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.space-station-14-launcher";
   name = "Space Station 14 Launcher";
   summary = "Launcher for Space Station 14, a multiplayer game about paranoia and disaster";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.clipman";
   name = "clipman";
   summary = "Simple clipboard manager for Wayland";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.cartridges";
   name = "Cartridges";
   summary = "GTK4 + Libadwaita game launcher";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.gcstar";
   name = "GCstar";
   summary = "Manage your collections of movies, games, books, music and more";
   description = ''

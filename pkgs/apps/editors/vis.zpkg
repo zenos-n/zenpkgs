@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.vis";
   name = "Vis";
   summary = "Vim like editor";
   description = ''

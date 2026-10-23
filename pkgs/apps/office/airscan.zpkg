@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.airscan";
   name = "AirScan";
   summary = "Package to scan paper documents using the Apple AirScan (eSCL) protocol";
   description = ''

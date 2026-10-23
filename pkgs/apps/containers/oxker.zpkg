@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.oxker";
   name = "oxker";
   summary = "Simple TUI to view & control docker containers";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.edgetx";
   name = "EdgeTX Companion";
   summary = "EdgeTX Companion transmitter support software";
   description = ''

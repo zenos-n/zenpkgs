@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.avocode";
   name = "Avocode";
   summary = "Bridge between designers and developers";
   description = ''

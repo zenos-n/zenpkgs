@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.websocat";
   name = "websocat";
   summary = "Command-line client for WebSockets (like netcat/socat)";
   description = ''

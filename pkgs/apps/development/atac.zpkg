@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.atac";
   name = "ATAC";
   summary = "Simple API client (postman like) in your terminal";
   description = ''

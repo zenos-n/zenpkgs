@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ec";
   name = "ec";
   summary = "Easy terminal-native 3-way git conflict resolver vim-like workflow";
   description = ''

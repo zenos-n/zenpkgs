@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gnubg";
   name = "GNU Backgammon";
   summary = "World class backgammon application";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.litefs";
   name = "LiteFS";
   summary = "FUSE-based file system for replicating SQLite databases across a cluster of machines";
   description = ''

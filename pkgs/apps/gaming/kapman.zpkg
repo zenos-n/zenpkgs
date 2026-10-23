@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.kapman";
   name = "Kapman";
   summary = "Kapman is a clone of the well known game Pac-Man";
   description = ''

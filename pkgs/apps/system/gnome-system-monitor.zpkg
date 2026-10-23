@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.SystemMonitor";
   name = "gnome-system-monitor";
   summary = "Curated gnome-system-monitor package for ZenOS";
   description = ''

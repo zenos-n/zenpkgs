@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.get-graphql-schema";
   name = "get-graphql-schema";
   summary = "Fetch and print the GraphQL schema from a GraphQL HTTP endpoint";
   description = ''

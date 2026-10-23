@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.bazel-watcher";
   name = "Bazel Watcher";
   summary = "Tools for building Bazel targets when source files change";
   description = ''

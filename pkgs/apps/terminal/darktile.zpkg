@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.darktile";
   name = "Darktile";
   summary = "GPU rendered terminal emulator designed for tiling window managers";
   description = ''

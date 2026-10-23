@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.convertall";
   name = "ConvertAll";
   summary = "Graphical unit converter";
   description = ''

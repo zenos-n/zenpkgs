@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.zoom-us";
   name = "Zoom";
   summary = "zoom.us video conferencing application";
   description = ''

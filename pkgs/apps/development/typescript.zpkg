@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.typescript";
   name = "TypeScript";
   summary = "Superset of JavaScript that compiles to clean JavaScript output";
   description = ''

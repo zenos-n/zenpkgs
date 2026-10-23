@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.johnny";
   name = "Johnny";
   summary = "Open Source GUI frontend for John the Ripper";
   description = ''

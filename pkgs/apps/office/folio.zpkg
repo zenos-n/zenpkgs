@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.folio";
   name = "Folio";
   summary = "Beautiful markdown note-taking app for GNOME (forked from Paper)";
   description = ''

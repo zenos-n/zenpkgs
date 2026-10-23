@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.cad.fritzing";
   name = "Fritzing";
   summary = "Open source prototyping tool for Arduino-based projects";
   description = ''

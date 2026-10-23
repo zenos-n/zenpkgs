@@ -1,4 +1,5 @@
 _meta = {
+  id = "com.openai.codex.cli";
   name = "Codex CLI";
   summary = "Lightweight coding agent that runs in your terminal";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.window-is-ready-remover";
   name = "window-is-ready-remover";
   summary = "Curated window-is-ready-remover package for ZenOS";
   description = ''

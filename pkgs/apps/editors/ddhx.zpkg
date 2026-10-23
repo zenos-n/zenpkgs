@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.ddhx";
   name = "ddhx";
   summary = "Console text-mode hex editor, inspired by GNU nano and vim";
   description = ''

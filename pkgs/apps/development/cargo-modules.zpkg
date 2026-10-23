@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-modules";
   name = "cargo-modules";
   summary = "Cargo plugin for showing a tree-like overview of a crate's modules";
   description = ''

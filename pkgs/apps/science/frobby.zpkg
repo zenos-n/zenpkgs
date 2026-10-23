@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.frobby";
   name = "Frobby";
   summary = "Software system and project for computations with monomial ideals";
   description = ''

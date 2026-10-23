@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.eclint";
   name = "eclint";
   summary = "EditorConfig linter written in Go";
   description = ''

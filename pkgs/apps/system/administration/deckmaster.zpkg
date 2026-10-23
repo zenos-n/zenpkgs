@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.deckmaster";
   name = "deckmaster";
   summary = "Application to control your Elgato Stream Deck on Linux";
   description = ''

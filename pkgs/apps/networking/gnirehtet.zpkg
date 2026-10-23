@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.gnirehtet";
   name = "Gnirehtet";
   summary = "Reverse tethering over adb for Android";
   description = ''

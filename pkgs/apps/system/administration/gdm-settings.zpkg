@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.gdm-settings";
   name = "GDM Settings";
   summary = "Settings app for GNOME's Login Manager";
   description = ''

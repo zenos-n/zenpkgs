@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.ytmdesktop";
   name = "YouTube Music Desktop";
   summary = "Desktop App for YouTube Music";
   description = ''

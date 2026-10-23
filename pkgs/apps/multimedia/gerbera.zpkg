@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.multimedia.gerbera";
   name = "Gerbera";
   summary = "UPnP media server";
   description = ''

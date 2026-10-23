@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.wire-desktop";
   name = "Wire";
   summary = "Modern, secure messenger for everyone";
   description = ''

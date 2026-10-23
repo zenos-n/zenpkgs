@@ -18,8 +18,8 @@ let
     if brandingCfg.prettyName != null then brandingCfg.prettyName else config.networking.hostName;
   finalIcon = if brandingCfg.icon != null then brandingCfg.icon else "negzero";
 
-  # Assuming the package is available as pkgs.zenos.zenboot
-  zenbootPkg = pkgs.zenos.zenboot.override {
+  # Assuming the package is available as pkgs.zenos.byCategories.zenboot
+  zenbootPkg = pkgs.zenos.byCategories.zenboot.override {
     inherit (cfg)
       resolution
       scannedDevices
@@ -37,7 +37,7 @@ let
   };
 
   # Assuming the theme package is available
-  zenosPlymouthPkg = pkgs.zenos.theming.system.zenos-plymouth.override {
+  zenosPlymouthPkg = pkgs.zenos.byCategories.theming.system.zenos-plymouth.override {
     distroName = cfg.distroName;
     releaseVersion = config.system.nixos.label;
     deviceName = finalDeviceName;

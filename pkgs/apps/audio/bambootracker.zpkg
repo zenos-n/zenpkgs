@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.bambootracker";
   name = "BambooTracker";
   summary = "Tracker for YM2608 (OPNA) which was used in NEC PC-8801/9801 series computers";
   description = ''

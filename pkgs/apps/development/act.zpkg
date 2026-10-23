@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.act";
   name = "act";
   summary = "Run your GitHub Actions locally";
   description = ''

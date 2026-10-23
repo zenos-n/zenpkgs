@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh-cal";
   name = "gh-cal";
   summary = "GitHub contributions calender terminal viewer";
   description = ''

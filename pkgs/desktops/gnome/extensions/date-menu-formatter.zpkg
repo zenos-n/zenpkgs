@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.date-menu-formatter";
   name = "date-menu-formatter";
   summary = "Curated date-menu-formatter package for ZenOS";
   description = ''

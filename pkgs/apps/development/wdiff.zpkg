@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.wdiff";
   name = "wdiff";
   summary = "Comparing files on a word by word basis";
   description = ''

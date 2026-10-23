@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.grex";
   name = "grex";
   summary = "Command-line tool for generating regular expressions from user-provided test cases";
   description = ''

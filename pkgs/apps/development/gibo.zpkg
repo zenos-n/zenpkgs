@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gibo";
   name = "gibo";
   summary = "Shell script for easily accessing gitignore boilerplates";
   description = ''

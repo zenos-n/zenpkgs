@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.picocrypt";
   name = "Picocrypt";
   summary = "Small graphical file encryption tool written in Go";
   description = ''

@@ -18,7 +18,7 @@ workingDirectory._meta = {
 package._meta = {
   name = "Bot package"; summary = "Bot package";
   description = ''Package supplying codex-tg.'';
-  type = $type.package; default = $pkgs.apps.ai.codex-telegram-bot;
+  type = $type.package; default = $pkgs.byCategories.apps.ai.codex-telegram-bot;
   tags = [ "ai" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
 arguments._meta = {
@@ -35,14 +35,14 @@ enable = enableOption {
   };
   u! {
     assertions = [ { assertion = $path.environmentFile != null && $lib.hasPrefix "/" $path.environmentFile; message = "codexTelegram.environmentFile must be an absolute runtime path"; } ];
-    home.packages = [ $path.package $pkgs.apps.ai.codex ];
+    home.packages = [ $path.package $pkgs.byCategories.apps.ai.codex ];
     systemd.user.services.codexTelegram = {
       Unit = { Description = "codex Telegram bridge"; After = [ "network-online.target" ]; };
       Service = {
         ExecStart = "${$path.package}/bin/codex-tg ${$lib.escapeShellArgs $path.arguments}";
         WorkingDirectory = $path.workingDirectory;
         EnvironmentFile = $lib.mkIf ($path.environmentFile != null) $path.environmentFile;
-        Environment = [ "PATH=${$lib.makeBinPath [ $pkgs.apps.ai.codex $pkgs.apps.development-tools.git $pkgs.legacy.bash ]}:%h/.nix-profile/bin:/run/current-system/sw/bin" ];
+        Environment = [ "PATH=${$lib.makeBinPath [ $pkgs.byCategories.apps.ai.codex $pkgs.byCategories.apps.development-tools.git $pkgs.legacy.bash ]}:%h/.nix-profile/bin:/run/current-system/sw/bin" ];
         Restart = "on-failure"; RestartSec = 5;
       };
       Install.WantedBy = [ "default.target" ];

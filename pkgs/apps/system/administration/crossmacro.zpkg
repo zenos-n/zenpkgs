@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.crossmacro";
   name = "CrossMacro";
   summary = "Cross-platform mouse and keyboard macro recorder and player";
   description = ''

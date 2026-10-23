@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.maps.josm";
   name = "JOSM";
   summary = "Extensible editor for OpenStreetMap";
   description = ''

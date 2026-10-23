@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.bemoji";
   name = "bemoji";
   summary = "Emoji picker with support for bemenu/wofi/rofi/dmenu and wayland/X11";
   description = ''

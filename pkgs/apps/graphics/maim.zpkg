@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.maim";
   name = "maim";
   summary = "Command-line screenshot utility";
   description = ''

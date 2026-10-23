@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.mongodb-ce";
   name = "MongoDB Community";
   summary = "MongoDB is a general purpose, document-based, distributed database";
   description = ''

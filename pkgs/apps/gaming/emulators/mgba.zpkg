@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.mgba";
   name = "mGBA";
   summary = "Modern GBA emulator with a focus on accuracy";
   description = ''

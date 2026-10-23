@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.recoll";
   name = "Recoll";
   summary = "Full-text search tool";
   description = ''

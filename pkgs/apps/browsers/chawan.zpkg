@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.browsers.chawan";
   name = "Chawan";
   summary = "Lightweight and featureful terminal web browser";
   description = ''

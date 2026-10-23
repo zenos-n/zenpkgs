@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-sbom";
   name = "cargo-sbom";
   summary = "Create software bill of materials (SBOM) for Rust";
   description = ''

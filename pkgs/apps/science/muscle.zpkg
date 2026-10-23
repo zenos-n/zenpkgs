@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.muscle";
   name = "MUSCLE";
   summary = "Multiple sequence alignment with top benchmark scores scalable to thousands of sequences";
   description = ''

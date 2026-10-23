@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.easylpac";
   name = "EasyLPAC";
   summary = "GUI frontend for lpac, a C-based eUICC LPA";
   description = ''

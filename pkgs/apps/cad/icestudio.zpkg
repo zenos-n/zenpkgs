@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.icestudio";
   name = "Icestudio";
   summary = "Visual editor for open FPGA boards";
   description = ''

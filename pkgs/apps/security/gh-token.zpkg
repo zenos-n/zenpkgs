@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.gh-token";
   name = "gh-token";
   summary = "Manage installation access tokens for GitHub apps from your terminal";
   description = ''

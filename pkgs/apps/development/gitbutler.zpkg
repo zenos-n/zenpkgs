@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitbutler";
   name = "GitButler";
   summary = "Git client for simultaneous branches on top of your existing workflow";
   description = ''

@@ -12,8 +12,8 @@ let
             boot.loader.grub.enable = false;
             fileSystems."/" = { device = "/dev/test-root"; fsType = "ext4"; };
           };
-          system.packages.apps.development-tools.git = true;
-          system.packages.apps.system.btop = false;
+          system.packages.byCategories.apps.development-tools.git = true;
+          system.packages.byCategories.apps.system.btop = false;
           system.syncthing = {
             enable = false;
             guiAddress = "127.0.0.1:8385";
@@ -21,7 +21,7 @@ let
             settings.options.localAnnounceEnabled = false;
           };
           users.alice = {
-            packages.apps.system.btop = true;
+            packages.byCategories.apps.system.btop = true;
             programs.zenlink = false;
             legacy = {
               isNormalUser = true;
@@ -36,7 +36,7 @@ let
             };
           };
           users.bob = {
-            packages.apps.development-tools.nano = true;
+            packages.byCategories.apps.development-tools.nano = true;
             programs.zenlink = false;
             legacy = {
               isNormalUser = true;
@@ -107,11 +107,11 @@ assert config.networking.hostName == "zstr-production";
 assert config.users.users.alice.isNormalUser && config.users.users.bob.isNormalUser;
 assert alice.home.sessionVariables.MOUNT_USER == "alice";
 assert bob.home.sessionVariables.MOUNT_USER == "bob";
-assert hasPackage pkgs.zenos.apps.development-tools.git config.environment.systemPackages;
-assert !(hasPackage pkgs.zenos.apps.system.btop config.environment.systemPackages);
-assert hasPackage pkgs.zenos.apps.system.btop alice.home.packages;
-assert !(hasPackage pkgs.zenos.apps.system.btop bob.home.packages);
-assert hasPackage pkgs.zenos.apps.development-tools.nano bob.home.packages;
+assert hasPackage pkgs.zenos.byCategories.apps.development-tools.git config.environment.systemPackages;
+assert !(hasPackage pkgs.zenos.byCategories.apps.system.btop config.environment.systemPackages);
+assert hasPackage pkgs.zenos.byCategories.apps.system.btop alice.home.packages;
+assert !(hasPackage pkgs.zenos.byCategories.apps.system.btop bob.home.packages);
+assert hasPackage pkgs.zenos.byCategories.apps.development-tools.nano bob.home.packages;
 assert !(config.zenos ? programs);
 assert builtins.any (warning: lib.hasInfix "modules/system/version.zmdl:" warning) config.warnings;
 assert fails config.zenos.system.programs.web-apps.profileDir;

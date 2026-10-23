@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.darling-dmg";
   name = "darling-dmg";
   summary = "FUSE module for .dmg files (containing an HFS+ filesystem)";
   description = ''

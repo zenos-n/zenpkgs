@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.betterlockscreen";
   name = "Betterlockscreen";
   summary = "Fast and sweet looking lockscreen for linux systems with effects";
   description = ''

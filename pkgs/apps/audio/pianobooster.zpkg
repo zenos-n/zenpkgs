@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.pianobooster";
   name = "PianoBooster";
   summary = "MIDI file player that teaches you how to play the piano";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.evhz";
   name = "evhz";
   summary = "Show mouse refresh rate under linux + evdev";
   description = ''

@@ -10,7 +10,7 @@ from typing import Any
 
 from .api import parse_file
 from .emitter import NixEmissionError, NixEmitter, emit_attr_name, emit_nix_data, semantic_descriptor
-from .validation import infer_type
+from .validation import infer_type, package_identity
 from .model import (
     ActionStatement,
     Assignment,
@@ -193,6 +193,7 @@ def _load_tree(root: Path, *, mode: str | None, jobs: int,
     for entry in entries.values():
         if entry.merge_error is not None:
             _raise_language_error(entry.merge_error)
+    _tree_packages(documents)
     modules = _tree_modules(documents)
     return entries, modules, ownership
 
@@ -269,6 +270,40 @@ def compile_tree_output(root: str | Path, *, mode: str = "build", jobs: int = 1,
     return output, warnings
 
 
+def _package_record(relative: str, document: Document) -> dict[str, Any]:
+    parts = PurePath(relative).parts
+    # Generic compiler trees may also contain standalone fixtures/fragments.
+    category = [*(parts[1:-1] if parts[0] == "pkgs" else parts[:-1]), PurePath(relative).stem]
+    if category[0] == "legacy":
+        raise CompilationError("pkgs/legacy is reserved for the virtual Nixpkgs view", document.span)
+    identity = package_identity(document)
+    return {"id": "pkgs." + identity, "target": identity.split("."), "categoryTarget": category}
+
+
+def _tree_packages(documents: dict[str, Document]) -> None:
+    indexes: dict[str, tuple[dict[tuple[str, ...], str], dict[tuple[str, ...], str]]] = {
+        "target": ({}, {}),
+        "categoryTarget": ({}, {}),
+    }
+    for relative, document in documents.items():
+        if document.kind is not FileKind.ZPKG:
+            continue
+        record = _package_record(relative, document)
+        for field, (leaves, descendants) in indexes.items():
+            target = tuple(record[field])
+            previous = descendants.get(target)
+            for length in range(1, len(target) + 1):
+                previous = previous or leaves.get(target[:length])
+            if previous is not None:
+                label = "identities" if field == "target" else "category paths"
+                raise CompilationError(
+                    f"duplicate or overlapping ZPKG {label}: {previous} and {relative} ({record['id']})", document.span
+                )
+            leaves[target] = relative
+            for length in range(1, len(target) + 1):
+                descendants.setdefault(target[:length], relative)
+
+
 def _compile_source(relative: str, document: Document, root: Path, mode: str) -> dict[str, Any]:
     diagnostics = []
     for diagnostic in document.diagnostics:
@@ -284,6 +319,7 @@ def _compile_source(relative: str, document: Document, root: Path, mode: str) ->
         diagnostics.append(record)
     compiled = compile_document(document, mode=mode, root=root)
     return {
+        **(_package_record(relative, document) if document.kind is FileKind.ZPKG else {}),
         "compiledNix": compiled,
         **({"buildNix": compiled if mode == "build" else compile_zpkg(document, mode="build")}
            if document.kind is FileKind.ZPKG else {}),
@@ -557,6 +593,7 @@ def compile_zpkg(document: Document, *, mode: str = "build") -> str:
             declared_providers[-1].span if declared_providers else document.span,
         )
 
+    identity = package_identity(document)
     for statement in _coalesce_zmdl_scope_assignments(_resolved_statements(document)):
         if isinstance(statement, ResolvedImport):
             local_bindings.append(statement)
@@ -621,6 +658,8 @@ def compile_zpkg(document: Document, *, mode: str = "build") -> str:
             "grammarVersion": document.grammar_version,
             "irVersion": document.ir_version,
             "kind": "zpkg",
+            "id": "pkgs." + identity,
+            "target": identity.split("."),
             "name": _source_name(document),
             "metadata": {
                 key: semantic_descriptor(value)
@@ -787,6 +826,9 @@ def _coalesce_zmdl_scope_assignments(
             normalized.append(statement)
             continue
         value = _canonicalize_zmdl_option_value(statement.value)
+        if _assignment_path(statement)[:1] == ("_meta",):
+            while isinstance(value, GroupExpr):
+                value = value.value
         if isinstance(statement.target, StructuralMarker):
             normalized.append(
                 Assignment(statement.target, statement.operator, value, statement.span)

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.biblioteca";
   name = "Biblioteca";
   summary = "Documentation viewer for GNOME";
   description = ''

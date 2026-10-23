@@ -21,7 +21,7 @@ enable = enableOption {
       description = "ZenOS System Maintenance Service";
       serviceConfig = {
         Type = "oneshot";
-        ExecStart = "${$pkgs.system.zenclean}/bin/zenos-maintenance";
+        ExecStart = "${$pkgs.byCategories.system.zenclean}/bin/zenos-maintenance";
         User = "root";
       };
     };

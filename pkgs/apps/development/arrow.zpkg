@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.arrow";
   name = "Arrow";
   summary = "Game Narrative Design Tool";
   description = ''

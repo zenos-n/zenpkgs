@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.caido-desktop";
   name = "Caido Desktop";
   summary = "Caido Desktop — lightweight web security auditing toolkit";
   description = ''

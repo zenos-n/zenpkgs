@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.ciderpress2";
   name = "CiderPress II";
   summary = "File archive utility for Apple II disk images and file archives";
   description = ''

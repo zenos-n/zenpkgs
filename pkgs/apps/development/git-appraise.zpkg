@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-appraise";
   name = "Git Appraise";
   summary = "Distributed code review system for Git repos";
   description = ''

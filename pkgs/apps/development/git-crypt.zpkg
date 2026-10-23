@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-crypt";
   name = "git-crypt";
   summary = "Transparent file encryption in git";
   description = ''

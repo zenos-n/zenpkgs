@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitlab-triage";
   name = "GitLab Triage";
   summary = "GitLab's issues and merge requests triage, automated";
   description = ''

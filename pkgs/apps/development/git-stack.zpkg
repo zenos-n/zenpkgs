@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-stack";
   name = "git-stack";
   summary = "Stacked branch management for Git";
   description = ''

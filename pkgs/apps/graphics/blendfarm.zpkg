@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.blendfarm";
   name = "BlendFarm";
   summary = "Open-source, cross-platform, stand-alone, Network Renderer for Blender";
   description = ''

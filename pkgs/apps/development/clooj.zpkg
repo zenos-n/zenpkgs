@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.clooj";
   name = "Clooj";
   summary = "Lightweight IDE for Clojure";
   description = ''

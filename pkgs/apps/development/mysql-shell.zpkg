@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.mysql-shell";
   name = "MySQL Shell";
   summary = "New command line scriptable shell for MySQL";
   description = ''

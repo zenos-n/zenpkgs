@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.android-image-kitchen";
   name = "Android Image Kitchen";
   summary = "Unpack & repack Android boot files";
   description = ''

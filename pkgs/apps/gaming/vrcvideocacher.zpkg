@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.vrcvideocacher";
   name = "VRC Video Cacher";
   summary = "Cache VRChat videos locally and fix YouTube videos that fail to load";
   description = ''

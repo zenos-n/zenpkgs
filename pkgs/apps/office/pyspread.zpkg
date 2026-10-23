@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.pyspread";
   name = "Pyspread";
   summary = "Python-oriented spreadsheet application";
   description = ''

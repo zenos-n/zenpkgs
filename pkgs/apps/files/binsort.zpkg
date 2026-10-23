@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.binsort";
   name = "binsort";
   summary = "Sort files by binary similarity";
   description = ''

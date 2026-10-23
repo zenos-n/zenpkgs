@@ -11,13 +11,13 @@ let
   users = lib.filterAttrs (_: user: user.enable && user.isNormalUser) config.users.users;
   hooks = import ../../installer-boot.nix {
     inherit pkgs lib;
-    bootPackage = pkgs.zenos.theming.system.zenos-plymouth.override {
+    bootPackage = pkgs.zenos.byCategories.theming.system.zenos-plymouth.override {
       distroName = "ZenOS";
       releaseVersion = "1.0.0Nb";
       deviceName = config.networking.hostName;
     };
-    refindInstaller = pkgs.zenos.system.zenos-refind-installer;
-    refindTheme = pkgs.zenos.theming.system.zenos-refind-theme;
+    refindInstaller = pkgs.zenos.byCategories.system.zenos-refind-installer;
+    refindTheme = pkgs.zenos.byCategories.theming.system.zenos-refind-theme;
   };
   zenfs = import ../../zenfs-runtime.nix {
     managedUsers = lib.mapAttrs (_: user: { inherit (user) home group; }) users;
@@ -73,8 +73,8 @@ in
           };
           environment.systemPackages = [
             pkgs.nixos-rebuild
-            pkgs.zenos.apps.system.zenos.zenos-rebuild
-            pkgs.zenos.theming.system.zenos-branding
+            pkgs.zenos.byCategories.apps.system.zenos.zenos-rebuild
+            pkgs.zenos.byCategories.theming.system.zenos-branding
           ];
           environment.sessionVariables = {
             XDG_CONFIG_HOME = "$HOME/.private/Config";
@@ -84,11 +84,11 @@ in
           };
           fonts = {
             packages = [
-              pkgs.zenos.apps.fonts.atkinson-hyperlegible
+              pkgs.zenos.byCategories.apps.fonts.atkinson-hyperlegible
               pkgs.nerd-fonts.atkynson-mono
-              pkgs.zenos.apps.fonts.inter
-              pkgs.zenos.theming.fonts.zero.regular
-              pkgs.zenos.theming.fonts.zero.mono-thin
+              pkgs.zenos.byCategories.apps.fonts.inter
+              pkgs.zenos.byCategories.theming.fonts.zero.regular
+              pkgs.zenos.byCategories.theming.fonts.zero.mono-thin
             ];
             fontconfig.defaultFonts = {
               sansSerif = lib.mkDefault [ "Atkinson Hyperlegible" ];

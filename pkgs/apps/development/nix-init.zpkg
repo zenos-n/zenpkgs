@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.nix-init";
   name = "nix-init";
   summary = "Command line tool to generate Nix packages from URLs";
   description = ''

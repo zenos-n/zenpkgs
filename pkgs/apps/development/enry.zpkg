@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.enry";
   name = "enry";
   summary = "Programming language detector based on go-enry/go-enry/v2 library";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.desktops.gnome.extensions.rounded-window-corners-reborn";
   name = "rounded-window-corners-reborn";
   summary = "Curated rounded-window-corners-reborn package for ZenOS";
   description = ''

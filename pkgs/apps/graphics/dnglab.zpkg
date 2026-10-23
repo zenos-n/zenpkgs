@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.dnglab";
   name = "DNGLab";
   summary = "Camera RAW to DNG file format converter";
   description = ''

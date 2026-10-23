@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.rhythmbox";
   name = "Rhythmbox";
   summary = "Music playing application for GNOME";
   description = ''

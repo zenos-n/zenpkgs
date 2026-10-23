@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.email";
   name = "email";
   summary = "Command line SMTP client";
   description = ''

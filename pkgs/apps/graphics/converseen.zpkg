@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.converseen";
   name = "Converseen";
   summary = "Batch image converter and resizer";
   description = ''

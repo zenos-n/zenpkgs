@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.nvme-cli";
   name = "nvme-cli";
   summary = "Curated nvme-cli package for ZenOS";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.certstrap";
   name = "certstrap";
   summary = "Tools to bootstrap CAs, certificate requests, and signed certificates";
   description = ''

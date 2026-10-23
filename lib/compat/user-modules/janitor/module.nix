@@ -8,7 +8,7 @@
 let
   cfg = config.zenos.janitor;
   # Reference internal package using zenos namespace where possible
-  zenfsPkg = pkgs.zenos.system.zenfs;
+  zenfsPkg = pkgs.zenos.byCategories.system.zenfs;
 
   jsonConfig = pkgs.writeText "janitor_config.json" (builtins.toJSON cfg);
   meta = {

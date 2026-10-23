@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.r2modman";
   name = "r2modman";
   summary = "Unofficial Thunderstore mod manager";
   description = ''

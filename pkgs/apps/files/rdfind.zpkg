@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.rdfind";
   name = "rdfind";
   summary = "Removes or hardlinks duplicate files very swiftly";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh-notify";
   name = "gh-notify";
   summary = "GitHub CLI extension to display GitHub notifications";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.fgallery";
   name = "fgallery";
   summary = "Static photo gallery generator";
   description = ''

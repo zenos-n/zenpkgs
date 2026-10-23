@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.bun";
   name = "Bun";
   summary = "Incredibly fast JavaScript runtime, bundler, transpiler and package manager – all in one";
   description = ''

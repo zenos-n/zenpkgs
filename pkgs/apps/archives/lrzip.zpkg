@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.archives.lrzip";
   name = "lrzip";
   summary = "CK LRZIP compression program (LZMA + RZIP)";
   description = ''

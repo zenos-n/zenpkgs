@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.constrict";
   name = "Constrict";
   summary = "Compresses your videos to your chosen file size";
   description = ''

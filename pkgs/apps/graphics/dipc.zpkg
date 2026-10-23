@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.graphics.dipc";
   name = "dipc";
   summary = "Convert your favorite images and wallpapers with your favorite color palettes/themes";
   description = ''

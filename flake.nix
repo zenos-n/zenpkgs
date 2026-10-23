@@ -55,7 +55,7 @@
       flake = false;
     };
     source-setup = {
-      url = "github:zenos-n/zenos-setup/de3a35e1fb0297468da12dd8a9ea609115a61c3d";
+      url = "github:zenos-n/zenos-setup/ce26f896fa488747f22eb7002e452fd9cfb18802";
       flake = false;
     };
     source-shell-defaults = {
@@ -326,18 +326,18 @@
                 tree = "eza --tree --group-directories-first --icons=auto";
               };
               systemPackages = [
-                pkgs.zenos.apps.system.eza
-                pkgs.zenos.theming.icons.zenos-icons
+                pkgs.zenos.byCategories.apps.system.eza
+                pkgs.zenos.byCategories.theming.icons.zenos-icons
               ];
             };
 
             fonts = {
               packages = [
-                pkgs.zenos.apps.fonts.atkinson-hyperlegible
-                pkgs.zenos.apps.fonts.atkinson-hyperlegible-mono
-                pkgs.zenos.apps.fonts.inter
-                pkgs.zenos.theming.fonts.zero.mono
-                pkgs.zenos.theming.fonts.zero.regular
+                pkgs.zenos.byCategories.apps.fonts.atkinson-hyperlegible
+                pkgs.zenos.byCategories.apps.fonts.atkinson-hyperlegible-mono
+                pkgs.zenos.byCategories.apps.fonts.inter
+                pkgs.zenos.byCategories.theming.fonts.zero.mono
+                pkgs.zenos.byCategories.theming.fonts.zero.regular
               ];
               fontconfig.defaultFonts = {
                 monospace = [ "AtkynsonMono NF" ];
@@ -430,7 +430,10 @@
                 inherit registry;
                 sourceTree = zenTree;
               };
-              lib.recursiveUpdate (lib.recursiveUpdate { legacy = prev; } mappedTree) customTree
+              mappedTree // {
+                legacy = prev;
+                byCategories = lib.recursiveUpdate mappedTree.byCategories customTree;
+              }
             else
               { };
         };
@@ -561,7 +564,7 @@
                 builtins.toJSON (interface.registryDocs registry)
               );
               zen-dsl = dsl.zenDsl;
-              zenos-rebuild = pkgs.zenos.apps.system.zenos.zenos-rebuild;
+              zenos-rebuild = pkgs.zenos.byCategories.apps.system.zenos.zenos-rebuild;
             };
           }
       );
@@ -617,7 +620,7 @@
                 system.stateVersion = "26.05";
                 zenos.desktops.gnome = {
                   enable = true;
-                  extensionPackages = [ pkgs.zenos.desktops.gnome.extensions.forge ];
+                  extensionPackages = [ pkgs.zenos.byCategories.desktops.gnome.extensions.forge ];
                   extensionUuids = [ "forge@jmmaranan.com" ];
                 };
               }
@@ -709,7 +712,7 @@
             assert self.legacyPackages.${system}.legacy.nvim.outPath == pkgs.neovim.outPath;
             pkgs.runCommand "zenpkgs-legacy-packages-check" { } "touch $out";
           gnome-base =
-            assert builtins.elem pkgs.zenos.desktops.gnome.extensions.forge
+            assert builtins.elem pkgs.zenos.byCategories.desktops.gnome.extensions.forge
               gnomeBaseConfig.config.environment.systemPackages;
             assert gnomeBaseConfig.config.programs.dconf.profiles.user.databases != [ ];
             assert

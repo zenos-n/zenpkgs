@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.fstl";
   name = "fstl";
   summary = "Fastest STL file viewer";
   description = ''

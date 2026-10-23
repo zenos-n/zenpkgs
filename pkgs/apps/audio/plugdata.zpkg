@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.plugdata";
   name = "plugdata";
   summary = "Plugin wrapper around Pure Data to allow patching in a wide selection of DAWs";
   description = ''

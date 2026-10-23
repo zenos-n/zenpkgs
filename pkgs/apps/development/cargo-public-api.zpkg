@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-public-api";
   name = "cargo-public-api";
   summary = "List and diff the public API of Rust library crates between releases and commits. Detect breaking API changes and semver violations";
   description = ''

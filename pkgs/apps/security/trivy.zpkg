@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.trivy";
   name = "Trivy";
   summary = "Simple and comprehensive vulnerability scanner for containers, suitable for CI";
   description = ''

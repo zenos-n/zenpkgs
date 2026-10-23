@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.ddd";
   name = "DDD";
   summary = "Graphical front-end for command-line debuggers";
   description = ''

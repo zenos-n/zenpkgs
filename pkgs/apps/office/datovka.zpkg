@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.datovka";
   name = "Datovka";
   summary = "Client application for operating Czech government-provided Databox infomation system";
   description = ''

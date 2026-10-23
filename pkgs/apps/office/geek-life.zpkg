@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.geek-life";
   name = "Geek Life";
   summary = "Todo List / Task Manager for Geeks in command line";
   description = ''

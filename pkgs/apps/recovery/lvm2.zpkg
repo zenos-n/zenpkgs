@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.lvm2";
   name = "lvm2";
   summary = "Curated lvm2 package for ZenOS";
   description = ''

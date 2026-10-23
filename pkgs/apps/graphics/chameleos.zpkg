@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.chameleos";
   name = "Chameleos";
   summary = "Screen annotation tool for niri and Hyprland";
   description = ''

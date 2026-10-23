@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.infrastructure.opentofu";
   name = "OpenTofu";
   summary = "Tool for building, changing, and versioning infrastructure";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.segger-ozone";
   name = "SEGGER Ozone";
   summary = "J-Link Debugger and Performance Analyzer";
   description = ''

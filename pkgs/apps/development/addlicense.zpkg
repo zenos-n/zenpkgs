@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.addlicense";
   name = "addlicense";
   summary = "Ensures source code files have copyright license headers by scanning directory patterns recursively";
   description = ''

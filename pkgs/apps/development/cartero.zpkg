@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cartero";
   name = "Cartero";
   summary = "Make HTTP requests and test APIs";
   description = ''

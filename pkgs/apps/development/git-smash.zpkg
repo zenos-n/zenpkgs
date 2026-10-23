@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-smash";
   name = "git-smash";
   summary = "Smash staged changes into previous commits to support your Git workflow, pull request and feature branch maintenance";
   description = ''

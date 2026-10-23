@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fdt-viewer";
   name = "FDT Viewer";
   summary = "Flattened Device Tree Viewer written in Qt";
   description = ''

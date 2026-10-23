@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.hamsket";
   name = "Hamsket";
   summary = "Free and open source messaging and emailing app that combines common web applications into one";
   description = ''

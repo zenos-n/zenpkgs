@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.zstd";
   name = "zstd";
   summary = "Curated zstd package for ZenOS";
   description = ''

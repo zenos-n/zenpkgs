@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.easyaudiosync";
   name = "EasyAudioSync";
   summary = "Audio library syncing and conversion utility";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.fast-cli-zig";
   name = "Fast CLI";
   summary = "Command line version of fast.com in ~1.2 MB";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.abcde";
   name = "abcde";
   summary = "Command-line audio CD ripper";
   description = ''

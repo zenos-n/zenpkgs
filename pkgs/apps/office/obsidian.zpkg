@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.obsidian";
   name = "obsidian";
   summary = "Curated obsidian package for ZenOS";
   description = ''

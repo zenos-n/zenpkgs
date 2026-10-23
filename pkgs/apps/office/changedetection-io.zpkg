@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.changedetection-io";
   name = "changedetection.io";
   summary = "Self-hosted free open source website change detection tracking, monitoring and notification service";
   description = ''

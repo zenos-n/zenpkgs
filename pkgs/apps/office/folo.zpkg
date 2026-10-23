@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.folo";
   name = "Folo";
   summary = "Next generation information browser";
   description = ''

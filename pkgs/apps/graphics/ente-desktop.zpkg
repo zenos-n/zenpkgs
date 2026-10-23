@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.ente-desktop";
   name = "Ente Photos";
   summary = "Desktop (Electron) client for Ente Photos";
   description = ''

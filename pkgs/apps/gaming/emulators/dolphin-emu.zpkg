@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.dolphin-emu";
   name = "Dolphin";
   summary = "Gamecube/Wii/Triforce emulator for x86_64 and ARMv8";
   description = ''

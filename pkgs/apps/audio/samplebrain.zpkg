@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.samplebrain";
   name = "SampleBrain";
   summary = "Custom sample mashing app";
   description = ''

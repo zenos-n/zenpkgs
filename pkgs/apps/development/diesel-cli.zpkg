@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.diesel-cli";
   name = "Diesel CLI";
   summary = "Database tool for working with Rust projects that use Diesel";
   description = ''

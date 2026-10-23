@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.gnome.Characters";
   name = "GNOME Characters";
   summary = "Simple utility application to find and insert unusual characters";
   description = ''

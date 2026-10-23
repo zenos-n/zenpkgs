@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-wait";
   name = "git-wait";
   summary = "Simple git wrapper that waits until index.lock file is removed when present before running the command";
   description = ''

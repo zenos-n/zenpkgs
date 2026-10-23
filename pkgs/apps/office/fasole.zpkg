@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.fasole";
   name = "Fasole";
   summary = "Minimalist's todo-list";
   description = ''

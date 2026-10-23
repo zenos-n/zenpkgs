@@ -95,7 +95,7 @@ and paths with actual migration state; import `nixosModules.default` once.
 ```
 
 To select the old kernel, set `zenos.system.kernel.package` to
-`pkgs.zenos.system.kernel.popcorn` or `.popcorn-zen4`. The latter reproduces the
+`pkgs.zenos.byCategories.system.kernel.popcorn` or `.popcorn-zen4`. The latter reproduces the
 Zen 4 CPU-tuned host variant. Inspection of its generated configuration and
 the live kernel confirms that both retain WLAN and i915 support; comments in the
 old recipe about stripping drivers do not describe its actual generated config. Neither is selected automatically. Out-of-tree modules

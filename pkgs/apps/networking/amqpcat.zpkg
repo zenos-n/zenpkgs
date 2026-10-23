@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.amqpcat";
   name = "amqpcat";
   summary = "CLI tool for publishing to and consuming from AMQP servers";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.censor";
   name = "Censor";
   summary = "PDF document redaction for the GNOME desktop";
   description = ''

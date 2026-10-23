@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-feature";
   name = "cargo-feature";
   summary = "Cargo plugin to manage dependency features";
   description = ''

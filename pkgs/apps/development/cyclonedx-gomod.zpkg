@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cyclonedx-gomod";
   name = "CycloneDX Go";
   summary = "Tool to create CycloneDX Software Bill of Materials (SBOM) from Go modules";
   description = ''

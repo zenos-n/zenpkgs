@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.maltego";
   name = "Maltego";
   summary = "Open source intelligence and forensics application, enabling to easily gather information about DNS, domains, IP addresses, websites, persons, and so on";
   description = ''

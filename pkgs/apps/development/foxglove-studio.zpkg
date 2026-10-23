@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.foxglove-studio";
   name = "Foxglove Studio";
   summary = "Visualization and observability platform for robotics";
   description = ''

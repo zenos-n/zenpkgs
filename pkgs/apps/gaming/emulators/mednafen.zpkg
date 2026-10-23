@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.mednafen";
   name = "Mednafen";
   summary = "Portable, CLI-driven, SDL+OpenGL-based, multi-system emulator";
   description = ''

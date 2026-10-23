@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.chocolate-doom";
   name = "Chocolate Doom";
   summary = "Doom source port that accurately reproduces the experience of Doom as it was played in the 1990s";
   description = ''

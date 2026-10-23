@@ -14,9 +14,9 @@ from zenlang.model import ZenLangError
 class PackageProviderTests(unittest.TestCase):
     def test_provider_count_precedes_coalescing(self):
         for source in (
-            "", "build = {}; build = {};", "build = 1; build = 2;",
-            "import $pkgs.legacy.hello; build = {};",
-            "import $pkgs.legacy.hello; import $pkgs.legacy.hello;",
+            "", '_meta.id = "org.example.Test"; build = {}; build = {};', '_meta.id = "org.example.Test"; build = 1; build = 2;',
+            '_meta.id = "org.example.Test"; import $pkgs.legacy.hello; build = {};',
+            '_meta.id = "org.example.Test"; import $pkgs.legacy.hello; import $pkgs.legacy.hello;',
             "build.foo = {};", "build.foo = {}; build.bar = {};",
         ):
             with self.subTest(source=source), self.assertRaises(CompilationError):
@@ -27,23 +27,23 @@ class PackageProviderTests(unittest.TestCase):
             root = Path(temporary)
             entry = root / "example.zpkg"
             fragment = root / "fragment.zpkg"
-            for source in ("build = {}; build = {};", "build.foo = {};", "import $pkgs.legacy.hello; build = {};"):
+            for source in ('_meta.id = "org.example.Test"; build = {}; build = {};', "build.foo = {};", '_meta.id = "org.example.Test"; import $pkgs.legacy.hello; build = {};'):
                 entry.write_text(source)
                 with self.assertRaises(ZenLangError):
                     parse_file(entry)
-            fragment.write_text("build = {};")
+            fragment.write_text('_meta.id = "org.example.Test"; build = {};')
             entry.write_text('_import "./fragment.zpkg"; build = {};')
             with self.assertRaises(ZenLangError):
                 parse_file(entry, import_root=root)
 
     def test_build_expression_is_not_a_metadata_node(self):
-        document = parse('build = $pkgs.legacy.stdenv.mkDerivation { name = "tiny"; };', "pkgs/tiny.zpkg")
+        document = parse('_meta.id = "org.example.Test"; build = $pkgs.legacy.stdenv.mkDerivation { name = "tiny"; };', "pkgs/tiny.zpkg")
         self.assertTrue(document.diagnostics)
         self.assertFalse(any("pkgs.tiny.build" in diagnostic.message for diagnostic in document.diagnostics))
 
     @unittest.skipUnless(shutil.which("nix-instantiate"), "Nix evaluation requires the VM")
     def test_interface_never_calls_throwing_provider(self):
-        document = parse('build = $lib.trivial.throw "provider was evaluated";', "pkgs/opaque.zpkg")
+        document = parse('_meta.id = "org.example.Test"; build = $lib.trivial.throw "provider was evaluated";', "pkgs/opaque.zpkg")
         interface = compile_zpkg(document, mode="interface")
         result = subprocess.run(
             ["nix-instantiate", "--store", "dummy://", "--eval", "--strict", "--json", "--expr", f"({interface}) {{}}"],
@@ -60,7 +60,7 @@ class PackageProviderTests(unittest.TestCase):
             root = Path(temporary)
             (root / "pkgs").mkdir()
             (root / "structure.zstr").write_text("")
-            (root / "pkgs" / "tiny.zpkg").write_text('build = $pkgs.legacy.runCommand "tiny" {} "mkdir $out";')
+            (root / "pkgs" / "tiny.zpkg").write_text('_meta.id = "org.example.Test"; build = $pkgs.legacy.runCommand "tiny" {} "mkdir $out";')
             bundle = compile_tree(root, mode="interface")
             source = next(source for source in bundle["sources"] if source["kind"] == "zpkg")
             self.assertIn("buildNix", source)
@@ -68,7 +68,7 @@ class PackageProviderTests(unittest.TestCase):
             self.assertNotIn("zpkgRuntime", source["compiledNix"])
 
     def test_deps_binding_is_executable_only(self):
-        document = parse("build = $lib.consumeDeps $deps;", "pkgs/deps.zpkg")
+        document = parse('_meta.id = "org.example.Test"; build = $lib.consumeDeps $deps;', "pkgs/deps.zpkg")
         binding = "deps = { general = [ ]; build = [ ]; runtime = [ ]; } // (suppliedMetadata.dependencies or { });"
         self.assertIn(binding, compile_zpkg(document))
         self.assertNotIn(binding, compile_zpkg(document, mode="interface"))
@@ -86,7 +86,7 @@ class PackageProviderTests(unittest.TestCase):
             return result.stdout.strip() if success else result.stderr
 
         sources = {
-            "declared": '''
+            "declared": '''_meta.id = "org.example.Test";
                 _meta.dependencies.build = [ $pkgs.legacy.buildTool ];
                 build = if $lib.isDerivation ($lib.head $deps.build) && $deps.general == [] && $deps.runtime == [] then
                   $pkgs.legacy.runCommand "zpkg-deps-declared" {} ''
@@ -99,13 +99,13 @@ class PackageProviderTests(unittest.TestCase):
                   ''
                 else $lib.trivial.throw "omitted authored scopes were not empty";
             ''',
-            "absent": '''
+            "absent": '''_meta.id = "org.example.Test";
                 build = if $deps == { general = []; build = []; runtime = []; }
                   then $pkgs.legacy.original
                   else $lib.trivial.throw "deps inferred inherited provider inputs";
             ''',
-            "imported": "import $pkgs.legacy.original;",
-            "runtimeCapture": '''
+            "imported": '_meta.id = "org.example.Test"; import $pkgs.legacy.original;',
+            "runtimeCapture": '''_meta.id = "org.example.Test";
                 _meta.dependencies.runtime = [ $pkgs.legacy.buildTool ];
                 build = $pkgs.legacy.runCommand "zpkg-deps-runtime-capture" {} ''
                   "${$lib.head $deps.runtime}/bin/deps-tool" > "$out"

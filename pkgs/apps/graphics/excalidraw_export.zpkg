@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.excalidraw-u5f-export";
   name = "Excalidraw Export";
   summary = "CLI to export Excalidraw drawings to SVG and PDF";
   description = ''

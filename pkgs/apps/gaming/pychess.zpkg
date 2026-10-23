@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.pychess";
   name = "PyChess";
   summary = "Advanced GTK chess client written in Python";
   description = ''

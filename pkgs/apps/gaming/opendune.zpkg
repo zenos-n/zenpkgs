@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.opendune";
   name = "OpenDUNE";
   summary = "Dune, Reinvented";
   description = ''

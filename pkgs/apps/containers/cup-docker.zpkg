@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.cup-docker";
   name = "Cup";
   summary = "Lightweight way to check for container image updates. written in Rust";
   description = ''

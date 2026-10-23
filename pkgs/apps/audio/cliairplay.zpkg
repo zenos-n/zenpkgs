@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.cliairplay";
   name = "cliairplay";
   summary = "Command line interface for audio streaming to AirPlay 2 devices";
   description = ''

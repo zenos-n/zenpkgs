@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.hydrogen";
   name = "Hydrogen";
   summary = "Advanced drum machine";
   description = ''

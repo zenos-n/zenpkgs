@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.aliyunpan";
   name = "Aliyun Drive CLI";
   summary = "Command line client for Aliyun Drive";
   description = ''

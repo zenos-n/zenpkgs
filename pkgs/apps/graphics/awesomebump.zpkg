@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.awesomebump";
   name = "AwesomeBump";
   summary = "Program to generate normal, height, specular or ambient occlusion textures from a single image";
   description = ''

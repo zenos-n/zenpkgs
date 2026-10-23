@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.buildtorrent";
   name = "buildtorrent";
   summary = "Simple commandline torrent creator";
   description = ''

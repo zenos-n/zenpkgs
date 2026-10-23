@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.notmuch";
   name = "Notmuch";
   summary = "Mail indexer";
   description = ''

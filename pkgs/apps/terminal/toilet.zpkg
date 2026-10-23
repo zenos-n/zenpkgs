@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.toilet";
   name = "toilet";
   summary = "Display large colourful characters in text mode";
   description = ''

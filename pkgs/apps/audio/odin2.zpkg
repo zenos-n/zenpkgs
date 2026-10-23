@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.odin2";
   name = "Odin 2";
   summary = "Odin 2 Synthesizer Plugin";
   description = ''

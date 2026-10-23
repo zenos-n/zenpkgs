@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.darcs";
   name = "Darcs";
   summary = "a distributed, interactive, smart revision control system";
   description = ''

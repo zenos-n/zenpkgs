@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-interactive-rebase-tool";
   name = "git-interactive-rebase-tool";
   summary = "Native cross platform full feature terminal based sequence editor for git interactive rebase";
   description = ''

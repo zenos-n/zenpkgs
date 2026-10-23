@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.pandoc";
   name = "Pandoc";
   summary = "Conversion between documentation formats";
   description = ''

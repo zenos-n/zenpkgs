@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.gridtracker2";
   name = "GridTracker 2";
   summary = "Warehouse of amateur radio information";
   description = ''

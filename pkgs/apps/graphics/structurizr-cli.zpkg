@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.structurizr-cli";
   name = "Structurizr CLI";
   summary = "Structurizr CLI for publishing C4 architecture diagrams and models";
   description = ''

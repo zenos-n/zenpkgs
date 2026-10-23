@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.cad.pcb";
   name = "pcb";
   summary = "Printed Circuit Board editor";
   description = ''

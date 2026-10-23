@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.timidity";
   name = "TiMidity++";
   summary = "Software MIDI renderer";
   description = ''

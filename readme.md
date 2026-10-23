@@ -10,28 +10,28 @@ Codex and Select for Figma use [native program preferences](docs/application-pro
 Desktop configuration is covered in the [system, GNOME, and program options guide](docs/desktop-options.md).
 Migration capability coverage and opt-in examples are in the [migration guide](docs/migration-parity.md).
 
-Curated nixpkgs interfaces are named leaves under `pkgs/`. A source such as
-`pkgs/apps/browsers/firefox.zpkg` mechanically defines
-public identity and registry ID `pkgs.apps.browsers.firefox`, internally
-`pkgs.zenos.apps.browsers.firefox`. Duplicate basenames in different directories
-are legal; targets are exact and unique, with no alternate alias catalog.
-The flake compiles the
-repository root in interface mode and uses the path-sorted result for the
-overlay, registry documentation, and flattened public package outputs.
-The 4133-entry normalized contract in `tests/fixtures/package-registry.json`
-protects every full public ID, derived target, metadata record, and imported
-nixpkgs source path.
+Curated package declarations remain named leaves in the existing category
+filesystem under `pkgs/`. Each ZPKG requires `_meta.id`, a reverse-DNS string.
+For example, `pkgs/apps/browsers/firefox.zpkg` with ID `org.mozilla.firefox`
+exports canonical `pkgs.org.mozilla.firefox` and category alias
+`pkgs.byCategories.apps.browsers.firefox`, both the same derivation. Internally
+these live below `pkgs.zenos`. There are no old root category aliases.
 
-The `.zpkg` files are the only package registry declaration source. Each file
-has one public package path derived from its location. See
-[metadata guidelines](docs/metadata-guidelines.md) for the schema and validation
-commands.
+Registry `id` is `"pkgs." + _meta.id`; `target` splits that metadata ID on dots.
+`categoryTarget` splits the relative filesystem path after removing `.zpkg`.
+There is one registry entry per declaration; the category view is derived from
+it. Preserve established IDs; otherwise author a unique ID under
+`org.zenos.packages`. Missing IDs are errors, never implicit fallbacks.
+`pkgs.legacy` remains unchanged. See the
+[metadata guidelines](docs/metadata-guidelines.md) for the full contract.
+Historical registry fixtures and catalog verification must be updated to check
+both views before they can certify this contract.
 
 Only `_meta` is prefixed: its fields use `name`, `summary`, multiline Markdown
 `description`, and dependency scopes `general`, `build`, and `runtime`.
 Missing descriptive metadata warns during evaluation and compilation; it is not
 replaced with guessed upstream information. Empty or omitted `packageVersion`
-defaults to `zenosVersion`. Filesystem paths establish identity, while ZSTR
+defaults to `zenosVersion`. `_meta.id` establishes package identity, while ZSTR
 controls exposure: without a root structure the adapter exports no packages or
 module candidates; multiple structures fail.
 

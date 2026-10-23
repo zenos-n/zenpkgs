@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.quartus-prime-lite";
   name = "Quartus Prime Lite";
   summary = "FPGA design and simulation software";
   description = ''

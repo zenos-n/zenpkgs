@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.goaccess";
   name = "GoAccess";
   summary = "Real-time web log analyzer and interactive viewer that runs in a terminal in *nix systems";
   description = ''

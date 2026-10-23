@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.gimagereader";
   name = "gImageReader";
   summary = "Simple Gtk/Qt front-end to tesseract-ocr";
   description = ''

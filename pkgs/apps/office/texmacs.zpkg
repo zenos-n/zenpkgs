@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.texmacs";
   name = "GNU TeXmacs";
   summary = "WYSIWYW editing platform with special features for scientists";
   description = ''

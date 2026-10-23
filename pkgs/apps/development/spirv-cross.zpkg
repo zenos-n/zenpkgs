@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.spirv-cross";
   name = "SPIRV-Cross";
   summary = "Tool designed for parsing and converting SPIR-V to other shader languages";
   description = ''

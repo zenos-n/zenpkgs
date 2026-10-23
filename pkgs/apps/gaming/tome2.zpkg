@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.tome2";
   name = "ToME 2";
   summary = "Dungeon crawler similar to Angband, based on the works of Tolkien";
   description = ''

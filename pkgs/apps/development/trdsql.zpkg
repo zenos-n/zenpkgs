@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.trdsql";
   name = "trdsql";
   summary = "CLI tool for execute SQL queries on CSV, LTSV, JSON, YAML and TBLN with various output formats";
   description = ''

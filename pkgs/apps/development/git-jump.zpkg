@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-jump";
   name = "git-jump";
   summary = "Improved navigation between Git branches";
   description = ''

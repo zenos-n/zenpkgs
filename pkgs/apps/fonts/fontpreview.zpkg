@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.fonts.fontpreview";
   name = "fontpreview";
   summary = "Highly customizable and minimal font previewer written in bash";
   description = ''

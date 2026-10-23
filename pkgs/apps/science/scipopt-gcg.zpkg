@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.scipopt-gcg";
   name = "GCG";
   summary = "Branch-and-Price & Column Generation for Everyone";
   description = ''

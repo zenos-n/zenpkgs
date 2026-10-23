@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.maps.viking";
   name = "Viking";
   summary = "GPS data editor and analyzer";
   description = ''

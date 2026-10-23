@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-component";
   name = "cargo-component";
   summary = "Cargo subcommand for creating WebAssembly components based on the component model proposal";
   description = ''

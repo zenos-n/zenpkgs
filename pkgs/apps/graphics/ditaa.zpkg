@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.ditaa";
   name = "ditaa";
   summary = "Convert ascii art diagrams into proper bitmap graphics";
   description = ''

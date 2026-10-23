@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.colorz";
   name = "colorz";
   summary = "Color scheme generator";
   description = ''

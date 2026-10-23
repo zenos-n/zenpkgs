@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.fmtoy";
   name = "FM Toy";
   summary = "FM synthesiser based on emulated Yamaha YM chips (OPL, OPM and OPN series)";
   description = ''

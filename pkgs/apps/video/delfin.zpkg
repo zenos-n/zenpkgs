@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.video.delfin";
   name = "Delfin";
   summary = "Stream movies and TV shows from Jellyfin";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.appimage-run";
   name = "appimage-run";
   summary = "Run portable AppImage applications in an FHS environment";
   description = ''

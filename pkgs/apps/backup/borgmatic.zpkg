@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.backup.borgmatic";
   name = "Borgmatic";
   summary = "Simple, configuration-driven backup software for servers and workstations";
   description = ''

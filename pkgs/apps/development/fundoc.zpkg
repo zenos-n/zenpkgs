@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fundoc";
   name = "fundoc";
   summary = "Language agnostic documentation generator";
   description = ''

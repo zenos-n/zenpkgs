@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.stockfish";
   name = "Stockfish";
   summary = "Strong open source chess engine";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.maxima";
   name = "Maxima";
   summary = "Computer algebra system";
   description = ''

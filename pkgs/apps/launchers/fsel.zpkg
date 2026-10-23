@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.launchers.fsel";
   name = "fsel";
   summary = "Fast TUI app launcher and fuzzy finder for GNU/Linux and *BSD";
   description = ''

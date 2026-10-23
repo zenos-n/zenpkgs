@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.hardinfo2";
   name = "HardInfo2";
   summary = "System information and benchmarks for Linux systems";
   description = ''

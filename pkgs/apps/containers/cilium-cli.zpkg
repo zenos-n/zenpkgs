@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.cilium-cli";
   name = "Cilium CLI";
   summary = "CLI to install, manage & troubleshoot Kubernetes clusters running Cilium";
   description = ''

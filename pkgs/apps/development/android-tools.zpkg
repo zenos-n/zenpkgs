@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.android-tools";
   name = "android-tools";
   summary = "Android SDK platform tools";
   description = ''

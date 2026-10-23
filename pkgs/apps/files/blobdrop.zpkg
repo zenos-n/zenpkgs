@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.blobdrop";
   name = "blobdrop";
   summary = "Drag and drop files directly out of the terminal";
   description = ''

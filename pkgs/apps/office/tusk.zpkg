@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.tusk";
   name = "Tusk";
   summary = "Refined Evernote desktop app";
   description = ''

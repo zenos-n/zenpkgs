@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.mysql-workbench";
   name = "MySQL Workbench";
   summary = "Visual MySQL database modeling, administration and querying tool";
   description = ''

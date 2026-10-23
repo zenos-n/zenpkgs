@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.ayugram-desktop";
   name = "AyuGram Desktop";
   summary = "Desktop Telegram client with good customization and Ghost mode";
   description = ''

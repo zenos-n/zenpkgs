@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.anvil-editor";
   name = "Anvil";
   summary = "Graphical, multi-pane tiling editor inspired by Acme";
   description = ''

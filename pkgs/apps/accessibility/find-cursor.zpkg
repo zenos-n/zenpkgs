@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.find-cursor";
   name = "Find Cursor";
   summary = "Simple XLib program to highlight the cursor position";
   description = ''

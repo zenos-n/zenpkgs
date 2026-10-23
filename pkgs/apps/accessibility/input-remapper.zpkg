@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.input-remapper";
   name = "input-remapper";
   summary = "Easy to use tool to change the mapping of your input device buttons";
   description = ''

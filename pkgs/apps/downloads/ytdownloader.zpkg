@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.ytdownloader";
   name = "YtDownloader";
   summary = "Modern GUI video and audio downloader";
   description = ''

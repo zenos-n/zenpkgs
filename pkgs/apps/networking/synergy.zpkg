@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.synergy";
   name = "Synergy";
   summary = "Share one mouse and keyboard between multiple computers";
   description = ''

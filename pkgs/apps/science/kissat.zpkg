@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.kissat";
   name = "Kissat";
   summary = "'keep it simple and clean bare metal SAT solver' written in C";
   description = ''

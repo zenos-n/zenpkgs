@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.emulators.desmume";
   name = "DeSmuME";
   summary = "Open-source Nintendo DS emulator";
   description = ''

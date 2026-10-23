@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-deb";
   name = "cargo-deb";
   summary = "Cargo subcommand that generates Debian packages from information in Cargo.toml";
   description = ''

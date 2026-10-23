@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gnome-robots";
   name = "GNOME Robots";
   summary = "Avoid the robots and make them crash into each other";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.rustc";
   name = "rustc";
   summary = "Safe, concurrent, practical language (wrapper script)";
   description = ''

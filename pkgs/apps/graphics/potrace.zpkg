@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.potrace";
   name = "Potrace";
   summary = "Tool for tracing a bitmap, which means, transforming a bitmap into a smooth, scalable image";
   description = ''

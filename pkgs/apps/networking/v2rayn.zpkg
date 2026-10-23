@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.v2rayn";
   name = "v2rayN";
   summary = "GUI client support Xray core and sing-box-core and others";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.libs.libsm";
   name = "libsm";
   summary = "X Session Management Library";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.smile";
   name = "Smile";
   summary = "Emoji picker for linux, with custom tags support and localization";
   description = ''

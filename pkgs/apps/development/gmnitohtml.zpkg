@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gmnitohtml";
   name = "gmnitohtml";
   summary = "Gemini text to HTML converter";
   description = ''

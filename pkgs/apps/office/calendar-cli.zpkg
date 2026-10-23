@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.calendar-cli";
   name = "Calendar CLI";
   summary = "Simple command-line CalDav client";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.csvtool";
   name = "csvtool";
   summary = "Command line tool for handling CSV files";
   description = ''

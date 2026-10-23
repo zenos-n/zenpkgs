@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.amberol";
   name = "Amberol";
   summary = "Small and simple sound and music player";
   description = ''

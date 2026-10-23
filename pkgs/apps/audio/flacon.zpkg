@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.flacon";
   name = "Flacon";
   summary = "Extracts audio tracks from an audio CD image to separate tracks";
   description = ''

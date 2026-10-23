@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-pages-cli";
   name = "git-pages CLI";
   summary = "Command-line application for uploading a site to a git-pages server";
   description = ''

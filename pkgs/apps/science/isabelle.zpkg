@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.isabelle";
   name = "Isabelle";
   summary = "Generic proof assistant";
   description = ''

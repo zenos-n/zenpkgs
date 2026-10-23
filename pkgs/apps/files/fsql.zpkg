@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fsql";
   name = "fsql";
   summary = "Search through your filesystem with SQL-esque queries";
   description = ''

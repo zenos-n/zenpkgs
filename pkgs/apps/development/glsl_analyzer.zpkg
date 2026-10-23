@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.glsl-u5f-analyzer";
   name = "GLSL Analyzer";
   summary = "Language server for GLSL (OpenGL Shading Language)";
   description = ''

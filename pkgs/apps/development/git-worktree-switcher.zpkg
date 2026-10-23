@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-worktree-switcher";
   name = "Git Worktree Switcher";
   summary = "Switch between git worktrees with speed";
   description = ''

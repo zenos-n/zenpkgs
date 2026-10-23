@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.ivpn-ui";
   name = "IVPN Desktop";
   summary = "UI interface for IVPN";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.notable";
   name = "Notable";
   summary = "Markdown-based note-taking app that doesn't suck";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.launchers.walker";
   name = "Walker";
   summary = "Wayland-native application runner";
   description = ''

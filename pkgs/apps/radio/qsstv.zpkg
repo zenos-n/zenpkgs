@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.qsstv";
   name = "QSSTV";
   summary = "Qt-based slow-scan TV and fax";
   description = ''

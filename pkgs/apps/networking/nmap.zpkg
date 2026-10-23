@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.nmap";
   name = "nmap";
   summary = "Curated nmap package for ZenOS";
   description = ''

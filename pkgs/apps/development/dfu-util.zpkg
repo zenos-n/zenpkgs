@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dfu-util";
   name = "dfu-util";
   summary = "Device firmware update (DFU) USB programmer";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.itch";
   name = "itch";
   summary = "Best way to play itch.io games";
   description = ''

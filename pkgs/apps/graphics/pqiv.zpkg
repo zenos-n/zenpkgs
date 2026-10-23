@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.pqiv";
   name = "pqiv";
   summary = "Powerful image viewer with minimal UI";
   description = ''

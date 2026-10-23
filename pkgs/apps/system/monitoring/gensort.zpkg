@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.gensort";
   name = "gensort";
   summary = "Generate and validate records for the sorting benchmark";
   description = ''

@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.backup.resticprofile";
   name = "resticprofile";
   summary = "Configuration profiles manager for restic backup";
   description = ''

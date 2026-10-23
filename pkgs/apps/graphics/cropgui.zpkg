@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.cropgui";
   name = "CropGUI";
   summary = "Gtk frontend for lossless cropping of jpeg images";
   description = ''

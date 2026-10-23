@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dotnet-outdated";
   name = "dotnet-outdated";
   summary = ".NET Core global tool to display and update outdated NuGet packages in a project";
   description = ''

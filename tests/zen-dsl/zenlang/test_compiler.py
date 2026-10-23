@@ -61,7 +61,7 @@ def zmdl_document(source: str, name: str):
 
 def zpkg_source(package: str = "demo") -> str:
     return (
-        '_meta = { name = "demo"; summary = "demo"; '
+        f'_meta = {{ id = "org.example.{package}"; name = "demo"; summary = "demo"; '
         "description = ''demo''; zenosVersion = \"1.0.0\"; "
         'tags = [ ]; maintainers = [ ]; license = $l.mit; '
         'dependencies = { general = [ ]; build = [ ]; runtime = [ ]; }; }; '
@@ -601,7 +601,7 @@ _import "../helpers/base.zmdl";
 
 class ZpkgCompilerTests(unittest.TestCase):
     def test_interface_mode_describes_metadata_and_package_import(self) -> None:
-        source = """
+        source = """_meta.id = "org.example.Test";
 _meta = {
   name = "Demo";
   summary = "Demo package";
@@ -653,11 +653,11 @@ import $pkgs.legacy.demo;
             compile_zpkg(parse_file(FIXTURES / "bat.zpkg"), mode="unknown")
 
     def test_package_import_requires_one_legacy_package(self) -> None:
-        metadata = zpkg_source().removesuffix("import $pkgs.legacy.demo;")
+        metadata = zpkg_source().removesuffix('import $pkgs.legacy.demo;')
         for source in (
             metadata,
             metadata + " import $pkgs.apps.demo;",
-            metadata + " import $pkgs.legacy.a; import $pkgs.legacy.b;",
+            metadata + ' import $pkgs.legacy.a; import $pkgs.legacy.b;',
         ):
             with self.subTest(source=source), self.assertRaisesRegex(
                 (ZenLangError, CompilationError), "(exactly one provider|\\$pkgs\\.legacy)"
@@ -665,18 +665,18 @@ import $pkgs.legacy.demo;
                 compile_zpkg(parse(source, "invalid.zpkg"))
 
     def test_missing_package_metadata_warns_but_both_modes_compile(self) -> None:
-        document = parse("import $pkgs.legacy.demo;", "pkgs/apps/demo.zpkg")
+        document = parse('_meta.id = "org.example.Test"; import $pkgs.legacy.demo;', "pkgs/apps/demo.zpkg")
         self.assertEqual(["ZEN226", "ZEN228"], [item.code for item in document.diagnostics])
         for diagnostic in document.diagnostics:
             self.assertEqual("warning", diagnostic.severity)
             self.assertTrue(diagnostic.message.startswith("pkgs.apps.demo:"))
             self.assertEqual("pkgs/apps/demo.zpkg", diagnostic.span.source)
-        for field in ("_meta", "name", "summary", "description", "tags", "maintainers", "license"):
+        for field in ("name", "summary", "description", "tags", "maintainers", "license"):
             self.assertIn(field, document.diagnostics[0].message)
-        self.assertIn("metadata = { };", compile_zpkg(document, mode="interface"))
+        self.assertIn('id = "pkgs.org.example.Test";', compile_zpkg(document, mode="interface"))
         output = compile_zpkg(document, mode="build")
         self.assertIn("package = pkgs.zenos.legacy.demo;", output)
-        self.assertIn("suppliedMetadata = {  };", output)
+        self.assertIn('suppliedMetadata = { id = "org.example.Test"; };', output)
         self.assertIn("zpkgRuntime { provider = package; metadata = suppliedMetadata;", output)
         self.assertIn("dependenciesDeclared = false;", output)
 
@@ -992,7 +992,7 @@ class TreeCompilerTests(unittest.TestCase):
             packages.mkdir()
             for index in reversed(range(4097)):
                 (packages / f"package-{index:04d}.zpkg").write_text(
-                    "import $pkgs.legacy.hello;", encoding="utf-8"
+                    f'_meta.id = "org.example.Package{index}"; import $pkgs.legacy.hello;', encoding="utf-8"
                 )
             bundle = compile_tree(root, mode="interface")
             paths = [source["path"] for source in bundle["sources"]]

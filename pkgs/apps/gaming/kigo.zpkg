@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.kigo";
   name = "Kigo";
   summary = "Kigo is an open-source implementation of the popular Go game";
   description = ''

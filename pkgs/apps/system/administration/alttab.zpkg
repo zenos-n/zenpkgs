@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.administration.alttab";
   name = "alttab";
   summary = "X11 window switcher designed for minimalistic window managers or standalone X11 session";
   description = ''

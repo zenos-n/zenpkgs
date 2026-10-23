@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.education.simavr";
   name = "simavr";
   summary = "Lean and mean Atmel AVR simulator";
   description = ''

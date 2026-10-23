@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gdb";
   name = "GDB";
   summary = "GNU Project debugger";
   description = ''

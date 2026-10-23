@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.bk";
   name = "bk";
   summary = "Terminal epub reader written in rust";
   description = ''

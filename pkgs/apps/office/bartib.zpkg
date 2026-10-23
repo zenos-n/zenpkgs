@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.bartib";
   name = "Bartib";
   summary = "Simple timetracker for the command line";
   description = ''

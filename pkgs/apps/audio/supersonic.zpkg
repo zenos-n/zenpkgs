@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.supersonic";
   name = "Supersonic";
   summary = "Lightweight cross-platform desktop client for Subsonic music servers";
   description = ''

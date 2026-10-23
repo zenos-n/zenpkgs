@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.evtest-qt";
   name = "evtest-qt";
   summary = "Simple input device tester for linux with Qt GUI";
   description = ''

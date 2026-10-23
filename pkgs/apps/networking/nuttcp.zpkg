@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.nuttcp";
   name = "nuttcp";
   summary = "Network performance measurement tool";
   description = ''

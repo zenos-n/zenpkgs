@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.betaflight-configurator";
   name = "Betaflight Configurator";
   summary = "Betaflight flight control system configuration tool";
   description = ''

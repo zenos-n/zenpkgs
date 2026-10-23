@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.galen";
   name = "Galen";
   summary = "Automated layout testing for websites";
   description = ''

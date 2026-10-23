@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gitlab-ci-ls";
   name = "GitLab CI Language Server";
   summary = "GitLab CI Language Server (gitlab-ci-ls)";
   description = ''

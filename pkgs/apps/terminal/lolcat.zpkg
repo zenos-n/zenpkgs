@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.terminal.lolcat";
   name = "lolcat";
   summary = "Rainbow version of cat";
   description = ''

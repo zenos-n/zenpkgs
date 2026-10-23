@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.plus42";
   name = "Plus42";
   summary = "Software clone of the HP-42S calculator (enhanced version)";
   description = ''

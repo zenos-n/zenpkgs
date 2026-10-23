@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.graphics.lazpaint";
   name = "LazPaint";
   summary = "Image editor like PaintBrush or Paint.Net";
   description = ''

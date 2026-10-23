@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.readest";
   name = "Readest";
   summary = "Modern, feature-rich ebook reader";
   description = ''

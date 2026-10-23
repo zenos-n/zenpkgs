@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.downloads.apkeep";
   name = "apkeep";
   summary = "Command-line tool for downloading APK files from various sources";
   description = ''

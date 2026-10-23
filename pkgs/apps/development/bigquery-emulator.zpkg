@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.bigquery-emulator";
   name = "BigQuery Emulator";
   summary = "BigQuery emulator server implemented in Go";
   description = ''

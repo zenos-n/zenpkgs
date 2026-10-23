@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.maps.fahrplan";
   name = "Fahrplan";
   summary = "Command line access to the SBB/CFF/FFS timetable with human readable argument parsing";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.deadlock-mod-manager";
   name = "Deadlock Mod Manager";
   summary = "Mod manager for the Valve game Deadlock";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.azure-functions-core-tools";
   name = "Azure Functions Core Tools";
   summary = "Command line tools for Azure Functions";
   description = ''

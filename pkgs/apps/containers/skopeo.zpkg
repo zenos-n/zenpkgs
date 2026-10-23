@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.skopeo";
   name = "Skopeo";
   summary = "Command line utility for various operations on container images and image repositories";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fsearch";
   name = "FSearch";
   summary = "Fast file search utility for Unix-like systems based on GTK+3";
   description = ''

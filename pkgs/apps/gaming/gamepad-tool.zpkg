@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gamepad-tool";
   name = "Gamepad Tool";
   summary = "Simple GUI tool to create/modify gamepad mappings for games that use SDL2 Game Controller API";
   description = ''

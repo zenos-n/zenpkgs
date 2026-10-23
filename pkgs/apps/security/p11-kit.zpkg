@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.p11-kit";
   name = "p11-kit";
   summary = "Library for loading and sharing PKCS#11 modules";
   description = ''

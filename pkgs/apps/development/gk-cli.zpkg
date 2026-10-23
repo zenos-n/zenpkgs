@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gk-cli";
   name = "GitKraken CLI";
   summary = "CLI for Git collaboration across multiple repos and services";
   description = ''

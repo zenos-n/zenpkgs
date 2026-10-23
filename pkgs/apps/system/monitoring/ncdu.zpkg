@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.ncdu";
   name = "ncdu";
   summary = "Disk usage analyzer with an ncurses interface";
   description = ''

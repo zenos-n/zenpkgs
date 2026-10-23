@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.marktext";
   name = "MarkText";
   summary = "Simple and elegant markdown editor, available for Linux, macOS and Windows";
   description = ''

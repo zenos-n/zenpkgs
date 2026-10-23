@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.system.monitoring.gl-gsync-demo";
   name = "G-SYNC Demo";
   summary = "Very basic OpenGL demo for testing NVIDIA's G-SYNC technology on Linux";
   description = ''

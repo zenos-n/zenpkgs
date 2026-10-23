@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.accessibility.orca";
   name = "Orca";
   summary = "Screen reader";
   description = ''

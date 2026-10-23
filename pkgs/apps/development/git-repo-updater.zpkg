@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-repo-updater";
   name = "git-repo-updater";
   summary = "Easily update multiple Git repositories at once";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.science.gnuplot";
   name = "Gnuplot";
   summary = "Portable command-line driven graphing utility for many platforms";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gforth";
   name = "Gforth";
   summary = "Forth implementation of the GNU project";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.fantomas";
   name = "Fantomas";
   summary = "F# source code formatter";
   description = ''

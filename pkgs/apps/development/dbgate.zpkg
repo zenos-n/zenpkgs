@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dbgate";
   name = "DbGate";
   summary = "Database manager for MySQL, PostgreSQL, SQL Server, MongoDB, SQLite and others";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.files.fpp";
   name = "PathPicker";
   summary = "CLI program that accepts piped input and presents files for selection";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.driftctl";
   name = "driftctl";
   summary = "Detect, track and alert on infrastructure drift";
   description = ''

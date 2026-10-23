@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.k9s";
   name = "K9s";
   summary = "Kubernetes CLI To Manage Your Clusters In Style";
   description = ''

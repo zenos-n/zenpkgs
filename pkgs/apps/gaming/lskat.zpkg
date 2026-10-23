@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.gaming.lskat";
   name = "LSkat";
   summary = "Lieutenant Skat (from German Offiziersskat) is a fun and engaging card game for two players";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.deezer-desktop";
   name = "Deezer Desktop";
   summary = "Unofficial Linux port of the music streaming application";
   description = ''

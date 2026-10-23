@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.security.onlykey";
   name = "OnlyKey";
   summary = "Setup and configure OnlyKey";
   description = ''

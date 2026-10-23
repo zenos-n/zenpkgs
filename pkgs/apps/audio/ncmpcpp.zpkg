@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.ncmpcpp";
   name = "ncmpcpp";
   summary = "Featureful ncurses based MPD client inspired by ncmpc";
   description = ''

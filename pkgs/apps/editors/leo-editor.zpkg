@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.editors.leo-editor";
   name = "Leo Editor";
   summary = "Powerful folding editor";
   description = ''

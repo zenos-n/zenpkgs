@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.security.bulk-u5f-extractor";
   name = "bulk_extractor";
   summary = "Digital forensics tool for extracting information from file systems";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.libs.gstreamer.gst-plugins-ugly";
   name = "gst-plugins-ugly";
   summary = "Gstreamer Ugly Plugins";
   description = ''

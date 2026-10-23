@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.virtualization.looking-glass-client";
   name = "looking-glass-client";
   summary = "KVM Frame Relay (KVMFR) implementation";
   description = ''

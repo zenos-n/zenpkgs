@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.radio.abracadabra";
   name = "Abraca DAB Radio";
   summary = "DAB/DAB+ radio application";
   description = ''

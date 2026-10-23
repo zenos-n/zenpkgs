@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.swell-foop";
   name = "Swell Foop";
   summary = "Puzzle game, previously known as Same GNOME";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.ai.gemini-cli";
   name = "Gemini CLI";
   summary = "AI agent that brings the power of Gemini directly into your terminal";
   description = ''

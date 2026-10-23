@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.gephgui-wry";
   name = "Geph";
   summary = "Modular Internet censorship circumvention system designed specifically to deal with national filtering";
   description = ''

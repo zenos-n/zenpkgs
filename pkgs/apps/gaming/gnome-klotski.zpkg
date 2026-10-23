@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.gnome-klotski";
   name = "GNOME Klotski";
   summary = "Slide blocks to solve the puzzle";
   description = ''

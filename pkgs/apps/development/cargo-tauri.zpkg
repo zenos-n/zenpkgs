@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.development.cargo-tauri";
   name = "cargo-tauri";
   summary = "Build smaller, faster, and more secure desktop applications with a web frontend";
   description = ''

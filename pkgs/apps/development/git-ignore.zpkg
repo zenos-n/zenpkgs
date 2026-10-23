@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-ignore";
   name = "git-ignore";
   summary = "Quickly and easily fetch .gitignore templates from gitignore.io";
   description = ''

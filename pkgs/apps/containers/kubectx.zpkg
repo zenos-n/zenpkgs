@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.containers.kubectx";
   name = "kubectx";
   summary = "Fast way to switch between clusters and namespaces in kubectl";
   description = ''

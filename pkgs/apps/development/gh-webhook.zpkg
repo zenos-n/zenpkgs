@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gh-webhook";
   name = "gh-webhook";
   summary = "GitHub CLI extension to chatter with Webhooks";
   description = ''

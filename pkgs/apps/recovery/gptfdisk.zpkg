@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.recovery.gptfdisk";
   name = "gptfdisk";
   summary = "Curated gptfdisk package for ZenOS";
   description = ''

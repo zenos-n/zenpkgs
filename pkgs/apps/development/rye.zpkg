@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.rye";
   name = "Rye";
   summary = "Tool to easily manage python dependencies and environments";
   description = ''

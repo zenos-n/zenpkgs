@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.theming.cursors.google-dot";
   name = "google-dot";
   summary = "Curated google-dot package for ZenOS";
   description = ''

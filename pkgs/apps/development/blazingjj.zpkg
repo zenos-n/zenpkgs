@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.blazingjj";
   name = "blazingjj";
   summary = "TUI for Jujutsu/jj";
   description = ''

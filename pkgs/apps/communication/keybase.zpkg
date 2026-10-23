@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.keybase";
   name = "Keybase CLI";
   summary = "Keybase official command-line utility and service";
   description = ''

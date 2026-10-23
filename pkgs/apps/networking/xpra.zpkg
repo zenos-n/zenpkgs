@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.networking.xpra";
   name = "Xpra";
   summary = "Persistent remote applications for X";
   description = ''

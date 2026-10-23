@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.files.dufs";
   name = "dufs";
   summary = "File server that supports static serving, uploading, searching, accessing control, webdav";
   description = ''

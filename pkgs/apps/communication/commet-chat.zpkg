@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.communication.commet-chat";
   name = "Commet";
   summary = "Client for Matrix focused on providing a feature rich experience while maintaining a simple interface";
   description = ''

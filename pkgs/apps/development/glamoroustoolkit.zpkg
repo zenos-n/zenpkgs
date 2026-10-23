@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.glamoroustoolkit";
   name = "Glamorous Toolkit";
   summary = "GlamorousToolkit Development Environment";
   description = ''

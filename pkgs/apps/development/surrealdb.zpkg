@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.surrealdb";
   name = "SurrealDB";
   summary = "Scalable, distributed, collaborative, document-graph database, for the realtime web";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.gdscript-formatter";
   name = "GDScript Formatter";
   summary = "Fast code formatter for GDScript and Godot 4";
   description = ''

@@ -17,7 +17,7 @@ enable = enableOption {
   _meta.summary = "Enable the Zero GNOME clock font tweak";
 
   s! {
-    fonts.packages = [ $pkgs.theming.fonts.zero.regular $pkgs.theming.fonts.zero.mono-thin ];
+    fonts.packages = [ $pkgs.byCategories.theming.fonts.zero.regular $pkgs.byCategories.theming.fonts.zero.mono-thin ];
     zenos.desktops.gnome.extensions = {
       customize-clock-on-lockscreen = {
         enable = true;

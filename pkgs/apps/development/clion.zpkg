@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.clion";
   name = "CLion";
   summary = "C/C++ IDE from JetBrains";
   description = ''

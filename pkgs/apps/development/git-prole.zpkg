@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.git-prole";
   name = "git-prole";
   summary = "`git-worktree(1)` manager";
   description = ''

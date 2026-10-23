@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.glslang";
   name = "glslang";
   summary = "Khronos reference front-end for GLSL and ESSL";
   description = ''

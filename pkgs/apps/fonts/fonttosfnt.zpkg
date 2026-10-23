@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.fonts.fonttosfnt";
   name = "fonttosfnt";
   summary = "Wraps a set of bdf or pcf bitmap fonts in a sfnt (TrueType or OpenType) wrapper";
   description = ''

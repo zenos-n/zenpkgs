@@ -18,9 +18,14 @@ were introduced. This does not claim that every added application was built or r
 
 ## Discovery and identity
 
-Each package has one canonical filesystem identity. Multiple `_meta.tags`
-make applications discoverable in several categories without creating duplicate
-package definitions or aliases. Examples:
+Each package requires a canonical reverse-DNS `_meta.id`, preserving an
+established ID or using an explicit unique ID under `org.zenos.packages`.
+`pkgs.<reverse DNS>` and `pkgs.byCategories.<existing category path>` expose the
+same derivation from one registry record. Filesystem paths supply
+`categoryTarget`; splitting `_meta.id` on dots supplies `target`. Root category
+aliases are not exported and `pkgs.legacy` is unchanged. Historical verification
+below predates this contract and does not certify its implementation.
+Multiple `_meta.tags` aid discovery without additional package definitions. Examples:
 
 | Package | Discovery tags include |
 | --- | --- |

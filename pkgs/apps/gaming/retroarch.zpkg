@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.retroarch";
   name = "retroarch";
   summary = "Curated retroarch package for ZenOS";
   description = ''

@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.storage.agedu";
   name = "agedu";
   summary = "Unix utility for tracking down wasted disk space";
   description = ''

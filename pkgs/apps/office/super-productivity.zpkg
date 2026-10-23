@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.office.super-productivity";
   name = "Super Productivity";
   summary = "To Do List / Time Tracker with Jira Integration";
   description = ''

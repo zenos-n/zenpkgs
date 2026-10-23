@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.avro-tools";
   name = "Avro Tools";
   summary = "Avro command-line tools and utilities";
   description = ''

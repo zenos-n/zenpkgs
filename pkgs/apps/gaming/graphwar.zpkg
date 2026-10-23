@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.gaming.graphwar";
   name = "Graphwar";
   summary = "Artillery game in which you must hit your enemies using mathematical functions";
   description = ''

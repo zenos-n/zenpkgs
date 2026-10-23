@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.audio.qsynth";
   name = "Qsynth";
   summary = "Fluidsynth GUI";
   description = ''

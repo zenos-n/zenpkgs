@@ -1,4 +1,5 @@
 _meta = {
+  id = "org.zenos.packages.apps.development.dsq";
   name = "dsq";
   summary = "Commandline tool for running SQL queries against JSON, CSV, Excel, Parquet, and more";
   description = ''

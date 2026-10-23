@@ -1,5 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
+  id = "org.zenos.packages.apps.office.verapdf";
   name = "veraPDF";
   summary = "Command line and GUI industry supported PDF/A and PDF/UA Validation";
   description = ''
