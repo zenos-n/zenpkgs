@@ -5,6 +5,7 @@ from collections.abc import MutableMapping
 import os
 from pathlib import Path
 import stat
+import subprocess
 import sys
 import tempfile
 
@@ -16,9 +17,31 @@ def configuration_path(specification):
         directory = specification.get("stateDirectory") or os.environ.get("CODEX_HOME")
         return Path(directory or home / ".codex") / "config.toml"
     if app == "select-for-figma":
-        directory = os.environ.get("XDG_CONFIG_HOME") or home / ".config"
-        return Path(directory) / "figma-linux" / "settings.json"
+        directory = os.environ.get("XDG_DATA_HOME") or home / ".local/share"
+        return Path(directory) / "select-for-figma" / "state.json"
     raise ValueError(f"unknown application: {app}")
+
+
+def require_select_closed(specification):
+    command = specification.get("sessionBusCommand")
+    if not command:
+        return
+    for name in ("io.github.doromiert.FigmaGtk", "io.github.doromiert.SelectForFigma"):
+        result = subprocess.run([
+            command, "call", "--session", "--dest", "org.freedesktop.DBus",
+            "--object-path", "/org/freedesktop/DBus", "--method",
+            "org.freedesktop.DBus.NameHasOwner", name,
+        ], capture_output=True, text=True, timeout=10)
+        if result.returncode:
+            runtime = os.environ.get("XDG_RUNTIME_DIR")
+            if os.environ.get("DBUS_SESSION_BUS_ADDRESS") or (runtime and (Path(runtime) / "bus").exists()):
+                raise ValueError("cannot check Select for Figma's session bus; close the app and retry from the user session")
+            # Initial/offline activation has no running user session to inspect.
+            return
+        if result.stdout.strip() == "(true,)":
+            raise ValueError("close Select for Figma before applying preferences or migrating its data")
+        if result.stdout.strip() != "(false,)":
+            raise ValueError("unexpected session bus response while checking Select for Figma")
 
 
 def atomic_write(path, content):
@@ -38,7 +61,16 @@ def apply(specification):
     assignments = specification["assignments"]
     if not assignments:
         return
-    path = configuration_path(specification).expanduser().resolve()
+    path = configuration_path(specification).expanduser()
+    if specification["application"] == "select-for-figma":
+        require_select_closed(specification)
+        # Match the app's first-launch migration before creating its new directory.
+        # Moving the whole directory preserves Chromium cookies and saved sessions.
+        destination = path.parent
+        legacy = destination.with_name("figma-gtk")
+        if not destination.exists() and not destination.is_symlink() and legacy.is_dir():
+            legacy.rename(destination)
+    path = path.resolve()
     if str(path).startswith("/nix/store/"):
         raise ValueError(f"{path} is immutable; migrate this config to a writable file")
     if path.exists():

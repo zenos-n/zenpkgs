@@ -1106,177 +1106,154 @@
   ],
   "select-for-figma": [
     {
-      "name": "showCreateFileButton",
+      "name": "appearance",
       "key": [
-        "app",
-        "visibleNewProjectBtn"
+        "appearance"
+      ],
+      "type": "$type.enum [ \"system\" \"light\" \"dark\" ]",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Null preserves the existing native Select preference."
+    },
+    {
+      "name": "adwaitaEditorTheme",
+      "key": [
+        "adwaita-editor"
       ],
       "type": "$type.boolean",
       "transform": null,
       "minimum": null,
       "maximum": null,
-      "note": ""
-    },
-    {
-      "name": "useSystemFileDialogs",
-      "key": [
-        "app",
-        "useZenity"
-      ],
-      "type": "$type.boolean",
-      "transform": null,
-      "minimum": null,
-      "maximum": null,
-      "note": "Use Zenity system dialogs instead of the built-in Electron dialogs."
-    },
-    {
-      "name": "forceStandardRgb",
-      "key": [
-        "app",
-        "enableColorSpaceSrgb"
-      ],
-      "type": "$type.boolean",
-      "transform": null,
-      "minimum": null,
-      "maximum": null,
-      "note": "Force the sRGB color space. Restart the app to apply this choice."
-    },
-    {
-      "name": "customThemes",
-      "key": [
-        "app",
-        "disableThemes"
-      ],
-      "type": "$type.boolean",
-      "transform": "invert",
-      "minimum": null,
-      "maximum": null,
-      "note": "Allow custom desktop chrome themes; false uses the built-in theme."
-    },
-    {
-      "name": "theme",
-      "key": [
-        "theme",
-        "currentTheme"
-      ],
-      "type": "$type.string",
-      "transform": null,
-      "minimum": null,
-      "maximum": null,
-      "note": "Desktop chrome theme identifier. The built-in theme is 0; installed theme files supply other identifiers."
+      "note": "Null preserves the existing native Select preference."
     },
     {
       "name": "restoreOpenFiles",
       "key": [
-        "app",
-        "saveLastOpenedTabs"
+        "restore-session"
       ],
       "type": "$type.boolean",
       "transform": null,
       "minimum": null,
       "maximum": null,
-      "note": "Restore the files that were open when the client last closed."
+      "note": "Null preserves the existing native Select preference."
     },
     {
-      "name": "exportDirectory",
+      "name": "tabSwitchingOrder",
       "key": [
-        "app",
-        "exportDir"
+        "tab-switcher-mru"
+      ],
+      "type": "$type.enum [ \"position\" \"recent\" ]",
+      "transform": {
+        "position": false,
+        "recent": true
+      },
+      "minimum": null,
+      "maximum": null,
+      "note": "Null preserves the existing native Select preference."
+    },
+    {
+      "name": "localFonts",
+      "key": [
+        "local-fonts"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Null preserves the existing native Select preference."
+    },
+    {
+      "name": "notifications",
+      "key": [
+        "notifications"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Null preserves the existing native Select preference."
+    },
+    {
+      "name": "downloadDirectory",
+      "key": [
+        "download-folder"
       ],
       "type": "$type.string",
       "transform": null,
       "minimum": null,
       "maximum": null,
-      "note": "Absolute destination for exports. The directory must be writable by the user."
+      "note": "Null preserves the existing native Select preference."
     },
     {
-      "name": "fontSearchDirectories",
+      "name": "zane.chat.model",
       "key": [
-        "app",
-        "fontDirs"
+        "zane-chat-model"
       ],
-      "type": "$type.list [ $type.string ]",
+      "type": "$type.string",
       "transform": null,
       "minimum": null,
       "maximum": null,
-      "note": "Directories recursively searched for fonts; include Nix font directories when needed."
+      "note": "Null preserves the existing native Select preference. Length is measured in UTF-8 bytes; empty inherits the application default.",
+      "maximumLength": 200
     },
     {
-      "name": "browserArguments",
+      "name": "zane.chat.reasoningEffort",
       "key": [
-        "app",
-        "commandSwitches"
+        "zane-chat-effort"
       ],
-      "type": "$type.list [ $type.string ]",
-      "transform": "switches",
+      "type": "$type.string",
+      "transform": null,
       "minimum": null,
       "maximum": null,
-      "note": "Chromium arguments such as --enable-gpu-rasterization or --force-device-scale-factor=1. Restart to apply."
+      "note": "Null preserves the existing native Select preference. Length is measured in UTF-8 bytes; empty inherits the application default.",
+      "maximumLength": 32
     },
     {
-      "name": "tabBarHeightPixels",
+      "name": "zane.work.model",
       "key": [
-        "app",
-        "panelHeight"
+        "zane-work-model"
       ],
-      "type": "$type.int",
+      "type": "$type.string",
       "transform": null,
-      "minimum": 0,
-      "maximum": null,
-      "note": ""
-    },
-    {
-      "name": "tabBarScale",
-      "key": [
-        "ui",
-        "scalePanel"
-      ],
-      "type": "$type.either [ $type.int $type.float ]",
-      "transform": null,
-      "minimum": 0,
-      "maximum": null,
-      "note": ""
-    },
-    {
-      "name": "canvasInterfaceScale",
-      "key": [
-        "ui",
-        "scaleFigmaUI"
-      ],
-      "type": "$type.either [ $type.int $type.float ]",
-      "transform": null,
-      "minimum": 0,
-      "maximum": null,
-      "note": ""
-    },
-    {
-      "name": "logging",
-      "key": [
-        "app",
-        "logLevel"
-      ],
-      "type": "$type.enum [ \"debug\" \"info\" \"warning\" \"error\" ]",
-      "transform": {
-        "debug": 0,
-        "info": 1,
-        "warning": 2,
-        "error": 3
-      },
       "minimum": null,
       "maximum": null,
-      "note": ""
+      "note": "Null preserves the existing native Select preference. Length is measured in UTF-8 bytes; empty inherits the application default.",
+      "maximumLength": 200
     },
     {
-      "name": "themeEditor.legacyPreview",
+      "name": "zane.work.reasoningEffort",
       "key": [
-        "app",
-        "useOldPreviewer"
+        "zane-work-effort"
+      ],
+      "type": "$type.string",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Null preserves the existing native Select preference. Length is measured in UTF-8 bytes; empty inherits the application default.",
+      "maximumLength": 32
+    },
+    {
+      "name": "zane.showAccountPresence",
+      "key": [
+        "zane-account-presence"
       ],
       "type": "$type.boolean",
       "transform": null,
       "minimum": null,
       "maximum": null,
-      "note": "Use the older theme preview renderer in the theme editor."
+      "note": "Null preserves the existing native Select preference."
+    },
+    {
+      "name": "zane.automaticEditAccess",
+      "key": [
+        "zane-auto-edit-access"
+      ],
+      "type": "$type.boolean",
+      "transform": null,
+      "minimum": null,
+      "maximum": null,
+      "note": "Null preserves the existing native Select preference."
     }
   ],
   "records": {
