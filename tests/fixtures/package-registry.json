@@ -244419,7 +244419,7 @@
                         },
                         {
                           "type": "text",
-                          "value": "/LICENSE.md \"$out/share/doc/nzportable/ASSETS-LICENSE.md\"\n    cat > \"$out/bin/nzportable\" <<SCRIPT\n    #!"
+                          "value": "/LICENSE.md \"$out/share/doc/nzportable/ASSETS-LICENSE.md\"\n    cat > \"$out/bin/nzportable\" <<SCRIPT\n#!"
                         },
                         {
                           "expression": {
@@ -244439,7 +244439,7 @@
                         },
                         {
                           "type": "text",
-                          "value": "\n    set -eu\n    nzp_data=\"\\${XDG_DATA_HOME:-\\$HOME/.local/share}/nzportable\"\n    mkdir -p \"\\$nzp_data/nzp\"\n    for asset in \"$out/share/nzportable/nzp/\"*; do\n      name=\\${asset##*/}\n      if [ \"\\$name\" = config.cfg ]; then\n        [ -e \"\\$nzp_data/nzp/\\$name\" ] || cp --no-preserve=mode \"\\$asset\" \"\\$nzp_data/nzp/\\$name\"\n      elif [ ! -e \"\\$nzp_data/nzp/\\$name\" ] || [ -L \"\\$nzp_data/nzp/\\$name\" ]; then\n        ln -sfn \"\\$asset\" \"\\$nzp_data/nzp/\\$name\"\n      fi\n    done\n    exec "
+                          "value": "\nset -eu\nnzp_data=\"\\${XDG_DATA_HOME:-\\$HOME/.local/share}/nzportable\"\nmkdir -p \"\\$nzp_data/nzp\"\nfor asset in \"$out/share/nzportable/nzp/\"*; do\n  name=\\${asset##*/}\n  if [ \"\\$name\" = config.cfg ]; then\n    [ -e \"\\$nzp_data/nzp/\\$name\" ] || cp --no-preserve=mode \"\\$asset\" \"\\$nzp_data/nzp/\\$name\"\n  elif [ ! -e \"\\$nzp_data/nzp/\\$name\" ] || [ -L \"\\$nzp_data/nzp/\\$name\" ]; then\n    ln -sfn \"\\$asset\" \"\\$nzp_data/nzp/\\$name\"\n  fi\ndone\nexec "
                         },
                         {
                           "expression": {
@@ -244455,7 +244455,7 @@
                         },
                         {
                           "type": "text",
-                          "value": "/bin/nzportable-engine -basedir \"\\$nzp_data\" \"\\$@\"\n    SCRIPT\n    chmod +x \"$out/bin/nzportable\"\n    runHook postInstall\n  "
+                          "value": "/bin/nzportable-engine -basedir \"\\$nzp_data\" \"\\$@\"\nSCRIPT\n    chmod +x \"$out/bin/nzportable\"\n    runHook postInstall\n  "
                         }
                       ],
                       "type": "string"
@@ -245938,7 +245938,7 @@
                           "parts": [
                             {
                               "type": "text",
-                              "value": "\n      mkdir -p build/sdl\n      cat > build/sdl/_build_info.h <<'HEADER'\n      #define GIT_HASH \"ac0a0ac6b081be3b44e669dafe842b21b2a033d1\"\n      #define GIT_BRANCH \"pinned\"\n      #define BUILD_DATE \"2026-10-23T00:00:00Z\"\n      HEADER\n    "
+                              "value": "\n      mkdir -p build/sdl\n      cat > build/sdl/_build_info.h <<'HEADER'\n#define GIT_HASH \"ac0a0ac6b081be3b44e669dafe842b21b2a033d1\"\n#define GIT_BRANCH \"pinned\"\n#define BUILD_DATE \"2026-10-23T00:00:00Z\"\nHEADER\n    "
                             }
                           ],
                           "type": "string"

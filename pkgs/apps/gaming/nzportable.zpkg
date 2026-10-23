@@ -85,10 +85,10 @@ build = let
     preBuild = ''
       mkdir -p build/sdl
       cat > build/sdl/_build_info.h <<'HEADER'
-      #define GIT_HASH "ac0a0ac6b081be3b44e669dafe842b21b2a033d1"
-      #define GIT_BRANCH "pinned"
-      #define BUILD_DATE "2026-10-23T00:00:00Z"
-      HEADER
+#define GIT_HASH "ac0a0ac6b081be3b44e669dafe842b21b2a033d1"
+#define GIT_BRANCH "pinned"
+#define BUILD_DATE "2026-10-23T00:00:00Z"
+HEADER
     '';
     installPhase = ''install -Dm755 build/sdl/nzportable "$out/bin/nzportable-engine"'';
   };
@@ -115,20 +115,20 @@ in p.stdenvNoCC.mkDerivation {
     cp ${gameSource}/LICENSE "$out/share/doc/nzportable/GAME-CODE-LICENSE"
     cp ${assetsSource}/LICENSE.md "$out/share/doc/nzportable/ASSETS-LICENSE.md"
     cat > "$out/bin/nzportable" <<SCRIPT
-    #!${p.runtimeShell}
-    set -eu
-    nzp_data="\''${XDG_DATA_HOME:-\$HOME/.local/share}/nzportable"
-    mkdir -p "\$nzp_data/nzp"
-    for asset in "$out/share/nzportable/nzp/"*; do
-      name=\''${asset##*/}
-      if [ "\$name" = config.cfg ]; then
-        [ -e "\$nzp_data/nzp/\$name" ] || cp --no-preserve=mode "\$asset" "\$nzp_data/nzp/\$name"
-      elif [ ! -e "\$nzp_data/nzp/\$name" ] || [ -L "\$nzp_data/nzp/\$name" ]; then
-        ln -sfn "\$asset" "\$nzp_data/nzp/\$name"
-      fi
-    done
-    exec ${engine}/bin/nzportable-engine -basedir "\$nzp_data" "\$@"
-    SCRIPT
+#!${p.runtimeShell}
+set -eu
+nzp_data="\''${XDG_DATA_HOME:-\$HOME/.local/share}/nzportable"
+mkdir -p "\$nzp_data/nzp"
+for asset in "$out/share/nzportable/nzp/"*; do
+  name=\''${asset##*/}
+  if [ "\$name" = config.cfg ]; then
+    [ -e "\$nzp_data/nzp/\$name" ] || cp --no-preserve=mode "\$asset" "\$nzp_data/nzp/\$name"
+  elif [ ! -e "\$nzp_data/nzp/\$name" ] || [ -L "\$nzp_data/nzp/\$name" ]; then
+    ln -sfn "\$asset" "\$nzp_data/nzp/\$name"
+  fi
+done
+exec ${engine}/bin/nzportable-engine -basedir "\$nzp_data" "\$@"
+SCRIPT
     chmod +x "$out/bin/nzportable"
     runHook postInstall
   '';
