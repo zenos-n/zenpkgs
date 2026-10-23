@@ -38,7 +38,7 @@ jobs:
         id: eval
         run: |
           echo "Running Integrity Check..."
-          OUTPUT=$(nix eval --show-trace --file tests/integrity.nix report 2>&1)
+          OUTPUT=$(nix eval --show-trace --option log-lines 300 --file tests/integrity.nix report 2>&1)
 
           echo "Nix Evaluation Output:"
           echo "$OUTPUT"
