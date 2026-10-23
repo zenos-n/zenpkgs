@@ -6,7 +6,7 @@ let
   specification = pkgs.writeText "zenos-${application}-preferences.json" (builtins.toJSON ({
     inherit application assignments stateDirectory;
   } // lib.optionalAttrs (application == "select-for-figma") {
-    sessionBusCommand = "${pkgs.glib}/bin/gdbus";
+    sessionBusCommand = "${pkgs.glib.bin}/bin/gdbus";
   }));
 in
 {
