@@ -38,8 +38,11 @@ let
   packagePaths = value: map (entry: entry.target) value.packages;
   activePaths = map (entry: entry.target) activeEntries;
   registryPathKeys = map pathKey registry.packages;
-  outputName = path: lib.concatStringsSep "-" ([ "zenos" ] ++ path);
-  outputNames = map (entry: outputName entry.target) activeEntries;
+  outputName = path: lib.concatStringsSep "." path;
+  outputNames = lib.concatMap (entry: [
+    (outputName entry.target)
+    (outputName entry.categoryTarget)
+  ]) activeEntries;
   # These recipes are internal builders, each owned by one canonical ZPKG.
   compatBuilderCategories = [
     [ "desktops" "gnome" "extensions" "dash-stacks" ]
@@ -73,6 +76,7 @@ let
       overlayPackage = lib.attrByPath ([ "zenos" ] ++ entry.target) null pkgs;
       categoryPackage = lib.attrByPath ([ "zenos" "byCategories" ] ++ entry.categoryTarget) null pkgs;
       publicPackage = publicPackages.${outputName entry.target} or null;
+      publicCategoryPackage = publicPackages.${outputName entry.categoryTarget} or null;
     in
     [
       (
@@ -82,6 +86,9 @@ let
         && categoryPackage.drvPath == overlayPackage.drvPath
         && categoryPackage.outPath == overlayPackage.outPath
         && publicPackage != null
+        && publicCategoryPackage != null
+        && publicCategoryPackage.drvPath == publicPackage.drvPath
+        && publicCategoryPackage.outPath == publicPackage.outPath
         && overlayPackage.drvPath == upstream.drvPath
         && overlayPackage.outPath == upstream.outPath
         && publicPackage.drvPath == upstream.drvPath
@@ -91,6 +98,7 @@ let
   ) activeEntries;
   pass = name: pkgs.runCommand name { } "touch $out";
   adapter = import ../lib/dsl-bundle.nix { inherit lib; };
+  packageOutputs = import ../lib/package-outputs.nix { inherit lib; };
   rejects = value: !(builtins.tryEval (builtins.deepSeq value true)).success;
   literal = value: {
     type = "literal";
@@ -303,6 +311,16 @@ in
     assert lib.all (identity: identity) outputIdentities;
     pass "zenpkgs-public-package-outputs";
 
+  gnosis-package =
+    let
+      canonical = publicPackages."com.neg-zero.gnosis";
+      category = publicPackages."apps.browsers.gnosis";
+    in
+    assert canonical.drvPath == category.drvPath;
+    assert canonical.meta.mainProgram == "gnosis";
+    assert canonical.meta.homepage == "https://github.com/doromiert/gnosis";
+    pass "zenpkgs-gnosis-package";
+
   registry-build-providers =
     assert
       map (entry: "${lib.concatStringsSep "." entry.categoryTarget}")
@@ -315,8 +333,8 @@ in
         "apps.ai.opencode-telegram-bot"
         "apps.ai.takopi"
         "apps.audio.swisstag"
+        "apps.browsers.gnosis"
         "apps.browsers.hyperbeam"
-        "apps.browsers.jupiter"
         "apps.connectivity.zbridge"
         "apps.development.gnome-builder-lsp"
         "apps.gaming.alvr-zenos-compat"
@@ -393,7 +411,9 @@ in
     pass "zenpkgs-registry-build-providers";
 
   registry-output-ownership =
-    assert builtins.length (lib.unique outputNames) == 4153;
+    assert builtins.length outputNames == 4153 * 2;
+    assert builtins.length (builtins.attrNames (builtins.listToAttrs
+      (map (name: { inherit name; value = true; }) outputNames))) == 4153 * 2;
     assert
       builtins.attrNames publicPackages == lib.sort builtins.lessThan (
         outputNames
@@ -409,6 +429,46 @@ in
       builtins.length (lib.filter (entry: entry.categoryTarget == categoryTarget) buildEntries) == 1
     ) compatBuilderCategories;
     pass "zenpkgs-registry-output-ownership";
+
+  registry-dotted-output-collisions =
+    let
+      first = {
+        target = [ "com" "neg-zero" "zenos-setup" ];
+        categoryTarget = [ "apps" "system" "zenos-setup" ];
+      };
+      second = {
+        target = [ "org" "example" "other" ];
+        categoryTarget = [ "apps" "other" ];
+      };
+      untouched = builtins.abort "output naming forced a package value";
+      flatten = packages: reserved: packageOutputs.flatten {
+        registry = { inherit packages; };
+        tree = untouched;
+        inherit reserved;
+      };
+      collision = packages: reserved: !(builtins.tryEval (flatten packages reserved)).success;
+      outputs = packageOutputs.flatten {
+        registry.packages = [ first second ];
+        tree.com.neg-zero.zenos-setup = pkgs.hello;
+        tree.org.example.other = untouched;
+        reserved.zen-dsl = untouched;
+      };
+    in
+    assert builtins.attrNames (flatten [ first ] { zen-dsl = untouched; }) == [
+      "apps.system.zenos-setup" "com.neg-zero.zenos-setup" "zen-dsl"
+    ];
+    assert outputs."com.neg-zero.zenos-setup".drvPath == outputs."apps.system.zenos-setup".drvPath;
+    assert outputs."com.neg-zero.zenos-setup".outPath == outputs."apps.system.zenos-setup".outPath;
+    assert collision [ first (second // { target = first.target; }) ] { };
+    assert collision [ first (second // { categoryTarget = first.categoryTarget; }) ] { };
+    assert collision [ first (second // { target = first.categoryTarget; }) ] { };
+    assert collision [ first (second // { categoryTarget = first.target; }) ] { };
+    assert collision [ (first // { categoryTarget = first.target; }) ] { };
+    assert collision [ first ] { "com.neg-zero.zenos-setup" = untouched; };
+    assert collision [ first ] { "apps.system.zenos-setup" = untouched; };
+    assert collision [ (first // { target = [ "zen-dsl" ]; }) ] { zen-dsl = untouched; };
+    assert !(builtins.tryEval ((flatten [ first first ] { zen-dsl = true; }).zen-dsl)).success;
+    pass "zenpkgs-dotted-output-collisions";
 
   registry-nzportable-identity =
     let

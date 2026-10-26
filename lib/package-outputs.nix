@@ -38,11 +38,20 @@
       reserved ? { },
     }:
     let
-      entries = map (entry: {
-        name = lib.concatStringsSep "-" ([ "zenos" ] ++ entry.target);
-        owner = "pkgs/${lib.concatStringsSep "/" entry.categoryTarget}.zpkg";
-        value = lib.getAttrFromPath entry.target tree;
-      }) registry.packages;
+      entries = lib.concatMap (entry:
+        let
+          # Both selectors reuse the canonical leaf, never build a second value.
+          value = lib.getAttrFromPath entry.target tree;
+          source = "pkgs/${lib.concatStringsSep "/" entry.categoryTarget}.zpkg";
+        in map (view: {
+          name = lib.concatStringsSep "." view.path;
+          owner = "${source} (${view.name} view)";
+          inherit value;
+        }) [
+          { name = "canonical"; path = entry.target; }
+          { name = "category"; path = entry.categoryTarget; }
+        ]
+      ) registry.packages;
       owners = lib.foldl' (
         seen: entry:
         if builtins.hasAttr entry.name seen then

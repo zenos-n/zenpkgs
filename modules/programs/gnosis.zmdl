@@ -1,0 +1,68 @@
+_meta = {
+  zenosVersion = 1.0.0Nb;
+  name = "Gnosis browser";
+  summary = "Install the native Gnosis browser";
+  description = ''
+    Installs Gnosis, the Epiphany-based browser with a Chromium engine, for the
+    selected user scope. Browser profiles, credentials, extensions, and writable
+    application settings remain managed by Gnosis.
+  '';
+  tags = [ "programs" "browsers" "internet" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Enable Gnosis";
+    summary = "Install Gnosis for the selected user scope";
+    description = ''Install the selected Gnosis package without replacing its writable profile or preferences.'';
+    tags = [ "programs" "browsers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+
+  u! {
+    home.packages = [ $path.package ];
+    xdg.mimeApps = $lib.optionalAttrs $path.defaultBrowser {
+      enable = true;
+      defaultApplications = {
+        "x-scheme-handler/http" = [ "io.github.doromiert.Jupiter.desktop" ];
+        "x-scheme-handler/https" = [ "io.github.doromiert.Jupiter.desktop" ];
+        "text/html" = [ "io.github.doromiert.Jupiter.desktop" ];
+        "application/xhtml+xml" = [ "io.github.doromiert.Jupiter.desktop" ];
+      };
+    };
+  };
+};
+
+package = {
+  _meta = {
+    name = "Gnosis package";
+    summary = "Gnosis package to install";
+    description = ''
+      Gnosis derivation providing bin/gnosis and the
+      io.github.doromiert.Jupiter.desktop desktop entry. The default is the
+      published development snapshot in the Zenpkgs browser catalog; override
+      this option to select a newer development package.
+    '';
+    type = $type.package;
+    default = $pkgs.byCategories.apps.browsers.gnosis;
+    tags = [ "programs" "browsers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+};
+
+defaultBrowser = {
+  _meta = {
+    name = "Default browser";
+    summary = "Use Gnosis for web links and HTML documents";
+    description = ''Declare Gnosis as the default handler for HTTP, HTTPS, HTML, and XHTML. False leaves existing associations untouched.'';
+    type = $type.boolean;
+    default = false;
+    tags = [ "programs" "browsers" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+};

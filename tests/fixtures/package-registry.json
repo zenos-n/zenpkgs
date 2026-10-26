@@ -240630,15 +240630,21 @@
       ]
     },
     {
+      "categoryTarget": [
+        "apps",
+        "browsers",
+        "gnosis"
+      ],
       "dependenciesDeclared": false,
-      "id": "pkgs.io.github.doromiert.Jupiter",
+      "id": "pkgs.com.neg-zero.gnosis",
       "meta": {
-        "description": "Native Epiphany-based GTK browser using Chromium Embedded Framework and full uBlock Origin. Uses an independent browser profile.",
+        "description": "Native GTK/libadwaita browser with an embedded Brave backend, full uBlock Origin and KeePassXC integration. The CEF/WebKit service migration remains in progress.",
+        "id": "com.neg-zero.gnosis",
         "license": "$l.gpl3Plus",
         "maintainers": [
           "doromiert"
         ],
-        "name": "Jupiter",
+        "name": "Gnosis",
         "packageVersion": "0.1.0",
         "summary": "GNOME browser with a Chromium engine and uBlock Origin",
         "tags": [
@@ -240646,197 +240652,41 @@
           "gnome",
           "web"
         ],
-        "zenosVersion": "1.0.0",
-        "id": "io.github.doromiert.Jupiter"
+        "zenosVersion": "1.0.0"
       },
       "provider": {
-        "kind": "build",
         "expression": {
-          "arguments": [
+          "name": "lib",
+          "path": [
             {
-              "recursive": false,
-              "statements": [
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "pkgs"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "name": "pkgs",
-                    "path": [
-                      {
-                        "kind": "identifier",
-                        "value": "legacy"
-                      }
-                    ],
-                    "type": "variable"
-                  }
-                }
-              ],
-              "type": "attr-set"
+              "kind": "identifier",
+              "value": "zenPackageSources"
+            },
+            {
+              "kind": "identifier",
+              "value": "gnosis"
+            },
+            {
+              "kind": "identifier",
+              "value": "packages"
+            },
+            {
+              "kind": "identifier",
+              "value": "x86_64-linux"
+            },
+            {
+              "kind": "identifier",
+              "value": "default"
             }
           ],
-          "callee": {
-            "arguments": [
-              {
-                "type": "group",
-                "value": {
-                  "left": {
-                    "type": "group",
-                    "value": {
-                      "arguments": [
-                        {
-                          "recursive": false,
-                          "statements": [
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "owner"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "doromiert"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "repo"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "jupiter-browser"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "rev"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "cdc33c33249b36f4210e006f7939896f2e8466d3"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "hash"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "sha256-VJ31F3LcGoMw7ddgrbIb0SRwagXxCVXd7XtbZQQhM28="
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            }
-                          ],
-                          "type": "attr-set"
-                        }
-                      ],
-                      "callee": {
-                        "name": "pkgs",
-                        "path": [
-                          {
-                            "kind": "identifier",
-                            "value": "legacy"
-                          },
-                          {
-                            "kind": "identifier",
-                            "value": "fetchFromGitHub"
-                          }
-                        ],
-                        "type": "variable"
-                      },
-                      "type": "call"
-                    }
-                  },
-                  "operator": "+",
-                  "right": {
-                    "multiline": false,
-                    "parts": [
-                      {
-                        "type": "text",
-                        "value": "/package.nix"
-                      }
-                    ],
-                    "type": "string"
-                  },
-                  "type": "binary"
-                }
-              }
-            ],
-            "callee": {
-              "name": "pkgs",
-              "path": [
-                {
-                  "kind": "identifier",
-                  "value": "legacy"
-                },
-                {
-                  "kind": "identifier",
-                  "value": "callPackage"
-                }
-              ],
-              "type": "variable"
-            },
-            "type": "call"
-          },
-          "type": "call"
-        }
+          "type": "variable"
+        },
+        "kind": "build"
       },
       "target": [
-        "io",
-        "github",
-        "doromiert",
-        "Jupiter"
-      ],
-      "categoryTarget": [
-        "apps",
-        "browsers",
-        "jupiter"
+        "com",
+        "neg-zero",
+        "gnosis"
       ]
     },
     {

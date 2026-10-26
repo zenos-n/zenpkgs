@@ -175,7 +175,7 @@ are required by those inputs. The personal online configuration lives at
 [doromiert/zenos-next-config](https://github.com/doromiert/zenos-next-config),
 separate from distribution defaults.
 
-The current catalog includes native Jupiter and Select for Figma 1.0.2,
+The current catalog includes native Gnosis and Select for Figma 1.0.2,
 Codex CLI 0.164.0, Codex Desktop 26.1016.61520, the public Adwaita Hacks and
 Zero font providers, and the Firefox GNOME theme. Yuzu Mainline 1611 is
 restored from pinned NixOS 23.11. The binary cache currently serves that exact

@@ -21,8 +21,8 @@ KNOWN = {
     "apps/ai/codex-desktop": "com.openai.codex.desktop",
     # modules/desktops/gnome.zmdl lists org.gnome.Nautilus.desktop.
     "apps/system/nautilus": "org.gnome.Nautilus",
-    # ../jupiter/meson.build: application_id (default, unprofiled target).
-    "apps/browsers/jupiter": "io.github.doromiert.Jupiter",
+    # Explicit package identity requested by the user; desktop/profile IDs stay compatible.
+    "apps/browsers/gnosis": "com.neg-zero.gnosis",
     # ../select-for-figma/data/io.github.doromiert.SelectForFigma.metainfo.xml.
     "apps/graphics/select-for-figma": "io.github.doromiert.SelectForFigma",
     # Verified against /run/current-system/sw/share/applications/<id>.desktop:
