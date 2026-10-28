@@ -78,6 +78,13 @@ jobs:
             exit 1
           fi
 
+      - name: Verify unquoted package selectors
+        run: |
+          nix build --dry-run --no-link --quiet .#com.neg-zero.zenos-setup
+          nix build --dry-run --no-link --quiet .#apps.system.zenos-setup
+          nix build --dry-run --no-link --quiet .#unknown.libsm
+          nix build --dry-run --no-link --quiet .#libs.libsm
+
       - name: Generate Documentation JSON
         if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
         run: |

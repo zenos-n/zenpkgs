@@ -579,7 +579,9 @@
         if !zstrRuntime.packageExposure (mkDslArtifacts system).bundleJSON then
           { }
         else
-          {
+          (builtins.removeAttrs pkgs.zenos [ "byCategories" "legacy" ])
+          // pkgs.zenos.byCategories
+          // {
             legacy = pkgs.zenos.legacy // {
               nvim = pkgs.zenos.legacy.neovim;
             };
