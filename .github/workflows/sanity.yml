@@ -85,6 +85,9 @@ jobs:
           nix build --dry-run --no-link --quiet .#unknown.libsm
           nix build --dry-run --no-link --quiet .#libs.libsm
 
+      - name: Verify declarative Gnosis web apps
+        run: python3 tests/check-gnosis-web-apps.py
+
       - name: Generate Documentation JSON
         if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
         run: |

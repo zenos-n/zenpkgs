@@ -8,8 +8,27 @@ Enable `users.<name>.programs.gnosis` (or the corresponding
 users.alex.programs.gnosis = {
   enable = true;
   defaultBrowser = false;
+  apps.mail = {
+    name = "Mail";
+    url = "https://mail.example/";
+    icon = "internet-mail";
+  };
 };
 ```
+
+`apps` creates named launchers under the user's applications directory. The
+app key (letters, digits, hyphens and underscores) is the stable profile ID;
+changing the display name or URL keeps browsing data, while changing the key
+selects a new profile. Each app uses a writable directory under
+`$XDG_DATA_HOME/com.neg-zero.Gnosis.WebApp_<key>`. Gnosis creates it on first
+launch and recognizes the declarative launcher in its Web Apps list even before
+that launch. It uses the local desktop entry for launch and leaves the profile
+intact when the app is removed from configuration. Change the app's name, URL
+or icon in ZenOS configuration; Gnosis does not offer Remove or Edit for these
+managed entries.
+
+The Gnosis package pin includes local desktop entry support for these managed
+apps.
 
 The canonical package is `pkgs.com.neg-zero.gnosis`, also exposed as
 `pkgs.byCategories.apps.browsers.gnosis`. Both selectors resolve to one

@@ -24,6 +24,26 @@ enable = enableOption {
 
   u! {
     home.packages = [ $path.package ];
+    xdg.desktopEntries = $lib.mapAttrs' (key: app:
+      let
+        id = "com.neg-zero.Gnosis.WebApp_${key}";
+      in $lib.nameValuePair id {
+        name = app.name;
+        genericName = "Web Application";
+        exec = "${$path.package}/bin/gnosis --application-mode=${id}.desktop \"${$lib.replaceStrings [ "\\" "\"" "%" ] [ "\\\\" "\\\"" "%%" ] app.url}\"";
+        icon = app.icon;
+        terminal = false;
+        categories = [ "Network" "WebBrowser" ];
+        settings = {
+          StartupWMClass = id;
+          "X-Gnosis-Declarative" = "true";
+        };
+      }) $path.apps;
+    assertions = $lib.mapAttrsToList (key: app: {
+      assertion = $lib.match "[A-Za-z0-9_-]+" key != null && app.name != "" &&
+        $lib.match "https?://[^[:space:]\"\\\\]+" app.url != null;
+      message = "Gnosis app ${key}: key must contain letters, digits, hyphens or underscores; name must be nonempty and URL must be HTTP(S) without whitespace, quotes or backslashes.";
+    }) $path.apps;
     xdg.mimeApps = $lib.optionalAttrs $path.defaultBrowser {
       enable = true;
       defaultApplications = {
@@ -32,6 +52,45 @@ enable = enableOption {
         "text/html" = [ "io.github.doromiert.Jupiter.desktop" ];
         "application/xhtml+xml" = [ "io.github.doromiert.Jupiter.desktop" ];
       };
+    };
+  };
+};
+
+apps = {
+  _meta = {
+    name = "Web applications";
+    summary = "Named Gnosis web applications";
+    description = ''Create application launchers while Gnosis keeps each browsing profile writable. Removing an entry leaves its profile intact.'';
+    tags = [ "programs" "browsers" "web-apps" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  (freeform app) = {
+    _meta = {
+      name = "Web application";
+      summary = "A named Gnosis web application";
+      description = ''A launcher with an independent, writable Gnosis profile.'';
+      tags = [ "programs" "browsers" "web-apps" ];
+      maintainers = [ $m.doromiert ];
+      license = $l.napl;
+    };
+    name._meta = {
+      name = "Name"; summary = "Application name";
+      description = ''Display name. The named app key is its stable profile identity.'';
+      type = $type.string;
+      tags = [ "programs" "web-apps" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+    };
+    url._meta = {
+      name = "URL"; summary = "Application URL";
+      description = ''HTTP or HTTPS address opened by the launcher.'';
+      type = $type.string;
+      tags = [ "programs" "web-apps" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+    };
+    icon._meta = {
+      name = "Icon"; summary = "Application icon";
+      description = ''Icon theme name or absolute icon path.'';
+      type = $type.string; default = "web-browser";
+      tags = [ "programs" "web-apps" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
     };
   };
 };
