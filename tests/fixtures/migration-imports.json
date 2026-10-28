@@ -108,7 +108,7 @@
     "source": "steam-run"
   },
   {
-    "id": "pkgs.unknown.uzdoom",
+    "id": "pkgs.org.zdoom.UZDoom",
     "source": "uzdoom"
   },
   {
