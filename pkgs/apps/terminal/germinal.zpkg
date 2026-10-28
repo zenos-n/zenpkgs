@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.germinal";
+  id = "unknown.germinal";
   name = "Germinal";
   summary = "Minimal terminal emulator";
   description = ''

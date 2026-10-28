@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.raider";
+  id = "unknown.raider";
   name = "Raider";
   summary = "Permanently delete your files (also named File Shredder)";
   description = ''

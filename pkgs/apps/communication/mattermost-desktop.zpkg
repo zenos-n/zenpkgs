@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.mattermost-desktop";
+  id = "unknown.mattermost-desktop";
   name = "Mattermost";
   summary = "Mattermost Desktop client";
   description = ''

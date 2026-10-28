@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.btrbk";
+  id = "unknown.btrbk";
   name = "btrbk";
   summary = "Backup tool for btrfs subvolumes";
   description = ''

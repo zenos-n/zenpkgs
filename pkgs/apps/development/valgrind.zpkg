@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.valgrind";
+  id = "unknown.valgrind";
   name = "Valgrind";
   summary = "Debugging and profiling tool suite";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gi-docgen";
+  id = "unknown.gi-docgen";
   name = "GI-DocGen";
   summary = "Documentation generator for GObject-based libraries";
   description = ''

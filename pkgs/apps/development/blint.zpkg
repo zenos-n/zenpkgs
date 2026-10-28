@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.blint";
+  id = "unknown.blint";
   name = "BLint";
   summary = "Binary Linter to check the security properties, and capabilities in executables";
   description = ''

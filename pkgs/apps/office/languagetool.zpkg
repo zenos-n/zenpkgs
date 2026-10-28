@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.languagetool";
+  id = "unknown.languagetool";
   name = "LanguageTool";
   summary = "Proofreading program for English, French German, Polish, and more";
   description = ''

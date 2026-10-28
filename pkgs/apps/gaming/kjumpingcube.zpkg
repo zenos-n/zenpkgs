@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.kjumpingcube";
+  id = "unknown.kjumpingcube";
   name = "KJumpingCube";
   summary = "KJumpingCube is a simple tactical game";
   description = ''

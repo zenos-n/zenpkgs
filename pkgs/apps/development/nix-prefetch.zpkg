@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.nix-prefetch";
+  id = "unknown.nix-prefetch";
   name = "nix-prefetch";
   summary = "Prefetch any fetcher function call, e.g. package sources";
   description = ''

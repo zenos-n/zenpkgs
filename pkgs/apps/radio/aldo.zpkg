@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.aldo";
+  id = "unknown.aldo";
   name = "Aldo";
   summary = "Morse code training program";
   description = ''

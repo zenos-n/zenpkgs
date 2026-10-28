@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-udeps";
+  id = "unknown.cargo-udeps";
   name = "cargo-udeps";
   summary = "Find unused dependencies in Cargo.toml";
   description = ''

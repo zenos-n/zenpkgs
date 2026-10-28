@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.science.fiji";
+  id = "unknown.fiji";
   name = "Fiji";
   summary = "Batteries-included distribution of ImageJ2, bundling a lot of plugins which facilitate scientific image analysis";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.virtualization.virt-manager";
+  id = "unknown.virt-manager";
   name = "virt-manager";
   summary = "Curated virt-manager package for ZenOS";
   description = ''

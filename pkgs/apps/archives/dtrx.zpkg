@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.dtrx";
+  id = "unknown.dtrx";
   name = "dtrx";
   summary = "Do The Right Extraction: A tool for taking the hassle out of extracting archives";
   description = ''

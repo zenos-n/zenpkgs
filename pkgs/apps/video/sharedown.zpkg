@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.sharedown";
+  id = "unknown.sharedown";
   name = "ShareDown";
   summary = "Application to save your Sharepoint videos for offline usage";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.espanso";
+  id = "unknown.espanso";
   name = "Espanso";
   summary = "Cross-platform Text Expander written in Rust";
   description = ''

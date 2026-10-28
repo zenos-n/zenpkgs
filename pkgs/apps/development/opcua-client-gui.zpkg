@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.opcua-client-gui";
+  id = "unknown.opcua-client-gui";
   name = "OPC UA Client";
   summary = "OPC UA GUI Client";
   description = ''

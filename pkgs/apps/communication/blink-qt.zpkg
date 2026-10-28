@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.blink-qt";
+  id = "unknown.blink-qt";
   name = "Blink";
   summary = "Blink SIP Client";
   description = ''

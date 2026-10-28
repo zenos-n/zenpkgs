@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.office.skanpage";
+  id = "unknown.skanpage";
   name = "Skanpage";
   summary = "Utility to scan images and multi-page documents";
   description = ''

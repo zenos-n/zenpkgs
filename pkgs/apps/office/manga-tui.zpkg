@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.manga-tui";
+  id = "unknown.manga-tui";
   name = "manga-tui";
   summary = "Terminal-based manga reader and downloader with image support";
   description = ''

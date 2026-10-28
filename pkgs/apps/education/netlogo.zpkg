@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.netlogo";
+  id = "unknown.netlogo";
   name = "NetLogo";
   summary = "Multi-agent programmable modeling environment";
   description = ''

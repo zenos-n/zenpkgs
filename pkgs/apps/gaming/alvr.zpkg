@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.alvr";
+  id = "unknown.alvr";
   name = "ALVR";
   summary = "Stream VR games from your PC to your headset via Wi-Fi";
   description = ''

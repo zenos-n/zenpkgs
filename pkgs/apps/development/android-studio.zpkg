@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.android-studio";
+  id = "unknown.android-studio";
   name = "Android Studio";
   summary = "Official IDE for Android (stable channel)";
   description = ''

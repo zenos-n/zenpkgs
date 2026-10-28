@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.foxtrotgps";
+  id = "unknown.foxtrotgps";
   name = "FoxtrotGPS";
   summary = "GPS/GIS application optimized for small screens";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.graphviz";
+  id = "unknown.graphviz";
   name = "Graphviz";
   summary = "Graph visualization tools";
   description = ''

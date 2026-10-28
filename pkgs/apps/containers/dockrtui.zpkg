@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.dockrtui";
+  id = "unknown.dockrtui";
   name = "Dockrtui";
   summary = "Fast, modern and keyboard-driven terminal dashboard for Docker";
   description = ''

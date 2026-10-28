@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-hakari";
+  id = "unknown.cargo-hakari";
   name = "cargo-hakari";
   summary = "Manage workspace-hack packages to speed up builds in large workspaces";
   description = ''

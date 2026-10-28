@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.nautilus-python";
+  id = "unknown.nautilus-python";
   name = "nautilus-python";
   summary = "Curated nautilus-python package for ZenOS";
   description = ''

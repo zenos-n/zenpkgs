@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.cbc";
+  id = "unknown.cbc";
   name = "CBC";
   summary = "Mixed integer programming solver";
   description = ''

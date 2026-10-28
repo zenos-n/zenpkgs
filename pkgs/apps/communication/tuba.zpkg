@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.tuba";
+  id = "unknown.tuba";
   name = "Tuba";
   summary = "Browse the Fediverse";
   description = ''

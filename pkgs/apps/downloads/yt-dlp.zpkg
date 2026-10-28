@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.yt-dlp";
+  id = "unknown.yt-dlp";
   name = "yt-dlp";
   summary = "Feature-rich command-line audio/video downloader";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.getdp";
+  id = "unknown.getdp";
   name = "GetDP";
   summary = "General Environment for the Treatment of Discrete Problems";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.qmapshack";
+  id = "unknown.qmapshack";
   name = "QMapShack";
   summary = "Consumer grade GIS software";
   description = ''

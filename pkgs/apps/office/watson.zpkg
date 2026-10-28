@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.watson";
+  id = "unknown.watson";
   name = "Watson";
   summary = "Wonderful CLI to track your time";
   description = ''

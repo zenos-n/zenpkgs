@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.delineate";
+  id = "unknown.delineate";
   name = "Delineate";
   summary = "View and edit graphs";
   description = ''

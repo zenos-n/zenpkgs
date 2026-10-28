@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.user-themes";
+  id = "unknown.user-themes";
   name = "user-themes";
   summary = "Curated user-themes package for ZenOS";
   description = ''

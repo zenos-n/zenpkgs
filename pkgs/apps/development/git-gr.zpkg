@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-gr";
+  id = "unknown.git-gr";
   name = "git-gr";
   summary = "Gerrit CLI client";
   description = ''

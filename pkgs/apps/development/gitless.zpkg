@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitless";
+  id = "unknown.gitless";
   name = "Gitless";
   summary = "Version control system built on top of Git";
   description = ''

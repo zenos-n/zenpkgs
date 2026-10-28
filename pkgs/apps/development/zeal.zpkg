@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.zeal";
+  id = "unknown.zeal";
   name = "Zeal";
   summary = "Simple offline API documentation browser";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.alphabetical-app-grid";
+  id = "unknown.alphabetical-app-grid";
   name = "alphabetical-app-grid";
   summary = "Curated alphabetical-app-grid package for ZenOS";
   description = ''

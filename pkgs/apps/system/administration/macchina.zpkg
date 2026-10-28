@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.macchina";
+  id = "unknown.macchina";
   name = "macchina";
   summary = "Fast, minimal and customizable system information fetcher";
   description = ''

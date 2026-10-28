@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.ffmpegthumbnailer";
+  id = "unknown.ffmpegthumbnailer";
   name = "FFmpegThumbnailer";
   summary = "Lightweight video thumbnailer";
   description = ''

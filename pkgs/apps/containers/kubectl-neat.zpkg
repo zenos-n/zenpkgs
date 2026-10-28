@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.kubectl-neat";
+  id = "unknown.kubectl-neat";
   name = "kubectl-neat";
   summary = "Clean up Kubernetes yaml and json output to make it readable";
   description = ''

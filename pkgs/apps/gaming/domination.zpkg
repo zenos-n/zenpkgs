@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.domination";
+  id = "unknown.domination";
   name = "Domination";
   summary = "Game that is a bit like the board game Risk or RisiKo";
   description = ''

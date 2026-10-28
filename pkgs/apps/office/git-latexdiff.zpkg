@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.git-latexdiff";
+  id = "unknown.git-latexdiff";
   name = "git-latexdiff";
   summary = "View diff on LaTeX source files on the generated PDF files";
   description = ''

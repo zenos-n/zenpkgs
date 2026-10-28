@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.mvoice";
+  id = "unknown.mvoice";
   name = "MVoice";
   summary = "M17 digital voice gateway and module for voice and data modes";
   description = ''

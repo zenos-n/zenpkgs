@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.skyemu";
+  id = "unknown.skyemu";
   name = "SkyEmu";
   summary = "Low level GameBoy, GameBoy Color, Game Boy Advance, and DS emulator";
   description = ''

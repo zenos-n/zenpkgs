@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pgloader";
+  id = "unknown.pgloader";
   name = "pgloader";
   summary = "Loads data into PostgreSQL and allows you to implement Continuous Migration from your current database to PostgreSQL";
   description = ''

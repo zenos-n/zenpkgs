@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.fatcat";
+  id = "unknown.fatcat";
   name = "Fatcat";
   summary = "FAT filesystems explore, extract, repair, and forensic tool";
   description = ''

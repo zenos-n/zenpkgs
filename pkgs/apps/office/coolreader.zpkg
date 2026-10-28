@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.coolreader";
+  id = "unknown.coolreader";
   name = "CoolReader";
   summary = "Cross platform open source e-book reader";
   description = ''

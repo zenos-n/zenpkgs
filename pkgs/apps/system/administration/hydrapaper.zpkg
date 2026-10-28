@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.hydrapaper";
+  id = "unknown.hydrapaper";
   name = "HydraPaper";
   summary = "GNOME utility for setting different wallpapers on individual monitors";
   description = ''

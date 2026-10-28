@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.influxdb2-cli";
+  id = "unknown.influxdb2-cli";
   name = "InfluxDB CLI";
   summary = "CLI for managing resources in InfluxDB v2";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ghui";
+  id = "unknown.ghui";
   name = "ghui";
   summary = "Terminal UI for GitHub pull requests";
   description = ''

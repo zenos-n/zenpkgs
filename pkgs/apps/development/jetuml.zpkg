@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.jetuml";
+  id = "unknown.jetuml";
   name = "JetUML";
   summary = "Desktop application for fast UML diagramming";
   description = ''

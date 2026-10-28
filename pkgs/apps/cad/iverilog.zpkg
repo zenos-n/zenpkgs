@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.cad.iverilog";
+  id = "unknown.iverilog";
   name = "Icarus Verilog";
   summary = "Icarus Verilog compiler";
   description = ''

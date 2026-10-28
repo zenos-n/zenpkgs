@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.filebot";
+  id = "unknown.filebot";
   name = "FileBot";
   summary = "Ultimate TV and Movie Renamer";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.newsboat";
+  id = "unknown.newsboat";
   name = "Newsboat";
   summary = "Fork of Newsbeuter, an RSS/Atom feed reader for the text console";
   description = ''

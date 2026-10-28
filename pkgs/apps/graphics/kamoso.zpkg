@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.graphics.kamoso";
+  id = "unknown.kamoso";
   name = "Kamoso";
   summary = "Application to take pictures and videos with your webcam";
   description = ''

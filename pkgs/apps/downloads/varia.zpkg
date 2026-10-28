@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.varia";
+  id = "unknown.varia";
   name = "Varia";
   summary = "Simple download manager based on aria2 and libadwaita";
   description = ''

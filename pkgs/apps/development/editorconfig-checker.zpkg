@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.editorconfig-checker";
+  id = "unknown.editorconfig-checker";
   name = "EditorConfig Checker";
   summary = "Tool to verify that your files are in harmony with your .editorconfig";
   description = ''

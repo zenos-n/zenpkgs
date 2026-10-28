@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.mousetweaks";
+  id = "unknown.mousetweaks";
   name = "mousetweaks";
   summary = "Provides mouse accessibility enhancements for the GNOME desktop";
   description = ''

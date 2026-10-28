@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.lact";
+  id = "unknown.lact";
   name = "LACT";
   summary = "Linux GPU Configuration Tool for AMD and NVIDIA";
   description = ''

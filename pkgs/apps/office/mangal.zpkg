@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.mangal";
+  id = "unknown.mangal";
   name = "mangal";
   summary = "CLI app written in Go which scrapes, downloads and packs manga into different formats";
   description = ''

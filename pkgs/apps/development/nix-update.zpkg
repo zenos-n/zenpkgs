@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.nix-update";
+  id = "unknown.nix-update";
   name = "nix-update";
   summary = "Swiss-knife for updating nix packages";
   description = ''

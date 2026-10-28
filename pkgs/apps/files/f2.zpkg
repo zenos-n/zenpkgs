@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.f2";
+  id = "unknown.f2";
   name = "F2";
   summary = "Command-line batch renaming tool";
   description = ''

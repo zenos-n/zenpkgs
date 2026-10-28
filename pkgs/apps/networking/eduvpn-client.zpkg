@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.eduvpn-client";
+  id = "unknown.eduvpn-client";
   name = "eduVPN";
   summary = "Linux client for eduVPN";
   description = ''

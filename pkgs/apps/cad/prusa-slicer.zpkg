@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.prusa-slicer";
+  id = "unknown.prusa-slicer";
   name = "PrusaSlicer";
   summary = "G-code generator for 3D printer";
   description = ''

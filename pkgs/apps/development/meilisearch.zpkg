@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.meilisearch";
+  id = "unknown.meilisearch";
   name = "Meilisearch";
   summary = "Powerful, fast, and an easy to use search engine";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.terraform-ls";
+  id = "unknown.terraform-ls";
   name = "Terraform Language Server";
   summary = "Terraform Language Server (official)";
   description = ''

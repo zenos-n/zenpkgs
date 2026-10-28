@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitbatch";
+  id = "unknown.gitbatch";
   name = "gitbatch";
   summary = "Running git UI commands";
   description = ''

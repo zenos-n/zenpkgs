@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.mitmproxy";
+  id = "unknown.mitmproxy";
   name = "mitmproxy";
   summary = "Man-in-the-middle proxy";
   description = ''

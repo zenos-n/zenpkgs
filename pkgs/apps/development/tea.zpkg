@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.tea";
+  id = "unknown.tea";
   name = "Gitea CLI";
   summary = "Gitea official CLI client";
   description = ''

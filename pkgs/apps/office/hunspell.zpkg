@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.office.hunspell";
+  id = "unknown.hunspell";
   name = "Hunspell";
   summary = "Spell checker";
   description = ''

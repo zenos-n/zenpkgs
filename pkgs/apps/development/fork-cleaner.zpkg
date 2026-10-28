@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fork-cleaner";
+  id = "unknown.fork-cleaner";
   name = "fork-cleaner";
   summary = "Quickly clean up unused forks on your GitHub account";
   description = ''

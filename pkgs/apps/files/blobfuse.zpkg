@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.blobfuse";
+  id = "unknown.blobfuse";
   name = "BlobFuse";
   summary = "Mount an Azure Blob storage as filesystem through FUSE";
   description = ''

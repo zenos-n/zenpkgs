@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.crex";
+  id = "unknown.crex";
   name = "crex";
   summary = "Explore, test, and check regular expressions in the terminal";
   description = ''

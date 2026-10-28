@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.js8call";
+  id = "unknown.js8call";
   name = "JS8Call";
   summary = "Weak-signal keyboard messaging for amateur radio";
   description = ''

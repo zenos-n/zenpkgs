@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.navidrome";
+  id = "unknown.navidrome";
   name = "Navidrome";
   summary = "Music Server and Streamer compatible with Subsonic/Airsonic";
   description = ''

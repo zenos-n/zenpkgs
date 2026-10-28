@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.claude-code";
+  id = "unknown.claude-code";
   name = "Claude Code";
   summary = "Agentic coding tool that lives in your terminal, understands your codebase, and helps you code faster";
   description = ''

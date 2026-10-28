@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.moneydance";
+  id = "unknown.moneydance";
   name = "Moneydance";
   summary = "Easy to use and full-featured personal finance app that doesn't compromise your privacy";
   description = ''

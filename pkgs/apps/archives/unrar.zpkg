@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.unrar";
+  id = "unknown.unrar";
   name = "UnRAR";
   summary = "Utility for RAR archives";
   description = ''

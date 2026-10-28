@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.railway";
+  id = "unknown.railway";
   name = "Railway CLI";
   summary = "Railway.app CLI";
   description = ''

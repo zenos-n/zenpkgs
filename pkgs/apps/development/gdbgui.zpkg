@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gdbgui";
+  id = "unknown.gdbgui";
   name = "gdbgui";
   summary = "Browser-based frontend for GDB";
   description = ''

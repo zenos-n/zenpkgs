@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.font-config-info";
+  id = "unknown.font-config-info";
   name = "font-config-info";
   summary = "Prints a Linux system's font configuration";
   description = ''

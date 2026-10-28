@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.signal-cli";
+  id = "unknown.signal-cli";
   name = "signal-cli";
   summary = "Command-line and dbus interface for communicating with the Signal messaging service";
   description = ''

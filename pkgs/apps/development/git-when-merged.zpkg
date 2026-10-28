@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-when-merged";
+  id = "unknown.git-when-merged";
   name = "git-when-merged";
   summary = "Helps you figure out when and why a commit was merged into a branch";
   description = ''

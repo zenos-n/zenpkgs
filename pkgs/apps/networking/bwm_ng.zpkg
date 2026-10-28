@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.bwm-u5f-ng";
+  id = "unknown.bwm-u5f-ng";
   name = "bwm-ng";
   summary = "Small and simple console-based live network and disk io bandwidth monitor";
   description = ''

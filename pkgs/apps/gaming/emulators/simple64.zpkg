@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.simple64";
+  id = "unknown.simple64";
   name = "simple64";
   summary = "Easy to use N64 emulator";
   description = ''

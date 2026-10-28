@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.terminal.cheat";
+  id = "unknown.cheat";
   name = "cheat";
   summary = "Create and view interactive cheatsheets on the command-line";
   description = ''

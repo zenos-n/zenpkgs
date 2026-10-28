@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.yubioath-flutter";
+  id = "unknown.yubioath-flutter";
   name = "Yubico Authenticator";
   summary = "Yubico Authenticator for Desktop";
   description = ''

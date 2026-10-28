@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fastcov";
+  id = "unknown.fastcov";
   name = "fastcov";
   summary = "Massively parallelized gcov wrapper";
   description = ''

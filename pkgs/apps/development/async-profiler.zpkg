@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.async-profiler";
+  id = "unknown.async-profiler";
   name = "async-profiler";
   summary = "Low overhead sampling profiler for Java that does not suffer from Safepoint bias problem";
   description = ''

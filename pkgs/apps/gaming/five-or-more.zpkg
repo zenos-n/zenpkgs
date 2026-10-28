@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.five-or-more";
+  id = "unknown.five-or-more";
   name = "Five or More";
   summary = "Remove colored balls from the board by forming lines";
   description = ''

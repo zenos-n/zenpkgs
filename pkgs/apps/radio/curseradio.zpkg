@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.curseradio";
+  id = "unknown.curseradio";
   name = "curseradio";
   summary = "Command line radio player";
   description = ''

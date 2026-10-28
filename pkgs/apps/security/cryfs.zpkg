@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.cryfs";
+  id = "unknown.cryfs";
   name = "cryfs";
   summary = "Cryptographic filesystem for the cloud";
   description = ''

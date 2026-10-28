@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.ectool";
+  id = "unknown.ectool";
   name = "ectool";
   summary = "Dump the RAM of a laptop's Embedded/Environmental Controller (EC)";
   description = ''

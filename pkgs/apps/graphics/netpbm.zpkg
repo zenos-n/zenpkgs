@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.netpbm";
+  id = "unknown.netpbm";
   name = "Netpbm";
   summary = "Toolkit for manipulation of graphic images";
   description = ''

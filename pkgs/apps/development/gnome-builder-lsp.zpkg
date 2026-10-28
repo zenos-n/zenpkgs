@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gnome-builder-lsp";
+  id = "unknown.gnome-builder-lsp";
   name = "GNOME Builder with language servers";
   summary = "GNOME Builder with Python, Rust, C and TypeScript tooling";
   description = ''GNOME Builder with the language servers from the migration reference available in its executable search path. Optional development variant.'';

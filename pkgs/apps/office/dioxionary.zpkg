@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.dioxionary";
+  id = "unknown.dioxionary";
   name = "Dioxionary";
   summary = "Rusty stardict. Enables terminal-based word lookup and vocabulary memorization using offline or online dictionaries";
   description = ''

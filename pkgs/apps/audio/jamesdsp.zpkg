@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.jamesdsp";
+  id = "unknown.jamesdsp";
   name = "JamesDSP";
   summary = "Audio effect processor for PipeWire clients";
   description = ''

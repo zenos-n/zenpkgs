@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.virtualization.gnome-boxes";
+  id = "unknown.gnome-boxes";
   name = "gnome-boxes";
   summary = "Curated gnome-boxes package for ZenOS";
   description = ''

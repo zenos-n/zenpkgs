@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-ps-rs";
+  id = "unknown.git-ps-rs";
   name = "Git Patch Stack";
   summary = "Tool for working with a stack of patches";
   description = ''

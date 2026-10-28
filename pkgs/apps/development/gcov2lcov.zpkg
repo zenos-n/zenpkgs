@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gcov2lcov";
+  id = "unknown.gcov2lcov";
   name = "gcov2lcov";
   summary = "Convert go coverage files to lcov format";
   description = ''

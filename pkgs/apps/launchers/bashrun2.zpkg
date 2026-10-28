@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.launchers.bashrun2";
+  id = "unknown.bashrun2";
   name = "bashrun2";
   summary = "Application launcher based on a modified bash session in a small terminal window";
   description = ''

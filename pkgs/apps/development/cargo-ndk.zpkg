@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-ndk";
+  id = "unknown.cargo-ndk";
   name = "cargo-ndk";
   summary = "Cargo extension for building Android NDK projects";
   description = ''

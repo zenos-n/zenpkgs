@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.decker";
+  id = "unknown.decker";
   name = "Decker";
   summary = "Multimedia platform for creating and sharing interactive documents";
   description = ''

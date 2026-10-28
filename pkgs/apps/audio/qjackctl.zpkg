@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.qjackctl";
+  id = "unknown.qjackctl";
   name = "QjackCtl";
   summary = "Qt application to control the JACK sound server daemon";
   description = ''

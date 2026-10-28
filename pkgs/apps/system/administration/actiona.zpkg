@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.actiona";
+  id = "unknown.actiona";
   name = "Actiona";
   summary = "Cross-platform automation tool";
   description = ''

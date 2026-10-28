@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cmake";
+  id = "unknown.cmake";
   name = "CMake";
   summary = "Cross-platform, open-source build system generator";
   description = ''

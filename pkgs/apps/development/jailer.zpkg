@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.jailer";
+  id = "unknown.jailer";
   name = "Jailer";
   summary = "Tool for database subsetting and relational data browsing";
   description = ''

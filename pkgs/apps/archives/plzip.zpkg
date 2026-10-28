@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.plzip";
+  id = "unknown.plzip";
   name = "plzip";
   summary = "Massively parallel lossless data compressor based on the lzlib compression library";
   description = ''

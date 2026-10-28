@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.quisk";
+  id = "unknown.quisk";
   name = "Quisk";
   summary = "SDR transceiver for radios that use the Hermes protocol";
   description = ''

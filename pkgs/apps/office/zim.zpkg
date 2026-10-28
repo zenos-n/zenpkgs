@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.zim";
+  id = "unknown.zim";
   name = "Zim";
   summary = "Desktop wiki";
   description = ''

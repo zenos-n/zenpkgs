@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-codereview";
+  id = "unknown.git-codereview";
   name = "git-codereview";
   summary = "Manage the code review process for Git changes using a Gerrit server";
   description = ''

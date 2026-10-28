@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.darklua";
+  id = "unknown.darklua";
   name = "Darklua";
   summary = "Command line tool that transforms Lua code";
   description = ''

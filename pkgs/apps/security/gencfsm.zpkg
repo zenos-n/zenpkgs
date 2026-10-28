@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.gencfsm";
+  id = "unknown.gencfsm";
   name = "Gnome Encfs Manager";
   summary = "EncFS manager and mounter with GNOME3 integration";
   description = ''

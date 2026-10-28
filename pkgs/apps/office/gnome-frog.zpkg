@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.gnome-frog";
+  id = "unknown.gnome-frog";
   name = "Frog OCR";
   summary = "Intuitive text extraction tool (OCR) for GNOME desktop";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.ee";
+  id = "unknown.ee";
   name = "ee";
   summary = "classic curses text editor";
   description = ''

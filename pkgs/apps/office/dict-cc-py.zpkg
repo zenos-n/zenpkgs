@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.dict-cc-py";
+  id = "unknown.dict-cc-py";
   name = "dict.cc CLI";
   summary = "Unofficial command line client for dict.cc";
   description = ''

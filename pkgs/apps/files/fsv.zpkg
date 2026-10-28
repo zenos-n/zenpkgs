@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fsv";
+  id = "unknown.fsv";
   name = "fsv";
   summary = "File system visualizer in cyberspace";
   description = ''

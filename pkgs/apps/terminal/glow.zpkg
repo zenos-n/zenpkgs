@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.glow";
+  id = "unknown.glow";
   name = "Glow";
   summary = "Render markdown on the CLI, with pizzazz";
   description = ''

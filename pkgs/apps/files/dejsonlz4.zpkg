@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.dejsonlz4";
+  id = "unknown.dejsonlz4";
   name = "dejsonlz4";
   summary = "Decompress Mozilla Firefox bookmarks backup files";
   description = ''

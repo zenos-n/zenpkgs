@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.viewnior";
+  id = "unknown.viewnior";
   name = "Viewnior";
   summary = "Fast and simple image viewer";
   description = ''

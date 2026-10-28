@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.fava";
+  id = "unknown.fava";
   name = "Fava";
   summary = "Web interface for beancount";
   description = ''

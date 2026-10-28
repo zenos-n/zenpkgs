@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.n-m3u8dl-re";
+  id = "unknown.n-m3u8dl-re";
   name = "N_m3u8DL-RE";
   summary = "Cross-Platform, modern and powerful stream downloader for MPD/M3U8/ISM";
   description = ''

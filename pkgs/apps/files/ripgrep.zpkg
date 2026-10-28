@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.files.ripgrep";
+  id = "unknown.ripgrep";
   name = "ripgrep";
   summary = "Utility that combines the usability of The Silver Searcher with the raw speed of grep";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.cryptoscan";
+  id = "unknown.cryptoscan";
   name = "Cryptoscan";
   summary = "Cryptographic Discovery Scanner";
   description = ''

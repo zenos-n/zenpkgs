@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.everspace";
+  id = "unknown.everspace";
   name = "EVERSPACE";
   summary = "Action-focused single-player space shooter with roguelike elements";
   description = ''

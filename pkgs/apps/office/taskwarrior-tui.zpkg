@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.taskwarrior-tui";
+  id = "unknown.taskwarrior-tui";
   name = "Taskwarrior TUI";
   summary = "Terminal user interface for taskwarrior";
   description = ''

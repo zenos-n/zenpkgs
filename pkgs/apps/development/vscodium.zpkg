@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.vscodium";
+  id = "unknown.vscodium";
   name = "VSCodium";
   summary = "Open source source code editor developed by Microsoft for Windows,\nLinux and macOS (VS Code without MS branding/telemetry/licensing)\n";
   description = ''

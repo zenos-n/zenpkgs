@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.dblab";
+  id = "unknown.dblab";
   name = "dblab";
   summary = "Database client every command line junkie deserves";
   description = ''

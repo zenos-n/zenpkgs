@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.dosage";
+  id = "unknown.dosage";
   name = "Dosage";
   summary = "Comic strip downloader and archiver";
   description = ''

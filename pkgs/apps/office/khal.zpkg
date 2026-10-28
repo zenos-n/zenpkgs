@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.khal";
+  id = "unknown.khal";
   name = "khal";
   summary = "CLI calendar application";
   description = ''

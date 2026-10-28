@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.zsh-powerlevel10k";
+  id = "unknown.zsh-powerlevel10k";
   name = "zsh-powerlevel10k";
   summary = "Fast reimplementation of Powerlevel9k ZSH theme";
   description = ''

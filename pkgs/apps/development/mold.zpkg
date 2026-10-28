@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.mold";
+  id = "unknown.mold";
   name = "mold";
   summary = "Faster drop-in replacement for existing Unix linkers (unwrapped) (wrapper script)";
   description = ''

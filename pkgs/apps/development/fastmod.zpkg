@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fastmod";
+  id = "unknown.fastmod";
   name = "fastmod";
   summary = "Utility that makes sweeping changes to large, shared code bases";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.clpeak";
+  id = "unknown.clpeak";
   name = "clpeak";
   summary = "Tool which profiles OpenCL devices to find their peak capacities";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.podman";
+  id = "unknown.podman";
   name = "Podman";
   summary = "Program for managing pods, containers and container images";
   description = ''

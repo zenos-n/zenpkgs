@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.trufflehog";
+  id = "unknown.trufflehog";
   name = "trufflehog";
   summary = "Find credentials all over the place";
   description = ''

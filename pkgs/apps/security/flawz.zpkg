@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.security.flawz";
+  id = "unknown.flawz";
   name = "Flawz";
   summary = "Terminal UI for browsing CVEs";
   description = ''

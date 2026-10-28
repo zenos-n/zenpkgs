@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.ecm";
+  id = "unknown.ecm";
   name = "GMP-ECM";
   summary = "Elliptic Curve Method for Integer Factorization";
   description = ''

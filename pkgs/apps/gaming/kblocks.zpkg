@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.kblocks";
+  id = "unknown.kblocks";
   name = "KBlocks";
   summary = "KBlocks is the classic falling blocks game";
   description = ''

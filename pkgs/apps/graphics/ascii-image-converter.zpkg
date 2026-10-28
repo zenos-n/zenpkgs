@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.ascii-image-converter";
+  id = "unknown.ascii-image-converter";
   name = "ASCII Image Converter";
   summary = "Convert images into ASCII art on the console";
   description = ''

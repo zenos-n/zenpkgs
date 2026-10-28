@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.cpx";
+  id = "unknown.cpx";
   name = "cpx";
   summary = "File copy tool for Linux with progress bars, resume capability";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.ironwail";
+  id = "unknown.ironwail";
   name = "Ironwail";
   summary = "Fork of the QuakeSpasm engine for iD software's Quake";
   description = ''

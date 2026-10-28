@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.flaca";
+  id = "unknown.flaca";
   name = "flaca";
   summary = "CLI tool to losslessly compress JPEG and PNG images";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.statix";
+  id = "unknown.statix";
   name = "statix";
   summary = "Lints and suggestions for the nix programming language";
   description = ''

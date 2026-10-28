@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.bastet";
+  id = "unknown.bastet";
   name = "Bastet";
   summary = "Tetris clone with 'bastard' block-choosing AI";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.starfox64recomp";
+  id = "unknown.starfox64recomp";
   name = "Star Fox 64 Recompiled";
   summary = "Static recompilation of Starfox 64 for PC (Windows/Linux)";
   description = ''

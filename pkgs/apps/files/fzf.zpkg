@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fzf";
+  id = "unknown.fzf";
   name = "fzf";
   summary = "Command-line fuzzy finder written in Go";
   description = ''

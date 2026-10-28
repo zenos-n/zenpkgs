@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.ddrescueview";
+  id = "unknown.ddrescueview";
   name = "ddrescueview";
   summary = "Tool to graphically examine ddrescue mapfiles";
   description = ''

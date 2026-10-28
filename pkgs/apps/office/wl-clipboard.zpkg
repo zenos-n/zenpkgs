@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.wl-clipboard";
+  id = "unknown.wl-clipboard";
   name = "wl-clipboard";
   summary = "Command-line copy/paste utilities for Wayland";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.lapce";
+  id = "unknown.lapce";
   name = "Lapce";
   summary = "Lightning-fast and Powerful Code Editor written in Rust";
   description = ''

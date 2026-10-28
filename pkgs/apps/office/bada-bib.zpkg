@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.bada-bib";
+  id = "unknown.bada-bib";
   name = "bada-bib";
   summary = "Simple BibTeX Viewer and Editor";
   description = ''

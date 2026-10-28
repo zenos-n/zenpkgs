@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.mokutil";
+  id = "unknown.mokutil";
   name = "mokutil";
   summary = "Curated mokutil package for ZenOS";
   description = ''

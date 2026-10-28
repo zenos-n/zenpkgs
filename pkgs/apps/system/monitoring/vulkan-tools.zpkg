@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.vulkan-tools";
+  id = "unknown.vulkan-tools";
   name = "vulkan-tools";
   summary = "Khronos official Vulkan Tools and Utilities";
   description = ''

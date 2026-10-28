@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.crane";
+  id = "unknown.crane";
   name = "crane";
   summary = "Tools for interacting with remote images and registries including crane and gcrane";
   description = ''

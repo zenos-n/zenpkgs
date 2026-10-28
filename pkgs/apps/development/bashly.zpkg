@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bashly";
+  id = "unknown.bashly";
   name = "Bashly";
   summary = "Bash command line framework and CLI generator";
   description = ''

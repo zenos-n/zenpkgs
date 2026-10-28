@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.launchers.wofi";
+  id = "unknown.wofi";
   name = "Wofi";
   summary = "Launcher/menu program for wlroots based wayland compositors such as sway";
   description = ''

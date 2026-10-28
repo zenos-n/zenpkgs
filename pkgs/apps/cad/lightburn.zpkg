@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.lightburn";
+  id = "unknown.lightburn";
   name = "LightBurn";
   summary = "Layout, editing, and control software for your laser cutter";
   description = ''

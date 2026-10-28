@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.atkinson-hyperlegible-mono";
+  id = "unknown.atkinson-hyperlegible-mono";
   name = "atkinson-hyperlegible-mono";
   summary = "Curated atkinson-hyperlegible-mono package for ZenOS";
   description = ''

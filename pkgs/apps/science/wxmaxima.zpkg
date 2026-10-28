@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.wxmaxima";
+  id = "unknown.wxmaxima";
   name = "wxMaxima";
   summary = "Cross platform GUI for the computer algebra system Maxima";
   description = ''

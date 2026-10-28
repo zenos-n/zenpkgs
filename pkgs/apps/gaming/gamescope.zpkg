@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gamescope";
+  id = "unknown.gamescope";
   name = "gamescope";
   summary = "SteamOS session compositing window manager";
   description = ''

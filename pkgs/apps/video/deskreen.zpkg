@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.deskreen";
+  id = "unknown.deskreen";
   name = "Deskreen";
   summary = "Turn any device into a secondary screen for your computer";
   description = ''

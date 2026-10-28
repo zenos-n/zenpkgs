@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.squashfs-tools";
+  id = "unknown.squashfs-tools";
   name = "squashfs-tools";
   summary = "Curated squashfs-tools package for ZenOS";
   description = ''

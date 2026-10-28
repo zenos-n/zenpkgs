@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.deltachat-repl";
+  id = "unknown.deltachat-repl";
   name = "Delta Chat REPL";
   summary = "Delta Chat CLI client";
   description = ''

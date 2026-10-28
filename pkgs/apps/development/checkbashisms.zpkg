@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.checkbashisms";
+  id = "unknown.checkbashisms";
   name = "checkbashisms";
   summary = "Check shell scripts for non-portable syntax";
   description = ''

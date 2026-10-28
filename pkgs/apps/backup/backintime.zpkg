@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.backintime";
+  id = "unknown.backintime";
   name = "Back In Time";
   summary = "Simple backup tool for Linux";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.geonkick";
+  id = "unknown.geonkick";
   name = "Geonkick";
   summary = "Free software percussion synthesizer";
   description = ''

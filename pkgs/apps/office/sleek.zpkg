@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.sleek";
+  id = "unknown.sleek";
   name = "sleek";
   summary = "CLI tool for formatting SQL";
   description = ''

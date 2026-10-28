@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.dasher";
+  id = "unknown.dasher";
   name = "Dasher";
   summary = "Information-efficient text-entry interface, driven by natural continuous pointing gestures";
   description = ''

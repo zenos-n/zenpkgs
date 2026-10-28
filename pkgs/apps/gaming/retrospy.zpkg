@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.retrospy";
+  id = "unknown.retrospy";
   name = "RetroSpy";
   summary = "Live controller viewer for Nintendo consoles as well as many other retro consoles and computers";
   description = ''

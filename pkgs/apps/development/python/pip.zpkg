@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.python.pip";
+  id = "unknown.pip";
   name = "pip";
   summary = "PyPA recommended tool for installing Python packages";
   description = ''

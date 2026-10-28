@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.vkbasalt-cli";
+  id = "unknown.vkbasalt-cli";
   name = "vkbasalt-cli";
   summary = "Command-line utility for vkBasalt";
   description = ''

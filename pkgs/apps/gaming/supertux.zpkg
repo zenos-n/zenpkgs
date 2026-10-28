@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.supertux";
+  id = "unknown.supertux";
   name = "SuperTux";
   summary = "Classic 2D jump'n run sidescroller game";
   description = ''

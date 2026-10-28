@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.keymapp";
+  id = "unknown.keymapp";
   name = "Keymapp";
   summary = "Application for ZSA keyboards";
   description = ''

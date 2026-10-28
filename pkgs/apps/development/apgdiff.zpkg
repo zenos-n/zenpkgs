@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.apgdiff";
+  id = "unknown.apgdiff";
   name = "APGdiff";
   summary = "Another PostgreSQL diff tool";
   description = ''

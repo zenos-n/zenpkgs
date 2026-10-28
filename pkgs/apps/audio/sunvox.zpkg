@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.sunvox";
+  id = "unknown.sunvox";
   name = "SunVox";
   summary = "Small, fast and powerful modular synthesizer with pattern-based sequencer";
   description = ''

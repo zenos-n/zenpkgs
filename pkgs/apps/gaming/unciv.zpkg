@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.unciv";
+  id = "unknown.unciv";
   name = "Unciv";
   summary = "Open-source Android/Desktop remake of Civ V";
   description = ''

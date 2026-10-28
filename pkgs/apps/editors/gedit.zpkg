@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.gedit";
+  id = "unknown.gedit";
   name = "gedit";
   summary = "Former GNOME text editor";
   description = ''

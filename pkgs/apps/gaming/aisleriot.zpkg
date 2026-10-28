@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.aisleriot";
+  id = "unknown.aisleriot";
   name = "Aisleriot";
   summary = "Collection of patience games written in guile scheme";
   description = ''

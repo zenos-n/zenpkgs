@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.xclip";
+  id = "unknown.xclip";
   name = "xclip";
   summary = "Tool to access the X clipboard from a console application";
   description = ''

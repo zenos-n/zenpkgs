@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.carddav-util";
+  id = "unknown.carddav-util";
   name = "CardDAV Utility";
   summary = "CardDAV import/export utility";
   description = ''

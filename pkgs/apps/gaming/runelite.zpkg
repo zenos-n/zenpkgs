@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.runelite";
+  id = "unknown.runelite";
   name = "RuneLite";
   summary = "Open source Old School RuneScape client";
   description = ''

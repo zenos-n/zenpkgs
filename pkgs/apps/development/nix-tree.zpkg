@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.nix-tree";
+  id = "unknown.nix-tree";
   name = "nix-tree";
   summary = "Interactively browse a Nix store paths dependencies";
   description = ''

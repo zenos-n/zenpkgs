@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.oh-my-git";
+  id = "unknown.oh-my-git";
   name = "Oh My Git!";
   summary = "Interactive Git learning game";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.simplex-chat-desktop";
+  id = "unknown.simplex-chat-desktop";
   name = "SimpleX Chat";
   summary = "Desktop application for SimpleX Chat";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.cava";
+  id = "unknown.cava";
   name = "CAVA";
   summary = "Console-based Audio Visualizer for Alsa";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.epic5";
+  id = "unknown.epic5";
   name = "EPIC5";
   summary = "IRC client that offers a great ircII interface";
   description = ''

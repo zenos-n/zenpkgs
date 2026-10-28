@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.formatjson5";
+  id = "unknown.formatjson5";
   name = "formatjson5";
   summary = "JSON5 formatter";
   description = ''

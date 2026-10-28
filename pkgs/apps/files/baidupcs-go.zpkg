@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.baidupcs-go";
+  id = "unknown.baidupcs-go";
   name = "BaiduPCS-Go";
   summary = "Baidu Netdisk commandline client, mimicking Linux shell file handling commands";
   description = ''

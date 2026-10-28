@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.helix";
+  id = "unknown.helix";
   name = "helix";
   summary = "Curated helix package for ZenOS";
   description = ''

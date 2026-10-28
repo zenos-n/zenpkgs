@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.galer";
+  id = "unknown.galer";
   name = "galer";
   summary = "Tool to fetch URLs from HTML attributes";
   description = ''

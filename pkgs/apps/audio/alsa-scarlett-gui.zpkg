@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.alsa-scarlett-gui";
+  id = "unknown.alsa-scarlett-gui";
   name = "ALSA Scarlett GUI";
   summary = "GUI for alsa controls presented by Focusrite Scarlett Gen 2/3/4 Mixer Driver";
   description = ''

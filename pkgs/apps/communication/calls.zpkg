@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.calls";
+  id = "unknown.calls";
   name = "Calls";
   summary = "Phone dialer and call handler";
   description = ''

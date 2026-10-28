@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.fish";
+  id = "unknown.fish";
   name = "fish";
   summary = "Curated fish package for ZenOS";
   description = ''

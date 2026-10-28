@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.quasselClient";
+  id = "unknown.quasselClient";
   name = "Quassel Client";
   summary = "Qt/KDE distributed IRC client supporting a remote daemon";
   description = ''

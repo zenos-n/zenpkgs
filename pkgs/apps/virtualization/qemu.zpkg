@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.virtualization.qemu";
+  id = "unknown.qemu";
   name = "QEMU";
   summary = "Generic and open source machine emulator and virtualizer";
   description = ''

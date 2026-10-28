@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.vikunja-desktop";
+  id = "unknown.vikunja-desktop";
   name = "Vikunja";
   summary = "Desktop App of the Vikunja to-do list app";
   description = ''

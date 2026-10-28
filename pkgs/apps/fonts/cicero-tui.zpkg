@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.cicero-tui";
+  id = "unknown.cicero-tui";
   name = "Cicero";
   summary = "Unicode tool with a terminal user interface";
   description = ''

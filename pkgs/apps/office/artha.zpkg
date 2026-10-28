@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.artha";
+  id = "unknown.artha";
   name = "Artha";
   summary = "Offline thesaurus based on WordNet";
   description = ''

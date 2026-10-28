@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.zelda64recomp";
+  id = "unknown.zelda64recomp";
   name = "Zelda 64 Recompiled";
   summary = "Static recompilation of Majora's Mask (and soon Ocarina of Time) for PC (Windows/Linux)";
   description = ''

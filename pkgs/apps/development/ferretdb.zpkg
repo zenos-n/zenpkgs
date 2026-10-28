@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ferretdb";
+  id = "unknown.ferretdb";
   name = "FerretDB";
   summary = "Truly Open Source MongoDB alternative";
   description = ''

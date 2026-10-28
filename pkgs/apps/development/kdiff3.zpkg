@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.kdiff3";
+  id = "unknown.kdiff3";
   name = "KDiff3";
   summary = "Compares and merges 2 or 3 files or directories";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.fsuae";
+  id = "unknown.fsuae";
   name = "FS-UAE";
   summary = "Accurate, customizable Amiga Emulator";
   description = ''

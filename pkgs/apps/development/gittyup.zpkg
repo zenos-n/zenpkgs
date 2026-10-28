@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gittyup";
+  id = "unknown.gittyup";
   name = "Gittyup";
   summary = "Graphical Git client designed to help you understand and manage your source code history";
   description = ''

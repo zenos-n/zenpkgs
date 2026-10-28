@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.gprojector";
+  id = "unknown.gprojector";
   name = "G.Projector";
   summary = "G.Projector transforms an input map image into any of about 200 global and regional map projections";
   description = ''

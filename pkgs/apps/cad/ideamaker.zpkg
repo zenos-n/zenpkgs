@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.ideamaker";
+  id = "unknown.ideamaker";
   name = "ideaMaker";
   summary = "Raise3D's 3D slicer software";
   description = ''

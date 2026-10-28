@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.wahjam";
+  id = "unknown.wahjam";
   name = "Wahjam";
   summary = "Software for musicians to play together over the internet";
   description = ''

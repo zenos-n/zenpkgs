@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.charm-freeze";
+  id = "unknown.charm-freeze";
   name = "Freeze";
   summary = "Tool to generate images of code and terminal output";
   description = ''

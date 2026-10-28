@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-conventional-commits";
+  id = "unknown.git-conventional-commits";
   name = "git-conventional-commits";
   summary = "Generate semantic versions, markdown changelogs, and validate commit messages";
   description = ''

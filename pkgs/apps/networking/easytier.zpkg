@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.easytier";
+  id = "unknown.easytier";
   name = "EasyTier";
   summary = "Simple, decentralized mesh VPN with WireGuard support";
   description = ''

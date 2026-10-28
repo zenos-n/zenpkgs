@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.pingus";
+  id = "unknown.pingus";
   name = "Pingus";
   summary = "Puzzle game with mechanics similar to Lemmings";
   description = ''

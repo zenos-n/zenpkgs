@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.jedit";
+  id = "unknown.jedit";
   name = "jEdit";
   summary = "Programmer's text editor written in Java";
   description = ''

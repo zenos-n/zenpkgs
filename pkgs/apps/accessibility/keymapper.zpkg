@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.keymapper";
+  id = "unknown.keymapper";
   name = "keymapper";
   summary = "Cross-platform context-aware key remapper";
   description = ''

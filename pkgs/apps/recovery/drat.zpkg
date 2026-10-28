@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.drat";
+  id = "unknown.drat";
   name = "Drat";
   summary = "Utility for performing data recovery and analysis of APFS partitions/containers";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.basilk";
+  id = "unknown.basilk";
   name = "Basilk";
   summary = "Terminal User Interface (TUI) to manage your tasks with minimal kanban logic";
   description = ''

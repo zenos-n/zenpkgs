@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.hottext";
+  id = "unknown.hottext";
   name = "Hottext";
   summary = "Simple RSVP speed-reading utility";
   description = ''

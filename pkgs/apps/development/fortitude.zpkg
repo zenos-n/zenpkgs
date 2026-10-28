@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fortitude";
+  id = "unknown.fortitude";
   name = "Fortitude";
   summary = "Fortran linter written in Rust inspired by Ruff";
   description = ''

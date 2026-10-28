@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.darktable";
+  id = "unknown.darktable";
   name = "darktable";
   summary = "Virtual lighttable and darkroom for photographers";
   description = ''

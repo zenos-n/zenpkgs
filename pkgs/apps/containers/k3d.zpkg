@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.k3d";
+  id = "unknown.k3d";
   name = "k3d";
   summary = "Helper to run k3s (Lightweight Kubernetes. 5 less than k8s) in a docker container";
   description = ''

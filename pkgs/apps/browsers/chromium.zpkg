@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.chromium";
+  id = "unknown.chromium";
   name = "Chromium";
   summary = "Open source web browser from Google";
   description = ''

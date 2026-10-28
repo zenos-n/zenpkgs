@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.gitlab-timelogs";
+  id = "unknown.gitlab-timelogs";
   name = "GitLab Timelogs";
   summary = "CLI utility to support you with your time logs in GitLab";
   description = ''

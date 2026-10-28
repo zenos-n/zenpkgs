@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.gigolo";
+  id = "unknown.gigolo";
   name = "Gigolo";
   summary = "Frontend to easily manage connections to remote filesystems";
   description = ''

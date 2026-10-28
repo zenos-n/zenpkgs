@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.bibtex-tidy";
+  id = "unknown.bibtex-tidy";
   name = "bibtex-tidy";
   summary = "Cleaner and Formatter for BibTeX files";
   description = ''

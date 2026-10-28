@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gmap";
+  id = "unknown.gmap";
   name = "gmap";
   summary = "Command-line tool for visualizing Git activity";
   description = ''

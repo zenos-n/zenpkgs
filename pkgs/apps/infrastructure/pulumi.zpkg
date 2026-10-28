@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.pulumi";
+  id = "unknown.pulumi";
   name = "Pulumi";
   summary = "Cloud development platform that makes creating cloud programs easy and productive";
   description = ''

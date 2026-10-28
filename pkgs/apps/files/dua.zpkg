@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.dua";
+  id = "unknown.dua";
   name = "dua";
   summary = "Tool to conveniently learn about the disk usage of directories";
   description = ''

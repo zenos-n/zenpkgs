@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pax-utils";
+  id = "unknown.pax-utils";
   name = "pax-utils";
   summary = "ELF utils that can check files for security relevant properties";
   description = ''

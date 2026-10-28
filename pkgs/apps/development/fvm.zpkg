@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fvm";
+  id = "unknown.fvm";
   name = "Flutter Version Management";
   summary = "Simple CLI to manage Flutter SDK versions";
   description = ''

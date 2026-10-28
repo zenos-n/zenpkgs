@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.minimap2";
+  id = "unknown.minimap2";
   name = "minimap2";
   summary = "Versatile pairwise aligner for genomic and spliced nucleotide sequences";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.cryptomator-cli";
+  id = "unknown.cryptomator-cli";
   name = "Cryptomator CLI";
   summary = "Command line program to access encrypted Cryptomator vaults";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.dbmate";
+  id = "unknown.dbmate";
   name = "dbmate";
   summary = "Database migration tool";
   description = ''

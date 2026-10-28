@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.bagr";
+  id = "unknown.bagr";
   name = "bagr";
   summary = "Command line utility for interacting with BagIt bags (RFC 8493)";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.csvkit";
+  id = "unknown.csvkit";
   name = "csvkit";
   summary = "Suite of command-line tools for converting to and working with CSV";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.just";
+  id = "unknown.just";
   name = "Just";
   summary = "Handy way to save and run project-specific commands";
   description = ''

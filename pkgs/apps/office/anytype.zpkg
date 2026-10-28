@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.anytype";
+  id = "unknown.anytype";
   name = "Anytype";
   summary = "P2P note-taking tool";
   description = ''

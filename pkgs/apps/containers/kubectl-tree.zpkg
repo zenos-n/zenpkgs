@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.kubectl-tree";
+  id = "unknown.kubectl-tree";
   name = "kubectl-tree";
   summary = "kubectl plugin to browse Kubernetes object hierarchies as a tree";
   description = ''

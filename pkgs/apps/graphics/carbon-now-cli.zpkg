@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.carbon-now-cli";
+  id = "unknown.carbon-now-cli";
   name = "carbon-now-cli";
   summary = "Beautiful images of your code — from right inside your terminal";
   description = ''

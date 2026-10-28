@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.compress-pptx";
+  id = "unknown.compress-pptx";
   name = "compress-pptx";
   summary = "Compress PPTX files";
   description = ''

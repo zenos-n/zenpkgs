@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.alex";
+  id = "unknown.alex";
   name = "Alex";
   summary = "Alex is a tool for generating lexical analysers in Haskell";
   description = ''

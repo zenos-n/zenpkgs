@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.efficient-compression-tool";
+  id = "unknown.efficient-compression-tool";
   name = "Efficient Compression Tool";
   summary = "Fast and effective C++ file optimizer";
   description = ''

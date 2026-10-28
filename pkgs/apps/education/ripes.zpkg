@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.ripes";
+  id = "unknown.ripes";
   name = "Ripes";
   summary = "Graphical processor simulator and assembly editor for the RISC-V ISA";
   description = ''

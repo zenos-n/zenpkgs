@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.coolercontrol";
+  id = "unknown.coolercontrol";
   name = "CoolerControl";
   summary = "Monitor and control your cooling devices (GUI)";
   description = ''

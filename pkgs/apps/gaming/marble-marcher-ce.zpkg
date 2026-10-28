@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.marble-marcher-ce";
+  id = "unknown.marble-marcher-ce";
   name = "Marble Marcher Community Edition";
   summary = "Community-developed version of the original Marble Marcher - a fractal physics game";
   description = ''

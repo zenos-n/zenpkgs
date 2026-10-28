@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.adguardian";
+  id = "unknown.adguardian";
   name = "AdGuardian";
   summary = "Terminal-based, real-time traffic monitoring and statistics for your AdGuard Home instance";
   description = ''

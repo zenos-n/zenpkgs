@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.hut";
+  id = "unknown.hut";
   name = "SourceHut CLI";
   summary = "CLI tool for Sourcehut / sr.ht";
   description = ''

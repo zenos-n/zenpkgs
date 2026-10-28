@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.gifsicle";
+  id = "unknown.gifsicle";
   name = "Gifsicle";
   summary = "Command-line tool for creating, editing, and getting information about GIF images and animations";
   description = ''

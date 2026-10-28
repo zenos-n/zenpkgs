@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.auto-changelog";
+  id = "unknown.auto-changelog";
   name = "auto-changelog";
   summary = "Command line tool for generating a changelog from git tags and commit history";
   description = ''

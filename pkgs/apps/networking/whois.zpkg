@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.whois";
+  id = "unknown.whois";
   name = "whois";
   summary = "Intelligent WHOIS client from Debian";
   description = ''

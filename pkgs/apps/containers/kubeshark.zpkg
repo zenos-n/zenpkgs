@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.kubeshark";
+  id = "unknown.kubeshark";
   name = "Kubeshark";
   summary = "API Traffic Viewer for Kubernetes";
   description = ''

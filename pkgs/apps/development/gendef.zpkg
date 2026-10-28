@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gendef";
+  id = "unknown.gendef";
   name = "gendef";
   summary = "Tool which generate def files from DLLs";
   description = ''

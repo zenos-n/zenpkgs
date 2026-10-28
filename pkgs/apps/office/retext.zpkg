@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.retext";
+  id = "unknown.retext";
   name = "ReText";
   summary = "Editor for Markdown and reStructuredText";
   description = ''

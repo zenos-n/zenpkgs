@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-extras";
+  id = "unknown.git-extras";
   name = "git-extras";
   summary = "GIT utilities -- repo summary, repl, changelog population, author commit percentages and more";
   description = ''

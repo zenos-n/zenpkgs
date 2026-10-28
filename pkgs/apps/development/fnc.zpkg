@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fnc";
+  id = "unknown.fnc";
   name = "fnc";
   summary = "Interactive ncurses browser for Fossil repositories";
   description = ''

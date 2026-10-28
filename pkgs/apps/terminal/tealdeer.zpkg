@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.terminal.tealdeer";
+  id = "unknown.tealdeer";
   name = "tealdeer";
   summary = "Very fast implementation of tldr in Rust";
   description = ''

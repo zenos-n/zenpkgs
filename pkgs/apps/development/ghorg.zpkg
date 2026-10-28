@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ghorg";
+  id = "unknown.ghorg";
   name = "ghorg";
   summary = "Quickly clone an entire org/users repositories into one directory";
   description = ''

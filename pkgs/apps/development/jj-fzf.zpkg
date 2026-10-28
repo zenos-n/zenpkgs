@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.jj-fzf";
+  id = "unknown.jj-fzf";
   name = "jj-fzf";
   summary = "Text UI for Jujutsu based on fzf";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.vscode-json-languageserver";
+  id = "unknown.vscode-json-languageserver";
   name = "VS Code JSON Language Server";
   summary = "JSON language server";
   description = ''

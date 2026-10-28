@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.micro";
+  id = "unknown.micro";
   name = "Micro";
   summary = "Modern and intuitive terminal-based text editor";
   description = ''

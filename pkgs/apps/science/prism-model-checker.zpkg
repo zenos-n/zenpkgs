@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.prism-model-checker";
+  id = "unknown.prism-model-checker";
   name = "PRISM";
   summary = "Probabilistic symbolic model checker";
   description = ''

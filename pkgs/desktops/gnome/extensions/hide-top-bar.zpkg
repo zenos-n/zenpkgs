@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.hide-top-bar";
+  id = "unknown.hide-top-bar";
   name = "hide-top-bar";
   summary = "Curated hide-top-bar package for ZenOS";
   description = ''

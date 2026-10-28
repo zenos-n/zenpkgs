@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.celluloid";
+  id = "unknown.celluloid";
   name = "Celluloid";
   summary = "Simple GTK frontend for the mpv video player";
   description = ''

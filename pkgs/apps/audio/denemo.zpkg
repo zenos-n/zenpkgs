@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.denemo";
+  id = "unknown.denemo";
   name = "Denemo";
   summary = "Music notation and composition software used with lilypond";
   description = ''

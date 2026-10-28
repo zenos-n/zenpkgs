@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.glide-media-player";
+  id = "unknown.glide-media-player";
   name = "Glide";
   summary = "Linux/macOS media player based on GStreamer and GTK";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.legcord";
+  id = "unknown.legcord";
   name = "Legcord";
   summary = "Lightweight, alternative desktop client for Discord";
   description = ''

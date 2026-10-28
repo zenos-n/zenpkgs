@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.television";
+  id = "unknown.television";
   name = "television";
   summary = "Blazingly fast general purpose fuzzy finder TUI";
   description = ''

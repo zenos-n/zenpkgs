@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.qgis";
+  id = "unknown.qgis";
   name = "QGIS";
   summary = "Free and Open Source Geographic Information System";
   description = ''

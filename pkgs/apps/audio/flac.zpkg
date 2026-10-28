@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.audio.flac";
+  id = "unknown.flac";
   name = "FLAC";
   summary = "Library and tools for encoding and decoding the FLAC lossless audio file format";
   description = ''

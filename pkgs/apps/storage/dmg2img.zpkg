@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.dmg2img";
+  id = "unknown.dmg2img";
   name = "dmg2img";
   summary = "Tool which allows converting Apple compressed dmg archives to standard (hfsplus) image disk files";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.litecli";
+  id = "unknown.litecli";
   name = "LiteCLI";
   summary = "Command-line interface for SQLite";
   description = ''

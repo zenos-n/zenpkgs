@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.angr-management";
+  id = "unknown.angr-management";
   name = "angr Management";
   summary = "Graphical binary analysis tool powered by the angr binary analysis platform";
   description = ''

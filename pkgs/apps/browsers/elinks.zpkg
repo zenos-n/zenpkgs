@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.elinks";
+  id = "unknown.elinks";
   name = "ELinks";
   summary = "Full-featured text-mode web browser";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.duplicati";
+  id = "unknown.duplicati";
   name = "Duplicati";
   summary = "Free backup client that securely stores encrypted, incremental, compressed backups on cloud storage services and remote file servers";
   description = ''

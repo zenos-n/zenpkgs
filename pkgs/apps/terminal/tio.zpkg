@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.tio";
+  id = "unknown.tio";
   name = "tio";
   summary = "Serial console TTY";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.librepcb";
+  id = "unknown.librepcb";
   name = "LibrePCB";
   summary = "Free EDA software to develop printed circuit boards";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.bitmap";
+  id = "unknown.bitmap";
   name = "Bitmap";
   summary = "X bitmap (XBM) editor and converter utilities";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.inter";
+  id = "unknown.inter";
   name = "inter";
   summary = "Curated inter package for ZenOS";
   description = ''

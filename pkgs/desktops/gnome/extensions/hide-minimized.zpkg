@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.hide-minimized";
+  id = "unknown.hide-minimized";
   name = "hide-minimized";
   summary = "Curated hide-minimized package for ZenOS";
   description = ''

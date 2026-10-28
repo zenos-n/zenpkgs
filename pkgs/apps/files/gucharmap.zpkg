@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.gucharmap";
+  id = "unknown.gucharmap";
   name = "GNOME Character Map";
   summary = "GNOME Character Map, based on the Unicode Character Database";
   description = ''

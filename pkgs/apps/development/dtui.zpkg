@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.dtui";
+  id = "unknown.dtui";
   name = "dtui";
   summary = "dBus TUI for introspecting your current dbus session/system";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.gdal";
+  id = "unknown.gdal";
   name = "GDAL";
   summary = "Translator library for raster geospatial data formats";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.flmsg";
+  id = "unknown.flmsg";
   name = "FLMSG";
   summary = "Digital modem message program";
   description = ''

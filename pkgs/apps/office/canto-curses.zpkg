@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.canto-curses";
+  id = "unknown.canto-curses";
   name = "Canto";
   summary = "Ncurses-based console Atom/RSS feed reader";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bats";
+  id = "unknown.bats";
   name = "Bats";
   summary = "Bash Automated Testing System";
   description = ''

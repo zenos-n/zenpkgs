@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.element";
+  id = "unknown.element";
   name = "Element";
   summary = "Periodic table on the command line";
   description = ''

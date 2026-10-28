@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.minisat";
+  id = "unknown.minisat";
   name = "MiniSat";
   summary = "Compact and readable SAT solver";
   description = ''

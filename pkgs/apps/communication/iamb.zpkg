@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.iamb";
+  id = "unknown.iamb";
   name = "iamb";
   summary = "Matrix client for Vim addicts";
   description = ''

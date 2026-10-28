@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.rsgain";
+  id = "unknown.rsgain";
   name = "rsgain";
   summary = "Simple, but powerful ReplayGain 2.0 tagging utility";
   description = ''

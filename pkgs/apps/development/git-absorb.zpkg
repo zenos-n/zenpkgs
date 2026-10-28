@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-absorb";
+  id = "unknown.git-absorb";
   name = "git-absorb";
   summary = "git commit --fixup, but automatic";
   description = ''

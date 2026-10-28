@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.termusic";
+  id = "unknown.termusic";
   name = "termusic";
   summary = "Terminal Music Player TUI written in Rust";
   description = ''

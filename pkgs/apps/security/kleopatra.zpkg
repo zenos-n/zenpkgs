@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.security.kleopatra";
+  id = "unknown.kleopatra";
   name = "Kleopatra";
   summary = "Certificate manager and GUI for OpenPGP and CMS cryptography";
   description = ''

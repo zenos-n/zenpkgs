@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.zathura";
+  id = "unknown.zathura";
   name = "Zathura";
   summary = "Highly customizable and functional PDF viewer";
   description = ''

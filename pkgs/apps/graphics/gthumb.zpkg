@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.gthumb";
+  id = "unknown.gthumb";
   name = "gThumb";
   summary = "Image browser and viewer for GNOME";
   description = ''

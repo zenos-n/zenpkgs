@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.vatprism";
+  id = "unknown.vatprism";
   name = "VATprism";
   summary = "VATSIM map and data explorer";
   description = ''

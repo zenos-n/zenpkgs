@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.mesa-demos";
+  id = "unknown.mesa-demos";
   name = "mesa-demos";
   summary = "Collection of demos and test programs for OpenGL and Mesa";
   description = ''

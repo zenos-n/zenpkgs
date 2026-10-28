@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.fceux";
+  id = "unknown.fceux";
   name = "FCEUX";
   summary = "Nintendo Entertainment System (NES) Emulator";
   description = ''

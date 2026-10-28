@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.archives.p7zip";
+  id = "unknown.p7zip";
   name = "7-Zip";
   summary = "New p7zip fork with additional codecs and improvements (forked from https://sourceforge.net/projects/p7zip/)";
   description = ''

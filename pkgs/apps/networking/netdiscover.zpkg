@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.netdiscover";
+  id = "unknown.netdiscover";
   name = "Netdiscover";
   summary = "Network address discovering tool, developed mainly for those wireless networks without dhcp server, it also works on hub/switched networks";
   description = ''

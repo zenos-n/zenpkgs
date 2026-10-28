@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.surelog";
+  id = "unknown.surelog";
   name = "Surelog";
   summary = "SystemVerilog 2017 Pre-processor, Parser, Elaborator, UHDM Compiler";
   description = ''

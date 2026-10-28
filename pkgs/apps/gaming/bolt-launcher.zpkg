@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.bolt-launcher";
+  id = "unknown.bolt-launcher";
   name = "Bolt Launcher";
   summary = "Alternative launcher for RuneScape";
   description = ''

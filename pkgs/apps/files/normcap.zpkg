@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.normcap";
+  id = "unknown.normcap";
   name = "NormCap";
   summary = "OCR powered screen-capture tool to capture information instead of images";
   description = ''

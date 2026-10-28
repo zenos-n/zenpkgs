@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.tyrolienne";
+  id = "unknown.tyrolienne";
   name = "Tyrolienne";
   summary = "Simple tool to convert, upload, and embed videos to Zipline";
   description = ''

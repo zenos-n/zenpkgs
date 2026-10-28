@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.zoxide";
+  id = "unknown.zoxide";
   name = "zoxide";
   summary = "Fast cd command that learns your habits";
   description = ''

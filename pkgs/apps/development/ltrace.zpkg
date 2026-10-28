@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ltrace";
+  id = "unknown.ltrace";
   name = "ltrace";
   summary = "Library call tracer";
   description = ''

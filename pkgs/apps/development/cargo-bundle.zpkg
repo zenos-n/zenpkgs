@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-bundle";
+  id = "unknown.cargo-bundle";
   name = "cargo-bundle";
   summary = "Wrap rust executables in OS-specific app bundles";
   description = ''

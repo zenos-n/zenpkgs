@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.shader-slang";
+  id = "unknown.shader-slang";
   name = "Slang Shader Compiler";
   summary = "Shading language that makes it easier to build and maintain large shader codebases in a modular and extensible fashion";
   description = ''

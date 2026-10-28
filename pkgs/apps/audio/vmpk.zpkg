@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.vmpk";
+  id = "unknown.vmpk";
   name = "Virtual MIDI Piano Keyboard";
   summary = "Virtual MIDI Piano Keyboard";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.melonloader-installer";
+  id = "unknown.melonloader-installer";
   name = "MelonLoader Installer";
   summary = "Automated installer for MelonLoader, the universal mod-loader for games built in the Unity Engine";
   description = ''

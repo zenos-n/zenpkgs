@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.geesefs";
+  id = "unknown.geesefs";
   name = "GeeseFS";
   summary = "Mount S3 object storage as a FUSE filesystem";
   description = ''

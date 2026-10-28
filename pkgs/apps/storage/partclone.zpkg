@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.partclone";
+  id = "unknown.partclone";
   name = "Partclone";
   summary = "Utilities to save and restore used blocks on a partition";
   description = ''

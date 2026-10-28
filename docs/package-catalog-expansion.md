@@ -4,7 +4,9 @@ The current registry contains 4153 declarations: 4098 Nixpkgs imports and 55
 build providers. Ten former compatibility-only recipes now have canonical ZPKG
 wrappers. The existing internal recipes remain trusted transitional builders
 behind explicit declarations, not implicit exports. Established IDs are
-preserved; packages without one explicitly use `org.zenos.packages` IDs. Each
+preserved; project-owned packages use `com.neg-zero` IDs, and third-party
+packages without a verified upstream ID use `unknown.<normalized leaf package
+name>` with no category segments. Each
 wrapper contributes one registry record for its canonical and category views.
 
 NZPortable adds the native build declaration at `apps/gaming/nzportable`, using
@@ -35,7 +37,9 @@ were introduced. This does not claim that every added application was built or r
 ## Discovery and identity
 
 Each package requires a canonical reverse-DNS `_meta.id`, preserving an
-established ID or using an explicit unique ID under `org.zenos.packages`.
+established upstream ID, using `com.neg-zero.<project>` for project-owned
+software, or explicitly using a unique `unknown.<normalized leaf package name>`
+for a third-party package without a verified upstream ID.
 `pkgs.<reverse DNS>` and `pkgs.byCategories.<existing category path>` expose the
 same derivation from one registry record. Filesystem paths supply
 `categoryTarget`; splitting `_meta.id` on dots supplies `target`. Root category

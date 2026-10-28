@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.bbe";
+  id = "unknown.bbe";
   name = "bbe";
   summary = "Sed-like editor for binary files";
   description = ''

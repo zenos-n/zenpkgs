@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.virtualization.quickgui";
+  id = "unknown.quickgui";
   name = "Quickgui";
   summary = "Elegant virtual machine manager for the desktop";
   description = ''

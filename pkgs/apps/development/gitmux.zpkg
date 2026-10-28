@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitmux";
+  id = "unknown.gitmux";
   name = "gitmux";
   summary = "Git in your tmux status bar";
   description = ''

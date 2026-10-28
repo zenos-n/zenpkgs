@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.sweeper";
+  id = "unknown.sweeper";
   name = "Sweeper";
   summary = "Application that helps to clean unwanted traces the user leaves on the system";
   description = ''

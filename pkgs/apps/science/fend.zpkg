@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.fend";
+  id = "unknown.fend";
   name = "fend";
   summary = "Arbitrary-precision unit-aware calculator";
   description = ''

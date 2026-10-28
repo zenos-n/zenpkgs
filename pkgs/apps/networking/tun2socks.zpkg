@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.tun2socks";
+  id = "unknown.tun2socks";
   name = "tun2socks";
   summary = "Routes network traffic from any application through a proxy";
   description = ''

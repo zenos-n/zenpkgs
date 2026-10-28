@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.spyder";
+  id = "unknown.spyder";
   name = "Spyder";
   summary = "Scientific python development environment";
   description = ''

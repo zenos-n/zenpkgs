@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.genext2fs";
+  id = "unknown.genext2fs";
   name = "genext2fs";
   summary = "Tool to generate ext2 filesystem images without requiring root privileges";
   description = ''

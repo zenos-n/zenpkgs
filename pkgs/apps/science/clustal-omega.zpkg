@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.clustal-omega";
+  id = "unknown.clustal-omega";
   name = "Clustal Omega";
   summary = "General purpose multiple sequence alignment program for protein and DNA/RNA";
   description = ''

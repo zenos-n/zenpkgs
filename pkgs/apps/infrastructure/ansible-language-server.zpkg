@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.ansible-language-server";
+  id = "unknown.ansible-language-server";
   name = "Ansible Language Server";
   summary = "Ansible Language Server";
   description = ''

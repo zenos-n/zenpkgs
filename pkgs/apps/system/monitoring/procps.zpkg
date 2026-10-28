@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.procps";
+  id = "unknown.procps";
   name = "procps";
   summary = "Utilities that give information about processes using the /proc filesystem";
   description = ''

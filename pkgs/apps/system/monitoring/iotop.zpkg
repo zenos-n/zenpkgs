@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.iotop";
+  id = "unknown.iotop";
   name = "iotop";
   summary = "Tool to find out the processes doing the most IO";
   description = ''

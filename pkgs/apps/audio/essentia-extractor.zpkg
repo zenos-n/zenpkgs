@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.essentia-extractor";
+  id = "unknown.essentia-extractor";
   name = "Essentia Extractor";
   summary = "AcousticBrainz audio feature extractor";
   description = ''

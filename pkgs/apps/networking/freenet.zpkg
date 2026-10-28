@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.freenet";
+  id = "unknown.freenet";
   name = "Freenet";
   summary = "Decentralised and censorship-resistant network";
   description = ''

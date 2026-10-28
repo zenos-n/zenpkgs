@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.deepgit";
+  id = "unknown.deepgit";
   name = "DeepGit";
   summary = "Tool to investigate the history of source code";
   description = ''

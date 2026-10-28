@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.graphics.spectacle";
+  id = "unknown.spectacle";
   name = "Spectacle";
   summary = "Screenshot capture utility";
   description = ''

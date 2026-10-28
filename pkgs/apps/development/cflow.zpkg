@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cflow";
+  id = "unknown.cflow";
   name = "GNU cflow";
   summary = "Tool to analyze the control flow of C programs";
   description = ''

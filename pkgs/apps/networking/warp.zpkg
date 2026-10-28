@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.warp";
+  id = "unknown.warp";
   name = "Warp";
   summary = "Fast and secure file transfer";
   description = ''

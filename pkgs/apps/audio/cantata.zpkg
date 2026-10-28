@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.cantata";
+  id = "unknown.cantata";
   name = "Cantata";
   summary = "Graphical client for MPD";
   description = ''

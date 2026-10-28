@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.fortune";
+  id = "unknown.fortune";
   name = "fortune";
   summary = "Program that displays a pseudorandom message from a database of quotations";
   description = ''

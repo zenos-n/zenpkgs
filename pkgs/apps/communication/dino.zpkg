@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.dino";
+  id = "unknown.dino";
   name = "Dino";
   summary = "Modern Jabber/XMPP Client using GTK/Vala";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.gmetronome";
+  id = "unknown.gmetronome";
   name = "GMetronome";
   summary = "Free software metronome and tempo measurement tool";
   description = ''

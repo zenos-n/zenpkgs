@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.hide-cursor";
+  id = "unknown.hide-cursor";
   name = "hide-cursor";
   summary = "Curated hide-cursor package for ZenOS";
   description = ''

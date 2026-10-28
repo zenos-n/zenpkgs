@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.ansible";
+  id = "unknown.ansible";
   name = "Ansible";
   summary = "Radically simple IT automation";
   description = ''

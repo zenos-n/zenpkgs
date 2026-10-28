@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cyberchef";
+  id = "unknown.cyberchef";
   name = "CyberChef";
   summary = "Cyber Swiss Army Knife for encryption, encoding, compression and data analysis";
   description = ''

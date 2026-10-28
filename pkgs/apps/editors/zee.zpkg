@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.zee";
+  id = "unknown.zee";
   name = "Zee";
   summary = "Modern text editor for the terminal written in Rust";
   description = ''

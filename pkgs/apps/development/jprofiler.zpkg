@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.jprofiler";
+  id = "unknown.jprofiler";
   name = "JProfiler";
   summary = "Java profiler for deep JVM analysis";
   description = ''

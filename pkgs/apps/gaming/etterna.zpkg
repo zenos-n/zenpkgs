@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.etterna";
+  id = "unknown.etterna";
   name = "Etterna";
   summary = "Advanced cross-platform rhythm game focused on keyboard play";
   description = ''

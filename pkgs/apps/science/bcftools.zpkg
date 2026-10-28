@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.bcftools";
+  id = "unknown.bcftools";
   name = "BCFtools";
   summary = "Tools for manipulating BCF2/VCF/gVCF format, SNP and short indel sequence variants";
   description = ''

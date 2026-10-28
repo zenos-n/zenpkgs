@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.futility";
+  id = "unknown.futility";
   name = "Futility";
   summary = "ChromeOS firmware utility";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.pattypan";
+  id = "unknown.pattypan";
   name = "Pattypan";
   summary = "Uploader for Wikimedia Commons";
   description = ''

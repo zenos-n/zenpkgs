@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.epilys-bb";
+  id = "unknown.epilys-bb";
   name = "bb";
   summary = "Clean, simple, and fast process viewer";
   description = ''

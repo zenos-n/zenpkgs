@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.tint";
+  id = "unknown.tint";
   name = "Tint";
   summary = "Command-line tool to recolor images using theme palettes";
   description = ''

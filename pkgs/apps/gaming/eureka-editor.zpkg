@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.eureka-editor";
+  id = "unknown.eureka-editor";
   name = "Eureka";
   summary = "Map editor for the classic DOOM games, and a few related games such as Heretic and Hexen";
   description = ''

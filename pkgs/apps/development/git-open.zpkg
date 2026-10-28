@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-open";
+  id = "unknown.git-open";
   name = "git-open";
   summary = "Open the GitHub page or website for a repository in your browser";
   description = ''

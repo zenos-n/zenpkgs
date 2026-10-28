@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.launchers.rofi";
+  id = "unknown.rofi";
   name = "Rofi";
   summary = "Window switcher, run dialog and dmenu replacement";
   description = ''

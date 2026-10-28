@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.sniffglue";
+  id = "unknown.sniffglue";
   name = "sniffglue";
   summary = "Secure multithreaded packet sniffer";
   description = ''

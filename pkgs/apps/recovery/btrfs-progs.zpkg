@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.btrfs-progs";
+  id = "unknown.btrfs-progs";
   name = "btrfs-progs";
   summary = "Curated btrfs-progs package for ZenOS";
   description = ''

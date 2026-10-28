@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.mbrola";
+  id = "unknown.mbrola";
   name = "MBROLA";
   summary = "Speech synthesizer based on the concatenation of diphones";
   description = ''

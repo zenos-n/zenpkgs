@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.deluge";
+  id = "unknown.deluge";
   name = "Deluge";
   summary = "Torrent client";
   description = ''

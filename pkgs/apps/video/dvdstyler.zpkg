@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.dvdstyler";
+  id = "unknown.dvdstyler";
   name = "DVDStyler";
   summary = "DVD authoring software";
   description = ''

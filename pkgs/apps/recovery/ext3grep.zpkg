@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.ext3grep";
+  id = "unknown.ext3grep";
   name = "ext3grep";
   summary = "Tool to investigate an ext3 file system for deleted content and possibly recover it";
   description = ''

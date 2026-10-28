@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.vorta";
+  id = "unknown.vorta";
   name = "Vorta";
   summary = "Desktop Backup Client for Borg";
   description = ''

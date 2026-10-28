@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.trellis";
+  id = "unknown.trellis";
   name = "Project Trellis";
   summary = "Documentation and bitstream tools for Lattice ECP5 FPGAs";
   description = ''

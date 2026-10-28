@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.glpk";
+  id = "unknown.glpk";
   name = "GLPK";
   summary = "GNU Linear Programming Kit";
   description = ''

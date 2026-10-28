@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.ashuffle";
+  id = "unknown.ashuffle";
   name = "ashuffle";
   summary = "Automatic library-wide shuffle for mpd";
   description = ''

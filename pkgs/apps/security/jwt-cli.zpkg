@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.jwt-cli";
+  id = "unknown.jwt-cli";
   name = "jwt-cli";
   summary = "Super fast CLI tool to decode and encode JWTs";
   description = ''

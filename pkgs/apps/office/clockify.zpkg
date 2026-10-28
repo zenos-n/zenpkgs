@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.clockify";
+  id = "unknown.clockify";
   name = "Clockify";
   summary = "Free time tracker and timesheet app that lets you track work hours across projects";
   description = ''

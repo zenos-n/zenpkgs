@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.kgoldrunner";
+  id = "unknown.kgoldrunner";
   name = "KGoldrunner";
   summary = "KGoldrunner is a game of action and puzzle solving";
   description = ''

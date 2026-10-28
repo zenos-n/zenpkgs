@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.sops";
+  id = "unknown.sops";
   name = "SOPS";
   summary = "Simple and flexible tool for managing secrets";
   description = ''

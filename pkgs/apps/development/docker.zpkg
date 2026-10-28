@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.docker";
+  id = "unknown.docker";
   name = "docker";
   summary = "Curated docker package for ZenOS";
   description = ''

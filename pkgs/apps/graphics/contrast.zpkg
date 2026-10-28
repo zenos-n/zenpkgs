@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.contrast";
+  id = "unknown.contrast";
   name = "Contrast";
   summary = "Checks whether the contrast between two colors meet the WCAG requirements";
   description = ''

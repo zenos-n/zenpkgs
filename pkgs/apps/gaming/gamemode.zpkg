@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gamemode";
+  id = "unknown.gamemode";
   name = "gamemode";
   summary = "Optimise Linux system performance on demand";
   description = ''

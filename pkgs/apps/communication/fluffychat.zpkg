@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.fluffychat";
+  id = "unknown.fluffychat";
   name = "FluffyChat";
   summary = "Chat with your friends (matrix client)";
   description = ''

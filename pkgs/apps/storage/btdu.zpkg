@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.btdu";
+  id = "unknown.btdu";
   name = "btdu";
   summary = "Sampling disk usage profiler for btrfs";
   description = ''

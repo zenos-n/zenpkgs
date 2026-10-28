@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.csv2parquet";
+  id = "unknown.csv2parquet";
   name = "csv2parquet";
   summary = "Convert CSV files to Apache Parquet";
   description = ''

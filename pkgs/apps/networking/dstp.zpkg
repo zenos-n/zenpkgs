@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.dstp";
+  id = "unknown.dstp";
   name = "dstp";
   summary = "Run common networking tests against your site";
   description = ''

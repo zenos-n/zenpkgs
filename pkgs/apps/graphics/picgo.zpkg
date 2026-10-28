@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.picgo";
+  id = "unknown.picgo";
   name = "PicGo";
   summary = "Simple tool for uploading pictures";
   description = ''

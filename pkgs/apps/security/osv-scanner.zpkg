@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.osv-scanner";
+  id = "unknown.osv-scanner";
   name = "osv-scanner";
   summary = "Vulnerability scanner written in Go which uses the data provided by https://osv.dev";
   description = ''

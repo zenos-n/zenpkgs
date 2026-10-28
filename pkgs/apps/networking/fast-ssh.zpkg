@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.fast-ssh";
+  id = "unknown.fast-ssh";
   name = "Fast SSH";
   summary = "TUI tool to use the SSH config for connections";
   description = ''

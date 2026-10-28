@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.bluetuith";
+  id = "unknown.bluetuith";
   name = "bluetuith";
   summary = "TUI-based bluetooth connection manager";
   description = ''

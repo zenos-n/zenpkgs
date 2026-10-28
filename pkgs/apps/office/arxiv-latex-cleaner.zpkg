@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.arxiv-latex-cleaner";
+  id = "unknown.arxiv-latex-cleaner";
   name = "arxiv-latex-cleaner";
   summary = "Easily clean the LaTeX code of your paper to submit to arXiv";
   description = ''

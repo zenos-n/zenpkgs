@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.frequest";
+  id = "unknown.frequest";
   name = "FRequest";
   summary = "Fast, lightweight and opensource desktop application to make HTTP(s) requests";
   description = ''

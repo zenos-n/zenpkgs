@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.speechd";
+  id = "unknown.speechd";
   name = "Speech Dispatcher";
   summary = "Common interface to speech synthesis";
   description = ''

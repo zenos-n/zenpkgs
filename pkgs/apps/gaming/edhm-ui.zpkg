@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.edhm-ui";
+  id = "unknown.edhm-ui";
   name = "EDHM UI";
   summary = "HUD modification manager for Elite Dangerous";
   description = ''

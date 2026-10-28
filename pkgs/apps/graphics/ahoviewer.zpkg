@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.ahoviewer";
+  id = "unknown.ahoviewer";
   name = "AhoViewer";
   summary = "GTK2 image viewer, manga reader, and booru browser";
   description = ''

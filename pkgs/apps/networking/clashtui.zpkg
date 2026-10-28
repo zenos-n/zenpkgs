@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.clashtui";
+  id = "unknown.clashtui";
   name = "ClashTUI";
   summary = "Mihomo (Clash.Meta) TUI Client";
   description = ''

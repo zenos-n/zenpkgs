@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.qimgv";
+  id = "unknown.qimgv";
   name = "qimgv";
   summary = "Qt6 image viewer with optional video support";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.flashprint";
+  id = "unknown.flashprint";
   name = "FlashPrint";
   summary = "Slicer for the FlashForge 3D printers";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.gnucash";
+  id = "unknown.gnucash";
   name = "GnuCash";
   summary = "Free software for double entry accounting";
   description = ''

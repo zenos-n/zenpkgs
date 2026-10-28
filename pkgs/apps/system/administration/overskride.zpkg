@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.overskride";
+  id = "unknown.overskride";
   name = "Overskride";
   summary = "Bluetooth and Obex client that is straight to the point, DE/WM agnostic, and beautiful";
   description = ''

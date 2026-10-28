@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.browsers.angelfish";
+  id = "unknown.angelfish";
   name = "Angelfish";
   summary = "Web browser for Plasma Mobile";
   description = ''

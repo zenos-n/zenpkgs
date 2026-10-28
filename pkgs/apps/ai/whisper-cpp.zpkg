@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.whisper-cpp";
+  id = "unknown.whisper-cpp";
   name = "whisper.cpp";
   summary = "Port of OpenAI's Whisper model in C/C++";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.tailscale";
+  id = "unknown.tailscale";
   name = "Tailscale";
   summary = "Node agent for Tailscale, a mesh VPN built on WireGuard";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.cobang";
+  id = "unknown.cobang";
   name = "CoBang";
   summary = "QR code scanner desktop app for Linux";
   description = ''

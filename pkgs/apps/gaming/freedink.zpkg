@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.freedink";
+  id = "unknown.freedink";
   name = "GNU FreeDink";
   summary = "Free, portable and enhanced version of the Dink Smallwood game engine";
   description = ''

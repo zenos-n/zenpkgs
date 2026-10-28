@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.phpstorm";
+  id = "unknown.phpstorm";
   name = "PhpStorm";
   summary = "PHP IDE from JetBrains";
   description = ''

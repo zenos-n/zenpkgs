@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.font-manager";
+  id = "unknown.font-manager";
   name = "Font Manager";
   summary = "Simple font management for GTK desktop environments";
   description = ''

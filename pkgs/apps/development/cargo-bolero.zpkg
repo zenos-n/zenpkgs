@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-bolero";
+  id = "unknown.cargo-bolero";
   name = "cargo-bolero";
   summary = "Fuzzing and property testing front-end framework for Rust";
   description = ''

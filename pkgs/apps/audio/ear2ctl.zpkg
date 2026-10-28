@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.ear2ctl";
+  id = "unknown.ear2ctl";
   name = "ear2ctl";
   summary = "Linux controller for the Nothing Ear (2)";
   description = ''

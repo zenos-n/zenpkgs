@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.rbw";
+  id = "unknown.rbw";
   name = "rbw";
   summary = "Unofficial command line client for Bitwarden";
   description = ''

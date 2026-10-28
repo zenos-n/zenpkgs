@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.graphics.kdegraphics-thumbnailers";
+  id = "unknown.kdegraphics-thumbnailers";
   name = "KDE Graphics Thumbnailers";
   summary = "Thumbnailers for various graphics file formats";
   description = ''

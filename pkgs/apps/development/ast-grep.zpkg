@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ast-grep";
+  id = "unknown.ast-grep";
   name = "ast-grep";
   summary = "Fast and polyglot tool for code searching, linting, rewriting at large scale";
   description = ''

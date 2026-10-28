@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fm-go";
+  id = "unknown.fm-go";
   name = "fm-go";
   summary = "Terminal based file manager";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.dte";
+  id = "unknown.dte";
   name = "dte";
   summary = "Small, configurable terminal text editor";
   description = ''

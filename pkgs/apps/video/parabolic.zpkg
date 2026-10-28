@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.parabolic";
+  id = "unknown.parabolic";
   name = "Parabolic";
   summary = "Graphical frontend for yt-dlp to download video and audio";
   description = ''

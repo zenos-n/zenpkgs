@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-identity";
+  id = "unknown.git-identity";
   name = "git-identity";
   summary = "Manage your identity in Git";
   description = ''

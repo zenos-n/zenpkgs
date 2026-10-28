@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-llvm-cov";
+  id = "unknown.cargo-llvm-cov";
   name = "cargo-llvm-cov";
   summary = "Cargo subcommand to easily use LLVM source-based code coverage";
   description = ''

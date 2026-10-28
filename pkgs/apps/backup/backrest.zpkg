@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.backrest";
+  id = "unknown.backrest";
   name = "Backrest";
   summary = "Web UI and orchestrator for restic backup";
   description = ''

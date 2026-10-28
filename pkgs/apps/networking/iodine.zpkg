@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.iodine";
+  id = "unknown.iodine";
   name = "iodine";
   summary = "Tool to tunnel IPv4 data through a DNS server";
   description = ''

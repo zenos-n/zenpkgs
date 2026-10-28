@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.fsmon";
+  id = "unknown.fsmon";
   name = "fsmon";
   summary = "FileSystem Monitor utility";
   description = ''

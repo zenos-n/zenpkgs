@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.weka";
+  id = "unknown.weka";
   name = "Weka";
   summary = "Collection of machine learning algorithms for data mining tasks";
   description = ''

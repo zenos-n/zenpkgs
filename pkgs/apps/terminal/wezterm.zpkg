@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.wezterm";
+  id = "unknown.wezterm";
   name = "WezTerm";
   summary = "GPU-accelerated cross-platform terminal emulator and multiplexer written by @wez and implemented in Rust";
   description = ''

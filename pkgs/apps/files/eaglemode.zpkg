@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.eaglemode";
+  id = "unknown.eaglemode";
   name = "Eagle Mode";
   summary = "Zoomable User Interface";
   description = ''

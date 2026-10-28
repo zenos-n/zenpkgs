@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.freerouting";
+  id = "unknown.freerouting";
   name = "Freerouting";
   summary = "Advanced PCB auto-router";
   description = ''

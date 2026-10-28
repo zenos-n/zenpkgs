@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.easyabc";
+  id = "unknown.easyabc";
   name = "EasyABC";
   summary = "ABC music notation editor";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.ovr-advanced-settings";
+  id = "unknown.ovr-advanced-settings";
   name = "OVR Advanced Settings";
   summary = "SteamVR overlay for playspace and runtime controls";
   description = ''SteamVR overlay for playspace and runtime controls. Optional migration package; installation does not activate a service.'';

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.qtractor";
+  id = "unknown.qtractor";
   name = "Qtractor";
   summary = "Audio/MIDI multi-track sequencer";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.bibtool";
+  id = "unknown.bibtool";
   name = "BibTool";
   summary = "Tool for manipulating BibTeX bibliographies";
   description = ''

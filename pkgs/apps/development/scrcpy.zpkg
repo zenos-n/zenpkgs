@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.scrcpy";
+  id = "unknown.scrcpy";
   name = "scrcpy";
   summary = "Display and control Android devices over USB or TCP/IP";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.jquake";
+  id = "unknown.jquake";
   name = "JQuake";
   summary = "Real-time earthquake map of Japan";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.mpdris2";
+  id = "unknown.mpdris2";
   name = "mpDris2";
   summary = "MPRIS 2 support for mpd";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.sunshine";
+  id = "unknown.sunshine";
   name = "Sunshine";
   summary = "Game stream host for Moonlight";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.diskgraph";
+  id = "unknown.diskgraph";
   name = "Diskgraph";
   summary = "Terminal-based monitor for disk I/O";
   description = ''

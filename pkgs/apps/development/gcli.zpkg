@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gcli";
+  id = "unknown.gcli";
   name = "gcli";
   summary = "Portable Git(Hub|Lab|ea) CLI tool";
   description = ''

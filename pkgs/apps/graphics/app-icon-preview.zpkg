@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.app-icon-preview";
+  id = "unknown.app-icon-preview";
   name = "App Icon Preview";
   summary = "Tool for designing applications icons";
   description = ''

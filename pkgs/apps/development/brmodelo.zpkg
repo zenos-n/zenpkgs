@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.brmodelo";
+  id = "unknown.brmodelo";
   name = "brModelo";
   summary = "Entity-relationship diagram tool for making conceptual and logical database models";
   description = ''

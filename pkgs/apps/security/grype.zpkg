@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.grype";
+  id = "unknown.grype";
   name = "grype";
   summary = "Vulnerability scanner for container images and filesystems";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.ctmg";
+  id = "unknown.ctmg";
   name = "ctmg";
   summary = "Encrypted container manager for Linux using cryptsetup";
   description = ''

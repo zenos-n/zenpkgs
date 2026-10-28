@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.cfonts";
+  id = "unknown.cfonts";
   name = "cfonts";
   summary = "Silly little command line tool for sexy ANSI fonts in the console";
   description = ''

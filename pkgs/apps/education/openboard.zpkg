@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.openboard";
+  id = "unknown.openboard";
   name = "OpenBoard";
   summary = "Interactive whiteboard application";
   description = ''

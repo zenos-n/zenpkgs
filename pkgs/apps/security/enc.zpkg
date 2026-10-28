@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.enc";
+  id = "unknown.enc";
   name = "enc";
   summary = "Modern and friendly alternative to GnuPG";
   description = ''

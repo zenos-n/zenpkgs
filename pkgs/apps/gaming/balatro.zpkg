@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.balatro";
+  id = "unknown.balatro";
   name = "Balatro";
   summary = "Poker roguelike";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.editors.edwood";
+  id = "unknown.edwood";
   name = "Edwood";
   summary = "Go version of Plan9 Acme Editor";
   description = ''

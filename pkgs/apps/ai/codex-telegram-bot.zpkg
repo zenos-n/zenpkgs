@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.codex-telegram-bot";
+  id = "unknown.codex-telegram-bot";
   name = "codex-telegram-bot"; summary = "Telegram bridge for codex";
   description = ''Telegram bridge for codex. Installs the pinned command-line client without starting a bot or storing credentials.'';
   zenosVersion = "1.0.0"; packageVersion = "1.1.1";

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.mspdebug";
+  id = "unknown.mspdebug";
   name = "MSPDebug";
   summary = "Free programmer, debugger, and gdb proxy for MSP430 MCUs";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.lepton-eda";
+  id = "unknown.lepton-eda";
   name = "Lepton EDA";
   summary = "Lepton Electronic Design Automation";
   description = ''

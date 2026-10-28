@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-tarpaulin";
+  id = "unknown.cargo-tarpaulin";
   name = "cargo-tarpaulin";
   summary = "Code coverage tool for Rust projects";
   description = ''

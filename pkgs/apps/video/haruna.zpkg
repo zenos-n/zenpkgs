@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.video.haruna";
+  id = "unknown.haruna";
   name = "Haruna";
   summary = "Open source video player built with Qt/QML and libmpv";
   description = ''

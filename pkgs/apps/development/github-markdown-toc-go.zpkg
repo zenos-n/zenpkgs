@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.github-markdown-toc-go";
+  id = "unknown.github-markdown-toc-go";
   name = "GitHub Markdown TOC";
   summary = "Easy TOC creation for GitHub README.md (in go)";
   description = ''

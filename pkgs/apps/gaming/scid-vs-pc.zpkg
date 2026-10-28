@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.scid-vs-pc";
+  id = "unknown.scid-vs-pc";
   name = "Scid vs. PC";
   summary = "Chess database with play and training functionality";
   description = ''

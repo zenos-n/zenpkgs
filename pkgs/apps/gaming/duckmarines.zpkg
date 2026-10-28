@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.duckmarines";
+  id = "unknown.duckmarines";
   name = "Duck Marines";
   summary = "Duck-themed action puzzle video game";
   description = ''

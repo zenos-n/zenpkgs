@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.astroterm";
+  id = "unknown.astroterm";
   name = "Astroterm";
   summary = "Celestial viewer for the terminal, written in C";
   description = ''

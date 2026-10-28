@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.coolercontrold";
+  id = "unknown.coolercontrold";
   name = "CoolerControl Daemon";
   summary = "Monitor and control your cooling devices (Main Daemon)";
   description = ''

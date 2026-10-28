@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.nuclear";
+  id = "unknown.nuclear";
   name = "Nuclear";
   summary = "Streaming music player that finds free music for you";
   description = ''

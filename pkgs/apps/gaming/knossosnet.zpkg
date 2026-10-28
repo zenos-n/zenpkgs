@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.knossosnet";
+  id = "unknown.knossosnet";
   name = "Knossos.NET";
   summary = "Multi-platform launcher for Freespace 2 Open";
   description = ''

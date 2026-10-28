@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.mihomo";
+  id = "unknown.mihomo";
   name = "Mihomo";
   summary = "Rule-based tunnel in Go";
   description = ''

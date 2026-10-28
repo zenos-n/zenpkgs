@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.hyperrogue";
+  id = "unknown.hyperrogue";
   name = "HyperRogue";
   summary = "Roguelike game set in hyperbolic geometry";
   description = ''

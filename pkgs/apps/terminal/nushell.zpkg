@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.nushell";
+  id = "unknown.nushell";
   name = "Nushell";
   summary = "Modern shell written in Rust";
   description = ''

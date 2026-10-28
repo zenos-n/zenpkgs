@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.nixos-install-tools";
+  id = "unknown.nixos-install-tools";
   name = "nixos-install-tools";
   summary = "Curated nixos-install-tools package for ZenOS";
   description = ''

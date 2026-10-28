@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.clapgrep";
+  id = "unknown.clapgrep";
   name = "Clapgrep";
   summary = "Search through all your files";
   description = ''

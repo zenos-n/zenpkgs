@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.browsers";
+  id = "unknown.browsers";
   name = "Browsers";
   summary = "Open the right browser at the right time";
   description = ''

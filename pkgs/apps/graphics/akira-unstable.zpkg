@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.akira-unstable";
+  id = "unknown.akira-unstable";
   name = "Akira";
   summary = "Native Linux Design application built in Vala and GTK";
   description = ''

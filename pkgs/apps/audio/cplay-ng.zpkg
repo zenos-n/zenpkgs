@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.cplay-ng";
+  id = "unknown.cplay-ng";
   name = "cplay-ng";
   summary = "Simple curses audio player";
   description = ''

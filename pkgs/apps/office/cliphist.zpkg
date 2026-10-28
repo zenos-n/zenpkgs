@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.cliphist";
+  id = "unknown.cliphist";
   name = "cliphist";
   summary = "Wayland clipboard manager";
   description = ''

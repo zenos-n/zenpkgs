@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.monero-gui";
+  id = "unknown.monero-gui";
   name = "Monero GUI";
   summary = "Graphical Monero cryptocurrency wallet";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.equalx";
+  id = "unknown.equalx";
   name = "EqualX";
   summary = "Graphical interface to latex and a bunch of conversion programs";
   description = ''

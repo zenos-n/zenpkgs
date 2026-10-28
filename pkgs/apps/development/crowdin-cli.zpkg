@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.crowdin-cli";
+  id = "unknown.crowdin-cli";
   name = "Crowdin CLI";
   summary = "Command-line client for the Crowdin API";
   description = ''

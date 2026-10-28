@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.beebeep";
+  id = "unknown.beebeep";
   name = "BeeBEEP";
   summary = "Peer-to-peer office messenger";
   description = ''

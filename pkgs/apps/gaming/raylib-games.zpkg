@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.raylib-games";
+  id = "unknown.raylib-games";
   name = "raylib Games";
   summary = "Collection of games made with raylib";
   description = ''

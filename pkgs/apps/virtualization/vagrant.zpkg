@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.virtualization.vagrant";
+  id = "unknown.vagrant";
   name = "Vagrant";
   summary = "Tool for building complete development environments";
   description = ''

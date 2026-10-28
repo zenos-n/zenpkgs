@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.openbao";
+  id = "unknown.openbao";
   name = "OpenBao";
   summary = "Open source, community-driven fork of Vault managed by the Linux Foundation";
   description = ''

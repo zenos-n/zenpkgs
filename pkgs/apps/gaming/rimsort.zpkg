@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.rimsort";
+  id = "unknown.rimsort";
   name = "RimSort";
   summary = "Open source mod manager for the video game RimWorld";
   description = ''

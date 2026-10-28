@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.stellarium";
+  id = "unknown.stellarium";
   name = "Stellarium";
   summary = "Free open-source planetarium";
   description = ''

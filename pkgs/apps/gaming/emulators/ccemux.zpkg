@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.ccemux";
+  id = "unknown.ccemux";
   name = "CCEmuX";
   summary = "Modular ComputerCraft emulator";
   description = ''

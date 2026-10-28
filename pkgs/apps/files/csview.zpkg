@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.files.csview";
+  id = "unknown.csview";
   name = "csview";
   summary = "High performance csv viewer with cjk/emoji support";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.eloquent";
+  id = "unknown.eloquent";
   name = "Eloquent";
   summary = "Proofreading software for English, Spanish, French, German, and more than 20 other languages";
   description = ''

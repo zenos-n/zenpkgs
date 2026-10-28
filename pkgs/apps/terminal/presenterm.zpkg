@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.presenterm";
+  id = "unknown.presenterm";
   name = "Presenterm";
   summary = "Terminal based slideshow tool";
   description = ''

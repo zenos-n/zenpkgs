@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.oras";
+  id = "unknown.oras";
   name = "ORAS";
   summary = "Distribute artifacts across OCI registries with ease";
   description = ''

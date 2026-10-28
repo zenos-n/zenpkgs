@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.liana";
+  id = "unknown.liana";
   name = "Liana";
   summary = "Bitcoin wallet leveraging on-chain timelocks for safety and recovery";
   description = ''

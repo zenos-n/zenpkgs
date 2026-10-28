@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.tomb";
+  id = "unknown.tomb";
   name = "tomb";
   summary = "File encryption on GNU/Linux";
   description = ''

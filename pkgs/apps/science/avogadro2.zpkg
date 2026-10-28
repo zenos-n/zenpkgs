@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.avogadro2";
+  id = "unknown.avogadro2";
   name = "Avogadro";
   summary = "Molecule editor and visualizer";
   description = ''

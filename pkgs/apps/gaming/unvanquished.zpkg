@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.unvanquished";
+  id = "unknown.unvanquished";
   name = "Unvanquished";
   summary = "Fast paced, first person strategy game";
   description = ''

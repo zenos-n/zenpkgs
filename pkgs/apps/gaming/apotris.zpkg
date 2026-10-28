@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.apotris";
+  id = "unknown.apotris";
   name = "Apotris";
   summary = "Block stacking game";
   description = ''

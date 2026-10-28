@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.systemctl-tui";
+  id = "unknown.systemctl-tui";
   name = "systemctl-tui";
   summary = "Simple TUI for interacting with systemd services and their logs";
   description = ''

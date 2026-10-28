@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.dbt";
+  id = "unknown.dbt";
   name = "dbt";
   summary = "Enables data analysts and engineers to transform their data using the same practices that software engineers use to build applications";
   description = ''

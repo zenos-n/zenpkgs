@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fortran-language-server";
+  id = "unknown.fortran-language-server";
   name = "Fortran Language Server";
   summary = "FORTRAN Language Server for the Language Server Protocol";
   description = ''

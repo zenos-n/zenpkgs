@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.mydumper";
+  id = "unknown.mydumper";
   name = "mydumper";
   summary = "High-performance MySQL backup tool";
   description = ''

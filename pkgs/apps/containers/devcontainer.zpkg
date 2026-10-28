@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.devcontainer";
+  id = "unknown.devcontainer";
   name = "Dev Container CLI";
   summary = "Dev container CLI, run and manage your dev environments via a devcontainer.json";
   description = ''

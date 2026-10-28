@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.piper";
+  id = "unknown.piper";
   name = "Piper";
   summary = "GTK frontend for ratbagd mouse config daemon";
   description = ''

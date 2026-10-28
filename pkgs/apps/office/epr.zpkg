@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.epr";
+  id = "unknown.epr";
   name = "epr";
   summary = "CLI Epub Reader";
   description = ''

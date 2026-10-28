@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.eternal-terminal";
+  id = "unknown.eternal-terminal";
   name = "Eternal Terminal";
   summary = "Remote shell that automatically reconnects without interrupting the session";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.checkstyle";
+  id = "unknown.checkstyle";
   name = "Checkstyle";
   summary = "Checks Java source against a coding standard";
   description = ''

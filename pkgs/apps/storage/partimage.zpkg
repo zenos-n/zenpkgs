@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.partimage";
+  id = "unknown.partimage";
   name = "Partimage";
   summary = "Opensource disk backup software";
   description = ''

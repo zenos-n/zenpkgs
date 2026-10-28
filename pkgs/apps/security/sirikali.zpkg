@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.sirikali";
+  id = "unknown.sirikali";
   name = "SiriKali";
   summary = "Qt/C++ GUI front end to sshfs, ecryptfs-simple, cryfs, gocryptfs, securefs, fscrypt and encfs";
   description = ''

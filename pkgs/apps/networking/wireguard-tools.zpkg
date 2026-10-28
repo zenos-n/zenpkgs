@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.wireguard-tools";
+  id = "unknown.wireguard-tools";
   name = "WireGuard Tools";
   summary = "Tools for the WireGuard secure network tunnel";
   description = ''

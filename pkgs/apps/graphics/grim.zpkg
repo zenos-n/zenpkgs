@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.grim";
+  id = "unknown.grim";
   name = "grim";
   summary = "Grab images from a Wayland compositor";
   description = ''

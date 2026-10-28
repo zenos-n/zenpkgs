@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.g3kb-switch";
+  id = "unknown.g3kb-switch";
   name = "GNOME Keyboard Switch";
   summary = "CLI keyboard layout switcher for GNOME Shell";
   description = ''

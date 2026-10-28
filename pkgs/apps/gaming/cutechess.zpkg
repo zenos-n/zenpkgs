@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.cutechess";
+  id = "unknown.cutechess";
   name = "Cute Chess";
   summary = "GUI, CLI, and library for playing chess";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.cointop";
+  id = "unknown.cointop";
   name = "Cointop";
   summary = "Fastest and most interactive terminal based UI application for tracking cryptocurrencies";
   description = ''

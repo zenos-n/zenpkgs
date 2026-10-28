@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.kubrick";
+  id = "unknown.kubrick";
   name = "Kubrick";
   summary = "Kubrick is based on the famous Rubik's Cube";
   description = ''

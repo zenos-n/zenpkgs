@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.browsers.floorp";
+  id = "unknown.floorp";
   name = "Floorp";
   summary = "Fork of Firefox that seeks balance between versatility, privacy and web openness";
   description = ''

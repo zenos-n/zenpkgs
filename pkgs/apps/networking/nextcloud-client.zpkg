@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.nextcloud-client";
+  id = "unknown.nextcloud-client";
   name = "Nextcloud Desktop";
   summary = "Desktop sync client for Nextcloud";
   description = ''

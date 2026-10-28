@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.freshfetch";
+  id = "unknown.freshfetch";
   name = "Freshfetch";
   summary = "Fresh take on neofetch";
   description = ''

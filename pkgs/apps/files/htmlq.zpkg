@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.htmlq";
+  id = "unknown.htmlq";
   name = "htmlq";
   summary = "Like jq, but for HTML";
   description = ''

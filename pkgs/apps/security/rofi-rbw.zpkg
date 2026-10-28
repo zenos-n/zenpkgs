@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.rofi-rbw";
+  id = "unknown.rofi-rbw";
   name = "rofi-rbw";
   summary = "Rofi frontend for Bitwarden";
   description = ''

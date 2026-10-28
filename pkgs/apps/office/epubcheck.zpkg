@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.office.epubcheck";
+  id = "unknown.epubcheck";
   name = "EPUBCheck";
   summary = "Validation tool for EPUB";
   description = ''

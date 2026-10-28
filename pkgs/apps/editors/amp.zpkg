@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.amp";
+  id = "unknown.amp";
   name = "Amp";
   summary = "Modern text editor inspired by Vim";
   description = ''

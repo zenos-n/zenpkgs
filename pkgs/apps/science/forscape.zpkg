@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.forscape";
+  id = "unknown.forscape";
   name = "Forscape";
   summary = "Scientific computing language";
   description = ''

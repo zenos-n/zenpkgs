@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.sqlitebrowser";
+  id = "unknown.sqlitebrowser";
   name = "DB Browser for SQLite";
   summary = "DB Browser for SQLite";
   description = ''

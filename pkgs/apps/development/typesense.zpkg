@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.typesense";
+  id = "unknown.typesense";
   name = "Typesense";
   summary = "Fast, typo-tolerant search engine for building delightful search experiences";
   description = ''

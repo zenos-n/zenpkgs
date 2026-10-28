@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.bcompare";
+  id = "unknown.bcompare";
   name = "Beyond Compare";
   summary = "GUI application that allows to quickly and easily compare files and folders";
   description = ''

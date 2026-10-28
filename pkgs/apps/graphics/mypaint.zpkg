@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.mypaint";
+  id = "unknown.mypaint";
   name = "MyPaint";
   summary = "Graphics application for digital painters";
   description = ''

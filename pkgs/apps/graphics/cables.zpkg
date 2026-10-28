@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.cables";
+  id = "unknown.cables";
   name = "cables";
   summary = "Standalone version of cables, a tool for creating beautiful interactive content";
   description = ''

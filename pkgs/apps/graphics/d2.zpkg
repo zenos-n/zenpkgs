@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.d2";
+  id = "unknown.d2";
   name = "D2";
   summary = "Modern diagram scripting language that turns text to diagrams";
   description = ''

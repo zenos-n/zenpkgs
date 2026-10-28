@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.aj-snapshot";
+  id = "unknown.aj-snapshot";
   name = "aj-snapshot";
   summary = "Tool for storing/restoring JACK and/or ALSA connections to/from cml files";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.bino3d";
+  id = "unknown.bino3d";
   name = "Bino";
   summary = "Video player with a focus on 3D and Virtual Reality";
   description = ''

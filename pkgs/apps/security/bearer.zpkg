@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.bearer";
+  id = "unknown.bearer";
   name = "Bearer";
   summary = "Code security scanning tool (SAST) to discover, filter and prioritize security and privacy risks";
   description = ''

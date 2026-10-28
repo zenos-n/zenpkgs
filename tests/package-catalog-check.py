@@ -26,14 +26,25 @@ def validate_records(packages):
             for part in category
         ), "invalid category target"
         assert category[0] != "legacy" and category[-1] != "package", "reserved category target"
+        assert not identity.startswith("org.zenos.packages."), "obsolete category-based identity"
+        if target[0] == "unknown":
+            leaf = category[-1]
+            normalized = "".join(
+                char if char.isascii() and (char.isalnum() or char == "-")
+                else f"-u{ord(char):x}-" for char in leaf
+            )
+            if not normalized[0].isalpha():
+                normalized = "p-" + normalized
+            assert identity == "unknown." + normalized, "fallback must use only normalized package leaf"
         canonical, category = tuple(target), tuple(category)
         assert canonical not in identities, "duplicate package identity"
         assert category not in categories, "duplicate category target"
-        output = "zenos-" + "-".join(target)
-        assert output not in outputs, "ambiguous flattened public output"
+        output = (".".join(target), ".".join(category))
+        assert all(name not in outputs for name in output), "ambiguous public output"
+        assert output[0] != output[1], "identity and category output collide"
         identities.add(canonical)
         categories.add(category)
-        outputs.add(output)
+        outputs.update(output)
     for paths in (identities, categories):
         assert all(path[:length] not in paths for path in paths
                    for length in range(1, len(path))), "package leaf/branch collision"

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.singular";
+  id = "unknown.singular";
   name = "singular";
   summary = "CAS for polynomial computations";
   description = ''

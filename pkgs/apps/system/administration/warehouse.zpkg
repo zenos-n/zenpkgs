@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.warehouse";
+  id = "unknown.warehouse";
   name = "Warehouse";
   summary = "Manage all things Flatpak";
   description = ''

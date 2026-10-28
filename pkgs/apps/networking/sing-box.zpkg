@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.sing-box";
+  id = "unknown.sing-box";
   name = "sing-box";
   summary = "Universal proxy platform";
   description = ''

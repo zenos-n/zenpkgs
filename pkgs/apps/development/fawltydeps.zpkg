@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fawltydeps";
+  id = "unknown.fawltydeps";
   name = "FawltyDeps";
   summary = "Find undeclared and/or unused 3rd-party dependencies in your Python project";
   description = ''

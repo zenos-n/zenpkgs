@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.libavif";
+  id = "unknown.libavif";
   name = "AVIF Tools";
   summary = "C implementation of the AV1 Image File Format";
   description = ''

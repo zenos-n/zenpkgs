@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.unityhub";
+  id = "unknown.unityhub";
   name = "Unity Hub";
   summary = "Official Unity3D app to download and manage Unity Projects and installations";
   description = ''

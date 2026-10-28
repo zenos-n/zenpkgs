@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.castero";
+  id = "unknown.castero";
   name = "Castero";
   summary = "TUI podcast client for the terminal";
   description = ''

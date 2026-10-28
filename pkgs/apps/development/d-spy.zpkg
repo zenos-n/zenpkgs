@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.d-spy";
+  id = "unknown.d-spy";
   name = "D-Spy";
   summary = "D-Bus exploration tool";
   description = ''

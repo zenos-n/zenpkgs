@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.castor";
+  id = "unknown.castor";
   name = "Castor";
   summary = "Graphical client for plain-text protocols written in Rust with GTK. It currently supports the Gemini, Gopher and Finger protocols";
   description = ''

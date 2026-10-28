@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.teamspeak6-client";
+  id = "unknown.teamspeak6-client";
   name = "TeamSpeak 6 Beta";
   summary = "TeamSpeak voice communication tool (beta version)";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.errands";
+  id = "unknown.errands";
   name = "Errands";
   summary = "Manage your tasks";
   description = ''

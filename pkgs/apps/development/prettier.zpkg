@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.prettier";
+  id = "unknown.prettier";
   name = "prettier";
   summary = "Code formatter";
   description = ''

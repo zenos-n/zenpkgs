@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.fxload";
+  id = "unknown.fxload";
   name = "fxload";
   summary = "Upload firmware to EZ-USB devices";
   description = ''

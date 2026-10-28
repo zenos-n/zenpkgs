@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fnm";
+  id = "unknown.fnm";
   name = "fnm";
   summary = "Fast and simple Node.js version manager";
   description = ''

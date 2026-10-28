@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.fluent-reader";
+  id = "unknown.fluent-reader";
   name = "Fluent Reader";
   summary = "Modern desktop RSS reader built with Electron, React, and Fluent UI";
   description = ''

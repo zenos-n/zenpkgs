@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.datagrip";
+  id = "unknown.datagrip";
   name = "DataGrip";
   summary = "Database IDE from JetBrains";
   description = ''

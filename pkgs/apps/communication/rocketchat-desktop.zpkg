@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.rocketchat-desktop";
+  id = "unknown.rocketchat-desktop";
   name = "Rocket.Chat";
   summary = "Official Desktop client for Rocket.Chat";
   description = ''

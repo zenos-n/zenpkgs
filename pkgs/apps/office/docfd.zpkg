@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.docfd";
+  id = "unknown.docfd";
   name = "docfd";
   summary = "TUI multiline fuzzy document finder";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.graphics.pngquant";
+  id = "unknown.pngquant";
   name = "pngquant";
   summary = "Tool to convert 24/32-bit RGBA PNGs to 8-bit palette with alpha channel preserved";
   description = ''

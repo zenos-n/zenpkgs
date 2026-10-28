@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.git-archive-all";
+  id = "unknown.git-archive-all";
   name = "git-archive-all";
   summary = "Archive a repository with all its submodules";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.lshw";
+  id = "unknown.lshw";
   name = "lshw";
   summary = "Curated lshw package for ZenOS";
   description = ''

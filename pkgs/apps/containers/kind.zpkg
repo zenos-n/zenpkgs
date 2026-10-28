@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.kind";
+  id = "unknown.kind";
   name = "kind";
   summary = "Kubernetes IN Docker - local clusters for testing Kubernetes";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.dsda-doom";
+  id = "unknown.dsda-doom";
   name = "DSDA-Doom";
   summary = "Advanced Doom source port with a focus on speedrunning, successor of PrBoom+";
   description = ''

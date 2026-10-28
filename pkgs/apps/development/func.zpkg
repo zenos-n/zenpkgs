@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.func";
+  id = "unknown.func";
   name = "Knative func";
   summary = "Knative client library and CLI for creating, building, and deploying Knative Functions";
   description = ''

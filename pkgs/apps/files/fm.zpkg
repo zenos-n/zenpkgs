@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fm";
+  id = "unknown.fm";
   name = "fm";
   summary = "Small, general purpose file manager built with GTK4";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.clipster";
+  id = "unknown.clipster";
   name = "Clipster";
   summary = "Lightweight python clipboard manager";
   description = ''

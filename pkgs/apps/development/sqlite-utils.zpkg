@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.sqlite-utils";
+  id = "unknown.sqlite-utils";
   name = "sqlite-utils";
   summary = "Python CLI utility and library for manipulating SQLite databases";
   description = ''

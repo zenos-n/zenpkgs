@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.moonlight-qt";
+  id = "unknown.moonlight-qt";
   name = "Moonlight";
   summary = "Play your PC games on almost any device";
   description = ''

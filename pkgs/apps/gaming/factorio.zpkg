@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.factorio";
+  id = "unknown.factorio";
   name = "Factorio";
   summary = "Game in which you build and maintain factories";
   description = ''

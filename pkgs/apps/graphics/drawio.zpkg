@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.drawio";
+  id = "unknown.drawio";
   name = "draw.io";
   summary = "Desktop version of draw.io for creating diagrams";
   description = ''

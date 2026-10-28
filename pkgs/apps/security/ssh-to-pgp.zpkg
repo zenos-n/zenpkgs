@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.ssh-to-pgp";
+  id = "unknown.ssh-to-pgp";
   name = "ssh-to-pgp";
   summary = "Convert ssh private keys to PGP";
   description = ''

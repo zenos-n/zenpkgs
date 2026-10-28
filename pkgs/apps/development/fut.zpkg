@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fut";
+  id = "unknown.fut";
   name = "Fusion";
   summary = "Fusion programming language";
   description = ''

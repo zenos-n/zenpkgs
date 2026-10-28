@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.tig";
+  id = "unknown.tig";
   name = "Tig";
   summary = "Text-mode interface for git";
   description = ''

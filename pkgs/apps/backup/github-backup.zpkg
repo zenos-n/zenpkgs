@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.github-backup";
+  id = "unknown.github-backup";
   name = "github-backup";
   summary = "Backup a github user or organization";
   description = ''

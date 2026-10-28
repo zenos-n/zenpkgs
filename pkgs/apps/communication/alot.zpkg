@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.alot";
+  id = "unknown.alot";
   name = "alot";
   summary = "Terminal MUA using notmuch mail";
   description = ''

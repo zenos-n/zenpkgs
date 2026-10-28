@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.gsconnect";
+  id = "unknown.gsconnect";
   name = "gsconnect";
   summary = "Curated gsconnect package for ZenOS";
   description = ''

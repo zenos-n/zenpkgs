@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.blueman";
+  id = "unknown.blueman";
   name = "Blueman";
   summary = "GTK-based Bluetooth Manager";
   description = ''

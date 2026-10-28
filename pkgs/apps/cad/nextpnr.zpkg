@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.nextpnr";
+  id = "unknown.nextpnr";
   name = "nextpnr";
   summary = "Place and route tool for FPGAs";
   description = ''

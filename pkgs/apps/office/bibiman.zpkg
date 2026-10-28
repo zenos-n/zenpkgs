@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.bibiman";
+  id = "unknown.bibiman";
   name = "bibiman";
   summary = "TUI for fast and simple interacting with your BibLaTeX database";
   description = ''

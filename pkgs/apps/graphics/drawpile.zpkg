@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.drawpile";
+  id = "unknown.drawpile";
   name = "Drawpile";
   summary = "Collaborative drawing program that allows multiple users to sketch on the same canvas simultaneously";
   description = ''

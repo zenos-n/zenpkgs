@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.perf-tools";
+  id = "unknown.perf-tools";
   name = "perf-tools";
   summary = "Performance analysis tools based on Linux perf_events (aka perf) and ftrace";
   description = ''

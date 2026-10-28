@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-xwin";
+  id = "unknown.cargo-xwin";
   name = "cargo-xwin";
   summary = "Cross compile Cargo project to Windows MSVC target with ease";
   description = ''

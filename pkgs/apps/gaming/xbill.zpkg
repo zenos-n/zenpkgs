@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.xbill";
+  id = "unknown.xbill";
   name = "XBill";
   summary = "Protect a computer network from getting infected";
   description = ''

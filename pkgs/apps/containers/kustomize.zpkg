@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.kustomize";
+  id = "unknown.kustomize";
   name = "Kustomize";
   summary = "Customization of kubernetes YAML configurations";
   description = ''

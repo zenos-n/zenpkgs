@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.glance";
+  id = "unknown.glance";
   name = "Glance";
   summary = "Self-hosted dashboard that puts all your feeds in one place";
   description = ''

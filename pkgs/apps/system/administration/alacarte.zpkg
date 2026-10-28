@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.alacarte";
+  id = "unknown.alacarte";
   name = "Alacarte";
   summary = "Menu editor for GNOME using the freedesktop.org menu specification";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.pdftoipe";
+  id = "unknown.pdftoipe";
   name = "pdftoipe";
   summary = "Program that tries to convert arbitrary PDF documents to Ipe files";
   description = ''

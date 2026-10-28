@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.security.kwalletmanager";
+  id = "unknown.kwalletmanager";
   name = "KWalletManager";
   summary = "Tool to manage the passwords on your system";
   description = ''

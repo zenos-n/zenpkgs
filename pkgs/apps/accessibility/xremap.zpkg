@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.xremap";
+  id = "unknown.xremap";
   name = "xremap";
   summary = "Key remapper for X11 and Wayland (wlroots support)";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.analyze-build";
+  id = "unknown.analyze-build";
   name = "analyze-build";
   summary = "run Clang static analyzer against a project with compilation database";
   description = ''

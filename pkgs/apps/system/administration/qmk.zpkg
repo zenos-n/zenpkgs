@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.qmk";
+  id = "unknown.qmk";
   name = "QMK";
   summary = "Program to help users work with QMK Firmware";
   description = ''

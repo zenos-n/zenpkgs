@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.mouse-tail";
+  id = "unknown.mouse-tail";
   name = "mouse-tail";
   summary = "Curated mouse-tail package for ZenOS";
   description = ''

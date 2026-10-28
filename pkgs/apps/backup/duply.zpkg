@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.duply";
+  id = "unknown.duply";
   name = "Duply";
   summary = "Shell front end for the duplicity backup tool";
   description = ''

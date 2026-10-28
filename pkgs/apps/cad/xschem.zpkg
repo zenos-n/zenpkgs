@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.xschem";
+  id = "unknown.xschem";
   name = "Xschem";
   summary = "Schematic capture and netlisting EDA tool";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.ngrok";
+  id = "unknown.ngrok";
   name = "ngrok";
   summary = "Allows you to expose a web server running on your local machine to the internet";
   description = ''

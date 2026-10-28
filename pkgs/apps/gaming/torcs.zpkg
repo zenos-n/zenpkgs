@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.torcs";
+  id = "unknown.torcs";
   name = "TORCS";
   summary = "Car racing game";
   description = ''

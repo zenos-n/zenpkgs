@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.mlterm";
+  id = "unknown.mlterm";
   name = "MLTerm";
   summary = "Multi Lingual TERMinal emulator";
   description = ''

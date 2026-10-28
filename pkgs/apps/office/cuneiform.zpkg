@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.cuneiform";
+  id = "unknown.cuneiform";
   name = "Cuneiform";
   summary = "Multi-language OCR system";
   description = ''

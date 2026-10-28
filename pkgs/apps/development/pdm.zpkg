@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pdm";
+  id = "unknown.pdm";
   name = "PDM";
   summary = "Modern Python package and dependency manager supporting the latest PEP standards";
   description = ''

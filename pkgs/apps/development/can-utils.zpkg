@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.can-utils";
+  id = "unknown.can-utils";
   name = "can-utils";
   summary = "CAN userspace utilities and tools (for use with Linux SocketCAN)";
   description = ''

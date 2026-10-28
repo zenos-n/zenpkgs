@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.dsearch";
+  id = "unknown.dsearch";
   name = "dsearch";
   summary = "Fast, configurable filesystem search with fuzzy matching";
   description = ''

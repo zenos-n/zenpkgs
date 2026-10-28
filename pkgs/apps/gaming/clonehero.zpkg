@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.clonehero";
+  id = "unknown.clonehero";
   name = "Clone Hero";
   summary = "Clone of Guitar Hero and Rockband-style games";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.addr-book-combine";
+  id = "unknown.addr-book-combine";
   name = "addr-book-combine";
   summary = "Combine multiple aerc-style address books into a single address book";
   description = ''

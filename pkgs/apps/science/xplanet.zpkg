@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.xplanet";
+  id = "unknown.xplanet";
   name = "Xplanet";
   summary = "Renders an image of the earth or other planets into the X root window";
   description = ''

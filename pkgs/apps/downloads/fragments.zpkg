@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.fragments";
+  id = "unknown.fragments";
   name = "Fragments";
   summary = "Easy to use BitTorrent client for the GNOME desktop environment";
   description = ''

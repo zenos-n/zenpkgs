@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.ftb-app";
+  id = "unknown.ftb-app";
   name = "FTB App";
   summary = "Feed the Beast desktop app";
   description = ''

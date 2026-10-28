@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.sqlc";
+  id = "unknown.sqlc";
   name = "sqlc";
   summary = "Generate type-safe code from SQL";
   description = ''

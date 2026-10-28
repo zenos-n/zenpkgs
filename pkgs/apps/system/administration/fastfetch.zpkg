@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.fastfetch";
+  id = "unknown.fastfetch";
   name = "Fastfetch";
   summary = "Actively maintained, feature-rich and performance oriented, neofetch like system information tool";
   description = ''

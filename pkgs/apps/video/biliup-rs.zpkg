@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.biliup-rs";
+  id = "unknown.biliup-rs";
   name = "biliup";
   summary = "CLI tool for uploading videos to Bilibili";
   description = ''

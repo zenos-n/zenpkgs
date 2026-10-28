@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.dirdiff";
+  id = "unknown.dirdiff";
   name = "dirdiff";
   summary = "Graphical directory tree diff and merge tool";
   description = ''

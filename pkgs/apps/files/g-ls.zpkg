@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.g-ls";
+  id = "unknown.g-ls";
   name = "g-ls";
   summary = "Powerful ls alternative written in Go";
   description = ''

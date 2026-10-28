@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.cyan";
+  id = "unknown.cyan";
   name = "Cyan";
   summary = "Image viewer and converter, designed for prepress (print) work";
   description = ''

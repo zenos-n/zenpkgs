@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.crates-tui";
+  id = "unknown.crates-tui";
   name = "crates-tui";
   summary = "TUI for exploring crates.io using Ratatui";
   description = ''

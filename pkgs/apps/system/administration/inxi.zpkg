@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.inxi";
+  id = "unknown.inxi";
   name = "inxi";
   summary = "Full featured CLI system information tool";
   description = ''

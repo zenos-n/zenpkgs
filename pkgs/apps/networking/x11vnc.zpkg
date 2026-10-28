@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.x11vnc";
+  id = "unknown.x11vnc";
   name = "x11vnc";
   summary = "VNC server connected to a real X11 screen";
   description = ''

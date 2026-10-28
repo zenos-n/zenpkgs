@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.virtualization.lima";
+  id = "unknown.lima";
   name = "Lima";
   summary = "Linux virtual machines with automatic file sharing and port forwarding";
   description = ''

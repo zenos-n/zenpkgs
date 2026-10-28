@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.zotero";
+  id = "unknown.zotero";
   name = "Zotero";
   summary = "Collect, organize, cite, and share your research sources";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.terragrunt";
+  id = "unknown.terragrunt";
   name = "Terragrunt";
   summary = "Thin wrapper for Terraform that supports locking for Terraform state and enforces best practices";
   description = ''

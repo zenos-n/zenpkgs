@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.libtas";
+  id = "unknown.libtas";
   name = "libTAS";
   summary = "GNU/Linux software to give TAS tools to games";
   description = ''

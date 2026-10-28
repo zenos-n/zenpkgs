@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-pr";
+  id = "unknown.git-pr";
   name = "git-pr";
   summary = "Simple git collaboration tool";
   description = ''

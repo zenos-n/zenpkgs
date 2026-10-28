@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.vaultwarden";
+  id = "unknown.vaultwarden";
   name = "vaultwarden";
   summary = "Unofficial Bitwarden compatible server written in Rust";
   description = ''

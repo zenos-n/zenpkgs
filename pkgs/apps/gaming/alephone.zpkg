@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.alephone";
+  id = "unknown.alephone";
   name = "Aleph One";
   summary = "Aleph One is the open source continuation of Bungie’s Marathon 2 game engine";
   description = ''

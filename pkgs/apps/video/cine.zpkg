@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.cine";
+  id = "unknown.cine";
   name = "Cine";
   summary = "Video Player for Linux";
   description = ''

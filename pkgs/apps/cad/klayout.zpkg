@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.klayout";
+  id = "unknown.klayout";
   name = "KLayout";
   summary = "High performance layout viewer and editor with support for GDS and OASIS";
   description = ''

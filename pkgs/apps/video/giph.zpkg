@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.giph";
+  id = "unknown.giph";
   name = "giph";
   summary = "Simple gif recorder";
   description = ''

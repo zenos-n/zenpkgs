@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.epub2txt2";
+  id = "unknown.epub2txt2";
   name = "epub2txt2";
   summary = "Simple command-line utility for Linux, for extracting text from EPUB documents";
   description = ''

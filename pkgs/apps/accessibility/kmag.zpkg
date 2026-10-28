@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.kmag";
+  id = "unknown.kmag";
   name = "KMag";
   summary = "Screen magnifier";
   description = ''

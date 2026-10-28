@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.iproute2";
+  id = "unknown.iproute2";
   name = "iproute2";
   summary = "Curated iproute2 package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.cura-appimage";
+  id = "unknown.cura-appimage";
   name = "UltiMaker Cura";
   summary = "3D printing software";
   description = ''

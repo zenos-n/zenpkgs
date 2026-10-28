@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.lm-u5f-sensors";
+  id = "unknown.lm-u5f-sensors";
   name = "lm-sensors";
   summary = "Tools for reading hardware sensors - maintained fork";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.yubikey-touch-detector";
+  id = "unknown.yubikey-touch-detector";
   name = "yubikey-touch-detector";
   summary = "Tool to detect when your YubiKey is waiting for a touch";
   description = ''

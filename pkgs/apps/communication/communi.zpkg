@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.communi";
+  id = "unknown.communi";
   name = "Communi";
   summary = "Simple and elegant cross-platform IRC client";
   description = ''

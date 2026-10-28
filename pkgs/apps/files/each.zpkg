@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.each";
+  id = "unknown.each";
   name = "each";
   summary = "Command-line tool for processing CSV, JSON and other structured data";
   description = ''

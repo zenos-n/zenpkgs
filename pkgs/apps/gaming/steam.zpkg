@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.steam";
+  id = "unknown.steam";
   name = "steam";
   summary = "Curated steam package for ZenOS";
   description = ''

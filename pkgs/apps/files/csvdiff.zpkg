@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.csvdiff";
+  id = "unknown.csvdiff";
   name = "csvdiff";
   summary = "Fast diff tool for comparing csv files";
   description = ''

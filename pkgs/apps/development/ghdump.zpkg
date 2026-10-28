@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ghdump";
+  id = "unknown.ghdump";
   name = "ghdump";
   summary = "Export GitHub issues, pull requests, and discussions through customizable templates";
   description = ''

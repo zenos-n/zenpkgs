@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.gpsprune";
+  id = "unknown.gpsprune";
   name = "GpsPrune";
   summary = "Application for viewing, editing and converting GPS coordinate data";
   description = ''

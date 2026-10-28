@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.proxyman";
+  id = "unknown.proxyman";
   name = "Proxyman";
   summary = "Capture, inspect, and manipulate HTTP(s) requests/responses with ease";
   description = ''

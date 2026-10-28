@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.qtscrcpy";
+  id = "unknown.qtscrcpy";
   name = "QtScrcpy";
   summary = "Android real-time display control software";
   description = ''

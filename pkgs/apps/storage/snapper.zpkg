@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.snapper";
+  id = "unknown.snapper";
   name = "Snapper";
   summary = "Tool for Linux filesystem snapshot management";
   description = ''

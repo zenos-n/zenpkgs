@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.fswebcam";
+  id = "unknown.fswebcam";
   name = "fswebcam";
   summary = "Neat and simple webcam app";
   description = ''

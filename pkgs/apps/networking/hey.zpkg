@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.hey";
+  id = "unknown.hey";
   name = "hey";
   summary = "HTTP load generator, ApacheBench (ab) replacement";
   description = ''

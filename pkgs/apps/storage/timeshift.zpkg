@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.timeshift";
+  id = "unknown.timeshift";
   name = "Timeshift";
   summary = "System restore tool for Linux";
   description = ''

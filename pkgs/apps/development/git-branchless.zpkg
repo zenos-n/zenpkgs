@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.git-branchless";
+  id = "unknown.git-branchless";
   name = "git-branchless";
   summary = "Suite of tools to help you visualize, navigate, manipulate, and repair your commit history";
   description = ''

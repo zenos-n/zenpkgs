@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.catimg";
+  id = "unknown.catimg";
   name = "catimg";
   summary = "Insanely fast image printing in your terminal";
   description = ''

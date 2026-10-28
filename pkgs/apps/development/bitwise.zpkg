@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bitwise";
+  id = "unknown.bitwise";
   name = "Bitwise";
   summary = "Terminal based bitwise calculator in curses";
   description = ''

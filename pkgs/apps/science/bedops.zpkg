@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.bedops";
+  id = "unknown.bedops";
   name = "BEDOPS";
   summary = "Suite of tools for addressing questions arising in genomics studies";
   description = ''

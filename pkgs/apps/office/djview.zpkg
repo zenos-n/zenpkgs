@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.djview";
+  id = "unknown.djview";
   name = "DjView";
   summary = "Portable DjVu viewer (Qt5)";
   description = ''

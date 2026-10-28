@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.krusader";
+  id = "unknown.krusader";
   name = "Krusader";
   summary = "Norton/Total Commander clone for KDE";
   description = ''

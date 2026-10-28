@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.antares";
+  id = "unknown.antares";
   name = "Antares SQL";
   summary = "Modern, fast and productivity driven SQL client with a focus in UX";
   description = ''

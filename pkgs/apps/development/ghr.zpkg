@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ghr";
+  id = "unknown.ghr";
   name = "ghr";
   summary = "Upload multiple artifacts to GitHub Release in parallel";
   description = ''

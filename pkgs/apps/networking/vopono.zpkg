@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.vopono";
+  id = "unknown.vopono";
   name = "vopono";
   summary = "Run applications through VPN connections in network namespaces";
   description = ''

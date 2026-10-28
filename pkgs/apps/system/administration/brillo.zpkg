@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.brillo";
+  id = "unknown.brillo";
   name = "brillo";
   summary = "Backlight and Keyboard LED control tool";
   description = ''

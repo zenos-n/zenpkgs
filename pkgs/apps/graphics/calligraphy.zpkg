@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.graphics.calligraphy";
+  id = "unknown.calligraphy";
   name = "Calligraphy";
   summary = "GTK tool turning text into ASCII banners";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.lzop";
+  id = "unknown.lzop";
   name = "lzop";
   summary = "Fast file compressor";
   description = ''

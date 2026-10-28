@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.rsync";
+  id = "unknown.rsync";
   name = "rsync";
   summary = "Curated rsync package for ZenOS";
   description = ''

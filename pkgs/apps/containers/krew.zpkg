@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.krew";
+  id = "unknown.krew";
   name = "Krew";
   summary = "Package manager for kubectl plugins";
   description = ''

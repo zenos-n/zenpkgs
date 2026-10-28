@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.mimic";
+  id = "unknown.mimic";
   name = "Mimic";
   summary = "Mycroft's TTS engine, based on CMU's Flite (Festival Lite)";
   description = ''

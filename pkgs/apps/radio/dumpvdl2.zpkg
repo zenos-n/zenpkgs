@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.dumpvdl2";
+  id = "unknown.dumpvdl2";
   name = "dumpvdl2";
   summary = "VDL Mode 2 message decoder and protocol analyzer";
   description = ''

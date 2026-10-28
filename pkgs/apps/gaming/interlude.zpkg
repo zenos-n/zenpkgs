@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.interlude";
+  id = "unknown.interlude";
   name = "Interlude";
   summary = "Keyboard rhythm game built for fun, part of the YAVSRG project";
   description = ''

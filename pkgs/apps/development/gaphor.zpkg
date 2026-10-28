@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gaphor";
+  id = "unknown.gaphor";
   name = "Gaphor";
   summary = "UML and SysML modeling tool";
   description = ''

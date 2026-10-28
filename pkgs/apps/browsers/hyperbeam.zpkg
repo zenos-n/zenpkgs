@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.hyperbeam";
+  id = "unknown.hyperbeam";
   name = "Hyperbeam";
   summary = "Shared browser desktop application";
   description = ''Shared browser desktop application. Optional migration package; installation does not activate a service.'';

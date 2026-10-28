@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-team";
+  id = "unknown.git-team";
   name = "git-team";
   summary = "Command line interface for managing and enhancing git commit messages with co-authors";
   description = ''

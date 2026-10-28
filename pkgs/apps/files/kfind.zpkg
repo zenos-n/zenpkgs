@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.files.kfind";
+  id = "unknown.kfind";
   name = "KFind";
   summary = "File search utility by KDE";
   description = ''

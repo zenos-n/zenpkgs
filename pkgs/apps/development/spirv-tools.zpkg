@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.spirv-tools";
+  id = "unknown.spirv-tools";
   name = "SPIR-V Tools";
   summary = "SPIR-V Tools project provides an API and commands for processing SPIR-V modules";
   description = ''

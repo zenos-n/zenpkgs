@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.xaos";
+  id = "unknown.xaos";
   name = "XaoS";
   summary = "Real-time interactive fractal zoomer";
   description = ''

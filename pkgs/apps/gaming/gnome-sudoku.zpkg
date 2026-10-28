@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gnome-sudoku";
+  id = "unknown.gnome-sudoku";
   name = "GNOME Sudoku";
   summary = "Test your logic skills in this number grid puzzle";
   description = ''

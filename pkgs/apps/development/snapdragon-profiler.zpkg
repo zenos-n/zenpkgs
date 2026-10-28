@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.snapdragon-profiler";
+  id = "unknown.snapdragon-profiler";
   name = "Snapdragon Profiler";
   summary = "Profiler for Android devices running Snapdragon chips";
   description = ''

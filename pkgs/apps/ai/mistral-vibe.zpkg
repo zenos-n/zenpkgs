@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.mistral-vibe";
+  id = "unknown.mistral-vibe";
   name = "Mistral Vibe";
   summary = "Minimal CLI coding agent by Mistral";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.flac123";
+  id = "unknown.flac123";
   name = "flac123";
   summary = "Command-line program for playing FLAC audio files";
   description = ''

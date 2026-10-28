@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.maliit-keyboard";
+  id = "unknown.maliit-keyboard";
   name = "Maliit Keyboard";
   summary = "Virtual keyboard";
   description = ''

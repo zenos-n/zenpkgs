@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.nmgui";
+  id = "unknown.nmgui";
   name = "nmgui";
   summary = "GTK4 network configuration interface using NetworkManager's nmcli";
   description = ''

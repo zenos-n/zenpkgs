@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.tilix";
+  id = "unknown.tilix";
   name = "Tilix";
   summary = "Tiling terminal emulator following the Gnome Human Interface Guidelines";
   description = ''

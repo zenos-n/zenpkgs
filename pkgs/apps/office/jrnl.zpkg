@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.jrnl";
+  id = "unknown.jrnl";
   name = "jrnl";
   summary = "Command line journal application that stores your journal in a plain text file";
   description = ''

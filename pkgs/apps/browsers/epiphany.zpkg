@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.epiphany";
+  id = "unknown.epiphany";
   name = "epiphany";
   summary = "Curated epiphany package for ZenOS";
   description = ''

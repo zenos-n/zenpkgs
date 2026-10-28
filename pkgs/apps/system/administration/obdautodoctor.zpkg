@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.obdautodoctor";
+  id = "unknown.obdautodoctor";
   name = "OBD Auto Doctor";
   summary = "Diagnose problems, reset the Check Engine Light, and monitor your car's performance with ease";
   description = ''

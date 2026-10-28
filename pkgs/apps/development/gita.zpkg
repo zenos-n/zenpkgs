@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gita";
+  id = "unknown.gita";
   name = "Gita";
   summary = "Command-line tool to manage multiple git repos";
   description = ''

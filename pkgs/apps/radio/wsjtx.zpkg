@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.wsjtx";
+  id = "unknown.wsjtx";
   name = "WSJT-X";
   summary = "Weak-signal digital communication modes for amateur radio";
   description = ''

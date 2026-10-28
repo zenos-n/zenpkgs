@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.education.step";
+  id = "unknown.step";
   name = "Step";
   summary = "Interactive physics simulator";
   description = ''

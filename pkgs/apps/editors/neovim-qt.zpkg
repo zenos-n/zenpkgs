@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.neovim-qt";
+  id = "unknown.neovim-qt";
   name = "Neovim Qt";
   summary = "Neovim client library and GUI, in Qt5";
   description = ''

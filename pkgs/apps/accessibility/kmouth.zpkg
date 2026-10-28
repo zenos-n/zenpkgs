@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.kmouth";
+  id = "unknown.kmouth";
   name = "KMouth";
   summary = "Type-and-say front end for speech synthesizers";
   description = ''

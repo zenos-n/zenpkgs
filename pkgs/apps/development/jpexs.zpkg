@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.jpexs";
+  id = "unknown.jpexs";
   name = "JPEXS Free Flash Decompiler";
   summary = "Flash SWF decompiler and editor";
   description = ''

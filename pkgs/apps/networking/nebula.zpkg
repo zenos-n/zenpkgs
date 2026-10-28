@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.nebula";
+  id = "unknown.nebula";
   name = "Nebula";
   summary = "Overlay networking tool with a focus on performance, simplicity and security";
   description = ''

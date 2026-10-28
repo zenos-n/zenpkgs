@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.diskscan";
+  id = "unknown.diskscan";
   name = "diskscan";
   summary = "Scan HDD/SSD for failed and near failed sectors";
   description = ''

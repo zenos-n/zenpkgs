@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.caneda";
+  id = "unknown.caneda";
   name = "Caneda";
   summary = "Open source EDA software focused on easy of use and portability";
   description = ''

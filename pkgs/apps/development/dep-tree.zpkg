@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.dep-tree";
+  id = "unknown.dep-tree";
   name = "dep-tree";
   summary = "Tool for visualizing interconnectedness of codebases in multiple languages";
   description = ''

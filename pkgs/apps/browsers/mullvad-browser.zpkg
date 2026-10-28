@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.browsers.mullvad-browser";
+  id = "unknown.mullvad-browser";
   name = "Mullvad Browser";
   summary = "Privacy-focused browser made in a collaboration between The Tor Project and Mullvad";
   description = ''

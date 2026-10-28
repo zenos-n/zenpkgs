@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.isd";
+  id = "unknown.isd";
   name = "isd";
   summary = "TUI to interactively work with systemd units";
   description = ''

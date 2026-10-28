@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fsnav";
+  id = "unknown.fsnav";
   name = "fsnav";
   summary = "3D filesystem navigator inspired by SGI FSN";
   description = ''

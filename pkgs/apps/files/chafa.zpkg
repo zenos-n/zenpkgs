@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.chafa";
+  id = "unknown.chafa";
   name = "Chafa";
   summary = "Terminal graphics for the 21st century";
   description = ''

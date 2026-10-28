@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.gum";
+  id = "unknown.gum";
   name = "Gum";
   summary = "Tasty Bubble Gum for your shell";
   description = ''

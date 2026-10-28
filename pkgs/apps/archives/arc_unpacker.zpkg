@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.arc-u5f-unpacker";
+  id = "unknown.arc-u5f-unpacker";
   name = "arc_unpacker";
   summary = "Tool to extract files from visual novel archives";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.assaultcube";
+  id = "unknown.assaultcube";
   name = "AssaultCube";
   summary = "Fast and fun first-person-shooter based on the Cube fps";
   description = ''

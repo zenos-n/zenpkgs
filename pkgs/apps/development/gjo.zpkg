@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gjo";
+  id = "unknown.gjo";
   name = "gjo";
   summary = "Small utility to create JSON objects";
   description = ''

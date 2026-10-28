@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.bulky";
+  id = "unknown.bulky";
   name = "Bulky";
   summary = "Bulk rename app";
   description = ''

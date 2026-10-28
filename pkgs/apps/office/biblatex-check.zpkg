@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.biblatex-check";
+  id = "unknown.biblatex-check";
   name = "biblatex-check";
   summary = "Python2/3 script for checking BibLatex .bib files";
   description = ''

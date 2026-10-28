@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.ns-usbloader";
+  id = "unknown.ns-usbloader";
   name = "NS-USBloader";
   summary = "All-in-one tool for managing Nintendo Switch homebrew";
   description = ''

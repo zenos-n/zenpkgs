@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.vtfedit";
+  id = "unknown.vtfedit";
   name = "VTFEdit";
   summary = "VTF file viewer/editor";
   description = ''

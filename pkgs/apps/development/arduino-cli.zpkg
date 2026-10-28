@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.arduino-cli";
+  id = "unknown.arduino-cli";
   name = "Arduino CLI";
   summary = "Arduino from the command line";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.testdisk";
+  id = "unknown.testdisk";
   name = "testdisk";
   summary = "Curated testdisk package for ZenOS";
   description = ''

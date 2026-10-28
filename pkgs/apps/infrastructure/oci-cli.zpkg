@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.oci-cli";
+  id = "unknown.oci-cli";
   name = "Oracle Cloud CLI";
   summary = "Command Line Interface for Oracle Cloud Infrastructure";
   description = ''

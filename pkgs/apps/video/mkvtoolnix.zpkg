@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.mkvtoolnix";
+  id = "unknown.mkvtoolnix";
   name = "MKVToolNix";
   summary = "Cross-platform tools for Matroska";
   description = ''

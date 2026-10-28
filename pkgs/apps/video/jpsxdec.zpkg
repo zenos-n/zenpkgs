@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.video.jpsxdec";
+  id = "unknown.jpsxdec";
   name = "jPSXdec";
   summary = "Cross-platform PlayStation 1 audio and video converter";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.birdtray";
+  id = "unknown.birdtray";
   name = "Birdtray";
   summary = "Mail system tray notification icon for Thunderbird";
   description = ''

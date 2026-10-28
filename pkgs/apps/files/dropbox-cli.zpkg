@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.dropbox-cli";
+  id = "unknown.dropbox-cli";
   name = "Dropbox CLI";
   summary = "Command line client for the dropbox daemon";
   description = ''

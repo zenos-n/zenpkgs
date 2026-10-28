@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.nitrogen";
+  id = "unknown.nitrogen";
   name = "Nitrogen";
   summary = "Wallpaper browser and setter for X11";
   description = ''

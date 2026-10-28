@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitlab-ci-local";
+  id = "unknown.gitlab-ci-local";
   name = "GitLab CI Local";
   summary = "Run gitlab pipelines locally as shell executor or docker executor";
   description = ''

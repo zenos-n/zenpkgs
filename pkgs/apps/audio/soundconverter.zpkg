@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.soundconverter";
+  id = "unknown.soundconverter";
   name = "SoundConverter";
   summary = "Leading audio file converter for the GNOME Desktop";
   description = ''

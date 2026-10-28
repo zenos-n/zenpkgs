@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.rdiff-backup";
+  id = "unknown.rdiff-backup";
   name = "rdiff-backup";
   summary = "Backup system trying to combine best a mirror and an incremental backup system";
   description = ''

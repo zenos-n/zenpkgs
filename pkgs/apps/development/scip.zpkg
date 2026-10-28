@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.scip";
+  id = "unknown.scip";
   name = "SCIP";
   summary = "SCIP Code Intelligence Protocol CLI";
   description = ''

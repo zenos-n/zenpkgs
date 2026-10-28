@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.gnome-maps";
+  id = "unknown.gnome-maps";
   name = "GNOME Maps";
   summary = "Map application for GNOME 3";
   description = ''

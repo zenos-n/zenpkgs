@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.aws-vault";
+  id = "unknown.aws-vault";
   name = "AWS Vault";
   summary = "Vault for securely storing and accessing AWS credentials in development environments";
   description = ''

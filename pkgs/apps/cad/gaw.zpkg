@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.gaw";
+  id = "unknown.gaw";
   name = "Gaw";
   summary = "Gtk Analog Wave viewer";
   description = ''

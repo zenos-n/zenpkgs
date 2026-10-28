@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.aerc";
+  id = "unknown.aerc";
   name = "aerc";
   summary = "Email client for your terminal";
   description = ''

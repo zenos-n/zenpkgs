@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.beancount";
+  id = "unknown.beancount";
   name = "Beancount";
   summary = "Double-entry bookkeeping computer language";
   description = ''

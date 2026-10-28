@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.lame";
+  id = "unknown.lame";
   name = "LAME";
   summary = "High quality MPEG Audio Layer III (MP3) encoder";
   description = ''

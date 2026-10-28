@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.vkquake";
+  id = "unknown.vkquake";
   name = "vkQuake";
   summary = "Vulkan Quake port based on QuakeSpasm";
   description = ''

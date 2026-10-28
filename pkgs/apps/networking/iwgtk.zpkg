@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.iwgtk";
+  id = "unknown.iwgtk";
   name = "iwgtk";
   summary = "Lightweight, graphical wifi management utility for Linux";
   description = ''

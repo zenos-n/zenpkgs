@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.fretboard";
+  id = "unknown.fretboard";
   name = "Fretboard";
   summary = "Look up guitar chords";
   description = ''

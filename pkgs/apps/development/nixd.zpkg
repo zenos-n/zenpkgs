@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.nixd";
+  id = "unknown.nixd";
   name = "nixd";
   summary = "Feature-rich Nix language server interoperating with C++ nix";
   description = ''

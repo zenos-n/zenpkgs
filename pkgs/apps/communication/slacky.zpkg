@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.slacky";
+  id = "unknown.slacky";
   name = "Slacky";
   summary = "Unofficial Slack desktop client for arm64 Linux";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.btop";
+  id = "unknown.btop";
   name = "btop";
   summary = "Curated btop package for ZenOS";
   description = ''

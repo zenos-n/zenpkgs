@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.biber";
+  id = "unknown.biber";
   name = "Biber";
   summary = "Backend for BibLaTeX";
   description = ''

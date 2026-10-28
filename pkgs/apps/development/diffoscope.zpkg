@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.diffoscope";
+  id = "unknown.diffoscope";
   name = "Diffoscope";
   summary = "Perform in-depth comparison of files, archives, and directories";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.security.age-plugin-yubikey";
+  id = "unknown.age-plugin-yubikey";
   name = "age-plugin-yubikey";
   summary = "YubiKey plugin for age";
   description = ''

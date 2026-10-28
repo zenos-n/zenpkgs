@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.drm-u5f-info";
+  id = "unknown.drm-u5f-info";
   name = "DRM Info";
   summary = "Small utility to dump info about DRM devices";
   description = ''

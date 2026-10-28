@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.goofcord";
+  id = "unknown.goofcord";
   name = "Goofcord";
   summary = "Highly configurable and privacy-focused Discord client";
   description = ''

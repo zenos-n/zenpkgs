@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.fop";
+  id = "unknown.fop";
   name = "Apache FOP";
   summary = "XML formatter driven by XSL Formatting Objects (XSL-FO)";
   description = ''

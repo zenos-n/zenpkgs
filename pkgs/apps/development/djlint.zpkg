@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.djlint";
+  id = "unknown.djlint";
   name = "djLint";
   summary = "HTML Template Linter and Formatter. Django - Jinja - Nunjucks - Handlebars - GoLang";
   description = ''

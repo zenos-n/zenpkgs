@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.emuflight-configurator";
+  id = "unknown.emuflight-configurator";
   name = "EmuFlight Configurator";
   summary = "Emuflight flight control system configuration tool";
   description = ''

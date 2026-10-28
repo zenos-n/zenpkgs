@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.filebench";
+  id = "unknown.filebench";
   name = "Filebench";
   summary = "File system and storage benchmark that can generate both micro and macro workloads";
   description = ''

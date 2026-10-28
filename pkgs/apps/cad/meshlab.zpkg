@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.meshlab";
+  id = "unknown.meshlab";
   name = "MeshLab";
   summary = "System for processing and editing 3D triangular meshes";
   description = ''

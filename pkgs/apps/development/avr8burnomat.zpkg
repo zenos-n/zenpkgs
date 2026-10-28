@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.avr8burnomat";
+  id = "unknown.avr8burnomat";
   name = "AVR8 Burn-O-Mat";
   summary = "GUI tool for avrdude";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.gitbeaker-cli";
+  id = "unknown.gitbeaker-cli";
   name = "Gitbeaker CLI";
   summary = "CLI Wrapper for the @gitbeaker/rest SDK";
   description = ''

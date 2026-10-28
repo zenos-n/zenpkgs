@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.audacity";
+  id = "unknown.audacity";
   name = "audacity";
   summary = "Sound editor with graphical UI";
   description = ''

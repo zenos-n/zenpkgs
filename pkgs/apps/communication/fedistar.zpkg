@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.fedistar";
+  id = "unknown.fedistar";
   name = "Fedistar";
   summary = "Multi-column Fediverse client application for desktop";
   description = ''

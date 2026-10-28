@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.cyanrip";
+  id = "unknown.cyanrip";
   name = "cyanrip";
   summary = "Command-line audio CD ripper";
   description = ''

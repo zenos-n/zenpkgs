@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-fixup";
+  id = "unknown.git-fixup";
   name = "git-fixup";
   summary = "Fighting the copy-paste element of your rebase workflow";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pgbouncer";
+  id = "unknown.pgbouncer";
   name = "PgBouncer";
   summary = "Lightweight connection pooler for PostgreSQL";
   description = ''

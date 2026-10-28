@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.dualsensectl";
+  id = "unknown.dualsensectl";
   name = "dualsensectl";
   summary = "Linux tool for controlling PS5 DualSense controller";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.onedrive";
+  id = "unknown.onedrive";
   name = "OneDrive Client";
   summary = "Complete tool to interact with OneDrive on Linux";
   description = ''

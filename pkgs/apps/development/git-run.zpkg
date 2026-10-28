@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-run";
+  id = "unknown.git-run";
   name = "git-run";
   summary = "Multiple git repository management tool";
   description = ''

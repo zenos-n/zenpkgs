@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bazel";
+  id = "unknown.bazel";
   name = "Bazel";
   summary = "Build tool that builds code quickly and reliably";
   description = ''

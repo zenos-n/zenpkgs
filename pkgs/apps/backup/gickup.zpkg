@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.gickup";
+  id = "unknown.gickup";
   name = "Gickup";
   summary = "Tool to backup repositories";
   description = ''

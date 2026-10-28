@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.binaryninja-free";
+  id = "unknown.binaryninja-free";
   name = "Binary Ninja Free";
   summary = "Interactive decompiler, disassembler, debugger";
   description = ''

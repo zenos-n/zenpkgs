@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.beekeeper-studio";
+  id = "unknown.beekeeper-studio";
   name = "Beekeeper Studio";
   summary = "Modern and easy to use SQL client for MySQL, Postgres, SQLite, SQL Server, and more";
   description = ''

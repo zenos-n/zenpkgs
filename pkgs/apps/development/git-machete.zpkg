@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-machete";
+  id = "unknown.git-machete";
   name = "git-machete";
   summary = "Git repository organizer and rebase/merge workflow automation tool";
   description = ''

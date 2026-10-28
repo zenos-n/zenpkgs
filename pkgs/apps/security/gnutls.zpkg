@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.gnutls";
+  id = "unknown.gnutls";
   name = "GnuTLS";
   summary = "GNU Transport Layer Security Library";
   description = ''

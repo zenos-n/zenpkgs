@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.lyx";
+  id = "unknown.lyx";
   name = "LyX";
   summary = "WYSIWYM frontend for LaTeX, DocBook";
   description = ''

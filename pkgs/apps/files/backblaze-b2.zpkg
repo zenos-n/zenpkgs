@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.backblaze-b2";
+  id = "unknown.backblaze-b2";
   name = "Backblaze B2 CLI";
   summary = "Command-line tool for accessing the Backblaze B2 storage service";
   description = ''

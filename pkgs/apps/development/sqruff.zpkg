@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.sqruff";
+  id = "unknown.sqruff";
   name = "sqruff";
   summary = "Fast SQL formatter/linter";
   description = ''

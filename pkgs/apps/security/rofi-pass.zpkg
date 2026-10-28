@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.rofi-pass";
+  id = "unknown.rofi-pass";
   name = "rofi-pass";
   summary = "Script to make rofi work with password-store";
   description = ''

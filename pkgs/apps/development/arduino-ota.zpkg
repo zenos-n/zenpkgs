@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.arduino-ota";
+  id = "unknown.arduino-ota";
   name = "Arduino OTA";
   summary = "Tool for uploading programs to Arduino boards over a network";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.yacas";
+  id = "unknown.yacas";
   name = "Yacas";
   summary = "Easy to use, general purpose Computer Algebra System, optionally with GUI";
   description = ''

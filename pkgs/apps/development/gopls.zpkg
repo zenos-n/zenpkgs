@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gopls";
+  id = "unknown.gopls";
   name = "gopls";
   summary = "Official language server for the Go language";
   description = ''

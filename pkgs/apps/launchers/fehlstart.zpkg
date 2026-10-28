@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.launchers.fehlstart";
+  id = "unknown.fehlstart";
   name = "Fehlstart";
   summary = "Small desktop application launcher with reasonable memory footprint";
   description = ''

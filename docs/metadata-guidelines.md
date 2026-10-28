@@ -7,10 +7,13 @@ The sibling `zenos-n-next/design/node-metadata.md`, `zpkg-format.md`,
 
 Every ZPKG requires `_meta.id`, a nonempty reverse-DNS string without the
 `pkgs.` prefix. Preserve an established upstream ID where one exists (for
-example `org.mozilla.firefox`). For packages without an established ID, author
-an explicit unique ID under `org.zenos.packages`, for example
-`org.zenos.packages.example`. This namespace is an authoring fallback, not an
-implicit value for missing metadata.
+example `org.mozilla.firefox`). Software owned by Negative Zero or ZenOS uses
+`com.neg-zero.<project>`. For a third-party package without a verified upstream
+ID, explicitly author `unknown.<normalized leaf package name>`, for example
+`unknown.example`. Use only the filename stem, never category segments. Preserve
+spelling and case; encode punctuation as `-u<hex code point>-` and prefix names
+beginning with a digit with `p-` (for example, `foo_bar` becomes `foo-u5f-bar`).
+Fallback names must be unique. Missing IDs remain errors.
 
 The registry contains one record per declaration:
 
@@ -56,7 +59,7 @@ Only `_meta` is prefixed. Its fields and dependency scopes are unprefixed:
 
 ```zpkg
 _meta = {
-  id = "org.zenos.packages.example";
+  id = "unknown.example";
   name = "Example";
   summary = "An example package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.zellij";
+  id = "unknown.zellij";
   name = "Zellij";
   summary = "Terminal workspace with batteries included";
   description = ''

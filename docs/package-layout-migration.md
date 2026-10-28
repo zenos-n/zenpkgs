@@ -5,7 +5,9 @@ without `.zpkg`). Under the current two-view contract these paths are selectors
 below `pkgs.byCategories`, not canonical IDs. Canonical `pkgs.<reverse DNS>`
 comes from required `_meta.id` and survives category moves. Both views resolve
 to the same derivation; no old root category aliases are exported. Preserve
-established IDs, otherwise author one under `org.zenos.packages`.
+established upstream IDs and project-owned `com.neg-zero` IDs. For a third-party
+package without a verified upstream ID, use `unknown.<normalized leaf package
+name>` without category segments.
 `pkgs.legacy` and module paths under `programs` are unchanged. See
 [metadata guidelines](metadata-guidelines.md).
 

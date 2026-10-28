@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.gelly";
+  id = "unknown.gelly";
   name = "Gelly";
   summary = "A Jellyfin GTK client for Linux focused on music";
   description = ''

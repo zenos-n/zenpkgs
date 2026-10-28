@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.frama-c";
+  id = "unknown.frama-c";
   name = "Frama-C";
   summary = "Extensible and collaborative platform dedicated to source-code analysis of C software";
   description = ''

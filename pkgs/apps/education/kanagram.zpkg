@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.kanagram";
+  id = "unknown.kanagram";
   name = "Kanagram";
   summary = "Letter Order Game";
   description = ''

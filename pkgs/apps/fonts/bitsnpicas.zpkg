@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.bitsnpicas";
+  id = "unknown.bitsnpicas";
   name = "Bits'N'Picas";
   summary = "Bitmap and emoji font creation and conversion tools";
   description = ''

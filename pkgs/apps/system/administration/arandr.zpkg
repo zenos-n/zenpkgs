@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.arandr";
+  id = "unknown.arandr";
   name = "ARandR";
   summary = "Simple visual front end for XRandR";
   description = ''

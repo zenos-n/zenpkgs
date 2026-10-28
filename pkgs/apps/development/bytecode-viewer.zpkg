@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bytecode-viewer";
+  id = "unknown.bytecode-viewer";
   name = "Bytecode Viewer";
   summary = "Lightweight user-friendly Java/Android Bytecode Viewer, Decompiler & More";
   description = ''

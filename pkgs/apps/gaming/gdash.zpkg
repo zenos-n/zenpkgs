@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gdash";
+  id = "unknown.gdash";
   name = "GDash";
   summary = "Maze-based puzzle video game, a clone of the original Boulder Dash";
   description = ''

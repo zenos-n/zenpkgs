@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.bt-migrate";
+  id = "unknown.bt-migrate";
   name = "bt-migrate";
   summary = "Torrent state migration tool";
   description = ''

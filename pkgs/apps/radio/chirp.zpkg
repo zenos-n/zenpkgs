@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.chirp";
+  id = "unknown.chirp";
   name = "CHIRP";
   summary = "Free, open-source tool for programming your amateur radio";
   description = ''

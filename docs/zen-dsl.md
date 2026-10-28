@@ -305,8 +305,10 @@ ZPKGs require reverse-DNS `_meta.id`. Registry `id = "pkgs." + _meta.id` and
 `target = _meta.id.split(".")`; `categoryTarget` contains filesystem segments
 relative to `pkgs/` without `.zpkg`. Canonical `pkgs.<reverse DNS>` and
 `pkgs.byCategories.<existing category path>` resolve to the same derivation,
-with one registry record. Preserve established IDs; otherwise author a unique
-ID under `org.zenos.packages`. Missing/malformed/duplicate IDs fail. No old root
+with one registry record. Preserve established upstream IDs and project-owned
+`com.neg-zero.<project>` IDs; otherwise explicitly use unique
+`unknown.<normalized leaf package name>` without category segments.
+Missing/malformed/duplicate IDs fail. No old root
 category aliases are exported. `pkgs.legacy` and module identity are unchanged.
 See [metadata guidelines](metadata-guidelines.md).
 

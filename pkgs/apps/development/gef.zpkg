@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gef";
+  id = "unknown.gef";
   name = "GEF";
   summary = "Modern experience for GDB with advanced debugging features for exploit developers & reverse engineers";
   description = ''

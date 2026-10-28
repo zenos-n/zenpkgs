@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.weaviate";
+  id = "unknown.weaviate";
   name = "Weaviate";
   summary = "ML-first vector search engine";
   description = ''

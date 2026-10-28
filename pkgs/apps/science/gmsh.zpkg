@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.gmsh";
+  id = "unknown.gmsh";
   name = "Gmsh";
   summary = "Three-dimensional finite element mesh generator";
   description = ''

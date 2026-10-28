@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gatsby-cli";
+  id = "unknown.gatsby-cli";
   name = "Gatsby CLI";
   summary = "The Gatsby command line interface";
   description = ''

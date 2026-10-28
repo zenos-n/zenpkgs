@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.amass";
+  id = "unknown.amass";
   name = "Amass";
   summary = "In-Depth DNS Enumeration and Network Mapping";
   description = ''

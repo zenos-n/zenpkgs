@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pipx";
+  id = "unknown.pipx";
   name = "pipx";
   summary = "Install and run Python applications in isolated environments";
   description = ''

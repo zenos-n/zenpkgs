@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.xsel";
+  id = "unknown.xsel";
   name = "xsel";
   summary = "Command-line program for getting and setting the contents of the X selection";
   description = ''

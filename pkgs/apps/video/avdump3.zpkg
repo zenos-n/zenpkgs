@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.video.avdump3";
+  id = "unknown.avdump3";
   name = "AVDump3";
   summary = "Tool for extracting audio/video metadata from media files and uploading it to AniDB";
   description = ''

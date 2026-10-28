@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.gcalcli";
+  id = "unknown.gcalcli";
   name = "gcalcli";
   summary = "CLI for Google Calendar";
   description = ''

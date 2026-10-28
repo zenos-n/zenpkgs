@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.liferea";
+  id = "unknown.liferea";
   name = "Liferea";
   summary = "GTK-based news feed aggregator";
   description = ''

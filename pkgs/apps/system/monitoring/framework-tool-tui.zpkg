@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.framework-tool-tui";
+  id = "unknown.framework-tool-tui";
   name = "Framework Tool TUI";
   summary = "TUI for controlling and monitoring Framework Computers hardware";
   description = ''

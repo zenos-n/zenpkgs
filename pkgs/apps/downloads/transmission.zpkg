@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.downloads.transmission";
+  id = "unknown.transmission";
   name = "Transmission";
   summary = "Fast, easy and free BitTorrent client";
   description = ''

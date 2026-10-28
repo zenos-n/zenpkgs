@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.app-hider";
+  id = "unknown.app-hider";
   name = "app-hider";
   summary = "Curated app-hider package for ZenOS";
   description = ''

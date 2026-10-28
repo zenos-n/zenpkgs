@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fixjson";
+  id = "unknown.fixjson";
   name = "fixjson";
   summary = "JSON Fixer for Humans using (relaxed) JSON5";
   description = ''

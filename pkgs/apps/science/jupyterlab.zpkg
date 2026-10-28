@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.jupyterlab";
+  id = "unknown.jupyterlab";
   name = "JupyterLab";
   summary = "Jupyter lab environment notebook server extension";
   description = ''

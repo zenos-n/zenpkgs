@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fclones";
+  id = "unknown.fclones";
   name = "fclones";
   summary = "Efficient Duplicate File Finder and Remover";
   description = ''

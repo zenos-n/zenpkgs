@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.coyim";
+  id = "unknown.coyim";
   name = "CoyIM";
   summary = "Safe and secure chat client";
   description = ''

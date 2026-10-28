@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.worldpainter";
+  id = "unknown.worldpainter";
   name = "WorldPainter";
   summary = "Interactive map generator for Minecraft";
   description = ''

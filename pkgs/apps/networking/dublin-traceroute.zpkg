@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.dublin-traceroute";
+  id = "unknown.dublin-traceroute";
   name = "Dublin Traceroute";
   summary = "NAT-aware multipath traceroute tool";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.revolt-desktop";
+  id = "unknown.revolt-desktop";
   name = "Revolt";
   summary = "Open source user-first chat platform";
   description = ''

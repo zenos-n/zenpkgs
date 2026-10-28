@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.watchexec";
+  id = "unknown.watchexec";
   name = "Watchexec";
   summary = "Executes commands in response to file modifications";
   description = ''

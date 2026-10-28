@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.cameractrls";
+  id = "unknown.cameractrls";
   name = "Camera Controls";
   summary = "Camera controls for Linux";
   description = ''

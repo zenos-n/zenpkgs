@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.popcorntime";
+  id = "unknown.popcorntime";
   name = "Popcorn Time";
   summary = "Application that streams movies and TV shows from torrents";
   description = ''

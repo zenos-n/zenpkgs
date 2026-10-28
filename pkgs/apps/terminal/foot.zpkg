@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.foot";
+  id = "unknown.foot";
   name = "foot";
   summary = "Fast, lightweight and minimalistic Wayland terminal emulator";
   description = ''

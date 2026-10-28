@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.andcli";
+  id = "unknown.andcli";
   name = "andcli";
   summary = "2FA TUI for your shell";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.auto-multiple-choice";
+  id = "unknown.auto-multiple-choice";
   name = "Auto Multiple Choice";
   summary = "Create and manage multiple choice questionnaires with automated marking";
   description = ''

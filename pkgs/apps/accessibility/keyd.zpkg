@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.keyd";
+  id = "unknown.keyd";
   name = "keyd";
   summary = "Key remapping daemon for Linux";
   description = ''

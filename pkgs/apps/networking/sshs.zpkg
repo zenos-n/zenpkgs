@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.sshs";
+  id = "unknown.sshs";
   name = "sshs";
   summary = "Terminal user interface for SSH";
   description = ''

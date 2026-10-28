@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.downloads.wget2";
+  id = "unknown.wget2";
   name = "Wget2";
   summary = "Successor of GNU Wget, a file and recursive website downloader";
   description = ''

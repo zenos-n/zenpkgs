@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.qpdf";
+  id = "unknown.qpdf";
   name = "QPDF";
   summary = "C++ library and set of programs that inspect and manipulate the structure of PDF files";
   description = ''

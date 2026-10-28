@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.root";
+  id = "unknown.root";
   name = "ROOT";
   summary = "Data analysis framework";
   description = ''

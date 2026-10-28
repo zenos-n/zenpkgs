@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.coz";
+  id = "unknown.coz";
   name = "Coz";
   summary = "Causal profiler for performance optimization";
   description = ''

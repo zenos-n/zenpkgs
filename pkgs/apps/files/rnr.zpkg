@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.rnr";
+  id = "unknown.rnr";
   name = "rnr";
   summary = "Command-line tool to batch rename files and directories";
   description = ''

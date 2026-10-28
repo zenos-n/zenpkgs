@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.innernet";
+  id = "unknown.innernet";
   name = "innernet";
   summary = "Private network system that uses WireGuard under the hood";
   description = ''

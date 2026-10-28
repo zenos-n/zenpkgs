@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bazelisk";
+  id = "unknown.bazelisk";
   name = "Bazelisk";
   summary = "User-friendly launcher for Bazel";
   description = ''

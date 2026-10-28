@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.figlet";
+  id = "unknown.figlet";
   name = "figlet";
   summary = "Program for making large letters out of ordinary text";
   description = ''

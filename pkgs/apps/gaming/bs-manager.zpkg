@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.bs-manager";
+  id = "unknown.bs-manager";
   name = "BSManager";
   summary = "Your Beat Saber Assistant";
   description = ''

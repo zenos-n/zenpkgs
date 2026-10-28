@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.envchain";
+  id = "unknown.envchain";
   name = "envchain";
   summary = "Set environment variables with macOS keychain or D-Bus secret service";
   description = ''

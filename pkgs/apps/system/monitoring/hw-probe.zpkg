@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.hw-probe";
+  id = "unknown.hw-probe";
   name = "hw-probe";
   summary = "Probe for hardware, check operability and find drivers";
   description = ''

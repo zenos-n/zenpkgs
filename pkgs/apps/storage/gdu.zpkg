@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.gdu";
+  id = "unknown.gdu";
   name = "gdu";
   summary = "Disk usage analyzer with console interface";
   description = ''

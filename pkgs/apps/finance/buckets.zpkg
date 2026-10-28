@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.buckets";
+  id = "unknown.buckets";
   name = "Buckets";
   summary = "Private family budgeting app";
   description = ''

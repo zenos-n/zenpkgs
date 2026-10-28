@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.emacs";
+  id = "unknown.emacs";
   name = "GNU Emacs";
   summary = "Extensible, customizable GNU text editor";
   description = ''

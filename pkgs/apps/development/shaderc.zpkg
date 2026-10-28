@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.shaderc";
+  id = "unknown.shaderc";
   name = "Shaderc";
   summary = "Collection of tools, libraries and tests for shader compilation";
   description = ''

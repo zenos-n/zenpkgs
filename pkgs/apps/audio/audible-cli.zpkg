@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.audible-cli";
+  id = "unknown.audible-cli";
   name = "Audible CLI";
   summary = "Command line interface for audible package. With the cli you can download your Audible books, cover, chapter files";
   description = ''

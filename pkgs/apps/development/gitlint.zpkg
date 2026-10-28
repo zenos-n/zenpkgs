@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitlint";
+  id = "unknown.gitlint";
   name = "gitlint";
   summary = "Linting for your git commit messages";
   description = ''

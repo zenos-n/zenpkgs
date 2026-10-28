@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.zulip";
+  id = "unknown.zulip";
   name = "Zulip";
   summary = "Desktop client for Zulip Chat";
   description = ''

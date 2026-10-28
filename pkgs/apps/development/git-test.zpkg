@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-test";
+  id = "unknown.git-test";
   name = "git-test";
   summary = "Test your commits";
   description = ''

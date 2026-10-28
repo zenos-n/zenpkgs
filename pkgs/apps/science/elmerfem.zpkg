@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.elmerfem";
+  id = "unknown.elmerfem";
   name = "Elmer";
   summary = "Finite element software for multiphysical problems";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.ukmm";
+  id = "unknown.ukmm";
   name = "UKMM";
   summary = "New mod manager for The Legend of Zelda: Breath of the Wild";
   description = ''

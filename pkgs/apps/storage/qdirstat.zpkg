@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.qdirstat";
+  id = "unknown.qdirstat";
   name = "QDirStat";
   summary = "Graphical disk usage analyzer";
   description = ''

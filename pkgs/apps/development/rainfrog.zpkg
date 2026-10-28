@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.rainfrog";
+  id = "unknown.rainfrog";
   name = "Rainfrog";
   summary = "Database management TUI for postgres";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-subtrac";
+  id = "unknown.git-subtrac";
   name = "git-subtrac";
   summary = "Keep the content for your git submodules all in one place: the parent repo";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.binwalk";
+  id = "unknown.binwalk";
   name = "Binwalk";
   summary = "Firmware Analysis Tool";
   description = ''

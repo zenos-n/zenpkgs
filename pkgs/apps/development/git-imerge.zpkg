@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-imerge";
+  id = "unknown.git-imerge";
   name = "git-imerge";
   summary = "Perform a merge between two branches incrementally";
   description = ''

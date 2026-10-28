@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-standup";
+  id = "unknown.git-standup";
   name = "git-standup";
   summary = "Recall what you did on the last working day";
   description = ''

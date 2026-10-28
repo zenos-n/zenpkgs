@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.poetry";
+  id = "unknown.poetry";
   name = "Poetry";
   summary = "Python dependency management and packaging made easy";
   description = ''

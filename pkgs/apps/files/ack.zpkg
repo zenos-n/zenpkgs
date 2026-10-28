@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.ack";
+  id = "unknown.ack";
   name = "ack";
   summary = "Grep-like tool tailored to working with large trees of source code";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.techmino";
+  id = "unknown.techmino";
   name = "Techmino";
   summary = "Modern Tetris clone with many features";
   description = ''

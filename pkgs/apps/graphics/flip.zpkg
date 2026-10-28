@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.flip";
+  id = "unknown.flip";
   name = "FLIP";
   summary = "Tool for visualizing and communicating the errors in rendered images";
   description = ''

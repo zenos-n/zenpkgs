@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ghi";
+  id = "unknown.ghi";
   name = "ghi";
   summary = "GitHub Issues on the command line";
   description = ''

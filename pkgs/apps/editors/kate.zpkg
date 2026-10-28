@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.editors.kate";
+  id = "unknown.kate";
   name = "Kate";
   summary = "Advanced text editor";
   description = ''

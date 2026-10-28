@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.nosql-workbench";
+  id = "unknown.nosql-workbench";
   name = "NoSQL Workbench";
   summary = "Visual tool that provides data modeling, data visualization, and query development features to help you design, create, query, and manage DynamoDB tables";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.thorium-reader";
+  id = "unknown.thorium-reader";
   name = "Thorium Reader";
   summary = "EPUB reader";
   description = ''

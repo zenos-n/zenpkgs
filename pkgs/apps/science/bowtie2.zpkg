@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.bowtie2";
+  id = "unknown.bowtie2";
   name = "Bowtie 2";
   summary = "Ultrafast and memory-efficient tool for aligning sequencing reads to long reference sequences";
   description = ''

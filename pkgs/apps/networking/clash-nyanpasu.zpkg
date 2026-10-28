@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.clash-nyanpasu";
+  id = "unknown.clash-nyanpasu";
   name = "Clash Nyanpasu";
   summary = "Clash GUI based on tauri";
   description = ''

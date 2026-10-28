@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.msmtp";
+  id = "unknown.msmtp";
   name = "msmtp";
   summary = "Simple and easy to use SMTP client with excellent sendmail compatibility";
   description = ''

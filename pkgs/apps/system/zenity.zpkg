@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.zenity";
+  id = "unknown.zenity";
   name = "zenity";
   summary = "Tool to display dialogs from the commandline and shell scripts";
   description = ''

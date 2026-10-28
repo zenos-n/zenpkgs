@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.lego";
+  id = "unknown.lego";
   name = "lego";
   summary = "Let's Encrypt client and ACME library written in Go";
   description = ''

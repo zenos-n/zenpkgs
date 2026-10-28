@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.oxlint";
+  id = "unknown.oxlint";
   name = "Oxlint";
   summary = "Collection of JavaScript tools written in Rust";
   description = ''

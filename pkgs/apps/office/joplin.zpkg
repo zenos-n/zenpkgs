@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.joplin";
+  id = "unknown.joplin";
   name = "Joplin CLI";
   summary = "CLI client for Joplin";
   description = ''

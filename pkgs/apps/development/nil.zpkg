@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.nil";
+  id = "unknown.nil";
   name = "nil";
   summary = "Yet another language server for Nix";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gnushogi";
+  id = "unknown.gnushogi";
   name = "GNU Shogi";
   summary = "GNU implementation of Shogi, also known as Japanese Chess";
   description = ''

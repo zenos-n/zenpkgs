@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.irpf";
+  id = "unknown.irpf";
   name = "IRPF";
   summary = "Brazilian government application for reporting income tax";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.fractal";
+  id = "unknown.fractal";
   name = "Fractal";
   summary = "Matrix group messaging app";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bikeshed";
+  id = "unknown.bikeshed";
   name = "Bikeshed";
   summary = "Preprocessor for anyone writing specifications that converts source files into actual specs";
   description = ''

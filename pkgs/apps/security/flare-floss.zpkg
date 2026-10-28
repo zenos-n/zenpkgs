@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.flare-floss";
+  id = "unknown.flare-floss";
   name = "FLOSS";
   summary = "Automatically extract obfuscated strings from malware";
   description = ''

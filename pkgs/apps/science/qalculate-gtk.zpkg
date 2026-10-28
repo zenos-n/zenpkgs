@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.qalculate-gtk";
+  id = "unknown.qalculate-gtk";
   name = "Qalculate!";
   summary = "Ultimate desktop calculator";
   description = ''

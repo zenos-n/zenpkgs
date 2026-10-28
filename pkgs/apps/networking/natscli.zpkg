@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.natscli";
+  id = "unknown.natscli";
   name = "NATS CLI";
   summary = "NATS Command Line Interface";
   description = ''

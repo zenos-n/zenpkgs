@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.taplo";
+  id = "unknown.taplo";
   name = "Taplo";
   summary = "TOML toolkit written in Rust";
   description = ''

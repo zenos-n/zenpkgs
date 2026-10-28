@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.vault";
+  id = "unknown.vault";
   name = "Vault";
   summary = "Tool for managing secrets";
   description = ''

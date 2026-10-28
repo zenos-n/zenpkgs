@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.netscanner";
+  id = "unknown.netscanner";
   name = "NetScanner";
   summary = "Network scanner with features like WiFi scanning, packetdump and more";
   description = ''

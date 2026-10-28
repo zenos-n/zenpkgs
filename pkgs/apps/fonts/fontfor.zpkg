@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.fontfor";
+  id = "unknown.fontfor";
   name = "fontfor";
   summary = "Find fonts which can show a specified character and preview them in browser";
   description = ''

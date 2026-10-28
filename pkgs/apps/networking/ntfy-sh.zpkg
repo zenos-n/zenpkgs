@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.ntfy-sh";
+  id = "unknown.ntfy-sh";
   name = "ntfy";
   summary = "Send push notifications to your phone or desktop via PUT/POST";
   description = ''

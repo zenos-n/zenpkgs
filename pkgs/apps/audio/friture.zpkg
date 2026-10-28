@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.friture";
+  id = "unknown.friture";
   name = "Friture";
   summary = "Real-time audio analyzer";
   description = ''

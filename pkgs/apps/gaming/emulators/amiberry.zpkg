@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.amiberry";
+  id = "unknown.amiberry";
   name = "Amiberry";
   summary = "Optimized Amiga emulator for Linux/macOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.krita";
+  id = "unknown.krita";
   name = "Krita";
   summary = "Free and open source painting application";
   description = ''

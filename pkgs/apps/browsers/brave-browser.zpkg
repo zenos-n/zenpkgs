@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.brave-browser";
+  id = "unknown.brave-browser";
   name = "Brave";
   summary = "Curated Brave package for ZenOS";
   description = ''

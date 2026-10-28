@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.communication.dissent";
+  id = "unknown.dissent";
   name = "Dissent";
   summary = "Third-party Discord client designed for a smooth, native experience (formerly gtkcord4)";
   description = ''

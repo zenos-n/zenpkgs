@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gmqcc";
+  id = "unknown.gmqcc";
   name = "GMQCC";
   summary = "Modern QuakeC compiler";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.fuse-archive";
+  id = "unknown.fuse-archive";
   name = "fuse-archive";
   summary = "Serve an archive or a compressed file as a read-only FUSE file system";
   description = ''

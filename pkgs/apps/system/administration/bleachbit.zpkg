@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.bleachbit";
+  id = "unknown.bleachbit";
   name = "BleachBit";
   summary = "Program to clean your computer";
   description = ''

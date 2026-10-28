@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.rocksndiamonds";
+  id = "unknown.rocksndiamonds";
   name = "Rocks'n'Diamonds";
   summary = "Scrolling tile-based arcade style puzzle game";
   description = ''

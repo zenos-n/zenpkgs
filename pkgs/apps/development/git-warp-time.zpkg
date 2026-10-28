@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-warp-time";
+  id = "unknown.git-warp-time";
   name = "git-warp-time";
   summary = "Utility to reset filesystem timestamps based on Git history";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.amphetype";
+  id = "unknown.amphetype";
   name = "Amphetype";
   summary = "Advanced typing practice program";
   description = ''

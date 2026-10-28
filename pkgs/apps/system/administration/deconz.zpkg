@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.deconz";
+  id = "unknown.deconz";
   name = "deCONZ";
   summary = "Manage Zigbee network with ConBee, ConBee II or RaspBee hardware";
   description = ''

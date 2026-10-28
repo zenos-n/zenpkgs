@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.lufus";
+  id = "unknown.lufus";
   name = "Lufus";
   summary = "A rufus clone written in py and designed to work with linux";
   description = ''

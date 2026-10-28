@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.navi";
+  id = "unknown.navi";
   name = "navi";
   summary = "Interactive cheatsheet tool for the command-line and application launchers";
   description = ''

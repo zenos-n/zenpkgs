@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gir-rs";
+  id = "unknown.gir-rs";
   name = "gir";
   summary = "Tool to generate rust bindings and user API for glib-based libraries";
   description = ''

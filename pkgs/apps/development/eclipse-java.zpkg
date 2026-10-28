@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.eclipse-java";
+  id = "unknown.eclipse-java";
   name = "Eclipse IDE for Java";
   summary = "Eclipse IDE for Java Developers";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.saga";
+  id = "unknown.saga";
   name = "SAGA GIS";
   summary = "System for Automated Geoscientific Analyses";
   description = ''

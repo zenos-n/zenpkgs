@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.ricochet-refresh";
+  id = "unknown.ricochet-refresh";
   name = "Ricochet Refresh";
   summary = "Secure chat without DNS or WebPKI";
   description = ''

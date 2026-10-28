@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gg-jj";
+  id = "unknown.gg-jj";
   name = "GG";
   summary = "GUI for the version control system Jujutsu";
   description = ''

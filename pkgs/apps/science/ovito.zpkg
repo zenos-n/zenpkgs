@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.science.ovito";
+  id = "unknown.ovito";
   name = "OVITO";
   summary = "Scientific visualization and analysis software for atomistic and particle simulation data";
   description = ''

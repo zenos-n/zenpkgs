@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.twinejs";
+  id = "unknown.twinejs";
   name = "Twine";
   summary = "Open-source tool for telling interactive, nonlinear stories";
   description = ''

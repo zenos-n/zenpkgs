@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.office.butterfly";
+  id = "unknown.butterfly";
   name = "Butterfly";
   summary = "Note taking app where your ideas come first";
   description = ''

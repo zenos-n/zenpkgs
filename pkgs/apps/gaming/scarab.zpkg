@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.scarab";
+  id = "unknown.scarab";
   name = "Scarab";
   summary = "Hollow Knight mod installer and manager";
   description = ''

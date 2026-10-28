@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.vhs";
+  id = "unknown.vhs";
   name = "VHS";
   summary = "Tool for generating terminal GIFs with code";
   description = ''

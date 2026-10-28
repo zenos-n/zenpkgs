@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.baresip";
+  id = "unknown.baresip";
   name = "Baresip";
   summary = "Modular SIP User-Agent with audio and video support";
   description = ''

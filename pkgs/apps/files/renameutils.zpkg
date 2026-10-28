@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.renameutils";
+  id = "unknown.renameutils";
   name = "renameutils";
   summary = "Set of programs to make renaming of files faster";
   description = ''

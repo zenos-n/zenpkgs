@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.protonup-qt";
+  id = "unknown.protonup-qt";
   name = "ProtonUp-Qt";
   summary = "Install and manage Proton-GE and Luxtorpeda for Steam and Wine-GE for Lutris with this graphical user interface";
   description = ''

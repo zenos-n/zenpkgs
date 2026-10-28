@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.linphone";
+  id = "unknown.linphone";
   name = "Linphone";
   summary = "Open source SIP phone for voice/video calls and instant messaging";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.briss";
+  id = "unknown.briss";
   name = "Briss";
   summary = "Java application for cropping PDF files";
   description = ''

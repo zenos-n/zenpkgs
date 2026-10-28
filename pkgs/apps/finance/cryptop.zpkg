@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.cryptop";
+  id = "unknown.cryptop";
   name = "cryptop";
   summary = "Command line Cryptocurrency Portfolio";
   description = ''

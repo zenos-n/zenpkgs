@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.cowsay";
+  id = "unknown.cowsay";
   name = "cowsay";
   summary = "Program which generates ASCII pictures of a cow with a message";
   description = ''

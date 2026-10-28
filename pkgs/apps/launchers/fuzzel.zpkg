@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.launchers.fuzzel";
+  id = "unknown.fuzzel";
   name = "Fuzzel";
   summary = "Wayland-native application launcher, similar to rofi’s drun mode";
   description = ''

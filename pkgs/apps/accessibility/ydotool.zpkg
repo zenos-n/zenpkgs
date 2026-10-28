@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.ydotool";
+  id = "unknown.ydotool";
   name = "ydotool";
   summary = "Generic Linux command-line automation tool";
   description = ''

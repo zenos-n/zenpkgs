@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.flowblade";
+  id = "unknown.flowblade";
   name = "Flowblade";
   summary = "Multitrack Non-Linear Video Editor";
   description = ''

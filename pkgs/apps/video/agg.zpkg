@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.agg";
+  id = "unknown.agg";
   name = "agg";
   summary = "High quality rendering engine for C++";
   description = ''

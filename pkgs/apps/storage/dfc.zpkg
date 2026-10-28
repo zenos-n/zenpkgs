@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.dfc";
+  id = "unknown.dfc";
   name = "dfc";
   summary = "Displays file system space usage using graphs and colors";
   description = ''

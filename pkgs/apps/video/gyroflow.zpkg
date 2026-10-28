@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.video.gyroflow";
+  id = "unknown.gyroflow";
   name = "Gyroflow";
   summary = "Advanced gyro-based video stabilization tool";
   description = ''

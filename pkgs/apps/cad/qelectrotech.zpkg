@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.qelectrotech";
+  id = "unknown.qelectrotech";
   name = "QElectroTech";
   summary = "Free software to create electric diagrams";
   description = ''

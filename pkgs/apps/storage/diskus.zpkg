@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.storage.diskus";
+  id = "unknown.diskus";
   name = "diskus";
   summary = "Minimal, fast alternative to 'du -sh'";
   description = ''

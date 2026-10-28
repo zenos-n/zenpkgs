@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.ncurses";
+  id = "unknown.ncurses";
   name = "ncurses";
   summary = "Curated ncurses package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.quark-goldleaf";
+  id = "unknown.quark-goldleaf";
   name = "Quark";
   summary = "GUI tool for transfering files between a computer and a Nintendo Switch running Goldleaf";
   description = ''

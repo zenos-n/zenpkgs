@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.eiciel";
+  id = "unknown.eiciel";
   name = "Eiciel";
   summary = "Graphical editor for ACLs and extended attributes";
   description = ''

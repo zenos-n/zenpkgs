@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.ghostunnel";
+  id = "unknown.ghostunnel";
   name = "Ghostunnel";
   summary = "TLS proxy with mutual authentication support for securing non-TLS backend applications";
   description = ''

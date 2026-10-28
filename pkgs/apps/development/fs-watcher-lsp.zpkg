@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.fs-watcher-lsp";
+  id = "unknown.fs-watcher-lsp";
   name = "Filesystem Watcher LSP";
   summary = "Little file system watcher LSP to reload your editor";
   description = ''

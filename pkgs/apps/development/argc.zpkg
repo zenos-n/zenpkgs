@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.argc";
+  id = "unknown.argc";
   name = "argc";
   summary = "Command-line options, arguments and sub-commands parser for bash";
   description = ''

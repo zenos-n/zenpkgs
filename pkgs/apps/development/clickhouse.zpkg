@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.clickhouse";
+  id = "unknown.clickhouse";
   name = "ClickHouse";
   summary = "Column-oriented database management system";
   description = ''

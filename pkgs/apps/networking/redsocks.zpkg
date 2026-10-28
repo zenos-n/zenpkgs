@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.redsocks";
+  id = "unknown.redsocks";
   name = "redsocks";
   summary = "Transparent redirector of any TCP connection to proxy";
   description = ''

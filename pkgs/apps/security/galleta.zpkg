@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.galleta";
+  id = "unknown.galleta";
   name = "Galleta";
   summary = "Examine the contents of the IE's cookie files for forensic purposes";
   description = ''

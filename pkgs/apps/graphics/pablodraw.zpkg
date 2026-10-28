@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.pablodraw";
+  id = "unknown.pablodraw";
   name = "PabloDraw";
   summary = "Ansi/Ascii text and RIPscrip vector graphic art editor/viewer with multi-user capabilities";
   description = ''

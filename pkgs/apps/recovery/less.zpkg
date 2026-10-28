@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.less";
+  id = "unknown.less";
   name = "less";
   summary = "Curated less package for ZenOS";
   description = ''

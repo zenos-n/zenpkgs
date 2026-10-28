@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.enjarify";
+  id = "unknown.enjarify";
   name = "Enjarify";
   summary = "Tool for translating Dalvik bytecode to equivalent Java bytecode";
   description = ''

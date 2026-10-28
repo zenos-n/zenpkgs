@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.jetbrains-toolbox";
+  id = "unknown.jetbrains-toolbox";
   name = "jetbrains-toolbox";
   summary = "Curated jetbrains-toolbox package for ZenOS";
   description = ''

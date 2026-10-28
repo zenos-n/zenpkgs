@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.uppaal";
+  id = "unknown.uppaal";
   name = "UPPAAL";
   summary = "Integrated tool environment for modeling, validation and verification of real-time systems";
   description = ''

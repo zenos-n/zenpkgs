@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-subrepo";
+  id = "unknown.git-subrepo";
   name = "git-subrepo";
   summary = "Git submodule alternative";
   description = ''

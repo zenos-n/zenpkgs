@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.hedgewars";
+  id = "unknown.hedgewars";
   name = "Hedgewars";
   summary = "Funny turn-based artillery game, featuring fighting hedgehogs";
   description = ''

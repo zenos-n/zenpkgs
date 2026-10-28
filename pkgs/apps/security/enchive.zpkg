@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.enchive";
+  id = "unknown.enchive";
   name = "Enchive";
   summary = "Encrypted personal archives";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.genmap";
+  id = "unknown.genmap";
   name = "GenMap";
   summary = "Ultra-fast computation of genome mappability";
   description = ''

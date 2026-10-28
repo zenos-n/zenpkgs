@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.mcomix";
+  id = "unknown.mcomix";
   name = "MComix";
   summary = "Comic book reader and image viewer";
   description = ''

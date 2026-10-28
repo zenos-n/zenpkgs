@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.geogebra6";
+  id = "unknown.geogebra6";
   name = "GeoGebra";
   summary = "Dynamic mathematics software with graphics, algebra and spreadsheets";
   description = ''

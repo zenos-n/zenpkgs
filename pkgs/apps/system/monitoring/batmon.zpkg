@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.batmon";
+  id = "unknown.batmon";
   name = "batmon";
   summary = "Interactive batteries viewer";
   description = ''

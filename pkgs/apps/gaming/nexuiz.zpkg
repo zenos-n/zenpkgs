@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.nexuiz";
+  id = "unknown.nexuiz";
   name = "Nexuiz";
   summary = "Free fast-paced first-person shooter";
   description = ''

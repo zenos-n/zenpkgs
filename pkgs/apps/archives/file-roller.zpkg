@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.file-roller";
+  id = "unknown.file-roller";
   name = "file-roller";
   summary = "Curated file-roller package for ZenOS";
   description = ''

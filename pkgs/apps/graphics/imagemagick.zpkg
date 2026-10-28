@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.imagemagick";
+  id = "unknown.imagemagick";
   name = "ImageMagick";
   summary = "Software suite to create, edit, compose, or convert bitmap images";
   description = ''

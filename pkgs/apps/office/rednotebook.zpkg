@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.rednotebook";
+  id = "unknown.rednotebook";
   name = "RedNotebook";
   summary = "Modern journal that includes a calendar navigation, customizable templates, export functionality and word clouds";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.geticons";
+  id = "unknown.geticons";
   name = "geticons";
   summary = "CLI utility to get icons for apps on your system or other generic icons by name";
   description = ''

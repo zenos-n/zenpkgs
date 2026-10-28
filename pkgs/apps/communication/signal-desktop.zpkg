@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.signal-desktop";
+  id = "unknown.signal-desktop";
   name = "signal-desktop";
   summary = "Private, simple, and secure messenger";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.shellcheck";
+  id = "unknown.shellcheck";
   name = "ShellCheck";
   summary = "Shell script analysis tool";
   description = ''

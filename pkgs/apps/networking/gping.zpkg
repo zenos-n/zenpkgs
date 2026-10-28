@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.gping";
+  id = "unknown.gping";
   name = "gping";
   summary = "Ping, but with a graph";
   description = ''

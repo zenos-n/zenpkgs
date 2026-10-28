@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.djvulibre";
+  id = "unknown.djvulibre";
   name = "DjVuLibre Tools";
   summary = "Big set of CLI tools to make/modify/optimize/show/export DJVU files";
   description = ''

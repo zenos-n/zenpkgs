@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.ssh-audit";
+  id = "unknown.ssh-audit";
   name = "ssh-audit";
   summary = "Tool for ssh server auditing";
   description = ''

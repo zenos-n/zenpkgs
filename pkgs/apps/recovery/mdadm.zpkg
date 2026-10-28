@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.mdadm";
+  id = "unknown.mdadm";
   name = "mdadm";
   summary = "Curated mdadm package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gen-license";
+  id = "unknown.gen-license";
   name = "gen-license";
   summary = "Create licenses for your projects right from your terminal";
   description = ''

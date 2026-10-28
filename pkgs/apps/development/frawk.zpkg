@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.frawk";
+  id = "unknown.frawk";
   name = "frawk";
   summary = "Small programming language for writing short programs processing textual data";
   description = ''

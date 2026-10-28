@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-graph";
+  id = "unknown.git-graph";
   name = "git-graph";
   summary = "Command line tool to show clear git graphs arranged for your branching model";
   description = ''

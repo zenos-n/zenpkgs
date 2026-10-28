@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.python.python-lsp-server";
+  id = "unknown.python-lsp-server";
   name = "python-lsp-server";
   summary = "Python implementation of the Language Server Protocol";
   description = ''

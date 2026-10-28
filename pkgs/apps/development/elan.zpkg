@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.elan";
+  id = "unknown.elan";
   name = "elan";
   summary = "Small tool to manage your installations of the Lean theorem prover";
   description = ''

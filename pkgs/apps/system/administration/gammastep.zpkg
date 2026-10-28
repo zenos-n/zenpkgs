@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.gammastep";
+  id = "unknown.gammastep";
   name = "Gammastep";
   summary = "Screen color temperature manager";
   description = ''

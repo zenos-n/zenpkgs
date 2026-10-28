@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.ariang";
+  id = "unknown.ariang";
   name = "AriaNg";
   summary = "Modern web frontend making aria2 easier to use";
   description = ''

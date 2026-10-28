@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.apktool";
+  id = "unknown.apktool";
   name = "Apktool";
   summary = "Tool for reverse engineering Android apk files";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.fusesoc";
+  id = "unknown.fusesoc";
   name = "FuseSoC";
   summary = "Package manager and build tools for HDL code";
   description = ''

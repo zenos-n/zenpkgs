@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-audit";
+  id = "unknown.cargo-audit";
   name = "cargo-audit";
   summary = "Audit Cargo.lock files for crates with security vulnerabilities";
   description = ''

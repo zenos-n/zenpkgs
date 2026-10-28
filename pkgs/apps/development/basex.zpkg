@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.basex";
+  id = "unknown.basex";
   name = "BaseX";
   summary = "XML database and XPath/XQuery processor";
   description = ''

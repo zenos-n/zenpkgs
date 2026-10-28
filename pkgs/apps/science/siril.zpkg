@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.siril";
+  id = "unknown.siril";
   name = "Siril";
   summary = "Astrophotographic image processing tool";
   description = ''

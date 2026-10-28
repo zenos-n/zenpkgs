@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.expresslrs-configurator";
+  id = "unknown.expresslrs-configurator";
   name = "ExpressLRS Configurator";
   summary = "Cross-platform build & configuration tool for ExpressLRS";
   description = ''

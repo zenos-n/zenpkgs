@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.libresprite";
+  id = "unknown.libresprite";
   name = "LibreSprite";
   summary = "Animated sprite editor & pixel art tool, fork of Aseprite";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.kfourinline";
+  id = "unknown.kfourinline";
   name = "KFourInLine";
   summary = "KFourInLine is a four-in-a-row game";
   description = ''

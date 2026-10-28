@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.udiskie";
+  id = "unknown.udiskie";
   name = "udiskie";
   summary = "Removable disk automounter for udisks";
   description = ''

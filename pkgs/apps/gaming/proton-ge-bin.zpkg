@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.proton-ge-bin";
+  id = "unknown.proton-ge-bin";
   name = "proton-ge-bin";
   summary = "Compatibility tool for Steam Play based on Wine and additional components.";
   description = ''

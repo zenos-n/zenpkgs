@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.paraview";
+  id = "unknown.paraview";
   name = "ParaView";
   summary = "3D Data analysis and visualization application";
   description = ''

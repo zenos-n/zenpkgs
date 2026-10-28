@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.gromacs";
+  id = "unknown.gromacs";
   name = "GROMACS";
   summary = "Molecular dynamics software package";
   description = ''

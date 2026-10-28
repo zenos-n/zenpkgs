@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.hexchat";
+  id = "unknown.hexchat";
   name = "HexChat";
   summary = "Popular and easy to use graphical IRC (chat) client";
   description = ''

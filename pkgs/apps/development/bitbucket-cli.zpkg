@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bitbucket-cli";
+  id = "unknown.bitbucket-cli";
   name = "Bitbucket CLI";
   summary = "Bitbucket Enterprise CLI";
   description = ''

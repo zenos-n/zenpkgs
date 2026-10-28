@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.freerdp";
+  id = "unknown.freerdp";
   name = "FreeRDP";
   summary = "Remote Desktop Protocol Client";
   description = ''

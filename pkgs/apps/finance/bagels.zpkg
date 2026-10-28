@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.bagels";
+  id = "unknown.bagels";
   name = "Bagels";
   summary = "Powerful expense tracker that lives in your terminal";
   description = ''

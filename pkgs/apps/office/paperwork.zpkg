@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.paperwork";
+  id = "unknown.paperwork";
   name = "Paperwork";
   summary = "Personal document manager for scanned documents";
   description = ''

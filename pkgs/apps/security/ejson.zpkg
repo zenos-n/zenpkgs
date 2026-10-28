@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.ejson";
+  id = "unknown.ejson";
   name = "EJSON";
   summary = "Manage asymmetrically encrypted secrets from the command line";
   description = ''

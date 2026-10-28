@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.wavemon";
+  id = "unknown.wavemon";
   name = "Wavemon";
   summary = "Ncurses-based monitoring application for wireless network devices";
   description = ''

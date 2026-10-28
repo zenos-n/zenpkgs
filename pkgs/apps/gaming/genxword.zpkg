@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.genxword";
+  id = "unknown.genxword";
   name = "Genxword";
   summary = "Crossword generator";
   description = ''

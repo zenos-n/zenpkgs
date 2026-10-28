@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.dopamine";
+  id = "unknown.dopamine";
   name = "Dopamine";
   summary = "Audio player that keeps it simple";
   description = ''

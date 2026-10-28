@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.wyrd";
+  id = "unknown.wyrd";
   name = "Wyrd";
   summary = "Text-based front-end to Remind";
   description = ''

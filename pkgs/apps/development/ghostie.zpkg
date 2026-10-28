@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ghostie";
+  id = "unknown.ghostie";
   name = "Ghostie";
   summary = "Github notifications in your terminal";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gdevelop";
+  id = "unknown.gdevelop";
   name = "GDevelop";
   summary = "Graphical Game Development Studio";
   description = ''

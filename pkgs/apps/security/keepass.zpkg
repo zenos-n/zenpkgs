@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.keepass";
+  id = "unknown.keepass";
   name = "KeePass";
   summary = "GUI password manager with strong cryptography";
   description = ''

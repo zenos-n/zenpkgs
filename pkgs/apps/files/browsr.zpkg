@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.browsr";
+  id = "unknown.browsr";
   name = "browsr";
   summary = "File explorer in your terminal";
   description = ''

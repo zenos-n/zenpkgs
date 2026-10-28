@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.calculix-ccx";
+  id = "unknown.calculix-ccx";
   name = "CalculiX CrunchiX";
   summary = "Three-dimensional structural finite element program";
   description = ''

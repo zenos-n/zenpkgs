@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.gpsd";
+  id = "unknown.gpsd";
   name = "GPSD";
   summary = "GPS service daemon";
   description = ''

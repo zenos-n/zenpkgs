@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.lynx";
+  id = "unknown.lynx";
   name = "Lynx";
   summary = "Text-mode web browser";
   description = ''

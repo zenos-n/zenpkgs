@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.nvtop";
+  id = "unknown.nvtop";
   name = "nvtop";
   summary = "htop-like task monitor for AMD, Adreno, Intel and NVIDIA GPUs";
   description = ''

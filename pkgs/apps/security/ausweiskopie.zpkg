@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.ausweiskopie";
+  id = "unknown.ausweiskopie";
   name = "Ausweiskopie";
   summary = "Create privacy-friendly copies of identity documents";
   description = ''

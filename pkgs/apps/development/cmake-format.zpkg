@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cmake-format";
+  id = "unknown.cmake-format";
   name = "cmake-format";
   summary = "Source code formatter for cmake listfiles";
   description = ''

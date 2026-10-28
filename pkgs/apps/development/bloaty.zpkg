@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bloaty";
+  id = "unknown.bloaty";
   name = "Bloaty";
   summary = "Size profiler for binaries";
   description = ''

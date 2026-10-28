@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.groovy";
+  id = "unknown.groovy";
   name = "Apache Groovy";
   summary = "Agile dynamic language for the Java Platform";
   description = ''

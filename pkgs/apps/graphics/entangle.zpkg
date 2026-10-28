@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.entangle";
+  id = "unknown.entangle";
   name = "Entangle";
   summary = "Tethered camera control and capture";
   description = ''

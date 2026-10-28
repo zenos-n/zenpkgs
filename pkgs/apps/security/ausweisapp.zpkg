@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.ausweisapp";
+  id = "unknown.ausweisapp";
   name = "AusweisApp";
   summary = "Official authentication app for German ID card and residence permit";
   description = ''

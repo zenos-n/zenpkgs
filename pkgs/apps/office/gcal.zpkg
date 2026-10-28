@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.gcal";
+  id = "unknown.gcal";
   name = "GNU Gcal";
   summary = "Program for calculating and printing calendars";
   description = ''

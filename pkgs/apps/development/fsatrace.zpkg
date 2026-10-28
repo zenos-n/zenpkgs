@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fsatrace";
+  id = "unknown.fsatrace";
   name = "fsatrace";
   summary = "Filesystem access tracer";
   description = ''

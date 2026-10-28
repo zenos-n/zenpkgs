@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitu";
+  id = "unknown.gitu";
   name = "Gitu";
   summary = "TUI Git client inspired by Magit";
   description = ''

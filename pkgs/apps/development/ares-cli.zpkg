@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ares-cli";
+  id = "unknown.ares-cli";
   name = "webOS CLI";
   summary = "Collection of commands used for creating, packaging, installing, and launching web apps for LG webOS TV";
   description = ''

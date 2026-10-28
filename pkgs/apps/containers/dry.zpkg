@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.dry";
+  id = "unknown.dry";
   name = "dry";
   summary = "Terminal application to manage Docker and Docker Swarm";
   description = ''

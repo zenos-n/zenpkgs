@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.multimedia.fcast-receiver";
+  id = "unknown.fcast-receiver";
   name = "FCast Receiver";
   summary = "FCast Receiver, an open-source media streaming receiver";
   description = ''

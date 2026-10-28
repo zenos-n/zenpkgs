@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.usql";
+  id = "unknown.usql";
   name = "usql";
   summary = "Universal command-line interface for SQL databases";
   description = ''

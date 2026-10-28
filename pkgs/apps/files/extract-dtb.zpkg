@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.extract-dtb";
+  id = "unknown.extract-dtb";
   name = "extract-dtb";
   summary = "Extract device tree blobs (dtb) from kernel images";
   description = ''

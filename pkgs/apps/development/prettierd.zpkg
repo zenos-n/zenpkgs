@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.prettierd";
+  id = "unknown.prettierd";
   name = "prettierd";
   summary = "Prettier, as a daemon, for improved formatting speed";
   description = ''

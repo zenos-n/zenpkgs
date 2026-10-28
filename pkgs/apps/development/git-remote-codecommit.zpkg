@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-remote-codecommit";
+  id = "unknown.git-remote-codecommit";
   name = "Git Remote CodeCommit";
   summary = "Git remote prefix to simplify pushing to and pulling from CodeCommit";
   description = ''

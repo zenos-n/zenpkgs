@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.asciinema-scenario";
+  id = "unknown.asciinema-scenario";
   name = "asciinema-scenario";
   summary = "Create asciinema videos from a text file";
   description = ''

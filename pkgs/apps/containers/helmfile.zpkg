@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.helmfile";
+  id = "unknown.helmfile";
   name = "Helmfile";
   summary = "Declarative spec for deploying Helm charts";
   description = ''

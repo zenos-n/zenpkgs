@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.pymol";
+  id = "unknown.pymol";
   name = "PyMOL";
   summary = "Python-enhanced molecular graphics tool";
   description = ''

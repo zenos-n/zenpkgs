@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.bwa";
+  id = "unknown.bwa";
   name = "BWA";
   summary = "Software package for mapping low-divergent sequences against a large reference genome, such as the human genome";
   description = ''

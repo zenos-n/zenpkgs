@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.autenticacao-gov-pt-bin";
+  id = "unknown.autenticacao-gov-pt-bin";
   name = "Autenticação.gov";
   summary = "Middleware for Electronic Identification in Portugal (with precompiled binaries by AMA)";
   description = ''

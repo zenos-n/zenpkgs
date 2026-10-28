@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.boringtun";
+  id = "unknown.boringtun";
   name = "BoringTun";
   summary = "Userspace WireGuard® implementation in Rust";
   description = ''

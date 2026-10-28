@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.thunar";
+  id = "unknown.thunar";
   name = "Thunar";
   summary = "Xfce file manager";
   description = ''

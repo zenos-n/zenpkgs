@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.gparted-live";
+  id = "unknown.gparted-live";
   name = "gparted-live";
   summary = "Curated gparted-live package for ZenOS";
   description = ''

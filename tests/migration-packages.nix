@@ -8,7 +8,10 @@ let
       entry = byId.${record.id};
       provider = lib.getAttrFromPath (lib.splitString "." record.source) pkgs.zenos.legacy;
       package = lib.getAttrFromPath entry.target pkgs.zenos;
-    in entry.provider.kind == "import"
+      leaf = lib.last entry.categoryTarget;
+    in entry.id == "pkgs.unknown.${leaf}"
+      && entry.target == [ "unknown" leaf ]
+      && entry.provider.kind == "import"
       && entry.sourcePath == lib.splitString "." record.source
       && package.drvPath == provider.drvPath && package.outPath == provider.outPath
       && (package.version or null) == (provider.version or null)

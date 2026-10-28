@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.fio";
+  id = "unknown.fio";
   name = "fio";
   summary = "Flexible IO Tester - an IO benchmark tool";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.filegive";
+  id = "unknown.filegive";
   name = "FileGive";
   summary = "Easy p2p file sending program";
   description = ''

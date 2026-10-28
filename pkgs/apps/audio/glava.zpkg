@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.glava";
+  id = "unknown.glava";
   name = "GLava";
   summary = "OpenGL audio spectrum visualizer";
   description = ''

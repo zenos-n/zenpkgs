@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.darkman";
+  id = "unknown.darkman";
   name = "Darkman";
   summary = "Framework for dark-mode and light-mode transitions on Linux desktop";
   description = ''

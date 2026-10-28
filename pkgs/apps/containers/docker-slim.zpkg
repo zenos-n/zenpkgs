@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.docker-slim";
+  id = "unknown.docker-slim";
   name = "DockerSlim";
   summary = "Minify and secure Docker containers";
   description = ''

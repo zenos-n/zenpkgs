@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.air";
+  id = "unknown.air";
   name = "Air";
   summary = "Live reload for Go apps";
   description = ''

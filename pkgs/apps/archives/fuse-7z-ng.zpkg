@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.fuse-7z-ng";
+  id = "unknown.fuse-7z-ng";
   name = "fuse-7z-ng";
   summary = "FUSE-based filesystem that uses the p7zip library";
   description = ''

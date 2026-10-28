@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.arduino-ci";
+  id = "unknown.arduino-ci";
   name = "Arduino CI";
   summary = "CI for Arduino Libraries";
   description = ''

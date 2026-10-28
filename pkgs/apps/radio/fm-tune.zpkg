@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.fm-tune";
+  id = "unknown.fm-tune";
   name = "fm-tune";
   summary = "Find initial calibration offset for SDR devices";
   description = ''

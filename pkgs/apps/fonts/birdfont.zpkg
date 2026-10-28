@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.birdfont";
+  id = "unknown.birdfont";
   name = "Birdfont";
   summary = "Font editor which can generate fonts in TTF, EOT, SVG and BIRDFONT format";
   description = ''

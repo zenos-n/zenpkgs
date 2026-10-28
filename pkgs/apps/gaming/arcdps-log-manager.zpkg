@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.arcdps-log-manager";
+  id = "unknown.arcdps-log-manager";
   name = "arcdps Log Manager";
   summary = "Manager for Guild Wars 2 log files";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.amidst";
+  id = "unknown.amidst";
   name = "Amidst";
   summary = "Advanced Minecraft Interface and Data/Structure Tracking";
   description = ''

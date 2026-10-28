@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.ghdl";
+  id = "unknown.ghdl";
   name = "GHDL";
   summary = "VHDL 2008/93/87 simulator";
   description = ''

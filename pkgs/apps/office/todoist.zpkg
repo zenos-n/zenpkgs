@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.todoist";
+  id = "unknown.todoist";
   name = "Todoist CLI";
   summary = "Todoist CLI Client";
   description = ''

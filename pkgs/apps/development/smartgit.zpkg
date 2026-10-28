@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.smartgit";
+  id = "unknown.smartgit";
   name = "SmartGit";
   summary = "Git GUI client";
   description = ''

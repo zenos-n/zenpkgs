@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.e1s";
+  id = "unknown.e1s";
   name = "e1s";
   summary = "Easily Manage AWS ECS Resources in Terminal";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.frangipanni";
+  id = "unknown.frangipanni";
   name = "frangipanni";
   summary = "Convert lines of text into a tree structure";
   description = ''

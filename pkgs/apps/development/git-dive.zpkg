@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.git-dive";
+  id = "unknown.git-dive";
   name = "git-dive";
   summary = "Dive into a file's history to find root cause";
   description = ''

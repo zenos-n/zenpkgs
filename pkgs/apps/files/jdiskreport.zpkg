@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.jdiskreport";
+  id = "unknown.jdiskreport";
   name = "JDiskReport";
   summary = "Graphical utility to visualize disk usage";
   description = ''

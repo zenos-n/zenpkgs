@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.evsieve";
+  id = "unknown.evsieve";
   name = "evsieve";
   summary = "Utility for mapping events from Linux event devices";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.css-checker";
+  id = "unknown.css-checker";
   name = "CSS Checker";
   summary = "Command-line tool for identifying similar or duplicated CSS code";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.biome";
+  id = "unknown.biome";
   name = "Biome";
   summary = "Toolchain of the web";
   description = ''

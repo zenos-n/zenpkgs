@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.tabby-agent";
+  id = "unknown.tabby-agent";
   name = "Tabby Agent";
   summary = "Language server used to communicate with Tabby server";
   description = ''

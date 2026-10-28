@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.globalplatform";
+  id = "unknown.globalplatform";
   name = "GlobalPlatform";
   summary = "C library + command-line for Open- / GlobalPlatform smart cards";
   description = ''

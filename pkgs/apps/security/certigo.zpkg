@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.certigo";
+  id = "unknown.certigo";
   name = "certigo";
   summary = "Utility to examine and validate certificates in a variety of formats";
   description = ''

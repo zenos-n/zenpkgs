@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.ffcast";
+  id = "unknown.ffcast";
   name = "ffcast";
   summary = "Run commands on rectangular screen regions";
   description = ''

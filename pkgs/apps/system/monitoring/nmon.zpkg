@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.nmon";
+  id = "unknown.nmon";
   name = "nmon";
   summary = "AIX & Linux Performance Monitoring tool";
   description = ''

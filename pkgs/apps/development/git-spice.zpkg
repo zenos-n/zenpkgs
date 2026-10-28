@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-spice";
+  id = "unknown.git-spice";
   name = "git-spice";
   summary = "Manage stacked Git branches";
   description = ''

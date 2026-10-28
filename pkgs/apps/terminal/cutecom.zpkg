@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.cutecom";
+  id = "unknown.cutecom";
   name = "CuteCom";
   summary = "Graphical serial terminal";
   description = ''

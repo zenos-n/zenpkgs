@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.outfox";
+  id = "unknown.outfox";
   name = "Project OutFox";
   summary = "Rhythm game engine forked from StepMania";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bashunit";
+  id = "unknown.bashunit";
   name = "bashunit";
   summary = "Simple testing framework for bash scripts";
   description = ''

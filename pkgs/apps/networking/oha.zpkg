@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.oha";
+  id = "unknown.oha";
   name = "oha";
   summary = "HTTP load generator inspired by rakyll/hey with tui animation";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.ctop";
+  id = "unknown.ctop";
   name = "ctop";
   summary = "Top-like interface for container metrics";
   description = ''

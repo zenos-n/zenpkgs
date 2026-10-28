@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-quick-stats";
+  id = "unknown.git-quick-stats";
   name = "git-quick-stats";
   summary = "Simple and efficient way to access various statistics in git repository";
   description = ''

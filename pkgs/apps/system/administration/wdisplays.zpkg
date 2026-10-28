@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.wdisplays";
+  id = "unknown.wdisplays";
   name = "wdisplays";
   summary = "Graphical application for configuring displays in Wayland compositors";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.opensearch";
+  id = "unknown.opensearch";
   name = "OpenSearch";
   summary = "Open Source, Distributed, RESTful Search Engine";
   description = ''

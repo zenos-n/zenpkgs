@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.cfdg";
+  id = "unknown.cfdg";
   name = "Context Free";
   summary = "Context-free design grammar - a tool for graphics generation";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.dockle";
+  id = "unknown.dockle";
   name = "dockle";
   summary = "Container Image Linter for Security";
   description = ''

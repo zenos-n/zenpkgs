@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.oxipng";
+  id = "unknown.oxipng";
   name = "Oxipng";
   summary = "Multithreaded lossless PNG compression optimizer";
   description = ''

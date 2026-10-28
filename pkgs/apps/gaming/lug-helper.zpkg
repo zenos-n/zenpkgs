@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.lug-helper";
+  id = "unknown.lug-helper";
   name = "LUG Helper";
   summary = "Script to manage and optimize Star Citizen on Linux";
   description = ''

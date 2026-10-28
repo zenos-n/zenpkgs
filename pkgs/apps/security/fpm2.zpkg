@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.fpm2";
+  id = "unknown.fpm2";
   name = "Figaro's Password Manager 2";
   summary = "GTK2 port from Figaro's Password Manager originally developed by John Conneely, with some new enhancements";
   description = ''

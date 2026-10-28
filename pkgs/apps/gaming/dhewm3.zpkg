@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.dhewm3";
+  id = "unknown.dhewm3";
   name = "dhewm3";
   summary = "Doom 3 port to SDL";
   description = ''

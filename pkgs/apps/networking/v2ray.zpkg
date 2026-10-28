@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.v2ray";
+  id = "unknown.v2ray";
   name = "V2Ray";
   summary = "Platform for building proxies to bypass network restrictions";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.better-control";
+  id = "unknown.better-control";
   name = "Better Control";
   summary = "Simple control panel for linux based on GTK";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.standardnotes";
+  id = "unknown.standardnotes";
   name = "Standard Notes";
   summary = "Simple and private notes app";
   description = ''

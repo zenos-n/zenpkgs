@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.tamatool";
+  id = "unknown.tamatool";
   name = "TamaTool";
   summary = "Cross-platform Tamagotchi P1 explorer";
   description = ''

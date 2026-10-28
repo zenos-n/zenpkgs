@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.dnsdiag";
+  id = "unknown.dnsdiag";
   name = "dnsdiag";
   summary = "DNS Measurement, Troubleshooting and Security Auditing Toolset";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.binutils";
+  id = "unknown.binutils";
   name = "binutils";
   summary = "Tools for manipulating binaries (linker, assembler, etc.) (wrapper script)";
   description = ''

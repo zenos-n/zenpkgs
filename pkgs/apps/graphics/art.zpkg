@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.art";
+  id = "unknown.art";
   name = "ART";
   summary = "Raw converter based on RawTherapee";
   description = ''

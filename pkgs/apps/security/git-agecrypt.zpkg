@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.git-agecrypt";
+  id = "unknown.git-agecrypt";
   name = "git-agecrypt";
   summary = "Alternative to git-crypt using age instead of GPG";
   description = ''

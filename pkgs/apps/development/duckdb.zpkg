@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.duckdb";
+  id = "unknown.duckdb";
   name = "DuckDB";
   summary = "Embeddable SQL OLAP Database Management System";
   description = ''

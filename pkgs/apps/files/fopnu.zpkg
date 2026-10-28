@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fopnu";
+  id = "unknown.fopnu";
   name = "Fopnu";
   summary = "P2P file sharing system";
   description = ''

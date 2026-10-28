@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.ethr";
+  id = "unknown.ethr";
   name = "Ethr";
   summary = "Comprehensive Network Measurement Tool for TCP, UDP & ICMP";
   description = ''

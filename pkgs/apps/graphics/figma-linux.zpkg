@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.figma-linux";
+  id = "unknown.figma-linux";
   name = "Figma Linux";
   summary = "Unofficial Electron-based Figma desktop app for Linux";
   description = ''

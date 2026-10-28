@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.pidgin";
+  id = "unknown.pidgin";
   name = "Pidgin";
   summary = "Multi-protocol instant messaging client";
   description = ''

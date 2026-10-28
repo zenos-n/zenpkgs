@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.chessx";
+  id = "unknown.chessx";
   name = "ChessX";
   summary = "Browse and analyse chess games";
   description = ''

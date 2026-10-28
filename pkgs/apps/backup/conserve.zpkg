@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.conserve";
+  id = "unknown.conserve";
   name = "Conserve";
   summary = "Robust portable backup tool in Rust";
   description = ''

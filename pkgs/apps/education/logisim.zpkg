@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.logisim";
+  id = "unknown.logisim";
   name = "Logisim";
   summary = "Educational tool for designing and simulating digital logic circuits";
   description = ''

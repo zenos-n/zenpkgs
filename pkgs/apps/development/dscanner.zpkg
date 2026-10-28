@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.dscanner";
+  id = "unknown.dscanner";
   name = "D-Scanner";
   summary = "Swiss-army knife for D source code";
   description = ''

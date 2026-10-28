@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.openterface-qt";
+  id = "unknown.openterface-qt";
   name = "Openterface";
   summary = "Openterface mini-KVM host application for linux";
   description = ''

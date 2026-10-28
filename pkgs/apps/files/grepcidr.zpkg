@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.grepcidr";
+  id = "unknown.grepcidr";
   name = "grepcidr";
   summary = "Filter IPv4 and IPv6 addresses matching CIDR patterns";
   description = ''

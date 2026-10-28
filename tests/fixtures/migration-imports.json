@@ -1,202 +1,202 @@
 [
   {
-    "id": "pkgs.org.zenos.packages.apps.development.cargo",
+    "id": "pkgs.unknown.cargo",
     "source": "cargo"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.development.rustc",
+    "id": "pkgs.unknown.rustc",
     "source": "rustc"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.development.ccls",
+    "id": "pkgs.unknown.ccls",
     "source": "ccls"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.development.gcc",
+    "id": "pkgs.unknown.gcc",
     "source": "gcc"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.development.android-tools",
+    "id": "pkgs.unknown.android-tools",
     "source": "android-tools"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.development.scrcpy",
+    "id": "pkgs.unknown.scrcpy",
     "source": "scrcpy"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.development.vscode-css-languageserver",
+    "id": "pkgs.unknown.vscode-css-languageserver",
     "source": "vscode-css-languageserver"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.development.python.pip",
+    "id": "pkgs.unknown.pip",
     "source": "python3Packages.pip"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.development.python.python-lsp-server",
+    "id": "pkgs.unknown.python-lsp-server",
     "source": "python3Packages.python-lsp-server"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.ai.llama-cpp-rocm",
+    "id": "pkgs.unknown.llama-cpp-rocm",
     "source": "llama-cpp-rocm"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.system.appimage-run",
+    "id": "pkgs.unknown.appimage-run",
     "source": "appimage-run"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.system.dbus",
+    "id": "pkgs.unknown.dbus",
     "source": "dbus"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.system.libnotify",
+    "id": "pkgs.unknown.libnotify",
     "source": "libnotify"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.system.zenity",
+    "id": "pkgs.unknown.zenity",
     "source": "zenity"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.system.nautilus-open-any-terminal",
+    "id": "pkgs.unknown.nautilus-open-any-terminal",
     "source": "nautilus-open-any-terminal"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.system.ltunify",
+    "id": "pkgs.unknown.ltunify",
     "source": "ltunify"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.virtualization.qemu-kvm",
+    "id": "pkgs.unknown.qemu-kvm",
     "source": "qemu_kvm"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.virtualization.bridge-utils",
+    "id": "pkgs.unknown.bridge-utils",
     "source": "bridge-utils"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.virtualization.vde2",
+    "id": "pkgs.unknown.vde2",
     "source": "vde2"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.virtualization.spice-vdagent",
+    "id": "pkgs.unknown.spice-vdagent",
     "source": "spice-vdagent"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.virtualization.looking-glass-client",
+    "id": "pkgs.unknown.looking-glass-client",
     "source": "looking-glass-client"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.virtualization.swtpm",
+    "id": "pkgs.unknown.swtpm",
     "source": "swtpm"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.virtualization.passt",
+    "id": "pkgs.unknown.passt",
     "source": "passt"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.networking.dnsmasq",
+    "id": "pkgs.unknown.dnsmasq",
     "source": "dnsmasq"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.gaming.wayvr",
+    "id": "pkgs.unknown.wayvr",
     "source": "wayvr"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.gaming.proton-ge-bin",
+    "id": "pkgs.unknown.proton-ge-bin",
     "source": "proton-ge-bin"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.gaming.steam-run",
+    "id": "pkgs.unknown.steam-run",
     "source": "steam-run"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.gaming.uzdoom",
+    "id": "pkgs.unknown.uzdoom",
     "source": "uzdoom"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.terminal.zsh-powerlevel10k",
+    "id": "pkgs.unknown.zsh-powerlevel10k",
     "source": "zsh-powerlevel10k"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.terminal.zplug",
+    "id": "pkgs.unknown.zplug",
     "source": "zplug"
   },
   {
-    "id": "pkgs.org.zenos.packages.apps.terminal.zsh-autosuggestions",
+    "id": "pkgs.unknown.zsh-autosuggestions",
     "source": "zsh-autosuggestions"
   },
   {
-    "id": "pkgs.org.zenos.packages.system.drivers.printing.brlaser",
+    "id": "pkgs.unknown.brlaser",
     "source": "brlaser"
   },
   {
-    "id": "pkgs.org.zenos.packages.system.drivers.printing.gutenprint",
+    "id": "pkgs.unknown.gutenprint",
     "source": "gutenprint"
   },
   {
-    "id": "pkgs.org.zenos.packages.system.drivers.graphics.rocm-opencl",
+    "id": "pkgs.unknown.rocm-opencl",
     "source": "rocmPackages.clr.icd"
   },
   {
-    "id": "pkgs.org.zenos.packages.system.drivers.graphics.libva-vdpau-driver",
+    "id": "pkgs.unknown.libva-vdpau-driver",
     "source": "libva-vdpau-driver"
   },
   {
-    "id": "pkgs.org.zenos.packages.system.drivers.graphics.libvdpau-va-gl",
+    "id": "pkgs.unknown.libvdpau-va-gl",
     "source": "libvdpau-va-gl"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.libsm",
+    "id": "pkgs.unknown.libsm",
     "source": "libSM"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.libice",
+    "id": "pkgs.unknown.libice",
     "source": "libICE"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.nss",
+    "id": "pkgs.unknown.nss",
     "source": "nss"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.nspr",
+    "id": "pkgs.unknown.nspr",
     "source": "nspr"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.libcap",
+    "id": "pkgs.unknown.libcap",
     "source": "libcap"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.libusb1",
+    "id": "pkgs.unknown.libusb1",
     "source": "libusb1"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.opencl-headers",
+    "id": "pkgs.unknown.opencl-headers",
     "source": "opencl-headers"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.ocl-icd",
+    "id": "pkgs.unknown.ocl-icd",
     "source": "ocl-icd"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.gstreamer.gstreamer",
+    "id": "pkgs.unknown.gstreamer",
     "source": "gst_all_1.gstreamer"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.gstreamer.gst-plugins-base",
+    "id": "pkgs.unknown.gst-plugins-base",
     "source": "gst_all_1.gst-plugins-base"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.gstreamer.gst-plugins-good",
+    "id": "pkgs.unknown.gst-plugins-good",
     "source": "gst_all_1.gst-plugins-good"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.gstreamer.gst-plugins-bad",
+    "id": "pkgs.unknown.gst-plugins-bad",
     "source": "gst_all_1.gst-plugins-bad"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.gstreamer.gst-plugins-ugly",
+    "id": "pkgs.unknown.gst-plugins-ugly",
     "source": "gst_all_1.gst-plugins-ugly"
   },
   {
-    "id": "pkgs.org.zenos.packages.libs.gstreamer.gst-libav",
+    "id": "pkgs.unknown.gst-libav",
     "source": "gst_all_1.gst-libav"
   }
 ]

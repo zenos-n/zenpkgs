@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.libs.gstreamer.gst-libav";
+  id = "unknown.gst-libav";
   name = "gst-libav";
   summary = "FFmpeg plugin for GStreamer";
   description = ''

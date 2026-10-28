@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.audio.chiptrack";
+  id = "unknown.chiptrack";
   name = "Chiptrack";
   summary = "Programmable cross-platform sequencer for the Game Boy Advance sound chip";
   description = ''

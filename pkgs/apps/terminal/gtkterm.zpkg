@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.gtkterm";
+  id = "unknown.gtkterm";
   name = "GtkTerm";
   summary = "Simple, graphical serial port terminal emulator";
   description = ''

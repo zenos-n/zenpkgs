@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.lumafly";
+  id = "unknown.lumafly";
   name = "Lumafly";
   summary = "Cross platform mod manager for Hollow Knight written in Avalonia";
   description = ''

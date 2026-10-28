@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.platformio";
+  id = "unknown.platformio";
   name = "PlatformIO";
   summary = "Open source ecosystem for IoT development";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.hyprmagnifier";
+  id = "unknown.hyprmagnifier";
   name = "hyprmagnifier";
   summary = "wlroots-compatible Wayland magnifier that does not suck";
   description = ''

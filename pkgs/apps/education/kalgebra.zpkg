@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.education.kalgebra";
+  id = "unknown.kalgebra";
   name = "KAlgebra";
   summary = "2D and 3D Graph Calculator";
   description = ''

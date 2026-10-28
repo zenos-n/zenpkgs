@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.satisfactorymodmanager";
+  id = "unknown.satisfactorymodmanager";
   name = "Satisfactory Mod Manager";
   summary = "Mod manager and modloader for Satisfactory";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.restic";
+  id = "unknown.restic";
   name = "restic";
   summary = "Backup program that is fast, efficient and secure";
   description = ''

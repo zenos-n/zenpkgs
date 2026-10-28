@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.vifm";
+  id = "unknown.vifm";
   name = "Vifm";
   summary = "Vi-like file manager";
   description = ''

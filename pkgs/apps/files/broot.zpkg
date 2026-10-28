@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.broot";
+  id = "unknown.broot";
   name = "Broot";
   summary = "Interactive tree view, a fuzzy search, a balanced BFS descent and customizable commands";
   description = ''

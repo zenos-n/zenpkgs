@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gf";
+  id = "unknown.gf";
   name = "GF";
   summary = "GDB Frontend";
   description = ''

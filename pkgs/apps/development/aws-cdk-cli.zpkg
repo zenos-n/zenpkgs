@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.aws-cdk-cli";
+  id = "unknown.aws-cdk-cli";
   name = "AWS CDK CLI";
   summary = "AWS CDK Toolkit";
   description = ''

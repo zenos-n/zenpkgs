@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pgcli";
+  id = "unknown.pgcli";
   name = "pgcli";
   summary = "Command-line interface for PostgreSQL";
   description = ''

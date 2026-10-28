@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.gi-crystal";
+  id = "unknown.gi-crystal";
   name = "GI Crystal";
   summary = "GI Crystal is a binding generator used to generate Crystal bindings for GObject based libraries using GObject Introspection";
   description = ''

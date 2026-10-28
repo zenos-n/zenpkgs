@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-chain";
+  id = "unknown.git-chain";
   name = "git-chain";
   summary = "Tool for rebasing a chain of local git branches";
   description = ''

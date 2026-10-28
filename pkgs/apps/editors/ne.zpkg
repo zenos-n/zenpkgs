@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.ne";
+  id = "unknown.ne";
   name = "NE";
   summary = "Nice editor";
   description = ''

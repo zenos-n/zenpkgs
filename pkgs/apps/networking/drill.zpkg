@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.drill";
+  id = "unknown.drill";
   name = "Drill";
   summary = "HTTP load testing application inspired by Ansible syntax";
   description = ''

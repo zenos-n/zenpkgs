@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gcs";
+  id = "unknown.gcs";
   name = "GURPS Character Sheet";
   summary = "Stand-alone, interactive, character sheet editor for the GURPS 4th Edition roleplaying game system";
   description = ''

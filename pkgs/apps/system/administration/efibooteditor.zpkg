@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.efibooteditor";
+  id = "unknown.efibooteditor";
   name = "EFI Boot Editor";
   summary = "Boot Editor for (U)EFI based systems";
   description = ''

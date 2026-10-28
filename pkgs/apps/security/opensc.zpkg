@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.opensc";
+  id = "unknown.opensc";
   name = "OpenSC";
   summary = "Set of libraries and utilities to access smart cards";
   description = ''

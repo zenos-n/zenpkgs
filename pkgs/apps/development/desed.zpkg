@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.desed";
+  id = "unknown.desed";
   name = "Desed";
   summary = "Debugger for Sed: demystify and debug your sed scripts, from comfort of your terminal";
   description = ''

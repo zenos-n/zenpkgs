@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.celestegame";
+  id = "unknown.celestegame";
   name = "Celeste";
   summary = "2D platformer about climbing a mountain";
   description = ''

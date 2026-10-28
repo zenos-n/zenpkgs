@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.sportstracker";
+  id = "unknown.sportstracker";
   name = "SportsTracker";
   summary = "Desktop application for people who want to record and analyze their sporting activities";
   description = ''

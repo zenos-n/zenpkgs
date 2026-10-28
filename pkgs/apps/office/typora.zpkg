@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.typora";
+  id = "unknown.typora";
   name = "Typora";
   summary = "A minimal Markdown editor and reader.";
   description = ''

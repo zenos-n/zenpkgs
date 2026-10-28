@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.ledger";
+  id = "unknown.ledger";
   name = "Ledger";
   summary = "Double-entry accounting system with a command-line reporting interface";
   description = ''

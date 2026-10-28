@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.gost";
+  id = "unknown.gost";
   name = "GOST";
   summary = "Simple tunnel written in golang";
   description = ''

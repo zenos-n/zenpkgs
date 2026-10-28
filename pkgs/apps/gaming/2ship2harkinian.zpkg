@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.p-2ship2harkinian";
+  id = "unknown.p-2ship2harkinian";
   name = "2 Ship 2 Harkinian";
   summary = "PC port of Majora's Mask with modern controls, widescreen, high-resolution, and more";
   description = ''

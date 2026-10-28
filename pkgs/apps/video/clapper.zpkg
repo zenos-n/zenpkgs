@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.clapper";
+  id = "unknown.clapper";
   name = "Clapper";
   summary = "GNOME media player built using GTK4 toolkit and powered by GStreamer with OpenGL rendering";
   description = ''

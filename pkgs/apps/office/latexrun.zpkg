@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.latexrun";
+  id = "unknown.latexrun";
   name = "latexrun";
   summary = "21st century LaTeX wrapper";
   description = ''

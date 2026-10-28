@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.dijo";
+  id = "unknown.dijo";
   name = "Dijo";
   summary = "Scriptable, curses-based, digital habit tracker";
   description = ''

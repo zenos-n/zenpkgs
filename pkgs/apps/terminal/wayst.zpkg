@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.wayst";
+  id = "unknown.wayst";
   name = "Wayst";
   summary = "Simple terminal emulator";
   description = ''

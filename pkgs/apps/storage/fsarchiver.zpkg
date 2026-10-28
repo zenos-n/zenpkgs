@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.fsarchiver";
+  id = "unknown.fsarchiver";
   name = "FSArchiver";
   summary = "File system archiver for linux";
   description = ''

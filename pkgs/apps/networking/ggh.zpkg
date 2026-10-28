@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.ggh";
+  id = "unknown.ggh";
   name = "ggh";
   summary = "Recall your SSH sessions (also search your SSH config file)";
   description = ''

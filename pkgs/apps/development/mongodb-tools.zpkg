@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.mongodb-tools";
+  id = "unknown.mongodb-tools";
   name = "MongoDB Tools";
   summary = "Tools for the MongoDB";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.diamond";
+  id = "unknown.diamond";
   name = "DIAMOND";
   summary = "Accelerated BLAST compatible local sequence aligner";
   description = ''

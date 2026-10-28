@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fortran-fpm";
+  id = "unknown.fortran-fpm";
   name = "Fortran Package Manager";
   summary = "Fortran Package Manager (fpm)";
   description = ''

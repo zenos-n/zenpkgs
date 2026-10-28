@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.units";
+  id = "unknown.units";
   name = "GNU Units";
   summary = "Unit conversion tool";
   description = ''

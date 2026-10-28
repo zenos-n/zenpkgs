@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.yq";
+  id = "unknown.yq";
   name = "yq";
   summary = "Command-line YAML/XML/TOML processor - jq wrapper for YAML, XML, TOML documents";
   description = ''

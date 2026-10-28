@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pgcopydb";
+  id = "unknown.pgcopydb";
   name = "pgcopydb";
   summary = "Copy a Postgres database to a target Postgres server (pg_dump | pg_restore on steroids";
   description = ''

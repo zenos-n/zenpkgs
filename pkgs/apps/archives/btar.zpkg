@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.btar";
+  id = "unknown.btar";
   name = "btar";
   summary = "Tar-compatible block-based archiver";
   description = ''

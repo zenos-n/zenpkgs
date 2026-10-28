@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.warzone2100";
+  id = "unknown.warzone2100";
   name = "Warzone 2100";
   summary = "Free RTS game, originally developed by Pumpkin Studios";
   description = ''

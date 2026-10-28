@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-revise";
+  id = "unknown.git-revise";
   name = "git-revise";
   summary = "Efficiently update, split, and rearrange git commits";
   description = ''

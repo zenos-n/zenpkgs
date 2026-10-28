@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.archives.ark";
+  id = "unknown.ark";
   name = "Ark";
   summary = "File archiver by KDE";
   description = ''

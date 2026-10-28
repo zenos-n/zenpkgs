@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.files.fselect";
+  id = "unknown.fselect";
   name = "fselect";
   summary = "Find files with SQL-like queries";
   description = ''

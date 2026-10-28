@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.idescriptor";
+  id = "unknown.idescriptor";
   name = "iDescriptor";
   summary = "A cross-platform iDevice management tool";
   description = ''

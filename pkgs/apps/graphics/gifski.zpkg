@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.gifski";
+  id = "unknown.gifski";
   name = "gifski";
   summary = "GIF encoder based on libimagequant (pngquant)";
   description = ''

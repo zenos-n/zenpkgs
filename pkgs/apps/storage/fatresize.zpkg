@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.fatresize";
+  id = "unknown.fatresize";
   name = "fatresize";
   summary = "FAT16/FAT32 non-destructive resizer";
   description = ''

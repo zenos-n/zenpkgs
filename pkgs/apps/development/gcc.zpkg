@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gcc";
+  id = "unknown.gcc";
   name = "gcc";
   summary = "GNU Compiler Collection, version 15.2.0 (wrapper script)";
   description = ''

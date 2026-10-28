@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.ccd2iso";
+  id = "unknown.ccd2iso";
   name = "ccd2iso";
   summary = "CloneCD to ISO converter";
   description = ''

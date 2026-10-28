@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.openocd";
+  id = "unknown.openocd";
   name = "OpenOCD";
   summary = "Free and Open On-Chip Debugging, In-System Programming and Boundary-Scan Testing";
   description = ''

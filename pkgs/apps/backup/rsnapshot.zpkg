@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.rsnapshot";
+  id = "unknown.rsnapshot";
   name = "rsnapshot";
   summary = "Filesystem snapshot utility for making backups of local and remote systems";
   description = ''

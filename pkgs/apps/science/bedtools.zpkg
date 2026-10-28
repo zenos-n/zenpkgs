@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.bedtools";
+  id = "unknown.bedtools";
   name = "BEDTools";
   summary = "Powerful toolset for genome arithmetic";
   description = ''

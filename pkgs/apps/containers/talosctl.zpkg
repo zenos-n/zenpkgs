@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.talosctl";
+  id = "unknown.talosctl";
   name = "talosctl";
   summary = "CLI for out-of-band management of Kubernetes nodes created by Talos";
   description = ''

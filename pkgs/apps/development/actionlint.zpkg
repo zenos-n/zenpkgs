@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.actionlint";
+  id = "unknown.actionlint";
   name = "actionlint";
   summary = "Static checker for GitHub Actions workflow files";
   description = ''

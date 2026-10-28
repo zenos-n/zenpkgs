@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.evolution";
+  id = "unknown.evolution";
   name = "Evolution";
   summary = "Personal information management application that provides integrated mail, calendaring and address book functionality";
   description = ''

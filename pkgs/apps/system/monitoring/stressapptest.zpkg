@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.stressapptest";
+  id = "unknown.stressapptest";
   name = "stressapptest";
   summary = "Userspace memory and IO stress test tool";
   description = ''

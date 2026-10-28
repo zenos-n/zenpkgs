@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.drive";
+  id = "unknown.drive";
   name = "Drive";
   summary = "Google Drive client for the commandline";
   description = ''

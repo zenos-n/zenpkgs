@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.genimage";
+  id = "unknown.genimage";
   name = "genimage";
   summary = "Generate filesystem images from directory trees";
   description = ''

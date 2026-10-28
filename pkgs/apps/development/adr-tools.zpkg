@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.adr-tools";
+  id = "unknown.adr-tools";
   name = "ADR Tools";
   summary = "Command-line tools for working with Architecture Decision Records";
   description = ''

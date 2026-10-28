@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.eta";
+  id = "unknown.eta";
   name = "eta";
   summary = "Tool for monitoring progress and ETA of an arbitrary process";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ghq";
+  id = "unknown.ghq";
   name = "ghq";
   summary = "Remote repository management made easy";
   description = ''

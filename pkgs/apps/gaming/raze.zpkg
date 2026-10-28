@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.raze";
+  id = "unknown.raze";
   name = "Raze";
   summary = "Build engine port backed by GZDoom tech";
   description = ''

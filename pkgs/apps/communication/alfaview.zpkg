@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.alfaview";
+  id = "unknown.alfaview";
   name = "alfaview";
   summary = "Video-conferencing application, specialized in virtual online meetings, seminars, training sessions and conferences";
   description = ''

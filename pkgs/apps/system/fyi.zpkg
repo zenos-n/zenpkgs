@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.fyi";
+  id = "unknown.fyi";
   name = "fyi";
   summary = "Command line utility to create desktop notifications";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.clamtk";
+  id = "unknown.clamtk";
   name = "ClamTk";
   summary = "Easy to use, lightweight front-end for ClamAV (Clam Antivirus).\n";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.brickstore";
+  id = "unknown.brickstore";
   name = "BrickStore";
   summary = "BrickLink offline management tool";
   description = ''

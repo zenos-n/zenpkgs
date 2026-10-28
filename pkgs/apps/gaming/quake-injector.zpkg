@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.quake-injector";
+  id = "unknown.quake-injector";
   name = "Quake Injector";
   summary = "Download, install and play quake singleplayer maps from the quaddicted.com archive";
   description = ''

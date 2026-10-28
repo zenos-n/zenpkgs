@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.anki";
+  id = "unknown.anki";
   name = "Anki";
   summary = "Spaced repetition flashcard program";
   description = ''

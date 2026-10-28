@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.nb";
+  id = "unknown.nb";
   name = "nb";
   summary = "Command line note-taking, bookmarking, archiving, and knowledge base application";
   description = ''

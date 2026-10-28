@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.localsend";
+  id = "unknown.localsend";
   name = "LocalSend";
   summary = "Open source cross-platform alternative to AirDrop";
   description = ''

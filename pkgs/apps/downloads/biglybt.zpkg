@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.biglybt";
+  id = "unknown.biglybt";
   name = "BiglyBT";
   summary = "BitTorrent client based on the Azureus that supports I2P darknet for privacy";
   description = ''

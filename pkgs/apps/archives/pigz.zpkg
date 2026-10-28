@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.pigz";
+  id = "unknown.pigz";
   name = "pigz";
   summary = "Parallel implementation of gzip for multi-core machines";
   description = ''

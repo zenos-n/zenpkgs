@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.whatsapp-electron";
+  id = "unknown.whatsapp-electron";
   name = "WhatsApp Electron";
   summary = "Electron wrapper around Whatsapp";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-leptos";
+  id = "unknown.cargo-leptos";
   name = "cargo-leptos";
   summary = "Build tool for the Leptos web framework";
   description = ''

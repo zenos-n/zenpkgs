@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.pocket-casts";
+  id = "unknown.pocket-casts";
   name = "Pocket Casts";
   summary = "Pocket Casts webapp, packaged for the Linux Desktop";
   description = ''

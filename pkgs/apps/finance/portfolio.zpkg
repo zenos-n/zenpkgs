@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.portfolio";
+  id = "unknown.portfolio";
   name = "Portfolio";
   summary = "Simple tool to calculate the overall performance of an investment portfolio";
   description = ''

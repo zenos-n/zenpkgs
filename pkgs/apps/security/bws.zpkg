@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.bws";
+  id = "unknown.bws";
   name = "Bitwarden Secrets Manager CLI";
   summary = "Bitwarden Secrets Manager CLI";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.ferdium";
+  id = "unknown.ferdium";
   name = "Ferdium";
   summary = "All your services in one place built by the community";
   description = ''

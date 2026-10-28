@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.poppler-utils";
+  id = "unknown.poppler-utils";
   name = "Poppler Tools";
   summary = "PDF rendering library";
   description = ''

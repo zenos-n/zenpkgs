@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.compiz-alike-magic-lamp-effect";
+  id = "unknown.compiz-alike-magic-lamp-effect";
   name = "compiz-alike-magic-lamp-effect";
   summary = "Curated compiz-alike-magic-lamp-effect package for ZenOS";
   description = ''

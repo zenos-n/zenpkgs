@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.pbzip2";
+  id = "unknown.pbzip2";
   name = "pbzip2";
   summary = "Parallel implementation of bzip2 for multi-core machines";
   description = ''

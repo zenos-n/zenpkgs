@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.go-migrate";
+  id = "unknown.go-migrate";
   name = "golang-migrate";
   summary = "Database migrations. CLI and Golang library";
   description = ''

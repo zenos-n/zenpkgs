@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.umu-launcher";
+  id = "unknown.umu-launcher";
   name = "umu-launcher";
   summary = "Unified launcher for Windows games on Linux using the Steam Linux Runtime and Tools";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.scipopt-papilo";
+  id = "unknown.scipopt-papilo";
   name = "PaPILO";
   summary = "Parallel Presolve for Integer and Linear Optimization";
   description = ''

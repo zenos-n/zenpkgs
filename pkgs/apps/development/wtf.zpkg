@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.wtf";
+  id = "unknown.wtf";
   name = "WTF Fuzzer";
   summary = "Cross-platform snapshot-based fuzzer";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.dvr-scan";
+  id = "unknown.dvr-scan";
   name = "DVR-Scan";
   summary = "Find and extract motion events in videos";
   description = ''

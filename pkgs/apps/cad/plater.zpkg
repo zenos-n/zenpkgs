@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.plater";
+  id = "unknown.plater";
   name = "Plater";
   summary = "3D-printer parts placer and plate generator";
   description = ''

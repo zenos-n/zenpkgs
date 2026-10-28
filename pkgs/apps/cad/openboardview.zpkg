@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.openboardview";
+  id = "unknown.openboardview";
   name = "OpenBoardView";
   summary = "Linux SDL/ImGui edition software for viewing .brd files";
   description = ''

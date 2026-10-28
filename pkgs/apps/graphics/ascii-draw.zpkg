@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.ascii-draw";
+  id = "unknown.ascii-draw";
   name = "ASCII Draw";
   summary = "Draw diagrams or anything using only ASCII";
   description = ''

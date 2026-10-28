@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.seqtk";
+  id = "unknown.seqtk";
   name = "seqtk";
   summary = "Toolkit for processing sequences in FASTA/Q formats";
   description = ''

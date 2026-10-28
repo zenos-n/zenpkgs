@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.gbdfed";
+  id = "unknown.gbdfed";
   name = "gbdfed";
   summary = "Bitmap Font Editor";
   description = ''

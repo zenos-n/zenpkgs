@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.bmon";
+  id = "unknown.bmon";
   name = "bmon";
   summary = "Network bandwidth monitor";
   description = ''

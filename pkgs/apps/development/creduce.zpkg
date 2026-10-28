@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.creduce";
+  id = "unknown.creduce";
   name = "C-Reduce";
   summary = "C program reducer";
   description = ''

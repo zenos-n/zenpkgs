@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.rambox";
+  id = "unknown.rambox";
   name = "Rambox";
   summary = "Workspace Simplifier - a cross-platform application organizing web services into Workspaces similar to browser profiles";
   description = ''

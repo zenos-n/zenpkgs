@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.equibop";
+  id = "unknown.equibop";
   name = "Equibop";
   summary = "Custom Discord App aiming to give you better performance and improve linux support";
   description = ''

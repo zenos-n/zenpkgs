@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.argocd";
+  id = "unknown.argocd";
   name = "Argo CD";
   summary = "Declarative continuous deployment for Kubernetes";
   description = ''

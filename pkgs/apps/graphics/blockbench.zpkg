@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.blockbench";
+  id = "unknown.blockbench";
   name = "Blockbench";
   summary = "Low-poly 3D modeling and animation software";
   description = ''

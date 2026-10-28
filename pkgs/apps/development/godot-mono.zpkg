@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.godot-mono";
+  id = "unknown.godot-mono";
   name = "Godot .NET";
   summary = "Free and Open Source 2D and 3D game engine";
   description = ''

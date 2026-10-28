@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.the-powder-toy";
+  id = "unknown.the-powder-toy";
   name = "The Powder Toy";
   summary = "Free 2D physics sandbox game";
   description = ''

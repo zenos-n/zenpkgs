@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.pomodoro-gtk";
+  id = "unknown.pomodoro-gtk";
   name = "Pomodoro GTK";
   summary = "Simple and intuitive timer application (also named Planytimer)";
   description = ''

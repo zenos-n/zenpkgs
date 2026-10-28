@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.action-validator";
+  id = "unknown.action-validator";
   name = "action-validator";
   summary = "Tool to validate GitHub Action and Workflow YAML files";
   description = ''

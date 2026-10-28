@@ -66,8 +66,12 @@ def normalize(segment):
     return value
 
 
-def fallback(category):
+def old_fallback(category):
     return "org.zenos.packages." + ".".join(map(normalize, category.split("/")))
+
+
+def fallback(category):
+    return "unknown." + normalize(category.rsplit("/", 1)[-1])
 
 
 def catalog(write=False):
@@ -77,7 +81,6 @@ def catalog(write=False):
     for path in paths:
         category = path.relative_to(ROOT).with_suffix("").as_posix()
         text = path.read_text()
-        original = text
         match = META.match(text)
         if not match:
             raise ValueError(f"{path}: expected leading _meta block")
@@ -88,16 +91,22 @@ def catalog(write=False):
         expected = KNOWN.get(category, fallback(category))
         if ids:
             value = ids[0]
-            if write and category in KNOWN and value == fallback(category):
+            if value.startswith("org.zenos.packages."):
+                if value != old_fallback(category):
+                    raise ValueError(f"{path}: unexpected category fallback {value}")
+                if not write:
+                    raise ValueError(f"{path}: obsolete category fallback {value}")
                 text = ID.sub(lambda m: m.group(0).replace(value, expected, 1),
                               text, count=1)
                 value = expected
-                changes.append((path, original, text))
+                changes.append((path, text))
             if category in KNOWN and value != expected:
                 raise ValueError(f"{path}: expected known ID {expected}, got {value}")
+            if value.startswith("unknown.") and value != fallback(category):
+                raise ValueError(f"{path}: expected fallback ID {fallback(category)}, got {value}")
         elif write:
             value = expected
-            changes.append((path, text, text[:match.end()] +
+            changes.append((path, text[:match.end()] +
                             f'  id = "{value}";\n' + text[match.end():]))
         else:
             raise ValueError(f"{path}: missing required _meta.id")
@@ -116,10 +125,8 @@ def catalog(write=False):
             if prefix in seen:
                 raise ValueError(f"prefix collision: {prefix} ({seen[prefix]}) "
                                  f"and {value} ({path})")
-    # Validate the entire plan before editing. Refuse to overwrite concurrent edits.
-    for path, original, updated in changes:
-        if path.read_text() != original:
-            raise ValueError(f"{path}: changed during migration; rerun")
+    # Validate the entire plan before editing; each declaration is read once.
+    for path, updated in changes:
         path.write_text(updated)
     print(f"Validated {len(paths)} unique required IDs; updated {len(changes)} files.")
 
@@ -127,6 +134,6 @@ def catalog(write=False):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--write", action="store_true",
-                        help="insert missing IDs and upgrade known namespace fallbacks")
+                        help="insert missing IDs and upgrade category namespace fallbacks")
     args = parser.parse_args()
     catalog(write=args.write)

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.coreutils";
+  id = "unknown.coreutils";
   name = "coreutils";
   summary = "GNU Core Utilities";
   description = ''

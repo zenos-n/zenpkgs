@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.speedtest-cli";
+  id = "unknown.speedtest-cli";
   name = "speedtest-cli";
   summary = "Command line interface for testing internet bandwidth using speedtest.net";
   description = ''

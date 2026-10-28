@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.vscode-langservers-extracted";
+  id = "unknown.vscode-langservers-extracted";
   name = "VS Code Language Servers";
   summary = "HTML/CSS/JSON/ESLint language servers extracted from vscode";
   description = ''

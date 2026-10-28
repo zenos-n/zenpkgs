@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.assh";
+  id = "unknown.assh";
   name = "Advanced SSH Config";
   summary = "Advanced SSH config - Regex, aliases, gateways, includes and dynamic hosts";
   description = ''

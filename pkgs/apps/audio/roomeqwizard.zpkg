@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.roomeqwizard";
+  id = "unknown.roomeqwizard";
   name = "Room EQ Wizard";
   summary = "Room Acoustics Software";
   description = ''

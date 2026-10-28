@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.virtualization.quickemu";
+  id = "unknown.quickemu";
   name = "Quickemu";
   summary = "Quickly create and run optimised Windows, macOS and Linux virtual machines";
   description = ''

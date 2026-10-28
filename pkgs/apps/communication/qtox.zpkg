@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.qtox";
+  id = "unknown.qtox";
   name = "qTox";
   summary = "Qt Tox client";
   description = ''

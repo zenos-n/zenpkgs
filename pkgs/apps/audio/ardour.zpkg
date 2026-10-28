@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.ardour";
+  id = "unknown.ardour";
   name = "Ardour";
   summary = "Multi-track hard disk recording software";
   description = ''

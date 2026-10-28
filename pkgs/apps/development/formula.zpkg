@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.formula";
+  id = "unknown.formula";
   name = "FORMULA";
   summary = "Formal Specifications for Verification and Synthesis";
   description = ''

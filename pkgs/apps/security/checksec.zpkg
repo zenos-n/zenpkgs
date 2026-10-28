@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.checksec";
+  id = "unknown.checksec";
   name = "checksec";
   summary = "Tool for checking security bits on executables";
   description = ''

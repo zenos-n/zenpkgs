@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.beammp-launcher";
+  id = "unknown.beammp-launcher";
   name = "BeamMP Launcher";
   summary = "Launcher for the BeamMP mod for BeamNG.drive";
   description = ''

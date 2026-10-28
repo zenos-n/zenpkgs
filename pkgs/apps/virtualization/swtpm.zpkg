@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.virtualization.swtpm";
+  id = "unknown.swtpm";
   name = "swtpm";
   summary = "Libtpms-based TPM emulator";
   description = ''

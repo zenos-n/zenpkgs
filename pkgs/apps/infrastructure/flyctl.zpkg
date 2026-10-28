@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.flyctl";
+  id = "unknown.flyctl";
   name = "Fly.io CLI";
   summary = "Command line tools for fly.io services";
   description = ''

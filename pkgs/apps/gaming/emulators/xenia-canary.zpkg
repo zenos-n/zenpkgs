@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.xenia-canary";
+  id = "unknown.xenia-canary";
   name = "Xenia Canary";
   summary = "Xbox 360 Emulator Research Project";
   description = ''

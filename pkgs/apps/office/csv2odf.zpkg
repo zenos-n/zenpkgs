@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.csv2odf";
+  id = "unknown.csv2odf";
   name = "csv2odf";
   summary = "Convert csv files to OpenDocument Format";
   description = ''

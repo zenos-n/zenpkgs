@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.amnezia-vpn";
+  id = "unknown.amnezia-vpn";
   name = "Amnezia VPN";
   summary = "Amnezia VPN Client";
   description = ''

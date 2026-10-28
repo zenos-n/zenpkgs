@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.cad.netgen";
+  id = "unknown.netgen";
   name = "Netgen";
   summary = "Atomatic 3d tetrahedral mesh generator";
   description = ''

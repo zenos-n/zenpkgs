@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.thonny";
+  id = "unknown.thonny";
   name = "Thonny";
   summary = "Python IDE for beginners";
   description = ''

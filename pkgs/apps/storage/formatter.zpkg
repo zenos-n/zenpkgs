@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.formatter";
+  id = "unknown.formatter";
   name = "Formatter";
   summary = "Graphical storage-device formatter for elementary OS";
   description = ''

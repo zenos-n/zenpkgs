@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.cassette";
+  id = "unknown.cassette";
   name = "Cassette";
   summary = "GTK4/Adwaita application that allows you to use Yandex Music service on Linux operating systems";
   description = ''

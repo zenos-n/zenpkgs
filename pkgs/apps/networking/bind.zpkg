@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.bind";
+  id = "unknown.bind";
   name = "BIND";
   summary = "Domain name server";
   description = ''

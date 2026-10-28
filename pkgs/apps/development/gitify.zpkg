@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitify";
+  id = "unknown.gitify";
   name = "Gitify";
   summary = "GitHub notifications on your menu bar";
   description = ''

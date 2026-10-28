@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.smartsynchronize";
+  id = "unknown.smartsynchronize";
   name = "SmartSynchronize";
   summary = "File Manager, File/Directory Compare";
   description = ''

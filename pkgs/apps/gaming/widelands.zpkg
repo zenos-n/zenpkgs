@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.widelands";
+  id = "unknown.widelands";
   name = "Widelands";
   summary = "RTS with multiple-goods economy";
   description = ''

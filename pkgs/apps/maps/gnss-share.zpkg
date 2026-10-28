@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.gnss-share";
+  id = "unknown.gnss-share";
   name = "gnss-share";
   summary = "Share GNSS data between multiple clients";
   description = ''

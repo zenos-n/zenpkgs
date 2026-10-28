@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.xkeysnail";
+  id = "unknown.xkeysnail";
   name = "xkeysnail";
   summary = "Yet another keyboard remapping tool for X environment";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.webcord";
+  id = "unknown.webcord";
   name = "WebCord";
   summary = "Discord and SpaceBar electron-based client implemented without Discord API";
   description = ''

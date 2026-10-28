@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.muse";
+  id = "unknown.muse";
   name = "MusE";
   summary = "MIDI/Audio sequencer with recording and editing capabilities";
   description = ''

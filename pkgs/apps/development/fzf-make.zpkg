@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fzf-make";
+  id = "unknown.fzf-make";
   name = "fzf-make";
   summary = "Fuzzy finder for Makefile";
   description = ''

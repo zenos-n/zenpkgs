@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.edit";
+  id = "unknown.edit";
   name = "Edit";
   summary = "Relaxing mix of Vi and ACME";
   description = ''

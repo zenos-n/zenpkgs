@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.enter-tex";
+  id = "unknown.enter-tex";
   name = "Enter TeX";
   summary = "LaTeX editor for the GNOME desktop";
   description = ''

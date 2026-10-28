@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.ktuberling";
+  id = "unknown.ktuberling";
   name = "KTuberling";
   summary = "KTuberling is a simple constructor game suitable for children and adults alike";
   description = ''

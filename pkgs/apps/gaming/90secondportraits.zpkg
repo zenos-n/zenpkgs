@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.p-90secondportraits";
+  id = "unknown.p-90secondportraits";
   name = "90 Second Portraits";
   summary = "Silly speed painting game";
   description = ''

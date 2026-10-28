@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.tailscale-systray";
+  id = "unknown.tailscale-systray";
   name = "Tailscale Systray";
   summary = "Tailscale systray";
   description = ''

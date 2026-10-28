@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.pfetch";
+  id = "unknown.pfetch";
   name = "pfetch";
   summary = "Pretty system information tool written in POSIX sh";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.voicevox";
+  id = "unknown.voicevox";
   name = "VOICEVOX";
   summary = "Editor for the VOICEVOX speech synthesis software";
   description = ''

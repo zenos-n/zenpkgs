@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.daggerfall-unity";
+  id = "unknown.daggerfall-unity";
   name = "Daggerfall Unity";
   summary = "Open source recreation of Daggerfall in the Unity engine";
   description = ''

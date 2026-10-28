@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.streamrip";
+  id = "unknown.streamrip";
   name = "streamrip";
   summary = "Scriptable music downloader for Qobuz, Tidal, SoundCloud, and Deezer";
   description = ''

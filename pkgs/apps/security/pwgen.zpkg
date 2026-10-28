@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.pwgen";
+  id = "unknown.pwgen";
   name = "pwgen";
   summary = "Password generator which creates passwords which can be easily memorized by a human";
   description = ''

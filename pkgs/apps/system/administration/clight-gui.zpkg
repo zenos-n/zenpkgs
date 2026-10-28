@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.clight-gui";
+  id = "unknown.clight-gui";
   name = "Clight GUI";
   summary = "Qt GUI for clight";
   description = ''

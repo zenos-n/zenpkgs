@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitkraken";
+  id = "unknown.gitkraken";
   name = "GitKraken";
   summary = "Simplifying Git for any OS";
   description = ''

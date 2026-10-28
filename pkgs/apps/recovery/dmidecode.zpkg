@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.dmidecode";
+  id = "unknown.dmidecode";
   name = "dmidecode";
   summary = "Curated dmidecode package for ZenOS";
   description = ''

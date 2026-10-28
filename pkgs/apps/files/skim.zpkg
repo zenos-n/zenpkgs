@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.skim";
+  id = "unknown.skim";
   name = "skim";
   summary = "Command-line fuzzy finder written in Rust";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.svp";
+  id = "unknown.svp";
   name = "SmoothVideo Project";
   summary = "SmoothVideo Project 4 (SVP4) converts any video to 60 fps (and even higher) and performs this in real time right in your favorite video player";
   description = ''

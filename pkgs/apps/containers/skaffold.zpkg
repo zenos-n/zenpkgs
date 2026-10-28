@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.skaffold";
+  id = "unknown.skaffold";
   name = "Skaffold";
   summary = "Easy and Repeatable Kubernetes Development";
   description = ''

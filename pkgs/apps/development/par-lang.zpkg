@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.par-lang";
+  id = "unknown.par-lang";
   name = "Par";
   summary = "Experimental concurrent programming language";
   description = ''

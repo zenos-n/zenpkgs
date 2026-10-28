@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-fast-export";
+  id = "unknown.git-fast-export";
   name = "git-fast-export";
   summary = "Import mercurial into git";
   description = ''

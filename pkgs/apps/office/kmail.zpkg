@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.office.kmail";
+  id = "unknown.kmail";
   name = "KMail";
   summary = "State-of-the-art feature-rich email client that supports many protocols";
   description = ''

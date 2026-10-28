@@ -29,6 +29,19 @@ class PackageIdentityTests(unittest.TestCase):
         self.assertEqual(entry["target"], moved["target"])
         self.assertEqual(entry["id"], moved["id"])
 
+    def test_leaf_only_fallback_and_established_ids(self):
+        catalog.validate_records([
+            record("unknown.tool"),
+            record("com.neg-zero.gnosis", ["apps", "browsers", "gnosis"]),
+            record("org.mozilla.firefox", ["apps", "browsers", "firefox"]),
+        ])
+        catalog.validate_records([record("unknown.p-1tool", ["dev", "1tool"])])
+        catalog.validate_records([record("unknown.foo-u5f-bar", ["dev", "foo_bar"])])
+        for identity in ("org.zenos.packages.apps.tools.tool", "unknown.apps.tools.tool",
+                         "unknown.other", "unknown.foo_bar"):
+            with self.subTest(identity=identity):
+                self.reject([record(identity)])
+
     def test_distinct_ids_with_same_leaf(self):
         catalog.validate_records([record(), record("net.example.tool", ["dev", "tool"])])
 
@@ -56,8 +69,12 @@ class PackageIdentityTests(unittest.TestCase):
         self.reject([record(), record("org.example.tool.child", ["dev", "child"])])
         self.reject([record(), record("net.example.other", ["apps", "tools", "tool", "child"])])
 
-    def test_flattened_output_collision_in_either_order(self):
+    def test_distinct_dotted_outputs(self):
         records = [record("org.example.foo-bar"), record("org.example.foo.bar", ["dev", "bar"])]
+        catalog.validate_records(records)
+
+    def test_cross_view_output_collision_in_either_order(self):
+        records = [record("org.example.foo"), record("apps.tools.tool", ["dev", "bar"])]
         self.reject(records)
         self.reject(list(reversed(records)))
 

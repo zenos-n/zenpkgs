@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.weather.wthrr";
+  id = "unknown.wthrr";
   name = "wthrr";
   summary = "Weather companion for the terminal";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.vdu-u5f-controls";
+  id = "unknown.vdu-u5f-controls";
   name = "VDU Controls";
   summary = "VDU controls - a control panel for monitor brightness/contrast";
   description = ''

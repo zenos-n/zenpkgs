@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.patchelf";
+  id = "unknown.patchelf";
   name = "patchelf";
   summary = "Small utility to modify the dynamic linker and RPATH of ELF executables";
   description = ''

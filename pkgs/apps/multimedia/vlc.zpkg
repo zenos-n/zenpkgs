@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.multimedia.vlc";
+  id = "unknown.vlc";
   name = "vlc";
   summary = "Cross-platform media player and streaming server";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.brotli";
+  id = "unknown.brotli";
   name = "Brotli";
   summary = "General-purpose lossless compression library with CLI";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.ntfs3g";
+  id = "unknown.ntfs3g";
   name = "ntfs3g";
   summary = "Curated ntfs3g package for ZenOS";
   description = ''

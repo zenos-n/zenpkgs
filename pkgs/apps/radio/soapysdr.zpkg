@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.soapysdr";
+  id = "unknown.soapysdr";
   name = "SoapySDR";
   summary = "Vendor and platform neutral SDR support library";
   description = ''

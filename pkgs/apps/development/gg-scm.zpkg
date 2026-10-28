@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gg-scm";
+  id = "unknown.gg-scm";
   name = "gg";
   summary = "Git with less typing";
   description = ''

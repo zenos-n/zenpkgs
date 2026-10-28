@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.fetchmail";
+  id = "unknown.fetchmail";
   name = "Fetchmail";
   summary = "Full-featured remote-mail retrieval and forwarding utility";
   description = ''

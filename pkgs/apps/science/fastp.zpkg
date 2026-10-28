@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.fastp";
+  id = "unknown.fastp";
   name = "fastp";
   summary = "Ultra-fast all-in-one FASTQ preprocessor";
   description = ''

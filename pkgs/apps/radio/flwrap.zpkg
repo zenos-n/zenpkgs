@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.flwrap";
+  id = "unknown.flwrap";
   name = "FLWRAP";
   summary = "Digital modem file transfer program";
   description = ''

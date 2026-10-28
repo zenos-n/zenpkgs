@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.seqdiag";
+  id = "unknown.seqdiag";
   name = "seqdiag";
   summary = "Generate sequence-diagram image from spec-text file (similar to Graphviz)";
   description = ''

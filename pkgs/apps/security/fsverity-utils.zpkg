@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.fsverity-utils";
+  id = "unknown.fsverity-utils";
   name = "fs-verity Utilities";
   summary = "Set of userspace utilities for fs-verity";
   description = ''

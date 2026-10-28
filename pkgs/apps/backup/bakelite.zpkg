@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.bakelite";
+  id = "unknown.bakelite";
   name = "Bakelite";
   summary = "Encrypted incremental backup tool";
   description = ''

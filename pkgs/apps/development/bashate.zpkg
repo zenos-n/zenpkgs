@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bashate";
+  id = "unknown.bashate";
   name = "bashate";
   summary = "Style enforcement for bash programs";
   description = ''

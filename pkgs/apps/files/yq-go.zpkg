@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.yq-go";
+  id = "unknown.yq-go";
   name = "yq";
   summary = "Portable command-line YAML processor";
   description = ''

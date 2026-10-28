@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.bfcal";
+  id = "unknown.bfcal";
   name = "bfcal";
   summary = "Quickly display a calendar";
   description = ''

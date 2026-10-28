@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.switcheroo";
+  id = "unknown.switcheroo";
   name = "Switcheroo";
   summary = "App for converting images between different formats";
   description = ''

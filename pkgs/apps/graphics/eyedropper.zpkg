@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.eyedropper";
+  id = "unknown.eyedropper";
   name = "Eyedropper";
   summary = "Pick and format colors";
   description = ''

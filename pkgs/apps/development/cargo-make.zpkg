@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-make";
+  id = "unknown.cargo-make";
   name = "cargo-make";
   summary = "Rust task runner and build tool";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.streamdeck-ui";
+  id = "unknown.streamdeck-ui";
   name = "Stream Deck UI";
   summary = "Linux compatible UI for the Elgato Stream Deck";
   description = ''

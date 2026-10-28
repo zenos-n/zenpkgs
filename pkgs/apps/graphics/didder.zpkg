@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.didder";
+  id = "unknown.didder";
   name = "Didder";
   summary = "Extensive, fast, and accurate command-line image dithering tool";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.p-010editor";
+  id = "unknown.p-010editor";
   name = "010 Editor";
   summary = "Text and hex editor";
   description = ''

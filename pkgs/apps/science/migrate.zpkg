@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.migrate";
+  id = "unknown.migrate";
   name = "Migrate-N";
   summary = "Estimates population size, migration, population splitting parameters using genetic/genomic data";
   description = ''

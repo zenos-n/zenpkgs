@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.ente-auth";
+  id = "unknown.ente-auth";
   name = "Ente Auth";
   summary = "End-to-end encrypted, cross platform and free app for storing your 2FA codes with cloud backups";
   description = ''

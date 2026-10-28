@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.mpd";
+  id = "unknown.mpd";
   name = "Music Player Daemon";
   summary = "Flexible, powerful daemon for playing music";
   description = ''

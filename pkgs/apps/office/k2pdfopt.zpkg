@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.k2pdfopt";
+  id = "unknown.k2pdfopt";
   name = "K2pdfopt";
   summary = "Optimizes PDF/DJVU files for mobile e-readers (e.g. the Kindle) and smartphones";
   description = ''

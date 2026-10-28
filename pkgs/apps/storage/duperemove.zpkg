@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.duperemove";
+  id = "unknown.duperemove";
   name = "duperemove";
   summary = "Simple tool for finding duplicated extents and submitting them for deduplication";
   description = ''

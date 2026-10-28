@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.launchers.centerpiece";
+  id = "unknown.centerpiece";
   name = "Centerpiece";
   summary = "Your trusty omnibox search";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.links2";
+  id = "unknown.links2";
   name = "Links";
   summary = "Small browser with some graphics support";
   description = ''

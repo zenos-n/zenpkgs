@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.pari";
+  id = "unknown.pari";
   name = "PARI/GP";
   summary = "Computer algebra system for high-performance number theory computations";
   description = ''

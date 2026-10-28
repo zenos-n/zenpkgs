@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cdxgen";
+  id = "unknown.cdxgen";
   name = "cdxgen";
   summary = "Creates CycloneDX Software Bill-of-Materials (SBOM) for your projects from source and container images";
   description = ''

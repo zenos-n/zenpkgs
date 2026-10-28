@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.veusz";
+  id = "unknown.veusz";
   name = "Veusz";
   summary = "Scientific plotting and graphing program with a GUI";
   description = ''

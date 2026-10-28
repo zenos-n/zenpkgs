@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.elvish";
+  id = "unknown.elvish";
   name = "Elvish";
   summary = "Friendly and expressive command shell";
   description = ''

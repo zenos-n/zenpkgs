@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.hedgedoc";
+  id = "unknown.hedgedoc";
   name = "HedgeDoc";
   summary = "Realtime collaborative markdown notes on all platforms";
   description = ''

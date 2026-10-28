@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.gwe";
+  id = "unknown.gwe";
   name = "GreenWithEnvy";
   summary = "System utility designed to provide information, control the fans and overclock your NVIDIA card";
   description = ''

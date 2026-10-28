@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.tfsec";
+  id = "unknown.tfsec";
   name = "tfsec";
   summary = "Static analysis powered security scanner for terraform code";
   description = ''

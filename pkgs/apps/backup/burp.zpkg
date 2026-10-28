@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.burp";
+  id = "unknown.burp";
   name = "Burp";
   summary = "BackUp and Restore Program";
   description = ''

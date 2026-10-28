@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.virtualization.virtiofsd";
+  id = "unknown.virtiofsd";
   name = "virtiofsd";
   summary = "vhost-user virtio-fs device backend written in Rust";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.dayon";
+  id = "unknown.dayon";
   name = "Dayon!";
   summary = "Easy to use, cross-platform remote desktop assistance solution";
   description = ''

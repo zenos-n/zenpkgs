@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.bit-logo";
+  id = "unknown.bit-logo";
   name = "bit-logo";
   summary = "Terminal ANSI Logo Designer & Font Library";
   description = ''

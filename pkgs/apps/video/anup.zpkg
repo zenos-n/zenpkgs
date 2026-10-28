@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.anup";
+  id = "unknown.anup";
   name = "anup";
   summary = "Anime tracker for AniList featuring a TUI";
   description = ''

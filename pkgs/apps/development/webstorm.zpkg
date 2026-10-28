@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.webstorm";
+  id = "unknown.webstorm";
   name = "WebStorm";
   summary = "Web IDE from JetBrains";
   description = ''

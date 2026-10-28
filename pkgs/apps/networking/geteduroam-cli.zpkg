@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.geteduroam-cli";
+  id = "unknown.geteduroam-cli";
   name = "geteduroam CLI";
   summary = "CLI client to configure eduroam";
   description = ''

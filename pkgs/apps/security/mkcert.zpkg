@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.mkcert";
+  id = "unknown.mkcert";
   name = "mkcert";
   summary = "Simple tool for making locally-trusted development certificates";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.ftx-prog";
+  id = "unknown.ftx-prog";
   name = "ftx-prog";
   summary = "Command-line alternative to the FTDI FTProg utility for FTDI's FT-X series";
   description = ''

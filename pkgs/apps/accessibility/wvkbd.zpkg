@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.wvkbd";
+  id = "unknown.wvkbd";
   name = "wvkbd";
   summary = "On-screen keyboard for wlroots";
   description = ''

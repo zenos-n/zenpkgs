@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.clac";
+  id = "unknown.clac";
   name = "clac";
   summary = "Interactive stack-based calculator";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.cidr-merger";
+  id = "unknown.cidr-merger";
   name = "cidr-merger";
   summary = "Simple command line tool to merge ip/ip cidr/ip range, supports IPv4/IPv6";
   description = ''

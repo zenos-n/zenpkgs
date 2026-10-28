@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.gqrx";
+  id = "unknown.gqrx";
   name = "Gqrx";
   summary = "Software defined radio (SDR) receiver";
   description = ''

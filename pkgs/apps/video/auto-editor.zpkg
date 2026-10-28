@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.auto-editor";
+  id = "unknown.auto-editor";
   name = "Auto-Editor";
   summary = "Command line application for automatically editing video and audio by analyzing a variety of methods, most notably audio loudness";
   description = ''

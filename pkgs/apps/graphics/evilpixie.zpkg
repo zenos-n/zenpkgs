@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.evilpixie";
+  id = "unknown.evilpixie";
   name = "EvilPixie";
   summary = "Pixel-oriented paint program, modelled on Deluxe Paint";
   description = ''

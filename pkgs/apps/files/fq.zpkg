@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fq";
+  id = "unknown.fq";
   name = "fq";
   summary = "jq for binary formats";
   description = ''

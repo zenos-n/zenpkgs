@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.podman-desktop";
+  id = "unknown.podman-desktop";
   name = "podman-desktop";
   summary = "Curated podman-desktop package for ZenOS";
   description = ''

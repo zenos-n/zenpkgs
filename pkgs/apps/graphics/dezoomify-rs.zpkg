@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.dezoomify-rs";
+  id = "unknown.dezoomify-rs";
   name = "dezoomify-rs";
   summary = "Zoomable image downloader for Google Arts & Culture, Zoomify, IIIF, and others";
   description = ''

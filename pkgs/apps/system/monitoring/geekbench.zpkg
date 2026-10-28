@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.geekbench";
+  id = "unknown.geekbench";
   name = "Geekbench";
   summary = "Cross-platform benchmark";
   description = ''

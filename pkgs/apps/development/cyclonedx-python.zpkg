@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cyclonedx-python";
+  id = "unknown.cyclonedx-python";
   name = "CycloneDX Python";
   summary = "Creates CycloneDX Software Bill of Materials (SBOM) from Python projects";
   description = ''

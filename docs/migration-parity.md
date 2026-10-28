@@ -15,8 +15,9 @@ pre-existing stale Codex, ZenFS, and setup provider records.
 
 Those ten internal recipes remain trusted transitional builders behind the
 explicit declarations, not implicit package exports. Each wrapper has a required
-reverse-DNS `_meta.id`, preserving an established ID or explicitly using the
-`org.zenos.packages` fallback namespace. Canonical and `byCategories` views
+reverse-DNS `_meta.id`, preserving an established upstream ID, using
+`com.neg-zero.<project>` for project-owned software, or explicitly using the
+leaf-only `unknown.<normalized package name>` fallback. Canonical and `byCategories` views
 resolve to the same derivation through one registry record.
 
 ## Native NZPortable

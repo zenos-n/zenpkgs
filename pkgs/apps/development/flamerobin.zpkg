@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.flamerobin";
+  id = "unknown.flamerobin";
   name = "FlameRobin";
   summary = "Database administration tool for Firebird RDBMS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bobby";
+  id = "unknown.bobby";
   name = "Bobby";
   summary = "Browse SQLite files";
   description = ''

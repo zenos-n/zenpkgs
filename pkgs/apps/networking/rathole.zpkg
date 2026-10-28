@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.rathole";
+  id = "unknown.rathole";
   name = "rathole";
   summary = "Reverse proxy for NAT traversal";
   description = ''

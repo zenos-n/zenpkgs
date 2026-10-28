@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fsautocomplete";
+  id = "unknown.fsautocomplete";
   name = "FsAutoComplete";
   summary = "Backend service for rich editing or intellisense features for editors";
   description = ''

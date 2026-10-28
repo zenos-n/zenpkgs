@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.swingsane";
+  id = "unknown.swingsane";
   name = "SwingSane";
   summary = "Java GUI for SANE scanner servers (saned)";
   description = ''

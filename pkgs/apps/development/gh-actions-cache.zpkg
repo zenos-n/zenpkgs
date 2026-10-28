@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gh-actions-cache";
+  id = "unknown.gh-actions-cache";
   name = "GitHub Actions Cache CLI";
   summary = "gh extension to manage GitHub Actions caches";
   description = ''

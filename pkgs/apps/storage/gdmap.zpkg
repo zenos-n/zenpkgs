@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.gdmap";
+  id = "unknown.gdmap";
   name = "GdMap";
   summary = "Tool to visualize disk space (GTK 3 port of Original)";
   description = ''

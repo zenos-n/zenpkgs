@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.blender-hip";
+  id = "unknown.blender-hip";
   name = "Blender with AMD HIP";
   summary = "Blender with AMD GPU rendering support";
   description = ''Blender with AMD GPU rendering support. Optional migration package; installation does not activate a service.'';

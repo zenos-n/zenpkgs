@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.dump1090-fa";
+  id = "unknown.dump1090-fa";
   name = "dump1090-fa";
   summary = "Simple Mode S decoder for RTLSDR devices";
   description = ''

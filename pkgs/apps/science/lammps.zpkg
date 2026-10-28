@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.lammps";
+  id = "unknown.lammps";
   name = "LAMMPS";
   summary = "Classical Molecular Dynamics simulation code";
   description = ''

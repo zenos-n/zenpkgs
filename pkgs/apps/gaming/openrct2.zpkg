@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.openrct2";
+  id = "unknown.openrct2";
   name = "OpenRCT2";
   summary = "Open source re-implementation of RollerCoaster Tycoon 2";
   description = ''

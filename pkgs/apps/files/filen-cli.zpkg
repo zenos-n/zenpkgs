@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.filen-cli";
+  id = "unknown.filen-cli";
   name = "Filen CLI";
   summary = "CLI tool for interacting with the Filen cloud";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.atril";
+  id = "unknown.atril";
   name = "Atril";
   summary = "Simple multi-page document viewer for the MATE desktop";
   description = ''

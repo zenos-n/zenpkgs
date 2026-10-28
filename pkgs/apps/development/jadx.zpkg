@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.jadx";
+  id = "unknown.jadx";
   name = "JADX";
   summary = "Dex to Java decompiler";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.fbvnc";
+  id = "unknown.fbvnc";
   name = "fbvnc";
   summary = "Framebuffer VNC client";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.certinfo";
+  id = "unknown.certinfo";
   name = "certinfo";
   summary = "Print x509 certificate info";
   description = ''

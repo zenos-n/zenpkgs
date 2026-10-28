@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.mission-planner";
+  id = "unknown.mission-planner";
   name = "Mission Planner";
   summary = "ArduPilot ground station";
   description = ''

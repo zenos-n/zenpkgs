@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-review";
+  id = "unknown.git-review";
   name = "git-review";
   summary = "Tool to submit code to Gerrit";
   description = ''

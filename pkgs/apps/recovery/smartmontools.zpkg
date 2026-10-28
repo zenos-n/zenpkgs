@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.smartmontools";
+  id = "unknown.smartmontools";
   name = "smartmontools";
   summary = "Curated smartmontools package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.penpot-desktop";
+  id = "unknown.penpot-desktop";
   name = "Penpot Desktop";
   summary = "Unofficial desktop application for the open-source design tool, Penpot";
   description = ''

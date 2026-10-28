@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gnugo";
+  id = "unknown.gnugo";
   name = "GNU Go";
   summary = "GNU Go - A computer go player";
   description = ''

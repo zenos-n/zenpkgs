@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.gnome-graphs";
+  id = "unknown.gnome-graphs";
   name = "Graphs";
   summary = "Simple, yet powerful tool that allows you to plot and manipulate your data with ease";
   description = ''

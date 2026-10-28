@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.write-good";
+  id = "unknown.write-good";
   name = "write-good";
   summary = "Naive linter for English prose";
   description = ''

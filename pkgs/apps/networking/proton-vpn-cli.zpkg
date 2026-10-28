@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.proton-vpn-cli";
+  id = "unknown.proton-vpn-cli";
   name = "Proton VPN CLI";
   summary = "Official ProtonVPN CLI Linux app";
   description = ''

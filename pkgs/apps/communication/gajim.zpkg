@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.gajim";
+  id = "unknown.gajim";
   name = "Gajim";
   summary = "Jabber client written in PyGTK";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.flamegraph";
+  id = "unknown.flamegraph";
   name = "FlameGraph";
   summary = "Visualization for profiled code";
   description = ''

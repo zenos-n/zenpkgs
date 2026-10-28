@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.klog-time-tracker";
+  id = "unknown.klog-time-tracker";
   name = "klog";
   summary = "Command line tool for time tracking in a human-readable, plain-text file format";
   description = ''

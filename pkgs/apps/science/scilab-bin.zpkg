@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.scilab-bin";
+  id = "unknown.scilab-bin";
   name = "Scilab";
   summary = "Scientific software package for numerical computations (Matlab lookalike)";
   description = ''

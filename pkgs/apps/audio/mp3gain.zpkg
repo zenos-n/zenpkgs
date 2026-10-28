@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.mp3gain";
+  id = "unknown.mp3gain";
   name = "MP3Gain";
   summary = "Lossless mp3 normalizer with statistical analysis";
   description = ''

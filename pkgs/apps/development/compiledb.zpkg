@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.compiledb";
+  id = "unknown.compiledb";
   name = "compiledb";
   summary = "Tool for generating Clang's JSON Compilation Database files";
   description = ''

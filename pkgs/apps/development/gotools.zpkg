@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gotools";
+  id = "unknown.gotools";
   name = "Go Tools";
   summary = "Additional tools for Go development";
   description = ''

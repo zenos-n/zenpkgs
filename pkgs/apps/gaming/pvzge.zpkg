@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.pvzge";
+  id = "unknown.pvzge";
   name = "PVZGE";
   summary = "Completely remastered PvZ2 for all desktop platforms";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.kubescape";
+  id = "unknown.kubescape";
   name = "Kubescape";
   summary = "Tool for testing if Kubernetes is deployed securely";
   description = ''

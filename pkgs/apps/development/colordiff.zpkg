@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.colordiff";
+  id = "unknown.colordiff";
   name = "colordiff";
   summary = "Wrapper for 'diff' that produces the same output but with pretty 'syntax' highlighting";
   description = ''

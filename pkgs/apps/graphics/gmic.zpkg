@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.gmic";
+  id = "unknown.gmic";
   name = "G'MIC";
   summary = "Open and full-featured framework for image processing";
   description = ''

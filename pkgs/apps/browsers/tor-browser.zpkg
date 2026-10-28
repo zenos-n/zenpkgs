@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.tor-browser";
+  id = "unknown.tor-browser";
   name = "tor-browser";
   summary = "Curated tor-browser package for ZenOS";
   description = ''

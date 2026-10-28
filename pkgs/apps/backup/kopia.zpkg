@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.kopia";
+  id = "unknown.kopia";
   name = "Kopia";
   summary = "Cross-platform backup tool with fast, incremental backups, client-side end-to-end encryption, compression and data deduplication";
   description = ''

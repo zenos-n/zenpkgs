@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.graphics.kruler";
+  id = "unknown.kruler";
   name = "KRuler";
   summary = "A pixel measuring tool by KDE";
   description = ''

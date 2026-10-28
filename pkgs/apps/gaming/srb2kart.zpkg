@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.srb2kart";
+  id = "unknown.srb2kart";
   name = "SRB2Kart";
   summary = "Classic styled kart racer";
   description = ''

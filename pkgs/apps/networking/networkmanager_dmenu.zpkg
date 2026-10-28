@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.networkmanager-u5f-dmenu";
+  id = "unknown.networkmanager-u5f-dmenu";
   name = "NetworkManager dmenu";
   summary = "Small script to manage NetworkManager connections with dmenu instead of nm-applet";
   description = ''

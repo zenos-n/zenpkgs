@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.sqlpage";
+  id = "unknown.sqlpage";
   name = "SQLPage";
   summary = "SQL-only webapp builder, empowering data analysts to build websites and applications quickly";
   description = ''

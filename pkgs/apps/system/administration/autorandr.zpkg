@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.autorandr";
+  id = "unknown.autorandr";
   name = "autorandr";
   summary = "Automatically select a display configuration based on connected devices";
   description = ''

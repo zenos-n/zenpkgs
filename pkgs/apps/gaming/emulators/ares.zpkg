@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.ares";
+  id = "unknown.ares";
   name = "ares";
   summary = "Open-source multi-system emulator with a focus on accuracy and preservation";
   description = ''

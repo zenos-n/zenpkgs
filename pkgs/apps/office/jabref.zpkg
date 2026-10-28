@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.jabref";
+  id = "unknown.jabref";
   name = "JabRef";
   summary = "Open source bibliography reference manager";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.aacgain";
+  id = "unknown.aacgain";
   name = "AACGain";
   summary = "ReplayGain for AAC files";
   description = ''

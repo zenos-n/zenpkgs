@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.synfigstudio";
+  id = "unknown.synfigstudio";
   name = "Synfig Studio";
   summary = "2D animation program";
   description = ''

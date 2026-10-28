@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.i2c-tools";
+  id = "unknown.i2c-tools";
   name = "i2c-tools";
   summary = "Set of I2C tools for Linux";
   description = ''

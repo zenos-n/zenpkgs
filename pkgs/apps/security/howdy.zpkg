@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.howdy";
+  id = "unknown.howdy";
   name = "Howdy";
   summary = "Windows Hello™ style facial authentication for Linux";
   description = ''

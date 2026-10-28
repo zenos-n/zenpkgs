@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.ddccontrol";
+  id = "unknown.ddccontrol";
   name = "ddccontrol";
   summary = "Program used to control monitor parameters by software";
   description = ''

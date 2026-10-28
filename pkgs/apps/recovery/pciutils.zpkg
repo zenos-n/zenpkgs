@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.pciutils";
+  id = "unknown.pciutils";
   name = "pciutils";
   summary = "Curated pciutils package for ZenOS";
   description = ''

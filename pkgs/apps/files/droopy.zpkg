@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.droopy";
+  id = "unknown.droopy";
   name = "Droopy";
   summary = "Mini Web server that let others upload files to your computer";
   description = ''

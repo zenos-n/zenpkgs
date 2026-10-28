@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.timewarrior";
+  id = "unknown.timewarrior";
   name = "Timewarrior";
   summary = "Command-line time tracker";
   description = ''

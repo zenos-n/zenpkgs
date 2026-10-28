@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.flashprog";
+  id = "unknown.flashprog";
   name = "flashprog";
   summary = "Utility for reading, writing, erasing and verifying flash ROM chips";
   description = ''

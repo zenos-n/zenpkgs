@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.toxic";
+  id = "unknown.toxic";
   name = "Toxic";
   summary = "Reference CLI for Tox";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.heroku";
+  id = "unknown.heroku";
   name = "Heroku CLI";
   summary = "Everything you need to get started using Heroku";
   description = ''

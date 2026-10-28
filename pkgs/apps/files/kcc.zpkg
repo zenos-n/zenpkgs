@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.kcc";
+  id = "unknown.kcc";
   name = "Kindle Comic Converter";
   summary = "Python app to convert comic/manga files or folders to EPUB, Panel View MOBI or E-Ink optimized CBZ";
   description = ''

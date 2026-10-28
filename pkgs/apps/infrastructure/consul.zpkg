@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.consul";
+  id = "unknown.consul";
   name = "Consul";
   summary = "Tool for service discovery, monitoring and configuration";
   description = ''

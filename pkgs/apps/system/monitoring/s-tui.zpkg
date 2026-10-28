@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.s-tui";
+  id = "unknown.s-tui";
   name = "s-tui";
   summary = "Stress-Terminal UI monitoring tool";
   description = ''

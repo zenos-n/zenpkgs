@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.readsb";
+  id = "unknown.readsb";
   name = "readsb";
   summary = "ADS-B decoder swiss knife";
   description = ''

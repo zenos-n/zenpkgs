@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.codeberg-cli";
+  id = "unknown.codeberg-cli";
   name = "Codeberg CLI";
   summary = "CLI Tool for Codeberg similar to gh and glab";
   description = ''

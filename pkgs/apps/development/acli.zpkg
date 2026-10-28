@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.acli";
+  id = "unknown.acli";
   name = "Atlassian CLI";
   summary = "Atlassian Command Line Interface";
   description = ''

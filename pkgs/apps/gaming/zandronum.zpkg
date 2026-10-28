@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.zandronum";
+  id = "unknown.zandronum";
   name = "Zandronum";
   summary = "Multiplayer oriented port, based off Skulltag, for Doom and Doom II by id Software";
   description = ''

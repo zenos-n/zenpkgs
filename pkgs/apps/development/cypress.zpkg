@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cypress";
+  id = "unknown.cypress";
   name = "Cypress";
   summary = "Fast, easy and reliable testing for anything that runs in a browser";
   description = ''

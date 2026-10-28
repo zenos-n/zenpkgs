@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.sdrpp";
+  id = "unknown.sdrpp";
   name = "SDR++";
   summary = "Cross-Platform SDR Software";
   description = ''

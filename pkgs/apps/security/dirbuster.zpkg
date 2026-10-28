@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.dirbuster";
+  id = "unknown.dirbuster";
   name = "DirBuster";
   summary = "Brute force directories and files names on web/application servers";
   description = ''

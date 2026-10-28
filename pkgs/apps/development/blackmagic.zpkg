@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.blackmagic";
+  id = "unknown.blackmagic";
   name = "Black Magic Debug";
   summary = "In-application debugger for ARM Cortex microcontrollers";
   description = ''

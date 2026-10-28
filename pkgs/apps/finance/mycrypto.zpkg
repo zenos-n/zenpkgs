@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.mycrypto";
+  id = "unknown.mycrypto";
   name = "MyCrypto";
   summary = "Free, open-source interface for interacting with the blockchain";
   description = ''

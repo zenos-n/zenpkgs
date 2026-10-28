@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.awscli2";
+  id = "unknown.awscli2";
   name = "AWS CLI";
   summary = "Unified tool to manage your AWS services";
   description = ''

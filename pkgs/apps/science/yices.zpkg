@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.yices";
+  id = "unknown.yices";
   name = "Yices";
   summary = "High-performance theorem prover and SMT solver";
   description = ''

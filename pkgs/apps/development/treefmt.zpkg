@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.treefmt";
+  id = "unknown.treefmt";
   name = "treefmt";
   summary = "One CLI to format the code tree";
   description = ''

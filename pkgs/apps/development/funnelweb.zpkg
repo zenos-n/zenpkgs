@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.funnelweb";
+  id = "unknown.funnelweb";
   name = "FunnelWeb";
   summary = "Simple, reliable literate-programming macro preprocessor";
   description = ''

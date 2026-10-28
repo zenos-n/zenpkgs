@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.wgcf";
+  id = "unknown.wgcf";
   name = "wgcf";
   summary = "Cross-platform, unofficial CLI for Cloudflare Warp";
   description = ''

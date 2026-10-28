@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.bitwarden";
+  id = "unknown.bitwarden";
   name = "bitwarden";
   summary = "Curated bitwarden package for ZenOS";
   description = ''

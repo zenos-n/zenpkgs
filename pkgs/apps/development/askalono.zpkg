@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.askalono";
+  id = "unknown.askalono";
   name = "askalono";
   summary = "Tool to detect open source licenses from texts";
   description = ''

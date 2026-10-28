@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.librewolf";
+  id = "unknown.librewolf";
   name = "librewolf";
   summary = "Curated librewolf package for ZenOS";
   description = ''

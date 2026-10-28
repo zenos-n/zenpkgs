@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.uuu";
+  id = "unknown.uuu";
   name = "UUU";
   summary = "Freescale/NXP I.MX Chip image deploy tools";
   description = ''

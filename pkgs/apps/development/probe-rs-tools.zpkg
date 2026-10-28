@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.probe-rs-tools";
+  id = "unknown.probe-rs-tools";
   name = "probe-rs";
   summary = "CLI tool for on-chip debugging and flashing of ARM chips";
   description = ''

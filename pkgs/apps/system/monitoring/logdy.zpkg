@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.logdy";
+  id = "unknown.logdy";
   name = "logdy";
   summary = "Web based real-time log viewer";
   description = ''

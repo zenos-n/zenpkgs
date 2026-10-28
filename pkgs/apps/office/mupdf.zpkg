@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.mupdf";
+  id = "unknown.mupdf";
   name = "MuPDF";
   summary = "Lightweight PDF, XPS, and E-book viewer and toolkit written in portable C";
   description = ''

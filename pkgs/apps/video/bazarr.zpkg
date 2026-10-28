@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.bazarr";
+  id = "unknown.bazarr";
   name = "Bazarr";
   summary = "Subtitle manager for Sonarr and Radarr";
   description = ''

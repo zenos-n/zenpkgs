@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.famistudio";
+  id = "unknown.famistudio";
   name = "FamiStudio";
   summary = "NES Music Editor";
   description = ''

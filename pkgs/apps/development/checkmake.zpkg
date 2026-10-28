@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.checkmake";
+  id = "unknown.checkmake";
   name = "checkmake";
   summary = "Linter and analyzer for Makefiles";
   description = ''

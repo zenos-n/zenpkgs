@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.distrobox";
+  id = "unknown.distrobox";
   name = "Distrobox";
   summary = "Wrapper around podman or docker to create and start containers";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.jflap";
+  id = "unknown.jflap";
   name = "JFLAP";
   summary = "GUI tool for experimenting with formal languages topics";
   description = ''

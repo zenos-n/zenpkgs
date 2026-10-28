@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.solidtime-desktop";
+  id = "unknown.solidtime-desktop";
   name = "Solidtime";
   summary = "Modern open-source time-tracking app";
   description = ''

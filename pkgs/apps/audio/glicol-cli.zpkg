@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.glicol-cli";
+  id = "unknown.glicol-cli";
   name = "Glicol CLI";
   summary = "Cross-platform music live coding in terminal";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.algolia-cli";
+  id = "unknown.algolia-cli";
   name = "Algolia CLI";
   summary = "Algolia’s official CLI devtool";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.clang-tools";
+  id = "unknown.clang-tools";
   name = "Clang Tools";
   summary = "Standalone command line tools for C++ development";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.unp";
+  id = "unknown.unp";
   name = "unp";
   summary = "Command line tool for unpacking archives easily";
   description = ''

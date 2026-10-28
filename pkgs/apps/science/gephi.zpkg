@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.gephi";
+  id = "unknown.gephi";
   name = "Gephi";
   summary = "Platform for visualizing and manipulating large graphs";
   description = ''

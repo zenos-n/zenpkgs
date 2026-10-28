@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.galaxy-buds-client";
+  id = "unknown.galaxy-buds-client";
   name = "Galaxy Buds Client";
   summary = "Unofficial Galaxy Buds Manager";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.mat2";
+  id = "unknown.mat2";
   name = "Metadata Anonymisation Toolkit";
   summary = "Handy tool to trash your metadata";
   description = ''

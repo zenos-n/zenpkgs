@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.sdparm";
+  id = "unknown.sdparm";
   name = "sdparm";
   summary = "Utility to access SCSI device parameters";
   description = ''

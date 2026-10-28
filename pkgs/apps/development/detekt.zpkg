@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.detekt";
+  id = "unknown.detekt";
   name = "Detekt";
   summary = "Static code analysis for Kotlin";
   description = ''

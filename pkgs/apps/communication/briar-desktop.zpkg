@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.briar-desktop";
+  id = "unknown.briar-desktop";
   name = "Briar";
   summary = "Decentralized and secure messenger";
   description = ''

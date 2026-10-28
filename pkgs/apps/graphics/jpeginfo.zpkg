@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.jpeginfo";
+  id = "unknown.jpeginfo";
   name = "jpeginfo";
   summary = "Prints information and tests integrity of JPEG/JFIF files";
   description = ''

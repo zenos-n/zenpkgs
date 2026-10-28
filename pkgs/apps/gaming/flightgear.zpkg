@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.flightgear";
+  id = "unknown.flightgear";
   name = "FlightGear";
   summary = "Flight simulator";
   description = ''

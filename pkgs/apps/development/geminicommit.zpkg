@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.geminicommit";
+  id = "unknown.geminicommit";
   name = "Geminicommit";
   summary = "CLI that generates git commit messages with Google Gemini AI";
   description = ''

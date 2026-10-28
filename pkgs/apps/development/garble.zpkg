@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.garble";
+  id = "unknown.garble";
   name = "Garble";
   summary = "Obfuscate Go code by wrapping the Go toolchain";
   description = ''

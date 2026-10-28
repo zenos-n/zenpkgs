@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.nautilus-open-any-terminal";
+  id = "unknown.nautilus-open-any-terminal";
   name = "nautilus-open-any-terminal";
   summary = "Extension for nautilus, which adds an context-entry for opening other terminal-emulators then `gnome-terminal`";
   description = ''

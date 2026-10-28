@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.keepassxc";
+  id = "unknown.keepassxc";
   name = "keepassxc";
   summary = "Curated keepassxc package for ZenOS";
   description = ''

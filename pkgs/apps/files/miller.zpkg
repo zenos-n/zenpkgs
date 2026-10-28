@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.miller";
+  id = "unknown.miller";
   name = "Miller";
   summary = "Like awk, sed, cut, join, and sort for data formats such as CSV, TSV, JSON, JSON Lines, and positionally-indexed";
   description = ''

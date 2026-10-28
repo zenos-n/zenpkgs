@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.kanata";
+  id = "unknown.kanata";
   name = "kanata";
   summary = "Tool to improve keyboard comfort and usability with advanced customization";
   description = ''

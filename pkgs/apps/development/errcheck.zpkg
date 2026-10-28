@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.errcheck";
+  id = "unknown.errcheck";
   name = "errcheck";
   summary = "Checks for unchecked errors in go programs";
   description = ''

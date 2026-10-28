@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.twinkle";
+  id = "unknown.twinkle";
   name = "Twinkle";
   summary = "SIP-based VoIP client";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.education.parley";
+  id = "unknown.parley";
   name = "Parley";
   summary = "Vocabulary Trainer";
   description = ''

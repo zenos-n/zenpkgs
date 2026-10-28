@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.iqtree";
+  id = "unknown.iqtree";
   name = "IQ-TREE";
   summary = "Efficient and versatile phylogenomic software by maximum likelihood";
   description = ''

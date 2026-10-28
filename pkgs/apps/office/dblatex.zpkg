@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.dblatex";
+  id = "unknown.dblatex";
   name = "dblatex";
   summary = "Program to convert DocBook to DVI, PostScript or PDF via LaTeX or ConTeXt";
   description = ''

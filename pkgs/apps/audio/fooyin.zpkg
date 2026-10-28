@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.fooyin";
+  id = "unknown.fooyin";
   name = "Fooyin";
   summary = "Customisable music player";
   description = ''

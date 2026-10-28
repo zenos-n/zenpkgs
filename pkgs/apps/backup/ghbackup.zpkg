@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.ghbackup";
+  id = "unknown.ghbackup";
   name = "ghbackup";
   summary = "Backup your GitHub repositories with a simple command-line application written in Go";
   description = ''

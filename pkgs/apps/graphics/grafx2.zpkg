@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.grafx2";
+  id = "unknown.grafx2";
   name = "GrafX2";
   summary = "Ultimate 256-color painting program";
   description = ''

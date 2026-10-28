@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ghstack";
+  id = "unknown.ghstack";
   name = "ghstack";
   summary = "Submit stacked diffs to GitHub on the command line";
   description = ''

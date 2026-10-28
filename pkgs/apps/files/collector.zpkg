@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.collector";
+  id = "unknown.collector";
   name = "Collector";
   summary = "Drag multiple files and folders on to Collection window, drop them anywhere";
   description = ''

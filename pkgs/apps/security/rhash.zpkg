@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.rhash";
+  id = "unknown.rhash";
   name = "rhash";
   summary = "Console utility and library for computing and verifying hash sums of files";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.pup";
+  id = "unknown.pup";
   name = "pup";
   summary = "Parsing HTML at the command line";
   description = ''

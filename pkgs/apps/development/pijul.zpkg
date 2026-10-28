@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pijul";
+  id = "unknown.pijul";
   name = "Pijul";
   summary = "Distributed version control system";
   description = ''

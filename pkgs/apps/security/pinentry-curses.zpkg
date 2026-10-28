@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.pinentry-curses";
+  id = "unknown.pinentry-curses";
   name = "Terminal Pinentry";
   summary = "GnuPG’s interface to passphrase input";
   description = ''

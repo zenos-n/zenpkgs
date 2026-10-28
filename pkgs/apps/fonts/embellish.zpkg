@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.embellish";
+  id = "unknown.embellish";
   name = "Embellish";
   summary = "User-friendly application designed for managing Nerd Fonts on your system";
   description = ''

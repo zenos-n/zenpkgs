@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.dysk";
+  id = "unknown.dysk";
   name = "dysk";
   summary = "Get information on your mounted disks";
   description = ''

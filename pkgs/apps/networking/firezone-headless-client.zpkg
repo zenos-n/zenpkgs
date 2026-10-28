@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.firezone-headless-client";
+  id = "unknown.firezone-headless-client";
   name = "Firezone CLI";
   summary = "CLI client for the Firezone zero-trust access platform";
   description = ''

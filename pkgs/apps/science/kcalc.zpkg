@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.science.kcalc";
+  id = "unknown.kcalc";
   name = "KCalc";
   summary = "Calculator offering everything a scientific calculator does, and more";
   description = ''

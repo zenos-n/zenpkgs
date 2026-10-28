@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.tuxguitar";
+  id = "unknown.tuxguitar";
   name = "TuxGuitar";
   summary = "Multitrack guitar tablature editor";
   description = ''

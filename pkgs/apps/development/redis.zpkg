@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.redis";
+  id = "unknown.redis";
   name = "Redis";
   summary = "Open source, advanced key-value store";
   description = ''

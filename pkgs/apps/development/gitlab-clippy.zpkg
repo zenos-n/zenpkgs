@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitlab-clippy";
+  id = "unknown.gitlab-clippy";
   name = "gitlab-clippy";
   summary = "Convert clippy warnings into GitLab Code Quality report";
   description = ''

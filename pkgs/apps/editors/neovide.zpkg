@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.neovide";
+  id = "unknown.neovide";
   name = "Neovide";
   summary = "Simple, no-nonsense, cross-platform graphical user interface for Neovim";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.git-privacy";
+  id = "unknown.git-privacy";
   name = "git-privacy";
   summary = "Tool to redact Git author and committer dates";
   description = ''

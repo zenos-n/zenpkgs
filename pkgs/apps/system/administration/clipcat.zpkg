@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.clipcat";
+  id = "unknown.clipcat";
   name = "Clipcat";
   summary = "Clipboard Manager written in Rust Programming Language";
   description = ''

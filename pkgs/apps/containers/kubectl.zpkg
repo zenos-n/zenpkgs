@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.kubectl";
+  id = "unknown.kubectl";
   name = "kubectl";
   summary = "Kubernetes CLI";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.giff";
+  id = "unknown.giff";
   name = "giff";
   summary = "Terminal-based Git diff viewer with interactive rebase capabilities";
   description = ''

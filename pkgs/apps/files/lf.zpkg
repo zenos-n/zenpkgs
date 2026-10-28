@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.lf";
+  id = "unknown.lf";
   name = "lf";
   summary = "Terminal file manager written in Go and heavily inspired by ranger";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.backgroundremover";
+  id = "unknown.backgroundremover";
   name = "BackgroundRemover";
   summary = "Remove backgrounds from images and video";
   description = ''

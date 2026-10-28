@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.gapless";
+  id = "unknown.gapless";
   name = "Gapless";
   summary = "Beautiful, fast, fluent, light weight music player written in GTK4";
   description = ''

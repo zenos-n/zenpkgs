@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.semgrep";
+  id = "unknown.semgrep";
   name = "semgrep";
   summary = "Lightweight static analysis for many languages - cli";
   description = ''

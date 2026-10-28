@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.fbterm";
+  id = "unknown.fbterm";
   name = "FbTerm";
   summary = "Framebuffer terminal emulator";
   description = ''

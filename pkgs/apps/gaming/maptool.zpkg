@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.maptool";
+  id = "unknown.maptool";
   name = "MapTool";
   summary = "Virtual Tabletop for playing roleplaying games with remote players or face to face";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-statuses";
+  id = "unknown.git-statuses";
   name = "git-statuses";
   summary = "Command-line tool to display the status of multiple Git repositories in a clear, tabular format";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.openrocket";
+  id = "unknown.openrocket";
   name = "OpenRocket";
   summary = "Model-rocketry aerodynamics and trajectory simulation software";
   description = ''

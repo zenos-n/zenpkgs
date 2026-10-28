@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-watch";
+  id = "unknown.cargo-watch";
   name = "cargo-watch";
   summary = "Cargo subcommand for watching over Cargo project's source";
   description = ''

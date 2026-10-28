@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.graphics.beeref";
+  id = "unknown.beeref";
   name = "BeeRef";
   summary = "Reference image viewer";
   description = ''

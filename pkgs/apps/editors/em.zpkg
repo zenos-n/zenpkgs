@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.em";
+  id = "unknown.em";
   name = "em";
   summary = "Editor for Mortals";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.docstrfmt";
+  id = "unknown.docstrfmt";
   name = "docstrfmt";
   summary = "Formatter for reStructuredText";
   description = ''

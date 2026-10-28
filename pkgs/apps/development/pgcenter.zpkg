@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pgcenter";
+  id = "unknown.pgcenter";
   name = "pgCenter";
   summary = "Command-line admin tool for observing and troubleshooting PostgreSQL";
   description = ''

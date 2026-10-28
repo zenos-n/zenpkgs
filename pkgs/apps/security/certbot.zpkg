@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.certbot";
+  id = "unknown.certbot";
   name = "certbot";
   summary = "ACME client that can obtain certs and extensibly update server configurations";
   description = ''

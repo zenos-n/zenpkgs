@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.filezilla";
+  id = "unknown.filezilla";
   name = "FileZilla";
   summary = "Graphical FTP, FTPS and SFTP client";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-ls";
+  id = "unknown.git-ls";
   name = "git-ls";
   summary = "List files and git status in a repository";
   description = ''

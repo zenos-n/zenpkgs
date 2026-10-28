@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.honey-home";
+  id = "unknown.honey-home";
   name = "Honey Home";
   summary = "A game where you save the bees, Ludum Dare 38 Game Jam winner";
   description = ''

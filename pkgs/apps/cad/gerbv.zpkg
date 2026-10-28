@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.gerbv";
+  id = "unknown.gerbv";
   name = "gerbv";
   summary = "Gerber (RS-274X) viewer";
   description = ''

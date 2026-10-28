@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.lmms";
+  id = "unknown.lmms";
   name = "LMMS";
   summary = "DAW similar to FL Studio (music production software)";
   description = ''

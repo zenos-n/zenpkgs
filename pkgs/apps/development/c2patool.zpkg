@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.c2patool";
+  id = "unknown.c2patool";
   name = "c2patool";
   summary = "Command line tool for working with C2PA manifests and media assets";
   description = ''

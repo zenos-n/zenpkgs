@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.lxappearance";
+  id = "unknown.lxappearance";
   name = "LXAppearance";
   summary = "Lightweight program for configuring the theme and fonts of gtk applications";
   description = ''

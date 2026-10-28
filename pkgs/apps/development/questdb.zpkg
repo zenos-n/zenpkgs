@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.questdb";
+  id = "unknown.questdb";
   name = "QuestDB";
   summary = "High-performance, open-source SQL database for applications in financial services, IoT, machine learning, DevOps and observability";
   description = ''

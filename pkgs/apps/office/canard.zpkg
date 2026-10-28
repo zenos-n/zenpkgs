@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.canard";
+  id = "unknown.canard";
   name = "Canard";
   summary = "Command line TUI client for the journalist RSS aggregator";
   description = ''

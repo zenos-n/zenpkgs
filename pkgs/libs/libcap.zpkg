@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.libs.libcap";
+  id = "unknown.libcap";
   name = "libcap";
   summary = "Library for working with POSIX capabilities";
   description = ''

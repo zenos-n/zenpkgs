@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.hakuneko";
+  id = "unknown.hakuneko";
   name = "HakuNeko";
   summary = "Manga & Anime Downloader";
   description = ''

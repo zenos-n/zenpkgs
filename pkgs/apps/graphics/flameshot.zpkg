@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.flameshot";
+  id = "unknown.flameshot";
   name = "Flameshot";
   summary = "Powerful yet simple to use screenshot software";
   description = ''

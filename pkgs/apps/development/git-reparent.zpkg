@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-reparent";
+  id = "unknown.git-reparent";
   name = "git-reparent";
   summary = "Git command to recommit HEAD with a new set of parents";
   description = ''

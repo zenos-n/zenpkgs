@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.file";
+  id = "unknown.file";
   name = "file";
   summary = "Program that shows the type of files";
   description = ''

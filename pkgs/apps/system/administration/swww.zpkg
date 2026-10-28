@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.swww";
+  id = "unknown.swww";
   name = "awww";
   summary = "Efficient animated wallpaper daemon for wayland, controlled at runtime";
   description = ''

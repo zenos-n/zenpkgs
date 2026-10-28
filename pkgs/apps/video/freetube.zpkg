@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.freetube";
+  id = "unknown.freetube";
   name = "FreeTube";
   summary = "Open Source YouTube app for privacy";
   description = ''

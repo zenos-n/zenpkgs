@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.rust-analyzer";
+  id = "unknown.rust-analyzer";
   name = "rust-analyzer";
   summary = "Language server for the Rust language";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.cavif";
+  id = "unknown.cavif";
   name = "cavif";
   summary = "Encoder/converter CLI for AVIF images";
   description = ''

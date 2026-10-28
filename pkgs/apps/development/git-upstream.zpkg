@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-upstream";
+  id = "unknown.git-upstream";
   name = "git-upstream";
   summary = "Shortcut for `git push --set-upstream`";
   description = ''

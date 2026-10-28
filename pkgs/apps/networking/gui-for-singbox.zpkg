@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.gui-for-singbox";
+  id = "unknown.gui-for-singbox";
   name = "GUI for SingBox";
   summary = "SingBox GUI program developed by vue3 + wails";
   description = ''

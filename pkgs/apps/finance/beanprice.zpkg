@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.beanprice";
+  id = "unknown.beanprice";
   name = "beanprice";
   summary = "Price quotes fetcher for Beancount";
   description = ''

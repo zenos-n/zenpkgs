@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitnuro";
+  id = "unknown.gitnuro";
   name = "Gitnuro";
   summary = "FOSS Git multiplatform client based on Compose and JGit";
   description = ''

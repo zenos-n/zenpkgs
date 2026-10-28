@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.patch";
+  id = "unknown.patch";
   name = "patch";
   summary = "GNU Patch, a program to apply differences to files";
   description = ''

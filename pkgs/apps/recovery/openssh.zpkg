@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.openssh";
+  id = "unknown.openssh";
   name = "openssh";
   summary = "Curated openssh package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.rmlint";
+  id = "unknown.rmlint";
   name = "rmlint";
   summary = "Extremely fast tool to remove duplicates and other lint from your filesystem";
   description = ''

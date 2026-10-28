@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.dnspeep";
+  id = "unknown.dnspeep";
   name = "dnspeep";
   summary = "Spy on the DNS queries your computer is making";
   description = ''

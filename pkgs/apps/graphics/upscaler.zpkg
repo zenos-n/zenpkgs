@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.upscaler";
+  id = "unknown.upscaler";
   name = "Upscaler";
   summary = "Upscale and enhance images";
   description = ''

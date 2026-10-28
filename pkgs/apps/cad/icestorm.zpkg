@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.icestorm";
+  id = "unknown.icestorm";
   name = "Project IceStorm";
   summary = "Documentation and tools for Lattice iCE40 FPGAs";
   description = ''

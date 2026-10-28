@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.vesktop";
+  id = "unknown.vesktop";
   name = "Vesktop";
   summary = "Alternate client for Discord with Vencord built-in";
   description = ''

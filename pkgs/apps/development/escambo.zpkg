@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.escambo";
+  id = "unknown.escambo";
   name = "Escambo";
   summary = "HTTP-based APIs test application for GNOME";
   description = ''

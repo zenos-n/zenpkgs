@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.optipng";
+  id = "unknown.optipng";
   name = "OptiPNG";
   summary = "PNG optimizer";
   description = ''

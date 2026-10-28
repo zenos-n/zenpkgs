@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.mcp-proxy";
+  id = "unknown.mcp-proxy";
   name = "MCP Proxy";
   summary = "MCP server which proxies other MCP servers from stdio to SSE or from SSE to stdio";
   description = ''

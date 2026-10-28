@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.rider";
+  id = "unknown.rider";
   name = "Rider";
   summary = ".NET IDE from JetBrains";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.merkaartor";
+  id = "unknown.merkaartor";
   name = "Merkaartor";
   summary = "OpenStreetMap editor";
   description = ''

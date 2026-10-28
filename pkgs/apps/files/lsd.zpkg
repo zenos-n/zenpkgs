@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.lsd";
+  id = "unknown.lsd";
   name = "lsd";
   summary = "Next gen ls command";
   description = ''

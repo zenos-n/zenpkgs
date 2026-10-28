@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.cliflux";
+  id = "unknown.cliflux";
   name = "cliflux";
   summary = "Terminal client for Miniflux RSS reader";
   description = ''

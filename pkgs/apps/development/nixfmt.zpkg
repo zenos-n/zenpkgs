@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.nixfmt";
+  id = "unknown.nixfmt";
   name = "nixfmt";
   summary = "Official formatter for Nix code";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.choose";
+  id = "unknown.choose";
   name = "choose";
   summary = "Human-friendly and fast alternative to cut and (sometimes) awk";
   description = ''

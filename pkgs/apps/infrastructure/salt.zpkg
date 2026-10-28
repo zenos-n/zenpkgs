@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.salt";
+  id = "unknown.salt";
   name = "Salt";
   summary = "Portable, distributed, remote execution and configuration management system";
   description = ''

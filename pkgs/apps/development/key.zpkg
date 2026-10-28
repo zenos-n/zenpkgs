@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.key";
+  id = "unknown.key";
   name = "KeY";
   summary = "Java formal verification tool";
   description = ''

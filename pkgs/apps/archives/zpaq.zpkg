@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.zpaq";
+  id = "unknown.zpaq";
   name = "ZPAQ";
   summary = "Incremental journaling backup utility and archiver";
   description = ''

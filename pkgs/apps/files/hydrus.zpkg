@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.hydrus";
+  id = "unknown.hydrus";
   name = "Hydrus Network";
   summary = "Danbooru-like image tagging and searching system for the desktop";
   description = ''

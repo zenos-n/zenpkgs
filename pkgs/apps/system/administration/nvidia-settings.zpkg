@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.nvidia-settings";
+  id = "unknown.nvidia-settings";
   name = "NVIDIA Settings";
   summary = "Settings application for NVIDIA graphics cards";
   description = ''

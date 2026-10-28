@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.freedv";
+  id = "unknown.freedv";
   name = "FreeDV";
   summary = "Digital voice for HF radio";
   description = ''

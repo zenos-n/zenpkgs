@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.abi-compliance-checker";
+  id = "unknown.abi-compliance-checker";
   name = "ABI Compliance Checker";
   summary = "Tool for checking backward API/ABI compatibility of a C/C++ library";
   description = ''

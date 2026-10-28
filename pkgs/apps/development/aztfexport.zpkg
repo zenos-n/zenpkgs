@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.aztfexport";
+  id = "unknown.aztfexport";
   name = "Azure Export for Terraform";
   summary = "Tool to bring existing Azure resources under Terraform's management";
   description = ''

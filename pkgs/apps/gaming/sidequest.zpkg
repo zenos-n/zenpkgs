@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.sidequest";
+  id = "unknown.sidequest";
   name = "SideQuest";
   summary = "Open app store and side-loading tool for Android-based VR devices such as the Oculus Go, Oculus Quest or Moverio BT 300";
   description = ''

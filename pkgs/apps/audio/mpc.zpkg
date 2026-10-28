@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.mpc";
+  id = "unknown.mpc";
   name = "mpc";
   summary = "Minimalist command line interface to MPD";
   description = ''

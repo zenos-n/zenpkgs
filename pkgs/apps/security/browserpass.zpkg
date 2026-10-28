@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.browserpass";
+  id = "unknown.browserpass";
   name = "browserpass";
   summary = "Browserpass native client app";
   description = ''

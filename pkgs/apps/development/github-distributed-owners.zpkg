@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.github-distributed-owners";
+  id = "unknown.github-distributed-owners";
   name = "GitHub Distributed Owners";
   summary = "Generate GitHub CODEOWNERS files from OWNERS files distributed through the file tree";
   description = ''

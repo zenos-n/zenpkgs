@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.tabiew";
+  id = "unknown.tabiew";
   name = "tabiew";
   summary = "Lightweight, terminal-based application to view and query delimiter separated value formatted documents, such as CSV and TSV files";
   description = ''

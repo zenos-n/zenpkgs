@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.bibutils";
+  id = "unknown.bibutils";
   name = "bibutils";
   summary = "Bibliography format interconversion";
   description = ''

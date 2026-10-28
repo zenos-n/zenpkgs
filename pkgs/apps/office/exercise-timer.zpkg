@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.exercise-timer";
+  id = "unknown.exercise-timer";
   name = "Exercise Timer";
   summary = "Timer app for high intensity interval training";
   description = ''

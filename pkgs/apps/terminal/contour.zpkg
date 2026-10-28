@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.contour";
+  id = "unknown.contour";
   name = "Contour";
   summary = "Modern C++ Terminal Emulator";
   description = ''

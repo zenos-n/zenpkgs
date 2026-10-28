@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.paleta";
+  id = "unknown.paleta";
   name = "Paleta";
   summary = "Extract the dominant colors from any image";
   description = ''

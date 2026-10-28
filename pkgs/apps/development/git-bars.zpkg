@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-bars";
+  id = "unknown.git-bars";
   name = "git-bars";
   summary = "Utility for visualising git commit activity as bars on the terminal";
   description = ''

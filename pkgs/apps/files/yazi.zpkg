@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.yazi";
+  id = "unknown.yazi";
   name = "Yazi";
   summary = "Blazing fast terminal file manager written in Rust, based on async I/O";
   description = ''

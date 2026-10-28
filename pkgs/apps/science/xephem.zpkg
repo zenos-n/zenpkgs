@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.xephem";
+  id = "unknown.xephem";
   name = "XEphem";
   summary = "Interactive astronomy program for all UNIX platforms";
   description = ''

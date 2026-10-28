@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bash-language-server";
+  id = "unknown.bash-language-server";
   name = "Bash Language Server";
   summary = "Language server for Bash";
   description = ''

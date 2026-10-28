@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gtkradiant";
+  id = "unknown.gtkradiant";
   name = "GtkRadiant";
   summary = "Level editor for idTech games";
   description = ''

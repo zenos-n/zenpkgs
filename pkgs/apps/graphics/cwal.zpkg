@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.cwal";
+  id = "unknown.cwal";
   name = "cwal";
   summary = "Blazing-fast pywal-like color palette generator written in C";
   description = ''

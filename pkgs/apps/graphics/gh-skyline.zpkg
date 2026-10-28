@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.gh-skyline";
+  id = "unknown.gh-skyline";
   name = "GitHub Skyline";
   summary = "Generate a 3D model of your GitHub contribution history";
   description = ''

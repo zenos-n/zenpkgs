@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.bsky-cli";
+  id = "unknown.bsky-cli";
   name = "Bluesky CLI";
   summary = "Cli application for bluesky social";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.nethack";
+  id = "unknown.nethack";
   name = "NetHack";
   summary = "Rogue-like game";
   description = ''

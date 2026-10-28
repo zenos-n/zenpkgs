@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.glock";
+  id = "unknown.glock";
   name = "Glock";
   summary = "Command-line tool to lock Go dependencies to specific revisions";
   description = ''

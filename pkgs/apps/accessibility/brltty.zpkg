@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.brltty";
+  id = "unknown.brltty";
   name = "BRLTTY";
   summary = "Access software for a blind person using a braille display";
   description = ''

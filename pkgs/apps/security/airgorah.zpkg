@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.airgorah";
+  id = "unknown.airgorah";
   name = "Airgorah";
   summary = "WiFi security auditing software mainly based on aircrack-ng tools suite";
   description = ''

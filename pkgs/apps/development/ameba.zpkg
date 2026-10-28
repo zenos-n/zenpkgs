@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ameba";
+  id = "unknown.ameba";
   name = "Ameba";
   summary = "Static code analysis tool for Crystal";
   description = ''

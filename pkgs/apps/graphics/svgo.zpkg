@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.svgo";
+  id = "unknown.svgo";
   name = "SVGO";
   summary = "Node.js tool for optimizing SVG files";
   description = ''

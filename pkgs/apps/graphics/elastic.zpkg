@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.elastic";
+  id = "unknown.elastic";
   name = "Elastic";
   summary = "Design spring animations";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fiddler-everywhere";
+  id = "unknown.fiddler-everywhere";
   name = "Fiddler Everywhere";
   summary = "Web debugging proxy by Telerik";
   description = ''

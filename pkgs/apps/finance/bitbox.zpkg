@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.bitbox";
+  id = "unknown.bitbox";
   name = "BitBoxApp";
   summary = "Companion app for the BitBox02 hardware wallet";
   description = ''

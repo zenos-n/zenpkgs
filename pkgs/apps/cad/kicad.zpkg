@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.kicad";
+  id = "unknown.kicad";
   name = "KiCad";
   summary = "Open Source Electronics Design Automation suite";
   description = ''

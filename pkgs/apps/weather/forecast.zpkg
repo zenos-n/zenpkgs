@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.weather.forecast";
+  id = "unknown.forecast";
   name = "Forecast";
   summary = "Weather app written in rust and libcosmic";
   description = ''

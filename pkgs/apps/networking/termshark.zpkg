@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.termshark";
+  id = "unknown.termshark";
   name = "Termshark";
   summary = "Terminal UI for wireshark-cli, inspired by Wireshark";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.mqttmultimeter";
+  id = "unknown.mqttmultimeter";
   name = "MQTT Multimeter";
   summary = "MQTT traffic monitor";
   description = ''

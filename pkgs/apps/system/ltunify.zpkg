@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.ltunify";
+  id = "unknown.ltunify";
   name = "ltunify";
   summary = "Tool for working with Logitech Unifying receivers and devices";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.telegram-desktop";
+  id = "unknown.telegram-desktop";
   name = "telegram-desktop";
   summary = "Telegram Desktop messaging app";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.diodon";
+  id = "unknown.diodon";
   name = "Diodon";
   summary = "Aiming to be the best integrated clipboard manager for the Unity desktop";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.opencode";
+  id = "unknown.opencode";
   name = "OpenCode";
   summary = "AI coding agent built for the terminal";
   description = ''

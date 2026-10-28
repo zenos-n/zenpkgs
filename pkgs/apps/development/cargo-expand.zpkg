@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-expand";
+  id = "unknown.cargo-expand";
   name = "cargo-expand";
   summary = "Cargo subcommand to show result of macro expansion";
   description = ''

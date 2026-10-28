@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.pcsx2";
+  id = "unknown.pcsx2";
   name = "PCSX2";
   summary = "Playstation 2 emulator";
   description = ''

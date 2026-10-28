@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.theming.apps.adw-gtk3";
+  id = "unknown.adw-gtk3";
   name = "adw-gtk3";
   summary = "Curated adw-gtk3 package for ZenOS";
   description = ''

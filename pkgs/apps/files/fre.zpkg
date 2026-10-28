@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fre";
+  id = "unknown.fre";
   name = "fre";
   summary = "CLI tool for tracking your most-used directories and files";
   description = ''

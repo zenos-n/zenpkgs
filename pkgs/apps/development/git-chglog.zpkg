@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-chglog";
+  id = "unknown.git-chglog";
   name = "git-chglog";
   summary = "CHANGELOG generator implemented in Go (Golang)";
   description = ''

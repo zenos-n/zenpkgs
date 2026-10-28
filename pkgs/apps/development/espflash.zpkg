@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.espflash";
+  id = "unknown.espflash";
   name = "espflash";
   summary = "Serial flasher utility for Espressif SoCs and modules based on esptool.py";
   description = ''

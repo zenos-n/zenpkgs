@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.pavucontrol";
+  id = "unknown.pavucontrol";
   name = "PulseAudio Volume Control";
   summary = "PulseAudio Volume Control";
   description = ''

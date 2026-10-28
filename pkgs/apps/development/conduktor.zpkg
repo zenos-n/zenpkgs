@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.conduktor";
+  id = "unknown.conduktor";
   name = "Conduktor";
   summary = "Apache Kafka Desktop Client";
   description = ''

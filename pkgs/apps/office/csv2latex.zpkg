@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.csv2latex";
+  id = "unknown.csv2latex";
   name = "csv2latex";
   summary = "Command-line CSV to LaTeX file converter";
   description = ''

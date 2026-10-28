@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.veloren";
+  id = "unknown.veloren";
   name = "Veloren";
   summary = "Open world, open source voxel RPG";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.util-linux";
+  id = "unknown.util-linux";
   name = "util-linux";
   summary = "Curated util-linux package for ZenOS";
   description = ''

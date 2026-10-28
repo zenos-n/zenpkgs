@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.flawfinder";
+  id = "unknown.flawfinder";
   name = "Flawfinder";
   summary = "Examine C and C++ source code for security flaws";
   description = ''

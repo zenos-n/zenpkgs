@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-semver-checks";
+  id = "unknown.cargo-semver-checks";
   name = "cargo-semver-checks";
   summary = "Tool to scan your Rust crate for semver violations";
   description = ''

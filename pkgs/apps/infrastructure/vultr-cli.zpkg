@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.vultr-cli";
+  id = "unknown.vultr-cli";
   name = "Vultr CLI";
   summary = "Official command line tool for Vultr services";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.gpaste";
+  id = "unknown.gpaste";
   name = "GPaste";
   summary = "Clipboard management system with GNOME integration";
   description = ''

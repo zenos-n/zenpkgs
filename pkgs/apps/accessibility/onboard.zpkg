@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.onboard";
+  id = "unknown.onboard";
   name = "Onboard";
   summary = "Onscreen keyboard useful for tablet PC users and for mobility impaired users";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.epy";
+  id = "unknown.epy";
   name = "epy";
   summary = "CLI Ebook Reader";
   description = ''

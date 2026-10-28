@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.atop";
+  id = "unknown.atop";
   name = "atop";
   summary = "Console system performance monitor";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.aws-sam-cli";
+  id = "unknown.aws-sam-cli";
   name = "AWS SAM CLI";
   summary = "CLI tool for local development and testing of Serverless applications";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.patool";
+  id = "unknown.patool";
   name = "patool";
   summary = "Portable archive file manager";
   description = ''

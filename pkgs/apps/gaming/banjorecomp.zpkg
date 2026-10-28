@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.banjorecomp";
+  id = "unknown.banjorecomp";
   name = "Banjo Recompiled";
   summary = "PC Port of Banjo-Kazooie made using N64: Recompiled";
   description = ''

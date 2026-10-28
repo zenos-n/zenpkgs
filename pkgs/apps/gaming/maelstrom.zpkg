@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.maelstrom";
+  id = "unknown.maelstrom";
   name = "Maelstrom";
   summary = "Arcade-style game resembling Asteroids";
   description = ''

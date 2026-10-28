@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.yosys";
+  id = "unknown.yosys";
   name = "Yosys";
   summary = "Open RTL synthesis framework and tools";
   description = ''

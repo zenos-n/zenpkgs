@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pspg";
+  id = "unknown.pspg";
   name = "pspg";
   summary = "Postgres Pager";
   description = ''

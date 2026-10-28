@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.molecule";
+  id = "unknown.molecule";
   name = "Molecule";
   summary = "Aids in the development and testing of Ansible roles";
   description = ''

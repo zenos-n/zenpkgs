@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.dyff";
+  id = "unknown.dyff";
   name = "dyff";
   summary = "Diff tool for YAML files, and sometimes JSON";
   description = ''

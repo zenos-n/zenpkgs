@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.bore-cli";
+  id = "unknown.bore-cli";
   name = "bore";
   summary = "Rust tool to create TCP tunnels";
   description = ''

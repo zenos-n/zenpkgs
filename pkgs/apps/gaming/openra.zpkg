@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.openra";
+  id = "unknown.openra";
   name = "OpenRA";
   summary = "Open Source real-time strategy game engine for early Westwood games such as Command & Conquer: Red Alert. release version";
   description = ''

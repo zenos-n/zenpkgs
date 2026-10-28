@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.wormhole-william";
+  id = "unknown.wormhole-william";
   name = "Wormhole William";
   summary = "End-to-end encrypted file transfers";
   description = ''

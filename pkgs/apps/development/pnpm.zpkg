@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pnpm";
+  id = "unknown.pnpm";
   name = "pnpm";
   summary = "Fast, disk space efficient package manager for JavaScript";
   description = ''

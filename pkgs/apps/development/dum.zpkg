@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.dum";
+  id = "unknown.dum";
   name = "dum";
   summary = "Npm scripts runner written in Rust";
   description = ''

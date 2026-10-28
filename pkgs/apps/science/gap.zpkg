@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.gap";
+  id = "unknown.gap";
   name = "GAP";
   summary = "Computational discrete algebra system";
   description = ''

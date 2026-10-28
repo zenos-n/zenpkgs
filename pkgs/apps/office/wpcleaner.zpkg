@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.wpcleaner";
+  id = "unknown.wpcleaner";
   name = "WPCleaner";
   summary = "Utility for performing maintenance on Wikipedia";
   description = ''

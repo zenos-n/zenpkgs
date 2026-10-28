@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-annex";
+  id = "unknown.git-annex";
   name = "git-annex";
   summary = "manage files with git, without checking their contents into git";
   description = ''

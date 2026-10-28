@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.curtail";
+  id = "unknown.curtail";
   name = "curtail";
   summary = "Curated curtail package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.acme-sh";
+  id = "unknown.acme-sh";
   name = "acme-sh";
   summary = "Pure Unix shell script implementing ACME client protocol";
   description = ''

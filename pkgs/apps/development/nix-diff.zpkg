@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.nix-diff";
+  id = "unknown.nix-diff";
   name = "nix-diff";
   summary = "Explain why two Nix derivations differ";
   description = ''

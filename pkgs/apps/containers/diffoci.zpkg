@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.diffoci";
+  id = "unknown.diffoci";
   name = "Diffoci";
   summary = "Diff for Docker and OCI container images";
   description = ''

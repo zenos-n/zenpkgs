@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.catdocx";
+  id = "unknown.catdocx";
   name = "catdocx";
   summary = "Extracts plain text from docx files";
   description = ''

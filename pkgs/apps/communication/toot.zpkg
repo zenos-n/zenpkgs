@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.toot";
+  id = "unknown.toot";
   name = "toot";
   summary = "Mastodon CLI interface";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.ctodo";
+  id = "unknown.ctodo";
   name = "ctodo";
   summary = "Simple ncurses-based task list manager";
   description = ''

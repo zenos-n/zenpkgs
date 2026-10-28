@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.files.convmv";
+  id = "unknown.convmv";
   name = "convmv";
   summary = "Converts filenames from one encoding to another";
   description = ''

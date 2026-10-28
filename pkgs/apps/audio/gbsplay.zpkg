@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.gbsplay";
+  id = "unknown.gbsplay";
   name = "gbsplay";
   summary = "Gameboy sound player";
   description = ''

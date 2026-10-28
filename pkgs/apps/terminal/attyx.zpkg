@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.attyx";
+  id = "unknown.attyx";
   name = "Attyx";
   summary = "Fast GPU-accelerated terminal emulator built with Zig";
   description = ''

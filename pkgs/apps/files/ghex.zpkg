@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.ghex";
+  id = "unknown.ghex";
   name = "GHex";
   summary = "Hex editor for GNOME desktop environment";
   description = ''

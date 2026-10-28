@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.freesweep";
+  id = "unknown.freesweep";
   name = "FreeSweep";
   summary = "Console minesweeper-style game written in C for Unix-like systems";
   description = ''

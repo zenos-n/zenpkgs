@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.vnote";
+  id = "unknown.vnote";
   name = "VNote";
   summary = "Pleasant note-taking platform";
   description = ''

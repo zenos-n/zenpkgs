@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.cunicu";
+  id = "unknown.cunicu";
   name = "cunicu";
   summary = "Zeroconf peer-to-peer mesh VPN using Wireguard® and Interactive Connectivity Establishment (ICE)";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.gnucap";
+  id = "unknown.gnucap";
   name = "Gnucap";
   summary = "Gnu Circuit Analysis Package";
   description = ''

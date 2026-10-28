@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.numworks-epsilon";
+  id = "unknown.numworks-epsilon";
   name = "NumWorks Epsilon";
   summary = "Simulator for Epsilon, a High-performance graphing calculator operating system";
   description = ''

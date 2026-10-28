@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.exercism";
+  id = "unknown.exercism";
   name = "Exercism CLI";
   summary = "Go based command line tool for exercism.io";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.tk-safe";
+  id = "unknown.tk-safe";
   name = "TkSafe";
   summary = "Electronic medical record (ePA) by Techniker Krankenkasse (TK)";
   description = ''

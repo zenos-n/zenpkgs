@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.entr";
+  id = "unknown.entr";
   name = "entr";
   summary = "Run arbitrary commands when files change";
   description = ''

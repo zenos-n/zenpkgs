@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.caerbannog";
+  id = "unknown.caerbannog";
   name = "Caerbannog";
   summary = "Mobile-friendly Gtk frontend for password-store";
   description = ''

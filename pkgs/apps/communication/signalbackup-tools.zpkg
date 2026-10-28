@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.signalbackup-tools";
+  id = "unknown.signalbackup-tools";
   name = "Signal Backup Tools";
   summary = "Tool to work with Signal Backup files";
   description = ''

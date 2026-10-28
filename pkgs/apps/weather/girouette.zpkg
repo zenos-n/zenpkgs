@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.weather.girouette";
+  id = "unknown.girouette";
   name = "Girouette";
   summary = "Show the weather in the terminal, in style";
   description = ''

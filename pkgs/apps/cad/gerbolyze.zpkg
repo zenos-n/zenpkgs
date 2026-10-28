@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.gerbolyze";
+  id = "unknown.gerbolyze";
   name = "Gerbolyze";
   summary = "Directly render SVG overlays into Gerber and Excellon files";
   description = ''

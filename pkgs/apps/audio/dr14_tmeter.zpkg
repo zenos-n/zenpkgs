@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.dr14-u5f-tmeter";
+  id = "unknown.dr14-u5f-tmeter";
   name = "DR14 T.meter";
   summary = "Compute the DR14 of a given audio file according to the procedure described by the Pleasurize Music Foundation";
   description = ''

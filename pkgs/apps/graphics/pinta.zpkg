@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.pinta";
+  id = "unknown.pinta";
   name = "Pinta";
   summary = "Drawing/editing program modeled after Paint.NET";
   description = ''

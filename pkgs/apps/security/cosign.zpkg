@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.cosign";
+  id = "unknown.cosign";
   name = "cosign";
   summary = "Container Signing CLI with support for ephemeral keys and Sigstore signing";
   description = ''

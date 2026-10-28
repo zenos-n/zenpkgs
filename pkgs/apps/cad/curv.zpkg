@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.curv";
+  id = "unknown.curv";
   name = "Curv";
   summary = "2D and 3D geometric modelling programming language for creating art with maths";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gh-markdown-preview";
+  id = "unknown.gh-markdown-preview";
   name = "GitHub Markdown Preview";
   summary = "gh extension to preview Markdown looking like on GitHub";
   description = ''

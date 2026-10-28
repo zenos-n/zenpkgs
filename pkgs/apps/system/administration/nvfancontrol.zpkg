@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.nvfancontrol";
+  id = "unknown.nvfancontrol";
   name = "NVFanControl";
   summary = "Nvidia dynamic fan control for Linux";
   description = ''

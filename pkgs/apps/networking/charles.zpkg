@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.charles";
+  id = "unknown.charles";
   name = "Charles";
   summary = "Web Debugging Proxy";
   description = ''

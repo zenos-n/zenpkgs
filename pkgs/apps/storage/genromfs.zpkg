@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.genromfs";
+  id = "unknown.genromfs";
   name = "genromfs";
   summary = "Tool for creating romfs file system images";
   description = ''

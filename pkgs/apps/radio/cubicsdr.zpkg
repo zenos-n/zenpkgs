@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.cubicsdr";
+  id = "unknown.cubicsdr";
   name = "CubicSDR";
   summary = "Software Defined Radio application";
   description = ''

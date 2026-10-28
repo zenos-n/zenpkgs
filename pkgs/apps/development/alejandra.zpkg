@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.alejandra";
+  id = "unknown.alejandra";
   name = "Alejandra";
   summary = "Uncompromising Nix Code Formatter";
   description = ''

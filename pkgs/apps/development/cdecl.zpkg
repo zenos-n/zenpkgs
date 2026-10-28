@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cdecl";
+  id = "unknown.cdecl";
   name = "cdecl";
   summary = "Composing and deciphering C (or C++) declarations or casts, aka 'gibberish'";
   description = ''

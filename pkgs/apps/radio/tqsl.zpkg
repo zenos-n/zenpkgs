@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.tqsl";
+  id = "unknown.tqsl";
   name = "TrustedQSL";
   summary = "Software for using the ARRL Logbook of the World";
   description = ''

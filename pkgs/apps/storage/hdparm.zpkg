@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.hdparm";
+  id = "unknown.hdparm";
   name = "hdparm";
   summary = "Tool to get/set ATA/SATA drive parameters under Linux";
   description = ''

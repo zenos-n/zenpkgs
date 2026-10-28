@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.btrfs-heatmap";
+  id = "unknown.btrfs-heatmap";
   name = "btrfs-heatmap";
   summary = "Visualize the layout of a mounted btrfs";
   description = ''

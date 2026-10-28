@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.elfx86exts";
+  id = "unknown.elfx86exts";
   name = "elfx86exts";
   summary = "Decode x86 binaries and print out which instruction set extensions they use";
   description = ''

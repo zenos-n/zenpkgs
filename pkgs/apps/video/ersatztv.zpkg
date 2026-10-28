@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.ersatztv";
+  id = "unknown.ersatztv";
   name = "ErsatzTV";
   summary = "Stream custom live channels using your own media";
   description = ''

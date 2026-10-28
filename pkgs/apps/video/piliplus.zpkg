@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.piliplus";
+  id = "unknown.piliplus";
   name = "PiliPlus";
   summary = "Third-party Bilibili client developed in Flutter";
   description = ''

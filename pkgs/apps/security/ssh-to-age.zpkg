@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.ssh-to-age";
+  id = "unknown.ssh-to-age";
   name = "ssh-to-age";
   summary = "Convert ssh private keys in ed25519 format to age keys";
   description = ''

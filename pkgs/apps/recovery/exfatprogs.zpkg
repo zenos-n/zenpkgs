@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.exfatprogs";
+  id = "unknown.exfatprogs";
   name = "exfatprogs";
   summary = "Curated exfatprogs package for ZenOS";
   description = ''

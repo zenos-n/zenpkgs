@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.teensy-loader-cli";
+  id = "unknown.teensy-loader-cli";
   name = "teensy-loader-cli";
   summary = "Firmware uploader for the Teensy microcontroller boards";
   description = ''

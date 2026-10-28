@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.gnuastro";
+  id = "unknown.gnuastro";
   name = "GNU Astronomy Utilities";
   summary = "GNU astronomy utilities and library";
   description = ''

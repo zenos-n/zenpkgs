@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.libs.nss";
+  id = "unknown.nss";
   name = "nss";
   summary = "Set of libraries for development of security-enabled client and server applications";
   description = ''

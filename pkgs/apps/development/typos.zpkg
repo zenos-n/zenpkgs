@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.typos";
+  id = "unknown.typos";
   name = "typos";
   summary = "Source code spell checker";
   description = ''

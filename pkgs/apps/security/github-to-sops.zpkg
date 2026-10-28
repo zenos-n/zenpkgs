@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.github-to-sops";
+  id = "unknown.github-to-sops";
   name = "github-to-sops";
   summary = "Tool for managing infrastructure secrets in git repositories using SOPS and GitHub SSH keys";
   description = ''

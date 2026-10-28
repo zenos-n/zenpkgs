@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.dmrconfig";
+  id = "unknown.dmrconfig";
   name = "DMRConfig";
   summary = "Configuration utility for DMR radios";
   description = ''

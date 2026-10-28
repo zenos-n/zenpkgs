@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.detox";
+  id = "unknown.detox";
   name = "detox";
   summary = "Utility designed to clean up filenames";
   description = ''

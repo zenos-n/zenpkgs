@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.networking.hickory-dns";
+  id = "unknown.hickory-dns";
   name = "Hickory DNS";
   summary = "Rust based DNS client, server, and resolver";
   description = ''

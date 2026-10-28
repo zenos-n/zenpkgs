@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.magic-vlsi";
+  id = "unknown.magic-vlsi";
   name = "Magic VLSI";
   summary = "VLSI layout tool written in Tcl";
   description = ''

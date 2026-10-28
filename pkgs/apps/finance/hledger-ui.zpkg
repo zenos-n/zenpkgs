@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.hledger-ui";
+  id = "unknown.hledger-ui";
   name = "hledger UI";
   summary = "Terminal interface for the hledger accounting system";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.genpass";
+  id = "unknown.genpass";
   name = "genpass";
   summary = "Simple yet robust commandline random password generator";
   description = ''

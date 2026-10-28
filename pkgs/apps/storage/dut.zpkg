@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.dut";
+  id = "unknown.dut";
   name = "dut";
   summary = "Disk usage calculator for Linux";
   description = ''

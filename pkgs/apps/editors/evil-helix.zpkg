@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.evil-helix";
+  id = "unknown.evil-helix";
   name = "Evil Helix";
   summary = "Post-modern modal text editor, with vim keybindings";
   description = ''

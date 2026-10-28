@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.ctune";
+  id = "unknown.ctune";
   name = "ctune";
   summary = "Nice terminal nCurses (tui) internet radio player for Linux, browse and search from api.radio-browser.info";
   description = ''

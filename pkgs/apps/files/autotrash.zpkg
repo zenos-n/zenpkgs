@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.autotrash";
+  id = "unknown.autotrash";
   name = "AutoTrash";
   summary = "Tool to automatically purge old trashed files";
   description = ''

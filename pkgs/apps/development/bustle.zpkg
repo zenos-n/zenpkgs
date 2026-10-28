@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bustle";
+  id = "unknown.bustle";
   name = "Bustle";
   summary = "Graphical D-Bus message analyser and profiler";
   description = ''

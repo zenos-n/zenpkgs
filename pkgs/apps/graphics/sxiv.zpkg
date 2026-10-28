@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.sxiv";
+  id = "unknown.sxiv";
   name = "sxiv";
   summary = "Simple X Image Viewer";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.uutils-coreutils";
+  id = "unknown.uutils-coreutils";
   name = "uutils-coreutils";
   summary = "Cross-platform Rust rewrite of the GNU coreutils";
   description = ''

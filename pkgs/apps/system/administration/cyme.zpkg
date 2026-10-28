@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.cyme";
+  id = "unknown.cyme";
   name = "cyme";
   summary = "Modern cross-platform lsusb";
   description = ''

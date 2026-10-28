@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.litestream";
+  id = "unknown.litestream";
   name = "Litestream";
   summary = "Streaming replication for SQLite";
   description = ''

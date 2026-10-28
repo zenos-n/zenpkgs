@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.usbutils";
+  id = "unknown.usbutils";
   name = "usbutils";
   summary = "Curated usbutils package for ZenOS";
   description = ''

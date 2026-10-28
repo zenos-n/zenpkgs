@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.scenebuilder";
+  id = "unknown.scenebuilder";
   name = "Scene Builder";
   summary = "Visual, drag'n'drop, layout tool for designing JavaFX application user interfaces";
   description = ''

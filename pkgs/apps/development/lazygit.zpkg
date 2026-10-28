@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.lazygit";
+  id = "unknown.lazygit";
   name = "LazyGit";
   summary = "Simple terminal UI for git commands";
   description = ''

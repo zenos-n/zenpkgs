@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.go-task";
+  id = "unknown.go-task";
   name = "Task";
   summary = "Task runner / simpler Make alternative written in Go";
   description = ''

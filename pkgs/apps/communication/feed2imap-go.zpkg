@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.feed2imap-go";
+  id = "unknown.feed2imap-go";
   name = "feed2imap-go";
   summary = "Uploads rss feeds as e-mails onto an IMAP server";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.batticonplus";
+  id = "unknown.batticonplus";
   name = "BatticonPlus";
   summary = "Lightweight battery status icon for the system tray and notifier (based on cbatticon)";
   description = ''

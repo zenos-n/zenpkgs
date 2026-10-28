@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.bristol";
+  id = "unknown.bristol";
   name = "Bristol";
   summary = "Range of synthesiser, electric piano and organ emulations";
   description = ''

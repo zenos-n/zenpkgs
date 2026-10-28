@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.httptoolkit";
+  id = "unknown.httptoolkit";
   name = "HTTP Toolkit";
   summary = "HTTP(S) debugging, development & testing tool";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.golden-cheetah";
+  id = "unknown.golden-cheetah";
   name = "GoldenCheetah";
   summary = "Performance software for cyclists, runners and triathletes. Built from source and without API tokens";
   description = ''

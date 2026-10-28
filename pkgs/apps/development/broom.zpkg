@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.broom";
+  id = "unknown.broom";
   name = "broom";
   summary = "Interactive CLI tool for managing local git branches";
   description = ''

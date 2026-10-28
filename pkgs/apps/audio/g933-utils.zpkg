@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.g933-utils";
+  id = "unknown.g933-utils";
   name = "G933 Utilities";
   summary = "Application to configure Logitech wireless G933/G533 headsets";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bingrep";
+  id = "unknown.bingrep";
   name = "bingrep";
   summary = "Greps through binaries from various OSs and architectures, and colors them";
   description = ''

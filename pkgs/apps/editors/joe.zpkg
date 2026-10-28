@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.joe";
+  id = "unknown.joe";
   name = "JOE";
   summary = "Full featured terminal-based screen editor";
   description = ''

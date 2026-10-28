@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.webeep-sync";
+  id = "unknown.webeep-sync";
   name = "WeBeep Sync";
   summary = "Keep all your WeBeep files synced on your computer";
   description = ''

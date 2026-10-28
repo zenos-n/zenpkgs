@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.qgit";
+  id = "unknown.qgit";
   name = "QGit";
   summary = "Graphical front-end to Git";
   description = ''

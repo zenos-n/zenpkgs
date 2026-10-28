@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.ugs";
+  id = "unknown.ugs";
   name = "Universal Gcode Sender";
   summary = "Cross-platform G-Code sender for GRBL, Smoothieware, TinyG and G2core";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.vbindiff";
+  id = "unknown.vbindiff";
   name = "vbindiff";
   summary = "Terminal visual binary diff viewer";
   description = ''

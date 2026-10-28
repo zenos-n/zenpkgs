@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.simutrans";
+  id = "unknown.simutrans";
   name = "Simutrans";
   summary = "Simulation game in which the player strives to run a successful transport system";
   description = ''

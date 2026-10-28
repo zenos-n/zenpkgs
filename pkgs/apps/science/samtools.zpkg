@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.samtools";
+  id = "unknown.samtools";
   name = "SAMtools";
   summary = "Tools for manipulating SAM/BAM/CRAM format";
   description = ''

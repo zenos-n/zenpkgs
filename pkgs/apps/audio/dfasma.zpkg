@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.audio.dfasma";
+  id = "unknown.dfasma";
   name = "DFasma";
   summary = "Analyse and compare audio files in time and frequency";
   description = ''

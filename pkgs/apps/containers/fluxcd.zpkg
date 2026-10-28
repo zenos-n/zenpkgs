@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.fluxcd";
+  id = "unknown.fluxcd";
   name = "Flux";
   summary = "Open and extensible continuous delivery solution for Kubernetes";
   description = ''

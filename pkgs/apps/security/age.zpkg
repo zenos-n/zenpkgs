@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.age";
+  id = "unknown.age";
   name = "age";
   summary = "Modern encryption tool with small explicit keys";
   description = ''

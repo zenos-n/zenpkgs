@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.archives.crabz";
+  id = "unknown.crabz";
   name = "crabz";
   summary = "Cross platform, fast, compression and decompression tool";
   description = ''

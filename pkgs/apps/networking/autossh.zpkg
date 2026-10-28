@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.autossh";
+  id = "unknown.autossh";
   name = "AutoSSH";
   summary = "Automatically restart SSH sessions and tunnels";
   description = ''

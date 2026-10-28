@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.photoqt";
+  id = "unknown.photoqt";
   name = "PhotoQt";
   summary = "Simple, yet powerful and good looking image viewer";
   description = ''

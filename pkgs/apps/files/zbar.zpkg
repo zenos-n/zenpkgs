@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.zbar";
+  id = "unknown.zbar";
   name = "ZBar";
   summary = "Bar code reader";
   description = ''

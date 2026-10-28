@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bbin";
+  id = "unknown.bbin";
   name = "bbin";
   summary = "Install any Babashka script or project with one command";
   description = ''

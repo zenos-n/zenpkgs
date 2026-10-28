@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.cryptomator";
+  id = "unknown.cryptomator";
   name = "Cryptomator";
   summary = "Free client-side encryption for your cloud files";
   description = ''

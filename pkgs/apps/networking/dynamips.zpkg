@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.dynamips";
+  id = "unknown.dynamips";
   name = "Dynamips";
   summary = "Cisco router emulator";
   description = ''

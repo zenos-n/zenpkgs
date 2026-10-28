@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.badkeys";
+  id = "unknown.badkeys";
   name = "badkeys";
   summary = "Tool to find common vulnerabilities in cryptographic public keys";
   description = ''

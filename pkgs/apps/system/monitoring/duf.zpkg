@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.duf";
+  id = "unknown.duf";
   name = "duf";
   summary = "Disk Usage/Free Utility";
   description = ''

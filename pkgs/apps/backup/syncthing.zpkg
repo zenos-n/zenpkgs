@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.syncthing";
+  id = "unknown.syncthing";
   name = "Syncthing";
   summary = "Open Source Continuous File Synchronization";
   description = ''

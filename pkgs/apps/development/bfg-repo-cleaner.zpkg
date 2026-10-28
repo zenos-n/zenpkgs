@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bfg-repo-cleaner";
+  id = "unknown.bfg-repo-cleaner";
   name = "BFG Repo-Cleaner";
   summary = "Removes large or troublesome blobs in a git repository like git-filter-branch does, but faster";
   description = ''

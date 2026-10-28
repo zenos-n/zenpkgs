@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.graphicsmagick";
+  id = "unknown.graphicsmagick";
   name = "GraphicsMagick";
   summary = "Swiss army knife of image processing";
   description = ''

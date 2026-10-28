@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.venera";
+  id = "unknown.venera";
   name = "Venera";
   summary = "Comic reader that support reading local and network comics";
   description = ''

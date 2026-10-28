@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.function-runner";
+  id = "unknown.function-runner";
   name = "Shopify Function Runner";
   summary = "CLI tool which allows you to run Wasm Functions intended for the Shopify Functions infrastructure";
   description = ''

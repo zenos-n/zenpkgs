@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.mkgmap";
+  id = "unknown.mkgmap";
   name = "mkgmap";
   summary = "Create maps for Garmin GPS devices from OpenStreetMap (OSM) data";
   description = ''

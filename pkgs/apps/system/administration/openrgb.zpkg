@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.openrgb";
+  id = "unknown.openrgb";
   name = "OpenRGB";
   summary = "Open source RGB lighting control";
   description = ''

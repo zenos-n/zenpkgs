@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-big-picture";
+  id = "unknown.git-big-picture";
   name = "git-big-picture";
   summary = "Tool for visualization of Git repositories";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.headlamp";
+  id = "unknown.headlamp";
   name = "Headlamp";
   summary = "An easy-to-use and extensible Kubernetes web UI";
   description = ''

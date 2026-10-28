@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.svls";
+  id = "unknown.svls";
   name = "svls";
   summary = "SystemVerilog language server";
   description = ''

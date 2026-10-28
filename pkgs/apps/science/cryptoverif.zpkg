@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.cryptoverif";
+  id = "unknown.cryptoverif";
   name = "CryptoVerif";
   summary = "Cryptographic protocol verifier in the computational model";
   description = ''

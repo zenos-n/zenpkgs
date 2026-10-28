@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.gwyddion";
+  id = "unknown.gwyddion";
   name = "Gwyddion";
   summary = "Scanning probe microscopy data visualization and analysis";
   description = ''

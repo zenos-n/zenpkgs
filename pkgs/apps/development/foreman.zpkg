@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.foreman";
+  id = "unknown.foreman";
   name = "Foreman";
   summary = "Process manager for applications with multiple components";
   description = ''

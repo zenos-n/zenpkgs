@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.dtop";
+  id = "unknown.dtop";
   name = "dtop";
   summary = "Terminal dashboard for Docker monitoring across multiple hosts with Dozzle integration";
   description = ''

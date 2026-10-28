@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.fcast-client";
+  id = "unknown.fcast-client";
   name = "FCast Client";
   summary = "FCast Client Terminal, a terminal open-source media streaming client";
   description = ''

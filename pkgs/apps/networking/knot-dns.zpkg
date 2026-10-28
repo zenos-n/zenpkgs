@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.knot-dns";
+  id = "unknown.knot-dns";
   name = "Knot DNS";
   summary = "Authoritative-only DNS server from .cz domain registry";
   description = ''

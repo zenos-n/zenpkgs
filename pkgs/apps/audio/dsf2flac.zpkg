@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.dsf2flac";
+  id = "unknown.dsf2flac";
   name = "dsf2flac";
   summary = "DSD to FLAC transcoding tool";
   description = ''

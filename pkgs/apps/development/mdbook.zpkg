@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.mdbook";
+  id = "unknown.mdbook";
   name = "mdBook";
   summary = "Create books from MarkDown";
   description = ''

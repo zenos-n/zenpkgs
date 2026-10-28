@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.burn-my-windows";
+  id = "unknown.burn-my-windows";
   name = "burn-my-windows";
   summary = "Curated burn-my-windows package for ZenOS";
   description = ''

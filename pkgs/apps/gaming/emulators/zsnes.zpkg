@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.zsnes";
+  id = "unknown.zsnes";
   name = "ZSNES";
   summary = "Super Nintendo Entertainment System Emulator";
   description = ''

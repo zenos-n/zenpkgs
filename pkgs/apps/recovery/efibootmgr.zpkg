@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.efibootmgr";
+  id = "unknown.efibootmgr";
   name = "efibootmgr";
   summary = "Curated efibootmgr package for ZenOS";
   description = ''

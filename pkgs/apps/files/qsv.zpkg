@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.files.qsv";
+  id = "unknown.qsv";
   name = "qsv";
   summary = "CSVs sliced, diced & analyzed";
   description = ''

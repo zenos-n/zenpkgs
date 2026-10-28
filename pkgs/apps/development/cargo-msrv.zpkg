@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-msrv";
+  id = "unknown.cargo-msrv";
   name = "cargo-msrv";
   summary = "Cargo subcommand \"msrv\": assists with finding your minimum supported Rust version (MSRV)";
   description = ''

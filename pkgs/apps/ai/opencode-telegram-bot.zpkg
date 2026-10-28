@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.opencode-telegram-bot";
+  id = "unknown.opencode-telegram-bot";
   name = "opencode-telegram-bot"; summary = "Telegram bridge for opencode";
   description = ''Telegram bridge for opencode. Installs the pinned command-line client without starting a bot or storing credentials.'';
   zenosVersion = "1.0.0"; packageVersion = "0.25.0";

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.multimedia.ruffle";
+  id = "unknown.ruffle";
   name = "Ruffle";
   summary = "Cross platform Adobe Flash Player emulator";
   description = ''

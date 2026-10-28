@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.tinc";
+  id = "unknown.tinc";
   name = "tinc";
   summary = "VPN daemon with full mesh routing";
   description = ''

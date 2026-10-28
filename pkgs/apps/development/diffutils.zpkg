@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.diffutils";
+  id = "unknown.diffutils";
   name = "diffutils";
   summary = "Commands for showing the differences between files (diff, cmp, etc.)";
   description = ''

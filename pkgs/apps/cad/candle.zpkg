@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.candle";
+  id = "unknown.candle";
   name = "Candle";
   summary = "GRBL controller application with G-Code visualizer written in Qt";
   description = ''

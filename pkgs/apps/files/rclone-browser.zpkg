@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.rclone-browser";
+  id = "unknown.rclone-browser";
   name = "Rclone Browser";
   summary = "Graphical Frontend to Rclone written in Qt";
   description = ''

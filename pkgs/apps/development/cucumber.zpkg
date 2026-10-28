@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cucumber";
+  id = "unknown.cucumber";
   name = "Cucumber";
   summary = "Tool for executable specifications";
   description = ''

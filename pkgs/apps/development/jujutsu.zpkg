@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.jujutsu";
+  id = "unknown.jujutsu";
   name = "Jujutsu";
   summary = "Git-compatible DVCS that is both simple and powerful";
   description = ''

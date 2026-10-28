@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.kstars";
+  id = "unknown.kstars";
   name = "KStars";
   summary = "Virtual planetarium astronomy software";
   description = ''

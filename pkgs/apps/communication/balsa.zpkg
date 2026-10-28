@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.balsa";
+  id = "unknown.balsa";
   name = "Balsa";
   summary = "E-mail client for GNOME";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.eom";
+  id = "unknown.eom";
   name = "Eye of MATE";
   summary = "Image viewing and cataloging program for the MATE desktop";
   description = ''

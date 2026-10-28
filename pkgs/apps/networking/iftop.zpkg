@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.iftop";
+  id = "unknown.iftop";
   name = "iftop";
   summary = "Display bandwidth usage on a network interface";
   description = ''

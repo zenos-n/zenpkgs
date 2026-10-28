@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.yadm";
+  id = "unknown.yadm";
   name = "yadm";
   summary = "Yet Another Dotfiles Manager";
   description = ''

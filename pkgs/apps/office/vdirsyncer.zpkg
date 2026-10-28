@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.vdirsyncer";
+  id = "unknown.vdirsyncer";
   name = "vdirsyncer";
   summary = "Synchronize calendars and contacts";
   description = ''

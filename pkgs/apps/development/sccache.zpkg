@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.sccache";
+  id = "unknown.sccache";
   name = "sccache";
   summary = "Ccache with Cloud Storage";
   description = ''

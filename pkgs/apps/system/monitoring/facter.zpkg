@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.facter";
+  id = "unknown.facter";
   name = "Facter";
   summary = "System inventory tool";
   description = ''

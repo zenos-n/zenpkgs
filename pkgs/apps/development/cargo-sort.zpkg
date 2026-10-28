@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-sort";
+  id = "unknown.cargo-sort";
   name = "cargo-sort";
   summary = "Tool to check that your Cargo.toml dependencies are sorted alphabetically";
   description = ''

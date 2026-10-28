@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.lcdf-typetools";
+  id = "unknown.lcdf-typetools";
   name = "LCDF Typetools";
   summary = "Utilities for manipulating OpenType, PostScript Type 1, and Multiple Master fonts";
   description = ''

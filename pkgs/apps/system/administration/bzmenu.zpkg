@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.bzmenu";
+  id = "unknown.bzmenu";
   name = "bzmenu";
   summary = "Launcher-driven Bluetooth manager for Linux";
   description = ''

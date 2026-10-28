@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.networking.kdenetwork-filesharing";
+  id = "unknown.kdenetwork-filesharing";
   name = "KDE File Sharing";
   summary = "Samba file sharing plugin for file properties";
   description = ''

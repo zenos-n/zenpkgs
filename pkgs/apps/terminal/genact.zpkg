@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.genact";
+  id = "unknown.genact";
   name = "genact";
   summary = "Nonsense activity generator";
   description = ''

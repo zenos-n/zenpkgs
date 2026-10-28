@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.blockdiag";
+  id = "unknown.blockdiag";
   name = "blockdiag";
   summary = "Generate block-diagram image from spec-text file (similar to Graphviz)";
   description = ''

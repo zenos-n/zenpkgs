@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.eclipse-cpp";
+  id = "unknown.eclipse-cpp";
   name = "Eclipse IDE for C/C++";
   summary = "Eclipse IDE for C/C++ Developers";
   description = ''

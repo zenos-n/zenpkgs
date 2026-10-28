@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.freeciv";
+  id = "unknown.freeciv";
   name = "Freeciv";
   summary = "Multiplayer (or single player), turn-based strategy game";
   description = ''

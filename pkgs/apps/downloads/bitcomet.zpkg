@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.bitcomet";
+  id = "unknown.bitcomet";
   name = "BitComet";
   summary = "BitTorrent download client";
   description = ''

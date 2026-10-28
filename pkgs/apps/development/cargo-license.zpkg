@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-license";
+  id = "unknown.cargo-license";
   name = "cargo-license";
   summary = "Cargo subcommand to see license of dependencies";
   description = ''

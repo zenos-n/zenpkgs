@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.evince";
+  id = "unknown.evince";
   name = "Evince";
   summary = "GNOME's document viewer";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cljstyle";
+  id = "unknown.cljstyle";
   name = "cljstyle";
   summary = "Tool for formatting Clojure code";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-aggregator";
+  id = "unknown.git-aggregator";
   name = "git-aggregator";
   summary = "Manage the aggregation of git branches from different remotes to build a consolidated one";
   description = ''

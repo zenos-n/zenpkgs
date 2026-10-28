@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.blueprint-compiler";
+  id = "unknown.blueprint-compiler";
   name = "Blueprint Compiler";
   summary = "Markup language for GTK user interface files";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.facedetect";
+  id = "unknown.facedetect";
   name = "facedetect";
   summary = "Simple face detector for batch processing";
   description = ''

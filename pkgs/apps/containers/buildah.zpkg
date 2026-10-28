@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.buildah";
+  id = "unknown.buildah";
   name = "Buildah";
   summary = "Tool which facilitates building OCI images";
   description = ''

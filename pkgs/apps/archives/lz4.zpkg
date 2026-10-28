@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.archives.lz4";
+  id = "unknown.lz4";
   name = "LZ4";
   summary = "Extremely fast compression algorithm";
   description = ''

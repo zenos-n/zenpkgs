@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.mars-mips";
+  id = "unknown.mars-mips";
   name = "MARS MIPS";
   summary = "IDE for programming in MIPS assembly language intended for educational-level use";
   description = ''

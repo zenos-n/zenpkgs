@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.solanum";
+  id = "unknown.solanum";
   name = "Solanum IRCd";
   summary = "IRCd for unified networks";
   description = ''

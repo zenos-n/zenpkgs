@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.jchempaint";
+  id = "unknown.jchempaint";
   name = "JChemPaint";
   summary = "Chemical 2D structure editor application/applet based on the Chemistry Development Kit";
   description = ''

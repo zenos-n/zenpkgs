@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.socat";
+  id = "unknown.socat";
   name = "socat";
   summary = "Utility for bidirectional data transfer between two independent data channels";
   description = ''

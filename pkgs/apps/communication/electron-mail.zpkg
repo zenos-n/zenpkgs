@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.electron-mail";
+  id = "unknown.electron-mail";
   name = "ElectronMail";
   summary = "Unofficial Electron-based ProtonMail desktop client";
   description = ''

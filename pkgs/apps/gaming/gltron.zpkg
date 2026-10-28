@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gltron";
+  id = "unknown.gltron";
   name = "GLtron";
   summary = "Game based on the movie Tron";
   description = ''

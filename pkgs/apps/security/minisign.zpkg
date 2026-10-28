@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.minisign";
+  id = "unknown.minisign";
   name = "Minisign";
   summary = "Simple tool for signing files and verifying signatures";
   description = ''

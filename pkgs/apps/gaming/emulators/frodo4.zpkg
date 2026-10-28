@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.frodo4";
+  id = "unknown.frodo4";
   name = "Frodo";
   summary = "C64 emulator with emphasis on graphical accuracy";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.quadrapassel";
+  id = "unknown.quadrapassel";
   name = "Quadrapassel";
   summary = "Classic falling-block game, Tetris";
   description = ''

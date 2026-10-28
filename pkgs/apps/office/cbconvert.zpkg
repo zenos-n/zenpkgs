@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.cbconvert";
+  id = "unknown.cbconvert";
   name = "CBconvert";
   summary = "Comic Book converter";
   description = ''

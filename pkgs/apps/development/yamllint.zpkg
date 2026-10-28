@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.yamllint";
+  id = "unknown.yamllint";
   name = "yamllint";
   summary = "Linter for YAML files";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.dutree";
+  id = "unknown.dutree";
   name = "dutree";
   summary = "Tool to analyze file system usage written in Rust";
   description = ''

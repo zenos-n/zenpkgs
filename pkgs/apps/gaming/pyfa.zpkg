@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.pyfa";
+  id = "unknown.pyfa";
   name = "Pyfa";
   summary = "Python fitting assistant, cross-platform fitting tool for EVE Online";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.imv";
+  id = "unknown.imv";
   name = "imv";
   summary = "Command line image viewer for tiling window managers";
   description = ''

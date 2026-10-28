@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.dumphfdl";
+  id = "unknown.dumphfdl";
   name = "dumphfdl";
   summary = "Decoder for Multichannel HFDL aircraft communication";
   description = ''

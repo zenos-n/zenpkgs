@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.mcontrolcenter";
+  id = "unknown.mcontrolcenter";
   name = "MControlCenter";
   summary = "Tool to change the settings of MSI laptops running Linux";
   description = ''

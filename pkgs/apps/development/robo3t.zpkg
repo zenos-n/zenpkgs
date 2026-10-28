@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.robo3t";
+  id = "unknown.robo3t";
   name = "Robo 3T";
   summary = "Query GUI for mongodb. Formerly called Robomongo";
   description = ''

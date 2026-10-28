@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.ringracers";
+  id = "unknown.ringracers";
   name = "Ring Racers";
   summary = "Kart racing video game based on Sonic Robo Blast 2 (SRB2), itself based on a modified version of Doom Legacy";
   description = ''

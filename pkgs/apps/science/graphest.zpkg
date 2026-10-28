@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.graphest";
+  id = "unknown.graphest";
   name = "Graphest";
   summary = "Graphing calculator that can faithfully plot arbitrary mathematical relations";
   description = ''

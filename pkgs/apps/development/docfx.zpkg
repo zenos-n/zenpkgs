@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.docfx";
+  id = "unknown.docfx";
   name = "DocFX";
   summary = "Build your technical documentation site with docfx, with landing pages, markdown, API reference docs for .NET, REST API and more";
   description = ''

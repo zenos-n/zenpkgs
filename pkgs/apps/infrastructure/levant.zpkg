@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.levant";
+  id = "unknown.levant";
   name = "Levant";
   summary = "Open source templating and deployment tool for HashiCorp Nomad jobs";
   description = ''

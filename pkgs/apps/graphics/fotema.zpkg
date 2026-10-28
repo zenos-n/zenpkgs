@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.fotema";
+  id = "unknown.fotema";
   name = "Fotema";
   summary = "Photo gallery for Linux";
   description = ''

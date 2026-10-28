@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.go-hass-agent";
+  id = "unknown.go-hass-agent";
   name = "Go Hass Agent";
   summary = "Home Assistant native app for desktop/laptop devices";
   description = ''

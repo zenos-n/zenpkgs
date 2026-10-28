@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.deadbeef";
+  id = "unknown.deadbeef";
   name = "DeaDBeeF";
   summary = "Ultimate Music Player for GNU/Linux";
   description = ''

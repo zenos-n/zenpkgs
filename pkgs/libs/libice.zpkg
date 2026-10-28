@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.libs.libice";
+  id = "unknown.libice";
   name = "libice";
   summary = "Inter-Client Exchange Library";
   description = ''

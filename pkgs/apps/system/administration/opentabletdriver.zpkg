@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.opentabletdriver";
+  id = "unknown.opentabletdriver";
   name = "OpenTabletDriver";
   summary = "Open source, cross-platform, user-mode tablet driver";
   description = ''

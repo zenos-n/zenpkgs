@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.texmaker";
+  id = "unknown.texmaker";
   name = "Texmaker";
   summary = "TeX and LaTeX editor";
   description = ''

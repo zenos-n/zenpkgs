@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.fonttools";
+  id = "unknown.fonttools";
   name = "FontTools";
   summary = "Library to manipulate font files from Python";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.betterleaks";
+  id = "unknown.betterleaks";
   name = "BetterLeaks";
   summary = "Scan code for secrets";
   description = ''

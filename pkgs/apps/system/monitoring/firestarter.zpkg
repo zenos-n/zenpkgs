@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.firestarter";
+  id = "unknown.firestarter";
   name = "FIRESTARTER";
   summary = "Processor Stress Test Utility";
   description = ''

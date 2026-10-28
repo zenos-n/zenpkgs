@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.openjk";
+  id = "unknown.openjk";
   name = "OpenJK";
   summary = "Open-source engine for Star Wars Jedi Academy game";
   description = ''

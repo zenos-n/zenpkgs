@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-lambda";
+  id = "unknown.cargo-lambda";
   name = "cargo-lambda";
   summary = "Cargo subcommand to help you work with AWS Lambda";
   description = ''

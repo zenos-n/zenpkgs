@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.qpaeq";
+  id = "unknown.qpaeq";
   name = "Qpaeq";
   summary = "Equalizer interface for pulseaudio's equalizer sinks";
   description = ''

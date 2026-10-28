@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.openroad";
+  id = "unknown.openroad";
   name = "OpenROAD";
   summary = "OpenROAD's unified application implementing an RTL-to-GDS flow";
   description = ''

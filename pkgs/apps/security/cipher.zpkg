@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.cipher";
+  id = "unknown.cipher";
   name = "cipher";
   summary = "Curated cipher package for ZenOS";
   description = ''

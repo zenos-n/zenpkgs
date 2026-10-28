@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.cwtch-ui";
+  id = "unknown.cwtch-ui";
   name = "Cwtch";
   summary = "Messaging app built on the cwtch decentralized, privacy-preserving, multi-party messaging protocol";
   description = ''

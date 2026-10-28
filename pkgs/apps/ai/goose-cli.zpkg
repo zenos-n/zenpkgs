@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.goose-cli";
+  id = "unknown.goose-cli";
   name = "Goose";
   summary = "Open-source, extensible AI agent that goes beyond code suggestions - install, execute, edit, and test with any LLM";
   description = ''

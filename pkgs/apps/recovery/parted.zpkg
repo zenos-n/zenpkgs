@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.parted";
+  id = "unknown.parted";
   name = "parted";
   summary = "Curated parted package for ZenOS";
   description = ''

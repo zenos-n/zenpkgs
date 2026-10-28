@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.alire";
+  id = "unknown.alire";
   name = "Alire";
   summary = "Source-based package manager for the Ada and SPARK programming languages";
   description = ''

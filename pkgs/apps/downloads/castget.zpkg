@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.castget";
+  id = "unknown.castget";
   name = "castget";
   summary = "Simple, command-line based RSS enclosure downloader";
   description = ''

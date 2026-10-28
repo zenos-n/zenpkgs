@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.chainsaw";
+  id = "unknown.chainsaw";
   name = "Chainsaw";
   summary = "Rapidly Search and Hunt through Windows Forensic Artefacts";
   description = ''

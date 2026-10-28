@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gh-s";
+  id = "unknown.gh-s";
   name = "gh-s";
   summary = "Search github repositories interactively";
   description = ''

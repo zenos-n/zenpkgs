@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.scipopt-soplex";
+  id = "unknown.scipopt-soplex";
   name = "SoPlex";
   summary = "Sequential object-oriented simPlex";
   description = ''

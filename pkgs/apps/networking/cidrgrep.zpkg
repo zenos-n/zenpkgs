@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.cidrgrep";
+  id = "unknown.cidrgrep";
   name = "cidrgrep";
   summary = "Like grep but for IPv4 CIDRs";
   description = ''

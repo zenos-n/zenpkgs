@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.ryubing-canary";
+  id = "unknown.ryubing-canary";
   name = "Ryubing Canary";
   summary = "Ryubing Canary Nintendo Switch emulator";
   description = ''Ryubing Canary Nintendo Switch emulator. Optional migration package; installation does not activate a service.'';

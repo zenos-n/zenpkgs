@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.ghostty";
+  id = "unknown.ghostty";
   name = "Ghostty";
   summary = "Fast, native, feature-rich terminal emulator pushing modern features";
   description = ''

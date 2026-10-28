@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.geteduroam";
+  id = "unknown.geteduroam";
   name = "geteduroam";
   summary = "GUI client to configure eduroam";
   description = ''

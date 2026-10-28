@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.confclerk";
+  id = "unknown.confclerk";
   name = "ConfClerk";
   summary = "Offline conference schedule viewer";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.ckb-next";
+  id = "unknown.ckb-next";
   name = "ckb-next";
   summary = "Driver and configuration tool for Corsair keyboards and mice";
   description = ''

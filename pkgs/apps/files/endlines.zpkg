@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.endlines";
+  id = "unknown.endlines";
   name = "endlines";
   summary = "Easy conversion between new-line conventions";
   description = ''

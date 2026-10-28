@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gimoji";
+  id = "unknown.gimoji";
   name = "gimoji";
   summary = "Easily add emojis to your git commit messages";
   description = ''

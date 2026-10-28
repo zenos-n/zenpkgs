@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fdupes";
+  id = "unknown.fdupes";
   name = "fdupes";
   summary = "Identifies duplicate files residing within specified directories";
   description = ''

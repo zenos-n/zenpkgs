@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.apkeditor";
+  id = "unknown.apkeditor";
   name = "APK Editor";
   summary = "Powerful android apk resources editor";
   description = ''

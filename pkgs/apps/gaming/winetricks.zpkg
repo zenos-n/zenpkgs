@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.winetricks";
+  id = "unknown.winetricks";
   name = "Winetricks";
   summary = "Script to install DLLs needed to work around problems in Wine";
   description = ''

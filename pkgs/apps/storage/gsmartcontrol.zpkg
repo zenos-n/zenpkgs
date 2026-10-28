@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.gsmartcontrol";
+  id = "unknown.gsmartcontrol";
   name = "GSmartControl";
   summary = "Hard disk drive health inspection tool";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.ffsubsync";
+  id = "unknown.ffsubsync";
   name = "ffsubsync";
   summary = "Automagically synchronize subtitles with video";
   description = ''

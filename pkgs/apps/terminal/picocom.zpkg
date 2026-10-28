@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.picocom";
+  id = "unknown.picocom";
   name = "picocom";
   summary = "Minimal dumb-terminal emulation program";
   description = ''

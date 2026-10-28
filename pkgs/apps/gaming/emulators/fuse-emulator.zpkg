@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.fuse-emulator";
+  id = "unknown.fuse-emulator";
   name = "Fuse";
   summary = "ZX Spectrum emulator";
   description = ''

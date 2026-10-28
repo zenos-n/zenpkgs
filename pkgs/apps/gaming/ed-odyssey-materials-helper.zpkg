@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.ed-odyssey-materials-helper";
+  id = "unknown.ed-odyssey-materials-helper";
   name = "ED Odyssey Materials Helper";
   summary = "Helper for managing materials in Elite Dangerous Odyssey";
   description = ''

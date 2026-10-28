@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.gash";
+  id = "unknown.gash";
   name = "Gash";
   summary = "POSIX-compatible shell written in Guile Scheme";
   description = ''

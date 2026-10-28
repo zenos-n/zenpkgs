@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.trimage";
+  id = "unknown.trimage";
   name = "Trimage";
   summary = "Cross-platform tool for optimizing PNG and JPG files";
   description = ''

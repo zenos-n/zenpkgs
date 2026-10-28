@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.ebook2cw";
+  id = "unknown.ebook2cw";
   name = "ebook2cw";
   summary = "Convert ebooks to Morse MP3s/OGGs";
   description = ''

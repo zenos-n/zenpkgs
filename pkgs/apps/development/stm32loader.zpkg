@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.stm32loader";
+  id = "unknown.stm32loader";
   name = "stm32loader";
   summary = "Flash firmware to STM32 microcontrollers in Python";
   description = ''

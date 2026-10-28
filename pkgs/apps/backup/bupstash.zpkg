@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.bupstash";
+  id = "unknown.bupstash";
   name = "Bupstash";
   summary = "Easy and efficient encrypted backups";
   description = ''

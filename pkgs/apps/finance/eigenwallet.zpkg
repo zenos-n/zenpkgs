@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.eigenwallet";
+  id = "unknown.eigenwallet";
   name = "Eigenwallet";
   summary = "Protocol and desktop application for swapping Monero and Bitcoin";
   description = ''

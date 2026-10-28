@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.lycheeslicer";
+  id = "unknown.lycheeslicer";
   name = "Lychee Slicer";
   summary = "All-in-one 3D slicer for resin and FDM printers";
   description = ''

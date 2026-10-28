@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gengetopt";
+  id = "unknown.gengetopt";
   name = "GNU Gengetopt";
   summary = "Command-line option parser generator";
   description = ''

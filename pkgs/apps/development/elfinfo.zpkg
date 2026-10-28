@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.elfinfo";
+  id = "unknown.elfinfo";
   name = "elfinfo";
   summary = "Small utility for showing information about ELF files";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.fnuidesktop-vr";
+  id = "unknown.fnuidesktop-vr";
   name = "fnuidesktop VR";
   summary = "Wayland desktop mirror for SteamVR using PipeWire";
   description = ''Wayland desktop mirror for SteamVR using PipeWire. Optional migration package; installation does not activate a service.'';

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.starship-sf64";
+  id = "unknown.starship-sf64";
   name = "Starship";
   summary = "SF64 PC Port";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.calcoo";
+  id = "unknown.calcoo";
   name = "Calcoo";
   summary = "RPN and algebraic scientific calculator";
   description = ''

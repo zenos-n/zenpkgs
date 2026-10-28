@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.screen";
+  id = "unknown.screen";
   name = "GNU Screen";
   summary = "Window manager that multiplexes a physical terminal";
   description = ''

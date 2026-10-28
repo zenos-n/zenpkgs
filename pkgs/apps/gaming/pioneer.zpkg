@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.pioneer";
+  id = "unknown.pioneer";
   name = "Pioneer";
   summary = "Space adventure game set in the Milky Way galaxy at the turn of the 31st century";
   description = ''

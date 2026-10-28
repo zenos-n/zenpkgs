@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.yourkit-java";
+  id = "unknown.yourkit-java";
   name = "YourKit Java Profiler";
   summary = "Award winning, fully featured low overhead profiler for Java EE and Java SE platforms";
   description = ''

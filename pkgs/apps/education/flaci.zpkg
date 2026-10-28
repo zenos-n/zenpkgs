@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.flaci";
+  id = "unknown.flaci";
   name = "FLACI";
   summary = "Create and test formal languages with automaton and create diagrams for them";
   description = ''

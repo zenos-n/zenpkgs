@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.system.drivers.graphics.libvdpau-va-gl";
+  id = "unknown.libvdpau-va-gl";
   name = "libvdpau-va-gl";
   summary = "VDPAU driver with OpenGL/VAAPI backend";
   description = ''

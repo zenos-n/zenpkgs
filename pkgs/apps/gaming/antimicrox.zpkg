@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.antimicrox";
+  id = "unknown.antimicrox";
   name = "AntiMicroX";
   summary = "GUI for mapping keyboard and mouse controls to a gamepad";
   description = ''

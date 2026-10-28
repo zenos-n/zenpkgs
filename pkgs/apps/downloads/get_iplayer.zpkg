@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.get-u5f-iplayer";
+  id = "unknown.get-u5f-iplayer";
   name = "get_iplayer";
   summary = "Downloads TV and radio programmes from BBC iPlayer and BBC Sounds";
   description = ''

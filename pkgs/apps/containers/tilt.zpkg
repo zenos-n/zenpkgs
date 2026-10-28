@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.tilt";
+  id = "unknown.tilt";
   name = "Tilt";
   summary = "Local development tool to manage your developer instance when your team deploys to Kubernetes in production";
   description = ''

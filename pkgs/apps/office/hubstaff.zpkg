@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.hubstaff";
+  id = "unknown.hubstaff";
   name = "Hubstaff";
   summary = "Time tracking software";
   description = ''

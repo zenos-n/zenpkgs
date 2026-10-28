@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.efmt";
+  id = "unknown.efmt";
   name = "efmt";
   summary = "Erlang code formatter";
   description = ''

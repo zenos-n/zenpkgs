@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.goose";
+  id = "unknown.goose";
   name = "Goose";
   summary = "Database migration tool which supports SQL migrations and Go functions";
   description = ''

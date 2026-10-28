@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.qt6ct";
+  id = "unknown.qt6ct";
   name = "Qt6 Configuration Tool";
   summary = "Qt6 Configuration Tool";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.mc";
+  id = "unknown.mc";
   name = "Midnight Commander";
   summary = "File Manager and User Shell for the GNU Project, known as Midnight Commander";
   description = ''

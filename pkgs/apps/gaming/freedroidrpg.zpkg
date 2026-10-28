@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.freedroidrpg";
+  id = "unknown.freedroidrpg";
   name = "FreedroidRPG";
   summary = "Isometric 3D RPG similar to game Diablo";
   description = ''

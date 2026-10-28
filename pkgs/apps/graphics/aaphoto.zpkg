@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.aaphoto";
+  id = "unknown.aaphoto";
   name = "aaphoto";
   summary = "Free and open source automatic photo adjusting software";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.osu-lazer";
+  id = "unknown.osu-lazer";
   name = "osu!";
   summary = "Rhythm is just a *click* away (no score submission or multiplayer, see osu-lazer-bin)";
   description = ''

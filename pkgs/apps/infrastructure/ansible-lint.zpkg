@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.ansible-lint";
+  id = "unknown.ansible-lint";
   name = "Ansible Lint";
   summary = "Best practices checker for Ansible";
   description = ''

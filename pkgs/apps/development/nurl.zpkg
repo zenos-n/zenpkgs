@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.nurl";
+  id = "unknown.nurl";
   name = "nurl";
   summary = "Command-line tool to generate Nix fetcher calls from repository URLs";
   description = ''

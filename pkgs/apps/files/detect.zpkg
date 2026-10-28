@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.files.detect";
+  id = "unknown.detect";
   name = "detect";
   summary = "Expression-based file search combining name, content, metadata, and structured data predicates";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.rust-rover";
+  id = "unknown.rust-rover";
   name = "RustRover";
   summary = "Rust IDE from JetBrains";
   description = ''

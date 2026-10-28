@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.fileinfo";
+  id = "unknown.fileinfo";
   name = "fileinfo";
   summary = "File extension metadata lookup tool";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.gnome-console-live";
+  id = "unknown.gnome-console-live";
   name = "gnome-console-live";
   summary = "Curated gnome-console-live package for ZenOS";
   description = ''

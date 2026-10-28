@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.deno";
+  id = "unknown.deno";
   name = "Deno";
   summary = "Secure runtime for JavaScript and TypeScript";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.dnstop";
+  id = "unknown.dnstop";
   name = "dnstop";
   summary = "libpcap application that displays DNS traffic on your network";
   description = ''

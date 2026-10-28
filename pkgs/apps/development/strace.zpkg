@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.strace";
+  id = "unknown.strace";
   name = "strace";
   summary = "System call tracer for Linux";
   description = ''

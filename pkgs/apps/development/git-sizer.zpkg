@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-sizer";
+  id = "unknown.git-sizer";
   name = "git-sizer";
   summary = "Compute various size metrics for a Git repository";
   description = ''

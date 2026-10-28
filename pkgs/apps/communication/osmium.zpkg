@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.osmium";
+  id = "unknown.osmium";
   name = "Osmium";
   summary = "Globally distributed community messaging and voice/video platform";
   description = ''

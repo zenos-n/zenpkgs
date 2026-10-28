@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.hashcat";
+  id = "unknown.hashcat";
   name = "hashcat";
   summary = "Fast password cracker";
   description = ''

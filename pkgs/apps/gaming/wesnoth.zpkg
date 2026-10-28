@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.wesnoth";
+  id = "unknown.wesnoth";
   name = "The Battle for Wesnoth";
   summary = "Battle for Wesnoth, a free, turn-based strategy game with a fantasy theme";
   description = ''

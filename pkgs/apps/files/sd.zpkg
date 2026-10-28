@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.sd";
+  id = "unknown.sd";
   name = "sd";
   summary = "Intuitive find & replace CLI (sed alternative)";
   description = ''

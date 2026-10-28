@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.codevis";
+  id = "unknown.codevis";
   name = "Codevis";
   summary = "Tool to take all source code in a folder and render them to one image";
   description = ''

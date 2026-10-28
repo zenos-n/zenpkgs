@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.dropbox";
+  id = "unknown.dropbox";
   name = "Dropbox";
   summary = "Online stored folders (daemon version)";
   description = ''

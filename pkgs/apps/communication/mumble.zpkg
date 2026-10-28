@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.mumble";
+  id = "unknown.mumble";
   name = "Mumble";
   summary = "Low-latency, high quality voice chat software";
   description = ''

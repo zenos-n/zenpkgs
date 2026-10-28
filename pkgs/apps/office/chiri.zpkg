@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.chiri";
+  id = "unknown.chiri";
   name = "Chiri";
   summary = "Cross-platform CalDAV task management app";
   description = ''

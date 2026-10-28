@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.discord";
+  id = "unknown.discord";
   name = "Discord";
   summary = "All-in-one cross-platform voice and text chat for gamers";
   description = ''

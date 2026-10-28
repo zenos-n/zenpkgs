@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.frp";
+  id = "unknown.frp";
   name = "frp";
   summary = "Fast reverse proxy";
   description = ''

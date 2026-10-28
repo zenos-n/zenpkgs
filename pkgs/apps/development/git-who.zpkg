@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-who";
+  id = "unknown.git-who";
   name = "git-who";
   summary = "Git blame for file trees";
   description = ''

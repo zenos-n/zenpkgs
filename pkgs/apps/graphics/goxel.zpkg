@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.goxel";
+  id = "unknown.goxel";
   name = "Goxel";
   summary = "Open Source 3D voxel editor";
   description = ''

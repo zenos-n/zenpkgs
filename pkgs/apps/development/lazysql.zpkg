@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.lazysql";
+  id = "unknown.lazysql";
   name = "LazySQL";
   summary = "Cross-platform TUI database management tool written in Go";
   description = ''

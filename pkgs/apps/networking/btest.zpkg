@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.btest";
+  id = "unknown.btest";
   name = "btest";
   summary = "Bandwidth Test server and client";
   description = ''

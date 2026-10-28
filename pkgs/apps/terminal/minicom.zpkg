@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.minicom";
+  id = "unknown.minicom";
   name = "minicom";
   summary = "Modem control and terminal emulation program";
   description = ''

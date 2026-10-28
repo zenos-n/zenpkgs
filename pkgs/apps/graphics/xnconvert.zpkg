@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.xnconvert";
+  id = "unknown.xnconvert";
   name = "XnConvert";
   summary = "Fast, powerful and free cross-platform batch image converter";
   description = ''

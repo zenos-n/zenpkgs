@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.wally-cli";
+  id = "unknown.wally-cli";
   name = "Wally CLI";
   summary = "Tool to flash firmware to mechanical keyboards";
   description = ''

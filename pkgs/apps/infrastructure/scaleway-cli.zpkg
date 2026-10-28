@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.scaleway-cli";
+  id = "unknown.scaleway-cli";
   name = "Scaleway CLI";
   summary = "Command Line Interface for Scaleway";
   description = ''

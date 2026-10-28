@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.zopfli";
+  id = "unknown.zopfli";
   name = "Zopfli";
   summary = "Very good, but slow, deflate or zlib compression";
   description = ''

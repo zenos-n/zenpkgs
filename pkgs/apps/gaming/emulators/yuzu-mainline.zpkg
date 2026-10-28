@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.yuzu-mainline";
+  id = "unknown.yuzu-mainline";
   name = "Yuzu Mainline"; summary = "Archived Yuzu Nintendo Switch emulator";
   description = ''Yuzu Mainline 1611 from pinned NixOS 23.11, replacing the discontinued Flatpak. Upstream source repositories have been removed; the original Nix binary cache currently provides this build.'';
   zenosVersion = "1.0.0"; packageVersion = "1611";

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.doctl";
+  id = "unknown.doctl";
   name = "DigitalOcean CLI";
   summary = "Command line tool for DigitalOcean services";
   description = ''

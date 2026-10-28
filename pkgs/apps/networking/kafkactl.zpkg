@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.kafkactl";
+  id = "unknown.kafkactl";
   name = "kafkactl";
   summary = "Command Line Tool for managing Apache Kafka";
   description = ''

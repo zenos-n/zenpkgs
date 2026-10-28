@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.buku";
+  id = "unknown.buku";
   name = "buku";
   summary = "Private cmdline bookmark manager";
   description = ''

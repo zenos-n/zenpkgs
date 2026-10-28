@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.dbvisualizer";
+  id = "unknown.dbvisualizer";
   name = "DbVisualizer";
   summary = "Universal database tool";
   description = ''

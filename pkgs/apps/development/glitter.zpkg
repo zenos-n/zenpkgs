@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.glitter";
+  id = "unknown.glitter";
   name = "Glitter";
   summary = "Git wrapper that allows you to compress multiple commands into one";
   description = ''

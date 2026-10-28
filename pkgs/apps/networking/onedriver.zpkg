@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.onedriver";
+  id = "unknown.onedriver";
   name = "OneDriver";
   summary = "Network filesystem for Linux";
   description = ''

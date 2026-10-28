@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.difftastic";
+  id = "unknown.difftastic";
   name = "Difftastic";
   summary = "Syntax-aware diff";
   description = ''

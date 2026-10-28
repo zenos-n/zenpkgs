@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ali";
+  id = "unknown.ali";
   name = "ali";
   summary = "Generate HTTP load and plot the results in real-time";
   description = ''

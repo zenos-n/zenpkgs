@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.comaps";
+  id = "unknown.comaps";
   name = "CoMaps";
   summary = "Community-led fork of Organic Maps";
   description = ''

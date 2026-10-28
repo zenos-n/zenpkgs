@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.browsers.geopard";
+  id = "unknown.geopard";
   name = "Geopard";
   summary = "Colorful, adaptive gemini browser";
   description = ''

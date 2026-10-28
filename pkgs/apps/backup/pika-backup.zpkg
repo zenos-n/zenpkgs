@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.pika-backup";
+  id = "unknown.pika-backup";
   name = "pika-backup";
   summary = "Curated pika-backup package for ZenOS";
   description = ''

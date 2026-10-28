@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.csvs-to-sqlite";
+  id = "unknown.csvs-to-sqlite";
   name = "csvs-to-sqlite";
   summary = "Convert CSV files into a SQLite database";
   description = ''

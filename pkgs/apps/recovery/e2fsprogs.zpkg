@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.e2fsprogs";
+  id = "unknown.e2fsprogs";
   name = "e2fsprogs";
   summary = "Curated e2fsprogs package for ZenOS";
   description = ''

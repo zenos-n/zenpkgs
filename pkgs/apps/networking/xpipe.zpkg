@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.networking.xpipe";
+  id = "unknown.xpipe";
   name = "XPipe";
   summary = "Cross-platform shell connection hub and remote file manager";
   description = ''

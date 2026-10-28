@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.eva";
+  id = "unknown.eva";
   name = "eva";
   summary = "Calculator REPL, similar to bc";
   description = ''

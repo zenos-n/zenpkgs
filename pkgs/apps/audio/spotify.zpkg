@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.spotify";
+  id = "unknown.spotify";
   name = "Spotify";
   summary = "Play music from the Spotify music service";
   description = ''

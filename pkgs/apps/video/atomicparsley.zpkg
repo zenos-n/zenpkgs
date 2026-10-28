@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.atomicparsley";
+  id = "unknown.atomicparsley";
   name = "AtomicParsley";
   summary = "CLI program for reading, parsing and setting metadata into MPEG-4 files";
   description = ''

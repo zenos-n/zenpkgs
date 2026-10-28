@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.tgpt";
+  id = "unknown.tgpt";
   name = "tgpt";
   summary = "ChatGPT in terminal without needing API keys";
   description = ''

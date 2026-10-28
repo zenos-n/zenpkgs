@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.duc";
+  id = "unknown.duc";
   name = "Duc";
   summary = "Collection of tools for inspecting and visualizing disk usage";
   description = ''

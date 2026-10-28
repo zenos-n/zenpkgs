@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-relevant-history";
+  id = "unknown.git-relevant-history";
   name = "git-relevant-history";
   summary = "Extract only relevant history from git repo";
   description = ''

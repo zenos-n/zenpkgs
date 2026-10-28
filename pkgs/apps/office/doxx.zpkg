@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.doxx";
+  id = "unknown.doxx";
   name = "doxx";
   summary = "Terminal document viewer for .docx files";
   description = ''

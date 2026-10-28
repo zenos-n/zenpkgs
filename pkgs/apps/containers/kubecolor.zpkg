@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.kubecolor";
+  id = "unknown.kubecolor";
   name = "kubecolor";
   summary = "Colorizes kubectl output";
   description = ''

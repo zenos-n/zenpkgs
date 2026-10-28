@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.senpai";
+  id = "unknown.senpai";
   name = "senpai";
   summary = "Your everyday IRC student";
   description = ''

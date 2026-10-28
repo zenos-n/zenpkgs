@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ruff";
+  id = "unknown.ruff";
   name = "Ruff";
   summary = "Extremely fast Python linter and code formatter";
   description = ''

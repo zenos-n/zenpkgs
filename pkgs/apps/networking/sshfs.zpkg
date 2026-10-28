@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.sshfs";
+  id = "unknown.sshfs";
   name = "SSHFS";
   summary = "FUSE-based filesystem that allows remote filesystems to be mounted over SSH";
   description = ''

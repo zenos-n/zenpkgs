@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.abduco";
+  id = "unknown.abduco";
   name = "abduco";
   summary = "Allows programs to be run independently from its controlling terminal";
   description = ''

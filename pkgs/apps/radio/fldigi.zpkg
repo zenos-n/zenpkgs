@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.fldigi";
+  id = "unknown.fldigi";
   name = "Fldigi";
   summary = "Digital modem program";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.gossip";
+  id = "unknown.gossip";
   name = "Gossip";
   summary = "Desktop client for nostr, an open social media protocol";
   description = ''

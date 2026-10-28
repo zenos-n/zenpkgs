@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.gcolor3";
+  id = "unknown.gcolor3";
   name = "Gcolor3";
   summary = "Simple color chooser written in GTK3";
   description = ''

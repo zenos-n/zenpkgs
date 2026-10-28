@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.cryptominisat";
+  id = "unknown.cryptominisat";
   name = "CryptoMiniSat";
   summary = "Advanced SAT Solver";
   description = ''

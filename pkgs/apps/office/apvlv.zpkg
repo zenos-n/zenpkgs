@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.apvlv";
+  id = "unknown.apvlv";
   name = "apvlv";
   summary = "PDF viewer with Vim-like behaviour";
   description = ''

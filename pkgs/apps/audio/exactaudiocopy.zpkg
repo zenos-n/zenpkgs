@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.exactaudiocopy";
+  id = "unknown.exactaudiocopy";
   name = "Exact Audio Copy";
   summary = "Precise CD audio grabber for creating perfect quality rips using CD and DVD drives";
   description = ''

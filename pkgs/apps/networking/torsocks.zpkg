@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.torsocks";
+  id = "unknown.torsocks";
   name = "torsocks";
   summary = "Wrapper to safely torify applications";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.vital";
+  id = "unknown.vital";
   name = "Vital";
   summary = "Spectral warping wavetable synth";
   description = ''

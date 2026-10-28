@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-together";
+  id = "unknown.git-together";
   name = "git-together";
   summary = "Better commit attribution while pairing without messing with your git workflow";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.yewtube";
+  id = "unknown.yewtube";
   name = "yewtube";
   summary = "Terminal based YouTube player and downloader, forked from mps-youtube";
   description = ''

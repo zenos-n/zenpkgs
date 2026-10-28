@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gnuapl";
+  id = "unknown.gnuapl";
   name = "GNU APL";
   summary = "Free interpreter for the APL programming language";
   description = ''

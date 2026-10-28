@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.blackvoxel";
+  id = "unknown.blackvoxel";
   name = "Blackvoxel";
   summary = "Sci-Fi game with industry and automation";
   description = ''

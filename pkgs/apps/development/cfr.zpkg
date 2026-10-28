@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cfr";
+  id = "unknown.cfr";
   name = "CFR";
   summary = "Another java decompiler";
   description = ''

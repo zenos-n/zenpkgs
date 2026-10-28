@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.forge";
+  id = "unknown.forge";
   name = "forge";
   summary = "Forge tiling window manager extension built from GNOME 50-compatible upstream";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.persepolis";
+  id = "unknown.persepolis";
   name = "Persepolis";
   summary = "Download manager GUI written in Python";
   description = ''

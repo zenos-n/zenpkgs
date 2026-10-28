@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.todoist-electron";
+  id = "unknown.todoist-electron";
   name = "Todoist Desktop";
   summary = "To-Do List App & Task Manager";
   description = ''

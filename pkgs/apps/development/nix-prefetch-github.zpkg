@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.nix-prefetch-github";
+  id = "unknown.nix-prefetch-github";
   name = "nix-prefetch-github";
   summary = "Prefetch sources from github";
   description = ''

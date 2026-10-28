@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.adriconf";
+  id = "unknown.adriconf";
   name = "adriconf";
   summary = "GUI tool used to configure open source graphics drivers";
   description = ''

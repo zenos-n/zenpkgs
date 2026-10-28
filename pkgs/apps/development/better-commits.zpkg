@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.better-commits";
+  id = "unknown.better-commits";
   name = "better-commits";
   summary = "CLI for creating better commits following the conventional commits specification";
   description = ''

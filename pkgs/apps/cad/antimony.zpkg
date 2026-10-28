@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.antimony";
+  id = "unknown.antimony";
   name = "Antimony";
   summary = "Computer-aided design (CAD) tool from a parallel universe";
   description = ''

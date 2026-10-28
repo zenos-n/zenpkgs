@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.sysstat";
+  id = "unknown.sysstat";
   name = "sysstat";
   summary = "Collection of performance monitoring tools for Linux (such as sar, iostat and pidstat)";
   description = ''

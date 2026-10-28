@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.gpsbabel";
+  id = "unknown.gpsbabel";
   name = "GPSBabel";
   summary = "Convert, upload and download data from GPS and Map programs";
   description = ''

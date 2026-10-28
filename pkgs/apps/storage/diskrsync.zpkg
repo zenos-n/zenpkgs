@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.diskrsync";
+  id = "unknown.diskrsync";
   name = "diskrsync";
   summary = "Rsync for block devices and disk images";
   description = ''

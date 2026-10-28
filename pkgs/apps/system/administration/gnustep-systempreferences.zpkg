@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.gnustep-systempreferences";
+  id = "unknown.gnustep-systempreferences";
   name = "GNUstep System Preferences";
   summary = "Settings manager for the GNUstep environment and its applications";
   description = ''

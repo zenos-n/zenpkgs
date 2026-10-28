@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.collectl";
+  id = "unknown.collectl";
   name = "collectl";
   summary = "Performance monitoring tool for Linux systems";
   description = ''

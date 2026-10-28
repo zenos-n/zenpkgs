@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-releaser";
+  id = "unknown.git-releaser";
   name = "git-releaser";
   summary = "Tool for creating Git releases based on Semantic Versioning";
   description = ''

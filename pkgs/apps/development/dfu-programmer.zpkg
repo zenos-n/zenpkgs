@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.dfu-programmer";
+  id = "unknown.dfu-programmer";
   name = "dfu-programmer";
   summary = "Device Firmware Update based USB programmer for Atmel chips with a USB bootloader";
   description = ''

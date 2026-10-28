@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.feather";
+  id = "unknown.feather";
   name = "Feather";
   summary = "Free Monero desktop wallet";
   description = ''

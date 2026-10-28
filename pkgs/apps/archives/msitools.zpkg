@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.archives.msitools";
+  id = "unknown.msitools";
   name = "msitools";
   summary = "Set of programs to inspect and build Windows Installer (.MSI) files";
   description = ''

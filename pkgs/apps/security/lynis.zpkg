@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.lynis";
+  id = "unknown.lynis";
   name = "lynis";
   summary = "Security auditing tool for Linux, macOS, and UNIX-based systems";
   description = ''

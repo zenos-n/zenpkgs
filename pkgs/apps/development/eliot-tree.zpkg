@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.eliot-tree";
+  id = "unknown.eliot-tree";
   name = "Eliot Tree";
   summary = "Render Eliot logs as an ASCII tree";
   description = ''

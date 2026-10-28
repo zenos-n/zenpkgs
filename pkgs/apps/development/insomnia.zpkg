@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.insomnia";
+  id = "unknown.insomnia";
   name = "Insomnia";
   summary = "Open-source, cross-platform API client for GraphQL, REST, WebSockets, SSE and gRPC, with Cloud, Local and Git storage";
   description = ''

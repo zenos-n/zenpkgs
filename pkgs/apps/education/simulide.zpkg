@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.simulide";
+  id = "unknown.simulide";
   name = "SimulIDE";
   summary = "Simple real time electronic circuit simulator";
   description = ''

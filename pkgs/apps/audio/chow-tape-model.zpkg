@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.chow-tape-model";
+  id = "unknown.chow-tape-model";
   name = "CHOW Tape Model";
   summary = "Physical modelling signal processing for analog tape recording. LV2, VST3, CLAP, and standalone";
   description = ''

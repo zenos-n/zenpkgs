@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-fame";
+  id = "unknown.git-fame";
   name = "git-fame";
   summary = "Command-line tool that helps you summarize and pretty-print collaborators based on contributions";
   description = ''

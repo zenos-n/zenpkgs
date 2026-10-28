@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.wayvnc";
+  id = "unknown.wayvnc";
   name = "wayvnc";
   summary = "VNC server for wlroots based Wayland compositors";
   description = ''

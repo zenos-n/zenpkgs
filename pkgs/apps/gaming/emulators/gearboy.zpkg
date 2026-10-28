@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.gearboy";
+  id = "unknown.gearboy";
   name = "Gearboy";
   summary = "Game Boy/Game Boy Color/Super Game Boy emulator, debugger and embedded MCP server for macOS, Windows, Linux, BSD and RetroArch";
   description = ''

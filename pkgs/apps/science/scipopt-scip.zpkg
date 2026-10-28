@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.scipopt-scip";
+  id = "unknown.scipopt-scip";
   name = "SCIP Optimizer";
   summary = "Solving Constraint Integer Programs";
   description = ''

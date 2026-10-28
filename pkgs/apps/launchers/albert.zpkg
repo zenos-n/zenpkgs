@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.launchers.albert";
+  id = "unknown.albert";
   name = "Albert";
   summary = "Fast and flexible keyboard launcher";
   description = ''

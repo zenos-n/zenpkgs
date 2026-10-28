@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.finance.bisq2";
+  id = "unknown.bisq2";
   name = "Bisq 2";
   summary = "Decentralized bitcoin exchange network";
   description = ''

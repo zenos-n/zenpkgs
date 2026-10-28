@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.files-cli";
+  id = "unknown.files-cli";
   name = "Files.com CLI";
   summary = "Files.com Command Line App for Windows, Linux, and macOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.gnome-notes";
+  id = "unknown.gnome-notes";
   name = "GNOME Notes";
   summary = "Note editor designed to remain simple to use";
   description = ''

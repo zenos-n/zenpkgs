@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.code-maat";
+  id = "unknown.code-maat";
   name = "Code Maat";
   summary = "Command line tool to mine and analyze data from version-control systems";
   description = ''

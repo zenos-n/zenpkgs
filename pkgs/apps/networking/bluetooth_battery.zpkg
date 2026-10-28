@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.bluetooth-u5f-battery";
+  id = "unknown.bluetooth-u5f-battery";
   name = "Bluetooth Battery";
   summary = "Fetch the battery charge level of some Bluetooth headsets";
   description = ''

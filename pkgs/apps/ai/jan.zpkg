@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.jan";
+  id = "unknown.jan";
   name = "Jan";
   summary = "Jan is an open source alternative to ChatGPT that runs 100% offline on your computer";
   description = ''

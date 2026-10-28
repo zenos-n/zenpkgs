@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.mousepad";
+  id = "unknown.mousepad";
   name = "Mousepad";
   summary = "Simple text editor for Xfce";
   description = ''

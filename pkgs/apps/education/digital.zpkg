@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.education.digital";
+  id = "unknown.digital";
   name = "Digital";
   summary = "Digital logic designer and circuit simulator";
   description = ''

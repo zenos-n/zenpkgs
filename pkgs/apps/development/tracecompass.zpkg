@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.tracecompass";
+  id = "unknown.tracecompass";
   name = "Trace Compass";
   summary = "Eclipse Trace Compass trace event analyzer";
   description = ''

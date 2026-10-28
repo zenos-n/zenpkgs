@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.mermaid-cli";
+  id = "unknown.mermaid-cli";
   name = "Mermaid CLI";
   summary = "Generation of diagrams from text in a similar manner as markdown";
   description = ''

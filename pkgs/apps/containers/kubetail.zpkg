@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.kubetail";
+  id = "unknown.kubetail";
   name = "Kubetail";
   summary = "Bash script to tail Kubernetes logs from multiple pods at the same time";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.zsh-autosuggestions";
+  id = "unknown.zsh-autosuggestions";
   name = "zsh-autosuggestions";
   summary = "Fish shell autosuggestions for Zsh";
   description = ''

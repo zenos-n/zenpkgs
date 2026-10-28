@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.faustfmt";
+  id = "unknown.faustfmt";
   name = "faustfmt";
   summary = "Formatter for the Faust programming language, using Topiary";
   description = ''

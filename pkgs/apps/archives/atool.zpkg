@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.archives.atool";
+  id = "unknown.atool";
   name = "atool";
   summary = "Archive command line helper";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.klines";
+  id = "unknown.klines";
   name = "KLines";
   summary = "KLines is a simple but highly addictive, one player game";
   description = ''

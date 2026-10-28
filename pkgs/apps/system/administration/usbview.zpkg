@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.usbview";
+  id = "unknown.usbview";
   name = "USBView";
   summary = "USB viewer for Linux";
   description = ''

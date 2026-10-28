@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.mqttx";
+  id = "unknown.mqttx";
   name = "MQTTX";
   summary = "Powerful cross-platform MQTT 5.0 Desktop, CLI, and WebSocket client tools";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.tonearm";
+  id = "unknown.tonearm";
   name = "Tonearm";
   summary = "GTK client for TIDAL written in Golang";
   description = ''

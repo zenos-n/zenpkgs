@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.pokefinder";
+  id = "unknown.pokefinder";
   name = "PokéFinder";
   summary = "Cross platform Pokémon RNG tool";
   description = ''

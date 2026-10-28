@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.meld";
+  id = "unknown.meld";
   name = "Meld";
   summary = "Visual diff and merge tool";
   description = ''

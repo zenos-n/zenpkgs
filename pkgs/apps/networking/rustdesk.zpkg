@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.rustdesk";
+  id = "unknown.rustdesk";
   name = "RustDesk";
   summary = "Virtual / remote desktop infrastructure for everyone! Open source TeamViewer / Citrix alternative";
   description = ''

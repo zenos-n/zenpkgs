@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.argonaut";
+  id = "unknown.argonaut";
   name = "Argonaut";
   summary = "Keyboard-first terminal UI for Argo CD";
   description = ''

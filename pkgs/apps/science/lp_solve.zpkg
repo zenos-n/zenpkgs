@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.lp-u5f-solve";
+  id = "unknown.lp-u5f-solve";
   name = "lp_solve";
   summary = "Mixed Integer Linear Programming (MILP) solver";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.bella";
+  id = "unknown.bella";
   name = "Bella";
   summary = "Simple eye dropper and color picker";
   description = ''

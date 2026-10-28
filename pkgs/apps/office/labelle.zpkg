@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.labelle";
+  id = "unknown.labelle";
   name = "Labelle";
   summary = "Print labels with LabelManager PnP from Dymo";
   description = ''

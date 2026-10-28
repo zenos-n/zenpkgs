@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.boolector";
+  id = "unknown.boolector";
   name = "Boolector";
   summary = "Extremely fast SMT solver for bit-vectors and arrays";
   description = ''

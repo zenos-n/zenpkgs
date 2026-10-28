@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.hyperfine";
+  id = "unknown.hyperfine";
   name = "Hyperfine";
   summary = "Command-line benchmarking tool";
   description = ''

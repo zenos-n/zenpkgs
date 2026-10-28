@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.compsize";
+  id = "unknown.compsize";
   name = "compsize";
   summary = "Find compression type/ratio on a file or set of files in the Btrfs filesystem";
   description = ''

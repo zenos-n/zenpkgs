@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.sshpass";
+  id = "unknown.sshpass";
   name = "sshpass";
   summary = "Non-interactive ssh password auth";
   description = ''

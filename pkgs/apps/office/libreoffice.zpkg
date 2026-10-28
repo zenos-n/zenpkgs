@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.libreoffice";
+  id = "unknown.libreoffice";
   name = "libreoffice";
   summary = "Curated libreoffice package for ZenOS";
   description = ''

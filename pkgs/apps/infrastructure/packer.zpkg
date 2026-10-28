@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.infrastructure.packer";
+  id = "unknown.packer";
   name = "Packer";
   summary = "Tool for creating identical machine images for multiple platforms from a single source configuration";
   description = ''

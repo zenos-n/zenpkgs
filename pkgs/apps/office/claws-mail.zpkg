@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.claws-mail";
+  id = "unknown.claws-mail";
   name = "Claws Mail";
   summary = "User-friendly, lightweight, and fast email client";
   description = ''

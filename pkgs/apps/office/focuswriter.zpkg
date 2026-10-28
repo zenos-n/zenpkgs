@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.focuswriter";
+  id = "unknown.focuswriter";
   name = "FocusWriter";
   summary = "Simple, distraction-free writing environment";
   description = ''

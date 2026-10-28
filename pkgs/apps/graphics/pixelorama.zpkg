@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.pixelorama";
+  id = "unknown.pixelorama";
   name = "Pixelorama";
   summary = "Free & open-source 2D sprite editor, made with the Godot Engine";
   description = ''

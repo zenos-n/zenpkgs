@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.gpt4all";
+  id = "unknown.gpt4all";
   name = "GPT4All";
   summary = "Free-to-use, locally running, privacy-aware chatbot. No GPU or internet required";
   description = ''

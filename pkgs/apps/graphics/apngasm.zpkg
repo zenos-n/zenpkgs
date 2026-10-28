@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.apngasm";
+  id = "unknown.apngasm";
   name = "APNG Assembler";
   summary = "Create an APNG from multiple PNG files";
   description = ''

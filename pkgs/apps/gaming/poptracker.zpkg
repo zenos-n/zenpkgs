@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.poptracker";
+  id = "unknown.poptracker";
   name = "PopTracker";
   summary = "Scriptable tracker for randomized games";
   description = ''

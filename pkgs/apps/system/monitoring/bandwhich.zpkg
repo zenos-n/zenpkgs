@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.bandwhich";
+  id = "unknown.bandwhich";
   name = "bandwhich";
   summary = "CLI utility for displaying current network utilization";
   description = ''

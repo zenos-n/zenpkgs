@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.gnmic";
+  id = "unknown.gnmic";
   name = "gNMIc";
   summary = "gNMI CLI client and collector";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fake-gcs-server";
+  id = "unknown.fake-gcs-server";
   name = "Fake GCS Server";
   summary = "Google Cloud Storage emulator & testing library";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.drawterm";
+  id = "unknown.drawterm";
   name = "Drawterm";
   summary = "Connect to Plan 9 CPU servers from other operating systems";
   description = ''

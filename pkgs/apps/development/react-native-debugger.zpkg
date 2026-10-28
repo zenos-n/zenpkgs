@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.react-native-debugger";
+  id = "unknown.react-native-debugger";
   name = "React Native Debugger";
   summary = "Standalone app based on official debugger of React Native, and includes React Inspector / Redux DevTools";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.fonts.get-google-fonts";
+  id = "unknown.get-google-fonts";
   name = "get-google-fonts";
   summary = "Downloads and adapts Google fonts to working offline";
   description = ''

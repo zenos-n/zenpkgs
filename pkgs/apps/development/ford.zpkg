@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ford";
+  id = "unknown.ford";
   name = "FORD";
   summary = "Fortran documentation system";
   description = ''

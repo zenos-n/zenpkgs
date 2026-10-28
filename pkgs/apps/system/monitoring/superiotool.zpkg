@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.superiotool";
+  id = "unknown.superiotool";
   name = "superiotool";
   summary = "User-space utility to detect Super I/O of a mainboard and provide detailed information about the register contents of the Super I/O";
   description = ''

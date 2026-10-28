@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.omnissa-horizon-client";
+  id = "unknown.omnissa-horizon-client";
   name = "Omnissa Horizon Client";
   summary = "Allows you to connect to your Omnissa Horizon virtual desktop";
   description = ''

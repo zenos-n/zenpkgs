@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-cliff";
+  id = "unknown.git-cliff";
   name = "git-cliff";
   summary = "Highly customizable Changelog Generator that follows Conventional Commit specifications";
   description = ''

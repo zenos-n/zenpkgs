@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gh-poi";
+  id = "unknown.gh-poi";
   name = "gh-poi";
   summary = "GitHub CLI extension to safely clean up your local branches";
   description = ''

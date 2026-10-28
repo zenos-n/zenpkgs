@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.gftp";
+  id = "unknown.gftp";
   name = "gFTP";
   summary = "GTK-based multithreaded FTP client for *nix-based machines";
   description = ''

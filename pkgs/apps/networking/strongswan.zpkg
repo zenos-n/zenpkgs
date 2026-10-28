@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.strongswan";
+  id = "unknown.strongswan";
   name = "strongSwan";
   summary = "OpenSource IPsec-based VPN solution";
   description = ''

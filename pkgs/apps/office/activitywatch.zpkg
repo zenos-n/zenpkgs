@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.activitywatch";
+  id = "unknown.activitywatch";
   name = "ActivityWatch";
   summary = "Best free and open-source automated time tracker";
   description = ''

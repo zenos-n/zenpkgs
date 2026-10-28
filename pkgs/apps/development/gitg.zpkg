@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gitg";
+  id = "unknown.gitg";
   name = "gitg";
   summary = "Curated gitg package for ZenOS";
   description = ''

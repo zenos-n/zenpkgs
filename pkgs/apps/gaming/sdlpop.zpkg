@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.sdlpop";
+  id = "unknown.sdlpop";
   name = "SDLPoP";
   summary = "Open-source port of Prince of Persia";
   description = ''

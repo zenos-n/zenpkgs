@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.gnome-contacts";
+  id = "unknown.gnome-contacts";
   name = "GNOME Contacts";
   summary = "GNOME’s integrated address book";
   description = ''

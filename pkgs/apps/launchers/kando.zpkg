@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.launchers.kando";
+  id = "unknown.kando";
   name = "Kando";
   summary = "Cross-Platform Pie Menu";
   description = ''

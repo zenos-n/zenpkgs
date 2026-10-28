@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.papis";
+  id = "unknown.papis";
   name = "papis";
   summary = "Powerful command-line document and bibliography manager";
   description = ''

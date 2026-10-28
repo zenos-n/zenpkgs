@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.abiword";
+  id = "unknown.abiword";
   name = "AbiWord";
   summary = "Word processing program, similar to Microsoft Word";
   description = ''

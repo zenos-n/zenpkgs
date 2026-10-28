@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-my";
+  id = "unknown.git-my";
   name = "git-my";
   summary = "List remote branches if they're merged and/or available locally";
   description = ''

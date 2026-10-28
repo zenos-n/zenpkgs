@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gede";
+  id = "unknown.gede";
   name = "Gede";
   summary = "Graphical frontend (GUI) to GDB";
   description = ''

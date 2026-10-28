@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.satty";
+  id = "unknown.satty";
   name = "Satty";
   summary = "Screenshot annotation tool inspired by Swappy and Flameshot";
   description = ''

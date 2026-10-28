@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.clang-uml";
+  id = "unknown.clang-uml";
   name = "clang-uml";
   summary = "Customizable automatic UML diagram generator for C++ based on Clang";
   description = ''

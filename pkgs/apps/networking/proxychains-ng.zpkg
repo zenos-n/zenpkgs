@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.proxychains-ng";
+  id = "unknown.proxychains-ng";
   name = "ProxyChains-NG";
   summary = "Preloader which hooks calls to sockets in dynamically linked programs and redirects it through one or more socks/http proxies";
   description = ''

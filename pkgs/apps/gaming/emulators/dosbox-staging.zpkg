@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.dosbox-staging";
+  id = "unknown.dosbox-staging";
   name = "DOSBox Staging";
   summary = "Modernized DOS emulator; DOSBox fork";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.swayimg";
+  id = "unknown.swayimg";
   name = "Swayimg";
   summary = "Image viewer for Sway/Wayland";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.libs.gstreamer.gst-plugins-bad";
+  id = "unknown.gst-plugins-bad";
   name = "gst-plugins-bad";
   summary = "GStreamer Bad Plugins";
   description = ''

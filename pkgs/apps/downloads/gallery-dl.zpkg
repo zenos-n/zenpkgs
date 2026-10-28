@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.gallery-dl";
+  id = "unknown.gallery-dl";
   name = "gallery-dl";
   summary = "Command-line program to download image-galleries and -collections from several image hosting sites";
   description = ''

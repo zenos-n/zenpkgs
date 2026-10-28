@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.obs-studio";
+  id = "unknown.obs-studio";
   name = "obs-studio";
   summary = "Free and open source software for video recording and live streaming";
   description = ''

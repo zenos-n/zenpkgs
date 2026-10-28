@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.xivlauncher";
+  id = "unknown.xivlauncher";
   name = "XIVLauncher";
   summary = "Custom launcher for FFXIV";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.office.textpieces";
+  id = "unknown.textpieces";
   name = "Text Pieces";
   summary = "Swiss knife of text processing";
   description = ''

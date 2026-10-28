@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.sshping";
+  id = "unknown.sshping";
   name = "sshping";
   summary = "Measure character-echo latency and bandwidth for an interactive ssh session";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.cpustat";
+  id = "unknown.cpustat";
   name = "cpustat";
   summary = "CPU usage monitoring tool";
   description = ''

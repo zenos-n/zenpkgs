@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.teleport";
+  id = "unknown.teleport";
   name = "Teleport";
   summary = "Certificate authority and access plane for SSH, Kubernetes, web applications, and databases";
   description = ''

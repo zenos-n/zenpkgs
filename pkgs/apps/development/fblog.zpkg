@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fblog";
+  id = "unknown.fblog";
   name = "fblog";
   summary = "Small command-line JSON log viewer";
   description = ''

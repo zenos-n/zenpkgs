@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.dasel";
+  id = "unknown.dasel";
   name = "Dasel";
   summary = "Query and update data structures from the command line";
   description = ''

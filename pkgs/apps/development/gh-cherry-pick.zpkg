@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gh-cherry-pick";
+  id = "unknown.gh-cherry-pick";
   name = "gh-cherry-pick";
   summary = "Cherry-pick commits across GitHub repositories using only the GitHub API";
   description = ''

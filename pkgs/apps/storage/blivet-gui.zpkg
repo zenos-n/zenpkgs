@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.blivet-gui";
+  id = "unknown.blivet-gui";
   name = "Blivet GUI";
   summary = "GUI tool for storage configuration using blivet library";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.g203-led";
+  id = "unknown.g203-led";
   name = "G203 LED";
   summary = "Logitech G203 Prodigy / G203 LightSync Mouse LED control for Linux";
   description = ''

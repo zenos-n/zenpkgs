@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.cfssl";
+  id = "unknown.cfssl";
   name = "cfssl";
   summary = "Cloudflare's PKI and TLS toolkit";
   description = ''

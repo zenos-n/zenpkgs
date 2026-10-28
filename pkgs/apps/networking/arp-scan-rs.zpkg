@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.arp-scan-rs";
+  id = "unknown.arp-scan-rs";
   name = "arp-scan-rs";
   summary = "ARP scan tool for fast local network scans";
   description = ''

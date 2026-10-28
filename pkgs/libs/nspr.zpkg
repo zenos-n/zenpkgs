@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.libs.nspr";
+  id = "unknown.nspr";
   name = "nspr";
   summary = "Netscape Portable Runtime, a platform-neutral API for system-level and libc-like functions";
   description = ''

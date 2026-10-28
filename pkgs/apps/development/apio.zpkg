@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.apio";
+  id = "unknown.apio";
   name = "Apio";
   summary = "Open source ecosystem for open FPGA boards";
   description = ''

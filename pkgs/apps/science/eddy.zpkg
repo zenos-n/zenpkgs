@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.eddy";
+  id = "unknown.eddy";
   name = "Eddy";
   summary = "Graphical editor for the specification and visualization of Graphol ontologies";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bacon";
+  id = "unknown.bacon";
   name = "Bacon";
   summary = "Background rust code checker";
   description = ''

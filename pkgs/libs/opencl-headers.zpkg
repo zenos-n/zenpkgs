@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.libs.opencl-headers";
+  id = "unknown.opencl-headers";
   name = "opencl-headers";
   summary = "Khronos OpenCL headers version 2025.07.22";
   description = ''

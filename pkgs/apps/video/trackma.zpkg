@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.trackma";
+  id = "unknown.trackma";
   name = "Trackma";
   summary = "Open multi-site list manager for Unix-like systems (ex-wMAL)";
   description = ''

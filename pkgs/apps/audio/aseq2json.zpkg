@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.aseq2json";
+  id = "unknown.aseq2json";
   name = "aseq2json";
   summary = "Listens for MIDI events on the Alsa sequencer and outputs as JSON to stdout";
   description = ''

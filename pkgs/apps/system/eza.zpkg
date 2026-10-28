@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.eza";
+  id = "unknown.eza";
   name = "eza";
   summary = "Curated eza package for ZenOS";
   description = ''

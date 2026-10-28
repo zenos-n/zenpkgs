@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.kid3-cli";
+  id = "unknown.kid3-cli";
   name = "Kid3 CLI";
   summary = "Simple and powerful audio tag editor";
   description = ''

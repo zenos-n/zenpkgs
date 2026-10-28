@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.atlas";
+  id = "unknown.atlas";
   name = "Atlas";
   summary = "Manage your database schema as code";
   description = ''

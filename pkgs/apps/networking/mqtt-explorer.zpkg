@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.mqtt-explorer";
+  id = "unknown.mqtt-explorer";
   name = "MQTT Explorer";
   summary = "All-round MQTT client that provides a structured topic overview";
   description = ''

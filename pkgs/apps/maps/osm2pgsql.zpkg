@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.osm2pgsql";
+  id = "unknown.osm2pgsql";
   name = "osm2pgsql";
   summary = "OpenStreetMap data to PostgreSQL converter";
   description = ''

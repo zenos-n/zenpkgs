@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.pngcheck";
+  id = "unknown.pngcheck";
   name = "pngcheck";
   summary = "Verifies the integrity of PNG, JNG and MNG files";
   description = ''

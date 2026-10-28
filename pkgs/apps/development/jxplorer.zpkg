@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.jxplorer";
+  id = "unknown.jxplorer";
   name = "JXplorer";
   summary = "Java Ldap Browser";
   description = ''

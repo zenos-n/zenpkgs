@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.koodo-reader";
+  id = "unknown.koodo-reader";
   name = "Koodo Reader";
   summary = "Cross-platform ebook reader";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.cryptsetup";
+  id = "unknown.cryptsetup";
   name = "cryptsetup";
   summary = "Curated cryptsetup package for ZenOS";
   description = ''

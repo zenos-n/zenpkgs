@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.session-desktop";
+  id = "unknown.session-desktop";
   name = "Session";
   summary = "Onion routing based messenger";
   description = ''

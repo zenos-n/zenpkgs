@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.wf-recorder";
+  id = "unknown.wf-recorder";
   name = "wf-recorder";
   summary = "Utility program for screen recording of wlroots-based compositors";
   description = ''

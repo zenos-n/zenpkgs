@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.dnsviz";
+  id = "unknown.dnsviz";
   name = "DNSViz";
   summary = "Tool suite for analyzing and visualizing DNS and DNSSEC behavior";
   description = ''

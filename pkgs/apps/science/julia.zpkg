@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.julia";
+  id = "unknown.julia";
   name = "Julia";
   summary = "High-level performance-oriented dynamical language for technical computing";
   description = ''

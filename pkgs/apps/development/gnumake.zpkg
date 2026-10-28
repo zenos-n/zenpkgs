@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gnumake";
+  id = "unknown.gnumake";
   name = "GNU Make";
   summary = "Tool to control the generation of non-source files from sources";
   description = ''

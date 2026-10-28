@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cpeditor";
+  id = "unknown.cpeditor";
   name = "CP Editor";
   summary = "IDE specially designed for competitive programming";
   description = ''

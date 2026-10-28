@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.bear";
+  id = "unknown.bear";
   name = "Bear";
   summary = "Tool that generates a compilation database for clang tooling";
   description = ''

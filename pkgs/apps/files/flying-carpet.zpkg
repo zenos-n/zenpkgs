@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.flying-carpet";
+  id = "unknown.flying-carpet";
   name = "Flying Carpet";
   summary = "Send and receive files between Android, iOS, Linux, macOS, and Windows over ad hoc WiFi";
   description = ''

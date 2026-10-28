@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.tetrio-desktop";
+  id = "unknown.tetrio-desktop";
   name = "TETR.IO";
   summary = "Desktop client for TETR.IO, an online stacker game";
   description = ''

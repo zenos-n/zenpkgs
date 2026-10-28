@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.scantailor-advanced";
+  id = "unknown.scantailor-advanced";
   name = "ScanTailor Advanced";
   summary = "Interactive post-processing tool for scanned pages (vigri's fork)";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.dduper";
+  id = "unknown.dduper";
   name = "dduper";
   summary = "Fast block-level out-of-band BTRFS deduplication tool";
   description = ''

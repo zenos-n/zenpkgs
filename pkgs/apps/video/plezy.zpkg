@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.plezy";
+  id = "unknown.plezy";
   name = "Plezy";
   summary = "Modern cross-platform Plex & Jellyfin client built with Flutter";
   description = ''

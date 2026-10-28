@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.bulletty";
+  id = "unknown.bulletty";
   name = "Bulletty";
   summary = "Terminal UI RSS/ATOM feed reader";
   description = ''

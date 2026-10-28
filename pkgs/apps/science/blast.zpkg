@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.blast";
+  id = "unknown.blast";
   name = "BLAST+";
   summary = "Basic Local Alignment Search Tool (BLAST) finds regions of similarity between biological sequences";
   description = ''

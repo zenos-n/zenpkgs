@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.accuraterip-checksum";
+  id = "unknown.accuraterip-checksum";
   name = "AccurateRip Checksum";
   summary = "Program for computing the AccurateRip checksum of singletrack WAV files";
   description = ''

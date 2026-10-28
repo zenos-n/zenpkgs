@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.almanah";
+  id = "unknown.almanah";
   name = "Almanah";
   summary = "Small GTK application to allow to keep a diary of your life";
   description = ''

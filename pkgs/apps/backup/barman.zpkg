@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.barman";
+  id = "unknown.barman";
   name = "Barman";
   summary = "Backup and Recovery Manager for PostgreSQL";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.flite";
+  id = "unknown.flite";
   name = "Flite";
   summary = "Small, fast run-time speech synthesis engine";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.netsniff-ng";
+  id = "unknown.netsniff-ng";
   name = "netsniff-ng";
   summary = "Swiss army knife for daily Linux network plumbing";
   description = ''

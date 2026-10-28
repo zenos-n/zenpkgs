@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.gojq";
+  id = "unknown.gojq";
   name = "gojq";
   summary = "Pure Go implementation of jq";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.motrix";
+  id = "unknown.motrix";
   name = "Motrix";
   summary = "Full-featured download manager";
   description = ''

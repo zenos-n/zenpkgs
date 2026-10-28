@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.maps.pdal";
+  id = "unknown.pdal";
   name = "PDAL";
   summary = "Point Data Abstraction Library. GDAL for point cloud data";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.farge";
+  id = "unknown.farge";
   name = "farge";
   summary = "View the color value of a specific pixel on your screen";
   description = ''

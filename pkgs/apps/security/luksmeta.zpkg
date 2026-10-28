@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.luksmeta";
+  id = "unknown.luksmeta";
   name = "luksmeta";
   summary = "Simple library for storing metadata in the LUKSv1 header";
   description = ''

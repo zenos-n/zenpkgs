@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.mlocate";
+  id = "unknown.mlocate";
   name = "mlocate";
   summary = "Utility to index and quickly search for files";
   description = ''

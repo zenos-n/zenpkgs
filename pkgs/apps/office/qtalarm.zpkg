@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.qtalarm";
+  id = "unknown.qtalarm";
   name = "QtAlarm";
   summary = "Nifty alarm clock written in QT";
   description = ''

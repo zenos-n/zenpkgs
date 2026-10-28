@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.ethq";
+  id = "unknown.ethq";
   name = "ethq";
   summary = "Ethernet NIC Queue stats viewer";
   description = ''

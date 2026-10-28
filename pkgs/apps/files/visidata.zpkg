@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.visidata";
+  id = "unknown.visidata";
   name = "VisiData";
   summary = "Interactive terminal multitool for tabular data";
   description = ''

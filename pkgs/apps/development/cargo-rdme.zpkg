@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.cargo-rdme";
+  id = "unknown.cargo-rdme";
   name = "cargo-rdme";
   summary = "Cargo command to create the README.md from your crate's documentation";
   description = ''

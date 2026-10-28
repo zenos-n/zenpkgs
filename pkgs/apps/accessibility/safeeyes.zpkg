@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.safeeyes";
+  id = "unknown.safeeyes";
   name = "Safe Eyes";
   summary = "Break reminder to prevent eye strain";
   description = ''

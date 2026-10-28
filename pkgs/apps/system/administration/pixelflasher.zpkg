@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.pixelflasher";
+  id = "unknown.pixelflasher";
   name = "PixelFlasher";
   summary = "Pixel™ phone flashing GUI utility with features";
   description = ''

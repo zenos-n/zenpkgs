@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.authenticator";
+  id = "unknown.authenticator";
   name = "Authenticator";
   summary = "Two-factor authentication code generator for GNOME";
   description = ''

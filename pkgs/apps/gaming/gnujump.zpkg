@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gnujump";
+  id = "unknown.gnujump";
   name = "GNUjump";
   summary = "Clone of the simple yet addictive game Xjump";
   description = ''

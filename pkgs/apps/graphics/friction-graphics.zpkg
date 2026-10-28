@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.friction-graphics";
+  id = "unknown.friction-graphics";
   name = "Friction";
   summary = "Vector motion graphics program";
   description = ''

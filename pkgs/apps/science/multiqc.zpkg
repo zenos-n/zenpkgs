@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.multiqc";
+  id = "unknown.multiqc";
   name = "MultiQC";
   summary = "Aggregates bioinformatics results from multiple samples into a unified report";
   description = ''

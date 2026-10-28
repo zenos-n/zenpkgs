@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.pikchr";
+  id = "unknown.pikchr";
   name = "Pikchr";
   summary = "PIC-like markup language for diagrams in technical documentation";
   description = ''

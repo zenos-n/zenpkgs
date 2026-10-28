@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.guvcview";
+  id = "unknown.guvcview";
   name = "Guvcview";
   summary = "Simple interface for devices supported by the linux UVC driver";
   description = ''

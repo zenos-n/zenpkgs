@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.launchers.wox";
+  id = "unknown.wox";
   name = "Wox";
   summary = "Cross-platform launcher that simply works";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.emulators.hatari";
+  id = "unknown.hatari";
   name = "Hatari";
   summary = "Atari ST/STE/TT/Falcon emulator";
   description = ''

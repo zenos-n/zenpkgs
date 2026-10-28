@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.gama-tui";
+  id = "unknown.gama-tui";
   name = "GAMA";
   summary = "Manage your GitHub Actions from Terminal with great UI";
   description = ''

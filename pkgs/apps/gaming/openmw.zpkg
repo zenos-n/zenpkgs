@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.openmw";
+  id = "unknown.openmw";
   name = "OpenMW";
   summary = "Unofficial open source engine reimplementation of the game Morrowind";
   description = ''

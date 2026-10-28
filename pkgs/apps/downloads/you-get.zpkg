@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.downloads.you-get";
+  id = "unknown.you-get";
   name = "You-Get";
   summary = "Tiny command line utility to download media contents from the web";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.irssi";
+  id = "unknown.irssi";
   name = "Irssi";
   summary = "Terminal based IRC client";
   description = ''

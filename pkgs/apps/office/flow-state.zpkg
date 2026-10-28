@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.flow-state";
+  id = "unknown.flow-state";
   name = "Flow State";
   summary = "Terminal-based habit tracker designed for neurodivergent users";
   description = ''

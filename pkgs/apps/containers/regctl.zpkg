@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.regctl";
+  id = "unknown.regctl";
   name = "regctl";
   summary = "Docker and OCI Registry Client in Go and tooling using those libraries";
   description = ''

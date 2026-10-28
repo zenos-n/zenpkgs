@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.gaming.kblackbox";
+  id = "unknown.kblackbox";
   name = "KBlackBox";
   summary = "KBlackBox is a game of hide and seek played on a grid of boxes";
   description = ''

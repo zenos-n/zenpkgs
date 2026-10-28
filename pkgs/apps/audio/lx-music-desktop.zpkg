@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.lx-music-desktop";
+  id = "unknown.lx-music-desktop";
   name = "LX Music Desktop";
   summary = "Music software based on Electron and Vue";
   description = ''

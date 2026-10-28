@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gnome-tetravex";
+  id = "unknown.gnome-tetravex";
   name = "GNOME Tetravex";
   summary = "Complete the puzzle by matching numbered tiles";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.graphics.galerio";
+  id = "unknown.galerio";
   name = "Galerio";
   summary = "Simple generator for self-contained HTML flexbox galleries";
   description = ''

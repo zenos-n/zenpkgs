@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.glslls";
+  id = "unknown.glslls";
   name = "GLSL Language Server";
   summary = "Language server implementation for GLSL";
   description = ''

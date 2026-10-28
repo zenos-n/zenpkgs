@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.harlequin";
+  id = "unknown.harlequin";
   name = "Harlequin";
   summary = "SQL IDE for Your Terminal";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.opencode-desktop";
+  id = "unknown.opencode-desktop";
   name = "OpenCode Desktop";
   summary = "AI coding agent desktop client";
   description = ''

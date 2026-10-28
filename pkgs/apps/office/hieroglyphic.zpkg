@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.hieroglyphic";
+  id = "unknown.hieroglyphic";
   name = "Hieroglyphic";
   summary = "Tool based on detexify for finding LaTeX symbols from drawings";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.remind";
+  id = "unknown.remind";
   name = "Remind";
   summary = "Sophisticated calendar and alarm program for the console";
   description = ''

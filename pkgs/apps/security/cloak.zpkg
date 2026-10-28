@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.cloak";
+  id = "unknown.cloak";
   name = "cloak";
   summary = "Command-line OTP authenticator application";
   description = ''

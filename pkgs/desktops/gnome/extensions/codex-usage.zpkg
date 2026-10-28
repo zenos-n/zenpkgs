@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.codex-usage";
+  id = "unknown.codex-usage";
   name = "codex-usage";
   summary = "GNOME Shell codex-usage extension";
   description = ''Package the existing codex-usage GNOME Shell extension. Installing it does not enable the extension.'';

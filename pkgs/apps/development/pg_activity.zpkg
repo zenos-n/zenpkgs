@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pg-u5f-activity";
+  id = "unknown.pg-u5f-activity";
   name = "pg_activity";
   summary = "Top like application for PostgreSQL server activity monitoring";
   description = ''

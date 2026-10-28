@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.uv";
+  id = "unknown.uv";
   name = "uv";
   summary = "Extremely fast Python package installer and resolver, written in Rust";
   description = ''

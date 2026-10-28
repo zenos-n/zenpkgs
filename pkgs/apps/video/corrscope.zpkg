@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.corrscope";
+  id = "unknown.corrscope";
   name = "Corrscope";
   summary = "Render wave files into oscilloscope views, featuring advanced correlation-based triggering algorithm";
   description = ''

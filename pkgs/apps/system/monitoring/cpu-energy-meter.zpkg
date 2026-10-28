@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.cpu-energy-meter";
+  id = "unknown.cpu-energy-meter";
   name = "CPU Energy Meter";
   summary = "Tool for measuring energy consumption of Intel CPUs";
   description = ''

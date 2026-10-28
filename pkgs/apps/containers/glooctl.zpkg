@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.containers.glooctl";
+  id = "unknown.glooctl";
   name = "glooctl";
   summary = "Unified CLI for Gloo, the feature-rich, Kubernetes-native, next-generation API gateway built on Envoy";
   description = ''

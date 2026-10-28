@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.foremost";
+  id = "unknown.foremost";
   name = "Foremost";
   summary = "Recover files based on their contents";
   description = ''

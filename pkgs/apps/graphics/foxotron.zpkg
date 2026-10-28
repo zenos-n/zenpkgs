@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.foxotron";
+  id = "unknown.foxotron";
   name = "Foxotron";
   summary = "General purpose model viewer";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.atuin";
+  id = "unknown.atuin";
   name = "Atuin";
   summary = "Replacement for a shell history which records additional commands context with optional encrypted synchronization between machines";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.security.john";
+  id = "unknown.john";
   name = "John the Ripper";
   summary = "John the Ripper password cracker";
   description = ''

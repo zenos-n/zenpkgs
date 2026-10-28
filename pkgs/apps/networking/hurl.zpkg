@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.hurl";
+  id = "unknown.hurl";
   name = "Hurl";
   summary = "Command line tool that performs HTTP requests defined in a simple plain text format";
   description = ''

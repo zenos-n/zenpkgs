@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.git-vendor";
+  id = "unknown.git-vendor";
   name = "git-vendor";
   summary = "Git command for managing vendored dependencies";
   description = ''

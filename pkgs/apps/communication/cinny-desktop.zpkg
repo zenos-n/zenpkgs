@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.cinny-desktop";
+  id = "unknown.cinny-desktop";
   name = "Cinny";
   summary = "Yet another matrix client for desktop";
   description = ''

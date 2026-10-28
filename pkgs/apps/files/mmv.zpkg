@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.mmv";
+  id = "unknown.mmv";
   name = "mmv";
   summary = "Utility for wildcard renaming, copying, etc";
   description = ''

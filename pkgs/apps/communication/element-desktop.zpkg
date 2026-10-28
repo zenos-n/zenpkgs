@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.communication.element-desktop";
+  id = "unknown.element-desktop";
   name = "Element";
   summary = "Feature-rich client for Matrix.org";
   description = ''

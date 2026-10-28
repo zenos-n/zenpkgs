@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.editors.jed";
+  id = "unknown.jed";
   name = "JED";
   summary = "Programmable text editor written around S-Lang";
   description = ''

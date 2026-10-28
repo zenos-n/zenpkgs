@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.focus-stack";
+  id = "unknown.focus-stack";
   name = "Focus Stack";
   summary = "Fast and easy focus stacking";
   description = ''

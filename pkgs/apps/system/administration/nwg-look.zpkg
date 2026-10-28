@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.nwg-look";
+  id = "unknown.nwg-look";
   name = "nwg-look";
   summary = "GTK settings editor, designed to work properly in wlroots-based Wayland environment";
   description = ''

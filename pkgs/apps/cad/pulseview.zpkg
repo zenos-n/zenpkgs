@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.pulseview";
+  id = "unknown.pulseview";
   name = "PulseView";
   summary = "Qt-based LA/scope/MSO GUI for sigrok (a signal analysis software suite)";
   description = ''

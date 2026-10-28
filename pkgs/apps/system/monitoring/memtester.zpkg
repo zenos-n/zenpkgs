@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.memtester";
+  id = "unknown.memtester";
   name = "memtester";
   summary = "Userspace utility for testing the memory subsystem for faults";
   description = ''

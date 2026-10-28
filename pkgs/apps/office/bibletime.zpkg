@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.bibletime";
+  id = "unknown.bibletime";
   name = "BibleTime";
   summary = "Powerful cross platform Bible study tool";
   description = ''

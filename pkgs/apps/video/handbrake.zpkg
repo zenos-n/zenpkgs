@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.handbrake";
+  id = "unknown.handbrake";
   name = "HandBrake";
   summary = "Tool for converting video files and ripping DVDs";
   description = ''

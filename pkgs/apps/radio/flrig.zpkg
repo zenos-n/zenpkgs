@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.flrig";
+  id = "unknown.flrig";
   name = "FLRIG";
   summary = "Digital modem rig control program";
   description = ''

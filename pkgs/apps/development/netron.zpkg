@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.netron";
+  id = "unknown.netron";
   name = "Netron";
   summary = "Visualizer for neural network, deep learning and machine learning models";
   description = ''

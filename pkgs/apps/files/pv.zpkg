@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.pv";
+  id = "unknown.pv";
   name = "pv";
   summary = "Tool for monitoring the progress of data through a pipeline";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.latexminted";
+  id = "unknown.latexminted";
   name = "latexminted";
   summary = "Python executable for LaTeX minted package";
   description = ''

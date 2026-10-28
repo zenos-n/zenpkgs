@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.csharpier";
+  id = "unknown.csharpier";
   name = "CSharpier";
   summary = "Opinionated code formatter for C#";
   description = ''

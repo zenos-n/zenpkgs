@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.dupeguru";
+  id = "unknown.dupeguru";
   name = "dupeGuru";
   summary = "GUI tool to find duplicate files in a system";
   description = ''

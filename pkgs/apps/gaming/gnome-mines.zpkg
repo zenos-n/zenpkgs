@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.gnome-mines";
+  id = "unknown.gnome-mines";
   name = "GNOME Mines";
   summary = "Clear hidden mines from a minefield";
   description = ''

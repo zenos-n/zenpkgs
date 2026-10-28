@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.pgmodeler";
+  id = "unknown.pgmodeler";
   name = "pgModeler";
   summary = "Database modeling tool for PostgreSQL";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.cadzinho";
+  id = "unknown.cadzinho";
   name = "CadZinho";
   summary = "Minimalist computer aided design (CAD) software";
   description = ''

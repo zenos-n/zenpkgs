@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.recovery.extundelete";
+  id = "unknown.extundelete";
   name = "extundelete";
   summary = "Utility that can recover deleted files from an ext3 or ext4 partition";
   description = ''

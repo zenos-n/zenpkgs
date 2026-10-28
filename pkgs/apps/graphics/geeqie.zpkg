@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.geeqie";
+  id = "unknown.geeqie";
   name = "Geeqie";
   summary = "Lightweight GTK based image viewer";
   description = ''

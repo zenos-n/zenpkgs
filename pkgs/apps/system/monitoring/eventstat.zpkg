@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.eventstat";
+  id = "unknown.eventstat";
   name = "eventstat";
   summary = "Simple monitoring of system events";
   description = ''

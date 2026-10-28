@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.chrysalis";
+  id = "unknown.chrysalis";
   name = "Chrysalis";
   summary = "Graphical configurator for Kaleidoscope-powered keyboards";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.administration.ahk-u5f-x11";
+  id = "unknown.ahk-u5f-x11";
   name = "AutoHotkey for X11";
   summary = "AutoHotkey for X11";
   description = ''

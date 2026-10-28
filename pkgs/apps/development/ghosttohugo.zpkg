@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.ghosttohugo";
+  id = "unknown.ghosttohugo";
   name = "ghostToHugo";
   summary = "Convert Ghost export to Hugo posts";
   description = ''

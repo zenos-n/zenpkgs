@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.fypp";
+  id = "unknown.fypp";
   name = "Fypp";
   summary = "Python powered Fortran preprocessor";
   description = ''

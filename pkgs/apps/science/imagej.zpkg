@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.science.imagej";
+  id = "unknown.imagej";
   name = "ImageJ";
   summary = "Image processing and analysis in Java";
   description = ''

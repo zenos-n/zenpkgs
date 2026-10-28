@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.ai.ramalama";
+  id = "unknown.ramalama";
   name = "RamaLama";
   summary = "Serving AI models locally using familiar container workflows";
   description = ''

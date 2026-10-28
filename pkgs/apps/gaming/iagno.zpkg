@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.iagno";
+  id = "unknown.iagno";
   name = "Iagno";
   summary = "Computer version of the game Reversi, more popularly called Othello";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.backup.deja-dup";
+  id = "unknown.deja-dup";
   name = "Déjà Dup";
   summary = "Simple backup tool";
   description = ''

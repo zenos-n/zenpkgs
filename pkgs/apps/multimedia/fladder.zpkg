@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.multimedia.fladder";
+  id = "unknown.fladder";
   name = "Fladder";
   summary = "Simple Jellyfin Frontend built on top of Flutter";
   description = ''

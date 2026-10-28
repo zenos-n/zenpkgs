@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.pdfsam-basic";
+  id = "unknown.pdfsam-basic";
   name = "PDFsam Basic";
   summary = "Multi-platform software designed to extract pages, split, merge, mix and rotate PDF files";
   description = ''

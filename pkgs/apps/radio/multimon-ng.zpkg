@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.radio.multimon-ng";
+  id = "unknown.multimon-ng";
   name = "multimon-ng";
   summary = "Digital baseband audio protocol decoder";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.flac2all";
+  id = "unknown.flac2all";
   name = "flac2all";
   summary = "Multi process, clustered, FLAC to multi codec audio converter with tagging support";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.gnumeric";
+  id = "unknown.gnumeric";
   name = "Gnumeric";
   summary = "GNOME Office Spreadsheet";
   description = ''

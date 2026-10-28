@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.graphics.gwenview";
+  id = "unknown.gwenview";
   name = "Gwenview";
   summary = "Image viewer by KDE";
   description = ''

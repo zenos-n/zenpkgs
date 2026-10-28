@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.networking.cloudflared";
+  id = "unknown.cloudflared";
   name = "Cloudflare Tunnel";
   summary = "Client for various Cloudflare services, including Tunnel, Access, and DNS over HTTPS";
   description = ''

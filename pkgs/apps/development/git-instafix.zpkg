@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.development.git-instafix";
+  id = "unknown.git-instafix";
   name = "git-instafix";
   summary = "Quickly fix up an old commit using your currently-staged changes";
   description = ''

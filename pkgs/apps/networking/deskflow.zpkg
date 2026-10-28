@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "org.zenos.packages.apps.networking.deskflow";
+  id = "unknown.deskflow";
   name = "Deskflow";
   summary = "Share one mouse and keyboard between multiple computers on Windows, macOS and Linux";
   description = ''

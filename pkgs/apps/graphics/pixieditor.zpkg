@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.pixieditor";
+  id = "unknown.pixieditor";
   name = "PixiEditor";
   summary = "Universal editor for all your 2D needs";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.protontricks";
+  id = "unknown.protontricks";
   name = "Protontricks";
   summary = "Simple wrapper for running Winetricks commands for Proton-enabled games";
   description = ''

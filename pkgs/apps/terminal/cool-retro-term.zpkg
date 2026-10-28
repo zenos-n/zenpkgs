@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.cool-retro-term";
+  id = "unknown.cool-retro-term";
   name = "Cool Retro Term";
   summary = "Terminal emulator which mimics the old cathode display";
   description = ''

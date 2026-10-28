@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.terminal.byobu";
+  id = "unknown.byobu";
   name = "Byobu";
   summary = "Text-based window manager and terminal multiplexer";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.orca-slicer";
+  id = "unknown.orca-slicer";
   name = "OrcaSlicer";
   summary = "G-code generator for 3D printers (Bambu, Prusa, Voron, VzBot, RatRig, Creality, etc.)";
   description = ''

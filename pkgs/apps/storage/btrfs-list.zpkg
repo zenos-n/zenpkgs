@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.storage.btrfs-list";
+  id = "unknown.btrfs-list";
   name = "btrfs-list";
   summary = "Get a nice tree-style view of your btrfs subvolumes/snapshots, including their size, à la 'zfs list'";
   description = ''

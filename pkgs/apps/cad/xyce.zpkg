@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.cad.xyce";
+  id = "unknown.xyce";
   name = "Xyce";
   summary = "High-performance analog circuit simulator";
   description = ''

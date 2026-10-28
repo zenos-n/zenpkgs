@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.development.edb";
+  id = "unknown.edb";
   name = "EDB Debugger";
   summary = "Cross platform AArch32/x86/x86-64 debugger";
   description = ''

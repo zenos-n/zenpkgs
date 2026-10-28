@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.miniserve";
+  id = "unknown.miniserve";
   name = "miniserve";
   summary = "CLI tool to serve files and directories over HTTP";
   description = ''

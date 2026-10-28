@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.monitoring.lnav";
+  id = "unknown.lnav";
   name = "Logfile Navigator";
   summary = "Logfile Navigator";
   description = ''

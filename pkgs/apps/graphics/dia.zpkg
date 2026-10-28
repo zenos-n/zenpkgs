@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.graphics.dia";
+  id = "unknown.dia";
   name = "Dia";
   summary = "Gnome Diagram drawing software";
   description = ''

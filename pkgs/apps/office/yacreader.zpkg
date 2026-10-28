@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.yacreader";
+  id = "unknown.yacreader";
   name = "YACReader";
   summary = "Comic reader for cross-platform reading and managing your digital comic collection";
   description = ''

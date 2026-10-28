@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.files.windsend";
+  id = "unknown.windsend";
   name = "WindSend";
   summary = "Quickly and securely sync clipboard, transfer files and directories between devices";
   description = ''

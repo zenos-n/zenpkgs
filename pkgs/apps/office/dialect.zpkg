@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.office.dialect";
+  id = "unknown.dialect";
   name = "Dialect";
   summary = "Translation app for GNOME";
   description = ''
