@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.theming.system.fastfetch";
+  id = "com.neg-zero.fastfetch";
   name = "zenos-fastfetch";
   summary = "ZenOS fastfetch theming and ASCII art";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.system.zenlink";
+  id = "com.neg-zero.zenlink";
   name = "zenlink";
   summary = "The Android to ZenOS communication bridge";
   description = ''

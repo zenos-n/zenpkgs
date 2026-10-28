@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.theming.icons.adwaita-hacks";
+  id = "com.neg-zero.adwaita-hacks";
   name = "Adwaita Hacks"; summary = "Extended Adwaita icon theme";
   description = ''Extended Adwaita icon theme. Preserves the existing ZenOS theme provider.'';
   zenosVersion = "1.0.0"; packageVersion = "1.0";

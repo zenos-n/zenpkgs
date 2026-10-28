@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.system.kernel.popcorn";
+  id = "com.neg-zero.popcorn";
   name = "popcorn kernel"; summary = "Optional Popcorn 7.0.2 kernel";
   description = ''Pinned Popcorn generic kernel for migration. Select explicitly through system.kernel.package; this package never changes the default kernel.'';
   zenosVersion = "1.0.0"; packageVersion = "7.0.2";

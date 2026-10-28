@@ -237,7 +237,7 @@ enable = enableOption {
 setupPackage = {
   _meta = {
     type = $type.package;
-    default = $pkgs.zenos.byCategories.system.zenos-setup;
+    default = $pkgs.zenos.byCategories.apps.system.zenos-setup;
     summary = "Setup application package launched by OOBE";
     example = "pkgs.zenos.setup";
   };

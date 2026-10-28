@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.dash-stacks";
+  id = "com.neg-zero.dash-stacks";
   name = "dash-stacks";
   summary = "macOS-style folder stacks for the GNOME dash";
   description = ''

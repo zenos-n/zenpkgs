@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.system.zenfs";
+  id = "com.neg-zero.zenfs";
   name = "ZenFS";
   summary = "Provides the ZenOS filesystem and application integration runtime";
   description = ''Packages ZenFS hierarchy initialization, application views, launchers, compatibility helpers, and roaming-drive support.'';

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.theming.fonts.zero.mono";
+  id = "com.neg-zero.zero-font-mono";
   name = "Zero Mono"; summary = "Monospaced Zero display typeface";
   description = ''Monospaced Zero display typeface. Preserves the existing ZenOS theme provider.'';
   zenosVersion = "1.0.0"; packageVersion = "1.0.0";

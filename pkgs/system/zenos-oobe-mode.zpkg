@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.system.zenos-oobe-mode";
+  id = "com.neg-zero.zenos-oobe-mode";
   name = "ZenOS OOBE session";
   summary = "GNOME session mode for installation and first-boot setup";
   description = ''Provides the GNOME shell extension and session mode used by ZenOS Setup.'';

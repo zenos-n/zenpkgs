@@ -35,6 +35,11 @@ OOBE, Setup, and the live ISO must use canonical IDs or the corresponding `pkgs.
 | apps/utilities/file-roller | apps/archives/file-roller |
 | programs/zenos-rebuild | apps/system/zenos/zenos-rebuild |
 | programs/swisstag (compatibility recipe) | apps/audio/swisstag |
+| system/zenos-setup | apps/system/zenos-setup |
+
+Setup uses canonical ID `com.neg-zero.zenos-setup`, independently of its
+category path. The corresponding selectors are `pkgs.com.neg-zero.zenos-setup`
+and `pkgs.byCategories.apps.system.zenos-setup`.
 
 Swisstag was also exposed by the internal compatibility recipe loader. Its
 recipe moved from `lib/compat/package-recipes/programs/swisstag` to

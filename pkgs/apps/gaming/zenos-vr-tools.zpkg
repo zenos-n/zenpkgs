@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.gaming.zenos-vr-tools";
+  id = "com.neg-zero.zenos-vr-tools";
   name = "zenos-vr-tools";
   summary = "ZenOS VR launcher, manager and overlay supervisor";
   description = ''ZenOS VR launcher, manager and overlay supervisor. Optional migration package; installation does not activate a service.'';

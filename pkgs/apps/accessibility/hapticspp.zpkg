@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.accessibility.hapticspp";
+  id = "com.neg-zero.hapticspp";
   name = "Haptics++";
   summary = "GNOME pointer haptics for Logitech HID++ mice";
   description = ''Package the existing mouse haptics daemon, GNOME extension and receiver access rules. Does not start the daemon.'';

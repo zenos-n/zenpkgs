@@ -347,6 +347,7 @@ in
         "apps.gaming.zenos-vr-tools"
         "apps.graphics.blender-hip"
         "apps.graphics.select-for-figma"
+        "apps.system.zenos-setup"
         "apps.system.zenos.zenos-rebuild"
         "apps.video.tubefin"
         "desktops.gnome.extensions.codex-usage"
@@ -367,7 +368,6 @@ in
         "system.zenos-oobe-mode"
         "system.zenos-recovery-tools"
         "system.zenos-refind-installer"
-        "system.zenos-setup"
         "system.zenos-shell-defaults"
         "theming.apps.firefox-gnome"
         "theming.fonts.zero.mono"
@@ -469,6 +469,17 @@ in
     assert collision [ (first // { target = [ "zen-dsl" ]; }) ] { zen-dsl = untouched; };
     assert !(builtins.tryEval ((flatten [ first first ] { zen-dsl = true; }).zen-dsl)).success;
     pass "zenpkgs-dotted-output-collisions";
+
+  registry-setup-identity =
+    let
+      entries = lib.filter (entry: entry.id == "pkgs.com.neg-zero.zenos-setup") activeEntries;
+    in
+    assert builtins.length entries == 1;
+    assert (builtins.head entries).target == [ "com" "neg-zero" "zenos-setup" ];
+    assert (builtins.head entries).categoryTarget == [ "apps" "system" "zenos-setup" ];
+    assert publicPackages."com.neg-zero.zenos-setup".drvPath
+      == publicPackages."apps.system.zenos-setup".drvPath;
+    pass "zenpkgs-setup-identity";
 
   registry-nzportable-identity =
     let

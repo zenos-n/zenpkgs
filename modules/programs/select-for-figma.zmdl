@@ -119,7 +119,7 @@ enable = enableOption {
     tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
   };
   u! {
-    home.packages = [ $pkgs.io.github.doromiert.SelectForFigma ];
+    home.packages = [ $pkgs.com.neg-zero.select-for-figma ];
     home.activation.zenosSelectForFigmaPreferences = $lib.mkWritableProgramConfig {
       pkgs = $pkgs.legacy; application = "select-for-figma"; assignments = $v.preferences;
     };

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.theming.wallpapers.destination-2";
+  id = "com.neg-zero.destination-2";
   name = "destination-2-wallpapers";
   summary = "Destination 2 wallpaper collection for ZenOS";
   description = ''

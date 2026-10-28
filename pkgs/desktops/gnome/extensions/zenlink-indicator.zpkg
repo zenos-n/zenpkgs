@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.zenlink-indicator";
+  id = "com.neg-zero.zenlink-indicator";
   name = "zenlink-indicator";
   summary = "ZenLink status indicator and control interface for GNOME";
   description = ''

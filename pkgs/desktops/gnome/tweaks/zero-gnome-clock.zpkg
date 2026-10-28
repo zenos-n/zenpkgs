@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.tweaks.zero-gnome-clock";
+  id = "com.neg-zero.zero-gnome-clock";
   name = "zero-gnome-clock";
   summary = "GNOME Shell top bar clock typography override";
   description = ''

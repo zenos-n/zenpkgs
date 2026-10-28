@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.theming.icons.zenos-icons";
+  id = "com.neg-zero.zenos-icons";
   name = "zenos-icons";
   summary = "Core iconography set for the ZenOS environment";
   description = ''

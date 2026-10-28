@@ -1,5 +1,5 @@
 _meta = {
-  id = "io.github.doromiert.SelectForFigma";
+  id = "com.neg-zero.select-for-figma";
   name = "Select for Figma";
   summary = "Native GTK and libadwaita Figma workspace";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.desktops.gnome.extensions.zen-vision";
+  id = "com.neg-zero.zen-vision";
   name = "zen-vision";
   summary = "GNOME Shell zen-vision extension";
   description = ''Package the existing zen-vision GNOME Shell extension. Installing it does not enable the extension.'';

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.video.tubefin";
+  id = "com.neg-zero.tubefin";
   name = "TubeFin";
   summary = "Native YouTube and Jellyfin client for GNOME";
   description = ''Native YouTube and Jellyfin client for GNOME. Optional migration package; installation does not activate a service.'';

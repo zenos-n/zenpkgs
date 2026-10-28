@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.system.zenclean";
+  id = "com.neg-zero.zenclean";
   name = "zenos-maintenance";
   summary = "Automated system maintenance and optimization utility";
   description = ''

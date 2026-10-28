@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.system.zenos.zenos-rebuild";
+  id = "com.neg-zero.zenos-rebuild";
   name = "ZenOS rebuild";
   summary = "Rebuilds ZenOS from canonical ZCFG sources";
   description = ''Packages the secure configuration snapshot and rebuild workflow used by live and installed systems.'';

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.system.zenos-shell-defaults";
+  id = "com.neg-zero.zenos-shell-defaults";
   name = "ZenOS shell defaults";
   summary = "Provides the default Powerlevel10k configuration";
   description = ''Packages the ZenOS default Powerlevel10k configuration for private per-user Zsh setup.'';

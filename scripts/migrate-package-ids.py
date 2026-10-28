@@ -23,8 +23,7 @@ KNOWN = {
     "apps/system/nautilus": "org.gnome.Nautilus",
     # Explicit package identity requested by the user; desktop/profile IDs stay compatible.
     "apps/browsers/gnosis": "com.neg-zero.gnosis",
-    # ../select-for-figma/data/io.github.doromiert.SelectForFigma.metainfo.xml.
-    "apps/graphics/select-for-figma": "io.github.doromiert.SelectForFigma",
+    "apps/graphics/select-for-figma": "com.neg-zero.select-for-figma",
     # Verified against /run/current-system/sw/share/applications/<id>.desktop:
     # Name/Exec identify these applications; preserve upstream ID capitalization.
     "apps/development/gnome-builder": "org.gnome.Builder",

@@ -142,7 +142,7 @@ in {
   serverLoopback = lib.any (lib.hasInfix "127.0.0.1") agents.home-manager.users.alice.systemd.user.services.opencodeServer.Service.ExecStart;
   enabledGnomeFontsResolveCanonicalPackage = lib.any
     (package: (package.meta.zenos.registryId or null)
-      == "pkgs.org.zenos.packages.theming.fonts.zero.regular")
+      == "pkgs.com.neg-zero.zero-font-regular")
     zeroFontProfile.fonts.packages;
   blurNumericSettingsAreTyped =
     blurDatabase.settings."org/gnome/shell/extensions/blur-my-shell".settings-version._type == "gvariant"

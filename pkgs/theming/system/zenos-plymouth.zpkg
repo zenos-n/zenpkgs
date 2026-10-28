@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.theming.system.zenos-plymouth";
+  id = "com.neg-zero.zenos-plymouth";
   name = "ZenOS boot visuals";
   summary = "Provides ZenOS Plymouth and installer boot resources";
   description = ''Packages the ZenOS Plymouth animation plus GRUB, Syslinux, and boot picker resources.'';

@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.system.zenboot";
+  id = "com.neg-zero.zenboot";
   name = "zenboot";
   summary = "ZenOS bootloader automation based on rEFInd";
   description = ''

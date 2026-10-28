@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.audio.swisstag";
+  id = "com.neg-zero.swisstag";
   name = "Swisstag";
   summary = "Automated music tagging and lyrics retrieval";
   description = ''Automated music tagging and lyrics retrieval. Optional migration package; installation does not activate a service.'';

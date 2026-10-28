@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.apps.connectivity.zbridge";
+  id = "com.neg-zero.zbridge";
   name = "ZeroBridge";
   summary = "Android and Linux audio/video bridge with a GNOME control extension";
   description = ''Android and Linux audio/video bridge with a GNOME control extension. Optional migration package; installation does not activate a service.'';

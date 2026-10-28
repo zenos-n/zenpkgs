@@ -6905,7 +6905,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.system.zenos-oobe-mode",
+      "id": "pkgs.com.neg-zero.zenos-oobe-mode",
       "meta": {
         "description": "Provides the GNOME shell extension and session mode used by ZenOS Setup.",
         "license": null,
@@ -6921,7 +6921,7 @@
           "oobe"
         ],
         "zenosVersion": "1.0.0Nb",
-        "id": "org.zenos.packages.system.zenos-oobe-mode"
+        "id": "com.neg-zero.zenos-oobe-mode"
       },
       "provider": {
         "kind": "build",
@@ -7081,10 +7081,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
+        "com",
+        "neg-zero",
         "zenos-oobe-mode"
       ],
       "categoryTarget": [
@@ -7094,7 +7092,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.system.zenos-setup",
+      "id": "pkgs.com.neg-zero.zenos-setup",
       "meta": {
         "description": "Installs ZenOS and finishes user setup after the first boot.",
         "license": null,
@@ -7109,7 +7107,7 @@
           "oobe"
         ],
         "zenosVersion": "1.0.0Nb",
-        "id": "org.zenos.packages.system.zenos-setup"
+        "id": "com.neg-zero.zenos-setup"
       },
       "provider": {
         "kind": "build",
@@ -7269,20 +7267,19 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
+        "com",
+        "neg-zero",
         "zenos-setup"
       ],
       "categoryTarget": [
+        "apps",
         "system",
         "zenos-setup"
       ]
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.apps.system.zenos.zenos-rebuild",
+      "id": "pkgs.com.neg-zero.zenos-rebuild",
       "meta": {
         "description": "Packages the secure configuration snapshot and rebuild workflow used by live and installed systems.",
         "license": null,
@@ -7297,7 +7294,7 @@
           "system"
         ],
         "zenosVersion": "1.0.0Nb",
-        "id": "org.zenos.packages.apps.system.zenos.zenos-rebuild"
+        "id": "com.neg-zero.zenos-rebuild"
       },
       "provider": {
         "kind": "build",
@@ -7457,12 +7454,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "apps",
-        "system",
-        "zenos",
+        "com",
+        "neg-zero",
         "zenos-rebuild"
       ],
       "categoryTarget": [
@@ -7474,7 +7467,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.system.zenfs",
+      "id": "pkgs.com.neg-zero.zenfs",
       "meta": {
         "description": "Packages ZenFS hierarchy initialization, application views, launchers, compatibility helpers, and roaming-drive support.",
         "license": null,
@@ -7489,7 +7482,7 @@
           "applications"
         ],
         "zenosVersion": "1.0.0Nb",
-        "id": "org.zenos.packages.system.zenfs"
+        "id": "com.neg-zero.zenfs"
       },
       "provider": {
         "kind": "build",
@@ -7649,10 +7642,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
+        "com",
+        "neg-zero",
         "zenfs"
       ],
       "categoryTarget": [
@@ -7662,7 +7653,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.system.zenos-recovery-tools",
+      "id": "pkgs.com.neg-zero.zenos-recovery-tools",
       "meta": {
         "description": "Packages diagnostics, read-only mounting, Linux recovery entry points, Windows guidance, and desktop launchers.",
         "license": null,
@@ -7677,7 +7668,7 @@
           "installer"
         ],
         "zenosVersion": "1.0.0Nb",
-        "id": "org.zenos.packages.system.zenos-recovery-tools"
+        "id": "com.neg-zero.zenos-recovery-tools"
       },
       "provider": {
         "kind": "build",
@@ -7837,10 +7828,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
+        "com",
+        "neg-zero",
         "zenos-recovery-tools"
       ],
       "categoryTarget": [
@@ -7850,7 +7839,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.system.zenos-refind-installer",
+      "id": "pkgs.com.neg-zero.zenos-refind-installer",
       "meta": {
         "description": "Packages the original ZenOS generation synchronizer used after systemd-boot writes EFI kernels.",
         "license": null,
@@ -7866,7 +7855,7 @@
           "refind"
         ],
         "zenosVersion": "1.0.0Nb",
-        "id": "org.zenos.packages.system.zenos-refind-installer"
+        "id": "com.neg-zero.zenos-refind-installer"
       },
       "provider": {
         "kind": "build",
@@ -8026,10 +8015,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
+        "com",
+        "neg-zero",
         "zenos-refind-installer"
       ],
       "categoryTarget": [
@@ -8039,7 +8026,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.system.zenos-shell-defaults",
+      "id": "pkgs.com.neg-zero.zenos-shell-defaults",
       "meta": {
         "description": "Packages the ZenOS default Powerlevel10k configuration for private per-user Zsh setup.",
         "license": null,
@@ -8055,7 +8042,7 @@
           "theme"
         ],
         "zenosVersion": "1.0.0Nb",
-        "id": "org.zenos.packages.system.zenos-shell-defaults"
+        "id": "com.neg-zero.zenos-shell-defaults"
       },
       "provider": {
         "kind": "build",
@@ -8215,10 +8202,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
+        "com",
+        "neg-zero",
         "zenos-shell-defaults"
       ],
       "categoryTarget": [
@@ -8228,7 +8213,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.theming.system.zenos-plymouth",
+      "id": "pkgs.com.neg-zero.zenos-plymouth",
       "meta": {
         "description": "Packages the ZenOS Plymouth animation plus GRUB, Syslinux, and boot picker resources.",
         "license": null,
@@ -8243,7 +8228,7 @@
           "theme"
         ],
         "zenosVersion": "1.0.0Nb",
-        "id": "org.zenos.packages.theming.system.zenos-plymouth"
+        "id": "com.neg-zero.zenos-plymouth"
       },
       "provider": {
         "kind": "build",
@@ -8403,11 +8388,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "theming",
-        "system",
+        "com",
+        "neg-zero",
         "zenos-plymouth"
       ],
       "categoryTarget": [
@@ -8418,7 +8400,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.theming.system.zenos-refind-theme",
+      "id": "pkgs.com.neg-zero.zenos-refind-theme",
       "meta": {
         "description": "Packages the unchanged rEFInd configuration, icons, selections, and background from zenos-old.",
         "license": null,
@@ -8434,7 +8416,7 @@
           "theme"
         ],
         "zenosVersion": "1.0.0Nb",
-        "id": "org.zenos.packages.theming.system.zenos-refind-theme"
+        "id": "com.neg-zero.zenos-refind-theme"
       },
       "provider": {
         "kind": "build",
@@ -8594,11 +8576,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "theming",
-        "system",
+        "com",
+        "neg-zero",
         "zenos-refind-theme"
       ],
       "categoryTarget": [
@@ -226252,7 +226231,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.apps.accessibility.hapticspp",
+      "id": "pkgs.com.neg-zero.hapticspp",
       "meta": {
         "description": "Package the existing mouse haptics daemon, GNOME extension and receiver access rules. Does not start the daemon.",
         "license": "$l.unfree",
@@ -226267,7 +226246,7 @@
           "gnome"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.apps.accessibility.hapticspp"
+        "id": "com.neg-zero.hapticspp"
       },
       "provider": {
         "kind": "build",
@@ -226333,11 +226312,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "apps",
-        "accessibility",
+        "com",
+        "neg-zero",
         "hapticspp"
       ],
       "categoryTarget": [
@@ -228102,7 +228078,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.apps.audio.swisstag",
+      "id": "pkgs.com.neg-zero.swisstag",
       "meta": {
         "description": "Automated music tagging and lyrics retrieval. Optional migration package; installation does not activate a service.",
         "license": "$l.gpl3Only",
@@ -228118,7 +228094,7 @@
           "lyrics"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.apps.audio.swisstag"
+        "id": "com.neg-zero.swisstag"
       },
       "provider": {
         "kind": "build",
@@ -229409,11 +229385,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "apps",
-        "audio",
+        "com",
+        "neg-zero",
         "swisstag"
       ],
       "categoryTarget": [
@@ -229904,7 +229877,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.apps.connectivity.zbridge",
+      "id": "pkgs.com.neg-zero.zbridge",
       "meta": {
         "description": "Android and Linux audio/video bridge with a GNOME control extension. Optional migration package; installation does not activate a service.",
         "license": "$l.mit",
@@ -229920,7 +229893,7 @@
           "camera"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.apps.connectivity.zbridge"
+        "id": "com.neg-zero.zbridge"
       },
       "provider": {
         "kind": "build",
@@ -230500,11 +230473,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "apps",
-        "connectivity",
+        "com",
+        "neg-zero",
         "zbridge"
       ],
       "categoryTarget": [
@@ -231342,7 +231312,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.apps.gaming.alvr-zenos-compat",
+      "id": "pkgs.com.neg-zero.alvr-zenos-compat",
       "meta": {
         "description": "ALVR with the ZenOS SteamVR compatibility patches. Optional migration package; installation does not activate a service.",
         "license": null,
@@ -231358,7 +231328,7 @@
           "migration"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.apps.gaming.alvr-zenos-compat"
+        "id": "com.neg-zero.alvr-zenos-compat"
       },
       "provider": {
         "kind": "build",
@@ -231424,11 +231394,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "apps",
-        "gaming",
+        "com",
+        "neg-zero",
         "alvr-zenos-compat"
       ],
       "categoryTarget": [
@@ -233659,7 +233626,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.apps.gaming.zenos-vr-tools",
+      "id": "pkgs.com.neg-zero.zenos-vr-tools",
       "meta": {
         "description": "ZenOS VR launcher, manager and overlay supervisor. Optional migration package; installation does not activate a service.",
         "license": null,
@@ -233675,7 +233642,7 @@
           "migration"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.apps.gaming.zenos-vr-tools"
+        "id": "com.neg-zero.zenos-vr-tools"
       },
       "provider": {
         "kind": "build",
@@ -233890,11 +233857,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "apps",
-        "gaming",
+        "com",
+        "neg-zero",
         "zenos-vr-tools"
       ],
       "categoryTarget": [
@@ -234527,7 +234491,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.apps.video.tubefin",
+      "id": "pkgs.com.neg-zero.tubefin",
       "meta": {
         "description": "Native YouTube and Jellyfin client for GNOME. Optional migration package; installation does not activate a service.",
         "license": "$l.gpl3Plus",
@@ -234543,7 +234507,7 @@
           "jellyfin"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.apps.video.tubefin"
+        "id": "com.neg-zero.tubefin"
       },
       "provider": {
         "kind": "build",
@@ -236000,11 +235964,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "apps",
-        "video",
+        "com",
+        "neg-zero",
         "tubefin"
       ],
       "categoryTarget": [
@@ -237156,7 +237117,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.desktops.gnome.extensions.zane-indicator",
+      "id": "pkgs.com.neg-zero.zane-indicator",
       "meta": {
         "description": "Package the existing zane-indicator GNOME Shell extension. Installing it does not enable the extension.",
         "license": "$l.unfree",
@@ -237171,7 +237132,7 @@
           "extensions"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.desktops.gnome.extensions.zane-indicator"
+        "id": "com.neg-zero.zane-indicator"
       },
       "provider": {
         "kind": "build",
@@ -237456,12 +237417,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "desktops",
-        "gnome",
-        "extensions",
+        "com",
+        "neg-zero",
         "zane-indicator"
       ],
       "categoryTarget": [
@@ -237473,7 +237430,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.desktops.gnome.extensions.zen-vision",
+      "id": "pkgs.com.neg-zero.zen-vision",
       "meta": {
         "description": "Package the existing zen-vision GNOME Shell extension. Installing it does not enable the extension.",
         "license": "$l.unfree",
@@ -237488,7 +237445,7 @@
           "extensions"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.desktops.gnome.extensions.zen-vision"
+        "id": "com.neg-zero.zen-vision"
       },
       "provider": {
         "kind": "build",
@@ -237773,12 +237730,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "desktops",
-        "gnome",
-        "extensions",
+        "com",
+        "neg-zero",
         "zen-vision"
       ],
       "categoryTarget": [
@@ -239425,7 +239378,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.system.kernel.popcorn",
+      "id": "pkgs.com.neg-zero.popcorn",
       "meta": {
         "description": "Pinned Popcorn generic kernel for migration. Select explicitly through system.kernel.package; this package never changes the default kernel.",
         "license": "$l.gpl2Only",
@@ -239440,7 +239393,7 @@
           "migration"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.system.kernel.popcorn"
+        "id": "com.neg-zero.popcorn"
       },
       "provider": {
         "kind": "build",
@@ -239791,11 +239744,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
-        "kernel",
+        "com",
+        "neg-zero",
         "popcorn"
       ],
       "categoryTarget": [
@@ -239806,7 +239756,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.system.kernel.popcorn-zen4",
+      "id": "pkgs.com.neg-zero.popcorn-zen4",
       "meta": {
         "description": "Pinned Popcorn doromitul kernel for migration. Select explicitly through system.kernel.package; this package never changes the default kernel.",
         "license": "$l.gpl2Only",
@@ -239821,7 +239771,7 @@
           "migration"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.system.kernel.popcorn-zen4"
+        "id": "com.neg-zero.popcorn-zen4"
       },
       "provider": {
         "kind": "build",
@@ -240172,11 +240122,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
-        "kernel",
+        "com",
+        "neg-zero",
         "popcorn-zen4"
       ],
       "categoryTarget": [
@@ -240187,7 +240134,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.theming.system.zenos-branding",
+      "id": "pkgs.com.neg-zero.zenos-branding",
       "meta": {
         "description": "Provides the ZenOS desktop logo and symbolic icon independently of the installer application.",
         "license": "$l.napl",
@@ -240203,7 +240150,7 @@
           "icons"
         ],
         "zenosVersion": "1.0.0Nb",
-        "id": "org.zenos.packages.theming.system.zenos-branding"
+        "id": "com.neg-zero.zenos-branding"
       },
       "provider": {
         "kind": "build",
@@ -240267,6 +240214,10 @@
                       {
                         "kind": "identifier",
                         "value": "byCategories"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "apps"
                       },
                       {
                         "kind": "identifier",
@@ -240405,11 +240356,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "theming",
-        "system",
+        "com",
+        "neg-zero",
         "zenos-branding"
       ],
       "categoryTarget": [
@@ -240420,7 +240368,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.io.github.doromiert.SelectForFigma",
+      "id": "pkgs.com.neg-zero.select-for-figma",
       "meta": {
         "description": "\n    Figma in a native GNOME window with embedded Chromium, document tab groups,\n    a thumbnail overview, local fonts, and KeePassXC integration. The homepage\n    and editor follow the GNOME accent color and app appearance. Ctrl+Tab opens\n    a thumbnail grid, including Home, with tab position or most recently used order.\n  ",
         "license": "$l.gpl3Only",
@@ -240437,7 +240385,7 @@
           "collaboration"
         ],
         "zenosVersion": "1.0.0",
-        "id": "io.github.doromiert.SelectForFigma"
+        "id": "com.neg-zero.select-for-figma"
       },
       "provider": {
         "kind": "build",
@@ -240618,10 +240566,9 @@
         }
       },
       "target": [
-        "io",
-        "github",
-        "doromiert",
-        "SelectForFigma"
+        "com",
+        "neg-zero",
+        "select-for-figma"
       ],
       "categoryTarget": [
         "apps",
@@ -241187,7 +241134,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.theming.fonts.zero.mono",
+      "id": "pkgs.com.neg-zero.zero-font-mono",
       "meta": {
         "description": "Monospaced Zero display typeface. Preserves the existing ZenOS theme provider.",
         "license": "$l.napl",
@@ -241201,7 +241148,7 @@
           "theming"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.theming.fonts.zero.mono"
+        "id": "com.neg-zero.zero-font-mono"
       },
       "provider": {
         "kind": "build",
@@ -241651,13 +241598,9 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "theming",
-        "fonts",
-        "zero",
-        "mono"
+        "com",
+        "neg-zero",
+        "zero-font-mono"
       ],
       "categoryTarget": [
         "theming",
@@ -241668,7 +241611,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.theming.fonts.zero.mono-thin",
+      "id": "pkgs.com.neg-zero.zero-font-mono-thin",
       "meta": {
         "description": "Thin monospaced Zero display typeface. Preserves the existing ZenOS theme provider.",
         "license": "$l.napl",
@@ -241682,7 +241625,7 @@
           "theming"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.theming.fonts.zero.mono-thin"
+        "id": "com.neg-zero.zero-font-mono-thin"
       },
       "provider": {
         "kind": "build",
@@ -242165,13 +242108,9 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "theming",
-        "fonts",
-        "zero",
-        "mono-thin"
+        "com",
+        "neg-zero",
+        "zero-font-mono-thin"
       ],
       "categoryTarget": [
         "theming",
@@ -242182,7 +242121,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.theming.fonts.zero.regular",
+      "id": "pkgs.com.neg-zero.zero-font-regular",
       "meta": {
         "description": "Zero display typeface. Preserves the existing ZenOS theme provider.",
         "license": "$l.napl",
@@ -242196,7 +242135,7 @@
           "theming"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.theming.fonts.zero.regular"
+        "id": "com.neg-zero.zero-font-regular"
       },
       "provider": {
         "kind": "build",
@@ -242666,13 +242605,9 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "theming",
-        "fonts",
-        "zero",
-        "regular"
+        "com",
+        "neg-zero",
+        "zero-font-regular"
       ],
       "categoryTarget": [
         "theming",
@@ -242683,7 +242618,7 @@
     },
     {
       "dependenciesDeclared": false,
-      "id": "pkgs.org.zenos.packages.theming.icons.adwaita-hacks",
+      "id": "pkgs.com.neg-zero.adwaita-hacks",
       "meta": {
         "description": "Extended Adwaita icon theme. Preserves the existing ZenOS theme provider.",
         "license": "$l.napl",
@@ -242697,7 +242632,7 @@
           "theming"
         ],
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.theming.icons.adwaita-hacks"
+        "id": "com.neg-zero.adwaita-hacks"
       },
       "provider": {
         "kind": "build",
@@ -243130,11 +243065,8 @@
         }
       },
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "theming",
-        "icons",
+        "com",
+        "neg-zero",
         "adwaita-hacks"
       ],
       "categoryTarget": [
@@ -243144,14 +243076,10 @@
       ]
     },
     {
-      "id": "pkgs.org.zenos.packages.desktops.gnome.extensions.dash-stacks",
+      "id": "pkgs.com.neg-zero.dash-stacks",
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "desktops",
-        "gnome",
-        "extensions",
+        "com",
+        "neg-zero",
         "dash-stacks"
       ],
       "meta": {
@@ -243166,7 +243094,7 @@
         "maintainers": [],
         "license": "$l.napalm",
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.desktops.gnome.extensions.dash-stacks",
+        "id": "com.neg-zero.dash-stacks",
         "packageVersion": "0-unstable-2026-08-30"
       },
       "provider": {
@@ -243284,14 +243212,10 @@
       ]
     },
     {
-      "id": "pkgs.org.zenos.packages.desktops.gnome.extensions.zenlink-indicator",
+      "id": "pkgs.com.neg-zero.zenlink-indicator",
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "desktops",
-        "gnome",
-        "extensions",
+        "com",
+        "neg-zero",
         "zenlink-indicator"
       ],
       "meta": {
@@ -243308,7 +243232,7 @@
         ],
         "license": "$l.napl",
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.desktops.gnome.extensions.zenlink-indicator",
+        "id": "com.neg-zero.zenlink-indicator",
         "packageVersion": "1.0"
       },
       "provider": {
@@ -243356,14 +243280,10 @@
       ]
     },
     {
-      "id": "pkgs.org.zenos.packages.desktops.gnome.tweaks.zero-gnome-clock",
+      "id": "pkgs.com.neg-zero.zero-gnome-clock",
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "desktops",
-        "gnome",
-        "tweaks",
+        "com",
+        "neg-zero",
         "zero-gnome-clock"
       ],
       "meta": {
@@ -243380,7 +243300,7 @@
         ],
         "license": "$l.napl",
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.desktops.gnome.tweaks.zero-gnome-clock",
+        "id": "com.neg-zero.zero-gnome-clock",
         "packageVersion": "1.0"
       },
       "provider": {
@@ -243428,12 +243348,10 @@
       ]
     },
     {
-      "id": "pkgs.org.zenos.packages.system.zenboot",
+      "id": "pkgs.com.neg-zero.zenboot",
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
+        "com",
+        "neg-zero",
         "zenboot"
       ],
       "meta": {
@@ -243448,7 +243366,7 @@
         ],
         "license": "$l.napl",
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.system.zenboot",
+        "id": "com.neg-zero.zenboot",
         "packageVersion": "1.0"
       },
       "provider": {
@@ -243494,12 +243412,10 @@
       ]
     },
     {
-      "id": "pkgs.org.zenos.packages.system.zenclean",
+      "id": "pkgs.com.neg-zero.zenclean",
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
+        "com",
+        "neg-zero",
         "zenclean"
       ],
       "meta": {
@@ -243514,7 +243430,7 @@
         ],
         "license": "$l.napl",
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.system.zenclean",
+        "id": "com.neg-zero.zenclean",
         "packageVersion": "0.1.0"
       },
       "provider": {
@@ -243560,12 +243476,10 @@
       ]
     },
     {
-      "id": "pkgs.org.zenos.packages.system.zenlink",
+      "id": "pkgs.com.neg-zero.zenlink",
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "system",
+        "com",
+        "neg-zero",
         "zenlink"
       ],
       "meta": {
@@ -243580,7 +243494,7 @@
         ],
         "license": "$l.napl",
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.system.zenlink",
+        "id": "com.neg-zero.zenlink",
         "packageVersion": "1.0.0"
       },
       "provider": {
@@ -243626,13 +243540,10 @@
       ]
     },
     {
-      "id": "pkgs.org.zenos.packages.theming.icons.zenos-icons",
+      "id": "pkgs.com.neg-zero.zenos-icons",
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "theming",
-        "icons",
+        "com",
+        "neg-zero",
         "zenos-icons"
       ],
       "meta": {
@@ -243648,7 +243559,7 @@
         ],
         "license": "$l.napl",
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.theming.icons.zenos-icons",
+        "id": "com.neg-zero.zenos-icons",
         "packageVersion": "1.0"
       },
       "provider": {
@@ -243695,13 +243606,10 @@
       ]
     },
     {
-      "id": "pkgs.org.zenos.packages.theming.system.fastfetch",
+      "id": "pkgs.com.neg-zero.fastfetch",
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "theming",
-        "system",
+        "com",
+        "neg-zero",
         "fastfetch"
       ],
       "meta": {
@@ -243717,7 +243625,7 @@
         ],
         "license": "$l.napl",
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.theming.system.fastfetch",
+        "id": "com.neg-zero.fastfetch",
         "packageVersion": "1.0"
       },
       "provider": {
@@ -243764,13 +243672,10 @@
       ]
     },
     {
-      "id": "pkgs.org.zenos.packages.theming.wallpapers.destination-2",
+      "id": "pkgs.com.neg-zero.destination-2",
       "target": [
-        "org",
-        "zenos",
-        "packages",
-        "theming",
-        "wallpapers",
+        "com",
+        "neg-zero",
         "destination-2"
       ],
       "meta": {
@@ -243784,7 +243689,7 @@
         "maintainers": [],
         "license": "$l.napalm",
         "zenosVersion": "1.0.0",
-        "id": "org.zenos.packages.theming.wallpapers.destination-2",
+        "id": "com.neg-zero.destination-2",
         "packageVersion": "1.0.0"
       },
       "provider": {

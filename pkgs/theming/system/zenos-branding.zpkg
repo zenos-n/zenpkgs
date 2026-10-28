@@ -1,5 +1,5 @@
 _meta = {
-  id = "org.zenos.packages.theming.system.zenos-branding";
+  id = "com.neg-zero.zenos-branding";
   name = "ZenOS branding";
   summary = "ZenOS logos for installed desktops";
   description = ''Provides the ZenOS desktop logo and symbolic icon independently of the installer application.'';
@@ -13,7 +13,7 @@ _meta = {
 build = $pkgs.legacy.stdenvNoCC.mkDerivation {
   pname = "zenos-branding";
   version = "1.0.0";
-  src = $pkgs.byCategories.system.zenos-setup.src;
+  src = $pkgs.byCategories.apps.system.zenos-setup.src;
   dontBuild = true;
   installPhase = ''
     runHook preInstall
