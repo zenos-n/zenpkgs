@@ -2,14 +2,14 @@
 
 let
   packageOutputs = import ../lib/package-outputs.nix { inherit lib; };
-  registryFor = targets: {
-    packages = map (target: {
-      inherit target;
-      categoryTarget = target;
+  registryFor = categoryTargets: {
+    packages = map (categoryTarget: {
+      target = [ "org" "example" ] ++ categoryTarget;
+      inherit categoryTarget;
       id = builtins.abort "output discovery evaluated registry identity metadata";
       sourcePath = builtins.abort "output discovery evaluated package provider";
       meta = builtins.abort "output discovery evaluated package metadata";
-    }) targets;
+    }) categoryTargets;
   };
   untouched = builtins.abort "output discovery evaluated the package tree";
   reserved = lib.genAttrs [
@@ -18,12 +18,14 @@ let
     "registry-docs"
     "zenos-rebuild"
   ] (_: builtins.abort "output discovery evaluated a reserved output");
-  collisionTargets = [ [ "org" "example" "foo-bar" ] [ "org" "example" "foo" "bar" ] ];
+  collisionEntries = (registryFor [ [ "apps" "foo" ] ]).packages ++ [
+    { target = [ "net" "example" "bar" ]; categoryTarget = [ "apps" "foo" ]; }
+  ];
   rejects = args: !(builtins.tryEval (packageOutputs.flatten args)).success;
   tree = {
-    apps.first.tool = { type = "derivation"; outPath = "/first-tool"; };
-    dev.second.tool = { type = "derivation"; outPath = "/second-tool"; };
-    "hyphen-dir".some_tool = { type = "derivation"; outPath = "/hyphen-tool"; };
+    org.example.apps.first.tool = { type = "derivation"; outPath = "/first-tool"; };
+    org.example.dev.second.tool = { type = "derivation"; outPath = "/second-tool"; };
+    org.example."hyphen-dir".some_tool = { type = "derivation"; outPath = "/hyphen-tool"; };
     byCategories = builtins.abort "output discovery traversed category aliases";
     unrelated = builtins.abort "output discovery traversed an unregistered branch";
   };
@@ -109,39 +111,68 @@ in
   }) [ null false 42 [ ] (toString compatibilitySource) ]; true;
 
   preservesNames = assert builtins.attrNames outputs == [
+    "apps.first.tool"
+    "dev.second.tool"
     "dsl-bundle"
+    "hyphen-dir.some_tool"
+    "org.example.apps.first.tool"
+    "org.example.dev.second.tool"
+    "org.example.hyphen-dir.some_tool"
     "registry-docs"
     "zen-dsl"
-    "zenos-apps-first-tool"
-    "zenos-dev-second-tool"
-    "zenos-hyphen-dir-some_tool"
     "zenos-rebuild"
   ]; true;
 
   preservesValuesAndHierarchy =
-    assert outputs.zenos-apps-first-tool == tree.apps.first.tool;
-    assert outputs.zenos-dev-second-tool == tree.dev.second.tool;
-    assert outputs.zenos-hyphen-dir-some_tool == tree."hyphen-dir".some_tool;
+    assert outputs."org.example.apps.first.tool" == tree.org.example.apps.first.tool;
+    assert outputs."apps.first.tool" == outputs."org.example.apps.first.tool";
+    assert outputs."dev.second.tool" == tree.org.example.dev.second.tool;
+    assert outputs."hyphen-dir.some_tool" == tree.org.example."hyphen-dir".some_tool;
     assert !(outputs ? tool);
+    assert !(outputs ? "zenos-apps-first-tool");
     true;
 
   rejectsCollisionBeforeTreeEvaluation = assert rejects {
-    registry = registryFor collisionTargets;
+    registry.packages = collisionEntries;
     tree = untouched;
   }; true;
 
   rejectsReversedCollision = assert rejects {
-    registry = registryFor (lib.reverseList collisionTargets);
+    registry.packages = lib.reverseList collisionEntries;
     tree = untouched;
   }; true;
 
   rejectsLateCollision = assert rejects {
-    registry = registryFor (targets ++ collisionTargets);
+    registry.packages = (registryFor targets).packages ++ collisionEntries;
     tree = untouched;
   }; true;
 
+  rejectsCanonicalCollision = assert rejects {
+    registry.packages = (registryFor [ [ "apps" "foo" ] ]).packages ++ [
+      { target = [ "org" "example" "apps" "foo" ]; categoryTarget = [ "dev" "foo" ]; }
+    ];
+    tree = untouched;
+  }; true;
+
+  rejectsCrossViewCollision = assert rejects {
+    registry.packages = (registryFor [ [ "apps" "tool" ] ]).packages ++ [
+      { target = [ "apps" "tool" ]; categoryTarget = [ "dev" "tool" ]; }
+    ];
+    tree = untouched;
+  }; true;
+
+  allowsDifferentDottedNames = assert builtins.attrNames (packageOutputs.flatten {
+    registry = registryFor [ [ "foo-bar" ] [ "foo" "bar" ] ];
+    tree = untouched;
+  }) == [
+    "foo-bar"
+    "foo.bar"
+    "org.example.foo-bar"
+    "org.example.foo.bar"
+  ]; true;
+
   rejectsReservedOutputCollision = assert rejects {
-    registry = registryFor [ [ "rebuild" ] ];
+    registry = registryFor [ [ "zenos-rebuild" ] ];
     tree = untouched;
     inherit reserved;
   }; true;
@@ -149,12 +180,18 @@ in
   rejectsCallerReservedName = assert rejects {
     registry = registryFor [ [ "apps" "first" "tool" ] ];
     tree = untouched;
-    reserved.zenos-apps-first-tool = builtins.abort "reserved value was evaluated";
+    reserved."apps.first.tool" = builtins.abort "reserved value was evaluated";
+  }; true;
+
+  rejectsCallerReservedCanonicalName = assert rejects {
+    registry = registryFor [ [ "apps" "first" "tool" ] ];
+    tree = untouched;
+    reserved."org.example.apps.first.tool" = builtins.abort "reserved value was evaluated";
   }; true;
 
   checksBeforeReturningReservedOutput =
     assert !(builtins.tryEval ((packageOutputs.flatten {
-      registry = registryFor collisionTargets;
+      registry.packages = collisionEntries;
       tree = untouched;
       reserved.zen-dsl = true;
     }).zen-dsl)).success;
@@ -164,18 +201,21 @@ in
     registry = registryFor targets;
     tree = untouched;
   }) == [
-    "zenos-apps-first-tool"
-    "zenos-dev-second-tool"
-    "zenos-hyphen-dir-some_tool"
+    "apps.first.tool"
+    "dev.second.tool"
+    "hyphen-dir.some_tool"
+    "org.example.apps.first.tool"
+    "org.example.dev.second.tool"
+    "org.example.hyphen-dir.some_tool"
   ]; true;
 
   selectedValueDoesNotEvaluateOtherPackages = assert (packageOutputs.flatten {
     registry = registryFor [ [ "good" ] [ "bad" ] ];
     tree = {
-      good = 42;
-      bad = builtins.abort "selecting a package evaluated an unrelated package";
+      org.example.good = 42;
+      org.example.bad = builtins.abort "selecting a package evaluated an unrelated package";
     };
-  }).zenos-good == 42; true;
+  })."good" == 42; true;
 
   preservesReservedValues = assert packageOutputs.flatten {
     registry = registryFor [ ];
