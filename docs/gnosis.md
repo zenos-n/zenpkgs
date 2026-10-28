@@ -32,9 +32,9 @@ apps.
 
 The canonical package is `pkgs.com.neg-zero.gnosis`, also exposed as
 `pkgs.byCategories.apps.browsers.gnosis`. Both selectors resolve to one
-package. The registry identity is independent of the retained
-`io.github.doromiert.Jupiter.desktop` compatibility identity: existing browser
-profiles, credentials, settings and KeePassXC pairing remain intact.
+package. The launcher uses `com.neg-zero.Gnosis.desktop`. The package registry
+identity is separate from the application identity; Gnosis migrates existing
+browser profiles, credentials, settings and KeePassXC pairing.
 
 The source is [doromiert/gnosis](https://github.com/doromiert/gnosis), pinned by
 the `gnosis` flake input and `flake.lock`. Zenpkgs imports the project's own
@@ -49,6 +49,6 @@ this is an explicit local override, not the published source pin.
 The CEF/WebKit service migration is still in progress.
 
 The module installs Gnosis without starting or restarting a running browser.
-`defaultBrowser` defaults to `false`. Enabling it declares the retained desktop
+`defaultBrowser` defaults to `false`. Enabling it declares the Gnosis desktop
 entry as the HTTP, HTTPS, HTML and XHTML handler, without managing writable
 browser preferences or profile data.

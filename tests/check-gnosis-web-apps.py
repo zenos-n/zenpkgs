@@ -30,6 +30,7 @@ let
   badUrl = {{ enable = true; apps.mail = {{ name = "Mail"; url = "file:///etc/passwd"; }}; }};
 in {{
   enabled = actions valid;
+  defaultBrowser = actions (valid // {{ defaultBrowser = true; }});
   empty = actions {{ enable = true; }};
   disabled = actions (valid // {{ enable = false; }});
   renamed = actions (valid // {{ apps.mail = {{ name = "Inbox"; url = "https://mail.example/"; }}; }});
@@ -49,6 +50,12 @@ in {{
     assert entry["exec"] == '/gnosis/bin/gnosis --application-mode=com.neg-zero.Gnosis.WebApp_mail.desktop "https://mail.example/path?q=1%%20a"'
     assert entry["settings"]["X-Gnosis-Declarative"] == "true"
     assert enabled["home"]["packages"] == ["/gnosis"]
+    defaults = result["defaultBrowser"][0]["home-manager"]["users"]["alex"]["content"]["xdg"]["mimeApps"]
+    assert defaults["enable"] is True
+    assert defaults["defaultApplications"] == {
+        kind: ["com.neg-zero.Gnosis.desktop"]
+        for kind in ("x-scheme-handler/http", "x-scheme-handler/https", "text/html", "application/xhtml+xml")
+    }
     assert enabled["assertions"][0]["assertion"] is True
     empty = result["empty"][0]["home-manager"]["users"]["alex"]["content"]
     assert empty["xdg"]["desktopEntries"] == {}

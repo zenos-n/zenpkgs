@@ -47,10 +47,10 @@ enable = enableOption {
     xdg.mimeApps = $lib.optionalAttrs $path.defaultBrowser {
       enable = true;
       defaultApplications = {
-        "x-scheme-handler/http" = [ "io.github.doromiert.Jupiter.desktop" ];
-        "x-scheme-handler/https" = [ "io.github.doromiert.Jupiter.desktop" ];
-        "text/html" = [ "io.github.doromiert.Jupiter.desktop" ];
-        "application/xhtml+xml" = [ "io.github.doromiert.Jupiter.desktop" ];
+        "x-scheme-handler/http" = [ "com.neg-zero.Gnosis.desktop" ];
+        "x-scheme-handler/https" = [ "com.neg-zero.Gnosis.desktop" ];
+        "text/html" = [ "com.neg-zero.Gnosis.desktop" ];
+        "application/xhtml+xml" = [ "com.neg-zero.Gnosis.desktop" ];
       };
     };
   };
@@ -101,7 +101,7 @@ package = {
     summary = "Gnosis package to install";
     description = ''
       Gnosis derivation providing bin/gnosis and the
-      io.github.doromiert.Jupiter.desktop desktop entry. The default is the
+      com.neg-zero.Gnosis.desktop desktop entry. The default is the
       published development snapshot in the Zenpkgs browser catalog; override
       this option to select a newer development package.
     '';
