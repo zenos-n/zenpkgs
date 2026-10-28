@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.denemo";
+  id = "org.denemo.Denemo";
   name = "Denemo";
   summary = "Music notation and composition software used with lilypond";
   description = ''

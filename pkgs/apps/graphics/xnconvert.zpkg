@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.xnconvert";
+  id = "com.xnview.XnConvert";
   name = "XnConvert";
   summary = "Fast, powerful and free cross-platform batch image converter";
   description = ''

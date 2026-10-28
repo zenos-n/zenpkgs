@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.impression";
+  id = "io.gitlab.adhami3310.Impression";
   name = "impression";
   summary = "Curated impression package for ZenOS";
   description = ''

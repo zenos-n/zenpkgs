@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gtkwave";
+  id = "io.github.gtkwave.GTKWave";
   name = "GTKWave";
   summary = "VCD/Waveform viewer for Unix and Win32";
   description = ''

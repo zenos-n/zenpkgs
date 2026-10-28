@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.speedcrunch";
+  id = "org.speedcrunch.SpeedCrunch";
   name = "SpeedCrunch";
   summary = "High-precision scientific calculator";
   description = ''

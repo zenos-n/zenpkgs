@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.confclerk";
+  id = "at.priv.toastfreeware.ConfClerk";
   name = "ConfClerk";
   summary = "Offline conference schedule viewer";
   description = ''

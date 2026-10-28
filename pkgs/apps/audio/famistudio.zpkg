@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.famistudio";
+  id = "org.famistudio.FamiStudio";
   name = "FamiStudio";
   summary = "NES Music Editor";
   description = ''

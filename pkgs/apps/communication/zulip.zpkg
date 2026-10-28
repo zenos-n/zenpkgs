@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.zulip";
+  id = "org.zulip.Zulip";
   name = "Zulip";
   summary = "Desktop client for Zulip Chat";
   description = ''

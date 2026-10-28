@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.melonds";
+  id = "net.kuribo64.melonDS";
   name = "melonDS";
   summary = "Work in progress Nintendo DS emulator";
   description = ''

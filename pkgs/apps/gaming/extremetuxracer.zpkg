@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.extremetuxracer";
+  id = "net.sourceforge.ExtremeTuxRacer";
   name = "Extreme Tux Racer";
   summary = "High speed arctic racing game based on Tux Racer";
   description = ''

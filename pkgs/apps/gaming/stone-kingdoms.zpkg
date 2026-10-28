@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.stone-kingdoms";
+  id = "io.gitlab.stone_kingdoms.StoneKingdoms";
   name = "Stone Kingdoms";
   summary = "Real-time strategy game made with LÖVE based on the original Stronghold by Firefly studios";
   description = ''

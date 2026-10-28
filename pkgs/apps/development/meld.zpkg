@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.meld";
+  id = "org.gnome.meld";
   name = "Meld";
   summary = "Visual diff and merge tool";
   description = ''

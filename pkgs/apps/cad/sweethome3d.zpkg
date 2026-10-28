@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.sweethome3d";
+  id = "com.sweethome3d.Sweethome3d";
   name = "Sweet Home 3D";
   summary = "Design and visualize your future home";
   description = ''

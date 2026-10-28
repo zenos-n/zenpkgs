@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.pika-backup";
+  id = "org.gnome.World.PikaBackup";
   name = "pika-backup";
   summary = "Curated pika-backup package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.uzdoom";
+  id = "org.zdoom.UZDoom";
   name = "uzdoom";
   summary = "Modder-friendly OpenGL and Vulkan source port based on the DOOM engine";
   description = ''

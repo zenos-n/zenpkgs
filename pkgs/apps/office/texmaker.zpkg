@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.texmaker";
+  id = "net.xm1math.Texmaker";
   name = "Texmaker";
   summary = "TeX and LaTeX editor";
   description = ''

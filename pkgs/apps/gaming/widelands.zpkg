@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.widelands";
+  id = "org.widelands.Widelands";
   name = "Widelands";
   summary = "RTS with multiple-goods economy";
   description = ''

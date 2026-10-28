@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.biblioteca";
+  id = "app.drey.Biblioteca";
   name = "Biblioteca";
   summary = "Documentation viewer for GNOME";
   description = ''

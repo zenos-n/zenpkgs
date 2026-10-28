@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.quakespasm";
+  id = "net.sourceforge.quakespasm.Quakespasm";
   name = "QuakeSpasm";
   summary = "Engine for iD software's Quake";
   description = ''

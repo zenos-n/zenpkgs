@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.git-cola";
+  id = "com.github.git_cola.git-cola";
   name = "git-cola";
   summary = "Sleek and powerful Git GUI";
   description = ''

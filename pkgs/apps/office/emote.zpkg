@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.emote";
+  id = "com.tomjwatson.Emote";
   name = "Emote";
   summary = "Modern emoji picker for Linux";
   description = ''

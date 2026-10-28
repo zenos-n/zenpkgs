@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.abiword";
+  id = "com.abisource.AbiWord";
   name = "AbiWord";
   summary = "Word processing program, similar to Microsoft Word";
   description = ''

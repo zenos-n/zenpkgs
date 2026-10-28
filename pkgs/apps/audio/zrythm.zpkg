@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.zrythm";
+  id = "org.zrythm.Zrythm";
   name = "Zrythm";
   summary = "Automated and intuitive digital audio workstation";
   description = ''

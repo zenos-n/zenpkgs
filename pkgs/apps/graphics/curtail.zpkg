@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.curtail";
+  id = "com.github.huluti.Curtail";
   name = "curtail";
   summary = "Curated curtail package for ZenOS";
   description = ''

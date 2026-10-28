@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.xlog";
+  id = "org.nongnu.Xlog";
   name = "Xlog";
   summary = "Amateur radio logging program";
   description = ''

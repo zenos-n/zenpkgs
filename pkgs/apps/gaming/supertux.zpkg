@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.supertux";
+  id = "org.supertuxproject.SuperTux";
   name = "SuperTux";
   summary = "Classic 2D jump'n run sidescroller game";
   description = ''

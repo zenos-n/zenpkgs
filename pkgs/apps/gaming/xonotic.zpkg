@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.xonotic";
+  id = "org.xonotic.Xonotic";
   name = "Xonotic";
   summary = "Free fast-paced first-person shooter";
   description = ''

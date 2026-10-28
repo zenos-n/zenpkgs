@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.goofcord";
+  id = "io.github.milkshiift.GoofCord";
   name = "Goofcord";
   summary = "Highly configurable and privacy-focused Discord client";
   description = ''

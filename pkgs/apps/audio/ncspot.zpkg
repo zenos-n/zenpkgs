@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ncspot";
+  id = "io.github.hrkfdn.ncspot";
   name = "ncspot";
   summary = "Cross-platform ncurses Spotify client written in Rust, inspired by ncmpc and the likes";
   description = ''

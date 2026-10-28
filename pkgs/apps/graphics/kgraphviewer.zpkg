@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kgraphviewer";
+  id = "org.kde.kgraphviewer";
   name = "KGraphViewer";
   summary = "GraphViz dot graph viewer";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.bluej";
+  id = "org.bluej.BlueJ";
   name = "BlueJ";
   summary = "Simple integrated development environment for Java";
   description = ''

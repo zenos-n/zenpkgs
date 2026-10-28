@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kget";
+  id = "org.kde.kget";
   name = "KGet";
   summary = "Download Manager";
   description = ''

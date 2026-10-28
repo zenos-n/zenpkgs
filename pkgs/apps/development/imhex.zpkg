@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.imhex";
+  id = "net.werwolv.ImHex";
   name = "ImHex";
   summary = "Hex Editor for Reverse Engineers, Programmers and people who value their retinas when working at 3 AM";
   description = ''

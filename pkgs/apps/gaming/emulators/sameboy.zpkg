@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.sameboy";
+  id = "io.github.sameboy.SameBoy";
   name = "SameBoy";
   summary = "Game Boy, Game Boy Color, and Super Game Boy emulator";
   description = ''

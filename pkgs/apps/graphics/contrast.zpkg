@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.contrast";
+  id = "org.gnome.design.Contrast";
   name = "Contrast";
   summary = "Checks whether the contrast between two colors meet the WCAG requirements";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.quodlibet";
+  id = "io.github.quodlibet.QuodLibet";
   name = "Quod Libet";
   summary = "GTK-based audio player written in Python, using the Mutagen tagging library";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.sioyek";
+  id = "com.github.ahrm.sioyek";
   name = "Sioyek";
   summary = "PDF viewer designed for research papers and technical books";
   description = ''

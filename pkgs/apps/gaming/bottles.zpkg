@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bottles";
+  id = "com.usebottles.bottles";
   name = "bottles";
   summary = "Curated bottles package for ZenOS";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kcolorchooser";
+  id = "org.kde.kcolorchooser";
   name = "KColorChooser";
   summary = "A small utility to select a color";
   description = ''

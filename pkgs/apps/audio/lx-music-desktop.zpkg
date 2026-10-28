@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.lx-music-desktop";
+  id = "cn.toside.lxmusic.lx-music-desktop";
   name = "LX Music Desktop";
   summary = "Music software based on Electron and Vue";
   description = ''

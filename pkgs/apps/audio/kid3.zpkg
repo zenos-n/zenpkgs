@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kid3";
+  id = "org.kde.kid3";
   name = "Kid3";
   summary = "Simple and powerful audio tag editor";
   description = ''

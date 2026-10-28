@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.aegisub";
+  id = "org.aegisub.Aegisub";
   name = "Aegisub";
   summary = "Advanced subtitle editor";
   description = ''

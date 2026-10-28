@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.caprine";
+  id = "com.sindresorhus.Caprine";
   name = "Caprine";
   summary = "Elegant Facebook Messenger desktop app";
   description = ''

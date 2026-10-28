@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.datovka";
+  id = "org.cznic.Datovka";
   name = "Datovka";
   summary = "Client application for operating Czech government-provided Databox infomation system";
   description = ''

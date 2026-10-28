@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.icon-library";
+  id = "org.gnome.design.IconLibrary";
   name = "Icon Library";
   summary = "Symbolic icons for your apps";
   description = ''

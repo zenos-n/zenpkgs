@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gimp";
+  id = "org.gimp.GIMP";
   name = "gimp";
   summary = "GNU Image Manipulation Program";
   description = ''

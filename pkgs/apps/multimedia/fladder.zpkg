@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.fladder";
+  id = "nl.jknaapen.fladder";
   name = "Fladder";
   summary = "Simple Jellyfin Frontend built on top of Flutter";
   description = ''

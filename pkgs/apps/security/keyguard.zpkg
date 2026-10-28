@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.keyguard";
+  id = "com.artemchep.keyguard";
   name = "Keyguard";
   summary = "Alternative client for the Bitwarden platform";
   description = ''

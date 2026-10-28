@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kodi";
+  id = "tv.kodi.Kodi";
   name = "Kodi";
   summary = "Media center";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.slack";
+  id = "com.slack.Slack";
   name = "Slack";
   summary = "Desktop client for Slack";
   description = ''

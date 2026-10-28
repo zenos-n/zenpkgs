@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.samplebrain";
+  id = "org.thentrythis.Samplebrain";
   name = "SampleBrain";
   summary = "Custom sample mashing app";
   description = ''

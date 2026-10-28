@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.rawtherapee";
+  id = "com.rawtherapee.RawTherapee";
   name = "RawTherapee";
   summary = "RAW converter and digital photo processing software";
   description = ''

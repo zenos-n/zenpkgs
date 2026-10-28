@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.rednotebook";
+  id = "app.rednotebook.RedNotebook";
   name = "RedNotebook";
   summary = "Modern journal that includes a calendar navigation, customizable templates, export functionality and word clouds";
   description = ''

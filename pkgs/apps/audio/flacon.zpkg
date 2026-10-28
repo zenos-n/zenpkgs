@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.flacon";
+  id = "com.github.Flacon";
   name = "Flacon";
   summary = "Extracts audio tracks from an audio CD image to separate tracks";
   description = ''

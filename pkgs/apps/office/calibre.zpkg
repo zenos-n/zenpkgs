@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.calibre";
+  id = "com.calibre_ebook.calibre";
   name = "Calibre";
   summary = "Comprehensive e-book software";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.exaile";
+  id = "org.exaile.Exaile";
   name = "Exaile";
   summary = "Music player with a simple interface and powerful music management capabilities";
   description = ''

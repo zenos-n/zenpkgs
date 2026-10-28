@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.jadx";
+  id = "com.github.skylot.jadx";
   name = "JADX";
   summary = "Dex to Java decompiler";
   description = ''

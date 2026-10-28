@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.dino";
+  id = "im.dino.Dino";
   name = "Dino";
   summary = "Modern Jabber/XMPP Client using GTK/Vala";
   description = ''

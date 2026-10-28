@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.agenda";
+  id = "com.github.dahenson.agenda";
   name = "Agenda";
   summary = "Simple, fast, no-nonsense to-do (task) list designed for elementary OS";
   description = ''

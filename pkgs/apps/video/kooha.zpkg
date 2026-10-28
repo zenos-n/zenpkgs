@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kooha";
+  id = "io.github.seadve.Kooha";
   name = "Kooha";
   summary = "Elegantly record your screen";
   description = ''

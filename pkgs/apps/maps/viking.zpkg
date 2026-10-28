@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.viking";
+  id = "org.viking.Viking";
   name = "Viking";
   summary = "GPS data editor and analyzer";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.standardnotes";
+  id = "org.standardnotes.standardnotes";
   name = "Standard Notes";
   summary = "Simple and private notes app";
   description = ''

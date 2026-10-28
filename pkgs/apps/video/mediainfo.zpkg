@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.mediainfo";
+  id = "net.mediaarea.MediaInfo";
   name = "MediaInfo";
   summary = "Supplies technical and tag information about a video or audio file";
   description = ''

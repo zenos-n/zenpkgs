@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.folio";
+  id = "com.toolstack.Folio";
   name = "Folio";
   summary = "Beautiful markdown note-taking app for GNOME (forked from Paper)";
   description = ''

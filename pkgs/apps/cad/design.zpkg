@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.design";
+  id = "io.github.dubstar_04.design";
   name = "Design";
   summary = "2D CAD For GNOME";
   description = ''

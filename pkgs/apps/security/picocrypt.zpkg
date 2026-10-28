@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.picocrypt";
+  id = "io.github.picocrypt.Picocrypt";
   name = "Picocrypt";
   summary = "Small graphical file encryption tool written in Go";
   description = ''

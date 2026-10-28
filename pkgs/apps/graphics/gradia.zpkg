@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gradia";
+  id = "be.alexandervanhee.gradia";
   name = "Gradia";
   summary = "Make your screenshots ready for the world";
   description = ''

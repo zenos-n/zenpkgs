@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.electron-mail";
+  id = "com.github.vladimiry.ElectronMail";
   name = "ElectronMail";
   summary = "Unofficial Electron-based ProtonMail desktop client";
   description = ''

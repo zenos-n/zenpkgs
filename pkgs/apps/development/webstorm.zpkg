@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.webstorm";
+  id = "com.jetbrains.WebStorm";
   name = "WebStorm";
   summary = "Web IDE from JetBrains";
   description = ''

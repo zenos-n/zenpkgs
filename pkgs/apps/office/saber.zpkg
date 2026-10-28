@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.saber";
+  id = "com.adilhanney.saber";
   name = "Saber";
   summary = "Cross-platform open-source app built for handwriting";
   description = ''

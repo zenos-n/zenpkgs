@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.censor";
+  id = "page.codeberg.censor.Censor";
   name = "Censor";
   summary = "PDF document redaction for the GNOME desktop";
   description = ''

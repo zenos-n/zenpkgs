@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.megaglest";
+  id = "org.megaglest.MegaGlest";
   name = "MegaGlest";
   summary = "Entertaining free (freeware and free software) and open source cross-platform 3D real-time strategy (RTS) game";
   description = ''

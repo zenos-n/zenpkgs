@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.desmume";
+  id = "org.desmume.DeSmuME";
   name = "DeSmuME";
   summary = "Open-source Nintendo DS emulator";
   description = ''

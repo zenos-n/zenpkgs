@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.newsflash";
+  id = "io.gitlab.news_flash.NewsFlash";
   name = "NewsFlash";
   summary = "Modern feed reader designed for the GNOME desktop";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.dynamic-wallpaper";
+  id = "me.dusansimic.DynamicWallpaper";
   name = "Dynamic Wallpaper";
   summary = "Dynamic wallpaper maker for Gnome";
   description = ''

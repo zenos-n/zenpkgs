@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.video-trimmer";
+  id = "org.gnome.gitlab.YaLTeR.VideoTrimmer";
   name = "Video Trimmer";
   summary = "Trim videos quickly";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.upscaler";
+  id = "io.gitlab.theevilskeleton.Upscaler";
   name = "Upscaler";
   summary = "Upscale and enhance images";
   description = ''

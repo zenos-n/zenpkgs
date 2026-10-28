@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.scummvm";
+  id = "org.scummvm.ScummVM";
   name = "ScummVM";
   summary = "Program to run certain classic graphical point-and-click adventure games (such as Monkey Island)";
   description = ''

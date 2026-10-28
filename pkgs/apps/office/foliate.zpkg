@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.foliate";
+  id = "com.github.johnfactotum.Foliate";
   name = "foliate";
   summary = "Curated foliate package for ZenOS";
   description = ''

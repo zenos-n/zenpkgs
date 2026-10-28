@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.qtcreator";
+  id = "io.qt.QtCreator";
   name = "Qt Creator";
   summary = "Cross-platform IDE tailored to the needs of Qt developers";
   description = ''

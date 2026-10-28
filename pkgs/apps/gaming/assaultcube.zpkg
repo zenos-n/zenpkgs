@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.assaultcube";
+  id = "net.cubers.assault.AssaultCube";
   name = "AssaultCube";
   summary = "Fast and fun first-person-shooter based on the Cube fps";
   description = ''

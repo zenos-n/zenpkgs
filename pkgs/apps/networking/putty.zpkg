@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.putty";
+  id = "uk.org.greenend.chiark.sgtatham.putty";
   name = "PuTTY";
   summary = "Free Telnet/SSH Client";
   description = ''

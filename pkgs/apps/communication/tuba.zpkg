@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.tuba";
+  id = "dev.geopjr.Tuba";
   name = "Tuba";
   summary = "Browse the Fediverse";
   description = ''

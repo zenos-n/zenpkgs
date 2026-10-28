@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gelly";
+  id = "io.m51.Gelly";
   name = "Gelly";
   summary = "A Jellyfin GTK client for Linux focused on music";
   description = ''

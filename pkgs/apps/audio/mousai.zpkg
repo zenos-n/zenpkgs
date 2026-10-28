@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.mousai";
+  id = "io.github.seadve.Mousai";
   name = "Mousai";
   summary = "Identify any songs in seconds";
   description = ''

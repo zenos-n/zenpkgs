@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.lact";
+  id = "io.github.ilya_zlobintsev.LACT";
   name = "LACT";
   summary = "Linux GPU Configuration Tool for AMD and NVIDIA";
   description = ''

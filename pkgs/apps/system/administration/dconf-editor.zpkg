@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.dconf-editor";
+  id = "ca.desrt.dconf-editor";
   name = "dconf Editor";
   summary = "GSettings editor for GNOME";
   description = ''

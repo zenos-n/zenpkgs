@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.finamp";
+  id = "com.unicornsonlsd.finamp";
   name = "Finamp";
   summary = "Open source Jellyfin music player";
   description = ''

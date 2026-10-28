@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.zed";
+  id = "dev.zed.Zed";
   name = "zed";
   summary = "Curated zed package for ZenOS";
   description = ''

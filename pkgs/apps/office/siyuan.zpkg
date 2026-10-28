@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.siyuan";
+  id = "org.b3log.siyuan";
   name = "SiYuan";
   summary = "Privacy-first personal knowledge management system that supports complete offline usage, as well as end-to-end encrypted data sync";
   description = ''

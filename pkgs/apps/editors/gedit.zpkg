@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gedit";
+  id = "org.gnome.gedit";
   name = "gedit";
   summary = "Former GNOME text editor";
   description = ''

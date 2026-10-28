@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.maelstrom";
+  id = "org.libsdl.Maelstrom";
   name = "Maelstrom";
   summary = "Arcade-style game resembling Asteroids";
   description = ''

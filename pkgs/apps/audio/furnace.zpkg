@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.furnace";
+  id = "org.tildearrow.furnace";
   name = "Furnace";
   summary = "Multi-system chiptune tracker compatible with DefleMask modules";
   description = ''

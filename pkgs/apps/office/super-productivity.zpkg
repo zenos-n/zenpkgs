@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.super-productivity";
+  id = "com.super_productivity.SuperProductivity";
   name = "Super Productivity";
   summary = "To Do List / Time Tracker with Jira Integration";
   description = ''

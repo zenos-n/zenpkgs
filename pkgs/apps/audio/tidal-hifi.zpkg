@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.tidal-hifi";
+  id = "com.mastermindzh.tidal-hifi";
   name = "TIDAL Hi-Fi";
   summary = "Web version of Tidal running in Electron with Hi-Fi support thanks to Widevine";
   description = ''

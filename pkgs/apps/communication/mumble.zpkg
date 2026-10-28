@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.mumble";
+  id = "info.mumble.Mumble";
   name = "Mumble";
   summary = "Low-latency, high quality voice chat software";
   description = ''

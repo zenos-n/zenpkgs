@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.smplayer";
+  id = "info.smplayer.SMPlayer";
   name = "SMPlayer";
   summary = "Complete front-end for MPlayer";
   description = ''

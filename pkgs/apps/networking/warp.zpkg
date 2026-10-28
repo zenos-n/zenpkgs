@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.warp";
+  id = "app.drey.Warp";
   name = "Warp";
   summary = "Fast and secure file transfer";
   description = ''

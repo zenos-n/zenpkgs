@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.qtox";
+  id = "io.github.qtox.qTox";
   name = "qTox";
   summary = "Qt Tox client";
   description = ''

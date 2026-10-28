@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.seabird";
+  id = "dev.skynomads.Seabird";
   name = "Seabird";
   summary = "Native Kubernetes desktop client";
   description = ''

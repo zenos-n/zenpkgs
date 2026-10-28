@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.texstudio";
+  id = "org.texstudio.TeXstudio";
   name = "TeXstudio";
   summary = "TeX and LaTeX editor";
   description = ''

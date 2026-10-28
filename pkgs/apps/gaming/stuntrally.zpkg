@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.stuntrally";
+  id = "org.tuxfamily.StuntRally";
   name = "Stunt Rally";
   summary = "3D racing game with Sci-Fi elements and own Track Editor";
   description = ''

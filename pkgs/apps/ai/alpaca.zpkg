@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.alpaca";
+  id = "com.jeffser.Alpaca";
   name = "Alpaca";
   summary = "Ollama client made with GTK4 and Adwaita";
   description = ''

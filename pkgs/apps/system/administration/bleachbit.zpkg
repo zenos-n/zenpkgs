@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bleachbit";
+  id = "org.bleachbit.BleachBit";
   name = "BleachBit";
   summary = "Program to clean your computer";
   description = ''

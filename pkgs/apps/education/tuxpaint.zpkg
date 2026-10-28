@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.tuxpaint";
+  id = "org.tuxpaint.Tuxpaint";
   name = "Tux Paint";
   summary = "Open Source Drawing Software for Children";
   description = ''

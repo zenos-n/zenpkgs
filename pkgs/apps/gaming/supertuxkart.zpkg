@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.supertuxkart";
+  id = "net.supertuxkart.SuperTuxKart";
   name = "SuperTuxKart";
   summary = "3D open-source arcade racer";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cowsay";
+  id = "org.gnome.gitlab.Cowsay";
   name = "cowsay";
   summary = "Program which generates ASCII pictures of a cow with a message";
   description = ''

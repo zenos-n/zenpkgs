@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bazaar";
+  id = "io.github.kolunmi.Bazaar";
   name = "Bazaar";
   summary = "FlatHub-first app store for GNOME";
   description = ''

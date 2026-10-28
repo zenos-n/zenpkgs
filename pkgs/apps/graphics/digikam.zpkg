@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.digikam";
+  id = "org.kde.digikam";
   name = "digiKam";
   summary = "Photo management application";
   description = ''

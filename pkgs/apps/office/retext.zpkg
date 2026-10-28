@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.retext";
+  id = "me.mitya57.ReText";
   name = "ReText";
   summary = "Editor for Markdown and reStructuredText";
   description = ''

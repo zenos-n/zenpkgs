@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gemrb";
+  id = "org.gemrb.gemrb";
   name = "GemRB";
   summary = "Reimplementation of the Infinity Engine, used by games such as Baldur's Gate";
   description = ''

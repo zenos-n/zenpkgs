@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kronometer";
+  id = "org.kde.kronometer";
   name = "Kronometer";
   summary = "Stopwatch application";
   description = ''

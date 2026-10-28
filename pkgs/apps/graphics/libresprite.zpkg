@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.libresprite";
+  id = "com.github.libresprite.LibreSprite";
   name = "LibreSprite";
   summary = "Animated sprite editor & pixel art tool, fork of Aseprite";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gpxsee";
+  id = "org.gpxsee.GPXSee";
   name = "GPXSee";
   summary = "GPS log file viewer and analyzer";
   description = ''

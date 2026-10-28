@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kgeography";
+  id = "org.kde.kgeography";
   name = "KGeography";
   summary = "Geography Trainer";
   description = ''

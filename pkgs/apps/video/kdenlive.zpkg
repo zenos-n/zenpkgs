@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kdenlive";
+  id = "org.kde.kdenlive";
   name = "Kdenlive";
   summary = "Free and open source video editor, based on MLT Framework and KDE Frameworks";
   description = ''

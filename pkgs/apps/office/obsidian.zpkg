@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.obsidian";
+  id = "md.obsidian.Obsidian";
   name = "obsidian";
   summary = "Curated obsidian package for ZenOS";
   description = ''

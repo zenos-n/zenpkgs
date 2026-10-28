@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.safeeyes";
+  id = "io.github.slgobinath.SafeEyes";
   name = "Safe Eyes";
   summary = "Break reminder to prevent eye strain";
   description = ''

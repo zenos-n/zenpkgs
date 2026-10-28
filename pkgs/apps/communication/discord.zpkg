@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.discord";
+  id = "com.discordapp.Discord";
   name = "Discord";
   summary = "All-in-one cross-platform voice and text chat for gamers";
   description = ''

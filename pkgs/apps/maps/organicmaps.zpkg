@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.organicmaps";
+  id = "app.organicmaps.desktop";
   name = "Organic Maps";
   summary = "Detailed Offline Maps for Travellers, Tourists, Hikers and Cyclists";
   description = ''

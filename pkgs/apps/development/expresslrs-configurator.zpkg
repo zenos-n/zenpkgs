@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.expresslrs-configurator";
+  id = "org.expresslrs.ExpressLRSConfigurator";
   name = "ExpressLRS Configurator";
   summary = "Cross-platform build & configuration tool for ExpressLRS";
   description = ''

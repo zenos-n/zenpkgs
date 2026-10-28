@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gpredict";
+  id = "net.oz9aec.Gpredict";
   name = "Gpredict";
   summary = "Real time satellite tracking and orbit prediction";
   description = ''

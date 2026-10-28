@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bazecor";
+  id = "com.dygma.bazecor";
   name = "Bazecor";
   summary = "Graphical configurator for Dygma Products";
   description = ''

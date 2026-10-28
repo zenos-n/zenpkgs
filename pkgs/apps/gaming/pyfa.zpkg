@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.pyfa";
+  id = "io.github.pyfa_org.Pyfa";
   name = "Pyfa";
   summary = "Python fitting assistant, cross-platform fitting tool for EVE Online";
   description = ''

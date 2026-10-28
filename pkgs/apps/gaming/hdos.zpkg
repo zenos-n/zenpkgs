@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.hdos";
+  id = "dev.hdos.HDOS";
   name = "HDOS";
   summary = "High Detail Old School Runescape Client";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.geeqie";
+  id = "org.geeqie.Geeqie";
   name = "Geeqie";
   summary = "Lightweight GTK based image viewer";
   description = ''

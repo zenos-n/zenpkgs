@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.planify";
+  id = "io.github.alainm23.planify";
   name = "Planify";
   summary = "Task manager with Todoist support designed for GNU/Linux";
   description = ''

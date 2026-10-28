@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.vorta";
+  id = "com.borgbase.Vorta";
   name = "Vorta";
   summary = "Desktop Backup Client for Borg";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-mahjongg";
+  id = "org.gnome.Mahjongg";
   name = "GNOME Mahjongg";
   summary = "Disassemble a pile of tiles by removing matching pairs";
   description = ''

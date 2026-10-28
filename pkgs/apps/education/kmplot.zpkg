@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kmplot";
+  id = "org.kde.kmplot";
   name = "KmPlot";
   summary = "Mathematical Function Plotter";
   description = ''

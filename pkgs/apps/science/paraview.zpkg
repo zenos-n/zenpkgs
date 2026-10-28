@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.paraview";
+  id = "org.paraview.ParaView";
   name = "ParaView";
   summary = "3D Data analysis and visualization application";
   description = ''

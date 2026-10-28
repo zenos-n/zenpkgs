@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.betaflight-configurator";
+  id = "io.github.betaflight.BetaflightConfigurator";
   name = "Betaflight Configurator";
   summary = "Betaflight flight control system configuration tool";
   description = ''

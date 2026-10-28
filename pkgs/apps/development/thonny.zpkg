@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.thonny";
+  id = "org.thonny.Thonny";
   name = "Thonny";
   summary = "Python IDE for beginners";
   description = ''

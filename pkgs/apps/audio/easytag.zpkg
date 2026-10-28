@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.easytag";
+  id = "org.gnome.EasyTAG";
   name = "EasyTAG";
   summary = "View and edit tags for various audio files";
   description = ''

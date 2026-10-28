@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.notepad-next";
+  id = "com.github.dail8859.NotepadNext";
   name = "Notepad Next";
   summary = "Cross-platform, reimplementation of Notepad++";
   description = ''

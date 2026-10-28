@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.konsole";
+  id = "org.kde.konsole";
   name = "Konsole";
   summary = "Terminal emulator by KDE";
   description = ''

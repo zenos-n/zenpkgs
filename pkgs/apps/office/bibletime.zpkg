@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bibletime";
+  id = "info.bibletime.BibleTime";
   name = "BibleTime";
   summary = "Powerful cross platform Bible study tool";
   description = ''

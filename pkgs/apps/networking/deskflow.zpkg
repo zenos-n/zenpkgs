@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.deskflow";
+  id = "org.deskflow.deskflow";
   name = "Deskflow";
   summary = "Share one mouse and keyboard between multiple computers on Windows, macOS and Linux";
   description = ''

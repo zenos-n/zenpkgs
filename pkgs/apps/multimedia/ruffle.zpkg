@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.ruffle";
+  id = "rs.ruffle.Ruffle";
   name = "Ruffle";
   summary = "Cross platform Adobe Flash Player emulator";
   description = ''

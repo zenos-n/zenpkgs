@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.deluge";
+  id = "org.deluge_torrent.deluge";
   name = "Deluge";
   summary = "Torrent client";
   description = ''

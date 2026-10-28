@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.smartsynchronize";
+  id = "com.syntevo.SmartSynchronize";
   name = "SmartSynchronize";
   summary = "File Manager, File/Directory Compare";
   description = ''

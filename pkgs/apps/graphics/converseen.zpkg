@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.converseen";
+  id = "net.fasterland.converseen";
   name = "Converseen";
   summary = "Batch image converter and resizer";
   description = ''

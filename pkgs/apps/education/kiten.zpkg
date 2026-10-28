@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kiten";
+  id = "org.kde.kiten";
   name = "Kiten";
   summary = "Japanese Reference/Study Tool";
   description = ''

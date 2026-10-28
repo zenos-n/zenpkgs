@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.vcmi";
+  id = "eu.vcmi.VCMI";
   name = "VCMI";
   summary = "Open-source engine for Heroes of Might and Magic III";
   description = ''

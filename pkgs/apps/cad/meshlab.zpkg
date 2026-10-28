@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.meshlab";
+  id = "net.meshlab.MeshLab";
   name = "MeshLab";
   summary = "System for processing and editing 3D triangular meshes";
   description = ''

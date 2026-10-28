@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.celeste64";
+  id = "com.exok.Celeste64";
   name = "Celeste 64";
   summary = "Celeste 64: Fragments of the Mountain";
   description = ''

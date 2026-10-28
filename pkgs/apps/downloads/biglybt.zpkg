@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.biglybt";
+  id = "com.biglybt.BiglyBT";
   name = "BiglyBT";
   summary = "BitTorrent client based on the Azureus that supports I2P darknet for privacy";
   description = ''

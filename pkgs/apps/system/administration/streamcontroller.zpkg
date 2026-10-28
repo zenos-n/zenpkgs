@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.streamcontroller";
+  id = "com.core447.StreamController";
   name = "StreamController";
   summary = "Elegant Linux app for the Elgato Stream Deck with support for plugins";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ristretto";
+  id = "org.xfce.ristretto";
   name = "Ristretto";
   summary = "Fast and lightweight picture-viewer for the Xfce desktop environment";
   description = ''

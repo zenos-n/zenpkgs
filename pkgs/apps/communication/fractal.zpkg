@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.fractal";
+  id = "org.gnome.Fractal";
   name = "Fractal";
   summary = "Matrix group messaging app";
   description = ''

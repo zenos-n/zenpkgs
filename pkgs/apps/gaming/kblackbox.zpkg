@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kblackbox";
+  id = "org.kde.kblackbox";
   name = "KBlackBox";
   summary = "KBlackBox is a game of hide and seek played on a grid of boxes";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.termius";
+  id = "com.termius.Termius";
   name = "Termius";
   summary = "Cross-platform SSH client with cloud data sync and more";
   description = ''

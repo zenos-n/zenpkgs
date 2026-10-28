@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.xivlauncher";
+  id = "dev.goats.xivlauncher";
   name = "XIVLauncher";
   summary = "Custom launcher for FFXIV";
   description = ''

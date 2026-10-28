@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.euphonica";
+  id = "io.github.htkhiem.Euphonica";
   name = "Euphonica";
   summary = "Graphical MPD music client";
   description = ''

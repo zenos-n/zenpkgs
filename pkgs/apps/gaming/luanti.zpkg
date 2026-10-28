@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.luanti";
+  id = "org.luanti.luanti";
   name = "Luanti";
   summary = "Open source voxel game engine (formerly Minetest)";
   description = ''

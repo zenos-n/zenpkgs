@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.four-in-a-row";
+  id = "org.gnome.Four-in-a-row";
   name = "Four in a Row";
   summary = "Make lines of the same color to win";
   description = ''

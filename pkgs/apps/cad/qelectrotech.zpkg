@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.qelectrotech";
+  id = "org.qelectrotech.QElectroTech";
   name = "QElectroTech";
   summary = "Free software to create electric diagrams";
   description = ''

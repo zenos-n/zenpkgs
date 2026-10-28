@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.comaps";
+  id = "app.comaps.comaps";
   name = "CoMaps";
   summary = "Community-led fork of Organic Maps";
   description = ''

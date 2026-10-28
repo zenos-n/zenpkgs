@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-frog";
+  id = "com.github.tenderowl.frog";
   name = "Frog OCR";
   summary = "Intuitive text extraction tool (OCR) for GNOME desktop";
   description = ''

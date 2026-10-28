@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.hydrapaper";
+  id = "org.gabmus.hydrapaper";
   name = "HydraPaper";
   summary = "GNOME utility for setting different wallpapers on individual monitors";
   description = ''

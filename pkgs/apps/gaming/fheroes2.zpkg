@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.fheroes2";
+  id = "io.github.ihhub.Fheroes2";
   name = "fheroes2";
   summary = "Free implementation of Heroes of Might and Magic II game engine";
   description = ''

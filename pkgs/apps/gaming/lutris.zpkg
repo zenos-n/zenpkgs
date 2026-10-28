@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.lutris";
+  id = "net.lutris.Lutris";
   name = "lutris";
   summary = "Curated lutris package for ZenOS";
   description = ''

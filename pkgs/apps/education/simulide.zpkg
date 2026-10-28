@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.simulide";
+  id = "com.simulide.simulide";
   name = "SimulIDE";
   summary = "Simple real time electronic circuit simulator";
   description = ''

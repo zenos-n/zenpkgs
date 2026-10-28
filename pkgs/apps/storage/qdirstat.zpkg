@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.qdirstat";
+  id = "io.github.shundhammer.qdirstat";
   name = "QDirStat";
   summary = "Graphical disk usage analyzer";
   description = ''

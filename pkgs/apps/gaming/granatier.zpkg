@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.granatier";
+  id = "org.kde.granatier";
   name = "Granatier";
   summary = "Granatier is a clone of the classic Bomberman game";
   description = ''

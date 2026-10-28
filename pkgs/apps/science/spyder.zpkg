@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.spyder";
+  id = "org.spyder_ide.spyder";
   name = "Spyder";
   summary = "Scientific python development environment";
   description = ''

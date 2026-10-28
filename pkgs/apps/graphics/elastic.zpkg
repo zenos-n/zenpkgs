@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.elastic";
+  id = "app.drey.Elastic";
   name = "Elastic";
   summary = "Design spring animations";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.xnviewmp";
+  id = "com.xnview.XnViewMP";
   name = "XnView MP";
   summary = "Efficient multimedia viewer, browser and converter";
   description = ''

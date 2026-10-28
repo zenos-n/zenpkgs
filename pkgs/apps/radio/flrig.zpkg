@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.flrig";
+  id = "com.w1hkj.flrig";
   name = "FLRIG";
   summary = "Digital modem rig control program";
   description = ''

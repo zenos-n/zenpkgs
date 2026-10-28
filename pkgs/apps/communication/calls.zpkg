@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.calls";
+  id = "org.gnome.Calls";
   name = "Calls";
   summary = "Phone dialer and call handler";
   description = ''

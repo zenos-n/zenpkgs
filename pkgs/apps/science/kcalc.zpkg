@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kcalc";
+  id = "org.kde.kcalc";
   name = "KCalc";
   summary = "Calculator offering everything a scientific calculator does, and more";
   description = ''

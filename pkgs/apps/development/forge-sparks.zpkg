@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.forge-sparks";
+  id = "com.mardojai.ForgeSparks";
   name = "Forge Sparks";
   summary = "Get Git forges notifications";
   description = ''

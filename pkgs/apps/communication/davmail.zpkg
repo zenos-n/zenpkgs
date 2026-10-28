@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.davmail";
+  id = "org.davmail.DavMail";
   name = "DavMail";
   summary = "Java application which presents a Microsoft Exchange server as local CALDAV, IMAP and SMTP servers";
   description = ''

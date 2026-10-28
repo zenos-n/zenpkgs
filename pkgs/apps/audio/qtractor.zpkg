@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.qtractor";
+  id = "org.rncbc.qtractor";
   name = "Qtractor";
   summary = "Audio/MIDI multi-track sequencer";
   description = ''

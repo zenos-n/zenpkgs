@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.element-desktop";
+  id = "im.riot.Riot";
   name = "Element";
   summary = "Feature-rich client for Matrix.org";
   description = ''

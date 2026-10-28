@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bespokesynth";
+  id = "com.bespokesynth.BespokeSynth";
   name = "Bespoke Synth";
   summary = "Software modular synth with controllers support, scripting and VST";
   description = ''

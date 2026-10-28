@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.delineate";
+  id = "io.github.seadve.Delineate";
   name = "Delineate";
   summary = "View and edit graphs";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.zathura";
+  id = "org.pwmt.zathura";
   name = "Zathura";
   summary = "Highly customizable and functional PDF viewer";
   description = ''

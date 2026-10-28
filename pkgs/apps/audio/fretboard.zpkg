@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.fretboard";
+  id = "dev.bragefuglseth.Fretboard";
   name = "Fretboard";
   summary = "Look up guitar chords";
   description = ''

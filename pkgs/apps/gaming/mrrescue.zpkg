@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.mrrescue";
+  id = "dk.tangramgames.mrrescue";
   name = "Mr. Rescue";
   summary = "Arcade-style fire fighting game";
   description = ''

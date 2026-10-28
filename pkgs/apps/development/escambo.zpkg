@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.escambo";
+  id = "io.github.cleomenezesjr.Escambo";
   name = "Escambo";
   summary = "HTTP-based APIs test application for GNOME";
   description = ''

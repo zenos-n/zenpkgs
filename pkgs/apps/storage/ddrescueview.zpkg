@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ddrescueview";
+  id = "net.sourceforge.ddrescueview";
   name = "ddrescueview";
   summary = "Tool to graphically examine ddrescue mapfiles";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.supersonic";
+  id = "io.github.dweymouth.supersonic";
   name = "Supersonic";
   summary = "Lightweight cross-platform desktop client for Subsonic music servers";
   description = ''

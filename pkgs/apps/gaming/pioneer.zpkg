@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.pioneer";
+  id = "net.pioneerspacesim.Pioneer";
   name = "Pioneer";
   summary = "Space adventure game set in the Milky Way galaxy at the turn of the 31st century";
   description = ''

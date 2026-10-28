@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.stm32cubemx";
+  id = "com.st.STM32CubeMX";
   name = "STM32CubeMX";
   summary = "Graphical tool for configuring STM32 microcontrollers and microprocessors";
   description = ''

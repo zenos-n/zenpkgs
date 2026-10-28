@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.dhewm3";
+  id = "org.dhewm3.Dhewm3";
   name = "dhewm3";
   summary = "Doom 3 port to SDL";
   description = ''

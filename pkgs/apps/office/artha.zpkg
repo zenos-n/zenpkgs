@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.artha";
+  id = "net.sourceforge.artha.Artha";
   name = "Artha";
   summary = "Offline thesaurus based on WordNet";
   description = ''

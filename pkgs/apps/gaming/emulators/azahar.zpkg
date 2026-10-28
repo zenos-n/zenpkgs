@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.azahar";
+  id = "org.azahar_emu.Azahar";
   name = "Azahar";
   summary = "Open-source 3DS emulator project based on Citra";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.horizon-eda";
+  id = "org.horizon_eda.HorizonEDA";
   name = "Horizon EDA";
   summary = "Free EDA software to develop printed circuit boards";
   description = ''

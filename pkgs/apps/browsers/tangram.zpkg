@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.tangram";
+  id = "re.sonny.Tangram";
   name = "Tangram";
   summary = "Run web apps on your desktop";
   description = ''

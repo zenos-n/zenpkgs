@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.aonsoku";
+  id = "io.github.victoralvesf.aonsoku";
   name = "Aonsoku";
   summary = "Modern desktop client for Navidrome/Subsonic servers";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cozy";
+  id = "com.github.geigi.cozy";
   name = "Cozy";
   summary = "Modern audio book player for Linux";
   description = ''

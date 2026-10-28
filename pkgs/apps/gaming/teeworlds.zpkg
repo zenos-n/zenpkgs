@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.teeworlds";
+  id = "com.teeworlds.Teeworlds";
   name = "Teeworlds";
   summary = "Retro multiplayer shooter game";
   description = ''

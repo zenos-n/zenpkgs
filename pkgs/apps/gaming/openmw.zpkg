@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.openmw";
+  id = "org.openmw.OpenMW";
   name = "OpenMW";
   summary = "Unofficial open source engine reimplementation of the game Morrowind";
   description = ''

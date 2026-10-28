@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.mypaint";
+  id = "org.mypaint.MyPaint";
   name = "MyPaint";
   summary = "Graphics application for digital painters";
   description = ''

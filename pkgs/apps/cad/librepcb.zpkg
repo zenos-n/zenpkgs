@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.librepcb";
+  id = "org.librepcb.LibrePCB";
   name = "LibrePCB";
   summary = "Free EDA software to develop printed circuit boards";
   description = ''

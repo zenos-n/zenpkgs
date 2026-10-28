@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.marktext";
+  id = "com.github.marktext.marktext";
   name = "MarkText";
   summary = "Simple and elegant markdown editor, available for Linux, macOS and Windows";
   description = ''

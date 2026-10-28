@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.openrgb";
+  id = "org.openrgb.OpenRGB";
   name = "OpenRGB";
   summary = "Open source RGB lighting control";
   description = ''

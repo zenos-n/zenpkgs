@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.treesheets";
+  id = "com.strlen.TreeSheets";
   name = "TreeSheets";
   summary = "Free Form Data Organizer";
   description = ''

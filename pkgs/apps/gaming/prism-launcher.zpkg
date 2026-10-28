@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.prism-launcher";
+  id = "org.prismlauncher.PrismLauncher";
   name = "prism-launcher";
   summary = "Curated prism-launcher package for ZenOS";
   description = ''

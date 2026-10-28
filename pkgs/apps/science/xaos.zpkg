@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.xaos";
+  id = "io.github.xaos_project.XaoS";
   name = "XaoS";
   summary = "Real-time interactive fractal zoomer";
   description = ''

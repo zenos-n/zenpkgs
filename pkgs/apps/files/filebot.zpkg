@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.filebot";
+  id = "net.filebot.FileBot";
   name = "FileBot";
   summary = "Ultimate TV and Movie Renamer";
   description = ''

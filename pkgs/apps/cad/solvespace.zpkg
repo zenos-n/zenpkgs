@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.solvespace";
+  id = "com.solvespace.SolveSpace";
   name = "SolveSpace";
   summary = "Parametric 3d CAD program";
   description = ''

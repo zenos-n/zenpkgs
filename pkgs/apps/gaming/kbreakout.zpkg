@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kbreakout";
+  id = "org.kde.kbreakout";
   name = "KBreakOut";
   summary = "KBreakOut is a Breakout-like game. Its objective is to destroy as many bricks as possible without losing the ball.";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.shattered-pixel-dungeon";
+  id = "com.shatteredpixel.shatteredpixeldungeon";
   name = "Shattered Pixel Dungeon";
   summary = "Traditional roguelike game with pixel-art graphics and simple interface";
   description = ''

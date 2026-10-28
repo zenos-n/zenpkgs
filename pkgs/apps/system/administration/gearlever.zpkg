@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.gearlever";
+  id = "it.mijorus.gearlever";
   name = "Gear Lever";
   summary = "Manage AppImages with ease";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.wasabiwallet";
+  id = "io.wasabiwallet.WasabiWallet";
   name = "Wasabi Wallet";
   summary = "Privacy focused Bitcoin wallet";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.komikku";
+  id = "info.febvre.Komikku";
   name = "Komikku";
   summary = "Manga reader for GNOME";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.ksirk";
+  id = "org.kde.ksirk";
   name = "KsirK";
   summary = "KsirK is a computerized version of a well known strategy game";
   description = ''

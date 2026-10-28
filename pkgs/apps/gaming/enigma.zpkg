@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.enigma";
+  id = "org.nongnu.enigma";
   name = "Enigma";
   summary = "Puzzle game inspired by Oxyd on the Atari ST and Rock'n'Roll on the Amiga";
   description = ''

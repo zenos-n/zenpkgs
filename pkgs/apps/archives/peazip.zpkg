@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.peazip";
+  id = "io.github.peazip.PeaZip";
   name = "PeaZip";
   summary = "File and archive manager";
   description = ''

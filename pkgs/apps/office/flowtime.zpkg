@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.flowtime";
+  id = "io.github.diegoivanme.flowtime";
   name = "Flowtime";
   summary = "Get what motivates you done, without losing concentration";
   description = ''

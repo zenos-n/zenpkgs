@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.abuse";
+  id = "com.github.Xenoveritas.abuse";
   name = "Abuse";
   summary = "Side-scroller action game that pits you against ruthless alien killers";
   description = ''

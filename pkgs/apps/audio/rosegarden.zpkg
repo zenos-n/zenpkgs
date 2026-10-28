@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.rosegarden";
+  id = "com.rosegardenmusic.rosegarden";
   name = "Rosegarden";
   summary = "Music composition and editing environment";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.jameica";
+  id = "de.willuhn.Jameica";
   name = "Jameica";
   summary = "Free Runtime Environment for Java Applications";
   description = ''

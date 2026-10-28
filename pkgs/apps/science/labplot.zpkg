@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.labplot";
+  id = "org.kde.labplot";
   name = "LabPlot";
   summary = "Free, open source and cross-platform data visualization and analysis software accessible to everyone";
   description = ''

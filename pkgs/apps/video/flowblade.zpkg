@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.flowblade";
+  id = "io.github.jliljebl.Flowblade";
   name = "Flowblade";
   summary = "Multitrack Non-Linear Video Editor";
   description = ''

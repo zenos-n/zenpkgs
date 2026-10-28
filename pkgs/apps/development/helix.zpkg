@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.helix";
+  id = "com.helix_editor.Helix";
   name = "helix";
   summary = "Curated helix package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.filezilla";
+  id = "org.filezillaproject.Filezilla";
   name = "FileZilla";
   summary = "Graphical FTP, FTPS and SFTP client";
   description = ''

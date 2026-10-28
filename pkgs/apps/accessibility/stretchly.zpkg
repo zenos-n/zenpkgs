@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.stretchly";
+  id = "net.hovancik.Stretchly";
   name = "Stretchly";
   summary = "Break time reminder app";
   description = ''

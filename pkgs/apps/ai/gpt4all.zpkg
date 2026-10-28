@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gpt4all";
+  id = "io.gpt4all.gpt4all";
   name = "GPT4All";
   summary = "Free-to-use, locally running, privacy-aware chatbot. No GPU or internet required";
   description = ''

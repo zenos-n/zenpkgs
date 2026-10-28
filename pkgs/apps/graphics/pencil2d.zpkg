@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.pencil2d";
+  id = "org.pencil2d.Pencil2D";
   name = "Pencil2D";
   summary = "Easy, intuitive tool to make 2D hand-drawn animations";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gitbutler";
+  id = "com.gitbutler.gitbutler";
   name = "GitButler";
   summary = "Git client for simultaneous branches on top of your existing workflow";
   description = ''

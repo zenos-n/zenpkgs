@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.morphosis";
+  id = "garden.jamie.Morphosis";
   name = "Morphosis";
   summary = "Convert your documents";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.delfin";
+  id = "cafe.avery.Delfin";
   name = "Delfin";
   summary = "Stream movies and TV shows from Jellyfin";
   description = ''

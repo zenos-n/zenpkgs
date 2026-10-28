@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.koodo-reader";
+  id = "io.github.troyeguo.koodo-reader";
   name = "Koodo Reader";
   summary = "Cross-platform ebook reader";
   description = ''

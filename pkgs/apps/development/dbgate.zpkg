@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.dbgate";
+  id = "org.dbgate.DbGate";
   name = "DbGate";
   summary = "Database manager for MySQL, PostgreSQL, SQL Server, MongoDB, SQLite and others";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gaphor";
+  id = "org.gaphor.Gaphor";
   name = "Gaphor";
   summary = "UML and SysML modeling tool";
   description = ''

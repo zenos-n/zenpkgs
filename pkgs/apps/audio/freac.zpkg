@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.freac";
+  id = "org.freac.freac";
   name = "fre:ac";
   summary = "Audio converter and CD ripper with support for various popular formats and encoders";
   description = ''

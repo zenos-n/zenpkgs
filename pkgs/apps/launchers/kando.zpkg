@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kando";
+  id = "menu.kando.Kando";
   name = "Kando";
   summary = "Cross-Platform Pie Menu";
   description = ''

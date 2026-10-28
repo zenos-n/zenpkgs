@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.intiface-central";
+  id = "com.nonpolynomial.intiface_central";
   name = "Intiface Central";
   summary = "Intiface Central (Buttplug Frontend) Application for Desktop";
   description = ''

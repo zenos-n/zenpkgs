@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.tuxguitar";
+  id = "ar.com.tuxguitar.TuxGuitar";
   name = "TuxGuitar";
   summary = "Multitrack guitar tablature editor";
   description = ''

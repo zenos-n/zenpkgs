@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.drawpile";
+  id = "net.drawpile.drawpile";
   name = "Drawpile";
   summary = "Collaborative drawing program that allows multiple users to sketch on the same canvas simultaneously";
   description = ''

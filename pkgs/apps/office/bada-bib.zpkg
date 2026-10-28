@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bada-bib";
+  id = "com.github.rogercrocker.badabib";
   name = "bada-bib";
   summary = "Simple BibTeX Viewer and Editor";
   description = ''

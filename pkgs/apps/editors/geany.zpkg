@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.geany";
+  id = "org.geany.Geany";
   name = "Geany";
   summary = "Small and lightweight IDE";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cobang";
+  id = "vn.hoabinh.quan.CoBang";
   name = "CoBang";
   summary = "QR code scanner desktop app for Linux";
   description = ''

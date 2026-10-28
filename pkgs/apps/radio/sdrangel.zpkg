@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.sdrangel";
+  id = "org.sdrangel.SDRangel";
   name = "SDRangel";
   summary = "Software defined radio (SDR) software";
   description = ''

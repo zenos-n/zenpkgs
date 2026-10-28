@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.mousepad";
+  id = "org.xfce.mousepad";
   name = "Mousepad";
   summary = "Simple text editor for Xfce";
   description = ''

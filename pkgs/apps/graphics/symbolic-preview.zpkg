@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.symbolic-preview";
+  id = "org.gnome.design.SymbolicPreview";
   name = "Symbolic Preview";
   summary = "Symbolics made easy";
   description = ''

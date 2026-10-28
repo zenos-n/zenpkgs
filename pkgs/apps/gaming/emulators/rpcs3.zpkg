@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.rpcs3";
+  id = "net.rpcs3.RPCS3";
   name = "RPCS3";
   summary = "PS3 emulator/debugger";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gittyup";
+  id = "com.github.Murmele.Gittyup";
   name = "Gittyup";
   summary = "Graphical Git client designed to help you understand and manage your source code history";
   description = ''

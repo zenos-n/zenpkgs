@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.lmms";
+  id = "io.lmms.LMMS";
   name = "LMMS";
   summary = "DAW similar to FL Studio (music production software)";
   description = ''

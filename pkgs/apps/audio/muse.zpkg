@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.muse";
+  id = "io.github.muse_sequencer.Muse";
   name = "MusE";
   summary = "MIDI/Audio sequencer with recording and editing capabilities";
   description = ''

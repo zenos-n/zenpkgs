@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.jflap";
+  id = "org.jflap.JFLAP";
   name = "JFLAP";
   summary = "GUI tool for experimenting with formal languages topics";
   description = ''

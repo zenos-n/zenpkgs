@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.easyeffects";
+  id = "com.github.wwmm.easyeffects";
   name = "Easy Effects";
   summary = "Audio effects for PipeWire applications";
   description = ''

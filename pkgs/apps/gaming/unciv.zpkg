@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.unciv";
+  id = "io.github.yairm210.unciv";
   name = "Unciv";
   summary = "Open-source Android/Desktop remake of Civ V";
   description = ''

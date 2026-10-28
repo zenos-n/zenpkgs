@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-chess";
+  id = "org.gnome.Chess";
   name = "GNOME Chess";
   summary = "Play the classic two-player boardgame of chess";
   description = ''

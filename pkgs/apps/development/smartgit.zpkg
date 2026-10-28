@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.smartgit";
+  id = "com.syntevo.SmartGit";
   name = "SmartGit";
   summary = "Git GUI client";
   description = ''

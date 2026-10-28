@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.motrix";
+  id = "net.agalwood.Motrix";
   name = "Motrix";
   summary = "Full-featured download manager";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.stellarium";
+  id = "org.stellarium.Stellarium";
   name = "Stellarium";
   summary = "Free open-source planetarium";
   description = ''

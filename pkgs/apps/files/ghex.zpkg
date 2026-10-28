@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ghex";
+  id = "org.gnome.GHex";
   name = "GHex";
   summary = "Hex editor for GNOME desktop environment";
   description = ''

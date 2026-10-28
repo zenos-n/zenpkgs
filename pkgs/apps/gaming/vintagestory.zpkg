@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.vintagestory";
+  id = "at.vintagestory.VintageStory";
   name = "Vintage Story";
   summary = "In-development indie sandbox game about innovation and exploration";
   description = ''

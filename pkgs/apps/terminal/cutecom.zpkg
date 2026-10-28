@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cutecom";
+  id = "com.gitlab.cutecom.cutecom";
   name = "CuteCom";
   summary = "Graphical serial terminal";
   description = ''

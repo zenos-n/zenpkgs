@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.swell-foop";
+  id = "org.gnome.SwellFoop";
   name = "Swell Foop";
   summary = "Puzzle game, previously known as Same GNOME";
   description = ''

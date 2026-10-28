@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.amiberry";
+  id = "com.blitterstudio.amiberry";
   name = "Amiberry";
   summary = "Optimized Amiga emulator for Linux/macOS";
   description = ''

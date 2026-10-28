@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gromit-mpx";
+  id = "net.christianbeier.Gromit-MPX";
   name = "Gromit-MPX";
   summary = "Desktop annotation tool";
   description = ''

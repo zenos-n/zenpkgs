@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bluejay";
+  id = "io.github.ebonjaeger.bluejay";
   name = "Bluejay";
   summary = "Bluetooth manager written in Qt";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.dolphin";
+  id = "org.kde.dolphin";
   name = "Dolphin File Manager";
   summary = "File manager by KDE";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.naev";
+  id = "org.naev.Naev";
   name = "Naev";
   summary = "2D action/rpg space game";
   description = ''

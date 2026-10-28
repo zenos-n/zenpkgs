@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.retroarch";
+  id = "org.libretro.RetroArch";
   name = "retroarch";
   summary = "Curated retroarch package for ZenOS";
   description = ''

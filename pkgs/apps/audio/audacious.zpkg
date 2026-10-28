@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.audacious";
+  id = "org.atheme.audacious";
   name = "Audacious";
   summary = "Lightweight and versatile audio player";
   description = ''

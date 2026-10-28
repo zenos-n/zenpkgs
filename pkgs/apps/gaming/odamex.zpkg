@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.odamex";
+  id = "net.odamex.Odamex";
   name = "Odamex";
   summary = "Client/server port for playing old-school Doom online";
   description = ''

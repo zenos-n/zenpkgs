@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.opentabletdriver";
+  id = "net.opentabletdriver.OpenTabletDriver";
   name = "OpenTabletDriver";
   summary = "Open source, cross-platform, user-mode tablet driver";
   description = ''

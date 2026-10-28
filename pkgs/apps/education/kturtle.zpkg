@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kturtle";
+  id = "org.kde.kturtle";
   name = "KTurtle";
   summary = "Educational programming environment that uses TurtleSpeak";
   description = ''

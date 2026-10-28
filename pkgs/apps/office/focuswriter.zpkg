@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.focuswriter";
+  id = "org.gottcode.FocusWriter";
   name = "FocusWriter";
   summary = "Simple, distraction-free writing environment";
   description = ''

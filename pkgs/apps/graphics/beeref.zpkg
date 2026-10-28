@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.beeref";
+  id = "org.beeref.BeeRef";
   name = "BeeRef";
   summary = "Reference image viewer";
   description = ''

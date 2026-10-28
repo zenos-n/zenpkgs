@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.solaar";
+  id = "io.github.pwr_solaar.solaar";
   name = "Solaar";
   summary = "Linux devices manager for the Logitech Unifying Receiver";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.manuskript";
+  id = "ch.theologeek.Manuskript";
   name = "Manuskript";
   summary = "Open-source tool for writers";
   description = ''

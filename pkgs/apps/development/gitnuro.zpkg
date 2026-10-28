@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gitnuro";
+  id = "com.jetpackduba.Gitnuro";
   name = "Gitnuro";
   summary = "FOSS Git multiplatform client based on Compose and JGit";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.milkytracker";
+  id = "org.milkytracker.MilkyTracker";
   name = "MilkyTracker";
   summary = "Music tracker application, similar to Fasttracker II";
   description = ''

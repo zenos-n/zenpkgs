@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.amberol";
+  id = "io.bassi.Amberol";
   name = "Amberol";
   summary = "Small and simple sound and music player";
   description = ''

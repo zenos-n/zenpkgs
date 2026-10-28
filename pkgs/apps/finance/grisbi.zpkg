@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.grisbi";
+  id = "org.grisbi.Grisbi";
   name = "Grisbi";
   summary = "Personnal accounting application";
   description = ''

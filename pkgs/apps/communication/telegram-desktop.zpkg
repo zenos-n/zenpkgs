@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.telegram-desktop";
+  id = "org.telegram.desktop";
   name = "telegram-desktop";
   summary = "Telegram Desktop messaging app";
   description = ''

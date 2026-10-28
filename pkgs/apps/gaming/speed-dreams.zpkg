@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.speed-dreams";
+  id = "org.speed_dreams.SpeedDreams";
   name = "Speed Dreams";
   summary = "Car racing game - TORCS fork with more experimental approach";
   description = ''

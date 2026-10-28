@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.pinta";
+  id = "com.github.PintaProject.Pinta";
   name = "Pinta";
   summary = "Drawing/editing program modeled after Paint.NET";
   description = ''

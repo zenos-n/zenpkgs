@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gitg";
+  id = "org.gnome.gitg";
   name = "gitg";
   summary = "Curated gitg package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.rust-rover";
+  id = "com.jetbrains.RustRover";
   name = "RustRover";
   summary = "Rust IDE from JetBrains";
   description = ''

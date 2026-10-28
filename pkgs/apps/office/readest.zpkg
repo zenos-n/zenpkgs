@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.readest";
+  id = "com.bilingify.readest";
   name = "Readest";
   summary = "Modern, feature-rich ebook reader";
   description = ''

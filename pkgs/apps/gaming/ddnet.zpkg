@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.ddnet";
+  id = "tw.ddnet.ddnet";
   name = "DDNet";
   summary = "Teeworlds modification with a unique cooperative gameplay";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.quasselClient";
+  id = "org.quassel_irc.QuasselClient";
   name = "Quassel Client";
   summary = "Qt/KDE distributed IRC client supporting a remote daemon";
   description = ''

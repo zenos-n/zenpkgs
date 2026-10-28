@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bustle";
+  id = "org.freedesktop.Bustle";
   name = "Bustle";
   summary = "Graphical D-Bus message analyser and profiler";
   description = ''

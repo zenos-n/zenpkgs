@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gitkraken";
+  id = "com.axosoft.GitKraken";
   name = "GitKraken";
   summary = "Simplifying Git for any OS";
   description = ''

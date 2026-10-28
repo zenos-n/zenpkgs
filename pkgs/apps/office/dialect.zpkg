@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.dialect";
+  id = "app.drey.Dialect";
   name = "Dialect";
   summary = "Translation app for GNOME";
   description = ''

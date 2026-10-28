@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.wheelwizard";
+  id = "io.github.TeamWheelWizard.WheelWizard";
   name = "Wheel Wizard";
   summary = "WheelWizard, Retro Rewind Launcher";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.krita";
+  id = "org.kde.krita";
   name = "Krita";
   summary = "Free and open source painting application";
   description = ''

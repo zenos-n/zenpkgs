@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.errands";
+  id = "io.github.mrvladus.List";
   name = "Errands";
   summary = "Manage your tasks";
   description = ''

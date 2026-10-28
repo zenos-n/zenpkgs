@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.neovide";
+  id = "dev.neovide.neovide";
   name = "Neovide";
   summary = "Simple, no-nonsense, cross-platform graphical user interface for Neovim";
   description = ''

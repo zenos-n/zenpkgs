@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.filelight";
+  id = "org.kde.filelight";
   name = "Filelight";
   summary = "Quickly visualize your disk space usage";
   description = ''

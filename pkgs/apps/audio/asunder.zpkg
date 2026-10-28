@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.asunder";
+  id = "ca.littlesvr.asunder";
   name = "Asunder";
   summary = "Graphical Audio CD ripper and encoder for Linux";
   description = ''

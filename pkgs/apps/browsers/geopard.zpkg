@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.geopard";
+  id = "com.ranfdev.Geopard";
   name = "Geopard";
   summary = "Colorful, adaptive gemini browser";
   description = ''

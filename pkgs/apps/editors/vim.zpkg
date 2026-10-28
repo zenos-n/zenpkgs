@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.vim";
+  id = "org.vim.Vim";
   name = "Vim";
   summary = "Most popular clone of the VI editor";
   description = ''

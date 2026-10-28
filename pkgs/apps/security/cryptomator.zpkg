@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cryptomator";
+  id = "org.cryptomator.Cryptomator";
   name = "Cryptomator";
   summary = "Free client-side encryption for your cloud files";
   description = ''

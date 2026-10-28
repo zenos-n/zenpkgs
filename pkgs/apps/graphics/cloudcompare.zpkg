@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cloudcompare";
+  id = "org.cloudcompare.CloudCompare";
   name = "CloudCompare";
   summary = "3D point cloud and mesh processing software";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.smile";
+  id = "it.mijorus.smile";
   name = "Smile";
   summary = "Emoji picker for linux, with custom tags support and localization";
   description = ''

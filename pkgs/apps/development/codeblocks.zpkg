@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.codeblocks";
+  id = "org.codeblocks.codeblocks";
   name = "Code::Blocks";
   summary = "Open source, cross platform, free C, C++ and Fortran IDE";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.opencode";
+  id = "ai.opencode.opencode";
   name = "OpenCode";
   summary = "AI coding agent built for the terminal";
   description = ''

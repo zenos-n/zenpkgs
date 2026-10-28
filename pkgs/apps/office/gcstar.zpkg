@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gcstar";
+  id = "io.gitlab.GCstar.GCstar";
   name = "GCstar";
   summary = "Manage your collections of movies, games, books, music and more";
   description = ''

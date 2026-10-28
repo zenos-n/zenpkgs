@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.newelle";
+  id = "io.github.qwersyk.Newelle";
   name = "Newelle";
   summary = "Ultimate Virtual Assistant";
   description = ''

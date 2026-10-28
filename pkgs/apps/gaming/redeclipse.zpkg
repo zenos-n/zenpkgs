@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.redeclipse";
+  id = "net.redeclipse.RedEclipse";
   name = "Red Eclipse";
   summary = "First person arena shooter, featuring parkour, impulse boosts, and more";
   description = ''

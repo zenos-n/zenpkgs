@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.unnamed-sdvx-clone";
+  id = "me.drewol.Unnamed-SDVX-Clone";
   name = "Unnamed SDVX Clone";
   summary = "Game based on K-Shoot MANIA and Sound Voltex";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.hamster";
+  id = "org.gnome.Hamster";
   name = "Hamster";
   summary = "Time tracking application";
   description = ''

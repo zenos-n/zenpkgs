@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.zandronum";
+  id = "com.zandronum.Zandronum";
   name = "Zandronum";
   summary = "Multiplayer oriented port, based off Skulltag, for Doom and Doom II by id Software";
   description = ''

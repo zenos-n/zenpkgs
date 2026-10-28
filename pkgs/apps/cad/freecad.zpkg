@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.freecad";
+  id = "org.freecad.FreeCAD";
   name = "FreeCAD";
   summary = "General purpose Open Source 3D CAD/MCAD/CAx/CAE/PLM modeler";
   description = ''

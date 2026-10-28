@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.remmina";
+  id = "org.remmina.Remmina";
   name = "Remmina";
   summary = "Remote desktop client written in GTK";
   description = ''

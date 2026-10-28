@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.massif-visualizer";
+  id = "org.kde.massif-visualizer";
   name = "Massif Visualizer";
   summary = "Visualizer for Valgrind Massif data files";
   description = ''

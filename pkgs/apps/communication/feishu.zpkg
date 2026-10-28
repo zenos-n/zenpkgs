@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.feishu";
+  id = "cn.feishu.Feishu";
   name = "Feishu";
   summary = "All-in-one collaboration suite";
   description = ''

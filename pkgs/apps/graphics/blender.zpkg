@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.blender";
+  id = "org.blender.Blender";
   name = "Blender";
   summary = "3D Creation/Animation/Publishing System";
   description = ''

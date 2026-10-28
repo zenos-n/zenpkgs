@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.unison";
+  id = "io.github.bcpierce00.unison";
   name = "Unison";
   summary = "Bidirectional file synchronizer";
   description = ''

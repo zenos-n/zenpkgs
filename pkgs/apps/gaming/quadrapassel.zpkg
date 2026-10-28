@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.quadrapassel";
+  id = "org.gnome.Quadrapassel";
   name = "Quadrapassel";
   summary = "Classic falling-block game, Tetris";
   description = ''

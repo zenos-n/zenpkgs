@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.palapeli";
+  id = "org.kde.palapeli";
   name = "Palapeli";
   summary = "Palapeli is a single-player jigsaw puzzle game";
   description = ''

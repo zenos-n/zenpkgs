@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.fooyin";
+  id = "org.fooyin.fooyin";
   name = "Fooyin";
   summary = "Customisable music player";
   description = ''

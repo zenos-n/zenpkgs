@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.eog";
+  id = "org.gnome.eog";
   name = "Eye of GNOME";
   summary = "GNOME image viewer";
   description = ''

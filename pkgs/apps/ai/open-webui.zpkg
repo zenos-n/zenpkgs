@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.open-webui";
+  id = "com.openwebui.open-webui";
   name = "Open WebUI";
   summary = "Comprehensive suite for LLMs with a user-friendly WebUI";
   description = ''

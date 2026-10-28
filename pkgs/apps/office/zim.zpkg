@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.zim";
+  id = "org.zim_wiki.Zim";
   name = "Zim";
   summary = "Desktop wiki";
   description = ''

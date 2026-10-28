@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.lapce";
+  id = "dev.lapce.lapce";
   name = "Lapce";
   summary = "Lightning-fast and Powerful Code Editor written in Rust";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.klavaro";
+  id = "net.sourceforge.Klavaro";
   name = "Klavaro";
   summary = "Free touch typing tutor program";
   description = ''

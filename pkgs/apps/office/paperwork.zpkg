@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.paperwork";
+  id = "work.openpaper.Paperwork";
   name = "Paperwork";
   summary = "Personal document manager for scanned documents";
   description = ''

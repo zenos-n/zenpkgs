@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.input-leap";
+  id = "io.github.input_leap.input-leap";
   name = "Input Leap";
   summary = "Open-source KVM software";
   description = ''

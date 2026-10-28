@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.darktable";
+  id = "org.darktable.Darktable";
   name = "darktable";
   summary = "Virtual lighttable and darkroom for photographers";
   description = ''

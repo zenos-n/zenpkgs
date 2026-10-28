@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.torcs";
+  id = "net.sourceforge.torcs";
   name = "TORCS";
   summary = "Car racing game";
   description = ''

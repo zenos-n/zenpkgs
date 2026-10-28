@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.vscode";
+  id = "com.visualstudio.code";
   name = "vscode";
   summary = "Curated vscode package for ZenOS";
   description = ''

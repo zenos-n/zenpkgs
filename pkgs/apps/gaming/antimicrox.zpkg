@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.antimicrox";
+  id = "io.github.antimicrox.antimicrox";
   name = "AntiMicroX";
   summary = "GUI for mapping keyboard and mouse controls to a gamepad";
   description = ''

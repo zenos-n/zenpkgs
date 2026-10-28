@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.spotify";
+  id = "com.spotify.Client";
   name = "Spotify";
   summary = "Play music from the Spotify music service";
   description = ''

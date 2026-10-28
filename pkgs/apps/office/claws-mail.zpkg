@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.claws-mail";
+  id = "org.claws_mail.Claws-Mail";
   name = "Claws Mail";
   summary = "User-friendly, lightweight, and fast email client";
   description = ''

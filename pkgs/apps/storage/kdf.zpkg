@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kdf";
+  id = "org.kde.kdf";
   name = "KDiskFree";
   summary = "Displays available storage devices and information about their usage";
   description = ''

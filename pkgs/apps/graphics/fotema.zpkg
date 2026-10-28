@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.fotema";
+  id = "app.fotema.Fotema";
   name = "Fotema";
   summary = "Photo gallery for Linux";
   description = ''

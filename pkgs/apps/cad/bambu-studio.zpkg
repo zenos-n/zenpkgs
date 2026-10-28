@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.bambu-studio";
+  id = "com.bambulab.BambuStudio";
   name = "Bambu Studio";
   summary = "PC Software for BambuLab's 3D printers";
   description = ''

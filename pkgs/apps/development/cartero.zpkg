@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cartero";
+  id = "es.danirod.Cartero";
   name = "Cartero";
   summary = "Make HTTP requests and test APIs";
   description = ''

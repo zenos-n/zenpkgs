@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.citations";
+  id = "org.gnome.World.Citations";
   name = "Citations";
   summary = "Manage your bibliographies using the BibTeX format";
   description = ''

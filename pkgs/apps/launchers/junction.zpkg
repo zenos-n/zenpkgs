@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.junction";
+  id = "re.sonny.Junction";
   name = "Junction";
   summary = "Choose the application to open files and links";
   description = ''

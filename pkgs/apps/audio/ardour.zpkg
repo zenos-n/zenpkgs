@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ardour";
+  id = "org.ardour.Ardour";
   name = "Ardour";
   summary = "Multi-track hard disk recording software";
   description = ''

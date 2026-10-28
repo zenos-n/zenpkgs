@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.distroshelf";
+  id = "com.ranfdev.DistroShelf";
   name = "Distroshelf";
   summary = "GUI for Distrobox Containers";
   description = ''

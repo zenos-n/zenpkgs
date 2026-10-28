@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.librecad";
+  id = "org.librecad.librecad";
   name = "LibreCAD";
   summary = "2D CAD package based on Qt";
   description = ''

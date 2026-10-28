@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-contacts";
+  id = "org.gnome.Contacts";
   name = "GNOME Contacts";
   summary = "GNOME’s integrated address book";
   description = ''

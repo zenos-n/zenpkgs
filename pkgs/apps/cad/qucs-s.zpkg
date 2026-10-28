@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.qucs-s";
+  id = "io.github.ra3xdh.qucs_s";
   name = "Qucs-S";
   summary = "Spin-off of Qucs that allows custom simulation kernels";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.shortwave";
+  id = "de.haeckerfelix.Shortwave";
   name = "Shortwave";
   summary = "Find and listen to internet radio stations";
   description = ''

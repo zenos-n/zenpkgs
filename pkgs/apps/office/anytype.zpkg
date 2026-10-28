@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.anytype";
+  id = "io.anytype.anytype";
   name = "Anytype";
   summary = "P2P note-taking tool";
   description = ''

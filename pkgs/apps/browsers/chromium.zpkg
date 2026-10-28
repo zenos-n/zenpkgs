@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.chromium";
+  id = "org.chromium.Chromium";
   name = "Chromium";
   summary = "Open source web browser from Google";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.sound-juicer";
+  id = "org.gnome.SoundJuicer";
   name = "Sound Juicer";
   summary = "Gnome CD Ripper";
   description = ''

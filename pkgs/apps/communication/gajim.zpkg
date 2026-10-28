@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gajim";
+  id = "org.gajim.Gajim";
   name = "Gajim";
   summary = "Jabber client written in PyGTK";
   description = ''

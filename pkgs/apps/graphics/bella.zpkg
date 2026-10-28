@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bella";
+  id = "io.github.josephmawa.Bella";
   name = "Bella";
   summary = "Simple eye dropper and color picker";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.trayscale";
+  id = "dev.deedles.Trayscale";
   name = "Trayscale";
   summary = "Unofficial GUI wrapper around the Tailscale CLI client";
   description = ''

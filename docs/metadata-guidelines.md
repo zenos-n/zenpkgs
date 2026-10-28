@@ -15,6 +15,12 @@ spelling and case; encode punctuation as `-u<hex code point>-` and prefix names
 beginning with a digit with `p-` (for example, `foo_bar` becomes `foo-u5f-bar`).
 Fallback names must be unique. Missing IDs remain errors.
 
+Check a candidate upstream ID against the application itself, such as its
+AppStream component or desktop file. A Flathub application ID is useful evidence
+when it describes the same project and component type. Matching display names
+alone are insufficient: the `boxes` CLI tool and GNOME Boxes are different
+applications, for example. Keep `unknown.*` when the identity is ambiguous.
+
 The registry contains one record per declaration:
 
 - `id = "pkgs." + _meta.id` is the canonical public identity.

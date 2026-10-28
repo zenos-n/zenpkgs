@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kdiamond";
+  id = "org.kde.kdiamond";
   name = "KDiamond";
   summary = "KDiamond is a single player puzzle game";
   description = ''

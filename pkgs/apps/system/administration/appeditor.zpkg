@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.appeditor";
+  id = "com.github.donadigo.appeditor";
   name = "AppEditor";
   summary = "Edit the Pantheon desktop application menu";
   description = ''

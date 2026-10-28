@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.mame";
+  id = "org.mamedev.MAME";
   name = "MAME";
   summary = "Multi-purpose emulation framework";
   description = ''

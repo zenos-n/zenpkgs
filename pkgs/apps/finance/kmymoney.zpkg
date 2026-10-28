@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kmymoney";
+  id = "org.kde.kmymoney";
   name = "KMyMoney";
   summary = "Personal finance manager for KDE";
   description = ''

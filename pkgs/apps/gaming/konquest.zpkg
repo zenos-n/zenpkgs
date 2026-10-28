@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.konquest";
+  id = "org.kde.konquest";
   name = "Konquest";
   summary = "Konquest is the KDE version of Gnu-Lactic";
   description = ''

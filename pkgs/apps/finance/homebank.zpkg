@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.homebank";
+  id = "fr.free.Homebank";
   name = "HomeBank";
   summary = "Free, easy, personal accounting for everyone";
   description = ''

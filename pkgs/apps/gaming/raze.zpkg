@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.raze";
+  id = "org.zdoom.Raze";
   name = "Raze";
   summary = "Build engine port backed by GZDoom tech";
   description = ''

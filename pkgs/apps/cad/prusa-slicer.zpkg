@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.prusa-slicer";
+  id = "com.prusa3d.PrusaSlicer";
   name = "PrusaSlicer";
   summary = "G-code generator for 3D printer";
   description = ''

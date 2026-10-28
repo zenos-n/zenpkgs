@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.frescobaldi";
+  id = "org.frescobaldi.Frescobaldi";
   name = "Frescobaldi";
   summary = "LilyPond sheet music text editor";
   description = ''

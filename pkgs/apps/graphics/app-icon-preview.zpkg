@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.app-icon-preview";
+  id = "org.gnome.design.AppIconPreview";
   name = "App Icon Preview";
   summary = "Tool for designing applications icons";
   description = ''

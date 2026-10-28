@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.varia";
+  id = "io.github.giantpinkrobots.varia";
   name = "Varia";
   summary = "Simple download manager based on aria2 and libadwaita";
   description = ''

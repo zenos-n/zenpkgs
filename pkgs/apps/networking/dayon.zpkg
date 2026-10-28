@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.dayon";
+  id = "io.github.retgal.Dayon";
   name = "Dayon!";
   summary = "Easy to use, cross-platform remote desktop assistance solution";
   description = ''

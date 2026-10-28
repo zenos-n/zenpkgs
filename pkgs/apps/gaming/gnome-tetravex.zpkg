@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-tetravex";
+  id = "org.gnome.Tetravex";
   name = "GNOME Tetravex";
   summary = "Complete the puzzle by matching numbered tiles";
   description = ''

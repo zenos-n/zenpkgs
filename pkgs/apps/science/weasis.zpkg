@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.weasis";
+  id = "io.github.nroduit.Weasis";
   name = "Weasis";
   summary = "Multipurpose standalone and web-based DICOM viewer with a highly modular architecture";
   description = ''

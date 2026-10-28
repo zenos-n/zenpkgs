@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.zettlr";
+  id = "com.zettlr.Zettlr";
   name = "Zettlr";
   summary = "Markdown editor for writing academic texts and taking notes";
   description = ''

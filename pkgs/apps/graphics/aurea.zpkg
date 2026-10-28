@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.aurea";
+  id = "io.github.cleomenezesjr.aurea";
   name = "Aurea";
   summary = "Flatpak metainfo banner previewer";
   description = ''

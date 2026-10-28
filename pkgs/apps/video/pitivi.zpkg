@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.pitivi";
+  id = "org.pitivi.Pitivi";
   name = "Pitivi";
   summary = "Non-Linear video editor utilizing the power of GStreamer";
   description = ''

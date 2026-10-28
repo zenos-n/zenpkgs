@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.zsnes";
+  id = "io.github.xyproto.zsnes";
   name = "ZSNES";
   summary = "Super Nintendo Entertainment System Emulator";
   description = ''

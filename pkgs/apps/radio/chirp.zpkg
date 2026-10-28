@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.chirp";
+  id = "com.chirpmyradio.chirp";
   name = "CHIRP";
   summary = "Free, open-source tool for programming your amateur radio";
   description = ''

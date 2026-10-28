@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.arduino-ide";
+  id = "cc.arduino.IDE2";
   name = "Arduino IDE";
   summary = "Open-source electronics prototyping platform";
   description = ''

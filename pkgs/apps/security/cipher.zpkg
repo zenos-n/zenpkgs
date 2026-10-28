@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cipher";
+  id = "com.github.arshubham.cipher";
   name = "cipher";
   summary = "Curated cipher package for ZenOS";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.syncthingtray";
+  id = "io.github.martchus.syncthingtray";
   name = "Syncthing Tray";
   summary = "Tray application and Dolphin/Plasma integration for Syncthing";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.jabref";
+  id = "org.jabref.jabref";
   name = "JabRef";
   summary = "Open source bibliography reference manager";
   description = ''

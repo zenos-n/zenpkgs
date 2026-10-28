@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gdm-settings";
+  id = "io.github.realmazharhussain.GdmSettings";
   name = "GDM Settings";
   summary = "Settings app for GNOME's Login Manager";
   description = ''

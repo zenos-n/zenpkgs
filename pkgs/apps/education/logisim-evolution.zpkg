@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.logisim-evolution";
+  id = "com.github.reds.LogisimEvolution";
   name = "Logisim Evolution";
   summary = "Digital logic designer and simulator";
   description = ''

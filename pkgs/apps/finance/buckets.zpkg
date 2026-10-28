@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.buckets";
+  id = "com.budgetwithbuckets.Buckets";
   name = "Buckets";
   summary = "Private family budgeting app";
   description = ''

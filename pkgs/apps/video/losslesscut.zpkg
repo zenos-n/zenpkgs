@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.losslesscut";
+  id = "no.mifi.losslesscut";
   name = "LosslessCut";
   summary = "Swiss army knife of lossless video/audio editing";
   description = ''

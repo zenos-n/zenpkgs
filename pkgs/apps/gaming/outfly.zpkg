@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.outfly";
+  id = "page.codeberg.outfly.outfly";
   name = "OutFly";
   summary = "Breathtaking 3D space game in the rings of Jupiter";
   description = ''

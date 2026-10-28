@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.pocket-casts";
+  id = "tech.feliciano.pocket-casts";
   name = "Pocket Casts";
   summary = "Pocket Casts webapp, packaged for the Linux Desktop";
   description = ''

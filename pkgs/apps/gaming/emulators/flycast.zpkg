@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.flycast";
+  id = "org.flycast.Flycast";
   name = "Flycast";
   summary = "Multi-platform Sega Dreamcast, Naomi and Atomiswave emulator";
   description = ''

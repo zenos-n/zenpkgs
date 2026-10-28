@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.ktorrent";
+  id = "org.kde.ktorrent";
   name = "KTorrent";
   summary = "Powerful BitTorrent client";
   description = ''

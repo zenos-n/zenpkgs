@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.sunshine";
+  id = "dev.lizardbyte.app.Sunshine";
   name = "Sunshine";
   summary = "Game stream host for Moonlight";
   description = ''

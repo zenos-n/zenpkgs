@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.typora";
+  id = "io.typora.Typora";
   name = "Typora";
   summary = "A minimal Markdown editor and reader.";
   description = ''

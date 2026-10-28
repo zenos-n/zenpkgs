@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.headlamp";
+  id = "io.kinvolk.Headlamp";
   name = "Headlamp";
   summary = "An easy-to-use and extensible Kubernetes web UI";
   description = ''

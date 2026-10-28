@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.steam";
+  id = "com.valvesoftware.Steam";
   name = "steam";
   summary = "Curated steam package for ZenOS";
   description = ''

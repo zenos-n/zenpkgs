@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kate";
+  id = "org.kde.kate";
   name = "Kate";
   summary = "Advanced text editor";
   description = ''

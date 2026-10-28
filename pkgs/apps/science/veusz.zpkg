@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.veusz";
+  id = "io.github.veusz.Veusz";
   name = "Veusz";
   summary = "Scientific plotting and graphing program with a GUI";
   description = ''

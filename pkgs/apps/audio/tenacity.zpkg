@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.tenacity";
+  id = "org.tenacityaudio.Tenacity";
   name = "Tenacity";
   summary = "Sound editor with graphical UI";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.epsonscan2";
+  id = "net.epson.epsonscan2";
   name = "Epson Scan 2";
   summary = "Epson Scan 2 scanner driver for many modern Epson scanners and multifunction printers";
   description = ''

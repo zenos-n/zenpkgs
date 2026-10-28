@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ticktick";
+  id = "com.ticktick.TickTick";
   name = "TickTick";
   summary = "Powerful to-do & task management app with seamless cloud synchronization across all your devices";
   description = ''

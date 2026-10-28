@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.mpv";
+  id = "io.mpv.Mpv";
   name = "mpv";
   summary = "General-purpose media player, fork of MPlayer and mplayer2";
   description = ''

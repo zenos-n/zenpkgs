@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.musescore";
+  id = "org.musescore.MuseScore";
   name = "MuseScore";
   summary = "Music notation and composition software";
   description = ''

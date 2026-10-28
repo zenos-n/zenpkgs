@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.vesktop";
+  id = "dev.vencord.Vesktop";
   name = "Vesktop";
   summary = "Alternate client for Discord with Vencord built-in";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.klickety";
+  id = "org.kde.klickety";
   name = "Klickety";
   summary = "Klickety is an adaptation of the Clickomania game";
   description = ''

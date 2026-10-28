@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.vlc";
+  id = "org.videolan.VLC";
   name = "vlc";
   summary = "Cross-platform media player and streaming server";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.warpinator";
+  id = "org.x.Warpinator";
   name = "Warpinator";
   summary = "Share files across the LAN";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.qsynth";
+  id = "org.rncbc.qsynth";
   name = "Qsynth";
   summary = "Fluidsynth GUI";
   description = ''

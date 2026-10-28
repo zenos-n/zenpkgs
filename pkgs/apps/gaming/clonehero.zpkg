@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.clonehero";
+  id = "net.clonehero.CloneHero";
   name = "Clone Hero";
   summary = "Clone of Guitar Hero and Rockband-style games";
   description = ''

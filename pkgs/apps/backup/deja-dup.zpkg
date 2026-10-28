@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.deja-dup";
+  id = "org.gnome.DejaDup";
   name = "Déjà Dup";
   summary = "Simple backup tool";
   description = ''

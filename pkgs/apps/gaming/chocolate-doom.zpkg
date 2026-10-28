@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.chocolate-doom";
+  id = "org.chocolate_doom.ChocolateDoom";
   name = "Chocolate Doom";
   summary = "Doom source port that accurately reproduces the experience of Doom as it was played in the 1990s";
   description = ''

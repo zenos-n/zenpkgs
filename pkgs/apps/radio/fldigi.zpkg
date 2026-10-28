@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.fldigi";
+  id = "com.w1hkj.fldigi";
   name = "Fldigi";
   summary = "Digital modem program";
   description = ''

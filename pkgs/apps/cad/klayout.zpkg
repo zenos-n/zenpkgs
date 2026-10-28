@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.klayout";
+  id = "de.klayout.KLayout";
   name = "KLayout";
   summary = "High performance layout viewer and editor with support for GDS and OASIS";
   description = ''

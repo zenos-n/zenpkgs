@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.coulr";
+  id = "com.github.huluti.Coulr";
   name = "Coulr";
   summary = "Color box to help developers and designers";
   description = ''

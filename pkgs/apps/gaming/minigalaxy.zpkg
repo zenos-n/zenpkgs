@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.minigalaxy";
+  id = "io.github.sharkwouter.Minigalaxy";
   name = "Minigalaxy";
   summary = "Simple GOG client for Linux";
   description = ''

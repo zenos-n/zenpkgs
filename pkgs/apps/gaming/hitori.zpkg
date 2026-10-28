@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.hitori";
+  id = "org.gnome.Hitori";
   name = "Hitori";
   summary = "GTK application to generate and let you play games of Hitori";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gmetronome";
+  id = "org.gnome.gitlab.dqpb.GMetronome";
   name = "GMetronome";
   summary = "Free software metronome and tempo measurement tool";
   description = ''

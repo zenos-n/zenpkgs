@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.lskat";
+  id = "org.kde.lskat";
   name = "LSkat";
   summary = "Lieutenant Skat (from German Offiziersskat) is a fun and engaging card game for two players";
   description = ''

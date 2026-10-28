@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.lycheeslicer";
+  id = "io.mango3d.LycheeSlicer";
   name = "Lychee Slicer";
   summary = "All-in-one 3D slicer for resin and FDM printers";
   description = ''

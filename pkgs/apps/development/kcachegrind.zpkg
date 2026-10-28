@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kcachegrind";
+  id = "org.kde.kcachegrind";
   name = "KCachegrind";
   summary = "GUI to profilers such as Valgrind";
   description = ''

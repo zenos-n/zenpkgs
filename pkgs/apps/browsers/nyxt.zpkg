@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.nyxt";
+  id = "engineer.atlas.Nyxt";
   name = "Nyxt";
   summary = "Infinitely extensible web-browser (with Lisp development files using WebKitGTK platform port)";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ares";
+  id = "dev.ares.ares";
   name = "ares";
   summary = "Open-source multi-system emulator with a focus on accuracy and preservation";
   description = ''

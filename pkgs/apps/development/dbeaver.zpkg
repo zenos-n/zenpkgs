@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.dbeaver";
+  id = "io.dbeaver.DBeaverCommunity";
   name = "DBeaver";
   summary = "Universal SQL Client for developers, DBA and analysts. Supports MySQL, PostgreSQL, MariaDB, SQLite, and more";
   description = ''

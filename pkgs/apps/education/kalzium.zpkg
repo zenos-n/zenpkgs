@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kalzium";
+  id = "org.kde.kalzium";
   name = "Kalzium";
   summary = "Periodic Table of Elements";
   description = ''

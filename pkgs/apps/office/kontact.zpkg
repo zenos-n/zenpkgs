@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kontact";
+  id = "org.kde.kontact";
   name = "Kontact";
   summary = "Container application to unify several major PIM applications";
   description = ''

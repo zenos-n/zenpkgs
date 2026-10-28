@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kmines";
+  id = "org.kde.kmines";
   name = "KMines";
   summary = "KMines is the classic Minesweeper game";
   description = ''

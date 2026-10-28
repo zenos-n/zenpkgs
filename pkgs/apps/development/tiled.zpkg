@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.tiled";
+  id = "org.mapeditor.Tiled";
   name = "Tiled";
   summary = "Free, easy to use and flexible tile map editor";
   description = ''

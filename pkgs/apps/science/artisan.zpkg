@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.artisan";
+  id = "org.artisan_scope.artisan";
   name = "Artisan";
   summary = "Visual scope for coffee roasters";
   description = ''

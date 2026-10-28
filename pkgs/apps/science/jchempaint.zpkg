@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.jchempaint";
+  id = "io.github.jchempaint.JChemPaint";
   name = "JChemPaint";
   summary = "Chemical 2D structure editor application/applet based on the Chemistry Development Kit";
   description = ''

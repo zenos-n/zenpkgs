@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.clion";
+  id = "com.jetbrains.CLion";
   name = "CLion";
   summary = "C/C++ IDE from JetBrains";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cubiomes-viewer";
+  id = "com.github.cubitect.cubiomes-viewer";
   name = "Cubiomes Viewer";
   summary = "Graphical Minecraft seed finder and map viewer";
   description = ''

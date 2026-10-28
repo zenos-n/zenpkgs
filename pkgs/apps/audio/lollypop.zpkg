@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.lollypop";
+  id = "org.gnome.Lollypop";
   name = "Lollypop";
   summary = "Modern music player for GNOME";
   description = ''

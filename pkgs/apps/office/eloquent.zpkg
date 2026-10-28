@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.eloquent";
+  id = "re.sonny.Eloquent";
   name = "Eloquent";
   summary = "Proofreading software for English, Spanish, French, German, and more than 20 other languages";
   description = ''

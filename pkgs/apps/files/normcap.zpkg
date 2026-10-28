@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.normcap";
+  id = "com.github.dynobo.normcap";
   name = "NormCap";
   summary = "OCR powered screen-capture tool to capture information instead of images";
   description = ''

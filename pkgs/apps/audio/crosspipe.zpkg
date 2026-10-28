@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.crosspipe";
+  id = "io.github.dp0sk.Crosspipe";
   name = "Crosspipe";
   summary = "PipeWire graph GTK4/Libadwaita GUI";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.filius";
+  id = "de.lernsoftware_filius.Filius";
   name = "Filius";
   summary = "A computer network simulator for secondary schools";
   description = ''

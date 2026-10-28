@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cutter";
+  id = "re.rizin.cutter";
   name = "Cutter";
   summary = "Free and Open Source Reverse Engineering Platform powered by rizin";
   description = ''

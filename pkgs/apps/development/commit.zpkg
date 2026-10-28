@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.commit";
+  id = "re.sonny.Commit";
   name = "Commit";
   summary = "Git commit message editor";
   description = ''

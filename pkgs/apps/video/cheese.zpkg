@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cheese";
+  id = "org.gnome.Cheese";
   name = "Cheese";
   summary = "Take photos and videos with your webcam, with fun graphical effects";
   description = ''

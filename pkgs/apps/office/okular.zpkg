@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.okular";
+  id = "org.kde.okular";
   name = "Okular";
   summary = "KDE document viewer";
   description = ''

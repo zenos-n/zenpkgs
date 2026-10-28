@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.runelite";
+  id = "net.runelite.RuneLite";
   name = "RuneLite";
   summary = "Open source Old School RuneScape client";
   description = ''

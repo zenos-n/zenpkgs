@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kmahjongg";
+  id = "org.kde.kmahjongg";
   name = "KMahjongg";
   summary = "KMahjongg is a tile matching game for one or two players";
   description = ''

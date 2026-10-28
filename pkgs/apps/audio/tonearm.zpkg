@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.tonearm";
+  id = "dev.dergs.Tonearm";
   name = "Tonearm";
   summary = "GTK client for TIDAL written in Golang";
   description = ''

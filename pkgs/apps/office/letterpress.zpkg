@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.letterpress";
+  id = "io.gitlab.gregorni.Letterpress";
   name = "Letterpress";
   summary = "Create beautiful ASCII art";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.signal-desktop";
+  id = "org.signal.Signal";
   name = "signal-desktop";
   summary = "Private, simple, and secure messenger";
   description = ''

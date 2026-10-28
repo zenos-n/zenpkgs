@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.skrooge";
+  id = "org.kde.skrooge";
   name = "Skrooge";
   summary = "Personal finances manager, powered by KDE";
   description = ''

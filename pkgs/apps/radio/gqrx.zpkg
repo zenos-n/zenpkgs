@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gqrx";
+  id = "dk.gqrx.gqrx";
   name = "Gqrx";
   summary = "Software defined radio (SDR) receiver";
   description = ''

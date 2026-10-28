@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.pcsx2";
+  id = "net.pcsx2.PCSX2";
   name = "PCSX2";
   summary = "Playstation 2 emulator";
   description = ''

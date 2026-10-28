@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.eyedropper";
+  id = "com.github.finefindus.eyedropper";
   name = "Eyedropper";
   summary = "Pick and format colors";
   description = ''

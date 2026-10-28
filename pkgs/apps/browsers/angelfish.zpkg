@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.angelfish";
+  id = "org.kde.angelfish";
   name = "Angelfish";
   summary = "Web browser for Plasma Mobile";
   description = ''

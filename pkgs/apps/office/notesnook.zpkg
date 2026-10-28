@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.notesnook";
+  id = "com.notesnook.Notesnook";
   name = "Notesnook";
   summary = "Fully open source & end-to-end encrypted note taking alternative to Evernote";
   description = ''

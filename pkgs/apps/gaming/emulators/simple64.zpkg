@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.simple64";
+  id = "io.github.simple64.simple64";
   name = "simple64";
   summary = "Easy to use N64 emulator";
   description = ''

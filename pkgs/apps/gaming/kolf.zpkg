@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kolf";
+  id = "org.kde.kolf";
   name = "Kolf";
   summary = "Kolf is a miniature golf game with 2d top-down view";
   description = ''

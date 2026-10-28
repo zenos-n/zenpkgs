@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.qownnotes";
+  id = "org.qownnotes.QOwnNotes";
   name = "QOwnNotes";
   summary = "Plain-text file notepad and todo-list manager with markdown support and Nextcloud/ownCloud integration";
   description = ''

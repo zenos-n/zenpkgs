@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bluefish";
+  id = "nl.openoffice.bluefish";
   name = "Bluefish";
   summary = "Powerful editor targeted towards programmers and webdevelopers";
   description = ''

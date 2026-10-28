@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-solanum";
+  id = "org.gnome.Solanum";
   name = "Solanum";
   summary = "Pomodoro timer for the GNOME desktop";
   description = ''

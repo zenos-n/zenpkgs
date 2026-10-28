@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.goverlay";
+  id = "io.github.benjamimgois.goverlay";
   name = "GOverlay";
   summary = "Opensource project that aims to create a Graphical UI to help manage Linux overlays";
   description = ''

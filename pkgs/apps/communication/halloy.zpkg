@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.halloy";
+  id = "org.squidowl.halloy";
   name = "Halloy";
   summary = "IRC application";
   description = ''

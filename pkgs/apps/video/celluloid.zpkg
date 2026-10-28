@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.celluloid";
+  id = "io.github.celluloid_player.Celluloid";
   name = "Celluloid";
   summary = "Simple GTK frontend for the mpv video player";
   description = ''

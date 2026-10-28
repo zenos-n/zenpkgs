@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.mqttx";
+  id = "com.emqx.MQTTX";
   name = "MQTTX";
   summary = "Powerful cross-platform MQTT 5.0 Desktop, CLI, and WebSocket client tools";
   description = ''

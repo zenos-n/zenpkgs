@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kbruch";
+  id = "org.kde.kbruch";
   name = "KBruch";
   summary = "Practice Fractions";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.grafx2";
+  id = "com.chez.GrafX2";
   name = "GrafX2";
   summary = "Ultimate 256-color painting program";
   description = ''

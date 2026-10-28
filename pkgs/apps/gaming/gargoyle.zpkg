@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gargoyle";
+  id = "io.github.garglk.Gargoyle";
   name = "Gargoyle";
   summary = "Interactive fiction interpreter GUI";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kfourinline";
+  id = "org.kde.kfourinline";
   name = "KFourInLine";
   summary = "KFourInLine is a four-in-a-row game";
   description = ''

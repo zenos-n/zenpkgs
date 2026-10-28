@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.freetube";
+  id = "io.freetubeapp.FreeTube";
   name = "FreeTube";
   summary = "Open Source YouTube app for privacy";
   description = ''

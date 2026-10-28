@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.recoll";
+  id = "org.recoll.recoll";
   name = "Recoll";
   summary = "Full-text search tool";
   description = ''

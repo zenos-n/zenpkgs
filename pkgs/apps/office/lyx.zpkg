@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.lyx";
+  id = "org.lyx.LyX";
   name = "LyX";
   summary = "WYSIWYM frontend for LaTeX, DocBook";
   description = ''

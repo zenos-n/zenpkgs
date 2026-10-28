@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.hydrogen";
+  id = "org.hydrogenmusic.Hydrogen";
   name = "Hydrogen";
   summary = "Advanced drum machine";
   description = ''

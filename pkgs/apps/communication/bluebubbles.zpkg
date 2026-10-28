@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bluebubbles";
+  id = "app.bluebubbles.BlueBubbles";
   name = "BlueBubbles";
   summary = "Cross-platform iMessage client";
   description = ''

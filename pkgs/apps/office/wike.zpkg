@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.wike";
+  id = "com.github.hugolabe.Wike";
   name = "Wike";
   summary = "Wikipedia Reader for the GNOME Desktop";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.confy";
+  id = "net.kirgroup.confy";
   name = "Confy";
   summary = "Conferences schedule viewer";
   description = ''

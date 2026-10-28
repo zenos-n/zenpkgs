@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.feishin";
+  id = "org.jeffvli.feishin";
   name = "Feishin";
   summary = "Full-featured Jellyfin, Navidrome, and OpenSubsonic Compatible Music Player";
   description = ''

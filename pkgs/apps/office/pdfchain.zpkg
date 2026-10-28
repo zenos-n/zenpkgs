@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.pdfchain";
+  id = "net.sourceforge.pdfchain";
   name = "PDF Chain";
   summary = "Graphical user interface for the PDF Toolkit (PDFtk)";
   description = ''

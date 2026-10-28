@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.pdfarranger";
+  id = "com.github.jeromerobert.pdfarranger";
   name = "PDF Arranger";
   summary = "Merge or split pdf documents and rotate, crop and rearrange their pages using a graphical interface";
   description = ''

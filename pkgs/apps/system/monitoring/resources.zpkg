@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.resources";
+  id = "net.nokyan.Resources";
   name = "resources";
   summary = "Curated resources package for ZenOS";
   description = ''

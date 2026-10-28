@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.art";
+  id = "us.pixls.art.ART";
   name = "ART";
   summary = "Raw converter based on RawTherapee";
   description = ''

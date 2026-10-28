@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.akregator";
+  id = "org.kde.akregator";
   name = "Akregator";
   summary = "RSS Feed Reader";
   description = ''

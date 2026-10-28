@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.tokodon";
+  id = "org.kde.tokodon";
   name = "Tokodon";
   summary = "Tokodon is a Mastodon client for Plasma and Plasma Mobile";
   description = ''

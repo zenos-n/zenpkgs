@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.blastem";
+  id = "com.retrodev.blastem";
   name = "BlastEm";
   summary = "Fast and accurate Genesis emulator";
   description = ''

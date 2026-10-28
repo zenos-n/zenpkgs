@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.paleta";
+  id = "io.github.nate_xyz.Paleta";
   name = "Paleta";
   summary = "Extract the dominant colors from any image";
   description = ''

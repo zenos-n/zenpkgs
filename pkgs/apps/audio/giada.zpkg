@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.giada";
+  id = "com.giadamusic.Giada";
   name = "Giada";
   summary = "Free, minimal, hardcore audio tool for DJs, live performers and electronic musicians";
   description = ''

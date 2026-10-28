@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cavasik";
+  id = "io.github.TheWisker.Cavasik";
   name = "Cavasik";
   summary = "Audio visualizer based on CAVA with extended capabilities";
   description = ''

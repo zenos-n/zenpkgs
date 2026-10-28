@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.zeal";
+  id = "org.zealdocs.Zeal";
   name = "Zeal";
   summary = "Simple offline API documentation browser";
   description = ''

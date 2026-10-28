@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.minion";
+  id = "gg.minion.Minion";
   name = "Minion";
   summary = "Addon manager for World of Warcraft and The Elder Scrolls Online";
   description = ''

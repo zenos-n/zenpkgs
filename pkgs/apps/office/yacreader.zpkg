@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.yacreader";
+  id = "com.yacreader.YACReader";
   name = "YACReader";
   summary = "Comic reader for cross-platform reading and managing your digital comic collection";
   description = ''

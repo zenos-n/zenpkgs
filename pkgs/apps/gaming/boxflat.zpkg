@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.boxflat";
+  id = "io.github.lawstorant.boxflat";
   name = "Boxflat";
   summary = "Control your Moza gear settings";
   description = ''

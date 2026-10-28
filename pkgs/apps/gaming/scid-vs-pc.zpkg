@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.scid-vs-pc";
+  id = "net.sourceforge.scidvspc.scidvspc";
   name = "Scid vs. PC";
   summary = "Chess database with play and training functionality";
   description = ''

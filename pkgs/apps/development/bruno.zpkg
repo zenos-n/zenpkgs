@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bruno";
+  id = "com.usebruno.Bruno";
   name = "Bruno";
   summary = "Open-source IDE For exploring and testing APIs";
   description = ''

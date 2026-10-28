@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cbconvert";
+  id = "io.github.gen2brain.cbconvert";
   name = "CBconvert";
   summary = "Comic Book converter";
   description = ''

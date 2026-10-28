@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.wxmaxima";
+  id = "io.github.wxmaxima_developers.wxMaxima";
   name = "wxMaxima";
   summary = "Cross platform GUI for the computer algebra system Maxima";
   description = ''

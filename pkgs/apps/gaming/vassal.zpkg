@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.vassal";
+  id = "org.vassalengine.vassal";
   name = "VASSAL";
   summary = "Free, open-source boardgame engine";
   description = ''

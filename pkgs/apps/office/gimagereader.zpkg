@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gimagereader";
+  id = "io.github.manisandro.gImageReader";
   name = "gImageReader";
   summary = "Simple Gtk/Qt front-end to tesseract-ocr";
   description = ''

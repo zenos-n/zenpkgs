@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnote";
+  id = "org.gnome.Gnote";
   name = "Gnote";
   summary = "Note taking application";
   description = ''

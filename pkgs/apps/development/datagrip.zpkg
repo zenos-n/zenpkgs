@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.datagrip";
+  id = "com.jetbrains.DataGrip";
   name = "DataGrip";
   summary = "Database IDE from JetBrains";
   description = ''

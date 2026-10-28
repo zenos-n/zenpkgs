@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-2048";
+  id = "org.gnome.TwentyFortyEight";
   name = "GNOME 2048";
   summary = "Obtain the 2048 tile";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.jami";
+  id = "net.jami.Jami";
   name = "Jami";
   summary = "Free and universal communication platform that respects the privacy and freedoms of its users";
   description = ''

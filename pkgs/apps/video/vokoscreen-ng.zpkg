@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.vokoscreen-ng";
+  id = "com.github.vkohaupt.vokoscreenNG";
   name = "vokoscreenNG";
   summary = "User friendly Open Source screencaster for Linux and Windows";
   description = ''

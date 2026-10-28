@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.clapgrep";
+  id = "de.leopoldluley.Clapgrep";
   name = "Clapgrep";
   summary = "Search through all your files";
   description = ''

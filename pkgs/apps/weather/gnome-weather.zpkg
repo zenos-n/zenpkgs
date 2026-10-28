@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-weather";
+  id = "org.gnome.Weather";
   name = "GNOME Weather";
   summary = "Access current weather conditions and forecasts";
   description = ''

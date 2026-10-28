@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.conduktor";
+  id = "io.conduktor.Conduktor";
   name = "Conduktor";
   summary = "Apache Kafka Desktop Client";
   description = ''

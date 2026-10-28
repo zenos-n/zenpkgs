@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.five-or-more";
+  id = "org.gnome.five-or-more";
   name = "Five or More";
   summary = "Remove colored balls from the board by forming lines";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gephi";
+  id = "org.gephi.Gephi";
   name = "Gephi";
   summary = "Platform for visualizing and manipulating large graphs";
   description = ''

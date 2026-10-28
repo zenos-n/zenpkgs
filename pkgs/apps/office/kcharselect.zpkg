@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kcharselect";
+  id = "org.kde.kcharselect";
   name = "KCharSelect";
   summary = "Tool to select and copy special characters from all installed fonts";
   description = ''

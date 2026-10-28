@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.vnote";
+  id = "fun.vnote.app.VNote";
   name = "VNote";
   summary = "Pleasant note-taking platform";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.chessx";
+  id = "net.sourceforge.Chessx";
   name = "ChessX";
   summary = "Browse and analyse chess games";
   description = ''

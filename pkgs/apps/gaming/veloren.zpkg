@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.veloren";
+  id = "net.veloren.veloren";
   name = "Veloren";
   summary = "Open world, open source voxel RPG";
   description = ''

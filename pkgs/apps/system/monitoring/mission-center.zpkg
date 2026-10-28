@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.mission-center";
+  id = "io.missioncenter.MissionCenter";
   name = "mission-center";
   summary = "Curated mission-center package for ZenOS";
   description = ''

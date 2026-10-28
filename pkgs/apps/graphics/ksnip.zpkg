@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ksnip";
+  id = "org.ksnip.ksnip";
   name = "ksnip";
   summary = "Cross-platform screenshot tool with many annotation features";
   description = ''

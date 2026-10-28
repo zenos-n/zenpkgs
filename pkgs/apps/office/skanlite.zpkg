@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.skanlite";
+  id = "org.kde.skanlite";
   name = "Skanlite";
   summary = "Lite image scanning application";
   description = ''

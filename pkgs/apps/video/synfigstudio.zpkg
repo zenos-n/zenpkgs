@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.synfigstudio";
+  id = "org.synfig.SynfigStudio";
   name = "Synfig Studio";
   summary = "2D animation program";
   description = ''

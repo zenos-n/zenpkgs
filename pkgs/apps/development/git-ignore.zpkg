@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.git-ignore";
+  id = "com.github.arshubham.gitignore";
   name = "git-ignore";
   summary = "Quickly and easily fetch .gitignore templates from gitignore.io";
   description = ''

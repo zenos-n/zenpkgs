@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.logisim";
+  id = "com.cburch.Logisim";
   name = "Logisim";
   summary = "Educational tool for designing and simulating digital logic circuits";
   description = ''

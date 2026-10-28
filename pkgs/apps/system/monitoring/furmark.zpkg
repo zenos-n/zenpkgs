@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.furmark";
+  id = "com.geeks3d.furmark";
   name = "FurMark";
   summary = "OpenGL and Vulkan Benchmark and Stress Test";
   description = ''

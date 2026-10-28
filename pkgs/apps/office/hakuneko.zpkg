@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.hakuneko";
+  id = "io.github.hakuneko.HakuNeko";
   name = "HakuNeko";
   summary = "Manga & Anime Downloader";
   description = ''

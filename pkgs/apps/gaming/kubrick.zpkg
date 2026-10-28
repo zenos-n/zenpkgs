@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kubrick";
+  id = "org.kde.kubrick";
   name = "Kubrick";
   summary = "Kubrick is based on the famous Rubik's Cube";
   description = ''

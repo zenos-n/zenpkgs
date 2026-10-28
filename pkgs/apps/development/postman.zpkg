@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.postman";
+  id = "com.getpostman.Postman";
   name = "Postman";
   summary = "API Development Environment";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.ksudoku";
+  id = "org.kde.ksudoku";
   name = "KSudoku";
   summary = "KSudoku is a logic-based symbol placement puzzle";
   description = ''

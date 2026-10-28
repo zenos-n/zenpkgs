@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gamepad-mirror";
+  id = "page.codeberg.vendillah.GamepadMirror";
   name = "Gamepad Mirror";
   summary = "Small Adwaita application to show game pad inputs using libmanette";
   description = ''

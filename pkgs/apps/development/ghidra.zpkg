@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ghidra";
+  id = "org.ghidra_sre.Ghidra";
   name = "Ghidra";
   summary = "Software reverse engineering (SRE) suite of tools";
   description = ''

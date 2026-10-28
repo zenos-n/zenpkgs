@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bobby";
+  id = "studio.planetpeanut.Bobby";
   name = "Bobby";
   summary = "Browse SQLite files";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.floorp";
+  id = "one.ablaze.floorp";
   name = "Floorp";
   summary = "Fork of Firefox that seeks balance between versatility, privacy and web openness";
   description = ''

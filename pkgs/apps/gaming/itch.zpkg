@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.itch";
+  id = "io.itch.itch";
   name = "itch";
   summary = "Best way to play itch.io games";
   description = ''

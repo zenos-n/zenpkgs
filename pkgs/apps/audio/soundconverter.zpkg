@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.soundconverter";
+  id = "org.soundconverter.SoundConverter";
   name = "SoundConverter";
   summary = "Leading audio file converter for the GNOME Desktop";
   description = ''

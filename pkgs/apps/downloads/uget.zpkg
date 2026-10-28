@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.uget";
+  id = "com.ugetdm.uGet";
   name = "uGet";
   summary = "Download manager using GTK and libcurl";
   description = ''

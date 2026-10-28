@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.exhibit";
+  id = "io.github.nokse22.Exhibit";
   name = "Exhibit";
   summary = "3D model viewer for the GNOME desktop powered by f3d";
   description = ''

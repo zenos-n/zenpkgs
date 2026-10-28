@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.eartag";
+  id = "app.drey.EarTag";
   name = "Ear Tag";
   summary = "Simple music tag editor";
   description = ''

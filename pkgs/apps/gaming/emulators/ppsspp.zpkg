@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ppsspp";
+  id = "org.ppsspp.PPSSPP";
   name = "PPSSPP";
   summary = "HLE Playstation Portable emulator, written in C++ (SDL + headless)";
   description = ''

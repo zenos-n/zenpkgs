@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.flightgear";
+  id = "org.flightgear.FlightGear";
   name = "FlightGear";
   summary = "Flight simulator";
   description = ''

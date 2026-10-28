@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kbackup";
+  id = "org.kde.kbackup";
   name = "KBackup";
   summary = "Backup program with an easy-to-use interface";
   description = ''

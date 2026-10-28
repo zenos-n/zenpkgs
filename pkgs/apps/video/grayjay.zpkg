@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.grayjay";
+  id = "app.grayjay.Grayjay";
   name = "Grayjay";
   summary = "Cross-platform application to stream and download content from various sources";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.ascii-draw";
+  id = "io.github.nokse22.asciidraw";
   name = "ASCII Draw";
   summary = "Draw diagrams or anything using only ASCII";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.butt";
+  id = "de.danielnoethen.butt";
   name = "butt";
   summary = "Easy to use, multi OS streaming tool";
   description = ''

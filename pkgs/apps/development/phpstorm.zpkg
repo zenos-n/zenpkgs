@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.phpstorm";
+  id = "com.jetbrains.PhpStorm";
   name = "PhpStorm";
   summary = "PHP IDE from JetBrains";
   description = ''

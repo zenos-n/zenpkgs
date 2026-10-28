@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bluemail";
+  id = "net.blix.BlueMail";
   name = "BlueMail";
   summary = "Cross platform email and calendar app, with AI features and a modern design";
   description = ''

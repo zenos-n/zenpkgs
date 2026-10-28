@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-sudoku";
+  id = "org.gnome.Sudoku";
   name = "GNOME Sudoku";
   summary = "Test your logic skills in this number grid puzzle";
   description = ''

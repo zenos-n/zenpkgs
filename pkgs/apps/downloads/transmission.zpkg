@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.transmission";
+  id = "com.transmissionbt.Transmission";
   name = "Transmission";
   summary = "Fast, easy and free BitTorrent client";
   description = ''

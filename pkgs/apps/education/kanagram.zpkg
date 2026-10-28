@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kanagram";
+  id = "org.kde.kanagram";
   name = "Kanagram";
   summary = "Letter Order Game";
   description = ''

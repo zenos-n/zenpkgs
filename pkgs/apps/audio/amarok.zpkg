@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.amarok";
+  id = "org.kde.amarok";
   name = "Amarok";
   summary = "Powerful music player with an intuitive interface";
   description = ''

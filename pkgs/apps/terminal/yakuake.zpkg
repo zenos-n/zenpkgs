@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.yakuake";
+  id = "org.kde.yakuake";
   name = "Yakuake";
   summary = "Drop-down terminal emulator based on Konsole technologies";
   description = ''

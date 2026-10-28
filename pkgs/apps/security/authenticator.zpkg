@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.authenticator";
+  id = "com.belmoussaoui.Authenticator";
   name = "Authenticator";
   summary = "Two-factor authentication code generator for GNOME";
   description = ''

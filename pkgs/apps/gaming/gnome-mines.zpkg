@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-mines";
+  id = "org.gnome.Mines";
   name = "GNOME Mines";
   summary = "Clear hidden mines from a minefield";
   description = ''

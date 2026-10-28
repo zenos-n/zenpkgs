@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kicad";
+  id = "org.kicad.KiCad";
   name = "KiCad";
   summary = "Open Source Electronics Design Automation suite";
   description = ''

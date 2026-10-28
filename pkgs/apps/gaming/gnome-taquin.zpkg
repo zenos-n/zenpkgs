@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-taquin";
+  id = "org.gnome.Taquin";
   name = "GNOME Taquin";
   summary = "Move tiles so that they reach their places";
   description = ''

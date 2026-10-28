@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kiriki";
+  id = "org.kde.kiriki";
   name = "Kiriki";
   summary = "Kiriki is an addictive and fun dice game";
   description = ''

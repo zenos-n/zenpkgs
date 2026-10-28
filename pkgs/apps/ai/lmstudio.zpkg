@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.lmstudio";
+  id = "ai.lmstudio.lm-studio";
   name = "LM Studio";
   summary = "LM Studio is an easy to use desktop app for experimenting with local and open-source Large Language Models (LLMs)";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.hieroglyphic";
+  id = "io.github.finefindus.Hieroglyphic";
   name = "Hieroglyphic";
   summary = "Tool based on detexify for finding LaTeX symbols from drawings";
   description = ''

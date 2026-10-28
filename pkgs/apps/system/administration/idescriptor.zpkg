@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.idescriptor";
+  id = "io.github.idescriptor.iDescriptor";
   name = "iDescriptor";
   summary = "A cross-platform iDevice management tool";
   description = ''

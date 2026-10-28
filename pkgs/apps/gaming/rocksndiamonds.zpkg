@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.rocksndiamonds";
+  id = "org.artsoft.rocksndiamonds";
   name = "Rocks'n'Diamonds";
   summary = "Scrolling tile-based arcade style puzzle game";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.hedgewars";
+  id = "org.hedgewars.Hedgewars";
   name = "Hedgewars";
   summary = "Funny turn-based artillery game, featuring fighting hedgehogs";
   description = ''

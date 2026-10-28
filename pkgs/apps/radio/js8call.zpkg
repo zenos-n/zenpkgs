@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.js8call";
+  id = "com.js8call.JS8Call";
   name = "JS8Call";
   summary = "Weak-signal keyboard messaging for amateur radio";
   description = ''

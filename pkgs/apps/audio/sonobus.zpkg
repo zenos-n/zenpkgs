@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.sonobus";
+  id = "net.sonobus.SonoBus";
   name = "SonoBus";
   summary = "High-quality network audio streaming";
   description = ''

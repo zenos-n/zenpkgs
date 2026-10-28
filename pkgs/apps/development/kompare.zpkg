@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kompare";
+  id = "org.kde.kompare";
   name = "Kompare";
   summary = "Graphical File Differences Tool";
   description = ''

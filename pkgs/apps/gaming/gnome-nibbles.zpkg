@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.gnome-nibbles";
+  id = "org.gnome.Nibbles";
   name = "GNOME Nibbles";
   summary = "Guide a worm around a maze";
   description = ''

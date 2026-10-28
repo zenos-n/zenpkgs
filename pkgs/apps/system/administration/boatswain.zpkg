@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.boatswain";
+  id = "com.feaneron.Boatswain";
   name = "Boatswain";
   summary = "Control Elgato Stream Deck devices";
   description = ''

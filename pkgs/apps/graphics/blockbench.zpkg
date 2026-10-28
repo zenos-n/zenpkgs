@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.blockbench";
+  id = "net.blockbench.Blockbench";
   name = "Blockbench";
   summary = "Low-poly 3D modeling and animation software";
   description = ''

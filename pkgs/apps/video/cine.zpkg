@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.cine";
+  id = "io.github.diegopvlk.Cine";
   name = "Cine";
   summary = "Video Player for Linux";
   description = ''

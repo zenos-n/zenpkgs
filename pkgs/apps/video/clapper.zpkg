@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.clapper";
+  id = "com.github.rafostar.Clapper";
   name = "Clapper";
   summary = "GNOME media player built using GTK4 toolkit and powered by GStreamer with OpenGL rendering";
   description = ''

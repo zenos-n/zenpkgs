@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.vivaldi";
+  id = "com.vivaldi.Vivaldi";
   name = "Vivaldi";
   summary = "Browser for our Friends, powerful and personal";
   description = ''

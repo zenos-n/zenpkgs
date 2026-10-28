@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.ksquares";
+  id = "org.kde.ksquares";
   name = "KSquares";
   summary = "KSquares is modeled after the well known pen and paper based game of Dots and Boxes";
   description = ''

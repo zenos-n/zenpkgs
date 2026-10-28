@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.bitwarden";
+  id = "com.bitwarden.desktop";
   name = "bitwarden";
   summary = "Curated bitwarden package for ZenOS";
   description = ''

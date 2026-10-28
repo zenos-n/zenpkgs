@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.krename";
+  id = "org.kde.krename";
   name = "KRename";
   summary = "Powerful batch renamer for KDE";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.anydesk";
+  id = "com.anydesk.Anydesk";
   name = "AnyDesk";
   summary = "Desktop sharing application, providing remote support and online meetings";
   description = ''

@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.klettres";
+  id = "org.kde.klettres";
   name = "KLettres";
   summary = "Learn The Alphabet";
   description = ''

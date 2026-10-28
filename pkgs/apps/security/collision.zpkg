@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.collision";
+  id = "dev.geopjr.Collision";
   name = "Collision";
   summary = "Check hashes for your files";
   description = ''

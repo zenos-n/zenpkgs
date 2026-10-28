@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.photoqt";
+  id = "org.photoqt.PhotoQt";
   name = "PhotoQt";
   summary = "Simple, yet powerful and good looking image viewer";
   description = ''

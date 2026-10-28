@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.dosbox-x";
+  id = "com.dosbox_x.DOSBox-X";
   name = "DOSBox-X";
   summary = "Cross-platform DOS emulator based on the DOSBox project";
   description = ''

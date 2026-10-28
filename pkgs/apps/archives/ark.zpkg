@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.ark";
+  id = "org.kde.ark";
   name = "Ark";
   summary = "File archiver by KDE";
   description = ''

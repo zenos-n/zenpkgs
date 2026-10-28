@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.openttd";
+  id = "org.openttd.OpenTTD";
   name = "OpenTTD";
   summary = "Open source clone of the Microprose game \"Transport Tycoon Deluxe\"";
   description = ''

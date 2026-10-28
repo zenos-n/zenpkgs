@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.drawing";
+  id = "com.github.maoschanz.drawing";
   name = "Drawing";
   summary = "Free basic image editor, similar to Microsoft Paint, but aiming at the GNOME desktop";
   description = ''

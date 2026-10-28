@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.dosbox-staging";
+  id = "io.github.dosbox-staging";
   name = "DOSBox Staging";
   summary = "Modernized DOS emulator; DOSBox fork";
   description = ''

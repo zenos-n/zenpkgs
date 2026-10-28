@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.warehouse";
+  id = "io.github.flattool.Warehouse";
   name = "Warehouse";
   summary = "Manage all things Flatpak";
   description = ''

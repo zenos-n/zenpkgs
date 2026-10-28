@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.josm";
+  id = "org.openstreetmap.josm";
   name = "JOSM";
   summary = "Extensible editor for OpenStreetMap";
   description = ''

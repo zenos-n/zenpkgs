@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.embellish";
+  id = "io.github.getnf.embellish";
   name = "Embellish";
   summary = "User-friendly application designed for managing Nerd Fonts on your system";
   description = ''

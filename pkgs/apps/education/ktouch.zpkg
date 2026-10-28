@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.ktouch";
+  id = "org.kde.ktouch";
   name = "KTouch";
   summary = "Touch Typing Tutor";
   description = ''

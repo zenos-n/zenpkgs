@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.qgit";
+  id = "org.tibirna.qgit";
   name = "QGit";
   summary = "Graphical front-end to Git";
   description = ''

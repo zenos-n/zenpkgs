@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.carla";
+  id = "studio.kx.carla";
   name = "Carla";
   summary = "Audio plugin host";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.openhantek6022";
+  id = "org.openhantek.OpenHantek6022";
   name = "OpenHantek 6022";
   summary = "Free software for Hantek and compatible (Voltcraft/Darkwire/Protek/Acetech) USB digital signal oscilloscopes";
   description = ''

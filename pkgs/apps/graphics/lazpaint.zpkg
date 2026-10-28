@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.lazpaint";
+  id = "io.github.bgrabitmap.LazPaint";
   name = "LazPaint";
   summary = "Image editor like PaintBrush or Paint.Net";
   description = ''

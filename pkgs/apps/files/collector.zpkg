@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.collector";
+  id = "it.mijorus.collector";
   name = "Collector";
   summary = "Drag multiple files and folders on to Collection window, drop them anywhere";
   description = ''

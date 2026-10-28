@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.foot";
+  id = "page.codeberg.dnkl.foot";
   name = "foot";
   summary = "Fast, lightweight and minimalistic Wayland terminal emulator";
   description = ''

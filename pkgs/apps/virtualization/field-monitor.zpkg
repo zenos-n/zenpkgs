@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.field-monitor";
+  id = "de.capypara.FieldMonitor";
   name = "Field Monitor";
   summary = "Viewer for virtual machines and other external screens";
   description = ''

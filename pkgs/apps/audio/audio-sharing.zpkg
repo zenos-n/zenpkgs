@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.audio-sharing";
+  id = "de.haeckerfelix.AudioSharing";
   name = "Audio Sharing";
   summary = "Automatically share the current audio playback in the form of an RTSP stream";
   description = ''

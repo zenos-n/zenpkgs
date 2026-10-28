@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.apostrophe";
+  id = "org.gnome.gitlab.somas.Apostrophe";
   name = "apostrophe";
   summary = "Curated apostrophe package for ZenOS";
   description = ''

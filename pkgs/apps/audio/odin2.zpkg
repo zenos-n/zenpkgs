@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.odin2";
+  id = "com.thewavewarden.Odin2";
   name = "Odin 2";
   summary = "Odin 2 Synthesizer Plugin";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.flashprint";
+  id = "com.flashforge.FlashPrint";
   name = "FlashPrint";
   summary = "Slicer for the FlashForge 3D printers";
   description = ''

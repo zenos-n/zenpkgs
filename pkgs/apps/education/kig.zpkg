@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kig";
+  id = "org.kde.kig";
   name = "Kig";
   summary = "Interactive Geometry";
   description = ''

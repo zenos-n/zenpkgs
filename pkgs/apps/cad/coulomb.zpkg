@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.coulomb";
+  id = "io.github.hamza_algohary.Coulomb";
   name = "Coulomb";
   summary = "Simple and beautiful circuit simulator app";
   description = ''

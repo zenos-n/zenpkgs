@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.rider";
+  id = "com.jetbrains.Rider";
   name = "Rider";
   summary = ".NET IDE from JetBrains";
   description = ''

@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.constrict";
+  id = "io.github.wartybix.Constrict";
   name = "Constrict";
   summary = "Compresses your videos to your chosen file size";
   description = ''

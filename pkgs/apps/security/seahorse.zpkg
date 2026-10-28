@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.seahorse";
+  id = "org.gnome.seahorse.Application";
   name = "Seahorse";
   summary = "Application for managing encryption keys and passwords in the GnomeKeyring";
   description = ''

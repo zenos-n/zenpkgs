@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.fsearch";
+  id = "io.github.cboxdoerfer.FSearch";
   name = "FSearch";
   summary = "Fast file search utility for Unix-like systems based on GTK+3";
   description = ''

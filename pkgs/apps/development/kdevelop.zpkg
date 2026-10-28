@@ -1,6 +1,6 @@
 # Upstream license metadata is retained by the imported recipe.
 _meta = {
-  id = "unknown.kdevelop";
+  id = "org.kde.kdevelop";
   name = "KDevelop";
   summary = "Cross-platform IDE for C, C++, Python, QML/JavaScript and PHP";
   description = ''

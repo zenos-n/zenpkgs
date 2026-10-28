@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.kstars";
+  id = "org.kde.kstars";
   name = "KStars";
   summary = "Virtual planetarium astronomy software";
   description = ''

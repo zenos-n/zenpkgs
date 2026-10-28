@@ -1,5 +1,5 @@
 _meta = {
-  id = "unknown.diebahn";
+  id = "de.schmidhuberj.DieBahn";
   name = "Railway";
   summary = "Travel with all your train information in one place. Also known as Railway";
   description = ''
