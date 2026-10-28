@@ -131,7 +131,7 @@ SCRIPT
     chmod +x "$out/bin/nzportable"
     runHook postInstall
   '';
-  passthru = { inherit engine gameCode assetsSource releaseArchive releaseMaps; };
+  passthru = { inherit engine gameCode assetsSource mapsArchive releaseMaps; };
   meta = {
     description = "Nazi Zombies: Portable, built from pinned engine, QuakeC and assets";
     homepage = "https://github.com/nzp-team/nzportable";
