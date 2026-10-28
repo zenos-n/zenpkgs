@@ -124,7 +124,7 @@ def schema_checks(nixpkgs, codex_schema):
   cases = builtins.fromJSON (builtins.readFile {directory}/cases.json);
   runtimeLib = lib // {{ mkWritableProgramConfig = arguments: arguments; }};
   pkgs.zenos = {{ legacy = {{}}; byCategories.apps.ai.codex = "/codex";
-    io.github.doromiert.SelectForFigma = "/figma"; }};
+    com.neg-zero.select-for-figma = "/figma"; }};
   make = cfg: user: import {compiled} {{ lib = runtimeLib; inherit cfg user pkgs; config = {{}}; }};
   schema = (make {{}} null).schema;
 {NORMALIZE}
