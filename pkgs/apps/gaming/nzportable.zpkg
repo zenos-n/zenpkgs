@@ -5,7 +5,7 @@ _meta = {
   description = ''
     Native Nazi Zombies: Portable, built from pinned upstream Vril engine,
     QuakeC game code and assets. Maps come from the hash-verified official
-    Linux release asset. Engine/game code use GPLv2; game assets use
+    Linux release maps snapshot. Engine/game code use GPLv2; game assets use
     CC BY-SA 4.0. Writable configuration and saves stay in the user's data directory.
   '';
   zenosVersion = "1.0.0";
@@ -17,21 +17,20 @@ _meta = {
 build = let
   p = $pkgs.legacy;
   l = $lib;
-  # Asset IDs identify the exact upstream upload; never trust a moving nightly's bytes.
-  releaseArchive = p.fetchurl {
-    url = "https://api.github.com/repos/nzp-team/nzportable/releases/assets/665884245";
-    hash = "sha256-aweoYi5ADQHRPkLuD58ozq3thoYGAXWaDGyJ7Slbz+o=";
-    curlOptsList = [ "--header" "Accept: application/octet-stream" "--user-agent" "ZenPkgs" ];
+  # Upstream deletes old nightly assets; archive the exact maps and licenses.
+  mapsArchive = p.fetchurl {
+    url = "https://github.com/zenos-n/zenpkgs/releases/download/nzportable-maps-2026-10-28/nzportable-maps-2026-10-28.tar.gz";
+    hash = "sha256-pwjlrHRhMVdnNAJeomfYbme5v6s4NRa1jYibV1RQFEg=";
   };
-  releaseMaps = p.runCommand "nzportable-official-maps-2026-10-22" {
-    nativeBuildInputs = [ p.unzip ];
+  releaseMaps = p.runCommand "nzportable-official-maps-2026-10-28" {
+    nativeBuildInputs = [ p.gnutar p.gzip ];
   } ''
     mkdir -p "$out"
-    unzip -j ${releaseArchive} 'nzp/maps/*.bsp' 'nzp/maps/*.nsz' 'nzp/licenses/*' -d "$out"
+    tar -xzf ${mapsArchive} -C "$out" --strip-components=1 --wildcards 'maps/*' 'licenses/*'
     test -s "$out/wahnsinn.bsp"
   '';
   mapsProvenance = p.writeText "nzportable-maps-provenance.json" ''
-    {"upstream":"nzp-team/nzportable","releaseAssetId":665884245,"archiveSha256":"6b07a8622e400d01d13e42ee0f9f28ceaded86860601759a0c6c89ed295bcfea","assetsSource":"f59187789f3d83f0502ac61dbc8bf7105daa4ff0","license":"CC-BY-SA-4.0"}
+    {"upstream":"nzp-team/nzportable","upstreamArchiveSha256":"e968ab5ff21c70b67d682b8a55f3ac5c8acf450feb871906deff40a230c52c92","mapsArchiveSha256":"a708e5ac746131576734025ea267d86e67b9bfab383516b58d889b5754501448","assetsSource":"f59187789f3d83f0502ac61dbc8bf7105daa4ff0","license":"CC-BY-SA-4.0"}
   '';
   engineSource = p.fetchFromGitHub {
     owner = "nzp-team"; repo = "vril-engine";
