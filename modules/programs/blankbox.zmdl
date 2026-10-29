@@ -1,0 +1,540 @@
+_meta = {
+  name = "Blankbox";
+  summary = "Install and configure Blankbox";
+  description = ''GNOME terminal preferences and optional desktop terminal defaults. Unselected preferences use the application defaults or existing live settings.'';
+  zenosVersion = 1.0.0Nb;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+package._meta = {
+  name = "Package";
+  summary = "Blankbox package";
+  description = ''Package providing bin/blankbox and com.neg-zero.Blankbox.desktop.'';
+  type = $type.package;
+  default = $pkgs.byCategories.apps.terminal.blankbox;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+defaultTerminal._meta = {
+  name = "Default terminal";
+  summary = "Use Blankbox as the desktop terminal";
+  description = ''Set TERMINAL and the GNOME and fallback xdg-terminal-exec preferences. Existing explicit shortcuts must be updated separately.'';
+  type = $type.boolean;
+  default = false;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+rememberWindowSize._meta = {
+  name = "Whether or not to remember window size";
+  summary = "Whether or not to remember window size";
+  description = ''Whether or not to remember window size. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+font._meta = {
+  name = "Font family and size";
+  summary = "Font family and size";
+  description = ''Font family and size. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.string) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+themeWindow._meta = {
+  name = "Whether the window should inherit terminal theme's colors";
+  summary = "Whether the window should inherit terminal theme's colors";
+  description = ''Whether the window should inherit terminal theme's colors. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+opacity._meta = {
+  name = "Terminal window background opacity";
+  summary = "Terminal window background opacity";
+  description = ''Terminal window background opacity. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.int) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+expandTabs._meta = {
+  name = "Whether or not tabs should expand to fill tab bar";
+  summary = "Whether or not tabs should expand to fill tab bar";
+  description = ''Whether or not tabs should expand to fill tab bar. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+tabSwitchingOrder._meta = {
+  name = "Tab switching order";
+  summary = "Cycle tabs by position or recent use";
+  description = ''Use horizontal position or most recently viewed order for next and previous tab shortcuts. Recent order stays fixed while Control is held. Null leaves the preference unselected.'';
+  type = $type.either [ ($type.enum [ "position" "recent" ]) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+showHeaderBar._meta = {
+  name = "Whether the headerbar should be shown or not";
+  summary = "Whether the headerbar should be shown or not";
+  description = ''Whether the headerbar should be shown or not. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+contextAwareHeaderBar._meta = {
+  name = "If enabled, the header bar will be colored differently for root and ssh contexts";
+  summary = "If enabled, the header bar will be colored differently for root and ssh contexts";
+  description = ''If enabled, the header bar will be colored differently for root and ssh contexts. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+showMenuButton._meta = {
+  name = "Whether or not to display a menu button in the headerbar";
+  summary = "Whether or not to display a menu button in the headerbar";
+  description = ''Whether or not to display a menu button in the headerbar. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+headerBarDragArea._meta = {
+  name = "Whether or not to reserve an area for dragging the header bar";
+  summary = "Whether or not to reserve an area for dragging the header bar";
+  description = ''Whether or not to reserve an area for dragging the header bar. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+showScrollbars._meta = {
+  name = "Whether or not to show scrollbars";
+  summary = "Whether or not to show scrollbars";
+  description = ''Whether or not to show scrollbars. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+useOverlayScrolling._meta = {
+  name = "Whether overlay scrolling should be enabled";
+  summary = "Whether overlay scrolling should be enabled";
+  description = ''Whether overlay scrolling should be enabled. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+pixelScrolling._meta = {
+  name = "If enabled, terminals will scroll by pixels instead of rows";
+  summary = "If enabled, terminals will scroll by pixels instead of rows";
+  description = ''If enabled, terminals will scroll by pixels instead of rows. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+sixel._meta = {
+  name = "If enabled, terminals will render sixel escape sequences";
+  summary = "If enabled, terminals will render sixel escape sequences";
+  description = ''If enabled, terminals will render sixel escape sequences. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+scrollbackMode._meta = {
+  name = "Scrollback mode";
+  summary = "Scrollback mode";
+  description = ''Scrollback mode. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.enum [ "fixed" "unlimited" "disabled" ]) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+scrollbackLines._meta = {
+  name = "Number of lines stored in scrollback";
+  summary = "Number of lines stored in scrollback";
+  description = ''Number of lines stored in scrollback. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.int) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+floatingControls._meta = {
+  name = "If enabled, floating controls will be shown in headerless mode";
+  summary = "If enabled, floating controls will be shown in headerless mode";
+  description = ''If enabled, floating controls will be shown in headerless mode. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+floatingControlsHoverArea._meta = {
+  name = "Hoverable area (in pixels) at the top of the window to trigger floating controls";
+  summary = "Hoverable area (in pixels) at the top of the window to trigger floating controls";
+  description = ''Hoverable area (in pixels) at the top of the window to trigger floating controls. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.int) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+floatingControlsDelay._meta = {
+  name = "Delay time before showing floating controls";
+  summary = "Delay time before showing floating controls";
+  description = ''Delay time before showing floating controls. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.int) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+themeLight._meta = {
+  name = "The light color scheme for the terminal";
+  summary = "The light color scheme for the terminal";
+  description = ''The light color scheme for the terminal. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.string) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+themeDark._meta = {
+  name = "The dark color scheme for the terminal";
+  summary = "The dark color scheme for the terminal";
+  description = ''The dark color scheme for the terminal. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.string) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+stylePreference._meta = {
+  name = "Style preference";
+  summary = "Style preference";
+  description = ''Style preference. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.enum [ "system" "light" "dark" ]) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+boldIsBright._meta = {
+  name = "Show bold text in bright colors";
+  summary = "Show bold text in bright colors";
+  description = ''Show bold text in bright colors. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+hidePointerWhileTyping._meta = {
+  name = "Hide mouse pointer while typing";
+  summary = "Hide mouse pointer while typing";
+  description = ''Hide mouse pointer while typing. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+padding._meta = {
+  name = "Amount of padding around terminal widgets (top, right, bottom, left)";
+  summary = "Amount of padding around terminal widgets (top, right, bottom, left)";
+  description = ''Amount of padding around terminal widgets (top, right, bottom, left). Null leaves this preference unselected.'';
+  type = $type.either [ ($type.list [ $type.int ]) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+cellWidth._meta = {
+  name = "Terminal cell width";
+  summary = "Terminal cell width";
+  description = ''Terminal cell width. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.float) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+cellHeight._meta = {
+  name = "Terminal cell height";
+  summary = "Terminal cell height";
+  description = ''Terminal cell height. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.float) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+bell._meta = {
+  name = "Terminal bell";
+  summary = "Terminal bell";
+  description = ''Terminal bell. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+cursorShape._meta = {
+  name = "Cursor shape";
+  summary = "Cursor shape";
+  description = ''Cursor shape. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.enum [ "block" "ibeam" "underline" ]) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+cursorBlinkMode._meta = {
+  name = "Whether or not the cursor should blink";
+  summary = "Whether or not the cursor should blink";
+  description = ''Whether or not the cursor should blink. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.enum [ "system" "on" "off" ]) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+cursorTrail._meta = {
+  name = "Animate a trail when the text cursor moves";
+  summary = "Animate a trail when the text cursor moves";
+  description = ''Animate a trail when the text cursor moves. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+cursorUseAccent._meta = {
+  name = "Use the desktop accent for the cursor instead of white";
+  summary = "Use the desktop accent for the cursor instead of white";
+  description = ''Use the desktop accent for the cursor instead of white. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+easyCopyPaste._meta = {
+  name = "If enabled, ctrl+c and ctrl+v will work for copy/paste";
+  summary = "If enabled, ctrl+c and ctrl+v will work for copy/paste";
+  description = ''If enabled, ctrl+c and ctrl+v will work for copy/paste. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+loginShell._meta = {
+  name = "Whether to spawn shell in login mode";
+  summary = "Whether to spawn shell in login mode";
+  description = ''Whether to spawn shell in login mode. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+useCustomCommand._meta = {
+  name = "Whether to use a custom command instead of the user's shell";
+  summary = "Whether to use a custom command instead of the user's shell";
+  description = ''Whether to use a custom command instead of the user's shell. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+customShellCommand._meta = {
+  name = "Custom command to use instead of the user's shell";
+  summary = "Custom command to use instead of the user's shell";
+  description = ''Custom command to use instead of the user's shell. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.string) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+notifyProcessCompletion._meta = {
+  name = "Send a desktop notification when a process is completed on an unfocussed tab";
+  summary = "Send a desktop notification when a process is completed on an unfocussed tab";
+  description = ''Send a desktop notification when a process is completed on an unfocussed tab. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+workingDirectoryMode._meta = {
+  name = "Working directory mode";
+  summary = "Working directory mode";
+  description = ''Working directory mode. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.enum [ "previous" "home" "custom" ]) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+customWorkingDirectory._meta = {
+  name = "Custom working directory for new terminals";
+  summary = "Custom working directory for new terminals";
+  description = ''Custom working directory for new terminals. Null leaves this preference unselected.'';
+  type = $type.either [ ($type.string) $type.null ];
+  default = null;
+  tags = [ "programs" "terminal" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+_let preferences: $type.set = $lib.filterAttrs (_: value: value != null) {
+  "remember-window-size" = if $path.rememberWindowSize == null then null else $path.rememberWindowSize;
+  "font" = if $path.font == null then null else $path.font;
+  "pretty" = if $path.themeWindow == null then null else $path.themeWindow;
+  "opacity" = if $path.opacity == null then null else $lib.gvariant.mkUint32 $path.opacity;
+  "fill-tabs" = if $path.expandTabs == null then null else $path.expandTabs;
+  "tab-switching-order" = if $path.tabSwitchingOrder == null then null else $lib.gvariant.mkUint32 ($lib.getAttr $path.tabSwitchingOrder {
+    position = 0;
+    recent = 1;
+  });
+  "show-headerbar" = if $path.showHeaderBar == null then null else $path.showHeaderBar;
+  "context-aware-header-bar" = if $path.contextAwareHeaderBar == null then null else $path.contextAwareHeaderBar;
+  "show-menu-button" = if $path.showMenuButton == null then null else $path.showMenuButton;
+  "headerbar-drag-area" = if $path.headerBarDragArea == null then null else $path.headerBarDragArea;
+  "show-scrollbars" = if $path.showScrollbars == null then null else $path.showScrollbars;
+  "use-overlay-scrolling" = if $path.useOverlayScrolling == null then null else $path.useOverlayScrolling;
+  "pixel-scrolling" = if $path.pixelScrolling == null then null else $path.pixelScrolling;
+  "use-sixel" = if $path.sixel == null then null else $path.sixel;
+  "scrollback-mode" = if $path.scrollbackMode == null then null else $lib.gvariant.mkUint32 ($lib.getAttr $path.scrollbackMode {
+      fixed = 0;
+      unlimited = 1;
+      disabled = 2;
+    });
+  "scrollback-lines" = if $path.scrollbackLines == null then null else $lib.gvariant.mkUint32 $path.scrollbackLines;
+  "floating-controls" = if $path.floatingControls == null then null else $path.floatingControls;
+  "floating-controls-hover-area" = if $path.floatingControlsHoverArea == null then null else $lib.gvariant.mkUint32 $path.floatingControlsHoverArea;
+  "delay-before-showing-floating-controls" = if $path.floatingControlsDelay == null then null else $lib.gvariant.mkUint32 $path.floatingControlsDelay;
+  "theme-light" = if $path.themeLight == null then null else $path.themeLight;
+  "theme-dark" = if $path.themeDark == null then null else $path.themeDark;
+  "style-preference" = if $path.stylePreference == null then null else $lib.gvariant.mkUint32 ($lib.getAttr $path.stylePreference {
+      system = 0;
+      light = 1;
+      dark = 2;
+    });
+  "theme-bold-is-bright" = if $path.boldIsBright == null then null else $path.boldIsBright;
+  "terminal-hide-cursor-while-typing" = if $path.hidePointerWhileTyping == null then null else $path.hidePointerWhileTyping;
+  "terminal-padding" = if $path.padding == null then null else $lib.gvariant.mkTuple ($lib.map $lib.gvariant.mkUint32 $path.padding);
+  "terminal-cell-width" = if $path.cellWidth == null then null else $lib.gvariant.mkDouble $path.cellWidth;
+  "terminal-cell-height" = if $path.cellHeight == null then null else $lib.gvariant.mkDouble $path.cellHeight;
+  "terminal-bell" = if $path.bell == null then null else $path.bell;
+  "cursor-shape" = if $path.cursorShape == null then null else $lib.gvariant.mkUint32 ($lib.getAttr $path.cursorShape {
+      block = 0;
+      ibeam = 1;
+      underline = 2;
+    });
+  "cursor-blink-mode" = if $path.cursorBlinkMode == null then null else $lib.gvariant.mkUint32 ($lib.getAttr $path.cursorBlinkMode {
+      system = 0;
+      on = 1;
+      off = 2;
+    });
+  "cursor-trail" = if $path.cursorTrail == null then null else $path.cursorTrail;
+  "cursor-use-accent" = if $path.cursorUseAccent == null then null else $path.cursorUseAccent;
+  "easy-copy-paste" = if $path.easyCopyPaste == null then null else $path.easyCopyPaste;
+  "command-as-login-shell" = if $path.loginShell == null then null else $path.loginShell;
+  "use-custom-command" = if $path.useCustomCommand == null then null else $path.useCustomCommand;
+  "custom-shell-command" = if $path.customShellCommand == null then null else $path.customShellCommand;
+  "notify-process-completion" = if $path.notifyProcessCompletion == null then null else $path.notifyProcessCompletion;
+  "working-directory-mode" = if $path.workingDirectoryMode == null then null else $lib.gvariant.mkUint32 ($lib.getAttr $path.workingDirectoryMode {
+      previous = 0;
+      home = 1;
+      custom = 2;
+    });
+  "custom-working-directory" = if $path.customWorkingDirectory == null then null else $path.customWorkingDirectory;
+};
+enable = enableOption {
+  _meta = {
+    name = "Enable";
+    summary = "Install and configure Blankbox";
+    description = ''Install the package and apply selected preferences through Home Manager dconf. Preferences remain writable; rebuilds reapply managed selections.'';
+    tags = [ "programs" "terminal" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    home.packages = [ $path.package ];
+    home.sessionVariables = $lib.optionalAttrs $path.defaultTerminal {
+      TERMINAL = "${$path.package}/bin/blankbox";
+    };
+    xdg.terminal-exec = $lib.optionalAttrs $path.defaultTerminal {
+      enable = true;
+      package = $pkgs.legacy.xdg-terminal-exec;
+      settings = {
+        default = [ "com.neg-zero.Blankbox.desktop" ];
+        GNOME = [ "com.neg-zero.Blankbox.desktop" ];
+      };
+    };
+    dconf.settings = $lib.optionalAttrs ($v.preferences != {}) {
+      "com/neg-zero/BlackBoxNext" = $v.preferences;
+    };
+    assertions = [
+      {
+        assertion = $path.opacity == null || ($path.opacity >= 0 && $path.opacity <= 100);
+        message = "Blankbox: opacity must be between 0 and 100.";
+      }
+      {
+        assertion = $path.scrollbackLines == null || ($path.scrollbackLines >= 0 && $path.scrollbackLines <= 4294967295);
+        message = "Blankbox: scrollbackLines must be between 0 and 4294967295.";
+      }
+      {
+        assertion = $path.floatingControlsHoverArea == null || ($path.floatingControlsHoverArea >= 0 && $path.floatingControlsHoverArea <= 4294967295);
+        message = "Blankbox: floatingControlsHoverArea must be between 0 and 4294967295.";
+      }
+      {
+        assertion = $path.floatingControlsDelay == null || ($path.floatingControlsDelay >= 0 && $path.floatingControlsDelay <= 4294967295);
+        message = "Blankbox: floatingControlsDelay must be between 0 and 4294967295.";
+      }
+      {
+        assertion = $path.padding == null || ($lib.length $path.padding == 4 && $lib.all (x: x >= 0 && x <= 4294967295) $path.padding);
+        message = "Blankbox: padding requires four unsigned 32-bit values (top, right, bottom, left).";
+      }
+      {
+        assertion = $path.cellWidth == null || ($path.cellWidth >= 1.0 && $path.cellWidth <= 2.0);
+        message = "Blankbox: cellWidth must be between 1.0 and 2.0.";
+      }
+      {
+        assertion = $path.cellHeight == null || ($path.cellHeight >= 1.0 && $path.cellHeight <= 2.0);
+        message = "Blankbox: cellHeight must be between 1.0 and 2.0.";
+      }
+    ];
+  };
+};

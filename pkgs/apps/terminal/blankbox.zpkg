@@ -1,0 +1,17 @@
+_meta = {
+  id = "com.neg-zero.blankbox";
+  name = "Blankbox";
+  summary = "Black Box terminal fork for GNOME 50";
+  description = ''
+    Native GTK terminal based on Black Box, targeting the GNOME 50 stack with
+    VTE GPU text rendering and stability fixes. Includes inherited Sixel image
+    support. Kitty graphics and complete Kitty feature parity are planned.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.15.2.6";
+  tags = [ "terminal" "command-line" "gnome" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.blankbox + "/package.nix") {};

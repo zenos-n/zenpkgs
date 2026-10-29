@@ -58,7 +58,7 @@
       flake = false;
     };
     source-setup = {
-      url = "github:zenos-n/zenos-setup/79fe259dfc9853131403871ebcda8c5586d02e28";
+      url = "github:zenos-n/zenos-setup/57f7021bbfcd1c49627b7b9bec04f1887784d41c";
       flake = false;
     };
     source-shell-defaults = {
@@ -90,10 +90,11 @@
     source-haptics = { url = "github:zenos-n/haptics-plus-plus/cb8df54b96676ec7dbd35f073385a3077189e168"; flake = false; };
     source-zane-indicator = { url = "github:zenos-n/zenos-zane-indicator/1846242f7e6940119d2b19e57daf501274b020ad"; flake = false; };
     source-vision-indicator = { url = "github:zenos-n/zenos-vision-indicator/1421f18f791cc249d2bbe70d7e52fb2adc2c0947"; flake = false; };
-    source-blackbox = {
-      url = "github:zenos-n/blackbox/9fe9ada7efe6bd6084f891ee7bd98175633c5b7c";
+    source-blankbox = {
+      url = "github:zenos-n/blankbox/5c91c9772ee60c897ad48e16e525345b930179ec";
       flake = false;
     };
+    source-blackbox.follows = "source-blankbox";
     source-zenlink = {
       url = "github:zenos-n/zenlink-gnome/fd8706ec644db39a54b61d60788e9f3af2a97f47";
       flake = false;
@@ -491,7 +492,7 @@
               haptics = inputs.source-haptics.outPath;
               zaneIndicator = inputs.source-zane-indicator.outPath;
               visionIndicator = inputs.source-vision-indicator.outPath;
-              blackbox = inputs.source-blackbox.outPath;
+              blankbox = inputs.source-blankbox.outPath;
               zenlink = inputs.source-zenlink.outPath;
             };
           };
@@ -739,7 +740,7 @@
             pkgs = dsl.bootstrapPkgs;
             sourceRoot = self;
           };
-          blackbox-next-module = import ./tests/blackbox-next-check.nix {
+          blankbox-module = import ./tests/blankbox-check.nix {
             pkgs = dsl.bootstrapPkgs;
             sourceRoot = self;
             homeManager = inputs.home-manager.outPath;

@@ -229674,14 +229674,70 @@
       "dependenciesDeclared": false,
       "id": "pkgs.com.neg-zero.blackbox-next",
       "meta": {
-        "description": "\n    Native GTK terminal based on Black Box, targeting the GNOME 50 stack with\n    VTE GPU text rendering and stability fixes. Includes inherited Sixel image\n    support. Kitty graphics and complete Kitty feature parity are planned.\n  ",
+        "description": "Use com.neg-zero.blankbox for new configurations. This name resolves to the same Blankbox package.",
         "id": "com.neg-zero.blackbox-next",
         "license": "$l.gpl3Plus",
         "maintainers": [
           "doromiert"
         ],
-        "name": "Black Box Next",
-        "packageVersion": "0.15.2.4",
+        "name": "Blankbox (compatibility name)",
+        "packageVersion": "0.15.2.6",
+        "summary": "Compatibility name for Blankbox",
+        "tags": [
+          "terminal",
+          "command-line",
+          "gnome"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "byCategories"
+            },
+            {
+              "kind": "identifier",
+              "value": "apps"
+            },
+            {
+              "kind": "identifier",
+              "value": "terminal"
+            },
+            {
+              "kind": "identifier",
+              "value": "blankbox"
+            }
+          ],
+          "type": "variable"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "com",
+        "neg-zero",
+        "blackbox-next"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "terminal",
+        "blankbox"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.blankbox",
+      "meta": {
+        "description": "\n    Native GTK terminal based on Black Box, targeting the GNOME 50 stack with\n    VTE GPU text rendering and stability fixes. Includes inherited Sixel image\n    support. Kitty graphics and complete Kitty feature parity are planned.\n  ",
+        "id": "com.neg-zero.blankbox",
+        "license": "$l.gpl3Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Blankbox",
+        "packageVersion": "0.15.2.6",
         "summary": "Black Box terminal fork for GNOME 50",
         "tags": [
           "terminal",
@@ -229713,7 +229769,7 @@
                       },
                       {
                         "kind": "identifier",
-                        "value": "blackbox"
+                        "value": "blankbox"
                       }
                     ],
                     "type": "variable"
@@ -229756,7 +229812,7 @@
       "target": [
         "com",
         "neg-zero",
-        "blackbox-next"
+        "blankbox"
       ]
     }
   ]

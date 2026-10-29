@@ -288,26 +288,26 @@ in
     pass "zenpkgs-no-retired-package-roots";
 
   registry-counts =
-    assert builtins.length expectedRegistry.packages == 4154;
-    assert builtins.length expectedActiveEntries == 4154;
-    assert builtins.length registry.packages == 4154;
-    assert builtins.length activeEntries == 4154;
+    assert builtins.length expectedRegistry.packages == 4155;
+    assert builtins.length expectedActiveEntries == 4155;
+    assert builtins.length registry.packages == 4155;
+    assert builtins.length activeEntries == 4155;
     assert builtins.length importEntries == 4098;
-    assert builtins.length buildEntries == 56;
+    assert builtins.length buildEntries == 57;
     assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 
   package-paths =
-    assert builtins.length (registryPaths expectedRegistry) == 4154;
-    assert builtins.length (packagePaths expectedRegistry) == 4154;
-    assert builtins.length activePaths == 4154;
+    assert builtins.length (registryPaths expectedRegistry) == 4155;
+    assert builtins.length (packagePaths expectedRegistry) == 4155;
+    assert builtins.length activePaths == 4155;
     assert registryPathKeys == lib.sort builtins.lessThan registryPathKeys;
     assert registryPaths registry == registryPaths expectedRegistry;
     assert packagePaths registry == packagePaths expectedSorted;
     pass "zenpkgs-package-registry-paths";
 
   public-package-outputs =
-    assert builtins.length outputIdentities == 4154;
+    assert builtins.length outputIdentities == 4155;
     assert lib.all (identity: identity) outputIdentities;
     pass "zenpkgs-public-package-outputs";
 
@@ -320,6 +320,17 @@ in
     assert canonical.meta.mainProgram == "gnosis";
     assert canonical.meta.homepage == "https://github.com/doromiert/gnosis";
     pass "zenpkgs-gnosis-package";
+
+  blankbox-package =
+    let
+      canonical = publicPackages."com.neg-zero.blankbox";
+      category = publicPackages."apps.terminal.blankbox";
+    in
+    assert canonical.drvPath == category.drvPath;
+    assert canonical.meta.mainProgram == "blankbox";
+    assert publicPackages."com.neg-zero.blackbox-next".drvPath == canonical.drvPath;
+    assert canonical.version == "0.15.2.6";
+    pass "zenpkgs-blankbox-package";
 
   registry-build-providers =
     assert
@@ -350,6 +361,7 @@ in
         "apps.system.zenos-setup"
         "apps.system.zenos.zenos-rebuild"
         "apps.terminal.blackbox-next"
+        "apps.terminal.blankbox"
         "apps.video.tubefin"
         "desktops.gnome.extensions.codex-usage"
         "desktops.gnome.extensions.dash-stacks"
@@ -412,9 +424,9 @@ in
     pass "zenpkgs-registry-build-providers";
 
   registry-output-ownership =
-    assert builtins.length outputNames == 4154 * 2;
+    assert builtins.length outputNames == 4155 * 2;
     assert builtins.length (builtins.attrNames (builtins.listToAttrs
-      (map (name: { inherit name; value = true; }) outputNames))) == 4154 * 2;
+      (map (name: { inherit name; value = true; }) outputNames))) == 4155 * 2;
     assert
       builtins.attrNames publicPackages == lib.sort builtins.lessThan (
         outputNames

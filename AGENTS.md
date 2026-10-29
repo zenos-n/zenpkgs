@@ -24,3 +24,8 @@ normative authority for ZenOS architecture and DSL behavior.
   must not be treated as contributor-facing module declarations.
 - The canonical DSL compiler lives under `lib/`; its tests live under `tests/`.
 - Package source and assets belong to one external repository per package.
+
+Until ZenOS 1.0.0, `main` is the development branch; do not create a separate
+`experimental` branch. `news`, `json`, and CI-generated `compiled-unstable` serve
+operational purposes and are not feature branches. Production flake inputs must
+use hosted sources, never machine-local paths.

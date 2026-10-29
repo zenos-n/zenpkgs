@@ -55,6 +55,9 @@ jobs:
         with:
           fetch-depth: 0 # Fetch all history so we can switch branches easily
 
+      - name: Reject local source inputs
+        run: python3 tests/check-source-inputs.py
+
       - name: Install Nix
         uses: cachix/install-nix-action@v27
         with:
@@ -89,7 +92,7 @@ jobs:
         shell: bash
         run: |
           failed=()
-          checks=(application-program-options registry-contract registry-counts package-paths registry-build-providers
+          checks=(blankbox-package blankbox-module application-program-options registry-contract registry-counts package-paths registry-build-providers
             registry-output-ownership registry-nzportable-identity registry-path-identities
             registry-invalid-identities registry-structure-exposure
             registry-metadata-defaults public-package-outputs

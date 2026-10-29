@@ -147,17 +147,17 @@ in
                 homeDirectory = lib.mkDefault user.home;
                 packages = [
                   pkgs.zenos.byCategories.apps.browsers.gnosis
-                  pkgs.zenos.byCategories.apps.terminal.blackbox-next
+                  pkgs.zenos.byCategories.apps.terminal.blankbox
                 ];
-                sessionVariables.TERMINAL = lib.mkDefault "${pkgs.zenos.byCategories.apps.terminal.blackbox-next}/bin/blackbox-next";
+                sessionVariables.TERMINAL = lib.mkDefault "${pkgs.zenos.byCategories.apps.terminal.blankbox}/bin/blankbox";
               };
               xdg = {
                 enable = true;
                 terminal-exec = {
                   enable = lib.mkDefault true;
                   settings = {
-                    default = lib.mkDefault [ "com.neg-zero.BlackBoxNext.desktop" ];
-                    GNOME = lib.mkDefault [ "com.neg-zero.BlackBoxNext.desktop" ];
+                    default = lib.mkDefault [ "com.neg-zero.Blankbox.desktop" ];
+                    GNOME = lib.mkDefault [ "com.neg-zero.Blankbox.desktop" ];
                   };
                 };
                 mimeApps = {
