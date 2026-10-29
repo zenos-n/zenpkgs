@@ -67,6 +67,11 @@ enable = enableOption {
     });
 
     services.desktopManager.gnome.enable = true;
+    qt = {
+      enable = $lib.mkDefault true;
+      platformTheme = $lib.mkDefault "gnome";
+      style = $lib.mkDefault (if $path.defaultDarkMode then "adwaita-dark" else "adwaita");
+    };
     services.gnome.gnome-initial-setup.enable = false;
     nixpkgs.overlays = [
       (final: prev: {
@@ -379,7 +384,7 @@ dockItems = {
     license = $l.napl;
     type = $type.list [ $type.string ];
     default = [
-      "firefox.desktop"
+      "com.neg-zero.Gnosis.desktop"
       "org.gnome.Nautilus.desktop"
       "org.gnome.Terminal.desktop"
       "kitty.desktop"

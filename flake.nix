@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
       url = "github:nix-community/home-manager/release-26.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -30,7 +31,7 @@
     nixpkgs-emulators.url = "github:NixOS/nixpkgs/205fd4226592cc83fd4c0885a3e4c9c400efabb5";
     nixpkgs-popcorn.url = "github:NixOS/nixpkgs/1c3fe55ad329cbcb28471bb30f05c9827f724c76";
     # Keep the browser's locked Nixpkgs: native Brave patches require its exact binary.
-    gnosis.url = "github:doromiert/gnosis/a415cc30429c38c8f47d738f7524ad69db61153c";
+    gnosis.url = "github:doromiert/gnosis/a2a73c808edfe3f0d3072c67c0fe1e8120e92942";
 
     nixpwamaker = {
       url = "github:doromiert/nixpwamaker/1.1";
@@ -57,7 +58,7 @@
       flake = false;
     };
     source-setup = {
-      url = "github:zenos-n/zenos-setup/615217877b9a599c109d64f56ad841f115b9cea7";
+      url = "github:zenos-n/zenos-setup/79fe259dfc9853131403871ebcda8c5586d02e28";
       flake = false;
     };
     source-shell-defaults = {
@@ -68,8 +69,12 @@
       url = "github:zenos-n/zenos-oobe-mode-extension/1.0.0";
       flake = false;
     };
+    source-fastfetch-config = {
+      url = "github:zenos-n/fastfetch-config/dd72d8c41882979c02dee36374151026977dfa75";
+      flake = false;
+    };
     source-zenfs = {
-      url = "github:zenos-n/zenfs/6a6ac505bd153b5235170e3e021138166c9c4bda";
+      url = "github:zenos-n/zenfs/28225feff5d40e2f2a7e290222b8747ff8d48cae";
       flake = false;
     };
     # Extracted package sources are published separately from the package catalog.
@@ -85,6 +90,10 @@
     source-haptics = { url = "github:zenos-n/haptics-plus-plus/cb8df54b96676ec7dbd35f073385a3077189e168"; flake = false; };
     source-zane-indicator = { url = "github:zenos-n/zenos-zane-indicator/1846242f7e6940119d2b19e57daf501274b020ad"; flake = false; };
     source-vision-indicator = { url = "github:zenos-n/zenos-vision-indicator/1421f18f791cc249d2bbe70d7e52fb2adc2c0947"; flake = false; };
+    source-blackbox = {
+      url = "github:zenos-n/blackbox/9fe9ada7efe6bd6084f891ee7bd98175633c5b7c";
+      flake = false;
+    };
     source-zenlink = {
       url = "github:zenos-n/zenlink-gnome/fd8706ec644db39a54b61d60788e9f3af2a97f47";
       flake = false;
@@ -109,18 +118,10 @@
             config.allowUnfree = true;
           };
           zenDsl = bootstrapPkgs.callPackage ./lib/zen-dsl/package.nix {
-            testSuite = ./tests/zen-dsl;
+            testSuite = builtins.path { path = ./tests/zen-dsl; name = "zen-dsl-tests"; };
             nixpkgsSrc = nixpkgs;
           };
-          bundle =
-            bootstrapPkgs.runCommand "zenpkgs-dsl-bundle"
-              {
-                enableParallelBuilding = true;
-                nativeBuildInputs = [
-                  zenDsl
-                  bootstrapPkgs.python3
-                ];
-                src = builtins.path {
+          dslSource = builtins.path {
                   path = self;
                   name = "zenpkgs-dsl-source";
                   filter =
@@ -136,6 +137,18 @@
                           "docs"
                         ];
                 };
+          compilerSource = builtins.path { path = ./lib/zen-dsl; name = "zen-dsl-compiler"; };
+          artifactGenerator = builtins.hashString "sha256" (builtins.readFile ./flake.nix);
+          generatedBundle =
+            bootstrapPkgs.runCommand "zenpkgs-dsl-bundle"
+              {
+                enableParallelBuilding = true;
+                nativeBuildInputs = [
+                  zenDsl
+                  bootstrapPkgs.python3
+                ];
+                src = dslSource;
+                inherit compilerSource artifactGenerator;
               }
               ''
                 mkdir -p "$out/interfaces" "$out/modules" "$out/builds"
@@ -148,6 +161,7 @@
 
                 python3 - "$out/bundle.json" "$out" <<'PY'
                 import json
+                import os
                 from pathlib import Path
                 import sys
 
@@ -177,7 +191,20 @@
                     if relative.stem == reserved_leaf:
                         raise ValueError(f"reserved {kind} leaf name: {raw_path}")
 
+                (output_root / "manifest.json").write_text(json.dumps({
+                    "version": 1,
+                    "dslSource": os.environ["src"],
+                    "compilerSource": os.environ["compilerSource"],
+                    "artifactGenerator": os.environ["artifactGenerator"],
+                }), encoding="utf-8")
                 destinations = set()
+                index = {
+                    "bundleVersion": compiled_bundle["bundleVersion"],
+                    "sources": [{"path": item["path"], "kind": item["kind"]} for item in compiled_bundle["sources"]],
+                    "structure": {key: compiled_bundle["structure"][key] for key in ("present", "mounts")},
+                }
+                (output_root / "package-index.json").write_text(json.dumps(index), encoding="utf-8")
+
                 for source in compiled_bundle["sources"]:
                     canonical_source(source)
                     if source["kind"] not in {"zpkg", "zmdl"}:
@@ -201,9 +228,24 @@
                         destination.write_text(code, encoding="utf-8")
                 PY
               '';
+          precompiled = self + "/.compiled";
+          manifest = if builtins.pathExists (precompiled + "/manifest.json") then
+            builtins.tryEval (builtins.fromJSON (builtins.readFile (precompiled + "/manifest.json")))
+          else { success = false; value = null; };
+          usePrecompiled = manifest.success && builtins.isAttrs manifest.value
+            && (manifest.value.version or null) == 1
+            && (manifest.value.dslSource or null) == toString dslSource
+            && (manifest.value.compilerSource or null) == toString compilerSource
+            && (manifest.value.artifactGenerator or null) == artifactGenerator;
+          bundle = if usePrecompiled then precompiled else generatedBundle;
+          runtimeBundle = if usePrecompiled then
+            bootstrapPkgs.runCommand "zenpkgs-runtime-bundle.json" { inherit dslSource; } ''
+              gzip -dc ${precompiled}/bundle.json.gz > "$out"
+            ''
+          else "${bundle}/bundle.json";
           bundleJSON =
             if builtins.pathExists (self + "/structure.zstr") then
-              import ./lib/read-dsl-bundle.nix "${bundle}/bundle.json"
+              import ./lib/read-dsl-bundle.nix runtimeBundle
             else
               {
                 bundleVersion = "zenlang.bundle/2";
@@ -215,8 +257,11 @@
                   nodes = [ ];
                 };
               };
+          packageIndex = if builtins.pathExists (self + "/structure.zstr") then
+            builtins.fromJSON (builtins.readFile "${bundle}/package-index.json")
+          else bundleJSON;
           registry = dslBundleAdapter.registryFromBundle {
-            bundle = bundleJSON;
+            bundle = packageIndex;
             bundlePath = bundle;
           };
           candidates = dslBundleAdapter.modulesFromBundle {
@@ -229,6 +274,7 @@
             bootstrapPkgs
             bundle
             bundleJSON
+            packageIndex
             candidates
             registry
             zenDsl
@@ -236,7 +282,8 @@
         };
       # Registry compilation is bootstrapped from nixpkgs without the ZenPkgs
       # overlay, so the overlay cannot depend on itself.
-      registryFor = system: (mkDslArtifacts system).registry;
+      dslArtifacts = forAllSystems mkDslArtifacts;
+      registryFor = system: dslArtifacts.${system}.registry;
       registry = registryFor (builtins.head systems);
       legacyOptionModule =
         { config, lib, ... }:
@@ -410,7 +457,13 @@
             # Transitional recipes use the same final package set and custom
             # library as before; ZPKG wrappers now own their public identities.
             zenCompatPackage = recipe: final.callPackage recipe { lib = compatLib; };
+            zenPrivateHomePackage = package: command: token: final.callPackage ./lib/private-home-package.nix {
+              inherit package command token;
+              zenfs = final.zenos.byCategories.system.zenfs;
+            };
             zenPackageSources = {
+              zenfs = inputs.source-zenfs.outPath;
+              fastfetchConfig = inputs.source-fastfetch-config.outPath;
               compatRecipes = {
                 "desktops/gnome/extensions/dash-stacks" = ./lib/compat/package-recipes/desktops/gnome/extensions/dash-stacks/package.nix;
                 "desktops/gnome/extensions/forge" = ./lib/compat/package-recipes/desktops/gnome/extensions/forge/package.nix;
@@ -425,17 +478,25 @@
               };
               emulatorsNixpkgs = inputs.nixpkgs-emulators.outPath;
               popcornNixpkgs = inputs.nixpkgs-popcorn.outPath;
+              # Packages may redirect to this upstream channel without maintaining
+              # a second recipe or applying binary modifications.
+              unstablePackages = import inputs.nixpkgs-unstable {
+                system = final.stdenv.hostPlatform.system;
+                config.allowUnfree = true;
+              };
+              setup = inputs.source-setup.outPath;
               gnosis = inputs.gnosis;
               vrTools = inputs.source-vr-tools.outPath;
               alvrCompat = inputs.source-alvr-compat.outPath;
               haptics = inputs.source-haptics.outPath;
               zaneIndicator = inputs.source-zane-indicator.outPath;
               visionIndicator = inputs.source-vision-indicator.outPath;
+              blackbox = inputs.source-blackbox.outPath;
               zenlink = inputs.source-zenlink.outPath;
             };
           };
           zenos =
-            if zstrRuntime.packageExposure (mkDslArtifacts prev.stdenv.hostPlatform.system).bundleJSON then
+            if zstrRuntime.packageExposure dslArtifacts.${prev.stdenv.hostPlatform.system}.packageIndex then
               mappedTree // { legacy = prev; }
             else
               { };
@@ -450,7 +511,7 @@
         loader = loader;
         utils = utils;
         dslRegistryFor = registryFor;
-        dslBundleFor = system: (mkDslArtifacts system).bundleJSON;
+        dslBundleFor = system: dslArtifacts.${system}.bundleJSON;
         inherit zstrRuntime dslLibrary;
         inherit
           dslBundleAdapter
@@ -520,6 +581,9 @@
           };
           interface = self.nixosModules.default;
           default = {
+            _module.args.zenpkgsRevision = if builtins.pathExists (self + "/.zenpkgs-revision") then
+              nixpkgs.lib.removeSuffix "\n" (builtins.readFile (self + "/.zenpkgs-revision"))
+            else self.shortRev or self.dirtyShortRev or "unknown";
             imports = [
               (inputs.source-zenlink.outPath + "/nix/devices.nix")
               ./lib/compat/system-modules/installed-runtime.nix
@@ -529,7 +593,8 @@
               inputs.masterful-gestures.nixosModules.default
               inputs.disko.nixosModules.disko
               (zstrRuntime.moduleFromBundle {
-                bundle = (mkDslArtifacts (builtins.head systems)).bundleJSON;
+                bundle = dslArtifacts.${builtins.head systems}.bundleJSON;
+                emitMetadataWarnings = false;
                 extraLib = dslLibrary;
               })
             ];
@@ -548,7 +613,7 @@
       packages = forAllSystems (
         system:
         let
-          dsl = mkDslArtifacts system;
+          dsl = dslArtifacts.${system};
           registry = dsl.registry;
           pkgs = import nixpkgs {
             inherit system;
@@ -557,7 +622,7 @@
           };
 
         in
-        if !zstrRuntime.packageExposure dsl.bundleJSON then
+        if !zstrRuntime.packageExposure dsl.packageIndex then
           { }
         else
           packageOutputs.flatten {
@@ -583,7 +648,7 @@
             config.allowUnfree = true;
           };
         in
-        if !zstrRuntime.packageExposure (mkDslArtifacts system).bundleJSON then
+        if !zstrRuntime.packageExposure dslArtifacts.${system}.packageIndex then
           { }
         else
           (builtins.removeAttrs pkgs.zenos [ "byCategories" "legacy" ])
@@ -598,7 +663,7 @@
       checks = forAllSystems (
         system:
         let
-          dsl = mkDslArtifacts system;
+          dsl = dslArtifacts.${system};
           registry = dsl.registry;
           pkgs = import nixpkgs {
             inherit system;
@@ -659,6 +724,12 @@
           flake-inputs = dsl.bootstrapPkgs.writeText "zenpkgs-flake-inputs.json" (
             builtins.toJSON (import ./tests/flake-inputs.nix)
           );
+          compact-registry =
+            assert interface.registryDocs dsl.registry == interface.registryDocs (dslBundleAdapter.registryFromBundle {
+              bundle = dsl.bundleJSON;
+              bundlePath = dsl.bundle;
+            });
+            pkgs.runCommand "compact-registry-equivalence" { } "touch $out";
           migration-options =
             assert nixpkgs.lib.all (value: value) (builtins.attrValues migrationPolicies);
             pkgs.writeText "zenos-migration-options" (builtins.toJSON migrationPolicies);
@@ -667,6 +738,11 @@
           application-program-options = import ./tests/application-program-options.nix {
             pkgs = dsl.bootstrapPkgs;
             sourceRoot = self;
+          };
+          blackbox-next-module = import ./tests/blackbox-next-check.nix {
+            pkgs = dsl.bootstrapPkgs;
+            sourceRoot = self;
+            homeManager = inputs.home-manager.outPath;
           };
           zenlink-integration =
             assert import ./tests/zenlink-system.nix {
@@ -682,6 +758,7 @@
             };
           migration-options-vm = import ./tests/migration-options-vm.nix {
             pkgs = dsl.bootstrapPkgs;
+            codexVersion = pkgs.zenos.byCategories.apps.ai.codex.version;
             zenosModule = self.nixosModules.default;
             policies = migrationPolicies;
             vrSupervisorSource = inputs.source-vr-tools.outPath + "/src/vr-overlay-supervisor.sh";

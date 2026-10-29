@@ -122,17 +122,17 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1793209729,
-        "narHash": "sha256-AeD4dN335f9ZRTlqAfXROg/ye28llKH3rC4eJqPcbxA=",
+        "lastModified": 1793308348,
+        "narHash": "sha256-pLE47NUFl3nuu/YiICCBBktWdwKnvq3Tcd4Opfx0o6Y=",
         "owner": "doromiert",
         "repo": "gnosis",
-        "rev": "a415cc30429c38c8f47d738f7524ad69db61153c",
+        "rev": "a2a73c808edfe3f0d3072c67c0fe1e8120e92942",
         "type": "github"
       },
       "original": {
         "owner": "doromiert",
         "repo": "gnosis",
-        "rev": "a415cc30429c38c8f47d738f7524ad69db61153c",
+        "rev": "a2a73c808edfe3f0d3072c67c0fe1e8120e92942",
         "type": "github"
       }
     },
@@ -455,6 +455,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1793110635,
+        "narHash": "sha256-dhoW6VgFWlaodSY5jrBn+CF2FLmaUvDVgM7+C7T2+NM=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "31ecbaca1bdefa45dffc409f0250bd8039ea0010",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixos-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1790822859,
@@ -619,9 +635,12 @@
         "nixpkgs": "nixpkgs_7",
         "nixpkgs-emulators": "nixpkgs-emulators",
         "nixpkgs-popcorn": "nixpkgs-popcorn",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "nixpwamaker": "nixpwamaker",
         "nur": "nur",
         "source-alvr-compat": "source-alvr-compat",
+        "source-blackbox": "source-blackbox",
+        "source-fastfetch-config": "source-fastfetch-config",
         "source-haptics": "source-haptics",
         "source-oobe": "source-oobe",
         "source-plymouth": "source-plymouth",
@@ -653,6 +672,40 @@
         "owner": "zenos-n",
         "repo": "alvr-zenos-compat",
         "rev": "4f24245e95fbe201fd3055be2b34da84e38ebdc2",
+        "type": "github"
+      }
+    },
+    "source-blackbox": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793307368,
+        "narHash": "sha256-VVtweYFMOpE+qt1ijEW5NwcHHYa6pRd7nC4nVOWTXZo=",
+        "owner": "zenos-n",
+        "repo": "blackbox",
+        "rev": "9fe9ada7efe6bd6084f891ee7bd98175633c5b7c",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "blackbox",
+        "rev": "9fe9ada7efe6bd6084f891ee7bd98175633c5b7c",
+        "type": "github"
+      }
+    },
+    "source-fastfetch-config": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793300229,
+        "narHash": "sha256-xscXGRN7ZesZzKRU+22i5F+eC5EBC+uE1svS8weZLwU=",
+        "owner": "zenos-n",
+        "repo": "fastfetch-config",
+        "rev": "dd72d8c41882979c02dee36374151026977dfa75",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "fastfetch-config",
+        "rev": "dd72d8c41882979c02dee36374151026977dfa75",
         "type": "github"
       }
     },
@@ -778,17 +831,17 @@
     "source-setup": {
       "flake": false,
       "locked": {
-        "lastModified": 1793181638,
-        "narHash": "sha256-pxztFIN5xQi8Gf3rVUe9GAVVQNtD+lp45lHyJF4+zxk=",
+        "lastModified": 1793308346,
+        "narHash": "sha256-oVCmcHbsc/nFfCQU8GDcrQmm9XtFkuxIZEnwjzfZkYA=",
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "615217877b9a599c109d64f56ad841f115b9cea7",
+        "rev": "79fe259dfc9853131403871ebcda8c5586d02e28",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "615217877b9a599c109d64f56ad841f115b9cea7",
+        "rev": "79fe259dfc9853131403871ebcda8c5586d02e28",
         "type": "github"
       }
     },
@@ -863,17 +916,17 @@
     "source-zenfs": {
       "flake": false,
       "locked": {
-        "lastModified": 1790808733,
-        "narHash": "sha256-y3qXWePf8zdpsgw51NOJXerPo7v+tdrNoKg4wRYIlv8=",
+        "lastModified": 1793308344,
+        "narHash": "sha256-7ExUV4i8TDlD0MivgCyaM7VY8YFhXZtV8281SO+8X48=",
         "owner": "zenos-n",
         "repo": "zenfs",
-        "rev": "6a6ac505bd153b5235170e3e021138166c9c4bda",
+        "rev": "28225feff5d40e2f2a7e290222b8747ff8d48cae",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenfs",
-        "rev": "6a6ac505bd153b5235170e3e021138166c9c4bda",
+        "rev": "28225feff5d40e2f2a7e290222b8747ff8d48cae",
         "type": "github"
       }
     },

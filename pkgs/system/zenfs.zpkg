@@ -9,9 +9,4 @@ _meta = {
   maintainers = [ $m.doromiert ];
 };
 
-build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
-  owner = "zenos-n";
-  repo = "zenfs";
-  rev = "6a6ac505bd153b5235170e3e021138166c9c4bda";
-  hash = "sha256-y3qXWePf8zdpsgw51NOJXerPo7v+tdrNoKg4wRYIlv8=";
-}) + "/package.nix") { };
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.zenfs + "/package.nix") { };

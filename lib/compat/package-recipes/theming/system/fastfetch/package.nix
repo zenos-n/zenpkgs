@@ -1,5 +1,4 @@
 {
-  fetchFromGitHub,
   lib,
   stdenv,
   pkgs,
@@ -10,12 +9,7 @@ stdenv.mkDerivation {
   pname = "zenos-fastfetch";
   version = "1.0";
 
-  src = fetchFromGitHub {
-    owner = "zenos-n";
-    repo = "fastfetch-config";
-    rev = "251097014340b0942f978c66698e0bf803517369";
-    hash = "sha256-Rhq5uFVZ/KOvHZucfFA+5Aoa1pl9NQf0xJQHnINQumQ=";
-  };
+  src = lib.zenPackageSources.fastfetchConfig;
 
   nativeBuildInputs = [ pkgs.makeWrapper ];
 

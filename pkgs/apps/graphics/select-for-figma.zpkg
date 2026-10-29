@@ -9,15 +9,17 @@ _meta = {
     a thumbnail grid, including Home, with tab position or most recently used order.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "1.0.2";
+  packageVersion = "1.0.2-unstable-2026-10-24";
   tags = [ "graphics" "design" "prototyping" "collaboration" ];
   maintainers = [ $m.doromiert ];
   license = $l.gpl3Only;
 };
 
-build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
+build = ($pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
   owner = "doromiert";
   repo = "select-for-figma";
-  rev = "v1.0.2";
-  hash = "sha256-Q9QAcR4oHTX/D0p3ZTHQC2OnGXRehy+cM4a0sE7f5/I=";
-}) + "/package.nix") { pkgs = $pkgs.legacy; };
+  rev = "a3b91956f30d154df0ba8bca07e70f72beed4187";
+  hash = "sha256-dSxY+vRK17/1KcYPrOP6b8ZMcASK3xzHaEyYahO9gGQ=";
+}) + "/package.nix") { pkgs = $pkgs.legacy; }).overrideAttrs {
+  version = "1.0.2-unstable-2026-10-24";
+};

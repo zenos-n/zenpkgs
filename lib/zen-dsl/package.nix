@@ -10,7 +10,7 @@
 stdenvNoCC.mkDerivation {
   pname = "zen-dsl";
   version = "0.1.0";
-  src = ./.;
+  src = builtins.path { path = ./.; name = "zen-dsl-source"; };
 
   dontConfigure = true;
   dontBuild = true;
@@ -26,7 +26,7 @@ stdenvNoCC.mkDerivation {
     export PYTHONPYCACHEPREFIX="$TMPDIR/pycache"
     export NIX_REMOTE="local?root=$TMPDIR/test-store"
     export NIX_PATH="nixpkgs=${nixpkgsSrc}"
-    export ZEN_MAINTAINERS=${../maintainers.nix}
+    export ZEN_MAINTAINERS=${builtins.path { path = ../maintainers.nix; name = "zen-maintainers.nix"; }}
     nix-store --init
     test -f zenlang/compiler.py
     test -f zenlang/emitter.py

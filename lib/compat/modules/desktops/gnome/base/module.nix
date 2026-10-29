@@ -88,7 +88,7 @@ in
     dockItems = mkOption {
       type = types.listOf types.str;
       default = [
-        "firefox.desktop"
+        "com.neg-zero.Gnosis.desktop"
         "org.gnome.Nautilus.desktop"
         "org.gnome.Terminal.desktop"
         "kitty.desktop"
@@ -141,6 +141,11 @@ in
   };
 
   config = mkIf cfg.enable {
+    qt = {
+      enable = lib.mkDefault true;
+      platformTheme = lib.mkDefault "gnome";
+      style = lib.mkDefault (if cfg.defaultDarkMode then "adwaita-dark" else "adwaita");
+    };
     # 1. System Packages & Environment
     environment.systemPackages =
       subtractLists config.environment.gnome.excludePackages (

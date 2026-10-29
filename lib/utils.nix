@@ -75,7 +75,9 @@ rec {
     }:
     let
       lifecycle = { alpha = "a"; beta = "b"; stable = ""; };
-      revision = self.shortRev or self.dirtyShortRev or "unknown";
+      revision = if self ? outPath && builtins.pathExists (self + "/.zenpkgs-revision") then
+        lib.removeSuffix "\n" (builtins.readFile (self + "/.zenpkgs-revision"))
+      else self.shortRev or self.dirtyShortRev or "unknown";
     in
     assert lib.assertMsg (builtins.match "[0-9]+\\.[0-9]+\\.[0-9]+" major != null)
       "ZenOS versions require all three numeric components: x.y.z";

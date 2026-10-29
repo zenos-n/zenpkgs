@@ -288,26 +288,26 @@ in
     pass "zenpkgs-no-retired-package-roots";
 
   registry-counts =
-    assert builtins.length expectedRegistry.packages == 4153;
-    assert builtins.length expectedActiveEntries == 4153;
-    assert builtins.length registry.packages == 4153;
-    assert builtins.length activeEntries == 4153;
+    assert builtins.length expectedRegistry.packages == 4154;
+    assert builtins.length expectedActiveEntries == 4154;
+    assert builtins.length registry.packages == 4154;
+    assert builtins.length activeEntries == 4154;
     assert builtins.length importEntries == 4098;
-    assert builtins.length buildEntries == 55;
+    assert builtins.length buildEntries == 56;
     assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 
   package-paths =
-    assert builtins.length (registryPaths expectedRegistry) == 4153;
-    assert builtins.length (packagePaths expectedRegistry) == 4153;
-    assert builtins.length activePaths == 4153;
+    assert builtins.length (registryPaths expectedRegistry) == 4154;
+    assert builtins.length (packagePaths expectedRegistry) == 4154;
+    assert builtins.length activePaths == 4154;
     assert registryPathKeys == lib.sort builtins.lessThan registryPathKeys;
     assert registryPaths registry == registryPaths expectedRegistry;
     assert packagePaths registry == packagePaths expectedSorted;
     pass "zenpkgs-package-registry-paths";
 
   public-package-outputs =
-    assert builtins.length outputIdentities == 4153;
+    assert builtins.length outputIdentities == 4154;
     assert lib.all (identity: identity) outputIdentities;
     pass "zenpkgs-public-package-outputs";
 
@@ -349,6 +349,7 @@ in
         "apps.graphics.select-for-figma"
         "apps.system.zenos-setup"
         "apps.system.zenos.zenos-rebuild"
+        "apps.terminal.blackbox-next"
         "apps.video.tubefin"
         "desktops.gnome.extensions.codex-usage"
         "desktops.gnome.extensions.dash-stacks"
@@ -411,9 +412,9 @@ in
     pass "zenpkgs-registry-build-providers";
 
   registry-output-ownership =
-    assert builtins.length outputNames == 4153 * 2;
+    assert builtins.length outputNames == 4154 * 2;
     assert builtins.length (builtins.attrNames (builtins.listToAttrs
-      (map (name: { inherit name; value = true; }) outputNames))) == 4153 * 2;
+      (map (name: { inherit name; value = true; }) outputNames))) == 4154 * 2;
     assert
       builtins.attrNames publicPackages == lib.sort builtins.lessThan (
         outputNames

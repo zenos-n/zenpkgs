@@ -6,41 +6,12 @@ _meta = {
     Lightweight coding agent that runs in your terminal.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "0.164.0";
+  packageVersion = "0.165.0";
   tags = [ "ai" "development" "coding" "terminal" ];
   maintainers = [ $m.doromiert ];
   license = $l.asl20;
 };
 
-build = $pkgs.legacy.stdenvNoCC.mkDerivation {
-    pname = "codex";
-    version = "0.164.0";
-
-    src = $pkgs.legacy.fetchurl {
-      url = "https://github.com/openai/codex/releases/download/rust-v0.164.0/codex-package-x86_64-unknown-linux-musl.tar.gz";
-      hash = "sha256-PsVQUxCWCNUDj35QdQ99Jfdo39dA/vBxqnEOJVm2Oqw=";
-    };
-
-    sourceRoot = ".";
-    dontConfigure = true;
-    dontBuild = true;
-
-    installPhase = ''
-      runHook preInstall
-      mkdir -p $out
-      cp -R bin codex-package.json codex-path codex-resources $out/
-
-      # The daemon copies and validates the entire package before starting.
-      # Keep Nix's helpers inside the package: external symlinks fail validation.
-      rm -f $out/codex-resources/bwrap $out/codex-path/rg
-      cp -L ${$pkgs.legacy.bubblewrap}/bin/bwrap $out/codex-resources/bwrap
-      cp -L ${$pkgs.legacy.ripgrep}/bin/rg $out/codex-path/rg
-      # Keep the entrypoint as the actual executable. The daemon compares its
-      # digest to bin/codex; a makeWrapper script fails that integrity check.
-      runHook postInstall
-    '';
-
-    meta = $pkgs.legacy.codex.meta // {
-      platforms = [ "x86_64-linux" ];
-    };
-  };
+# Use the source-built upstream package, including its complete daemon package
+# and manifest handling. Never replace bundled executables after checksumming.
+build = $lib.zenPackageSources.unstablePackages.codex;

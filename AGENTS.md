@@ -1,5 +1,8 @@
 # ZenOS Implementation Rules
 
+Port reusable fixes made on the installed ZenOS system to the canonical upstream
+repositories as part of the same task; do not leave them only in `/Config/ZenOS`.
+
 Before editing this repository, read the relevant design in the sibling
 `/home/doromiert/Projects/zenos-n-next` checkout. That repository is the
 normative authority for ZenOS architecture and DSL behavior.
@@ -10,6 +13,8 @@ normative authority for ZenOS architecture and DSL behavior.
   `AGENTS.md`, `LICENSE`, `structure.zstr`, `modules/`, `docs/`, `lib/`, `pkgs/`,
   `scripts/`, and `tests/`.
 - The only dot entries are `.git/`, `.gitignore`, `.github/`, and `.vscode/`.
+- The CI-generated `compiled-unstable` branch additionally contains `.compiled/`
+  and `.zenpkgs-revision`; regenerate these artifacts rather than editing them.
 - Package and module identity must follow the documented filesystem mapping.
 - `modules/` is the only public module tree. Do not create separate NixOS,
   Home Manager, program, user, or legacy module roots.
@@ -19,4 +24,3 @@ normative authority for ZenOS architecture and DSL behavior.
   must not be treated as contributor-facing module declarations.
 - The canonical DSL compiler lives under `lib/`; its tests live under `tests/`.
 - Package source and assets belong to one external repository per package.
-- Runtime tests and integration acceptance must run in a ZenOS VM.
