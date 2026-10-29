@@ -94,6 +94,10 @@
       url = "github:zenos-n/blackbox/9fe9ada7efe6bd6084f891ee7bd98175633c5b7c";
       flake = false;
     };
+    source-zenlink = {
+      url = "github:zenos-n/zenlink-gnome/fd8706ec644db39a54b61d60788e9f3af2a97f47";
+      flake = false;
+    };
   };
 
   outputs =
@@ -488,6 +492,7 @@
               zaneIndicator = inputs.source-zane-indicator.outPath;
               visionIndicator = inputs.source-vision-indicator.outPath;
               blackbox = inputs.source-blackbox.outPath;
+              zenlink = inputs.source-zenlink.outPath;
             };
           };
           zenos =
@@ -571,7 +576,8 @@
             ]
             ++ coreModules
             ++ [ gnomeBaseModule ]
-            ++ transitionalSystemModules;
+            ++ transitionalSystemModules
+            ++ [ (inputs.source-zenlink.outPath + "/nix/devices.nix") ];
           };
           interface = self.nixosModules.default;
           default = {
@@ -579,6 +585,7 @@
               nixpkgs.lib.removeSuffix "\n" (builtins.readFile (self + "/.zenpkgs-revision"))
             else self.shortRev or self.dirtyShortRev or "unknown";
             imports = [
+              (inputs.source-zenlink.outPath + "/nix/devices.nix")
               ./lib/compat/system-modules/installed-runtime.nix
               ./lib/compat/system-modules/oobe-runtime.nix
               inputs.home-manager.nixosModules.home-manager
@@ -737,6 +744,18 @@
             sourceRoot = self;
             homeManager = inputs.home-manager.outPath;
           };
+          zenlink-integration =
+            assert import ./tests/zenlink-system.nix {
+              inherit nixpkgs;
+              zenosModule = self.nixosModules.default;
+            };
+            import ./tests/zenlink-check.nix {
+              pkgs = dsl.bootstrapPkgs;
+              sourceRoot = self;
+              zenlinkSource = inputs.source-zenlink.outPath;
+              package = pkgs.zenos.byCategories.system.zenlink;
+              indicator = pkgs.zenos.byCategories.desktops.gnome.extensions.zenlink-indicator;
+            };
           migration-options-vm = import ./tests/migration-options-vm.nix {
             pkgs = dsl.bootstrapPkgs;
             codexVersion = pkgs.zenos.byCategories.apps.ai.codex.version;

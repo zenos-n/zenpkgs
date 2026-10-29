@@ -18,8 +18,8 @@ stdenv.mkDerivation {
   src = fetchFromGitHub {
     owner = "zenos-n";
     repo = "adwaita-hacks";
-    rev = "43fcf4a6448ae3ce4c386950f656e649d745bb1f";
-    hash = "sha256-llATSR56yVWDKm6w+3071X77bpl8UDJ9GHKz//F2BoM=";
+    rev = "4091ab1f8d96404eaabc103c89492a86b4bb0b0d";
+    hash = "sha256-xO/m9jULIhIJToU1JQ2Wxme170eC4Buo6PE8WT1AjD4=";
   };
   dontUnpack = true;
   # Compatibility aliases intentionally resolve through the inherited Adwaita theme.
