@@ -1,0 +1,14 @@
+_meta = {
+  zenosVersion = "1.0.0";
+  name = "Codex usage";
+  summary = "Display Codex usage in the GNOME panel";
+  description = ''Installs and enables the Codex usage extension. Credentials remain in the user's writable Codex profile.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+enable = enableOption {
+  _meta.description = ''Show Codex usage in the GNOME panel.'';
+  s! { environment.systemPackages = [ $pkgs.byCategories.desktops.gnome.extensions.codex-usage ]; };
+  u! { dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.byCategories.desktops.gnome.extensions.codex-usage.extensionUuid ]; };
+};

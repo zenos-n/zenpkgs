@@ -132,7 +132,7 @@ in rec {
     (bundle.structure.present or false)
     && builtins.any (mount: mount.kind == "packages") (bundle.structure.mounts or [ ]);
 
-  moduleFromBundle = { bundle, packageTree ? null, extraLib ? { } }:
+  moduleFromBundle = { bundle, packageTree ? null, extraLib ? { }, emitMetadataWarnings ? true }:
     { config, options, pkgs, ... }:
     let
       rootConfig = config;
@@ -446,11 +446,11 @@ in rec {
         ++ lib.concatMap staticRoots (builtins.attrValues node.children);
       mountedSources = node: node.definitions ++ lib.concatMap mountedSources (builtins.attrValues node.children);
       exposedSources = lib.unique ([ "structure.zstr" ] ++ mountedSources tree);
-      metadataWarnings = lib.concatMap (source:
+      metadataWarnings = lib.optionals emitMetadataWarnings (lib.concatMap (source:
         map (diagnostic:
           "ZenPkgs ${diagnostic.code} ${diagnostic.source}:${toString diagnostic.line}:${toString diagnostic.column}: ${diagnostic.message}"
         ) (builtins.filter (diagnostic: diagnostic.severity == "warning") (source.diagnostics or [ ]))
-      ) (builtins.filter (source: builtins.elem source.path exposedSources) bundle.sources);
+      ) (builtins.filter (source: builtins.elem source.path exposedSources) bundle.sources));
     in lib.optionalAttrs present {
       options.zenos = lib.mkOption {
         type = ownedType (nodeType tree [ ] { } null);

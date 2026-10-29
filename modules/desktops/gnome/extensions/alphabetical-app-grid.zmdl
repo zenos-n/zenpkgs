@@ -56,7 +56,7 @@ sort-folder-contents = {
 folder-order-position = {
   _meta = {
     type = $type.string;
-    default = "alphabetical";
+    default = "end";
     description = ''
       Position of folders in the grid
 

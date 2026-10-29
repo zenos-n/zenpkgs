@@ -6634,10 +6634,16 @@
       ]
     },
     {
+      "categoryTarget": [
+        "apps",
+        "system",
+        "zenos-setup"
+      ],
       "dependenciesDeclared": false,
       "id": "pkgs.com.neg-zero.zenos-setup",
       "meta": {
         "description": "Installs ZenOS and finishes user setup after the first boot.",
+        "id": "com.neg-zero.zenos-setup",
         "license": null,
         "maintainers": [
           "doromiert"
@@ -6649,16 +6655,123 @@
           "installer",
           "oobe"
         ],
-        "zenosVersion": "1.0.0Nb",
-        "id": "com.neg-zero.zenos-setup"
+        "zenosVersion": "1.0.0Nb"
       },
       "provider": {
-        "kind": "build",
         "expression": {
           "arguments": [
             {
               "recursive": false,
-              "statements": [],
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "applicationIcons"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "string",
+                            "value": "com.neg-zero.Gnosis"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "left": {
+                            "name": "lib",
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "zenPackageSources"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "gnosis"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "outPath"
+                              }
+                            ],
+                            "type": "variable"
+                          },
+                          "operator": "+",
+                          "right": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "/data/icons/hicolor/scalable/apps/com.neg-zero.Gnosis.svg"
+                              }
+                            ],
+                            "type": "string"
+                          },
+                          "type": "binary"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "string",
+                            "value": "io.github.doromiert.SelectForFigma"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "left": {
+                            "name": "pkgs",
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "byCategories"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "apps"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "graphics"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "select-for-figma"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "src"
+                              }
+                            ],
+                            "type": "variable"
+                          },
+                          "operator": "+",
+                          "right": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "/data/io.github.doromiert.SelectForFigma.svg"
+                              }
+                            ],
+                            "type": "string"
+                          },
+                          "type": "binary"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                }
+              ],
               "type": "attr-set"
             }
           ],
@@ -6668,112 +6781,18 @@
                 "type": "group",
                 "value": {
                   "left": {
-                    "type": "group",
-                    "value": {
-                      "arguments": [
-                        {
-                          "recursive": false,
-                          "statements": [
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "owner"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "zenos-n"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "repo"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "zenos-setup"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "rev"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "615217877b9a599c109d64f56ad841f115b9cea7"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "hash"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "sha256-pxztFIN5xQi8Gf3rVUe9GAVVQNtD+lp45lHyJF4+zxk="
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            }
-                          ],
-                          "type": "attr-set"
-                        }
-                      ],
-                      "callee": {
-                        "name": "pkgs",
-                        "path": [
-                          {
-                            "kind": "identifier",
-                            "value": "legacy"
-                          },
-                          {
-                            "kind": "identifier",
-                            "value": "fetchFromGitHub"
-                          }
-                        ],
-                        "type": "variable"
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
                       },
-                      "type": "call"
-                    }
+                      {
+                        "kind": "identifier",
+                        "value": "setup"
+                      }
+                    ],
+                    "type": "variable"
                   },
                   "operator": "+",
                   "right": {
@@ -6807,16 +6826,12 @@
             "type": "call"
           },
           "type": "call"
-        }
+        },
+        "kind": "build"
       },
       "target": [
         "com",
         "neg-zero",
-        "zenos-setup"
-      ],
-      "categoryTarget": [
-        "apps",
-        "system",
         "zenos-setup"
       ]
     },
@@ -7009,10 +7024,15 @@
       ]
     },
     {
+      "categoryTarget": [
+        "system",
+        "zenfs"
+      ],
       "dependenciesDeclared": false,
       "id": "pkgs.com.neg-zero.zenfs",
       "meta": {
         "description": "Packages ZenFS hierarchy initialization, application views, launchers, compatibility helpers, and roaming-drive support.",
+        "id": "com.neg-zero.zenfs",
         "license": null,
         "maintainers": [
           "doromiert"
@@ -7024,11 +7044,9 @@
           "filesystem",
           "applications"
         ],
-        "zenosVersion": "1.0.0Nb",
-        "id": "com.neg-zero.zenfs"
+        "zenosVersion": "1.0.0Nb"
       },
       "provider": {
-        "kind": "build",
         "expression": {
           "arguments": [
             {
@@ -7043,112 +7061,18 @@
                 "type": "group",
                 "value": {
                   "left": {
-                    "type": "group",
-                    "value": {
-                      "arguments": [
-                        {
-                          "recursive": false,
-                          "statements": [
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "owner"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "zenos-n"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "repo"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "zenfs"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "rev"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "6a6ac505bd153b5235170e3e021138166c9c4bda"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "hash"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "sha256-y3qXWePf8zdpsgw51NOJXerPo7v+tdrNoKg4wRYIlv8="
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            }
-                          ],
-                          "type": "attr-set"
-                        }
-                      ],
-                      "callee": {
-                        "name": "pkgs",
-                        "path": [
-                          {
-                            "kind": "identifier",
-                            "value": "legacy"
-                          },
-                          {
-                            "kind": "identifier",
-                            "value": "fetchFromGitHub"
-                          }
-                        ],
-                        "type": "variable"
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
                       },
-                      "type": "call"
-                    }
+                      {
+                        "kind": "identifier",
+                        "value": "zenfs"
+                      }
+                    ],
+                    "type": "variable"
                   },
                   "operator": "+",
                   "right": {
@@ -7182,15 +7106,12 @@
             "type": "call"
           },
           "type": "call"
-        }
+        },
+        "kind": "build"
       },
       "target": [
         "com",
         "neg-zero",
-        "zenfs"
-      ],
-      "categoryTarget": [
-        "system",
         "zenfs"
       ]
     },
@@ -81881,16 +81802,22 @@
       ]
     },
     {
+      "categoryTarget": [
+        "apps",
+        "ai",
+        "codex"
+      ],
       "dependenciesDeclared": false,
       "id": "pkgs.com.openai.codex.cli",
       "meta": {
         "description": "\n    Lightweight coding agent that runs in your terminal.\n  ",
+        "id": "com.openai.codex.cli",
         "license": "$l.asl20",
         "maintainers": [
           "doromiert"
         ],
         "name": "Codex CLI",
-        "packageVersion": "0.164.0",
+        "packageVersion": "0.165.0",
         "summary": "Lightweight coding agent that runs in your terminal",
         "tags": [
           "ai",
@@ -81898,341 +81825,34 @@
           "coding",
           "terminal"
         ],
-        "zenosVersion": "1.0.0",
-        "id": "com.openai.codex.cli"
+        "zenosVersion": "1.0.0"
       },
       "provider": {
-        "kind": "build",
         "expression": {
-          "arguments": [
+          "name": "lib",
+          "path": [
             {
-              "recursive": false,
-              "statements": [
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "pname"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "multiline": false,
-                    "parts": [
-                      {
-                        "type": "text",
-                        "value": "codex"
-                      }
-                    ],
-                    "type": "string"
-                  }
-                },
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "version"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "multiline": false,
-                    "parts": [
-                      {
-                        "type": "text",
-                        "value": "0.164.0"
-                      }
-                    ],
-                    "type": "string"
-                  }
-                },
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "src"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "arguments": [
-                      {
-                        "recursive": false,
-                        "statements": [
-                          {
-                            "operator": "=",
-                            "target": [
-                              {
-                                "kind": "identifier",
-                                "value": "url"
-                              }
-                            ],
-                            "type": "assignment",
-                            "value": {
-                              "multiline": false,
-                              "parts": [
-                                {
-                                  "type": "text",
-                                  "value": "https://github.com/openai/codex/releases/download/rust-v0.164.0/codex-package-x86_64-unknown-linux-musl.tar.gz"
-                                }
-                              ],
-                              "type": "string"
-                            }
-                          },
-                          {
-                            "operator": "=",
-                            "target": [
-                              {
-                                "kind": "identifier",
-                                "value": "hash"
-                              }
-                            ],
-                            "type": "assignment",
-                            "value": {
-                              "multiline": false,
-                              "parts": [
-                                {
-                                  "type": "text",
-                                  "value": "sha256-PsVQUxCWCNUDj35QdQ99Jfdo39dA/vBxqnEOJVm2Oqw="
-                                }
-                              ],
-                              "type": "string"
-                            }
-                          }
-                        ],
-                        "type": "attr-set"
-                      }
-                    ],
-                    "callee": {
-                      "name": "pkgs",
-                      "path": [
-                        {
-                          "kind": "identifier",
-                          "value": "legacy"
-                        },
-                        {
-                          "kind": "identifier",
-                          "value": "fetchurl"
-                        }
-                      ],
-                      "type": "variable"
-                    },
-                    "type": "call"
-                  }
-                },
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "sourceRoot"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "multiline": false,
-                    "parts": [
-                      {
-                        "type": "text",
-                        "value": "."
-                      }
-                    ],
-                    "type": "string"
-                  }
-                },
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "dontConfigure"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "kind": "true",
-                    "type": "literal",
-                    "value": true
-                  }
-                },
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "dontBuild"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "kind": "true",
-                    "type": "literal",
-                    "value": true
-                  }
-                },
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "installPhase"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "multiline": true,
-                    "parts": [
-                      {
-                        "type": "text",
-                        "value": "\n      runHook preInstall\n      mkdir -p $out\n      cp -R bin codex-package.json codex-path codex-resources $out/\n\n      # The daemon copies and validates the entire package before starting.\n      # Keep Nix's helpers inside the package: external symlinks fail validation.\n      rm -f $out/codex-resources/bwrap $out/codex-path/rg\n      cp -L "
-                      },
-                      {
-                        "expression": {
-                          "name": "pkgs",
-                          "path": [
-                            {
-                              "kind": "identifier",
-                              "value": "legacy"
-                            },
-                            {
-                              "kind": "identifier",
-                              "value": "bubblewrap"
-                            }
-                          ],
-                          "type": "variable"
-                        },
-                        "type": "interpolation"
-                      },
-                      {
-                        "type": "text",
-                        "value": "/bin/bwrap $out/codex-resources/bwrap\n      cp -L "
-                      },
-                      {
-                        "expression": {
-                          "name": "pkgs",
-                          "path": [
-                            {
-                              "kind": "identifier",
-                              "value": "legacy"
-                            },
-                            {
-                              "kind": "identifier",
-                              "value": "ripgrep"
-                            }
-                          ],
-                          "type": "variable"
-                        },
-                        "type": "interpolation"
-                      },
-                      {
-                        "type": "text",
-                        "value": "/bin/rg $out/codex-path/rg\n      # Keep the entrypoint as the actual executable. The daemon compares its\n      # digest to bin/codex; a makeWrapper script fails that integrity check.\n      runHook postInstall\n    "
-                      }
-                    ],
-                    "type": "string"
-                  }
-                },
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "meta"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "left": {
-                      "name": "pkgs",
-                      "path": [
-                        {
-                          "kind": "identifier",
-                          "value": "legacy"
-                        },
-                        {
-                          "kind": "identifier",
-                          "value": "codex"
-                        },
-                        {
-                          "kind": "identifier",
-                          "value": "meta"
-                        }
-                      ],
-                      "type": "variable"
-                    },
-                    "operator": "//",
-                    "right": {
-                      "recursive": false,
-                      "statements": [
-                        {
-                          "operator": "=",
-                          "target": [
-                            {
-                              "kind": "identifier",
-                              "value": "platforms"
-                            }
-                          ],
-                          "type": "assignment",
-                          "value": {
-                            "items": [
-                              {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "x86_64-linux"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            ],
-                            "type": "list"
-                          }
-                        }
-                      ],
-                      "type": "attr-set"
-                    },
-                    "type": "binary"
-                  }
-                }
-              ],
-              "type": "attr-set"
+              "kind": "identifier",
+              "value": "zenPackageSources"
+            },
+            {
+              "kind": "identifier",
+              "value": "unstablePackages"
+            },
+            {
+              "kind": "identifier",
+              "value": "codex"
             }
           ],
-          "callee": {
-            "name": "pkgs",
-            "path": [
-              {
-                "kind": "identifier",
-                "value": "legacy"
-              },
-              {
-                "kind": "identifier",
-                "value": "stdenvNoCC"
-              },
-              {
-                "kind": "identifier",
-                "value": "mkDerivation"
-              }
-            ],
-            "type": "variable"
-          },
-          "type": "call"
-        }
+          "type": "variable"
+        },
+        "kind": "build"
       },
       "target": [
         "com",
         "openai",
         "codex",
         "cli"
-      ],
-      "categoryTarget": [
-        "apps",
-        "ai",
-        "codex"
       ]
     },
     {
@@ -224597,16 +224217,22 @@
       ]
     },
     {
+      "categoryTarget": [
+        "apps",
+        "graphics",
+        "select-for-figma"
+      ],
       "dependenciesDeclared": false,
       "id": "pkgs.com.neg-zero.select-for-figma",
       "meta": {
         "description": "\n    Figma in a native GNOME window with embedded Chromium, document tab groups,\n    a thumbnail overview, local fonts, and KeePassXC integration. The homepage\n    and editor follow the GNOME accent color and app appearance. Ctrl+Tab opens\n    a thumbnail grid, including Home, with tab position or most recently used order.\n  ",
+        "id": "com.neg-zero.select-for-figma",
         "license": "$l.gpl3Only",
         "maintainers": [
           "doromiert"
         ],
         "name": "Select for Figma",
-        "packageVersion": "1.0.2",
+        "packageVersion": "1.0.2-unstable-2026-10-24",
         "summary": "Native GTK and libadwaita Figma workspace",
         "tags": [
           "graphics",
@@ -224614,11 +224240,9 @@
           "prototyping",
           "collaboration"
         ],
-        "zenosVersion": "1.0.0",
-        "id": "com.neg-zero.select-for-figma"
+        "zenosVersion": "1.0.0"
       },
       "provider": {
-        "kind": "build",
         "expression": {
           "arguments": [
             {
@@ -224629,19 +224253,19 @@
                   "target": [
                     {
                       "kind": "identifier",
-                      "value": "pkgs"
+                      "value": "version"
                     }
                   ],
                   "type": "assignment",
                   "value": {
-                    "name": "pkgs",
-                    "path": [
+                    "multiline": false,
+                    "parts": [
                       {
-                        "kind": "identifier",
-                        "value": "legacy"
+                        "type": "text",
+                        "value": "1.0.2-unstable-2026-10-24"
                       }
                     ],
-                    "type": "variable"
+                    "type": "string"
                   }
                 }
               ],
@@ -224649,160 +224273,197 @@
             }
           ],
           "callee": {
-            "arguments": [
-              {
-                "type": "group",
-                "value": {
-                  "left": {
-                    "type": "group",
-                    "value": {
-                      "arguments": [
-                        {
-                          "recursive": false,
-                          "statements": [
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "owner"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "doromiert"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "repo"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "select-for-figma"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "rev"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "v1.0.2"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "hash"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "sha256-Q9QAcR4oHTX/D0p3ZTHQC2OnGXRehy+cM4a0sE7f5/I="
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            }
-                          ],
-                          "type": "attr-set"
-                        }
-                      ],
-                      "callee": {
-                        "name": "pkgs",
-                        "path": [
+            "segment": {
+              "kind": "identifier",
+              "value": "overrideAttrs"
+            },
+            "type": "selection",
+            "value": {
+              "type": "group",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
                           {
                             "kind": "identifier",
-                            "value": "legacy"
-                          },
-                          {
-                            "kind": "identifier",
-                            "value": "fetchFromGitHub"
+                            "value": "pkgs"
                           }
                         ],
-                        "type": "variable"
-                      },
-                      "type": "call"
-                    }
-                  },
-                  "operator": "+",
-                  "right": {
-                    "multiline": false,
-                    "parts": [
-                      {
-                        "type": "text",
-                        "value": "/package.nix"
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            }
+                          ],
+                          "type": "variable"
+                        }
                       }
                     ],
-                    "type": "string"
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "arguments": [
+                    {
+                      "type": "group",
+                      "value": {
+                        "left": {
+                          "type": "group",
+                          "value": {
+                            "arguments": [
+                              {
+                                "recursive": false,
+                                "statements": [
+                                  {
+                                    "operator": "=",
+                                    "target": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "owner"
+                                      }
+                                    ],
+                                    "type": "assignment",
+                                    "value": {
+                                      "multiline": false,
+                                      "parts": [
+                                        {
+                                          "type": "text",
+                                          "value": "doromiert"
+                                        }
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  {
+                                    "operator": "=",
+                                    "target": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "repo"
+                                      }
+                                    ],
+                                    "type": "assignment",
+                                    "value": {
+                                      "multiline": false,
+                                      "parts": [
+                                        {
+                                          "type": "text",
+                                          "value": "select-for-figma"
+                                        }
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  {
+                                    "operator": "=",
+                                    "target": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "rev"
+                                      }
+                                    ],
+                                    "type": "assignment",
+                                    "value": {
+                                      "multiline": false,
+                                      "parts": [
+                                        {
+                                          "type": "text",
+                                          "value": "a3b91956f30d154df0ba8bca07e70f72beed4187"
+                                        }
+                                      ],
+                                      "type": "string"
+                                    }
+                                  },
+                                  {
+                                    "operator": "=",
+                                    "target": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "hash"
+                                      }
+                                    ],
+                                    "type": "assignment",
+                                    "value": {
+                                      "multiline": false,
+                                      "parts": [
+                                        {
+                                          "type": "text",
+                                          "value": "sha256-dSxY+vRK17/1KcYPrOP6b8ZMcASK3xzHaEyYahO9gGQ="
+                                        }
+                                      ],
+                                      "type": "string"
+                                    }
+                                  }
+                                ],
+                                "type": "attr-set"
+                              }
+                            ],
+                            "callee": {
+                              "name": "pkgs",
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "legacy"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "fetchFromGitHub"
+                                }
+                              ],
+                              "type": "variable"
+                            },
+                            "type": "call"
+                          }
+                        },
+                        "operator": "+",
+                        "right": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "/package.nix"
+                            }
+                          ],
+                          "type": "string"
+                        },
+                        "type": "binary"
+                      }
+                    }
+                  ],
+                  "callee": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "callPackage"
+                      }
+                    ],
+                    "type": "variable"
                   },
-                  "type": "binary"
-                }
-              }
-            ],
-            "callee": {
-              "name": "pkgs",
-              "path": [
-                {
-                  "kind": "identifier",
-                  "value": "legacy"
+                  "type": "call"
                 },
-                {
-                  "kind": "identifier",
-                  "value": "callPackage"
-                }
-              ],
-              "type": "variable"
-            },
-            "type": "call"
+                "type": "call"
+              }
+            }
           },
           "type": "call"
-        }
+        },
+        "kind": "build"
       },
       "target": [
         "com",
         "neg-zero",
-        "select-for-figma"
-      ],
-      "categoryTarget": [
-        "apps",
-        "graphics",
         "select-for-figma"
       ]
     },
@@ -224833,30 +224494,75 @@
       },
       "provider": {
         "expression": {
-          "name": "lib",
-          "path": [
+          "arguments": [
             {
-              "kind": "identifier",
-              "value": "zenPackageSources"
-            },
-            {
-              "kind": "identifier",
-              "value": "gnosis"
-            },
-            {
-              "kind": "identifier",
-              "value": "packages"
-            },
-            {
-              "kind": "identifier",
-              "value": "x86_64-linux"
-            },
-            {
-              "kind": "identifier",
-              "value": "default"
+              "multiline": false,
+              "parts": [
+                {
+                  "type": "text",
+                  "value": "8eff4256f06a2296f7c6f362cdf5b33dd61d795f3d65faa2902fef9ba0fef45a"
+                }
+              ],
+              "type": "string"
             }
           ],
-          "type": "variable"
+          "callee": {
+            "arguments": [
+              {
+                "multiline": false,
+                "parts": [
+                  {
+                    "type": "text",
+                    "value": "gnosis"
+                  }
+                ],
+                "type": "string"
+              }
+            ],
+            "callee": {
+              "arguments": [
+                {
+                  "name": "lib",
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "zenPackageSources"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "gnosis"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "packages"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "x86_64-linux"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "default"
+                    }
+                  ],
+                  "type": "variable"
+                }
+              ],
+              "callee": {
+                "name": "lib",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "zenPrivateHomePackage"
+                  }
+                ],
+                "type": "variable"
+              },
+              "type": "call"
+            },
+            "type": "call"
+          },
+          "type": "call"
         },
         "kind": "build"
       },
@@ -229920,6 +229626,100 @@
         "apps",
         "gaming",
         "nzportable"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "terminal",
+        "blackbox-next"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.blackbox-next",
+      "meta": {
+        "description": "\n    Native GTK terminal based on Black Box, targeting the GNOME 50 stack with\n    VTE GPU text rendering and stability fixes. Includes inherited Sixel image\n    support. Kitty graphics and complete Kitty feature parity are planned.\n  ",
+        "id": "com.neg-zero.blackbox-next",
+        "license": "$l.gpl3Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Black Box Next",
+        "packageVersion": "0.15.2.4",
+        "summary": "Black Box terminal fork for GNOME 50",
+        "tags": [
+          "terminal",
+          "command-line",
+          "gnome"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "blackbox"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "com",
+        "neg-zero",
+        "blackbox-next"
       ]
     }
   ]

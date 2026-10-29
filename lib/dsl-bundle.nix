@@ -1,4 +1,4 @@
-{ lib }:
+{ lib, emitMetadataWarnings ? false }:
 
 let
   duplicates = values:
@@ -287,7 +287,7 @@ let
         inherit meta provider dependenciesDeclared;
         location = descriptor.location or location;
       } // lib.optionalAttrs (provider.kind == "import") { sourcePath = builtins.tail importPath; })
-      warnings;
+      (lib.optionals emitMetadataWarnings warnings);
 
   decodeInterface =
     descriptor: decodeInterfaceAt (descriptor.name or "<zpkg>") "<descriptor>" descriptor;

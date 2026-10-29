@@ -9,9 +9,9 @@ _meta = {
   maintainers = [ $m.doromiert ];
 };
 
-build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
-  owner = "zenos-n";
-  repo = "zenos-setup";
-  rev = "615217877b9a599c109d64f56ad841f115b9cea7";
-  hash = "sha256-pxztFIN5xQi8Gf3rVUe9GAVVQNtD+lp45lHyJF4+zxk=";
-}) + "/package.nix") { };
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.setup + "/package.nix") {
+  applicationIcons = {
+    "com.neg-zero.Gnosis" = $lib.zenPackageSources.gnosis.outPath + "/data/icons/hicolor/scalable/apps/com.neg-zero.Gnosis.svg";
+    "io.github.doromiert.SelectForFigma" = $pkgs.byCategories.apps.graphics.select-for-figma.src + "/data/io.github.doromiert.SelectForFigma.svg";
+  };
+};

@@ -36,6 +36,9 @@ pkgs.runCommand "zenpkgs-application-program-options" {
   python ${sourceRoot}/tests/check-application-program-options.py \
     --nixpkgs ${pkgs.path} --codex-schema ${codexSchema}
 
+  NIX_REMOTE=dummy:// NIX_PATH=nixpkgs=${pkgs.path} \
+    python ${sourceRoot}/tests/check-codex-usage.py
+
   printf '# preserved comment\nmodel = "preserved-model"\n' > "$CODEX_HOME/config.toml"
   run() { "$@"; }
   ${activation.data}

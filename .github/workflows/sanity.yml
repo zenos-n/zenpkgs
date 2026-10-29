@@ -12,6 +12,39 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  publish-compiled:
+    needs: check-integrity
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@v27
+      - name: Use the locked Nix toolchain
+        run: |
+          ZENPKGS_NIX=$(nix build --no-link --print-out-paths --inputs-from . 'nixpkgs#nix^out')
+          printf '%s/bin\n' "$ZENPKGS_NIX" >> "$GITHUB_PATH"
+      - name: Validate and export compiled sources
+        env:
+          SOURCE_REVISION: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          bundle=$(nix build --no-link --print-out-paths .#dsl-bundle)
+          nix build --no-link .#checks.x86_64-linux.compact-registry
+          git worktree add --detach "$RUNNER_TEMP/compiled" "$SOURCE_REVISION"
+          python3 scripts/export-compiled.py "$bundle" "$RUNNER_TEMP/compiled" "$SOURCE_REVISION"
+          git -C "$RUNNER_TEMP/compiled" config user.name 'ZenOS Compiler Bot'
+          git -C "$RUNNER_TEMP/compiled" config user.email 'bot@zenos.dev'
+          git -C "$RUNNER_TEMP/compiled" add -f .compiled .zenpkgs-revision
+          git -C "$RUNNER_TEMP/compiled" commit -m "Compile ZenPkgs $SOURCE_REVISION"
+          previous=$(git ls-remote origin refs/heads/compiled-unstable | cut -f1)
+          git -C "$RUNNER_TEMP/compiled" push \
+            "--force-with-lease=refs/heads/compiled-unstable:$previous" \
+            origin HEAD:refs/heads/compiled-unstable
   check-integrity:
     runs-on: ubuntu-latest
     permissions:

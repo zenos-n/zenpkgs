@@ -28,7 +28,8 @@ stdenvNoCC.mkDerivation {
 
   postPatch = ''
     substituteInPlace lib/shared/theme.js \
-      --replace-fail 'this.configMgr.stylesheetFileName + ".bak"' 'configCss.get_path() + ".bak"'
+      --replace-fail 'this.configMgr.stylesheetFileName + ".bak"' 'configCss.get_path() + ".bak"' \
+      --replace-fail 'Gio.FileCopyFlags.OVERWRITE, null, null' '(Gio.FileCopyFlags.OVERWRITE | Gio.FileCopyFlags.TARGET_DEFAULT_PERMS), null, null'
   '';
 
   buildPhase = ''

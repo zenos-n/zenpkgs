@@ -11,4 +11,4 @@ _meta = {
 };
 
 # Use Gnosis's own locked package set: its Brave binary adapter checks the exact version.
-build = $lib.zenPackageSources.gnosis.packages.x86_64-linux.default;
+build = $lib.zenPrivateHomePackage $lib.zenPackageSources.gnosis.packages.x86_64-linux.default "gnosis" "8eff4256f06a2296f7c6f362cdf5b33dd61d795f3d65faa2902fef9ba0fef45a";

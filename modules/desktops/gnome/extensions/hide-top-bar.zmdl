@@ -58,7 +58,7 @@ hot-corner = { _meta = { type = $type.bool; default = false; description = ''
   Whether to keep the activities hot corner active even when the
   panel is hidden.
 ''; }; };
-mouse-sensitive = { _meta = { type = $type.bool; default = false; description = ''
+mouse-sensitive = { _meta = { type = $type.bool; default = true; description = ''
   Reveal panel on mouse proximity
 
   Whether to show the panel when the mouse cursor approaches the

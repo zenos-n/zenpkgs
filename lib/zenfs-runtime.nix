@@ -134,12 +134,24 @@ in
         }
       ];
       environment.systemPackages = [ zenfs ];
+      nixpkgs.overlays = lib.mkIf cfg.strict [ (_final: previous: {
+        seahorse = previous.callPackage ./private-home-package.nix {
+          package = previous.seahorse;
+          command = "seahorse";
+          token = "189f1fd8e460c3f790ffedf20a4e73df008d05174ff91b48ebe01d841858035a";
+          inherit zenfs;
+        };
+      }) ];
       environment.etc."zenfs/manifest.json".source = manifest;
       environment.etc."systemd/user-environment-generators/20-zenfs".source =
         pkgs.writeShellScript "zenfs-user-environment" ''exec ${session} environment'';
       environment.extraInit = ''
         eval "$(${session} environment --shell)"
       '';
+      programs.zsh.shellInit = lib.mkIf cfg.strict ''
+        eval "$(${session} environment --shell)"
+      '';
+      nix.settings.use-xdg-base-directories = lib.mkIf cfg.strict (lib.mkDefault true);
       programs.ssh.extraConfig = lib.mkIf (users != { } && cfg.strict) ''
         Match localuser ${lib.concatStringsSep "," (builtins.attrNames users)}
           Include %d/.private/Config/ssh/config
@@ -149,6 +161,18 @@ in
           IdentityFile %d/.private/Config/ssh/id_rsa
         Match all
       '';
+      home-manager.users = lib.mapAttrs (_: _: { config, ... }: {
+        home.file.".zshenv".enable = lib.mkIf (cfg.strict && config.programs.zsh.enable) false;
+        home.file.".mozilla/native-messaging-hosts" = lib.mkIf
+          (cfg.strict && (config.mozilla.firefoxNativeMessagingHosts != [ ]
+            || config.mozilla.thunderbirdNativeMessagingHosts != [ ])) {
+          target = ".private/Config/mozilla/native-messaging-hosts";
+        };
+        home.file.".librewolf/native-messaging-hosts" = lib.mkIf
+          (cfg.strict && config.mozilla.librewolfNativeMessagingHosts != [ ]) {
+          target = ".private/Config/librewolf/native-messaging-hosts";
+        };
+      }) users;
       systemd.tmpfiles.settings."10-zenfs" = builtins.listToAttrs (
         lib.concatLists (lib.mapAttrsToList (name: user:
           [ (directoryRule user.home name user.group "0700") ]

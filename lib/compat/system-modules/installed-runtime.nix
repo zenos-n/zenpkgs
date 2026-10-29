@@ -3,11 +3,15 @@
   config,
   lib,
   pkgs,
+  zenpkgsRevision ? "unknown",
   ...
 }:
 let
   enabled = config.zenos.system.installed-base.enable;
   oobe = config.zenos.system.oobeMode;
+  releaseVersion = builtins.head (lib.splitString " " config.zenos.system.version.full);
+  zenpkgsHash = builtins.substring 0 7 zenpkgsRevision;
+  displayVersion = "${releaseVersion} (${zenpkgsHash})";
   users = lib.filterAttrs (_: user: user.enable && user.isNormalUser) config.users.users;
   hooks = import ../../installer-boot.nix {
     inherit pkgs lib;
@@ -47,11 +51,25 @@ in
           system.nixos = {
             distroId = lib.mkDefault "zenos";
             distroName = lib.mkDefault "ZenOS";
-            version = "1.0.0Nb";
+            version = displayVersion;
             versionSuffix = "";
+            label = "${releaseVersion}-${zenpkgsHash}";
             vendorId = lib.mkDefault "zenos";
             vendorName = lib.mkDefault "ZenOS";
-            extraOSReleaseArgs.LOGO = "zenos";
+            extraOSReleaseArgs = {
+              LOGO = "zenos";
+              BUILD_ID = "${releaseVersion}-${zenpkgsHash}";
+              CPE_NAME = "cpe:/o:zenos:zenos:${releaseVersion}";
+              VERSION = displayVersion;
+              VERSION_ID = releaseVersion;
+              VERSION_CODENAME = "";
+              PRETTY_NAME = "ZenOS ${displayVersion}";
+            };
+            extraLSBReleaseArgs = {
+              DISTRIB_DESCRIPTION = "ZenOS ${displayVersion}";
+              DISTRIB_ID = "ZenOS";
+              DISTRIB_RELEASE = releaseVersion;
+            };
           };
           xdg.portal.extraPortals = lib.optionals (
             !config.services.desktopManager.gnome.enable && !config.services.desktopManager.plasma6.enable
@@ -59,8 +77,31 @@ in
           time.timeZone = lib.mkDefault "UTC";
           i18n.defaultLocale = lib.mkDefault "en_US.UTF-8";
           console.keyMap = lib.mkDefault "us";
+          programs.zsh.interactiveShellInit = ''
+            for word_keymap in emacs viins; do
+              bindkey -M "$word_keymap" '^[[1;5D' backward-word
+              bindkey -M "$word_keymap" '^[[1;5C' forward-word
+              bindkey -M "$word_keymap" '^[[5D' backward-word
+              bindkey -M "$word_keymap" '^[[5C' forward-word
+            done
+            unset word_keymap
+          '';
           hardware.graphics.enable = lib.mkDefault true;
           services.pipewire.alsa.support32Bit = lib.mkDefault true;
+          services.masterfulGestures = {
+            enable = lib.mkDefault true;
+            user = lib.mkDefault "masterful-gestures";
+          };
+          # Input emulation needs device access, not a particular login session.
+          # A stable service account also avoids a recursive dependency between
+          # the backend's dynamic users.users key and normal-user discovery.
+          users.users.masterful-gestures = lib.mkIf (
+            config.services.masterfulGestures.enable
+            && config.services.masterfulGestures.user == "masterful-gestures"
+          ) {
+            isSystemUser = true;
+            group = "input";
+          };
           services.fwupd.enable = lib.mkDefault true;
           services.fstrim.enable = lib.mkDefault true;
           services.qemuGuest.enable = lib.mkDefault true;
@@ -72,6 +113,7 @@ in
             options = "--delete-older-than 14d";
           };
           environment.systemPackages = [
+            pkgs.zenos.byCategories.theming.system.fastfetch
             pkgs.nixos-rebuild
             pkgs.zenos.byCategories.apps.system.zenos.zenos-rebuild
             pkgs.zenos.byCategories.theming.system.zenos-branding
@@ -103,9 +145,28 @@ in
                 stateVersion = lib.mkDefault "26.05";
                 username = lib.mkDefault user.name;
                 homeDirectory = lib.mkDefault user.home;
+                packages = [
+                  pkgs.zenos.byCategories.apps.browsers.gnosis
+                  pkgs.zenos.byCategories.apps.terminal.blackbox-next
+                ];
+                sessionVariables.TERMINAL = lib.mkDefault "${pkgs.zenos.byCategories.apps.terminal.blackbox-next}/bin/blackbox-next";
               };
               xdg = {
                 enable = true;
+                terminal-exec = {
+                  enable = lib.mkDefault true;
+                  settings = {
+                    default = lib.mkDefault [ "com.neg-zero.BlackBoxNext.desktop" ];
+                    GNOME = lib.mkDefault [ "com.neg-zero.BlackBoxNext.desktop" ];
+                  };
+                };
+                mimeApps = {
+                  enable = lib.mkDefault true;
+                  defaultApplications = lib.genAttrs [
+                    "x-scheme-handler/http" "x-scheme-handler/https"
+                    "text/html" "application/xhtml+xml"
+                  ] (_: lib.mkDefault [ "com.neg-zero.Gnosis.desktop" ]);
+                };
                 configHome = "${user.home}/.private/Config";
                 dataHome = "${user.home}/.private/Packages";
                 cacheHome = "${user.home}/.private/Live";
