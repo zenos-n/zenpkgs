@@ -1,51 +1,58 @@
-# Transitional parity source: lib/compat/user-modules/zenlink/module.nix
-# Unsupported: internal/readOnly/defaultText option fields have no ZMDL equivalents.
 _meta = {
-  zenosVersion = 1.0.0Na;
-  summary = "Android to ZenOS communication bridge";
+  zenosVersion = 1.0.0Nb;
+  summary = "ZenLink phone integration";
   description = ''
-    Installs ZenLink for the current user and optionally starts its daemon with
-    the graphical session. Runtime state remains intentionally unmanaged.
+    Installs the native ZenLink desktop service and GNOME extension. Provides
+    the host virtual webcam and pairing ports. Streaming settings and live
+    camera/microphone selection belong to the Android app. Pairing and media
+    settings remain writable at runtime.
   '';
   maintainers = [ $m.doromiert ];
-  license = $l.napl;
+  license = $l.gpl2Plus;
   platforms = $lib.platforms.zenos;
 };
 
 enable = enableOption {
-  _meta.summary = "Enable the ZenLink Android bridge service";
+  _meta.summary = "Enable ZenLink phone integration";
 
+  s! {
+    programs.zenlink.enable = true;
+    environment.systemPackages = [ $path.package ];
+  };
   u! {
     home.packages = [ $path.package ];
-    systemd.user.services.zenlink = if $path.autoStart then {
+    dconf.settings."org/gnome/shell" = {
+      enabled-extensions = [ "zenlink@zenos-n.github.io" ];
+      disabled-extensions = [ "gsconnect@andyholmes.github.io" ];
+    };
+    dconf.settings."org/zenos/zenlink".enabled = $path.autoStart;
+    xdg.dataFile."dbus-1/services/org.zenos.ZenLink.service".text = "[D-BUS Service]\nName=org.zenos.ZenLink\nExec=${$path.package}/bin/zenlink\nSystemdService=zenlink.service\n";
+    systemd.user.services.zenlink = {
       Unit = {
-        Description = "ZenLink Daemon";
-        After = [ "graphical-session.target" "pipewire.service" ];
+        Description = "ZenLink device service";
+        After = [ "graphical-session-pre.target" "pipewire.service" "pipewire-pulse.service" ];
         PartOf = [ "graphical-session.target" ];
       };
       Service = {
-        ExecStart = "${$path.package}/bin/zl-daemon";
+        Type = "dbus";
+        BusName = "org.zenos.ZenLink";
+        ExecStart = "${$path.package}/bin/zenlink";
         Restart = "on-failure";
         RestartSec = "3s";
-        Environment = "PATH=${$lib.makeBinPath [ $path.package ]}:$PATH";
       };
-      Install.WantedBy = [ "graphical-session.target" ];
-    } else { };
+      Install.WantedBy = if $path.autoStart then [ "graphical-session.target" ] else [ ];
+    };
   };
 };
 
-package = {
-  _meta = {
-    type = $type.package;
-    default = $pkgs.byCategories.system.zenlink;
-    summary = "ZenLink package";
-  };
+package._meta = {
+  type = $type.package;
+  default = $pkgs.byCategories.system.zenlink;
+  summary = "ZenLink desktop package";
 };
 
-autoStart = {
-  _meta = {
-    type = $type.boolean;
-    default = true;
-    summary = "Start ZenLink with the graphical session";
-  };
+autoStart._meta = {
+  type = $type.boolean;
+  default = true;
+  summary = "Start ZenLink with the graphical session";
 };

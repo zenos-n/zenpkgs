@@ -635,6 +635,7 @@
         "source-vr-tools": "source-vr-tools",
         "source-zane-indicator": "source-zane-indicator",
         "source-zenfs": "source-zenfs",
+        "source-zenlink": "source-zenlink",
         "vsc-extensions": "vsc-extensions"
       }
     },
@@ -873,6 +874,23 @@
         "owner": "zenos-n",
         "repo": "zenfs",
         "rev": "6a6ac505bd153b5235170e3e021138166c9c4bda",
+        "type": "github"
+      }
+    },
+    "source-zenlink": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793308198,
+        "narHash": "sha256-JzlqOzsHYGb7KflQiS0EPvy/mMDMBUawz3NXAl4Ipqg=",
+        "owner": "zenos-n",
+        "repo": "zenlink-gnome",
+        "rev": "fd8706ec644db39a54b61d60788e9f3af2a97f47",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "zenlink-gnome",
+        "rev": "fd8706ec644db39a54b61d60788e9f3af2a97f47",
         "type": "github"
       }
     },
