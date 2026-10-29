@@ -353,18 +353,117 @@
             "callee": {
               "arguments": [
                 {
-                  "name": "pkgs",
-                  "path": [
-                    {
-                      "kind": "identifier",
-                      "value": "legacy"
+                  "type": "group",
+                  "value": {
+                    "arguments": [
+                      {
+                        "recursive": false,
+                        "statements": [
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "extraEnv"
+                              },
+                              {
+                                "kind": "identifier",
+                                "value": "STEAM_EXTRA_COMPAT_TOOLS_PATHS"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "arguments": [
+                                {
+                                  "items": [
+                                    {
+                                      "name": "pkgs",
+                                      "path": [
+                                        {
+                                          "kind": "identifier",
+                                          "value": "byCategories"
+                                        },
+                                        {
+                                          "kind": "identifier",
+                                          "value": "apps"
+                                        },
+                                        {
+                                          "kind": "identifier",
+                                          "value": "gaming"
+                                        },
+                                        {
+                                          "kind": "identifier",
+                                          "value": "proton-ge-bin"
+                                        }
+                                      ],
+                                      "type": "variable"
+                                    }
+                                  ],
+                                  "type": "list"
+                                }
+                              ],
+                              "callee": {
+                                "arguments": [
+                                  {
+                                    "multiline": false,
+                                    "parts": [],
+                                    "type": "string"
+                                  }
+                                ],
+                                "callee": {
+                                  "arguments": [
+                                    {
+                                      "multiline": false,
+                                      "parts": [
+                                        {
+                                          "type": "text",
+                                          "value": "steamcompattool"
+                                        }
+                                      ],
+                                      "type": "string"
+                                    }
+                                  ],
+                                  "callee": {
+                                    "name": "lib",
+                                    "path": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "makeSearchPathOutput"
+                                      }
+                                    ],
+                                    "type": "variable"
+                                  },
+                                  "type": "call"
+                                },
+                                "type": "call"
+                              },
+                              "type": "call"
+                            }
+                          }
+                        ],
+                        "type": "attr-set"
+                      }
+                    ],
+                    "callee": {
+                      "name": "pkgs",
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "legacy"
+                        },
+                        {
+                          "kind": "identifier",
+                          "value": "steam"
+                        },
+                        {
+                          "kind": "identifier",
+                          "value": "override"
+                        }
+                      ],
+                      "type": "variable"
                     },
-                    {
-                      "kind": "identifier",
-                      "value": "steam"
-                    }
-                  ],
-                  "type": "variable"
+                    "type": "call"
+                  }
                 }
               ],
               "callee": {

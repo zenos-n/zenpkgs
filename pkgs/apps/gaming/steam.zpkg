@@ -11,4 +11,8 @@ _meta = {
   maintainers = [ $m.doromiert ];
 };
 
-build = $lib.zenPrivateHomePackage $pkgs.legacy.steam "steam" "68561f488261e6f7d6d63a8f8765d6f75091a558409550efeb2cc3c111f5b280";
+build = $lib.zenPrivateHomePackage ($pkgs.legacy.steam.override {
+  extraEnv.STEAM_EXTRA_COMPAT_TOOLS_PATHS = $lib.makeSearchPathOutput "steamcompattool" "" [
+    $pkgs.byCategories.apps.gaming.proton-ge-bin
+  ];
+}) "steam" "68561f488261e6f7d6d63a8f8765d6f75091a558409550efeb2cc3c111f5b280";
