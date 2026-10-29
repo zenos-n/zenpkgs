@@ -11,4 +11,4 @@ _meta = {
   maintainers = [ $m.doromiert ];
 };
 
-import $pkgs.legacy.steam;
+build = $lib.zenPrivateHomePackage $pkgs.legacy.steam "steam" "68561f488261e6f7d6d63a8f8765d6f75091a558409550efeb2cc3c111f5b280";

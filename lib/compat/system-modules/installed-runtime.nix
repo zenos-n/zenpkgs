@@ -87,6 +87,9 @@ in
             unset word_keymap
           '';
           hardware.graphics.enable = lib.mkDefault true;
+          hardware.graphics.enable32Bit = lib.mkIf (
+            lib.any (package: lib.getName package == "steam") config.environment.systemPackages
+          ) (lib.mkDefault true);
           services.pipewire.alsa.support32Bit = lib.mkDefault true;
           services.masterfulGestures = {
             enable = lib.mkDefault true;

@@ -919,17 +919,17 @@
     "source-zenfs": {
       "flake": false,
       "locked": {
-        "lastModified": 1793309998,
-        "narHash": "sha256-pg6J9LR+FCghIWU5lo4E3VVSbBFL5ecsWIRHYsdoqAc=",
+        "lastModified": 1793314539,
+        "narHash": "sha256-bdahLR0d+GMhCM8mloDHDug6mYxRh44Bl2+jySn7h4E=",
         "owner": "zenos-n",
         "repo": "zenfs",
-        "rev": "3ae2f61c036876afe2dc5e65482284989a12b20e",
+        "rev": "27b383e8d98ba0cac0dc3535f074b29a731364f7",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenfs",
-        "rev": "3ae2f61c036876afe2dc5e65482284989a12b20e",
+        "rev": "27b383e8d98ba0cac0dc3535f074b29a731364f7",
         "type": "github"
       }
     },

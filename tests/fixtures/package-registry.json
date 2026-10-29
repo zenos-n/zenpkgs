@@ -299,54 +299,96 @@
       ]
     },
     {
-      "id": "pkgs.com.valvesoftware.Steam",
-      "target": [
-        "com",
-        "valvesoftware",
-        "Steam"
-      ],
-      "sourcePath": [
+      "categoryTarget": [
+        "apps",
+        "gaming",
         "steam"
       ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.valvesoftware.Steam",
       "meta": {
-        "name": "steam",
-        "summary": "Curated steam package for ZenOS",
         "description": "\n    Curated steam package for ZenOS\n  ",
-        "zenosVersion": "1.0.0",
+        "id": "com.valvesoftware.Steam",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "steam",
         "packageVersion": "1.0.0",
+        "summary": "Curated steam package for ZenOS",
         "tags": [
           "gaming",
           "store",
           "launcher"
         ],
-        "maintainers": [
-          "doromiert"
-        ],
-        "license": null,
-        "id": "com.valvesoftware.Steam"
+        "zenosVersion": "1.0.0"
       },
       "provider": {
-        "kind": "import",
         "expression": {
-          "name": "pkgs",
-          "path": [
+          "arguments": [
             {
-              "kind": "identifier",
-              "value": "legacy"
-            },
-            {
-              "kind": "identifier",
-              "value": "steam"
+              "multiline": false,
+              "parts": [
+                {
+                  "type": "text",
+                  "value": "68561f488261e6f7d6d63a8f8765d6f75091a558409550efeb2cc3c111f5b280"
+                }
+              ],
+              "type": "string"
             }
           ],
-          "type": "variable"
-        }
+          "callee": {
+            "arguments": [
+              {
+                "multiline": false,
+                "parts": [
+                  {
+                    "type": "text",
+                    "value": "steam"
+                  }
+                ],
+                "type": "string"
+              }
+            ],
+            "callee": {
+              "arguments": [
+                {
+                  "name": "pkgs",
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "legacy"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "steam"
+                    }
+                  ],
+                  "type": "variable"
+                }
+              ],
+              "callee": {
+                "name": "lib",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "zenPrivateHomePackage"
+                  }
+                ],
+                "type": "variable"
+              },
+              "type": "call"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
       },
-      "dependenciesDeclared": false,
-      "categoryTarget": [
-        "apps",
-        "gaming",
-        "steam"
+      "target": [
+        "com",
+        "valvesoftware",
+        "Steam"
       ]
     },
     {

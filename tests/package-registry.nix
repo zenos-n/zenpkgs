@@ -292,8 +292,8 @@ in
     assert builtins.length expectedActiveEntries == 4155;
     assert builtins.length registry.packages == 4155;
     assert builtins.length activeEntries == 4155;
-    assert builtins.length importEntries == 4098;
-    assert builtins.length buildEntries == 57;
+    assert builtins.length importEntries == 4097;
+    assert builtins.length buildEntries == 58;
     assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 
@@ -354,6 +354,7 @@ in
         "apps.gaming.fnuidesktop-vr"
         "apps.gaming.nzportable"
         "apps.gaming.ovr-advanced-settings"
+        "apps.gaming.steam"
         "apps.gaming.wlx-overlay-s"
         "apps.gaming.zenos-vr-tools"
         "apps.graphics.blender-hip"
