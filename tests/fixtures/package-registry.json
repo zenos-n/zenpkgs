@@ -227422,70 +227422,55 @@
       ]
     },
     {
-      "id": "pkgs.com.neg-zero.zenlink-indicator",
-      "target": [
-        "com",
-        "neg-zero",
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
         "zenlink-indicator"
       ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.zenlink-indicator",
       "meta": {
-        "name": "zenlink-indicator",
-        "summary": "ZenLink status indicator and control interface for GNOME",
-        "description": "\n    ZenLink status indicator and control interface for GNOME\n\n    **ZenLink Indicator** provides a status icon and control interface for the\n    ZenLink service. It integrates directly into the GNOME control center or\n    top bar, offering quick access to device pairing, file transfers, and\n    notification settings.\n\n    **Features:**\n    - Visual status indicator for connectivity.\n    - Quick access menu for common actions.\n  ",
+        "description": "\n    The ZenLink desktop package includes both its GNOME Shell extension and\n    device service. This existing package selector resolves to that same build.\n  ",
+        "id": "com.neg-zero.zenlink-indicator",
+        "license": "$l.gpl2Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenLink GNOME extension",
+        "packageVersion": "0.1.0",
+        "summary": "Compatibility alias for the complete ZenLink desktop package",
         "tags": [
           "desktops",
           "gnome",
           "extensions"
         ],
-        "maintainers": [
-          "doromiert"
-        ],
-        "license": "$l.napl",
-        "zenosVersion": "1.0.0",
-        "id": "com.neg-zero.zenlink-indicator",
-        "packageVersion": "1.0"
+        "zenosVersion": "1.0.0"
       },
       "provider": {
-        "kind": "build",
         "expression": {
-          "arguments": [
+          "name": "pkgs",
+          "path": [
             {
-              "name": "lib",
-              "path": [
-                {
-                  "kind": "identifier",
-                  "value": "zenPackageSources"
-                },
-                {
-                  "kind": "identifier",
-                  "value": "compatRecipes"
-                },
-                {
-                  "kind": "string",
-                  "value": "desktops/gnome/extensions/zenlink-indicator"
-                }
-              ],
-              "type": "variable"
+              "kind": "identifier",
+              "value": "byCategories"
+            },
+            {
+              "kind": "identifier",
+              "value": "system"
+            },
+            {
+              "kind": "identifier",
+              "value": "zenlink"
             }
           ],
-          "callee": {
-            "name": "lib",
-            "path": [
-              {
-                "kind": "identifier",
-                "value": "zenCompatPackage"
-              }
-            ],
-            "type": "variable"
-          },
-          "type": "call"
-        }
+          "type": "variable"
+        },
+        "kind": "build"
       },
-      "dependenciesDeclared": false,
-      "categoryTarget": [
-        "desktops",
-        "gnome",
-        "extensions",
+      "target": [
+        "com",
+        "neg-zero",
         "zenlink-indicator"
       ]
     },
@@ -227686,66 +227671,118 @@
       ]
     },
     {
-      "id": "pkgs.com.neg-zero.zenlink",
-      "target": [
-        "com",
-        "neg-zero",
+      "categoryTarget": [
+        "system",
         "zenlink"
       ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.zenlink",
       "meta": {
-        "name": "zenlink",
-        "summary": "The Android to ZenOS communication bridge",
-        "description": "\n    The Android to ZenOS communication bridge\n\n    **ZenLink** (formerly ZeroBridge)\n\n    ZenLink uses termux to stream PC audio to your phone and ADB to stream phone's mic and camera to your PC.\n    It provides a seamless integration between mobile hardware and the ZenOS desktop environment.\n    Configure using `zl-config` or the gnome extension (`pkgs.byCategories.desktops.gnome.extensions.zenlink-indicator`).\n  ",
-        "tags": [
-          "system"
-        ],
+        "description": "\n    ZenLink's GSConnect-based desktop service and GNOME Shell extension.\n    Pair with the native ZenLink Android app over the local network. The phone\n    controls streaming, camera selection and microphone selection. Dedicated\n    desktop audio devices isolate phone microphone input from playback output.\n    Enable system.programs.zenlink for session integration and virtual webcam support.\n  ",
+        "id": "com.neg-zero.zenlink",
+        "license": "$l.gpl2Plus",
         "maintainers": [
           "doromiert"
         ],
-        "license": "$l.napl",
-        "zenosVersion": "1.0.0",
-        "id": "com.neg-zero.zenlink",
-        "packageVersion": "1.0.0"
+        "name": "ZenLink",
+        "packageVersion": "0.1.0",
+        "summary": "KDE Connect device integration with bidirectional audio and camera streaming",
+        "tags": [
+          "system",
+          "android",
+          "gnome",
+          "audio",
+          "camera"
+        ],
+        "zenosVersion": "1.0.0"
       },
       "provider": {
-        "kind": "build",
         "expression": {
           "arguments": [
             {
-              "name": "lib",
-              "path": [
+              "recursive": false,
+              "statements": [
                 {
-                  "kind": "identifier",
-                  "value": "zenPackageSources"
-                },
-                {
-                  "kind": "identifier",
-                  "value": "compatRecipes"
-                },
-                {
-                  "kind": "string",
-                  "value": "system/zenlink"
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "pkgs"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      }
+                    ],
+                    "type": "variable"
+                  }
                 }
               ],
-              "type": "variable"
+              "type": "attr-set"
             }
           ],
           "callee": {
-            "name": "lib",
-            "path": [
+            "arguments": [
               {
-                "kind": "identifier",
-                "value": "zenCompatPackage"
+                "type": "group",
+                "value": {
+                  "left": {
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "zenlink"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/nix/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
               }
             ],
-            "type": "variable"
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
           },
           "type": "call"
-        }
+        },
+        "kind": "build"
       },
-      "dependenciesDeclared": false,
-      "categoryTarget": [
-        "system",
+      "target": [
+        "com",
+        "neg-zero",
         "zenlink"
       ]
     },

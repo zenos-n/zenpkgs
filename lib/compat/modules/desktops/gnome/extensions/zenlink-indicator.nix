@@ -24,7 +24,7 @@ let
       - Native integration with the ZenOS connectivity stack.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
-    license = lib.licenses.napl;
+    license = lib.licenses.gpl2Plus;
     platforms = lib.platforms.zenos;
   };
 in
@@ -41,6 +41,7 @@ in
   };
 
   config = mkIf cfg.enable {
+    programs.zenlink.enable = true;
     environment.systemPackages = [ pkgs.zenos.byCategories.desktops.gnome.extensions.zenlink-indicator ];
   };
 }

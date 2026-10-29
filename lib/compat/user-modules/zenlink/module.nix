@@ -11,7 +11,7 @@ let
   cfg = config.zenos.zenlink;
   meta = {
     description = ''
-      Android to ZenOS communication bridge service
+      ZenLink native phone integration
 
       **ZenLink User Module**
 
@@ -19,7 +19,7 @@ let
       ZenLink enables audio and camera streaming between Android devices and ZenOS.
     '';
     maintainers = with lib.maintainers; [ doromiert ];
-    license = lib.licenses.napl;
+    license = lib.licenses.gpl2Plus;
     platforms = lib.platforms.zenos;
   };
 in
@@ -61,30 +61,31 @@ in
   config = mkIf cfg.enable {
     home.packages = [ cfg.package ];
 
-    # The config file (~/.config/zenlink/state.conf) is intentionally
-    # NOT managed by Home Manager to allow the imperative `zl-config`
-    # tool to modify it at runtime without read-only errors.
-
-    systemd.zenlink = mkIf cfg.autoStart {
+    dconf.settings."org/gnome/shell" = {
+      enabled-extensions = [ "zenlink@zenos-n.github.io" ];
+      disabled-extensions = [ "gsconnect@andyholmes.github.io" ];
+    };
+    dconf.settings."org/zenos/zenlink".enabled = cfg.autoStart;
+    xdg.dataFile."dbus-1/services/org.zenos.ZenLink.service".text = ''
+      [D-BUS Service]
+      Name=org.zenos.ZenLink
+      Exec=${cfg.package}/bin/zenlink
+      SystemdService=zenlink.service
+    '';
+    systemd.user.services.zenlink = {
       Unit = {
-        Description = "ZenLink Daemon";
-        After = [
-          "graphical-session.target"
-          "pipewire.service"
-        ];
+        Description = "ZenLink device service";
+        After = [ "graphical-session-pre.target" "pipewire.service" "pipewire-pulse.service" ];
         PartOf = [ "graphical-session.target" ];
       };
-
       Service = {
-        ExecStart = "${cfg.package}/bin/zl-daemon";
+        Type = "dbus";
+        BusName = "org.zenos.ZenLink";
+        ExecStart = "${cfg.package}/bin/zenlink";
         Restart = "on-failure";
         RestartSec = "3s";
-        Environment = "PATH=${lib.makeBinPath [ cfg.package ]}:$PATH";
       };
-
-      Install = {
-        WantedBy = [ "graphical-session.target" ];
-      };
+      Install.WantedBy = lib.optionals cfg.autoStart [ "graphical-session.target" ];
     };
   };
 }

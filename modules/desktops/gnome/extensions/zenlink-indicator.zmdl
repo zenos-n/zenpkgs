@@ -1,29 +1,12 @@
 _meta = {
-  zenosVersion = 1.0.0Na;
-  summary = "ZenLink integration indicator for GNOME Shell";
-  description = ''
-    ZenLink integration indicator for GNOME Shell
-
-    This module installs and configures the **ZenLink Indicator** extension.
-    It adds a dedicated indicator to the top bar for quick access to ZenLink
-    functionality, facilitating seamless device synchronization within
-    the ZenOS ecosystem.
-
-    **Features:**
-    - Quick access panel menu for ZenLink actions.
-    - Native integration with the ZenOS connectivity stack.
-  '';
+  zenosVersion = 1.0.0Nb;
+  summary = "Enable ZenLink's integrated GNOME extension";
+  description = ''Compatibility selector for system.programs.zenlink, which installs the complete desktop service and extension.'';
   maintainers = [ $m.doromiert ];
-  license = $l.napl;
+  license = $l.gpl2Plus;
   platforms = $lib.platforms.zenos;
 };
 
 enable = enableOption {
-  u! {
-    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.byCategories.desktops.gnome.extensions.zenlink-indicator.extensionUuid ];
-  };
-  _meta.description = ''ZenLink indicator GNOME extension configuration'';
-  s! {
-    environment.systemPackages = [ $pkgs.byCategories.desktops.gnome.extensions.zenlink-indicator ];
-  };
+  s! { zenos.system.programs.zenlink.enable = true; };
 };
