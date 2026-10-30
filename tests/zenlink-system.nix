@@ -6,6 +6,9 @@ let
     modules = [ zenosModule {
       system.stateVersion = "26.05";
       zenos.desktops.gnome.extensions.zenlink-indicator.enable = true;
+      zenos.desktops.gnome.enable = true;
+      zenos.desktops.gnome.extensions.forge.enable = true;
+      zenos.desktops.gnome.extensionUuids = [ "existing@example.test" ];
       zenos.users.zenlink-test.profile.normalUser = true;
       home-manager.users.zenlink-test.home.stateVersion = "26.05";
     } ];
@@ -18,6 +21,8 @@ assert c.zenos.system.programs.zenlink.enable && c.programs.zenlink.enable;
 assert builtins.elem c.boot.kernelPackages.v4l2loopback.drvPath (map (p: p.drvPath) c.boot.extraModulePackages);
 assert nixpkgs.lib.hasInfix "zenlink@zenos-n.github.io" (toString h.dconf.settings."org/gnome/shell".enabled-extensions);
 assert nixpkgs.lib.hasInfix "gsconnect@andyholmes.github.io" (toString h.dconf.settings."org/gnome/shell".disabled-extensions);
+assert nixpkgs.lib.hasInfix "forge@jmmaranan.com" (toString h.dconf.settings."org/gnome/shell".enabled-extensions);
+assert nixpkgs.lib.hasInfix "existing@example.test" (toString h.dconf.settings."org/gnome/shell".enabled-extensions);
 assert service.Service.BusName == "org.zenos.ZenLink";
 assert service.Install.WantedBy == [ "graphical-session.target" ];
 assert !(builtins.elem "graphical-session.target" service.Unit.After);

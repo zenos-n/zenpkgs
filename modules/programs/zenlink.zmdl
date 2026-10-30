@@ -20,10 +20,10 @@ enable = enableOption {
     environment.systemPackages = [ $path.package ];
   };
   u! {
-    home.packages = [ $path.package ];
+    home.packages = $lib.mkDefault [ $path.package ];
     dconf.settings."org/gnome/shell" = {
-      enabled-extensions = [ "zenlink@zenos-n.github.io" ];
-      disabled-extensions = [ "gsconnect@andyholmes.github.io" ];
+      enabled-extensions = $lib.mkDefault [ "zenlink@zenos-n.github.io" ];
+      disabled-extensions = $lib.mkDefault [ "gsconnect@andyholmes.github.io" ];
     };
     dconf.settings."org/zenos/zenlink".enabled = $path.autoStart;
     xdg.dataFile."dbus-1/services/org.zenos.ZenLink.service".text = "[D-BUS Service]\nName=org.zenos.ZenLink\nExec=${$path.package}/bin/zenlink\nSystemdService=zenlink.service\n";
