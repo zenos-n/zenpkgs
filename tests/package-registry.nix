@@ -329,7 +329,7 @@ in
     assert canonical.drvPath == category.drvPath;
     assert canonical.meta.mainProgram == "blankbox";
     assert publicPackages."com.neg-zero.blackbox-next".drvPath == canonical.drvPath;
-    assert canonical.version == "0.15.2.7";
+    assert canonical.version == "0.15.2.8";
     pass "zenpkgs-blankbox-package";
 
   registry-build-providers =

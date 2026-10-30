@@ -681,17 +681,17 @@
     "source-blankbox": {
       "flake": false,
       "locked": {
-        "lastModified": 1793342774,
-        "narHash": "sha256-egYiv2qdciRK8ysjBXg18MAwxmVifXEIzITo/HwGi8I=",
+        "lastModified": 1793353676,
+        "narHash": "sha256-j9ZVTKPPrFU9ED1PcrDARk1P5u9dpbdZZfy6Jpph0eM=",
         "owner": "zenos-n",
         "repo": "blankbox",
-        "rev": "9201b9ac7ea16bf3317709b61e1aec92a4085a01",
+        "rev": "e629edf8a4b287475b836d5d2d674a8139a6579e",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "blankbox",
-        "rev": "9201b9ac7ea16bf3317709b61e1aec92a4085a01",
+        "rev": "e629edf8a4b287475b836d5d2d674a8139a6579e",
         "type": "github"
       }
     },

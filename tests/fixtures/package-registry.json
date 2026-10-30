@@ -229822,7 +229822,7 @@
           "doromiert"
         ],
         "name": "Blankbox (compatibility name)",
-        "packageVersion": "0.15.2.7",
+        "packageVersion": "0.15.2.8",
         "summary": "Compatibility name for Blankbox",
         "tags": [
           "terminal",
@@ -229878,7 +229878,7 @@
           "doromiert"
         ],
         "name": "Blankbox",
-        "packageVersion": "0.15.2.7",
+        "packageVersion": "0.15.2.8",
         "summary": "Black Box terminal fork for GNOME 50",
         "tags": [
           "terminal",
