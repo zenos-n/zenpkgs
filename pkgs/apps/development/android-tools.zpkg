@@ -11,4 +11,27 @@ _meta = {
   maintainers = [ $m.doromiert ];
 };
 
-import $pkgs.legacy.android-tools;
+build = $pkgs.legacy.symlinkJoin {
+  name = "android-tools-${$pkgs.legacy.android-tools.version}-zenfs";
+  paths = [ $pkgs.legacy.android-tools ];
+  nativeBuildInputs = [ $pkgs.legacy.makeWrapper ];
+  postBuild = ''
+    rm "$out/bin/adb"
+    makeWrapper ${$pkgs.legacy.android-tools}/bin/adb "$out/bin/adb" \
+      --run 'if [ -d "$HOME/.private" ]; then
+        android_private_home="$HOME/.private/Packages/android-tools"
+        if [ -z "$ANDROID_USER_HOME" ]; then export ANDROID_USER_HOME="$HOME/.private/Config/android"; fi
+        mkdir -p "$android_private_home" "$ANDROID_USER_HOME"
+        if [ ! -e "$android_private_home/.android" ] && [ ! -L "$android_private_home/.android" ]; then
+          ln -s "$ANDROID_USER_HOME" "$android_private_home/.android"
+        fi
+        if [ ! -L "$android_private_home/.android" ] || [ "$(readlink "$android_private_home/.android")" != "$ANDROID_USER_HOME" ]; then
+          echo "adb: unexpected private Android directory; refusing to replace it" >&2
+          exit 1
+        fi
+        export HOME="$android_private_home"
+      fi'
+  '';
+  meta = $pkgs.legacy.android-tools.meta;
+  version = $pkgs.legacy.android-tools.version;
+};

@@ -10,4 +10,22 @@ _meta = {
   license = $l.gpl3Only;
 };
 
-import $pkgs.legacy.gpu-screen-recorder;
+build = $lib.makeOverridable ({ wrapperDir ? "/run/wrappers/bin" }:
+  $pkgs.legacy.symlinkJoin {
+    name = "gpu-screen-recorder-${$pkgs.legacy.gpu-screen-recorder.version}-zenfs";
+    paths = [ ($pkgs.legacy.gpu-screen-recorder.override { inherit wrapperDir; }) ];
+    nativeBuildInputs = [ $pkgs.legacy.makeWrapper ];
+    postBuild = ''
+      original=$(readlink "$out/bin/gpu-screen-recorder")
+      rm "$out/bin/gpu-screen-recorder"
+      makeWrapper "$original" "$out/bin/gpu-screen-recorder" \
+        --run 'if [ -d "$HOME/.private" ]; then
+          export HOME="$HOME/.private/Packages/gpu-screen-recorder"
+          mkdir -p "$HOME"
+        fi' \
+        --prefix PATH : "${wrapperDir}"
+    '';
+    meta = $pkgs.legacy.gpu-screen-recorder.meta;
+    version = $pkgs.legacy.gpu-screen-recorder.version;
+  }
+) {};

@@ -292,8 +292,8 @@ in
     assert builtins.length expectedActiveEntries == 4161;
     assert builtins.length registry.packages == 4161;
     assert builtins.length activeEntries == 4161;
-    assert builtins.length importEntries == 4099;
-    assert builtins.length buildEntries == 62;
+    assert builtins.length importEntries == 4097;
+    assert builtins.length buildEntries == 64;
     assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 

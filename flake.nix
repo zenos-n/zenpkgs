@@ -76,7 +76,7 @@
       flake = false;
     };
     source-zenfs = {
-      url = "github:zenos-n/zenfs/27b383e8d98ba0cac0dc3535f074b29a731364f7";
+      url = "github:zenos-n/zenfs/5b27c6a02ae8ee769ffbeb4ddc13343174c772d4";
       flake = false;
     };
     # Extracted package sources are published separately from the package catalog.
@@ -765,6 +765,14 @@
             sourceRoot = self;
             homeManager = inputs.home-manager.outPath;
           };
+          home-leak-wrappers = pkgs.runCommand "zenpkgs-home-leak-wrappers" {
+            nativeBuildInputs = [ pkgs.python3 ];
+          } ''
+            python ${./tests/check-home-leak-wrappers.py} \
+              ${pkgs.zenos.byCategories.apps.development.android-tools}/bin/adb \
+              ${pkgs.zenos.byCategories.apps.video.gpu-screen-recorder}/bin/gpu-screen-recorder
+            touch "$out"
+          '';
           gpu-screen-recorder-module =
             assert import ./tests/gpu-screen-recorder.nix { inherit nixpkgs; zenosModule = self.nixosModules.default; };
             pkgs.writeText "gpu-screen-recorder-module-check" "passed";

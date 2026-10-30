@@ -214613,10 +214613,16 @@
       ]
     },
     {
+      "categoryTarget": [
+        "apps",
+        "development",
+        "android-tools"
+      ],
       "dependenciesDeclared": false,
       "id": "pkgs.unknown.android-tools",
       "meta": {
         "description": "\n    Android SDK platform tools\n  ",
+        "id": "unknown.android-tools",
         "license": null,
         "maintainers": [
           "doromiert"
@@ -214629,36 +214635,238 @@
           "migration",
           "android-tools"
         ],
-        "zenosVersion": "1.0.0",
-        "id": "unknown.android-tools"
+        "zenosVersion": "1.0.0"
       },
       "provider": {
-        "kind": "import",
         "expression": {
-          "name": "pkgs",
-          "path": [
+          "arguments": [
             {
-              "kind": "identifier",
-              "value": "legacy"
-            },
-            {
-              "kind": "identifier",
-              "value": "android-tools"
+              "recursive": false,
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "name"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "android-tools-"
+                      },
+                      {
+                        "expression": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "android-tools"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "version"
+                            }
+                          ],
+                          "type": "variable"
+                        },
+                        "type": "interpolation"
+                      },
+                      {
+                        "type": "text",
+                        "value": "-zenfs"
+                      }
+                    ],
+                    "type": "string"
+                  }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "paths"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "items": [
+                      {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "android-tools"
+                          }
+                        ],
+                        "type": "variable"
+                      }
+                    ],
+                    "type": "list"
+                  }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "nativeBuildInputs"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "items": [
+                      {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "makeWrapper"
+                          }
+                        ],
+                        "type": "variable"
+                      }
+                    ],
+                    "type": "list"
+                  }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "postBuild"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "multiline": true,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "\n    rm \"$out/bin/adb\"\n    makeWrapper "
+                      },
+                      {
+                        "expression": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "android-tools"
+                            }
+                          ],
+                          "type": "variable"
+                        },
+                        "type": "interpolation"
+                      },
+                      {
+                        "type": "text",
+                        "value": "/bin/adb \"$out/bin/adb\" \\\n      --run 'if [ -d \"$HOME/.private\" ]; then\n        android_private_home=\"$HOME/.private/Packages/android-tools\"\n        if [ -z \"$ANDROID_USER_HOME\" ]; then export ANDROID_USER_HOME=\"$HOME/.private/Config/android\"; fi\n        mkdir -p \"$android_private_home\" \"$ANDROID_USER_HOME\"\n        if [ ! -e \"$android_private_home/.android\" ] && [ ! -L \"$android_private_home/.android\" ]; then\n          ln -s \"$ANDROID_USER_HOME\" \"$android_private_home/.android\"\n        fi\n        if [ ! -L \"$android_private_home/.android\" ] || [ \"$(readlink \"$android_private_home/.android\")\" != \"$ANDROID_USER_HOME\" ]; then\n          echo \"adb: unexpected private Android directory; refusing to replace it\" >&2\n          exit 1\n        fi\n        export HOME=\"$android_private_home\"\n      fi'\n  "
+                      }
+                    ],
+                    "type": "string"
+                  }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "meta"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "android-tools"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "meta"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "version"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "android-tools"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "version"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
+              "type": "attr-set"
             }
           ],
-          "type": "variable"
-        }
+          "callee": {
+            "name": "pkgs",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "legacy"
+              },
+              {
+                "kind": "identifier",
+                "value": "symlinkJoin"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        },
+        "kind": "build"
       },
-      "sourcePath": [
-        "android-tools"
-      ],
       "target": [
         "unknown",
-        "android-tools"
-      ],
-      "categoryTarget": [
-        "apps",
-        "development",
         "android-tools"
       ]
     },
@@ -230123,24 +230331,300 @@
       },
       "provider": {
         "expression": {
-          "name": "pkgs",
-          "path": [
+          "arguments": [
             {
-              "kind": "identifier",
-              "value": "legacy"
-            },
-            {
-              "kind": "identifier",
-              "value": "gpu-screen-recorder"
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
             }
           ],
-          "type": "variable"
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "body": {
+                    "arguments": [
+                      {
+                        "recursive": false,
+                        "statements": [
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "name"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "multiline": false,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "gpu-screen-recorder-"
+                                },
+                                {
+                                  "expression": {
+                                    "name": "pkgs",
+                                    "path": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "legacy"
+                                      },
+                                      {
+                                        "kind": "identifier",
+                                        "value": "gpu-screen-recorder"
+                                      },
+                                      {
+                                        "kind": "identifier",
+                                        "value": "version"
+                                      }
+                                    ],
+                                    "type": "variable"
+                                  },
+                                  "type": "interpolation"
+                                },
+                                {
+                                  "type": "text",
+                                  "value": "-zenfs"
+                                }
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "paths"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "items": [
+                                {
+                                  "type": "group",
+                                  "value": {
+                                    "arguments": [
+                                      {
+                                        "recursive": false,
+                                        "statements": [
+                                          {
+                                            "names": [
+                                              "wrapperDir"
+                                            ],
+                                            "source": null,
+                                            "type": "inherit"
+                                          }
+                                        ],
+                                        "type": "attr-set"
+                                      }
+                                    ],
+                                    "callee": {
+                                      "name": "pkgs",
+                                      "path": [
+                                        {
+                                          "kind": "identifier",
+                                          "value": "legacy"
+                                        },
+                                        {
+                                          "kind": "identifier",
+                                          "value": "gpu-screen-recorder"
+                                        },
+                                        {
+                                          "kind": "identifier",
+                                          "value": "override"
+                                        }
+                                      ],
+                                      "type": "variable"
+                                    },
+                                    "type": "call"
+                                  }
+                                }
+                              ],
+                              "type": "list"
+                            }
+                          },
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "nativeBuildInputs"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "items": [
+                                {
+                                  "name": "pkgs",
+                                  "path": [
+                                    {
+                                      "kind": "identifier",
+                                      "value": "legacy"
+                                    },
+                                    {
+                                      "kind": "identifier",
+                                      "value": "makeWrapper"
+                                    }
+                                  ],
+                                  "type": "variable"
+                                }
+                              ],
+                              "type": "list"
+                            }
+                          },
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "postBuild"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "multiline": true,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "\n      original=$(readlink \"$out/bin/gpu-screen-recorder\")\n      rm \"$out/bin/gpu-screen-recorder\"\n      makeWrapper \"$original\" \"$out/bin/gpu-screen-recorder\" \\\n        --run 'if [ -d \"$HOME/.private\" ]; then\n          export HOME=\"$HOME/.private/Packages/gpu-screen-recorder\"\n          mkdir -p \"$HOME\"\n        fi' \\\n        --prefix PATH : \""
+                                },
+                                {
+                                  "expression": {
+                                    "path": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "wrapperDir"
+                                      }
+                                    ],
+                                    "type": "reference"
+                                  },
+                                  "type": "interpolation"
+                                },
+                                {
+                                  "type": "text",
+                                  "value": "\"\n    "
+                                }
+                              ],
+                              "type": "string"
+                            }
+                          },
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "meta"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "name": "pkgs",
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "legacy"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "gpu-screen-recorder"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "meta"
+                                }
+                              ],
+                              "type": "variable"
+                            }
+                          },
+                          {
+                            "operator": "=",
+                            "target": [
+                              {
+                                "kind": "identifier",
+                                "value": "version"
+                              }
+                            ],
+                            "type": "assignment",
+                            "value": {
+                              "name": "pkgs",
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "legacy"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "gpu-screen-recorder"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "version"
+                                }
+                              ],
+                              "type": "variable"
+                            }
+                          }
+                        ],
+                        "type": "attr-set"
+                      }
+                    ],
+                    "callee": {
+                      "name": "pkgs",
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "legacy"
+                        },
+                        {
+                          "kind": "identifier",
+                          "value": "symlinkJoin"
+                        }
+                      ],
+                      "type": "variable"
+                    },
+                    "type": "call"
+                  },
+                  "form": "set",
+                  "parameters": [
+                    {
+                      "default": {
+                        "multiline": false,
+                        "parts": [
+                          {
+                            "type": "text",
+                            "value": "/run/wrappers/bin"
+                          }
+                        ],
+                        "type": "string"
+                      },
+                      "name": "wrapperDir",
+                      "variadic": false
+                    }
+                  ],
+                  "type": "lambda"
+                }
+              }
+            ],
+            "callee": {
+              "name": "lib",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "makeOverridable"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
         },
-        "kind": "import"
+        "kind": "build"
       },
-      "sourcePath": [
-        "gpu-screen-recorder"
-      ],
       "target": [
         "com",
         "dec05eba",
