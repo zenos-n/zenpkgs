@@ -161,7 +161,10 @@ in
           IdentityFile %d/.private/Config/ssh/id_rsa
         Match all
       '';
-      home-manager.users = lib.mapAttrs (_: _: { config, ... }: {
+      home-manager.users = lib.mapAttrs (_: _: { config, lib, ... }: {
+        home.activation.zenfsDesktopEntries = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
+          run ${session} export-desktop --profile ${config.home.path}
+        '';
         home.file.".zshenv".enable = lib.mkIf (cfg.strict && config.programs.zsh.enable) false;
         home.file.".mozilla/native-messaging-hosts" = lib.mkIf
           (cfg.strict && (config.mozilla.firefoxNativeMessagingHosts != [ ]
