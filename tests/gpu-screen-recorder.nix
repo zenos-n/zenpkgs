@@ -28,6 +28,7 @@ let
   has = nixpkgs.lib.hasInfix;
 in
 assert c.programs.gpu-screen-recorder.enable;
+assert c.zenos.users.recorder.programs.gpu-screen-recorder.monitor == "focused_monitor";
 assert c.security.wrappers.gsr-kms-server.capabilities == "cap_sys_admin+ep";
 assert service.Install.WantedBy == [ "graphical-session.target" ];
 assert has "/bin/gsr-ui launch-hide" (toString service.Service.ExecStart);

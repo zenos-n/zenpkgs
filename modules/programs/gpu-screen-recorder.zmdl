@@ -18,7 +18,7 @@ systemSupport = {
 autoStart._meta = { type = $type.boolean; default = false; summary = "Start the replay buffer with the graphical session";  name = "Start the replay buffer with the graphical session"; description = ''Start the replay buffer with the graphical session.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
 replaySeconds._meta = { type = $type.int; default = 60; summary = "Replay duration in seconds";  name = "Replay duration in seconds"; description = ''Replay duration in seconds.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
 frameRate._meta = { type = $type.int; default = 60; summary = "Maximum frames per second";  name = "Maximum frames per second"; description = ''Maximum frames per second.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
-monitor._meta = { type = $type.string; default = "screen"; summary = "Capture source accepted by GPU Screen Recorder";  name = "Capture source accepted by GPU Screen Recorder"; description = ''Capture source accepted by GPU Screen Recorder.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+monitor._meta = { type = $type.string; default = "focused_monitor"; summary = "Capture target accepted by the overlay, such as focused_monitor or a connector name";  name = "Capture target accepted by the overlay, such as focused_monitor or a connector name"; description = ''Capture target accepted by the overlay, such as focused_monitor or a connector name.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
 audioDevice._meta = { type = $type.string; default = "default_output"; summary = "Audio source; default is system output, without microphone";  name = "Audio source; default is system output, without microphone"; description = ''Audio source; default is system output, without microphone.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
 clipsDirectory._meta = { type = $type.string; default = "%h/Videos/Clips"; summary = "Clip output directory; supports systemd user specifiers";  name = "Clip output directory; supports systemd user specifiers"; description = ''Clip output directory; supports systemd user specifiers.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
 recordingsDirectory._meta = { type = $type.string; default = "%h/Videos/Recordings"; summary = "Recording output directory";  name = "Recording output directory"; description = ''Recording output directory.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
@@ -40,7 +40,7 @@ _let preferences: $type.list [ $type.set ] = [
   { path = [ mode "record_options" "codec" ]; value = "h264"; }
   { path = [ mode "record_options" "audio_codec" ]; value = "aac"; }
   { path = [ mode "record_options" "video_quality" ]; value = "high"; }
-  { path = [ mode "record_options" "audio_track_item" ]; value = [ { name = "System audio"; audio_inputs = [ $path.audioDevice ]; application_audio_invert = false; } ]; }
+  { path = [ mode "record_options" "audio_track_item" ]; value = [ { name = ""; audio_inputs = [ $path.audioDevice ]; application_audio_invert = false; } ]; }
 ]) [ "record" "replay" ]);
 
 enable = enableOption {

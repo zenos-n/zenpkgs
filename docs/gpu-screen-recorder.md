@@ -28,7 +28,7 @@ replay from the HUD. Stop everything with
 `systemctl --user stop zenos-screen-recorder`.
 
 Defaults: 60fps, GPU H.264, AAC, system-output audio (no microphone), source
-`screen`, clips under `%h/Videos/Clips`, recordings under `%h/Videos/Recordings`.
+`focused_monitor`, clips under `%h/Videos/Clips`, recordings under `%h/Videos/Recordings`.
 Directories may be absolute or start with `%h` for the user's home. Preferences
 are merged into writable `$XDG_CONFIG_HOME/gpu-screen-recorder/config_ui` during
 activation, preserving unselected UI settings with a private backup. Restart
@@ -45,3 +45,7 @@ repositories, built with the external
 set. The installed ZenOS flake still imports only ZenPkgs. Module checks cover
 KMS setup, overlay ownership, RPC commands, existing shortcuts and user isolation;
 writable-file checks cover JSON merging and home-directory expansion.
+
+The focused-monitor default is accepted on GNOME Wayland; the CLI-only `screen`
+target is not accepted by the overlay there. Leave the default audio track
+unnamed: GSR UI 1.15 can emit track-name syntax that CLI 5.13.8 does not support.
