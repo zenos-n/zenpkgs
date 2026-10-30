@@ -91,7 +91,7 @@
     source-zane-indicator = { url = "github:zenos-n/zenos-zane-indicator/1846242f7e6940119d2b19e57daf501274b020ad"; flake = false; };
     source-vision-indicator = { url = "github:zenos-n/zenos-vision-indicator/1421f18f791cc249d2bbe70d7e52fb2adc2c0947"; flake = false; };
     source-blankbox = {
-      url = "github:zenos-n/blankbox/5c91c9772ee60c897ad48e16e525345b930179ec";
+      url = "github:zenos-n/blankbox/9201b9ac7ea16bf3317709b61e1aec92a4085a01";
       flake = false;
     };
     source-blackbox.follows = "source-blankbox";
