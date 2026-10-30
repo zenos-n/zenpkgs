@@ -1,0 +1,83 @@
+_meta = {
+  name = "GPU Screen Recorder";
+  tags = [ "programs" "video" ];
+  summary = "GPU recording, replay buffer and GNOME shortcuts";
+  description = ''System support grants the standard NixOS KMS helper capability. User enable installs the GUI and replay service; capture starts only when autoStart is selected or the service is started manually.'';
+  zenosVersion = 1.0.0Nb;
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+systemSupport = {
+  _meta = { type = $type.boolean; default = false; summary = "Install system KMS capture support (system scope only)";  name = "Install system KMS capture support (system scope only)"; description = ''Install system KMS capture support (system scope only).''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+  s!! {
+    programs.gpu-screen-recorder.enable = $lib.mkIf $path.systemSupport true;
+    programs.gpu-screen-recorder.package = $lib.mkIf $path.systemSupport $pkgs.byCategories.apps.video.gpu-screen-recorder;
+  };
+};
+autoStart._meta = { type = $type.boolean; default = false; summary = "Start the replay buffer with the graphical session";  name = "Start the replay buffer with the graphical session"; description = ''Start the replay buffer with the graphical session.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+replaySeconds._meta = { type = $type.int; default = 60; summary = "Replay duration in seconds";  name = "Replay duration in seconds"; description = ''Replay duration in seconds.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+frameRate._meta = { type = $type.int; default = 60; summary = "Maximum frames per second";  name = "Maximum frames per second"; description = ''Maximum frames per second.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+monitor._meta = { type = $type.string; default = "screen"; summary = "Capture source accepted by GPU Screen Recorder";  name = "Capture source accepted by GPU Screen Recorder"; description = ''Capture source accepted by GPU Screen Recorder.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+audioDevice._meta = { type = $type.string; default = "default_output"; summary = "Audio source; default is system output, without microphone";  name = "Audio source; default is system output, without microphone"; description = ''Audio source; default is system output, without microphone.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+clipsDirectory._meta = { type = $type.string; default = "%h/Videos/Clips"; summary = "Clip output directory; supports systemd user specifiers";  name = "Clip output directory; supports systemd user specifiers"; description = ''Clip output directory; supports systemd user specifiers.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+recordingsDirectory._meta = { type = $type.string; default = "%h/Videos/Recordings"; summary = "Recording output directory";  name = "Recording output directory"; description = ''Recording output directory.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+recordShortcut._meta = { type = $type.string; default = ""; summary = "GNOME shortcut to toggle regular recording";  name = "GNOME shortcut to toggle regular recording"; description = ''GNOME shortcut to toggle regular recording.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+clipShortcut._meta = { type = $type.string; default = ""; summary = "GNOME shortcut to save replay";  name = "GNOME shortcut to save replay"; description = ''GNOME shortcut to save replay.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+
+enable = enableOption {
+  _meta = { name = "Enable recorder"; summary = "Install the recorder and configure its replay service"; description = ''Creates the user service and selected GNOME shortcuts. Capture starts at login only when autoStart is true.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+  u! {
+    home.packages = [ $pkgs.byCategories.apps.video.gpu-screen-recorder-gtk ];
+    systemd.user.services.zenos-screen-recorder = {
+      Unit = {
+        Description = "GPU Screen Recorder replay and recording";
+        After = [ "graphical-session.target" "pipewire-pulse.service" ];
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStartPre = $lib.escapeShellArgs [ "${$pkgs.legacy.coreutils}/bin/mkdir" "-p" $path.clipsDirectory $path.recordingsDirectory ];
+        ExecStart = $lib.escapeShellArgs [
+          "${$pkgs.byCategories.apps.video.gpu-screen-recorder}/bin/gpu-screen-recorder"
+          "-w" $path.monitor "-f" ($lib.toString $path.frameRate)
+          "-a" $path.audioDevice "-c" "mp4" "-k" "h264" "-ac" "aac"
+          "-q" "high" "-encoder" "gpu" "-fallback-cpu-encoding" "no" "-fm" "vfr" "-r" ($lib.toString $path.replaySeconds)
+          "-replay-storage" "ram" "-o" $path.clipsDirectory "-ro" $path.recordingsDirectory
+        ];
+        KillSignal = "SIGINT";
+        TimeoutStopSec = 30;
+        Restart = "on-failure";
+        RestartSec = 5;
+      };
+      Install.WantedBy = if $path.autoStart then [ "graphical-session.target" ] else [ ];
+    };
+    dconf.settings = $lib.mkMerge [
+      {
+        "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings =
+          $lib.mkIf ($path.recordShortcut != "" || $path.clipShortcut != "")
+          ($lib.concatMap (database:
+            database.settings."org/gnome/settings-daemon/plugins/media-keys".custom-keybindings or [ ])
+            ($cfg.legacy.programs.dconf.profiles.user.databases or [ ]));
+      }
+      ($lib.optionalAttrs ($path.recordShortcut != "") {
+        "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-record/" ];
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-record" = {
+          name = "Toggle GPU recording";
+          binding = $path.recordShortcut;
+          command = "${$pkgs.legacy.systemd}/bin/systemctl --user kill --kill-whom=main --signal=SIGRTMIN zenos-screen-recorder.service";
+        };
+      })
+      ($lib.optionalAttrs ($path.clipShortcut != "") {
+        "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-clip/" ];
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-clip" = {
+          name = "Save GPU replay clip";
+          binding = $path.clipShortcut;
+          command = "${$pkgs.legacy.systemd}/bin/systemctl --user kill --kill-whom=main --signal=SIGUSR1 zenos-screen-recorder.service";
+        };
+      })
+    ];
+    assertions = [
+      { assertion = $path.replaySeconds > 0 && $path.frameRate > 0; message = "GPU Screen Recorder requires positive replay duration and frame rate."; }
+    ];
+  };
+};

@@ -230095,6 +230095,109 @@
         "neg-zero",
         "keyslot-extension"
       ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "video",
+        "gpu-screen-recorder"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.dec05eba.gpu-screen-recorder.cli",
+      "meta": {
+        "description": "GPU-accelerated recording and instant replay. Uses the maintained nixpkgs package.",
+        "id": "com.dec05eba.gpu-screen-recorder.cli",
+        "license": "$l.gpl3Only",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "GPU Screen Recorder CLI",
+        "packageVersion": "5.13.8",
+        "summary": "GPU-accelerated recording and instant replay",
+        "tags": [
+          "video",
+          "recording",
+          "gaming"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gpu-screen-recorder"
+            }
+          ],
+          "type": "variable"
+        },
+        "kind": "import"
+      },
+      "sourcePath": [
+        "gpu-screen-recorder"
+      ],
+      "target": [
+        "com",
+        "dec05eba",
+        "gpu-screen-recorder",
+        "cli"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "video",
+        "gpu-screen-recorder-gtk"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.dec05eba.gpu_screen_recorder",
+      "meta": {
+        "description": "GTK interface for GPU Screen Recorder. Uses the maintained nixpkgs package.",
+        "id": "com.dec05eba.gpu_screen_recorder",
+        "license": "$l.gpl3Only",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "GPU Screen Recorder",
+        "packageVersion": "5.7.9",
+        "summary": "GTK interface for GPU Screen Recorder",
+        "tags": [
+          "video",
+          "recording",
+          "gaming"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "name": "pkgs",
+          "path": [
+            {
+              "kind": "identifier",
+              "value": "legacy"
+            },
+            {
+              "kind": "identifier",
+              "value": "gpu-screen-recorder-gtk"
+            }
+          ],
+          "type": "variable"
+        },
+        "kind": "import"
+      },
+      "sourcePath": [
+        "gpu-screen-recorder-gtk"
+      ],
+      "target": [
+        "com",
+        "dec05eba",
+        "gpu_screen_recorder"
+      ]
     }
   ]
 }

@@ -288,26 +288,26 @@ in
     pass "zenpkgs-no-retired-package-roots";
 
   registry-counts =
-    assert builtins.length expectedRegistry.packages == 4157;
-    assert builtins.length expectedActiveEntries == 4157;
-    assert builtins.length registry.packages == 4157;
-    assert builtins.length activeEntries == 4157;
-    assert builtins.length importEntries == 4097;
+    assert builtins.length expectedRegistry.packages == 4159;
+    assert builtins.length expectedActiveEntries == 4159;
+    assert builtins.length registry.packages == 4159;
+    assert builtins.length activeEntries == 4159;
+    assert builtins.length importEntries == 4099;
     assert builtins.length buildEntries == 60;
     assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 
   package-paths =
-    assert builtins.length (registryPaths expectedRegistry) == 4157;
-    assert builtins.length (packagePaths expectedRegistry) == 4157;
-    assert builtins.length activePaths == 4157;
+    assert builtins.length (registryPaths expectedRegistry) == 4159;
+    assert builtins.length (packagePaths expectedRegistry) == 4159;
+    assert builtins.length activePaths == 4159;
     assert registryPathKeys == lib.sort builtins.lessThan registryPathKeys;
     assert registryPaths registry == registryPaths expectedRegistry;
     assert packagePaths registry == packagePaths expectedSorted;
     pass "zenpkgs-package-registry-paths";
 
   public-package-outputs =
-    assert builtins.length outputIdentities == 4157;
+    assert builtins.length outputIdentities == 4159;
     assert lib.all (identity: identity) outputIdentities;
     pass "zenpkgs-public-package-outputs";
 
@@ -427,9 +427,9 @@ in
     pass "zenpkgs-registry-build-providers";
 
   registry-output-ownership =
-    assert builtins.length outputNames == 4157 * 2;
+    assert builtins.length outputNames == 4159 * 2;
     assert builtins.length (builtins.attrNames (builtins.listToAttrs
-      (map (name: { inherit name; value = true; }) outputNames))) == 4157 * 2;
+      (map (name: { inherit name; value = true; }) outputNames))) == 4159 * 2;
     assert
       builtins.attrNames publicPackages == lib.sort builtins.lessThan (
         outputNames

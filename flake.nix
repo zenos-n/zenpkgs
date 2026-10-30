@@ -750,6 +750,9 @@
             sourceRoot = self;
             homeManager = inputs.home-manager.outPath;
           };
+          gpu-screen-recorder-module =
+            assert import ./tests/gpu-screen-recorder.nix { inherit nixpkgs; zenosModule = self.nixosModules.default; };
+            pkgs.writeText "gpu-screen-recorder-module-check" "passed";
           zenlink-integration =
             assert import ./tests/zenlink-system.nix {
               inherit nixpkgs;
