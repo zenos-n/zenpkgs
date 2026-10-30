@@ -645,6 +645,8 @@
         "source-blankbox": "source-blankbox",
         "source-fastfetch-config": "source-fastfetch-config",
         "source-haptics": "source-haptics",
+        "source-keyslot": "source-keyslot",
+        "source-keyslot-extension": "source-keyslot-extension",
         "source-oobe": "source-oobe",
         "source-plymouth": "source-plymouth",
         "source-rebuild": "source-rebuild",
@@ -729,6 +731,40 @@
         "type": "github"
       }
     },
+    "source-keyslot": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793370608,
+        "narHash": "sha256-C6PyNo8Ti9YiHYHn0YWy3jjLwMGoZD/N0MpWqZWC9qM=",
+        "owner": "doromiert",
+        "repo": "keyslot",
+        "rev": "8cc0461342dd494fd840e4ec749625c099263fc3",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doromiert",
+        "ref": "main",
+        "repo": "keyslot",
+        "type": "github"
+      }
+    },
+    "source-keyslot-extension": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793370609,
+        "narHash": "sha256-EUprw4UIET+9Pex0EAEVFU3nu19C8NKWx9QGDYhN/bE=",
+        "owner": "doromiert",
+        "repo": "keyslot-gnome-extension",
+        "rev": "8c2d445f315538ef2ba932bb2d580469bd82e57e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doromiert",
+        "ref": "main",
+        "repo": "keyslot-gnome-extension",
+        "type": "github"
+      }
+    },
     "source-oobe": {
       "flake": false,
       "locked": {
@@ -766,17 +802,17 @@
     "source-rebuild": {
       "flake": false,
       "locked": {
-        "lastModified": 1789023675,
-        "narHash": "sha256-jvc5Jf0eZ2m9fHeHMhRJQfRlLdsg0lh4ZjtF9HG/4rs=",
+        "lastModified": 1793370307,
+        "narHash": "sha256-igrmo3rTcugyq/lC8Qh0mzby/q8YIqERalSCdFRGJnI=",
         "owner": "zenos-n",
         "repo": "zenos-rebuild",
-        "rev": "6345106c44d99e6354944666e773a365e3ea8ed9",
+        "rev": "f06b7098227ccf368484550cabe4f18008889d67",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
+        "ref": "main",
         "repo": "zenos-rebuild",
-        "rev": "6345106c44d99e6354944666e773a365e3ea8ed9",
         "type": "github"
       }
     },

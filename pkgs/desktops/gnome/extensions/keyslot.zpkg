@@ -1,0 +1,20 @@
+_meta = {
+  id = "com.neg-zero.keyslot-extension";
+  name = "Keyslot Quick Settings";
+  summary = "Open and lock Keyslot from GNOME 50 Quick Settings";
+  description = ''
+    Adds a Keyslot tile to GNOME Shell Quick Settings with lock status,
+    Open, and Lock actions. Credentials remain in the separate Keyslot app.
+    Requires the Keyslot application for those actions to work.
+    Installing this package does not enable the extension.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.0";
+  tags = [ "gnome" "extensions" "security" "passwords" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.keyslotExtension + "/default.nix") {
+  pkgs = $pkgs.legacy;
+};

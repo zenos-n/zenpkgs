@@ -6977,10 +6977,17 @@
       ]
     },
     {
+      "categoryTarget": [
+        "apps",
+        "system",
+        "zenos",
+        "zenos-rebuild"
+      ],
       "dependenciesDeclared": false,
       "id": "pkgs.com.neg-zero.zenos-rebuild",
       "meta": {
         "description": "Packages the secure configuration snapshot and rebuild workflow used by live and installed systems.",
+        "id": "com.neg-zero.zenos-rebuild",
         "license": null,
         "maintainers": [
           "doromiert"
@@ -6992,11 +6999,9 @@
           "configuration",
           "system"
         ],
-        "zenosVersion": "1.0.0Nb",
-        "id": "com.neg-zero.zenos-rebuild"
+        "zenosVersion": "1.0.0Nb"
       },
       "provider": {
-        "kind": "build",
         "expression": {
           "arguments": [
             {
@@ -7011,112 +7016,18 @@
                 "type": "group",
                 "value": {
                   "left": {
-                    "type": "group",
-                    "value": {
-                      "arguments": [
-                        {
-                          "recursive": false,
-                          "statements": [
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "owner"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "zenos-n"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "repo"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "zenos-rebuild"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "rev"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "6345106c44d99e6354944666e773a365e3ea8ed9"
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            },
-                            {
-                              "operator": "=",
-                              "target": [
-                                {
-                                  "kind": "identifier",
-                                  "value": "hash"
-                                }
-                              ],
-                              "type": "assignment",
-                              "value": {
-                                "multiline": false,
-                                "parts": [
-                                  {
-                                    "type": "text",
-                                    "value": "sha256-jvc5Jf0eZ2m9fHeHMhRJQfRlLdsg0lh4ZjtF9HG/4rs="
-                                  }
-                                ],
-                                "type": "string"
-                              }
-                            }
-                          ],
-                          "type": "attr-set"
-                        }
-                      ],
-                      "callee": {
-                        "name": "pkgs",
-                        "path": [
-                          {
-                            "kind": "identifier",
-                            "value": "legacy"
-                          },
-                          {
-                            "kind": "identifier",
-                            "value": "fetchFromGitHub"
-                          }
-                        ],
-                        "type": "variable"
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
                       },
-                      "type": "call"
-                    }
+                      {
+                        "kind": "identifier",
+                        "value": "rebuild"
+                      }
+                    ],
+                    "type": "variable"
                   },
                   "operator": "+",
                   "right": {
@@ -7150,17 +7061,12 @@
             "type": "call"
           },
           "type": "call"
-        }
+        },
+        "kind": "build"
       },
       "target": [
         "com",
         "neg-zero",
-        "zenos-rebuild"
-      ],
-      "categoryTarget": [
-        "apps",
-        "system",
-        "zenos",
         "zenos-rebuild"
       ]
     },
@@ -229954,6 +229860,240 @@
         "com",
         "neg-zero",
         "blankbox"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "security",
+        "keyslot"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.keyslot",
+      "meta": {
+        "description": "\n    Browse and edit KeePass databases with an adaptive GNOME interface.\n    A private helper links the pinned KeePassXC core for encryption and storage.\n    Includes UUID-based editing, upstream search, custom attributes, TOTP,\n    history, groups, password generation, attachment transfers, database\n    settings and unlock-key changes, merge/export, and local health reports.\n    Development alpha: full KeePassXC feature parity is not yet implemented.\n    The GNOME Quick Settings companion is packaged separately.\n  ",
+        "id": "com.neg-zero.keyslot",
+        "license": "$l.gpl3Only",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Keyslot",
+        "packageVersion": "0.2.0",
+        "summary": "Native GTK4/libadwaita client for KeePassXC databases",
+        "tags": [
+          "security",
+          "privacy",
+          "passwords",
+          "gnome",
+          "gtk4"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "pkgs"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "keyslot"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/default.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "com",
+        "neg-zero",
+        "keyslot"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
+        "keyslot"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.keyslot-extension",
+      "meta": {
+        "description": "\n    Adds a Keyslot tile to GNOME Shell Quick Settings with lock status,\n    Open, and Lock actions. Credentials remain in the separate Keyslot app.\n    Requires the Keyslot application for those actions to work.\n    Installing this package does not enable the extension.\n  ",
+        "id": "com.neg-zero.keyslot-extension",
+        "license": "$l.gpl3Only",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Keyslot Quick Settings",
+        "packageVersion": "0.1.0",
+        "summary": "Open and lock Keyslot from GNOME 50 Quick Settings",
+        "tags": [
+          "gnome",
+          "extensions",
+          "security",
+          "passwords"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "pkgs"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "keyslotExtension"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/default.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "com",
+        "neg-zero",
+        "keyslot-extension"
       ]
     }
   ]

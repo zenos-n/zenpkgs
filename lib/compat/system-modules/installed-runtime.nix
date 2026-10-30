@@ -37,6 +37,22 @@ in
         hooks.common
         (hooks.installed { inherit config; })
         {
+          # rEFInd 0.14.2 needs the complete GNU-EFI 4 ABI fix; the older
+          # nixpkgs compatibility patch compiles but can hang before the menu.
+          nixpkgs.overlays = [ (_final: previous: {
+            refind = previous.refind.overrideAttrs (old: {
+              patches = builtins.filter
+                (patch: !(lib.hasSuffix "gnu-efi-4-compat.patch" (toString patch)))
+                (old.patches or []) ++ [
+                  (previous.fetchurl {
+                    name = "gnu-efi-4-compat-fixed.patch";
+                    url = "https://gitlab.archlinux.org/toolybird/refind/-/raw/d136a25fba9bab19f9d72f8f1cab40243d009c62/gnu-efi-4-compat.patch";
+                    hash = "sha256-dYr8RCiY07Zg1caLmtMgSRhr8HQghxp3zubqenYrMaY=";
+                  })
+                ];
+            });
+          }) ];
+
           services.openssh = lib.mkIf (!oobe) {
             enable = lib.mkDefault true;
             openFirewall = lib.mkDefault true;

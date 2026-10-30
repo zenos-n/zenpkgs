@@ -41,8 +41,10 @@
       url = "github:zenos-n/plymouth-theme/1.0.0";
       flake = false;
     };
+    source-keyslot = { url = "github:doromiert/keyslot/main"; flake = false; };
+    source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/main"; flake = false; };
     source-rebuild = {
-      url = "github:zenos-n/zenos-rebuild/6345106c44d99e6354944666e773a365e3ea8ed9";
+      url = "github:zenos-n/zenos-rebuild/main";
       flake = false;
     };
     source-recovery = {
@@ -463,6 +465,9 @@
               zenfs = final.zenos.byCategories.system.zenfs;
             };
             zenPackageSources = {
+              keyslot = inputs.source-keyslot.outPath;
+              keyslotExtension = inputs.source-keyslot-extension.outPath;
+              rebuild = inputs.source-rebuild.outPath;
               zenfs = inputs.source-zenfs.outPath;
               fastfetchConfig = inputs.source-fastfetch-config.outPath;
               compatRecipes = {
