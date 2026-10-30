@@ -972,17 +972,17 @@
     "source-zenlink": {
       "flake": false,
       "locked": {
-        "lastModified": 1793343137,
-        "narHash": "sha256-BJTK9WqIzp3xgMYz6h2Lc/p5Kq/dUIsTiZmzNIuLLEY=",
+        "lastModified": 1793377655,
+        "narHash": "sha256-CBNg9PCW7WlTaBR+xQB6OODrshuOAP4kaMr64Q9J0Mg=",
         "owner": "zenos-n",
         "repo": "zenlink-gnome",
-        "rev": "fd23c7d70025ef84d5b33fb450507864dd48c0ed",
+        "rev": "0c2970e8fade5d615361778583280c2df0fc7e2e",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenlink-gnome",
-        "rev": "fd23c7d70025ef84d5b33fb450507864dd48c0ed",
+        "rev": "0c2970e8fade5d615361778583280c2df0fc7e2e",
         "type": "github"
       }
     },
