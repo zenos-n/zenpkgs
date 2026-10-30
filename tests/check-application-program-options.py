@@ -259,6 +259,23 @@ class WritablePreferences(unittest.TestCase):
             backend.apply(preferences)
             self.assertEqual(target.stat().st_mtime_ns, before)
 
+    def test_gsr_overlay_preferences_are_writable_and_expand_home(self):
+        with self.environment() as home:
+            target = home / "config/gpu-screen-recorder/config_ui"
+            target.parent.mkdir(parents=True)
+            target.write_text('{"main":{"tint_color":"violet"},"replay":{"time":60}}')
+            backend.apply({"application": "gpu-screen-recorder-ui", "assignments": [
+                {"path": ["replay", "time"], "value": 30},
+                {"path": ["replay", "save_directory"], "value": "%h/Videos/Clips"},
+                {"path": ["main", "hotkeys_enable_option"], "value": "disable_hotkeys"},
+            ]})
+            document = json.loads(target.read_text())
+            self.assertEqual(document["replay"]["time"], 30)
+            self.assertEqual(document["replay"]["save_directory"], str(home / "Videos/Clips"))
+            self.assertEqual(document["main"]["tint_color"], "violet")
+            self.assertFalse(target.is_symlink())
+            self.assertEqual(target.stat().st_mode & 0o777, 0o600)
+
     def test_native_state_preserves_sessions_chromium_and_unselected_preferences(self):
         with self.environment() as home:
             target = home / "data/select-for-figma/state.json"

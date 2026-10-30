@@ -644,6 +644,9 @@
         ],
         "source-blankbox": "source-blankbox",
         "source-fastfetch-config": "source-fastfetch-config",
+        "source-gsr-notification": "source-gsr-notification",
+        "source-gsr-packaging": "source-gsr-packaging",
+        "source-gsr-ui": "source-gsr-ui",
         "source-haptics": "source-haptics",
         "source-keyslot": "source-keyslot",
         "source-keyslot-extension": "source-keyslot-extension",
@@ -712,6 +715,61 @@
         "repo": "fastfetch-config",
         "rev": "dd72d8c41882979c02dee36374151026977dfa75",
         "type": "github"
+      }
+    },
+    "source-gsr-notification": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793350811,
+        "narHash": "sha256-CmAFwL6a3Tl1WW9YR0UOVqbxvnOuHYTaxx/ibT+ki3M=",
+        "ref": "refs/heads/master",
+        "rev": "7cefb292ccd5a5b44828101ee0749cae2109ee3e",
+        "revCount": 121,
+        "submodules": true,
+        "type": "git",
+        "url": "https://repo.dec05eba.com/gpu-screen-recorder-notification"
+      },
+      "original": {
+        "rev": "7cefb292ccd5a5b44828101ee0749cae2109ee3e",
+        "submodules": true,
+        "type": "git",
+        "url": "https://repo.dec05eba.com/gpu-screen-recorder-notification"
+      }
+    },
+    "source-gsr-packaging": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792073672,
+        "narHash": "sha256-tQmgoqfkLQyvut6BOGLekmQXu2IuBcgRpzz/SoQrMXQ=",
+        "owner": "rPlakama",
+        "repo": "gsr-ui-nix",
+        "rev": "757bf2877f6b94932e9aa80e3b7a4024a7e10d00",
+        "type": "github"
+      },
+      "original": {
+        "owner": "rPlakama",
+        "repo": "gsr-ui-nix",
+        "rev": "757bf2877f6b94932e9aa80e3b7a4024a7e10d00",
+        "type": "github"
+      }
+    },
+    "source-gsr-ui": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793353048,
+        "narHash": "sha256-q0v+XdyRZV36sSNEogark9zKxokTcSkZozKgMwmjwVk=",
+        "ref": "refs/heads/master",
+        "rev": "e4d30d44230e3d0a9e1f6e90f17644933eee764d",
+        "revCount": 776,
+        "submodules": true,
+        "type": "git",
+        "url": "https://repo.dec05eba.com/gpu-screen-recorder-ui"
+      },
+      "original": {
+        "rev": "e4d30d44230e3d0a9e1f6e90f17644933eee764d",
+        "submodules": true,
+        "type": "git",
+        "url": "https://repo.dec05eba.com/gpu-screen-recorder-ui"
       }
     },
     "source-haptics": {

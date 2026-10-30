@@ -25,25 +25,40 @@ recordingsDirectory._meta = { type = $type.string; default = "%h/Videos/Recordin
 recordShortcut._meta = { type = $type.string; default = ""; summary = "GNOME shortcut to toggle regular recording";  name = "GNOME shortcut to toggle regular recording"; description = ''GNOME shortcut to toggle regular recording.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
 clipShortcut._meta = { type = $type.string; default = ""; summary = "GNOME shortcut to save replay";  name = "GNOME shortcut to save replay"; description = ''GNOME shortcut to save replay.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
 
+hudShortcut._meta = { type = $type.string; default = ""; summary = "GNOME shortcut to show or hide the recording overlay"; name = "Show recording HUD"; description = ''Toggle the NVIDIA-style overlay using the desktop shortcut service.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
+
+_let preferences: $type.list [ $type.set ] = [
+  { path = [ "main" "hotkeys_enable_option" ]; value = "disable_hotkeys"; }
+  { path = [ "main" "joystick_hotkeys_enable_option" ]; value = "disable_hotkeys"; }
+  { path = [ "replay" "turn_on_replay_automatically_mode" ]; value = if $path.autoStart then "turn_on_at_system_startup" else "dont_turn_on_automatically"; }
+  { path = [ "replay" "time" ]; value = $path.replaySeconds; }
+  { path = [ "replay" "save_directory" ]; value = $path.clipsDirectory; }
+  { path = [ "record" "save_directory" ]; value = $path.recordingsDirectory; }
+] ++ ($lib.concatMap (mode: [
+  { path = [ mode "record_options" "record_area_option" ]; value = $path.monitor; }
+  { path = [ mode "record_options" "fps" ]; value = $path.frameRate; }
+  { path = [ mode "record_options" "codec" ]; value = "h264"; }
+  { path = [ mode "record_options" "audio_codec" ]; value = "aac"; }
+  { path = [ mode "record_options" "video_quality" ]; value = "high"; }
+  { path = [ mode "record_options" "audio_track_item" ]; value = [ { name = "System audio"; audio_inputs = [ $path.audioDevice ]; application_audio_invert = false; } ]; }
+]) [ "record" "replay" ]);
+
 enable = enableOption {
   _meta = { name = "Enable recorder"; summary = "Install the recorder and configure its replay service"; description = ''Creates the user service and selected GNOME shortcuts. Capture starts at login only when autoStart is true.''; tags = [ "programs" "video" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
   u! {
-    home.packages = [ $pkgs.byCategories.apps.video.gpu-screen-recorder-gtk ];
+    home.packages = [ $pkgs.byCategories.apps.video.gpu-screen-recorder-ui ];
+    home.activation.zenosScreenRecorderPreferences = $lib.mkWritableProgramConfig {
+      pkgs = $pkgs.legacy; application = "gpu-screen-recorder-ui"; assignments = $v.preferences;
+    };
     systemd.user.services.zenos-screen-recorder = {
       Unit = {
-        Description = "GPU Screen Recorder replay and recording";
+        Description = "GPU Screen Recorder overlay, replay and recording";
         After = [ "graphical-session.target" "pipewire-pulse.service" ];
         PartOf = [ "graphical-session.target" ];
       };
       Service = {
         ExecStartPre = $lib.escapeShellArgs [ "${$pkgs.legacy.coreutils}/bin/mkdir" "-p" $path.clipsDirectory $path.recordingsDirectory ];
-        ExecStart = $lib.escapeShellArgs [
-          "${$pkgs.byCategories.apps.video.gpu-screen-recorder}/bin/gpu-screen-recorder"
-          "-w" $path.monitor "-f" ($lib.toString $path.frameRate)
-          "-a" $path.audioDevice "-c" "mp4" "-k" "h264" "-ac" "aac"
-          "-q" "high" "-encoder" "gpu" "-fallback-cpu-encoding" "no" "-fm" "vfr" "-r" ($lib.toString $path.replaySeconds)
-          "-replay-storage" "ram" "-o" $path.clipsDirectory "-ro" $path.recordingsDirectory
-        ];
+        ExecStart = "${$pkgs.byCategories.apps.video.gpu-screen-recorder-ui}/bin/gsr-ui launch-hide";
         KillSignal = "SIGINT";
         TimeoutStopSec = 30;
         Restart = "on-failure";
@@ -54,7 +69,7 @@ enable = enableOption {
     dconf.settings = $lib.mkMerge [
       {
         "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings =
-          $lib.mkIf ($path.recordShortcut != "" || $path.clipShortcut != "")
+          $lib.mkIf ($path.recordShortcut != "" || $path.clipShortcut != "" || $path.hudShortcut != "")
           ($lib.concatMap (database:
             database.settings."org/gnome/settings-daemon/plugins/media-keys".custom-keybindings or [ ])
             ($cfg.legacy.programs.dconf.profiles.user.databases or [ ]));
@@ -64,7 +79,7 @@ enable = enableOption {
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-record" = {
           name = "Toggle GPU recording";
           binding = $path.recordShortcut;
-          command = "${$pkgs.legacy.systemd}/bin/systemctl --user kill --kill-whom=main --signal=SIGRTMIN zenos-screen-recorder.service";
+          command = "${$pkgs.byCategories.apps.video.gpu-screen-recorder-ui}/bin/gsr-ui-cli toggle-record";
         };
       })
       ($lib.optionalAttrs ($path.clipShortcut != "") {
@@ -72,7 +87,15 @@ enable = enableOption {
         "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-clip" = {
           name = "Save GPU replay clip";
           binding = $path.clipShortcut;
-          command = "${$pkgs.legacy.systemd}/bin/systemctl --user kill --kill-whom=main --signal=SIGUSR1 zenos-screen-recorder.service";
+          command = "${$pkgs.byCategories.apps.video.gpu-screen-recorder-ui}/bin/gsr-ui-cli replay-save";
+        };
+      })
+      ($lib.optionalAttrs ($path.hudShortcut != "") {
+        "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings = [ "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-hud/" ];
+        "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-hud" = {
+          name = "Toggle GPU recording HUD";
+          binding = $path.hudShortcut;
+          command = "${$pkgs.byCategories.apps.video.gpu-screen-recorder-ui}/bin/gsr-ui-cli toggle-show";
         };
       })
     ];

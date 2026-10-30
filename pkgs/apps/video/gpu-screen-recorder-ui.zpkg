@@ -1,0 +1,31 @@
+_meta = {
+  id = "unknown.gpu-screen-recorder-ui";
+  name = "GPU Screen Recorder Overlay";
+  summary = "ShadowPlay-style recording overlay";
+  description = ''Official GPU Screen Recorder overlay frontend. Uses the external gsr-ui-nix recipe with ZenPkgs dependencies.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.0";
+  tags = [ "video" "recording" "gaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+build = ($pkgs.legacy.callPackage ($lib.zenPackageSources.gsrPackaging + "/gpu-screen-recorder-ui.nix") {
+  src = $lib.zenPackageSources.gsrUi;
+  libX11 = $pkgs.legacy.libx11;
+  libXrandr = $pkgs.legacy.libxrandr;
+  libXrender = $pkgs.legacy.libxrender;
+  libXext = $pkgs.legacy.libxext;
+  libXcomposite = $pkgs.legacy.libxcomposite;
+  libXcursor = $pkgs.legacy.libxcursor;
+  libXfixes = $pkgs.legacy.libxfixes;
+  libXi = $pkgs.legacy.libxi;
+  gpu-screen-recorder = $pkgs.byCategories.apps.video.gpu-screen-recorder;
+  gpu-screen-recorder-notification = $pkgs.byCategories.apps.video.gpu-screen-recorder-notification;
+}).overrideAttrs (old: {
+  src = $lib.zenPackageSources.gsrUi;
+  name = "gpu-screen-recorder-ui-1.15.0";
+  version = "1.15.0";
+  meta = old.meta // { mainProgram = "gsr-ui"; };
+  mesonFlags = [ "-Dcapabilities=false" ];
+});

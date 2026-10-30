@@ -15,6 +15,7 @@ let
         autoStart = true;
         replaySeconds = 30;
         recordShortcut = "<Shift><Super>q";
+        hudShortcut = "<Shift><Super>g";
         clipShortcut = "<Shift><Super>w";
       };
     } ];
@@ -29,15 +30,15 @@ in
 assert c.programs.gpu-screen-recorder.enable;
 assert c.security.wrappers.gsr-kms-server.capabilities == "cap_sys_admin+ep";
 assert service.Install.WantedBy == [ "graphical-session.target" ];
-assert has "-r 30" (toString service.Service.ExecStart);
-assert has "-ro %h/Videos/Recordings" (toString service.Service.ExecStart);
-assert has "-o %h/Videos/Clips" (toString service.Service.ExecStart);
-assert has "-fallback-cpu-encoding no" (toString service.Service.ExecStart);
+assert has "/bin/gsr-ui launch-hide" (toString service.Service.ExecStart);
+assert has "gpu-screen-recorder-ui" h.home.activation.zenosScreenRecorderPreferences.data;
 assert service.Service.KillSignal == "SIGINT";
-assert has "/existing/" paths && has "gsr-record/" paths && has "gsr-clip/" paths;
+assert has "/existing/" paths && has "gsr-record/" paths && has "gsr-clip/" paths && has "gsr-hud/" paths;
 assert settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-record".binding == "<Shift><Super>q";
-assert has "--signal=SIGRTMIN" settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-record".command;
-assert has "--signal=SIGUSR1" settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-clip".command;
+assert has "gsr-ui-cli toggle-record" settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-record".command;
+assert has "gsr-ui-cli replay-save" settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-clip".command;
+assert has "gsr-ui-cli toggle-show" settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-hud".command;
+assert settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-hud".binding == "<Shift><Super>g";
 assert !(other.systemd.user.services ? zenos-screen-recorder);
 assert !(other.dconf.settings ? "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-record");
 true

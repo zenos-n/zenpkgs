@@ -230198,6 +230198,923 @@
         "dec05eba",
         "gpu_screen_recorder"
       ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "video",
+        "gpu-screen-recorder-notification"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.unknown.gpu-screen-recorder-notification",
+      "meta": {
+        "description": "Official GPU Screen Recorder notification helper. Uses the external gsr-ui-nix recipe with ZenPkgs dependencies.",
+        "id": "unknown.gpu-screen-recorder-notification",
+        "license": "$l.gpl3Only",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "GPU Screen Recorder Notifications",
+        "packageVersion": "1.3.8",
+        "summary": "Recording notification overlay",
+        "tags": [
+          "video",
+          "recording",
+          "gaming"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "type": "group",
+              "value": {
+                "body": {
+                  "recursive": false,
+                  "statements": [
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "src"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "name": "lib",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "zenPackageSources"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "gsrNotification"
+                          }
+                        ],
+                        "type": "variable"
+                      }
+                    },
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "name"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "multiline": false,
+                        "parts": [
+                          {
+                            "type": "text",
+                            "value": "gpu-screen-recorder-notification-1.3.8"
+                          }
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "version"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "multiline": false,
+                        "parts": [
+                          {
+                            "type": "text",
+                            "value": "1.3.8"
+                          }
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "meta"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "left": {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "old"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "meta"
+                            }
+                          ],
+                          "type": "reference"
+                        },
+                        "operator": "//",
+                        "right": {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "mainProgram"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "gsr-notify"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        },
+                        "type": "binary"
+                      }
+                    }
+                  ],
+                  "type": "attr-set"
+                },
+                "form": "identifier",
+                "parameters": [
+                  {
+                    "default": null,
+                    "name": "old",
+                    "variadic": false
+                  }
+                ],
+                "type": "lambda"
+              }
+            }
+          ],
+          "callee": {
+            "segment": {
+              "kind": "identifier",
+              "value": "overrideAttrs"
+            },
+            "type": "selection",
+            "value": {
+              "type": "group",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "src"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "lib",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "zenPackageSources"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "gsrNotification"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libX11"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libx11"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libXrandr"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libxrandr"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libXrender"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libxrender"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libXext"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libxext"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "arguments": [
+                    {
+                      "type": "group",
+                      "value": {
+                        "left": {
+                          "name": "lib",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "zenPackageSources"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "gsrPackaging"
+                            }
+                          ],
+                          "type": "variable"
+                        },
+                        "operator": "+",
+                        "right": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "/gpu-screen-recorder-notification.nix"
+                            }
+                          ],
+                          "type": "string"
+                        },
+                        "type": "binary"
+                      }
+                    }
+                  ],
+                  "callee": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "callPackage"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "type": "call"
+                },
+                "type": "call"
+              }
+            }
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "unknown",
+        "gpu-screen-recorder-notification"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "video",
+        "gpu-screen-recorder-ui"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.unknown.gpu-screen-recorder-ui",
+      "meta": {
+        "description": "Official GPU Screen Recorder overlay frontend. Uses the external gsr-ui-nix recipe with ZenPkgs dependencies.",
+        "id": "unknown.gpu-screen-recorder-ui",
+        "license": "$l.gpl3Only",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "GPU Screen Recorder Overlay",
+        "packageVersion": "1.15.0",
+        "summary": "ShadowPlay-style recording overlay",
+        "tags": [
+          "video",
+          "recording",
+          "gaming"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "type": "group",
+              "value": {
+                "body": {
+                  "recursive": false,
+                  "statements": [
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "src"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "name": "lib",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "zenPackageSources"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "gsrUi"
+                          }
+                        ],
+                        "type": "variable"
+                      }
+                    },
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "name"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "multiline": false,
+                        "parts": [
+                          {
+                            "type": "text",
+                            "value": "gpu-screen-recorder-ui-1.15.0"
+                          }
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "version"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "multiline": false,
+                        "parts": [
+                          {
+                            "type": "text",
+                            "value": "1.15.0"
+                          }
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "meta"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "left": {
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "old"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "meta"
+                            }
+                          ],
+                          "type": "reference"
+                        },
+                        "operator": "//",
+                        "right": {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "mainProgram"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "gsr-ui"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        },
+                        "type": "binary"
+                      }
+                    },
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "mesonFlags"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "items": [
+                          {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "-Dcapabilities=false"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        ],
+                        "type": "list"
+                      }
+                    }
+                  ],
+                  "type": "attr-set"
+                },
+                "form": "identifier",
+                "parameters": [
+                  {
+                    "default": null,
+                    "name": "old",
+                    "variadic": false
+                  }
+                ],
+                "type": "lambda"
+              }
+            }
+          ],
+          "callee": {
+            "segment": {
+              "kind": "identifier",
+              "value": "overrideAttrs"
+            },
+            "type": "selection",
+            "value": {
+              "type": "group",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "src"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "lib",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "zenPackageSources"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "gsrUi"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libX11"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libx11"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libXrandr"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libxrandr"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libXrender"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libxrender"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libXext"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libxext"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libXcomposite"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libxcomposite"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libXcursor"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libxcursor"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libXfixes"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libxfixes"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "libXi"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "libxi"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "gpu-screen-recorder"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "byCategories"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "apps"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "video"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "gpu-screen-recorder"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "gpu-screen-recorder-notification"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "byCategories"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "apps"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "video"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "gpu-screen-recorder-notification"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "arguments": [
+                    {
+                      "type": "group",
+                      "value": {
+                        "left": {
+                          "name": "lib",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "zenPackageSources"
+                            },
+                            {
+                              "kind": "identifier",
+                              "value": "gsrPackaging"
+                            }
+                          ],
+                          "type": "variable"
+                        },
+                        "operator": "+",
+                        "right": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "/gpu-screen-recorder-ui.nix"
+                            }
+                          ],
+                          "type": "string"
+                        },
+                        "type": "binary"
+                      }
+                    }
+                  ],
+                  "callee": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "callPackage"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "type": "call"
+                },
+                "type": "call"
+              }
+            }
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "unknown",
+        "gpu-screen-recorder-ui"
+      ]
     }
   ]
 }

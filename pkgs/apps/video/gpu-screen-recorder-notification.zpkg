@@ -1,0 +1,24 @@
+_meta = {
+  id = "unknown.gpu-screen-recorder-notification";
+  name = "GPU Screen Recorder Notifications";
+  summary = "Recording notification overlay";
+  description = ''Official GPU Screen Recorder notification helper. Uses the external gsr-ui-nix recipe with ZenPkgs dependencies.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.3.8";
+  tags = [ "video" "recording" "gaming" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+build = ($pkgs.legacy.callPackage ($lib.zenPackageSources.gsrPackaging + "/gpu-screen-recorder-notification.nix") {
+  src = $lib.zenPackageSources.gsrNotification;
+  libX11 = $pkgs.legacy.libx11;
+  libXrandr = $pkgs.legacy.libxrandr;
+  libXrender = $pkgs.legacy.libxrender;
+  libXext = $pkgs.legacy.libxext;
+}).overrideAttrs (old: {
+  src = $lib.zenPackageSources.gsrNotification;
+  name = "gpu-screen-recorder-notification-1.3.8";
+  version = "1.3.8";
+  meta = old.meta // { mainProgram = "gsr-notify"; };
+});

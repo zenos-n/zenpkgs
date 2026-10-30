@@ -97,6 +97,18 @@
       flake = false;
     };
     source-blackbox.follows = "source-blankbox";
+    source-gsr-packaging = {
+      url = "github:rPlakama/gsr-ui-nix/757bf2877f6b94932e9aa80e3b7a4024a7e10d00";
+      flake = false;
+    };
+    source-gsr-ui = {
+      url = "git+https://repo.dec05eba.com/gpu-screen-recorder-ui?rev=e4d30d44230e3d0a9e1f6e90f17644933eee764d&submodules=1";
+      flake = false;
+    };
+    source-gsr-notification = {
+      url = "git+https://repo.dec05eba.com/gpu-screen-recorder-notification?rev=7cefb292ccd5a5b44828101ee0749cae2109ee3e&submodules=1";
+      flake = false;
+    };
     source-zenlink = {
       url = "github:zenos-n/zenlink-gnome/0c2970e8fade5d615361778583280c2df0fc7e2e";
       flake = false;
@@ -498,6 +510,9 @@
               zaneIndicator = inputs.source-zane-indicator.outPath;
               visionIndicator = inputs.source-vision-indicator.outPath;
               blankbox = inputs.source-blankbox.outPath;
+              gsrPackaging = inputs.source-gsr-packaging.outPath;
+              gsrUi = inputs.source-gsr-ui.outPath;
+              gsrNotification = inputs.source-gsr-notification.outPath;
               zenlink = inputs.source-zenlink.outPath;
             };
           };

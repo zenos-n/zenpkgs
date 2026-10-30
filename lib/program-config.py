@@ -19,6 +19,9 @@ def configuration_path(specification):
     if app == "select-for-figma":
         directory = os.environ.get("XDG_DATA_HOME") or home / ".local/share"
         return Path(directory) / "select-for-figma" / "state.json"
+    if app == "gpu-screen-recorder-ui":
+        directory = os.environ.get("XDG_CONFIG_HOME") or home / ".config"
+        return Path(directory) / "gpu-screen-recorder" / "config_ui"
     raise ValueError(f"unknown application: {app}")
 
 
@@ -97,7 +100,10 @@ def apply(specification):
             if not isinstance(target[key], MutableMapping):
                 raise ValueError(f"cannot assign {'.'.join(keys)}: {key} is not a table")
             target = target[key]
-        target[keys[-1]] = assignment["value"]
+        value = assignment["value"]
+        if specification["application"] == "gpu-screen-recorder-ui" and keys[-1] == "save_directory":
+            value = value.replace("%h", str(Path.home()))
+        target[keys[-1]] = value
     content = tomlkit.dumps(document) if toml else json.dumps(document, indent=2) + "\n"
     if content == original:
         return

@@ -10,29 +10,38 @@ users.alex.programs.gpu-screen-recorder = {
   replaySeconds = 30;
   recordShortcut = "<Shift><Super>q";
   clipShortcut = "<Shift><Super>w";
+  hudShortcut = "<Shift><Super>g";
 };
 ```
 
-The user service captures once into a RAM replay buffer. The record shortcut
-sends SIGRTMIN to that service's main process to toggle regular recording;
-the clip shortcut sends SIGUSR1 to save the replay. Other recorder processes
-are not signalled. The service starts at login only with `autoStart`; stop it
-with `systemctl --user stop zenos-screen-recorder`.
+The user service runs the official NVIDIA/ShadowPlay-style `gsr-ui` overlay.
+It owns a single recorder and RAM replay buffer. GNOME shortcuts use its
+`gsr-ui-cli` RPC interface to toggle recording, save a clip, or toggle the HUD.
+Recording can run inside the replay session, keeping clipping available.
+The old GTK frontend remains separately available but is not installed by this
+module. Low-level keyboard and joystick grabbing are disabled; no privileged
+keyboard helper is installed. Empty shortcut options emit no GNOME binding.
 
-Defaults: 60fps, GPU H.264, AAC, system-output audio (no microphone), captures
-`screen`, saves clips to `%h/Videos/Clips` and recordings to
-`%h/Videos/Recordings`. Directories are created before capture. `monitor` and
-`audioDevice` accept GPU Screen Recorder source names. Output-directory options
-accept systemd user specifiers such as `%h`. The GUI is installed as well;
-its manually configured sessions are independent of this replay service.
+With `autoStart`, the overlay and replay buffer start with the graphical session.
+Otherwise start `systemctl --user start zenos-screen-recorder`, then enable
+replay from the HUD. Stop everything with
+`systemctl --user stop zenos-screen-recorder`.
+
+Defaults: 60fps, GPU H.264, AAC, system-output audio (no microphone), source
+`screen`, clips under `%h/Videos/Clips`, recordings under `%h/Videos/Recordings`.
+Directories may be absolute or start with `%h` for the user's home. Preferences
+are merged into writable `$XDG_CONFIG_HOME/gpu-screen-recorder/config_ui` during
+activation, preserving unselected UI settings with a private backup. Restart
+the service after changing declared preferences. The HUD can still edit other
+preferences normally. GNOME Wayland uses the upstream XWayland overlay.
 
 Personal shortcuts and autostart apply only to the selected user. Existing
-shared shortcut paths declared in `legacy.programs.dconf.profiles.user.databases`
-are retained when adding the personal shortcuts. Other user-scoped bindings
-retain normal Home Manager list merging. Both shortcuts can be left empty to
-avoid writing GNOME bindings.
+shared shortcuts in `legacy.programs.dconf.profiles.user.databases` are retained,
+as are other user-scoped shortcut lists.
 
-The implementation uses the maintained nixpkgs CLI/GTK packages; no custom
-recorder binary or extra installed-flake input is required. The native module
-check evaluates KMS setup, replay/recording arguments, signals, preservation of
-existing shortcuts, and isolation from a second user.
+The CLI comes from Nixpkgs. UI/notification source comes from dec05eba's official
+repositories, built with the external
+[gsr-ui-nix recipes](https://github.com/rPlakama/gsr-ui-nix) and ZenPkgs' dependency
+set. The installed ZenOS flake still imports only ZenPkgs. Module checks cover
+KMS setup, overlay ownership, RPC commands, existing shortcuts and user isolation;
+writable-file checks cover JSON merging and home-directory expansion.
