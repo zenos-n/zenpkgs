@@ -82,3 +82,49 @@ nix eval --impure --json --file scripts/gen-user-docs.nix > ../zenpkgs.users.jso
 
 This is an explicitly labeled filtered view of the canonical search export.
 The full export remains available through `scripts/gen-docs.nix`.
+
+## Shared defaults and personal settings
+
+A file's directory does not determine its scope. Select the scope explicitly:
+
+```zcfg
+# Shared program defaults, inherited by configured users.
+system.programs.blankbox = { enable = true; defaultTerminal = true; };
+
+# Alex's preferences override inherited program defaults.
+users.alex.programs.blankbox = { cursorShape = "ibeam"; cursorTrail = true; };
+users.alex.theming.gnome.dockItems = [ "org.gnome.Nautilus.desktop" ];
+users.alex.shell.aliases.":q" = "exit";
+users.alex.packages.byCategories.apps.development = {
+  nil = true;
+  nixd = true;
+  nixfmt = true;
+};
+```
+
+`system.packages` installs shared software; `users.<name>.packages` installs
+personal tools. `desktops.gnome` configures shared desktop defaults, while
+`users.<name>.theming.gnome` selects personal session preferences. Keep hardware
+and intentional shared defaults in host files and personal settings in imported
+`hosts/<host>/users/<name>/*.zcfg` files. Importing a file from a user's directory
+never makes an unscoped assignment user-specific.
+
+Extension preferences without a native user option can use the existing
+`users.<name>.legacy.homeManager.dconf.settings` route. ZCFG is data-only: use
+literal data, not function calls such as `$lib.toJSON`. For JSON-valued settings,
+store a JSON string. To append personal extension UUIDs to shared defaults without
+replacing their list, the legacy route accepts Nix's default-priority record:
+
+```zcfg
+users.alex.legacy.homeManager.dconf.settings."org/gnome/shell".enabled-extensions = {
+  _type = "override";
+  priority = 1000;
+  content = [ "keyslot@neg-zero" ];
+};
+```
+
+Install that extension through `users.alex.packages` as well. The priority matches
+shared user defaults, so the lists merge. A normal-priority complete list is an
+intentional replacement. Validate with two users: personal packages, dock, stacks,
+and additional extension UUIDs must not appear in the other user's profile;
+shared defaults must still apply.
