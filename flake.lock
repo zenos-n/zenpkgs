@@ -686,17 +686,17 @@
     "source-blankbox": {
       "flake": false,
       "locked": {
-        "lastModified": 1793353915,
-        "narHash": "sha256-9YR6IUP72vnsjm2a572v0GQNOGYhIKVFOQxiuXNdaq8=",
+        "lastModified": 1793448266,
+        "narHash": "sha256-Yb1o6y4Ov8OXBzmG+ICeDHFO4ifJjAAi3Yy63b7LByQ=",
         "owner": "zenos-n",
         "repo": "blankbox",
-        "rev": "c98ac81d7ac3649e032adcade5235b39bc95a6b2",
+        "rev": "1db329377962a92b57784f923b9f2b464221b616",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "blankbox",
-        "rev": "c98ac81d7ac3649e032adcade5235b39bc95a6b2",
+        "rev": "1db329377962a92b57784f923b9f2b464221b616",
         "type": "github"
       }
     },
@@ -1030,17 +1030,17 @@
     "source-zenlink": {
       "flake": false,
       "locked": {
-        "lastModified": 1793377655,
-        "narHash": "sha256-CBNg9PCW7WlTaBR+xQB6OODrshuOAP4kaMr64Q9J0Mg=",
+        "lastModified": 1793448007,
+        "narHash": "sha256-HHj1b6sHwLkIryiRIy+HlVSW+j8QOo//e+1fL2tnIJY=",
         "owner": "zenos-n",
         "repo": "zenlink-gnome",
-        "rev": "0c2970e8fade5d615361778583280c2df0fc7e2e",
+        "rev": "0b4301cf7f62a32baa0af99761ce8b93d3338abb",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenlink-gnome",
-        "rev": "0c2970e8fade5d615361778583280c2df0fc7e2e",
+        "rev": "0b4301cf7f62a32baa0af99761ce8b93d3338abb",
         "type": "github"
       }
     },

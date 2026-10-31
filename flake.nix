@@ -93,7 +93,7 @@
     source-zane-indicator = { url = "github:zenos-n/zenos-zane-indicator/1846242f7e6940119d2b19e57daf501274b020ad"; flake = false; };
     source-vision-indicator = { url = "github:zenos-n/zenos-vision-indicator/1421f18f791cc249d2bbe70d7e52fb2adc2c0947"; flake = false; };
     source-blankbox = {
-      url = "github:zenos-n/blankbox/c98ac81d7ac3649e032adcade5235b39bc95a6b2";
+      url = "github:zenos-n/blankbox/1db329377962a92b57784f923b9f2b464221b616";
       flake = false;
     };
     source-blackbox.follows = "source-blankbox";
@@ -110,7 +110,7 @@
       flake = false;
     };
     source-zenlink = {
-      url = "github:zenos-n/zenlink-gnome/0c2970e8fade5d615361778583280c2df0fc7e2e";
+      url = "github:zenos-n/zenlink-gnome/0b4301cf7f62a32baa0af99761ce8b93d3338abb";
       flake = false;
     };
   };
