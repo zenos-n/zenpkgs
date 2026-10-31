@@ -32,3 +32,12 @@ verified password filling, TOTP, generation, saving and WebAuthn create/get with
 independent signature verification. Manual Gnosis use verified manager switching
 with both apps running, pairing, cancellation, forgetting and reconnecting.
 These results cover implemented behavior, not full production acceptance.
+
+Explicit KeePassXC INI profiles are supported through `--config`, `--localconfig`,
+`KPXC_CONFIG` and `KPXC_CONFIG_LOCAL`. Supported settings and generator options
+are updated by Qt without replacing unrelated keys. Remembered key files and
+hardware slots use KeePassXC dictionaries; open vaults restore as separate
+windows, including hidden background startup. Login unlock targets its enrolled
+vault independently of the focused window. Private GTK, stdin, configuration
+conflict and disposable-keyring acceptance passed; physical hardware and broader
+preference migration remain open. No tests or harnesses were added for this update.
