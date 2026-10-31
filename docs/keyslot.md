@@ -104,3 +104,24 @@ This batch is runtime compilation only. No tests, harnesses or automated
 behavior runs were added or performed; keyboard-layout, conflict, text-focus,
 recording and desktop acceptance remain with the user's manual stress testing.
 The full drop-in replacement goal is still incomplete.
+
+## SSH key generation candidate
+
+Entry → SSH Key Settings → Generate New SSH Key now offers upstream Ed25519,
+RSA (2048/3072/4096) and ECDSA (256/384/521) generation. Optional protection
+uses the current entry password with OpenSSH bcrypt/AES-256-CTR framing; no
+password is changed. Private bytes remain native, with a public-key review
+before a single-use, two-minute, revision-bound save. The native parser must
+accept and decrypt the generated output before a review is returned.
+
+Saving adds private and .pub attachments and selects the new KeeAgent source
+in one history/save transaction. Existing attachments and files are never
+overwritten; loaded agent keys and policy are unchanged. Generation works with
+SSH Agent disabled, and existing attachment actions provide export. UUID
+ambiguity, stale review, recycled entries and conflicting names are refused.
+
+This is a runtime-compilation candidate for the user's manual stress testing.
+No tests/harnesses or automated behavioral runs were added or performed. Real
+OpenSSH import/signing, encrypted and unencrypted output, all algorithms,
+expiry/cancel, history/save/recovery and desktop acceptance remain open; full
+drop-in parity is still incomplete.
