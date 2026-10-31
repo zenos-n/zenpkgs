@@ -50,3 +50,6 @@ reuse stock settings when private preferences are absent, and explicit profile
 requests safely reject incompatible older running instances. Private recovery,
 chooser, draft, browser/URI and idle-lock acceptance passed. Broader network,
 hardware and changed-key reauthentication remain open.
+
+Changed-file key recovery (source caf013e5a7ed1c378be7d0683a865f804c532e5f): new credentials reopen a candidate while retaining the old database on failure or cancellation. The dialog offers an encrypted copy before switching; successful authentication refreshes enrolled keyring/key-file memory and invalidates the old quick-unlock credential. Manual Reload defers around forms/choosers and uses the same recovery path. Private real GTK/password+file rotation, stock-readable rescue, actual disposable GNOME keyring and idle-lock cleanup verified; existing 323 backend/19 application and 332 native checks pass. No new tests/harnesses. Hardware/network acceptance remains open. App and companion remain separate packages; extension/Gnosis pins unchanged.
+Published-source catalog build `/nix/store/nwrk7xmkp942p24k6a6890fhrvxrjsmi-keyslot-0.2.0` passes the same existing 323 backend checks and 19 application gates; all 38 Python files match the source, native engine remains `5wi36i91`, companion remains `7dwdfb8v`. Log: `/tmp/keyslot-reauth-catalog-build.log`.
