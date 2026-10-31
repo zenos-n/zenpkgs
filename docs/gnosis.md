@@ -36,7 +36,7 @@ package. The launcher uses `com.neg-zero.Gnosis.desktop`. The package registry
 identity is separate from the application identity; Gnosis migrates existing
 browser profiles, credentials, settings and KeePassXC pairing.
 
-The source is [doromiert/gnosis](https://github.com/doromiert/gnosis), pinned by
+The source is [zenos-n/gnosis](https://github.com/zenos-n/gnosis), pinned by
 the `gnosis` flake input and `flake.lock`. Zenpkgs imports the project's own
 package output and locked Nixpkgs rather than rebuilding it against the catalog's
 Brave version. The native binary adapters require their exact Brave version.
@@ -52,3 +52,13 @@ The module installs Gnosis without starting or restarting a running browser.
 `defaultBrowser` defaults to `false`. Enabling it declares the Gnosis desktop
 entry as the HTTP, HTTPS, HTML and XHTML handler, without managing writable
 browser preferences or profile data.
+
+Open **hamburger menu → Password Manager** to select **Keyslot**, **KeePassXC**
+or **Automatic**. Keyslot uses a dedicated native-messaging endpoint, so the two
+apps may run concurrently. If Keyslot is installed outside PATH, enable Gnosis
+in Keyslot’s **Preferences → Browser Integration → Configure…** first.
+
+**Forget Browser Connections…** removes this Gnosis profile’s saved database
+pairing keys and cached logins after confirmation. It preserves vault entries;
+use **Connect Database…** to authorize a new connection in the chosen manager.
+Existing pairings are preserved when changing managers.

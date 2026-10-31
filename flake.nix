@@ -31,7 +31,7 @@
     nixpkgs-emulators.url = "github:NixOS/nixpkgs/205fd4226592cc83fd4c0885a3e4c9c400efabb5";
     nixpkgs-popcorn.url = "github:NixOS/nixpkgs/1c3fe55ad329cbcb28471bb30f05c9827f724c76";
     # Keep the browser's locked Nixpkgs: native Brave patches require its exact binary.
-    gnosis.url = "github:doromiert/gnosis/a023f9fa83e8df44595f26bab1ad555b0e780c69";
+    gnosis.url = "github:zenos-n/gnosis/7dd276b8786d7bf6a35d4ea9d971434afcbb9ebe";
 
     nixpwamaker = {
       url = "github:doromiert/nixpwamaker/1.1";
@@ -41,8 +41,8 @@
       url = "github:zenos-n/plymouth-theme/1.0.0";
       flake = false;
     };
-    source-keyslot = { url = "github:doromiert/keyslot/main"; flake = false; };
-    source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/main"; flake = false; };
+    source-keyslot = { url = "github:zenos-n/keyslot/5aff9282a509dfad8fbea8e1cc1a42470d69b6a7"; flake = false; };
+    source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/8c2d445f315538ef2ba932bb2d580469bd82e57e"; flake = false; };
     source-rebuild = {
       url = "github:zenos-n/zenos-rebuild/main";
       flake = false;
