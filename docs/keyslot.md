@@ -41,3 +41,12 @@ windows, including hidden background startup. Login unlock targets its enrolled
 vault independently of the focused window. Private GTK, stdin, configuration
 conflict and disposable-keyring acceptance passed; physical hardware and broader
 preference migration remain open. No tests or harnesses were added for this update.
+
+Vault files now reload after external changes, with directory monitoring and
+asynchronous metadata fallback. Checks stay passive, actual reloads wait for
+forms/choosers, and missing or unreadable sources retain the open data for an
+encrypted copy. Reload Changed Vaults maps AutoReloadOnChange. First launches
+reuse stock settings when private preferences are absent, and explicit profile
+requests safely reject incompatible older running instances. Private recovery,
+chooser, draft, browser/URI and idle-lock acceptance passed. Broader network,
+hardware and changed-key reauthentication remain open.
