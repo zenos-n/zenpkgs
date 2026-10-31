@@ -83,3 +83,24 @@ Runtime-only catalog artifact: `/nix/store/z1xq4h8zr0lzca4z1kj3q1v03x3l2mlx-keys
 
 Browser-inventory candidate (source 5fa8c05dd1d688b4da3b0c17f75bedd2cbdd3e23): get-database-entries returns upstream title/UUID/resolved-URL records only after current association authentication and default-OFF shared Browser/AllowGetDatabaseEntriesRequest permission. GTK opt-in confirms broader inventory exposure, including hidden-entry metadata and resolved references/protected values. Native ordering/field resolution/recycle-bin traversal match upstream2.8; errors19/16 represent denial/empty inventory. Scoped permission reads have a five-second RPC budget before/after enumeration, with GUI revocation checked again before delivery; malformed/unreadable policy fails closed, and unrelated settings saves cannot re-grant the shared key. Opening Preferences refreshes without writing. Oversized inventory returns an explicit protocol error without truncation or stopping integration. Native protocol version stays honest about the pinned2.7.12 engine. Runtime compilation only; user browser/client-version/permission/reference/traversal/large-list/race acceptance pending. No tests/harnesses added or automated behavior runs; both publications skip CI, compiled channel awaits manual acceptance. Companion/Gnosis pins and installed/live state unchanged.
 Runtime-only catalog artifact: `/nix/store/1qks4zbvnh1dzsgmqdfw8rbr7kpanvni-keyslot-0.2.0`; engine `/nix/store/mhqdik8cvvqy8m7j6qhf4pmk2m5imwa8-keyslot-engine-2.7.12`. Build log: `/tmp/keyslot-browser-listing-catalog-runtime-build.log`. Native/Python compilation succeeded; no browser/permission/reference/traversal/large-list behavior is claimed verified.
+
+## Configurable application shortcuts
+
+Preferences → Keyboard Shortcuts now supports staged recording, conflict
+replacement, disabling, per-action resets and restoring all defaults. Shared
+actions retain KeePassXC's Qt shortcut keys; private actions have their own
+namespace. Reset removes only selected overrides, preserving unrelated keys
+and refusing a stale shortcut snapshot. Unsupported platform and multi-stroke
+Qt sequences remain stored and inactive until explicitly changed. The editor
+records one combination per action; desktop auto-type shortcuts remain in their
+existing preferences. Help follows active bindings across windows.
+
+Entry edit, duplicate, delete, username/password/URL/TOTP and other copying use
+existing guarded native workflows. They yield to focused text and dialogs.
+Ctrl+U copies the URL; Ctrl+Shift+U opens it. Shortcut recording temporarily
+inhibits application accelerators, including Quit, and restores them on close.
+
+This batch is runtime compilation only. No tests, harnesses or automated
+behavior runs were added or performed; keyboard-layout, conflict, text-focus,
+recording and desktop acceptance remain with the user's manual stress testing.
+The full drop-in replacement goal is still incomplete.
