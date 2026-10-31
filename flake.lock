@@ -792,17 +792,17 @@
     "source-keyslot": {
       "flake": false,
       "locked": {
-        "lastModified": 1793476517,
-        "narHash": "sha256-84m35sZXDwTxi+JCUVoY9UvtyPl+fESTw+GH+j0U7zI=",
+        "lastModified": 1793477694,
+        "narHash": "sha256-m0Wqem/BE5O5hWKMa8o9pSJVt2LqcyTvq3+s11Zz7uw=",
         "owner": "zenos-n",
         "repo": "keyslot",
-        "rev": "cc4c75871d28ebf53041d54c282ad5f38272b6e6",
+        "rev": "5fa8c05dd1d688b4da3b0c17f75bedd2cbdd3e23",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "keyslot",
-        "rev": "cc4c75871d28ebf53041d54c282ad5f38272b6e6",
+        "rev": "5fa8c05dd1d688b4da3b0c17f75bedd2cbdd3e23",
         "type": "github"
       }
     },
