@@ -125,3 +125,25 @@ No tests/harnesses or automated behavioral runs were added or performed. Real
 OpenSSH import/signing, encrypted and unencrypted output, all algorithms,
 expiry/cancel, history/save/recovery and desktop acceptance remain open; full
 drop-in parity is still incomplete.
+
+## Startup unlock and GNOME icon candidate
+
+The manual-prompt/login-keyring handoff now clears a pending authentication
+prompt before login unlock, and rendering a current unlocked snapshot dismisses
+obsolete prompts. Locking switches to the locked view first, clears pending
+unlock requests, and rejects stale snapshot rendering. Worker delivery rechecks
+its epoch after observers; login paths are canonicalized. This addresses a
+reported boot screenshot with vault metadata behind an unlock prompt. A
+password/autofill bypass was not established; no live reboot or reproduction
+was performed. Boot/keyring/activation/lock acceptance remains manual.
+
+Search options now have a wider, window-aware popover and an available Adwaita
+icon. Standard KeePass icon IDs are rendered with Adwaita equivalents without
+rewriting the vault. Edit Entry → Icon → Adwaita Icons provides searchable,
+paged theme selection; additional choices are embedded as custom icons for
+other clients, with an explicit name marker for live themed rendering in
+Keyslot. Existing custom images/IDs remain intact. Adwaita assets are packaged.
+
+Runtime compilation only; no tests/harnesses were added or run, and visual or
+security behavior is not claimed verified. Full replacement parity remains
+incomplete.
