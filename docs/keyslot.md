@@ -147,3 +147,24 @@ Keyslot. Existing custom images/IDs remain intact. Adwaita assets are packaged.
 Runtime compilation only; no tests/harnesses were added or run, and visual or
 security behavior is not claimed verified. Full replacement parity remains
 incomplete.
+
+## Proton Pass records and attribute-name suggestions
+
+The Proton Pass reader now includes upstream 2.8 Wi-Fi and SSH-key records.
+Wi-Fi uses username/password plus security; SSH private-key attributes are
+protected. Unknown record content is retained in protected attributes, including
+compact JSON for structured/scalar values. Extra-field TOTP values remain
+protected and duplicate or unnamed fields receive collision-free names. Existing
+import review and encrypted-save/recovery workflows remain in use.
+
+Custom Attribute → Name now offers searchable, paged suggestions from other
+non-recycled entries. Only names cross the native boundary; existing entry
+keys and reserved passkey keys are excluded. Preferences → Editing controls
+the shared AutocompleteSuggestions setting, with a separate private-profile
+boolean. Settings failures leave free-form editing available, and menu replies
+are guarded by dialog/lock/request lifetimes.
+
+Runtime compilation only; no tests/harnesses or automated behavior runs were
+added/performed. Real Proton exports, field protections, collisions, saving,
+suggestion pagination/configuration and desktop/lock acceptance remain manual.
+Full drop-in parity is still incomplete.
