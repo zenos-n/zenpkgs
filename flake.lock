@@ -792,34 +792,34 @@
     "source-keyslot": {
       "flake": false,
       "locked": {
-        "lastModified": 1793560561,
-        "narHash": "sha256-8XMigT6CNv2I9sAh0NadMs2Dgafl41gMjpnyNIC9eyA=",
+        "lastModified": 1793561476,
+        "narHash": "sha256-8twvxEHtKyEZjPp2KlQnU8o1rpRAXC+Avmh0n6RhN0s=",
         "owner": "zenos-n",
         "repo": "keyslot",
-        "rev": "ac7e1ebb9e26bb7356ad0134e31698353cc1a532",
+        "rev": "5d05d9882c66a91c8fdb7b93d59f62f04b5aa58c",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "keyslot",
-        "rev": "ac7e1ebb9e26bb7356ad0134e31698353cc1a532",
+        "rev": "5d05d9882c66a91c8fdb7b93d59f62f04b5aa58c",
         "type": "github"
       }
     },
     "source-keyslot-extension": {
       "flake": false,
       "locked": {
-        "lastModified": 1793370609,
-        "narHash": "sha256-EUprw4UIET+9Pex0EAEVFU3nu19C8NKWx9QGDYhN/bE=",
+        "lastModified": 1793561476,
+        "narHash": "sha256-yNY8s8EnO01csTHmWH2X0HVFyrz0tXp2ZGr19bLiH6c=",
         "owner": "doromiert",
         "repo": "keyslot-gnome-extension",
-        "rev": "8c2d445f315538ef2ba932bb2d580469bd82e57e",
+        "rev": "16876635db756545eb31a11c16afd8cb9555638a",
         "type": "github"
       },
       "original": {
         "owner": "doromiert",
         "repo": "keyslot-gnome-extension",
-        "rev": "8c2d445f315538ef2ba932bb2d580469bd82e57e",
+        "rev": "16876635db756545eb31a11c16afd8cb9555638a",
         "type": "github"
       }
     },
