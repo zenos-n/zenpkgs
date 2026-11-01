@@ -196,8 +196,8 @@ in
     ++ (optional cfg.excludeGnomeConsole pkgs.gnome-console);
 
     # 3. Tracker Configuration
-    services.gnome.tracker-miners.enable = cfg.fileIndexing.enable;
-    services.gnome.tracker.enable = cfg.fileIndexing.enable;
+    services.gnome.localsearch.enable = cfg.fileIndexing.enable;
+    services.gnome.tinysparql.enable = cfg.fileIndexing.enable;
 
     # 4. DConf Configuration
     programs.dconf.enable = true;

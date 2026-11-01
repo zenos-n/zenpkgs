@@ -22,4 +22,6 @@ build = ($pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
   hash = "sha256-dSxY+vRK17/1KcYPrOP6b8ZMcASK3xzHaEyYahO9gGQ=";
 }) + "/package.nix") { pkgs = $pkgs.legacy; }).overrideAttrs {
   version = "1.0.2-unstable-2026-10-24";
+  # The fetched commit is already the intended source; only its label differs.
+  __intentionallyOverridingVersion = true;
 };

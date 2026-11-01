@@ -224522,6 +224522,21 @@
                     ],
                     "type": "string"
                   }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "__intentionallyOverridingVersion"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "kind": "true",
+                    "type": "literal",
+                    "value": true
+                  }
                 }
               ],
               "type": "attr-set"

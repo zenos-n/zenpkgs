@@ -120,8 +120,8 @@ enable = enableOption {
     environment.gnome.excludePackages = [ $pkgs.zenos.legacy.gnome-tour ]
       ++ ($lib.optional $path.excludeGnomeConsole $pkgs.zenos.legacy.gnome-console);
 
-    services.gnome.tracker-miners.enable = $path.fileIndexing.enable;
-    services.gnome.tracker.enable = $path.fileIndexing.enable;
+    services.gnome.localsearch.enable = $path.fileIndexing.enable;
+    services.gnome.tinysparql.enable = $path.fileIndexing.enable;
     programs.dconf.enable = true;
     programs.dconf.profiles.user.databases = [
       {
