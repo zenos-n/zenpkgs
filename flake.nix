@@ -41,7 +41,7 @@
       url = "github:zenos-n/plymouth-theme/1.0.0";
       flake = false;
     };
-    source-keyslot = { url = "github:zenos-n/keyslot/a71e0d0abb13cc28256dc0addda79d448174a2ad"; flake = false; };
+    source-keyslot = { url = "github:zenos-n/keyslot/31b9619255155c0a95cdb1dea02cfec2e954e697"; flake = false; };
     source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/16876635db756545eb31a11c16afd8cb9555638a"; flake = false; };
     source-rebuild = {
       url = "github:zenos-n/zenos-rebuild/main";
