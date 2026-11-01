@@ -40,6 +40,8 @@ assert has "gsr-ui-cli toggle-record" settings."org/gnome/settings-daemon/plugin
 assert has "gsr-ui-cli replay-save" settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-clip".command;
 assert has "gsr-ui-cli toggle-show" settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-hud".command;
 assert settings."org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-hud".binding == "<Shift><Super>g";
+assert (map (value: value.value) settings."org/gnome/shell/extensions/forge/keybindings".workspace-active-tile-toggle.value) == [ "" ];
+assert !(other.dconf.settings ? "org/gnome/shell/extensions/forge/keybindings");
 assert !(other.systemd.user.services ? zenos-screen-recorder);
 assert !(other.dconf.settings ? "org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/gsr-record");
 true

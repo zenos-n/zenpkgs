@@ -49,3 +49,8 @@ writable-file checks cover JSON merging and home-directory expansion.
 The focused-monitor default is accepted on GNOME Wayland; the CLI-only `screen`
 target is not accepted by the overlay there. Leave the default audio track
 unnamed: GSR UI 1.15 can emit track-name syntax that CLI 5.13.8 does not support.
+
+Forge reserves Shift+Super+W for toggling workspace tiling. When selected as
+this module’s clip shortcut (in either modifier order), the recorder user gets
+an unbound Forge workspace toggle to avoid interception. Explicit user
+dconf overrides take precedence; other users and clip shortcuts are unchanged.

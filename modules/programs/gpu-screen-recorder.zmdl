@@ -67,6 +67,10 @@ enable = enableOption {
       Install.WantedBy = if $path.autoStart then [ "graphical-session.target" ] else [ ];
     };
     dconf.settings = $lib.mkMerge [
+      ($lib.mkIf ($lib.elem $path.clipShortcut [ "<Shift><Super>w" "<Super><Shift>w" ]) {
+        # Forge otherwise intercepts the replay shortcut before GNOME can run it.
+        "org/gnome/shell/extensions/forge/keybindings".workspace-active-tile-toggle = $lib.mkDefault [ "" ];
+      })
       {
         "org/gnome/settings-daemon/plugins/media-keys".custom-keybindings =
           $lib.mkIf ($path.recordShortcut != "" || $path.clipShortcut != "" || $path.hudShortcut != "")
