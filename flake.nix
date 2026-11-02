@@ -43,7 +43,8 @@
     };
     source-keyslot = { url = "github:zenos-n/keyslot/f6d6329ccd8309aba97c663860c506f8971e025d"; flake = false; };
     source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/fcd5109e808d46a5f2056093a82993bb3d744479"; flake = false; };
-    source-galeria = { url = "github:zenos-n/galeria/b309ccd4551cc3edb570d2c4e87c28519b336873"; flake = false; };
+    source-galeria = { url = "github:zenos-n/galeria/37f9eb836b139205c73df5ff1e70a34cb5db0d58"; flake = false; };
+    source-galeria-extension = { url = "github:zenos-n/galeria-gnome-extension/2c7112823e7074fcbc2fc22dff6b89ad6553a754"; flake = false; };
     source-rebuild = {
       url = "github:zenos-n/zenos-rebuild/main";
       flake = false;
@@ -481,6 +482,7 @@
               keyslot = inputs.source-keyslot.outPath;
               keyslotExtension = inputs.source-keyslot-extension.outPath;
               galeria = inputs.source-galeria.outPath;
+              galeriaExtension = inputs.source-galeria-extension.outPath;
               rebuild = inputs.source-rebuild.outPath;
               zenfs = inputs.source-zenfs.outPath;
               fastfetchConfig = inputs.source-fastfetch-config.outPath;

@@ -1,0 +1,14 @@
+_meta = {
+  id = "com.neg-zero.galeria-extension";
+  name = "Galeria Quick Settings";
+  summary = "Galeria background and folder sync controls for GNOME 50";
+  description = ''Open Galeria, manage background lifetime and request configured folder uploads. Requires Galeria 0.6 or later. Installing does not enable the extension or uploads.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.0";
+  tags = [ "gnome" "extensions" "photography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.galeriaExtension + "/default.nix") {
+  pkgs = $pkgs.legacy;
+};

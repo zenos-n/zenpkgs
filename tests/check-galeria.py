@@ -23,14 +23,19 @@ let
  schema=(make {} null).schema;
  evaluate=values:(lib.evalModules {modules=[schema {config=values;}];}).config;
  actions=values:(make (evaluate values) "alex").actions;
-in {defaults=evaluate {};disabled=actions {};enabled=actions {enable=true;};viewer=actions {enable=true;defaultViewer=true;};}
+in {defaults=evaluate {};disabled=actions {};enabled=actions {enable=true;};viewer=actions {enable=true;defaultViewer=true;};startup=actions {enable=true;startAtLogin=true;};noStartup=actions {enable=true;startAtLogin=false;};}
 '''.replace('MODULE',str(module))
     process=subprocess.run(['nix-instantiate','--eval','--strict','--json','--expr',expression],capture_output=True,text=True,timeout=30)
     if process.returncode:raise RuntimeError(process.stderr)
     result=json.loads(process.stdout)
+    assert result['defaults']['startAtLogin'] is None
     assert result['defaults']['enable'] is False and result['defaults']['defaultViewer'] is False
     assert result['disabled'][0]['home-manager']['users']['alex']['condition'] is False
     enabled=result['enabled'][0]['home-manager']['users']['alex']['content']
+    assert enabled['xdg']['configFile']=={}
+    for key,hidden in [('startup','false'),('noStartup','true')]:
+        launcher=result[key][0]['home-manager']['users']['alex']['content']['xdg']['configFile']['autostart/com.neg-zero.Galeria.desktop']['text']
+        assert 'Exec=/galeria/bin/galeria --background' in launcher and 'Hidden='+hidden in launcher
     assert enabled['home']['packages']==['/galeria'] and enabled['xdg']['mimeApps']=={}
     viewer=result['viewer'][0]['home-manager']['users']['alex']['content']['xdg']['mimeApps']
     assert viewer['enable'] is True

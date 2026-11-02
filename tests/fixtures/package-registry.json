@@ -231631,7 +231631,7 @@
           "doromiert"
         ],
         "name": "Galeria",
-        "packageVersion": "0.5.0",
+        "packageVersion": "0.6.0",
         "summary": "Native photo and video library for local folders and Immich",
         "tags": [
           "graphics",
@@ -231730,6 +231730,122 @@
         "com",
         "neg-zero",
         "Galeria"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
+        "galeria"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.galeria-extension",
+      "meta": {
+        "description": "Open Galeria, manage background lifetime and request configured folder uploads. Requires Galeria 0.6 or later. Installing does not enable the extension or uploads.",
+        "id": "com.neg-zero.galeria-extension",
+        "license": "$l.gpl3Only",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Galeria Quick Settings",
+        "packageVersion": "0.1.0",
+        "summary": "Galeria background and folder sync controls for GNOME 50",
+        "tags": [
+          "gnome",
+          "extensions",
+          "photography"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "pkgs"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "galeriaExtension"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/default.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "com",
+        "neg-zero",
+        "galeria-extension"
       ]
     }
   ]

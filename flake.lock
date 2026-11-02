@@ -645,6 +645,7 @@
         "source-blankbox": "source-blankbox",
         "source-fastfetch-config": "source-fastfetch-config",
         "source-galeria": "source-galeria",
+        "source-galeria-extension": "source-galeria-extension",
         "source-gsr-notification": "source-gsr-notification",
         "source-gsr-packaging": "source-gsr-packaging",
         "source-gsr-ui": "source-gsr-ui",
@@ -721,17 +722,34 @@
     "source-galeria": {
       "flake": false,
       "locked": {
-        "lastModified": 1793609553,
-        "narHash": "sha256-TbdGAsgs5TgKPoon0o5Gx9Ae7zy3nv+3jr7k/jDuVIo=",
+        "lastModified": 1793614764,
+        "narHash": "sha256-6WsrnA35nLjmFQRTwc85uEDSvN0e5uaEYKBMZrplkSU=",
         "owner": "zenos-n",
         "repo": "galeria",
-        "rev": "b309ccd4551cc3edb570d2c4e87c28519b336873",
+        "rev": "37f9eb836b139205c73df5ff1e70a34cb5db0d58",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "galeria",
-        "rev": "b309ccd4551cc3edb570d2c4e87c28519b336873",
+        "rev": "37f9eb836b139205c73df5ff1e70a34cb5db0d58",
+        "type": "github"
+      }
+    },
+    "source-galeria-extension": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793614618,
+        "narHash": "sha256-R5BxLFV9E8liH3+IBgX9NOaCqAkbgtypi/s8gjGfOJ8=",
+        "owner": "zenos-n",
+        "repo": "galeria-gnome-extension",
+        "rev": "2c7112823e7074fcbc2fc22dff6b89ad6553a754",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "galeria-gnome-extension",
+        "rev": "2c7112823e7074fcbc2fc22dff6b89ad6553a754",
         "type": "github"
       }
     },

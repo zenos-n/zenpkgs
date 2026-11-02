@@ -17,6 +17,17 @@ enable = enableOption {
   };
   u! {
     home.packages = [ $path.package ];
+    xdg.configFile = $lib.optionalAttrs ($path.startAtLogin != null) {
+      "autostart/com.neg-zero.Galeria.desktop".text = ''
+        [Desktop Entry]
+        Type=Application
+        Name=Galeria
+        Exec=${$path.package}/bin/galeria --background
+        Icon=com.neg-zero.Galeria
+        Terminal=false
+        Hidden=${$lib.boolToString (!$path.startAtLogin)}
+      '';
+    };
     xdg.mimeApps = $lib.optionalAttrs $path.defaultViewer {
       enable = true;
       defaultApplications = $lib.genAttrs [
@@ -43,5 +54,14 @@ defaultViewer._meta = {
   description = ''Set Galeria as the default handler for its supported image and video MIME types. False leaves existing associations untouched.'';
   type = $type.boolean;
   default = false;
+  tags = [ "programs" "graphics" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
+startAtLogin._meta = {
+  name = "Start at login";
+  summary = "Start Galeria in the background on desktop login";
+  description = ''Null preserves the app's writable startup preference. True manages a background login launcher; false manages a disabled launcher. This never enables folder uploads or supplies account credentials.'';
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
   tags = [ "programs" "graphics" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
 };
