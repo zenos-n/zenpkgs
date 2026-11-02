@@ -37,14 +37,14 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.11.0 is a development preview. Real albums, metadata/semantic search,
+Version 0.11.1 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing remains pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 64 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 65 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -195,3 +195,16 @@ the selected interval; rendered5second Preview applies crop/rotation/filters and
 Save a copy exports all edits.64unit tests and native interrupted-fold/RAM-tier,
 clipboard/locked-cleanup/archive/trash, video play/seek/trim/export,10kLOD and
 cache/account/sync regressions pass. No production media was modified by tests.
+
+Version0.11.1 keeps all structural date-card starting rects during folder motion,
+so offscreen rows slide into place rather than jumping. The reveal gap collapses
+with the panel; native photo children remain bounded. Tier captions retain
+natural size and paint above sprites while only cover pictures are hidden.
+Interrupted captions fade out. Native18k-photo/120-card frame checks and inspected
+opening/closing/tier snapshots cover the intermediate states.
+
+Album cards have one hover background. Owned album menus include Delete album…
+with confirmation; the album endpoint is used, never media deletion. Caches,
+sidebar and pins refresh after success, including an empty cached album list.
+65unit tests and private-XTest hover/delete/cancel,10kLOD and existing motion/cache/
+media-action tests pass. No production album was deleted during verification.
