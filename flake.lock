@@ -644,6 +644,7 @@
         ],
         "source-blankbox": "source-blankbox",
         "source-fastfetch-config": "source-fastfetch-config",
+        "source-galeria": "source-galeria",
         "source-gsr-notification": "source-gsr-notification",
         "source-gsr-packaging": "source-gsr-packaging",
         "source-gsr-ui": "source-gsr-ui",
@@ -714,6 +715,23 @@
         "owner": "zenos-n",
         "repo": "fastfetch-config",
         "rev": "dd72d8c41882979c02dee36374151026977dfa75",
+        "type": "github"
+      }
+    },
+    "source-galeria": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793608902,
+        "narHash": "sha256-EWPPOfWgl56RbRHrDcmWcoGLOhVnV7dQdhGQiLPQCjg=",
+        "owner": "zenos-n",
+        "repo": "galeria",
+        "rev": "1f5a0a4dd63744ff1d4d78e347b22c0b5f479671",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "galeria",
+        "rev": "1f5a0a4dd63744ff1d4d78e347b22c0b5f479671",
         "type": "github"
       }
     },

@@ -1,0 +1,47 @@
+_meta = {
+  name = "Galeria";
+  summary = "Install the native photo library";
+  description = ''Install Galeria for local folders and Immich. Accounts, credentials, libraries, sync rules and preferences remain writable and managed by the app.'';
+  zenosVersion = 1.0.0Nb;
+  tags = [ "programs" "graphics" "photography" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+enable = enableOption {
+  _meta = {
+    name = "Enable Galeria";
+    summary = "Install Galeria for the selected user scope";
+    description = ''Install the selected Galeria package without replacing application data or enabling background uploads. Folder syncing is opt-in inside the app.'';
+    tags = [ "programs" "graphics" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+  };
+  u! {
+    home.packages = [ $path.package ];
+    xdg.mimeApps = $lib.optionalAttrs $path.defaultViewer {
+      enable = true;
+      defaultApplications = $lib.genAttrs [
+        "image/jpeg" "image/png" "image/webp" "image/avif" "image/gif"
+        "image/bmp" "image/tiff" "video/mp4" "video/webm"
+        "video/quicktime" "video/x-matroska"
+      ] (_: [ "com.neg-zero.Galeria.desktop" ]);
+    };
+  };
+};
+
+package._meta = {
+  name = "Package";
+  summary = "Galeria package to install";
+  description = ''Package providing bin/galeria, bin/galeria-sync and com.neg-zero.Galeria.desktop. The default is the pinned development package in ZenPkgs.'';
+  type = $type.package;
+  default = $pkgs.com.neg-zero.Galeria;
+  tags = [ "programs" "graphics" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
+defaultViewer._meta = {
+  name = "Default media viewer";
+  summary = "Open supported images and videos with Galeria";
+  description = ''Set Galeria as the default handler for its supported image and video MIME types. False leaves existing associations untouched.'';
+  type = $type.boolean;
+  default = false;
+  tags = [ "programs" "graphics" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};

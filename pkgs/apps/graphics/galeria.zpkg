@@ -1,0 +1,20 @@
+_meta = {
+  id = "com.neg-zero.Galeria";
+  name = "Galeria";
+  summary = "Native photo and video library for local folders and Immich";
+  description = ''
+    Browse device photos and videos or connect to an Immich library.
+    Includes date folders, albums, people, tags, duplicate review, sharing,
+    administration and opt-in upload-only device folder syncing.
+    Development preview: image processing and AI editor parity are unfinished.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.5.0";
+  tags = [ "graphics" "photography" "video" "gnome" "gtk4" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.galeria + "/default.nix") {
+  pkgs = $pkgs.legacy;
+};
