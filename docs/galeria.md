@@ -37,14 +37,14 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.9.1 is a development preview. Real albums, metadata/semantic search,
+Version 0.10.0 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
-editor still lacks saved image processing and AI parity; offline encrypted-vault browsing and viewer downloads remain pending. HEIC
+editor still lacks saved image processing and AI parity; offline encrypted-vault browsing remains pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 53 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 60 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -139,3 +139,22 @@ coordinates, including dragging outside the track. Captured click/unpaired-relea
 gestures replace a nullable legacy GdkEvent path. A real private-XTest input check
 verifies hover, dragging, outside release, popup movement, track collapse and
 unchanged content width; existing53unit/grid/cache/refresh/Trash checks pass.
+
+Version0.10 restores cached ordinary timeline metadata and the initial three
+screens of thumbnail pixels before network/session validation. Expired snapshots
+can display immediately; refresh keeps the same grid when dates are unchanged.
+Cold accounts, evicted thumbnails and cleared caches still need network loading.
+Locked media never enters this bootstrap. Native cold-process/warm-cache checks
+verify pixels appear while authentication is deliberately blocked.
+
+The account menu loads the real Immich profile photo and changes it via a native
+image chooser. Sidebar folder-sync status reads real service activity/counts and
+errors, including immediately after Sync now; the repeated username is removed.
+Viewer Save As and bulk Download selected stream originals into user-chosen
+locations with cancellation/atomic completion. Bulk name collisions get numbered
+copies. Selection scopes to the current/selected month or all selected months.
+The cursor-following year hint now uses non-targetable in-window widgets, avoiding
+the separate native popup input surface that interrupted drags. A real-XTest
+pointer regression crosses the actual hint while held. Playback submenu chevron
+backgrounds are corrected.60unit tests and native cache/profile/export/sync,
+10k-slot LOD, cache/refresh/Trash/stack checks pass; production accounts unchanged.
