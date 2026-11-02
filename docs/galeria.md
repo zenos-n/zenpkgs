@@ -37,14 +37,14 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.8.1 is a development preview. Real albums, metadata/semantic search,
+Version 0.9.0 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing and viewer downloads remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 50 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 53 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -118,3 +118,15 @@ matching media outside the viewport. Fifty unit tests and offline native checks
 pass. Two read-only44,854-item Vulkan traces measured tier p95 around17ms and
 scroll p9517–33ms; first-layout outliers remain. See upstream PERF.md for the
 method, renderer experiment, cache benchmark and limits.
+
+
+Version0.9 adds a native year-weighted scrollbar in the indexed All Photos view.
+Each year gets equal track space; scrolling inside it remains proportional.
+Native thumb/direction/keyboard behavior is retained, with small year divisions.
+The year hint stays hidden until hover or dragging. Stale thumbnail jobs are
+retired in a batch instead of repeated full-queue priority scans. Two fresh-cache
+3,600-step read-only44,855-item scrolling runs in the actual catalog runtime
+(Python3.13.15, GTK4.22.4) had frame p9517/30ms and max149/134ms, with no reproduced
+multi-second pause. Initial model construction still has an approximately0.7s
+pause. All53unit tests and native rail direction/hint/LOD/refresh/Trash checks
+pass. No allocation-skip, renderer, scheduler or system changes ship.
