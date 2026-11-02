@@ -37,14 +37,14 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.10.2 is a development preview. Real albums, metadata/semantic search,
+Version 0.10.3 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing remains pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 62 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 63 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -172,3 +172,11 @@ Version0.10.2 hides successful idle sync status and closes the open popover;
 only pending/active sync or errors retain the sidebar indicator. Background
 scanning continues. Native checks verify10px bottom spacing during active work
 and both popover/indicator dismissal on completion.
+
+Version0.10.3 reduces resize work by retaining compact justified-row indices and
+creating photo rectangles only around the viewport. Full-library heights remain
+exact. In the same45,000-item private-Xvfb resize benchmark, measure p95 fell
+from66.8ms to20.0/20.9ms and frame p95 from83.3ms to33.3ms in two repeats; max frame
+interval fell117->50ms. This is not a physical-GPU or universal16.7ms guarantee.
+63unit tests plus native full-height/LOD/date/priority/groups, cache/account/sync
+and stack/Trash regressions pass. No renderer/system/monitor changes ship.
