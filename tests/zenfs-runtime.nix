@@ -70,6 +70,8 @@ in
   appImage = cfg.programs.appimage.enable && cfg.programs.appimage.binfmt
     && cfg.programs.appimage.package == cfg.zenos.system.zenfs.apps.appimage.runPackage;
   flatpak = cfg.services.flatpak.enable && lib.elem "$HOME/.private/Packages/flatpak/exports" cfg.environment.profiles;
+  flatpakPrivateData = cfg.services.flatpak.package.zenfsPrivateAppData or false;
+  stockNonStrictFlatpak = !((evaluate { zenos.system.zenfs.strict = false; }).config.services.flatpak.package.zenfsPrivateAppData or false);
   mime = cfg.xdg.mime.defaultApplications."application/x-zenos-app" == "com.negzero.zenos.AppLauncher.desktop";
   activationOrder = lib.elem "zenfs-hierarchy" cfg.system.activationScripts.users.deps
     && lib.hasSuffix "|| exit 1" cfg.system.activationScripts.zenfs-hierarchy.text

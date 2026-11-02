@@ -135,6 +135,11 @@ in
       ];
       environment.systemPackages = [ zenfs ];
       nixpkgs.overlays = lib.mkIf cfg.strict [ (_final: previous: {
+        flatpak = previous.flatpak.overrideAttrs (old: {
+          # Unrelated ZenFS updates must not rebuild Flatpak and its consumers.
+          patches = (old.patches or [ ]) ++ [ (builtins.toFile "flatpak-private-app-data.patch" (builtins.readFile zenfs.flatpakPrivateDataPatch)) ];
+          passthru = (old.passthru or { }) // { zenfsPrivateAppData = true; };
+        });
         seahorse = previous.callPackage ./private-home-package.nix {
           package = previous.seahorse;
           command = "seahorse";

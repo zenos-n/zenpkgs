@@ -14,7 +14,7 @@ filesystemHierarchy.enable = {
 };
 strict = {
   _meta = { type = $type.boolean; default = true; summary = "Keep managed home dotfiles under .private";
-    description = ''Flatpak's .var app-data directory remains untouched until a complete CLI and libflatpak redirect is integrated.''; };
+    description = ''Flatpak CLI, library and helper app data is redirected into .private/Packages/flatpak-app-data; legacy migration requires live Flatpak apps to exit before initialization succeeds.''; };
 };
 apps = {
   enable = { _meta = { type = $type.boolean; default = true; summary = "Build separate system and private application views"; }; };
