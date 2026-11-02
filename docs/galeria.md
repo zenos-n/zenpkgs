@@ -37,7 +37,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.9.0 is a development preview. Real albums, metadata/semantic search,
+Version 0.9.1 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing and viewer downloads remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
@@ -130,3 +130,12 @@ retired in a batch instead of repeated full-queue priority scans. Two fresh-cach
 multi-second pause. Initial model construction still has an approximately0.7s
 pause. All53unit tests and native rail direction/hint/LOD/refresh/Trash checks
 pass. No allocation-skip, renderer, scheduler or system changes ship.
+
+
+Version0.9.1 moves the year rail into an overlay so it preserves full grid width.
+Native overlay-indicator states restore the narrow resting thumb and expanded
+hover/drag track. Year divisions hide at rest; the year hint follows actual cursor
+coordinates, including dragging outside the track. Captured click/unpaired-release
+gestures replace a nullable legacy GdkEvent path. A real private-XTest input check
+verifies hover, dragging, outside release, popup movement, track collapse and
+unchanged content width; existing53unit/grid/cache/refresh/Trash checks pass.
