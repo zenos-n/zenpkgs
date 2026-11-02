@@ -230212,14 +230212,14 @@
       "dependenciesDeclared": false,
       "id": "pkgs.com.neg-zero.keyslot-extension",
       "meta": {
-        "description": "\n    Adds a Keyslot tile to GNOME Shell Quick Settings with lock status,\n    Open, and Lock actions, plus configurable desktop Auto-Type shortcuts.\n    Credentials remain in the separate Keyslot app.\n    Requires the Keyslot application for those actions to work.\n    Installing this package does not enable the extension.\n  ",
+        "description": "\n    Adds a Keyslot tile to GNOME Shell Quick Settings with lock status,\n    Open, and Lock actions, configurable desktop Auto-Type shortcuts,\n    and compact browser password-access approval popups.\n    Credentials remain in the separate Keyslot app.\n    Requires the Keyslot application for those actions to work.\n    Installing this package does not enable the extension.\n  ",
         "id": "com.neg-zero.keyslot-extension",
         "license": "$l.gpl3Only",
         "maintainers": [
           "doromiert"
         ],
         "name": "Keyslot Quick Settings",
-        "packageVersion": "0.3.0",
+        "packageVersion": "0.4.0",
         "summary": "Open and lock Keyslot from GNOME 50 Quick Settings",
         "tags": [
           "gnome",
@@ -231631,7 +231631,7 @@
           "doromiert"
         ],
         "name": "Galeria",
-        "packageVersion": "0.6.0",
+        "packageVersion": "0.7.0",
         "summary": "Native photo and video library for local folders and Immich",
         "tags": [
           "graphics",

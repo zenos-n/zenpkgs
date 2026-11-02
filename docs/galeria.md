@@ -37,14 +37,14 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.6.0 is a development preview. Real albums, metadata/semantic search,
+Version 0.7.0 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing and viewer downloads remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 40 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 42 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -70,3 +70,20 @@ The app repository also has a locked Nix flake: `nix run`, `nix build` and
 the x86_64-linux package and development shell were built locally. The helper
 was built and its JavaScript syntax and D-Bus contract checked; live GNOME Shell
 activation has not been exercised.
+
+Version0.7 adds original-preserving video trim/crop/quarter-turn rotation and
+Original/Vivid/Warm/Cool/Mono/Noir filters, encoded five-second preview and
+cancellable H.264/AAC MP4 save-copy export. Remote edits use originals through
+the authenticated range bridge, without exposing session tokens to FFmpeg.
+The image editor's saved processing and AI parity remain unfinished.
+
+The supplied app icon is now packaged. Video buffering uses one transparent
+Adwaita spinner; Clapper's duplicate dot animation is hidden. Map photo markers
+stay56x56 after texture load. Grid results/date covers/collection textures have
+bounded RAM caches; visible active views poll remote changes every15seconds.
+Cached views stay visible during refresh; failed refresh preserves cached media.
+Date tiers close stacks and animate actual image IDs into cover quadrants.
+Successful batch Trash flies thumbnails to the sidebar, then closes grid gaps
+without a network reload. Native tests cover these flows and actual video export;
+FFmpeg8.1.2 and packaged9.0.1 both pass the video export checks. Native GNOME
+helper activation remains untested; no system configuration activation occurred.
