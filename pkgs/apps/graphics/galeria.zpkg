@@ -9,7 +9,7 @@ _meta = {
     Development preview: image processing and AI editor parity are unfinished.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "0.8.0";
+  packageVersion = "0.8.1";
   tags = [ "graphics" "photography" "video" "gnome" "gtk4" ];
   maintainers = [ $m.doromiert ];
   license = $l.napl;

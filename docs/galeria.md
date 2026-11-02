@@ -37,14 +37,14 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.8.0 is a development preview. Real albums, metadata/semantic search,
+Version 0.8.1 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing and viewer downloads remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 49 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 50 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -107,3 +107,14 @@ Batch selection supports moving to the locked folder with elevation and ordinary
 cache/in-flight-write invalidation. Album sidebar hover restores actual selection.
 `galeria --monitor DP-2` chooses a connector on initial launch without reconfiguring
 monitors or manipulating other windows. Both native UI and49unit checks pass.
+
+
+Version0.8.1 fixes a live performance regression: cache writes use an eviction
+index, hover/selection touch active cells, and row geometry is cached per month.
+The grid keeps full month heights but constructs rectangles/native child trees
+only near the viewport. Group transitions use visible photos rather than
+constructing sprites for the whole library. Select All still reaches loaded
+matching media outside the viewport. Fifty unit tests and offline native checks
+pass. Two read-only44,854-item Vulkan traces measured tier p95 around17ms and
+scroll p9517–33ms; first-layout outliers remain. See upstream PERF.md for the
+method, renderer experiment, cache benchmark and limits.
