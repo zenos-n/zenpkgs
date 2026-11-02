@@ -37,14 +37,14 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.10.3 is a development preview. Real albums, metadata/semantic search,
+Version 0.11.0 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing remains pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 63 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 64 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -180,3 +180,18 @@ from66.8ms to20.0/20.9ms and frame p95 from83.3ms to33.3ms in two repeats; max f
 interval fell117->50ms. This is not a physical-GPU or universal16.7ms guarantee.
 63unit tests plus native full-height/LOD/date/priority/groups, cache/account/sync
 and stack/Trash regressions pass. No renderer/system/monitor changes ship.
+
+Version0.11 resolves cached textures before tier sprite planning, keeps logical
+folder clipping through interrupted close/model rebuild, and skips obsolete
+motion entries absent from both layouts instead of aborting GTK allocation.
+Archive/unarchive and Trash/restore are available in selection and focused media.
+Right-click Copy media and focused Ctrl+C offer native image/original-file
+clipboard formats; private remote copies are replaced on the next copy/Clear
+cache, while locked clipboard payloads/tempfiles clear on lock/sign-out/switch.
+
+Video editing adds a two-handle trim range with an accent-selected span, numeric
+endpoints, play/pause and a seekable playhead. Playback shows the original within
+the selected interval; rendered5second Preview applies crop/rotation/filters and
+Save a copy exports all edits.64unit tests and native interrupted-fold/RAM-tier,
+clipboard/locked-cleanup/archive/trash, video play/seek/trim/export,10kLOD and
+cache/account/sync regressions pass. No production media was modified by tests.
