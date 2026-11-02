@@ -37,14 +37,14 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.7.0 is a development preview. Real albums, metadata/semantic search,
+Version 0.8.0 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing and viewer downloads remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 42 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 49 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -87,3 +87,23 @@ Successful batch Trash flies thumbnails to the sidebar, then closes grid gaps
 without a network reload. Native tests cover these flows and actual video export;
 FFmpeg8.1.2 and packaged9.0.1 both pass the video export checks. Native GNOME
 helper activation remains untested; no system configuration activation occurred.
+
+Version0.8 uses the compact Immich3.3.3 timeline endpoint for IDs/ratios/types
+before fetching images. The unfiltered Library has its entire placeholder scroll
+range immediately; exact sizes arrive with compact month metadata. Native button,
+image and checkbox children exist only in the two-screen viewport band. Filtered
+views/legacy servers retain pagination. The native10000-slot fixture used90live
+button trees after an old-date jump; metadata/image jobs prioritise the viewport.
+The typical1200-image tier allocation pass is~1.2ms in softwareGL; outliers remain.
+Month/year transitions group all visible photos under the containing date, keep
+the current date in view, and use the final cover geometry without padded-size
+inflation. Empty video thumbnails use preview/frame fallback, never whole-video
+image decoding or repeated error toasts. The main header is46px.
+
+Folder sync has explicit Unlimited depth and Folders to albums switches. Album
+mode can create one album per directory or use a single named/existing target.
+Per-directory names include the relative path; originals/deletions are untouched.
+Batch selection supports moving to the locked folder with elevation and ordinary
+cache/in-flight-write invalidation. Album sidebar hover restores actual selection.
+`galeria --monitor DP-2` chooses a connector on initial launch without reconfiguring
+monitors or manipulating other windows. Both native UI and49unit checks pass.
