@@ -37,14 +37,14 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.10.0 is a development preview. Real albums, metadata/semantic search,
+Version 0.10.1 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing remains pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 60 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 62 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -158,3 +158,12 @@ the separate native popup input surface that interrupted drags. A real-XTest
 pointer regression crosses the actual hint while held. Playback submenu chevron
 backgrounds are corrected.60unit tests and native cache/profile/export/sync,
 10k-slot LOD, cache/refresh/Trash/stack checks pass; production accounts unchanged.
+
+Version0.10.1 fixes update visibility while Galeria is on an unfocused secondary
+display: visible libraries/albums refresh every15seconds regardless of keyboard
+focus. Hidden windows and viewer/editing still pause refresh. Upload scanning
+already repeats every30seconds by default; read-only diagnosis confirmed a clip
+uploaded22seconds after creation. Validated startup resumes only already-enabled
+account folder rules and updates their service runtime. Initial service install
+no longer sends a wake signal before its handler is ready; the first scan starts
+automatically.62unit tests plus native unfocused-update/cache/account tests pass.
