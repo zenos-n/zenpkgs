@@ -45,3 +45,17 @@ Run `nix build .#checks.x86_64-linux.zenlink-integration` to build the desktop
 package, validate both selectors, evaluate the real NixOS/Home Manager graph,
 check startup/disabled/manual behavior and kernel matching, and run the media
 protocol tests. This check never connects to a phone or activates the host.
+
+
+Phone webcam capture uses the Android hardware H.264 encoder at up to 1280×720,
+30 fps, with continuous Camera2 recording/auto-exposure. Video has a bounded
+four-frame credit window and recovers dropped access units at keyframes. The
+Android and desktop updates are required together. The legacy reverse PC-camera
+preview remains JPEG-based.
+
+The desktop decodes AVC once and publishes a native PipeWire `Video/Source`
+(`ZenLink Phone`) for Snapshot and camera portals, alongside `/dev/video10` for
+V4L2 clients. This avoids the V4L2 monitor caching `exclusive_caps` as output-only
+before the producer starts. Raw preview bytes are framed independently of pipe
+read boundaries, and encoded camera writes are queued/acknowledged only after
+being written to the decoder. The package includes the PipeWire GStreamer plugin.
