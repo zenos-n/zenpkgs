@@ -37,7 +37,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.10.1 is a development preview. Real albums, metadata/semantic search,
+Version 0.10.2 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing remains pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
@@ -167,3 +167,8 @@ uploaded22seconds after creation. Validated startup resumes only already-enabled
 account folder rules and updates their service runtime. Initial service install
 no longer sends a wake signal before its handler is ready; the first scan starts
 automatically.62unit tests plus native unfocused-update/cache/account tests pass.
+
+Version0.10.2 hides successful idle sync status and closes the open popover;
+only pending/active sync or errors retain the sidebar indicator. Background
+scanning continues. Native checks verify10px bottom spacing during active work
+and both popover/indicator dismissal on completion.
