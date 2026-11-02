@@ -230212,14 +230212,14 @@
       "dependenciesDeclared": false,
       "id": "pkgs.com.neg-zero.keyslot-extension",
       "meta": {
-        "description": "\n    Adds a Keyslot tile to GNOME Shell Quick Settings with lock status,\n    Open, and Lock actions. Credentials remain in the separate Keyslot app.\n    Requires the Keyslot application for those actions to work.\n    Installing this package does not enable the extension.\n  ",
+        "description": "\n    Adds a Keyslot tile to GNOME Shell Quick Settings with lock status,\n    Open, and Lock actions, plus configurable desktop Auto-Type shortcuts.\n    Credentials remain in the separate Keyslot app.\n    Requires the Keyslot application for those actions to work.\n    Installing this package does not enable the extension.\n  ",
         "id": "com.neg-zero.keyslot-extension",
         "license": "$l.gpl3Only",
         "maintainers": [
           "doromiert"
         ],
         "name": "Keyslot Quick Settings",
-        "packageVersion": "0.1.0",
+        "packageVersion": "0.3.0",
         "summary": "Open and lock Keyslot from GNOME 50 Quick Settings",
         "tags": [
           "gnome",
@@ -231613,6 +231613,123 @@
       "target": [
         "unknown",
         "gpu-screen-recorder-ui"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "graphics",
+        "galeria"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.Galeria",
+      "meta": {
+        "description": "\n    Browse device photos and videos or connect to an Immich library.\n    Includes date folders, albums, people, tags, duplicate review, sharing,\n    administration and opt-in upload-only device folder syncing.\n    Development preview: image processing and AI editor parity are unfinished.\n  ",
+        "id": "com.neg-zero.Galeria",
+        "license": "$l.napl",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Galeria",
+        "packageVersion": "0.5.0",
+        "summary": "Native photo and video library for local folders and Immich",
+        "tags": [
+          "graphics",
+          "photography",
+          "video",
+          "gnome",
+          "gtk4"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "pkgs"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "galeria"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/default.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "com",
+        "neg-zero",
+        "Galeria"
       ]
     }
   ]

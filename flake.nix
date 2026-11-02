@@ -43,7 +43,7 @@
     };
     source-keyslot = { url = "github:zenos-n/keyslot/4a650938be4587fed5c39d34f3eb240958237120"; flake = false; };
     source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/fcd5109e808d46a5f2056093a82993bb3d744479"; flake = false; };
-    source-galeria = { url = "github:zenos-n/galeria/1f5a0a4dd63744ff1d4d78e347b22c0b5f479671"; flake = false; };
+    source-galeria = { url = "github:zenos-n/galeria/b309ccd4551cc3edb570d2c4e87c28519b336873"; flake = false; };
     source-rebuild = {
       url = "github:zenos-n/zenos-rebuild/main";
       flake = false;
