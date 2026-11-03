@@ -45,6 +45,7 @@
     source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/79ab807e64a0f8b3d9748a78df300439b5a8e4f7"; flake = false; };
     source-galeria = { url = "github:zenos-n/galeria/676b66fb07853dd8d442cc492913a91afafd342b"; flake = false; };
     source-galeria-extension = { url = "github:zenos-n/galeria-gnome-extension/2c7112823e7074fcbc2fc22dff6b89ad6553a754"; flake = false; };
+    source-nzportable = { url = "github:zenos-n/nzportable/1102b7067b62883faa94a35b53fd5199943fec38"; flake = false; };
     source-rebuild = {
       url = "github:zenos-n/zenos-rebuild/main";
       flake = false;
@@ -481,6 +482,7 @@
             zenPackageSources = {
               keyslot = inputs.source-keyslot.outPath;
               keyslotExtension = inputs.source-keyslot-extension.outPath;
+              nzportable = inputs.source-nzportable.outPath;
               galeria = inputs.source-galeria.outPath;
               galeriaExtension = inputs.source-galeria-extension.outPath;
               rebuild = inputs.source-rebuild.outPath;

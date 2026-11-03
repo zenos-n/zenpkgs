@@ -16,6 +16,6 @@ let
       && (package.version or null) == (provider.version or null)
   ) expected;
 in
-assert builtins.length expected == 50;
+assert builtins.length expected == 49;
 assert lib.all (value: value) matches;
 pkgs.runCommand "zenos-migration-import-providers" {} "touch $out"

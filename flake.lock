@@ -652,6 +652,7 @@
         "source-haptics": "source-haptics",
         "source-keyslot": "source-keyslot",
         "source-keyslot-extension": "source-keyslot-extension",
+        "source-nzportable": "source-nzportable",
         "source-oobe": "source-oobe",
         "source-plymouth": "source-plymouth",
         "source-rebuild": "source-rebuild",
@@ -856,6 +857,23 @@
         "owner": "doromiert",
         "repo": "keyslot-gnome-extension",
         "rev": "79ab807e64a0f8b3d9748a78df300439b5a8e4f7",
+        "type": "github"
+      }
+    },
+    "source-nzportable": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1792739533,
+        "narHash": "sha256-dDlP+SYGauyK7lJcWpfCXDk1xTCdyuYdKC2tbGm4ROM=",
+        "owner": "zenos-n",
+        "repo": "nzportable",
+        "rev": "1102b7067b62883faa94a35b53fd5199943fec38",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "nzportable",
+        "rev": "1102b7067b62883faa94a35b53fd5199943fec38",
         "type": "github"
       }
     },

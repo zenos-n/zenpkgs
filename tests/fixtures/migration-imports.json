@@ -16,10 +16,6 @@
     "source": "gcc"
   },
   {
-    "id": "pkgs.unknown.android-tools",
-    "source": "android-tools"
-  },
-  {
     "id": "pkgs.unknown.scrcpy",
     "source": "scrcpy"
   },

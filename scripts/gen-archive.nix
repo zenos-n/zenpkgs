@@ -1,4 +1,5 @@
 let
+  sourceRevision = builtins.getEnv "ZENPKGS_ARCHIVE_SOURCE_REVISION";
   system = builtins.currentSystem;
   # path: includes newly added files in a working checkout, without git staging.
   flake = builtins.getFlake "path:${toString ../.}";
@@ -11,6 +12,7 @@ let
   };
   search = import ../lib/search-index.nix { lib = flake.inputs.nixpkgs.lib; };
 in
+assert sourceRevision == "" || builtins.match "[0-9a-f]{40}" sourceRevision != null;
 search.mkIndex {
   inherit evaluated;
   registry = flake.lib.dslRegistryFor system;
@@ -25,7 +27,7 @@ search.mkIndex {
   maintainers = import ../lib/maintainers.nix { };
   versionInfo = {
     inherit system;
-    zenpkgsVersion = flake.rev or flake.dirtyRev or null;
+    zenpkgsVersion = if sourceRevision != "" then sourceRevision else flake.rev or flake.dirtyRev or null;
     nixpkgsRevision = flake.inputs.nixpkgs.rev or null;
   };
 }

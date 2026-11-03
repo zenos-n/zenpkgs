@@ -9,6 +9,14 @@ Package: `pkgs.com.neg-zero.Galeria`, with category alias
 `pkgs.byCategories.apps.graphics.galeria`. Executables: `galeria` and
 `galeria-sync`. The package includes its desktop entry, icon and AppStream data.
 
+Run the published package directly (the canonical ID has a capital `G`):
+
+```sh
+nix run github:zenos-n/zenpkgs/main#com.neg-zero.Galeria
+```
+
+The lowercase category selector `#apps.graphics.galeria` selects the same package.
+
 Enable it in the normal program tree:
 
 ```nix
