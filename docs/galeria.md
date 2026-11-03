@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.11.1 is a development preview. Real albums, metadata/semantic search,
+Version 0.11.2 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing remains pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
@@ -216,3 +216,16 @@ with confirmation; the album endpoint is used, never media deletion. Caches,
 sidebar and pins refresh after success, including an empty cached album list.
 65unit tests and private-XTest hover/delete/cancel,10kLOD and existing motion/cache/
 media-action tests pass. No production album was deleted during verification.
+
+
+Version0.11.2 adds Pin album/Unpin album to ellipsis and right-click menus,
+including sidebar albums. Pins persist per account; the empty pinned section is
+hidden. Collections uses the same label-to-row spacing as other sidebar groups.
+
+Remote upload arrivals keep populated months visible while new metadata loads.
+Complete changes animate into the existing geometry with cached textures,
+selection and the scroll anchor retained. Visible incoming thumbnails prepare
+before insertion (at most24), within the768-texture RAM limit. Failed refreshes
+keep the current photos and retry on the next15-second check.65unit tests and
+native pointer/pin/spacing, blocked-response insertion, bottom scroll anchor,
+failure/retry, album deletion, group frames and startup/cache checks pass.
