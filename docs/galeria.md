@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.12.2 is a development preview. Real albums, metadata/semantic search,
+Version 0.13.0 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -304,3 +304,32 @@ coordinates, newest-heading omission, exact source/reverse positions, and
 matching left edges across long/short dates and the Months year label.
 70unit checks and native photo, startup/status, Locked retention, pins/insertion
 and selection/motion regressions pass; screenshots were inspected.
+
+
+Version0.13.0 connects file/folder drag-and-drop to real reviewed Immich uploads,
+with checksum duplicate checks, cancellation and unchanged source files. Gio
+directory notifications wake folder sync after a250ms debounce, following
+recursive/depth rules and new directories. Stable-file checks remain; pending
+files retry after2.2seconds, errors after30seconds and a600second recovery pass
+covers missed/unavailable notifications. Scans/hash/duplicate checks stay quiet.
+
+Photo Save a copy uploads PNG bytes directly to Immich from memory, with locked
+visibility at creation for private sources. Both editors support bounded Undo/Redo
+history and Ctrl+Z/Ctrl+Shift+Z/Ctrl+Y. Photo text uses inline on-image typing and
+move/rotate/scale handles; the selected color has a visible ring. Focused media
+has working Favorite, Archive, Trash and Locked actions. Space controls video
+playback without leaving focus; Replay and Loop are available. Wheel/pinch zoom
+spans1–8x with bounded drag panning/reset, transforming the existing player.
+
+Image Copy supplies pixels only, without FileList/URI/private paths. Videos have
+no Copy action; right-click Share is available for both. Removal animations fly
+into the invoked toolbar icon in selection and viewer modes. Locked moves retain
+visible pixels even after LRU eviction; metadata-only updates retain native
+cells/textures. The year-scroll hint has an explicit popover background.
+
+78unit checks and native real cross-window drop/multipart upload, image clipboard
+receiver/context Share, action-target, viewer/video controls, text transform/history,
+in-memory private PNG upload and Locked retention checks pass, plus existing
+startup/cache/scroll/group/date/reconnect regressions. Pinch callbacks were
+simulated; physical touchpad/touch and production-server mutations were not tested.
+No new frame-time improvement is claimed.
