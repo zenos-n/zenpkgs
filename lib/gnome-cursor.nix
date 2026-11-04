@@ -12,6 +12,9 @@ in
 {
   config = lib.mkIf config.services.desktopManager.gnome.enable {
     environment.extraInit = ''eval "$(${bridge} --environment --shell)"'';
+    # Existing terminals retain NixOS's environment guard across a system switch.
+    programs.zsh.shellInit = ''eval "$(${bridge} --environment --shell)"'';
+    programs.bash.interactiveShellInit = ''eval "$(${bridge} --environment --shell)"'';
     environment.etc."systemd/user-environment-generators/25-zenos-cursor".source =
       pkgs.writeShellScript "zenos-cursor-environment" ''exec ${bridge} --environment'';
     systemd.user.services.zenos-gnome-cursor = {
