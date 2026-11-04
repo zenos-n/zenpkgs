@@ -92,7 +92,7 @@ jobs:
         shell: bash
         run: |
           failed=()
-          checks=(blankbox-package blankbox-module application-program-options registry-contract registry-counts package-paths registry-build-providers
+          checks=(gnome-cursor blankbox-package blankbox-module application-program-options registry-contract registry-counts package-paths registry-build-providers
             registry-output-ownership registry-nzportable-identity registry-path-identities
             registry-invalid-identities registry-structure-exposure
             registry-metadata-defaults public-package-outputs
