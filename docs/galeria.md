@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.12.1 is a development preview. Real albums, metadata/semantic search,
+Version 0.12.2 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -292,3 +292,15 @@ errors; folder scans, hashing and duplicate checks stay quiet. Existing SHA-1
 preflight checks skip downloaded originals already present on Immich.70unit
 checks plus native date, Locked retention, photo/editor, startup/status,
 reconnect, selection/motion and pins/insertion checks pass.
+
+
+Version0.12.2 makes fast header exchanges direction-aware: upward scrolling
+exits downward and enters from above. The newest library month appears only
+in the header; its duplicate inline label and reserved space are removed.
+Older headings retain their shared vertical path. Explicit left alignment,
+matching content/header insets and constant overlay X prevent title-length
+and transition padding shifts. A native fixture checks opposite up/down
+coordinates, newest-heading omission, exact source/reverse positions, and
+matching left edges across long/short dates and the Months year label.
+70unit checks and native photo, startup/status, Locked retention, pins/insertion
+and selection/motion regressions pass; screenshots were inspected.
