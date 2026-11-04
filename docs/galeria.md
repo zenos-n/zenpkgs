@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.13.0 is a development preview. Real albums, metadata/semantic search,
+Version 0.13.1 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -333,3 +333,11 @@ in-memory private PNG upload and Locked retention checks pass, plus existing
 startup/cache/scroll/group/date/reconnect regressions. Pinch callbacks were
 simulated; physical touchpad/touch and production-server mutations were not tested.
 No new frame-time improvement is claimed.
+
+
+Version0.13.1 starts selection-grid reflow immediately after capturing the removal
+flight snapshots. Remaining tiles move concurrently with Trash, Archive and
+Locked flights; the toolbar stays visible until the snapshots reach its icon.
+Native checks verify intermediate tile positions while all three flights are
+active, empty-grid/reduced-motion completion, viewer targets and failed-request
+retention. The Locked cache/privacy/scroll regression also passes.
