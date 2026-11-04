@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.11.3 is a development preview. Real albums, metadata/semantic search,
+Version 0.11.4 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing remains pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
@@ -247,3 +247,14 @@ and Markup; Contrast has one background, and the hamburger has no Quit item.
 66unit tests plus cache/scroll, clipboard/editor/shortcuts, pins, startup/export,
 media-action, year-rail and10kLOD native checks pass. Photo processing/save
 remains a preview; video editing/export remains separate and functional.
+
+
+Version0.11.4 fixes a reconnect race that could leave All Photos permanently
+showing placeholders: three old-index metadata requests kept all pending slots
+after a changed date catalog replaced the index. Replace the pending set with
+the index, retain populated cached months while changed counts reload, and mark
+those ranges for fresh metadata until it is applied. A gated native regression
+holds three old requests across reconnect and verifies cached pixels remain,
+new data arrives and the pending queue clears. Live-library verification reached
+all144months loaded, zero placeholders and179 active cached textures.66unit and
+startup/cache/insertion/10kLOD native checks pass; no production media mutation.
