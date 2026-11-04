@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.13.1 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.0 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -341,3 +341,24 @@ Locked flights; the toolbar stays visible until the snapshots reach its icon.
 Native checks verify intermediate tile positions while all three flights are
 active, empty-grid/reduced-motion completion, viewer targets and failed-request
 retention. The Locked cache/privacy/scroll regression also passes.
+
+
+Version0.14.0 adds Save/Cancel/Discard for unsaved photo/video edits when using
+Done, Back/Escape, changing media, closing the window or quitting. Save uses the
+existing photo-to-Immich/video-save-copy flow and resumes the requested action
+only after success; failed uploads/exports and cancelled choosers retain edits.
+Cancel keeps editing; Discard restores the last saved snapshot. Clean or already
+saved state leaves directly, independently of Undo history limits.
+
+Text annotations use shared Pango/Cairo glyph outlines across live photo-edit
+categories and final-resolution PNG rendering. Scaling text no longer enlarges
+a small glyph bitmap. The saved photo remains PNG. Rotation has6degree detents
+around every90degrees, with free rotation between them. Private cleanup clears
+the saved edit snapshot and glyph cache with the rest of the editor state.
+
+80unit checks pass, plus native photo/text rotation, full Save/Cancel/Discard
+photo/video decisions, save failures/chooser cancellation/close/quit guards,
+video edit/export, image clipboard and selection-action regressions. Generated
+media/fixture uploads and real local video exports preserve original bytes.
+Large-text/prompt screenshots inspected; no production media changed for tests.
+Exact added text runtime: Pango1.57.1/Cairo1.18.4.
