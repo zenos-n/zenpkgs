@@ -45,14 +45,13 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.11.4 is a development preview. Real albums, metadata/semantic search,
-collections, sharing, administration and video playback are implemented. The
-editor still lacks saved image processing and AI parity; offline encrypted-vault browsing remains pending. HEIC
+Version 0.12.0 is a development preview. Real albums, metadata/semantic search,
+collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 65 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 69 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -83,7 +82,7 @@ Version0.7 adds original-preserving video trim/crop/quarter-turn rotation and
 Original/Vivid/Warm/Cool/Mono/Noir filters, encoded five-second preview and
 cancellable H.264/AAC MP4 save-copy export. Remote edits use originals through
 the authenticated range bridge, without exposing session tokens to FFmpeg.
-The image editor's saved processing and AI parity remain unfinished.
+Advanced AI editing remains unfinished.
 
 The supplied app icon is now packaged. Video buffering uses one transparent
 Adwaita spinner; Clapper's duplicate dot animation is hidden. Map photo markers
@@ -245,8 +244,8 @@ and nested Wayland. Shift+D downloads the current expanded media or selection
 through the chosen-location picker. Photo editing now exposes only Crop, Adjust
 and Markup; Contrast has one background, and the hamburger has no Quit item.
 66unit tests plus cache/scroll, clipboard/editor/shortcuts, pins, startup/export,
-media-action, year-rail and10kLOD native checks pass. Photo processing/save
-remains a preview; video editing/export remains separate and functional.
+media-action, year-rail and10kLOD native checks passed for that release.
+Photo processing is connected in0.12.0 below; video editing remains separate.
 
 
 Version0.11.4 fixes a reconnect race that could leave All Photos permanently
@@ -258,3 +257,20 @@ holds three old requests across reconnect and verifies cached pixels remain,
 new data arrives and the pending queue clears. Live-library verification reached
 all144months loaded, zero placeholders and179 active cached textures.66unit and
 startup/cache/insertion/10kLOD native checks pass; no production media mutation.
+
+
+Version0.12.0 connects all16 photo adjustment controls to distinct processing,
+retains per-tool values and snaps pointer drags to neutral while preserving
+fine keyboard steps. Pen, highlighter, opaque redaction and placed text support
+real on-photo input, color selection and Undo. Compare/Reset operate on pixels;
+chosen-path PNG copies apply adjustments, markup, crop, rotation, mirror and
+straighten without replacing originals. An unsupported remote original falls
+back to the server preview and explicitly reports the resolution fallback.
+Preview renders coalesce in a worker with1200px maximum dimensions.
+
+The header date follows viewport content; the small inline month label hands
+off to an animated header only after scrolling away, avoiding duplicate dates.
+69unit tests and native real-pointer drawing/export/date-handoff checks pass,
+along with existing clipboard, video-edit/playback/export, media-action,
+startup/account/download and reconnect-index regressions. Original byte
+preservation and preview-resolution fallback are covered with generated media.

@@ -6,10 +6,11 @@ _meta = {
     Browse device photos and videos or connect to an Immich library.
     Includes date folders, albums, people, tags, duplicate review, sharing,
     administration and opt-in upload-only device folder syncing.
-    Development preview: image processing and AI editor parity are unfinished.
+    Photo adjustments, markup and PNG copies preserve original media.
+    Development preview: advanced AI editing and offline vault browsing are unfinished.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "0.11.4";
+  packageVersion = "0.12.0";
   tags = [ "graphics" "photography" "video" "gnome" "gtk4" ];
   maintainers = [ $m.doromiert ];
   license = $l.napl;
