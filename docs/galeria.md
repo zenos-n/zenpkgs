@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.11.2 is a development preview. Real albums, metadata/semantic search,
+Version 0.11.3 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. The
 editor still lacks saved image processing and AI parity; offline encrypted-vault browsing remains pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
@@ -229,3 +229,21 @@ before insertion (at most24), within the768-texture RAM limit. Failed refreshes
 keep the current photos and retry on the next15-second check.65unit tests and
 native pointer/pin/spacing, blocked-response insertion, bottom scroll anchor,
 failure/retry, album deletion, group frames and startup/cache checks pass.
+
+
+Version0.11.3 isolates video preloads in a128MB cache, preserving512MB for
+ordinary image/metadata data; old video packets migrate without deleting
+thumbnails. Two cached-read workers bypass blocked network image workers.
+Initial month metadata fills existing cells in place; deferred restoration yields
+to newer scroll input and a held year scrollbar. Native checks hold all four
+HTTP workers while cached pixels appear and verify no month-hydration scroll reset.
+
+Copy media prefers image pixels, with a rendered-preview fallback for originals
+that cannot be decoded locally; the original file remains available to file
+consumers. Actual right clicks and an independent clipboard reader pass on X11
+and nested Wayland. Shift+D downloads the current expanded media or selection
+through the chosen-location picker. Photo editing now exposes only Crop, Adjust
+and Markup; Contrast has one background, and the hamburger has no Quit item.
+66unit tests plus cache/scroll, clipboard/editor/shortcuts, pins, startup/export,
+media-action, year-rail and10kLOD native checks pass. Photo processing/save
+remains a preview; video editing/export remains separate and functional.
