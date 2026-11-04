@@ -45,13 +45,13 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.12.0 is a development preview. Real albums, metadata/semantic search,
+Version 0.12.1 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
 fixtures and generated media.
 
-Validation: 69 app tests; native collection/sharing, legacy-keyring migration,
+Validation: 70 app tests; native collection/sharing, legacy-keyring migration,
 and desktop file-open checks; package/module DSL checks and exact pinned-source
 package build. No installed configuration or production account was changed.
 
@@ -274,3 +274,21 @@ off to an animated header only after scrolling away, avoiding duplicate dates.
 along with existing clipboard, video-edit/playback/export, media-action,
 startup/account/download and reconnect-index regressions. Original byte
 preservation and preview-resolution fallback are covered with generated media.
+
+
+Version0.12.1 replaces the disconnected month/header reveal with one shared
+glyph run. Slow scrolling moves it1:1 from the exact source position to the
+header, reversing continuously; fast skips use a short vertical exchange
+clipped inside the header. Original headings are suppressed while the overlay
+owns their text. Native coordinate and screenshot checks cover both paths.
+
+Moving assets to Locked preserves unrelated RAM textures and known ordinary
+disk thumbnails/previews/video prefixes. All moved revisions, stale metadata
+and affected covers are removed; pre-move cache writes are blocked. A480-item
+indexed fixture moves two assets with zero blank active cells, no downloads
+and unchanged scroll position, while checking privacy cleanup and original bytes.
+The upload indicator appears only while transferring files or for attention
+errors; folder scans, hashing and duplicate checks stay quiet. Existing SHA-1
+preflight checks skip downloaded originals already present on Immich.70unit
+checks plus native date, Locked retention, photo/editor, startup/status,
+reconnect, selection/motion and pins/insertion checks pass.
