@@ -561,6 +561,7 @@
           coreModules = nixpkgs.lib.collect builtins.isPath zenosTree.core;
           gnomeBaseModule = zenosTree.desktops.gnome.base."module.nix";
           transitionalSystemModules = [
+            ./lib/gnome-cursor.nix
             ./lib/compat/system-modules/installed-base.nix
             ./lib/compat/system-modules/disks.nix
             ./lib/compat/system-modules/oobe.nix
@@ -614,6 +615,7 @@
             imports = [
               (inputs.source-zenlink.outPath + "/nix/devices.nix")
               ./lib/compat/system-modules/installed-runtime.nix
+              ./lib/gnome-cursor.nix
               ./lib/compat/system-modules/oobe-runtime.nix
               inputs.home-manager.nixosModules.home-manager
               inputs.nix-flatpak.nixosModules.nix-flatpak
@@ -761,6 +763,12 @@
             assert nixpkgs.lib.all (value: value) (builtins.attrValues migrationPolicies);
             pkgs.writeText "zenos-migration-options" (builtins.toJSON migrationPolicies);
           migration-packages = import ./tests/migration-packages.nix { inherit pkgs registry; };
+          gnome-cursor = pkgs.runCommand "zenos-gnome-cursor-check" {
+            nativeBuildInputs = [ pkgs.python3 ];
+          } ''
+            ZENOS_CURSOR_HELPER=${./lib/gnome-cursor.py} PYTHONDONTWRITEBYTECODE=1 python3 ${./tests/test-gnome-cursor.py}
+            touch "$out"
+          '';
           nzportable = import ./tests/nzportable.nix { inherit pkgs; };
           application-program-options = import ./tests/application-program-options.nix {
             pkgs = dsl.bootstrapPkgs;
