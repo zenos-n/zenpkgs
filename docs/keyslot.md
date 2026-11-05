@@ -250,3 +250,15 @@ Lock, re-render and invalidation discard active drag presentation. A busy deskto
 Secret Service remains owned by its current provider; Keyslot shows this in
 Preferences without interrupting startup with a generic error. Native/runtime
 compilation and installed source comparison only; no tests or GUI acceptance run.
+
+Start as a Service is now an explicit Startup preference (on by default), stored
+in private JSON or the selected profile's local Keyslot/StartAsService key. Login
+unlock uses a hidden background process when enabled; disabling it shows the
+login-unlocked vault, while explicit --background/--minimized still wins. A
+duplicate user KeePassXC autostart entry invoking the Keyslot compatibility
+command is backed up and replaced by an owned Hidden entry, then restored on
+disable. Other executables/commands and user edits are preserved; managed links
+and conflicting backups are reported. Login enrollment retains the running
+packaged binary instead of an older profile binary. English/Polish/Romanian
+labels included. Runtime/Python/gettext compilation only; no tests, login cycles,
+GUI runs or installed configuration activation performed.
