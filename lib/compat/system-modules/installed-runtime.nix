@@ -29,6 +29,8 @@ let
   };
 in
 {
+  imports = [ ../../legacy-openal.nix ];
+
   config = lib.mkMerge [
     { zenos.system.zenfs.enable = lib.mkDefault enabled; }
     (lib.mkIf enabled (
