@@ -65,6 +65,14 @@ in
       pulse.enable = lib.mkDefault true;
     };
 
+    # OpenAL Soft 1.15 defaults to DONT_MOVE, stranding legacy games on lost outputs.
+    environment.etc."openal/alsoft.conf" = lib.mkIf config.services.pipewire.pulse.enable {
+      text = lib.mkDefault ''
+        [pulse]
+        allow-moves = true
+      '';
+    };
+
     programs.dconf.enable = lib.mkDefault true;
     hardware.enableRedistributableFirmware = lib.mkDefault true;
 

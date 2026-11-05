@@ -155,6 +155,10 @@ in
     assert final.services.pipewire.enable;
     assert final.services.pipewire.alsa.enable;
     assert final.services.pipewire.pulse.enable;
+    assert final.environment.etc."openal/alsoft.conf".text == ''
+      [pulse]
+      allow-moves = true
+    '';
     assert final.programs.dconf.enable;
     assert final.hardware.enableRedistributableFirmware;
     assert final.boot.loader.efi.canTouchEfiVariables;
