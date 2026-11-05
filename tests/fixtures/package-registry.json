@@ -229985,6 +229985,134 @@
         "neg-zero",
         "galeria-extension"
       ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "gaming",
+        "steam-gamescope"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.SteamGamescope",
+      "meta": {
+        "description": "\n    Separate Steam launcher using the user's current GNOME primary display mode.\n    Resolution and refresh are detected at launch from the active display mode. Uses the curated Steam package and its Proton GE/private-home\n    integration. Existing Steam sessions are never closed automatically.\n  ",
+        "id": "com.neg-zero.SteamGamescope",
+        "license": "$l.mit",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Steam (Gamescope)",
+        "packageVersion": "1.0.2",
+        "summary": "Steam Big Picture in Gamescope on your primary GNOME display",
+        "tags": [
+          "gaming",
+          "steam",
+          "gamescope",
+          "wayland"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "steam"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "byCategories"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "apps"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "gaming"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "steam"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "steamGamescope"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "com",
+        "neg-zero",
+        "SteamGamescope"
+      ]
     }
   ]
 }

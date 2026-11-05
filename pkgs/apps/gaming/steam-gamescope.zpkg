@@ -1,0 +1,19 @@
+_meta = {
+  id = "com.neg-zero.SteamGamescope";
+  name = "Steam (Gamescope)";
+  summary = "Steam Big Picture in Gamescope on your primary GNOME display";
+  description = ''
+    Separate Steam launcher using the user's current GNOME primary display mode.
+    Resolution and refresh are detected at launch from the active display mode. Uses the curated Steam package and its Proton GE/private-home
+    integration. Existing Steam sessions are never closed automatically.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.0.2";
+  tags = [ "gaming" "steam" "gamescope" "wayland" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.steamGamescope + "/package.nix") {
+  steam = $pkgs.byCategories.apps.gaming.steam;
+};

@@ -661,6 +661,7 @@
         "source-refind-theme": "source-refind-theme",
         "source-setup": "source-setup",
         "source-shell-defaults": "source-shell-defaults",
+        "source-steam-gamescope": "source-steam-gamescope",
         "source-vision-indicator": "source-vision-indicator",
         "source-vr-tools": "source-vr-tools",
         "source-zane-indicator": "source-zane-indicator",
@@ -1010,6 +1011,23 @@
         "owner": "zenos-n",
         "repo": "zenos-shell-defaults",
         "rev": "29d54418b0e7e966e33a0f5766b92d9c94b1345e",
+        "type": "github"
+      }
+    },
+    "source-steam-gamescope": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1793913768,
+        "narHash": "sha256-RmJn4ZuTbGs7gG0POJlpPUWlsdWE3CGmap0D4On/XV4=",
+        "owner": "zenos-n",
+        "repo": "steam-gamescope",
+        "rev": "2a37997b61852bb29f7a70ecc0a856742f5c1719",
+        "type": "github"
+      },
+      "original": {
+        "owner": "zenos-n",
+        "repo": "steam-gamescope",
+        "rev": "2a37997b61852bb29f7a70ecc0a856742f5c1719",
         "type": "github"
       }
     },
