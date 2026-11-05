@@ -252,3 +252,7 @@ data directory, `:64` loads and validates preferences, and `:135` saves state.
 parses the model catalog (`:124` reads reasoning efforts); `src/zane.cpp:960`
 defines account-presence and automatic-access preferences. The working checkout
 contains newer changes, so the tagged files are the authority for this version.
+
+## Background phone connection
+
+`users.alex.programs.codex = { enable = true; remoteControl = true; };` starts the native managed daemon at user-manager startup and checks it every 30 seconds. Existing sessions and phone pairing remain writable and are preserved. This lifecycle switch defaults to false; it is separate from nullable application preferences. The check does not restart a running daemon or open a public listener. Set `users.alex.profile.linger = true;` to keep the user manager available after logout and start it at boot. The service uses stateDirectory when selected, otherwise `%h/.private/Packages/codex`. Disabling remoteControl removes automatic startup/recovery; stop an existing daemon explicitly with `codex remote-control stop` when no active work needs it. See [official Codex commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli#codex-remote-control).

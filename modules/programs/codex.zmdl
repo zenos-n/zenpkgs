@@ -964,6 +964,14 @@ _let preferences: $type.list [ $type.set ] =
       ($lib.optional (entry.purpose != null) { path = [ "agents" entryName "description" ]; value = entry.purpose; }) ++
     ($lib.optional (entry.configurationFile != null) { path = [ "agents" entryName "config_file" ]; value = entry.configurationFile; })) $path.agentRoles));
 
+remoteControl._meta = {
+  name = "Keep Codex available from paired devices";
+  summary = "Start and recover the background phone connection";
+  description = ''Use Codex's native managed daemon at user startup and check it every 30 seconds. Existing login, pairing and active sessions are preserved. Select the user's profile.linger separately for availability before login and after logout.'';
+  type = $type.boolean; default = false;
+  tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl;
+};
+
 enable = enableOption {
   _meta = {
     name = "Install and configure Codex"; summary = "Install and configure Codex";
@@ -973,6 +981,22 @@ enable = enableOption {
   u! {
     home.packages = [ $pkgs.byCategories.apps.ai.codex ];
     home.sessionVariables = $lib.optionalAttrs ($path.stateDirectory != null) { CODEX_HOME = $path.stateDirectory; };
+    systemd.user.services.codex-remote-control = $lib.mkIf $path.remoteControl {
+      Unit.Description = "Keep the Codex phone connection available";
+      Service = {
+        Type = "oneshot";
+        ExecStart = "${$pkgs.byCategories.apps.ai.codex}/bin/codex remote-control start --json";
+        Environment = [ "CODEX_HOME=${if $path.stateDirectory != null then $path.stateDirectory else "%h/.private/Packages/codex"}" ];
+        # Codex owns a detached daemon; finishing a health check must retain it.
+        KillMode = "process";
+        TimeoutStartSec = 120;
+      };
+    };
+    systemd.user.timers.codex-remote-control = $lib.mkIf $path.remoteControl {
+      Unit.Description = "Start and recover Codex remote control";
+      Timer = { OnStartupSec = "5s"; OnUnitInactiveSec = "30s"; AccuracySec = "5s"; };
+      Install.WantedBy = [ "timers.target" ];
+    };
     home.activation.zenosCodexPreferences = $lib.mkWritableProgramConfig {
       pkgs = $pkgs.legacy; application = "codex"; assignments = $v.preferences;
       stateDirectory = $path.stateDirectory;

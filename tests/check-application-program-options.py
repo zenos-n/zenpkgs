@@ -88,6 +88,8 @@ def schema_checks(nixpkgs, codex_schema):
                     assign(invalid, entry["name"], entry["minimum"] - 1)
                     cases["invalid_" + entry["name"]] = invalid
             if application == "codex":
+                cases["remoteControl"] = {"enable": True, "remoteControl": True}
+                cases["remoteState"] = cases["remoteControl"] | {"stateDirectory": "/tmp/codex-state"}
                 cases["conflictingServer"] = values | {"toolServers": {"bad": {"command": "server", "serverUrl": "https://example.com"}}}
                 cases["reservedRole"] = values | {"agentRoles": {"enabled": {"purpose": "invalid"}}}
             else:
@@ -163,6 +165,15 @@ in assert builtins.all rejected (builtins.fromJSON (builtins.readFile {directory
                 if name.startswith("invalid_") or name in ("conflictingServer", "reservedRole"):
                     assert not all(item["assertion"] for item in payload(name)["assertions"]), name
             if application == "codex":
+                assert not payload("enabledNull").get("systemd", {}).get("user", {}).get("timers", {})
+                remote = payload("remoteControl")["systemd"]["user"]
+                service = remote["services"]["codex-remote-control"]["Service"]
+                assert service["ExecStart"] == "/codex/bin/codex remote-control start --json"
+                assert service["Type"] == "oneshot" and service["KillMode"] == "process"
+                assert service["Environment"] == ["CODEX_HOME=%h/.private/Packages/codex"]
+                assert remote["timers"]["codex-remote-control"]["Install"]["WantedBy"] == ["timers.target"]
+                assert remote["timers"]["codex-remote-control"]["Timer"]["OnUnitInactiveSec"] == "30s"
+                assert payload("remoteState")["systemd"]["user"]["services"]["codex-remote-control"]["Service"]["Environment"] == ["CODEX_HOME=/tmp/codex-state"]
                 assert emitted[("approval_policy",)] == "on-request"
                 assert emitted[("sandbox_mode",)] == "read-only"
                 assert emitted[("history", "persistence")] == "none"
