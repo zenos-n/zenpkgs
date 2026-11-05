@@ -166,6 +166,7 @@ in assert builtins.all rejected (builtins.fromJSON (builtins.readFile {directory
                     assert not all(item["assertion"] for item in payload(name)["assertions"]), name
             if application == "codex":
                 assert not payload("enabledNull").get("systemd", {}).get("user", {}).get("timers", {})
+                assert payload("remoteControl")["home"]["activation"]["zenosCodexPreferences"]["assignments"] == [{"path": ["features", "daemon_auto_start"], "value": True}]
                 remote = payload("remoteControl")["systemd"]["user"]
                 service = remote["services"]["codex-remote-control"]["Service"]
                 assert service["ExecStart"] == "/codex/bin/codex remote-control start --json"

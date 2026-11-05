@@ -829,6 +829,7 @@ tools._meta = { name = "Tools preferences"; summary = "Tools preferences"; descr
 workspace._meta = { name = "Workspace preferences"; summary = "Workspace preferences"; description = ''Selected workspace preferences. Unset choices preserve live settings.''; tags = [ "programs" ]; maintainers = [ $m.doromiert ]; license = $l.napl; };
 
 _let preferences: $type.list [ $type.set ] =
+    ($lib.optional $path.remoteControl { path = [ "features" "daemon_auto_start" ]; value = true; }) ++
     ($lib.optional ($path.model != null) { path = [ "model" ]; value = $path.model; }) ++
     ($lib.optional ($path.reviewModel != null) { path = [ "review_model" ]; value = $path.reviewModel; }) ++
     ($lib.optional ($path.reasoningEffort != null) { path = [ "model_reasoning_effort" ]; value = $path.reasoningEffort; }) ++
