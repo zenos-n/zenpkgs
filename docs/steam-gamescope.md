@@ -20,3 +20,5 @@ Steam package, including Proton GE and ZenFS private-home handling.
 `steam-gamescope --print-plan` checks display selection without opening a window
 or starting Steam/Gamescope. Source, recipe, license, tests and limitations live
 in [zenos-n/steam-gamescope](https://github.com/zenos-n/steam-gamescope).
+
+The 1.1.0 launcher shows a Steam loading view inside the nested compositor and dismisses it on a visible Steam window. It includes/starts MangoApp, which Gamescope Steam integration selects for Steam's performance statistics. Monitor detection remains dynamic; game-specific VSync/frame limits remain the game's own settings. UI readiness/cleanup are tested on isolated Xvfb with a fake Steam window, without starting or stopping a real Steam client.

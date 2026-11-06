@@ -1017,17 +1017,17 @@
     "source-steam-gamescope": {
       "flake": false,
       "locked": {
-        "lastModified": 1793913768,
-        "narHash": "sha256-RmJn4ZuTbGs7gG0POJlpPUWlsdWE3CGmap0D4On/XV4=",
+        "lastModified": 1793993751,
+        "narHash": "sha256-49WkETbNp+ntCMip11JwqIJPoi4JN2lRIJ47VEiLBmI=",
         "owner": "zenos-n",
         "repo": "steam-gamescope",
-        "rev": "2a37997b61852bb29f7a70ecc0a856742f5c1719",
+        "rev": "a4e70d334169cbd5f69196cfd3b8f2e52b872a40",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "steam-gamescope",
-        "rev": "2a37997b61852bb29f7a70ecc0a856742f5c1719",
+        "rev": "a4e70d334169cbd5f69196cfd3b8f2e52b872a40",
         "type": "github"
       }
     },

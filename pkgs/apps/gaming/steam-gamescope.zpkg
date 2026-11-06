@@ -8,7 +8,7 @@ _meta = {
     integration. Existing Steam sessions are never closed automatically.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "1.0.2";
+  packageVersion = "1.1.0";
   tags = [ "gaming" "steam" "gamescope" "wayland" ];
   maintainers = [ $m.doromiert ];
   license = $l.mit;
