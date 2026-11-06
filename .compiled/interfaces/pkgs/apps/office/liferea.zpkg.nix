@@ -1,0 +1,435 @@
+{ ... }:
+{
+  dependenciesDeclared = false;
+  descriptorVersion = "zenlang.semantic/2";
+  grammarVersion = "1.0.0Na";
+  id = "pkgs.net.sourceforge.liferea";
+  imports = [ ];
+  irVersion = "1.0.0Na";
+  kind = "zpkg";
+  location = "/nix/store/59qqzf108ga8h2qmsjizzsn2p7i889xx-zenpkgs-dsl-source/pkgs/apps/office/liferea.zpkg:18:8";
+  metadata = {
+    description = {
+      multiline = true;
+      parts = [
+        {
+          type = "text";
+          value = "\n    Liferea (Linux Feed Reader) is an RSS/RDF feed reader.\n    It's intended to be a clone of the Windows-only FeedReader.\n    It can be used to maintain a list of subscribed feeds,\n    browse through their items, and show their contents.\n  ";
+        }
+      ];
+      type = "string";
+    };
+    id = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "net.sourceforge.liferea";
+        }
+      ];
+      type = "string";
+    };
+    license = {
+      name = "l";
+      path = [
+        {
+          kind = "identifier";
+          value = "gpl2Plus";
+        }
+      ];
+      type = "variable";
+    };
+    maintainers = {
+      items = [
+        {
+          name = "m";
+          path = [
+            {
+              kind = "identifier";
+              value = "doromiert";
+            }
+          ];
+          type = "variable";
+        }
+      ];
+      type = "list";
+    };
+    name = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "Liferea";
+        }
+      ];
+      type = "string";
+    };
+    packageVersion = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "1.16.10";
+        }
+      ];
+      type = "string";
+    };
+    summary = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "GTK-based news feed aggregator";
+        }
+      ];
+      type = "string";
+    };
+    tags = {
+      items = [
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "office";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "productivity";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "rss";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "news";
+            }
+          ];
+          type = "string";
+        }
+      ];
+      type = "list";
+    };
+    zenosVersion = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "1.0.0";
+        }
+      ];
+      type = "string";
+    };
+  };
+  name = "liferea";
+  packageImport = {
+    name = "pkgs";
+    path = [
+      {
+        kind = "identifier";
+        value = "legacy";
+      }
+      {
+        kind = "identifier";
+        value = "liferea";
+      }
+    ];
+    type = "variable";
+  };
+  provider = {
+    expression = {
+      name = "pkgs";
+      path = [
+        {
+          kind = "identifier";
+          value = "legacy";
+        }
+        {
+          kind = "identifier";
+          value = "liferea";
+        }
+      ];
+      type = "variable";
+    };
+    kind = "import";
+  };
+  statements = [
+    {
+      operator = "=";
+      target = [
+        {
+          kind = "identifier";
+          value = "_meta";
+        }
+      ];
+      type = "assignment";
+      value = {
+        recursive = false;
+        statements = [
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "id";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "net.sourceforge.liferea";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "name";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "Liferea";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "summary";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "GTK-based news feed aggregator";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "description";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = true;
+              parts = [
+                {
+                  type = "text";
+                  value = "\n    Liferea (Linux Feed Reader) is an RSS/RDF feed reader.\n    It's intended to be a clone of the Windows-only FeedReader.\n    It can be used to maintain a list of subscribed feeds,\n    browse through their items, and show their contents.\n  ";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "zenosVersion";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "1.0.0";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "packageVersion";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "1.16.10";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "tags";
+              }
+            ];
+            type = "assignment";
+            value = {
+              items = [
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "office";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "productivity";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "rss";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "news";
+                    }
+                  ];
+                  type = "string";
+                }
+              ];
+              type = "list";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "maintainers";
+              }
+            ];
+            type = "assignment";
+            value = {
+              items = [
+                {
+                  name = "m";
+                  path = [
+                    {
+                      kind = "identifier";
+                      value = "doromiert";
+                    }
+                  ];
+                  type = "variable";
+                }
+              ];
+              type = "list";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "license";
+              }
+            ];
+            type = "assignment";
+            value = {
+              name = "l";
+              path = [
+                {
+                  kind = "identifier";
+                  value = "gpl2Plus";
+                }
+              ];
+              type = "variable";
+            };
+          }
+        ];
+        type = "attr-set";
+      };
+    }
+    {
+      package = {
+        name = "pkgs";
+        path = [
+          {
+            kind = "identifier";
+            value = "legacy";
+          }
+          {
+            kind = "identifier";
+            value = "liferea";
+          }
+        ];
+        type = "variable";
+      };
+      type = "package-import";
+    }
+  ];
+  target = [
+    "net"
+    "sourceforge"
+    "liferea"
+  ];
+}

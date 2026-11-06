@@ -1,0 +1,434 @@
+{ ... }:
+{
+  dependenciesDeclared = false;
+  descriptorVersion = "zenlang.semantic/2";
+  grammarVersion = "1.0.0Na";
+  id = "pkgs.unknown.effitask";
+  imports = [ ];
+  irVersion = "1.0.0Na";
+  kind = "zpkg";
+  location = "/nix/store/59qqzf108ga8h2qmsjizzsn2p7i889xx-zenpkgs-dsl-source/pkgs/apps/office/effitask.zpkg:20:8";
+  metadata = {
+    description = {
+      multiline = true;
+      parts = [
+        {
+          type = "text";
+          value = "\n    To use it as todo.sh add-on, create a symlink like this:\n    mkdir ~/.todo.actions.d/\n    ln -s $(which effitask) ~/.todo.actions.d/et\n\n    Or use it as standalone program by defining some environment variables\n    like described in the projects readme.\n  ";
+        }
+      ];
+      type = "string";
+    };
+    id = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "unknown.effitask";
+        }
+      ];
+      type = "string";
+    };
+    license = {
+      name = "l";
+      path = [
+        {
+          kind = "identifier";
+          value = "mit";
+        }
+      ];
+      type = "variable";
+    };
+    maintainers = {
+      items = [
+        {
+          name = "m";
+          path = [
+            {
+              kind = "identifier";
+              value = "doromiert";
+            }
+          ];
+          type = "variable";
+        }
+      ];
+      type = "list";
+    };
+    name = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "Effitask";
+        }
+      ];
+      type = "string";
+    };
+    packageVersion = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "1.4.2";
+        }
+      ];
+      type = "string";
+    };
+    summary = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "Graphical task manager, based on the todo.txt format";
+        }
+      ];
+      type = "string";
+    };
+    tags = {
+      items = [
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "office";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "tasks";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "todo-txt";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "productivity";
+            }
+          ];
+          type = "string";
+        }
+      ];
+      type = "list";
+    };
+    zenosVersion = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "1.0.0";
+        }
+      ];
+      type = "string";
+    };
+  };
+  name = "effitask";
+  packageImport = {
+    name = "pkgs";
+    path = [
+      {
+        kind = "identifier";
+        value = "legacy";
+      }
+      {
+        kind = "identifier";
+        value = "effitask";
+      }
+    ];
+    type = "variable";
+  };
+  provider = {
+    expression = {
+      name = "pkgs";
+      path = [
+        {
+          kind = "identifier";
+          value = "legacy";
+        }
+        {
+          kind = "identifier";
+          value = "effitask";
+        }
+      ];
+      type = "variable";
+    };
+    kind = "import";
+  };
+  statements = [
+    {
+      operator = "=";
+      target = [
+        {
+          kind = "identifier";
+          value = "_meta";
+        }
+      ];
+      type = "assignment";
+      value = {
+        recursive = false;
+        statements = [
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "id";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "unknown.effitask";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "name";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "Effitask";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "summary";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "Graphical task manager, based on the todo.txt format";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "description";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = true;
+              parts = [
+                {
+                  type = "text";
+                  value = "\n    To use it as todo.sh add-on, create a symlink like this:\n    mkdir ~/.todo.actions.d/\n    ln -s $(which effitask) ~/.todo.actions.d/et\n\n    Or use it as standalone program by defining some environment variables\n    like described in the projects readme.\n  ";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "zenosVersion";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "1.0.0";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "packageVersion";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "1.4.2";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "tags";
+              }
+            ];
+            type = "assignment";
+            value = {
+              items = [
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "office";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "tasks";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "todo-txt";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "productivity";
+                    }
+                  ];
+                  type = "string";
+                }
+              ];
+              type = "list";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "maintainers";
+              }
+            ];
+            type = "assignment";
+            value = {
+              items = [
+                {
+                  name = "m";
+                  path = [
+                    {
+                      kind = "identifier";
+                      value = "doromiert";
+                    }
+                  ];
+                  type = "variable";
+                }
+              ];
+              type = "list";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "license";
+              }
+            ];
+            type = "assignment";
+            value = {
+              name = "l";
+              path = [
+                {
+                  kind = "identifier";
+                  value = "mit";
+                }
+              ];
+              type = "variable";
+            };
+          }
+        ];
+        type = "attr-set";
+      };
+    }
+    {
+      package = {
+        name = "pkgs";
+        path = [
+          {
+            kind = "identifier";
+            value = "legacy";
+          }
+          {
+            kind = "identifier";
+            value = "effitask";
+          }
+        ];
+        type = "variable";
+      };
+      type = "package-import";
+    }
+  ];
+  target = [
+    "unknown"
+    "effitask"
+  ];
+}

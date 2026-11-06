@@ -1,0 +1,454 @@
+{ ... }:
+{
+  dependenciesDeclared = false;
+  descriptorVersion = "zenlang.semantic/2";
+  grammarVersion = "1.0.0Na";
+  id = "pkgs.unknown.asciinema";
+  imports = [ ];
+  irVersion = "1.0.0Na";
+  kind = "zpkg";
+  location = "/nix/store/59qqzf108ga8h2qmsjizzsn2p7i889xx-zenpkgs-dsl-source/pkgs/apps/video/asciinema.zpkg:23:8";
+  metadata = {
+    description = {
+      multiline = true;
+      parts = [
+        {
+          type = "text";
+          value = "\n    asciinema is a suite of tools for recording, replaying, and sharing\n    terminal sessions. It is free and open-source software (FOSS), created\n    by Marcin Kulik.\n\n    Its typical use cases include creating tutorials, demonstrating\n    command-line tools, and sharing reproducible bug reports. It focuses on\n    simplicity and interoperability, which makes it a popular choice among\n    computer users working with the command-line, such as developers or\n    system administrators.\n  ";
+        }
+      ];
+      type = "string";
+    };
+    id = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "unknown.asciinema";
+        }
+      ];
+      type = "string";
+    };
+    license = {
+      name = "l";
+      path = [
+        {
+          kind = "identifier";
+          value = "gpl3Plus";
+        }
+      ];
+      type = "variable";
+    };
+    maintainers = {
+      items = [
+        {
+          name = "m";
+          path = [
+            {
+              kind = "identifier";
+              value = "doromiert";
+            }
+          ];
+          type = "variable";
+        }
+      ];
+      type = "list";
+    };
+    name = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "asciinema";
+        }
+      ];
+      type = "string";
+    };
+    packageVersion = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "3.2.0";
+        }
+      ];
+      type = "string";
+    };
+    summary = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "Terminal session recorder and the best companion of asciinema.org";
+        }
+      ];
+      type = "string";
+    };
+    tags = {
+      items = [
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "video";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "terminal";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "recording";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "multimedia";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "creativity";
+            }
+          ];
+          type = "string";
+        }
+      ];
+      type = "list";
+    };
+    zenosVersion = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "1.0.0";
+        }
+      ];
+      type = "string";
+    };
+  };
+  name = "asciinema";
+  packageImport = {
+    name = "pkgs";
+    path = [
+      {
+        kind = "identifier";
+        value = "legacy";
+      }
+      {
+        kind = "identifier";
+        value = "asciinema";
+      }
+    ];
+    type = "variable";
+  };
+  provider = {
+    expression = {
+      name = "pkgs";
+      path = [
+        {
+          kind = "identifier";
+          value = "legacy";
+        }
+        {
+          kind = "identifier";
+          value = "asciinema";
+        }
+      ];
+      type = "variable";
+    };
+    kind = "import";
+  };
+  statements = [
+    {
+      operator = "=";
+      target = [
+        {
+          kind = "identifier";
+          value = "_meta";
+        }
+      ];
+      type = "assignment";
+      value = {
+        recursive = false;
+        statements = [
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "id";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "unknown.asciinema";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "name";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "asciinema";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "summary";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "Terminal session recorder and the best companion of asciinema.org";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "description";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = true;
+              parts = [
+                {
+                  type = "text";
+                  value = "\n    asciinema is a suite of tools for recording, replaying, and sharing\n    terminal sessions. It is free and open-source software (FOSS), created\n    by Marcin Kulik.\n\n    Its typical use cases include creating tutorials, demonstrating\n    command-line tools, and sharing reproducible bug reports. It focuses on\n    simplicity and interoperability, which makes it a popular choice among\n    computer users working with the command-line, such as developers or\n    system administrators.\n  ";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "zenosVersion";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "1.0.0";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "packageVersion";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "3.2.0";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "tags";
+              }
+            ];
+            type = "assignment";
+            value = {
+              items = [
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "video";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "terminal";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "recording";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "multimedia";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "creativity";
+                    }
+                  ];
+                  type = "string";
+                }
+              ];
+              type = "list";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "maintainers";
+              }
+            ];
+            type = "assignment";
+            value = {
+              items = [
+                {
+                  name = "m";
+                  path = [
+                    {
+                      kind = "identifier";
+                      value = "doromiert";
+                    }
+                  ];
+                  type = "variable";
+                }
+              ];
+              type = "list";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "license";
+              }
+            ];
+            type = "assignment";
+            value = {
+              name = "l";
+              path = [
+                {
+                  kind = "identifier";
+                  value = "gpl3Plus";
+                }
+              ];
+              type = "variable";
+            };
+          }
+        ];
+        type = "attr-set";
+      };
+    }
+    {
+      package = {
+        name = "pkgs";
+        path = [
+          {
+            kind = "identifier";
+            value = "legacy";
+          }
+          {
+            kind = "identifier";
+            value = "asciinema";
+          }
+        ];
+        type = "variable";
+      };
+      type = "package-import";
+    }
+  ];
+  target = [
+    "unknown"
+    "asciinema"
+  ];
+}
