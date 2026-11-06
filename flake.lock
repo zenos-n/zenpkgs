@@ -1102,17 +1102,17 @@
     "source-zenlink": {
       "flake": false,
       "locked": {
-        "lastModified": 1793611457,
-        "narHash": "sha256-6bJPApByXyMMe5c3VSjJjccrRp0XDO7WnIfPw+Mpxqc=",
+        "lastModified": 1793956933,
+        "narHash": "sha256-ijN24edNkDl5htmKE4Dj7GWjz2fmYnx6K7DIlAIl5wc=",
         "owner": "zenos-n",
         "repo": "zenlink-gnome",
-        "rev": "7079a074724f6237221a0b24ebae93b65ab1a2f1",
+        "rev": "8023ec29746788ebce03bef0ebfc5832c76ef79a",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenlink-gnome",
-        "rev": "7079a074724f6237221a0b24ebae93b65ab1a2f1",
+        "rev": "8023ec29746788ebce03bef0ebfc5832c76ef79a",
         "type": "github"
       }
     },

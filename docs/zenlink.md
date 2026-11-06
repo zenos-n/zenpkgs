@@ -59,3 +59,25 @@ V4L2 clients. This avoids the V4L2 monitor caching `exclusive_caps` as output-on
 before the producer starts. Raw preview bytes are framed independently of pipe
 read boundaries, and encoded camera writes are queued/acknowledged only after
 being written to the decoder. The package includes the PipeWire GStreamer plugin.
+
+
+## Quest workspace / PCVR
+
+ZenLink73 includes the native C++ backend and portal-free GNOME workspace bridge.
+The existing ZenLink extension owns a systemd user socket; the native streaming
+process starts for a receiver and exits when idle. No separate Quest Workspace
+extension is required. ZenLink's **VR & Desktop** entry opens libadwaita preferences
+for WiVRn/SteamVR runtime selection, runtime-specific startup apps and immersive
+overlays within the existing PCVR stream.
+
+The first integrated login archives and uninstalls the prototype Quest extension,
+retires its host service and standalone launcher, and preserves private receiver
+pairing/configuration. Changed GNOME extension code needs a new login. A private
+user-service `PrivateTmp` sandbox must not be applied to the mapped-Mutter startup
+guard: it prevents access to the compositor's proc metadata.
+
+Verified PC-only: native package/CTest, inherited socket + TLS authenticated
+WebSocket and idle exit, private setup idempotency, mock-systemd lifecycle and
+migration/archive/pair preservation, packaged PC environment, settings entry and
+libadwaita window offscreen. Live headset/PCVR acceptance remains pending; the
+user requested no headset tests during this integration.

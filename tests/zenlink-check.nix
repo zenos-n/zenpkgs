@@ -9,6 +9,11 @@ pkgs.runCommand "zenpkgs-zenlink-integration" {
   python ${sourceRoot}/tests/check-zenlink.py \
     --nixpkgs ${pkgs.path} --zenlink-source ${zenlinkSource}
   test -x ${package}/bin/zenlink
+  test -x ${package.workspace}/bin/quest-workspace-host
+  test -x ${package.workspace}/bin/zenlink-pcvr
+  test -x ${package.workspace}/bin/zenlink-run-openxr
+  test -f ${package}/share/gnome-shell/extensions/zenlink@zenos-n.github.io/shell/workspace.js
+  gjs -m ${zenlinkSource}/installed-tests/test-workspace-units.js
   test -x ${package}/bin/zenlink-preferences
   test ! -e ${package}/bin/zl-daemon
   test ! -e ${package}/bin/zl-installer
