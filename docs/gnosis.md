@@ -62,3 +62,18 @@ in Keyslot’s **Preferences → Browser Integration → Configure…** first.
 pairing keys and cached logins after confirmation. It preserves vault entries;
 use **Connect Database…** to authorize a new connection in the chosen manager.
 Existing pairings are preserved when changing managers.
+
+
+User-installed web apps offer generic **Link Associations** under
+**Preferences → Web Apps → select an app**. Enable **Open Links in This App**
+and enter domains separated by commas (for example `example.com, chat.example.org`).
+With Gnosis as the default HTTP/HTTPS browser, matching incoming links reuse
+the app's profile and window, or start it if closed. The most specific domain
+wins; ambiguous claims, unrelated links and private browsing remain in the browser.
+Disabling a claim takes effect on the next incoming link. The operating system's
+HTTP/HTTPS default is preserved. Managed declarative launcher definitions remain
+controlled by ZenOS configuration.
+
+The source pin now includes these associations, native external-application
+confirmation, destination-page history swipe previews and native scroll momentum.
+Existing browser and web-app windows adopt the update after a normal restart.
