@@ -114,7 +114,7 @@
       flake = false;
     };
     source-zenlink = {
-      url = "github:zenos-n/zenlink-gnome/382af9758151551c9d072ffab30ae9636f345041";
+      url = "github:zenos-n/zenlink-gnome/26fac2ee892d7b71a6baef4ba05bcda7d248d391";
       flake = false;
     };
   };

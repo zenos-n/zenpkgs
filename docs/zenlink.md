@@ -89,3 +89,26 @@ upstream package set intentionally excludes overlay overrides and must not be
 used to decide runtime capture compatibility. The integration check asserts that Mutter50.4 carries the tested touch-focus
 guard and workspace support is enabled. Installation checks also match the
 prepared guard library against the live compositor's mapped library.
+
+ZenLink74 adds USB setup/reconnection, quality↔responsiveness controls, pointer
+hover before keyboard focus, physical monitor streams and explicit resizable
+virtual monitors at120Hz. Native stream production is capped at120fps; physical
+sources retain their actual cadence and Mutter50.4 window capture remains60fps.
+Virtual outputs resize through variable-rate PipeWire negotiation with a120fps
+maximum, retaining the same output/session. Focus loss stops encoding/input while
+retaining a bounded consumer; disconnect removes the output. Automatic oversized
+displays for normal window resizing remain disabled. No further Mutter patch or
+physical HDMI mode changes are part of this release.
+
+The receiver can align monitor panels using temporary on-screen AprilTags. Camera2
+frames and OpenCV pose estimation stay on Quest; markers disappear before capture
+resumes. The native helper has timeout/Escape/cancel/disconnect cleanup. Unknown
+screen widths require user input. Camera permission is requested only when aligning.
+
+Verified: five native CTests, real isolated GNOME50.4 virtual output creation/four
+landscape/portrait resizes at120Hz plus consumption pause/resume and removal,
+fake-ADB USB selection/private pairing transfer, hardware HEVC, TLS/socket/idle,
+offscreen settings and a Quest synthetic marker/known-distance pose fixture.
+Physical USB and on-head alignment accuracy remain unverified. Receiver camera
+permission is currently ungranted; calibration metadata remains unknown until it
+is granted. PCVR hardware acceptance is still pending.

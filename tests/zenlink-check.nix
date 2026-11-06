@@ -14,6 +14,8 @@ pkgs.runCommand "zenpkgs-zenlink-integration" {
   test -x ${package.workspace}/bin/quest-workspace-host
   test -x ${package.workspace}/bin/zenlink-pcvr
   test -x ${package.workspace}/bin/zenlink-run-openxr
+  test -x ${package.workspace}/bin/zenlink-workspace-connect
+  ${package.workspace}/bin/zenlink-workspace-alignment --self-test
   test -f ${package}/share/gnome-shell/extensions/zenlink@zenos-n.github.io/shell/workspace.js
   gjs -m ${zenlinkSource}/installed-tests/test-workspace-units.js
   test -x ${package}/bin/zenlink-preferences
