@@ -16,6 +16,4 @@ _meta = {
   license = $l.gpl2Plus;
 };
 
-build = $pkgs.legacy.callPackage ($lib.zenPackageSources.zenlink + "/nix/package.nix") {
-  pkgs = $pkgs.legacy;
-};
+build = $lib.zenCompatPackage ($lib.zenPackageSources.zenlink + "/nix/package.nix");

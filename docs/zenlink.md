@@ -81,3 +81,11 @@ WebSocket and idle exit, private setup idempotency, mock-systemd lifecycle and
 migration/archive/pair preservation, packaged PC environment, settings entry and
 libadwaita window offscreen. Live headset/PCVR acceptance remains pending; the
 user requested no headset tests during this integration.
+
+
+The catalog build uses its existing final-package recipe helper so workspace
+checks resolve the same overridden Mutter as the running desktop. The legacy
+upstream package set intentionally excludes overlay overrides and must not be
+used to decide runtime capture compatibility. The integration check asserts that Mutter50.4 carries the tested touch-focus
+guard and workspace support is enabled. Installation checks also match the
+prepared guard library against the live compositor's mapped library.

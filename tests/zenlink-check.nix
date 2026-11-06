@@ -1,5 +1,7 @@
 { pkgs, sourceRoot, zenlinkSource, package, indicator }:
 assert package.drvPath == indicator.drvPath;
+assert package.workspaceSupported;
+assert package.workspaceMutter.version != "50.4" || package.workspaceMutter.zenosTouchFocusGuard;
 assert package.extensionUuid == "zenlink@zenos-n.github.io";
 pkgs.runCommand "zenpkgs-zenlink-integration" {
   nativeBuildInputs = [ pkgs.python3 pkgs.nix pkgs.gjs ];
