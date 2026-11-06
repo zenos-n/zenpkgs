@@ -66,7 +66,8 @@ Existing pairings are preserved when changing managers.
 
 User-installed web apps offer generic **Link Associations** under
 **Preferences → Web Apps → select an app**. Enable **Open Links in This App**
-and enter domains separated by commas (for example `example.com, chat.example.org`).
+and add each domain using **Add Domain**, then Enter or the plus button.
+Domains appear as removable chips in a native wrapping list.
 With Gnosis as the default HTTP/HTTPS browser, matching incoming links reuse
 the app's profile and window, or start it if closed. The most specific domain
 wins; ambiguous claims, unrelated links and private browsing remain in the browser.
