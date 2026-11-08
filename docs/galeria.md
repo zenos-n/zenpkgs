@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.0 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.1 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -362,3 +362,20 @@ video edit/export, image clipboard and selection-action regressions. Generated
 media/fixture uploads and real local video exports preserve original bytes.
 Large-text/prompt screenshots inspected; no production media changed for tests.
 Exact added text runtime: Pango1.57.1/Cairo1.18.4.
+
+
+Version0.14.1 fixes desktop Open With replacing the saved Immich library with
+a local-folder library. Device files now open in separate temporary previews,
+leaving the main account/client, media grid, texture cache and scroll unchanged.
+Neither opening nor refreshing a preview rewrites the saved library choice.
+Normal startup still restores the remembered account; explicit Choose folders
+retains its persistent behavior. Previews close fully even in background mode;
+Quit protects unsaved edits and cleans up all Galeria windows.
+
+A private-D-Bus/X11 native regression launches an actual desktop entry through
+GApplication for cold/warm images, videos, multiple files and folders. The0.14.0
+package fails with an overwritten account mode; the fix retains byte-identical
+preferences and the live main client/grid/cache/scroll. Preview refresh, explicit
+folder choice, background close and multi-window edit/quit checks pass, along
+with the existing cached-account restore and editor-exit native regressions.
+Fixture accounts/media only; production account settings were not edited.

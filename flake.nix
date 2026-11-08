@@ -43,7 +43,7 @@
     };
     source-keyslot = { url = "github:zenos-n/keyslot/ef688b064a429c0190b99b2359745857355207b6"; flake = false; };
     source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/79ab807e64a0f8b3d9748a78df300439b5a8e4f7"; flake = false; };
-    source-galeria = { url = "github:zenos-n/galeria/e3e9ec93a8767f23bbb0a764164654c97e4fdeec"; flake = false; };
+    source-galeria = { url = "github:zenos-n/galeria/eacb1d7984f30d6b9360d838d7f1e31343b29d4e"; flake = false; };
     source-galeria-extension = { url = "github:zenos-n/galeria-gnome-extension/2c7112823e7074fcbc2fc22dff6b89ad6553a754"; flake = false; };
     source-nzportable = { url = "github:zenos-n/nzportable/1102b7067b62883faa94a35b53fd5199943fec38"; flake = false; };
     source-steam-gamescope = { url = "github:zenos-n/steam-gamescope/a4e70d334169cbd5f69196cfd3b8f2e52b872a40"; flake = false; };
