@@ -24,8 +24,16 @@ let
   };
   registryPackage = {
     id = "pkgs.org.example.Tool";
-    target = [ "org" "example" "Tool" ];
-    categoryTarget = [ "apps" "utilities" "tool" ];
+    target = [
+      "org"
+      "example"
+      "Tool"
+    ];
+    categoryTarget = [
+      "apps"
+      "utilities"
+      "tool"
+    ];
     meta = {
       id = "org.example.Tool";
       name = "Registry tool";
@@ -56,6 +64,9 @@ let
           options.future.marker = lib.mkOption {
             type = lib.types.str;
             default = "new upstream option";
+            defaultText = lib.literalExpression ''"new upstream option"'';
+            example = "another value";
+            readOnly = true;
           };
           config.home-manager.sharedModules = [
             ({ lib, ... }: {
@@ -66,7 +77,8 @@ let
             })
           ];
         })
-      ] ++ extraModules;
+      ]
+      ++ extraModules;
     };
   index = search.mkIndex {
     evaluated = evaluate bundle;
@@ -213,9 +225,21 @@ let
       builtins.length aliasPaths == 4
       && builtins.all (path: builtins.elem path aliasPaths) [
         [ "legacy" ]
-        [ "system" "syncthing" ]
-        [ "users" "{user}" "legacy" ]
-        [ "users" "{user}" "legacy" "homeManager" ]
+        [
+          "system"
+          "syncthing"
+        ]
+        [
+          "users"
+          "{user}"
+          "legacy"
+        ]
+        [
+          "users"
+          "{user}"
+          "legacy"
+          "homeManager"
+        ]
       ];
     aliasRoots =
       index.options.legacy.meta.upstream
@@ -288,9 +312,26 @@ let
       && index.pkgs.second.sub.same.meta.id == "pkgs.second.same";
     registryPackageMetadata =
       registryLeaf.meta.id == "pkgs.org.example.Tool"
-      && registryLeaf.meta.path == [ "org" "example" "Tool" ]
-      && registryLeaf.meta.categoryTarget == [ "apps" "utilities" "tool" ]
-      && registryLeaf.meta.categoryPath == [ "pkgs" "byCategories" "apps" "utilities" "tool" ]
+      &&
+        registryLeaf.meta.path == [
+          "org"
+          "example"
+          "Tool"
+        ]
+      &&
+        registryLeaf.meta.categoryTarget == [
+          "apps"
+          "utilities"
+          "tool"
+        ]
+      &&
+        registryLeaf.meta.categoryPath == [
+          "pkgs"
+          "byCategories"
+          "apps"
+          "utilities"
+          "tool"
+        ]
       && registryLeaf.meta.name == "Registry tool"
       && registryLeaf.meta.summary == "Data-only package metadata"
       && registryLeaf.meta.longDescription == "Registry description"
@@ -344,22 +385,47 @@ let
       && index.options.legacy.sub.future.sub.marker.meta.maintainers == [ ];
     scalarDefault =
       unit.sub.scalar.meta.defaultStatus == "value" && unit.sub.scalar.meta.default == false;
-    upstreamDefaultNotEvaluated =
-      let serialized = search.serializeOptions {
-        tree = lib.mkOption {
-          type = lib.types.str;
-          default = builtins.abort "upstream default forced";
+    upstreamDocumentation =
+      let
+        meta = index.options.legacy.sub.future.sub.marker.meta;
+      in
+      meta.defaultStatus == "documented"
+      && meta.defaultText.text == ''"new upstream option"''
+      && meta.example == "another value"
+      && meta.readOnly
+      && meta.declarations != [ ];
+    scalarCoverage =
+      let
+        node = search.serializeOptions {
+          tree = unitTree.scalar;
+          limits = search.defaultLimits // {
+            optionDepth = 0;
+          };
         };
-        upstream = true;
-      }; in serialized.meta.upstream
-        && serialized.meta.defaultStatus == "unavailable"
-        && serialized.meta.default == null;
+      in
+      node.meta.traversal == "complete" && node.meta.isOption;
+    compositeTypeDocumentation = lib.hasInfix "null or" unit.sub.nullable.meta.typeDescription;
+    upstreamDefaultNotEvaluated =
+      let
+        serialized = search.serializeOptions {
+          tree = lib.mkOption {
+            type = lib.types.str;
+            default = builtins.abort "upstream default forced";
+          };
+          upstream = true;
+        };
+      in
+      serialized.meta.upstream
+      && serialized.meta.defaultStatus == "unavailable"
+      && serialized.meta.default == null;
     defaultsExplicitlyDisabled =
-      let serialized = search.serializeOptions {
-        tree = unitTree.scalar;
-        evaluateDefaults = false;
-      }; in serialized.meta.defaultStatus == "unavailable"
-        && serialized.meta.default == null;
+      let
+        serialized = search.serializeOptions {
+          tree = unitTree.scalar;
+          evaluateDefaults = false;
+        };
+      in
+      serialized.meta.defaultStatus == "unavailable" && serialized.meta.default == null;
     absentDefault = unit.sub.required.meta.defaultStatus == "absent";
     defaultText =
       unit.sub.documented.meta.defaultStatus == "documented"
@@ -422,9 +488,11 @@ let
     );
   };
 in
-assert lib.all (name: lib.assertMsg checks.${name} (
-  "search acceptance failed: ${name}"
-  + lib.optionalString (lib.hasPrefix "disjointLocalMount" name)
-    " localMount=${builtins.toJSON localMountDiagnostic}"
-)) (builtins.attrNames checks);
+assert lib.all (
+  name:
+  lib.assertMsg checks.${name} (
+    "search acceptance failed: ${name}"
+    + lib.optionalString (lib.hasPrefix "disjointLocalMount" name) " localMount=${builtins.toJSON localMountDiagnostic}"
+  )
+) (builtins.attrNames checks);
 checks

@@ -71,7 +71,13 @@ let
 
   mirrorOptions = tree: lib.mapAttrs (_: option:
     if lib.isOption option then lib.mkOption {
-      inherit (option) type;
+      type = option.type // {
+        # Documentation must survive mirroring without becoming runtime defaults.
+        _zenosSearchDocumentation = builtins.intersectAttrs {
+          defaultText = null; example = null;
+          declarations = null; readOnly = null;
+        } option;
+      };
       description = option.description or "Upstream option";
     } else mirrorOptions option
   ) tree;

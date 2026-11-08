@@ -32,8 +32,10 @@ does not expose a separate per-package option schema through `getSubOptions`.
 expression records); it is never copied into `default`. Only scalar defaults of
 plain bool/int/float/str/enum types are attempted. Container, function, package,
 wrapped-type, throwing, and placeholder-dependent defaults remain unavailable.
-The runtime's upstream mirrors deliberately discard upstream defaults; this
-export does not invent replacements for them. `default = null` alone must not
+The runtime's upstream mirrors deliberately discard upstream runtime defaults,
+but retain defaultText, examples, declarations and readOnly documentation on the
+type for search. This export does not invent replacements for unavailable
+defaults. `default = null` alone must not
 be interpreted as a known null default. Examples are bounded data, not executed.
 
 Descriptive metadata comes from the compiler's data IR and package metadata.

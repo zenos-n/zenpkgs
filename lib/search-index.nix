@@ -102,19 +102,40 @@ let
   typeDescription =
     type:
     let
-      name = type.name or "unknown";
-      composite = builtins.elem name [
-        "attrs"
-        "attrsOf"
-        "coercedTo"
-        "either"
-        "lazyAttrsOf"
-        "listOf"
-        "nullOr"
-        "submodule"
-      ];
+      format =
+        depth: current:
+        let
+          name = current.name or "unknown";
+          nested = current.nestedTypes or { };
+          child = key: format (depth - 1) (nested.${key} or { name = "unknown"; });
+        in
+        if
+          depth == 0
+          || builtins.elem name [
+            "attrs"
+            "submodule"
+          ]
+        then
+          name
+        else if
+          builtins.elem name [
+            "attrsOf"
+            "lazyAttrsOf"
+          ]
+        then
+          "attribute set of (${child "elemType"})"
+        else if name == "listOf" then
+          "list of (${child "elemType"})"
+        else if name == "nullOr" then
+          "null or (${child "elemType"})"
+        else if name == "either" then
+          "(${child "left"}) or (${child "right"})"
+        else if name == "coercedTo" then
+          format (depth - 1) (nested.finalType or { inherit name; })
+        else
+          text (current.description or name);
     in
-    if composite then name else text (type.description or name);
+    text (format 5 type);
 
   # Read descriptive fields from the compiler's data IR, never execute metadata
   # expressions as defaults. Schema discovery remains exclusively type-driven.
@@ -277,6 +298,7 @@ rec {
       evaluated = builtins.tryEval tree;
       value = evaluated.value;
       isOption = evaluated.success && lib.isOption value;
+      documentation = if isOption then value.type._zenosSearchDocumentation or value else { };
       authored = metadataAt path;
       schema = typeChildren 8 path upstream value.type;
       provenance = attempt schema.upstream;
@@ -296,14 +318,27 @@ rec {
       status =
         if !evaluated.success || !names.success then
           "unavailable"
-        else if limited then
+        else if
+          limited
+          && (
+            !isOption
+            || !(builtins.elem (value.type.name or "") [
+              "bool"
+              "int"
+              "float"
+              "str"
+              "path"
+              "enum"
+            ])
+          )
+        then
           "depth-limit"
         else
           "complete";
       optionDefault =
-        if value ? defaultText then
+        if documentation ? defaultText then
           let
-            documented = attempt (jsonValue 6 value.defaultText);
+            documented = attempt (jsonValue 6 documentation.defaultText);
           in
           if documented.success && documented.value != null then
             {
@@ -312,7 +347,7 @@ rec {
             }
           else
             { defaultStatus = "unavailable"; }
-        else if !(value ? default) then
+        else if !(documentation ? default) then
           { defaultStatus = if isUpstream then "unavailable" else "absent"; }
         else if !evaluateDefaults || isUpstream then
           { defaultStatus = "unavailable"; }
@@ -340,7 +375,7 @@ rec {
           let
             result = attempt (
               let
-                v = value.default;
+                v = documentation.default;
               in
               if
                 v == null || builtins.isBool v || builtins.isInt v || builtins.isFloat v || builtins.isString v
@@ -364,7 +399,12 @@ rec {
         serializeOptions {
           inherit (children.${name}) tree upstream;
           path = path ++ [ name ];
-          inherit limits metadataAt mountPaths evaluateDefaults;
+          inherit
+            limits
+            metadataAt
+            mountPaths
+            evaluateDefaults
+            ;
           typeDepth = depth + (if isOption then 1 else 0);
         }
       );
@@ -376,13 +416,17 @@ rec {
         )
         // {
           inherit path;
+          inherit isOption;
           upstream = isUpstream;
           traversal = status;
           type = if isOption then clientType value.type else "set";
           typeDescription = if isOption then typeDescription value.type else null;
           typeName = if isOption then value.type.name or "unknown" else "set";
           default = null;
-          example = if isOption then safe null (value.example or null) else null;
+          example = safe null (documentation.example or null);
+          readOnly = safe false (documentation.readOnly or false);
+          declarations =
+            authored.declarations or (safe [ ] (map toString (documentation.declarations or [ ])));
         }
         // lib.optionalAttrs isOption optionDefault
         // lib.optionalAttrs (isOption && (value.type.name or "") == "zstr-package-selectors") {
@@ -404,7 +448,10 @@ rec {
       # Registry leaves are data-only: never inspect or evaluate their providers.
       evaluated = builtins.tryEval (
         if entry != null then
-          { value = { }; derivation = false; }
+          {
+            value = { };
+            derivation = false;
+          }
         else if builtins.isAttrs tree then
           let
             derivation = lib.isDerivation tree;
@@ -503,7 +550,14 @@ rec {
           id = if entry != null then entry.id else lib.concatStringsSep "." ([ "pkgs" ] ++ path);
           categoryTarget = if entry != null then entry.categoryTarget else null;
           categoryPath =
-            if entry != null then [ "pkgs" "byCategories" ] ++ entry.categoryTarget else null;
+            if entry != null then
+              [
+                "pkgs"
+                "byCategories"
+              ]
+              ++ entry.categoryTarget
+            else
+              null;
           kind = if derivation || entry != null then "package" else "package-set";
           traversal =
             if !valid then
@@ -513,15 +567,23 @@ rec {
             else
               "complete";
           version =
-            if entry != null then text (meta.packageVersion or null)
-            else if derivation then text (value.version or null)
-            else null;
+            if entry != null then
+              text (meta.packageVersion or null)
+            else if derivation then
+              text (value.version or null)
+            else
+              null;
           packageVersion = text (meta.packageVersion or null);
           dependencies = safe null (meta.dependencies or null);
           homepage =
-            if entry != null then safe null (meta.homepage or null)
-            else if derivation then safe null (value.meta.homepage or null)
-            else null;
+            if entry != null then
+              safe null (meta.homepage or null)
+            else if derivation then
+              safe null (value.meta.homepage or null)
+            else
+              null;
+          sourcePath =
+            if entry != null then "pkgs/${lib.concatStringsSep "/" entry.categoryTarget}.zpkg" else null;
         };
       }
       // lib.optionalAttrs (sub != { }) { inherit sub; };
@@ -531,7 +593,9 @@ rec {
       evaluated,
       bundle,
       packageTree ? evaluated.pkgs.zenos or { },
-      registry ? { packages = [ ]; },
+      registry ? {
+        packages = [ ];
+      },
       maintainers ? { },
       versionInfo ? { },
       limits ? defaultLimits,
@@ -573,7 +637,9 @@ rec {
         if entry.source.kind == "zmdl" then
           map (record: {
             path = entry.path ++ map (part: if builtins.isAttrs part then "<name>" else part) record.path;
-            meta = lib.mapAttrs (_: value: safe null (adapter.decodeValue value)) record.metadata;
+            meta = (lib.mapAttrs (_: value: safe null (adapter.decodeValue value)) record.metadata) // {
+              declarations = [ entry.source.path ];
+            };
           }) entry.source.descriptor.nodeMetadata
         else
           metadataRecords entry.path (entry.source.descriptor.statements or [ ])
@@ -591,10 +657,12 @@ rec {
         evaluateDefaults = true;
       };
       packageMount = builtins.any (mount: mount.kind == "packages") mounts;
-      packageEntries = builtins.listToAttrs (map (entry: {
-        name = key entry.target;
-        value = entry;
-      }) registry.packages);
+      packageEntries = builtins.listToAttrs (
+        map (entry: {
+          name = key entry.target;
+          value = entry;
+        }) registry.packages
+      );
       packages = serializePackages {
         registryAt = path: packageEntries.${key path} or null;
         tree = removeAttrs packageTree [ "legacy" ];
@@ -609,9 +677,13 @@ rec {
               if source ? target then
                 [ "pkgs" ] ++ source.target
               else
-                [ "pkgs" "byCategories" ]
-                ++ (source.categoryTarget or
-                  (lib.splitString "/" (lib.removeSuffix ".zpkg" (lib.removePrefix "pkgs/" source.path))));
+                [
+                  "pkgs"
+                  "byCategories"
+                ]
+                ++ (source.categoryTarget
+                  or (lib.splitString "/" (lib.removeSuffix ".zpkg" (lib.removePrefix "pkgs/" source.path)))
+                );
           }) (builtins.filter (source: source.kind == "zpkg") (bundle.sources or [ ]))
         );
       diagnostics = lib.concatMap (
