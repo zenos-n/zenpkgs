@@ -12,4 +12,7 @@ _meta = {
   license = $l.gpl3Only;
 };
 
-import $pkgs.legacy.vesktop;
+build = $pkgs.legacy.vesktop.override {
+  withSystemVencord = true;
+  vencord = $pkgs.byCategories.apps.communication.vencord;
+};

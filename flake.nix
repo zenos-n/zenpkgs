@@ -777,6 +777,7 @@
           '';
           nzportable = import ./tests/nzportable.nix { inherit pkgs; };
           steam-gamescope = import ./tests/steam-gamescope.nix { inherit pkgs; };
+          vencord = import ./tests/vencord.nix { inherit pkgs; };
           application-program-options = import ./tests/application-program-options.nix {
             pkgs = dsl.bootstrapPkgs;
             sourceRoot = self;

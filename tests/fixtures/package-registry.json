@@ -23619,10 +23619,270 @@
       ]
     },
     {
+      "categoryTarget": [
+        "apps",
+        "communication",
+        "vencord"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.unknown.vencord",
+      "meta": {
+        "description": "\n    Vencord with upstream fixes for Discord's updated Rspack module exports\n    and module lookup. Use this package for Nixcord's discord.vencord.package.\n  ",
+        "id": "unknown.vencord",
+        "license": "$l.gpl3Only",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Vencord",
+        "packageVersion": "1.15.3",
+        "summary": "Discord client modification with current bundler compatibility",
+        "tags": [
+          "communication",
+          "discord",
+          "vencord"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "type": "group",
+              "value": {
+                "body": {
+                  "recursive": false,
+                  "statements": [
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "patches"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "left": {
+                          "type": "group",
+                          "value": {
+                            "default": {
+                              "items": [],
+                              "type": "list"
+                            },
+                            "type": "default",
+                            "value": {
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "previous"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "patches"
+                                }
+                              ],
+                              "type": "reference"
+                            }
+                          }
+                        },
+                        "operator": "++",
+                        "right": {
+                          "items": [
+                            {
+                              "type": "group",
+                              "value": {
+                                "arguments": [
+                                  {
+                                    "recursive": false,
+                                    "statements": [
+                                      {
+                                        "operator": "=",
+                                        "target": [
+                                          {
+                                            "kind": "identifier",
+                                            "value": "url"
+                                          }
+                                        ],
+                                        "type": "assignment",
+                                        "value": {
+                                          "multiline": false,
+                                          "parts": [
+                                            {
+                                              "type": "text",
+                                              "value": "https://github.com/Vendicated/Vencord/commit/ba8453ebac146b241b18409640b0548f37b9064e.patch"
+                                            }
+                                          ],
+                                          "type": "string"
+                                        }
+                                      },
+                                      {
+                                        "operator": "=",
+                                        "target": [
+                                          {
+                                            "kind": "identifier",
+                                            "value": "hash"
+                                          }
+                                        ],
+                                        "type": "assignment",
+                                        "value": {
+                                          "multiline": false,
+                                          "parts": [
+                                            {
+                                              "type": "text",
+                                              "value": "sha256-G22LQCvObBPGo2flNaOBa5bRiEn/I8CHj1NB1BF9q7o="
+                                            }
+                                          ],
+                                          "type": "string"
+                                        }
+                                      }
+                                    ],
+                                    "type": "attr-set"
+                                  }
+                                ],
+                                "callee": {
+                                  "name": "pkgs",
+                                  "path": [
+                                    {
+                                      "kind": "identifier",
+                                      "value": "legacy"
+                                    },
+                                    {
+                                      "kind": "identifier",
+                                      "value": "fetchurl"
+                                    }
+                                  ],
+                                  "type": "variable"
+                                },
+                                "type": "call"
+                              }
+                            },
+                            {
+                              "type": "group",
+                              "value": {
+                                "arguments": [
+                                  {
+                                    "recursive": false,
+                                    "statements": [
+                                      {
+                                        "operator": "=",
+                                        "target": [
+                                          {
+                                            "kind": "identifier",
+                                            "value": "url"
+                                          }
+                                        ],
+                                        "type": "assignment",
+                                        "value": {
+                                          "multiline": false,
+                                          "parts": [
+                                            {
+                                              "type": "text",
+                                              "value": "https://github.com/Vendicated/Vencord/commit/a764679e9f988903560f408d6615c709d71281ce.patch"
+                                            }
+                                          ],
+                                          "type": "string"
+                                        }
+                                      },
+                                      {
+                                        "operator": "=",
+                                        "target": [
+                                          {
+                                            "kind": "identifier",
+                                            "value": "hash"
+                                          }
+                                        ],
+                                        "type": "assignment",
+                                        "value": {
+                                          "multiline": false,
+                                          "parts": [
+                                            {
+                                              "type": "text",
+                                              "value": "sha256-WH/7b1tYvX4xcUsrXtQD7Hkae80DcF+KP+SZoMO8kUQ="
+                                            }
+                                          ],
+                                          "type": "string"
+                                        }
+                                      }
+                                    ],
+                                    "type": "attr-set"
+                                  }
+                                ],
+                                "callee": {
+                                  "name": "pkgs",
+                                  "path": [
+                                    {
+                                      "kind": "identifier",
+                                      "value": "legacy"
+                                    },
+                                    {
+                                      "kind": "identifier",
+                                      "value": "fetchurl"
+                                    }
+                                  ],
+                                  "type": "variable"
+                                },
+                                "type": "call"
+                              }
+                            }
+                          ],
+                          "type": "list"
+                        },
+                        "type": "binary"
+                      }
+                    }
+                  ],
+                  "type": "attr-set"
+                },
+                "form": "identifier",
+                "parameters": [
+                  {
+                    "default": null,
+                    "name": "previous",
+                    "variadic": false
+                  }
+                ],
+                "type": "lambda"
+              }
+            }
+          ],
+          "callee": {
+            "name": "pkgs",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "legacy"
+              },
+              {
+                "kind": "identifier",
+                "value": "vencord"
+              },
+              {
+                "kind": "identifier",
+                "value": "overrideAttrs"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "unknown",
+        "vencord"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "communication",
+        "vesktop"
+      ],
       "dependenciesDeclared": false,
       "id": "pkgs.dev.vencord.Vesktop",
       "meta": {
         "description": "\n    Alternate client for Discord with Vencord built-in.\n  ",
+        "id": "dev.vencord.Vesktop",
         "license": "$l.gpl3Only",
         "maintainers": [
           "doromiert"
@@ -23634,38 +23894,91 @@
           "communication",
           "networking"
         ],
-        "zenosVersion": "1.0.0",
-        "id": "dev.vencord.Vesktop"
+        "zenosVersion": "1.0.0"
       },
       "provider": {
-        "kind": "import",
         "expression": {
-          "name": "pkgs",
-          "path": [
+          "arguments": [
             {
-              "kind": "identifier",
-              "value": "legacy"
-            },
-            {
-              "kind": "identifier",
-              "value": "vesktop"
+              "recursive": false,
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "withSystemVencord"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "kind": "true",
+                    "type": "literal",
+                    "value": true
+                  }
+                },
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "vencord"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "byCategories"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "apps"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "communication"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "vencord"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
+              "type": "attr-set"
             }
           ],
-          "type": "variable"
-        }
+          "callee": {
+            "name": "pkgs",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "legacy"
+              },
+              {
+                "kind": "identifier",
+                "value": "vesktop"
+              },
+              {
+                "kind": "identifier",
+                "value": "override"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        },
+        "kind": "build"
       },
-      "sourcePath": [
-        "vesktop"
-      ],
       "target": [
         "dev",
         "vencord",
         "Vesktop"
-      ],
-      "categoryTarget": [
-        "apps",
-        "communication",
-        "vesktop"
       ]
     },
     {
@@ -227676,81 +227989,46 @@
         "expression": {
           "arguments": [
             {
-              "recursive": false,
-              "statements": [
-                {
-                  "operator": "=",
-                  "target": [
+              "type": "group",
+              "value": {
+                "left": {
+                  "name": "lib",
+                  "path": [
                     {
                       "kind": "identifier",
-                      "value": "pkgs"
+                      "value": "zenPackageSources"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "zenlink"
                     }
                   ],
-                  "type": "assignment",
-                  "value": {
-                    "name": "pkgs",
-                    "path": [
-                      {
-                        "kind": "identifier",
-                        "value": "legacy"
-                      }
-                    ],
-                    "type": "variable"
-                  }
-                }
-              ],
-              "type": "attr-set"
+                  "type": "variable"
+                },
+                "operator": "+",
+                "right": {
+                  "multiline": false,
+                  "parts": [
+                    {
+                      "type": "text",
+                      "value": "/nix/package.nix"
+                    }
+                  ],
+                  "type": "string"
+                },
+                "type": "binary"
+              }
             }
           ],
           "callee": {
-            "arguments": [
+            "name": "lib",
+            "path": [
               {
-                "type": "group",
-                "value": {
-                  "left": {
-                    "name": "lib",
-                    "path": [
-                      {
-                        "kind": "identifier",
-                        "value": "zenPackageSources"
-                      },
-                      {
-                        "kind": "identifier",
-                        "value": "zenlink"
-                      }
-                    ],
-                    "type": "variable"
-                  },
-                  "operator": "+",
-                  "right": {
-                    "multiline": false,
-                    "parts": [
-                      {
-                        "type": "text",
-                        "value": "/nix/package.nix"
-                      }
-                    ],
-                    "type": "string"
-                  },
-                  "type": "binary"
-                }
+                "kind": "identifier",
+                "value": "zenCompatPackage"
               }
             ],
-            "callee": {
-              "name": "pkgs",
-              "path": [
-                {
-                  "kind": "identifier",
-                  "value": "legacy"
-                },
-                {
-                  "kind": "identifier",
-                  "value": "callPackage"
-                }
-              ],
-              "type": "variable"
-            },
-            "type": "call"
+            "type": "variable"
           },
           "type": "call"
         },
@@ -230002,7 +230280,7 @@
           "doromiert"
         ],
         "name": "Steam (Gamescope)",
-        "packageVersion": "1.0.2",
+        "packageVersion": "1.1.0",
         "summary": "Steam Big Picture in Gamescope on your primary GNOME display",
         "tags": [
           "gaming",

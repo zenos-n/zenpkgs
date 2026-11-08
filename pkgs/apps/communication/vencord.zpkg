@@ -1,0 +1,29 @@
+_meta = {
+  id = "unknown.vencord";
+  name = "Vencord";
+  summary = "Discord client modification with current bundler compatibility";
+  description = ''
+    Vencord with upstream fixes for Discord's updated Rspack module exports
+    and module lookup. Use this package for Nixcord's discord.vencord.package.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "1.15.3";
+  tags = [ "communication" "discord" "vencord" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Only;
+};
+
+build = $pkgs.legacy.vencord.overrideAttrs (previous: {
+  patches = (previous.patches or []) ++ [
+    # Discord now supplies plain exports in a third argument to wreq.d.
+    ($pkgs.legacy.fetchurl {
+      url = "https://github.com/Vendicated/Vencord/commit/ba8453ebac146b241b18409640b0548f37b9064e.patch";
+      hash = "sha256-G22LQCvObBPGo2flNaOBa5bRiEn/I8CHj1NB1BF9q7o=";
+    })
+    # The same bundler update no longer supplies module.id to factories.
+    ($pkgs.legacy.fetchurl {
+      url = "https://github.com/Vendicated/Vencord/commit/a764679e9f988903560f408d6615c709d71281ce.patch";
+      hash = "sha256-WH/7b1tYvX4xcUsrXtQD7Hkae80DcF+KP+SZoMO8kUQ=";
+    })
+  ];
+});
