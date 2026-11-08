@@ -210,8 +210,6 @@ def inventory(details, reader, scanner, icons, asset_url, references=None, ident
                         reference = reference_artwork(references.get(identifier), scanner, icons)
                         if reference:
                             break
-                if reference:
-                    continue
                 for inner in inners:
                     resolved = scanner.resolve(f"{output_path}/{inner}")
                     if resolved is None:
@@ -241,6 +239,8 @@ def inventory(details, reader, scanner, icons, asset_url, references=None, ident
     result["artworkStatus"] = "indexed" if entries or screenshots else "unavailable" if missing or errors else "no-entries"
     for entry in entries:
         file = entry.pop("iconFile", None)
+        if file:
+            entry["iconUrl"] = asset_url.rstrip("/") + "/icons/" + file
         if file and not entry.get("noDisplay") and "icon" not in result:
             result["icon"] = asset_url.rstrip("/") + "/icons/" + file
     if reference:
@@ -254,7 +254,8 @@ def inventory(details, reader, scanner, icons, asset_url, references=None, ident
         if used_reference:
             result["artworkReference"] = reference["reference"]
             result["artworkStatus"] = "indexed"
-    result["screenshots"] = list({shot["url"]: {"url": shot["url"], "caption": shot.get("caption"), "source": shot["url"]} for shot in screenshots if shot["url"].startswith("https://")}.values())
+    result["screenshots"] = list({shot["url"]: {"url": shot["url"], "caption": shot.get("caption"), "source": shot["url"]} for shot in screenshots if shot["url"].startswith(("https://", "http://"))}.values())
+    result["desktopStatus"] = "partial" if missing or errors else "complete"
     if errors:
         result["indexErrors"] = sorted(set(errors))
     return result

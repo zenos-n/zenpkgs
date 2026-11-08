@@ -34,10 +34,11 @@ also provides reference graphics, matched only by exact component ID (the
 canonical package ID or a shipped metainfo/desktop filename). The UI labels
 their Flathub source and release version; those images can describe a different
 release. Binary inventories and all package facts still come exclusively from
-the actual Nix outputs/evaluation. This avoids downloading a large application
-archive just to extract its logo and improves coverage for uncached builds.
-Shipped local graphics retain priority. The cache scanner remains the fallback
-for applications not represented in the reference catalog.
+the actual Nix outputs/evaluation. This improves graphics coverage for uncached
+builds. Shipped graphics retain priority. Available desktop/metainfo files are
+still read from the actual NAR even when reference artwork exists, so graphics
+enrichment never replaces exact launcher metadata. Reading such files can
+require downloading a large application archive during indexing.
 
 Search data publication has its own search-export checks and runs independently
 of compiled-source publication and unrelated package build checks.

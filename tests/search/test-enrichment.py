@@ -135,6 +135,7 @@ class EnrichmentTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             scanner.cache_dir = root
+            scanner.indexed_files.return_value = []
             scanner.session.get.side_effect = RuntimeError("offline icon")
             scanner.listing.return_value = {"root": {"entries": {"bin": {"type": "directory", "entries": {"actual-nix-command": {"type": "regular", "executable": True}}}}}}
             result = module.inventory({"outputPaths": ["/nix/store/hash-editor"]}, reader, scanner, root, "https://archive.org", refs, "org.example.Editor")
@@ -142,6 +143,20 @@ class EnrichmentTests(unittest.TestCase):
         self.assertEqual(result["artworkReference"]["version"], "2.0")
         self.assertEqual(result["screenshots"][0]["url"], "https://upstream.org/shot.png")
         scanner.fetch_entries.assert_not_called()
+
+    def test_reference_graphics_do_not_discard_actual_desktop_file_details(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            scanner = Mock()
+            scanner.cache_dir = root
+            scanner.listing.return_value = {"root": {"entries": {}}}
+            scanner.indexed_files.return_value = ["share/applications/org.example.Editor.desktop"]
+            scanner.resolve.return_value = ("hash", "/share/applications/org.example.Editor.desktop")
+            scanner.fetch_entries.return_value = {"/share/applications/org.example.Editor.desktop": {"desktopName": "Actual Nix launcher", "noDisplay": False}}
+            reference = {"screenshots": [{"url": "https://upstream.org/shot.png"}], "reference": {"version": "2.0"}}
+            result = module.inventory({"outputPaths": ["/nix/store/hash-editor"]}, Mock(), scanner, root, "https://archive.org", {"org.example.Editor": reference}, "org.example.Editor")
+        self.assertEqual(result["desktopEntries"][0]["desktopName"], "Actual Nix launcher")
+        scanner.fetch_entries.assert_called_once()
 
 
 if __name__ == "__main__":
