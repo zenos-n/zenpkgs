@@ -45,7 +45,11 @@ let
         broken = meta.broken or false;
         insecure = (meta.knownVulnerabilities or [ ]) != [ ];
         knownVulnerabilities = meta.knownVulnerabilities or [ ];
-        unfree = lib.any (license: !(license.free or true)) (lib.toList (meta.license or { }));
+        unfree =
+          if builtins.isAttrs (meta.license or null) && meta.license ? licenseType then
+            !(lib.licenses.isFree meta.license)
+          else
+            lib.any (license: !(license.free or true)) (lib.toList (meta.license or { }));
       };
     in
     {
