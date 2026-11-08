@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.1 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.2 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -379,3 +379,21 @@ preferences and the live main client/grid/cache/scroll. Preview refresh, explici
 folder choice, background close and multi-window edit/quit checks pass, along
 with the existing cached-account restore and editor-exit native regressions.
 Fixture accounts/media only; production account settings were not edited.
+
+
+Version0.14.2 removes the asset-details roundtrip from click-to-viewer opening.
+Indexed items open immediately from cached thumbnail pixels while metadata
+validates in the background. Full previews, video playback, editing and data
+actions wait for fresh visibility checks; private responses are rejected.
+Back/navigation/cached zoom remain usable, failures retain the cached view, and
+late responses cannot overwrite a closed or newer item. Delayed permitted
+video metadata starts playback correctly.
+
+Same private-X11/software-GL fixture, cached pixels and1200ms metadata delay:
+median click-to-painted-viewer1265.23ms before versus54.61ms after, three indexed
+items. Already hydrated media stays about56–61ms. These are controlled values,
+not production-server timings. The native budget checks median below250ms and
+all opens below500ms, with private image/video, pending-action/shortcut, failure,
+stale/duplicate response, navigation and real video-autoplay coverage. Existing
+viewer controls, clipboard/editor-exit, Open With account retention and selection
+action regressions pass. No production media mutations were used in tests.
