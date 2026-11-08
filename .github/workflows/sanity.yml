@@ -81,10 +81,10 @@ jobs:
 
           if echo "$OUTPUT" | grep -Fq 'status = "PASSED";'; then
             echo "✅ Integrity check PASSED."
-            echo "status=success" >> $GITHUB_OUTPUT
+            echo "status=success" >> "$GITHUB_OUTPUT"
           else
             echo "❌ Integrity check FAILED."
-            echo "status=failure" >> $GITHUB_OUTPUT
+            echo "status=failure" >> "$GITHUB_OUTPUT"
             exit 1
           fi
 
@@ -127,15 +127,36 @@ jobs:
       - name: Verify search metadata enrichment
         run: python3 tests/search/test-enrichment.py
 
+  publish-search:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.sha }}
+          fetch-depth: 0
+      - uses: cachix/install-nix-action@v27
+        with:
+          extra_nix_config: |
+            experimental-features = nix-command flakes
+            allow-import-from-derivation = true
+      - name: Use the locked Nix toolchain
+        run: |
+          ZENPKGS_NIX=$(nix build --no-link --print-out-paths --inputs-from . 'nixpkgs#nix^out')
+          printf '%s/bin\n' "$ZENPKGS_NIX" >> "$GITHUB_PATH"
+      - name: Verify search export
+        run: |
+          python3 tests/search/test-enrichment.py
+          nix build --no-link .#checks.x86_64-linux.search-index
       - name: Prepare search metadata reader
-        if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
         run: |
           git init "$RUNNER_TEMP/search-reader"
           git -C "$RUNNER_TEMP/search-reader" fetch --depth=1 https://github.com/NixOS/nixos-search.git 2167f7df098eb0c10c82dbe71eeb52f8d8d1b393
           git -C "$RUNNER_TEMP/search-reader" checkout --detach FETCH_HEAD
 
       - uses: actions/cache@v4
-        if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
         with:
           path: |
             ${{ runner.temp }}/search-cache
@@ -144,7 +165,6 @@ jobs:
           restore-keys: search-artwork-v1-
 
       - name: Generate Documentation JSON
-        if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
         run: |
           ZENPKGS_ARCHIVE_SOURCE_REVISION="$GITHUB_SHA" nix eval --json --impure --file scripts/gen-archive.nix > docs.json
           nix eval --json --impure --file scripts/search-package-manifest.nix > "$RUNNER_TEMP/search-manifest.json"
@@ -158,7 +178,6 @@ jobs:
           python3 -c 'from pathlib import Path; size = Path("docs.json").stat().st_size; print(f"Archive JSON: {size / 1024**2:.1f} MiB"); assert size < 90 * 1024**2, "Archive exceeds the 90 MiB budget; do not push an oversized Git blob"'
 
       - name: Archive JSON to 'json' branch
-        if: steps.eval.outputs.status == 'success' && github.event_name == 'push'
         run: |
           git config --global user.name "ZenOS Bot"
           git config --global user.email "bot@zenos.dev"
@@ -172,7 +191,7 @@ jobs:
           if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
             TAG_NAME=${GITHUB_REF#refs/tags/}
             echo "Detected release tag: $TAG_NAME"
-            cp docs.json /tmp/$TAG_NAME.json
+            cp docs.json "/tmp/$TAG_NAME.json"
             FILES_TO_ADD="$TAG_NAME.json"
           elif [[ "$GITHUB_REF_NAME" == "main" ]]; then
             echo "Detected push to main."
@@ -192,7 +211,7 @@ jobs:
           # Move files into place
           if [[ "$GITHUB_REF_TYPE" == "tag" ]]; then
             TAG_NAME=${GITHUB_REF#refs/tags/}
-            mv /tmp/$TAG_NAME.json .
+            mv "/tmp/$TAG_NAME.json" .
           elif [[ "$GITHUB_REF_NAME" == "main" ]]; then
             mv /tmp/latestCommit.json .
           fi
@@ -201,7 +220,7 @@ jobs:
           mkdir -p artwork
           cp -a "$RUNNER_TEMP/search-artwork/." artwork/
           git add artwork
-          git add $FILES_TO_ADD
+          git add "$FILES_TO_ADD"
 
           if ! git diff --cached --quiet; then
             git commit -m "Archive: ${GITHUB_REF_NAME} - $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
