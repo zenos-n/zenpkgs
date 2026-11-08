@@ -295,6 +295,8 @@ def enrich(catalog, manifest, reader, scanner, icons, asset_url, previous=None, 
                         if key in saved:
                             meta[key] = saved[key]
         else:
+            for key in ("programs", "icon", "screenshots", "desktopEntries", "componentIds", "artworkReference", "desktopStatus", "indexErrors", "indexedOutputPaths", "resolvedVersion", "broken", "insecure", "unfree"):
+                meta.pop(key, None)
             meta["binaryStatus"] = "unavailable"
             meta["artworkStatus"] = "unavailable"
         meta["sourceUrl"] = source_url(meta.get("sourcePath"), revision, nixpkgs_revision, manifest.get("sourceRoots", []))

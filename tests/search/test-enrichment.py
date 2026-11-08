@@ -88,7 +88,7 @@ class EnrichmentTests(unittest.TestCase):
     def test_enrichment_preserves_authored_identity_and_isolates_failed_providers(self):
         catalog = {"metadata": {"zenpkgsVersion": "abc"}, "pkgs": {
             "good": {"meta": {"id": "pkgs.good", "kind": "package", "version": "1", "maintainers": ["zen-maintainer"], "sourcePath": "pkgs/good.zpkg"}},
-            "bad": {"meta": {"id": "pkgs.bad", "kind": "package"}},
+            "bad": {"meta": {"id": "pkgs.bad", "kind": "package", "programs": ["obsolete"], "indexedOutputPaths": ["/nix/store/obsolete"], "resolvedVersion": "obsolete"}},
         }, "options": {"flag": {"meta": {"default": False, "declarations": ["modules/flag.zmdl"]}}}}
         manifest = {"system": "x86_64-linux", "nixpkgsRevision": "def", "packages": {"pkgs.good": {"status": "evaluated", "version": "2", "outputs": ["out"], "outputPaths": []}}}
         with tempfile.TemporaryDirectory() as directory:
@@ -98,6 +98,8 @@ class EnrichmentTests(unittest.TestCase):
         self.assertEqual(good["resolvedVersion"], "2")
         self.assertEqual(good["maintainers"], ["zen-maintainer"])
         self.assertEqual(result["pkgs"]["bad"]["meta"]["binaryStatus"], "unavailable")
+        self.assertNotIn("programs", result["pkgs"]["bad"]["meta"])
+        self.assertNotIn("resolvedVersion", result["pkgs"]["bad"]["meta"])
         self.assertFalse(result["options"]["flag"]["meta"]["default"])
         self.assertIn("/abc/modules/flag.zmdl", result["options"]["flag"]["meta"]["declarations"][0])
 
