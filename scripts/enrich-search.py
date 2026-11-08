@@ -32,18 +32,21 @@ def source_url(path, revision, nixpkgs_revision, roots=()):
     if path.startswith("https://"):
         return path
     for source in roots:
-        if path.startswith(source["root"] + "/") and source.get("revision"):
+        source_revision = source.get("revision") or (revision if source["repository"] == "zenos-n/zenpkgs" else None)
+        if path.startswith(source["root"] + "/") and source_revision:
             relative = path[len(source["root"]) + 1:]
             if ".." in relative.split("/"):
                 return None
             relative = re.sub(r":(\d+)$", r"#L\1", relative)
-            return f'https://github.com/{source["repository"]}/blob/{source["revision"]}/{relative}'
+            return f'https://github.com/{source["repository"]}/blob/{source_revision}/{relative}'
     match = re.match(r"/nix/store/[^/]+/(.*)", path)
     relative = match.group(1) if match else path
     relative = relative.removeprefix("builds/").removesuffix(".nix") if relative.endswith(".zmdl.nix") else relative
     if relative.startswith(("pkgs/", "modules/", "nixos/", "lib/")):
         # Generated DSL definitions belong to ZenPkgs, ordinary Nix to Nixpkgs.
         own = relative.endswith((".zpkg", ".zmdl", ".zstr"))
+        if match and not own:
+            return None
         repo, rev = ("zenos-n/zenpkgs", revision) if own else ("NixOS/nixpkgs", nixpkgs_revision)
         location = re.sub(r":(\d+)$", r"#L\1", relative)
         if rev and ".." not in relative.split("/"):
@@ -268,7 +271,7 @@ def enrich(catalog, manifest, reader, scanner, icons, asset_url, previous=None, 
         if details.get("status") == "evaluated":
             # Authored descriptions, maintainers and version remain authoritative.
             for key, value in details.items():
-                if key not in ("status", "outputPaths", "maintainers", "version") and value is not None:
+                if key not in ("status", "outputPaths", "maintainers", "version", "drvPath") and value is not None:
                     meta[key] = value
             meta["resolvedVersion"] = details.get("version")
             if not meta.get("sourceRepository"):
@@ -333,6 +336,7 @@ def main():
     parser.add_argument("--asset-url", required=True)
     parser.add_argument("--cache", type=Path, required=True)
     parser.add_argument("--previous", type=Path)
+    parser.add_argument("--popularity", type=Path)
     args = parser.parse_args()
     spec = importlib.util.spec_from_file_location("nixos_search_desktop", args.scanner)
     reader = importlib.util.module_from_spec(spec)
@@ -353,6 +357,11 @@ def main():
     previous = json.loads(args.previous.read_text()) if args.previous and args.previous.is_file() else None
     references = load_references(reader, args.cache)
     catalog = enrich(json.loads(args.catalog.read_text()), json.loads(args.manifest.read_text()), reader, scanner, icons, args.asset_url, previous, references)
+    if args.popularity:
+        popularity = json.loads(args.popularity.read_text())
+        for node in nodes(catalog.get("pkgs", {})):
+            meta = node.get("meta", {})
+            meta.update(popularity["packages"].get(meta.get("id"), {}))
     mirror_screenshots(catalog, scanner, args.asset_url)
     staged = args.catalog.with_suffix(".tmp")
     staged.write_text(json.dumps(catalog, ensure_ascii=False))

@@ -20,9 +20,15 @@ let
         pname = package.pname or package.name or null;
         version = package.version or null;
         outputs = package.outputs or [ "out" ];
+        drvPath = package.drvPath;
+        nativeAttribute = if entry ? sourcePath then lib.concatStringsSep "." entry.sourcePath else null;
         defaultOutput = package.outputName or "out";
         outputPaths = map (name: toString package.${name}) (package.outputs or [ "out" ]);
         homepage = meta.homepage or null;
+        upstreamDescription = safe null (meta.longDescription or null);
+        changelog = safe null (meta.changelog or null);
+        problems = safe [ ] (meta.problems or [ ]);
+        system = system;
         license = meta.license or null;
         platforms = meta.platforms or [ ];
         mainProgram = meta.mainProgram or null;
@@ -59,7 +65,14 @@ let
 in
 {
   inherit system;
-  sourceRoots =
+  sourceRoots = [
+    {
+      root = toString flake;
+      repository = "zenos-n/zenpkgs";
+      revision = null;
+    }
+  ]
+  ++
     map
       (input: {
         root = toString flake.inputs.${input.name};

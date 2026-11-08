@@ -179,7 +179,7 @@ jobs:
           locked_nixpkgs=$(nix eval --raw --impure --expr '(builtins.getFlake (toString ./.)).inputs.nixpkgs.outPath')
           nix-shell -I "nixpkgs=$locked_nixpkgs" \
             -p 'python3.withPackages (ps: [ ps.requests ps.zstandard ps.brotli ])' imagemagick librsvg nix \
-            --run "python3 scripts/enrich-search.py docs.json '$RUNNER_TEMP/search-manifest.json' --scanner '$RUNNER_TEMP/search-reader/flake-info/scripts/desktop-entries-index.py' --assets '$RUNNER_TEMP/search-artwork' --asset-url 'https://raw.githubusercontent.com/zenos-n/zenpkgs/json/artwork' --cache '$RUNNER_TEMP/search-cache' --previous '$RUNNER_TEMP/previous-search.json'"
+            --run "python3 scripts/search-popularity.py '$RUNNER_TEMP/search-manifest.json' --cache '$RUNNER_TEMP/search-cache' --output '$RUNNER_TEMP/search-popularity.json' && python3 scripts/enrich-search.py docs.json '$RUNNER_TEMP/search-manifest.json' --scanner '$RUNNER_TEMP/search-reader/flake-info/scripts/desktop-entries-index.py' --assets '$RUNNER_TEMP/search-artwork' --asset-url 'https://raw.githubusercontent.com/zenos-n/zenpkgs/json/artwork' --cache '$RUNNER_TEMP/search-cache' --previous '$RUNNER_TEMP/previous-search.json' --popularity '$RUNNER_TEMP/search-popularity.json'"
           python3 -c 'from pathlib import Path; size = Path("docs.json").stat().st_size; print(f"Archive JSON: {size / 1024**2:.1f} MiB"); assert size < 90 * 1024**2, "Archive exceeds the 90 MiB budget; do not push an oversized Git blob"'
 
       - name: Archive JSON to 'json' branch

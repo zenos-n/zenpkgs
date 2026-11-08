@@ -9,12 +9,46 @@ from unittest.mock import patch
 spec = importlib.util.spec_from_file_location("enrichment", Path(__file__).parents[2] / "scripts/enrich-search.py")
 module = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(module)
+pop_spec = importlib.util.spec_from_file_location("popularity", Path(__file__).parents[2] / "scripts/search-popularity.py")
+popularity = importlib.util.module_from_spec(pop_spec)
+pop_spec.loader.exec_module(popularity)
 
 
 class EnrichmentTests(unittest.TestCase):
+    def test_dependency_counts_deduplicate_aliases_and_label_the_catalog_population(self):
+        manifest = {"packages": {"one": {"drvPath": "/nix/store/one.drv"}, "alias": {"drvPath": "/nix/store/one.drv"}, "two": {"drvPath": "/nix/store/two.drv"}, "unknown": {}}}
+        result = popularity.dependency_metrics(manifest, lambda _: {"derivations": {"one.drv": {"inputs": {"drvs": {"external.drv": {}}}}, "two.drv": {"inputs": {"drvs": {"one.drv": {}}}}}})
+        self.assertEqual(result["one"]["catalogDependents"], 1)
+        self.assertEqual(result["alias"]["catalogDependents"], 1)
+        self.assertEqual(result["one"]["directBuildInputs"], 1)
+        self.assertEqual(result["two"]["catalogDependencies"], ["alias", "one"])
+        self.assertNotIn("unknown", result)
+
+    def test_repology_counts_distinct_repositories_and_matches_native_attributes(self):
+        counts = {}
+        popularity.merge_repology(counts, {"project-name": [{"repo": "nix_unstable", "srcname": "native-attribute"}, {"repo": "nix_unstable", "srcname": "native-attribute"}, {"repo": "debian", "srcname": "unrelated-name"}]})
+        self.assertEqual(counts, {"native-attribute": 2})
+
+    def test_repology_resumes_a_checkpoint_and_retries_connection_resets(self):
+        import json, time
+        with tempfile.TemporaryDirectory() as directory:
+            cache = Path(directory) / "counts.json"
+            cache.with_suffix(".partial.json").write_text(json.dumps({"counts": {"previous": 4}, "cursor": "last/", "pages": 20, "startedEpoch": time.time()}))
+            response = Mock(status_code=200)
+            response.json.return_value = {"last": [{"repo": "nix_unstable", "srcname": "native"}]}
+            session = Mock()
+            session.get.side_effect = [OSError("connection reset"), response]
+            with patch.object(popularity.time, "sleep"):
+                result = popularity.repology_counts(session, cache)
+            self.assertEqual(result["counts"], {"previous": 4, "native": 1})
+            self.assertEqual(session.get.call_count, 2)
+            self.assertIn("/last/?inrepo=", session.get.call_args.args[0])
+            self.assertTrue(cache.is_file())
+            self.assertFalse(cache.with_suffix(".partial.json").exists())
     def test_definition_links_are_revision_specific_and_do_not_leak_store_paths(self):
         self.assertEqual(module.source_url("pkgs/apps/tool.zpkg", "abc", "def"), "https://github.com/zenos-n/zenpkgs/blob/abc/pkgs/apps/tool.zpkg")
-        self.assertEqual(module.source_url("/nix/store/hash-source/nixos/modules/foo.nix:42", "abc", "def"), "https://github.com/NixOS/nixpkgs/blob/def/nixos/modules/foo.nix#L42")
+        self.assertEqual(module.source_url("/nix/store/hash-source/nixos/modules/foo.nix:42", "abc", "def", [{"root": "/nix/store/hash-source", "repository": "NixOS/nixpkgs", "revision": "def"}]), "https://github.com/NixOS/nixpkgs/blob/def/nixos/modules/foo.nix#L42")
+        self.assertIsNone(module.source_url("/nix/store/unknown-repo/lib/package.nix", "abc", "def"))
         self.assertIsNone(module.source_url("/etc/private.nix", "abc", "def"))
         self.assertIsNone(module.source_url("pkgs/../secret", "abc", "def"))
         self.assertEqual(module.source_url("/nix/store/hm-source/modules/home.nix:5", "abc", "def", [{"root": "/nix/store/hm-source", "repository": "nix-community/home-manager", "revision": "hm"}]), "https://github.com/nix-community/home-manager/blob/hm/modules/home.nix#L5")

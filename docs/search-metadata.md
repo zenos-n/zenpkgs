@@ -42,6 +42,21 @@ for applications not represented in the reference catalog.
 Search data publication has its own search-export checks and runs independently
 of compiled-source publication and unrelated package build checks.
 
+`scripts/search-popularity.py` reads instantiated derivations without building
+outputs. It reports direct build-input counts, direct dependent counts within
+the exposed ZenPkgs catalog, and links to dependencies present in that catalog.
+Derivation aliases do not multiply counts. These are not counts across all
+Nixpkgs; the UI explicitly labels the population. Nix 2.34's versioned JSON and
+the older derivation JSON encoding are both accepted.
+
+Repology repository counts use its `nix_unstable` native `srcname`, matched to
+the recorded registry import path, never a guessed software/project name.
+The crawler follows the matching/rate-limit semantics in the MIT
+[NixOS Search implementation](https://github.com/NixOS/nixos-search/blob/2167f7df098eb0c10c82dbe71eeb52f8d8d1b393/flake-info/src/commands/repology.rs),
+counts distinct repositories, waits at least one second between pages, honors
+bounded retry delays and caches a completed map for 24 hours. The fetch date is
+retained. External failure leaves unknown counts absent.
+
 ## Coverage and limits
 
 The package inventory is system-specific (`metadata.packageEnrichment.system`).
