@@ -265,11 +265,14 @@ def enrich(catalog, manifest, reader, scanner, icons, asset_url, previous=None, 
     revision = catalog.get("metadata", {}).get("zenpkgsVersion")
     nixpkgs_revision = manifest.get("nixpkgsRevision")
     packages = [node for node in nodes(catalog.get("pkgs", {})) if node.get("meta", {}).get("kind") == "package"]
-    prior = {node.get("meta", {}).get("id"): node.get("meta", {}) for node in nodes((previous or {}).get("pkgs", {}))}
+    prior = {node.get("meta", {}).get("id"): dict(node.get("meta", {})) for node in nodes((previous if previous is not None else catalog).get("pkgs", {}))}
     def update(node):
         meta = node["meta"]
         details = manifest["packages"].get(meta.get("id"), {})
         if details.get("status") == "evaluated":
+            if meta.get("indexedOutputPaths") != details["outputPaths"]:
+                for key in ("programs", "icon", "screenshots", "desktopEntries", "componentIds", "artworkReference", "desktopStatus", "indexErrors"):
+                    meta.pop(key, None)
             # Authored descriptions, maintainers and version remain authoritative.
             for key, value in details.items():
                 if key not in ("status", "outputPaths", "maintainers", "version", "drvPath") and value is not None:
@@ -287,8 +290,8 @@ def enrich(catalog, manifest, reader, scanner, icons, asset_url, previous=None, 
                 if meta["binaryStatus"] != "complete" and saved.get("binaryStatus") == "complete" and isinstance(saved.get("programs"), list):
                     meta["programs"] = saved["programs"]
                     meta["binaryStatus"] = "complete"
-                if meta["artworkStatus"] == "unavailable" and saved.get("artworkStatus") == "indexed":
-                    for key in ("icon", "screenshots", "desktopEntries", "componentIds", "artworkStatus", "artworkReference"):
+                if meta["artworkStatus"] in ("unavailable", "no-entries") and saved.get("artworkStatus") == "indexed":
+                    for key in ("icon", "screenshots", "desktopEntries", "componentIds", "artworkStatus", "artworkReference", "desktopStatus"):
                         if key in saved:
                             meta[key] = saved[key]
         else:

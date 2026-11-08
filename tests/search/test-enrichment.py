@@ -115,7 +115,7 @@ class EnrichmentTests(unittest.TestCase):
     def test_previous_inventory_requires_exact_output_identity(self):
         import copy
         previous = {"pkgs": {"app": {"meta": {"id": "pkgs.app", "indexedOutputPaths": ["/nix/store/same-app"], "binaryStatus": "complete", "programs": ["app"], "artworkStatus": "indexed", "icon": "https://archive.org/icon.png"}}}}
-        catalog = {"pkgs": {"app": {"meta": {"id": "pkgs.app", "kind": "package"}}}}
+        catalog = {"pkgs": {"app": {"meta": {"id": "pkgs.app", "kind": "package", "indexedOutputPaths": ["/nix/store/obsolete-version"], "programs": ["obsolete-command"], "icon": "https://archive.org/obsolete.png"}}}}
         manifest = {"system": "x86_64-linux", "packages": {"pkgs.app": {"status": "evaluated", "outputPaths": ["/nix/store/same-app"]}}}
         with patch.object(module, "inventory", return_value={"binaryStatus": "partial", "artworkStatus": "unavailable"}):
             result = module.enrich(copy.deepcopy(catalog), manifest, Mock(), Mock(), Path("/tmp"), "https://archive.org", previous)
