@@ -7,15 +7,14 @@ on:
   pull_request:
     branches: ["main"]
 
-concurrency:
-  group: integrity-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   publish-compiled:
     needs: check-integrity
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
+    concurrency:
+      group: compiled-${{ github.ref }}
+      cancel-in-progress: true
     permissions:
       contents: write
     steps:
@@ -47,6 +46,9 @@ jobs:
             origin HEAD:refs/heads/compiled-unstable
   check-integrity:
     runs-on: ubuntu-latest
+    concurrency:
+      group: core-integrity-${{ github.ref }}
+      cancel-in-progress: true
     permissions:
       contents: write # Required to push to the json branch
     steps:
@@ -130,6 +132,9 @@ jobs:
   publish-search:
     if: github.event_name == 'push'
     runs-on: ubuntu-latest
+    concurrency:
+      group: search-index-${{ github.ref }}
+      cancel-in-progress: false
     permissions:
       contents: write
     steps:
