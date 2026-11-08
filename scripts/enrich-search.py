@@ -7,6 +7,7 @@ loaded from the exact revision recorded by CI, not copied into ZenPkgs.
 import argparse
 import concurrent.futures
 import hashlib
+import gzip
 import importlib.util
 import json
 import os
@@ -14,6 +15,7 @@ from pathlib import Path
 import re
 import sys
 import threading
+from xml.etree import ElementTree
 
 
 def nodes(tree):
@@ -107,9 +109,77 @@ def local_artwork(output, reader, icons):
     return entries, screenshots, components
 
 
-def inventory(details, reader, scanner, icons, asset_url):
+def reference_catalog(xml, reader):
+    references = {}
+    for component in ElementTree.fromstring(xml).findall("component"):
+        identifier = component.findtext("id")
+        if not identifier:
+            continue
+        identifier = identifier.removesuffix(".desktop")
+        remote_icons = [icon for icon in component.findall("icon") if icon.get("type") == "remote" and (icon.text or "").startswith("https://")]
+        icon = max(remote_icons, key=lambda icon: int(icon.get("width", "0")), default=None)
+        parsed = reader.parse_metainfo(ElementTree.tostring(component, encoding="unicode")) or {}
+        release = component.find("releases/release")
+        references[identifier.removesuffix(".desktop")] = {
+            "iconUrl": icon.text if icon is not None else None,
+            "screenshots": parsed.get("screenshots", []),
+            "reference": {"componentId": identifier, "url": "https://flathub.org/apps/" + identifier, "version": release.get("version") if release is not None else None},
+        }
+    return references
+
+
+def load_references(reader, cache):
+    target = cache / "flathub.xml.gz"
+    try:
+        response = reader.requests.get("https://dl.flathub.org/repo/appstream/x86_64/appstream.xml.gz", timeout=30)
+        response.raise_for_status()
+        references = reference_catalog(gzip.decompress(response.content), reader)
+        staged = target.with_suffix(".tmp")
+        staged.write_bytes(response.content)
+        staged.replace(target)
+        return references
+    except Exception as error:
+        print(f"Reference artwork catalog: {type(error).__name__}", file=sys.stderr)
+        if target.exists():
+            try:
+                return reference_catalog(gzip.decompress(target.read_bytes()), reader)
+            except (OSError, ValueError, ElementTree.ParseError):
+                pass
+        return {}
+
+
+def reference_artwork(reference, scanner, icons):
+    if not reference:
+        return None
+    result = dict(reference)
+    url = result.get("iconUrl")
+    if url:
+        record = scanner.cache_dir / ("reference-icon-" + hashlib.sha256(url.encode()).hexdigest() + ".json")
+        try:
+            file = json.loads(record.read_text()) if record.exists() else None
+        except (ValueError, OSError):
+            file = None
+        if file and (icons / file).is_file():
+            result["iconFile"] = file
+        else:
+            try:
+                response = scanner.session.get(url, timeout=20)
+                response.raise_for_status()
+                data = response.content
+                if len(data) <= 1024 * 1024 and data.startswith(b"\x89PNG\r\n\x1a\n"):
+                    file = scanner.store_image(data, ".png", icons)
+                    record.write_text(json.dumps(file))
+                    result["iconFile"] = file
+            except Exception:
+                pass
+    return result if result.get("iconFile") or result["screenshots"] else None
+
+
+def inventory(details, reader, scanner, icons, asset_url, references=None, identity=None):
     programs, entries, screenshots, component_ids = set(), [], [], []
     missing, errors = False, []
+    references = references or {}
+    reference = reference_artwork(references.get(identity), scanner, icons)
     for output_path in details.get("outputPaths", []):
         output = Path(output_path)
         binaries_read = False
@@ -130,7 +200,16 @@ def inventory(details, reader, scanner, icons, asset_url):
                 binaries_read = True
                 targets = {}
                 by_nar = {}
-                for inner in scanner.indexed_files(output_path) or []:
+                inners = scanner.indexed_files(output_path) or []
+                if not reference:
+                    for inner in inners:
+                        identifier = Path(inner).name.removesuffix(".metainfo.xml").removesuffix(".appdata.xml").removesuffix(".desktop")
+                        reference = reference_artwork(references.get(identifier), scanner, icons)
+                        if reference:
+                            break
+                if reference:
+                    continue
+                for inner in inners:
                     resolved = scanner.resolve(f"{output_path}/{inner}")
                     if resolved is None:
                         errors.append("unresolved")
@@ -161,13 +240,24 @@ def inventory(details, reader, scanner, icons, asset_url):
         file = entry.pop("iconFile", None)
         if file and not entry.get("noDisplay") and "icon" not in result:
             result["icon"] = asset_url.rstrip("/") + "/icons/" + file
+    if reference:
+        used_reference = False
+        if "icon" not in result and reference.get("iconFile"):
+            result["icon"] = asset_url.rstrip("/") + "/icons/" + reference["iconFile"]
+            used_reference = True
+        if not screenshots and reference["screenshots"]:
+            screenshots = reference["screenshots"]
+            used_reference = True
+        if used_reference:
+            result["artworkReference"] = reference["reference"]
+            result["artworkStatus"] = "indexed"
     result["screenshots"] = list({shot["url"]: {"url": shot["url"], "caption": shot.get("caption"), "source": shot["url"]} for shot in screenshots if shot["url"].startswith("https://")}.values())
     if errors:
         result["indexErrors"] = sorted(set(errors))
     return result
 
 
-def enrich(catalog, manifest, reader, scanner, icons, asset_url, previous=None):
+def enrich(catalog, manifest, reader, scanner, icons, asset_url, previous=None, references=None):
     revision = catalog.get("metadata", {}).get("zenpkgsVersion")
     nixpkgs_revision = manifest.get("nixpkgsRevision")
     packages = [node for node in nodes(catalog.get("pkgs", {})) if node.get("meta", {}).get("kind") == "package"]
@@ -186,7 +276,7 @@ def enrich(catalog, manifest, reader, scanner, icons, asset_url, previous=None):
                 if repository:
                     meta["sourceRepository"] = "https://github.com/" + repository.group(1).removesuffix(".git")
             meta["indexedOutputPaths"] = details["outputPaths"]
-            meta.update(inventory(details, reader, scanner, icons, asset_url))
+            meta.update(inventory(details, reader, scanner, icons, asset_url, references, meta.get("id", "").removeprefix("pkgs.")))
             saved = prior.get(meta.get("id"), {})
             # Reuse only identical store outputs, never a similarly named release.
             if saved.get("indexedOutputPaths") == details["outputPaths"]:
@@ -194,7 +284,7 @@ def enrich(catalog, manifest, reader, scanner, icons, asset_url, previous=None):
                     meta["programs"] = saved["programs"]
                     meta["binaryStatus"] = "complete"
                 if meta["artworkStatus"] == "unavailable" and saved.get("artworkStatus") == "indexed":
-                    for key in ("icon", "screenshots", "desktopEntries", "componentIds", "artworkStatus"):
+                    for key in ("icon", "screenshots", "desktopEntries", "componentIds", "artworkStatus", "artworkReference"):
                         if key in saved:
                             meta[key] = saved[key]
         else:
@@ -261,7 +351,8 @@ def main():
                 return super().fetch_entries(*args)
     scanner = Scanner(args.cache, icon_dir=icons, icon_extensions=(".png", ".svg"), icon_pixel_size=96, icon_colors=256, icon_svg_max_bytes=32768, screenshot_dir=args.assets / "screenshots", screenshot_pixel_size=400, screenshot_quality=82, screenshot_large_pixel_size=1200, screenshot_large_quality=80)
     previous = json.loads(args.previous.read_text()) if args.previous and args.previous.is_file() else None
-    catalog = enrich(json.loads(args.catalog.read_text()), json.loads(args.manifest.read_text()), reader, scanner, icons, args.asset_url, previous)
+    references = load_references(reader, args.cache)
+    catalog = enrich(json.loads(args.catalog.read_text()), json.loads(args.manifest.read_text()), reader, scanner, icons, args.asset_url, previous, references)
     mirror_screenshots(catalog, scanner, args.asset_url)
     staged = args.catalog.with_suffix(".tmp")
     staged.write_text(json.dumps(catalog, ensure_ascii=False))

@@ -29,6 +29,19 @@ upstream URL; the UI hides an image that fails to load. Existing archive artwork
 is retained so released catalogs keep working. Cached inventories can only be
 reused when the complete list of Nix output store paths matches exactly.
 
+Flathub's public [AppStream catalog](https://dl.flathub.org/repo/appstream/x86_64/appstream.xml.gz)
+also provides reference graphics, matched only by exact component ID (the
+canonical package ID or a shipped metainfo/desktop filename). The UI labels
+their Flathub source and release version; those images can describe a different
+release. Binary inventories and all package facts still come exclusively from
+the actual Nix outputs/evaluation. This avoids downloading a large application
+archive just to extract its logo and improves coverage for uncached builds.
+Shipped local graphics retain priority. The cache scanner remains the fallback
+for applications not represented in the reference catalog.
+
+Search data publication has its own search-export checks and runs independently
+of compiled-source publication and unrelated package build checks.
+
 ## Coverage and limits
 
 The package inventory is system-specific (`metadata.packageEnrichment.system`).

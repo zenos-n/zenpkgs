@@ -92,6 +92,23 @@ class EnrichmentTests(unittest.TestCase):
             self.assertNotIn("programs", result["pkgs"]["app"]["meta"])
             self.assertNotIn("icon", result["pkgs"]["app"]["meta"])
 
+    def test_reference_artwork_is_exact_identity_and_does_not_replace_binary_inventory(self):
+        reader, scanner = Mock(), Mock()
+        reader.parse_metainfo.return_value = {"screenshots": [{"url": "https://upstream.org/shot.png"}]}
+        refs = module.reference_catalog('<components><component><id>org.example.Editor</id><icon type="remote" width="128">https://upstream.org/icon.png</icon><releases><release version="2.0"/></releases></component></components>', reader)
+        self.assertNotIn("Editor", refs)
+        self.assertEqual(refs["org.example.Editor"]["reference"]["version"], "2.0")
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            scanner.cache_dir = root
+            scanner.session.get.side_effect = RuntimeError("offline icon")
+            scanner.listing.return_value = {"root": {"entries": {"bin": {"type": "directory", "entries": {"actual-nix-command": {"type": "regular", "executable": True}}}}}}
+            result = module.inventory({"outputPaths": ["/nix/store/hash-editor"]}, reader, scanner, root, "https://archive.org", refs, "org.example.Editor")
+        self.assertEqual(result["programs"], ["actual-nix-command"])
+        self.assertEqual(result["artworkReference"]["version"], "2.0")
+        self.assertEqual(result["screenshots"][0]["url"], "https://upstream.org/shot.png")
+        scanner.fetch_entries.assert_not_called()
+
 
 if __name__ == "__main__":
     unittest.main()
