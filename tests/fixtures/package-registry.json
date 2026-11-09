@@ -230047,7 +230047,7 @@
           "doromiert"
         ],
         "name": "Galeria",
-        "packageVersion": "0.14.2",
+        "packageVersion": "0.14.3",
         "summary": "Native photo and video library for local folders and Immich",
         "tags": [
           "graphics",

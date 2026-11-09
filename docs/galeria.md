@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.2 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.3 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -397,3 +397,20 @@ all opens below500ms, with private image/video, pending-action/shortcut, failure
 stale/duplicate response, navigation and real video-autoplay coverage. Existing
 viewer controls, clipboard/editor-exit, Open With account retention and selection
 action regressions pass. No production media mutations were used in tests.
+
+
+Version0.14.3 applies styles during shared application startup: cold Open With
+previews retain sidebar heading margins and the dark focus backdrop. Preview
+account controls display the live or remembered Immich identity and cached
+profile photo. Open library and sidebar navigation use the primary library's
+normal session restoration; local-file actions retain their separate model.
+Account changes propagate to existing previews. Focus actions are on the left,
+with Info and Edit on the right.
+
+The private-D-Bus desktop-entry regression now uses real application startup
+and verifies computed margins, backdrop pixels, left/right button bounds,
+cached/live avatars, primary-library routing and signout propagation. Existing
+preferences/client/grid/cache/scroll retention checks remain.80unit tests and
+native viewer controls, clipboard, editor exit, opening latency and six action
+animation targets pass. Tests use fixture accounts and generated media;
+production authentication was not exercised.
