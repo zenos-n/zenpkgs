@@ -784,6 +784,24 @@
             pkgs = dsl.bootstrapPkgs;
             sourceRoot = self;
           };
+          boot-build-progress-defaults =
+            let
+              make = settings: (nixpkgs.lib.nixosSystem {
+                inherit system;
+                modules = [ self.nixosModules.default { zenos.system = settings; } ];
+              }).config;
+              defaults = make { };
+              optedOut = make { boot.verbose.enable = false; nix.monitor.enable = false; };
+              baselineOff = make { installed-base.enable = false; };
+            in
+            assert defaults.zenos.system.boot.verbose.enable;
+            assert defaults.services.bootvine.enable;
+            assert defaults.programs.zenosNixMonitor.enable;
+            assert !optedOut.services.bootvine.enable;
+            assert !optedOut.programs.zenosNixMonitor.enable;
+            assert !baselineOff.zenos.system.boot.verbose.enable;
+            assert !baselineOff.zenos.system.nix.monitor.enable;
+            pkgs.writeText "zenpkgs-boot-build-progress-defaults" "passed";
           boot-progress-vm = import ./tests/boot-progress.nix { inherit pkgs; };
           boot-build-progress-options = pkgs.runCommand "zenpkgs-boot-build-progress-options" {
             nativeBuildInputs = [ pkgs.python3 pkgs.nix ];

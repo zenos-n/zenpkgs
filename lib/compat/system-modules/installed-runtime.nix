@@ -32,7 +32,13 @@ in
   imports = [ ../../legacy-openal.nix ];
 
   config = lib.mkMerge [
-    { zenos.system.zenfs.enable = lib.mkDefault enabled; }
+    {
+      # Keep public defaults outside mkIf enabled: zenos is a single submodule,
+      # so conditioning definitions inside it on itself creates a fixed-point loop.
+      zenos.system.zenfs.enable = lib.mkDefault enabled;
+      zenos.system.boot.verbose.enable = lib.mkDefault enabled;
+      zenos.system.nix.monitor.enable = lib.mkDefault enabled;
+    }
     (lib.mkIf enabled (
       lib.mkMerge [
         (zenfs { inherit config lib pkgs; }).config
