@@ -288,26 +288,26 @@ in
     pass "zenpkgs-no-retired-package-roots";
 
   registry-counts =
-    assert builtins.length expectedRegistry.packages == 4165;
-    assert builtins.length expectedActiveEntries == 4165;
-    assert builtins.length registry.packages == 4165;
-    assert builtins.length activeEntries == 4165;
+    assert builtins.length expectedRegistry.packages == 4166;
+    assert builtins.length expectedActiveEntries == 4166;
+    assert builtins.length registry.packages == 4166;
+    assert builtins.length activeEntries == 4166;
     assert builtins.length importEntries == 4096;
-    assert builtins.length buildEntries == 69;
+    assert builtins.length buildEntries == 70;
     assert lib.all (entry: !entry.dependenciesDeclared) importEntries;
     pass "zenpkgs-package-registry-counts";
 
   package-paths =
-    assert builtins.length (registryPaths expectedRegistry) == 4165;
-    assert builtins.length (packagePaths expectedRegistry) == 4165;
-    assert builtins.length activePaths == 4165;
+    assert builtins.length (registryPaths expectedRegistry) == 4166;
+    assert builtins.length (packagePaths expectedRegistry) == 4166;
+    assert builtins.length activePaths == 4166;
     assert registryPathKeys == lib.sort builtins.lessThan registryPathKeys;
     assert registryPaths registry == registryPaths expectedRegistry;
     assert packagePaths registry == packagePaths expectedSorted;
     pass "zenpkgs-package-registry-paths";
 
   public-package-outputs =
-    assert builtins.length outputIdentities == 4165;
+    assert builtins.length outputIdentities == 4166;
     assert lib.all (identity: identity) outputIdentities;
     pass "zenpkgs-public-package-outputs";
 
@@ -346,6 +346,8 @@ in
         "apps.audio.swisstag"
         "apps.browsers.gnosis"
         "apps.browsers.hyperbeam"
+        "apps.communication.vencord"
+        "apps.communication.vesktop"
         "apps.connectivity.zbridge"
         "apps.development.android-tools"
         "apps.development.gnome-builder-lsp"
@@ -363,7 +365,7 @@ in
         "apps.graphics.galeria"
         "apps.graphics.select-for-figma"
         "apps.security.keyslot"
-      "apps.system.zenos-setup"
+        "apps.system.zenos-setup"
         "apps.system.zenos.zenos-rebuild"
         "apps.terminal.blackbox-next"
         "apps.terminal.blankbox"
@@ -376,12 +378,13 @@ in
         "desktops.gnome.extensions.forge"
         "desktops.gnome.extensions.galeria"
         "desktops.gnome.extensions.keyslot"
-      "desktops.gnome.extensions.wiggly"
+        "desktops.gnome.extensions.wiggly"
         "desktops.gnome.extensions.zane-indicator"
         "desktops.gnome.extensions.zen-vision"
         "desktops.gnome.extensions.zenlink-indicator"
         "desktops.gnome.tweaks.zero-gnome-clock"
         "libs.libfreenect2"
+        "system.bootvine"
         "system.kernel.popcorn"
         "system.kernel.popcorn-zen4"
         "system.zenboot"
@@ -434,9 +437,9 @@ in
     pass "zenpkgs-registry-build-providers";
 
   registry-output-ownership =
-    assert builtins.length outputNames == 4165 * 2;
+    assert builtins.length outputNames == 4166 * 2;
     assert builtins.length (builtins.attrNames (builtins.listToAttrs
-      (map (name: { inherit name; value = true; }) outputNames))) == 4165 * 2;
+      (map (name: { inherit name; value = true; }) outputNames))) == 4166 * 2;
     assert
       builtins.attrNames publicPackages == lib.sort builtins.lessThan (
         outputNames

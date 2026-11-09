@@ -1,0 +1,11 @@
+_meta = {
+  zenosVersion = 1.0.0Nb;
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+  summary = "Interactive Nix build progress";
+  description = ''Shows nix-output-monitor for interactive build, run, shell, develop and copy commands without piping app input or output. Explicit machine output and command nix bypass monitoring.'';
+  maintainers = [ $m.doromiert ];
+};
+enable = enableOption {
+  s! { programs.zenosNixMonitor.enable = true; };
+};

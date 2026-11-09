@@ -1,0 +1,11 @@
+_meta = {
+  zenosVersion = 1.0.0Nb;
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+  summary = "Live verbose boot progress";
+  description = ''Keeps Plymouth as the default splash and reveals the Bootvine systemd tree with Escape. Escape returns to the splash. Missing viewers retain ordinary boot details.'';
+  maintainers = [ $m.doromiert ];
+};
+enable = enableOption {
+  s! { services.bootvine.enable = true; };
+};

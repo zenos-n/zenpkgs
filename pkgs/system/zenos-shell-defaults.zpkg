@@ -1,10 +1,10 @@
 _meta = {
   id = "com.neg-zero.zenos-shell-defaults";
   name = "ZenOS shell defaults";
-  summary = "Provides the default Powerlevel10k configuration";
-  description = ''Packages the ZenOS default Powerlevel10k configuration for private per-user Zsh setup.'';
+  summary = "Provides shell defaults and interactive Nix build progress";
+  description = ''Packages the ZenOS Powerlevel10k defaults and a Nix progress sidecar. Interactive build, run, shell and develop commands show nix-output-monitor while preserving application streams and exit status.'';
   zenosVersion = 1.0.0Nb;
-  packageVersion = "1.0.0";
+  packageVersion = "1.1.0";
   tags = [ "shell" "zsh" "theme" ];
   maintainers = [ $m.doromiert ];
 };
@@ -12,6 +12,6 @@ _meta = {
 build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
   owner = "zenos-n";
   repo = "zenos-shell-defaults";
-  rev = "29d54418b0e7e966e33a0f5766b92d9c94b1345e";
-  hash = "sha256-LKd4jdhyVxqjVCx59IM4+Dh3WzfVT/AGSlX7ygNYeik=";
+  rev = "0c7a421c02619dc78392163533a9bcda15334c98";
+  hash = "sha256-tWQ7LkCDrm4S+reGZQqCyyKq1Z9tazrdr818cfoDt9o=";
 }) + "/package.nix") { };

@@ -9,4 +9,4 @@ _meta = {
   maintainers = [ $m.doromiert ];
 };
 
-build = $pkgs.legacy.callPackage ($lib.zenPackageSources.rebuild + "/package.nix") {};
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.rebuild + "/package.nix") { nixMonitor = $pkgs.byCategories.system.zenos-shell-defaults; };

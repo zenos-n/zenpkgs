@@ -68,7 +68,7 @@
       flake = false;
     };
     source-shell-defaults = {
-      url = "github:zenos-n/zenos-shell-defaults/29d54418b0e7e966e33a0f5766b92d9c94b1345e";
+      url = "github:zenos-n/zenos-shell-defaults/0c7a421c02619dc78392163533a9bcda15334c98";
       flake = false;
     };
     source-oobe = {
@@ -620,6 +620,8 @@
             imports = [
               (inputs.source-zenlink.outPath + "/nix/devices.nix")
               ./lib/compat/system-modules/installed-runtime.nix
+              ./lib/boot-progress.nix
+              ./lib/nix-monitor.nix
               ./lib/gnome-cursor.nix
               ./lib/compat/system-modules/oobe-runtime.nix
               inputs.home-manager.nixosModules.home-manager
@@ -782,6 +784,14 @@
             pkgs = dsl.bootstrapPkgs;
             sourceRoot = self;
           };
+          boot-progress-vm = import ./tests/boot-progress.nix { inherit pkgs; };
+          boot-build-progress-options = pkgs.runCommand "zenpkgs-boot-build-progress-options" {
+            nativeBuildInputs = [ pkgs.python3 pkgs.nix ];
+          } ''
+            export PYTHONDONTWRITEBYTECODE=1 NIX_REMOTE=dummy://
+            python ${self}/tests/check-boot-build-progress.py --nixpkgs ${pkgs.path}
+            touch "$out"
+          '';
           blankbox-module = import ./tests/blankbox-check.nix {
             pkgs = dsl.bootstrapPkgs;
             sourceRoot = self;

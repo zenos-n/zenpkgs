@@ -7006,7 +7006,36 @@
           "arguments": [
             {
               "recursive": false,
-              "statements": [],
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "nixMonitor"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "byCategories"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "system"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "zenos-shell-defaults"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
               "type": "attr-set"
             }
           ],
@@ -7539,14 +7568,14 @@
       "dependenciesDeclared": false,
       "id": "pkgs.com.neg-zero.zenos-shell-defaults",
       "meta": {
-        "description": "Packages the ZenOS default Powerlevel10k configuration for private per-user Zsh setup.",
+        "description": "Packages the ZenOS Powerlevel10k defaults and a Nix progress sidecar. Interactive build, run, shell and develop commands show nix-output-monitor while preserving application streams and exit status.",
         "license": null,
         "maintainers": [
           "doromiert"
         ],
         "name": "ZenOS shell defaults",
-        "packageVersion": "1.0.0",
-        "summary": "Provides the default Powerlevel10k configuration",
+        "packageVersion": "1.1.0",
+        "summary": "Provides shell defaults and interactive Nix build progress",
         "tags": [
           "shell",
           "zsh",
@@ -7631,7 +7660,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "29d54418b0e7e966e33a0f5766b92d9c94b1345e"
+                                    "value": "0c7a421c02619dc78392163533a9bcda15334c98"
                                   }
                                 ],
                                 "type": "string"
@@ -7651,7 +7680,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "sha256-LKd4jdhyVxqjVCx59IM4+Dh3WzfVT/AGSlX7ygNYeik="
+                                    "value": "sha256-tWQ7LkCDrm4S+reGZQqCyyKq1Z9tazrdr818cfoDt9o="
                                   }
                                 ],
                                 "type": "string"
@@ -230390,6 +230419,194 @@
         "com",
         "neg-zero",
         "SteamGamescope"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "system",
+        "bootvine"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.org.codeberg.wvhulle.bootvine",
+      "meta": {
+        "description": "Shows boot dependencies, unit states and passphrase prompts. The ZenOS integration switches between Plymouth and the live tree with Escape and keeps initrd history across switch-root. Based on wvhulle/bootvine under GPL-3.0-or-later.",
+        "id": "org.codeberg.wvhulle.bootvine",
+        "license": "$l.gpl3Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Bootvine",
+        "packageVersion": "0.1.3-zenos1",
+        "summary": "Live systemd boot tree behind the Plymouth splash",
+        "tags": [
+          "boot",
+          "systemd",
+          "plymouth"
+        ],
+        "zenosVersion": "1.0.0Nb"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "zenos-n"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "bootvine"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "a74dd29649fd15d079361a969e452d3a8cf4af5e"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-cDbtk3LaTD4rpb8RzTmvTFKJEFTwyY685FFV7V+RMY0="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "org",
+        "codeberg",
+        "wvhulle",
+        "bootvine"
       ]
     }
   ]

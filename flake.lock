@@ -915,11 +915,11 @@
     "source-rebuild": {
       "flake": false,
       "locked": {
-        "lastModified": 1793546685,
-        "narHash": "sha256-+kPWgZGiWu5ywllt7u4dwgr3Z2+UeUk2evSpIyzMpnI=",
+        "lastModified": 1794254558,
+        "narHash": "sha256-nAFFZusQCjTt3a1zAj4DdJhFDxjlfMQQantTtSwWwLs=",
         "owner": "zenos-n",
         "repo": "zenos-rebuild",
-        "rev": "ab798e4fa23958921203c32f94363f53be6412a0",
+        "rev": "a0fd27322e3fa042f3a76a540adbf9f61c5a199c",
         "type": "github"
       },
       "original": {
@@ -1000,17 +1000,17 @@
     "source-shell-defaults": {
       "flake": false,
       "locked": {
-        "lastModified": 1789023480,
-        "narHash": "sha256-LKd4jdhyVxqjVCx59IM4+Dh3WzfVT/AGSlX7ygNYeik=",
+        "lastModified": 1794255113,
+        "narHash": "sha256-tWQ7LkCDrm4S+reGZQqCyyKq1Z9tazrdr818cfoDt9o=",
         "owner": "zenos-n",
         "repo": "zenos-shell-defaults",
-        "rev": "29d54418b0e7e966e33a0f5766b92d9c94b1345e",
+        "rev": "0c7a421c02619dc78392163533a9bcda15334c98",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenos-shell-defaults",
-        "rev": "29d54418b0e7e966e33a0f5766b92d9c94b1345e",
+        "rev": "0c7a421c02619dc78392163533a9bcda15334c98",
         "type": "github"
       }
     },

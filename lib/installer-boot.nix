@@ -11,6 +11,8 @@ let
 in
 {
   common = {
+    zenos.system.boot.verbose.enable = lib.mkDefault true;
+    zenos.system.nix.monitor.enable = lib.mkDefault true;
     boot = {
       consoleLogLevel = 0;
       initrd.verbose = false;
