@@ -80,7 +80,7 @@
       flake = false;
     };
     source-zenfs = {
-      url = "github:zenos-n/zenfs/a0160ad9dd9ecc8222b0b5c57e0ea8be12218ef7";
+      url = "github:zenos-n/zenfs/518fe4f14ba6bec16f38c08a8b68b1b802a2f19a";
       flake = false;
     };
     # Extracted package sources are published separately from the package catalog.
