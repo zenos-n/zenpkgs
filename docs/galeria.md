@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.3 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.4 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -414,3 +414,27 @@ preferences/client/grid/cache/scroll retention checks remain.80unit tests and
 native viewer controls, clipboard, editor exit, opening latency and six action
 animation targets pass. Tests use fixture accounts and generated media;
 production authentication was not exercised.
+
+
+Version0.14.4 uploads pasted clipboard images with Ctrl+V in the connected
+gallery, selection or focus view. PNG encoding stays in memory; existing upload
+progress, checksum preflight, duplicate skipping and incremental refresh apply.
+Text fields, dialogs and the editor retain ordinary paste behavior; clipboard
+replies are fenced to the initiating account/library.
+
+The Trash confirmation chooses This device and Immich, This device only or
+Immich only; both is the default when both copies are known. Local originals
+use the desktop Trash, cloud items Immich Trash. Cloud-only preserves device
+files; local-only preserves cloud items and their grid thumbnails. Existing
+sync-journal associations are reused; new manual imports and downloads record
+asset/path/checksum associations. Older unrecorded files are not guessed.
+Changed files and symlinks are kept. Failed cloud requests keep local originals;
+local failures after a cloud success are reported. Restore each copy through
+its respective Trash.
+
+85unit tests and native clipboard-upload/Trash-scope/action-target/drop-upload/
+viewer-copy/editor-exit/Open-With regressions pass with generated media and
+fixture accounts. The clipboard test uses a real cross-process image and real
+Ctrl+V, verifies PNG pixels/alpha/checksum/multipart/duplicates, text paste and
+failure/account guards. Trash tests exercise the native scope dialog and real
+reversible desktop Trash; no production files or assets were deleted.
