@@ -622,6 +622,7 @@
               ./lib/compat/system-modules/installed-runtime.nix
               ./lib/boot-progress.nix
               ./lib/nix-monitor.nix
+              ./lib/compat/gnome-desktop-defaults.nix
               ./lib/gnome-cursor.nix
               ./lib/compat/system-modules/oobe-runtime.nix
               inputs.home-manager.nixosModules.home-manager
@@ -802,6 +803,10 @@
             assert !baselineOff.zenos.system.boot.verbose.enable;
             assert !baselineOff.zenos.system.nix.monitor.enable;
             pkgs.writeText "zenpkgs-boot-build-progress-defaults" "passed";
+          gnome-desktop-defaults = import ./tests/gnome-desktop-defaults.nix {
+            inherit pkgs nixpkgs;
+            zenosModule = self.nixosModules.default;
+          };
           gdm-branding-vm = import ./tests/gdm-branding-vm.nix {
             inherit pkgs;
             zenosModule = self.nixosModules.default;

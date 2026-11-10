@@ -135,3 +135,18 @@ options do not enroll credentials or change account lockout policy.
 GNOME greeter defaults use the ZenOS branding logo and host accent/color scheme.
 Explicit loginScreen.logo and existing greeter database settings take precedence.
 Only the GDM shell selects the system GDM profile explicitly.
+
+
+GNOME Destination II wallpapers follow accent changes only when the current
+variant matches the previous accent. Light and dark image settings are checked
+independently and retain their light/dark flavor. Teal uses the Cyan variant;
+slate uses Slate. A different Destination color, an unrelated wallpaper, or a
+manually copied image remains untouched. Selecting a matching installed variant
+resumes following on the next accent change. Starting or restarting the session
+helper never rewrites the current selection.
+
+GNOME's system MIME defaults select GNOME Text Editor for plain/empty text and
+for the text/code formats that upstream GNOME otherwise sends to Builder,
+including JSON, XML and Markdown. Explicit user associations keep priority.
+These defaults live in the GNOME-specific profile, leaving other desktops' text
+editors and browser/file-manager associations alone.
