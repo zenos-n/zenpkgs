@@ -802,6 +802,14 @@
             assert !baselineOff.zenos.system.boot.verbose.enable;
             assert !baselineOff.zenos.system.nix.monitor.enable;
             pkgs.writeText "zenpkgs-boot-build-progress-defaults" "passed";
+          gdm-branding-vm = import ./tests/gdm-branding-vm.nix {
+            inherit pkgs;
+            zenosModule = self.nixosModules.default;
+          };
+          gdm-branding = import ./tests/gdm-branding.nix {
+            inherit pkgs nixpkgs;
+            zenosModule = self.nixosModules.default;
+          };
           boot-progress-vm = import ./tests/boot-progress.nix { inherit pkgs; };
           boot-build-progress-options = pkgs.runCommand "zenpkgs-boot-build-progress-options" {
             nativeBuildInputs = [ pkgs.python3 pkgs.nix ];

@@ -46,7 +46,7 @@ enable = enableOption {
     ];
     services.displayManager.gdm.enable = true;
     services.displayManager.gdm.autoSuspend = $lib.mkIf ($path.loginScreen.automaticSuspend != null) $path.loginScreen.automaticSuspend;
-    programs.dconf.profiles.gdm.databases = $lib.mkBefore ($lib.optional ($path.loginScreen.showUsers != null || $path.loginScreen.showPowerButtons != null || $path.loginScreen.allowPasswords != null || $path.loginScreen.allowFingerprints != null || $path.loginScreen.allowSmartCards != null || $path.loginScreen.allowPasskeys != null || $path.loginScreen.allowWebLogin != null || $path.loginScreen.attemptsBeforeUserSelection != null || $path.loginScreen.logo != null || $path.loginScreen.screenReader != null || $path.loginScreen.screenKeyboard != null || $path.loginScreen.textScale != null || $path.loginScreen.highContrast != null || $path.loginScreen.clockFormat != null || $path.loginScreen.message != null) {
+    programs.dconf.profiles.gdm.databases = $lib.mkMerge [ ($lib.mkBefore ($lib.optional ($path.loginScreen.showUsers != null || $path.loginScreen.showPowerButtons != null || $path.loginScreen.allowPasswords != null || $path.loginScreen.allowFingerprints != null || $path.loginScreen.allowSmartCards != null || $path.loginScreen.allowPasskeys != null || $path.loginScreen.allowWebLogin != null || $path.loginScreen.attemptsBeforeUserSelection != null || $path.loginScreen.logo != null || $path.loginScreen.screenReader != null || $path.loginScreen.screenKeyboard != null || $path.loginScreen.textScale != null || $path.loginScreen.highContrast != null || $path.loginScreen.clockFormat != null || $path.loginScreen.message != null) {
       settings = $lib.foldl $lib.recursiveUpdate { } [
         ($lib.optionalAttrs ($path.loginScreen.showUsers != null) { "org/gnome/login-screen"."disable-user-list" = $path.loginScreen.showUsers == false; })
         ($lib.optionalAttrs ($path.loginScreen.showPowerButtons != null) { "org/gnome/login-screen"."disable-restart-buttons" = $path.loginScreen.showPowerButtons == false; })
@@ -64,8 +64,22 @@ enable = enableOption {
         ($lib.optionalAttrs ($path.loginScreen.clockFormat != null) { "org/gnome/desktop/interface"."clock-format" = $path.loginScreen.clockFormat; })
         ($lib.optionalAttrs ($path.loginScreen.message != null) { "org/gnome/login-screen" = { banner-message-enable = $path.loginScreen.message != ""; banner-message-source = "settings"; banner-message-text = $path.loginScreen.message; }; })
       ];
-    });
+    }))
+      ($lib.mkAfter [{
+        settings = {
+          "org/gnome/login-screen".logo = "${$pkgs.byCategories.theming.system.zenos-branding}/share/icons/hicolor/scalable/apps/zenos.svg";
+          "org/gnome/desktop/interface" = {
+            accent-color = $path.defaultAccentColor;
+            color-scheme = if $path.defaultDarkMode then "prefer-dark" else "prefer-light";
+          };
+        };
+      }])
+    ];
 
+    systemd.user.services."org.gnome.Shell@gdm" = {
+      overrideStrategy = "asDropin";
+      environment.DCONF_PROFILE = "/etc/dconf/profile/gdm";
+    };
     services.desktopManager.gnome.enable = true;
     qt = {
       enable = $lib.mkDefault true;

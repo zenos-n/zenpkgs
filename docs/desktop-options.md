@@ -131,3 +131,7 @@ sessions. Its nullable settings cover account visibility, a welcome message,
 text size, clock format, accessibility, automatic suspend and authentication
 methods. Authentication still needs the corresponding system services; these
 options do not enroll credentials or change account lockout policy.
+
+GNOME greeter defaults use the ZenOS branding logo and host accent/color scheme.
+Explicit loginScreen.logo and existing greeter database settings take precedence.
+Only the GDM shell selects the system GDM profile explicitly.
