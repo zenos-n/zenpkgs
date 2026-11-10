@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.5 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.6 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -463,3 +463,25 @@ actual frame paint, retained cells, server pixel adoption and a500ms budget.
 Existing editor/markup/navigation/exit, six action targets, local/cloud Trash,
 file drop, viewer controls and cache/account/Open-With regressions pass. All
 writes during tests use generated files and fixture cloud accounts.
+
+
+Version 0.14.6 opens device files in focus over the primary library. Cold Open
+With restores the remembered Immich account and fills the same grid behind
+focus. Warm Open With preserves the live account and page; sidebar entries
+navigate within that window. File/folder arguments queue previews in the same
+window. Device originals remain separate from server asset IDs.
+
+Back, close and quit check the file checksum asynchronously. An existing Immich
+asset skips the save prompt. A new file offers Save, Don’t Save and Cancel.
+Save uploads the unchanged original through the existing progress flow and waits
+for acknowledgement. Failed checks offer Retry, Don’t Save and Cancel. Failed
+saves keep focus open. Disconnected previews remain usable without a cloud
+check or upload.
+
+Actual private desktop-entry and cold-process tests cover slow restore, image/
+video/batch focus, sidebar routing, duplicate skip, cancel/retry/discard/save,
+failed saves, background close and Save on Quit. The package precompiles Python
+modules at build time to reduce cold-start latency. The native tests measure
+first visible feedback against a 400 ms budget with an 8,000-item library and
+a 64 MiB file. Tests use a fixture server and verify that originals and account
+preferences stay intact.
