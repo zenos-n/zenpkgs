@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.4 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.5 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -438,3 +438,28 @@ fixture accounts. The clipboard test uses a real cross-process image and real
 Ctrl+V, verifies PNG pixels/alpha/checksum/multipart/duplicates, text paste and
 failure/account guards. Trash tests exercise the native scope dialog and real
 reversible desktop Trash; no production files or assets were deleted.
+
+
+Version0.14.5 inserts upload previews before the transfer finishes. Paste,
+file/folder imports, edited-photo copies and folder sync use per-item circular
+byte progress; the circle disappears only after Immich confirms an asset or
+checksum duplicate. Failed items keep their preview and Retry control. Temporary
+IDs cannot be selected or sent to cloud actions; server metadata adopts the
+preview pixels. Edited copies enter the grid while retaining the editor and
+its source/navigation state. Folder-sync status records feed the same UI via
+file monitoring and a fallback poll; scans alone create no upload indication.
+
+Upload updates retain existing cells/pixels, and progress redraws only visible
+circles. Image/metadata work is restricted to the viewport plus one screen below;
+offscreen buckets wait for scrolling. Acknowledgement does not trigger a full-grid
+refresh. A private X11/software-GL delayed-response fixture measured about102ms
+from Ctrl+V to painted pixels/circle with8,000cached items (618ms before cell reuse
+and viewport scoping). These are controlled values, not production timings.
+
+92unit tests pass, including scope/account fences, metadata-window bounds,
+no-ACK-global-refresh and nonblocking rejection of replaced FIFOs in local Trash.
+Native delayed multipart/image/video/batch/sync/failure/retry checks pass with
+actual frame paint, retained cells, server pixel adoption and a500ms budget.
+Existing editor/markup/navigation/exit, six action targets, local/cloud Trash,
+file drop, viewer controls and cache/account/Open-With regressions pass. All
+writes during tests use generated files and fixture cloud accounts.
