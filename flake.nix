@@ -807,6 +807,10 @@
             inherit pkgs nixpkgs;
             zenosModule = self.nixosModules.default;
           };
+          gnome-workspace-indicator-vm = import ./tests/gnome-workspace-indicator-vm.nix {
+            inherit pkgs;
+            zenosModule = self.nixosModules.default;
+          };
           gdm-branding-vm = import ./tests/gdm-branding-vm.nix {
             inherit pkgs;
             zenosModule = self.nixosModules.default;

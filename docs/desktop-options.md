@@ -150,3 +150,10 @@ for the text/code formats that upstream GNOME otherwise sends to Builder,
 including JSON, XML and Markdown. Explicit user associations keep priority.
 These defaults live in the GNOME-specific profile, leaving other desktops' text
 editors and browser/file-manager associations alone.
+
+
+GNOME's Activities workspace indicator excludes outgoing dot actors from the
+workspace indices during removal animations. This prevents the active pill from
+vanishing after rapid workspace removal/addition; GNOME's inactive dot size and
+opacity remain unchanged. The shared GNOME overlay carries the maintained Shell
+source fix, covered by the animated `gnome-workspace-indicator-vm` check.

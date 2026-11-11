@@ -89,6 +89,14 @@ enable = enableOption {
     services.gnome.gnome-initial-setup.enable = false;
     nixpkgs.overlays = [
       (final: prev: {
+        gnome-shell = prev.gnome-shell.overrideAttrs (old: {
+          patches = (old.patches or [ ]) ++ [
+            (prev.fetchurl {
+              url = "https://github.com/zenos-n/gnome-shell/commit/f29518afb9387f56451993e83d6d326eafdd4003.patch";
+              hash = "sha256-8RY+0aSZQmd69RZgd4QTzRBSMb17MAu23nGm+VA0zi8=";
+            })
+          ];
+        });
         gdm = prev.gdm.overrideAttrs (old: {
           postInstall = (old.postInstall or "") + ''
             sed -i 's|^Exec=gnome-session$|Exec=gnome-session --session=gnome-login|' \
