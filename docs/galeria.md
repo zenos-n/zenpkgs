@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.12 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.13 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -509,7 +509,7 @@ and out-of-order success/failure. The first/second tile image morph test
 reproduces old side strips and verifies clipped cover rendering with the decoded
 texture aspect. Native viewer/editor/action regressions and 96 unit tests pass.
 
-Version 0.14.12 retains unchanged gallery cells during removal and rollback
+Version 0.14.13 retains unchanged gallery cells during removal and rollback
 reflows through the existing upload cell-reuse path. In an 8,000-item native
 fixture with held HTTP replies, repeated 2/20/200-file batches reduced median
 first paint from 163.53 ms to 101.72 ms. The 200-file median fell from 281.84 ms
@@ -523,3 +523,9 @@ and rollback remain intact. With8,000items, held HTTP replies and native pointer
 input, median first moving frame is31ms versus121ms in0.14.11. This is separate
 from subsequent gap filling. Video controls replace the Video stream picker
 with a Loop switch remembered across media and application launches.
+
+
+0.14.13 keeps the existing grid tree while applying worker plans, paints incoming
+thumbnails immediately and builds their native controls across frames. An8k
+fixture's median worst-flight frame gap fell66.44→36ms. Date grouping formats
+once per month:8k calculator time23.8→4.6ms, with unchanged row geometry.
