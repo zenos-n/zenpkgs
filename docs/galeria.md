@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.9 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.10 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -498,3 +498,13 @@ with 95 unit tests covering stability, writer detection and account isolation.
 
 Version 0.14.8 puts Fullscreen at the far right and uses a pencil icon for Edit.
 Editing retains its Done button.
+
+Version 0.14.10 starts removal snapshots and grid reflow synchronously from the
+action callback. Focus slides to the closest remaining file concurrently,
+including fullscreen. Pending server requests allow further optimistic removals
+and use separate I/O workers. Per-operation rollback preserves unrelated pending
+removals and rejects stale page reinsertions. Actual pointer/held-HTTP tests
+cover Archive and Trash in selection, focus and fullscreen with repeated actions
+and out-of-order success/failure. The first/second tile image morph test
+reproduces old side strips and verifies clipped cover rendering with the decoded
+texture aspect. Native viewer/editor/action regressions and 96 unit tests pass.
