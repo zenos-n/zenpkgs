@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.6 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.7 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -485,3 +485,13 @@ modules at build time to reduce cold-start latency. The native tests measure
 first visible feedback against a 400 ms budget with an 8,000-item library and
 a 64 MiB file. Tests use a fixture server and verify that originals and account
 preferences stay intact.
+
+
+Version 0.14.7 adds the fullscreen header gradient and moves Fullscreen, Download
+and Share beside Info and Edit. Archive and Trash animate before server
+acknowledgement, with rollback for rejected and partially completed actions.
+Automatic folder sync waits for ten seconds of unchanged size and modification
+time across scans and skips files open for writing on Linux. Details displays
+full local paths recorded by Galeria for the current Immich account. Native
+delayed-response, rollback, header rendering and local-path checks pass, along
+with 95 unit tests covering stability, writer detection and account isolation.
