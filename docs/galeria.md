@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.13 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.14 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -529,3 +529,14 @@ with a Loop switch remembered across media and application launches.
 thumbnails immediately and builds their native controls across frames. An8k
 fixture's median worst-flight frame gap fell66.44→36ms. Date grouping formats
 once per month:8k calculator time23.8→4.6ms, with unchanged row geometry.
+
+
+0.14.14 reduces frame work during archive/removal: existing check and owner
+maps survive, GTK measure/allocation share an interpolated frame, and only
+viewport reflow labels animate. Hidden cover opacity changes only at tier
+boundaries. New native controls continue building even after expensive layout.
+Single selection/focus and bulk full-flight tests now include263months.
+
+Worker plans also supply the item-index map, removing UI-wide tile/check
+renumbering. An opt-in Wayland check reads actual compositor presentation
+timestamps; repeated single/bulk fixtures presented every16.7ms onDP-2.
