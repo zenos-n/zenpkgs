@@ -5,6 +5,7 @@ pkgs.testers.runNixOSTest {
   node.pkgsReadOnly = false;
   nodes.machine = { ... }: {
     imports = [ zenosModule ];
+    nixpkgs.config.allowUnfree = true;
     zenos = {
       system.installed-base.enable = false;
       desktops.gnome = { enable = true; extraPackages.enable = false; };
@@ -21,12 +22,12 @@ pkgs.testers.runNixOSTest {
     machine.start()
     machine.wait_for_unit("display-manager.service")
     machine.wait_until_succeeds("systemctl --user --machine=gdm-greeter@.host is-active org.gnome.Shell@gdm.service", timeout=90)
-    machine.succeed("p=$(pgrep -u gdm-greeter -f '/bin/gnome-shell --mode=gdm' | head -1); tr '\\0' '\\n' < /proc/$p/environ | grep -qx 'DCONF_PROFILE=/etc/dconf/profile/gdm'")
+    machine.wait_until_succeeds("p=$(systemctl --user --machine=gdm-greeter@.host show org.gnome.Shell@gdm.service -p MainPID --value); tr '\\0' '\\n' < /proc/$p/environ | grep -x 'DCONF_PROFILE=/etc/dconf/profile/gdm' > /dev/null", timeout=30)
     # Read exactly the profile and persistent config directory used by the greeter.
     prefix = "env DCONF_PROFILE=/etc/dconf/profile/gdm XDG_CONFIG_HOME=/var/lib/gdm/seat0/config dconf read "
     assert machine.succeed(prefix + "/org/gnome/desktop/interface/accent-color").strip() == "'purple'"
     logo = machine.succeed(prefix + "/org/gnome/login-screen/logo").strip().strip("'")
-    assert logo.endswith("/share/icons/hicolor/scalable/apps/zenos.svg"), logo
+    assert logo.endswith("/share/pixmaps/zenos-gdm-symbolic.svg"), logo
     machine.succeed("test -r " + logo)
     machine.sleep(10)
     machine.screenshot("zenos-greeter")

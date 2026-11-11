@@ -67,7 +67,7 @@ enable = enableOption {
     }))
       ($lib.mkAfter [{
         settings = {
-          "org/gnome/login-screen".logo = "${$pkgs.byCategories.theming.system.zenos-branding}/share/icons/hicolor/scalable/apps/zenos.svg";
+          "org/gnome/login-screen".logo = "${$pkgs.byCategories.theming.system.zenos-branding}/share/pixmaps/zenos-gdm-symbolic.svg";
           "org/gnome/desktop/interface" = {
             accent-color = $path.defaultAccentColor;
             color-scheme = if $path.defaultDarkMode then "prefer-dark" else "prefer-light";

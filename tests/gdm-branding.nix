@@ -17,7 +17,7 @@ let
 in
 assert value defaults "org/gnome/desktop/interface" "accent-color" == "purple";
 assert value defaults "org/gnome/desktop/interface" "color-scheme" == "prefer-dark";
-assert value defaults "org/gnome/login-screen" "logo" == "${pkgs.zenos.byCategories.theming.system.zenos-branding}/share/icons/hicolor/scalable/apps/zenos.svg";
+assert value defaults "org/gnome/login-screen" "logo" == "${pkgs.zenos.byCategories.theming.system.zenos-branding}/share/pixmaps/zenos-gdm-symbolic.svg";
 assert value custom "org/gnome/desktop/interface" "accent-color" == "teal";
 assert value custom "org/gnome/desktop/interface" "color-scheme" == "prefer-light";
 assert value custom "org/gnome/login-screen" "logo" == "";

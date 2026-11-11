@@ -224589,7 +224589,7 @@
           "doromiert"
         ],
         "name": "ZenOS branding",
-        "packageVersion": "1.0.0",
+        "packageVersion": "1.0.1",
         "summary": "ZenOS logos for installed desktops",
         "tags": [
           "theme",
@@ -224640,7 +224640,7 @@
                     "parts": [
                       {
                         "type": "text",
-                        "value": "1.0.0"
+                        "value": "1.0.1"
                       }
                     ],
                     "type": "string"
@@ -224711,7 +224711,7 @@
                     "parts": [
                       {
                         "type": "text",
-                        "value": "\n    runHook preInstall\n    install -Dm644 data/icons/hicolor/scalable/apps/zenos.svg \\\n      \"$out/share/icons/hicolor/scalable/apps/zenos.svg\"\n    install -Dm644 data/icons/hicolor/symbolic/apps/zenos-symbolic.svg \\\n      \"$out/share/icons/hicolor/symbolic/apps/zenos-symbolic.svg\"\n    ln -s zenos.svg \"$out/share/icons/hicolor/scalable/apps/distributor-logo.svg\"\n    ln -s zenos-symbolic.svg \"$out/share/icons/hicolor/symbolic/apps/distributor-logo-symbolic.svg\"\n    runHook postInstall\n  "
+                        "value": "\n    runHook preInstall\n    install -Dm644 data/icons/hicolor/scalable/apps/zenos.svg \\\n      \"$out/share/icons/hicolor/scalable/apps/zenos.svg\"\n    install -Dm644 data/icons/hicolor/symbolic/apps/zenos-symbolic.svg \\\n      \"$out/share/icons/hicolor/symbolic/apps/zenos-symbolic.svg\"\n    # GDM loads a raw image, so its symbolic glyph needs a light foreground.\n    install -Dm644 data/icons/hicolor/symbolic/apps/zenos-symbolic.svg \\\n      \"$out/share/pixmaps/zenos-gdm-symbolic.svg\"\n    substituteInPlace \"$out/share/pixmaps/zenos-gdm-symbolic.svg\" \\\n      --replace-fail '#2E3436' '#F6F5F4' \\\n      --replace-fail '<svg width=\"16\" height=\"16\"' '<svg width=\"128\" height=\"128\"'\n    ln -s zenos.svg \"$out/share/icons/hicolor/scalable/apps/distributor-logo.svg\"\n    ln -s zenos-symbolic.svg \"$out/share/icons/hicolor/symbolic/apps/distributor-logo-symbolic.svg\"\n    runHook postInstall\n  "
                       }
                     ],
                     "type": "string"

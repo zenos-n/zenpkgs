@@ -983,17 +983,17 @@
     "source-setup": {
       "flake": false,
       "locked": {
-        "lastModified": 1793961386,
-        "narHash": "sha256-toenxcfZ/V/Ta/s4+Qncvcw4hk8dNnYWMVBoHvhmtVg=",
+        "lastModified": 1794395555,
+        "narHash": "sha256-+iecI3zpON6t0nhU7W6erhsOYCgECS1HHIv+PxCzq24=",
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "98830a2585f1c8c864c6501829702d6c6a20bb05",
+        "rev": "4be85332792b5f6e2830fdd3c8842492e48c585d",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "98830a2585f1c8c864c6501829702d6c6a20bb05",
+        "rev": "4be85332792b5f6e2830fdd3c8842492e48c585d",
         "type": "github"
       }
     },
