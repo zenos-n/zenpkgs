@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.8 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.9 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
