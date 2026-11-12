@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.14 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.15 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -540,3 +540,12 @@ Single selection/focus and bulk full-flight tests now include263months.
 Worker plans also supply the item-index map, removing UI-wide tile/check
 renumbering. An opt-in Wayland check reads actual compositor presentation
 timestamps; repeated single/bulk fixtures presented every16.7ms onDP-2.
+
+
+0.14.15 adds an off-by-default General→Storage option to move unchanged
+Folder sync originals to the device Trash after Immich confirms archive.
+Cleanup runs independently of optimistic motion; failed archive, unarchive,
+changed files, other accounts and device-copy-only associations retain files.
+Shift+A archives, Delete opens the normal Trash confirmation, Shift+L moves
+to Locked folder in selection and focus views. Text/editor/dialog/loading
+guards apply, and Delete never restores items already in Trash.
