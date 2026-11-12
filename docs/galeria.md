@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.15 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.16 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -549,3 +549,9 @@ changed files, other accounts and device-copy-only associations retain files.
 Shift+A archives, Delete opens the normal Trash confirmation, Shift+L moves
 to Locked folder in selection and focus views. Text/editor/dialog/loading
 guards apply, and Delete never restores items already in Trash.
+
+
+0.14.16 keeps gallery cells at least 64×64 logical pixels where the viewport
+allows it. Row capacity and proportional width allocation avoid thin strips
+and overflow; extreme thumbnails crop in the grid, while full-view aspect
+and originals remain unchanged. Worker, startup and native geometry agree.
