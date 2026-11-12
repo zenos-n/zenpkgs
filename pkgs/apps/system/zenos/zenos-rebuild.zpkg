@@ -4,7 +4,7 @@ _meta = {
   summary = "Rebuilds ZenOS from canonical ZCFG sources";
   description = ''Packages the secure configuration snapshot and rebuild workflow used by live and installed systems.'';
   zenosVersion = 1.0.0Nb;
-  packageVersion = "1.1.0";
+  packageVersion = "1.1.1";
   tags = [ "configuration" "system" ];
   maintainers = [ $m.doromiert ];
 };

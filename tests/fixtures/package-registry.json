@@ -6993,7 +6993,7 @@
           "doromiert"
         ],
         "name": "ZenOS rebuild",
-        "packageVersion": "1.1.0",
+        "packageVersion": "1.1.1",
         "summary": "Rebuilds ZenOS from canonical ZCFG sources",
         "tags": [
           "configuration",
