@@ -807,6 +807,10 @@
             inherit pkgs nixpkgs;
             zenosModule = self.nixosModules.default;
           };
+          forge-recorder-vm = import ./tests/forge-recorder-vm.nix {
+            inherit pkgs;
+            zenosModule = self.nixosModules.default;
+          };
           gnome-workspace-indicator-vm = import ./tests/gnome-workspace-indicator-vm.nix {
             inherit pkgs;
             zenosModule = self.nixosModules.default;

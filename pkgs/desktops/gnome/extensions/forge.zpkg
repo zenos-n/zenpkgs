@@ -6,7 +6,7 @@ _meta = {
     Forge tiling window manager extension built from GNOME 50-compatible upstream
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "0-unstable-2026-06-25";
+  packageVersion = "0-unstable-2026-11-13";
   tags = [ "desktops" "gnome" "extensions" ];
   license = $l.gpl3Only;
 };

@@ -227693,7 +227693,7 @@
         "license": "$l.gpl3Only",
         "zenosVersion": "1.0.0",
         "id": "unknown.forge",
-        "packageVersion": "0-unstable-2026-06-25"
+        "packageVersion": "0-unstable-2026-11-13"
       },
       "provider": {
         "kind": "build",

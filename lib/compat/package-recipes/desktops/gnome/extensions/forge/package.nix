@@ -4,19 +4,20 @@
   git,
   glib,
   gnumake,
+  gjs,
   lib,
   stdenvNoCC,
 }:
 
 stdenvNoCC.mkDerivation {
   pname = "forge";
-  version = "0-unstable-2026-06-25";
+  version = "0-unstable-2026-11-13";
 
   src = fetchFromGitHub {
-    owner = "forge-ext";
+    owner = "zenos-n";
     repo = "forge";
-    rev = "46736af63815b46cadeb1db2988f04d60e6601b8";
-    hash = "sha256-bdoD5k33l0SwwuEmd+EvB0FiVJdbtIMeBrUAjRhSg2s=";
+    rev = "102a8ef05d05218ce5b82fc5a47b3616a762c0d4";
+    hash = "sha256-Y+zW5GXaGuUPytP/C9k9Y/d84OG8N/+60bM3hos7OWs=";
   };
 
   nativeBuildInputs = [
@@ -24,12 +25,20 @@ stdenvNoCC.mkDerivation {
     git
     glib
     gnumake
+    gjs
   ];
 
   postPatch = ''
     substituteInPlace lib/shared/theme.js \
       --replace-fail 'this.configMgr.stylesheetFileName + ".bak"' 'configCss.get_path() + ".bak"' \
       --replace-fail 'Gio.FileCopyFlags.OVERWRITE, null, null' '(Gio.FileCopyFlags.OVERWRITE | Gio.FileCopyFlags.TARGET_DEFAULT_PERMS), null, null'
+  '';
+
+  doCheck = true;
+  checkPhase = ''
+    runHook preCheck
+    gjs -m tests/window-tracking.js
+    runHook postCheck
   '';
 
   buildPhase = ''

@@ -157,3 +157,11 @@ workspace indices during removal animations. This prevents the active pill from
 vanishing after rapid workspace removal/addition; GNOME's inactive dot size and
 opacity remain unchanged. The shared GNOME overlay carries the maintained Shell
 source fix, covered by the animated `gnome-workspace-indicator-vm` check.
+
+
+Forge auto-splits only for a new window eligible for tiling. Internal window types,
+hidden taskbar helpers, dialogs/transients, fixed-size windows, floating overrides
+and untiled workspaces do not split the focused app container. Duplicate tracking
+events also leave the layout unchanged. The maintained Forge source and
+`forge-recorder-vm` regression check cover recorder-style helper lifecycles while
+retaining normal application tiling.
