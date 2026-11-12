@@ -915,11 +915,11 @@
     "source-rebuild": {
       "flake": false,
       "locked": {
-        "lastModified": 1794497535,
-        "narHash": "sha256-CpTDrXxhxjoAj5jNLJYEq2Epd9jQkD/BzhG8XTLGaGs=",
+        "lastModified": 1794497857,
+        "narHash": "sha256-jjZgQ1xXTJarZbeF7uR387F9ejpQDBTtKBWCdp9sVf0=",
         "owner": "zenos-n",
         "repo": "zenos-rebuild",
-        "rev": "b65892259805f989af0f1636eb8a778488edb770",
+        "rev": "d9bcf28522a1eed9affb9e80e9cd5d57f3c9b210",
         "type": "github"
       },
       "original": {
