@@ -1,0 +1,434 @@
+{ ... }:
+{
+  dependenciesDeclared = false;
+  descriptorVersion = "zenlang.semantic/2";
+  grammarVersion = "1.0.0Na";
+  id = "pkgs.unknown.git-together";
+  imports = [ ];
+  irVersion = "1.0.0Na";
+  kind = "zpkg";
+  location = "/nix/store/3ni594f60hm22hcrazxd35dmk7pwi61m-zenpkgs-dsl-source/pkgs/apps/development/git-together.zpkg:15:8";
+  metadata = {
+    description = {
+      multiline = true;
+      parts = [
+        {
+          type = "text";
+          value = "\n    Better commit attribution while pairing without messing with your git workflow.\n  ";
+        }
+      ];
+      type = "string";
+    };
+    id = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "unknown.git-together";
+        }
+      ];
+      type = "string";
+    };
+    license = {
+      name = "l";
+      path = [
+        {
+          kind = "identifier";
+          value = "mit";
+        }
+      ];
+      type = "variable";
+    };
+    maintainers = {
+      items = [
+        {
+          name = "m";
+          path = [
+            {
+              kind = "identifier";
+              value = "doromiert";
+            }
+          ];
+          type = "variable";
+        }
+      ];
+      type = "list";
+    };
+    name = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "git-together";
+        }
+      ];
+      type = "string";
+    };
+    packageVersion = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "0.1.0-alpha.26";
+        }
+      ];
+      type = "string";
+    };
+    summary = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "Better commit attribution while pairing without messing with your git workflow";
+        }
+      ];
+      type = "string";
+    };
+    tags = {
+      items = [
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "development";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "git";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "pair-programming";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "coauthors";
+            }
+          ];
+          type = "string";
+        }
+      ];
+      type = "list";
+    };
+    zenosVersion = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "1.0.0";
+        }
+      ];
+      type = "string";
+    };
+  };
+  name = "git-together";
+  packageImport = {
+    name = "pkgs";
+    path = [
+      {
+        kind = "identifier";
+        value = "legacy";
+      }
+      {
+        kind = "identifier";
+        value = "git-together";
+      }
+    ];
+    type = "variable";
+  };
+  provider = {
+    expression = {
+      name = "pkgs";
+      path = [
+        {
+          kind = "identifier";
+          value = "legacy";
+        }
+        {
+          kind = "identifier";
+          value = "git-together";
+        }
+      ];
+      type = "variable";
+    };
+    kind = "import";
+  };
+  statements = [
+    {
+      operator = "=";
+      target = [
+        {
+          kind = "identifier";
+          value = "_meta";
+        }
+      ];
+      type = "assignment";
+      value = {
+        recursive = false;
+        statements = [
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "id";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "unknown.git-together";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "name";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "git-together";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "summary";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "Better commit attribution while pairing without messing with your git workflow";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "description";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = true;
+              parts = [
+                {
+                  type = "text";
+                  value = "\n    Better commit attribution while pairing without messing with your git workflow.\n  ";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "zenosVersion";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "1.0.0";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "packageVersion";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "0.1.0-alpha.26";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "tags";
+              }
+            ];
+            type = "assignment";
+            value = {
+              items = [
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "development";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "git";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "pair-programming";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "coauthors";
+                    }
+                  ];
+                  type = "string";
+                }
+              ];
+              type = "list";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "maintainers";
+              }
+            ];
+            type = "assignment";
+            value = {
+              items = [
+                {
+                  name = "m";
+                  path = [
+                    {
+                      kind = "identifier";
+                      value = "doromiert";
+                    }
+                  ];
+                  type = "variable";
+                }
+              ];
+              type = "list";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "license";
+              }
+            ];
+            type = "assignment";
+            value = {
+              name = "l";
+              path = [
+                {
+                  kind = "identifier";
+                  value = "mit";
+                }
+              ];
+              type = "variable";
+            };
+          }
+        ];
+        type = "attr-set";
+      };
+    }
+    {
+      package = {
+        name = "pkgs";
+        path = [
+          {
+            kind = "identifier";
+            value = "legacy";
+          }
+          {
+            kind = "identifier";
+            value = "git-together";
+          }
+        ];
+        type = "variable";
+      };
+      type = "package-import";
+    }
+  ];
+  target = [
+    "unknown"
+    "git-together"
+  ];
+}

@@ -1,0 +1,434 @@
+{ ... }:
+{
+  dependenciesDeclared = false;
+  descriptorVersion = "zenlang.semantic/2";
+  grammarVersion = "1.0.0Na";
+  id = "pkgs.unknown.ciderpress2";
+  imports = [ ];
+  irVersion = "1.0.0Na";
+  kind = "zpkg";
+  location = "/nix/store/3ni594f60hm22hcrazxd35dmk7pwi61m-zenpkgs-dsl-source/pkgs/apps/archives/ciderpress2.zpkg:17:8";
+  metadata = {
+    description = {
+      multiline = true;
+      parts = [
+        {
+          type = "text";
+          value = "\n    CiderPress 2 is a file archive utility for Apple II disk images and file\n    archives. It can extract files from disk images and file archives, and\n    create new archives.\n  ";
+        }
+      ];
+      type = "string";
+    };
+    id = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "unknown.ciderpress2";
+        }
+      ];
+      type = "string";
+    };
+    license = {
+      name = "l";
+      path = [
+        {
+          kind = "identifier";
+          value = "asl20";
+        }
+      ];
+      type = "variable";
+    };
+    maintainers = {
+      items = [
+        {
+          name = "m";
+          path = [
+            {
+              kind = "identifier";
+              value = "doromiert";
+            }
+          ];
+          type = "variable";
+        }
+      ];
+      type = "list";
+    };
+    name = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "CiderPress II";
+        }
+      ];
+      type = "string";
+    };
+    packageVersion = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "1.1.0";
+        }
+      ];
+      type = "string";
+    };
+    summary = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "File archive utility for Apple II disk images and file archives";
+        }
+      ];
+      type = "string";
+    };
+    tags = {
+      items = [
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "archives";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "apple-ii";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "disk-images";
+            }
+          ];
+          type = "string";
+        }
+        {
+          multiline = false;
+          parts = [
+            {
+              type = "text";
+              value = "retro";
+            }
+          ];
+          type = "string";
+        }
+      ];
+      type = "list";
+    };
+    zenosVersion = {
+      multiline = false;
+      parts = [
+        {
+          type = "text";
+          value = "1.0.0";
+        }
+      ];
+      type = "string";
+    };
+  };
+  name = "ciderpress2";
+  packageImport = {
+    name = "pkgs";
+    path = [
+      {
+        kind = "identifier";
+        value = "legacy";
+      }
+      {
+        kind = "identifier";
+        value = "ciderpress2";
+      }
+    ];
+    type = "variable";
+  };
+  provider = {
+    expression = {
+      name = "pkgs";
+      path = [
+        {
+          kind = "identifier";
+          value = "legacy";
+        }
+        {
+          kind = "identifier";
+          value = "ciderpress2";
+        }
+      ];
+      type = "variable";
+    };
+    kind = "import";
+  };
+  statements = [
+    {
+      operator = "=";
+      target = [
+        {
+          kind = "identifier";
+          value = "_meta";
+        }
+      ];
+      type = "assignment";
+      value = {
+        recursive = false;
+        statements = [
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "id";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "unknown.ciderpress2";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "name";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "CiderPress II";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "summary";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "File archive utility for Apple II disk images and file archives";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "description";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = true;
+              parts = [
+                {
+                  type = "text";
+                  value = "\n    CiderPress 2 is a file archive utility for Apple II disk images and file\n    archives. It can extract files from disk images and file archives, and\n    create new archives.\n  ";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "zenosVersion";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "1.0.0";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "packageVersion";
+              }
+            ];
+            type = "assignment";
+            value = {
+              multiline = false;
+              parts = [
+                {
+                  type = "text";
+                  value = "1.1.0";
+                }
+              ];
+              type = "string";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "tags";
+              }
+            ];
+            type = "assignment";
+            value = {
+              items = [
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "archives";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "apple-ii";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "disk-images";
+                    }
+                  ];
+                  type = "string";
+                }
+                {
+                  multiline = false;
+                  parts = [
+                    {
+                      type = "text";
+                      value = "retro";
+                    }
+                  ];
+                  type = "string";
+                }
+              ];
+              type = "list";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "maintainers";
+              }
+            ];
+            type = "assignment";
+            value = {
+              items = [
+                {
+                  name = "m";
+                  path = [
+                    {
+                      kind = "identifier";
+                      value = "doromiert";
+                    }
+                  ];
+                  type = "variable";
+                }
+              ];
+              type = "list";
+            };
+          }
+          {
+            operator = "=";
+            target = [
+              {
+                kind = "identifier";
+                value = "license";
+              }
+            ];
+            type = "assignment";
+            value = {
+              name = "l";
+              path = [
+                {
+                  kind = "identifier";
+                  value = "asl20";
+                }
+              ];
+              type = "variable";
+            };
+          }
+        ];
+        type = "attr-set";
+      };
+    }
+    {
+      package = {
+        name = "pkgs";
+        path = [
+          {
+            kind = "identifier";
+            value = "legacy";
+          }
+          {
+            kind = "identifier";
+            value = "ciderpress2";
+          }
+        ];
+        type = "variable";
+      };
+      type = "package-import";
+    }
+  ];
+  target = [
+    "unknown"
+    "ciderpress2"
+  ];
+}
