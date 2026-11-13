@@ -95,6 +95,10 @@ enable = enableOption {
               url = "https://github.com/zenos-n/gnome-shell/commit/f29518afb9387f56451993e83d6d326eafdd4003.patch";
               hash = "sha256-8RY+0aSZQmd69RZgd4QTzRBSMb17MAu23nGm+VA0zi8=";
             })
+            (prev.fetchurl {
+              url = "https://github.com/zenos-n/gnome-shell/commit/6a2695b9c015e2e5a1eee63e15ab509d87359b2c.patch";
+              hash = "sha256-Evonj3c27bKIST4cS8ekjDJ4xtupsclK9DexKU2T5kc=";
+            })
           ];
         });
         gdm = prev.gdm.overrideAttrs (old: {

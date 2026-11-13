@@ -165,3 +165,11 @@ and untiled workspaces do not split the focused app container. Duplicate trackin
 events also leave the layout unchanged. The maintained Forge source and
 `forge-recorder-vm` regression check cover recorder-style helper lifecycles while
 retaining normal application tiling.
+
+
+Workspace dots settle their grow/shrink animations when a parent is detached.
+Cancelled incoming dots restore full actor scale; outgoing dots are removed even
+when their transition is stopped. This prevents tiny/invisible or stale dots when
+startup panel extensions reparent the panel. Normal inactive styling is retained.
+The native VM check covers styled parent removal/re-addition at zero/partial grow
+and partial shrink, alongside the earlier workspace-index regression.

@@ -6,6 +6,7 @@ let
     echo '{"uuid":"workspace-probe@zenos.test","name":"Workspace test","description":"VM-only probe","shell-version":["50"]}' > "$dir/metadata.json"
     cat > "$dir/extension.js" <<'JS'
     import GLib from 'gi://GLib';
+    import St from 'gi://St';
     import * as Main from 'resource:///org/gnome/shell/ui/main.js';
     import {Extension} from 'resource:///org/gnome/shell/extensions/extension.js';
     const delay = ms => new Promise(resolve => GLib.timeout_add(GLib.PRIORITY_DEFAULT, ms, () => {
@@ -20,8 +21,17 @@ let
         await delay(2000);
         const original = Main.panel.statusArea.activities.get_first_child();
         const widget = new original.constructor();
-        Main.uiGroup.add_child(widget);
-        widget.set_position(200, 100);
+        const panel = new St.BoxLayout({name:'panel', width:240, height:32});
+        const button = new St.Bin({name:'panelActivities', style_class:'panel-button'});
+        button.set_child(widget);
+        panel.add_child(button);
+        panel.set_position(200, 100);
+        Main.uiGroup.add_child(panel);
+        const detach = () => {
+          const parent = panel.get_parent();
+          parent.remove_child(panel);
+          parent.add_child(panel);
+        };
         try {
           // Use the actual Shell actors without changing the session's workspaces.
           widget._workspacesAdjustment = {upper: 3, value: 0};
@@ -38,21 +48,50 @@ let
           const immediateExpansion = active.expansion;
           await delay(800);
           const dots = widget.get_children().map(d => ({expansion:d.expansion, scale:d.scale_x, destroying:d.destroying}));
-          // Hiding the panel during an animation must not strand a shrunken dot.
-          active.scaleIn();
+          // Detaching a parent stops transitions recursively; hiding alone does not.
+          widget._workspacesAdjustment.upper = 1;
+          widget._workspacesAdjustment.value = 0;
+          widget._recalculateDots();
+          await delay(800);
+          widget._workspacesAdjustment.upper = 2;
+          widget._recalculateDots();
+          await delay(100);
+          detach();
+          widget._workspacesAdjustment.upper = 3;
+          widget._recalculateDots();
+          await delay(800);
+          const middle = widget.get_children()[1];
+          const afterDetachMid = middle.scale_x;
+          const dotSize = middle._dot.get_size();
+          middle.scaleIn();
+          detach();
+          await delay(100);
+          const afterDetachZero = middle.scale_x;
+          middle.scaleIn();
           await delay(100);
           widget.hide();
           await delay(100);
           widget.show();
           await delay(600);
-          const afterHidden = active.scale_x;
-          active.scaleOutAndDestroy();
+          const afterHidden = middle.scale_x;
+          widget._workspacesAdjustment.upper = 2;
+          widget._recalculateDots();
           await delay(100);
-          widget.hide();
+          detach();
           await delay(600);
-          GLib.file_set_contents('/tmp/workspace-result', JSON.stringify({dots, immediateExpansion, feedbackMs, afterHidden, remaining:widget.get_children().length}));
+          const remainingAfterDetach = widget.get_children().length;
+          // Reversing scale-in must not interfere with scale-out settlement.
+          widget._workspacesAdjustment.upper = 3;
+          widget._recalculateDots();
+          await delay(100);
+          widget._workspacesAdjustment.upper = 2;
+          widget._recalculateDots();
+          await delay(100);
+          detach();
+          await delay(600);
+          GLib.file_set_contents('/tmp/workspace-result', JSON.stringify({dots, immediateExpansion, feedbackMs, afterHidden, afterDetachMid, afterDetachZero, dotSize, remainingAfterDetach, remaining:widget.get_children().length}));
         } finally {
-          widget.destroy();
+          panel.destroy();
         }
       }
       disable() {}
@@ -99,6 +138,10 @@ in pkgs.testers.runNixOSTest {
     assert result["immediateExpansion"] == 1, result
     assert result["feedbackMs"] < 400, result
     assert result["afterHidden"] == 1, result
-    assert result["remaining"] == 1, result
+    assert result["dotSize"][0] >= 5 and result["dotSize"][1] >= 5, result
+    assert result["afterDetachMid"] == 1, result
+    assert result["afterDetachZero"] == 1, result
+    assert result["remainingAfterDetach"] == 2, result
+    assert result["remaining"] == 2, result
   '';
 }
