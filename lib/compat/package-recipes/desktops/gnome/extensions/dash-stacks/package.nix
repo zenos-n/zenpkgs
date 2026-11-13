@@ -7,19 +7,14 @@
 
 stdenvNoCC.mkDerivation {
   pname = "dash-stacks";
-  version = "0-unstable-2026-08-30";
+  version = "0-unstable-2026-11-13";
 
   src = fetchFromGitHub {
     owner = "doromiert";
-    repo = "dash-stacks-doromiert.neg-zero.com";
-    rev = "eb2dc300850b55e738e05209d2a4dc34fc5e3639";
-    hash = "sha256-2oyDm5wI4AEceh2wSqwzhMYB1NwRcY8heNNbpQOU0gA=";
+    repo = "dash-stacks";
+    rev = "b936451b92f172c660b668762a34dd66be98a2a0";
+    hash = "sha256-Ph0YDvAIBQkcffa0cVHV1jsdzWSZI65x/5B5KDk5P2M=";
   };
-
-  patches = [
-    ./gnome-50.patch
-    ./standard-icons.patch
-  ];
 
   nativeBuildInputs = [ glib ];
 

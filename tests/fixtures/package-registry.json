@@ -227628,7 +227628,7 @@
         "license": "$l.napalm",
         "zenosVersion": "1.0.0",
         "id": "com.neg-zero.dash-stacks",
-        "packageVersion": "0-unstable-2026-08-30"
+        "packageVersion": "0-unstable-2026-11-13"
       },
       "provider": {
         "kind": "build",

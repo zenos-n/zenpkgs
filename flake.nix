@@ -811,6 +811,10 @@
             inherit pkgs;
             zenosModule = self.nixosModules.default;
           };
+          dash-stacks-vm = import ./tests/dash-stacks-vm.nix {
+            inherit pkgs;
+            zenosModule = self.nixosModules.default;
+          };
           gnome-workspace-indicator-vm = import ./tests/gnome-workspace-indicator-vm.nix {
             inherit pkgs;
             zenosModule = self.nixosModules.default;

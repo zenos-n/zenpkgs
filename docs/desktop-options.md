@@ -173,3 +173,17 @@ when their transition is stopped. This prevents tiny/invisible or stale dots whe
 startup panel extensions reparent the panel. Normal inactive styling is retained.
 The native VM check covers styled parent removal/re-addition at zero/partial grow
 and partial shrink, alongside the earlier workspace-index regression.
+
+## Dash Stacks folder pins
+
+The Dash Stacks package supports app-grid folders alongside existing directory
+stacks. Right-click a GNOME app folder and choose Pin to Dock; use Unpin from
+Dock on its dock context menu to restore it to the app grid. Folder settings,
+app membership, category/exclusion rules and search remain managed by GNOME.
+The per-user extension setting `pinned-app-folders` stores only folder IDs.
+Disabling the extension restores the grid without deleting stored pins.
+
+`nix build .#checks.x86_64-linux.dash-stacks-vm` exercises the actual GNOME50
+folder context menu, pin/unpin, native dialog, folder edits, missing/duplicate
+pins, empty-folder recovery, disable/re-enable and square actor allocations.
+The fixture measures pin feedback against the400ms responsiveness limit.

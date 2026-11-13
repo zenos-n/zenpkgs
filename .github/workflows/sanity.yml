@@ -94,7 +94,7 @@ jobs:
         shell: bash
         run: |
           failed=()
-          checks=(steam-gamescope mutter-touch forge-recorder-vm gnome-workspace-indicator-vm gnome-cursor blankbox-package blankbox-module application-program-options registry-contract registry-counts package-paths registry-build-providers
+          checks=(steam-gamescope mutter-touch forge-recorder-vm dash-stacks-vm gnome-workspace-indicator-vm gnome-cursor blankbox-package blankbox-module application-program-options registry-contract registry-counts package-paths registry-build-providers
             registry-output-ownership registry-nzportable-identity registry-path-identities
             registry-invalid-identities registry-structure-exposure
             registry-metadata-defaults public-package-outputs
