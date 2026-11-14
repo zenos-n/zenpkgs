@@ -34,6 +34,6 @@ stacks = {
   _meta = {
     type = $type.list [ ($type.set [ ($type.either [ $type.string $type.bool ]) ]) ];
     default = [ ];
-    description = ''Folder entries with name, path, icon and autoIcon fields.'';
+    description = ''Directory or app-folder entries with name, path or appFolder, icon and autoIcon fields.'';
   };
 };

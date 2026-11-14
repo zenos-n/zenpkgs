@@ -176,14 +176,19 @@ and partial shrink, alongside the earlier workspace-index regression.
 
 ## Dash Stacks folder pins
 
-The Dash Stacks package supports app-grid folders alongside existing directory
-stacks. Right-click a GNOME app folder and choose Pin to Dock; use Unpin from
-Dock on its dock context menu to restore it to the app grid. Folder settings,
-app membership, category/exclusion rules and search remain managed by GNOME.
-The per-user extension setting `pinned-app-folders` stores only folder IDs.
-Disabling the extension restores the grid without deleting stored pins.
+App folders and directory folders share the existing stack UI and `stacks` list.
+An `appFolder` reference replaces `path` for a GNOME app folder. Right-click an
+app-grid folder and choose Pin to Dock, or drag it into the dock. Right-click
+Unpin from Dock or drag it back to the grid to restore it. Drag stacks within
+their section to reorder them. A folder item in a directory popup can also be
+dragged into the dock; removing a stack never deletes files.
 
-`nix build .#checks.x86_64-linux.dash-stacks-vm` exercises the actual GNOME50
-folder context menu, pin/unpin, native dialog, folder edits, missing/duplicate
-pins, empty-folder recovery, disable/re-enable and square actor allocations.
-The fixture measures pin feedback against the400ms responsiveness limit.
+Show Folder Contents (`autoIcon`) toggles the existing preview versus an icon
+for either kind. Both open the same stack popup and use the normal dock's theme
+and tooltip hooks. Earlier `pinned-app-folders` preferences migrate once without
+replacing existing icon/contents choices. GNOME retains native app membership,
+category/exclusion rules, parental controls and search. Missing or empty app
+folders remain remembered and reappear when populated.
+
+The `dash-stacks-vm` check compares real normal/stack pins, menu and DND actions,
+shared controls/popup, migration/lifecycle and square bounds under scaling.
