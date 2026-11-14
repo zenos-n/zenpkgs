@@ -13,12 +13,19 @@ let
       resolve();
       return GLib.SOURCE_REMOVE;
     }));
+    const waitFor = async (condition, message) => {
+      const deadline = GLib.get_monotonic_time() + 15_000_000;
+      while (!condition()) {
+        if (GLib.get_monotonic_time() >= deadline) throw new Error(message);
+        await delay(20);
+      }
+    };
     export default class Probe extends Extension {
       enable() {
         this.run().catch(e => GLib.file_set_contents('/tmp/workspace-result', JSON.stringify({error:String(e), stack:e.stack})));
       }
       async run() {
-        await delay(2000);
+        await waitFor(() => !Main.layoutManager._startingUp, 'Shell startup did not finish');
         const original = Main.panel.statusArea.activities.get_first_child();
         const widget = new original.constructor();
         const panel = new St.BoxLayout({name:'panel', width:240, height:32});
@@ -33,10 +40,13 @@ let
           parent.add_child(panel);
         };
         try {
+          await waitFor(() => widget.mapped, 'probe was not mapped');
+          const settled = count => widget.get_children().length === count &&
+            widget.get_children().every(d => !d.destroying && d.scale_x === 1 && d.scale_y === 1);
           // Use the actual Shell actors without changing the session's workspaces.
           widget._workspacesAdjustment = {upper: 3, value: 0};
           widget._recalculateDots();
-          await delay(800);
+          await waitFor(() => settled(3), 'initial dots did not settle');
           widget._workspacesAdjustment.upper = 1;
           widget._recalculateDots();
           widget._workspacesAdjustment.upper = 2;
@@ -46,39 +56,39 @@ let
           const active = widget._getActiveIndicators()[1];
           const feedbackMs = (GLib.get_monotonic_time() - started) / 1000;
           const immediateExpansion = active.expansion;
-          await delay(800);
+          await waitFor(() => settled(2), 'replacement dots did not settle');
           const dots = widget.get_children().map(d => ({expansion:d.expansion, scale:d.scale_x, destroying:d.destroying}));
           // Detaching a parent stops transitions recursively; hiding alone does not.
           widget._workspacesAdjustment.upper = 1;
           widget._workspacesAdjustment.value = 0;
           widget._recalculateDots();
-          await delay(800);
+          await waitFor(() => settled(1), 'single dot did not settle');
           widget._workspacesAdjustment.upper = 2;
           widget._recalculateDots();
           await delay(100);
           detach();
           widget._workspacesAdjustment.upper = 3;
           widget._recalculateDots();
-          await delay(800);
+          await waitFor(() => settled(3), 'detached dots did not settle');
           const middle = widget.get_children()[1];
           const afterDetachMid = middle.scale_x;
           const dotSize = middle._dot.get_size();
           middle.scaleIn();
           detach();
-          await delay(100);
+          await waitFor(() => settled(3), 'scale-in cancellation did not settle');
           const afterDetachZero = middle.scale_x;
           middle.scaleIn();
           await delay(100);
           widget.hide();
           await delay(100);
           widget.show();
-          await delay(600);
+          await waitFor(() => settled(3), 'shown dots did not settle');
           const afterHidden = middle.scale_x;
           widget._workspacesAdjustment.upper = 2;
           widget._recalculateDots();
           await delay(100);
           detach();
-          await delay(600);
+          await waitFor(() => settled(2), 'scale-out cancellation did not settle');
           const remainingAfterDetach = widget.get_children().length;
           // Reversing scale-in must not interfere with scale-out settlement.
           widget._workspacesAdjustment.upper = 3;
@@ -88,7 +98,7 @@ let
           widget._recalculateDots();
           await delay(100);
           detach();
-          await delay(600);
+          await waitFor(() => settled(2), 'reversed scale-out did not settle');
           GLib.file_set_contents('/tmp/workspace-result', JSON.stringify({dots, immediateExpansion, feedbackMs, afterHidden, afterDetachMid, afterDetachZero, dotSize, remainingAfterDetach, remaining:widget.get_children().length}));
         } finally {
           panel.destroy();

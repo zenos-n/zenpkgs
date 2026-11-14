@@ -116,6 +116,14 @@ jobs:
             exit 1
           fi
 
+      - name: Preserve failed VM diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: gnome-vm-logs
+          path: ${{ runner.temp }}/*-vm.log
+          if-no-files-found: ignore
+
       - name: Verify unquoted package selectors
         run: |
           nix build --dry-run --no-link --quiet .#com.neg-zero.zenos-setup

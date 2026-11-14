@@ -36,7 +36,10 @@ let
         this.run().catch(e => GLib.file_set_contents('/tmp/forge-result', JSON.stringify({error:String(e), stack:e.stack})));
       }
       async run() {
-        await delay(3000);
+        for (let i = 0; Main.layoutManager._startingUp; i++) {
+          if (i === 400) throw new Error('Shell startup did not finish');
+          await delay(50);
+        }
         const forge = Main.extensionManager.lookup('forge@jmmaranan.com').stateObj;
         const wm = forge.extWm;
         forge.settings.set_boolean('tiling-mode-enabled', true);
@@ -55,7 +58,7 @@ let
           return launcher.spawnv(['${python}/bin/python3', '${app}', title, mode]);
         };
         const waitWindow = async title => {
-          for (let i = 0; i < 100; i++) {
+          for (let i = 0; i < 400; i++) {
             const w = windows().find(w => w.get_title() === title);
             if (w) return w;
             await delay(50);
