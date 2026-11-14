@@ -933,11 +933,11 @@
     "source-rebuild": {
       "flake": false,
       "locked": {
-        "lastModified": 1794497857,
-        "narHash": "sha256-jjZgQ1xXTJarZbeF7uR387F9ejpQDBTtKBWCdp9sVf0=",
+        "lastModified": 1794656048,
+        "narHash": "sha256-VHMcj+Bq/TsK0g5oygT8LvmJ9LuAzr8zTqgBhsmi1yU=",
         "owner": "zenos-n",
         "repo": "zenos-rebuild",
-        "rev": "d9bcf28522a1eed9affb9e80e9cd5d57f3c9b210",
+        "rev": "8c47ab1397a5bcd3b2d7826d490e022b7c959901",
         "type": "github"
       },
       "original": {
