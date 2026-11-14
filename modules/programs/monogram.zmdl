@@ -1,0 +1,25 @@
+_meta = {
+  name = "Monogram";
+  summary = "Install Monogram and support LAN device sync";
+  zenosVersion = 1.0.0Nb;
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+enable = enableOption {
+  _meta.summary = "Enable Monogram; system scope also permits LAN pairing and sync";
+  s! {
+    environment.systemPackages = [ $path.package ];
+    networking.firewall.allowedTCPPorts = [ 45950 ];
+    networking.firewall.allowedUDPPorts = [ 45950 ];
+  };
+  u! {
+    home.packages = [ $path.package ];
+  };
+};
+
+package._meta = {
+  type = $type.package;
+  default = $pkgs.byCategories.apps.communication.monogram;
+  summary = "Monogram desktop package";
+};

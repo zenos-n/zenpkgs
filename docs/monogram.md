@@ -11,6 +11,16 @@ Select it for one user:
 users.doromiert.packages.com.neg-zero.monogram = true;
 ```
 
+For LAN pairing/sync on a firewall-enabled host, select system integration:
+
+```zenos
+system.programs.monogram.enable = true;
+```
+
+It installs the canonical package and permits TCP/UDP 45950. User-scoped program
+enablement installs the app without changing host firewall rules. Pairing still
+requires explicit QR/TOTP authentication in the app.
+
 The executable is `monogram-desktop`. The upstream desktop/application ID remains
 `com.negzero.MonogramDesktop`, preserving existing desktop integration and data.
 The application stores credentials in Secret Service and supports the shared
