@@ -1,0 +1,22 @@
+_meta = {
+  id = "com.neg-zero.monogram";
+  name = "Monogram";
+  summary = "Native GNOME XMPP client with encrypted messaging and LAN device sync";
+  description = ''
+    Monogram is a Rust/GTK4/libadwaita XMPP client with OMEMO encryption,
+    replies, reactions, media, custom sticker and emoji packs, folders,
+    KeePassXC integration and authenticated QR or TOTP LAN device pairing.
+    Device sync interoperates with Monogram Android. The desktop stores and
+    relays encrypted wallet recovery capsules; a production spending engine
+    is not available yet.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.2.0";
+  tags = [ "communication" "messaging" "xmpp" "privacy" "gnome" "gtk4" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+build = $pkgs.legacy.callPackage ($lib.zenPackageSources.monogram + "/default.nix") {
+  pkgs = $pkgs.legacy;
+};

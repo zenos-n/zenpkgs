@@ -41,6 +41,7 @@
       url = "github:zenos-n/plymouth-theme/1.0.0";
       flake = false;
     };
+    source-monogram = { url = "github:doromiert/monogram-desktop/dd195a3711606428a0cbb0717158bac8932ff128"; flake = false; };
     source-keyslot = { url = "github:zenos-n/keyslot/ef688b064a429c0190b99b2359745857355207b6"; flake = false; };
     source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/79ab807e64a0f8b3d9748a78df300439b5a8e4f7"; flake = false; };
     source-galeria = { url = "github:zenos-n/galeria/325d5e31b084718e164531f375d756ea50778996"; flake = false; };
@@ -484,6 +485,7 @@
               zenfs = final.zenos.byCategories.system.zenfs;
             };
             zenPackageSources = {
+              monogram = inputs.source-monogram.outPath;
               keyslot = inputs.source-keyslot.outPath;
               keyslotExtension = inputs.source-keyslot-extension.outPath;
               nzportable = inputs.source-nzportable.outPath;

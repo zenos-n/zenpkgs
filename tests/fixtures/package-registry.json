@@ -230608,6 +230608,124 @@
         "wvhulle",
         "bootvine"
       ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "communication",
+        "monogram"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.monogram",
+      "meta": {
+        "description": "\n    Monogram is a Rust/GTK4/libadwaita XMPP client with OMEMO encryption,\n    replies, reactions, media, custom sticker and emoji packs, folders,\n    KeePassXC integration and authenticated QR or TOTP LAN device pairing.\n    Device sync interoperates with Monogram Android. The desktop stores and\n    relays encrypted wallet recovery capsules; a production spending engine\n    is not available yet.\n  ",
+        "id": "com.neg-zero.monogram",
+        "license": "$l.gpl3Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Monogram",
+        "packageVersion": "0.2.0",
+        "summary": "Native GNOME XMPP client with encrypted messaging and LAN device sync",
+        "tags": [
+          "communication",
+          "messaging",
+          "xmpp",
+          "privacy",
+          "gnome",
+          "gtk4"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [
+                {
+                  "operator": "=",
+                  "target": [
+                    {
+                      "kind": "identifier",
+                      "value": "pkgs"
+                    }
+                  ],
+                  "type": "assignment",
+                  "value": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      }
+                    ],
+                    "type": "variable"
+                  }
+                }
+              ],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "name": "lib",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "zenPackageSources"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "monogram"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/default.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "com",
+        "neg-zero",
+        "monogram"
+      ]
     }
   ]
 }

@@ -652,6 +652,7 @@
         "source-haptics": "source-haptics",
         "source-keyslot": "source-keyslot",
         "source-keyslot-extension": "source-keyslot-extension",
+        "source-monogram": "source-monogram",
         "source-nzportable": "source-nzportable",
         "source-oobe": "source-oobe",
         "source-plymouth": "source-plymouth",
@@ -858,6 +859,23 @@
         "owner": "doromiert",
         "repo": "keyslot-gnome-extension",
         "rev": "79ab807e64a0f8b3d9748a78df300439b5a8e4f7",
+        "type": "github"
+      }
+    },
+    "source-monogram": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794619379,
+        "narHash": "sha256-Cs8IQtxTVcdfJfEz0nby8Ipt5LAttFhoKRHXB45apzg=",
+        "owner": "doromiert",
+        "repo": "monogram-desktop",
+        "rev": "dd195a3711606428a0cbb0717158bac8932ff128",
+        "type": "github"
+      },
+      "original": {
+        "owner": "doromiert",
+        "repo": "monogram-desktop",
+        "rev": "dd195a3711606428a0cbb0717158bac8932ff128",
         "type": "github"
       }
     },
