@@ -34,7 +34,7 @@
     gnosis.url = "github:zenos-n/gnosis/bdbb4b480abf8ee46e3a4dc69a8e679bb15eb735";
 
     nixpwamaker = {
-      url = "github:doromiert/nixpwamaker/1.1";
+      url = "github:doromiert/nixpwamaker/b67ee291d8caf8698df7e58913eed0f5ac6039ff";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     source-plymouth = {
@@ -643,6 +643,9 @@
               ({ lib, ... }: { services.flatpak.enable = lib.mkDefault false; })
               inputs.nixcord.homeModules.nixcord
               inputs.nixpwamaker.homeManagerModules.pwamaker
+              ({ lib, pkgs, ... }: {
+                programs.pwamaker.gnosisPackage = lib.mkDefault pkgs.zenos.byCategories.apps.browsers.gnosis;
+              })
             ];
           };
         }
@@ -816,6 +819,10 @@
           dash-stacks-vm = import ./tests/dash-stacks-vm.nix {
             inherit pkgs;
             zenosModule = self.nixosModules.default;
+          };
+          nixpwamaker = import (inputs.nixpwamaker.outPath + "/tests") {
+            inherit pkgs;
+            homeManager = inputs.home-manager;
           };
           gnome-workspace-indicator-vm = import ./tests/gnome-workspace-indicator-vm.nix {
             inherit pkgs;

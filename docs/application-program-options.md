@@ -258,3 +258,28 @@ contains newer changes, so the tagged files are the authority for this version.
 `users.alex.programs.codex = { enable = true; remoteControl = true; };` starts the native managed daemon at user-manager startup and checks it every 30 seconds. Existing sessions and phone pairing remain writable and are preserved. This lifecycle switch defaults to false; it is separate from nullable application preferences. The check does not restart a running daemon or open a public listener. Set `users.alex.profile.linger = true;` to keep the user manager available after logout and start it at boot. The service uses stateDirectory when selected, otherwise `%h/.private/Packages/codex`. Disabling remoteControl removes automatic startup/recovery; stop an existing daemon explicitly with `codex remote-control stop` when no active work needs it. See [official Codex commands](https://learn.chatgpt.com/docs/developer-commands?surface=cli#codex-remote-control).
 
 The remoteControl switch also selects Codex's stable `features.daemon_auto_start = true` so newly launched terminal clients share the managed server with the phone. Existing embedded terminal chats keep their writer locks: quit and resume them once to move them to the shared server. Never delete those locks or restart a busy terminal to force a handoff.
+
+
+Nixpwamaker also supports native Gnosis apps through the existing per-user
+passthrough, so mixed Firefox/Gnosis apps and URL routing need no extra flake
+input in a ZenOS configuration:
+
+```zcfg
+users.doromiert.programs.pwamaker = {
+  enable = true;
+  browser = "gnosis";
+  dispatcher.enable = true;
+  apps.mail = {
+    name = "Mail";
+    url = "https://mail.example.com/";
+    openUrls = [ "mail.example.com" ];
+  };
+};
+```
+
+ZenPkgs supplies its Gnosis package automatically. Each app can override
+`browser`; Firefox remains the default globally. Gnosis app IDs, launchers and
+profile ownership follow `programs.gnosis.apps` above. Choose one interface per
+app ID; neither interface removes Gnosis profile data when a launcher is removed.
+Firefox-only extensions, preferences, CSS and layout overrides are rejected for
+Gnosis apps. Browser extension/preference management stays with Gnosis.

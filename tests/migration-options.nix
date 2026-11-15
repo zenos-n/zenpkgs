@@ -37,7 +37,12 @@ let
           kitty = { enable = true; settings.font_size = 11; };
           keepassxc = { enable = true; settings.Browser.Enabled = true; };
           vscode = { enable = true; profiles.default.userSettings."editor.fontSize" = 14; };
-          pwamaker = { enable = true; dispatcher.enable = true; apps.example = { name = "Example"; url = "https://example.invalid"; openUrls = [ "example.invalid" ]; }; };
+          pwamaker = {
+            enable = true;
+            dispatcher.enable = true;
+            apps.example = { name = "Example"; url = "https://example.invalid"; openUrls = [ "example.invalid" ]; };
+            apps.native = { browser = "gnosis"; name = "Native"; url = "https://native.invalid"; };
+          };
           nixcord.enable = false;
         };
       };
@@ -107,7 +112,11 @@ in {
     && h.programs.vscode.profiles.default.userSettings."editor.fontSize" == 14;
   webApplications = h.programs.pwamaker.enable && h.programs.pwamaker.dispatcher.enable
     && h.programs.pwamaker.apps.example.id == "example"
-    && h.programs.pwamaker.apps.example.openUrls == [ "example.invalid" ];
+    && h.programs.pwamaker.apps.example.openUrls == [ "example.invalid" ]
+    && h.programs.pwamaker.apps.example.browser == "firefox"
+    && h.programs.pwamaker.apps.native.browser == "gnosis"
+    && h.programs.pwamaker.gnosisPackage != null
+    && h.xdg.dataFile ? "applications/com.neg-zero.Gnosis.WebApp_native.desktop";
   userIsolation = !configured.home-manager.users.bob.programs.firefox.enable
     && !configured.home-manager.users.bob.programs.keepassxc.enable;
   vrKernelDefault = vr.boot.kernel.sysctl."vm.max_map_count" == 2147483642;

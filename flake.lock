@@ -584,17 +584,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1767739463,
-        "narHash": "sha256-sRB4DX9d4DkxYTdYrjexKdxU1ipggHvI7mH2/d4nwDY=",
+        "lastModified": 1794747974,
+        "narHash": "sha256-Y/NmDmQ20JnDi7Ni9VhlL+XJ8lk/mIeNigsNY+eMY5I=",
         "owner": "doromiert",
         "repo": "nixpwamaker",
-        "rev": "f131465ebd4b9704aa94a79215256e540daede9b",
+        "rev": "b67ee291d8caf8698df7e58913eed0f5ac6039ff",
         "type": "github"
       },
       "original": {
         "owner": "doromiert",
-        "ref": "1.1",
         "repo": "nixpwamaker",
+        "rev": "b67ee291d8caf8698df7e58913eed0f5ac6039ff",
         "type": "github"
       }
     },
