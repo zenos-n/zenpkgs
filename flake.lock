@@ -865,16 +865,16 @@
     "source-monogram": {
       "flake": false,
       "locked": {
-        "lastModified": 1794863259,
-        "narHash": "sha256-m3KNDACntrRH5J1agmV0VqMkehGXU8acXVJXbG0zU2g=",
+        "lastModified": 1794869171,
+        "narHash": "sha256-aVN6NQFArrIMjVaSPPPkYq1VQkfeSMeN8eBcXmW/P5o=",
         "owner": "doromiert",
         "repo": "monogram-desktop",
-        "rev": "e01ec6eaef1f2a4382f8e7b9f54a961d82e8f711",
+        "rev": "e0d9e7df2eb79212db3e6a1c7a10716f46839aee",
         "type": "github"
       },
       "original": {
         "owner": "doromiert",
-        "ref": "e01ec6e",
+        "ref": "e0d9e7d",
         "repo": "monogram-desktop",
         "type": "github"
       }
