@@ -395,6 +395,22 @@
         "url": "https://channels.nixos.org/nixpkgs-unstable/nixexprs.tar.zst"
       }
     },
+    "nixpkgs-codex": {
+      "locked": {
+        "lastModified": 1794942686,
+        "narHash": "sha256-DxppoldCTQrbVhcuSdvWowxCEzpeETtySSTiurp5tmk=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "5ed6fdd10275194ccff789e6e35681d1d9d4e915",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "master",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-emulators": {
       "locked": {
         "lastModified": 1720535198,
@@ -633,6 +649,7 @@
         "nixcord": "nixcord",
         "nixos-hardware": "nixos-hardware",
         "nixpkgs": "nixpkgs_7",
+        "nixpkgs-codex": "nixpkgs-codex",
         "nixpkgs-emulators": "nixpkgs-emulators",
         "nixpkgs-popcorn": "nixpkgs-popcorn",
         "nixpkgs-unstable": "nixpkgs-unstable",

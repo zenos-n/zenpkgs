@@ -6,7 +6,7 @@ _meta = {
     Lightweight coding agent that runs in your terminal.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "0.165.0";
+  packageVersion = "0.169.0";
   tags = [ "ai" "development" "coding" "terminal" ];
   maintainers = [ $m.doromiert ];
   license = $l.asl20;
@@ -14,4 +14,4 @@ _meta = {
 
 # Use the source-built upstream package, including its complete daemon package
 # and manifest handling. Never replace bundled executables after checksumming.
-build = $lib.zenPackageSources.unstablePackages.codex;
+build = $lib.zenPackageSources.codexPackages.codex;
