@@ -12,8 +12,8 @@ stdenvNoCC.mkDerivation {
   src = fetchFromGitHub {
     owner = "doromiert";
     repo = "dash-stacks";
-    rev = "1b177ead93296cdeb55720ff20818d1b21df556b";
-    hash = "sha256-y2TDE8WGJQALui8toO3jFpGS6uSUESVh05hWUIWla/c=";
+    rev = "17168f5234cf21608d80283dbf30ff1e94c5b0e6";
+    hash = "sha256-g8OJHAfVwpY1tU/Bk9kvmR7pDmcI2jo23nAcHMAsFPw=";
   };
 
   nativeBuildInputs = [ glib ];

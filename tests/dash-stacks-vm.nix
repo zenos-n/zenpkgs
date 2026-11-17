@@ -64,6 +64,11 @@ in pkgs.testers.runNixOSTest {
     assert "error" not in result, result
     assert result["feedbackMs"] < 400, result
     assert result["overflow"]["feedbackMs"] < 400, result
+    assert result["contents"]["feedbackMs"] < 400, result
+    for feature in ["kineticTouch", "kineticTrackpad", "interrupt"]:
+        assert result["overflow"][feature], result
+    for feature in ["physicalAppDrop", "physicalStackDrop", "nativeGrouping", "nestedShortcut", "originalPreserved", "cycleRejected"]:
+        assert result["contents"][feature], result
     assert result["membersPreserved"] and result["lifecycle"], result
     machine.succeed("journalctl -b > /tmp/shell.log")
     print(machine.succeed("tail -n40 /tmp/shell.log"))
