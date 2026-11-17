@@ -58,7 +58,7 @@ in pkgs.testers.runNixOSTest {
     result = json.loads(machine.succeed("cat /tmp/stacks-result"))
     print("DASH_STACKS_RESULT", result)
     machine.screenshot("dash-stacks-folders")
-    for phase in ["start", "middle", "end", "fit", "scale2"]:
+    for phase in ["start", "middle", "end", "fit", "scale2", "drop"]:
         if machine.execute(f"test -f /tmp/dock-{phase}.png")[0] == 0:
             machine.copy_from_vm(f"/tmp/dock-{phase}.png")
     assert "error" not in result, result
@@ -67,7 +67,7 @@ in pkgs.testers.runNixOSTest {
     assert result["contents"]["feedbackMs"] < 400, result
     for feature in ["kineticTouch", "kineticTrackpad", "interrupt"]:
         assert result["overflow"][feature], result
-    for feature in ["physicalAppDrop", "physicalStackDrop", "nativeGrouping", "nestedShortcut", "originalPreserved", "cycleRejected"]:
+    for feature in ["physicalAppDrop", "physicalStackDrop", "dropOutline", "outlineCleanup", "noFavoriteGap", "nativeGrouping", "nestedShortcut", "originalPreserved", "cycleRejected"]:
         assert result["contents"][feature], result
     assert result["membersPreserved"] and result["lifecycle"], result
     machine.succeed("journalctl -b > /tmp/shell.log")
