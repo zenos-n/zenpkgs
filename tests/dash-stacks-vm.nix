@@ -58,8 +58,12 @@ in pkgs.testers.runNixOSTest {
     result = json.loads(machine.succeed("cat /tmp/stacks-result"))
     print("DASH_STACKS_RESULT", result)
     machine.screenshot("dash-stacks-folders")
+    for phase in ["start", "middle", "end", "fit", "scale2"]:
+        if machine.execute(f"test -f /tmp/dock-{phase}.png")[0] == 0:
+            machine.copy_from_vm(f"/tmp/dock-{phase}.png")
     assert "error" not in result, result
     assert result["feedbackMs"] < 400, result
+    assert result["overflow"]["feedbackMs"] < 400, result
     assert result["membersPreserved"] and result["lifecycle"], result
     machine.succeed("journalctl -b > /tmp/shell.log")
     print(machine.succeed("tail -n40 /tmp/shell.log"))
