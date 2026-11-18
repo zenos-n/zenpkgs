@@ -230744,7 +230744,7 @@
           "doromiert"
         ],
         "name": "App Library",
-        "packageVersion": "0.1.0",
+        "packageVersion": "0.1.1",
         "summary": "A paginated GNOME application library",
         "tags": [
           "desktops",
@@ -230828,7 +230828,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "d365d00be477079d12670dc902798d8d47f6321e"
+                                    "value": "698ba77502ceb6d2d7c4994eb9b5944865f83104"
                                   }
                                 ],
                                 "type": "string"
@@ -230848,7 +230848,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "sha256-pJokQajAxWujxsgXQ3HGF9zinRwwCPH5eX7qvIh/WHY="
+                                    "value": "sha256-gwAmyqVmEjf/DPJxr6QefTvcvXRFx3a869ab1qQs3AQ="
                                   }
                                 ],
                                 "type": "string"
