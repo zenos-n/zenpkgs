@@ -1,0 +1,17 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  summary = "A categorized application library for GNOME";
+  description = ''Paginated XDG categories, animated folders, custom ordering and persistent recents. Disable Alphabetical App Grid when using App Library. Per-user choices remain editable in the Sort menu.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  s! {
+    environment.systemPackages = [ $pkgs.byCategories.desktops.gnome.extensions.app-library ];
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.byCategories.desktops.gnome.extensions.app-library.extensionUuid ];
+  };
+};

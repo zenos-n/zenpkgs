@@ -1018,17 +1018,17 @@
     "source-setup": {
       "flake": false,
       "locked": {
-        "lastModified": 1794395555,
-        "narHash": "sha256-+iecI3zpON6t0nhU7W6erhsOYCgECS1HHIv+PxCzq24=",
+        "lastModified": 1795010994,
+        "narHash": "sha256-p7xlyYWVkjbVckZR5UaEZNPK2LvCqSVN533iCxWZGtU=",
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "4be85332792b5f6e2830fdd3c8842492e48c585d",
+        "rev": "6de336c8c2249d43901d9ba46321238c6a18527a",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "zenos-setup",
-        "rev": "4be85332792b5f6e2830fdd3c8842492e48c585d",
+        "rev": "6de336c8c2249d43901d9ba46321238c6a18527a",
         "type": "github"
       }
     },

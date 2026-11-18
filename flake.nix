@@ -66,7 +66,7 @@
       flake = false;
     };
     source-setup = {
-      url = "github:zenos-n/zenos-setup/4be85332792b5f6e2830fdd3c8842492e48c585d";
+      url = "github:zenos-n/zenos-setup/6de336c8c2249d43901d9ba46321238c6a18527a";
       flake = false;
     };
     source-shell-defaults = {
@@ -847,6 +847,13 @@
           } ''
             export PYTHONDONTWRITEBYTECODE=1 NIX_REMOTE=dummy://
             python ${self}/tests/check-boot-build-progress.py --nixpkgs ${pkgs.path}
+            touch "$out"
+          '';
+          app-library-module = dsl.bootstrapPkgs.runCommand "zenpkgs-app-library-module" {
+            nativeBuildInputs = [ dsl.bootstrapPkgs.python3 dsl.bootstrapPkgs.nix ];
+          } ''
+            export PYTHONDONTWRITEBYTECODE=1 NIX_REMOTE=dummy://
+            python ${self}/tests/check-app-library.py --nixpkgs ${dsl.bootstrapPkgs.path}
             touch "$out"
           '';
           blankbox-module = import ./tests/blankbox-check.nix {

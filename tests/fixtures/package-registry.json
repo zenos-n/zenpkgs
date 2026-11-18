@@ -82206,7 +82206,7 @@
           "doromiert"
         ],
         "name": "Codex CLI",
-        "packageVersion": "0.165.0",
+        "packageVersion": "0.169.0",
         "summary": "Lightweight coding agent that runs in your terminal",
         "tags": [
           "ai",
@@ -82226,7 +82226,7 @@
             },
             {
               "kind": "identifier",
-              "value": "unstablePackages"
+              "value": "codexPackages"
             },
             {
               "kind": "identifier",
@@ -227616,22 +227616,21 @@
         "dash-stacks"
       ],
       "meta": {
-        "name": "dash-stacks",
-        "summary": "macOS-style folder stacks for the GNOME dash",
         "description": "\n    macOS-style folder stacks for the GNOME dash\n  ",
+        "id": "com.neg-zero.dash-stacks",
+        "license": "$l.napalm",
+        "maintainers": [],
+        "name": "dash-stacks",
+        "packageVersion": "0-unstable-2026-11-17",
+        "summary": "macOS-style folder stacks for the GNOME dash",
         "tags": [
           "desktops",
           "gnome",
           "extensions"
         ],
-        "maintainers": [],
-        "license": "$l.napalm",
-        "zenosVersion": "1.0.0",
-        "id": "com.neg-zero.dash-stacks",
-        "packageVersion": "0-unstable-2026-11-14"
+        "zenosVersion": "1.0.0"
       },
       "provider": {
-        "kind": "build",
         "expression": {
           "arguments": [
             {
@@ -227664,7 +227663,8 @@
             "type": "variable"
           },
           "type": "call"
-        }
+        },
+        "kind": "build"
       },
       "dependenciesDeclared": false,
       "categoryTarget": [
@@ -230725,6 +230725,195 @@
         "com",
         "neg-zero",
         "monogram"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
+        "app-library"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.app-library",
+      "meta": {
+        "description": "XDG categories, persistent icon animations, custom ordering and per-user recents. Supports GNOME Shell 50 and optional Blur My Shell integration.",
+        "id": "com.neg-zero.app-library",
+        "license": "$l.gpl3Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "App Library",
+        "packageVersion": "0.1.0",
+        "summary": "A paginated GNOME application library",
+        "tags": [
+          "desktops",
+          "gnome",
+          "extensions"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "arguments": [
+            {
+              "recursive": false,
+              "statements": [],
+              "type": "attr-set"
+            }
+          ],
+          "callee": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "owner"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "doromiert"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "app-library"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "d365d00be477079d12670dc902798d8d47f6321e"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-pJokQajAxWujxsgXQ3HGF9zinRwwCPH5eX7qvIh/WHY="
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            }
+                          ],
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
+                      },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "/package.nix"
+                      }
+                    ],
+                    "type": "string"
+                  },
+                  "type": "binary"
+                }
+              }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
+          },
+          "type": "call"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "com",
+        "neg-zero",
+        "app-library"
       ]
     }
   ]
