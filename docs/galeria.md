@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.16 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.17 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -555,3 +555,7 @@ guards apply, and Delete never restores items already in Trash.
 allows it. Row capacity and proportional width allocation avoid thin strips
 and overflow; extreme thumbnails crop in the grid, while full-view aspect
 and originals remain unchanged. Worker, startup and native geometry agree.
+
+0.14.17 follows GNOME titlebar button-layout directly through a read-only
+settings binding, including live changes and left-side controls. Other
+desktops retain GTK defaults; no desktop preference is modified.
