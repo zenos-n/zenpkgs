@@ -4,7 +4,7 @@ _meta = {
   summary = "A paginated GNOME application library";
   description = ''XDG categories, persistent icon animations, custom ordering and per-user recents. Supports GNOME Shell 50 and optional Blur My Shell integration.'';
   zenosVersion = "1.0.0";
-  packageVersion = "0.1.5";
+  packageVersion = "0.1.6";
   tags = [ "desktops" "gnome" "extensions" ];
   maintainers = [ $m.doromiert ];
   license = $l.gpl3Plus;
@@ -13,6 +13,6 @@ _meta = {
 build = $pkgs.legacy.callPackage (($pkgs.legacy.fetchFromGitHub {
   owner = "doromiert";
   repo = "app-library";
-  rev = "a8adaec2789858bee76835ad121de31ae56efdce";
-  hash = "sha256-02pABcdw+0VBjjDJEJLPjl3G8bVlTp1JiYWeA382AF0=";
+  rev = "1a2838679c3107ba11307c95c21fe6679b08ede9";
+  hash = "sha256-gKnNN5qKmDcqzmLlIfR6nsnK/+4DnivEB8LwtMfIM0c=";
 }) + "/package.nix") { };
