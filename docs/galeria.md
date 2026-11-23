@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.17 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.18 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -559,3 +559,14 @@ and originals remain unchanged. Worker, startup and native geometry agree.
 0.14.17 follows GNOME titlebar button-layout directly through a read-only
 settings binding, including live changes and left-side controls. Other
 desktops retain GTK defaults; no desktop preference is modified.
+
+0.14.18 adds Preferences→General→Timeline controls and album context-menu
+Hide/Show in timeline actions. Screenshot filenames and screenshot-named albums
+can be hidden automatically; device folders can be hidden recursively in local
+libraries. Rules are per account on this computer and affect only the unsearched
+main timeline, including month/year covers. Albums, search and originals remain
+available. No server archive/deletion is performed. Excluded IDs/counts are
+cached for offline startup; metadata filtering/layout run on workers and large
+cached startup cell construction yields to GTK. A read-only API smoke check
+passed against Immich 3.3.3; private 45k-item checks cover feedback/loop gaps,
+cache retention, hide/show, local folders and cached startup.
