@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.18 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.19 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -570,3 +570,11 @@ cached for offline startup; metadata filtering/layout run on workers and large
 cached startup cell construction yields to GTK. A read-only API smoke check
 passed against Immich 3.3.3; private 45k-item checks cover feedback/loop gaps,
 cache retention, hide/show, local folders and cached startup.
+
+0.14.19 keeps album and folder switches interactive during visibility updates.
+Rapid changes are saved immediately and coalesced into a background rebuild;
+obsolete queued/page work is cancelled and older responses cannot overwrite the
+latest selection. A cached latest choice can apply while an old request is
+still waiting. Failed batches restore the last applied rules and date index.
+Native real-pointer checks cover rapid toggles, stale replies and failures,
+partial-index rollback, retained pixels and the final visible library.
