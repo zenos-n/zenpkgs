@@ -127,6 +127,7 @@ enable = enableOption {
           legacy.gst_all_1.gst-vaapi
         ]))
       ++ $path.extensionPackages
+      ++ ($lib.optional $path.aod.enable $pkgs.byCategories.desktops.gnome.extensions.aod)
       ++ ($lib.optionals ($cfg.legacy.services.flatpak.enable or false) [ $pkgs.zenos.legacy.warehouse ])
       ++ ($lib.optionals $path.extraPackages.enable (with $pkgs.zenos; [
         legacy.icon-library
@@ -176,8 +177,8 @@ enable = enableOption {
           "org/gnome/desktop/privacy"."remove-old-temp-files" = $path.privacy.removeOldTemporaryFiles;
           "org/gnome/desktop/privacy"."old-files-age" = $lib.gvariant.mkUint32 ($path.privacy.cleanupAgeDays);
           "org/gnome/desktop/privacy"."report-technical-problems" = $path.privacy.reportTechnicalProblems;
-          "org/gnome/desktop/session"."idle-delay" = $lib.gvariant.mkUint32 ($path.power.screenBlankSeconds);
-          "org/gnome/desktop/screensaver"."lock-enabled" = $path.security.lockScreen;
+          "org/gnome/desktop/session"."idle-delay" = $lib.gvariant.mkUint32 (if $path.aod.enable then 0 else $path.power.screenBlankSeconds);
+          "org/gnome/desktop/screensaver"."lock-enabled" = if $path.aod.enable then false else $path.security.lockScreen;
           "org/gnome/desktop/screensaver"."lock-delay" = $lib.gvariant.mkUint32 ($path.security.lockDelaySeconds);
           "org/gnome/desktop/peripherals/mouse"."speed" = $lib.gvariant.mkDouble ($path.mouse.speed);
           "org/gnome/desktop/peripherals/mouse"."accel-profile" = $path.mouse.acceleration;
@@ -357,6 +358,9 @@ enable = enableOption {
       }
     ];
     services.udev.packages = [ $pkgs.zenos.legacy.gnome-settings-daemon ];
+  };
+  u! [ ($path.aod.enable == true) ] {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ "aod@neg-zero.com" ];
   };
   u! [ ($path.extensionUuids != [ ]) ] {
     dconf.settings."org/gnome/shell".enabled-extensions = $path.extensionUuids;
@@ -3218,4 +3222,18 @@ loginScreen._meta = {
   tags = [ "gnome" "login" ];
   maintainers = [ $m.doromiert ];
   license = $l.napl;
+};
+
+
+aod.enable = {
+  _meta = {
+    name = "Always on display";
+    summary = "Use live AOD instead of native idle blanking and automatic locking";
+    description = ''Install and enable the ZenOS AOD extension by default. Live windows keep their colors on black; settings also offer grayscale and the actual GNOME lockscreen curtain. Manual locking remains available. Disable to use native idle and lock defaults.'';
+    tags = [ "desktop" "gnome" "power" "oled" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.boolean;
+    default = true;
+  };
 };

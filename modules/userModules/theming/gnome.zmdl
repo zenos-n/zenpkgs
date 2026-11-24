@@ -3160,3 +3160,27 @@ power.oledCare = {
     };
   };
 };
+
+
+aod.enable = enableOption {
+  _meta = {
+    name = "Always on display";
+    summary = "Show dim live windows instead of idle blanking and automatic locking";
+    description = ''Install and enable the live AOD extension on all monitors. Manual lock remains available. Use AOD settings for delay, brightness and pixel shift. Disable this option to restore native idle/lock policy.'';
+    tags = [ "users" "gnome" "power" "oled" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+  };
+  u! {
+    home.packages = [ $pkgs.byCategories.desktops.gnome.extensions.aod ];
+    dconf.settings = {
+      "org/gnome/shell".enabled-extensions = $lib.mkDefault [ "aod@neg-zero.com" ];
+      "org/gnome/desktop/session".idle-delay = $lib.mkOverride 900 ($lib.gvariant.mkUint32 0);
+      "org/gnome/desktop/screensaver".lock-enabled = $lib.mkOverride 900 false;
+    };
+    assertions = [
+      { assertion = $path.power.screenBlankSeconds == null || $path.power.screenBlankSeconds == 0; message = "AOD replaces idle blanking; unset power.screenBlankSeconds or set it to zero."; }
+      { assertion = $path.security.lockScreen == null || $path.security.lockScreen == false; message = "AOD requires automatic locking disabled; unset security.lockScreen or set it to false. Manual lock remains available."; }
+    ];
+  };
+};

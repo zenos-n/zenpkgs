@@ -1,0 +1,20 @@
+_meta = {
+  id = "com.neg-zero.zenos-aod";
+  name = "ZenOS Always On Display";
+  summary = "Live windows or the native GNOME lockscreen on a dim black display";
+  description = ''Live filtered windows preserve foreground colors, with optional grayscale, native lockscreen extension interoperability, temporary dark mode and randomized pixel shifting. Manual lock remains available.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.1";
+  tags = [ "gnome" "extensions" "oled" "power" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+build = let
+  source = $pkgs.legacy.fetchFromGitHub {
+    owner = "doromiert";
+    repo = "zenos-aod";
+    rev = "2b47add7b95456ab3f90e00882b26f987c14ec09";
+    hash = "sha256-ykDe8wRsXGSDTOKKtJygY/1zdmro/trnwp84urAqjJA=";
+  };
+in $pkgs.legacy.callPackage (source + "/package.nix") { };

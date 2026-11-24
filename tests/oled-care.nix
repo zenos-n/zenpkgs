@@ -6,6 +6,7 @@ let
     cfg = (lib.evalModules { modules = [ (make {}).schema { config = choices; } ]; }).config;
     result = lib.evalModules { modules = [
       { options.home-manager.users = lib.mkOption { type = lib.types.attrsOf (lib.types.submodule {
+        options.home.packages = lib.mkOption { type = lib.types.listOf lib.types.anything; default = []; };
         options.assertions = lib.mkOption { type = lib.types.listOf lib.types.anything; default = []; };
         options.dconf.settings = lib.mkOption { type = lib.types.attrsOf (lib.types.attrsOf lib.types.anything); default = {}; };
       }); default = {}; }; }
