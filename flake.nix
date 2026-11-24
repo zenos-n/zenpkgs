@@ -495,7 +495,6 @@
               zenfs = inputs.source-zenfs.outPath;
               fastfetchConfig = inputs.source-fastfetch-config.outPath;
               compatRecipes = {
-                "desktops/gnome/extensions/dash-stacks" = ./lib/compat/package-recipes/desktops/gnome/extensions/dash-stacks/package.nix;
                 "desktops/gnome/extensions/forge" = ./lib/compat/package-recipes/desktops/gnome/extensions/forge/package.nix;
                 "desktops/gnome/extensions/zenlink-indicator" = ./lib/compat/package-recipes/desktops/gnome/extensions/zenlink-indicator/package.nix;
                 "desktops/gnome/tweaks/zero-gnome-clock" = ./lib/compat/package-recipes/desktops/gnome/tweaks/zero-gnome-clock/package.nix;
