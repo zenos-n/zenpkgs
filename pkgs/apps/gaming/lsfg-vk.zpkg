@@ -18,7 +18,7 @@ build = let
   sourceLsfg = ($pkgs.legacy.fetchFromGitHub {
     owner = "zenos-n";
     repo = "lsfg-vk";
-    rev = "b702f4c465e07864078f89d2986575df7b5096c6";
-    hash = "sha256-DFyeTVonv8OF8tQyEUzktdlmd8d3rBA7mUswJg/Xep0=";
+    rev = "ea2be9856903ce87b15ac2d8c709b558316b7058";
+    hash = "sha256-izCMGfRO1Q5+Fok9Mlca8Vdn09Voz8VmH1RRu70WlQk=";
   });
 in $pkgs.legacy.callPackage (sourceLsfg + "/package.nix") {};
