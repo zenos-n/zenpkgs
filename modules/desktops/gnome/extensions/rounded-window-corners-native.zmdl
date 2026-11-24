@@ -1,0 +1,25 @@
+_meta = {
+  zenosVersion = 1.0.0Na;
+  summary = "Rounded corners with sharp fractional scaling";
+  description = ''Opt-in GNOME50 alternative to Rounded Window Corners Reborn. Disable Reborn before enabling this extension.'';
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+  platforms = $lib.platforms.zenos;
+};
+
+enable = enableOption {
+  _meta.description = ''Enable Rounded Window Corners Native.'';
+  s! {
+    environment.systemPackages = [ $pkgs.byCategories.desktops.gnome.extensions.rounded-window-corners-native ];
+  };
+  u! {
+    dconf.settings."org/gnome/shell".enabled-extensions = [ $pkgs.byCategories.desktops.gnome.extensions.rounded-window-corners-native.extensionUuid ];
+    dconf.settings."org/gnome/shell/extensions/rounded-window-corners-native" = {
+      sharp-windows = $path.sharp-windows;
+      round-libadwaita-apps = $path.round-libadwaita-apps;
+    };
+  };
+};
+
+sharp-windows = { _meta = { type = $type.bool; default = true; description = ''Keep window contents sharp at fractional scales.''; }; };
+round-libadwaita-apps = { _meta = { type = $type.bool; default = true; description = ''Apply the global corner style to libadwaita apps.''; }; };

@@ -1,0 +1,20 @@
+_meta = {
+  id = "io.github.ztrahmet.rounded-window-corners-native";
+  name = "Rounded Window Corners Native";
+  summary = "Sharp fractional-scale rounded corners for GNOME50";
+  description = ''Alternate to Rounded Window Corners Reborn. GNOME50 port of Ahmet Öztürk's extension, with sharp rendering enabled by default. Disable other corner extensions before enabling this one.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "51.1-gnome50.1";
+  tags = [ "gnome" "extensions" "theming" "hidpi" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+build = let
+  source = $pkgs.legacy.fetchFromGitHub {
+    owner = "doromiert";
+    repo = "rounded-window-corners-native";
+    rev = "6fcce3dead9390b94a0699ba747fb781b39ff7dd";
+    hash = "sha256-Px305zQ2h09Kp5wf7mEnQyxVPTUMXKvPzus2ay8RXvU=";
+  };
+in $pkgs.legacy.callPackage (source + "/package.nix") { };
