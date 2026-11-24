@@ -122,17 +122,17 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1795016579,
-        "narHash": "sha256-X/rn40zBV2r9u16jDu+Z6VXMcf4ZvSlr68sYrk+2t1w=",
+        "lastModified": 1795522615,
+        "narHash": "sha256-BHucpLBy9YO1f5L23w6j4TTZRHeskXqO32SkuQIr3Eg=",
         "owner": "zenos-n",
         "repo": "gnosis",
-        "rev": "b3c7f5e00d8ccd463537bc60d4aa47c4147a4a14",
+        "rev": "ff65ebb63bd5a7e852b110292171dabafa735106",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "gnosis",
-        "rev": "b3c7f5e00d8ccd463537bc60d4aa47c4147a4a14",
+        "rev": "ff65ebb63bd5a7e852b110292171dabafa735106",
         "type": "github"
       }
     },
