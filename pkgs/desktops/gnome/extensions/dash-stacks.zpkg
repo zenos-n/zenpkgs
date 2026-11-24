@@ -6,7 +6,7 @@ _meta = {
     macOS-style folder stacks for the GNOME dash
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "0-unstable-2026-11-24";
+  packageVersion = "0-unstable-2026-11-24.1";
   tags = [ "desktops" "gnome" "extensions" ];
   license = $l.napalm;
 };
@@ -15,7 +15,7 @@ build = let
   source = $pkgs.legacy.fetchFromGitHub {
     owner = "doromiert";
     repo = "dash-stacks";
-    rev = "16f44ea40c643d8943a392cd46eb513f600fbfa7";
-    hash = "sha256-zqLZI3Qo/5Jbh3AG3MoLZQF8JVyQNnW1jDA1AFGHTvg=";
+    rev = "50514a082c09985536fc20e326b25baf878da488";
+    hash = "sha256-oSem1ZJdsjyi+aAKsIgMAaBGvoUmJHVl86ejIAhLb4Y=";
   };
 in $pkgs.legacy.callPackage (source + "/package.nix") { };
