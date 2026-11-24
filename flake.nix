@@ -32,7 +32,7 @@
     nixpkgs-emulators.url = "github:NixOS/nixpkgs/205fd4226592cc83fd4c0885a3e4c9c400efabb5";
     nixpkgs-popcorn.url = "github:NixOS/nixpkgs/1c3fe55ad329cbcb28471bb30f05c9827f724c76";
     # Keep the browser's locked Nixpkgs: native Brave patches require its exact binary.
-    gnosis.url = "github:zenos-n/gnosis/a1489d6e0bb81328ded9f4a6b01fc7697d86f47d";
+    gnosis.url = "github:zenos-n/gnosis/24e8dc85ac82eac9343a1f8ed81ab59bcb46163d";
 
     nixpwamaker = {
       url = "github:doromiert/nixpwamaker/b67ee291d8caf8698df7e58913eed0f5ac6039ff";
