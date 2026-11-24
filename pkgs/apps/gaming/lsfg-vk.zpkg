@@ -1,0 +1,24 @@
+_meta = {
+  id = "gay.pancake.lsfg-vk-ui";
+  name = "lsfg-vk";
+  summary = "Lossless Scaling frame generation for Vulkan games";
+  description = ''
+    Vulkan frame generation layer, validation tools, and graphical configuration.
+    Requires a purchased copy of Lossless Scaling installed through Steam with
+    its lsfg-vk beta selected. Profiles can enable frame generation per game.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "2.0.0";
+  tags = [ "gaming" "vulkan" "frame-generation" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.cc-by-nc-nd-40;
+};
+
+build = let
+  sourceLsfg = ($pkgs.legacy.fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "lsfg-vk";
+    rev = "b702f4c465e07864078f89d2986575df7b5096c6";
+    hash = "sha256-DFyeTVonv8OF8tQyEUzktdlmd8d3rBA7mUswJg/Xep0=";
+  });
+in $pkgs.legacy.callPackage (sourceLsfg + "/package.nix") {};
