@@ -192,3 +192,14 @@ folders remain remembered and reappear when populated.
 
 The `dash-stacks-vm` check compares real normal/stack pins, menu and DND actions,
 shared controls/popup, migration/lifecycle and square bounds under scaling.
+
+
+### OLED care
+
+Enable `users.<name>.theming.gnome.power.oledCare = true` for five-minute idle
+blanking and supported native idle dimming. Explicit personal
+`power.screenBlankSeconds` and `power.dimWhenIdle` settings take precedence.
+GNOME honors idle inhibitors; all session displays blank together. External
+monitor dimming is hardware dependent. This does not control or replace monitor
+pixel shifting, Pixel Refresh or Panel Refresh. Keep the monitor's own protection
+enabled. Appearance, wallpaper, brightness and suspend policy are not changed.

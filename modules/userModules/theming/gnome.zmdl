@@ -3140,3 +3140,23 @@ wallpaper.darkImage = {
     dconf.settings."org/gnome/desktop/background"."picture-uri-dark" = $lib.mkIf ($path.wallpaper.darkImage != null) ($path.wallpaper.darkImage);
   };
 };
+
+
+power.oledCare = {
+  _meta = {
+    name = "OLED care";
+    summary = "Blank idle displays to reduce static OLED exposure";
+    description = ''Use GNOME's normal idle handling to blank displays after five minutes and enable supported idle dimming. Games, video and presentations may inhibit blanking. Explicit personal idle settings override these defaults. Applies to all session displays; pixel shifting and panel refresh remain monitor firmware features.'';
+    tags = [ "users" "gnome" "power" "oled" ];
+    maintainers = [ $m.doromiert ];
+    license = $l.napl;
+    type = $type.bool;
+    default = false;
+  };
+  u!! {
+    dconf.settings = $lib.mkIf $path.power.oledCare {
+      "org/gnome/desktop/session"."idle-delay" = $lib.mkDefault ($lib.gvariant.mkUint32 300);
+      "org/gnome/settings-daemon/plugins/power"."idle-dim" = $lib.mkDefault true;
+    };
+  };
+};

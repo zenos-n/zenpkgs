@@ -11,4 +11,11 @@ _meta = {
   maintainers = [ $m.doromiert ];
 };
 
-import $pkgs.legacy.gnomeExtensions.rounded-window-corners-reborn;
+# GNOME 50 makes logical framebuffer scaling unconditional on Wayland.
+build = $pkgs.legacy.gnomeExtensions.rounded-window-corners-reborn.overrideAttrs (old: {
+  postPatch = (old.postPatch or "") + ''
+    substituteInPlace manager/utils.js \
+      --replace-fail "features.includes('scale-monitor-framebuffer')" \
+        "(!Meta.is_wayland_compositor || features.includes('scale-monitor-framebuffer'))"
+  '';
+});
