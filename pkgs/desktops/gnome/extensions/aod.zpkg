@@ -4,7 +4,7 @@ _meta = {
   summary = "Live windows or the native GNOME lockscreen on a dim black display";
   description = ''Live filtered windows preserve foreground colors, with optional grayscale, native lockscreen extension interoperability, temporary dark mode and randomized pixel shifting. Manual lock remains available.'';
   zenosVersion = "1.0.0";
-  packageVersion = "0.1.2";
+  packageVersion = "0.1.3";
   tags = [ "gnome" "extensions" "oled" "power" ];
   maintainers = [ $m.doromiert ];
   license = $l.gpl3Plus;
@@ -14,7 +14,7 @@ build = let
   source = $pkgs.legacy.fetchFromGitHub {
     owner = "doromiert";
     repo = "zenos-aod";
-    rev = "65ee0e926c54c23e2af19cdaf2bd839d1557dc97";
-    hash = "sha256-f4xISzVxsTG9P6ySOipaWxx8YS1zcgIgLjjB9ns8cRY=";
+    rev = "12e697c626126af56a9503cab30b0817ac403879";
+    hash = "sha256-9MEv2prwjQfihIL2einmN/0GKJLt3N8O3btfrsu0fSo=";
   };
 in $pkgs.legacy.callPackage (source + "/package.nix") { };
