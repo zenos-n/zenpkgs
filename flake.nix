@@ -471,8 +471,9 @@
         # ZenPkgs owns one internal package namespace. User-facing package
         # references are prefixed by the zcfg compiler.
         {
-          mutter = import ./lib/mutter-touch-fix.nix {
-            inherit (prev) mutter fetchurl;
+          mutter = import ./lib/mutter-hdr-fix.nix {
+            mutter = import ./lib/mutter-touch-fix.nix { inherit (prev) mutter fetchurl; };
+            inherit (prev) fetchurl lib;
           };
           lib = prev.lib // {
             licenses = prev.lib.licenses // utils.licenses;
@@ -779,6 +780,7 @@
             pkgs.writeText "zenos-migration-options" (builtins.toJSON migrationPolicies);
           migration-packages = import ./tests/migration-packages.nix { inherit pkgs registry; };
           mutter-touch = import ./tests/mutter-touch.nix { inherit pkgs; };
+          mutter-hdr = import ./tests/mutter-hdr.nix { inherit pkgs; };
           gnome-cursor = pkgs.runCommand "zenos-gnome-cursor-check" {
             nativeBuildInputs = [ pkgs.python3 ];
           } ''
