@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.21 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.22 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -601,3 +601,9 @@ streaming threads). Fractional-scale bounds align to logical/device pixels
 and re-align after slide completion. Actual fullscreen/windowed Wayland tests
 verify active HDR children and SDR UI parents;115unit checks pass. Unsupported
 clipping/transforms can fall back to SDR while keeping UI appearance stable.
+
+0.14.22 inherits native libadwaita sidebar and details-pane materials instead
+of painting opaque custom backgrounds. Active/inactive colors, their native
+transitions, secondary sidebars, light/dark and high-contrast styles now follow
+GNOME. Packaged rendered pixels match native split views in all six appearance
+states; reinstating the old rules reproduces the mismatch.
