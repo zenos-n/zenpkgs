@@ -1,0 +1,23 @@
+_meta = {
+  name = "TubeFin";
+  summary = "Install the native YouTube and Jellyfin client";
+  description = ''Install TubeFin with adaptive video playback and video-only HDR. Sign-in, account credentials, history, downloads and preferences remain writable and managed by the app.'';
+  zenosVersion = 1.0.0Nb;
+  tags = [ "programs" "video" "youtube" "jellyfin" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.gpl3Plus;
+};
+
+enable = enableOption {
+  _meta.summary = "Install TubeFin for the selected user scope";
+  u! {
+    home.packages = [ $path.package ];
+  };
+};
+
+package._meta = {
+  name = "Package";
+  summary = "TubeFin package to install";
+  type = $type.package;
+  default = $pkgs.com.neg-zero.Tubefin;
+};

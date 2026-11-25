@@ -859,6 +859,13 @@
             python ${self}/tests/check-app-library.py --nixpkgs ${dsl.bootstrapPkgs.path}
             touch "$out"
           '';
+          tubefin-module = dsl.bootstrapPkgs.runCommand "zenpkgs-tubefin-module" {
+            nativeBuildInputs = [ dsl.bootstrapPkgs.python3 dsl.bootstrapPkgs.nix ];
+          } ''
+            export PYTHONDONTWRITEBYTECODE=1 NIX_REMOTE=dummy://
+            python ${self}/tests/check-tubefin.py --nixpkgs ${dsl.bootstrapPkgs.path}
+            touch "$out"
+          '';
           blankbox-module = import ./tests/blankbox-check.nix {
             pkgs = dsl.bootstrapPkgs;
             sourceRoot = self;
