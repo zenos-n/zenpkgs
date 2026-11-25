@@ -231266,7 +231266,7 @@
           "doromiert"
         ],
         "name": "ZenOS Always On Display",
-        "packageVersion": "0.1.5",
+        "packageVersion": "0.1.6",
         "summary": "Live windows or the native GNOME lockscreen on a dim black display",
         "tags": [
           "gnome",
@@ -231402,7 +231402,7 @@
                           "parts": [
                             {
                               "type": "text",
-                              "value": "b960cafffec2ada200b039b4244e2822ad1e7ad3"
+                              "value": "e2dd80e7637d652e72aa30f4b86c3e6b19e013df"
                             }
                           ],
                           "type": "string"
@@ -231422,7 +231422,7 @@
                           "parts": [
                             {
                               "type": "text",
-                              "value": "sha256-rki145S5saq3pEbGTv608AQknEtzDUBcK2J9LZPl3Z0="
+                              "value": "sha256-CTIe/w1cskL7tSn/AXziCk3hcZuzhTu7T2WUDq26zMs="
                             }
                           ],
                           "type": "string"
