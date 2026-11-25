@@ -61,6 +61,8 @@ let
       memory.zram.enable = false;
     };
   });
+  steamDevices = evaluate { zenos.system.gaming.steamDevices = true; };
+  noSteamDevices = evaluate { zenos.system.gaming.steamDevices = false; };
   vr = evaluate {
     zenos.users.alice.services.vr = { enable = true; overlayFont = "sans-serif"; };
   };
@@ -94,6 +96,10 @@ in {
     && !configured.virtualisation.libvirtd.qemu.runAsRoot
     && configured.programs.virt-manager.enable && configured.virtualisation.docker.enable
     && configured.virtualisation.docker.storageDriver == "overlay2";
+  controllerTouchpad = steamDevices.hardware.steam-hardware.enable
+    && lib.hasInfix ''ATTRS{name}=="DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"'' steamDevices.services.udev.extraRules
+    && !(lib.hasInfix "DualSense Wireless Controller Touchpad" noSteamDevices.services.udev.extraRules)
+    && !(lib.hasInfix "DualSense Wireless Controller Touchpad" defaults.services.udev.extraRules);
   memory = configured.zramSwap.enable && configured.zramSwap.memoryPercent == 50
     && configured.zramSwap.algorithm == "zstd" && configured.zramSwap.priority == 10;
   kernel = builtins.elem "iommu=pt" configured.boot.kernelParams

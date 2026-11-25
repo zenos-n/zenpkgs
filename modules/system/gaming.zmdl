@@ -101,6 +101,10 @@ _meta = {
 };
   s!! {
     hardware.steam-hardware.enable = $lib.mkIf ($path.steamDevices != null) ($path.steamDevices);
+    # Keep native controller HID data; suppress only the desktop pointer device.
+    services.udev.extraRules = $lib.mkIf ($path.steamDevices == true) ''
+      ACTION=="add|change", SUBSYSTEM=="input", KERNEL=="event[0-9]*", ATTRS{name}=="DualSense Wireless Controller Touchpad", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+    '';
   };
 };
 
