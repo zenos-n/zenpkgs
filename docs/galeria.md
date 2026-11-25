@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.20 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.21 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -590,3 +590,14 @@ is enabled per process; desktop HDR settings are unchanged. Generated16-bit
 PNG/10-bitAVIF and HEVC PQ/HLG native tests plus112unit tests pass. Real DP-2
 Wayland negotiation of Rec2100PQ was verified. Editors/grid thumbnails remain
 SDR; gain-map reconstruction and Dolby Vision dynamic metadata are not supported.
+
+
+0.14.21 keeps text, icons, controls and SDR media on an8-bit sRGB parent surface.
+Only explicitly PQ/HLG-tagged media enables an independent HDR graphics-offload
+surface. An app-local GTK4.22.4 backport preserves the system GTK, supplies
+RGBA16F HDR photo buffers, and avoids implicit HDR UI render targets. HLG
+normalizes to supported PQ (photos on decode workers; video remains10-bit on
+streaming threads). Fractional-scale bounds align to logical/device pixels
+and re-align after slide completion. Actual fullscreen/windowed Wayland tests
+verify active HDR children and SDR UI parents;115unit checks pass. Unsupported
+clipping/transforms can fall back to SDR while keeping UI appearance stable.
