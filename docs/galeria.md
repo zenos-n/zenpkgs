@@ -45,7 +45,7 @@ the service keeps its selected runtime alive independently of the UI. Disable
 Background uploads in Galeria to stop it. The program module never starts it
 or supplies credentials.
 
-Version 0.14.19 is a development preview. Real albums, metadata/semantic search,
+Version 0.14.20 is a development preview. Real albums, metadata/semantic search,
 collections, sharing, administration and video playback are implemented. Advanced AI editing and offline encrypted-vault browsing remain pending. HEIC
 decoding is not advertised by the desktop launcher. Production Immich
 acceptance still requires the user's server; development tests use loopback
@@ -578,3 +578,15 @@ latest selection. A cached latest choice can apply while an old request is
 still waiting. Failed batches restore the last applied rules and date index.
 Native real-pointer checks cover rapid toggles, stale replies and failures,
 partial-index rollback, retained pixels and the final visible library.
+
+
+0.14.20 preserves HDR photo/video originals in focus view. Sandboxed Glycin
+retains native precision and ICC/CICP color; Clapper controls use the GTK
+paintable sink with 10-bit PQ/HLG support. Remote viewing uses authenticated
+originals with separate original/playback range-cache keys. Full-size photos
+have a separate128MiB account cache to protect cached grid thumbnails. Cached thumbnails
+stay visible while originals load on workers. GTK4.22 Wayland color management
+is enabled per process; desktop HDR settings are unchanged. Generated16-bit
+PNG/10-bitAVIF and HEVC PQ/HLG native tests plus112unit tests pass. Real DP-2
+Wayland negotiation of Rec2100PQ was verified. Editors/grid thumbnails remain
+SDR; gain-map reconstruction and Dolby Vision dynamic metadata are not supported.

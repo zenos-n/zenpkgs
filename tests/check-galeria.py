@@ -39,7 +39,8 @@ in {defaults=evaluate {};disabled=actions {};enabled=actions {enable=true;};view
     assert enabled['home']['packages']==['/galeria'] and enabled['xdg']['mimeApps']=={}
     viewer=result['viewer'][0]['home-manager']['users']['alex']['content']['xdg']['mimeApps']
     assert viewer['enable'] is True
-    assert len(viewer['defaultApplications'])==11
+    assert len(viewer['defaultApplications'])==15
+    assert {'image/heic','image/heif','image/jxl','image/x-exr'} <= viewer['defaultApplications'].keys()
     assert all(value==['com.neg-zero.Galeria.desktop'] for value in viewer['defaultApplications'].values())
     assert set(enabled)=={'home','xdg'} and 'activation' not in enabled['home']
     print('Galeria package syntax/module defaults/associations: OK')

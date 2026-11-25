@@ -741,17 +741,17 @@
     "source-galeria": {
       "flake": false,
       "locked": {
-        "lastModified": 1795393594,
-        "narHash": "sha256-BmLZECipzl5tEdeO8Rd/yr4R99dPgHuXpKbEEKrmdU4=",
+        "lastModified": 1795603029,
+        "narHash": "sha256-Eec84a1PrzR1IJpqOjFCqs+egq2lQAcQkp3S3fiabns=",
         "owner": "zenos-n",
         "repo": "galeria",
-        "rev": "aa2014ca5c7fd81fb2dac7084ce38894be1bbb4b",
+        "rev": "f111fb4182263e6bc3a1e0c86954efab8e7ee068",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "galeria",
-        "rev": "aa2014ca5c7fd81fb2dac7084ce38894be1bbb4b",
+        "rev": "f111fb4182263e6bc3a1e0c86954efab8e7ee068",
         "type": "github"
       }
     },
