@@ -14,6 +14,7 @@ let
         enable = true;
         autoStart = true;
         replaySeconds = 30;
+        codec = "hevc_hdr";
         recordShortcut = "<Shift><Super>q";
         hudShortcut = "<Shift><Super>g";
         clipShortcut = "<Shift><Super>w";
@@ -28,6 +29,8 @@ let
   has = nixpkgs.lib.hasInfix;
 in
 assert c.programs.gpu-screen-recorder.enable;
+assert c.zenos.users.recorder.programs.gpu-screen-recorder.codec == "hevc_hdr";
+assert c.zenos.users.other.programs.gpu-screen-recorder.codec == "h264";
 assert c.zenos.users.recorder.programs.gpu-screen-recorder.monitor == "focused_monitor";
 assert c.security.wrappers.gsr-kms-server.capabilities == "cap_sys_admin+ep";
 assert service.Install.WantedBy == [ "graphical-session.target" ];

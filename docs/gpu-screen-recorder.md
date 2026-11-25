@@ -27,6 +27,12 @@ Otherwise start `systemctl --user start zenos-screen-recorder`, then enable
 replay from the HUD. Stop everything with
 `systemctl --user stop zenos-screen-recorder`.
 
+Set `codec = "hevc_hdr";` for 10-bit HEVC HDR recording and replay, or
+`av1_hdr` when the GPU supports AV1 encoding. Use direct monitor capture;
+portal capture does not preserve HDR in this recorder version. Plain `hevc_10bit`
+is 10-bit SDR. HDR output requires HDR-aware playback; existing SDR recordings
+cannot recover the lost highlight/color information by changing metadata.
+
 Defaults: 60fps, GPU H.264, AAC, system-output audio (no microphone), source
 `focused_monitor`, clips under `%h/Videos/Clips`, recordings under `%h/Videos/Recordings`.
 Directories may be absolute or start with `%h` for the user's home. Preferences
