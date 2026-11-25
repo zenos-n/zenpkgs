@@ -228611,7 +228611,7 @@
           "doromiert"
         ],
         "name": "Blankbox (compatibility name)",
-        "packageVersion": "0.15.2.9",
+        "packageVersion": "0.15.2.13",
         "summary": "Compatibility name for Blankbox",
         "tags": [
           "terminal",
