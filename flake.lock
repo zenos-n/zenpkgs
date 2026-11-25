@@ -881,17 +881,17 @@
     "source-monogram": {
       "flake": false,
       "locked": {
-        "lastModified": 1795556354,
-        "narHash": "sha256-XpmUWNT57YvV/0NhwwF8alw5GezPzdYjYCH/uwbT0bI=",
+        "lastModified": 1795602216,
+        "narHash": "sha256-hiiseOuJlChgUAQbuJ7DKT2Rv9JQ+HbafCoIUMSUTaU=",
         "owner": "doromiert",
         "repo": "monogram-desktop",
-        "rev": "5bef62c18304b6328c63cc2727dc4606541e6872",
+        "rev": "89084d9c819b56db15b9a5137d1a3b3f5fdf14fa",
         "type": "github"
       },
       "original": {
         "owner": "doromiert",
         "repo": "monogram-desktop",
-        "rev": "5bef62c18304b6328c63cc2727dc4606541e6872",
+        "rev": "89084d9c819b56db15b9a5137d1a3b3f5fdf14fa",
         "type": "github"
       }
     },
