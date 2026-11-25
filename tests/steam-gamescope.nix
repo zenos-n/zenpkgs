@@ -9,7 +9,7 @@ pkgs.runCommand "steam-gamescope-desktop-check" {
   test -x ${package}/bin/steam-gamescope
   desktop=${package}/share/applications/com.neg-zero.SteamGamescope.desktop
   desktop-file-validate "$desktop"
-  grep -Fx 'Exec=steam-gamescope' "$desktop"
+  grep -Fx 'Exec=${package}/bin/steam-gamescope' "$desktop"
   grep -Fx 'Icon=steam' "$desktop"
   touch "$out"
 ''

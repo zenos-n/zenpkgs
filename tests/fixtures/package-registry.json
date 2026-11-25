@@ -229274,7 +229274,7 @@
           "doromiert"
         ],
         "name": "Steam (Gamescope)",
-        "packageVersion": "1.2.1",
+        "packageVersion": "1.2.2",
         "summary": "Steam Big Picture in Gamescope on your primary GNOME display",
         "tags": [
           "gaming",
@@ -229445,7 +229445,7 @@
                             "parts": [
                               {
                                 "type": "text",
-                                "value": "b75572f52259f3a936b55bdeae1303f58f6fe251"
+                                "value": "42cb9267029b6e7b81cdeae69920bf8af9e91d0f"
                               }
                             ],
                             "type": "string"
@@ -229465,7 +229465,7 @@
                             "parts": [
                               {
                                 "type": "text",
-                                "value": "sha256-BBha2VRhDyOpFU2OjiD1+2e/R3sIToXckM+IDBIdq6g="
+                                "value": "sha256-Cxh+fkK6apyjaWkR4aDrcrR6gYA+Pi2WBtDnNF10f9U="
                               }
                             ],
                             "type": "string"

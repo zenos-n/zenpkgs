@@ -8,7 +8,7 @@ _meta = {
     integration. Existing Steam sessions are never closed automatically.
   '';
   zenosVersion = "1.0.0";
-  packageVersion = "1.2.1";
+  packageVersion = "1.2.2";
   tags = [ "gaming" "steam" "gamescope" "wayland" ];
   maintainers = [ $m.doromiert ];
   license = $l.mit;
@@ -18,8 +18,8 @@ build = let
   sourceSteamGamescope = ($pkgs.legacy.fetchFromGitHub {
     owner = "zenos-n";
     repo = "steam-gamescope";
-    rev = "b75572f52259f3a936b55bdeae1303f58f6fe251";
-    hash = "sha256-BBha2VRhDyOpFU2OjiD1+2e/R3sIToXckM+IDBIdq6g=";
+    rev = "42cb9267029b6e7b81cdeae69920bf8af9e91d0f";
+    hash = "sha256-Cxh+fkK6apyjaWkR4aDrcrR6gYA+Pi2WBtDnNF10f9U=";
   });
 in $pkgs.legacy.callPackage (sourceSteamGamescope + "/package.nix") {
   steam = $pkgs.byCategories.apps.gaming.steam;
