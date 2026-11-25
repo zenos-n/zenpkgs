@@ -12,7 +12,7 @@ users. `package` can select another compatible derivation. Direct package
 selection also works through `packages.com.neg-zero.Tubefin` or the existing
 `packages.byCategories.apps.video.tubefin` compatibility view.
 
-The package pins TubeFin 1.7.3 and yt-dlp 2026.11.23. It uses the upstream
+The package pins TubeFin 1.7.4 and yt-dlp 2026.11.23. It uses the upstream
 `default.nix`, including the app-local GTK HDR backport and WebKitGTK login.
 HDR applies to explicitly HDR video; windows, controls and menus remain SDR.
 Automatic quality uses the current monitor's physical height; higher resolutions

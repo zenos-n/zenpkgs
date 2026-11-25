@@ -4,7 +4,7 @@ _meta = {
   summary = "Native YouTube and Jellyfin client with video-only HDR";
   description = ''Native GNOME video client with adaptive 4K/HDR playback, dedicated YouTube sign-in, KeePassXC autofill and opt-in resume from local or account history. Application chrome stays SDR. Accounts and preferences remain managed by TubeFin.'';
   zenosVersion = "1.0.0";
-  packageVersion = "1.7.3";
+  packageVersion = "1.7.4";
   tags = [ "video" "youtube" "jellyfin" "hdr" "gnome" ];
   maintainers = [ $m.doromiert ];
   license = $l.gpl3Plus;
@@ -14,8 +14,8 @@ build = let
   sourceTubeFin = ($pkgs.legacy.fetchFromGitHub {
     owner = "doromiert";
     repo = "tubefin";
-    rev = "811a66cb0495634c2cedb0dff5af4147897a6c21";
-    hash = "sha256-qDSc3C/SvSLgUyf0cATQauH+xkQg5HFWiJEC+n9PsA0=";
+    rev = "c2c6745447aebac56966a032d0b3d1cbf1a3e6b6";
+    hash = "sha256-rJcQHyoIBFutgFd6+FqwozWcekcmZXoqsaIKlb0ILlQ=";
   });
 in $pkgs.legacy.callPackage (sourceTubeFin + "/default.nix") {
   pkgs = $pkgs.legacy;
