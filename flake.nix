@@ -39,10 +39,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     source-plymouth = {
-      url = "github:zenos-n/plymouth-theme/1.0.0";
+      url = "github:zenos-n/plymouth-theme/b7040721520bc2c7bb3e9aba6de21cbe2bb5636f";
       flake = false;
     };
-    source-monogram = { url = "github:doromiert/monogram-desktop/19570e62f6ce9f9ac0b3b39fba397f871d3f5506"; flake = false; };
+    source-monogram = { url = "github:doromiert/monogram-desktop/b9e76e1c8f53b2b6bfe409e3877886898e107fa3"; flake = false; };
     source-keyslot = { url = "github:zenos-n/keyslot/ef688b064a429c0190b99b2359745857355207b6"; flake = false; };
     source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/79ab807e64a0f8b3d9748a78df300439b5a8e4f7"; flake = false; };
     source-galeria = { url = "github:zenos-n/galeria/24244d9627fdfb5374f8f447e31e2de0cbd5355d"; flake = false; };
@@ -73,7 +73,7 @@
       flake = false;
     };
     source-oobe = {
-      url = "github:zenos-n/zenos-oobe-mode-extension/1.0.0";
+      url = "github:zenos-n/zenos-oobe-mode-extension/228b597601273c0e0537913db4e2a04b24154c79";
       flake = false;
     };
     source-fastfetch-config = {
@@ -98,7 +98,7 @@
     source-zane-indicator = { url = "github:zenos-n/zenos-zane-indicator/1846242f7e6940119d2b19e57daf501274b020ad"; flake = false; };
     source-vision-indicator = { url = "github:zenos-n/zenos-vision-indicator/1421f18f791cc249d2bbe70d7e52fb2adc2c0947"; flake = false; };
     source-blankbox = {
-      url = "github:zenos-n/blankbox/1db329377962a92b57784f923b9f2b464221b616";
+      url = "github:zenos-n/blankbox/de00b7a086f9cf9db7b23fcc65fb0b93057868b0";
       flake = false;
     };
     source-blackbox.follows = "source-blankbox";

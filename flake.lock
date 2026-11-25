@@ -707,17 +707,17 @@
     "source-blankbox": {
       "flake": false,
       "locked": {
-        "lastModified": 1793448266,
-        "narHash": "sha256-Yb1o6y4Ov8OXBzmG+ICeDHFO4ifJjAAi3Yy63b7LByQ=",
+        "lastModified": 1795003213,
+        "narHash": "sha256-2b/qbj5kGxg8hdJkFaFAeEkml0Gca+ahkx9qNVj2/ig=",
         "owner": "zenos-n",
         "repo": "blankbox",
-        "rev": "1db329377962a92b57784f923b9f2b464221b616",
+        "rev": "de00b7a086f9cf9db7b23fcc65fb0b93057868b0",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
         "repo": "blankbox",
-        "rev": "1db329377962a92b57784f923b9f2b464221b616",
+        "rev": "de00b7a086f9cf9db7b23fcc65fb0b93057868b0",
         "type": "github"
       }
     },
@@ -881,17 +881,17 @@
     "source-monogram": {
       "flake": false,
       "locked": {
-        "lastModified": 1795614140,
-        "narHash": "sha256-jnlS5kEyl2KrJGasEFHeNCm34ce7OKdbc8tw4OvXnao=",
+        "lastModified": 1795614668,
+        "narHash": "sha256-MgwMncQmrqTAfK9YmW6qgFPYEZbPz/sXhl+GFMemQ+E=",
         "owner": "doromiert",
         "repo": "monogram-desktop",
-        "rev": "19570e62f6ce9f9ac0b3b39fba397f871d3f5506",
+        "rev": "b9e76e1c8f53b2b6bfe409e3877886898e107fa3",
         "type": "github"
       },
       "original": {
         "owner": "doromiert",
         "repo": "monogram-desktop",
-        "rev": "19570e62f6ce9f9ac0b3b39fba397f871d3f5506",
+        "rev": "b9e76e1c8f53b2b6bfe409e3877886898e107fa3",
         "type": "github"
       }
     },
@@ -915,34 +915,34 @@
     "source-oobe": {
       "flake": false,
       "locked": {
-        "lastModified": 1778011713,
-        "narHash": "sha256-T/aq+EP1X1trt8TYR/swoB+9UTOt9tZHh7Gn4QCP1V8=",
+        "lastModified": 1788774639,
+        "narHash": "sha256-Efnagk9y9rHXXdGoH3f+v3JetDrGWo9zeQzejB2M/RU=",
         "owner": "zenos-n",
         "repo": "zenos-oobe-mode-extension",
-        "rev": "c75f2bb638ab3ba9c9a914ab23709bba1f370597",
+        "rev": "228b597601273c0e0537913db4e2a04b24154c79",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
-        "ref": "1.0.0",
         "repo": "zenos-oobe-mode-extension",
+        "rev": "228b597601273c0e0537913db4e2a04b24154c79",
         "type": "github"
       }
     },
     "source-plymouth": {
       "flake": false,
       "locked": {
-        "lastModified": 1778440329,
-        "narHash": "sha256-ltX1704M5umTuq78HfapUdUHB1Esfa8PUoSsk7Tg1DU=",
+        "lastModified": 1789023675,
+        "narHash": "sha256-XCpwnJPmiHyQAat24d2gp1Q6WWMJqGv5M21QCgFl+1I=",
         "owner": "zenos-n",
         "repo": "plymouth-theme",
-        "rev": "e6478d286075ec85ca8827d3625ed7ecd508c656",
+        "rev": "b7040721520bc2c7bb3e9aba6de21cbe2bb5636f",
         "type": "github"
       },
       "original": {
         "owner": "zenos-n",
-        "ref": "1.0.0",
         "repo": "plymouth-theme",
+        "rev": "b7040721520bc2c7bb3e9aba6de21cbe2bb5636f",
         "type": "github"
       }
     },

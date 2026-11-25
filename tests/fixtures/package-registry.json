@@ -3994,59 +3994,132 @@
       ]
     },
     {
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
+        "rounded-window-corners-reborn"
+      ],
+      "dependenciesDeclared": false,
       "id": "pkgs.unknown.rounded-window-corners-reborn",
-      "target": [
-        "unknown",
-        "rounded-window-corners-reborn"
-      ],
-      "sourcePath": [
-        "gnomeExtensions",
-        "rounded-window-corners-reborn"
-      ],
       "meta": {
-        "name": "rounded-window-corners-reborn",
-        "summary": "Curated rounded-window-corners-reborn package for ZenOS",
         "description": "\n    Curated rounded-window-corners-reborn package for ZenOS\n  ",
-        "zenosVersion": "1.0.0",
+        "id": "unknown.rounded-window-corners-reborn",
+        "license": null,
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "rounded-window-corners-reborn",
         "packageVersion": "1.0.0",
+        "summary": "Curated rounded-window-corners-reborn package for ZenOS",
         "tags": [
           "system",
           "desktop",
           "gnome",
           "extensions"
         ],
-        "maintainers": [
-          "doromiert"
-        ],
-        "license": null,
-        "id": "unknown.rounded-window-corners-reborn"
+        "zenosVersion": "1.0.0"
       },
       "provider": {
-        "kind": "import",
         "expression": {
-          "name": "pkgs",
-          "path": [
+          "arguments": [
             {
-              "kind": "identifier",
-              "value": "legacy"
-            },
-            {
-              "kind": "identifier",
-              "value": "gnomeExtensions"
-            },
-            {
-              "kind": "identifier",
-              "value": "rounded-window-corners-reborn"
+              "type": "group",
+              "value": {
+                "body": {
+                  "recursive": false,
+                  "statements": [
+                    {
+                      "operator": "=",
+                      "target": [
+                        {
+                          "kind": "identifier",
+                          "value": "postPatch"
+                        }
+                      ],
+                      "type": "assignment",
+                      "value": {
+                        "left": {
+                          "type": "group",
+                          "value": {
+                            "default": {
+                              "multiline": false,
+                              "parts": [],
+                              "type": "string"
+                            },
+                            "type": "default",
+                            "value": {
+                              "path": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "old"
+                                },
+                                {
+                                  "kind": "identifier",
+                                  "value": "postPatch"
+                                }
+                              ],
+                              "type": "reference"
+                            }
+                          }
+                        },
+                        "operator": "+",
+                        "right": {
+                          "multiline": true,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "\n    substituteInPlace manager/utils.js \\\n      --replace-fail \"features.includes('scale-monitor-framebuffer')\" \\\n        \"(!Meta.is_wayland_compositor || features.includes('scale-monitor-framebuffer'))\"\n  "
+                            }
+                          ],
+                          "type": "string"
+                        },
+                        "type": "binary"
+                      }
+                    }
+                  ],
+                  "type": "attr-set"
+                },
+                "form": "identifier",
+                "parameters": [
+                  {
+                    "default": null,
+                    "name": "old",
+                    "variadic": false
+                  }
+                ],
+                "type": "lambda"
+              }
             }
           ],
-          "type": "variable"
-        }
+          "callee": {
+            "name": "pkgs",
+            "path": [
+              {
+                "kind": "identifier",
+                "value": "legacy"
+              },
+              {
+                "kind": "identifier",
+                "value": "gnomeExtensions"
+              },
+              {
+                "kind": "identifier",
+                "value": "rounded-window-corners-reborn"
+              },
+              {
+                "kind": "identifier",
+                "value": "overrideAttrs"
+              }
+            ],
+            "type": "variable"
+          },
+          "type": "call"
+        },
+        "kind": "build"
       },
-      "dependenciesDeclared": false,
-      "categoryTarget": [
-        "desktops",
-        "gnome",
-        "extensions",
+      "target": [
+        "unknown",
         "rounded-window-corners-reborn"
       ]
     },
@@ -227609,19 +227682,21 @@
       ]
     },
     {
-      "id": "pkgs.com.neg-zero.dash-stacks",
-      "target": [
-        "com",
-        "neg-zero",
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
         "dash-stacks"
       ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.dash-stacks",
       "meta": {
         "description": "\n    macOS-style folder stacks for the GNOME dash\n  ",
         "id": "com.neg-zero.dash-stacks",
         "license": "$l.napalm",
         "maintainers": [],
         "name": "dash-stacks",
-        "packageVersion": "0-unstable-2026-11-17",
+        "packageVersion": "0-unstable-2026-11-24.1",
         "summary": "macOS-style folder stacks for the GNOME dash",
         "tags": [
           "desktops",
@@ -227632,45 +227707,185 @@
       },
       "provider": {
         "expression": {
-          "arguments": [
-            {
-              "name": "lib",
-              "path": [
-                {
-                  "kind": "identifier",
-                  "value": "zenPackageSources"
-                },
-                {
-                  "kind": "identifier",
-                  "value": "compatRecipes"
-                },
-                {
-                  "kind": "string",
-                  "value": "desktops/gnome/extensions/dash-stacks"
-                }
-              ],
-              "type": "variable"
-            }
-          ],
-          "callee": {
-            "name": "lib",
-            "path": [
+          "body": {
+            "arguments": [
               {
-                "kind": "identifier",
-                "value": "zenCompatPackage"
+                "recursive": false,
+                "statements": [],
+                "type": "attr-set"
               }
             ],
-            "type": "variable"
+            "callee": {
+              "arguments": [
+                {
+                  "type": "group",
+                  "value": {
+                    "left": {
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "source"
+                        }
+                      ],
+                      "type": "reference"
+                    },
+                    "operator": "+",
+                    "right": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "/package.nix"
+                        }
+                      ],
+                      "type": "string"
+                    },
+                    "type": "binary"
+                  }
+                }
+              ],
+              "callee": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "callPackage"
+                  }
+                ],
+                "type": "variable"
+              },
+              "type": "call"
+            },
+            "type": "call"
           },
-          "type": "call"
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "source"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "owner"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "doromiert"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "repo"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "dash-stacks"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "rev"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "50514a082c09985536fc20e326b25baf878da488"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "hash"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "sha256-oSem1ZJdsjyi+aAKsIgMAaBGvoUmJHVl86ejIAhLb4Y="
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "name": "pkgs",
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "legacy"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "fetchFromGitHub"
+                    }
+                  ],
+                  "type": "variable"
+                },
+                "type": "call"
+              }
+            }
+          ],
+          "type": "let"
         },
         "kind": "build"
       },
-      "dependenciesDeclared": false,
-      "categoryTarget": [
-        "desktops",
-        "gnome",
-        "extensions",
+      "target": [
+        "com",
+        "neg-zero",
         "dash-stacks"
       ]
     },
@@ -228452,7 +228667,7 @@
           "doromiert"
         ],
         "name": "Blankbox",
-        "packageVersion": "0.15.2.12",
+        "packageVersion": "0.15.2.13",
         "summary": "Black Box terminal fork for GNOME 50",
         "tags": [
           "terminal",
@@ -230309,7 +230524,7 @@
           "doromiert"
         ],
         "name": "Steam (Gamescope)",
-        "packageVersion": "1.1.0",
+        "packageVersion": "1.2.1",
         "summary": "Steam Big Picture in Gamescope on your primary GNOME display",
         "tags": [
           "gaming",
@@ -230321,97 +230536,215 @@
       },
       "provider": {
         "expression": {
-          "arguments": [
-            {
-              "recursive": false,
-              "statements": [
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "steam"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "name": "pkgs",
-                    "path": [
-                      {
-                        "kind": "identifier",
-                        "value": "byCategories"
-                      },
-                      {
-                        "kind": "identifier",
-                        "value": "apps"
-                      },
-                      {
-                        "kind": "identifier",
-                        "value": "gaming"
-                      },
+          "body": {
+            "arguments": [
+              {
+                "recursive": false,
+                "statements": [
+                  {
+                    "operator": "=",
+                    "target": [
                       {
                         "kind": "identifier",
                         "value": "steam"
                       }
                     ],
-                    "type": "variable"
+                    "type": "assignment",
+                    "value": {
+                      "name": "pkgs",
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "byCategories"
+                        },
+                        {
+                          "kind": "identifier",
+                          "value": "apps"
+                        },
+                        {
+                          "kind": "identifier",
+                          "value": "gaming"
+                        },
+                        {
+                          "kind": "identifier",
+                          "value": "steam"
+                        }
+                      ],
+                      "type": "variable"
+                    }
                   }
-                }
-              ],
-              "type": "attr-set"
-            }
-          ],
-          "callee": {
-            "arguments": [
-              {
-                "type": "group",
-                "value": {
-                  "left": {
-                    "name": "lib",
-                    "path": [
-                      {
-                        "kind": "identifier",
-                        "value": "zenPackageSources"
-                      },
-                      {
-                        "kind": "identifier",
-                        "value": "steamGamescope"
-                      }
-                    ],
-                    "type": "variable"
-                  },
-                  "operator": "+",
-                  "right": {
-                    "multiline": false,
-                    "parts": [
-                      {
-                        "type": "text",
-                        "value": "/package.nix"
-                      }
-                    ],
-                    "type": "string"
-                  },
-                  "type": "binary"
-                }
+                ],
+                "type": "attr-set"
               }
             ],
             "callee": {
-              "name": "pkgs",
-              "path": [
+              "arguments": [
                 {
-                  "kind": "identifier",
-                  "value": "legacy"
-                },
-                {
-                  "kind": "identifier",
-                  "value": "callPackage"
+                  "type": "group",
+                  "value": {
+                    "left": {
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "sourceSteamGamescope"
+                        }
+                      ],
+                      "type": "reference"
+                    },
+                    "operator": "+",
+                    "right": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "/package.nix"
+                        }
+                      ],
+                      "type": "string"
+                    },
+                    "type": "binary"
+                  }
                 }
               ],
-              "type": "variable"
+              "callee": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "callPackage"
+                  }
+                ],
+                "type": "variable"
+              },
+              "type": "call"
             },
             "type": "call"
           },
-          "type": "call"
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "sourceSteamGamescope"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "type": "group",
+                "value": {
+                  "arguments": [
+                    {
+                      "recursive": false,
+                      "statements": [
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "owner"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "zenos-n"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "repo"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "steam-gamescope"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "rev"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "b75572f52259f3a936b55bdeae1303f58f6fe251"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "hash"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "sha256-BBha2VRhDyOpFU2OjiD1+2e/R3sIToXckM+IDBIdq6g="
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "type": "attr-set"
+                    }
+                  ],
+                  "callee": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "fetchFromGitHub"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "type": "call"
+                }
+              }
+            }
+          ],
+          "type": "let"
         },
         "kind": "build"
       },
@@ -230744,7 +231077,7 @@
           "doromiert"
         ],
         "name": "App Library",
-        "packageVersion": "0.1.5",
+        "packageVersion": "0.1.6",
         "summary": "A paginated GNOME application library",
         "tags": [
           "desktops",
@@ -230828,7 +231161,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "a8adaec2789858bee76835ad121de31ae56efdce"
+                                    "value": "1a2838679c3107ba11307c95c21fe6679b08ede9"
                                   }
                                 ],
                                 "type": "string"
@@ -230848,7 +231181,7 @@
                                 "parts": [
                                   {
                                     "type": "text",
-                                    "value": "sha256-02pABcdw+0VBjjDJEJLPjl3G8bVlTp1JiYWeA382AF0="
+                                    "value": "sha256-gKnNN5qKmDcqzmLlIfR6nsnK/+4DnivEB8LwtMfIM0c="
                                   }
                                 ],
                                 "type": "string"
@@ -230914,6 +231247,641 @@
         "com",
         "neg-zero",
         "app-library"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
+        "aod"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.com.neg-zero.zenos-aod",
+      "meta": {
+        "description": "Live filtered windows preserve foreground colors, with optional grayscale, native lockscreen extension interoperability, temporary dark mode and randomized pixel shifting. Manual lock remains available.",
+        "id": "com.neg-zero.zenos-aod",
+        "license": "$l.gpl3Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "ZenOS Always On Display",
+        "packageVersion": "0.1.5",
+        "summary": "Live windows or the native GNOME lockscreen on a dim black display",
+        "tags": [
+          "gnome",
+          "extensions",
+          "oled",
+          "power"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "body": {
+            "arguments": [
+              {
+                "recursive": false,
+                "statements": [],
+                "type": "attr-set"
+              }
+            ],
+            "callee": {
+              "arguments": [
+                {
+                  "type": "group",
+                  "value": {
+                    "left": {
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "source"
+                        }
+                      ],
+                      "type": "reference"
+                    },
+                    "operator": "+",
+                    "right": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "/package.nix"
+                        }
+                      ],
+                      "type": "string"
+                    },
+                    "type": "binary"
+                  }
+                }
+              ],
+              "callee": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "callPackage"
+                  }
+                ],
+                "type": "variable"
+              },
+              "type": "call"
+            },
+            "type": "call"
+          },
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "source"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "owner"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "doromiert"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "repo"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "zenos-aod"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "rev"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "b960cafffec2ada200b039b4244e2822ad1e7ad3"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "hash"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "sha256-rki145S5saq3pEbGTv608AQknEtzDUBcK2J9LZPl3Z0="
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "name": "pkgs",
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "legacy"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "fetchFromGitHub"
+                    }
+                  ],
+                  "type": "variable"
+                },
+                "type": "call"
+              }
+            }
+          ],
+          "type": "let"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "com",
+        "neg-zero",
+        "zenos-aod"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "gaming",
+        "lsfg-vk"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.gay.pancake.lsfg-vk-ui",
+      "meta": {
+        "description": "\n    Vulkan frame generation layer, validation tools, and graphical configuration.\n    Requires a purchased copy of Lossless Scaling installed through Steam with\n    its lsfg-vk beta selected. Profiles can enable frame generation per game.\n  ",
+        "id": "gay.pancake.lsfg-vk-ui",
+        "license": "$l.cc-by-nc-nd-40",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "lsfg-vk",
+        "packageVersion": "2.0.0",
+        "summary": "Lossless Scaling frame generation for Vulkan games",
+        "tags": [
+          "gaming",
+          "vulkan",
+          "frame-generation"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "body": {
+            "arguments": [
+              {
+                "recursive": false,
+                "statements": [],
+                "type": "attr-set"
+              }
+            ],
+            "callee": {
+              "arguments": [
+                {
+                  "type": "group",
+                  "value": {
+                    "left": {
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "sourceLsfg"
+                        }
+                      ],
+                      "type": "reference"
+                    },
+                    "operator": "+",
+                    "right": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "/package.nix"
+                        }
+                      ],
+                      "type": "string"
+                    },
+                    "type": "binary"
+                  }
+                }
+              ],
+              "callee": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "callPackage"
+                  }
+                ],
+                "type": "variable"
+              },
+              "type": "call"
+            },
+            "type": "call"
+          },
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "sourceLsfg"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "type": "group",
+                "value": {
+                  "arguments": [
+                    {
+                      "recursive": false,
+                      "statements": [
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "owner"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "zenos-n"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "repo"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "lsfg-vk"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "rev"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "ea2be9856903ce87b15ac2d8c709b558316b7058"
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        },
+                        {
+                          "operator": "=",
+                          "target": [
+                            {
+                              "kind": "identifier",
+                              "value": "hash"
+                            }
+                          ],
+                          "type": "assignment",
+                          "value": {
+                            "multiline": false,
+                            "parts": [
+                              {
+                                "type": "text",
+                                "value": "sha256-izCMGfRO1Q5+Fok9Mlca8Vdn09Voz8VmH1RRu70WlQk="
+                              }
+                            ],
+                            "type": "string"
+                          }
+                        }
+                      ],
+                      "type": "attr-set"
+                    }
+                  ],
+                  "callee": {
+                    "name": "pkgs",
+                    "path": [
+                      {
+                        "kind": "identifier",
+                        "value": "legacy"
+                      },
+                      {
+                        "kind": "identifier",
+                        "value": "fetchFromGitHub"
+                      }
+                    ],
+                    "type": "variable"
+                  },
+                  "type": "call"
+                }
+              }
+            }
+          ],
+          "type": "let"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "gay",
+        "pancake",
+        "lsfg-vk-ui"
+      ]
+    },
+    {
+      "categoryTarget": [
+        "desktops",
+        "gnome",
+        "extensions",
+        "rounded-window-corners-native"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.io.github.ztrahmet.rounded-window-corners-native",
+      "meta": {
+        "description": "Alternate to Rounded Window Corners Reborn. GNOME50 port of Ahmet \u00d6zt\u00fcrk's extension, with sharp rendering enabled by default. Disable other corner extensions before enabling this one.",
+        "id": "io.github.ztrahmet.rounded-window-corners-native",
+        "license": "$l.gpl3Plus",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Rounded Window Corners Native",
+        "packageVersion": "51.1-gnome50.2",
+        "summary": "Sharp fractional-scale rounded corners for GNOME50",
+        "tags": [
+          "gnome",
+          "extensions",
+          "theming",
+          "hidpi"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "body": {
+            "arguments": [
+              {
+                "recursive": false,
+                "statements": [],
+                "type": "attr-set"
+              }
+            ],
+            "callee": {
+              "arguments": [
+                {
+                  "type": "group",
+                  "value": {
+                    "left": {
+                      "path": [
+                        {
+                          "kind": "identifier",
+                          "value": "source"
+                        }
+                      ],
+                      "type": "reference"
+                    },
+                    "operator": "+",
+                    "right": {
+                      "multiline": false,
+                      "parts": [
+                        {
+                          "type": "text",
+                          "value": "/package.nix"
+                        }
+                      ],
+                      "type": "string"
+                    },
+                    "type": "binary"
+                  }
+                }
+              ],
+              "callee": {
+                "name": "pkgs",
+                "path": [
+                  {
+                    "kind": "identifier",
+                    "value": "legacy"
+                  },
+                  {
+                    "kind": "identifier",
+                    "value": "callPackage"
+                  }
+                ],
+                "type": "variable"
+              },
+              "type": "call"
+            },
+            "type": "call"
+          },
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "source"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "owner"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "doromiert"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "repo"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "rounded-window-corners-native"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "rev"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "2e8518f8439508ecfbe06f029b8a92a8562a1314"
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "hash"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "multiline": false,
+                          "parts": [
+                            {
+                              "type": "text",
+                              "value": "sha256-LeZPpWDa5CDaj6TnI2PIvaLWJ5R2Ky2h7EB5InqIISE="
+                            }
+                          ],
+                          "type": "string"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  }
+                ],
+                "callee": {
+                  "name": "pkgs",
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "legacy"
+                    },
+                    {
+                      "kind": "identifier",
+                      "value": "fetchFromGitHub"
+                    }
+                  ],
+                  "type": "variable"
+                },
+                "type": "call"
+              }
+            }
+          ],
+          "type": "let"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "io",
+        "github",
+        "ztrahmet",
+        "rounded-window-corners-native"
       ]
     }
   ]
