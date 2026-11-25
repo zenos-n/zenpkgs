@@ -230439,7 +230439,7 @@
           "doromiert"
         ],
         "name": "Rounded Window Corners Native",
-        "packageVersion": "51.1-gnome50.2",
+        "packageVersion": "51.1-gnome50.3",
         "summary": "Sharp fractional-scale rounded corners for GNOME50",
         "tags": [
           "gnome",
@@ -230575,7 +230575,7 @@
                           "parts": [
                             {
                               "type": "text",
-                              "value": "2e8518f8439508ecfbe06f029b8a92a8562a1314"
+                              "value": "b7bc9dcc2cdbd486823da87609f729e48b3c0d08"
                             }
                           ],
                           "type": "string"
@@ -230595,7 +230595,7 @@
                           "parts": [
                             {
                               "type": "text",
-                              "value": "sha256-LeZPpWDa5CDaj6TnI2PIvaLWJ5R2Ky2h7EB5InqIISE="
+                              "value": "sha256-1tbKeD+3eTyoM8MnMkMFz04UxESNluEr9KfMYYfPlVE="
                             }
                           ],
                           "type": "string"

@@ -13,8 +13,7 @@ also rounds libadwaita apps; both `sharp-windows` and `round-libadwaita-apps` ar
 configurable booleans. Other appearance choices follow upstream and can be
 changed in the extension preferences. Do not enable both rounding extensions.
 
-The package owns its external source pin and introduces no flake input or Mutter
-replacement. Initial synthetic GNOME50.4 Wayland tests preserved interior text
+The package owns its external source pin and introduces no flake input. Initial synthetic GNOME50.4 Wayland tests preserved interior text
 and stripe pixels at100%,150%,200%, including resize/fullscreen/overview checks.
 This does not establish every real app or mixed-monitor case. Fractional-scale
 XWayland sharpness remains unverified due baseline fixture geometry issues.
@@ -24,3 +23,13 @@ deformations, preserving foreign timelines. Tested Compiz Windows31 and Magic
 Lamp24 on GNOME50.4, including actual minimize/restore and a shifted-edge pixel
 assertion. Sharp interior pixels remain unchanged after animations settle.
 GNOME caches the extension module: updated code takes effect at the next login.
+
+Version51.1-gnome50.3 preserves the paint target while buffering mixed SDR/HDR
+windows. This fixes unmaximized HDR pages becoming darker with sharp corners.
+The existing ZenOS Mutter50.4 overlay exposes the paint-target getter to GJS;
+no compositor rendering algorithm is changed. Stock GNOME50 without that API
+retains the previous extension path. Both updated code and typelib load at the
+next login; restarting a browser alone cannot update a running GNOME Shell.
+Native pixel tests preserve SDR gray ramps and PQ highlights across window
+states and alternating SDR/HDR captures. Physical monitor acceptance remains
+separate from these encoding checks.
