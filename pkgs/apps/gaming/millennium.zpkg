@@ -12,7 +12,7 @@ _meta = {
 
 # Match Steam's libc/loader while retaining upstream's exact Bun pin.
 build = let
-  source = $lib.getFlake "github:zenos-n/millennium-nix/436dd66481a41099c67706c4ef8f8fb381be1c80";
+  source = $lib.getFlake "github:zenos-n/millennium-nix/2ab7ccc6d5cc438b4555283e423b7d5fd3b9e54c";
   runtime = (source.overlays.default $pkgs.legacy $pkgs.legacy).millennium;
 in runtime.overrideAttrs (old: {
   passthru = (old.passthru or { }) // {

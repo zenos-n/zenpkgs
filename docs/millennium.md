@@ -24,5 +24,7 @@ under the MIT license.
 ZenOS maintains a [Nix-only packaging adaptation](https://github.com/zenos-n/millennium-nix)
 for upstream [dependency-hash issue #934](https://github.com/SteamClientHomebrew/Millennium/issues/934).
 Dependency fetching skips binary/shebang fixups; TTC compilation runs in the
-normal build sandbox. The upstream 3.6.3 runtime and Steam wrapper are unchanged.
+normal build sandbox. The upstream 3.6.3 runtime is unchanged. Bootstrap placement
+prioritizes `.private/Packages/Steam`, then resolves Steam compatibility links
+and XDG/default paths. Stale default folders never override the private install.
 Header-only nlohmann_json dependency tests are skipped to bound installation disk use.
