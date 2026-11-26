@@ -37,15 +37,14 @@ identity is separate from the application identity; Gnosis migrates existing
 browser profiles, credentials, settings and KeePassXC pairing.
 
 The source is [zenos-n/gnosis](https://github.com/zenos-n/gnosis), pinned by
-the `gnosis` flake input and `flake.lock`. Zenpkgs imports the project's own
+its owning `pkgs/apps/browsers/gnosis.zpkg` declaration. Zenpkgs imports the project's own
 package output and locked Nixpkgs rather than rebuilding it against the catalog's
 Brave version. The native binary adapters require their exact Brave version.
 Package source and assets stay in the Gnosis repository; no workstation path is
 part of the package declaration.
 
-Override `package` to select another Gnosis derivation. Development validation
-can use `--override-input gnosis git+file:///path/to/gnosis --no-write-lock-file`;
-this is an explicit local override, not the published source pin.
+Override `package` to select another Gnosis derivation for development validation.
+The published source remains owned by the Gnosis package declaration.
 The CEF/WebKit service migration is still in progress.
 
 The module installs Gnosis without starting or restarting a running browser.
@@ -92,3 +91,10 @@ bands, HDR media, repeated fullscreen cycles and fractional scaling; physical
 monitor calibration and compositor-specific SDR enhancement profiles remain
 separate from those pixel/protocol checks. Running windows receive the update
 at their next normal browser launch.
+
+The native color path keeps SDR and Display-P3 SDR distinct from HDR capability.
+HDR pages also put GTK's clipped edge strips into HDR, preventing a darker band
+at rounded window edges. Closed tabs destroy their browser documents rather
+than parking a hidden page; the managed browser can remain alive with zero tabs.
+Web-app launchers follow the installed Gnosis launcher across upgrades, while
+existing running windows retain their original executable until closed.

@@ -223901,30 +223901,53 @@
             "callee": {
               "arguments": [
                 {
-                  "name": "lib",
-                  "path": [
-                    {
-                      "kind": "identifier",
-                      "value": "zenPackageSources"
-                    },
-                    {
-                      "kind": "identifier",
-                      "value": "gnosis"
-                    },
-                    {
-                      "kind": "identifier",
-                      "value": "packages"
-                    },
-                    {
+                  "segment": {
+                    "kind": "identifier",
+                    "value": "default"
+                  },
+                  "type": "selection",
+                  "value": {
+                    "segment": {
                       "kind": "identifier",
                       "value": "x86_64-linux"
                     },
-                    {
-                      "kind": "identifier",
-                      "value": "default"
+                    "type": "selection",
+                    "value": {
+                      "segment": {
+                        "kind": "identifier",
+                        "value": "packages"
+                      },
+                      "type": "selection",
+                      "value": {
+                        "type": "group",
+                        "value": {
+                          "arguments": [
+                            {
+                              "multiline": false,
+                              "parts": [
+                                {
+                                  "type": "text",
+                                  "value": "github:zenos-n/gnosis/c39d0d917f41b56fb7bb0dceb1b10a69f3f45860"
+                                }
+                              ],
+                              "type": "string"
+                            }
+                          ],
+                          "callee": {
+                            "name": "lib",
+                            "path": [
+                              {
+                                "kind": "identifier",
+                                "value": "getFlake"
+                              }
+                            ],
+                            "type": "variable"
+                          },
+                          "type": "call"
+                        }
+                      }
                     }
-                  ],
-                  "type": "variable"
+                  }
                 }
               ],
               "callee": {
