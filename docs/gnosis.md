@@ -78,3 +78,17 @@ controlled by ZenOS configuration.
 The source pin now includes these associations, native external-application
 confirmation, destination-page history swipe previews and native scroll momentum.
 Existing browser and web-app windows adopt the update after a normal restart.
+
+
+Gnosis separates SDR content from the monitor's HDR capability. SDR-only pages
+use native sRGB output, Display-P3 SDR canvases retain their primaries, and HDR
+images/video retain native PQ highlights. Switching content color spaces commits
+new asynchronous Wayland descriptions, including for a static HDR image that
+does not repaint again. Real full uBlock Origin and the Chromium sandbox remain
+in use; the module does not alter monitor mode or personal color preferences.
+A mixed SDR/HDR page may use one PQ surface while its SDR regions retain SDR
+luminance. The native regression checks encoded colors, P3 pixels, SDR gray
+bands, HDR media, repeated fullscreen cycles and fractional scaling; physical
+monitor calibration and compositor-specific SDR enhancement profiles remain
+separate from those pixel/protocol checks. Running windows receive the update
+at their next normal browser launch.
