@@ -16,6 +16,10 @@ pkgs.runCommand "mutter-sdr-hdr-package-check" { nativeBuildInputs = [ pkgs.glib
   gsettings --schemadir "$schemas" range org.gnome.mutter sdr-hdr-corrections > "$out"
   grep -Fx 'type a(ssssdd)' "$out"
   if [ "${mutter.version}" = "50.4" ]; then
+    gsettings --schemadir "$schemas" range org.gnome.mutter sdr-hdr-grading > grading-range.txt
+    grep -Fx 'type a(ssssad)' grading-range.txt
+    gsettings --schemadir "$schemas" get org.gnome.mutter sdr-hdr-grading > grading-default.txt
+    grep -Fx '@a(ssssad) []' grading-default.txt
     GI_TYPELIB_PATH=${mutter}/lib/mutter-18:$GI_TYPELIB_PATH gjs -c '
       imports.gi.versions.Clutter = "18";
       const Clutter = imports.gi.Clutter;
