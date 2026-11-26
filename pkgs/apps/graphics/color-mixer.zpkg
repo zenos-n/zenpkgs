@@ -1,0 +1,27 @@
+_meta = {
+  id = "com.neg-zero.ColorMixer";
+  name = "Color Mixer";
+  summary = "Per-monitor SDR appearance controls with native HDR bypass";
+  description = ''
+    Tune SDR white, gamma, contrast and six color ranges independently for
+    each HDR monitor. Includes shared SDR references and a window mirror.
+    Requires the optional grading backend in the running GNOME compositor.
+    Personal profiles remain user settings; native HDR bypasses the grade.
+  '';
+  zenosVersion = "1.0.0";
+  packageVersion = "0.1.0";
+  tags = [ "graphics" "color" "hdr" "gnome" "gtk4" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.napl;
+};
+
+build = let
+  source = ($pkgs.legacy.fetchFromGitHub {
+    owner = "zenos-n";
+    repo = "color-mixer";
+    rev = "084161d2ccc90e7158fdde222a8c2f2f80303c59";
+    hash = "sha256-LNMDI8ah503ARbGREW1i/X/tIUhWhc56CNkOoVzIV2Q=";
+  }).outPath;
+in $pkgs.legacy.callPackage (source + "/default.nix") {
+  pkgs = $pkgs.legacy;
+};
