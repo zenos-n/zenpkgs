@@ -5,6 +5,6 @@ if mutter.version != "50.4" || (mutter.zenosSdrHdrCorrection or false) then mutt
 import (fetchFromGitHub {
   owner = "doromiert";
   repo = "zenos-mutter";
-  rev = "c3169c82997c4f0d5b8be14f94a51ed11ab69591";
-  hash = "sha256-Kgu2sDXi+HJqF5J4vePy/Wm62cWn6moHThsNkq/SzSQ=";
+  rev = "e73570c5881a6baa5362a2b447cd3914023de5f3";
+  hash = "sha256-DHEAlzerHLWPIy17u7TTq+pI78DZJfHuh1wzClcd5TE=";
 }) { inherit mutter; }
