@@ -24,11 +24,17 @@ pkgs.runCommand "mutter-sdr-hdr-package-check" { nativeBuildInputs = [ pkgs.glib
     grep -Fx 'type a(ssssad)' mixer-range.txt
     gsettings --schemadir "$schemas" get org.gnome.mutter sdr-hdr-color-mixer > mixer-default.txt
     grep -Fx '@a(ssssad) []' mixer-default.txt
+    gsettings --schemadir "$schemas" range org.gnome.mutter sdr-hdr-brightness-curves > curve-range.txt
+    grep -Fx 'type a(ssssad)' curve-range.txt
+    gsettings --schemadir "$schemas" get org.gnome.mutter sdr-hdr-brightness-curves > curve-default.txt
+    grep -Fx '@a(ssssad) []' curve-default.txt
     GI_TYPELIB_PATH=${mutter}/lib/mutter-18:$GI_TYPELIB_PATH gjs -c '
       imports.gi.versions.Clutter = "18";
       const Clutter = imports.gi.Clutter;
       if (typeof Clutter.ColorState.prototype.params_set_sdr_mixer !== "function")
         throw Error("SDR color mixer API is missing");
+      if (typeof Clutter.ColorState.prototype.params_set_sdr_white !== "function")
+        throw Error("SDR brightness curve API is missing");
       if (typeof Clutter.PaintContext.prototype.get_target_color_state !== "function")
         throw Error("HDR offscreen effects cannot inspect the paint target");
     '
