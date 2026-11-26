@@ -223652,7 +223652,7 @@
           "doromiert"
         ],
         "name": "Select for Figma",
-        "packageVersion": "1.0.2-unstable-2026-10-24",
+        "packageVersion": "1.0.3",
         "summary": "Native GTK and libadwaita Figma workspace",
         "tags": [
           "graphics",
@@ -223673,34 +223673,19 @@
                   "target": [
                     {
                       "kind": "identifier",
-                      "value": "version"
+                      "value": "pkgs"
                     }
                   ],
                   "type": "assignment",
                   "value": {
-                    "multiline": false,
-                    "parts": [
+                    "name": "pkgs",
+                    "path": [
                       {
-                        "type": "text",
-                        "value": "1.0.2-unstable-2026-10-24"
+                        "kind": "identifier",
+                        "value": "legacy"
                       }
                     ],
-                    "type": "string"
-                  }
-                },
-                {
-                  "operator": "=",
-                  "target": [
-                    {
-                      "kind": "identifier",
-                      "value": "__intentionallyOverridingVersion"
-                    }
-                  ],
-                  "type": "assignment",
-                  "value": {
-                    "kind": "true",
-                    "type": "literal",
-                    "value": true
+                    "type": "variable"
                   }
                 }
               ],
@@ -223708,189 +223693,148 @@
             }
           ],
           "callee": {
-            "segment": {
-              "kind": "identifier",
-              "value": "overrideAttrs"
-            },
-            "type": "selection",
-            "value": {
-              "type": "group",
-              "value": {
-                "arguments": [
-                  {
-                    "recursive": false,
-                    "statements": [
-                      {
-                        "operator": "=",
-                        "target": [
-                          {
-                            "kind": "identifier",
-                            "value": "pkgs"
-                          }
-                        ],
-                        "type": "assignment",
-                        "value": {
-                          "name": "pkgs",
-                          "path": [
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "left": {
+                    "type": "group",
+                    "value": {
+                      "arguments": [
+                        {
+                          "recursive": false,
+                          "statements": [
                             {
-                              "kind": "identifier",
-                              "value": "legacy"
-                            }
-                          ],
-                          "type": "variable"
-                        }
-                      }
-                    ],
-                    "type": "attr-set"
-                  }
-                ],
-                "callee": {
-                  "arguments": [
-                    {
-                      "type": "group",
-                      "value": {
-                        "left": {
-                          "type": "group",
-                          "value": {
-                            "arguments": [
-                              {
-                                "recursive": false,
-                                "statements": [
-                                  {
-                                    "operator": "=",
-                                    "target": [
-                                      {
-                                        "kind": "identifier",
-                                        "value": "owner"
-                                      }
-                                    ],
-                                    "type": "assignment",
-                                    "value": {
-                                      "multiline": false,
-                                      "parts": [
-                                        {
-                                          "type": "text",
-                                          "value": "doromiert"
-                                        }
-                                      ],
-                                      "type": "string"
-                                    }
-                                  },
-                                  {
-                                    "operator": "=",
-                                    "target": [
-                                      {
-                                        "kind": "identifier",
-                                        "value": "repo"
-                                      }
-                                    ],
-                                    "type": "assignment",
-                                    "value": {
-                                      "multiline": false,
-                                      "parts": [
-                                        {
-                                          "type": "text",
-                                          "value": "select-for-figma"
-                                        }
-                                      ],
-                                      "type": "string"
-                                    }
-                                  },
-                                  {
-                                    "operator": "=",
-                                    "target": [
-                                      {
-                                        "kind": "identifier",
-                                        "value": "rev"
-                                      }
-                                    ],
-                                    "type": "assignment",
-                                    "value": {
-                                      "multiline": false,
-                                      "parts": [
-                                        {
-                                          "type": "text",
-                                          "value": "a3b91956f30d154df0ba8bca07e70f72beed4187"
-                                        }
-                                      ],
-                                      "type": "string"
-                                    }
-                                  },
-                                  {
-                                    "operator": "=",
-                                    "target": [
-                                      {
-                                        "kind": "identifier",
-                                        "value": "hash"
-                                      }
-                                    ],
-                                    "type": "assignment",
-                                    "value": {
-                                      "multiline": false,
-                                      "parts": [
-                                        {
-                                          "type": "text",
-                                          "value": "sha256-dSxY+vRK17/1KcYPrOP6b8ZMcASK3xzHaEyYahO9gGQ="
-                                        }
-                                      ],
-                                      "type": "string"
-                                    }
-                                  }
-                                ],
-                                "type": "attr-set"
-                              }
-                            ],
-                            "callee": {
-                              "name": "pkgs",
-                              "path": [
+                              "operator": "=",
+                              "target": [
                                 {
                                   "kind": "identifier",
-                                  "value": "legacy"
-                                },
-                                {
-                                  "kind": "identifier",
-                                  "value": "fetchFromGitHub"
+                                  "value": "owner"
                                 }
                               ],
-                              "type": "variable"
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "doromiert"
+                                  }
+                                ],
+                                "type": "string"
+                              }
                             },
-                            "type": "call"
-                          }
-                        },
-                        "operator": "+",
-                        "right": {
-                          "multiline": false,
-                          "parts": [
                             {
-                              "type": "text",
-                              "value": "/package.nix"
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "repo"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "select-for-figma"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "rev"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "e9661f6f460d87fe9f43dba3c1f6a1a7cc3784e6"
+                                  }
+                                ],
+                                "type": "string"
+                              }
+                            },
+                            {
+                              "operator": "=",
+                              "target": [
+                                {
+                                  "kind": "identifier",
+                                  "value": "hash"
+                                }
+                              ],
+                              "type": "assignment",
+                              "value": {
+                                "multiline": false,
+                                "parts": [
+                                  {
+                                    "type": "text",
+                                    "value": "sha256-4+QcP3V1js+vv9EJ7fw4W7N24sefrUES5dSGVqLXCiY="
+                                  }
+                                ],
+                                "type": "string"
+                              }
                             }
                           ],
-                          "type": "string"
-                        },
-                        "type": "binary"
-                      }
-                    }
-                  ],
-                  "callee": {
-                    "name": "pkgs",
-                    "path": [
-                      {
-                        "kind": "identifier",
-                        "value": "legacy"
+                          "type": "attr-set"
+                        }
+                      ],
+                      "callee": {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "fetchFromGitHub"
+                          }
+                        ],
+                        "type": "variable"
                       },
+                      "type": "call"
+                    }
+                  },
+                  "operator": "+",
+                  "right": {
+                    "multiline": false,
+                    "parts": [
                       {
-                        "kind": "identifier",
-                        "value": "callPackage"
+                        "type": "text",
+                        "value": "/package.nix"
                       }
                     ],
-                    "type": "variable"
+                    "type": "string"
                   },
-                  "type": "call"
-                },
-                "type": "call"
+                  "type": "binary"
+                }
               }
-            }
+            ],
+            "callee": {
+              "name": "pkgs",
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "legacy"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "callPackage"
+                }
+              ],
+              "type": "variable"
+            },
+            "type": "call"
           },
           "type": "call"
         },
