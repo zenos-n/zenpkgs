@@ -1,0 +1,21 @@
+_meta = {
+  id = "app.steambrew.millennium";
+  name = "Millennium";
+  summary = "SteamBrew themes and plugins for the Steam client";
+  description = ''Official Millennium runtime; enable system.gaming.steam.millennium to integrate it with Steam.'';
+  zenosVersion = "1.0.0";
+  packageVersion = "3.6.3";
+  tags = [ "gaming" "steam" "themes" "plugins" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+};
+
+# Match Steam's libc/loader while retaining upstream's exact Bun pin.
+build = let
+  source = $lib.getFlake "github:zenos-n/millennium-nix/436dd66481a41099c67706c4ef8f8fb381be1c80";
+  runtime = (source.overlays.default $pkgs.legacy $pkgs.legacy).millennium;
+in runtime.overrideAttrs (old: {
+  passthru = (old.passthru or { }) // {
+    steamWrapper = source.outPath + "/steam.nix";
+  };
+});

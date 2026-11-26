@@ -793,6 +793,7 @@
           '';
           nzportable = import ./tests/nzportable.nix { inherit pkgs; };
           steam-gamescope = import ./tests/steam-gamescope.nix { inherit pkgs; };
+          millennium = import ./tests/millennium.nix { inherit nixpkgs; zenosModule = self.nixosModules.default; };
           vencord = import ./tests/vencord.nix { inherit pkgs; };
           application-program-options = import ./tests/application-program-options.nix {
             pkgs = dsl.bootstrapPkgs;

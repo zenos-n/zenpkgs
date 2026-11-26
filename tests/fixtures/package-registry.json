@@ -230600,6 +230600,267 @@
         "ztrahmet",
         "rounded-window-corners-native"
       ]
+    },
+    {
+      "categoryTarget": [
+        "apps",
+        "gaming",
+        "millennium"
+      ],
+      "dependenciesDeclared": false,
+      "id": "pkgs.app.steambrew.millennium",
+      "meta": {
+        "description": "Official Millennium runtime; enable system.gaming.steam.millennium to integrate it with Steam.",
+        "id": "app.steambrew.millennium",
+        "license": "$l.mit",
+        "maintainers": [
+          "doromiert"
+        ],
+        "name": "Millennium",
+        "packageVersion": "3.6.3",
+        "summary": "SteamBrew themes and plugins for the Steam client",
+        "tags": [
+          "gaming",
+          "steam",
+          "themes",
+          "plugins"
+        ],
+        "zenosVersion": "1.0.0"
+      },
+      "provider": {
+        "expression": {
+          "body": {
+            "arguments": [
+              {
+                "type": "group",
+                "value": {
+                  "body": {
+                    "recursive": false,
+                    "statements": [
+                      {
+                        "operator": "=",
+                        "target": [
+                          {
+                            "kind": "identifier",
+                            "value": "passthru"
+                          }
+                        ],
+                        "type": "assignment",
+                        "value": {
+                          "left": {
+                            "type": "group",
+                            "value": {
+                              "default": {
+                                "recursive": false,
+                                "statements": [],
+                                "type": "attr-set"
+                              },
+                              "type": "default",
+                              "value": {
+                                "path": [
+                                  {
+                                    "kind": "identifier",
+                                    "value": "old"
+                                  },
+                                  {
+                                    "kind": "identifier",
+                                    "value": "passthru"
+                                  }
+                                ],
+                                "type": "reference"
+                              }
+                            }
+                          },
+                          "operator": "//",
+                          "right": {
+                            "recursive": false,
+                            "statements": [
+                              {
+                                "operator": "=",
+                                "target": [
+                                  {
+                                    "kind": "identifier",
+                                    "value": "steamWrapper"
+                                  }
+                                ],
+                                "type": "assignment",
+                                "value": {
+                                  "left": {
+                                    "path": [
+                                      {
+                                        "kind": "identifier",
+                                        "value": "source"
+                                      },
+                                      {
+                                        "kind": "identifier",
+                                        "value": "outPath"
+                                      }
+                                    ],
+                                    "type": "reference"
+                                  },
+                                  "operator": "+",
+                                  "right": {
+                                    "multiline": false,
+                                    "parts": [
+                                      {
+                                        "type": "text",
+                                        "value": "/steam.nix"
+                                      }
+                                    ],
+                                    "type": "string"
+                                  },
+                                  "type": "binary"
+                                }
+                              }
+                            ],
+                            "type": "attr-set"
+                          },
+                          "type": "binary"
+                        }
+                      }
+                    ],
+                    "type": "attr-set"
+                  },
+                  "form": "identifier",
+                  "parameters": [
+                    {
+                      "default": null,
+                      "name": "old",
+                      "variadic": false
+                    }
+                  ],
+                  "type": "lambda"
+                }
+              }
+            ],
+            "callee": {
+              "path": [
+                {
+                  "kind": "identifier",
+                  "value": "runtime"
+                },
+                {
+                  "kind": "identifier",
+                  "value": "overrideAttrs"
+                }
+              ],
+              "type": "reference"
+            },
+            "type": "call"
+          },
+          "statements": [
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "source"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "arguments": [
+                  {
+                    "multiline": false,
+                    "parts": [
+                      {
+                        "type": "text",
+                        "value": "github:zenos-n/millennium-nix/436dd66481a41099c67706c4ef8f8fb381be1c80"
+                      }
+                    ],
+                    "type": "string"
+                  }
+                ],
+                "callee": {
+                  "name": "lib",
+                  "path": [
+                    {
+                      "kind": "identifier",
+                      "value": "getFlake"
+                    }
+                  ],
+                  "type": "variable"
+                },
+                "type": "call"
+              }
+            },
+            {
+              "operator": "=",
+              "target": [
+                {
+                  "kind": "identifier",
+                  "value": "runtime"
+                }
+              ],
+              "type": "assignment",
+              "value": {
+                "segment": {
+                  "kind": "identifier",
+                  "value": "millennium"
+                },
+                "type": "selection",
+                "value": {
+                  "type": "group",
+                  "value": {
+                    "arguments": [
+                      {
+                        "name": "pkgs",
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "legacy"
+                          }
+                        ],
+                        "type": "variable"
+                      }
+                    ],
+                    "callee": {
+                      "arguments": [
+                        {
+                          "name": "pkgs",
+                          "path": [
+                            {
+                              "kind": "identifier",
+                              "value": "legacy"
+                            }
+                          ],
+                          "type": "variable"
+                        }
+                      ],
+                      "callee": {
+                        "path": [
+                          {
+                            "kind": "identifier",
+                            "value": "source"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "overlays"
+                          },
+                          {
+                            "kind": "identifier",
+                            "value": "default"
+                          }
+                        ],
+                        "type": "reference"
+                      },
+                      "type": "call"
+                    },
+                    "type": "call"
+                  }
+                }
+              }
+            }
+          ],
+          "type": "let"
+        },
+        "kind": "build"
+      },
+      "target": [
+        "app",
+        "steambrew",
+        "millennium"
+      ]
     }
   ]
 }

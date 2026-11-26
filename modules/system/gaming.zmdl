@@ -24,6 +24,30 @@ _meta = {
   };
 };
 
+steam.millennium = {
+_meta = {
+  name = "SteamBrew (Millennium)";
+  summary = "Enable Steam client themes and plugins";
+  description = ''Use the official Millennium Steam integration in both the ordinary and Gamescope launchers. Takes effect on the next Steam launch; never restarts a running client.'';
+  tags = [ "gaming" "steam" "themes" "plugins" ];
+  maintainers = [ $m.doromiert ];
+  license = $l.mit;
+  type = $type.either [ ($type.boolean) $type.null ];
+  default = null;
+};
+  s!! {
+    # Run before the package mapping so curated Steam and its callers share it.
+    nixpkgs.overlays = $lib.mkIf ($path.steam.millennium == true) ($lib.mkBefore [
+      (final: prev: {
+        steam = prev.callPackage final.zenos.byCategories.apps.gaming.millennium.steamWrapper {
+          steam = prev.steam;
+          millennium = final.zenos.byCategories.apps.gaming.millennium;
+        };
+      })
+    ]);
+  };
+};
+
 steam.remotePlay = {
 _meta = {
   name = "Allow Steam Remote Play through the firewall";
