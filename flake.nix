@@ -41,7 +41,7 @@
       url = "github:zenos-n/plymouth-theme/b7040721520bc2c7bb3e9aba6de21cbe2bb5636f";
       flake = false;
     };
-    source-monogram = { url = "github:doromiert/monogram-desktop/f8108f20279d62c9b1b099da79f40d5c7aaf1448"; flake = false; };
+    source-monogram = { url = "github:doromiert/monogram-desktop/be40e41b311aed5411498c65b2a4e309b29d551c"; flake = false; };
     source-keyslot = { url = "github:zenos-n/keyslot/ef688b064a429c0190b99b2359745857355207b6"; flake = false; };
     source-keyslot-extension = { url = "github:doromiert/keyslot-gnome-extension/79ab807e64a0f8b3d9748a78df300439b5a8e4f7"; flake = false; };
     source-galeria = { url = "github:zenos-n/galeria/24244d9627fdfb5374f8f447e31e2de0cbd5355d"; flake = false; };
